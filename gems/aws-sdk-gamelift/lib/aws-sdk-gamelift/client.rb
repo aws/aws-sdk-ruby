@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::GameLift
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -471,17 +473,18 @@ module Aws::GameLift
     #   need to be unique. You can use UpdateBuild to change this value later.
     #
     # @option params [String] :version
-    #   Version that is associated with this build. Version strings do not
-    #   need to be unique. You can use UpdateBuild to change this value later.
+    #   Version that is associated with a build or script. Version strings do
+    #   not need to be unique. You can use UpdateBuild to change this value
+    #   later.
     #
     # @option params [Types::S3Location] :storage_location
     #   Information indicating where your game build files are stored. Use
     #   this parameter only when creating a build with files stored in an
     #   Amazon S3 bucket that you own. The storage location must specify an
-    #   Amazon S3 bucket name and key, as well as a role ARN that you set up
-    #   to allow Amazon GameLift to access your Amazon S3 bucket. The S3
-    #   bucket must be in the same region that you want to create a new build
-    #   in.
+    #   Amazon S3 bucket name and key, as well as a the ARN for a role that
+    #   you set up to allow Amazon GameLift to access your Amazon S3 bucket.
+    #   The S3 bucket must be in the same region that you want to create a new
+    #   build in.
     #
     # @option params [String] :operating_system
     #   Operating system that the game server binaries are built to run on.
@@ -506,6 +509,7 @@ module Aws::GameLift
     #       bucket: "NonEmptyString",
     #       key: "NonEmptyString",
     #       role_arn: "NonEmptyString",
+    #       object_version: "NonEmptyString",
     #     },
     #     operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX
     #   })
@@ -525,6 +529,7 @@ module Aws::GameLift
     #   resp.storage_location.bucket #=> String
     #   resp.storage_location.key #=> String
     #   resp.storage_location.role_arn #=> String
+    #   resp.storage_location.object_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuild AWS API Documentation
     #
@@ -535,18 +540,26 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Creates a new fleet to run your game servers. A fleet is a set of
-    # Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can
-    # run multiple server processes to host game sessions. You set up a
-    # fleet to use instances with certain hardware specifications (see
-    # [Amazon EC2 Instance Types][1]), and deploy your game build to the
-    # fleet.
+    # Creates a new fleet to run your game servers. whether they are custom
+    # game builds or Realtime Servers with game-specific script. A fleet is
+    # a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of
+    # which can host multiple game sessions. When creating a fleet, you
+    # choose the hardware specifications, set some configuration options,
+    # and specify the game server to deploy on the new fleet.
     #
     # To create a new fleet, you must provide the following: (1) a fleet
-    # name, (2) an EC2 instance type, (3) the build ID for your game build,
-    # and (4) a run-time configuration, which specifies the server processes
-    # to run on each instance in the fleet. If fleet type is not set, the
-    # new fleet will use on-demand instances by default.
+    # name, (2) an EC2 instance type and fleet type (spot or on-demand), (3)
+    # the build ID for your game build or script ID if using Realtime
+    # Servers, and (4) a run-time configuration, which determines how game
+    # servers will run on each instance in the fleet.
+    #
+    # <note markdown="1"> When creating a Realtime Servers fleet, we recommend using a minimal
+    # version of the Realtime script (see this [ working code example ][1]).
+    # This will make it much easier to troubleshoot any fleet creation
+    # issues. Once the fleet is active, you can update your Realtime script
+    # as needed.
+    #
+    #  </note>
     #
     # If the `CreateFleet` call is successful, Amazon GameLift performs the
     # following tasks. You can track the process of a fleet by checking the
@@ -560,8 +573,8 @@ module Aws::GameLift
     #   Sets the fleet's target capacity to 1 (desired instances), which
     #   triggers Amazon GameLift to start one new EC2 instance.
     #
-    # * Downloads the game build to the new instance and installs it.
-    #   Statuses: `DOWNLOADING`, `VALIDATING`, `BUILDING`.
+    # * Downloads the game build or Realtime script to the new instance and
+    #   installs it. Statuses: `DOWNLOADING`, `VALIDATING`, `BUILDING`.
     #
     # * Starts launching server processes on the instance. If the fleet is
     #   configured to run multiple server processes per instance, Amazon
@@ -573,7 +586,9 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [ Working with Fleets][2].
+    # [ Working with Fleets][2]
+    #
+    # [ Debug Fleet Creation Issues][3]
     #
     # **Related operations**
     #
@@ -617,8 +632,9 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://aws.amazon.com/ec2/instance-types/
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-script.html#realtime-script-examples
     # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html
     #
     # @option params [required, String] :name
     #   Descriptive label that is associated with a fleet. Fleet names do not
@@ -627,11 +643,17 @@ module Aws::GameLift
     # @option params [String] :description
     #   Human-readable description of a fleet.
     #
-    # @option params [required, String] :build_id
+    # @option params [String] :build_id
     #   Unique identifier for a build to be deployed on the new fleet. The
-    #   build must have been successfully uploaded to Amazon GameLift and be
-    #   in a `READY` status. This fleet setting cannot be changed once the
-    #   fleet is created.
+    #   custom game server build must have been successfully uploaded to
+    #   Amazon GameLift and be in a `READY` status. This fleet setting cannot
+    #   be changed once the fleet is created.
+    #
+    # @option params [String] :script_id
+    #   Unique identifier for a Realtime script to be deployed on the new
+    #   fleet. The Realtime script must have been successfully uploaded to
+    #   Amazon GameLift. This fleet setting cannot be changed once the fleet
+    #   is created.
     #
     # @option params [String] :server_launch_path
     #   This parameter is no longer used. Instead, specify a server launch
@@ -669,10 +691,12 @@ module Aws::GameLift
     #
     # @option params [Array<Types::IpPermission>] :ec2_inbound_permissions
     #   Range of IP addresses and port settings that permit inbound traffic to
-    #   access server processes running on the fleet. If no inbound
-    #   permissions are set, including both IP address range and port range,
-    #   the server processes in the fleet cannot accept connections. You can
-    #   specify one or more sets of permissions for a fleet.
+    #   access game sessions that running on the fleet. For fleets using a
+    #   custom game build, this parameter is required before game sessions
+    #   running on the fleet can accept connections. For Realtime Servers
+    #   fleets, Amazon GameLift automatically sets TCP and UDP ranges for use
+    #   by the Realtime servers. You can specify multiple permission settings
+    #   or add more by updating the fleet.
     #
     # @option params [String] :new_game_session_protection_policy
     #   Game session protection policy to apply to all instances in this
@@ -690,17 +714,13 @@ module Aws::GameLift
     #
     # @option params [Types::RuntimeConfiguration] :runtime_configuration
     #   Instructions for launching server processes on each instance in the
-    #   fleet. The run-time configuration for a fleet has a collection of
-    #   server process configurations, one for each type of server process to
-    #   run on an instance. A server process configuration specifies the
-    #   location of the server executable, launch parameters, and the number
-    #   of concurrent processes with that configuration to maintain on each
-    #   instance. A CreateFleet request must include a run-time configuration
-    #   with at least one server process configuration; otherwise the request
-    #   fails with an invalid request exception. (This parameter replaces the
-    #   parameters `ServerLaunchPath` and `ServerLaunchParameters`; requests
-    #   that contain values for these parameters instead of a run-time
-    #   configuration will continue to work.)
+    #   fleet. Server processes run either a custom game build executable or a
+    #   Realtime Servers script. The run-time configuration lists the types of
+    #   server processes to run on an instance and includes the following
+    #   configuration settings: the server executable or launch script file,
+    #   launch parameters, and the number of processes to run concurrently on
+    #   each instance. A CreateFleet request must include a run-time
+    #   configuration with at least one server process configuration.
     #
     # @option params [Types::ResourceCreationLimitPolicy] :resource_creation_limit_policy
     #   Policy that limits the number of game sessions an individual player
@@ -733,26 +753,22 @@ module Aws::GameLift
     # @option params [String] :fleet_type
     #   Indicates whether to use on-demand instances or spot instances for
     #   this fleet. If empty, the default is ON\_DEMAND. Both categories of
-    #   instances use identical hardware and configurations, based on the
-    #   instance type selected for this fleet. You can acquire on-demand
-    #   instances at any time for a fixed price and keep them as long as you
-    #   need them. Spot instances have lower prices, but spot pricing is
-    #   variable, and while in use they can be interrupted (with a two-minute
-    #   notification). Learn more about Amazon GameLift spot instances with at
-    #   [ Set up Access to External Services][1].
+    #   instances use identical hardware and configurations based on the
+    #   instance type selected for this fleet. Learn more about [ On-Demand
+    #   versus Spot Instances][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-credentials.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot
     #
     # @option params [String] :instance_role_arn
     #   Unique identifier for an AWS IAM role that manages access to your AWS
-    #   services. Any application that runs on an instance in this fleet can
-    #   assume the role, including install scripts, server processs, daemons
-    #   (background processes). Create a role or look up a role's ARN using
-    #   the [IAM dashboard][1] in the AWS Management Console. Learn more about
-    #   using on-box credentials for your game servers at [ Access external
-    #   resources from a game server][2].
+    #   services. With an instance role ARN set, any application that runs on
+    #   an instance in this fleet can assume the role, including install
+    #   scripts, server processes, daemons (background processes). Create a
+    #   role or look up a role's ARN using the [IAM dashboard][1] in the AWS
+    #   Management Console. Learn more about using on-box credentials for your
+    #   game servers at [ Access external resources from a game server][2].
     #
     #
     #
@@ -768,7 +784,8 @@ module Aws::GameLift
     #   resp = client.create_fleet({
     #     name: "NonZeroAndMaxString", # required
     #     description: "NonZeroAndMaxString",
-    #     build_id: "BuildId", # required
+    #     build_id: "BuildId",
+    #     script_id: "ScriptId",
     #     server_launch_path: "NonZeroAndMaxString",
     #     server_launch_parameters: "NonZeroAndMaxString",
     #     log_paths: ["NonZeroAndMaxString"],
@@ -816,6 +833,7 @@ module Aws::GameLift
     #   resp.fleet_attributes.termination_time #=> Time
     #   resp.fleet_attributes.status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED"
     #   resp.fleet_attributes.build_id #=> String
+    #   resp.fleet_attributes.script_id #=> String
     #   resp.fleet_attributes.server_launch_path #=> String
     #   resp.fleet_attributes.server_launch_parameters #=> String
     #   resp.fleet_attributes.log_paths #=> Array
@@ -1384,16 +1402,18 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Adds a player to a game session and creates a player session record.
-    # Before a player can be added, a game session must have an `ACTIVE`
-    # status, have a creation policy of `ALLOW_ALL`, and have an open player
-    # slot. To add a group of players to a game session, use
-    # CreatePlayerSessions.
+    # Reserves an open player slot in an active game session. Before a
+    # player can be added, a game session must have an `ACTIVE` status, have
+    # a creation policy of `ALLOW_ALL`, and have an open player slot. To add
+    # a group of players to a game session, use CreatePlayerSessions. When
+    # the player connects to the game server and references a player session
+    # ID, the game server contacts the Amazon GameLift service to validate
+    # the player reservation and accept the player.
     #
     # To create a player session, specify a game session ID, player ID, and
-    # optionally a string of player data. If successful, the player is added
-    # to the game session and a new PlayerSession object is returned. Player
-    # sessions cannot be updated.
+    # optionally a string of player data. If successful, a slot is reserved
+    # in the game session for the player and a new PlayerSession object is
+    # returned. Player sessions cannot be updated.
     #
     # *Available in Amazon GameLift Local.*
     #
@@ -1456,16 +1476,18 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Adds a group of players to a game session. This action is useful with
-    # a team matching feature. Before players can be added, a game session
-    # must have an `ACTIVE` status, have a creation policy of `ALLOW_ALL`,
-    # and have an open player slot. To add a single player to a game
-    # session, use CreatePlayerSession.
+    # Reserves open slots in a game session for a group of players. Before
+    # players can be added, a game session must have an `ACTIVE` status,
+    # have a creation policy of `ALLOW_ALL`, and have an open player slot.
+    # To add a single player to a game session, use CreatePlayerSession.
+    # When a player connects to the game server and references a player
+    # session ID, the game server contacts the Amazon GameLift service to
+    # validate the player reservation and accept the player.
     #
     # To create player sessions, specify a game session ID, a list of player
-    # IDs, and optionally a set of player data strings. If successful, the
-    # players are added to the game session and a set of new PlayerSession
-    # objects is returned. Player sessions cannot be updated.
+    # IDs, and optionally a set of player data strings. If successful, a
+    # slot is reserved in the game session for each player and a set of new
+    # PlayerSession objects is returned. Player sessions cannot be updated.
     #
     # *Available in Amazon GameLift Local.*
     #
@@ -1530,6 +1552,124 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def create_player_sessions(params = {}, options = {})
       req = build_request(:create_player_sessions, params)
+      req.send_request(options)
+    end
+
+    # Creates a new script record for your Realtime Servers script. Realtime
+    # scripts are JavaScript that provide configuration settings and
+    # optional custom game logic for your game. The script is deployed when
+    # you create a Realtime Servers fleet to host your game sessions. Script
+    # logic is executed during an active game session.
+    #
+    # To create a new script record, specify a script name and provide the
+    # script file(s). The script files and all dependencies must be zipped
+    # into a single file. You can pull the zip file from either of these
+    # locations:
+    #
+    # * A locally available directory. Use the *ZipFile* parameter for this
+    #   option.
+    #
+    # * An Amazon Simple Storage Service (Amazon S3) bucket under your AWS
+    #   account. Use the *StorageLocation* parameter for this option.
+    #   You'll need to have an Identity Access Management (IAM) role that
+    #   allows the Amazon GameLift service to access your S3 bucket.
+    #
+    # If the call is successful, a new script record is created with a
+    # unique script ID. If the script file is provided as a local file, the
+    # file is uploaded to an Amazon GameLift-owned S3 bucket and the script
+    # record's storage location reflects this location. If the script file
+    # is provided as an S3 bucket, Amazon GameLift accesses the file at this
+    # storage location as needed for deployment.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # [Set Up a Role for Amazon GameLift Access][2]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html
+    #
+    # @option params [String] :name
+    #   Descriptive label that is associated with a script. Script names do
+    #   not need to be unique. You can use UpdateScript to change this value
+    #   later.
+    #
+    # @option params [String] :version
+    #   Version that is associated with a build or script. Version strings do
+    #   not need to be unique. You can use UpdateScript to change this value
+    #   later.
+    #
+    # @option params [Types::S3Location] :storage_location
+    #   Location of the Amazon S3 bucket where a zipped file containing your
+    #   Realtime scripts is stored. The storage location must specify the
+    #   Amazon S3 bucket name, the zip file name (the "key"), and a role ARN
+    #   that allows Amazon GameLift to access the Amazon S3 storage location.
+    #   The S3 bucket must be in the same region where you want to create a
+    #   new script. By default, Amazon GameLift uploads the latest version of
+    #   the zip file; if you have S3 object versioning turned on, you can use
+    #   the `ObjectVersion` parameter to specify an earlier version.
+    #
+    # @option params [String, IO] :zip_file
+    #   Data object containing your Realtime scripts and dependencies as a zip
+    #   file. The zip file can have one or multiple files. Maximum size of a
+    #   zip file is 5 MB.
+    #
+    #   When using the AWS CLI tool to create a script, this parameter is set
+    #   to the zip file name. It must be prepended with the string
+    #   "fileb://" to indicate that the file data is a binary object. For
+    #   example: `--zip-file fileb://myRealtimeScript.zip`.
+    #
+    # @return [Types::CreateScriptOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateScriptOutput#script #script} => Types::Script
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_script({
+    #     name: "NonZeroAndMaxString",
+    #     version: "NonZeroAndMaxString",
+    #     storage_location: {
+    #       bucket: "NonEmptyString",
+    #       key: "NonEmptyString",
+    #       role_arn: "NonEmptyString",
+    #       object_version: "NonEmptyString",
+    #     },
+    #     zip_file: "data",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.script.script_id #=> String
+    #   resp.script.name #=> String
+    #   resp.script.version #=> String
+    #   resp.script.size_on_disk #=> Integer
+    #   resp.script.creation_time #=> Time
+    #   resp.script.storage_location.bucket #=> String
+    #   resp.script.storage_location.key #=> String
+    #   resp.script.storage_location.role_arn #=> String
+    #   resp.script.storage_location.object_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateScript AWS API Documentation
+    #
+    # @overload create_script(params = {})
+    # @param [Hash] params ({})
+    def create_script(params = {}, options = {})
+      req = build_request(:create_script, params)
       req.send_request(options)
     end
 
@@ -2049,6 +2189,56 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # Deletes a Realtime script. This action permanently deletes the script
+    # record. If script files were uploaded, they are also deleted (files
+    # stored in an S3 bucket are not deleted).
+    #
+    # To delete a script, specify the script ID. Before deleting a script,
+    # be sure to terminate all fleets that are deployed with the script
+    # being deleted. Fleet instances periodically check for script updates,
+    # and if the script record no longer exists, the instance will go into
+    # an error state and be unable to host game sessions.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    #
+    # @option params [required, String] :script_id
+    #   Unique identifier for a Realtime script to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_script({
+    #     script_id: "ScriptId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScript AWS API Documentation
+    #
+    # @overload delete_script(params = {})
+    # @param [Hash] params ({})
+    def delete_script(params = {}, options = {})
+      req = build_request(:delete_script, params)
+      req.send_request(options)
+    end
+
     # Cancels a pending VPC peering authorization for the specified VPC. If
     # the authorization has already been used to create a peering
     # connection, call DeleteVpcPeeringConnection to remove the connection.
@@ -2463,6 +2653,7 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].termination_time #=> Time
     #   resp.fleet_attributes[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED"
     #   resp.fleet_attributes[0].build_id #=> String
+    #   resp.fleet_attributes[0].script_id #=> String
     #   resp.fleet_attributes[0].server_launch_path #=> String
     #   resp.fleet_attributes[0].server_launch_parameters #=> String
     #   resp.fleet_attributes[0].log_paths #=> Array
@@ -3861,6 +4052,65 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # Retrieves properties for a Realtime script.
+    #
+    # To request a script record, specify the script ID. If successful, an
+    # object containing the script properties is returned.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    #
+    # @option params [required, String] :script_id
+    #   Unique identifier for a Realtime script to retrieve properties for.
+    #
+    # @return [Types::DescribeScriptOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScriptOutput#script #script} => Types::Script
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_script({
+    #     script_id: "ScriptId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.script.script_id #=> String
+    #   resp.script.name #=> String
+    #   resp.script.version #=> String
+    #   resp.script.size_on_disk #=> Integer
+    #   resp.script.creation_time #=> Time
+    #   resp.script.storage_location.bucket #=> String
+    #   resp.script.storage_location.key #=> String
+    #   resp.script.storage_location.role_arn #=> String
+    #   resp.script.storage_location.object_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScript AWS API Documentation
+    #
+    # @overload describe_script(params = {})
+    # @param [Hash] params ({})
+    def describe_script(params = {}, options = {})
+      req = build_request(:describe_script, params)
+      req.send_request(options)
+    end
+
     # Retrieves valid VPC peering authorizations that are pending for the
     # AWS account. This operation returns all VPC peering authorizations and
     # requests for peering. This includes those initiated and received by
@@ -4255,16 +4505,17 @@ module Aws::GameLift
     end
 
     # Retrieves a collection of fleet records for this AWS account. You can
-    # filter the result set by build ID. Use the pagination parameters to
-    # retrieve results in sequential pages.
+    # filter the result set to find only those fleets that are deployed with
+    # a specific build or script. Use the pagination parameters to retrieve
+    # results in sequential pages.
     #
-    # <note markdown="1"> Fleet records are not listed in any particular order.
+    # <note markdown="1"> Fleet records are not listed in a particular order.
     #
     #  </note>
     #
     # **Learn more**
     #
-    # [ Working with Fleets][1].
+    # [ Set Up Fleets][1].
     #
     # **Related operations**
     #
@@ -4315,6 +4566,11 @@ module Aws::GameLift
     #   to return only fleets using the specified build. To retrieve all
     #   fleets, leave this parameter empty.
     #
+    # @option params [String] :script_id
+    #   Unique identifier for a Realtime script to return fleets for. Use this
+    #   parameter to return only fleets using the specified script. To
+    #   retrieve all fleets, leave this parameter empty.
+    #
     # @option params [Integer] :limit
     #   Maximum number of results to return. Use this parameter with
     #   `NextToken` to get results as a set of sequential pages.
@@ -4333,6 +4589,7 @@ module Aws::GameLift
     #
     #   resp = client.list_fleets({
     #     build_id: "BuildId",
+    #     script_id: "ScriptId",
     #     limit: 1,
     #     next_token: "NonZeroAndMaxString",
     #   })
@@ -4349,6 +4606,73 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def list_fleets(params = {}, options = {})
       req = build_request(:list_fleets, params)
+      req.send_request(options)
+    end
+
+    # Retrieves script records for all Realtime scripts that are associated
+    # with the AWS account in use.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    #
+    # @option params [Integer] :limit
+    #   Maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #
+    # @option params [String] :next_token
+    #   Token that indicates the start of the next sequential page of results.
+    #   Use the token that is returned with a previous call to this action. To
+    #   start at the beginning of the result set, do not specify a value.
+    #
+    # @return [Types::ListScriptsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScriptsOutput#scripts #scripts} => Array&lt;Types::Script&gt;
+    #   * {Types::ListScriptsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scripts({
+    #     limit: 1,
+    #     next_token: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scripts #=> Array
+    #   resp.scripts[0].script_id #=> String
+    #   resp.scripts[0].name #=> String
+    #   resp.scripts[0].version #=> String
+    #   resp.scripts[0].size_on_disk #=> Integer
+    #   resp.scripts[0].creation_time #=> Time
+    #   resp.scripts[0].storage_location.bucket #=> String
+    #   resp.scripts[0].storage_location.key #=> String
+    #   resp.scripts[0].storage_location.role_arn #=> String
+    #   resp.scripts[0].storage_location.object_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListScripts AWS API Documentation
+    #
+    # @overload list_scripts(params = {})
+    # @param [Hash] params ({})
+    def list_scripts(params = {}, options = {})
+      req = build_request(:list_scripts, params)
       req.send_request(options)
     end
 
@@ -4639,6 +4963,7 @@ module Aws::GameLift
     #   resp.storage_location.bucket #=> String
     #   resp.storage_location.key #=> String
     #   resp.storage_location.role_arn #=> String
+    #   resp.storage_location.object_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentials AWS API Documentation
     #
@@ -5758,8 +6083,8 @@ module Aws::GameLift
     #   need to be unique.
     #
     # @option params [String] :version
-    #   Version that is associated with this build. Version strings do not
-    #   need to be unique.
+    #   Version that is associated with a build or script. Version strings do
+    #   not need to be unique.
     #
     # @return [Types::UpdateBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6458,18 +6783,16 @@ module Aws::GameLift
     # to be in an `ACTIVE` status.
     #
     # To update run-time configuration, specify the fleet ID and provide a
-    # `RuntimeConfiguration` object with the updated collection of server
-    # process configurations.
+    # `RuntimeConfiguration` object with an updated set of server process
+    # configurations.
     #
     # Each instance in a Amazon GameLift fleet checks regularly for an
     # updated run-time configuration and changes how it launches server
     # processes to comply with the latest version. Existing server processes
-    # are not affected by the update; they continue to run until they end,
-    # while Amazon GameLift simply adds new server processes to fit the
-    # current run-time configuration. As a result, the run-time
-    # configuration changes are applied gradually as existing processes shut
-    # down and new processes are launched in Amazon GameLift's normal
-    # process recycling activity.
+    # are not affected by the update; run-time configuration changes are
+    # applied gradually as existing processes shut down and new processes
+    # are launched during Amazon GameLift's normal process recycling
+    # activity.
     #
     # **Learn more**
     #
@@ -6524,12 +6847,13 @@ module Aws::GameLift
     #
     # @option params [required, Types::RuntimeConfiguration] :runtime_configuration
     #   Instructions for launching server processes on each instance in the
-    #   fleet. The run-time configuration for a fleet has a collection of
-    #   server process configurations, one for each type of server process to
-    #   run on an instance. A server process configuration specifies the
-    #   location of the server executable, launch parameters, and the number
-    #   of concurrent processes with that configuration to maintain on each
-    #   instance.
+    #   fleet. Server processes run either a custom game build executable or a
+    #   Realtime Servers script. The run-time configuration lists the types of
+    #   server processes to run on an instance and includes the following
+    #   configuration settings: the server executable or launch script file,
+    #   launch parameters, and the number of processes to run concurrently on
+    #   each instance. A CreateFleet request must include a run-time
+    #   configuration with at least one server process configuration.
     #
     # @return [Types::UpdateRuntimeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6567,6 +6891,112 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def update_runtime_configuration(params = {}, options = {})
       req = build_request(:update_runtime_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates Realtime script metadata and content.
+    #
+    # To update script metadata, specify the script ID and provide updated
+    # name and/or version values.
+    #
+    # To update script content, provide an updated zip file by pointing to
+    # either a local file or an Amazon S3 bucket location. You can use
+    # either method regardless of how the original script was uploaded. Use
+    # the *Version* parameter to track updates to the script.
+    #
+    # If the call is successful, the updated metadata is stored in the
+    # script record and a revised script is uploaded to the Amazon GameLift
+    # service. Once the script is updated and acquired by a fleet instance,
+    # the new version is used for all new game sessions.
+    #
+    # **Learn more**
+    #
+    # [Amazon GameLift Realtime Servers][1]
+    #
+    # **Related operations**
+    #
+    # * CreateScript
+    #
+    # * ListScripts
+    #
+    # * DescribeScript
+    #
+    # * UpdateScript
+    #
+    # * DeleteScript
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+    #
+    # @option params [required, String] :script_id
+    #   Unique identifier for a Realtime script to update.
+    #
+    # @option params [String] :name
+    #   Descriptive label that is associated with a script. Script names do
+    #   not need to be unique.
+    #
+    # @option params [String] :version
+    #   Version that is associated with a build or script. Version strings do
+    #   not need to be unique.
+    #
+    # @option params [Types::S3Location] :storage_location
+    #   Location of the Amazon S3 bucket where a zipped file containing your
+    #   Realtime scripts is stored. The storage location must specify the
+    #   Amazon S3 bucket name, the zip file name (the "key"), and a role ARN
+    #   that allows Amazon GameLift to access the Amazon S3 storage location.
+    #   The S3 bucket must be in the same region where you want to create a
+    #   new script. By default, Amazon GameLift uploads the latest version of
+    #   the zip file; if you have S3 object versioning turned on, you can use
+    #   the `ObjectVersion` parameter to specify an earlier version.
+    #
+    # @option params [String, IO] :zip_file
+    #   Data object containing your Realtime scripts and dependencies as a zip
+    #   file. The zip file can have one or multiple files. Maximum size of a
+    #   zip file is 5 MB.
+    #
+    #   When using the AWS CLI tool to create a script, this parameter is set
+    #   to the zip file name. It must be prepended with the string
+    #   "fileb://" to indicate that the file data is a binary object. For
+    #   example: `--zip-file fileb://myRealtimeScript.zip`.
+    #
+    # @return [Types::UpdateScriptOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateScriptOutput#script #script} => Types::Script
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_script({
+    #     script_id: "ScriptId", # required
+    #     name: "NonZeroAndMaxString",
+    #     version: "NonZeroAndMaxString",
+    #     storage_location: {
+    #       bucket: "NonEmptyString",
+    #       key: "NonEmptyString",
+    #       role_arn: "NonEmptyString",
+    #       object_version: "NonEmptyString",
+    #     },
+    #     zip_file: "data",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.script.script_id #=> String
+    #   resp.script.name #=> String
+    #   resp.script.version #=> String
+    #   resp.script.size_on_disk #=> Integer
+    #   resp.script.creation_time #=> Time
+    #   resp.script.storage_location.bucket #=> String
+    #   resp.script.storage_location.key #=> String
+    #   resp.script.storage_location.role_arn #=> String
+    #   resp.script.storage_location.object_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateScript AWS API Documentation
+    #
+    # @overload update_script(params = {})
+    # @param [Hash] params ({})
+    def update_script(params = {}, options = {})
+      req = build_request(:update_script, params)
       req.send_request(options)
     end
 
@@ -6643,7 +7073,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Inspector
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -336,7 +338,7 @@ module Aws::Inspector
     #
     #
     # [1]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_slr.html
-    # [2]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
+    # [2]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
     #
     # @option params [required, String] :assessment_target_name
     #   The user-defined name that identifies the assessment target that you
@@ -1324,7 +1326,7 @@ module Aws::Inspector
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
     #
     # @return [Types::GetAssessmentReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1955,7 +1957,7 @@ module Aws::Inspector
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
+    # [1]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
     #
     # @option params [Types::AssessmentTargetFilter] :filter
     #   You can use this parameter to specify a subset of data to be included
@@ -2898,7 +2900,7 @@ module Aws::Inspector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -436,8 +436,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [Boolean] :copy_tags
-    #   True to copy all tags from the source DB snapshot to the target DB
-    #   snapshot, and otherwise false. The default is false.
+    #   A value that indicates whether to copy all tags from the source DB
+    #   snapshot to the target DB snapshot. By default, tags are not copied.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
     #   `CopyDBSnapshot` API action in the source AWS Region that contains the
@@ -606,12 +606,12 @@ module Aws::RDS
     #
     #   Constraints: Value must be `1150-65535`
     # @option options [String] :availability_zone
-    #   The EC2 Availability Zone that the DB instance is created in.
+    #   The Availability Zone (AZ) where the DB instance will be created.
     #
     #   Default: A random, system-chosen Availability Zone.
     #
-    #   Constraint: You can't specify the AvailabilityZone parameter if the
-    #   MultiAZ parameter is set to `true`.
+    #   Constraint: You can't specify the `AvailabilityZone` parameter if the
+    #   DB instance is a Multi-AZ deployment.
     #
     #   Example: `us-east-1a`
     # @option options [String] :db_subnet_group_name
@@ -622,19 +622,21 @@ module Aws::RDS
     #
     #   Example: `mySubnetgroup`
     # @option options [Boolean] :multi_az
-    #   Specifies if the DB instance is a Multi-AZ deployment.
+    #   A value that indicates whether the DB instance is a Multi-AZ
+    #   deployment.
     #
-    #   Constraint: You can't specify the AvailabilityZone parameter if the
-    #   MultiAZ parameter is set to `true`.
+    #   Constraint: You can't specify the `AvailabilityZone` parameter if the
+    #   DB instance is a Multi-AZ deployment.
     # @option options [Boolean] :publicly_accessible
-    #   Specifies the accessibility options for the DB instance. A value of
-    #   true specifies an Internet-facing instance with a publicly resolvable
-    #   DNS name, which resolves to a public IP address. A value of false
-    #   specifies an internal instance with a DNS name that resolves to a
-    #   private IP address. For more information, see CreateDBInstance.
+    #   A value that indicates whether the DB instance is publicly accessible.
+    #   When the DB instance is publicly accessible, it is an Internet-facing
+    #   instance with a publicly resolvable DNS name, which resolves to a
+    #   public IP address. When the DB instance is not publicly accessible, it
+    #   is an internal instance with a DNS name that resolves to a private IP
+    #   address. For more information, see CreateDBInstance.
     # @option options [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor version upgrades are applied automatically to the
-    #   DB instance during the maintenance window.
+    #   A value that indicates whether minor version upgrades are applied
+    #   automatically to the DB instance during the maintenance window.
     # @option options [String] :license_model
     #   License model information for the restored DB instance.
     #
@@ -721,8 +723,7 @@ module Aws::RDS
     #   If you specify `io1`, you must also include a value for the `Iops`
     #   parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise
-    #   `standard`
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     # @option options [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
@@ -737,14 +738,16 @@ module Aws::RDS
     # @option options [String] :domain
     #   Specify the Active Directory Domain to restore the instance in.
     # @option options [Boolean] :copy_tags_to_snapshot
-    #   True to copy all tags from the restored DB instance to snapshots of
-    #   the restored DB instance, and otherwise false. The default is false.
+    #   A value that indicates whether to copy all tags from the restored DB
+    #   instance to snapshots of the DB instance. By default, tags are not
+    #   copied.
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
     # @option options [Boolean] :enable_iam_database_authentication
-    #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts, and otherwise false.
+    #   A value that indicates whether to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts. By default,
+    #   mapping is disabled.
     #
     #   You can enable IAM database authentication for the following database
     #   engines
@@ -752,8 +755,6 @@ module Aws::RDS
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
-    #
-    #   Default: `false`
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
@@ -767,8 +768,8 @@ module Aws::RDS
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.
     # @option options [Boolean] :use_default_processor_features
-    #   A value that specifies that the DB instance class of the DB instance
-    #   uses its default processor features.
+    #   A value that indicates whether the DB instance class of the DB
+    #   instance uses its default processor features.
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
     #   If this argument is omitted, the default DBParameterGroup for the
@@ -784,10 +785,10 @@ module Aws::RDS
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     # @option options [Boolean] :deletion_protection
-    #   Indicates if the DB instance should have deletion protection enabled.
-    #   The database can't be deleted when this value is set to true. The
-    #   default is false. For more information, see [ Deleting a DB
-    #   Instance][1].
+    #   A value that indicates whether the DB instance has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled. For more
+    #   information, see [ Deleting a DB Instance][1].
     #
     #
     #

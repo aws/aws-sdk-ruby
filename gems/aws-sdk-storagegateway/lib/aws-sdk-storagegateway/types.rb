@@ -477,7 +477,13 @@ module Aws::StorageGateway
     #   @return [Time]
     #
     # @!attribute [rw] volume_used_in_bytes
-    #   The size of the data stored on the volume in bytes.
+    #   The size of the data stored on the volume in bytes. This value is
+    #   calculated based on the number of blocks that are touched, instead
+    #   of the actual amount of data written. This value can be useful for
+    #   sequential write patterns but less accurate for random write
+    #   patterns. `VolumeUsedInBytes` is different from the compressed size
+    #   of the volume, which is the value that is used to calculate your
+    #   bill.
     #
     #   <note markdown="1"> This value is not available for volumes created prior to May 13,
     #   2015, until you store data on the volume.
@@ -957,6 +963,8 @@ module Aws::StorageGateway
     #         read_only: false,
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
+    #         smbacl_enabled: false,
+    #         admin_user_list: ["FileShareUser"],
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
     #         authentication: "Authentication",
@@ -1036,6 +1044,23 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] smbacl_enabled
+    #   Set this value to "true to enable ACL (access control list) on the
+    #   SMB file share. Set it to "false" to map file and directory
+    #   permissions to the POSIX permissions.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
+    #   in the Storage Gateway User Guide.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] admin_user_list
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed
+    #   with the @ character. For example `@group1`. Can only be set if
+    #   Authentication is set to `ActiveDirectory`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
@@ -1083,6 +1108,8 @@ module Aws::StorageGateway
       :read_only,
       :guess_mime_type_enabled,
       :requester_pays,
+      :smbacl_enabled,
+      :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
       :authentication,
@@ -1167,6 +1194,12 @@ module Aws::StorageGateway
     #       {
     #         volume_arn: "VolumeARN", # required
     #         snapshot_description: "SnapshotDescription", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] volume_arn
@@ -1181,11 +1214,24 @@ module Aws::StorageGateway
     #   **Description** field
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotInput AWS API Documentation
     #
     class CreateSnapshotInput < Struct.new(
       :volume_arn,
-      :snapshot_description)
+      :snapshot_description,
+      :tags)
       include Aws::Structure
     end
 
@@ -4239,6 +4285,24 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] smbacl_enabled
+    #   If this value is set to "true", indicates that ACL (access control
+    #   list) is enabled on the SMB file share. If it is set to "false",
+    #   it indicates that file and directory permissions are mapped to the
+    #   POSIX permission.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
+    #   in the Storage Gateway User Guide.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] admin_user_list
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed
+    #   with the @ character. For example `@group1`. Can only be set if
+    #   Authentication is set to `ActiveDirectory`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
@@ -4284,6 +4348,8 @@ module Aws::StorageGateway
       :read_only,
       :guess_mime_type_enabled,
       :requester_pays,
+      :smbacl_enabled,
+      :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
       :authentication,
@@ -4531,7 +4597,13 @@ module Aws::StorageGateway
     #   @return [Time]
     #
     # @!attribute [rw] volume_used_in_bytes
-    #   The size of the data stored on the volume in bytes.
+    #   The size of the data stored on the volume in bytes. This value is
+    #   calculated based on the number of blocks that are touched, instead
+    #   of the actual amount of data written. This value can be useful for
+    #   sequential write patterns but less accurate for random write
+    #   patterns. `VolumeUsedInBytes` is different from the compressed size
+    #   of the volume, which is the value that is used to calculate your
+    #   bill.
     #
     #   <note markdown="1"> This value is not available for volumes created prior to May 13,
     #   2015, until you store data on the volume.
@@ -5271,6 +5343,8 @@ module Aws::StorageGateway
     #         read_only: false,
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
+    #         smbacl_enabled: false,
+    #         admin_user_list: ["FileShareUser"],
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
     #       }
@@ -5329,6 +5403,23 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] smbacl_enabled
+    #   Set this value to "true to enable ACL (access control list) on the
+    #   SMB file share. Set it to "false" to map file and directory
+    #   permissions to the POSIX permissions.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.htmlin
+    #   the Storage Gateway User Guide.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] admin_user_list
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed
+    #   with the @ character. For example `@group1`. Can only be set if
+    #   Authentication is set to `ActiveDirectory`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
@@ -5354,6 +5445,8 @@ module Aws::StorageGateway
       :read_only,
       :guess_mime_type_enabled,
       :requester_pays,
+      :smbacl_enabled,
+      :admin_user_list,
       :valid_user_list,
       :invalid_user_list)
       include Aws::Structure
@@ -5390,6 +5483,12 @@ module Aws::StorageGateway
     #         start_at: 1, # required
     #         recurrence_in_hours: 1, # required
     #         description: "Description",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] volume_arn
@@ -5413,13 +5512,26 @@ module Aws::StorageGateway
     #   description.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotScheduleInput AWS API Documentation
     #
     class UpdateSnapshotScheduleInput < Struct.new(
       :volume_arn,
       :start_at,
       :recurrence_in_hours,
-      :description)
+      :description,
+      :tags)
       include Aws::Structure
     end
 

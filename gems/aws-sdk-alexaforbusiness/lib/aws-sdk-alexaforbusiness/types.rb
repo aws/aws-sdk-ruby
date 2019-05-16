@@ -211,6 +211,53 @@ module Aws::AlexaForBusiness
     #
     class AssociateSkillWithUsersResponse < Aws::EmptyStructure; end
 
+    # The audio message. There is a 1 MB limit on the audio file input and
+    # the only supported format is MP3. To convert your MP3 audio files to
+    # an Alexa-friendly,
+    #
+    # required codec version (MPEG version 2) and bit rate (48 kbps), you
+    # might use converter software. One option for this is a command-line
+    # tool, FFmpeg. For more information, see [FFmpeg][1]. The following
+    # command converts the provided &lt;input-file&gt; to an MP3 file that
+    # is played in the announcement:
+    #
+    # `ffmpeg -i <input-file> -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000
+    # <output-file.mp3>`
+    #
+    #
+    #
+    # [1]: https://www.ffmpeg.org/
+    #
+    # @note When making an API call, you may pass Audio
+    #   data as a hash:
+    #
+    #       {
+    #         locale: "en-US", # required, accepts en-US
+    #         location: "AudioLocation", # required
+    #       }
+    #
+    # @!attribute [rw] locale
+    #   The locale of the audio message. Currently, en-US is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the audio file. Currently, S3 URLs are supported.
+    #   Only S3 locations comprised of safe characters are valid. For more
+    #   information, see [Safe Characters][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Audio AWS API Documentation
+    #
+    class Audio < Struct.new(
+      :locale,
+      :location)
+      include Aws::Structure
+    end
+
     # Usage report with specified parameters.
     #
     # @!attribute [rw] status
@@ -505,6 +552,54 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The content definition. This can contain only one text, SSML, or audio
+    # list object.
+    #
+    # @note When making an API call, you may pass Content
+    #   data as a hash:
+    #
+    #       {
+    #         text_list: [
+    #           {
+    #             locale: "en-US", # required, accepts en-US
+    #             value: "TextValue", # required
+    #           },
+    #         ],
+    #         ssml_list: [
+    #           {
+    #             locale: "en-US", # required, accepts en-US
+    #             value: "SsmlValue", # required
+    #           },
+    #         ],
+    #         audio_list: [
+    #           {
+    #             locale: "en-US", # required, accepts en-US
+    #             location: "AudioLocation", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] text_list
+    #   The list of text messages.
+    #   @return [Array<Types::Text>]
+    #
+    # @!attribute [rw] ssml_list
+    #   The list of SSML messages.
+    #   @return [Array<Types::Ssml>]
+    #
+    # @!attribute [rw] audio_list
+    #   The list of audio messages.
+    #   @return [Array<Types::Audio>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Content AWS API Documentation
+    #
+    class Content < Struct.new(
+      :text_list,
+      :ssml_list,
+      :audio_list)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAddressBookRequest
     #   data as a hash:
     #
@@ -754,6 +849,51 @@ module Aws::AlexaForBusiness
     #
     class CreateContactResponse < Struct.new(
       :contact_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateGatewayGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "GatewayGroupName", # required
+    #         description: "GatewayGroupDescription",
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the gateway group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the gateway group.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroupRequest AWS API Documentation
+    #
+    class CreateGatewayGroupRequest < Struct.new(
+      :name,
+      :description,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_group_arn
+    #   The ARN of the created gateway group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroupResponse AWS API Documentation
+    #
+    class CreateGatewayGroupResponse < Struct.new(
+      :gateway_group_arn)
       include Aws::Structure
     end
 
@@ -1134,6 +1274,56 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceResponse AWS API Documentation
     #
     class DeleteDeviceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteDeviceUsageDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_arn: "Arn", # required
+    #         device_usage_type: "VOICE", # required, accepts VOICE
+    #       }
+    #
+    # @!attribute [rw] device_arn
+    #   The ARN of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_usage_type
+    #   The type of usage data to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageDataRequest AWS API Documentation
+    #
+    class DeleteDeviceUsageDataRequest < Struct.new(
+      :device_arn,
+      :device_usage_type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageDataResponse AWS API Documentation
+    #
+    class DeleteDeviceUsageDataResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteGatewayGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_group_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_group_arn
+    #   The ARN of the gateway group to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroupRequest AWS API Documentation
+    #
+    class DeleteGatewayGroupRequest < Struct.new(
+      :gateway_group_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroupResponse AWS API Documentation
+    #
+    class DeleteGatewayGroupResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteProfileRequest
     #   data as a hash:
@@ -1668,6 +1858,120 @@ module Aws::AlexaForBusiness
     #
     class ForgetSmartHomeAppliancesResponse < Aws::EmptyStructure; end
 
+    # The details of the gateway.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_group_arn
+    #   The ARN of the gateway group that the gateway is associated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] software_version
+    #   The software version of the gateway. The gateway automatically
+    #   updates its software version during normal operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Gateway AWS API Documentation
+    #
+    class Gateway < Struct.new(
+      :arn,
+      :name,
+      :description,
+      :gateway_group_arn,
+      :software_version)
+      include Aws::Structure
+    end
+
+    # The details of the gateway group.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the gateway group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the gateway group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the gateway group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GatewayGroup AWS API Documentation
+    #
+    class GatewayGroup < Struct.new(
+      :arn,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
+    # The summary of a gateway group.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the gateway group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the gateway group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the gateway group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GatewayGroupSummary AWS API Documentation
+    #
+    class GatewayGroupSummary < Struct.new(
+      :arn,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
+    # The summary of a gateway.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_group_arn
+    #   The ARN of the gateway group that the gateway is associated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] software_version
+    #   The software version of the gateway. The gateway automatically
+    #   updates its software version during normal operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GatewaySummary AWS API Documentation
+    #
+    class GatewaySummary < Struct.new(
+      :arn,
+      :name,
+      :description,
+      :gateway_group_arn,
+      :software_version)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAddressBookRequest
     #   data as a hash:
     #
@@ -1798,6 +2102,64 @@ module Aws::AlexaForBusiness
     #
     class GetDeviceResponse < Struct.new(
       :device)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetGatewayGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_group_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_group_arn
+    #   The ARN of the gateway group to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroupRequest AWS API Documentation
+    #
+    class GetGatewayGroupRequest < Struct.new(
+      :gateway_group_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_group
+    #   The details of the gateway group.
+    #   @return [Types::GatewayGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroupResponse AWS API Documentation
+    #
+    class GetGatewayGroupResponse < Struct.new(
+      :gateway_group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The ARN of the gateway to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayRequest AWS API Documentation
+    #
+    class GetGatewayRequest < Struct.new(
+      :gateway_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway
+    #   The details of the gateway.
+    #   @return [Types::Gateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayResponse AWS API Documentation
+    #
+    class GetGatewayResponse < Struct.new(
+      :gateway)
       include Aws::Structure
     end
 
@@ -2128,6 +2490,98 @@ module Aws::AlexaForBusiness
     #
     class ListDeviceEventsResponse < Struct.new(
       :device_events,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListGatewayGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token used to paginate though multiple pages of gateway group
+    #   summaries.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of gateway group summaries to return. The default
+    #   is 50.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroupsRequest AWS API Documentation
+    #
+    class ListGatewayGroupsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_groups
+    #   The gateway groups in the list.
+    #   @return [Array<Types::GatewayGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to paginate though multiple pages of gateway group
+    #   summaries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroupsResponse AWS API Documentation
+    #
+    class ListGatewayGroupsResponse < Struct.new(
+      :gateway_groups,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListGatewaysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_group_arn: "Arn",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] gateway_group_arn
+    #   The gateway group ARN for which to list gateways.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to paginate though multiple pages of gateway
+    #   summaries.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of gateway summaries to return. The default is
+    #   50.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewaysRequest AWS API Documentation
+    #
+    class ListGatewaysRequest < Struct.new(
+      :gateway_group_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateways
+    #   The gateways in the list.
+    #   @return [Array<Types::GatewaySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to paginate though multiple pages of gateway
+    #   summaries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewaysResponse AWS API Documentation
+    #
+    class ListGatewaysResponse < Struct.new(
+      :gateways,
       :next_token)
       include Aws::Structure
     end
@@ -3502,6 +3956,86 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendAnnouncementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         room_filters: [ # required
+    #           {
+    #             key: "FilterKey", # required
+    #             values: ["FilterValue"], # required
+    #           },
+    #         ],
+    #         content: { # required
+    #           text_list: [
+    #             {
+    #               locale: "en-US", # required, accepts en-US
+    #               value: "TextValue", # required
+    #             },
+    #           ],
+    #           ssml_list: [
+    #             {
+    #               locale: "en-US", # required, accepts en-US
+    #               value: "SsmlValue", # required
+    #             },
+    #           ],
+    #           audio_list: [
+    #             {
+    #               locale: "en-US", # required, accepts en-US
+    #               location: "AudioLocation", # required
+    #             },
+    #           ],
+    #         },
+    #         time_to_live_in_seconds: 1,
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] room_filters
+    #   The filters to use to send an announcement to a specified list of
+    #   rooms. The supported filter keys are RoomName, ProfileName, RoomArn,
+    #   and ProfileArn. To send to all rooms, specify an empty RoomFilters
+    #   list.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] content
+    #   The announcement content. This can contain only one of the three
+    #   possible announcement types (text, SSML or audio).
+    #   @return [Types::Content]
+    #
+    # @!attribute [rw] time_to_live_in_seconds
+    #   The time to live for an announcement. Default is 300. If delivery
+    #   doesn't occur within this time, the announcement is not delivered.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_request_token
+    #   The unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncementRequest AWS API Documentation
+    #
+    class SendAnnouncementRequest < Struct.new(
+      :room_filters,
+      :content,
+      :time_to_live_in_seconds,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] announcement_arn
+    #   The identifier of the announcement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncementResponse AWS API Documentation
+    #
+    class SendAnnouncementResponse < Struct.new(
+      :announcement_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SendInvitationRequest
     #   data as a hash:
     #
@@ -3757,6 +4291,37 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The SSML message. For more information, see [SSML Reference][1].
+    #
+    #
+    #
+    # [1]: https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html
+    #
+    # @note When making an API call, you may pass Ssml
+    #   data as a hash:
+    #
+    #       {
+    #         locale: "en-US", # required, accepts en-US
+    #         value: "SsmlValue", # required
+    #       }
+    #
+    # @!attribute [rw] locale
+    #   The locale of the SSML message. Currently, en-US is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the SSML message in the correct SSML format. The audio
+    #   tag is not supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Ssml AWS API Documentation
+    #
+    class Ssml < Struct.new(
+      :locale,
+      :value)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartDeviceSyncRequest
     #   data as a hash:
     #
@@ -3873,6 +4438,32 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The text message.
+    #
+    # @note When making an API call, you may pass Text
+    #   data as a hash:
+    #
+    #       {
+    #         locale: "en-US", # required, accepts en-US
+    #         value: "TextValue", # required
+    #       }
+    #
+    # @!attribute [rw] locale
+    #   The locale of the text message. Currently, en-US is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the text message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Text AWS API Documentation
+    #
+    class Text < Struct.new(
+      :locale,
+      :value)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
@@ -4122,6 +4713,81 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateDeviceResponse AWS API Documentation
     #
     class UpdateDeviceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateGatewayGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_group_arn: "Arn", # required
+    #         name: "GatewayGroupName",
+    #         description: "GatewayGroupDescription",
+    #       }
+    #
+    # @!attribute [rw] gateway_group_arn
+    #   The ARN of the gateway group to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the gateway group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the gateway group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroupRequest AWS API Documentation
+    #
+    class UpdateGatewayGroupRequest < Struct.new(
+      :gateway_group_arn,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroupResponse AWS API Documentation
+    #
+    class UpdateGatewayGroupResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "Arn", # required
+    #         name: "GatewayName",
+    #         description: "GatewayDescription",
+    #         software_version: "GatewayVersion",
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The ARN of the gateway to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] software_version
+    #   The updated software version of the gateway. The gateway
+    #   automatically updates its software version during normal operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayRequest AWS API Documentation
+    #
+    class UpdateGatewayRequest < Struct.new(
+      :gateway_arn,
+      :name,
+      :description,
+      :software_version)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayResponse AWS API Documentation
+    #
+    class UpdateGatewayResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateProfileRequest
     #   data as a hash:

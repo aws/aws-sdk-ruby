@@ -179,7 +179,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationInput AWS API Documentation
@@ -243,7 +243,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpointInput AWS API Documentation
@@ -266,6 +266,12 @@ module Aws::SNS
     #         attributes: {
     #           "attributeName" => "attributeValue",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -291,13 +297,34 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the
     #     topic.
+    #
+    #   The following attribute applies only to
+    #   [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
+    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags to add to a new topic.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopicInput AWS API Documentation
     #
     class CreateTopicInput < Struct.new(
       :name,
-      :attributes)
+      :attributes,
+      :tags)
       include Aws::Structure
     end
 
@@ -503,7 +530,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributesInput AWS API Documentation
@@ -868,6 +895,35 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the topic for which to list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags associated with the specified topic.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTopicsInput
     #   data as a hash:
     #
@@ -917,8 +973,8 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/api/API_Publish.html
-    # [2]: http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html
     #
     # @note When making an API call, you may pass MessageAttributeValue
     #   data as a hash:
@@ -936,17 +992,16 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes
     #   @return [String]
     #
     # @!attribute [rw] string_value
     #   Strings are Unicode with UTF8 binary encoding. For a list of code
-    #   values, see
-    #   [http://en.wikipedia.org/wiki/ASCII#ASCII\_printable\_characters][1].
+    #   values, see [ASCII Printable Characters][1].
     #
     #
     #
-    #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
+    #   [1]: https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
     #   @return [String]
     #
     # @!attribute [rw] binary_value
@@ -1036,8 +1091,6 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   Either TopicArn or EndpointArn, but not both.
-    #
     #   If you don't specify a value for the `TargetArn` parameter, you
     #   must specify a value for the `PhoneNumber` or `TopicArn` parameters.
     #   @return [String]
@@ -1148,7 +1201,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
+    #   [1]: https://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
     #   @return [String]
     #
     # @!attribute [rw] message_attributes
@@ -1406,7 +1459,7 @@ module Aws::SNS
     #
     #
     #   [1]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-sns
-    #   [2]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributesInput AWS API Documentation
@@ -1501,6 +1554,22 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the
     #     topic.
+    #
+    #   The following attribute applies only to
+    #   [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
+    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
@@ -1562,7 +1631,7 @@ module Aws::SNS
     #   by protocol:
     #
     #   * For the `http` protocol, the endpoint is an URL beginning with
-    #     "http://"
+    #     "https://"
     #
     #   * For the `https` protocol, the endpoint is a URL beginning with
     #     "https://"
@@ -1681,6 +1750,66 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # The list of tags to be added to the specified topic.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The required key portion of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional value portion of the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the topic to which to add tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be added to the specified topic. A tag consists of a
+    #   required key and an optional value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # A wrapper type for the topic's Amazon Resource Name (ARN). To
     # retrieve a topic's attributes, use `GetTopicAttributes`.
     #
@@ -1714,6 +1843,34 @@ module Aws::SNS
       :subscription_arn)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the topic from which to remove tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to remove from the specified topic.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
   end
 end

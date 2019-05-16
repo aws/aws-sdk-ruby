@@ -12,7 +12,7 @@ module Aws::CloudSearchDomain
     include Seahorse::Model
 
     Adds = Shapes::IntegerShape.new(name: 'Adds')
-    Blob = Shapes::BlobShape.new(name: 'Blob')
+    Blob = Shapes::BlobShape.new(name: 'Blob', streaming: true)
     Bucket = Shapes::StructureShape.new(name: 'Bucket')
     BucketInfo = Shapes::StructureShape.new(name: 'BucketInfo')
     BucketList = Shapes::ListShape.new(name: 'BucketList')

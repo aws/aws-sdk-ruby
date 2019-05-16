@@ -349,6 +349,9 @@
   "Macie": {
     "models": "macie/2017-12-19"
   },
+  "ManagedBlockchain": {
+    "models": "managedblockchain/2018-09-24"
+  },
   "MarketplaceCommerceAnalytics": {
     "models": "marketplacecommerceanalytics/2015-07-01"
   },

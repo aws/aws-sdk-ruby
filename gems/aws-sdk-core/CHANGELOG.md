@@ -1,6 +1,43 @@
 Unreleased Changes
 ------------------
 
+3.52.1 (2019-05-15)
+------------------
+
+* Issue - Handle paginator stubs with expression #2040
+
+3.52.0 (2019-05-14)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Feature - Support transfer encoding and `requiresLength` trait
+
+3.51.0 (2019-05-10)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.50.0 (2019-05-06)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.49.0 (2019-04-30)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.48.6 (2019-04-26)
+------------------
+
+* Issue - Call RefreshingCredentials initialize method in ProcessCredentials to set mutex. 
+
+3.48.5 (2019-04-24)
+------------------
+
 * Issue - Add PriorRequestNotComplete to throttling errors.
 
 3.48.4 (2019-04-18)

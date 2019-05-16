@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::XRay
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -789,6 +791,86 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Get an aggregation of service statistics defined by a specific time
+    # range.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start of the time frame for which to aggregate statistics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time frame for which to aggregate statistics.
+    #
+    # @option params [String] :group_name
+    #   The case-sensitive name of the group for which to pull statistics
+    #   from.
+    #
+    # @option params [String] :group_arn
+    #   The ARN of the group for which to pull statistics from.
+    #
+    # @option params [String] :entity_selector_expression
+    #   A filter expression defining entities that will be aggregated for
+    #   statistics. Supports ID, service, and edge functions. If no selector
+    #   expression is specified, edge statistics are returned.
+    #
+    # @option params [Integer] :period
+    #   Aggregation period in seconds.
+    #
+    # @option params [String] :next_token
+    #   Pagination token. Not used.
+    #
+    # @return [Types::GetTimeSeriesServiceStatisticsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTimeSeriesServiceStatisticsResult#time_series_service_statistics #time_series_service_statistics} => Array&lt;Types::TimeSeriesServiceStatistics&gt;
+    #   * {Types::GetTimeSeriesServiceStatisticsResult#contains_old_group_versions #contains_old_group_versions} => Boolean
+    #   * {Types::GetTimeSeriesServiceStatisticsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_time_series_service_statistics({
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     group_name: "GroupName",
+    #     group_arn: "GroupARN",
+    #     entity_selector_expression: "EntitySelectorExpression",
+    #     period: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.time_series_service_statistics #=> Array
+    #   resp.time_series_service_statistics[0].timestamp #=> Time
+    #   resp.time_series_service_statistics[0].edge_summary_statistics.ok_count #=> Integer
+    #   resp.time_series_service_statistics[0].edge_summary_statistics.error_statistics.throttle_count #=> Integer
+    #   resp.time_series_service_statistics[0].edge_summary_statistics.error_statistics.other_count #=> Integer
+    #   resp.time_series_service_statistics[0].edge_summary_statistics.error_statistics.total_count #=> Integer
+    #   resp.time_series_service_statistics[0].edge_summary_statistics.fault_statistics.other_count #=> Integer
+    #   resp.time_series_service_statistics[0].edge_summary_statistics.fault_statistics.total_count #=> Integer
+    #   resp.time_series_service_statistics[0].edge_summary_statistics.total_count #=> Integer
+    #   resp.time_series_service_statistics[0].edge_summary_statistics.total_response_time #=> Float
+    #   resp.time_series_service_statistics[0].service_summary_statistics.ok_count #=> Integer
+    #   resp.time_series_service_statistics[0].service_summary_statistics.error_statistics.throttle_count #=> Integer
+    #   resp.time_series_service_statistics[0].service_summary_statistics.error_statistics.other_count #=> Integer
+    #   resp.time_series_service_statistics[0].service_summary_statistics.error_statistics.total_count #=> Integer
+    #   resp.time_series_service_statistics[0].service_summary_statistics.fault_statistics.other_count #=> Integer
+    #   resp.time_series_service_statistics[0].service_summary_statistics.fault_statistics.total_count #=> Integer
+    #   resp.time_series_service_statistics[0].service_summary_statistics.total_count #=> Integer
+    #   resp.time_series_service_statistics[0].service_summary_statistics.total_response_time #=> Float
+    #   resp.time_series_service_statistics[0].response_time_histogram #=> Array
+    #   resp.time_series_service_statistics[0].response_time_histogram[0].value #=> Float
+    #   resp.time_series_service_statistics[0].response_time_histogram[0].count #=> Integer
+    #   resp.contains_old_group_versions #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTimeSeriesServiceStatistics AWS API Documentation
+    #
+    # @overload get_time_series_service_statistics(params = {})
+    # @param [Hash] params ({})
+    def get_time_series_service_statistics(params = {}, options = {})
+      req = build_request(:get_time_series_service_statistics, params)
+      req.send_request(options)
+    end
+
     # Retrieves a service graph for one or more specific trace IDs.
     #
     # @option params [required, Array<String>] :trace_ids
@@ -889,7 +971,7 @@ module Aws::XRay
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html
+    # [1]: https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The start of the time frame for which to retrieve traces.
@@ -897,8 +979,16 @@ module Aws::XRay
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The end of the time frame for which to retrieve traces.
     #
+    # @option params [String] :time_range_type
+    #   A parameter to indicate whether to query trace summaries by TraceId or
+    #   Event time.
+    #
     # @option params [Boolean] :sampling
     #   Set to `true` to get summaries for only a subset of available traces.
+    #
+    # @option params [Types::SamplingStrategy] :sampling_strategy
+    #   A paramater to indicate whether to enable sampling on trace summaries.
+    #   Input parameters are Name and Value.
     #
     # @option params [String] :filter_expression
     #   Specify a filter expression to retrieve trace summaries for services
@@ -920,7 +1010,12 @@ module Aws::XRay
     #   resp = client.get_trace_summaries({
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
+    #     time_range_type: "TraceId", # accepts TraceId, Event
     #     sampling: false,
+    #     sampling_strategy: {
+    #       name: "PartialScan", # accepts PartialScan, FixedRate
+    #       value: 1.0,
+    #     },
     #     filter_expression: "FilterExpression",
     #     next_token: "String",
     #   })
@@ -1017,6 +1112,7 @@ module Aws::XRay
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].entity_path[0].remote #=> Boolean
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].inferred #=> Boolean
     #   resp.trace_summaries[0].revision #=> Integer
+    #   resp.trace_summaries[0].matched_event_time #=> Time
     #   resp.approximate_time #=> Time
     #   resp.traces_processed_count #=> Integer
     #   resp.next_token #=> String
@@ -1315,7 +1411,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

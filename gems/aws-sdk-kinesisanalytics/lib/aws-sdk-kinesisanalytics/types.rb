@@ -70,20 +70,32 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] current_application_version_id
     #   Version of the application to which you want to add the input
-    #   processing configuration. You can use the DescribeApplication
+    #   processing configuration. You can use the [DescribeApplication][1]
     #   operation to get the current application version. If the version
     #   specified is not the current version, the
     #   `ConcurrentModificationException` is returned.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [Integer]
     #
     # @!attribute [rw] input_id
     #   The ID of the input configuration to add the input processing
     #   configuration to. You can get a list of the input IDs for an
-    #   application using the DescribeApplication operation.
+    #   application using the [DescribeApplication][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [String]
     #
     # @!attribute [rw] input_processing_configuration
-    #   The InputProcessingConfiguration to add to the application.
+    #   The [InputProcessingConfiguration][1] to add to the application.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html
     #   @return [Types::InputProcessingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfigurationRequest AWS API Documentation
@@ -157,12 +169,20 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] current_application_version_id
     #   Current version of your Amazon Kinesis Analytics application. You
-    #   can use the DescribeApplication operation to find the current
+    #   can use the [DescribeApplication][1] operation to find the current
     #   application version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [Integer]
     #
     # @!attribute [rw] input
-    #   The Input to add.
+    #   The [Input][1] to add.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html
     #   @return [Types::Input]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputRequest AWS API Documentation
@@ -211,9 +231,14 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] current_application_version_id
     #   Version of the application to which you want to add the output
-    #   configuration. You can use the DescribeApplication operation to get
-    #   the current application version. If the version specified is not the
-    #   current version, the `ConcurrentModificationException` is returned.
+    #   configuration. You can use the [DescribeApplication][1] operation to
+    #   get the current application version. If the version specified is not
+    #   the current version, the `ConcurrentModificationException` is
+    #   returned.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [Integer]
     #
     # @!attribute [rw] output
@@ -281,9 +306,14 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] current_application_version_id
     #   Version of the application for which you are adding the reference
-    #   data source. You can use the DescribeApplication operation to get
-    #   the current application version. If the version specified is not the
-    #   current version, the `ConcurrentModificationException` is returned.
+    #   data source. You can use the [DescribeApplication][1] operation to
+    #   get the current application version. If the version specified is not
+    #   the current version, the `ConcurrentModificationException` is
+    #   returned.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [Integer]
     #
     # @!attribute [rw] reference_data_source
@@ -309,6 +339,14 @@ module Aws::KinesisAnalytics
     #
     class AddApplicationReferenceDataSourceResponse < Aws::EmptyStructure; end
 
+    # <note markdown="1"> This documentation is for version 1 of the Amazon Kinesis Data
+    # Analytics API, which only supports SQL applications. Version 2 of the
+    # API supports SQL and Java applications. For more information about
+    # version 2, see [Amazon Kinesis Data Analytics API V2
+    # Documentation](/kinesisanalytics/latest/apiv2/Welcome.html).
+    #
+    #  </note>
+    #
     # Provides a description of the application, including the application
     # Amazon Resource Name (ARN), status, latest version, and input and
     # output configuration.
@@ -343,7 +381,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #   @return [Array<Types::InputDescription>]
     #
     # @!attribute [rw] output_descriptions
@@ -352,7 +390,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
     #   @return [Array<Types::OutputDescription>]
     #
     # @!attribute [rw] reference_data_source_descriptions
@@ -361,7 +399,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #   @return [Array<Types::ReferenceDataSourceDescription>]
     #
     # @!attribute [rw] cloud_watch_logging_option_descriptions
@@ -372,7 +410,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html
     #   @return [Array<Types::CloudWatchLoggingOptionDescription>]
     #
     # @!attribute [rw] application_code
@@ -402,6 +440,14 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # <note markdown="1"> This documentation is for version 1 of the Amazon Kinesis Data
+    # Analytics API, which only supports SQL applications. Version 2 of the
+    # API supports SQL and Java applications. For more information about
+    # version 2, see [Amazon Kinesis Data Analytics API V2
+    # Documentation](/kinesisanalytics/latest/apiv2/Welcome.html).
+    #
+    #  </note>
+    #
     # Provides application summary information, including the application
     # Amazon Resource Name (ARN), name, and status.
     #
@@ -775,6 +821,12 @@ module Aws::KinesisAnalytics
     #           },
     #         ],
     #         application_code: "ApplicationCode",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] application_name
@@ -834,7 +886,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html
     #   @return [Array<Types::CloudWatchLoggingOption>]
     #
     # @!attribute [rw] application_code
@@ -858,8 +910,21 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of one or more tags to assign to the application. A tag is a
+    #   key-value pair that identifies an application. Note that the maximum
+    #   number of application tags includes system tags. The maximum number
+    #   of user-defined application tags is 50. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
+    #   Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplicationRequest AWS API Documentation
     #
@@ -869,7 +934,8 @@ module Aws::KinesisAnalytics
       :inputs,
       :outputs,
       :cloud_watch_logging_options,
-      :application_code)
+      :application_code,
+      :tags)
       include Aws::Structure
     end
 
@@ -909,7 +975,11 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] cloud_watch_logging_option_id
     #   The `CloudWatchLoggingOptionId` of the CloudWatch logging option to
     #   delete. You can get the `CloudWatchLoggingOptionId` by using the
-    #   DescribeApplication operation.
+    #   [DescribeApplication][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationCloudWatchLoggingOptionRequest AWS API Documentation
@@ -945,7 +1015,11 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] input_id
     #   The ID of the input configuration from which to delete the input
     #   processing configuration. You can get a list of the input IDs for an
-    #   application by using the DescribeApplication operation.
+    #   application by using the [DescribeApplication][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationInputProcessingConfigurationRequest AWS API Documentation
@@ -976,19 +1050,28 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] current_application_version_id
     #   Amazon Kinesis Analytics application version. You can use the
-    #   DescribeApplication operation to get the current application
+    #   [DescribeApplication][1] operation to get the current application
     #   version. If the version specified is not the current version, the
     #   `ConcurrentModificationException` is returned.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [Integer]
     #
     # @!attribute [rw] output_id
     #   The ID of the configuration to delete. Each output configuration
     #   that is added to the application, either when the application is
-    #   created or later using the AddApplicationOutput operation, has a
-    #   unique ID. You need to provide the ID to uniquely identify the
+    #   created or later using the [AddApplicationOutput][1] operation, has
+    #   a unique ID. You need to provide the ID to uniquely identify the
     #   output configuration that you want to delete from the application
-    #   configuration. You can use the DescribeApplication operation to get
-    #   the specific `OutputId`.
+    #   configuration. You can use the [DescribeApplication][2] operation to
+    #   get the specific `OutputId`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html
+    #   [2]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationOutputRequest AWS API Documentation
@@ -1018,18 +1101,27 @@ module Aws::KinesisAnalytics
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   Version of the application. You can use the DescribeApplication
+    #   Version of the application. You can use the [DescribeApplication][1]
     #   operation to get the current application version. If the version
     #   specified is not the current version, the
     #   `ConcurrentModificationException` is returned.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [Integer]
     #
     # @!attribute [rw] reference_id
     #   ID of the reference data source. When you add a reference data
     #   source to your application using the
-    #   AddApplicationReferenceDataSource, Amazon Kinesis Analytics assigns
-    #   an ID. You can use the DescribeApplication operation to get the
-    #   reference ID.
+    #   [AddApplicationReferenceDataSource][1], Amazon Kinesis Analytics
+    #   assigns an ID. You can use the [DescribeApplication][2] operation to
+    #   get the reference ID.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html
+    #   [2]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSourceRequest AWS API Documentation
@@ -1109,7 +1201,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
     #
     # @note When making an API call, you may pass DestinationSchema
     #   data as a hash:
@@ -1171,8 +1263,12 @@ module Aws::KinesisAnalytics
     #   @return [Types::S3Configuration]
     #
     # @!attribute [rw] input_processing_configuration
-    #   The InputProcessingConfiguration to use to preprocess the records
-    #   before discovering the schema of the records.
+    #   The [InputProcessingConfiguration][1] to use to preprocess the
+    #   records before discovering the schema of the records.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html
     #   @return [Types::InputProcessingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchemaRequest AWS API Documentation
@@ -1224,7 +1320,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #
     # @note When making an API call, you may pass Input
     #   data as a hash:
@@ -1282,10 +1378,16 @@ module Aws::KinesisAnalytics
     #   @return [String]
     #
     # @!attribute [rw] input_processing_configuration
-    #   The InputProcessingConfiguration for the input. An input processor
-    #   transforms records as they are received from the stream, before the
-    #   application's SQL code executes. Currently, the only input
-    #   processing configuration available is InputLambdaProcessor.
+    #   The [InputProcessingConfiguration][1] for the input. An input
+    #   processor transforms records as they are received from the stream,
+    #   before the application's SQL code executes. Currently, the only
+    #   input processing configuration available is
+    #   [InputLambdaProcessor][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html
     #   @return [Types::InputProcessingConfiguration]
     #
     # @!attribute [rw] kinesis_streams_input
@@ -1317,7 +1419,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #   @return [Types::InputParallelism]
     #
     # @!attribute [rw] input_schema
@@ -1356,7 +1458,11 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] id
     #   Input source ID. You can get this ID by calling the
-    #   DescribeApplication operation.
+    #   [DescribeApplication][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [String]
     #
     # @!attribute [rw] input_starting_position_configuration
@@ -1377,7 +1483,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #
     # @!attribute [rw] input_id
     #   Input ID associated with the application input. This is the ID that
@@ -1451,7 +1557,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # [1]: https://aws.amazon.com/documentation/lambda/
+    # [1]: https://docs.aws.amazon.com/lambda/
     #
     # @note When making an API call, you may pass InputLambdaProcessor
     #   data as a hash:
@@ -1465,9 +1571,16 @@ module Aws::KinesisAnalytics
     #   The ARN of the [AWS Lambda][1] function that operates on records in
     #   the stream.
     #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #
     #
-    #   [1]: https://aws.amazon.com/documentation/lambda/
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1490,7 +1603,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # [1]: https://aws.amazon.com/documentation/lambda/
+    # [1]: https://docs.aws.amazon.com/lambda/
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the [AWS Lambda][1] function that is used to preprocess
@@ -1498,7 +1611,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: https://aws.amazon.com/documentation/lambda/
+    #   [1]: https://docs.aws.amazon.com/lambda/
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1514,8 +1627,12 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    # Represents an update to the InputLambdaProcessor that is used to
+    # Represents an update to the [InputLambdaProcessor][1] that is used to
     # preprocess the records in the stream.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html
     #
     # @note When making an API call, you may pass InputLambdaProcessorUpdate
     #   data as a hash:
@@ -1529,9 +1646,16 @@ module Aws::KinesisAnalytics
     #   The Amazon Resource Name (ARN) of the new [AWS Lambda][1] function
     #   that is used to preprocess the records in the stream.
     #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #
     #
-    #   [1]: https://aws.amazon.com/documentation/lambda/
+    #
+    #   [1]: https://docs.aws.amazon.com/ambda/
     #   @return [String]
     #
     # @!attribute [rw] role_arn_update
@@ -1553,7 +1677,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #
     # @note When making an API call, you may pass InputParallelism
     #   data as a hash:
@@ -1568,7 +1692,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputParallelism AWS API Documentation
@@ -1605,7 +1729,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # [1]: https://aws.amazon.com/documentation/lambda/
+    # [1]: https://docs.aws.amazon.com/lambda/
     #
     # @note When making an API call, you may pass InputProcessingConfiguration
     #   data as a hash:
@@ -1618,8 +1742,12 @@ module Aws::KinesisAnalytics
     #       }
     #
     # @!attribute [rw] input_lambda_processor
-    #   The InputLambdaProcessor that is used to preprocess the records in
-    #   the stream before being processed by your application code.
+    #   The [InputLambdaProcessor][1] that is used to preprocess the records
+    #   in the stream before being processed by your application code.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html
     #   @return [Types::InputLambdaProcessor]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfiguration AWS API Documentation
@@ -1634,11 +1762,15 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # [1]: https://aws.amazon.com/documentation/lambda/
+    # [1]: https://docs.aws.amazon.com/lambda/
     #
     # @!attribute [rw] input_lambda_processor_description
     #   Provides configuration information about the associated
-    #   InputLambdaProcessorDescription.
+    #   [InputLambdaProcessorDescription][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessorDescription.html
     #   @return [Types::InputLambdaProcessorDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfigurationDescription AWS API Documentation
@@ -1648,7 +1780,11 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    # Describes updates to an InputProcessingConfiguration.
+    # Describes updates to an [InputProcessingConfiguration][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html
     #
     # @note When making an API call, you may pass InputProcessingConfigurationUpdate
     #   data as a hash:
@@ -1661,7 +1797,11 @@ module Aws::KinesisAnalytics
     #       }
     #
     # @!attribute [rw] input_lambda_processor_update
-    #   Provides update information for an InputLambdaProcessor.
+    #   Provides update information for an [InputLambdaProcessor][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html
     #   @return [Types::InputLambdaProcessorUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfigurationUpdate AWS API Documentation
@@ -2012,9 +2152,13 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    # When updating an output configuration using the UpdateApplication
+    # When updating an output configuration using the [UpdateApplication][1]
     # operation, provides information about an Amazon Kinesis Firehose
     # delivery stream configured as the destination.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html
     #
     # @note When making an API call, you may pass KinesisFirehoseOutputUpdate
     #   data as a hash:
@@ -2175,9 +2319,13 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    # When updating an output configuration using the UpdateApplication
+    # When updating an output configuration using the [UpdateApplication][1]
     # operation, provides information about an Amazon Kinesis stream
     # configured as the destination.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html
     #
     # @note When making an API call, you may pass KinesisStreamsOutputUpdate
     #   data as a hash:
@@ -2222,6 +2370,13 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the destination Lambda function to
     #   write to.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2258,9 +2413,13 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    # When updating an output configuration using the UpdateApplication
+    # When updating an output configuration using the [UpdateApplication][1]
     # operation, provides information about an AWS Lambda function
     # configured as the destination.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html
     #
     # @note When making an API call, you may pass LambdaOutputUpdate
     #   data as a hash:
@@ -2272,6 +2431,13 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] resource_arn_update
     #   Amazon Resource Name (ARN) of the destination Lambda function.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] role_arn_update
@@ -2332,6 +2498,35 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "KinesisAnalyticsARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the application for which to retrieve tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The key-value tags assigned to the application.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # When configuring application input at the time of creating or updating
     # an application, provides additional mapping information specific to
     # the record format (such as JSON, CSV, or record fields delimited by
@@ -2380,7 +2575,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html
     #
     # @note When making an API call, you may pass Output
     #   data as a hash:
@@ -2428,7 +2623,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
     #   @return [Types::DestinationSchema]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Output AWS API Documentation
@@ -2544,7 +2739,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
     #   @return [Types::DestinationSchema]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/OutputUpdate AWS API Documentation
@@ -2579,8 +2774,13 @@ module Aws::KinesisAnalytics
     #   @return [String]
     #
     # @!attribute [rw] mapping
-    #   Reference to the data element in the streaming input of the
-    #   reference data source.
+    #   Reference to the data element in the streaming input or the
+    #   reference data source. This element is required if the
+    #   [RecordFormatType][1] is `JSON`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_RecordFormat.html#analytics-Type-RecordFormat-RecordFormatTypel
     #   @return [String]
     #
     # @!attribute [rw] sql_type
@@ -2684,7 +2884,7 @@ module Aws::KinesisAnalytics
     #   data. Also identifies the IAM role Amazon Kinesis Analytics can
     #   assume to read this object on your behalf. An Amazon Kinesis
     #   Analytics application loads reference data only once. If the data
-    #   changes, you call the UpdateApplication operation to trigger
+    #   changes, you call the `UpdateApplication` operation to trigger
     #   reloading of data into your application.
     #   @return [Types::S3ReferenceDataSource]
     #
@@ -2708,7 +2908,12 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] reference_id
     #   ID of the reference data source. This is the ID that Amazon Kinesis
     #   Analytics assigns when you add the reference data source to your
-    #   application using the AddApplicationReferenceDataSource operation.
+    #   application using the [AddApplicationReferenceDataSource][1]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html
     #   @return [String]
     #
     # @!attribute [rw] table_name
@@ -2783,7 +2988,11 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] reference_id
     #   ID of the reference data source being updated. You can use the
-    #   DescribeApplication operation to get this value.
+    #   [DescribeApplication][1] operation to get this value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [String]
     #
     # @!attribute [rw] table_name_update
@@ -2852,8 +3061,12 @@ module Aws::KinesisAnalytics
     # read this object on your behalf.
     #
     # An Amazon Kinesis Analytics application loads reference data only
-    # once. If the data changes, you call the UpdateApplication operation to
-    # trigger reloading of data into your application.
+    # once. If the data changes, you call the [UpdateApplication][1]
+    # operation to trigger reloading of data into your application.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html
     #
     # @note When making an API call, you may pass S3ReferenceDataSource
     #   data as a hash:
@@ -3061,6 +3274,104 @@ module Aws::KinesisAnalytics
     #
     class StopApplicationResponse < Aws::EmptyStructure; end
 
+    # A key-value pair (the value is optional) that you can define and
+    # assign to AWS resources. If you specify a tag that already exists, the
+    # tag value is replaced with the value that you specify in the request.
+    # Note that the maximum number of application tags includes system tags.
+    # The maximum number of user-defined application tags is 50. For more
+    # information, see [Using Cost Allocation Tags][1] in the *AWS Billing
+    # and Cost Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the key-value tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the key-value tag. The value is optional.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "KinesisAnalyticsARN", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the application to assign the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags to assign to the application.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "KinesisAnalyticsARN", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the Kinesis Analytics application from which to remove
+    #   the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of keys of tags to remove from the specified application.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateApplicationRequest
     #   data as a hash:
     #
@@ -3184,7 +3495,11 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] current_application_version_id
     #   The current application version ID. You can use the
-    #   DescribeApplication operation to get this value.
+    #   [DescribeApplication][1] operation to get this value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
     #   @return [Integer]
     #
     # @!attribute [rw] application_update

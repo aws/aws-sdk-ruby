@@ -100,6 +100,7 @@ module Aws::MediaConvert
     DashIsoEncryptionSettings = Shapes::StructureShape.new(name: 'DashIsoEncryptionSettings')
     DashIsoGroupSettings = Shapes::StructureShape.new(name: 'DashIsoGroupSettings')
     DashIsoHbbtvCompliance = Shapes::StringShape.new(name: 'DashIsoHbbtvCompliance')
+    DashIsoPlaybackDeviceCompatibility = Shapes::StringShape.new(name: 'DashIsoPlaybackDeviceCompatibility')
     DashIsoSegmentControl = Shapes::StringShape.new(name: 'DashIsoSegmentControl')
     DashIsoWriteSegmentTimelineInRepresentation = Shapes::StringShape.new(name: 'DashIsoWriteSegmentTimelineInRepresentation')
     DecryptionMode = Shapes::StringShape.new(name: 'DecryptionMode')
@@ -795,6 +796,7 @@ module Aws::MediaConvert
     CreateQueueResponse.add_member(:queue, Shapes::ShapeRef.new(shape: Queue, location_name: "queue"))
     CreateQueueResponse.struct_class = Types::CreateQueueResponse
 
+    DashIsoEncryptionSettings.add_member(:playback_device_compatibility, Shapes::ShapeRef.new(shape: DashIsoPlaybackDeviceCompatibility, location_name: "playbackDeviceCompatibility"))
     DashIsoEncryptionSettings.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, location_name: "spekeKeyProvider"))
     DashIsoEncryptionSettings.struct_class = Types::DashIsoEncryptionSettings
 

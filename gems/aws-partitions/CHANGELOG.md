@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2019-05-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.161.0 (2019-05-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.160.0 (2019-05-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.159.0 (2019-05-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.158.0 (2019-05-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.157.0 (2019-05-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.156.0 (2019-04-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ManagedBlockchain`.
+
+1.155.0 (2019-04-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.154.0 (2019-04-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.153.0 (2019-04-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.152.0 (2019-04-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.151.0 (2019-04-18)
 ------------------
 

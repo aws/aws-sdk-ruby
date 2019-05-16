@@ -276,14 +276,20 @@ module Aws::RDS
     # @option options [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.
     # @option options [Boolean] :default_only
-    #   Indicates that only the default version of the specified engine or
-    #   engine and major version combination is returned.
+    #   A value that indicates whether only the default version of the
+    #   specified engine or engine and major version combination is returned.
     # @option options [Boolean] :list_supported_character_sets
-    #   If this parameter is specified and the requested engine supports the
+    #   A value that indicates whether to list the supported character sets
+    #   for each engine version.
+    #
+    #   If this parameter is enabled and the requested engine supports the
     #   `CharacterSetName` parameter for `CreateDBInstance`, the response
     #   includes a list of supported character sets for each engine version.
     # @option options [Boolean] :list_supported_timezones
-    #   If this parameter is specified and the requested engine supports the
+    #   A value that indicates whether to list the supported time zones for
+    #   each engine version.
+    #
+    #   If this parameter is enabled and the requested engine supports the
     #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
     #   list of supported time zones for each engine version.
     # @return [DBEngineVersion::Collection]

@@ -486,6 +486,7 @@ module Aws::RDS
 
     AddRoleToDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     AddRoleToDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+    AddRoleToDBClusterMessage.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "FeatureName"))
     AddRoleToDBClusterMessage.struct_class = Types::AddRoleToDBClusterMessage
 
     AddRoleToDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -2119,6 +2120,7 @@ module Aws::RDS
 
     RemoveRoleFromDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     RemoveRoleFromDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+    RemoveRoleFromDBClusterMessage.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "FeatureName"))
     RemoveRoleFromDBClusterMessage.struct_class = Types::RemoveRoleFromDBClusterMessage
 
     RemoveRoleFromDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))

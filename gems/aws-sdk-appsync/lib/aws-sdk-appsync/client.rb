@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::AppSync
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -475,14 +477,21 @@ module Aws::AppSync
     #   The Amazon CloudWatch Logs configuration.
     #
     # @option params [required, String] :authentication_type
-    #   The authentication type: API key, AWS IAM, or Amazon Cognito user
-    #   pools.
+    #   The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito
+    #   user pools.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
     #   The Amazon Cognito user pool configuration.
     #
     # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
     #   The OpenID Connect configuration.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A `TagMap` object.
+    #
+    # @option params [Array<Types::AdditionalAuthenticationProvider>] :additional_authentication_providers
+    #   A list of additional authentication providers for the `GraphqlApi`
+    #   API.
     #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -509,6 +518,25 @@ module Aws::AppSync
     #       iat_ttl: 1,
     #       auth_ttl: 1,
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     additional_authentication_providers: [
+    #       {
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         open_id_connect_config: {
+    #           issuer: "String", # required
+    #           client_id: "String",
+    #           iat_ttl: 1,
+    #           auth_ttl: 1,
+    #         },
+    #         user_pool_config: {
+    #           user_pool_id: "String", # required
+    #           aws_region: "String", # required
+    #           app_id_client_regex: "String",
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -529,6 +557,17 @@ module Aws::AppSync
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
+    #   resp.graphql_api.tags #=> Hash
+    #   resp.graphql_api.tags["TagKey"] #=> String
+    #   resp.graphql_api.additional_authentication_providers #=> Array
+    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApi AWS API Documentation
     #
@@ -948,6 +987,17 @@ module Aws::AppSync
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
+    #   resp.graphql_api.tags #=> Hash
+    #   resp.graphql_api.tags["TagKey"] #=> String
+    #   resp.graphql_api.additional_authentication_providers #=> Array
+    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApi AWS API Documentation
     #
@@ -966,6 +1016,10 @@ module Aws::AppSync
     # @option params [required, String] :format
     #   The schema format: SDL or JSON.
     #
+    # @option params [Boolean] :include_directives
+    #   A flag that specifies whether the schema introspection should contain
+    #   directives.
+    #
     # @return [Types::GetIntrospectionSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIntrospectionSchemaResponse#schema #schema} => String
@@ -975,6 +1029,7 @@ module Aws::AppSync
     #   resp = client.get_introspection_schema({
     #     api_id: "String", # required
     #     format: "SDL", # required, accepts SDL, JSON
+    #     include_directives: false,
     #   })
     #
     # @example Response structure
@@ -1052,7 +1107,7 @@ module Aws::AppSync
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "PROCESSING", "ACTIVE", "DELETING"
+    #   resp.status #=> String, one of "PROCESSING", "ACTIVE", "DELETING", "FAILED", "SUCCESS", "NOT_APPLICABLE"
     #   resp.details #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetSchemaCreationStatus AWS API Documentation
@@ -1304,6 +1359,17 @@ module Aws::AppSync
     #   resp.graphql_apis[0].arn #=> String
     #   resp.graphql_apis[0].uris #=> Hash
     #   resp.graphql_apis[0].uris["String"] #=> String
+    #   resp.graphql_apis[0].tags #=> Hash
+    #   resp.graphql_apis[0].tags["TagKey"] #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers #=> Array
+    #   resp.graphql_apis[0].additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.aws_region #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis AWS API Documentation
@@ -1421,6 +1487,35 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Lists the tags for a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The `GraphqlApi` ARN.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Lists the types for a given API.
     #
     # @option params [required, String] :api_id
@@ -1494,7 +1589,7 @@ module Aws::AppSync
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "PROCESSING", "ACTIVE", "DELETING"
+    #   resp.status #=> String, one of "PROCESSING", "ACTIVE", "DELETING", "FAILED", "SUCCESS", "NOT_APPLICABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartSchemaCreation AWS API Documentation
     #
@@ -1502,6 +1597,60 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def start_schema_creation(params = {}, options = {})
       req = build_request(:start_schema_creation, params)
+      req.send_request(options)
+    end
+
+    # Tags a resource with user-supplied tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   The `GraphqlApi` ARN.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A `TagMap` object.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Untags a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The `GraphqlApi` ARN.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of `TagKey` objects.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1745,6 +1894,10 @@ module Aws::AppSync
     # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
     #   The OpenID Connect configuration for the `GraphqlApi` object.
     #
+    # @option params [Array<Types::AdditionalAuthenticationProvider>] :additional_authentication_providers
+    #   A list of additional authentication providers for the `GraphqlApi`
+    #   API.
+    #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -1771,6 +1924,22 @@ module Aws::AppSync
     #       iat_ttl: 1,
     #       auth_ttl: 1,
     #     },
+    #     additional_authentication_providers: [
+    #       {
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         open_id_connect_config: {
+    #           issuer: "String", # required
+    #           client_id: "String",
+    #           iat_ttl: 1,
+    #           auth_ttl: 1,
+    #         },
+    #         user_pool_config: {
+    #           user_pool_id: "String", # required
+    #           aws_region: "String", # required
+    #           app_id_client_regex: "String",
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1791,6 +1960,17 @@ module Aws::AppSync
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
+    #   resp.graphql_api.tags #=> Hash
+    #   resp.graphql_api.tags["TagKey"] #=> String
+    #   resp.graphql_api.additional_authentication_providers #=> Array
+    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApi AWS API Documentation
     #
@@ -1933,7 +2113,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

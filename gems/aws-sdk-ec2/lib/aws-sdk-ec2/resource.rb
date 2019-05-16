@@ -70,7 +70,7 @@ module Aws::EC2
     #       },
     #     ],
     #     image_id: "String",
-    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
@@ -131,6 +131,7 @@ module Aws::EC2
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         interface_type: "String",
     #       },
     #     ],
     #     private_ip_address: "String",
@@ -200,9 +201,8 @@ module Aws::EC2
     #   not blank and its encryption status is used for the volume encryption
     #   status.
     # @option options [String] :image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
-    #   is required to launch an instance and must be specified here or in a
-    #   launch template.
+    #   The ID of the AMI. An AMI is required to launch an instance and must
+    #   be specified here or in a launch template.
     # @option options [String] :instance_type
     #   The instance type. For more information, see [Instance Types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
@@ -213,7 +213,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     # @option options [Integer] :ipv_6_address_count
-    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
+    #   \[EC2-VPC\] The number of IPv6 addresses to associate with the primary
     #   network interface. Amazon EC2 chooses the IPv6 addresses from the
     #   range of your subnet. You cannot specify this option and the option to
     #   assign specific IPv6 addresses in the same request. You can specify
@@ -243,11 +243,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     # @option options [String] :key_name
     #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    #   [CreateKeyPair][1] or [ImportKeyPair][2].
     #
     #   If you do not specify a key pair, you can't connect to the instance
     #   unless you choose an AMI that is configured to allow users another way
     #   to log in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     # @option options [required, Integer] :max_count
     #   The maximum number of instances to launch. If you specify more
     #   instances than Amazon EC2 can launch in the target Availability Zone,
@@ -276,11 +281,14 @@ module Aws::EC2
     #
     #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
     # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
-    #   The monitoring for the instance.
+    #   Specifies whether detailed monitoring is enabled for the instance.
     # @option options [Types::Placement] :placement
     #   The placement for the instance.
     # @option options [String] :ramdisk_id
-    #   The ID of the RAM disk.
+    #   The ID of the RAM disk to select. Some kernels require additional
+    #   drivers at launch. Check the kernel requirements for information about
+    #   whether you need to specify a RAM disk. To find kernel requirements,
+    #   go to the AWS Resource Center and search for the kernel ID.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
@@ -291,18 +299,20 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     # @option options [Array<String>] :security_group_ids
     #   The IDs of the security groups. You can create a security group using
-    #   CreateSecurityGroup.
+    #   [CreateSecurityGroup][1].
     #
-    #   Default: Amazon EC2 uses the default security group.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     # @option options [Array<String>] :security_groups
     #   \[EC2-Classic, default VPC\] The names of the security groups. For a
     #   nondefault VPC, you must use security group IDs instead.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
     #   Default: Amazon EC2 uses the default security group.
     # @option options [String] :subnet_id
@@ -315,7 +325,8 @@ module Aws::EC2
     #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
     #   [Adding User Data][2] (Windows). If you are using a command line tool,
     #   base64-encoding is performed for you, and you can load the text from a
-    #   file. Otherwise, you must provide base64-encoded text.
+    #   file. Otherwise, you must provide base64-encoded text. User data is
+    #   limited to 16 KB.
     #
     #
     #
@@ -337,11 +348,15 @@ module Aws::EC2
     #   If you set this parameter to `true`, you can't terminate the instance
     #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
     #   change this attribute to `false` after launch, use
-    #   ModifyInstanceAttribute. Alternatively, if you set
+    #   [ModifyInstanceAttribute][1]. Alternatively, if you set
     #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
     #   the instance by running the shutdown command from the instance.
     #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -365,10 +380,9 @@ module Aws::EC2
     #
     #   Default: `stop`
     # @option options [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   The network interfaces.
-    #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   The network interfaces to associate with the instance. If you specify
+    #   a network interface, you must specify any security groups as part of
+    #   the network interface.
     # @option options [String] :private_ip_address
     #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
     #   the IPv4 address range of the subnet.
@@ -382,14 +396,29 @@ module Aws::EC2
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
     # @option options [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   An elastic GPU to associate with the instance.
+    #   An elastic GPU to associate with the instance. An Elastic GPU is a GPU
+    #   resource that you can attach to your Windows instance to accelerate
+    #   the graphics performance of your applications. For more information,
+    #   see [ Amazon EC2 Elastic GPUs][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
     # @option options [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
-    #   An elastic inference accelerator.
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to all
     #   instances or volumes that are created during launch. To tag a resource
-    #   after it has been created, see CreateTags.
+    #   after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     # @option options [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template to use to launch the instances. Any parameters
     #   that you specify in RunInstances override the same parameters in the
@@ -402,17 +431,18 @@ module Aws::EC2
     #   when **InstanceInterruptionBehavior** is set to either `hibernate` or
     #   `stop`.
     # @option options [Types::CreditSpecificationRequest] :credit_specification
-    #   The credit option for CPU usage of the instance. Valid values are
-    #   `standard` and `unlimited`. To change this attribute after launch, use
-    #   ModifyInstanceCreditSpecification. For more information, see
-    #   [Burstable Performance Instances][1] in the *Amazon Elastic Compute
+    #   The credit option for CPU usage of the T2 or T3 instance. Valid values
+    #   are `standard` and `unlimited`. To change this attribute after launch,
+    #   use [ ModifyInstanceCreditSpecification][1]. For more information, see
+    #   [Burstable Performance Instances][2] in the *Amazon Elastic Compute
     #   Cloud User Guide*.
     #
     #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     # @option options [Types::CpuOptionsRequest] :cpu_options
     #   The CPU options for the instance. For more information, see
     #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud User
@@ -542,6 +572,7 @@ module Aws::EC2
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,
+    #     interface_type: "efa", # accepts efa
     #     subnet_id: "String", # required
     #   })
     # @param [Hash] options ({})
@@ -587,6 +618,17 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    # @option options [String] :interface_type
+    #   Indicates whether the network interface is an Elastic Fabric Adapter
+    #   (EFA). Only specify this parameter to create an EFA. For more
+    #   information, see [Elastic Fabric Adapter][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #   If you are not creating an EFA ENI, omit this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     # @option options [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
     # @return [NetworkInterface]
@@ -805,9 +847,9 @@ module Aws::EC2
     #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
     #   request into smaller batches.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [EmptyStructure]
     def create_tags(options = {})
       resp = @client.create_tags(options)
@@ -881,17 +923,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     namespace, followed by the Region of the CMK, the AWS account ID of
     #     the CMK owner, the `alias` namespace, and then the CMK alias. For
     #     example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -1015,10 +1057,10 @@ module Aws::EC2
     #   The ID of the requester VPC. You must specify this parameter in the
     #   request.
     # @option options [String] :peer_region
-    #   The region code for the accepter VPC, if the accepter VPC is located
-    #   in a region other than the region in which you make the request.
+    #   The Region code for the accepter VPC, if the accepter VPC is located
+    #   in a Region other than the Region in which you make the request.
     #
-    #   Default: The region in which you make the request.
+    #   Default: The Region in which you make the request.
     # @return [VpcPeeringConnection]
     def create_vpc_peering_connection(options = {})
       resp = @client.create_vpc_peering_connection(options)
@@ -1118,7 +1160,7 @@ module Aws::EC2
     #   Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
     #   AMIs, the architecture specified in the manifest file.
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     # @option options [String] :description
     #   A description for your AMI.
     # @option options [Boolean] :dry_run
@@ -1305,16 +1347,18 @@ module Aws::EC2
     # @return [DhcpOptions::Collection]
     def dhcp_options_sets(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_dhcp_options(options)
-        resp.data.dhcp_options.each do |d|
-          batch << DhcpOptions.new(
-            id: d.dhcp_options_id,
-            data: d,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.dhcp_options.each do |d|
+            batch << DhcpOptions.new(
+              id: d.dhcp_options_id,
+              data: d,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       DhcpOptions::Collection.new(batches)
     end
@@ -1348,7 +1392,7 @@ module Aws::EC2
     #   an AWS account ID, `self` (the sender of the request), or `all`
     #   (public AMIs).
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `architecture` - The image architecture (`i386` \| `x86_64`).
     #
@@ -1437,7 +1481,7 @@ module Aws::EC2
     #   * `virtualization-type` - The virtualization type (`paravirtual` \|
     #     `hvm`).
     # @option options [Array<String>] :image_ids
-    #   One or more image IDs.
+    #   The image IDs.
     #
     #   Default: Describes all images available to you.
     # @option options [Array<String>] :owners
@@ -1683,8 +1727,8 @@ module Aws::EC2
     #   * `placement-partition-number` - The partition in which the instance
     #     is located.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -2122,7 +2166,7 @@ module Aws::EC2
     #     being managed by an AWS service (for example, AWS Management
     #     Console, Auto Scaling, and so on).
     #
-    #   * `source-desk-check` - Indicates whether the network interface
+    #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
     #     checking is enabled, and `false` means checking is disabled. The
     #     value must be `false` for the network interface to perform network
@@ -2530,6 +2574,9 @@ module Aws::EC2
     #
     #   * `description` - A description of the snapshot.
     #
+    #   * `encrypted` - Indicates whether the snapshot is encrypted (`true` \|
+    #     `false`)
+    #
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
     #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
     #     owners. Not to be confused with the user-configured AWS account
@@ -2676,16 +2723,18 @@ module Aws::EC2
     # @return [Subnet::Collection]
     def subnets(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_subnets(options)
-        resp.data.subnets.each do |s|
-          batch << Subnet.new(
-            id: s.subnet_id,
-            data: s,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.subnets.each do |s|
+            batch << Subnet.new(
+              id: s.subnet_id,
+              data: s,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Subnet::Collection.new(batches)
     end
@@ -2735,7 +2784,8 @@ module Aws::EC2
     #
     #   * `create-time` - The time stamp when the volume was created.
     #
-    #   * `encrypted` - The encryption status of the volume.
+    #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
+    #     `false`)
     #
     #   * `size` - The size of the volume, in GiB.
     #

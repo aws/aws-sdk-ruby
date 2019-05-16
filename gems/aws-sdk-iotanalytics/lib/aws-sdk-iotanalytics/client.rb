@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::IoTAnalytics
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -490,6 +492,15 @@ module Aws::IoTAnalytics
     #             input_name: "IotEventsInputName", # required
     #             role_arn: "RoleArn", # required
     #           },
+    #           s3_destination_configuration: {
+    #             bucket: "BucketName", # required
+    #             key: "BucketKeyExpression", # required
+    #             glue_configuration: {
+    #               table_name: "GlueTableName", # required
+    #               database_name: "GlueDatabaseName", # required
+    #             },
+    #             role_arn: "RoleArn", # required
+    #           },
     #         },
     #       },
     #     ],
@@ -906,6 +917,11 @@ module Aws::IoTAnalytics
     #   resp.dataset.content_delivery_rules[0].entry_name #=> String
     #   resp.dataset.content_delivery_rules[0].destination.iot_events_destination_configuration.input_name #=> String
     #   resp.dataset.content_delivery_rules[0].destination.iot_events_destination_configuration.role_arn #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.bucket #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.key #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.glue_configuration.table_name #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.glue_configuration.database_name #=> String
+    #   resp.dataset.content_delivery_rules[0].destination.s3_destination_configuration.role_arn #=> String
     #   resp.dataset.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.dataset.creation_time #=> Time
     #   resp.dataset.last_update_time #=> Time
@@ -1706,6 +1722,15 @@ module Aws::IoTAnalytics
     #             input_name: "IotEventsInputName", # required
     #             role_arn: "RoleArn", # required
     #           },
+    #           s3_destination_configuration: {
+    #             bucket: "BucketName", # required
+    #             key: "BucketKeyExpression", # required
+    #             glue_configuration: {
+    #               table_name: "GlueTableName", # required
+    #               database_name: "GlueDatabaseName", # required
+    #             },
+    #             role_arn: "RoleArn", # required
+    #           },
     #         },
     #       },
     #     ],
@@ -1863,7 +1888,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

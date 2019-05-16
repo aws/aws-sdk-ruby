@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::MediaPackage
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -397,7 +399,7 @@ module Aws::MediaPackage
     #       period_triggers: ["ADS"], # accepts ADS
     #       profile: "NONE", # accepts NONE, HBBTV_1_5
     #       segment_duration_seconds: 1,
-    #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
+    #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #       stream_selection: {
     #         max_video_bits_per_second: 1,
     #         min_video_bits_per_second: 1,
@@ -501,7 +503,7 @@ module Aws::MediaPackage
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.dash_package.segment_duration_seconds #=> Integer
-    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE"
+    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -706,7 +708,7 @@ module Aws::MediaPackage
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.dash_package.segment_duration_seconds #=> Integer
-    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE"
+    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -867,7 +869,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.origin_endpoints[0].dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.origin_endpoints[0].dash_package.segment_duration_seconds #=> Integer
-    #   resp.origin_endpoints[0].dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE"
+    #   resp.origin_endpoints[0].dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.origin_endpoints[0].dash_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -1218,7 +1220,7 @@ module Aws::MediaPackage
     #       period_triggers: ["ADS"], # accepts ADS
     #       profile: "NONE", # accepts NONE, HBBTV_1_5
     #       segment_duration_seconds: 1,
-    #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
+    #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #       stream_selection: {
     #         max_video_bits_per_second: 1,
     #         min_video_bits_per_second: 1,
@@ -1319,7 +1321,7 @@ module Aws::MediaPackage
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.dash_package.segment_duration_seconds #=> Integer
-    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE"
+    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -1388,7 +1390,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

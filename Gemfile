@@ -23,14 +23,23 @@ group :test do
     gem 'webmock', '2.2.0'
     # oj drop support for Ruby under 2.0 since 3.3.5
     gem 'oj', '<= 3.3.4'
-    # cucumber drop support for Ruby under 2.0 after 3.0.0
+    # cucumber drop support for Ruby under 2.1 after 3.0.0
     gem 'cucumber', '3.0.0'
+    # hashdiff drop support for Ruby under 2.0 since 0.3.9
+    gem 'hashdiff', '0.3.8'
   elsif RUBY_VERSION == '2.0.0'
-    # addressable 2.6.0 relaxed version on public_suffix < 4
     # public_suffix released 3.0.3 which support ruby >= 2.1
+    gem 'public_suffix', '2.0.5'
+    # addressable 2.6.0 relaxed version on public_suffix < 4
     gem 'addressable', '2.5.2'
     gem 'webmock'
-    gem 'cucumber'
+    # cucumber drop support for Ruby under 2.2 after 3.0.0
+    gem 'cucumber', '3.0.0'
+  elsif RUBY_VERSION < '2.2'
+    gem 'addressable'
+    gem 'webmock'
+    # cucumber drop support for Ruby under 2.2 after 3.0.0
+    gem 'cucumber', '3.0.0'
   else
     gem 'addressable'
     gem 'webmock'

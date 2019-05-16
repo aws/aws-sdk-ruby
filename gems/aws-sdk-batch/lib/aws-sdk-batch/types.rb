@@ -316,7 +316,7 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] type
-    #   The type of compute environment.
+    #   The type of compute environment: EC2 or SPOT.
     #   @return [String]
     #
     # @!attribute [rw] minv_cpus
@@ -337,8 +337,8 @@ module Aws::Batch
     #   families to launch any instance type within those families (for
     #   example, `c4` or `p3`), or you can specify specific sizes within a
     #   family (such as `c4.8xlarge`). You can also choose `optimal` to pick
-    #   instance types (from the latest C, M, and R instance families) on
-    #   the fly that match the demand of your job queues.
+    #   instance types (from the C, M, and R instance families) on the fly
+    #   that match the demand of your job queues.
     #   @return [Array<String>]
     #
     # @!attribute [rw] image_id
@@ -363,20 +363,23 @@ module Aws::Batch
     # @!attribute [rw] instance_role
     #   The Amazon ECS instance profile applied to Amazon EC2 instances in a
     #   compute environment. You can specify the short name or full Amazon
-    #   Resource Name (ARN) of an instance profile. For example,
-    #   `ecsInstanceRole` or
-    #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole`.
+    #   Resource Name (ARN) of an instance profile. For example, `
+    #   ecsInstanceRole ` or
+    #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole `.
     #   For more information, see [Amazon ECS Instance Role][1] in the *AWS
     #   Batch User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   Key-value pair tags to be applied to resources that are launched in
-    #   the compute environment.
+    #   the compute environment. For AWS Batch, these take the form of
+    #   "String1": "String2", where String1 is the tag key and String2
+    #   is the tag value—for example, \\\{ "Name": "AWS Batch Instance -
+    #   C4OnDemand" \\}.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] placement_group
@@ -406,7 +409,12 @@ module Aws::Batch
     #
     # @!attribute [rw] spot_iam_fleet_role
     #   The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role
-    #   applied to a `SPOT` compute environment.
+    #   applied to a `SPOT` compute environment. For more information, see
+    #   [Amazon EC2 Spot Fleet Role][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] launch_template
@@ -414,7 +422,13 @@ module Aws::Batch
     #   compute resource parameters that you specify in a
     #   CreateComputeEnvironment API operation override the same parameters
     #   in the launch template. You must specify either the launch template
-    #   ID or launch template name in the request, but not both.
+    #   ID or launch template name in the request, but not both. For more
+    #   information, see [Launch Template Support][1] in the *AWS Batch User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResource AWS API Documentation
@@ -751,8 +765,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -765,8 +779,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -786,10 +800,10 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
-    #   [4]: http://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
+    #   [4]: https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
     #   @return [Integer]
     #
     # @!attribute [rw] command
@@ -801,8 +815,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
     #   @return [Array<String>]
@@ -832,8 +846,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
     #
@@ -844,8 +858,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::MountPoint>]
     #
@@ -857,8 +871,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   @return [Boolean]
     #
     # @!attribute [rw] privileged
@@ -870,8 +884,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
@@ -882,8 +896,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Ulimit>]
     #
@@ -894,8 +908,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -1005,7 +1019,13 @@ module Aws::Batch
     #
     # @!attribute [rw] compute_resources
     #   Details of the compute resources managed by the compute environment.
-    #   This parameter is required for managed compute environments.
+    #   This parameter is required for managed compute environments. For
+    #   more information, see [Compute Environments][1] in the *AWS Batch
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #   @return [Types::ComputeResource]
     #
     # @!attribute [rw] service_role
@@ -1273,8 +1293,8 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_definitions
-    #   A space-separated list of up to 100 job definition names or full
-    #   Amazon Resource Name (ARN) entries.
+    #   A list of up to 100 job definition names or full Amazon Resource
+    #   Name (ARN) entries.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -1420,7 +1440,7 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] jobs
-    #   A space-separated list of up to 100 job IDs.
+    #   A list of up to 100 job IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobsRequest AWS API Documentation
@@ -1441,11 +1461,11 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # The contents of the `host` parameter determine whether your data
-    # volume persists on the host container instance and where it is stored.
-    # If the host parameter is empty, then the Docker daemon assigns a host
-    # path for your data volume, but the data is not guaranteed to persist
-    # after the containers associated with it stop running.
+    # Determine whether your data volume persists on the host container
+    # instance and where it is stored. If this parameter is empty, then the
+    # Docker daemon assigns a host path for your data volume, but the data
+    # is not guaranteed to persist after the containers associated with it
+    # stop running.
     #
     # @note When making an API call, you may pass Host
     #   data as a hash:
@@ -1457,12 +1477,12 @@ module Aws::Batch
     # @!attribute [rw] source_path
     #   The path on the host container instance that is presented to the
     #   container. If this parameter is empty, then the Docker daemon has
-    #   assigned a host path for you. If the `host` parameter contains a
-    #   `sourcePath` file location, then the data volume persists at the
-    #   specified location on the host container instance until you delete
-    #   it manually. If the `sourcePath` value does not exist on the host
-    #   container instance, the Docker daemon creates it. If the location
-    #   does exist, the contents of the source path folder are exported.
+    #   assigned a host path for you. If this parameter contains a file
+    #   location, then the data volume persists at the specified location on
+    #   the host container instance until you delete it manually. If the
+    #   source path location does not exist on the host container instance,
+    #   the Docker daemon creates it. If the location does exist, the
+    #   contents of the source path folder are exported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Host AWS API Documentation
@@ -1981,7 +2001,13 @@ module Aws::Batch
     end
 
     # Details on a Docker volume mount point that is used in a job's
-    # container properties.
+    # container properties. This parameter maps to `Volumes` in the [Create
+    # a container][1] section of the Docker Remote API and the `--volume`
+    # option to docker run.
+    #
+    #
+    #
+    # [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.19/#create-a-container
     #
     # @note When making an API call, you may pass MountPoint
     #   data as a hash:
@@ -2508,7 +2534,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
     #   @return [Types::NodeProperties]
     #
     # @!attribute [rw] retry_strategy
@@ -2711,7 +2737,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
     #   @return [Types::ArrayProperties]
     #
     # @!attribute [rw] depends_on

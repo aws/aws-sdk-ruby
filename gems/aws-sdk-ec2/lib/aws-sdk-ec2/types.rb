@@ -445,15 +445,21 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] auto_placement
-    #   This is enabled by default. This property allows instances to be
-    #   automatically placed onto available Dedicated Hosts, when you are
-    #   launching instances without specifying a host ID.
+    #   Indicates whether the host accepts any untargeted instance launches
+    #   that match its instance type configuration, or if it only accepts
+    #   Host tenancy instance launches that specify its unique host ID. For
+    #   more information, see [ Understanding Instance Placement and Host
+    #   Affinity][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
-    #   Default: Enabled
+    #   Default: `on`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-understanding
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone for the Dedicated Hosts.
+    #   The Availability Zone in which to allocate the Dedicated Host.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -467,7 +473,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   Specify the instance type for which to configure your Dedicated
+    #   Specifies the instance type for which to configure your Dedicated
     #   Hosts. When you specify the instance type, that is the only instance
     #   type that you can launch onto that host.
     #   @return [String]
@@ -700,7 +706,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   The Elastic IP address. This is required for EC2-Classic.
+    #   The Elastic IP address to associate with the instance. This is
+    #   required for EC2-Classic.
     #   @return [String]
     #
     # @!attribute [rw] allow_reassociation
@@ -724,6 +731,9 @@ module Aws::EC2
     #   \[EC2-VPC\] The ID of the network interface. If the instance has
     #   more than one network interface, you must specify a network
     #   interface ID.
+    #
+    #   For EC2-VPC, you can specify either the instance ID or the network
+    #   interface ID, but not both.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
@@ -1638,15 +1648,21 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] cidr_ip
-    #   The CIDR IPv4 address range. You can't specify this parameter when
-    #   specifying a source security group.
+    #   The IPv4 address range, in CIDR format. You can't specify this
+    #   parameter when specifying a source security group. To specify an
+    #   IPv6 address range, use a set of IP permissions.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1`
-    #   to specify all types. If you specify all ICMP/ICMPv6 types, you must
-    #   specify all codes.
+    #   The start of port range for the TCP and UDP protocols, or an ICMP
+    #   type number. For the ICMP type number, use `-1` to specify all
+    #   types. If you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #   @return [Integer]
     #
     # @!attribute [rw] group_id
@@ -1662,19 +1678,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   The sets of IP permissions. Can be used to specify multiple rules in
-    #   a single command.
+    #   The sets of IP permissions.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
-    #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`,
-    #   or `58` (ICMPv6), traffic on all ports is allowed, regardless of any
-    #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
-    #   port range. For protocol `58` (ICMPv6), you can optionally specify a
-    #   port range; if you don't, traffic for all types and codes is
-    #   allowed.
+    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #
+    #   \[VPC only\] Use `-1` to specify all protocols. If you specify `-1`
+    #   or a protocol other than `tcp`, `udp`, or `icmp`, traffic on all
+    #   ports is allowed, regardless of any ports you specify.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     #
     #
@@ -1703,10 +1719,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use `-1`
-    #   to specify all codes. If you specify all ICMP/ICMPv6 types, you must
-    #   specify all codes.
+    #   The end of port range for the TCP and UDP protocols, or an ICMP code
+    #   number. For the ICMP code number, use `-1` to specify all codes. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -1743,7 +1761,7 @@ module Aws::EC2
     #   @return [Array<Types::AvailabilityZoneMessage>]
     #
     # @!attribute [rw] region_name
-    #   The name of the region.
+    #   The name of the Region.
     #   @return [String]
     #
     # @!attribute [rw] zone_name
@@ -3546,7 +3564,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_region
-    #   The region that contains the source AFI.
+    #   The Region that contains the source AFI.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -3609,7 +3627,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the new AMI in the destination region.
+    #   A description for the new AMI in the destination Region.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -3638,17 +3656,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -3657,12 +3675,12 @@ module Aws::EC2
     #   call may appear to complete even though you provided an invalid
     #   identifier. This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the snapshot is
+    #   The specified CMK must exist in the Region that the snapshot is
     #   being copied to.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the new AMI in the destination region.
+    #   The name of the new AMI in the destination Region.
     #   @return [String]
     #
     # @!attribute [rw] source_image_id
@@ -3670,7 +3688,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_region
-    #   The name of the region that contains the AMI to copy.
+    #   The name of the Region that contains the AMI to copy.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -3765,17 +3783,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -4640,7 +4658,7 @@ module Aws::EC2
     #             },
     #             overrides: [
     #               {
-    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #                 max_price: "String",
     #                 subnet_id: "String",
     #                 availability_zone: "String",
@@ -4849,26 +4867,37 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] deliver_logs_permission_arn
-    #   The ARN for the IAM role that's used to post flow logs to a log
-    #   group.
+    #   The ARN for the IAM role that permits Amazon EC2 to publish flow
+    #   logs to a CloudWatch Logs log group in your account.
+    #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
     #   @return [String]
     #
     # @!attribute [rw] log_group_name
-    #   The name of the log group.
+    #   The name of a new or existing CloudWatch Logs log group where Amazon
+    #   EC2 publishes your flow logs.
+    #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
     #   @return [String]
     #
     # @!attribute [rw] resource_ids
-    #   One or more subnet, network interface, or VPC IDs.
+    #   The ID of the subnet, network interface, or VPC for which you want
+    #   to create a flow log.
     #
     #   Constraints: Maximum of 1000 resources
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource on which to create the flow log.
+    #   The type of resource for which to create the flow log. For example,
+    #   if you specified a VPC ID for the `ResourceId` property, specify
+    #   `VPC` for this property.
     #   @return [String]
     #
     # @!attribute [rw] traffic_type
-    #   The type of traffic to log.
+    #   The type of traffic to log. You can log traffic that the resource
+    #   accepts or rejects, or all traffic.
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
@@ -4878,14 +4907,17 @@ module Aws::EC2
     #   `cloud-watch-logs`. To publish flow log data to Amazon S3, specify
     #   `s3`.
     #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
+    #
     #   Default: `cloud-watch-logs`
     #   @return [String]
     #
     # @!attribute [rw] log_destination
     #   Specifies the destination to which the flow log data is to be
-    #   published. Flow log data can be published to an CloudWatch Logs log
+    #   published. Flow log data can be published to a CloudWatch Logs log
     #   group or an Amazon S3 bucket. The value specified for this parameter
-    #   depends on the value specified for LogDestinationType.
+    #   depends on the value specified for `LogDestinationType`.
     #
     #   If LogDestinationType is not specified or `cloud-watch-logs`,
     #   specify the Amazon Resource Name (ARN) of the CloudWatch Logs log
@@ -5261,6 +5293,7 @@ module Aws::EC2
     #               description: "String",
     #               device_index: 1,
     #               groups: ["String"],
+    #               interface_type: "String",
     #               ipv_6_address_count: 1,
     #               ipv_6_addresses: [
     #                 {
@@ -5280,7 +5313,7 @@ module Aws::EC2
     #             },
     #           ],
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           key_name: "String",
     #           monitoring: {
     #             enabled: false,
@@ -5343,14 +5376,14 @@ module Aws::EC2
     #               capacity_reservation_id: "String",
     #             },
     #           },
-    #           hibernation_options: {
-    #             configured: false,
-    #           },
     #           license_specifications: [
     #             {
     #               license_configuration_arn: "String",
     #             },
     #           ],
+    #           hibernation_options: {
+    #             configured: false,
+    #           },
     #         },
     #       }
     #
@@ -5447,6 +5480,7 @@ module Aws::EC2
     #               description: "String",
     #               device_index: 1,
     #               groups: ["String"],
+    #               interface_type: "String",
     #               ipv_6_address_count: 1,
     #               ipv_6_addresses: [
     #                 {
@@ -5466,7 +5500,7 @@ module Aws::EC2
     #             },
     #           ],
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           key_name: "String",
     #           monitoring: {
     #             enabled: false,
@@ -5529,14 +5563,14 @@ module Aws::EC2
     #               capacity_reservation_id: "String",
     #             },
     #           },
-    #           hibernation_options: {
-    #             configured: false,
-    #           },
     #           license_specifications: [
     #             {
     #               license_configuration_arn: "String",
     #             },
     #           ],
+    #           hibernation_options: {
+    #             configured: false,
+    #           },
     #         },
     #       }
     #
@@ -5886,6 +5920,7 @@ module Aws::EC2
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
+    #         interface_type: "efa", # accepts efa
     #         subnet_id: "String", # required
     #       }
     #
@@ -5948,6 +5983,19 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
     #   @return [Integer]
     #
+    # @!attribute [rw] interface_type
+    #   Indicates whether the network interface is an Elastic Fabric Adapter
+    #   (EFA). Only specify this parameter to create an EFA. For more
+    #   information, see [Elastic Fabric Adapter][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #   If you are not creating an EFA ENI, omit this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
+    #   @return [String]
+    #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet to associate with the network interface.
     #   @return [String]
@@ -5963,6 +6011,7 @@ module Aws::EC2
       :private_ip_address,
       :private_ip_addresses,
       :secondary_private_ip_address_count,
+      :interface_type,
       :subnet_id)
       include Aws::Structure
     end
@@ -6487,9 +6536,9 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags. The `value` parameter is required, but if you
-    #   don't want the tag to have a value, specify the parameter with no
-    #   value, and we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTagsRequest AWS API Documentation
@@ -6593,7 +6642,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] blackhole
-    #   Indicates whether traffic matching this route is to be dropped.
+    #   Indicates whether to drop traffic that matches this route.
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -6924,17 +6973,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -7157,7 +7206,7 @@ module Aws::EC2
     #   (Interface endpoint) Indicate whether to associate a private hosted
     #   zone with the specified VPC. The private hosted zone contains a
     #   record set for the default public DNS name for the service for the
-    #   region (for example, `kinesis.us-east-1.amazonaws.com`) which
+    #   Region (for example, `kinesis.us-east-1.amazonaws.com`) which
     #   resolves to the private IP addresses of the endpoint network
     #   interfaces in the VPC. This enables you to make requests to the
     #   default public DNS name for the service instead of the public DNS
@@ -7305,10 +7354,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] peer_region
-    #   The region code for the accepter VPC, if the accepter VPC is located
-    #   in a region other than the region in which you make the request.
+    #   The Region code for the accepter VPC, if the accepter VPC is located
+    #   in a Region other than the Region in which you make the request.
     #
-    #   Default: The region in which you make the request.
+    #   Default: The Region in which you make the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnectionRequest AWS API Documentation
@@ -8627,11 +8676,11 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags to delete. Specify a tag key and an optional tag
-    #   value to delete specific tags. If you specify a tag key without a
-    #   tag value, we delete any tag with this key regardless of its value.
-    #   If you specify a tag key with an empty string as the tag value, we
-    #   delete the tag only if its value is an empty string.
+    #   The tags to delete. Specify a tag key and an optional tag value to
+    #   delete specific tags. If you specify a tag key without a tag value,
+    #   we delete any tag with this key regardless of its value. If you
+    #   specify a tag key with an empty string as the tag value, we delete
+    #   the tag only if its value is an empty string.
     #
     #   If you omit this parameter, we delete all user-defined tags for the
     #   specified resources. We do not delete AWS-generated tags (tags that
@@ -9323,9 +9372,9 @@ module Aws::EC2
     end
 
     # @!attribute [rw] use_long_ids_aggregated
-    #   Indicates whether all resource types in the region are configured to
+    #   Indicates whether all resource types in the Region are configured to
     #   use longer IDs. This value is only `true` if all users are
-    #   configured to use longer IDs for all resources types in the region.
+    #   configured to use longer IDs for all resources types in the Region.
     #   @return [Boolean]
     #
     # @!attribute [rw] statuses
@@ -9360,7 +9409,7 @@ module Aws::EC2
     #
     #   * `message` - Information about the Availability Zone.
     #
-    #   * `region-name` - The name of the region for the Availability Zone
+    #   * `region-name` - The name of the Region for the Availability Zone
     #     (for example, `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone (`available` \|
@@ -9424,13 +9473,13 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] bundle_ids
-    #   One or more bundle task IDs.
+    #   The bundle task IDs.
     #
     #   Default: Describes all your bundle tasks.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `bundle-id` - The ID of the bundle task.
     #
@@ -10059,7 +10108,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] conversion_task_ids
-    #   One or more conversion task IDs.
+    #   The conversion task IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -10181,6 +10230,8 @@ module Aws::EC2
     #           },
     #         ],
     #         dry_run: false,
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] dhcp_options_ids
@@ -10220,12 +10271,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsRequest AWS API Documentation
     #
     class DescribeDhcpOptionsRequest < Struct.new(
       :dhcp_options_ids,
       :filters,
-      :dry_run)
+      :dry_run,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -10233,10 +10296,16 @@ module Aws::EC2
     #   Information about one or more DHCP options sets.
     #   @return [Array<Types::DhcpOptions>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsResult AWS API Documentation
     #
     class DescribeDhcpOptionsResult < Struct.new(
-      :dhcp_options)
+      :dhcp_options,
+      :next_token)
       include Aws::Structure
     end
 
@@ -10315,7 +10384,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] elastic_gpu_ids
-    #   One or more Elastic Graphics accelerator IDs.
+    #   The Elastic Graphics accelerator IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -10326,7 +10395,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone in which the Elastic
     #     Graphics accelerator resides.
@@ -10400,7 +10469,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] export_task_ids
-    #   One or more export task IDs.
+    #   The export task IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasksRequest AWS API Documentation
@@ -10598,7 +10667,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-type` - The instance type.
     #
@@ -10713,7 +10782,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `activity-status` - The progress of the EC2 Fleet ( `error` \|
     #     `pending-fulfillment` \| `pending-termination` \| `fulfilled`).
@@ -10914,7 +10983,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] fpga_image_ids
-    #   One or more AFI IDs.
+    #   The AFI IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] owners
@@ -10924,7 +10993,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `create-time` - The creation time of the AFI.
     #
@@ -10979,7 +11048,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] fpga_images
-    #   Information about one or more FPGA images.
+    #   Information about the FPGA images.
     #   @return [Array<Types::FpgaImage>]
     #
     # @!attribute [rw] next_token
@@ -11013,7 +11082,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-family` - The instance family of the offering (for
     #     example, `m4`).
@@ -11100,7 +11169,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-family` - The instance family (for example, `m4`).
     #
@@ -11122,7 +11191,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] host_reservation_id_set
-    #   One or more host reservation IDs.
+    #   The host reservation IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -11180,7 +11249,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `auto-placement` - Whether auto-placement is enabled or disabled
     #     (`on` \| `off`).
@@ -11266,11 +11335,11 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] association_ids
-    #   One or more IAM instance profile associations.
+    #   The IAM instance profile associations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -11299,7 +11368,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] iam_instance_profile_associations
-    #   Information about one or more IAM instance profile associations.
+    #   Information about the IAM instance profile associations.
     #   @return [Array<Types::IamInstanceProfileAssociation>]
     #
     # @!attribute [rw] next_token
@@ -11461,7 +11530,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `architecture` - The image architecture (`i386` \| `x86_64`).
     #
@@ -11554,7 +11623,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] image_ids
-    #   One or more image IDs.
+    #   The image IDs.
     #
     #   Default: Describes all images available to you.
     #   @return [Array<String>]
@@ -11697,7 +11766,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] import_task_ids
@@ -12205,8 +12274,8 @@ module Aws::EC2
     #   * `placement-partition-number` - The partition in which the instance
     #     is located.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -13212,7 +13281,7 @@ module Aws::EC2
     #     being managed by an AWS service (for example, AWS Management
     #     Console, Auto Scaling, and so on).
     #
-    #   * `source-desk-check` - Indicates whether the network interface
+    #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
     #     checking is enabled, and `false` means checking is disabled. The
     #     value must be `false` for the network interface to perform network
@@ -13557,14 +13626,14 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters.
     #
-    #   * `endpoint` - The endpoint of the region (for example,
+    #   * `endpoint` - The endpoint of the Region (for example,
     #     `ec2.us-east-1.amazonaws.com`).
     #
-    #   * `region-name` - The name of the region (for example, `us-east-1`).
+    #   * `region-name` - The name of the Region (for example, `us-east-1`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] region_names
-    #   The names of the regions.
+    #   The names of the Regions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -13584,7 +13653,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] regions
-    #   Information about the regions.
+    #   Information about the Regions.
     #   @return [Array<Types::Region>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegionsResult AWS API Documentation
@@ -13765,7 +13834,7 @@ module Aws::EC2
     #           },
     #         ],
     #         include_marketplace: false,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         max_duration: 1,
     #         max_instance_count: 1,
     #         min_duration: 1,
@@ -14253,7 +14322,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone (for example,
     #     `us-west-2a`).
@@ -14360,7 +14429,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone (for example,
     #     `us-west-2a`).
@@ -14385,7 +14454,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] scheduled_instance_ids
-    #   One or more Scheduled Instance IDs.
+    #   The Scheduled Instance IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] slot_start_time_range
@@ -14706,6 +14775,9 @@ module Aws::EC2
     #   The filters.
     #
     #   * `description` - A description of the snapshot.
+    #
+    #   * `encrypted` - Indicates whether the snapshot is encrypted (`true`
+    #     \| `false`)
     #
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
     #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
@@ -15293,7 +15365,7 @@ module Aws::EC2
     #         availability_zone: "String",
     #         dry_run: false,
     #         end_time: Time.now,
-    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         max_results: 1,
     #         next_token: "String",
     #         product_descriptions: ["String"],
@@ -15404,7 +15476,7 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         max_results: 1,
-    #         next_token: "NextToken",
+    #         next_token: "DescribeStaleSecurityGroupsNextToken",
     #         vpc_id: "String", # required
     #       }
     #
@@ -15469,6 +15541,8 @@ module Aws::EC2
     #         ],
     #         subnet_ids: ["String"],
     #         dry_run: false,
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filters
@@ -15535,12 +15609,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsRequest AWS API Documentation
     #
     class DescribeSubnetsRequest < Struct.new(
       :filters,
       :subnet_ids,
-      :dry_run)
+      :dry_run,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -15548,10 +15634,16 @@ module Aws::EC2
     #   Information about one or more subnets.
     #   @return [Array<Types::Subnet>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsResult AWS API Documentation
     #
     class DescribeSubnetsResult < Struct.new(
-      :subnets)
+      :subnets,
+      :next_token)
       include Aws::Structure
     end
 
@@ -15578,7 +15670,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `key` - The tag key.
     #
@@ -16281,7 +16373,8 @@ module Aws::EC2
     #
     #   * `create-time` - The time stamp when the volume was created.
     #
-    #   * `encrypted` - The encryption status of the volume.
+    #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
+    #     `false`)
     #
     #   * `size` - The size of the volume, in GiB.
     #
@@ -16739,6 +16832,16 @@ module Aws::EC2
     #
     #   * `service-state` - The state of the service (`Pending` \|
     #     `Available` \| `Deleting` \| `Deleted` \| `Failed`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -16891,7 +16994,15 @@ module Aws::EC2
     #
     #   * `service-name`\: The name of the service.
     #
-    #   ^
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -16983,6 +17094,16 @@ module Aws::EC2
     #
     #   * `vpc-endpoint-state`\: The state of the endpoint. (`pending` \|
     #     `available` \| `deleting` \| `deleted`)
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -18346,18 +18467,19 @@ module Aws::EC2
     # @!attribute [rw] volume_size
     #   The size of the volume, in GiB.
     #
+    #   Default: If you're creating the volume from a snapshot and don't
+    #   specify a volume size, the default is the snapshot size.
+    #
     #   Constraints: 1-16384 for General Purpose SSD (`gp2`), 4-16384 for
     #   Provisioned IOPS SSD (`io1`), 500-16384 for Throughput Optimized HDD
     #   (`st1`), 500-16384 for Cold HDD (`sc1`), and 1-1024 for Magnetic
     #   (`standard`) volumes. If you specify a snapshot, the volume size
     #   must be equal to or larger than the snapshot size.
-    #
-    #   Default: If you're creating the volume from a snapshot and don't
-    #   specify a volume size, the default is the snapshot size.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type: `gp2`, `io1`, `st1`, `sc1`, or `standard`.
+    #   The volume type. If you set the type to `io1`, you must also set the
+    #   **Iops** property.
     #
     #   Default: `standard`
     #   @return [String]
@@ -18606,7 +18728,7 @@ module Aws::EC2
     #
     # @!attribute [rw] type
     #   The type of elastic inference accelerator. The possible values are
-    #   eia1.small, eia1.medium, and eia1.large.
+    #   `eia1.small`, `eia1.medium`, and `eia1.large`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticInferenceAccelerator AWS API Documentation
@@ -18701,11 +18823,14 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway that is attached to a VPC. The
+    #   virtual private gateway must be attached to the same VPC that the
+    #   routing tables are associated with.
     #   @return [String]
     #
     # @!attribute [rw] route_table_id
-    #   The ID of the route table.
+    #   The ID of the route table. The routing table must be associated with
+    #   the same VPC that the virtual private gateway is attached to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagationRequest AWS API Documentation
@@ -18814,7 +18939,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Spot Fleet event.
+    # Describes an EC2 Fleet or Spot Fleet event.
     #
     # @!attribute [rw] event_description
     #   The description of the event.
@@ -18825,8 +18950,9 @@ module Aws::EC2
     #
     #   The following are the `error` events:
     #
-    #   * `iamFleetRoleInvalid` - The Spot Fleet did not have the required
-    #     permissions either to launch or terminate an instance.
+    #   * `iamFleetRoleInvalid` - The EC2 Fleet or Spot Fleet did not have
+    #     the required permissions either to launch or terminate an
+    #     instance.
     #
     #   * `spotFleetRequestConfigurationInvalid` - The configuration is not
     #     valid. For more information, see the description of the event.
@@ -18836,35 +18962,39 @@ module Aws::EC2
     #
     #   The following are the `fleetRequestChange` events:
     #
-    #   * `active` - The Spot Fleet has been validated and Amazon EC2 is
-    #     attempting to maintain the target number of running Spot
-    #     Instances.
+    #   * `active` - The EC2 Fleet or Spot Fleet request has been validated
+    #     and Amazon EC2 is attempting to maintain the target number of
+    #     running Spot Instances.
     #
-    #   * `cancelled` - The Spot Fleet is canceled and has no running Spot
-    #     Instances. The Spot Fleet will be deleted two days after its
-    #     instances were terminated.
+    #   * `cancelled` - The EC2 Fleet or Spot Fleet request is canceled and
+    #     has no running Spot Instances. The EC2 Fleet or Spot Fleet will be
+    #     deleted two days after its instances were terminated.
     #
-    #   * `cancelled_running` - The Spot Fleet is canceled and does not
-    #     launch additional Spot Instances. Existing Spot Instances continue
-    #     to run until they are interrupted or terminated.
+    #   * `cancelled_running` - The EC2 Fleet or Spot Fleet request is
+    #     canceled and does not launch additional Spot Instances. Existing
+    #     Spot Instances continue to run until they are interrupted or
+    #     terminated.
     #
-    #   * `cancelled_terminating` - The Spot Fleet is canceled and its Spot
-    #     Instances are terminating.
+    #   * `cancelled_terminating` - The EC2 Fleet or Spot Fleet request is
+    #     canceled and its Spot Instances are terminating.
     #
-    #   * `expired` - The Spot Fleet request has expired. A subsequent event
-    #     indicates that the instances were terminated, if the request was
-    #     created with `TerminateInstancesWithExpiration` set.
+    #   * `expired` - The EC2 Fleet or Spot Fleet request has expired. A
+    #     subsequent event indicates that the instances were terminated, if
+    #     the request was created with `TerminateInstancesWithExpiration`
+    #     set.
     #
-    #   * `modify_in_progress` - A request to modify the Spot Fleet request
-    #     was accepted and is in progress.
+    #   * `modify_in_progress` - A request to modify the EC2 Fleet or Spot
+    #     Fleet request was accepted and is in progress.
     #
-    #   * `modify_successful` - The Spot Fleet request was modified.
+    #   * `modify_successful` - The EC2 Fleet or Spot Fleet request was
+    #     modified.
     #
     #   * `price_update` - The price for a launch configuration was adjusted
     #     because it was too high. This change is permanent.
     #
-    #   * `submitted` - The Spot Fleet request is being evaluated and Amazon
-    #     EC2 is preparing to launch the target number of Spot Instances.
+    #   * `submitted` - The EC2 Fleet or Spot Fleet request is being
+    #     evaluated and Amazon EC2 is preparing to launch the target number
+    #     of Spot Instances.
     #
     #   The following are the `instanceChange` events:
     #
@@ -19406,7 +19536,7 @@ module Aws::EC2
     #         },
     #         overrides: [
     #           {
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             max_price: "String",
     #             subnet_id: "String",
     #             availability_zone: "String",
@@ -19499,7 +19629,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         max_price: "String",
     #         subnet_id: "String",
     #         availability_zone: "String",
@@ -19808,11 +19938,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] load_permissions
-    #   One or more load permissions.
+    #   The load permissions.
     #   @return [Array<Types::LoadPermission>]
     #
     # @!attribute [rw] product_codes
-    #   One or more product codes.
+    #   The product codes.
     #   @return [Array<Types::ProductCode>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImageAttribute AWS API Documentation
@@ -21084,7 +21214,7 @@ module Aws::EC2
     # Describes an image attribute.
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
@@ -21092,11 +21222,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] launch_permissions
-    #   One or more launch permissions.
+    #   The launch permissions.
     #   @return [Array<Types::LaunchPermission>]
     #
     # @!attribute [rw] product_codes
-    #   One or more product codes.
+    #   The product codes.
     #   @return [Array<Types::ProductCode>]
     #
     # @!attribute [rw] description
@@ -21334,17 +21464,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -21353,7 +21483,7 @@ module Aws::EC2
     #   call may appear to complete even though you provided an invalid
     #   identifier. This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the AMI is being
+    #   The specified CMK must exist in the Region that the AMI is being
     #   copied to.
     #   @return [String]
     #
@@ -21576,7 +21706,7 @@ module Aws::EC2
     #         group_ids: ["String"],
     #         group_names: ["String"],
     #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         monitoring: false,
     #         placement: {
     #           availability_zone: "String",
@@ -21603,11 +21733,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] group_ids
-    #   One or more security group IDs.
+    #   The security group IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] group_names
-    #   One or more security group names.
+    #   The security group names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_initiated_shutdown_behavior
@@ -21691,7 +21821,7 @@ module Aws::EC2
     #           group_ids: ["String"],
     #           group_names: ["String"],
     #           instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           monitoring: false,
     #           placement: {
     #             availability_zone: "String",
@@ -21773,7 +21903,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] volumes
-    #   One or more volumes.
+    #   The volumes.
     #   @return [Array<Types::ImportInstanceVolumeDetailItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceTaskDetails AWS API Documentation
@@ -21956,17 +22086,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -21975,7 +22105,7 @@ module Aws::EC2
     #   call may appear to complete even though you provided an invalid
     #   identifier. This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the snapshot is
+    #   The specified CMK must exist in the Region that the snapshot is
     #   being copied to.
     #   @return [String]
     #
@@ -22824,6 +22954,10 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] interface_type
+    #   Describes the type of network interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
     #
     class InstanceNetworkInterface < Struct.new(
@@ -22841,7 +22975,8 @@ module Aws::EC2
       :source_dest_check,
       :status,
       :subnet_id,
-      :vpc_id)
+      :vpc_id,
+      :interface_type)
       include Aws::Structure
     end
 
@@ -22931,6 +23066,7 @@ module Aws::EC2
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         interface_type: "String",
     #       }
     #
     # @!attribute [rw] associate_public_ip_address
@@ -22954,9 +23090,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] device_index
-    #   The index of the device on the instance for the network interface
-    #   attachment. If you are specifying a network interface in a
-    #   RunInstances request, you must provide the device index.
+    #   The position of the network interface in the attachment order. A
+    #   primary network interface has a device index of 0.
+    #
+    #   If you specify a network interface when launching an instance, you
+    #   must specify the device index.
     #   @return [Integer]
     #
     # @!attribute [rw] groups
@@ -22987,26 +23125,43 @@ module Aws::EC2
     #   The private IPv4 address of the network interface. Applies only if
     #   creating a network interface when launching an instance. You cannot
     #   specify this option if you're launching more than one instance in a
-    #   RunInstances request.
+    #   [RunInstances][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [String]
     #
     # @!attribute [rw] private_ip_addresses
     #   One or more private IPv4 addresses to assign to the network
     #   interface. Only one private IPv4 address can be designated as
     #   primary. You cannot specify this option if you're launching more
-    #   than one instance in a RunInstances request.
+    #   than one instance in a [RunInstances][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Array<Types::PrivateIpAddressSpecification>]
     #
     # @!attribute [rw] secondary_private_ip_address_count
     #   The number of secondary private IPv4 addresses. You can't specify
     #   this option and specify more than one private IP address using the
     #   private IP addresses option. You cannot specify this option if
-    #   you're launching more than one instance in a RunInstances request.
+    #   you're launching more than one instance in a [RunInstances][1]
+    #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Integer]
     #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet associated with the network string. Applies
     #   only if creating a network interface when launching an instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_type
+    #   The type of interface.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
@@ -23023,7 +23178,8 @@ module Aws::EC2
       :private_ip_address,
       :private_ip_addresses,
       :secondary_private_ip_address_count,
-      :subnet_id)
+      :subnet_id,
+      :interface_type)
       include Aws::Structure
     end
 
@@ -23347,16 +23503,16 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
-    #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]).
+    #   The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
+    #   [Protocol Numbers][1]).
     #
-    #   \[EC2-VPC only\] Use `-1` to specify all protocols. When authorizing
+    #   \[VPC only\] Use `-1` to specify all protocols. When authorizing
     #   security group rules, specifying `-1` or a protocol number other
-    #   than `tcp`, `udp`, `icmp`, or `58` (ICMPv6) allows traffic on all
-    #   ports, regardless of any port range you specify. For `tcp`, `udp`,
-    #   and `icmp`, you must specify a port range. For `58` (ICMPv6), you
-    #   can optionally specify a port range; if you don't, traffic for all
-    #   types and codes is allowed when authorizing rules.
+    #   than `tcp`, `udp`, `icmp`, or `icmpv6` allows traffic on all ports,
+    #   regardless of any port range you specify. For `tcp`, `udp`, and
+    #   `icmp`, you must specify a port range. For `icmpv6`, the port range
+    #   is optional; if you omit the port range, traffic for all types and
+    #   codes is allowed.
     #
     #
     #
@@ -23368,21 +23524,19 @@ module Aws::EC2
     #   @return [Array<Types::IpRange>]
     #
     # @!attribute [rw] ipv_6_ranges
-    #   \[EC2-VPC only\] The IPv6 ranges.
+    #   \[VPC only\] The IPv6 ranges.
     #   @return [Array<Types::Ipv6Range>]
     #
     # @!attribute [rw] prefix_list_ids
-    #   \[EC2-VPC only\] The prefix list IDs for an AWS service. With
-    #   AuthorizeSecurityGroupEgress, this is the AWS service that you want
-    #   to access through a VPC endpoint from instances associated with the
-    #   security group.
+    #   \[VPC only\] The prefix list IDs for an AWS service. With outbound
+    #   rules, this is the AWS service to access through a VPC endpoint from
+    #   instances associated with the security group.
     #   @return [Array<Types::PrefixListId>]
     #
     # @!attribute [rw] to_port
     #   The end of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes
-    #   for the specified ICMP type. If you specify all ICMP/ICMPv6 types,
-    #   you must specify all codes.
+    #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes.
+    #   If you specify all ICMP/ICMPv6 types, you must specify all codes.
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
@@ -23907,7 +24061,7 @@ module Aws::EC2
     #         },
     #         overrides: [
     #           {
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             spot_price: "String",
     #             subnet_id: "String",
     #             availability_zone: "String",
@@ -24059,12 +24213,16 @@ module Aws::EC2
     #   performance of the volume and the rate at which the volume
     #   accumulates I/O credits for bursting. For more information about
     #   General Purpose SSD baseline performance, I/O credits, and bursting,
-    #   see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User
-    #   Guide.
+    #   see [Amazon EBS Volume Types][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
     #   Condition: This parameter is required for requests to create io1
     #   volumes; it is not used in requests to create gp2, st1, sc1, or
     #   standard volumes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
@@ -24297,6 +24455,10 @@ module Aws::EC2
     #   The IDs of one or more security groups.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] interface_type
+    #   The type of network interface.
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_address_count
     #   The number of IPv6 addresses for the network interface.
     #   @return [Integer]
@@ -24334,6 +24496,7 @@ module Aws::EC2
       :description,
       :device_index,
       :groups,
+      :interface_type,
       :ipv_6_address_count,
       :ipv_6_addresses,
       :network_interface_id,
@@ -24355,6 +24518,7 @@ module Aws::EC2
     #         description: "String",
     #         device_index: 1,
     #         groups: ["String"],
+    #         interface_type: "String",
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -24394,6 +24558,10 @@ module Aws::EC2
     # @!attribute [rw] groups
     #   The IDs of one or more security groups.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] interface_type
+    #   The type of networking interface.
+    #   @return [String]
     #
     # @!attribute [rw] ipv_6_address_count
     #   The number of IPv6 addresses to assign to a network interface.
@@ -24437,6 +24605,7 @@ module Aws::EC2
       :description,
       :device_index,
       :groups,
+      :interface_type,
       :ipv_6_address_count,
       :ipv_6_addresses,
       :network_interface_id,
@@ -24486,7 +24655,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         spot_price: "String",
     #         subnet_id: "String",
     #         availability_zone: "String",
@@ -24791,7 +24960,11 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are `instance` and `volume`. To tag a
-    #   resource after it has been created, see CreateTags.
+    #   resource after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -25309,19 +25482,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_ids
-    #   One or more AWS account IDs. This parameter is valid only when
-    #   modifying the `loadPermission` attribute.
+    #   The AWS account IDs. This parameter is valid only when modifying the
+    #   `loadPermission` attribute.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
-    #   One or more user groups. This parameter is valid only when modifying
-    #   the `loadPermission` attribute.
+    #   The user groups. This parameter is valid only when modifying the
+    #   `loadPermission` attribute.
     #   @return [Array<String>]
     #
     # @!attribute [rw] product_codes
-    #   One or more product codes. After you add a product code to an AFI,
-    #   it can't be removed. This parameter is valid only when modifying
-    #   the `productCodes` attribute.
+    #   The product codes. After you add a product code to an AFI, it can't
+    #   be removed. This parameter is valid only when modifying the
+    #   `productCodes` attribute.
     #   @return [Array<String>]
     #
     # @!attribute [rw] load_permission
@@ -25540,18 +25713,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] product_codes
-    #   One or more DevPay product codes. After you add a product code to an
-    #   AMI, it can't be removed.
+    #   The DevPay product codes. After you add a product code to an AMI, it
+    #   can't be removed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
-    #   One or more user groups. This parameter can be used only when the
+    #   The user groups. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_ids
-    #   One or more AWS account IDs. This parameter can be used only when
-    #   the `Attribute` parameter is `launchPermission`.
+    #   The AWS account IDs. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] value
@@ -25901,7 +26074,7 @@ module Aws::EC2
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation.`
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_id
@@ -26153,7 +26326,7 @@ module Aws::EC2
     #           {
     #             availability_zone: "String",
     #             instance_count: 1,
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             platform: "String",
     #             scope: "Availability Zone", # accepts Availability Zone, Region
     #           },
@@ -26996,6 +27169,57 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyVpnConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpn_connection_id: "String", # required
+    #         transit_gateway_id: "String",
+    #         vpn_gateway_id: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_gateway_id
+    #   The ID of the virtual private gateway at the AWS side of the VPN
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionRequest AWS API Documentation
+    #
+    class ModifyVpnConnectionRequest < Struct.new(
+      :vpn_connection_id,
+      :transit_gateway_id,
+      :vpn_gateway_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection
+    #   Describes a VPN connection.
+    #   @return [Types::VpnConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionResult AWS API Documentation
+    #
+    class ModifyVpnConnectionResult < Struct.new(
+      :vpn_connection)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass MonitorInstancesRequest
     #   data as a hash:
     #
@@ -27391,7 +27615,7 @@ module Aws::EC2
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] interface_type
-    #   The type of interface.
+    #   The type of network interface.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_addresses
@@ -27903,6 +28127,9 @@ module Aws::EC2
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone of the instance.
+    #
+    #   If not specified, an Availability Zone will be automatically chosen
+    #   for you based on the load balancing criteria for the Region.
     #   @return [String]
     #
     # @!attribute [rw] affinity
@@ -27927,8 +28154,12 @@ module Aws::EC2
     # @!attribute [rw] tenancy
     #   The tenancy of the instance (if the instance is running in a VPC).
     #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware. The `host` tenancy is not supported for the ImportInstance
-    #   command.
+    #   hardware. The `host` tenancy is not supported for the
+    #   [ImportInstance][1] command.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
     #   @return [String]
     #
     # @!attribute [rw] spread_domain
@@ -28256,7 +28487,7 @@ module Aws::EC2
     #   The public IPv4 address range, in CIDR notation. The most specific
     #   prefix that you can specify is /24. The address range cannot overlap
     #   with another address range that you've brought to this or another
-    #   region.
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] cidr_authorization_context
@@ -28694,7 +28925,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] purchase_requests
-    #   One or more purchase requests.
+    #   The purchase requests.
     #   @return [Array<Types::PurchaseRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstancesRequest AWS API Documentation
@@ -28764,14 +28995,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a region.
+    # Describes a Region.
     #
     # @!attribute [rw] endpoint
-    #   The region service endpoint.
+    #   The Region service endpoint.
     #   @return [String]
     #
     # @!attribute [rw] region_name
-    #   The name of the region.
+    #   The name of the Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Region AWS API Documentation
@@ -28830,7 +29061,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] description
@@ -29600,6 +29831,7 @@ module Aws::EC2
     #             description: "String",
     #             device_index: 1,
     #             groups: ["String"],
+    #             interface_type: "String",
     #             ipv_6_address_count: 1,
     #             ipv_6_addresses: [
     #               {
@@ -29619,7 +29851,7 @@ module Aws::EC2
     #           },
     #         ],
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         key_name: "String",
     #         monitoring: {
     #           enabled: false,
@@ -29682,14 +29914,14 @@ module Aws::EC2
     #             capacity_reservation_id: "String",
     #           },
     #         },
-    #         hibernation_options: {
-    #           configured: false,
-    #         },
     #         license_specifications: [
     #           {
     #             license_configuration_arn: "String",
     #           },
     #         ],
+    #         hibernation_options: {
+    #           configured: false,
+    #         },
     #       }
     #
     # @!attribute [rw] kernel_id
@@ -29729,11 +29961,17 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateBlockDeviceMappingRequest>]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces.
+    #   One or more network interfaces. If you specify a network interface,
+    #   you must specify any security groups as part of the network
+    #   interface.
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI, which you can get by using DescribeImages.
+    #   The ID of the AMI, which you can get by using [DescribeImages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -29747,11 +29985,16 @@ module Aws::EC2
     #
     # @!attribute [rw] key_name
     #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    #   [CreateKeyPair][1] or [ImportKeyPair][2].
     #
     #   If you do not specify a key pair, you can't connect to the instance
     #   unless you choose an AMI that is configured to allow users another
     #   way to log in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     #   @return [String]
     #
     # @!attribute [rw] monitoring
@@ -29777,7 +30020,11 @@ module Aws::EC2
     # @!attribute [rw] disable_api_termination
     #   If set to `true`, you can't terminate the instance using the Amazon
     #   EC2 console, CLI, or API. To change this attribute to `false` after
-    #   launch, use ModifyInstanceAttribute.
+    #   launch, use [ ModifyInstanceAttribute][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_initiated_shutdown_behavior
@@ -29803,7 +30050,11 @@ module Aws::EC2
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to
     #   all instances or volumes that are created during launch. To tag a
-    #   resource after it has been created, see CreateTags.
+    #   resource after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
     #
     # @!attribute [rw] elastic_gpu_specifications
@@ -29816,8 +30067,12 @@ module Aws::EC2
     #
     # @!attribute [rw] security_group_ids
     #   One or more security group IDs. You can create a security group
-    #   using CreateSecurityGroup. You cannot specify both a security group
-    #   ID and security name in the same request.
+    #   using [CreateSecurityGroup][1]. You cannot specify both a security
+    #   group ID and security name in the same request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
@@ -29854,6 +30109,10 @@ module Aws::EC2
     #   Availability Zone).
     #   @return [Types::LaunchTemplateCapacityReservationSpecificationRequest]
     #
+    # @!attribute [rw] license_specifications
+    #   The license configurations.
+    #   @return [Array<Types::LaunchTemplateLicenseConfigurationRequest>]
+    #
     # @!attribute [rw] hibernation_options
     #   Indicates whether an instance is enabled for hibernation. This
     #   parameter is valid only if the instance meets the [hibernation
@@ -29866,10 +30125,6 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #   @return [Types::LaunchTemplateHibernationOptionsRequest]
-    #
-    # @!attribute [rw] license_specifications
-    #   The license configurations.
-    #   @return [Array<Types::LaunchTemplateLicenseConfigurationRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
@@ -29897,8 +30152,8 @@ module Aws::EC2
       :credit_specification,
       :cpu_options,
       :capacity_reservation_specification,
-      :hibernation_options,
-      :license_specifications)
+      :license_specifications,
+      :hibernation_options)
       include Aws::Structure
     end
 
@@ -29948,7 +30203,7 @@ module Aws::EC2
     #                 name: "String",
     #               },
     #               image_id: "String",
-    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #               kernel_id: "String",
     #               key_name: "String",
     #               monitoring: {
@@ -29977,6 +30232,7 @@ module Aws::EC2
     #                   ],
     #                   secondary_private_ip_address_count: 1,
     #                   subnet_id: "String",
+    #                   interface_type: "String",
     #                 },
     #               ],
     #               placement: {
@@ -30011,7 +30267,7 @@ module Aws::EC2
     #               },
     #               overrides: [
     #                 {
-    #                   instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #                   instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #                   spot_price: "String",
     #                   subnet_id: "String",
     #                   availability_zone: "String",
@@ -30120,7 +30376,7 @@ module Aws::EC2
     #             name: "String",
     #           },
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           kernel_id: "String",
     #           key_name: "String",
     #           monitoring: {
@@ -30149,6 +30405,7 @@ module Aws::EC2
     #               ],
     #               secondary_private_ip_address_count: 1,
     #               subnet_id: "String",
+    #               interface_type: "String",
     #             },
     #           ],
     #           placement: {
@@ -30336,7 +30593,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -30365,6 +30622,7 @@ module Aws::EC2
     #             ],
     #             secondary_private_ip_address_count: 1,
     #             subnet_id: "String",
+    #             interface_type: "String",
     #           },
     #         ],
     #         placement: {
@@ -30457,7 +30715,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data for the instance.
+    #   The Base64-encoded user data for the instance. User data is limited
+    #   to 16 KB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotLaunchSpecification AWS API Documentation
@@ -30696,7 +30955,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String",
     #         instance_count: 1,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         platform: "String",
     #         scope: "Availability Zone", # accepts Availability Zone, Region
     #       }
@@ -30723,7 +30982,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Whether the Reserved Instance is applied to instances in a region or
+    #   Whether the Reserved Instance is applied to instances in a Region or
     #   instances in a specific Availability Zone.
     #   @return [String]
     #
@@ -30964,7 +31223,7 @@ module Aws::EC2
     #   @return [Array<Types::RecurringCharge>]
     #
     # @!attribute [rw] scope
-    #   Whether the Reserved Instance is applied to instances in a region or
+    #   Whether the Reserved Instance is applied to instances in a Region or
     #   an Availability Zone.
     #   @return [String]
     #
@@ -31300,6 +31559,10 @@ module Aws::EC2
     #   Information about the Capacity Reservation targeting option.
     #   @return [Types::LaunchTemplateCapacityReservationSpecificationResponse]
     #
+    # @!attribute [rw] license_specifications
+    #   The license configurations.
+    #   @return [Array<Types::LaunchTemplateLicenseConfiguration>]
+    #
     # @!attribute [rw] hibernation_options
     #   Indicates whether an instance is configured for hibernation. For
     #   more information, see [Hibernate Your Instance][1] in the *Amazon
@@ -31309,10 +31572,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #   @return [Types::LaunchTemplateHibernationOptions]
-    #
-    # @!attribute [rw] license_specifications
-    #   The license configurations.
-    #   @return [Array<Types::LaunchTemplateLicenseConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
@@ -31340,8 +31599,8 @@ module Aws::EC2
       :credit_specification,
       :cpu_options,
       :capacity_reservation_specification,
-      :hibernation_options,
-      :license_specifications)
+      :license_specifications,
+      :hibernation_options)
       include Aws::Structure
     end
 
@@ -31889,7 +32148,7 @@ module Aws::EC2
     #           },
     #         ],
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -31950,6 +32209,7 @@ module Aws::EC2
     #             ],
     #             secondary_private_ip_address_count: 1,
     #             subnet_id: "String",
+    #             interface_type: "String",
     #           },
     #         ],
     #         private_ip_address: "String",
@@ -32021,9 +32281,8 @@ module Aws::EC2
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages. An
-    #   AMI is required to launch an instance and must be specified here or
-    #   in a launch template.
+    #   The ID of the AMI. An AMI is required to launch an instance and must
+    #   be specified here or in a launch template.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -32038,11 +32297,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_address_count
-    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
-    #   network interface. Amazon EC2 chooses the IPv6 addresses from the
-    #   range of your subnet. You cannot specify this option and the option
-    #   to assign specific IPv6 addresses in the same request. You can
-    #   specify this option if you've specified a minimum number of
+    #   \[EC2-VPC\] The number of IPv6 addresses to associate with the
+    #   primary network interface. Amazon EC2 chooses the IPv6 addresses
+    #   from the range of your subnet. You cannot specify this option and
+    #   the option to assign specific IPv6 addresses in the same request.
+    #   You can specify this option if you've specified a minimum number of
     #   instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
@@ -32074,11 +32333,16 @@ module Aws::EC2
     #
     # @!attribute [rw] key_name
     #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    #   [CreateKeyPair][1] or [ImportKeyPair][2].
     #
     #   If you do not specify a key pair, you can't connect to the instance
     #   unless you choose an AMI that is configured to allow users another
     #   way to log in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     #   @return [String]
     #
     # @!attribute [rw] max_count
@@ -32113,7 +32377,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] monitoring
-    #   The monitoring for the instance.
+    #   Specifies whether detailed monitoring is enabled for the instance.
     #   @return [Types::RunInstancesMonitoringEnabled]
     #
     # @!attribute [rw] placement
@@ -32121,7 +32385,11 @@ module Aws::EC2
     #   @return [Types::Placement]
     #
     # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
+    #   The ID of the RAM disk to select. Some kernels require additional
+    #   drivers at launch. Check the kernel requirements for information
+    #   about whether you need to specify a RAM disk. To find kernel
+    #   requirements, go to the AWS Resource Center and search for the
+    #   kernel ID.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic
@@ -32134,20 +32402,22 @@ module Aws::EC2
     #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups. You can create a security group
-    #   using CreateSecurityGroup.
+    #   using [CreateSecurityGroup][1].
     #
-    #   Default: Amazon EC2 uses the default security group.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
     #   \[EC2-Classic, default VPC\] The names of the security groups. For a
     #   nondefault VPC, you must use security group IDs instead.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
     #   Default: Amazon EC2 uses the default security group.
     #   @return [Array<String>]
@@ -32165,7 +32435,7 @@ module Aws::EC2
     #   Launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
     #   using a command line tool, base64-encoding is performed for you, and
     #   you can load the text from a file. Otherwise, you must provide
-    #   base64-encoded text.
+    #   base64-encoded text. User data is limited to 16 KB.
     #
     #
     #
@@ -32193,12 +32463,16 @@ module Aws::EC2
     #   If you set this parameter to `true`, you can't terminate the
     #   instance using the Amazon EC2 console, CLI, or API; otherwise, you
     #   can. To change this attribute to `false` after launch, use
-    #   ModifyInstanceAttribute. Alternatively, if you set
+    #   [ModifyInstanceAttribute][1]. Alternatively, if you set
     #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can
     #   terminate the instance by running the shutdown command from the
     #   instance.
     #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -32232,10 +32506,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
-    #   The network interfaces.
-    #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   The network interfaces to associate with the instance. If you
+    #   specify a network interface, you must specify any security groups as
+    #   part of the network interface.
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] private_ip_address
@@ -32253,18 +32526,33 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_specification
-    #   An elastic GPU to associate with the instance.
+    #   An elastic GPU to associate with the instance. An Elastic GPU is a
+    #   GPU resource that you can attach to your Windows instance to
+    #   accelerate the graphics performance of your applications. For more
+    #   information, see [ Amazon EC2 Elastic GPUs][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   An elastic inference accelerator.
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
     #   @return [Array<Types::ElasticInferenceAccelerator>]
     #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to
     #   all instances or volumes that are created during launch. To tag a
-    #   resource after it has been created, see CreateTags.
+    #   resource after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] launch_template
@@ -32283,17 +32571,18 @@ module Aws::EC2
     #   @return [Types::InstanceMarketOptionsRequest]
     #
     # @!attribute [rw] credit_specification
-    #   The credit option for CPU usage of the instance. Valid values are
-    #   `standard` and `unlimited`. To change this attribute after launch,
-    #   use ModifyInstanceCreditSpecification. For more information, see
-    #   [Burstable Performance Instances][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   The credit option for CPU usage of the T2 or T3 instance. Valid
+    #   values are `standard` and `unlimited`. To change this attribute
+    #   after launch, use [ ModifyInstanceCreditSpecification][1]. For more
+    #   information, see [Burstable Performance Instances][2] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #   @return [Types::CreditSpecificationRequest]
     #
     # @!attribute [rw] cpu_options
@@ -33057,7 +33346,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     #   @return [Array<Types::ScheduledInstancesBlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
@@ -33096,7 +33385,7 @@ module Aws::EC2
     #   @return [Types::ScheduledInstancesMonitoring]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces.
+    #   The network interfaces.
     #   @return [Array<Types::ScheduledInstancesNetworkInterface>]
     #
     # @!attribute [rw] placement
@@ -33108,7 +33397,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   The IDs of one or more security groups.
+    #   The IDs of the security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
@@ -33211,7 +33500,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] groups
-    #   The IDs of one or more security groups.
+    #   The IDs of the security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_6_address_count
@@ -33220,7 +33509,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_addresses
-    #   One or more specific IPv6 addresses from the subnet range.
+    #   The specific IPv6 addresses from the subnet range.
     #   @return [Array<Types::ScheduledInstancesIpv6Address>]
     #
     # @!attribute [rw] network_interface_id
@@ -33427,7 +33716,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions_egress
-    #   \[EC2-VPC\] The outbound rules associated with the security group.
+    #   \[VPC only\] The outbound rules associated with the security group.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] tags
@@ -33435,7 +33724,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] vpc_id
-    #   \[EC2-VPC\] The ID of the VPC for the security group.
+    #   \[VPC only\] The ID of the VPC for the security group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroup AWS API Documentation
@@ -33522,8 +33811,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] manages_vpc_endpoints
-    #   Indicates whether the service manages it's VPC Endpoints.
-    #   Management of the service VPC Endpoints using the VPC Endpoint API
+    #   Indicates whether the service manages it's VPC endpoints.
+    #   Management of the service VPC endpoints using the VPC endpoint API
     #   is restricted.
     #   @return [Boolean]
     #
@@ -33540,6 +33829,10 @@ module Aws::EC2
     #   The private DNS name for the service.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the service.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceConfiguration AWS API Documentation
     #
     class ServiceConfiguration < Struct.new(
@@ -33552,7 +33845,8 @@ module Aws::EC2
       :manages_vpc_endpoints,
       :network_load_balancer_arns,
       :base_endpoint_dns_names,
-      :private_dns_name)
+      :private_dns_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -33560,6 +33854,10 @@ module Aws::EC2
     #
     # @!attribute [rw] service_name
     #   The Amazon Resource Name (ARN) of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the endpoint service.
     #   @return [String]
     #
     # @!attribute [rw] service_type
@@ -33592,15 +33890,20 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] manages_vpc_endpoints
-    #   Indicates whether the service manages it's VPC Endpoints.
-    #   Management of the service VPC Endpoints using the VPC Endpoint API
+    #   Indicates whether the service manages it's VPC endpoints.
+    #   Management of the service VPC endpoints using the VPC endpoint API
     #   is restricted.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the service.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceDetail AWS API Documentation
     #
     class ServiceDetail < Struct.new(
       :service_name,
+      :service_id,
       :service_type,
       :availability_zones,
       :owner,
@@ -33608,7 +33911,8 @@ module Aws::EC2
       :private_dns_name,
       :vpc_endpoint_policy_supported,
       :acceptance_required,
-      :manages_vpc_endpoints)
+      :manages_vpc_endpoints,
+      :tags)
       include Aws::Structure
     end
 
@@ -33981,7 +34285,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the launch specification for one or more Spot Instances.
+    # Describes the launch specification for one or more Spot Instances. If
+    # you include On-Demand capacity in your fleet request, you can't use
+    # `SpotFleetLaunchSpecification`; you must use
+    # [LaunchTemplateConfig][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html
     #
     # @note When making an API call, you may pass SpotFleetLaunchSpecification
     #   data as a hash:
@@ -34016,7 +34327,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -34045,6 +34356,7 @@ module Aws::EC2
     #             ],
     #             secondary_private_ip_address_count: 1,
     #             subnet_id: "String",
+    #             interface_type: "String",
     #           },
     #         ],
     #         placement: {
@@ -34082,11 +34394,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries. You can't specify both a
-    #   snapshot ID and an encryption value. This is because only blank
-    #   volumes can be encrypted on creation. If a snapshot is the basis for
-    #   a volume, it is not blank and its encryption status is used for the
-    #   volume encryption status.
+    #   One or more block devices that are mapped to the Spot instances. You
+    #   can't specify both a snapshot ID and an encryption value. This is
+    #   because only blank volumes can be encrypted on creation. If a
+    #   snapshot is the basis for a volume, it is not blank and its
+    #   encryption status is used for the volume encryption status.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
@@ -34135,7 +34447,10 @@ module Aws::EC2
     #   @return [Types::SpotPlacement]
     #
     # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
+    #   The ID of the RAM disk. Some kernels require additional drivers at
+    #   launch. Check the kernel requirements for information about whether
+    #   you need to specify a RAM disk. To find kernel requirements, refer
+    #   to the AWS Resource Center and search for the kernel ID.
     #   @return [String]
     #
     # @!attribute [rw] spot_price
@@ -34152,18 +34467,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data to make available to the instances.
+    #   The Base64-encoded user data that instances use when starting up.
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
     #   The number of units provided by the specified instance type. These
     #   are the same units that you chose to set the target capacity in
-    #   terms (instances or a performance characteristic such as vCPUs,
-    #   memory, or I/O).
+    #   terms of instances, or a performance characteristic such as vCPUs,
+    #   memory, or I/O.
     #
     #   If the target capacity divided by this value is not a whole number,
-    #   we round the number of instances to the next whole number. If this
-    #   value is not specified, the default is 1.
+    #   Amazon EC2 rounds the number of instances to the next whole number.
+    #   If this value is not specified, the default is 1.
     #   @return [Float]
     #
     # @!attribute [rw] tag_specifications
@@ -34298,7 +34613,7 @@ module Aws::EC2
     #               name: "String",
     #             },
     #             image_id: "String",
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             kernel_id: "String",
     #             key_name: "String",
     #             monitoring: {
@@ -34327,6 +34642,7 @@ module Aws::EC2
     #                 ],
     #                 secondary_private_ip_address_count: 1,
     #                 subnet_id: "String",
+    #                 interface_type: "String",
     #               },
     #             ],
     #             placement: {
@@ -34361,7 +34677,7 @@ module Aws::EC2
     #             },
     #             overrides: [
     #               {
-    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #                 spot_price: "String",
     #                 subnet_id: "String",
     #                 availability_zone: "String",
@@ -34425,8 +34741,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] excess_capacity_termination_policy
-    #   Indicates whether running Spot Instances should be terminated if the
-    #   target capacity of the Spot Fleet request is decreased below the
+    #   Indicates whether running Spot Instances should be terminated if you
+    #   decrease the target capacity of the Spot Fleet request below the
     #   current size of the Spot Fleet.
     #   @return [String]
     #
@@ -34441,18 +34757,32 @@ module Aws::EC2
     #   @return [Float]
     #
     # @!attribute [rw] iam_fleet_role
-    #   Grants the Spot Fleet permission to terminate Spot Instances on your
-    #   behalf when you cancel its Spot Fleet request using
-    #   CancelSpotFleetRequests or when the Spot Fleet request expires, if
-    #   you set `terminateInstancesWithExpiration`.
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that grants the Spot Fleet the permission to
+    #   request, launch, terminate, and tag instances on your behalf. For
+    #   more information, see [Spot Fleet Prerequisites][1] in the *Amazon
+    #   EC2 User Guide for Linux Instances*. Spot Fleet can terminate Spot
+    #   Instances on your behalf when you cancel its Spot Fleet request
+    #   using CancelSpotFleetRequests or when the Spot Fleet request
+    #   expires, if you set `TerminateInstancesWithExpiration`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html#spot-fleet-prerequisites
     #   @return [String]
     #
     # @!attribute [rw] launch_specifications
-    #   The launch specifications for the Spot Fleet request.
+    #   The launch specifications for the Spot Fleet request. If you specify
+    #   `LaunchSpecifications`, you can't specify `LaunchTemplateConfigs`.
+    #   If you include On-Demand capacity in your request, you must use
+    #   `LaunchTemplateConfigs`.
     #   @return [Array<Types::SpotFleetLaunchSpecification>]
     #
     # @!attribute [rw] launch_template_configs
-    #   The launch template and overrides.
+    #   The launch template and overrides. If you specify
+    #   `LaunchTemplateConfigs`, you can't specify `LaunchSpecifications`.
+    #   If you include On-Demand capacity in your request, you must use
+    #   `LaunchTemplateConfigs`.
     #   @return [Array<Types::LaunchTemplateConfig>]
     #
     # @!attribute [rw] spot_price
@@ -34461,11 +34791,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] target_capacity
-    #   The number of units to request. You can choose to set the target
-    #   capacity in terms of instances or a performance characteristic that
-    #   is important to your application workload, such as vCPUs, memory, or
-    #   I/O. If the request type is `maintain`, you can specify a target
-    #   capacity of 0 and add capacity later.
+    #   The number of units to request for the Spot Fleet. You can choose to
+    #   set the target capacity in terms of instances or a performance
+    #   characteristic that is important to your application workload, such
+    #   as vCPUs, memory, or I/O. If the request type is `maintain`, you can
+    #   specify a target capacity of 0 and add capacity later.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
@@ -34477,8 +34807,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] terminate_instances_with_expiration
-    #   Indicates whether running Spot Instances should be terminated when
-    #   the Spot Fleet request expires.
+    #   Indicates whether running Spot Instances are terminated when the
+    #   Spot Fleet request expires.
     #   @return [Boolean]
     #
     # @!attribute [rw] type
@@ -34495,17 +34825,17 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] valid_from
-    #   The start date and time of the request, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
+    #   The start date and time of the request, in UTC format
+    #   (*YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). By default, Amazon EC2 starts
     #   fulfilling the request immediately.
     #   @return [Time]
     #
     # @!attribute [rw] valid_until
-    #   The end date and time of the request, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new Spot
-    #   Instance requests are placed or able to fulfill the request. If no
-    #   value is specified, the Spot Fleet request remains until you cancel
-    #   it.
+    #   The end date and time of the request, in UTC format
+    #   (*YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). After the end date and time,
+    #   no new Spot Instance requests are placed or able to fulfill the
+    #   request. If no value is specified, the Spot Fleet request remains
+    #   until you cancel it.
     #   @return [Time]
     #
     # @!attribute [rw] replace_unhealthy_instances
@@ -37516,7 +37846,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_managed
-    #   Indicates whether the VPC Endpoint is being managed by its service.
+    #   Indicates whether the VPC endpoint is being managed by its service.
     #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_ids
@@ -37531,6 +37861,10 @@ module Aws::EC2
     # @!attribute [rw] creation_timestamp
     #   The date and time the VPC endpoint was created.
     #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the VPC endpoint.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
     #
@@ -37548,7 +37882,8 @@ module Aws::EC2
       :requester_managed,
       :network_interface_ids,
       :dns_entries,
-      :creation_timestamp)
+      :creation_timestamp,
+      :tags)
       include Aws::Structure
     end
 
@@ -37721,7 +38056,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The region in which the VPC is located.
+    #   The Region in which the VPC is located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionVpcInfo AWS API Documentation

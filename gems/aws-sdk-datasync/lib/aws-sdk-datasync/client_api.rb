@@ -55,8 +55,13 @@ module Aws::DataSync
     Ec2SecurityGroupArnList = Shapes::ListShape.new(name: 'Ec2SecurityGroupArnList')
     Ec2SubnetArn = Shapes::StringShape.new(name: 'Ec2SubnetArn')
     EfsFilesystemArn = Shapes::StringShape.new(name: 'EfsFilesystemArn')
+    FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FilterRule = Shapes::StructureShape.new(name: 'FilterRule')
+    FilterType = Shapes::StringShape.new(name: 'FilterType')
+    FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     Gid = Shapes::StringShape.new(name: 'Gid')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
+    InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     ListAgentsRequest = Shapes::StructureShape.new(name: 'ListAgentsRequest')
     ListAgentsResponse = Shapes::StructureShape.new(name: 'ListAgentsResponse')
@@ -76,6 +81,9 @@ module Aws::DataSync
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Mtime = Shapes::StringShape.new(name: 'Mtime')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NfsMountOptions = Shapes::StructureShape.new(name: 'NfsMountOptions')
+    NfsVersion = Shapes::StringShape.new(name: 'NfsVersion')
+    NonEmptySubdirectory = Shapes::StringShape.new(name: 'NonEmptySubdirectory')
     OnPremConfig = Shapes::StructureShape.new(name: 'OnPremConfig')
     Options = Shapes::StructureShape.new(name: 'Options')
     PhaseStatus = Shapes::StringShape.new(name: 'PhaseStatus')
@@ -139,7 +147,7 @@ module Aws::DataSync
     CreateAgentResponse.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn"))
     CreateAgentResponse.struct_class = Types::CreateAgentResponse
 
-    CreateLocationEfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: Subdirectory, required: true, location_name: "Subdirectory"))
+    CreateLocationEfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: Subdirectory, location_name: "Subdirectory"))
     CreateLocationEfsRequest.add_member(:efs_filesystem_arn, Shapes::ShapeRef.new(shape: EfsFilesystemArn, required: true, location_name: "EfsFilesystemArn"))
     CreateLocationEfsRequest.add_member(:ec2_config, Shapes::ShapeRef.new(shape: Ec2Config, required: true, location_name: "Ec2Config"))
     CreateLocationEfsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -148,16 +156,17 @@ module Aws::DataSync
     CreateLocationEfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     CreateLocationEfsResponse.struct_class = Types::CreateLocationEfsResponse
 
-    CreateLocationNfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: Subdirectory, required: true, location_name: "Subdirectory"))
+    CreateLocationNfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: NonEmptySubdirectory, required: true, location_name: "Subdirectory"))
     CreateLocationNfsRequest.add_member(:server_hostname, Shapes::ShapeRef.new(shape: ServerHostname, required: true, location_name: "ServerHostname"))
     CreateLocationNfsRequest.add_member(:on_prem_config, Shapes::ShapeRef.new(shape: OnPremConfig, required: true, location_name: "OnPremConfig"))
+    CreateLocationNfsRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
     CreateLocationNfsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateLocationNfsRequest.struct_class = Types::CreateLocationNfsRequest
 
     CreateLocationNfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     CreateLocationNfsResponse.struct_class = Types::CreateLocationNfsResponse
 
-    CreateLocationS3Request.add_member(:subdirectory, Shapes::ShapeRef.new(shape: Subdirectory, required: true, location_name: "Subdirectory"))
+    CreateLocationS3Request.add_member(:subdirectory, Shapes::ShapeRef.new(shape: Subdirectory, location_name: "Subdirectory"))
     CreateLocationS3Request.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "S3BucketArn"))
     CreateLocationS3Request.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, required: true, location_name: "S3Config"))
     CreateLocationS3Request.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -171,6 +180,7 @@ module Aws::DataSync
     CreateTaskRequest.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
     CreateTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
     CreateTaskRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
+    CreateTaskRequest.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
     CreateTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTaskRequest.struct_class = Types::CreateTaskRequest
 
@@ -217,6 +227,7 @@ module Aws::DataSync
     DescribeLocationNfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     DescribeLocationNfsResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
     DescribeLocationNfsResponse.add_member(:on_prem_config, Shapes::ShapeRef.new(shape: OnPremConfig, location_name: "OnPremConfig"))
+    DescribeLocationNfsResponse.add_member(:mount_options, Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
     DescribeLocationNfsResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationNfsResponse.struct_class = Types::DescribeLocationNfsResponse
 
@@ -235,6 +246,8 @@ module Aws::DataSync
     DescribeTaskExecutionResponse.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn"))
     DescribeTaskExecutionResponse.add_member(:status, Shapes::ShapeRef.new(shape: TaskExecutionStatus, location_name: "Status"))
     DescribeTaskExecutionResponse.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
+    DescribeTaskExecutionResponse.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
+    DescribeTaskExecutionResponse.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
     DescribeTaskExecutionResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "StartTime"))
     DescribeTaskExecutionResponse.add_member(:estimated_files_to_transfer, Shapes::ShapeRef.new(shape: long, location_name: "EstimatedFilesToTransfer"))
     DescribeTaskExecutionResponse.add_member(:estimated_bytes_to_transfer, Shapes::ShapeRef.new(shape: long, location_name: "EstimatedBytesToTransfer"))
@@ -255,6 +268,7 @@ module Aws::DataSync
     DescribeTaskResponse.add_member(:destination_location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "DestinationLocationArn"))
     DescribeTaskResponse.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
     DescribeTaskResponse.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
+    DescribeTaskResponse.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
     DescribeTaskResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "ErrorCode"))
     DescribeTaskResponse.add_member(:error_detail, Shapes::ShapeRef.new(shape: string, location_name: "ErrorDetail"))
     DescribeTaskResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
@@ -265,6 +279,12 @@ module Aws::DataSync
     Ec2Config.struct_class = Types::Ec2Config
 
     Ec2SecurityGroupArnList.member = Shapes::ShapeRef.new(shape: Ec2SecurityGroupArn)
+
+    FilterList.member = Shapes::ShapeRef.new(shape: FilterRule)
+
+    FilterRule.add_member(:filter_type, Shapes::ShapeRef.new(shape: FilterType, location_name: "FilterType"))
+    FilterRule.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, location_name: "Value"))
+    FilterRule.struct_class = Types::FilterRule
 
     ListAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -314,6 +334,9 @@ module Aws::DataSync
     LocationListEntry.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
     LocationListEntry.struct_class = Types::LocationListEntry
 
+    NfsMountOptions.add_member(:version, Shapes::ShapeRef.new(shape: NfsVersion, location_name: "Version"))
+    NfsMountOptions.struct_class = Types::NfsMountOptions
+
     OnPremConfig.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
     OnPremConfig.struct_class = Types::OnPremConfig
 
@@ -333,6 +356,7 @@ module Aws::DataSync
 
     StartTaskExecutionRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, required: true, location_name: "TaskArn"))
     StartTaskExecutionRequest.add_member(:override_options, Shapes::ShapeRef.new(shape: Options, location_name: "OverrideOptions"))
+    StartTaskExecutionRequest.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
     StartTaskExecutionRequest.struct_class = Types::StartTaskExecutionRequest
 
     StartTaskExecutionResponse.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn"))
@@ -342,7 +366,7 @@ module Aws::DataSync
 
     TagList.member = Shapes::ShapeRef.new(shape: TagListEntry)
 
-    TagListEntry.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
+    TagListEntry.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     TagListEntry.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     TagListEntry.struct_class = Types::TagListEntry
 
@@ -389,7 +413,9 @@ module Aws::DataSync
 
     UpdateTaskRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, required: true, location_name: "TaskArn"))
     UpdateTaskRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
+    UpdateTaskRequest.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
     UpdateTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
+    UpdateTaskRequest.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
     UpdateTaskRequest.struct_class = Types::UpdateTaskRequest
 
     UpdateTaskResponse.struct_class = Types::UpdateTaskResponse
@@ -421,6 +447,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: CancelTaskExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: CancelTaskExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:create_agent, Seahorse::Model::Operation.new.tap do |o|
@@ -430,6 +457,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: CreateAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAgentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:create_location_efs, Seahorse::Model::Operation.new.tap do |o|
@@ -439,6 +467,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: CreateLocationEfsRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLocationEfsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:create_location_nfs, Seahorse::Model::Operation.new.tap do |o|
@@ -448,6 +477,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: CreateLocationNfsRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLocationNfsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:create_location_s3, Seahorse::Model::Operation.new.tap do |o|
@@ -457,6 +487,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: CreateLocationS3Request)
         o.output = Shapes::ShapeRef.new(shape: CreateLocationS3Response)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:create_task, Seahorse::Model::Operation.new.tap do |o|
@@ -466,6 +497,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: CreateTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTaskResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:delete_agent, Seahorse::Model::Operation.new.tap do |o|
@@ -475,6 +507,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: DeleteAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAgentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:delete_location, Seahorse::Model::Operation.new.tap do |o|
@@ -484,6 +517,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: DeleteLocationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLocationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:delete_task, Seahorse::Model::Operation.new.tap do |o|
@@ -493,6 +527,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: DeleteTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTaskResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:describe_agent, Seahorse::Model::Operation.new.tap do |o|
@@ -502,6 +537,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: DescribeAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAgentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:describe_location_efs, Seahorse::Model::Operation.new.tap do |o|
@@ -511,6 +547,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: DescribeLocationEfsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocationEfsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:describe_location_nfs, Seahorse::Model::Operation.new.tap do |o|
@@ -520,6 +557,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: DescribeLocationNfsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocationNfsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:describe_location_s3, Seahorse::Model::Operation.new.tap do |o|
@@ -529,6 +567,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: DescribeLocationS3Request)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocationS3Response)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:describe_task, Seahorse::Model::Operation.new.tap do |o|
@@ -538,6 +577,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: DescribeTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTaskResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:describe_task_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -547,6 +587,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: DescribeTaskExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTaskExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:list_agents, Seahorse::Model::Operation.new.tap do |o|
@@ -556,6 +597,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: ListAgentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAgentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -571,6 +613,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: ListLocationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLocationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -586,6 +629,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -601,6 +645,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: ListTaskExecutionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTaskExecutionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -616,6 +661,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: ListTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTasksResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -631,6 +677,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: StartTaskExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: StartTaskExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -640,6 +687,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -649,6 +697,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:update_agent, Seahorse::Model::Operation.new.tap do |o|
@@ -658,6 +707,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: UpdateAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAgentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
       api.add_operation(:update_task, Seahorse::Model::Operation.new.tap do |o|
@@ -667,6 +717,7 @@ module Aws::DataSync
         o.input = Shapes::ShapeRef.new(shape: UpdateTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateTaskResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
     end
 

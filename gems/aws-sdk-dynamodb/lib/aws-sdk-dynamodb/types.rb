@@ -51,7 +51,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
     #
     # @note When making an API call, you may pass AttributeValue
     #   data as a hash:
@@ -190,7 +190,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] action
@@ -787,9 +787,9 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
-    #   [3]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     #   @return [Hash<String,Types::KeysAndAttributes>]
     #
     # @!attribute [rw] return_consumed_capacity
@@ -1350,7 +1350,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Condition AWS API Documentation
@@ -1433,7 +1433,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #
     # @!attribute [rw] table_name
     #   The name of the table that was affected by the operation.
@@ -1582,7 +1582,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalSecondaryIndexAction AWS API Documentation
@@ -1721,6 +1721,12 @@ module Aws::DynamoDB
     #           sse_type: "AES256", # accepts AES256, KMS
     #           kms_master_key_id: "KMSMasterKeyId",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] attribute_definitions
@@ -1773,8 +1779,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key
     #   @return [Array<Types::KeySchemaElement>]
     #
     # @!attribute [rw] local_secondary_indexes
@@ -1888,7 +1894,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
     #
     # @!attribute [rw] stream_specification
@@ -1919,6 +1925,15 @@ module Aws::DynamoDB
     #   Represents the settings used to enable server-side encryption.
     #   @return [Types::SSESpecification]
     #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to label the table. For more information,
+    #   see [Tagging for DynamoDB][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableInput AWS API Documentation
     #
     class CreateTableInput < Struct.new(
@@ -1930,7 +1945,8 @@ module Aws::DynamoDB
       :billing_mode,
       :provisioned_throughput,
       :stream_specification,
-      :sse_specification)
+      :sse_specification,
+      :tags)
       include Aws::Structure
     end
 
@@ -2111,7 +2127,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
     #   @return [Hash<String,Types::ExpectedAttributeValue>]
     #
     # @!attribute [rw] conditional_operator
@@ -2121,7 +2137,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #   @return [String]
     #
     # @!attribute [rw] return_values
@@ -2190,7 +2206,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -2242,8 +2258,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] expression_attribute_values
@@ -2271,7 +2287,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItemInput AWS API Documentation
@@ -2310,7 +2326,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
     #
     # @!attribute [rw] item_collection_metrics
@@ -2732,7 +2748,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] exists
@@ -2952,7 +2968,7 @@ module Aws::DynamoDB
     #
     #
     #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html
     #   @return [Array<Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExpectedAttributeValue AWS API Documentation
@@ -3055,7 +3071,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] consistent_read
@@ -3099,7 +3115,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -3151,8 +3167,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItemInput AWS API Documentation
@@ -3186,7 +3202,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItemOutput AWS API Documentation
@@ -3262,7 +3278,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndex AWS API Documentation
@@ -3346,7 +3362,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughputDescription]
     #
     # @!attribute [rw] index_size_bytes
@@ -3750,7 +3766,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] consistent_read
@@ -3774,7 +3790,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -3826,8 +3842,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KeysAndAttributes AWS API Documentation
@@ -4351,7 +4367,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #
     # @note When making an API call, you may pass ProvisionedThroughput
     #   data as a hash:
@@ -4372,7 +4388,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
     #   @return [Integer]
     #
     # @!attribute [rw] write_capacity_units
@@ -4386,7 +4402,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughput AWS API Documentation
@@ -4419,7 +4435,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Integer]
     #
     # @!attribute [rw] read_capacity_units
@@ -4568,7 +4584,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] expected
@@ -4578,7 +4594,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
     #   @return [Hash<String,Types::ExpectedAttributeValue>]
     #
     # @!attribute [rw] return_values
@@ -4635,7 +4651,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #   @return [String]
     #
     # @!attribute [rw] condition_expression
@@ -4658,7 +4674,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -4710,8 +4726,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] expression_attribute_values
@@ -4739,7 +4755,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItemInput AWS API Documentation
@@ -4778,7 +4794,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
     #
     # @!attribute [rw] item_collection_metrics
@@ -4953,7 +4969,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -4971,7 +4987,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
     #   @return [Integer]
     #
     # @!attribute [rw] consistent_read
@@ -4991,7 +5007,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html
     #   @return [Hash<String,Types::Condition>]
     #
     # @!attribute [rw] query_filter
@@ -5001,7 +5017,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html
     #   @return [Hash<String,Types::Condition>]
     #
     # @!attribute [rw] conditional_operator
@@ -5011,7 +5027,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #   @return [String]
     #
     # @!attribute [rw] scan_index_forward
@@ -5076,7 +5092,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [String]
     #
     # @!attribute [rw] filter_expression
@@ -5099,7 +5115,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
     #   @return [String]
     #
     # @!attribute [rw] key_condition_expression
@@ -5184,8 +5200,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -5237,8 +5253,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] expression_attribute_values
@@ -5266,7 +5282,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/QueryInput AWS API Documentation
@@ -5324,7 +5340,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Count
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Count
     #   @return [Integer]
     #
     # @!attribute [rw] last_evaluated_key
@@ -5352,7 +5368,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/QueryOutput AWS API Documentation
@@ -5530,7 +5546,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
     #   @return [Integer]
     #
     # @!attribute [rw] replica_provisioned_read_capacity_auto_scaling_settings
@@ -5546,7 +5562,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
     #   @return [Integer]
     #
     # @!attribute [rw] replica_provisioned_write_capacity_auto_scaling_settings
@@ -5631,7 +5647,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
     #   @return [Integer]
     #
     # @!attribute [rw] replica_provisioned_read_capacity_auto_scaling_settings_update
@@ -5944,7 +5960,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -5962,7 +5978,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
     #   @return [Integer]
     #
     # @!attribute [rw] select
@@ -6025,7 +6041,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html
     #   @return [Hash<String,Types::Condition>]
     #
     # @!attribute [rw] conditional_operator
@@ -6035,7 +6051,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #   @return [String]
     #
     # @!attribute [rw] exclusive_start_key
@@ -6121,7 +6137,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [String]
     #
     # @!attribute [rw] filter_expression
@@ -6140,7 +6156,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -6192,8 +6208,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] expression_attribute_values
@@ -6221,7 +6237,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] consistent_read
@@ -6295,7 +6311,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Count
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Count
     #   @return [Integer]
     #
     # @!attribute [rw] last_evaluated_key
@@ -6323,7 +6339,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ScanOutput AWS API Documentation
@@ -6528,7 +6544,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
     #   @return [Array<Types::KeySchemaElement>]
     #
     # @!attribute [rw] table_status
@@ -6773,7 +6789,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -7398,7 +7414,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalSecondaryIndexAction AWS API Documentation
@@ -7658,7 +7674,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html
     #   @return [Hash<String,Types::AttributeValueUpdate>]
     #
     # @!attribute [rw] expected
@@ -7668,7 +7684,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
     #   @return [Hash<String,Types::ExpectedAttributeValue>]
     #
     # @!attribute [rw] conditional_operator
@@ -7678,7 +7694,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #   @return [String]
     #
     # @!attribute [rw] return_values
@@ -7828,7 +7844,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html
     #   @return [String]
     #
     # @!attribute [rw] condition_expression
@@ -7851,7 +7867,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -7903,8 +7919,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] expression_attribute_values
@@ -7932,7 +7948,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItemInput AWS API Documentation
@@ -7976,7 +7992,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
     #
     # @!attribute [rw] item_collection_metrics
@@ -8120,7 +8136,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html
     #   @return [Array<Types::GlobalSecondaryIndexUpdate>]
     #
     # @!attribute [rw] stream_specification

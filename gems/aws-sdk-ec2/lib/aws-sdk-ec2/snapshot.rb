@@ -325,17 +325,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     namespace, followed by the Region of the CMK, the AWS account ID of
     #     the CMK owner, the `alias` namespace, and then the CMK alias. For
     #     example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -395,9 +395,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []

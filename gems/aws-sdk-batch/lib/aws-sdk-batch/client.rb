@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::Batch
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -366,7 +368,13 @@ module Aws::Batch
     #
     # @option params [Types::ComputeResource] :compute_resources
     #   Details of the compute resources managed by the compute environment.
-    #   This parameter is required for managed compute environments.
+    #   This parameter is required for managed compute environments. For more
+    #   information, see [Compute Environments][1] in the *AWS Batch User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @option params [required, String] :service_role
     #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
@@ -901,8 +909,8 @@ module Aws::Batch
     # as `ACTIVE`) to only return job definitions that match that status.
     #
     # @option params [Array<String>] :job_definitions
-    #   A space-separated list of up to 100 job definition names or full
-    #   Amazon Resource Name (ARN) entries.
+    #   A list of up to 100 job definition names or full Amazon Resource Name
+    #   (ARN) entries.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `DescribeJobDefinitions` in
@@ -1168,7 +1176,7 @@ module Aws::Batch
     # Describes a list of AWS Batch jobs.
     #
     # @option params [required, Array<String>] :jobs
-    #   A space-separated list of up to 100 job IDs.
+    #   A list of up to 100 job IDs.
     #
     # @return [Types::DescribeJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1513,7 +1521,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
     #
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs that are submitted with this
@@ -1717,7 +1725,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
     #
     # @option params [Array<Types::JobDependency>] :depends_on
     #   A list of dependencies for the job. A job can depend upon a maximum of
@@ -2089,7 +2097,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

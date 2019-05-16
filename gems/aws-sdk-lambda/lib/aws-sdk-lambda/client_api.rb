@@ -27,7 +27,7 @@ module Aws::Lambda
     Arn = Shapes::StringShape.new(name: 'Arn')
     BatchSize = Shapes::IntegerShape.new(name: 'BatchSize')
     Blob = Shapes::BlobShape.new(name: 'Blob')
-    BlobStream = Shapes::BlobShape.new(name: 'BlobStream')
+    BlobStream = Shapes::BlobShape.new(name: 'BlobStream', streaming: true)
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CodeStorageExceededException = Shapes::StructureShape.new(name: 'CodeStorageExceededException')
     CompatibleRuntimes = Shapes::ListShape.new(name: 'CompatibleRuntimes')
@@ -72,6 +72,7 @@ module Aws::Lambda
     GetFunctionConfigurationRequest = Shapes::StructureShape.new(name: 'GetFunctionConfigurationRequest')
     GetFunctionRequest = Shapes::StructureShape.new(name: 'GetFunctionRequest')
     GetFunctionResponse = Shapes::StructureShape.new(name: 'GetFunctionResponse')
+    GetLayerVersionByArnRequest = Shapes::StructureShape.new(name: 'GetLayerVersionByArnRequest')
     GetLayerVersionPolicyRequest = Shapes::StructureShape.new(name: 'GetLayerVersionPolicyRequest')
     GetLayerVersionPolicyResponse = Shapes::StructureShape.new(name: 'GetLayerVersionPolicyResponse')
     GetLayerVersionRequest = Shapes::StructureShape.new(name: 'GetLayerVersionRequest')
@@ -392,6 +393,9 @@ module Aws::Lambda
     GetFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     GetFunctionResponse.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, location_name: "Concurrency"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
+
+    GetLayerVersionByArnRequest.add_member(:arn, Shapes::ShapeRef.new(shape: LayerVersionArn, required: true, location: "querystring", location_name: "Arn"))
+    GetLayerVersionByArnRequest.struct_class = Types::GetLayerVersionByArnRequest
 
     GetLayerVersionPolicyRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     GetLayerVersionPolicyRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
@@ -870,6 +874,18 @@ module Aws::Lambda
         o.http_method = "GET"
         o.http_request_uri = "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}"
         o.input = Shapes::ShapeRef.new(shape: GetLayerVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLayerVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_layer_version_by_arn, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLayerVersionByArn"
+        o.http_method = "GET"
+        o.http_request_uri = "/2018-10-31/layers?find=LayerVersion"
+        o.input = Shapes::ShapeRef.new(shape: GetLayerVersionByArnRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLayerVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)

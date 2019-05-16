@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::SSM
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -544,7 +546,7 @@ module Aws::SSM
     #   The instance ID.
     #
     # @option params [Hash<String,Array>] :parameters
-    #   The parameters for the documents runtime configuration.
+    #   The parameters for the runtime configuration of the document.
     #
     # @option params [Array<Types::Target>] :targets
     #   The targets (either instances or tags) for the association.
@@ -1080,7 +1082,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
     # @option params [String] :approved_patches_compliance_level
     #   Defines the compliance level for approved patches. This means that if
@@ -1101,7 +1103,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
     # @option params [String] :rejected_patches_action
     #   The action for Patch Manager to take on patches included in the
@@ -1162,7 +1164,7 @@ module Aws::SSM
     #     global_filters: {
     #       patch_filters: [ # required
     #         {
-    #           key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #           key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #           values: ["PatchFilterValue"], # required
     #         },
     #       ],
@@ -1173,7 +1175,7 @@ module Aws::SSM
     #           patch_filter_group: { # required
     #             patch_filters: [ # required
     #               {
-    #                 key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                 key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                 values: ["PatchFilterValue"], # required
     #               },
     #             ],
@@ -2611,6 +2613,7 @@ module Aws::SSM
     #   resp.instance_patch_states[0].installed_rejected_count #=> Integer
     #   resp.instance_patch_states[0].missing_count #=> Integer
     #   resp.instance_patch_states[0].failed_count #=> Integer
+    #   resp.instance_patch_states[0].unreported_not_applicable_count #=> Integer
     #   resp.instance_patch_states[0].not_applicable_count #=> Integer
     #   resp.instance_patch_states[0].operation_start_time #=> Time
     #   resp.instance_patch_states[0].operation_end_time #=> Time
@@ -2683,6 +2686,7 @@ module Aws::SSM
     #   resp.instance_patch_states[0].installed_rejected_count #=> Integer
     #   resp.instance_patch_states[0].missing_count #=> Integer
     #   resp.instance_patch_states[0].failed_count #=> Integer
+    #   resp.instance_patch_states[0].unreported_not_applicable_count #=> Integer
     #   resp.instance_patch_states[0].not_applicable_count #=> Integer
     #   resp.instance_patch_states[0].operation_start_time #=> Time
     #   resp.instance_patch_states[0].operation_end_time #=> Time
@@ -3391,6 +3395,11 @@ module Aws::SSM
     #   resp.parameters[0].description #=> String
     #   resp.parameters[0].allowed_pattern #=> String
     #   resp.parameters[0].version #=> Integer
+    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced"
+    #   resp.parameters[0].policies #=> Array
+    #   resp.parameters[0].policies[0].policy_text #=> String
+    #   resp.parameters[0].policies[0].policy_type #=> String
+    #   resp.parameters[0].policies[0].policy_status #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParameters AWS API Documentation
@@ -3471,6 +3480,7 @@ module Aws::SSM
     #   * {Types::DescribePatchGroupStateResult#instances_with_missing_patches #instances_with_missing_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_failed_patches #instances_with_failed_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_not_applicable_patches #instances_with_not_applicable_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_unreported_not_applicable_patches #instances_with_unreported_not_applicable_patches} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -3487,6 +3497,7 @@ module Aws::SSM
     #   resp.instances_with_missing_patches #=> Integer
     #   resp.instances_with_failed_patches #=> Integer
     #   resp.instances_with_not_applicable_patches #=> Integer
+    #   resp.instances_with_unreported_not_applicable_patches #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupState AWS API Documentation
     #
@@ -3545,6 +3556,96 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_patch_groups(params = {}, options = {})
       req = build_request(:describe_patch_groups, params)
+      req.send_request(options)
+    end
+
+    # Lists the properties of available patches organized by product,
+    # product family, classification, severity, and other properties of
+    # available patches. You can use the reported properties in the filters
+    # you specify in requests for actions such as CreatePatchBaseline,
+    # UpdatePatchBaseline, DescribeAvailablePatches, and
+    # DescribePatchBaselines.
+    #
+    # The following section lists the properties that can be used in filters
+    # for each major operating system type:
+    #
+    # WINDOWS
+    #
+    # : Valid properties: PRODUCT, PRODUCT\_FAMILY, CLASSIFICATION,
+    #   MSRC\_SEVERITY
+    #
+    # AMAZON\_LINUX
+    #
+    # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
+    #
+    # AMAZON\_LINUX\_2
+    #
+    # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
+    #
+    # UBUNTU
+    #
+    # : Valid properties: PRODUCT, PRIORITY
+    #
+    # REDHAT\_ENTERPRISE\_LINUX
+    #
+    # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
+    #
+    # SUSE
+    #
+    # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
+    #
+    # CENTOS
+    #
+    # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
+    #
+    # @option params [required, String] :operating_system
+    #   The operating system type for which to list patches.
+    #
+    # @option params [required, String] :property
+    #   The patch property for which you want to view patch details.
+    #
+    # @option params [String] :patch_set
+    #   Indicates whether to list patches for the Windows operating system or
+    #   for Microsoft applications. Not applicable for Linux operating
+    #   systems.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribePatchPropertiesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePatchPropertiesResult#properties #properties} => Array&lt;Hash&lt;String,String&gt;&gt;
+    #   * {Types::DescribePatchPropertiesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_patch_properties({
+    #     operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #     property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
+    #     patch_set: "OS", # accepts OS, APPLICATION
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.properties #=> Array
+    #   resp.properties[0] #=> Hash
+    #   resp.properties[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchProperties AWS API Documentation
+    #
+    # @overload describe_patch_properties(params = {})
+    # @param [Hash] params ({})
+    def describe_patch_properties(params = {}, options = {})
+      req = build_request(:describe_patch_properties, params)
       req.send_request(options)
     end
 
@@ -4516,6 +4617,11 @@ module Aws::SSM
     #   resp.parameters[0].version #=> Integer
     #   resp.parameters[0].labels #=> Array
     #   resp.parameters[0].labels[0] #=> String
+    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced"
+    #   resp.parameters[0].policies #=> Array
+    #   resp.parameters[0].policies[0].policy_text #=> String
+    #   resp.parameters[0].policies[0].policy_type #=> String
+    #   resp.parameters[0].policies[0].policy_status #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory AWS API Documentation
@@ -4708,12 +4814,12 @@ module Aws::SSM
     #   resp.name #=> String
     #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.global_filters.patch_filters #=> Array
-    #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
+    #   resp.global_filters.patch_filters[0].key #=> String, one of "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
     #   resp.global_filters.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters #=> Array
-    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
@@ -5954,7 +6060,9 @@ module Aws::SSM
     #   Do not enter personally identifiable information in this field.
     #
     # @option params [required, String] :value
-    #   The parameter value that you want to add to the system.
+    #   The parameter value that you want to add to the system. Standard
+    #   parameters have a value limit of 4 KB. Advanced parameters have a
+    #   value limit of 8 KB.
     #
     # @option params [required, String] :type
     #   The type of parameter that you want to add to the system.
@@ -6015,6 +6123,66 @@ module Aws::SSM
     #
     #    </note>
     #
+    # @option params [String] :tier
+    #   Parameter Store offers a standard tier and an advanced tier for
+    #   parameters. Standard parameters have a value limit of 4 KB and can't
+    #   be configured to use parameter policies. You can create a maximum of
+    #   10,000 standard parameters per account and per Region. Standard
+    #   parameters are offered at no additional cost.
+    #
+    #   Advanced parameters have a value limit of 8 KB and can be configured
+    #   to use parameter policies. You can create a maximum of 100,000
+    #   advanced parameters per account and per Region. Advanced parameters
+    #   incur a charge.
+    #
+    #   If you don't specify a parameter tier when you create a new
+    #   parameter, the parameter defaults to using the standard tier. You can
+    #   change a standard parameter to an advanced parameter at any time. But
+    #   you can't revert an advanced parameter to a standard parameter.
+    #   Reverting an advanced parameter to a standard parameter would result
+    #   in data loss because the system would truncate the size of the
+    #   parameter from 8 KB to 4 KB. Reverting would also remove any policies
+    #   attached to the parameter. Lastly, advanced parameters use a different
+    #   form of encryption than standard parameters.
+    #
+    #   If you no longer need an advanced parameter, or if you no longer want
+    #   to incur charges for an advanced parameter, you must delete it and
+    #   recreate it as a new standard parameter. For more information, see
+    #   [About Advanced Parameters][1] in the *AWS Systems Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
+    #
+    # @option params [String] :policies
+    #   One or more policies to apply to a parameter. This action takes a JSON
+    #   array. Parameter Store supports the following policy types:
+    #
+    #   Expiration: This policy deletes the parameter after it expires. When
+    #   you create the policy, you specify the expiration date. You can update
+    #   the expiration date and time by updating the policy. Updating the
+    #   *parameter* does not affect the expiration date and time. When the
+    #   expiration time is reached, Parameter Store deletes the parameter.
+    #
+    #   ExpirationNotification: This policy triggers an event in Amazon
+    #   CloudWatch Events that notifies you about the expiration. By using
+    #   this policy, you can receive notification before or after the
+    #   expiration time is reached, in units of days or hours.
+    #
+    #   NoChangeNotification: This policy triggers a CloudWatch event if a
+    #   parameter has not been modified for a specified period of time. This
+    #   policy type is useful when, for example, a secret needs to be changed
+    #   within a period of time, but it has not been changed.
+    #
+    #   All existing policies are preserved until you send new policies or an
+    #   empty policy. For more information about parameter policies, see
+    #   [Working with Parameter Policies][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-policies.html
+    #
     # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutParameterResult#version #version} => Integer
@@ -6035,6 +6203,8 @@ module Aws::SSM
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     tier: "Standard", # accepts Standard, Advanced
+    #     policies: "ParameterPolicies",
     #   })
     #
     # @example Response structure
@@ -7890,7 +8060,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
     # @option params [String] :approved_patches_compliance_level
     #   Assigns a new compliance severity level to an existing patch baseline.
@@ -7909,7 +8079,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
     # @option params [String] :rejected_patches_action
     #   The action for Patch Manager to take on patches included in the
@@ -7965,7 +8135,7 @@ module Aws::SSM
     #     global_filters: {
     #       patch_filters: [ # required
     #         {
-    #           key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #           key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #           values: ["PatchFilterValue"], # required
     #         },
     #       ],
@@ -7976,7 +8146,7 @@ module Aws::SSM
     #           patch_filter_group: { # required
     #             patch_filters: [ # required
     #               {
-    #                 key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                 key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                 values: ["PatchFilterValue"], # required
     #               },
     #             ],
@@ -8009,12 +8179,12 @@ module Aws::SSM
     #   resp.name #=> String
     #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.global_filters.patch_filters #=> Array
-    #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
+    #   resp.global_filters.patch_filters[0].key #=> String, one of "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
     #   resp.global_filters.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters #=> Array
-    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
@@ -8100,7 +8270,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

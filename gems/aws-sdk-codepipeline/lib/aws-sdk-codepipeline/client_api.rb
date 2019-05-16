@@ -80,6 +80,7 @@ module Aws::CodePipeline
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Code = Shapes::StringShape.new(name: 'Code')
+    ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ContinuationToken = Shapes::StringShape.new(name: 'ContinuationToken')
     CreateCustomActionTypeInput = Shapes::StructureShape.new(name: 'CreateCustomActionTypeInput')
     CreateCustomActionTypeOutput = Shapes::StructureShape.new(name: 'CreateCustomActionTypeOutput')
@@ -122,6 +123,7 @@ module Aws::CodePipeline
     InputArtifactList = Shapes::ListShape.new(name: 'InputArtifactList')
     InvalidActionDeclarationException = Shapes::StructureShape.new(name: 'InvalidActionDeclarationException')
     InvalidApprovalTokenException = Shapes::StructureShape.new(name: 'InvalidApprovalTokenException')
+    InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
     InvalidBlockerDeclarationException = Shapes::StructureShape.new(name: 'InvalidBlockerDeclarationException')
     InvalidClientTokenException = Shapes::StructureShape.new(name: 'InvalidClientTokenException')
     InvalidJobException = Shapes::StructureShape.new(name: 'InvalidJobException')
@@ -130,6 +132,7 @@ module Aws::CodePipeline
     InvalidNonceException = Shapes::StructureShape.new(name: 'InvalidNonceException')
     InvalidStageDeclarationException = Shapes::StructureShape.new(name: 'InvalidStageDeclarationException')
     InvalidStructureException = Shapes::StructureShape.new(name: 'InvalidStructureException')
+    InvalidTagsException = Shapes::StructureShape.new(name: 'InvalidTagsException')
     InvalidWebhookAuthenticationParametersException = Shapes::StructureShape.new(name: 'InvalidWebhookAuthenticationParametersException')
     InvalidWebhookFilterPatternException = Shapes::StructureShape.new(name: 'InvalidWebhookFilterPatternException')
     Job = Shapes::StructureShape.new(name: 'Job')
@@ -152,6 +155,8 @@ module Aws::CodePipeline
     ListPipelineExecutionsOutput = Shapes::StructureShape.new(name: 'ListPipelineExecutionsOutput')
     ListPipelinesInput = Shapes::StructureShape.new(name: 'ListPipelinesInput')
     ListPipelinesOutput = Shapes::StructureShape.new(name: 'ListPipelinesOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListWebhookItem = Shapes::StructureShape.new(name: 'ListWebhookItem')
     ListWebhooksInput = Shapes::StructureShape.new(name: 'ListWebhooksInput')
     ListWebhooksOutput = Shapes::StructureShape.new(name: 'ListWebhooksOutput')
@@ -202,6 +207,8 @@ module Aws::CodePipeline
     QueryParamMap = Shapes::MapShape.new(name: 'QueryParamMap')
     RegisterWebhookWithThirdPartyInput = Shapes::StructureShape.new(name: 'RegisterWebhookWithThirdPartyInput')
     RegisterWebhookWithThirdPartyOutput = Shapes::StructureShape.new(name: 'RegisterWebhookWithThirdPartyOutput')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryStageExecutionInput = Shapes::StructureShape.new(name: 'RetryStageExecutionInput')
     RetryStageExecutionOutput = Shapes::StructureShape.new(name: 'RetryStageExecutionOutput')
     Revision = Shapes::StringShape.new(name: 'Revision')
@@ -233,6 +240,13 @@ module Aws::CodePipeline
     StageTransitionType = Shapes::StringShape.new(name: 'StageTransitionType')
     StartPipelineExecutionInput = Shapes::StructureShape.new(name: 'StartPipelineExecutionInput')
     StartPipelineExecutionOutput = Shapes::StructureShape.new(name: 'StartPipelineExecutionOutput')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThirdPartyJob = Shapes::StructureShape.new(name: 'ThirdPartyJob')
     ThirdPartyJobData = Shapes::StructureShape.new(name: 'ThirdPartyJobData')
     ThirdPartyJobDetails = Shapes::StructureShape.new(name: 'ThirdPartyJobDetails')
@@ -240,7 +254,10 @@ module Aws::CodePipeline
     ThirdPartyJobList = Shapes::ListShape.new(name: 'ThirdPartyJobList')
     Time = Shapes::TimestampShape.new(name: 'Time')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TransitionState = Shapes::StructureShape.new(name: 'TransitionState')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdatePipelineInput = Shapes::StructureShape.new(name: 'UpdatePipelineInput')
     UpdatePipelineOutput = Shapes::StructureShape.new(name: 'UpdatePipelineOutput')
     Url = Shapes::StringShape.new(name: 'Url')
@@ -301,6 +318,7 @@ module Aws::CodePipeline
     ActionConfigurationPropertyList.member = Shapes::ShapeRef.new(shape: ActionConfigurationProperty)
 
     ActionContext.add_member(:name, Shapes::ShapeRef.new(shape: ActionName, location_name: "name"))
+    ActionContext.add_member(:action_execution_id, Shapes::ShapeRef.new(shape: ActionExecutionId, location_name: "actionExecutionId"))
     ActionContext.struct_class = Types::ActionContext
 
     ActionDeclaration.add_member(:name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "name"))
@@ -446,15 +464,19 @@ module Aws::CodePipeline
     CreateCustomActionTypeInput.add_member(:configuration_properties, Shapes::ShapeRef.new(shape: ActionConfigurationPropertyList, location_name: "configurationProperties"))
     CreateCustomActionTypeInput.add_member(:input_artifact_details, Shapes::ShapeRef.new(shape: ArtifactDetails, required: true, location_name: "inputArtifactDetails"))
     CreateCustomActionTypeInput.add_member(:output_artifact_details, Shapes::ShapeRef.new(shape: ArtifactDetails, required: true, location_name: "outputArtifactDetails"))
+    CreateCustomActionTypeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateCustomActionTypeInput.struct_class = Types::CreateCustomActionTypeInput
 
     CreateCustomActionTypeOutput.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "actionType"))
+    CreateCustomActionTypeOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateCustomActionTypeOutput.struct_class = Types::CreateCustomActionTypeOutput
 
     CreatePipelineInput.add_member(:pipeline, Shapes::ShapeRef.new(shape: PipelineDeclaration, required: true, location_name: "pipeline"))
+    CreatePipelineInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreatePipelineInput.struct_class = Types::CreatePipelineInput
 
     CreatePipelineOutput.add_member(:pipeline, Shapes::ShapeRef.new(shape: PipelineDeclaration, location_name: "pipeline"))
+    CreatePipelineOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreatePipelineOutput.struct_class = Types::CreatePipelineOutput
 
     CurrentRevision.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "revision"))
@@ -610,12 +632,22 @@ module Aws::CodePipeline
     ListPipelinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPipelinesOutput.struct_class = Types::ListPipelinesOutput
 
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    ListTagsForResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTagsForResourceInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     ListWebhookItem.add_member(:definition, Shapes::ShapeRef.new(shape: WebhookDefinition, required: true, location_name: "definition"))
     ListWebhookItem.add_member(:url, Shapes::ShapeRef.new(shape: WebhookUrl, required: true, location_name: "url"))
     ListWebhookItem.add_member(:error_message, Shapes::ShapeRef.new(shape: WebhookErrorMessage, location_name: "errorMessage"))
     ListWebhookItem.add_member(:error_code, Shapes::ShapeRef.new(shape: WebhookErrorCode, location_name: "errorCode"))
     ListWebhookItem.add_member(:last_triggered, Shapes::ShapeRef.new(shape: WebhookLastTriggered, location_name: "lastTriggered"))
     ListWebhookItem.add_member(:arn, Shapes::ShapeRef.new(shape: WebhookArn, location_name: "arn"))
+    ListWebhookItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ListWebhookItem.struct_class = Types::ListWebhookItem
 
     ListWebhooksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -634,6 +666,8 @@ module Aws::CodePipeline
     PipelineContext.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "pipelineName"))
     PipelineContext.add_member(:stage, Shapes::ShapeRef.new(shape: StageContext, location_name: "stage"))
     PipelineContext.add_member(:action, Shapes::ShapeRef.new(shape: ActionContext, location_name: "action"))
+    PipelineContext.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "pipelineArn"))
+    PipelineContext.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
     PipelineContext.struct_class = Types::PipelineContext
 
     PipelineDeclaration.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "name"))
@@ -733,6 +767,7 @@ module Aws::CodePipeline
     PutThirdPartyJobSuccessResultInput.struct_class = Types::PutThirdPartyJobSuccessResultInput
 
     PutWebhookInput.add_member(:webhook, Shapes::ShapeRef.new(shape: WebhookDefinition, required: true, location_name: "webhook"))
+    PutWebhookInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     PutWebhookInput.struct_class = Types::PutWebhookInput
 
     PutWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: ListWebhookItem, location_name: "webhook"))
@@ -802,6 +837,20 @@ module Aws::CodePipeline
     StartPipelineExecutionOutput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
     StartPipelineExecutionOutput.struct_class = Types::StartPipelineExecutionOutput
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
     ThirdPartyJob.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId"))
     ThirdPartyJob.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     ThirdPartyJob.struct_class = Types::ThirdPartyJob
@@ -828,6 +877,12 @@ module Aws::CodePipeline
     TransitionState.add_member(:last_changed_at, Shapes::ShapeRef.new(shape: LastChangedAt, location_name: "lastChangedAt"))
     TransitionState.add_member(:disabled_reason, Shapes::ShapeRef.new(shape: DisabledReason, location_name: "disabledReason"))
     TransitionState.struct_class = Types::TransitionState
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdatePipelineInput.add_member(:pipeline, Shapes::ShapeRef.new(shape: PipelineDeclaration, required: true, location_name: "pipeline"))
     UpdatePipelineInput.struct_class = Types::UpdatePipelineInput
@@ -905,6 +960,9 @@ module Aws::CodePipeline
         o.output = Shapes::ShapeRef.new(shape: CreateCustomActionTypeOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -920,6 +978,9 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: InvalidBlockerDeclarationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStructureException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_custom_action_type, Seahorse::Model::Operation.new.tap do |o|
@@ -929,6 +990,7 @@ module Aws::CodePipeline
         o.input = Shapes::ShapeRef.new(shape: DeleteCustomActionTypeInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -938,6 +1000,7 @@ module Aws::CodePipeline
         o.input = Shapes::ShapeRef.new(shape: DeletePipelineInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_webhook, Seahorse::Model::Operation.new.tap do |o|
@@ -947,6 +1010,7 @@ module Aws::CodePipeline
         o.input = Shapes::ShapeRef.new(shape: DeleteWebhookInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteWebhookOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:deregister_webhook_with_third_party, Seahorse::Model::Operation.new.tap do |o|
@@ -1045,6 +1109,12 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineExecutionNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_action_types, Seahorse::Model::Operation.new.tap do |o|
@@ -1055,6 +1125,11 @@ module Aws::CodePipeline
         o.output = Shapes::ShapeRef.new(shape: ListActionTypesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_pipeline_executions, Seahorse::Model::Operation.new.tap do |o|
@@ -1066,6 +1141,12 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_pipelines, Seahorse::Model::Operation.new.tap do |o|
@@ -1076,6 +1157,29 @@ module Aws::CodePipeline
         o.output = Shapes::ShapeRef.new(shape: ListPipelinesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_webhooks, Seahorse::Model::Operation.new.tap do |o|
@@ -1086,6 +1190,12 @@ module Aws::CodePipeline
         o.output = Shapes::ShapeRef.new(shape: ListWebhooksOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:poll_for_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -1191,6 +1301,9 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: InvalidWebhookFilterPatternException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidWebhookAuthenticationParametersException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:register_webhook_with_third_party, Seahorse::Model::Operation.new.tap do |o|
@@ -1224,6 +1337,33 @@ module Aws::CodePipeline
         o.output = Shapes::ShapeRef.new(shape: StartPipelineExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_pipeline, Seahorse::Model::Operation.new.tap do |o|

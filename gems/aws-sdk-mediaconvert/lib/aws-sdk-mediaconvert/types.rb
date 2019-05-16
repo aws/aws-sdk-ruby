@@ -182,8 +182,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Accelerated transcoding is currently in private preview. Contact AWS
-    # for more information.
+    # Accelerated transcoding can significantly speed up jobs with long,
+    # visually complex content. Outputs that use this feature incur pro-tier
+    # pricing. For information about feature limitations, see the AWS
+    # Elemental MediaConvert User Guide.
     #
     # @note When making an API call, you may pass AccelerationSettings
     #   data as a hash:
@@ -2186,6 +2188,7 @@ module Aws::MediaConvert
     #                     },
     #                   },
     #                   encryption: {
+    #                     playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                       resource_id: "__string",
@@ -2804,8 +2807,10 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] acceleration_settings
-    #   This is a beta feature. If you are interested in using this feature,
-    #   please contact AWS customer support.
+    #   Accelerated transcoding can significantly speed up jobs with long,
+    #   visually complex content. Outputs that use this feature incur
+    #   pro-tier pricing. For information about feature limitations, see the
+    #   AWS Elemental MediaConvert User Guide.
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] billing_tags_source
@@ -3103,6 +3108,7 @@ module Aws::MediaConvert
     #                     },
     #                   },
     #                   encryption: {
+    #                     playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                       resource_id: "__string",
@@ -3721,8 +3727,10 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] acceleration_settings
-    #   This is a beta feature. If you are interested in using this feature
-    #   please contact AWS customer support.
+    #   Accelerated transcoding can significantly speed up jobs with long,
+    #   visually complex content. Outputs that use this feature incur
+    #   pro-tier pricing. For information about feature limitations, see the
+    #   AWS Elemental MediaConvert User Guide.
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] category
@@ -4409,6 +4417,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #         speke_key_provider: {
     #           certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #           resource_id: "__string",
@@ -4417,6 +4426,16 @@ module Aws::MediaConvert
     #         },
     #       }
     #
+    # @!attribute [rw] playback_device_compatibility
+    #   This setting can improve the compatibility of your output with video
+    #   players on obsolete devices. It applies only to DASH H.264 outputs
+    #   with DRM encryption. Choose Unencrypted SEI (UNENCRYPTED\_SEI) only
+    #   to correct problems with playback on older devices. Otherwise, keep
+    #   the default setting CENC v1 (CENC\_V1). If you choose Unencrypted
+    #   SEI, for that output, the service will exclude the access unit
+    #   delimiter and will leave the SEI NAL units unencrypted.
+    #   @return [String]
+    #
     # @!attribute [rw] speke_key_provider
     #   Settings for use with a SPEKE key provider
     #   @return [Types::SpekeKeyProvider]
@@ -4424,6 +4443,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoEncryptionSettings AWS API Documentation
     #
     class DashIsoEncryptionSettings < Struct.new(
+      :playback_device_compatibility,
       :speke_key_provider)
       include Aws::Structure
     end
@@ -4446,6 +4466,7 @@ module Aws::MediaConvert
     #           },
     #         },
     #         encryption: {
+    #           playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #           speke_key_provider: {
     #             certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #             resource_id: "__string",
@@ -7830,8 +7851,8 @@ module Aws::MediaConvert
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
     # @!attribute [rw] acceleration_settings
-    #   Accelerated transcoding is currently in private preview. Contact AWS
-    #   for more information.
+    #   Accelerated transcoding can significantly speed up jobs with long,
+    #   visually complex content.
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] arn
@@ -8173,6 +8194,7 @@ module Aws::MediaConvert
     #                   },
     #                 },
     #                 encryption: {
+    #                   playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                     resource_id: "__string",
@@ -9137,6 +9159,7 @@ module Aws::MediaConvert
     #                   },
     #                 },
     #                 encryption: {
+    #                   playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                     resource_id: "__string",
@@ -12083,6 +12106,7 @@ module Aws::MediaConvert
     #               },
     #             },
     #             encryption: {
+    #               playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #               speke_key_provider: {
     #                 certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                 resource_id: "__string",
@@ -12778,6 +12802,7 @@ module Aws::MediaConvert
     #             },
     #           },
     #           encryption: {
+    #             playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #             speke_key_provider: {
     #               certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #               resource_id: "__string",
@@ -14657,6 +14682,7 @@ module Aws::MediaConvert
     #                     },
     #                   },
     #                   encryption: {
+    #                     playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                       resource_id: "__string",
@@ -15272,8 +15298,10 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] acceleration_settings
-    #   This is a beta feature. If you are interested in using this feature,
-    #   please contact AWS customer support.
+    #   Accelerated transcoding can significantly speed up jobs with long,
+    #   visually complex content. Outputs that use this feature incur
+    #   pro-tier pricing. For information about feature limitations, see the
+    #   AWS Elemental MediaConvert User Guide.
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] category
@@ -16371,9 +16399,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] anti_alias
-    #   The anti-alias filter is automatically applied to all outputs. The
-    #   service no longer accepts the value DISABLED for AntiAlias. If you
-    #   specify that in your job, the service will ignore the setting.
+    #   The service automatically applies the anti-alias filter to all
+    #   outputs. The service no longer accepts the value DISABLED for
+    #   AntiAlias. If you specify that in your job, the service will ignore
+    #   the setting.
     #   @return [String]
     #
     # @!attribute [rw] codec_settings

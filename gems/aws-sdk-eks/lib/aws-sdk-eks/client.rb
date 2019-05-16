@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::EKS
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -251,10 +253,10 @@ module Aws::EKS
     # Creates an Amazon EKS control plane.
     #
     # The Amazon EKS control plane consists of control plane instances that
-    # run the Kubernetes software, like `etcd` and the API server. The
+    # run the Kubernetes software, such as `etcd` and the API server. The
     # control plane runs in an account managed by AWS, and the Kubernetes
     # API is exposed via the Amazon EKS API server endpoint. Each Amazon EKS
-    # cluster control plane is single-tenant and unique, and runs on its own
+    # cluster control plane is single-tenant and unique and runs on its own
     # set of Amazon EC2 instances.
     #
     # The cluster control plane is provisioned across multiple Availability
@@ -271,13 +273,13 @@ module Aws::EKS
     # You can use the `endpointPublicAccess` and `endpointPrivateAccess`
     # parameters to enable or disable public and private access to your
     # cluster's Kubernetes API server endpoint. By default, public access
-    # is enabled and private access is disabled. For more information, see
+    # is enabled, and private access is disabled. For more information, see
     # [Amazon EKS Cluster Endpoint Access Control][1] in the <i> <i>Amazon
     # EKS User Guide</i> </i>.
     #
     # You can use the `logging` parameter to enable or disable exporting the
     # Kubernetes control plane logs for your cluster to CloudWatch Logs. By
-    # default, cluster control plane logs are not exported to CloudWatch
+    # default, cluster control plane logs aren't exported to CloudWatch
     # Logs. For more information, see [Amazon EKS Cluster Control Plane
     # Logs][2] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
@@ -306,7 +308,7 @@ module Aws::EKS
     #   The unique name to give to your cluster.
     #
     # @option params [String] :version
-    #   The desired Kubernetes version for your cluster. If you do not specify
+    #   The desired Kubernetes version for your cluster. If you don't specify
     #   a value here, the latest version available in Amazon EKS is used.
     #
     # @option params [required, String] :role_arn
@@ -324,7 +326,7 @@ module Aws::EKS
     #   VPC resources have specific requirements to work properly with
     #   Kubernetes. For more information, see [Cluster VPC Considerations][1]
     #   and [Cluster Security Group Considerations][2] in the *Amazon EKS User
-    #   Guide*. You must specify at least two subnets. You may specify up to
+    #   Guide*. You must specify at least two subnets. You can specify up to
     #   five security groups, but we recommend that you use a dedicated
     #   security group for your cluster control plane.
     #
@@ -335,10 +337,10 @@ module Aws::EKS
     #
     # @option params [Types::Logging] :logging
     #   Enable or disable exporting the Kubernetes control plane logs for your
-    #   cluster to CloudWatch Logs. By default, cluster control plane logs are
-    #   not exported to CloudWatch Logs. For more information, see [Amazon EKS
-    #   Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User Guide</i>
-    #   </i>.
+    #   cluster to CloudWatch Logs. By default, cluster control plane logs
+    #   aren't exported to CloudWatch Logs. For more information, see [Amazon
+    #   EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User
+    #   Guide</i> </i>.
     #
     #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     #   apply to exported control plane logs. For more information, see
@@ -524,7 +526,7 @@ module Aws::EKS
     # with your Kubernetes API server. For more information, see [Create a
     # kubeconfig for Amazon EKS][1].
     #
-    # <note markdown="1"> The API server endpoint and certificate authority data are not
+    # <note markdown="1"> The API server endpoint and certificate authority data aren't
     # available until the cluster reaches the `ACTIVE` state.
     #
     #  </note>
@@ -667,13 +669,13 @@ module Aws::EKS
     #
     # @option params [Integer] :max_results
     #   The maximum number of cluster results returned by `ListClusters` in
-    #   paginated output. When this parameter is used, `ListClusters` only
-    #   returns `maxResults` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListClusters` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListClusters` returns up to 100 results
-    #   and a `nextToken` value if applicable.
+    #   paginated output. When you use this parameter, `ListClusters` returns
+    #   only `maxResults` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListClusters` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you don't
+    #   use this parameter, `ListClusters` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -681,7 +683,7 @@ module Aws::EKS
     #   exceeded the value of that parameter. Pagination continues from the
     #   end of the previous results that returned the `nextToken` value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -734,7 +736,7 @@ module Aws::EKS
     # account, in the specified Region.
     #
     # @option params [required, String] :name
-    #   The name of the Amazon EKS cluster for which to list updates.
+    #   The name of the Amazon EKS cluster to list updates for.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated `ListUpdates`
@@ -744,13 +746,13 @@ module Aws::EKS
     #
     # @option params [Integer] :max_results
     #   The maximum number of update results returned by `ListUpdates` in
-    #   paginated output. When this parameter is used, `ListUpdates` only
-    #   returns `maxResults` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListUpdates` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListUpdates` returns up to 100 results
-    #   and a `nextToken` value if applicable.
+    #   paginated output. When you use this parameter, `ListUpdates` returns
+    #   only `maxResults` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListUpdates` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you don't
+    #   use this parameter, `ListUpdates` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #
     # @return [Types::ListUpdatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -785,23 +787,26 @@ module Aws::EKS
     # that you can use to track the status of your cluster update with the
     # DescribeUpdate API operation.
     #
-    # You can use this API operation to enable or disable public and private
-    # access to your cluster's Kubernetes API server endpoint. By default,
-    # public access is enabled and private access is disabled. For more
-    # information, see [Amazon EKS Cluster Endpoint Access Control][1] in
-    # the <i> <i>Amazon EKS User Guide</i> </i>.
-    #
-    # You can also use this API operation to enable or disable exporting the
+    # You can use this API operation to enable or disable exporting the
     # Kubernetes control plane logs for your cluster to CloudWatch Logs. By
-    # default, cluster control plane logs are not exported to CloudWatch
+    # default, cluster control plane logs aren't exported to CloudWatch
     # Logs. For more information, see [Amazon EKS Cluster Control Plane
-    # Logs][2] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    # Logs][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     # <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     # apply to exported control plane logs. For more information, see
-    # [Amazon CloudWatch Pricing][3].
+    # [Amazon CloudWatch Pricing][2].
     #
     #  </note>
+    #
+    # You can also use this API operation to enable or disable public and
+    # private access to your cluster's Kubernetes API server endpoint. By
+    # default, public access is enabled, and private access is disabled. For
+    # more information, see [Amazon EKS Cluster Endpoint Access Control][3]
+    # in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    # At this time, you can not update the subnets or security group IDs for
+    # an existing cluster.
     #
     # Cluster updates are asynchronous, and they should finish within a few
     # minutes. During an update, the cluster status moves to `UPDATING`
@@ -811,9 +816,9 @@ module Aws::EKS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
-    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
-    # [3]: http://aws.amazon.com/cloudwatch/pricing/
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    # [2]: http://aws.amazon.com/cloudwatch/pricing/
+    # [3]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
     #
     # @option params [required, String] :name
     #   The name of the Amazon EKS cluster to update.
@@ -824,10 +829,10 @@ module Aws::EKS
     #
     # @option params [Types::Logging] :logging
     #   Enable or disable exporting the Kubernetes control plane logs for your
-    #   cluster to CloudWatch Logs. By default, cluster control plane logs are
-    #   not exported to CloudWatch Logs. For more information, see [Amazon EKS
-    #   Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User Guide</i>
-    #   </i>.
+    #   cluster to CloudWatch Logs. By default, cluster control plane logs
+    #   aren't exported to CloudWatch Logs. For more information, see [Amazon
+    #   EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User
+    #   Guide</i> </i>.
     #
     #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     #   apply to exported control plane logs. For more information, see
@@ -969,7 +974,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

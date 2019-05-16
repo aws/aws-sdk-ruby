@@ -1520,6 +1520,42 @@ module Aws::CognitoIdentityProvider
     #
     class AdminSetUserMFAPreferenceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AdminSetUserPasswordRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         username: "UsernameType", # required
+    #         password: "PasswordType", # required
+    #         permanent: false,
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   @return [String]
+    #
+    # @!attribute [rw] permanent
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserPasswordRequest AWS API Documentation
+    #
+    class AdminSetUserPasswordRequest < Struct.new(
+      :user_pool_id,
+      :username,
+      :password,
+      :permanent)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserPasswordResponse AWS API Documentation
+    #
+    class AdminSetUserPasswordResponse < Aws::EmptyStructure; end
+
     # Represents the request to set user settings as an administrator.
     #
     # @note When making an API call, you may pass AdminSetUserSettingsRequest
@@ -2838,6 +2874,7 @@ module Aws::CognitoIdentityProvider
     #             require_lowercase: false,
     #             require_numbers: false,
     #             require_symbols: false,
+    #             temporary_password_validity_days: 1,
     #           },
     #         },
     #         lambda_config: {
@@ -5467,6 +5504,7 @@ module Aws::CognitoIdentityProvider
     #         require_lowercase: false,
     #         require_numbers: false,
     #         require_symbols: false,
+    #         temporary_password_validity_days: 1,
     #       }
     #
     # @!attribute [rw] minimum_length
@@ -5496,6 +5534,9 @@ module Aws::CognitoIdentityProvider
     #   required users to use at least one symbol in their password.
     #   @return [Boolean]
     #
+    # @!attribute [rw] temporary_password_validity_days
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/PasswordPolicyType AWS API Documentation
     #
     class PasswordPolicyType < Struct.new(
@@ -5503,7 +5544,8 @@ module Aws::CognitoIdentityProvider
       :require_uppercase,
       :require_lowercase,
       :require_numbers,
-      :require_symbols)
+      :require_symbols,
+      :temporary_password_validity_days)
       include Aws::Structure
     end
 
@@ -7233,6 +7275,7 @@ module Aws::CognitoIdentityProvider
     #             require_lowercase: false,
     #             require_numbers: false,
     #             require_symbols: false,
+    #             temporary_password_validity_days: 1,
     #           },
     #         },
     #         lambda_config: {
@@ -7760,6 +7803,7 @@ module Aws::CognitoIdentityProvider
     #           require_lowercase: false,
     #           require_numbers: false,
     #           require_symbols: false,
+    #           temporary_password_validity_days: 1,
     #         },
     #       }
     #

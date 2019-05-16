@@ -5770,7 +5770,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionExpiration AWS API Documentation
@@ -7173,6 +7173,7 @@ module Aws::S3
     #             },
     #           ],
     #         },
+    #         token: "ObjectLockToken",
     #       }
     #
     # @!attribute [rw] bucket
@@ -7186,12 +7187,16 @@ module Aws::S3
     #   The maximum size of a replication configuration is 2 MB.
     #   @return [Types::ReplicationConfiguration]
     #
+    # @!attribute [rw] token
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplicationRequest AWS API Documentation
     #
     class PutBucketReplicationRequest < Struct.new(
       :bucket,
       :content_md5,
-      :replication_configuration)
+      :replication_configuration,
+      :token)
       include Aws::Structure
     end
 

@@ -57,6 +57,8 @@ module Aws::CognitoIdentityProvider
     AdminRespondToAuthChallengeResponse = Shapes::StructureShape.new(name: 'AdminRespondToAuthChallengeResponse')
     AdminSetUserMFAPreferenceRequest = Shapes::StructureShape.new(name: 'AdminSetUserMFAPreferenceRequest')
     AdminSetUserMFAPreferenceResponse = Shapes::StructureShape.new(name: 'AdminSetUserMFAPreferenceResponse')
+    AdminSetUserPasswordRequest = Shapes::StructureShape.new(name: 'AdminSetUserPasswordRequest')
+    AdminSetUserPasswordResponse = Shapes::StructureShape.new(name: 'AdminSetUserPasswordResponse')
     AdminSetUserSettingsRequest = Shapes::StructureShape.new(name: 'AdminSetUserSettingsRequest')
     AdminSetUserSettingsResponse = Shapes::StructureShape.new(name: 'AdminSetUserSettingsResponse')
     AdminUpdateAuthEventFeedbackRequest = Shapes::StructureShape.new(name: 'AdminUpdateAuthEventFeedbackRequest')
@@ -377,6 +379,7 @@ module Aws::CognitoIdentityProvider
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValueType = Shapes::StringShape.new(name: 'TagValueType')
+    TemporaryPasswordValidityDaysType = Shapes::IntegerShape.new(name: 'TemporaryPasswordValidityDaysType')
     TokenModelType = Shapes::StringShape.new(name: 'TokenModelType')
     TooManyFailedAttemptsException = Shapes::StructureShape.new(name: 'TooManyFailedAttemptsException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -637,6 +640,14 @@ module Aws::CognitoIdentityProvider
     AdminSetUserMFAPreferenceRequest.struct_class = Types::AdminSetUserMFAPreferenceRequest
 
     AdminSetUserMFAPreferenceResponse.struct_class = Types::AdminSetUserMFAPreferenceResponse
+
+    AdminSetUserPasswordRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    AdminSetUserPasswordRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
+    AdminSetUserPasswordRequest.add_member(:password, Shapes::ShapeRef.new(shape: PasswordType, required: true, location_name: "Password"))
+    AdminSetUserPasswordRequest.add_member(:permanent, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Permanent"))
+    AdminSetUserPasswordRequest.struct_class = Types::AdminSetUserPasswordRequest
+
+    AdminSetUserPasswordResponse.struct_class = Types::AdminSetUserPasswordResponse
 
     AdminSetUserSettingsRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     AdminSetUserSettingsRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
@@ -1309,6 +1320,7 @@ module Aws::CognitoIdentityProvider
     PasswordPolicyType.add_member(:require_lowercase, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireLowercase"))
     PasswordPolicyType.add_member(:require_numbers, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireNumbers"))
     PasswordPolicyType.add_member(:require_symbols, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireSymbols"))
+    PasswordPolicyType.add_member(:temporary_password_validity_days, Shapes::ShapeRef.new(shape: TemporaryPasswordValidityDaysType, location_name: "TemporaryPasswordValidityDays"))
     PasswordPolicyType.struct_class = Types::PasswordPolicyType
 
     ProviderDescription.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ProviderName"))
@@ -2125,6 +2137,21 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotConfirmedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:admin_set_user_password, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AdminSetUserPassword"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AdminSetUserPasswordRequest)
+        o.output = Shapes::ShapeRef.new(shape: AdminSetUserPasswordResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
       end)
 
       api.add_operation(:admin_set_user_settings, Seahorse::Model::Operation.new.tap do |o|

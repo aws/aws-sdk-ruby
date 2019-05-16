@@ -35,12 +35,16 @@ module Aws::AlexaForBusiness
     AssociateSkillWithSkillGroupResponse = Shapes::StructureShape.new(name: 'AssociateSkillWithSkillGroupResponse')
     AssociateSkillWithUsersRequest = Shapes::StructureShape.new(name: 'AssociateSkillWithUsersRequest')
     AssociateSkillWithUsersResponse = Shapes::StructureShape.new(name: 'AssociateSkillWithUsersResponse')
+    Audio = Shapes::StructureShape.new(name: 'Audio')
+    AudioList = Shapes::ListShape.new(name: 'AudioList')
+    AudioLocation = Shapes::StringShape.new(name: 'AudioLocation')
     AuthorizationResult = Shapes::MapShape.new(name: 'AuthorizationResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BulletPoint = Shapes::StringShape.new(name: 'BulletPoint')
     BulletPoints = Shapes::ListShape.new(name: 'BulletPoints')
     BusinessReport = Shapes::StructureShape.new(name: 'BusinessReport')
     BusinessReportContentRange = Shapes::StructureShape.new(name: 'BusinessReportContentRange')
+    BusinessReportDeliveryTime = Shapes::TimestampShape.new(name: 'BusinessReportDeliveryTime')
     BusinessReportDownloadUrl = Shapes::StringShape.new(name: 'BusinessReportDownloadUrl')
     BusinessReportFailureCode = Shapes::StringShape.new(name: 'BusinessReportFailureCode')
     BusinessReportFormat = Shapes::StringShape.new(name: 'BusinessReportFormat')
@@ -70,6 +74,7 @@ module Aws::AlexaForBusiness
     ContactData = Shapes::StructureShape.new(name: 'ContactData')
     ContactDataList = Shapes::ListShape.new(name: 'ContactDataList')
     ContactName = Shapes::StringShape.new(name: 'ContactName')
+    Content = Shapes::StructureShape.new(name: 'Content')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CreateAddressBookRequest = Shapes::StructureShape.new(name: 'CreateAddressBookRequest')
     CreateAddressBookResponse = Shapes::StructureShape.new(name: 'CreateAddressBookResponse')
@@ -79,6 +84,8 @@ module Aws::AlexaForBusiness
     CreateConferenceProviderResponse = Shapes::StructureShape.new(name: 'CreateConferenceProviderResponse')
     CreateContactRequest = Shapes::StructureShape.new(name: 'CreateContactRequest')
     CreateContactResponse = Shapes::StructureShape.new(name: 'CreateContactResponse')
+    CreateGatewayGroupRequest = Shapes::StructureShape.new(name: 'CreateGatewayGroupRequest')
+    CreateGatewayGroupResponse = Shapes::StructureShape.new(name: 'CreateGatewayGroupResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
     CreateProfileResponse = Shapes::StructureShape.new(name: 'CreateProfileResponse')
     CreateRoomRequest = Shapes::StructureShape.new(name: 'CreateRoomRequest')
@@ -99,6 +106,10 @@ module Aws::AlexaForBusiness
     DeleteContactResponse = Shapes::StructureShape.new(name: 'DeleteContactResponse')
     DeleteDeviceRequest = Shapes::StructureShape.new(name: 'DeleteDeviceRequest')
     DeleteDeviceResponse = Shapes::StructureShape.new(name: 'DeleteDeviceResponse')
+    DeleteDeviceUsageDataRequest = Shapes::StructureShape.new(name: 'DeleteDeviceUsageDataRequest')
+    DeleteDeviceUsageDataResponse = Shapes::StructureShape.new(name: 'DeleteDeviceUsageDataResponse')
+    DeleteGatewayGroupRequest = Shapes::StructureShape.new(name: 'DeleteGatewayGroupRequest')
+    DeleteGatewayGroupResponse = Shapes::StructureShape.new(name: 'DeleteGatewayGroupResponse')
     DeleteProfileRequest = Shapes::StructureShape.new(name: 'DeleteProfileRequest')
     DeleteProfileResponse = Shapes::StructureShape.new(name: 'DeleteProfileResponse')
     DeleteRoomRequest = Shapes::StructureShape.new(name: 'DeleteRoomRequest')
@@ -118,6 +129,7 @@ module Aws::AlexaForBusiness
     DeviceDataList = Shapes::ListShape.new(name: 'DeviceDataList')
     DeviceEvent = Shapes::StructureShape.new(name: 'DeviceEvent')
     DeviceEventList = Shapes::ListShape.new(name: 'DeviceEventList')
+    DeviceEventTime = Shapes::TimestampShape.new(name: 'DeviceEventTime')
     DeviceEventType = Shapes::StringShape.new(name: 'DeviceEventType')
     DeviceEventValue = Shapes::StringShape.new(name: 'DeviceEventValue')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
@@ -130,6 +142,7 @@ module Aws::AlexaForBusiness
     DeviceStatusDetails = Shapes::ListShape.new(name: 'DeviceStatusDetails')
     DeviceStatusInfo = Shapes::StructureShape.new(name: 'DeviceStatusInfo')
     DeviceType = Shapes::StringShape.new(name: 'DeviceType')
+    DeviceUsageType = Shapes::StringShape.new(name: 'DeviceUsageType')
     DisassociateContactFromAddressBookRequest = Shapes::StructureShape.new(name: 'DisassociateContactFromAddressBookRequest')
     DisassociateContactFromAddressBookResponse = Shapes::StructureShape.new(name: 'DisassociateContactFromAddressBookResponse')
     DisassociateDeviceFromRoomRequest = Shapes::StructureShape.new(name: 'DisassociateDeviceFromRoomRequest')
@@ -159,6 +172,17 @@ module Aws::AlexaForBusiness
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     ForgetSmartHomeAppliancesRequest = Shapes::StructureShape.new(name: 'ForgetSmartHomeAppliancesRequest')
     ForgetSmartHomeAppliancesResponse = Shapes::StructureShape.new(name: 'ForgetSmartHomeAppliancesResponse')
+    Gateway = Shapes::StructureShape.new(name: 'Gateway')
+    GatewayDescription = Shapes::StringShape.new(name: 'GatewayDescription')
+    GatewayGroup = Shapes::StructureShape.new(name: 'GatewayGroup')
+    GatewayGroupDescription = Shapes::StringShape.new(name: 'GatewayGroupDescription')
+    GatewayGroupName = Shapes::StringShape.new(name: 'GatewayGroupName')
+    GatewayGroupSummaries = Shapes::ListShape.new(name: 'GatewayGroupSummaries')
+    GatewayGroupSummary = Shapes::StructureShape.new(name: 'GatewayGroupSummary')
+    GatewayName = Shapes::StringShape.new(name: 'GatewayName')
+    GatewaySummaries = Shapes::ListShape.new(name: 'GatewaySummaries')
+    GatewaySummary = Shapes::StructureShape.new(name: 'GatewaySummary')
+    GatewayVersion = Shapes::StringShape.new(name: 'GatewayVersion')
     GenericKeyword = Shapes::StringShape.new(name: 'GenericKeyword')
     GenericKeywords = Shapes::ListShape.new(name: 'GenericKeywords')
     GetAddressBookRequest = Shapes::StructureShape.new(name: 'GetAddressBookRequest')
@@ -171,6 +195,10 @@ module Aws::AlexaForBusiness
     GetContactResponse = Shapes::StructureShape.new(name: 'GetContactResponse')
     GetDeviceRequest = Shapes::StructureShape.new(name: 'GetDeviceRequest')
     GetDeviceResponse = Shapes::StructureShape.new(name: 'GetDeviceResponse')
+    GetGatewayGroupRequest = Shapes::StructureShape.new(name: 'GetGatewayGroupRequest')
+    GetGatewayGroupResponse = Shapes::StructureShape.new(name: 'GetGatewayGroupResponse')
+    GetGatewayRequest = Shapes::StructureShape.new(name: 'GetGatewayRequest')
+    GetGatewayResponse = Shapes::StructureShape.new(name: 'GetGatewayResponse')
     GetInvitationConfigurationRequest = Shapes::StructureShape.new(name: 'GetInvitationConfigurationRequest')
     GetInvitationConfigurationResponse = Shapes::StructureShape.new(name: 'GetInvitationConfigurationResponse')
     GetProfileRequest = Shapes::StructureShape.new(name: 'GetProfileRequest')
@@ -195,6 +223,10 @@ module Aws::AlexaForBusiness
     ListConferenceProvidersResponse = Shapes::StructureShape.new(name: 'ListConferenceProvidersResponse')
     ListDeviceEventsRequest = Shapes::StructureShape.new(name: 'ListDeviceEventsRequest')
     ListDeviceEventsResponse = Shapes::StructureShape.new(name: 'ListDeviceEventsResponse')
+    ListGatewayGroupsRequest = Shapes::StructureShape.new(name: 'ListGatewayGroupsRequest')
+    ListGatewayGroupsResponse = Shapes::StructureShape.new(name: 'ListGatewayGroupsResponse')
+    ListGatewaysRequest = Shapes::StructureShape.new(name: 'ListGatewaysRequest')
+    ListGatewaysResponse = Shapes::StructureShape.new(name: 'ListGatewaysResponse')
     ListSkillsRequest = Shapes::StructureShape.new(name: 'ListSkillsRequest')
     ListSkillsResponse = Shapes::StructureShape.new(name: 'ListSkillsResponse')
     ListSkillsStoreCategoriesRequest = Shapes::StructureShape.new(name: 'ListSkillsStoreCategoriesRequest')
@@ -205,6 +237,7 @@ module Aws::AlexaForBusiness
     ListSmartHomeAppliancesResponse = Shapes::StructureShape.new(name: 'ListSmartHomeAppliancesResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
+    Locale = Shapes::StringShape.new(name: 'Locale')
     MacAddress = Shapes::StringShape.new(name: 'MacAddress')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxVolumeLimit = Shapes::IntegerShape.new(name: 'MaxVolumeLimit')
@@ -242,6 +275,7 @@ module Aws::AlexaForBusiness
     RequirePin = Shapes::StringShape.new(name: 'RequirePin')
     ResolveRoomRequest = Shapes::StructureShape.new(name: 'ResolveRoomRequest')
     ResolveRoomResponse = Shapes::StructureShape.new(name: 'ResolveRoomResponse')
+    ResourceAssociatedException = Shapes::StructureShape.new(name: 'ResourceAssociatedException')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ReviewKey = Shapes::StringShape.new(name: 'ReviewKey')
     ReviewValue = Shapes::StringShape.new(name: 'ReviewValue')
@@ -273,6 +307,8 @@ module Aws::AlexaForBusiness
     SearchSkillGroupsResponse = Shapes::StructureShape.new(name: 'SearchSkillGroupsResponse')
     SearchUsersRequest = Shapes::StructureShape.new(name: 'SearchUsersRequest')
     SearchUsersResponse = Shapes::StructureShape.new(name: 'SearchUsersResponse')
+    SendAnnouncementRequest = Shapes::StructureShape.new(name: 'SendAnnouncementRequest')
+    SendAnnouncementResponse = Shapes::StructureShape.new(name: 'SendAnnouncementResponse')
     SendInvitationRequest = Shapes::StructureShape.new(name: 'SendInvitationRequest')
     SendInvitationResponse = Shapes::StructureShape.new(name: 'SendInvitationResponse')
     ShortDescription = Shapes::StringShape.new(name: 'ShortDescription')
@@ -302,6 +338,9 @@ module Aws::AlexaForBusiness
     SortKey = Shapes::StringShape.new(name: 'SortKey')
     SortList = Shapes::ListShape.new(name: 'SortList')
     SortValue = Shapes::StringShape.new(name: 'SortValue')
+    Ssml = Shapes::StructureShape.new(name: 'Ssml')
+    SsmlList = Shapes::ListShape.new(name: 'SsmlList')
+    SsmlValue = Shapes::StringShape.new(name: 'SsmlValue')
     StartDeviceSyncRequest = Shapes::StructureShape.new(name: 'StartDeviceSyncRequest')
     StartDeviceSyncResponse = Shapes::StructureShape.new(name: 'StartDeviceSyncResponse')
     StartSmartHomeApplianceDiscoveryRequest = Shapes::StructureShape.new(name: 'StartSmartHomeApplianceDiscoveryRequest')
@@ -314,7 +353,10 @@ module Aws::AlexaForBusiness
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TemperatureUnit = Shapes::StringShape.new(name: 'TemperatureUnit')
-    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Text = Shapes::StructureShape.new(name: 'Text')
+    TextList = Shapes::ListShape.new(name: 'TextList')
+    TextValue = Shapes::StringShape.new(name: 'TextValue')
+    TimeToLiveInSeconds = Shapes::IntegerShape.new(name: 'TimeToLiveInSeconds')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
@@ -330,6 +372,10 @@ module Aws::AlexaForBusiness
     UpdateContactResponse = Shapes::StructureShape.new(name: 'UpdateContactResponse')
     UpdateDeviceRequest = Shapes::StructureShape.new(name: 'UpdateDeviceRequest')
     UpdateDeviceResponse = Shapes::StructureShape.new(name: 'UpdateDeviceResponse')
+    UpdateGatewayGroupRequest = Shapes::StructureShape.new(name: 'UpdateGatewayGroupRequest')
+    UpdateGatewayGroupResponse = Shapes::StructureShape.new(name: 'UpdateGatewayGroupResponse')
+    UpdateGatewayRequest = Shapes::StructureShape.new(name: 'UpdateGatewayRequest')
+    UpdateGatewayResponse = Shapes::StructureShape.new(name: 'UpdateGatewayResponse')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
     UpdateProfileResponse = Shapes::StructureShape.new(name: 'UpdateProfileResponse')
     UpdateRoomRequest = Shapes::StructureShape.new(name: 'UpdateRoomRequest')
@@ -395,6 +441,12 @@ module Aws::AlexaForBusiness
 
     AssociateSkillWithUsersResponse.struct_class = Types::AssociateSkillWithUsersResponse
 
+    Audio.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "Locale"))
+    Audio.add_member(:location, Shapes::ShapeRef.new(shape: AudioLocation, required: true, location_name: "Location"))
+    Audio.struct_class = Types::Audio
+
+    AudioList.member = Shapes::ShapeRef.new(shape: Audio)
+
     AuthorizationResult.key = Shapes::ShapeRef.new(shape: Key)
     AuthorizationResult.value = Shapes::ShapeRef.new(shape: Value)
 
@@ -403,7 +455,7 @@ module Aws::AlexaForBusiness
     BusinessReport.add_member(:status, Shapes::ShapeRef.new(shape: BusinessReportStatus, location_name: "Status"))
     BusinessReport.add_member(:failure_code, Shapes::ShapeRef.new(shape: BusinessReportFailureCode, location_name: "FailureCode"))
     BusinessReport.add_member(:s3_location, Shapes::ShapeRef.new(shape: BusinessReportS3Location, location_name: "S3Location"))
-    BusinessReport.add_member(:delivery_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeliveryTime"))
+    BusinessReport.add_member(:delivery_time, Shapes::ShapeRef.new(shape: BusinessReportDeliveryTime, location_name: "DeliveryTime"))
     BusinessReport.add_member(:download_url, Shapes::ShapeRef.new(shape: BusinessReportDownloadUrl, location_name: "DownloadUrl"))
     BusinessReport.struct_class = Types::BusinessReport
 
@@ -464,6 +516,11 @@ module Aws::AlexaForBusiness
 
     ContactDataList.member = Shapes::ShapeRef.new(shape: ContactData)
 
+    Content.add_member(:text_list, Shapes::ShapeRef.new(shape: TextList, location_name: "TextList"))
+    Content.add_member(:ssml_list, Shapes::ShapeRef.new(shape: SsmlList, location_name: "SsmlList"))
+    Content.add_member(:audio_list, Shapes::ShapeRef.new(shape: AudioList, location_name: "AudioList"))
+    Content.struct_class = Types::Content
+
     CreateAddressBookRequest.add_member(:name, Shapes::ShapeRef.new(shape: AddressBookName, required: true, location_name: "Name"))
     CreateAddressBookRequest.add_member(:description, Shapes::ShapeRef.new(shape: AddressBookDescription, location_name: "Description"))
     CreateAddressBookRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -504,6 +561,14 @@ module Aws::AlexaForBusiness
 
     CreateContactResponse.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ContactArn"))
     CreateContactResponse.struct_class = Types::CreateContactResponse
+
+    CreateGatewayGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: GatewayGroupName, required: true, location_name: "Name"))
+    CreateGatewayGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: GatewayGroupDescription, location_name: "Description"))
+    CreateGatewayGroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateGatewayGroupRequest.struct_class = Types::CreateGatewayGroupRequest
+
+    CreateGatewayGroupResponse.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GatewayGroupArn"))
+    CreateGatewayGroupResponse.struct_class = Types::CreateGatewayGroupResponse
 
     CreateProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location_name: "ProfileName"))
     CreateProfileRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, required: true, location_name: "Timezone"))
@@ -575,6 +640,17 @@ module Aws::AlexaForBusiness
 
     DeleteDeviceResponse.struct_class = Types::DeleteDeviceResponse
 
+    DeleteDeviceUsageDataRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DeviceArn"))
+    DeleteDeviceUsageDataRequest.add_member(:device_usage_type, Shapes::ShapeRef.new(shape: DeviceUsageType, required: true, location_name: "DeviceUsageType"))
+    DeleteDeviceUsageDataRequest.struct_class = Types::DeleteDeviceUsageDataRequest
+
+    DeleteDeviceUsageDataResponse.struct_class = Types::DeleteDeviceUsageDataResponse
+
+    DeleteGatewayGroupRequest.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GatewayGroupArn"))
+    DeleteGatewayGroupRequest.struct_class = Types::DeleteGatewayGroupRequest
+
+    DeleteGatewayGroupResponse.struct_class = Types::DeleteGatewayGroupResponse
+
     DeleteProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     DeleteProfileRequest.struct_class = Types::DeleteProfileRequest
 
@@ -642,7 +718,7 @@ module Aws::AlexaForBusiness
 
     DeviceEvent.add_member(:type, Shapes::ShapeRef.new(shape: DeviceEventType, location_name: "Type"))
     DeviceEvent.add_member(:value, Shapes::ShapeRef.new(shape: DeviceEventValue, location_name: "Value"))
-    DeviceEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    DeviceEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DeviceEventTime, location_name: "Timestamp"))
     DeviceEvent.struct_class = Types::DeviceEvent
 
     DeviceEventList.member = Shapes::ShapeRef.new(shape: DeviceEvent)
@@ -699,6 +775,34 @@ module Aws::AlexaForBusiness
 
     ForgetSmartHomeAppliancesResponse.struct_class = Types::ForgetSmartHomeAppliancesResponse
 
+    Gateway.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    Gateway.add_member(:name, Shapes::ShapeRef.new(shape: GatewayName, location_name: "Name"))
+    Gateway.add_member(:description, Shapes::ShapeRef.new(shape: GatewayDescription, location_name: "Description"))
+    Gateway.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GatewayGroupArn"))
+    Gateway.add_member(:software_version, Shapes::ShapeRef.new(shape: GatewayVersion, location_name: "SoftwareVersion"))
+    Gateway.struct_class = Types::Gateway
+
+    GatewayGroup.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    GatewayGroup.add_member(:name, Shapes::ShapeRef.new(shape: GatewayGroupName, location_name: "Name"))
+    GatewayGroup.add_member(:description, Shapes::ShapeRef.new(shape: GatewayGroupDescription, location_name: "Description"))
+    GatewayGroup.struct_class = Types::GatewayGroup
+
+    GatewayGroupSummaries.member = Shapes::ShapeRef.new(shape: GatewayGroupSummary)
+
+    GatewayGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    GatewayGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: GatewayGroupName, location_name: "Name"))
+    GatewayGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: GatewayGroupDescription, location_name: "Description"))
+    GatewayGroupSummary.struct_class = Types::GatewayGroupSummary
+
+    GatewaySummaries.member = Shapes::ShapeRef.new(shape: GatewaySummary)
+
+    GatewaySummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    GatewaySummary.add_member(:name, Shapes::ShapeRef.new(shape: GatewayName, location_name: "Name"))
+    GatewaySummary.add_member(:description, Shapes::ShapeRef.new(shape: GatewayDescription, location_name: "Description"))
+    GatewaySummary.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GatewayGroupArn"))
+    GatewaySummary.add_member(:software_version, Shapes::ShapeRef.new(shape: GatewayVersion, location_name: "SoftwareVersion"))
+    GatewaySummary.struct_class = Types::GatewaySummary
+
     GenericKeywords.member = Shapes::ShapeRef.new(shape: GenericKeyword)
 
     GetAddressBookRequest.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AddressBookArn"))
@@ -729,6 +833,18 @@ module Aws::AlexaForBusiness
 
     GetDeviceResponse.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "Device"))
     GetDeviceResponse.struct_class = Types::GetDeviceResponse
+
+    GetGatewayGroupRequest.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GatewayGroupArn"))
+    GetGatewayGroupRequest.struct_class = Types::GetGatewayGroupRequest
+
+    GetGatewayGroupResponse.add_member(:gateway_group, Shapes::ShapeRef.new(shape: GatewayGroup, location_name: "GatewayGroup"))
+    GetGatewayGroupResponse.struct_class = Types::GetGatewayGroupResponse
+
+    GetGatewayRequest.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GatewayArn"))
+    GetGatewayRequest.struct_class = Types::GetGatewayRequest
+
+    GetGatewayResponse.add_member(:gateway, Shapes::ShapeRef.new(shape: Gateway, location_name: "Gateway"))
+    GetGatewayResponse.struct_class = Types::GetGatewayResponse
 
     GetInvitationConfigurationRequest.struct_class = Types::GetInvitationConfigurationRequest
 
@@ -792,6 +908,23 @@ module Aws::AlexaForBusiness
     ListDeviceEventsResponse.add_member(:device_events, Shapes::ShapeRef.new(shape: DeviceEventList, location_name: "DeviceEvents"))
     ListDeviceEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDeviceEventsResponse.struct_class = Types::ListDeviceEventsResponse
+
+    ListGatewayGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGatewayGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListGatewayGroupsRequest.struct_class = Types::ListGatewayGroupsRequest
+
+    ListGatewayGroupsResponse.add_member(:gateway_groups, Shapes::ShapeRef.new(shape: GatewayGroupSummaries, location_name: "GatewayGroups"))
+    ListGatewayGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGatewayGroupsResponse.struct_class = Types::ListGatewayGroupsResponse
+
+    ListGatewaysRequest.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GatewayGroupArn"))
+    ListGatewaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListGatewaysRequest.struct_class = Types::ListGatewaysRequest
+
+    ListGatewaysResponse.add_member(:gateways, Shapes::ShapeRef.new(shape: GatewaySummaries, location_name: "Gateways"))
+    ListGatewaysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGatewaysResponse.struct_class = Types::ListGatewaysResponse
 
     ListSkillsRequest.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
     ListSkillsRequest.add_member(:enablement_type, Shapes::ShapeRef.new(shape: EnablementTypeFilter, location_name: "EnablementType"))
@@ -1037,6 +1170,15 @@ module Aws::AlexaForBusiness
     SearchUsersResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
     SearchUsersResponse.struct_class = Types::SearchUsersResponse
 
+    SendAnnouncementRequest.add_member(:room_filters, Shapes::ShapeRef.new(shape: FilterList, required: true, location_name: "RoomFilters"))
+    SendAnnouncementRequest.add_member(:content, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "Content"))
+    SendAnnouncementRequest.add_member(:time_to_live_in_seconds, Shapes::ShapeRef.new(shape: TimeToLiveInSeconds, location_name: "TimeToLiveInSeconds"))
+    SendAnnouncementRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    SendAnnouncementRequest.struct_class = Types::SendAnnouncementRequest
+
+    SendAnnouncementResponse.add_member(:announcement_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnnouncementArn"))
+    SendAnnouncementResponse.struct_class = Types::SendAnnouncementResponse
+
     SendInvitationRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "UserArn"))
     SendInvitationRequest.struct_class = Types::SendInvitationRequest
 
@@ -1103,6 +1245,12 @@ module Aws::AlexaForBusiness
 
     SortList.member = Shapes::ShapeRef.new(shape: Sort)
 
+    Ssml.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "Locale"))
+    Ssml.add_member(:value, Shapes::ShapeRef.new(shape: SsmlValue, required: true, location_name: "Value"))
+    Ssml.struct_class = Types::Ssml
+
+    SsmlList.member = Shapes::ShapeRef.new(shape: Ssml)
+
     StartDeviceSyncRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     StartDeviceSyncRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
     StartDeviceSyncRequest.add_member(:features, Shapes::ShapeRef.new(shape: Features, required: true, location_name: "Features"))
@@ -1128,6 +1276,12 @@ module Aws::AlexaForBusiness
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    Text.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "Locale"))
+    Text.add_member(:value, Shapes::ShapeRef.new(shape: TextValue, required: true, location_name: "Value"))
+    Text.struct_class = Types::Text
+
+    TextList.member = Shapes::ShapeRef.new(shape: Text)
 
     UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
@@ -1175,6 +1329,21 @@ module Aws::AlexaForBusiness
     UpdateDeviceRequest.struct_class = Types::UpdateDeviceRequest
 
     UpdateDeviceResponse.struct_class = Types::UpdateDeviceResponse
+
+    UpdateGatewayGroupRequest.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GatewayGroupArn"))
+    UpdateGatewayGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: GatewayGroupName, location_name: "Name"))
+    UpdateGatewayGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: GatewayGroupDescription, location_name: "Description"))
+    UpdateGatewayGroupRequest.struct_class = Types::UpdateGatewayGroupRequest
+
+    UpdateGatewayGroupResponse.struct_class = Types::UpdateGatewayGroupResponse
+
+    UpdateGatewayRequest.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GatewayArn"))
+    UpdateGatewayRequest.add_member(:name, Shapes::ShapeRef.new(shape: GatewayName, location_name: "Name"))
+    UpdateGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: GatewayDescription, location_name: "Description"))
+    UpdateGatewayRequest.add_member(:software_version, Shapes::ShapeRef.new(shape: GatewayVersion, location_name: "SoftwareVersion"))
+    UpdateGatewayRequest.struct_class = Types::UpdateGatewayRequest
+
+    UpdateGatewayResponse.struct_class = Types::UpdateGatewayResponse
 
     UpdateProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     UpdateProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "ProfileName"))
@@ -1334,6 +1503,16 @@ module Aws::AlexaForBusiness
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:create_gateway_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGatewayGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateGatewayGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateGatewayGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:create_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateProfile"
         o.http_method = "POST"
@@ -1425,6 +1604,26 @@ module Aws::AlexaForBusiness
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateAuthorityException)
+      end)
+
+      api.add_operation(:delete_device_usage_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDeviceUsageData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDeviceUsageDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDeviceUsageDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:delete_gateway_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGatewayGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGatewayGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGatewayGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAssociatedException)
       end)
 
       api.add_operation(:delete_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1587,6 +1786,24 @@ module Aws::AlexaForBusiness
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:get_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:get_gateway_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGatewayGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetGatewayGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGatewayGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:get_invitation_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetInvitationConfiguration"
         o.http_method = "POST"
@@ -1667,6 +1884,34 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: ListDeviceEventsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDeviceEventsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_gateway_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGatewayGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGatewayGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGatewayGroupsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_gateways, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGateways"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGatewaysRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGatewaysResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1923,6 +2168,16 @@ module Aws::AlexaForBusiness
         )
       end)
 
+      api.add_operation(:send_announcement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendAnnouncement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendAnnouncementRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendAnnouncementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+      end)
+
       api.add_operation(:send_invitation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SendInvitation"
         o.http_method = "POST"
@@ -2019,6 +2274,26 @@ module Aws::AlexaForBusiness
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
+      end)
+
+      api.add_operation(:update_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NameInUseException)
+      end)
+
+      api.add_operation(:update_gateway_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGatewayGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGatewayGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGatewayGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NameInUseException)
       end)
 
       api.add_operation(:update_profile, Seahorse::Model::Operation.new.tap do |o|

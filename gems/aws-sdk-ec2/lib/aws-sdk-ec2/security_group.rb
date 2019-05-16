@@ -55,7 +55,7 @@ module Aws::EC2
       data[:owner_id]
     end
 
-    # \[EC2-VPC\] The outbound rules associated with the security group.
+    # \[VPC only\] The outbound rules associated with the security group.
     # @return [Array<Types::IpPermission>]
     def ip_permissions_egress
       data[:ip_permissions_egress]
@@ -67,7 +67,7 @@ module Aws::EC2
       data[:tags]
     end
 
-    # \[EC2-VPC\] The ID of the VPC for the security group.
+    # \[VPC only\] The ID of the VPC for the security group.
     # @return [String]
     def vpc_id
       data[:vpc_id]
@@ -333,28 +333,35 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [String] :cidr_ip
-    #   The CIDR IPv4 address range. You can't specify this parameter when
-    #   specifying a source security group.
+    #   The IPv4 address range, in CIDR format. You can't specify this
+    #   parameter when specifying a source security group. To specify an IPv6
+    #   address range, use a set of IP permissions.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     # @option options [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1` to
-    #   specify all types. If you specify all ICMP/ICMPv6 types, you must
-    #   specify all codes.
+    #   The start of port range for the TCP and UDP protocols, or an ICMP type
+    #   number. For the ICMP type number, use `-1` to specify all types. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     # @option options [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You must
     #   specify either the security group ID or the security group name in the
     #   request.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   The sets of IP permissions. Can be used to specify multiple rules in a
-    #   single command.
+    #   The sets of IP permissions.
     # @option options [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
-    #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`, or
-    #   `58` (ICMPv6), traffic on all ports is allowed, regardless of any
-    #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
-    #   port range. For protocol `58` (ICMPv6), you can optionally specify a
-    #   port range; if you don't, traffic for all types and codes is allowed.
+    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #
+    #   \[VPC only\] Use `-1` to specify all protocols. If you specify `-1` or
+    #   a protocol other than `tcp`, `udp`, or `icmp`, traffic on all ports is
+    #   allowed, regardless of any ports you specify.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     #
     #
@@ -376,10 +383,12 @@ module Aws::EC2
     #   ICMP, UDP, and TCP access. To create a rule with a specific IP
     #   protocol and port range, use a set of IP permissions instead.
     # @option options [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
-    #   code number. For the ICMP/ICMPv6 code number, use `-1` to specify all
-    #   codes. If you specify all ICMP/ICMPv6 types, you must specify all
-    #   codes.
+    #   The end of port range for the TCP and UDP protocols, or an ICMP code
+    #   number. For the ICMP code number, use `-1` to specify all codes. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -410,9 +419,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []

@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Textract
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -258,33 +260,48 @@ module Aws::Textract
 
     # @!group API Operations
 
-    # Analyzes an input document for relationships in the detected text and
-    # tables.
+    # Analyzes an input document for relationships between detected items.
     #
-    # Two types of information are returned:
+    # The types of information returned are as follows:
     #
     # * Words and lines that are related to nearby lines and words. The
-    #   related information is returned in two Block objects: a KEY Block
-    #   object and a VALUE Block object. For example, *Name: Ana Silva
-    #   Carolina* contains a key and value. *Name:* is the key. *Ana Silva
-    #   Carolina* is the value.
+    #   related information is returned in two Block objects each of type
+    #   `KEY_VALUE_SET`\: a KEY Block object and a VALUE Block object. For
+    #   example, *Name: Ana Silva Carolina* contains a key and value.
+    #   *Name:* is the key. *Ana Silva Carolina* is the value.
     #
-    # * Table and table cell data. A TABLE Block contains information about
-    #   a detected table. A CELL block is returned for each cell in a table.
+    # * Table and table cell data. A TABLE Block object contains information
+    #   about a detected table. A CELL Block object is returned for each
+    #   cell in a table.
+    #
+    # * Selectable elements such as checkboxes and radio buttons. A
+    #   SELECTION\_ELEMENT Block object contains information about a
+    #   selectable element.
+    #
+    # * Lines and words of text. A LINE Block object contains one or more
+    #   WORD Block objects.
     #
     # You can choose which type of analysis to perform by specifying the
     # `FeatureTypes` list.
     #
-    # The output is returned in a list of `BLOCK` objects (Blocks). For more
-    # information, see how-it-works-analyzing.
+    # The output is returned in a list of `BLOCK` objects.
     #
     # `AnalyzeDocument` is a synchronous operation. To analyze documents
     # asynchronously, use StartDocumentAnalysis.
+    #
+    # For more information, see [Document Text Analysis][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html
     #
     # @option params [required, Types::Document] :document
     #   The input document as base64-encoded bytes or an Amazon S3 object. If
     #   you use the AWS CLI to call Amazon Textract operations, you can't
     #   pass image bytes. The document must be an image in JPG or PNG format.
+    #
+    #   If you are using an AWS SDK to call Amazon Textract, you might not
+    #   need to base64-encode image bytes passed using the `Bytes` field.
     #
     # @option params [required, Array<String>] :feature_types
     #   A list of the types of analysis to perform. Add TABLES to the list to
@@ -316,7 +333,7 @@ module Aws::Textract
     #
     #   resp.document_metadata.pages #=> Integer
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].row_index #=> Integer
@@ -337,6 +354,7 @@ module Aws::Textract
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
     #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeDocument AWS API Documentation
@@ -351,16 +369,30 @@ module Aws::Textract
     # Detects text in the input document. Amazon Textract can detect lines
     # of text and the words that make up a line of text. The input document
     # must be an image in JPG or PNG format. `DetectDocumentText` returns
-    # the detected text in an array of Block objects. For more information,
-    # see how-it-works-detecting.
+    # the detected text in an array of Block objects.
+    #
+    # Each document page has as an associated `Block` of type PAGE. Each
+    # PAGE `Block` object is the parent of LINE `Block` objects that
+    # represent the lines of detected text on a page. A LINE `Block` object
+    # is a parent for each word that makes up the line. Words are
+    # represented by `Block` objects of type WORD.
     #
     # `DetectDocumentText` is a synchronous operation. To analyze documents
     # asynchronously, use StartDocumentTextDetection.
+    #
+    # For more information, see [Document Text Detection][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html
     #
     # @option params [required, Types::Document] :document
     #   The input document as base64-encoded bytes or an Amazon S3 object. If
     #   you use the AWS CLI to call Amazon Textract operations, you can't
     #   pass image bytes. The document must be an image in JPG or PNG format.
+    #
+    #   If you are using an AWS SDK to call Amazon Textract, you might not
+    #   need to base64-encode image bytes passed using the `Bytes` field.
     #
     # @return [Types::DetectDocumentTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -384,7 +416,7 @@ module Aws::Textract
     #
     #   resp.document_metadata.pages #=> Integer
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].row_index #=> Integer
@@ -405,6 +437,7 @@ module Aws::Textract
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
     #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DetectDocumentText AWS API Documentation
@@ -417,7 +450,7 @@ module Aws::Textract
     end
 
     # Gets the results for an Amazon Textract asynchronous operation that
-    # analyzes text in a document image.
+    # analyzes text in a document.
     #
     # You start asynchronous text analysis by calling StartDocumentAnalysis,
     # which returns a job identifier (`JobId`). When the text analysis
@@ -429,8 +462,25 @@ module Aws::Textract
     # `GetDocumentAnalysis`, and pass the job identifier (`JobId`) from the
     # initial call to `StartDocumentAnalysis`.
     #
-    # `GetDocumentAnalysis` returns an array of Block objects. For more
-    # information, see how-it-works-analyzing.
+    # `GetDocumentAnalysis` returns an array of Block objects. The following
+    # types of information are returned:
+    #
+    # * Words and lines that are related to nearby lines and words. The
+    #   related information is returned in two Block objects each of type
+    #   `KEY_VALUE_SET`\: a KEY Block object and a VALUE Block object. For
+    #   example, *Name: Ana Silva Carolina* contains a key and value.
+    #   *Name:* is the key. *Ana Silva Carolina* is the value.
+    #
+    # * Table and table cell data. A TABLE Block object contains information
+    #   about a detected table. A CELL Block object is returned for each
+    #   cell in a table.
+    #
+    # * Selectable elements such as checkboxes and radio buttons. A
+    #   SELECTION\_ELEMENT Block object contains information about a
+    #   selectable element.
+    #
+    # * Lines and words of text. A LINE Block object contains one or more
+    #   WORD Block objects.
     #
     # Use the `MaxResults` parameter to limit the number of blocks returned.
     # If there are more results than specified in `MaxResults`, the value of
@@ -439,6 +489,12 @@ module Aws::Textract
     # `GetDocumentAnalysis`, and populate the `NextToken` request parameter
     # with the token value that's returned from the previous call to
     # `GetDocumentAnalysis`.
+    #
+    # For more information, see [Document Text Analysis][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html
     #
     # @option params [required, String] :job_id
     #   A unique identifier for the text-detection job. The `JobId` is
@@ -479,7 +535,7 @@ module Aws::Textract
     #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
     #   resp.next_token #=> String
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].row_index #=> Integer
@@ -500,6 +556,7 @@ module Aws::Textract
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
     #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
     #   resp.warnings #=> Array
     #   resp.warnings[0].error_code #=> String
@@ -517,8 +574,8 @@ module Aws::Textract
     end
 
     # Gets the results for an Amazon Textract asynchronous operation that
-    # detects text in a document image. Amazon Textract can detect lines of
-    # text and the words that make up a line of text.
+    # detects text in a document. Amazon Textract can detect lines of text
+    # and the words that make up a line of text.
     #
     # You start asynchronous text detection by calling
     # StartDocumentTextDetection, which returns a job identifier (`JobId`).
@@ -531,8 +588,13 @@ module Aws::Textract
     # pass the job identifier (`JobId`) from the initial call to
     # `StartDocumentTextDetection`.
     #
-    # `GetDocumentTextDetection` returns an array of Block objects. For more
-    # information, see how-it-works-detecting.
+    # `GetDocumentTextDetection` returns an array of Block objects.
+    #
+    # Each document page has as an associated `Block` of type PAGE. Each
+    # PAGE `Block` object is the parent of LINE `Block` objects that
+    # represent the lines of detected text on a page. A LINE `Block` object
+    # is a parent for each word that makes up the line. Words are
+    # represented by `Block` objects of type WORD.
     #
     # Use the MaxResults parameter to limit the number of blocks that are
     # returned. If there are more results than specified in `MaxResults`,
@@ -542,8 +604,11 @@ module Aws::Textract
     # `NextToken` request parameter with the token value that's returned
     # from the previous call to `GetDocumentTextDetection`.
     #
-    # For more information, see Document Text Detection in the Amazon
-    # Textract Developer Guide.
+    # For more information, see [Document Text Detection][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html
     #
     # @option params [required, String] :job_id
     #   A unique identifier for the text detection job. The `JobId` is
@@ -584,7 +649,7 @@ module Aws::Textract
     #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
     #   resp.next_token #=> String
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].row_index #=> Integer
@@ -605,6 +670,7 @@ module Aws::Textract
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
     #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
     #   resp.warnings #=> Array
     #   resp.warnings[0].error_code #=> String
@@ -621,22 +687,14 @@ module Aws::Textract
       req.send_request(options)
     end
 
-    # Starts asynchronous analysis of text for relationships in the text and
-    # tables that are detected in a document. Amazon Textract returns for
-    # two types of information:
+    # Starts asynchronous analysis of an input document for relationships
+    # between detected items such as key and value pairs, tables, and
+    # selection elements.
     #
-    # * Words and lines that are related to nearby lines and words. The
-    #   related information is returned in two Block objects: A KEY Block
-    #   object and a VALUE Block object. For example, *Name: Ana Silva
-    #   Carolina* contains a key and value. *Name:* is the key. *Ana Silva
-    #   Carolina* is the value.
-    #
-    # * Table and table cell data. A TABLE block contains information about
-    #   a detected table. A CELL block is returned for each cell in a table.
-    #
-    # Amazon Textract can analyze text in document images and PDF files that
-    # are stored in an Amazon S3 bucket. Use DocumentLocation to specify the
-    # bucket name and file name of the document image.
+    # `StartDocumentAnalysis` can analyze text in documents that are in JPG,
+    # PNG, and PDF format. The documents are stored in an Amazon S3 bucket.
+    # Use DocumentLocation to specify the bucket name and file name of the
+    # document.
     #
     # `StartDocumentAnalysis` returns a job identifier (`JobId`) that you
     # use to get the results of the operation. When text analysis is
@@ -648,6 +706,12 @@ module Aws::Textract
     # the job identifier (`JobId`) from the initial call to
     # `StartDocumentAnalysis`.
     #
+    # For more information, see [Document Text Analysis][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html
+    #
     # @option params [required, Types::DocumentLocation] :document_location
     #   The location of the document to be processed.
     #
@@ -656,7 +720,8 @@ module Aws::Textract
     #   return information about the tables that are detected in the input
     #   document. Add FORMS to return detected fields and the associated text.
     #   To perform both types of analysis, add TABLES and FORMS to
-    #   `FeatureTypes`.
+    #   `FeatureTypes`. All selectable elements (`SELECTION_ELEMENT`) that are
+    #   detected are returned, whatever the value of `FeatureTypes`.
     #
     # @option params [String] :client_request_token
     #   The idempotent token that you use to identify the start request. If
@@ -665,8 +730,10 @@ module Aws::Textract
     #   same job from being accidentally started more than once.
     #
     # @option params [String] :job_tag
-    #   The unique identifier you specify to identify the job in the
-    #   completion status that's published to the Amazon SNS topic.
+    #   An identifier you specify that's included in the completion
+    #   notification that's published to the Amazon SNS topic. For example,
+    #   you can use `JobTag` to identify the type of document, such as a tax
+    #   form or a receipt, that the completion notification corresponds to.
     #
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Textract to publish the
@@ -712,9 +779,10 @@ module Aws::Textract
     # Textract can detect lines of text and the words that make up a line of
     # text.
     #
-    # Amazon Textract can detect text in document images and PDF files that
-    # are stored in an Amazon S3 bucket. Use DocumentLocation to specify the
-    # bucket name and the file name of the document image.
+    # `StartDocumentTextDetection` can analyze text in documents that are in
+    # JPG, PNG, and PDF format. The documents are stored in an Amazon S3
+    # bucket. Use DocumentLocation to specify the bucket name and file name
+    # of the document.
     #
     # `StartTextDetection` returns a job identifier (`JobId`) that you use
     # to get the results of the operation. When text detection is finished,
@@ -726,8 +794,11 @@ module Aws::Textract
     # pass the job identifier (`JobId`) from the initial call to
     # `StartDocumentTextDetection`.
     #
-    # For more information, see Document Text Detection in the Amazon
-    # Textract Developer Guide.
+    # For more information, see [Document Text Detection][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html
     #
     # @option params [required, Types::DocumentLocation] :document_location
     #   The location of the document to be processed.
@@ -739,9 +810,10 @@ module Aws::Textract
     #   prevent the same job from being accidentally started more than once.
     #
     # @option params [String] :job_tag
-    #   A unique identifier you specify to identify the job in the completion
-    #   status that's published to the Amazon Simple Notification Service
-    #   (Amazon SNS) topic.
+    #   An identifier you specify that's included in the completion
+    #   notification that's published to the Amazon SNS topic. For example,
+    #   you can use `JobTag` to identify the type of document, such as a tax
+    #   form or a receipt, that the completion notification corresponds to.
     #
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Textract to publish the
@@ -795,7 +867,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

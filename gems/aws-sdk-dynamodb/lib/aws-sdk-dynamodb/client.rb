@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-dynamodb/plugins/extended_retries.rb'
@@ -58,6 +59,7 @@ module Aws::DynamoDB
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::DynamoDB::Plugins::ExtendedRetries)
@@ -345,8 +347,8 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations
-    # [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations
     #
     # @option params [required, Hash<String,Types::KeysAndAttributes>] :request_items
     #   A map of one or more table names and, for each table, a map that
@@ -430,9 +432,9 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
-    #   [3]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     #
     # @option params [String] :return_consumed_capacity
     #   Determines the level of detail about provisioned throughput
@@ -649,7 +651,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations
     #
     # @option params [required, Hash<String,Array>] :request_items
     #   A map of one or more table names and, for each table, a list of
@@ -1028,8 +1030,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key
     #
     # @option params [Array<Types::LocalSecondaryIndex>] :local_secondary_indexes
     #   One or more local secondary indexes (the maximum is 5) to be created
@@ -1137,7 +1139,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #
     # @option params [Types::StreamSpecification] :stream_specification
     #   The settings for DynamoDB Streams on the table. These settings consist
@@ -1164,6 +1166,14 @@ module Aws::DynamoDB
     #
     # @option params [Types::SSESpecification] :sse_specification
     #   Represents the settings used to enable server-side encryption.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to label the table. For more information,
+    #   see [Tagging for DynamoDB][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
     #
     # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1301,6 +1311,12 @@ module Aws::DynamoDB
     #       sse_type: "AES256", # accepts AES256, KMS
     #       kms_master_key_id: "KMSMasterKeyId",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1483,7 +1499,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
     #
     # @option params [String] :conditional_operator
     #   This is a legacy parameter. Use `ConditionExpression` instead. For
@@ -1492,7 +1508,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #
     # @option params [String] :return_values
     #   Use `ReturnValues` if you want to get the item attributes as they
@@ -1554,7 +1570,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -1604,8 +1620,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #
     # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
@@ -1631,7 +1647,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
     # @return [Types::DeleteItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2174,7 +2190,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     # [2]: https://console.aws.amazon.com/support/home#/
     #
     # @return [Types::DescribeLimitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2420,7 +2436,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     #
     # @option params [Boolean] :consistent_read
     #   Determines the read consistency model: If set to `true`, then the
@@ -2459,7 +2475,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -2509,8 +2525,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #
     # @return [Types::GetItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2776,7 +2792,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon DynamoDB resource with tags to be listed. This value is an
@@ -2876,7 +2892,7 @@ module Aws::DynamoDB
     # [7]: http://docs.aws.amazon.com/goto/SdkForPHPV3/dynamodb-2012-08-10/PutItem
     # [8]: http://docs.aws.amazon.com/goto/boto3/dynamodb-2012-08-10/PutItem
     # [9]: http://docs.aws.amazon.com/goto/SdkForRubyV2/dynamodb-2012-08-10/PutItem
-    # [10]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html
+    # [10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html
     #
     # @option params [required, String] :table_name
     #   The name of the table to contain the item.
@@ -2902,7 +2918,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
     #
     # @option params [Hash<String,Types::ExpectedAttributeValue>] :expected
     #   This is a legacy parameter. Use `ConditionExpression` instead. For
@@ -2911,7 +2927,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
     #
     # @option params [String] :return_values
     #   Use `ReturnValues` if you want to get the item attributes as they
@@ -2961,7 +2977,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #
     # @option params [String] :condition_expression
     #   A condition that must be satisfied in order for a conditional
@@ -2983,7 +2999,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -3033,8 +3049,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #
     # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
@@ -3060,7 +3076,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
     # @return [Types::PutItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3213,7 +3229,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.Pagination
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.Pagination
     #
     # @option params [required, String] :table_name
     #   The name of the table containing the requested items.
@@ -3280,7 +3296,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     #
     # @option params [Integer] :limit
     #   The maximum number of items to evaluate (not necessarily the number of
@@ -3297,7 +3313,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
     #
     # @option params [Boolean] :consistent_read
     #   Determines the read consistency model: If set to `true`, then the
@@ -3315,7 +3331,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html
     #
     # @option params [Hash<String,Types::Condition>] :query_filter
     #   This is a legacy parameter. Use `FilterExpression` instead. For more
@@ -3324,7 +3340,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html
     #
     # @option params [String] :conditional_operator
     #   This is a legacy parameter. Use `FilterExpression` instead. For more
@@ -3333,7 +3349,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #
     # @option params [Boolean] :scan_index_forward
     #   Specifies the order for index traversal: If `true` (default), the
@@ -3392,7 +3408,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #
     # @option params [String] :filter_expression
     #   A string that contains conditions that DynamoDB applies after the
@@ -3413,7 +3429,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
     #
     # @option params [String] :key_condition_expression
     #   The condition that specifies the key value(s) for items to be
@@ -3496,8 +3512,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -3547,8 +3563,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #
     # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
@@ -3574,7 +3590,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
     # @return [Types::QueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3964,8 +3980,8 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.Pagination
-    # [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.Pagination
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan
     #
     # @option params [required, String] :table_name
     #   The name of the table containing the requested items; or, if you
@@ -3984,7 +4000,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     #
     # @option params [Integer] :limit
     #   The maximum number of items to evaluate (not necessarily the number of
@@ -4001,7 +4017,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
     #
     # @option params [String] :select
     #   The attributes to be returned in the result. You can retrieve all item
@@ -4060,7 +4076,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html
     #
     # @option params [String] :conditional_operator
     #   This is a legacy parameter. Use `FilterExpression` instead. For more
@@ -4069,7 +4085,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #
     # @option params [Hash<String,Types::AttributeValue>] :exclusive_start_key
     #   The primary key of the first item that this operation will evaluate.
@@ -4147,7 +4163,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #
     # @option params [String] :filter_expression
     #   A string that contains conditions that DynamoDB applies after the
@@ -4165,7 +4181,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -4215,8 +4231,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #
     # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
@@ -4242,7 +4258,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
     # @option params [Boolean] :consistent_read
     #   A Boolean value that determines the read consistency model during the
@@ -4383,7 +4399,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
     #
     # @option params [required, String] :resource_arn
     #   Identifies the Amazon DynamoDB resource to which tags should be added.
@@ -4726,7 +4742,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon DyanamoDB resource the tags will be removed from. This
@@ -5085,7 +5101,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html
     #
     # @option params [Hash<String,Types::ExpectedAttributeValue>] :expected
     #   This is a legacy parameter. Use `ConditionExpression` instead. For
@@ -5094,7 +5110,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html
     #
     # @option params [String] :conditional_operator
     #   This is a legacy parameter. Use `ConditionExpression` instead. For
@@ -5103,7 +5119,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     #
     # @option params [String] :return_values
     #   Use `ReturnValues` if you want to get the item attributes as they
@@ -5241,7 +5257,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html
     #
     # @option params [String] :condition_expression
     #   A condition that must be satisfied in order for a conditional update
@@ -5263,7 +5279,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -5313,8 +5329,8 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #
     # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
     #   One or more values that can be substituted in an expression.
@@ -5340,7 +5356,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
     # @return [Types::UpdateItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5514,7 +5530,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html
     #
     # @option params [Types::StreamSpecification] :stream_specification
     #   Represents the DynamoDB Streams configuration for the table.
@@ -5746,7 +5762,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html
     #
     # @option params [required, String] :table_name
     #   The name of the table to be configured.
@@ -5796,7 +5812,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

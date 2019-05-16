@@ -49,13 +49,13 @@ module Aws::RDS
       data[:vpc_id]
     end
 
-    # Contains a list of EC2SecurityGroup elements.
+    # Contains a list of `EC2SecurityGroup` elements.
     # @return [Array<Types::EC2SecurityGroup>]
     def ec2_security_groups
       data[:ec2_security_groups]
     end
 
-    # Contains a list of IPRange elements.
+    # Contains a list of `IPRange` elements.
     # @return [Array<Types::IPRange>]
     def ip_ranges
       data[:ip_ranges]
@@ -252,12 +252,7 @@ module Aws::RDS
     # @option options [required, String] :db_security_group_description
     #   The description for the DB security group.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   Tags to assign to the DB security group.
     # @return [DBSecurityGroup]
     def create(options = {})
       options = options.merge(db_security_group_name: @name)

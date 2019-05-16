@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::ConfigService
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -952,7 +954,7 @@ module Aws::ConfigService
     #   The number of rule evaluation results that you want returned.
     #
     #   This parameter is required if the rule limit for your account is more
-    #   than the default of 50 rules.
+    #   than the default of 150 rules.
     #
     #   For information about requesting a rule limit increase, see [AWS
     #   Config Limits][1] in the *AWS General Reference Guide*.
@@ -2417,6 +2419,8 @@ module Aws::ConfigService
     # @option params [required, String] :authorized_aws_region
     #   The region authorized to collect aggregated data.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::PutAggregationAuthorizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutAggregationAuthorizationResponse#aggregation_authorization #aggregation_authorization} => Types::AggregationAuthorization
@@ -2426,6 +2430,12 @@ module Aws::ConfigService
     #   resp = client.put_aggregation_authorization({
     #     authorized_account_id: "AccountId", # required
     #     authorized_aws_region: "AwsRegion", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2491,6 +2501,8 @@ module Aws::ConfigService
     # @option params [required, Types::ConfigRule] :config_rule
     #   The rule that you want to add to your account.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2523,6 +2535,12 @@ module Aws::ConfigService
     #       config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
     #       created_by: "StringWithCharLimit256",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRule AWS API Documentation
@@ -2557,6 +2575,8 @@ module Aws::ConfigService
     # @option params [Types::OrganizationAggregationSource] :organization_aggregation_source
     #   An OrganizationAggregationSource object.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::PutConfigurationAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutConfigurationAggregatorResponse#configuration_aggregator #configuration_aggregator} => Types::ConfigurationAggregator
@@ -2577,6 +2597,12 @@ module Aws::ConfigService
     #       aws_regions: ["String"],
     #       all_aws_regions: false,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3153,7 +3179,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

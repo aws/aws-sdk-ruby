@@ -59,6 +59,8 @@ module Aws::WorkMail
     EntityNotFoundException = Shapes::StructureShape.new(name: 'EntityNotFoundException')
     EntityState = Shapes::StringShape.new(name: 'EntityState')
     EntityStateException = Shapes::StructureShape.new(name: 'EntityStateException')
+    GetMailboxDetailsRequest = Shapes::StructureShape.new(name: 'GetMailboxDetailsRequest')
+    GetMailboxDetailsResponse = Shapes::StructureShape.new(name: 'GetMailboxDetailsResponse')
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
     Groups = Shapes::ListShape.new(name: 'Groups')
@@ -83,6 +85,8 @@ module Aws::WorkMail
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
     MailDomainNotFoundException = Shapes::StructureShape.new(name: 'MailDomainNotFoundException')
     MailDomainStateException = Shapes::StructureShape.new(name: 'MailDomainStateException')
+    MailboxQuota = Shapes::IntegerShape.new(name: 'MailboxQuota')
+    MailboxSize = Shapes::FloatShape.new(name: 'MailboxSize')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Member = Shapes::StructureShape.new(name: 'Member')
     MemberType = Shapes::StringShape.new(name: 'MemberType')
@@ -116,6 +120,8 @@ module Aws::WorkMail
     String = Shapes::StringShape.new(name: 'String')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
+    UpdateMailboxQuotaRequest = Shapes::StructureShape.new(name: 'UpdateMailboxQuotaRequest')
+    UpdateMailboxQuotaResponse = Shapes::StructureShape.new(name: 'UpdateMailboxQuotaResponse')
     UpdatePrimaryEmailAddressRequest = Shapes::StructureShape.new(name: 'UpdatePrimaryEmailAddressRequest')
     UpdatePrimaryEmailAddressResponse = Shapes::StructureShape.new(name: 'UpdatePrimaryEmailAddressResponse')
     UpdateResourceRequest = Shapes::StructureShape.new(name: 'UpdateResourceRequest')
@@ -287,6 +293,14 @@ module Aws::WorkMail
 
     DisassociateMemberFromGroupResponse.struct_class = Types::DisassociateMemberFromGroupResponse
 
+    GetMailboxDetailsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    GetMailboxDetailsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
+    GetMailboxDetailsRequest.struct_class = Types::GetMailboxDetailsRequest
+
+    GetMailboxDetailsResponse.add_member(:mailbox_quota, Shapes::ShapeRef.new(shape: MailboxQuota, location_name: "MailboxQuota"))
+    GetMailboxDetailsResponse.add_member(:mailbox_size, Shapes::ShapeRef.new(shape: MailboxSize, location_name: "MailboxSize"))
+    GetMailboxDetailsResponse.struct_class = Types::GetMailboxDetailsResponse
+
     Group.add_member(:id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "Id"))
     Group.add_member(:email, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
     Group.add_member(:name, Shapes::ShapeRef.new(shape: GroupName, location_name: "Name"))
@@ -433,6 +447,13 @@ module Aws::WorkMail
     ResourceDelegates.member = Shapes::ShapeRef.new(shape: Delegate)
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
+
+    UpdateMailboxQuotaRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    UpdateMailboxQuotaRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
+    UpdateMailboxQuotaRequest.add_member(:mailbox_quota, Shapes::ShapeRef.new(shape: MailboxQuota, required: true, location_name: "MailboxQuota"))
+    UpdateMailboxQuotaRequest.struct_class = Types::UpdateMailboxQuotaRequest
+
+    UpdateMailboxQuotaResponse.struct_class = Types::UpdateMailboxQuotaResponse
 
     UpdatePrimaryEmailAddressRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     UpdatePrimaryEmailAddressRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
@@ -728,6 +749,17 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:get_mailbox_details, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMailboxDetails"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMailboxDetailsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMailboxDetailsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+      end)
+
       api.add_operation(:list_aliases, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAliases"
         o.http_method = "POST"
@@ -828,6 +860,12 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_resources, Seahorse::Model::Operation.new.tap do |o|
@@ -911,6 +949,19 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:update_mailbox_quota, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMailboxQuota"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMailboxQuotaRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMailboxQuotaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityStateException)
       end)
 
       api.add_operation(:update_primary_email_address, Seahorse::Model::Operation.new.tap do |o|

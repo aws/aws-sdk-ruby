@@ -16,6 +16,7 @@ module Aws::MediaTailor
     DashConfiguration = Shapes::StructureShape.new(name: 'DashConfiguration')
     DashConfigurationForPut = Shapes::StructureShape.new(name: 'DashConfigurationForPut')
     DeletePlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'DeletePlaybackConfigurationRequest')
+    DeletePlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'DeletePlaybackConfigurationResponse')
     GetPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'GetPlaybackConfigurationRequest')
     GetPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'GetPlaybackConfigurationResponse')
     HlsConfiguration = Shapes::StructureShape.new(name: 'HlsConfiguration')
@@ -23,6 +24,7 @@ module Aws::MediaTailor
     ListPlaybackConfigurationsResponse = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    OriginManifestType = Shapes::StringShape.new(name: 'OriginManifestType')
     PlaybackConfiguration = Shapes::StructureShape.new(name: 'PlaybackConfiguration')
     PutPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationRequest')
     PutPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationResponse')
@@ -47,13 +49,17 @@ module Aws::MediaTailor
 
     DashConfiguration.add_member(:manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ManifestEndpointPrefix"))
     DashConfiguration.add_member(:mpd_location, Shapes::ShapeRef.new(shape: __string, location_name: "MpdLocation"))
+    DashConfiguration.add_member(:origin_manifest_type, Shapes::ShapeRef.new(shape: OriginManifestType, location_name: "OriginManifestType"))
     DashConfiguration.struct_class = Types::DashConfiguration
 
     DashConfigurationForPut.add_member(:mpd_location, Shapes::ShapeRef.new(shape: __string, location_name: "MpdLocation"))
+    DashConfigurationForPut.add_member(:origin_manifest_type, Shapes::ShapeRef.new(shape: OriginManifestType, location_name: "OriginManifestType"))
     DashConfigurationForPut.struct_class = Types::DashConfigurationForPut
 
     DeletePlaybackConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
     DeletePlaybackConfigurationRequest.struct_class = Types::DeletePlaybackConfigurationRequest
+
+    DeletePlaybackConfigurationResponse.struct_class = Types::DeletePlaybackConfigurationResponse
 
     GetPlaybackConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
     GetPlaybackConfigurationRequest.struct_class = Types::GetPlaybackConfigurationRequest
@@ -169,7 +175,7 @@ module Aws::MediaTailor
         o.http_method = "DELETE"
         o.http_request_uri = "/playbackConfiguration/{Name}"
         o.input = Shapes::ShapeRef.new(shape: DeletePlaybackConfigurationRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DeletePlaybackConfigurationResponse)
       end)
 
       api.add_operation(:get_playback_configuration, Seahorse::Model::Operation.new.tap do |o|

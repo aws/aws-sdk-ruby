@@ -311,6 +311,11 @@ module Aws::IAM
     # @option options [required, String] :policy_document
     #   The policy document.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the policy
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
@@ -419,14 +424,9 @@ module Aws::IAM
     #   New name for the IAM group. Only include this if changing the group's
     #   name.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @return [Group]
     def update(options = {})
       options = options.merge(group_name: @name)

@@ -443,6 +443,8 @@ module Aws::StorageGateway
     CreateSMBFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     CreateSMBFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     CreateSMBFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
+    CreateSMBFileShareInput.add_member(:smbacl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
+    CreateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     CreateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     CreateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     CreateSMBFileShareInput.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
@@ -463,6 +465,7 @@ module Aws::StorageGateway
 
     CreateSnapshotInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     CreateSnapshotInput.add_member(:snapshot_description, Shapes::ShapeRef.new(shape: SnapshotDescription, required: true, location_name: "SnapshotDescription"))
+    CreateSnapshotInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSnapshotInput.struct_class = Types::CreateSnapshotInput
 
     CreateSnapshotOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
@@ -955,6 +958,8 @@ module Aws::StorageGateway
     SMBFileShareInfo.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     SMBFileShareInfo.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     SMBFileShareInfo.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
+    SMBFileShareInfo.add_member(:smbacl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
+    SMBFileShareInfo.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     SMBFileShareInfo.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     SMBFileShareInfo.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     SMBFileShareInfo.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
@@ -1135,6 +1140,8 @@ module Aws::StorageGateway
     UpdateSMBFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     UpdateSMBFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     UpdateSMBFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
+    UpdateSMBFileShareInput.add_member(:smbacl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
+    UpdateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     UpdateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     UpdateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     UpdateSMBFileShareInput.struct_class = Types::UpdateSMBFileShareInput
@@ -1146,6 +1153,7 @@ module Aws::StorageGateway
     UpdateSnapshotScheduleInput.add_member(:start_at, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "StartAt"))
     UpdateSnapshotScheduleInput.add_member(:recurrence_in_hours, Shapes::ShapeRef.new(shape: RecurrenceInHours, required: true, location_name: "RecurrenceInHours"))
     UpdateSnapshotScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateSnapshotScheduleInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     UpdateSnapshotScheduleInput.struct_class = Types::UpdateSnapshotScheduleInput
 
     UpdateSnapshotScheduleOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
@@ -1692,6 +1700,12 @@ module Aws::StorageGateway
         o.output = Shapes::ShapeRef.new(shape: ListFileSharesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_gateways, Seahorse::Model::Operation.new.tap do |o|
@@ -1728,6 +1742,12 @@ module Aws::StorageGateway
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_tapes, Seahorse::Model::Operation.new.tap do |o|
@@ -1738,6 +1758,12 @@ module Aws::StorageGateway
         o.output = Shapes::ShapeRef.new(shape: ListTapesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_volume_initiators, Seahorse::Model::Operation.new.tap do |o|

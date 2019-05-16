@@ -346,7 +346,7 @@ module Aws::MediaPackage
     #           period_triggers: ["ADS"], # accepts ADS
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
     #           segment_duration_seconds: 1,
-    #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
+    #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #           stream_selection: {
     #             max_video_bits_per_second: 1,
     #             min_video_bits_per_second: 1,
@@ -596,7 +596,7 @@ module Aws::MediaPackage
     #         period_triggers: ["ADS"], # accepts ADS
     #         profile: "NONE", # accepts NONE, HBBTV_1_5
     #         segment_duration_seconds: 1,
-    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #         stream_selection: {
     #           max_video_bits_per_second: 1,
     #           min_video_bits_per_second: 1,
@@ -653,11 +653,13 @@ module Aws::MediaPackage
     #   @return [Integer]
     #
     # @!attribute [rw] segment_template_format
-    #   Determines the type of SegmentTimeline included in the Media
+    #   Determines the type of SegmentTemplate included in the Media
     #   Presentation Description (MPD). When set to NUMBER\_WITH\_TIMELINE,
     #   a full timeline is presented in each SegmentTemplate, with $Number$
     #   media URLs. When set to TIME\_WITH\_TIMELINE, a full timeline is
-    #   presented in each SegmentTemplate, with $Time$ media URLs.
+    #   presented in each SegmentTemplate, with $Time$ media URLs. When set
+    #   to NUMBER\_WITH\_DURATION, only a duration is included in each
+    #   SegmentTemplate, with $Number$ media URLs.
     #   @return [String]
     #
     # @!attribute [rw] stream_selection
@@ -1950,7 +1952,7 @@ module Aws::MediaPackage
     #           period_triggers: ["ADS"], # accepts ADS
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
     #           segment_duration_seconds: 1,
-    #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
+    #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #           stream_selection: {
     #             max_video_bits_per_second: 1,
     #             min_video_bits_per_second: 1,

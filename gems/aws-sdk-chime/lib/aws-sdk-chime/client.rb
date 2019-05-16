@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::Chime
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -355,7 +357,7 @@ module Aws::Chime
     # [Managing Your Amazon Chime Accounts][1] in the *Amazon Chime
     # Administration Guide*.
     #
-    # Users suspended from a `Team` account are dissociated from the
+    # Users suspended from a `Team` account are dissasociated from the
     # account, but they can continue to use Amazon Chime as free users. To
     # remove the suspension from suspended `Team` account users, invite them
     # to the `Team` account again. You can use the InviteUsers action to do
@@ -575,6 +577,50 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Creates a bot for an Amazon Chime Enterprise account.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :display_name
+    #   The bot display name.
+    #
+    # @option params [String] :domain
+    #   The domain of the Amazon Chime Enterprise account.
+    #
+    # @return [Types::CreateBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBotResponse#bot #bot} => Types::Bot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bot({
+    #     account_id: "NonEmptyString", # required
+    #     display_name: "SensitiveString", # required
+    #     domain: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot.bot_id #=> String
+    #   resp.bot.user_id #=> String
+    #   resp.bot.display_name #=> String
+    #   resp.bot.bot_type #=> String, one of "ChatBot"
+    #   resp.bot.disabled #=> Boolean
+    #   resp.bot.created_timestamp #=> Time
+    #   resp.bot.updated_timestamp #=> Time
+    #   resp.bot.bot_email #=> String
+    #   resp.bot.security_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateBot AWS API Documentation
+    #
+    # @overload create_bot(params = {})
+    # @param [Hash] params ({})
+    def create_bot(params = {}, options = {})
+      req = build_request(:create_bot, params)
+      req.send_request(options)
+    end
+
     # Creates an order for phone numbers to be provisioned. Choose from
     # Amazon Chime Business Calling and Amazon Chime Voice Connector product
     # types.
@@ -690,6 +736,33 @@ module Aws::Chime
     # @param [Hash] params ({})
     def delete_account(params = {}, options = {})
       req = build_request(:delete_account, params)
+      req.send_request(options)
+    end
+
+    # Deletes the events configuration that allows a bot to receive outgoing
+    # events.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :bot_id
+    #   The bot ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_events_configuration({
+    #     account_id: "NonEmptyString", # required
+    #     bot_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteEventsConfiguration AWS API Documentation
+    #
+    # @overload delete_events_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_events_configuration(params = {}, options = {})
+      req = build_request(:delete_events_configuration, params)
       req.send_request(options)
     end
 
@@ -950,6 +1023,82 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_account_settings(params = {}, options = {})
       req = build_request(:get_account_settings, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details for the specified bot, such as bot email address,
+    # bot type, status, and display name.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :bot_id
+    #   The bot ID.
+    #
+    # @return [Types::GetBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBotResponse#bot #bot} => Types::Bot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bot({
+    #     account_id: "NonEmptyString", # required
+    #     bot_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot.bot_id #=> String
+    #   resp.bot.user_id #=> String
+    #   resp.bot.display_name #=> String
+    #   resp.bot.bot_type #=> String, one of "ChatBot"
+    #   resp.bot.disabled #=> Boolean
+    #   resp.bot.created_timestamp #=> Time
+    #   resp.bot.updated_timestamp #=> Time
+    #   resp.bot.bot_email #=> String
+    #   resp.bot.security_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetBot AWS API Documentation
+    #
+    # @overload get_bot(params = {})
+    # @param [Hash] params ({})
+    def get_bot(params = {}, options = {})
+      req = build_request(:get_bot, params)
+      req.send_request(options)
+    end
+
+    # Gets details for an events configuration that allows a bot to receive
+    # outgoing events, such as an HTTPS endpoint or Lambda function ARN.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :bot_id
+    #   The bot ID.
+    #
+    # @return [Types::GetEventsConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventsConfigurationResponse#events_configuration #events_configuration} => Types::EventsConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_events_configuration({
+    #     account_id: "NonEmptyString", # required
+    #     bot_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events_configuration.bot_id #=> String
+    #   resp.events_configuration.outbound_events_https_endpoint #=> String
+    #   resp.events_configuration.lambda_function_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetEventsConfiguration AWS API Documentation
+    #
+    # @overload get_events_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_events_configuration(params = {}, options = {})
+      req = build_request(:get_events_configuration, params)
       req.send_request(options)
     end
 
@@ -1366,6 +1515,55 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Lists the bots associated with the administrator's Amazon Chime
+    # Enterprise account ID.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Default is
+    #   10.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @return [Types::ListBotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotsResponse#bots #bots} => Array&lt;Types::Bot&gt;
+    #   * {Types::ListBotsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bots({
+    #     account_id: "NonEmptyString", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bots #=> Array
+    #   resp.bots[0].bot_id #=> String
+    #   resp.bots[0].user_id #=> String
+    #   resp.bots[0].display_name #=> String
+    #   resp.bots[0].bot_type #=> String, one of "ChatBot"
+    #   resp.bots[0].disabled #=> Boolean
+    #   resp.bots[0].created_timestamp #=> Time
+    #   resp.bots[0].updated_timestamp #=> Time
+    #   resp.bots[0].bot_email #=> String
+    #   resp.bots[0].security_token #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListBots AWS API Documentation
+    #
+    # @overload list_bots(params = {})
+    # @param [Hash] params ({})
+    def list_bots(params = {}, options = {})
+      req = build_request(:list_bots, params)
+      req.send_request(options)
+    end
+
     # Lists the phone number orders for the administrator's Amazon Chime
     # account.
     #
@@ -1631,6 +1829,50 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Creates an events configuration that allows a bot to receive outgoing
+    # events sent by Amazon Chime. Choose either an HTTPS endpoint or a
+    # Lambda function ARN. For more information, see Bot.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :bot_id
+    #   The bot ID.
+    #
+    # @option params [String] :outbound_events_https_endpoint
+    #   HTTPS endpoint that allows the bot to receive outgoing events.
+    #
+    # @option params [String] :lambda_function_arn
+    #   Lambda function ARN that allows the bot to receive outgoing events.
+    #
+    # @return [Types::PutEventsConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEventsConfigurationResponse#events_configuration #events_configuration} => Types::EventsConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_events_configuration({
+    #     account_id: "NonEmptyString", # required
+    #     bot_id: "NonEmptyString", # required
+    #     outbound_events_https_endpoint: "SensitiveString",
+    #     lambda_function_arn: "SensitiveString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events_configuration.bot_id #=> String
+    #   resp.events_configuration.outbound_events_https_endpoint #=> String
+    #   resp.events_configuration.lambda_function_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutEventsConfiguration AWS API Documentation
+    #
+    # @overload put_events_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_events_configuration(params = {}, options = {})
+      req = build_request(:put_events_configuration, params)
+      req.send_request(options)
+    end
+
     # Adds origination settings for the specified Amazon Chime Voice
     # Connector.
     #
@@ -1755,6 +1997,46 @@ module Aws::Chime
     # @param [Hash] params ({})
     def put_voice_connector_termination_credentials(params = {}, options = {})
       req = build_request(:put_voice_connector_termination_credentials, params)
+      req.send_request(options)
+    end
+
+    # Regenerates the security token for a bot.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :bot_id
+    #   The bot ID.
+    #
+    # @return [Types::RegenerateSecurityTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegenerateSecurityTokenResponse#bot #bot} => Types::Bot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.regenerate_security_token({
+    #     account_id: "NonEmptyString", # required
+    #     bot_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot.bot_id #=> String
+    #   resp.bot.user_id #=> String
+    #   resp.bot.display_name #=> String
+    #   resp.bot.bot_type #=> String, one of "ChatBot"
+    #   resp.bot.disabled #=> Boolean
+    #   resp.bot.created_timestamp #=> Time
+    #   resp.bot.updated_timestamp #=> Time
+    #   resp.bot.bot_email #=> String
+    #   resp.bot.security_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RegenerateSecurityToken AWS API Documentation
+    #
+    # @overload regenerate_security_token(params = {})
+    # @param [Hash] params ({})
+    def regenerate_security_token(params = {}, options = {})
+      req = build_request(:regenerate_security_token, params)
       req.send_request(options)
     end
 
@@ -1969,6 +2251,51 @@ module Aws::Chime
     # @param [Hash] params ({})
     def update_account_settings(params = {}, options = {})
       req = build_request(:update_account_settings, params)
+      req.send_request(options)
+    end
+
+    # Updates the status of the specified bot, such as starting or stopping
+    # the bot from running in your Amazon Chime Enterprise account.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :bot_id
+    #   The bot ID.
+    #
+    # @option params [Boolean] :disabled
+    #   When true, stops the specified bot from running in your account.
+    #
+    # @return [Types::UpdateBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBotResponse#bot #bot} => Types::Bot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_bot({
+    #     account_id: "NonEmptyString", # required
+    #     bot_id: "NonEmptyString", # required
+    #     disabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot.bot_id #=> String
+    #   resp.bot.user_id #=> String
+    #   resp.bot.display_name #=> String
+    #   resp.bot.bot_type #=> String, one of "ChatBot"
+    #   resp.bot.disabled #=> Boolean
+    #   resp.bot.created_timestamp #=> Time
+    #   resp.bot.updated_timestamp #=> Time
+    #   resp.bot.bot_email #=> String
+    #   resp.bot.security_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateBot AWS API Documentation
+    #
+    # @overload update_bot(params = {})
+    # @param [Hash] params ({})
+    def update_bot(params = {}, options = {})
+      req = build_request(:update_bot, params)
       req.send_request(options)
     end
 
@@ -2193,7 +2520,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -66,7 +66,7 @@ module Aws::RDS
 
     # The effective date when the pending maintenance action is applied to
     # the resource. This date takes into account opt-in requests received
-    # from the ApplyPendingMaintenanceAction API, the
+    # from the `ApplyPendingMaintenanceAction` API, the
     # `AutoAppliedAfterDate`, and the `ForcedApplyDate`. This value is blank
     # if an opt-in request has not been received and nothing has been
     # specified as `AutoAppliedAfterDate` or `ForcedApplyDate`.

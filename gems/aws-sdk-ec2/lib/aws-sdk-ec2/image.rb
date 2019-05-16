@@ -359,9 +359,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
@@ -460,13 +460,13 @@ module Aws::EC2
     #   The operation type. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     # @option options [Array<String>] :product_codes
-    #   One or more DevPay product codes. After you add a product code to an
-    #   AMI, it can't be removed.
+    #   The DevPay product codes. After you add a product code to an AMI, it
+    #   can't be removed.
     # @option options [Array<String>] :user_groups
-    #   One or more user groups. This parameter can be used only when the
-    #   `Attribute` parameter is `launchPermission`.
+    #   The user groups. This parameter can be used only when the `Attribute`
+    #   parameter is `launchPermission`.
     # @option options [Array<String>] :user_ids
-    #   One or more AWS account IDs. This parameter can be used only when the
+    #   The AWS account IDs. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     # @option options [String] :value
     #   The value of the attribute being modified. This parameter can be used

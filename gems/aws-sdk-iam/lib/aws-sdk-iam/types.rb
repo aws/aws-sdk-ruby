@@ -634,16 +634,10 @@ module Aws::IAM
     #   The name of the group to create. Do not include the path in this
     #   value.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-. The group name must be unique within the
-    #   account. Group names are not distinguished by case. For example, you
-    #   cannot create groups named both "ADMINS" and "admins".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroupRequest AWS API Documentation
@@ -902,14 +896,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The friendly name of the policy.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -937,6 +927,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The JSON policy document that you want to use as the content for the
     #   new policy.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1013,6 +1008,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The JSON policy document that you want to use as the content for
     #   this new version of the policy.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1110,22 +1110,20 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to create.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #   Role names are not distinguished by case. For example, you cannot
-    #   create roles named both "PRODROLE" and "prodrole".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @!attribute [rw] assume_role_policy_document
     #   The trust relationship policy document that grants an entity
     #   permission to assume the role.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1294,7 +1292,7 @@ module Aws::IAM
     #
     #   Service principals are unique and case-sensitive. To find the exact
     #   service principal for your service-linked role, see [AWS Services
-    #   That Work with IAM][1] in the *IAM User Guide* and look for the
+    #   That Work with IAM][1] in the *IAM User Guide*. Look for the
     #   services that have <b>Yes </b>in the **Service-Linked Role** column.
     #   Choose the **Yes** link to view the service-linked role
     #   documentation for that service.
@@ -1384,8 +1382,8 @@ module Aws::IAM
     #   service-specific credential.
     #
     #   This is the only time that the password for this credential set is
-    #   available. It cannot be recovered later. Instead, you will have to
-    #   reset the password with ResetServiceSpecificCredential.
+    #   available. It cannot be recovered later. Instead, you must reset the
+    #   password with ResetServiceSpecificCredential.
     #   @return [Types::ServiceSpecificCredential]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredentialResponse AWS API Documentation
@@ -1433,16 +1431,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to create.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-. User names are not distinguished by case. For
-    #   example, you cannot create users named both "TESTUSER" and
-    #   "testuser".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @!attribute [rw] permissions_boundary
@@ -3110,6 +3102,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   IAM stores policies in JSON format. However, resources that were
+    #   created using AWS CloudFormation templates can be formatted in YAML.
+    #   AWS CloudFormation always converts a YAML policy to JSON format
+    #   before submitting it to IAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicyResponse AWS API Documentation
@@ -3498,6 +3495,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   IAM stores policies in JSON format. However, resources that were
+    #   created using AWS CloudFormation templates can be formatted in YAML.
+    #   AWS CloudFormation always converts a YAML policy to JSON format
+    #   before submitting it to IAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicyResponse AWS API Documentation
@@ -3831,7 +3833,7 @@ module Aws::IAM
     #
     #   To learn the service namespace for a service, go to [Actions,
     #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
-    #   Guide* and choose the name of the service to view details for that
+    #   Guide*. Choose the name of the service to view details for that
     #   service. In the first paragraph, find the service prefix. For
     #   example, `(service prefix: a4b)`. For more information about service
     #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
@@ -4026,6 +4028,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   IAM stores policies in JSON format. However, resources that were
+    #   created using AWS CloudFormation templates can be formatted in YAML.
+    #   AWS CloudFormation always converts a YAML policy to JSON format
+    #   before submitting it to IAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicyResponse AWS API Documentation
@@ -5862,8 +5869,8 @@ module Aws::IAM
     # @!attribute [rw] marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
-    #   to the value of the `Marker` element in the response to indicate
-    #   where the next call should start.
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -6439,8 +6446,8 @@ module Aws::IAM
     # @!attribute [rw] marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
-    #   to the value of the `Marker` element in the response to indicate
-    #   where the next call should start.
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -7374,14 +7381,7 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to associate the policy with.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   &amp;regex-name;.
     #   @return [String]
     #
     # @!attribute [rw] policy_name
@@ -7399,6 +7399,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -7490,6 +7495,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
     #
@@ -7579,6 +7589,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -7962,9 +7977,11 @@ module Aws::IAM
     #   role.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities
-    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    #   User Guide*.
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
@@ -8066,9 +8083,11 @@ module Aws::IAM
     #   role.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities
-    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    #   User Guide*.
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
@@ -8531,6 +8550,36 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SetSecurityTokenServicePreferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_endpoint_token_version: "v1Token", # required, accepts v1Token, v2Token
+    #       }
+    #
+    # @!attribute [rw] global_endpoint_token_version
+    #   The version of the global endpoint token. Version 1 tokens are valid
+    #   only in AWS Regions that are available by default. These tokens do
+    #   not work in manually enabled Regions, such as Asia Pacific (Hong
+    #   Kong). Version 2 tokens are valid in all Regions. However, version 2
+    #   tokens are longer and might affect systems where you temporarily
+    #   store tokens.
+    #
+    #   For information, see [Activating and Deactivating STS in an AWS
+    #   Region][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetSecurityTokenServicePreferencesRequest AWS API Documentation
+    #
+    class SetSecurityTokenServicePreferencesRequest < Struct.new(
+      :global_endpoint_token_version)
+      include Aws::Structure
+    end
+
     # Contains information about an X.509 signing certificate.
     #
     # This data type is used as a response element in the
@@ -8623,7 +8672,8 @@ module Aws::IAM
     # @!attribute [rw] action_names
     #   A list of names of API operations to evaluate in the simulation.
     #   Each operation is evaluated against each resource. Each operation
-    #   must include the service identifier, such as `iam:CreateUser`.
+    #   must include the service identifier, such as `iam:CreateUser`. This
+    #   operation does not support using wildcards (*) in an action name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_arns
@@ -8677,15 +8727,15 @@ module Aws::IAM
     # @!attribute [rw] resource_owner
     #   An ARN representing the AWS account ID that specifies the owner of
     #   any simulated resource that does not identify its owner in the
-    #   resource ARN, such as an S3 bucket or object. If `ResourceOwner` is
-    #   specified, it is also used as the account owner of any
-    #   `ResourcePolicy` included in the simulation. If the `ResourceOwner`
-    #   parameter is not specified, then the owner of the resources and the
-    #   resource policy defaults to the account of the identity provided in
-    #   `CallerArn`. This parameter is required only if you specify a
-    #   resource-based policy and account that owns the resource is
-    #   different from the account that owns the simulated calling user
-    #   `CallerArn`.
+    #   resource ARN. Examples of resource ARNs include an S3 bucket or
+    #   object. If `ResourceOwner` is specified, it is also used as the
+    #   account owner of any `ResourcePolicy` included in the simulation. If
+    #   the `ResourceOwner` parameter is not specified, then the owner of
+    #   the resources and the resource policy defaults to the account of the
+    #   identity provided in `CallerArn`. This parameter is required only if
+    #   you specify a resource-based policy and account that owns the
+    #   resource is different from the account that owns the simulated
+    #   calling user `CallerArn`.
     #
     #   The ARN for an account uses the following syntax:
     #   `arn:aws:iam::AWS-account-ID:root`. For example, to represent the
@@ -8706,7 +8756,7 @@ module Aws::IAM
     # @!attribute [rw] context_entries
     #   A list of context keys and corresponding values for the simulation
     #   to use. Whenever a context key is evaluated in one of the simulated
-    #   IAM permission policies, the corresponding value is supplied.
+    #   IAM permissions policies, the corresponding value is supplied.
     #   @return [Array<Types::ContextEntry>]
     #
     # @!attribute [rw] resource_handling_option
@@ -8938,15 +8988,16 @@ module Aws::IAM
     #
     # @!attribute [rw] resource_owner
     #   An AWS account ID that specifies the owner of any simulated resource
-    #   that does not identify its owner in the resource ARN, such as an S3
-    #   bucket or object. If `ResourceOwner` is specified, it is also used
-    #   as the account owner of any `ResourcePolicy` included in the
-    #   simulation. If the `ResourceOwner` parameter is not specified, then
-    #   the owner of the resources and the resource policy defaults to the
-    #   account of the identity provided in `CallerArn`. This parameter is
-    #   required only if you specify a resource-based policy and account
-    #   that owns the resource is different from the account that owns the
-    #   simulated calling user `CallerArn`.
+    #   that does not identify its owner in the resource ARN. Examples of
+    #   resource ARNs include an S3 bucket or object. If `ResourceOwner` is
+    #   specified, it is also used as the account owner of any
+    #   `ResourcePolicy` included in the simulation. If the `ResourceOwner`
+    #   parameter is not specified, then the owner of the resources and the
+    #   resource policy defaults to the account of the identity provided in
+    #   `CallerArn`. This parameter is required only if you specify a
+    #   resource-based policy and account that owns the resource is
+    #   different from the account that owns the simulated calling user
+    #   `CallerArn`.
     #   @return [String]
     #
     # @!attribute [rw] caller_arn
@@ -9485,6 +9536,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy that grants an entity permission to assume the role.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
     #
@@ -9553,14 +9609,10 @@ module Aws::IAM
     #   New name for the IAM group. Only include this if changing the
     #   group's name.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroupRequest AWS API Documentation
@@ -10058,14 +10110,10 @@ module Aws::IAM
     #   New name for the user. Include this parameter only if you're
     #   changing the user's name.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUserRequest AWS API Documentation
@@ -10428,9 +10476,11 @@ module Aws::IAM
     #   user.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities
-    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    #   User Guide*.
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
@@ -10524,9 +10574,11 @@ module Aws::IAM
     #   user.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities
-    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
-    #   User Guide*.
+    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags

@@ -239,7 +239,7 @@ module Aws::SageMaker
     #             {
     #               channel_name: "ChannelName", # required
     #               data_source: { # required
-    #                 s3_data_source: { # required
+    #                 s3_data_source: {
     #                   s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                   s3_uri: "S3Uri", # required
     #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -345,7 +345,7 @@ module Aws::SageMaker
     #                 {
     #                   channel_name: "ChannelName", # required
     #                   data_source: { # required
-    #                     s3_data_source: { # required
+    #                     s3_data_source: {
     #                       s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                       s3_uri: "S3Uri", # required
     #                       s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -457,6 +457,8 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox`
     #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox`
+    #
     #   * *Image classification* - Uses a variant of the Expectation
     #     Maximization approach to estimate the true class of an image based
     #     on annotations from individual workers.
@@ -470,6 +472,8 @@ module Aws::SageMaker
     #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass`
     #
     #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass`
     #
     #   * *Semantic segmentation* - Treats each pixel in an image as a
     #     multi-class classification and treats pixel annotations from
@@ -485,6 +489,8 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation`
     #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation`
+    #
     #   * *Text classification* - Uses a variant of the Expectation
     #     Maximization approach to estimate the true class of text based on
     #     annotations from individual workers.
@@ -498,6 +504,8 @@ module Aws::SageMaker
     #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass`
     #
     #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass`
     #
     #   For more information, see [Annotation Consolidation][1].
     #
@@ -568,7 +576,7 @@ module Aws::SageMaker
     #       {
     #         channel_name: "ChannelName", # required
     #         data_source: { # required
-    #           s3_data_source: { # required
+    #           s3_data_source: {
     #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #             s3_uri: "S3Uri", # required
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -858,7 +866,24 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] container_hostname
-    #   This parameter is ignored.
+    #   This parameter is ignored for models that contain only a
+    #   `PrimaryContainer`.
+    #
+    #   When a `ContainerDefinition` is part of an inference pipeline, the
+    #   value of ths parameter uniquely identifies the container for the
+    #   purposes of logging and metrics. For information, see [Use Logs and
+    #   Metrics to Monitor an Inference Pipeline][1]. If you don't specify
+    #   a value for this parameter for a `ContainerDefinition` that is part
+    #   of an inference pipeline, a unique name is automatically assigned
+    #   based on the position of the `ContainerDefinition` in the pipeline.
+    #   If you specify a value for the `ContainerHostName` for any
+    #   `ContainerDefinition` that is part of an inference pipeline, you
+    #   must specify a value for the `ContainerHostName` parameter of every
+    #   `ContainerDefinition` in that pipeline.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -878,19 +903,27 @@ module Aws::SageMaker
     # @!attribute [rw] model_data_url
     #   The S3 path where the model artifacts, which result from model
     #   training, are stored. This path must point to a single gzip
-    #   compressed tar archive (.tar.gz suffix).
+    #   compressed tar archive (.tar.gz suffix). The S3 path is required for
+    #   Amazon SageMaker built-in algorithms, but not if you use your own
+    #   algorithms. For more information on built-in algorithms, see [Common
+    #   Parameters][1].
     #
     #   If you provide a value for this parameter, Amazon SageMaker uses AWS
     #   Security Token Service to download model artifacts from the S3 path
     #   you provide. AWS STS is activated in your IAM user account by
     #   default. If you previously deactivated AWS STS for a region, you
     #   need to reactivate AWS STS for that region. For more information,
-    #   see [Activating and Deactivating AWS STS in an AWS Region][1] in the
+    #   see [Activating and Deactivating AWS STS in an AWS Region][2] in the
     #   *AWS Identity and Access Management User Guide*.
     #
+    #   If you use a built-in algorithm to create a model, Amazon SageMaker
+    #   requires that you provide a S3 path to the model artifacts in
+    #   `ModelDataUrl`.
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -944,8 +977,8 @@ module Aws::SageMaker
     # @!attribute [rw] scaling_type
     #   The scale that hyperparameter tuning uses to search the
     #   hyperparameter range. For information about choosing a
-    #   hyperparameter scale, see [Hyperparameter Range Scaling][1]. One of
-    #   the following values:
+    #   hyperparameter scale, see [Hyperparameter Scaling][1]. One of the
+    #   following values:
     #
     #   Auto
     #
@@ -1100,7 +1133,7 @@ module Aws::SageMaker
     #                   {
     #                     channel_name: "ChannelName", # required
     #                     data_source: { # required
-    #                       s3_data_source: { # required
+    #                       s3_data_source: {
     #                         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                         s3_uri: "S3Uri", # required
     #                         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -1301,7 +1334,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens, rk3399, rk3288
+    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -1314,7 +1347,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IIAMAM role that enables Amazon
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
     #   SageMaker to perform tasks on your behalf.
     #
     #   During model compilation, Amazon SageMaker needs your permission to:
@@ -1415,14 +1448,14 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] production_variants
-    #   An array of `ProductionVariant` objects, one for each model that you
+    #   An list of `ProductionVariant` objects, one for each model that you
     #   want to host at this endpoint.
     #   @return [Array<Types::ProductionVariant>]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. For more information, see [Using Cost
-    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
-    #   Guide*.
+    #   A list of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the <i> AWS Billing and Cost Management User
+    #   Guide</i>.
     #
     #
     #
@@ -1521,7 +1554,7 @@ module Aws::SageMaker
     #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
     #         hyper_parameter_tuning_job_config: { # required
     #           strategy: "Bayesian", # required, accepts Bayesian, Random
-    #           hyper_parameter_tuning_job_objective: { # required
+    #           hyper_parameter_tuning_job_objective: {
     #             type: "Maximize", # required, accepts Maximize, Minimize
     #             metric_name: "MetricName", # required
     #           },
@@ -1529,7 +1562,7 @@ module Aws::SageMaker
     #             max_number_of_training_jobs: 1, # required
     #             max_parallel_training_jobs: 1, # required
     #           },
-    #           parameter_ranges: { # required
+    #           parameter_ranges: {
     #             integer_parameter_ranges: [
     #               {
     #                 name: "ParameterKey", # required
@@ -1555,7 +1588,7 @@ module Aws::SageMaker
     #           },
     #           training_job_early_stopping_type: "Off", # accepts Off, Auto
     #         },
-    #         training_job_definition: { # required
+    #         training_job_definition: {
     #           static_hyper_parameters: {
     #             "ParameterKey" => "ParameterValue",
     #           },
@@ -1575,7 +1608,7 @@ module Aws::SageMaker
     #             {
     #               channel_name: "ChannelName", # required
     #               data_source: { # required
-    #                 s3_data_source: { # required
+    #                 s3_data_source: {
     #                   s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                   s3_uri: "S3Uri", # required
     #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -1979,17 +2012,18 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] vpc_config
-    #   A VpcConfig object that specifies the VPC that you want your model
-    #   to connect to. Control access to and from your model container by
-    #   configuring the VPC. `VpcConfig` is used in hosting services and in
-    #   batch transform. For more information, see [Protect Endpoints by
-    #   Using an Amazon Virtual Private Cloud][1] and [Protect Data in Batch
-    #   Transform Jobs by Using an Amazon Virtual Private Cloud][2].
+    #   A [VpcConfig][1] object that specifies the VPC that you want your
+    #   model to connect to. Control access to and from your model container
+    #   by configuring the VPC. `VpcConfig` is used in hosting services and
+    #   in batch transform. For more information, see [Protect Endpoints by
+    #   Using an Amazon Virtual Private Cloud][2] and [Protect Data in Batch
+    #   Transform Jobs by Using an Amazon Virtual Private Cloud][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] enable_network_isolation
@@ -2219,11 +2253,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt
-    #   data at rest on the ML storage volume that is attached to your
-    #   notebook instance. The KMS key you provide must be enabled. For
-    #   information, see [Enabling and Disabling Keys][1] in the *AWS Key
-    #   Management Service Developer Guide*.
+    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
+    #   that Amazon SageMaker uses to encrypt data on the storage volume
+    #   attached to your notebook instance. The KMS key you provide must be
+    #   enabled. For information, see [Enabling and Disabling Keys][1] in
+    #   the *AWS Key Management Service Developer Guide*.
     #
     #
     #
@@ -2461,7 +2495,7 @@ module Aws::SageMaker
     #           {
     #             channel_name: "ChannelName", # required
     #             data_source: { # required
-    #               s3_data_source: { # required
+    #               s3_data_source: {
     #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                 s3_uri: "S3Uri", # required
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -2743,9 +2777,18 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_concurrent_transforms
     #   The maximum number of parallel requests that can be sent to each
-    #   instance in a transform job. The default value is `1`. To allow
-    #   Amazon SageMaker to determine the appropriate number for
-    #   `MaxConcurrentTransforms`, set the value to `0`.
+    #   instance in a transform job. If `MaxConcurrentTransforms` is set to
+    #   `0` or left unset, Amazon SageMaker checks the optional
+    #   execution-parameters to determine the optimal settings for your
+    #   chosen algorithm. If the execution-parameters endpoint is not
+    #   enabled, the default value is `1`. For more information on
+    #   execution-parameters, see [How Containers Serve Requests][1]. For
+    #   built-in algorithms, you don't need to set a value for
+    #   `MaxConcurrentTransforms`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests
     #   @return [Integer]
     #
     # @!attribute [rw] max_payload_in_mb
@@ -2852,6 +2895,9 @@ module Aws::SageMaker
     #           },
     #         ],
     #         description: "String200", # required
+    #         notification_configuration: {
+    #           notification_topic_arn: "NotificationTopicArn",
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -2881,6 +2927,11 @@ module Aws::SageMaker
     #   A description of the work team.
     #   @return [String]
     #
+    # @!attribute [rw] notification_configuration
+    #   Configures notification of workers regarding available or expiring
+    #   work items.
+    #   @return [Types::NotificationConfiguration]
+    #
     # @!attribute [rw] tags
     #   @return [Array<Types::Tag>]
     #
@@ -2890,6 +2941,7 @@ module Aws::SageMaker
       :workteam_name,
       :member_definitions,
       :description,
+      :notification_configuration,
       :tags)
       include Aws::Structure
     end
@@ -2912,7 +2964,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         s3_data_source: { # required
+    #         s3_data_source: {
     #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #           s3_uri: "S3Uri", # required
     #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -5156,6 +5208,16 @@ module Aws::SageMaker
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass`
+    #
+    #   **Asia Pacific (Sydney (ap-southeast-1):**
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass`
     #   @return [String]
     #
     # @!attribute [rw] task_keywords
@@ -5388,7 +5450,7 @@ module Aws::SageMaker
     #           {
     #             channel_name: "ChannelName", # required
     #             data_source: { # required
-    #               s3_data_source: { # required
+    #               s3_data_source: {
     #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                 s3_uri: "S3Uri", # required
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -5626,7 +5688,7 @@ module Aws::SageMaker
     #
     #       {
     #         strategy: "Bayesian", # required, accepts Bayesian, Random
-    #         hyper_parameter_tuning_job_objective: { # required
+    #         hyper_parameter_tuning_job_objective: {
     #           type: "Maximize", # required, accepts Maximize, Minimize
     #           metric_name: "MetricName", # required
     #         },
@@ -5634,7 +5696,7 @@ module Aws::SageMaker
     #           max_number_of_training_jobs: 1, # required
     #           max_parallel_training_jobs: 1, # required
     #         },
-    #         parameter_ranges: { # required
+    #         parameter_ranges: {
     #           integer_parameter_ranges: [
     #             {
     #               name: "ParameterKey", # required
@@ -6089,8 +6151,8 @@ module Aws::SageMaker
     # @!attribute [rw] scaling_type
     #   The scale that hyperparameter tuning uses to search the
     #   hyperparameter range. For information about choosing a
-    #   hyperparameter scale, see [Hyperparameter Range Scaling][1]. One of
-    #   the following values:
+    #   hyperparameter scale, see [Hyperparameter Scaling][1]. One of the
+    #   following values:
     #
     #   Auto
     #
@@ -6329,6 +6391,10 @@ module Aws::SageMaker
     #   Provides information about the progress of a labeling job.
     #   @return [Types::LabelCountersForWorkteam]
     #
+    # @!attribute [rw] number_of_human_workers_per_data_object
+    #   The configured number of workers per data object.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobForWorkteamSummary AWS API Documentation
     #
     class LabelingJobForWorkteamSummary < Struct.new(
@@ -6336,7 +6402,8 @@ module Aws::SageMaker
       :job_reference_code,
       :work_requester_account_id,
       :creation_time,
-      :label_counters)
+      :label_counters,
+      :number_of_human_workers_per_data_object)
       include Aws::Structure
     end
 
@@ -6892,8 +6959,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] creation_time_after
-    #   A filter that returns only endpoint configurations created after the
-    #   specified time (timestamp).
+    #   A filter that returns only endpoint configurations with a creation
+    #   time greater than or equal to the specified time (timestamp).
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigsInput AWS API Documentation
@@ -6972,8 +7039,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] creation_time_after
-    #   A filter that returns only endpoints that were created after the
-    #   specified time (timestamp).
+    #   A filter that returns only endpoints with a creation time greater
+    #   than or equal to the specified time (timestamp).
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time_before
@@ -7430,8 +7497,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] creation_time_after
-    #   A filter that returns only models created after the specified time
-    #   (timestamp).
+    #   A filter that returns only models with a creation time greater than
+    #   or equal to the specified time (timestamp).
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsInput AWS API Documentation
@@ -8725,6 +8792,28 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configures SNS notifications of available or expiring work items for
+    # work teams.
+    #
+    # @note When making an API call, you may pass NotificationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         notification_topic_arn: "NotificationTopicArn",
+    #       }
+    #
+    # @!attribute [rw] notification_topic_arn
+    #   The ARN for the SNS topic to which notifications should be
+    #   published.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotificationConfiguration AWS API Documentation
+    #
+    class NotificationConfiguration < Struct.new(
+      :notification_topic_arn)
+      include Aws::Structure
+    end
+
     # Specifies the number of training jobs that this hyperparameter tuning
     # job launched, categorized by the status of their objective metric. The
     # objective metric status shows whether the final objective metric for
@@ -8766,7 +8855,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens, rk3399, rk3288
+    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288
     #       }
     #
     # @!attribute [rw] s3_output_location
@@ -10468,7 +10557,7 @@ module Aws::SageMaker
     #           {
     #             channel_name: "ChannelName", # required
     #             data_source: { # required
-    #               s3_data_source: { # required
+    #               s3_data_source: {
     #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                 s3_uri: "S3Uri", # required
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -11154,6 +11243,10 @@ module Aws::SageMaker
     #   If you choose `ManifestFile`, `S3Uri` identifies an object that is a
     #   manifest file containing a list of object keys that you want Amazon
     #   SageMaker to use for batch transform.
+    #
+    #   The following values are compatible: `ManifestFile`, `S3Prefix`
+    #
+    #   The following value is not compatible: `AugmentedManifestFile`
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
@@ -11456,7 +11549,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] disassociate_lifecycle_config
     #   Set to `true` to remove the notebook instance lifecycle
-    #   configuration currently associated with the notebook instance.
+    #   configuration currently associated with the notebook instance. This
+    #   operation is idempotent. If you specify a lifecycle configuration
+    #   that is not associated with the notebook instance when you call this
+    #   method, it does not throw an error.
     #   @return [Boolean]
     #
     # @!attribute [rw] volume_size_in_gb
@@ -11507,17 +11603,23 @@ module Aws::SageMaker
     #
     # @!attribute [rw] disassociate_accelerator_types
     #   A list of the Elastic Inference (EI) instance types to remove from
-    #   this notebook instance.
+    #   this notebook instance. This operation is idempotent. If you specify
+    #   an accelerator type that is not associated with the notebook
+    #   instance when you call this method, it does not throw an error.
     #   @return [Boolean]
     #
     # @!attribute [rw] disassociate_default_code_repository
     #   The name or URL of the default Git repository to remove from this
-    #   notebook instance.
+    #   notebook instance. This operation is idempotent. If you specify a
+    #   Git repository that is not associated with the notebook instance
+    #   when you call this method, it does not throw an error.
     #   @return [Boolean]
     #
     # @!attribute [rw] disassociate_additional_code_repositories
     #   A list of names or URLs of the default Git repositories to remove
-    #   from this notebook instance.
+    #   from this notebook instance. This operation is idempotent. If you
+    #   specify a Git repository that is not associated with the notebook
+    #   instance when you call this method, it does not throw an error.
     #   @return [Boolean]
     #
     # @!attribute [rw] root_access
@@ -11613,6 +11715,9 @@ module Aws::SageMaker
     #           },
     #         ],
     #         description: "String200",
+    #         notification_configuration: {
+    #           notification_topic_arn: "NotificationTopicArn",
+    #         },
     #       }
     #
     # @!attribute [rw] workteam_name
@@ -11628,12 +11733,18 @@ module Aws::SageMaker
     #   An updated description for the work team.
     #   @return [String]
     #
+    # @!attribute [rw] notification_configuration
+    #   Configures SNS topic notifications for available or expiring work
+    #   items
+    #   @return [Types::NotificationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkteamRequest AWS API Documentation
     #
     class UpdateWorkteamRequest < Struct.new(
       :workteam_name,
       :member_definitions,
-      :description)
+      :description,
+      :notification_configuration)
       include Aws::Structure
     end
 
@@ -11676,6 +11787,13 @@ module Aws::SageMaker
     # @!attribute [rw] subnets
     #   The ID of the subnets in the VPC to which you want to connect your
     #   training job or model.
+    #
+    #   <note markdown="1"> Amazon EC2 P3 accelerated computing instances are not available in
+    #   the c/d/e availability zones of region us-east-1. If you want to
+    #   create endpoints with P3 instances in VPC mode in region us-east-1,
+    #   create subnets in a/b/f availability zones instead.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VpcConfig AWS API Documentation
@@ -11721,6 +11839,11 @@ module Aws::SageMaker
     #   The date and time that the work team was last updated (timestamp).
     #   @return [Time]
     #
+    # @!attribute [rw] notification_configuration
+    #   Configures SNS notifications of available or expiring work items for
+    #   work teams.
+    #   @return [Types::NotificationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workteam AWS API Documentation
     #
     class Workteam < Struct.new(
@@ -11731,7 +11854,8 @@ module Aws::SageMaker
       :description,
       :sub_domain,
       :create_date,
-      :last_updated_date)
+      :last_updated_date,
+      :notification_configuration)
       include Aws::Structure
     end
 

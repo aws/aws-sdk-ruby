@@ -236,12 +236,13 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom
+    #   bundles, and IP access control groups.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags. Each WorkSpace can have a maximum of 50 tags.
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsRequest AWS API Documentation
@@ -385,8 +386,9 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom
+    #   bundles, and IP access control groups.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -576,8 +578,9 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom
+    #   bundles, and IP access control groups.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsRequest AWS API Documentation

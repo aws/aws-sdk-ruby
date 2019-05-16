@@ -42,6 +42,6 @@ require_relative 'aws-sdk-lambdapreview/customizations'
 # @service
 module Aws::LambdaPreview
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.11.0'
 
 end

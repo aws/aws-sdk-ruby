@@ -104,6 +104,8 @@ module Aws::MediaLive
     DeleteInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'DeleteInputSecurityGroupResponse')
     DeleteReservationRequest = Shapes::StructureShape.new(name: 'DeleteReservationRequest')
     DeleteReservationResponse = Shapes::StructureShape.new(name: 'DeleteReservationResponse')
+    DeleteScheduleRequest = Shapes::StructureShape.new(name: 'DeleteScheduleRequest')
+    DeleteScheduleResponse = Shapes::StructureShape.new(name: 'DeleteScheduleResponse')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
@@ -352,6 +354,7 @@ module Aws::MediaLive
     ScheduleAction = Shapes::StructureShape.new(name: 'ScheduleAction')
     ScheduleActionSettings = Shapes::StructureShape.new(name: 'ScheduleActionSettings')
     ScheduleActionStartSettings = Shapes::StructureShape.new(name: 'ScheduleActionStartSettings')
+    ScheduleDeleteResultModel = Shapes::StructureShape.new(name: 'ScheduleDeleteResultModel')
     ScheduleDescribeResultModel = Shapes::StructureShape.new(name: 'ScheduleDescribeResultModel')
     Scte20Convert608To708 = Shapes::StringShape.new(name: 'Scte20Convert608To708')
     Scte20PlusEmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'Scte20PlusEmbeddedDestinationSettings')
@@ -408,6 +411,9 @@ module Aws::MediaLive
     UdpTimedMetadataId3Frame = Shapes::StringShape.new(name: 'UdpTimedMetadataId3Frame')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
     UpdateChannel = Shapes::StructureShape.new(name: 'UpdateChannel')
+    UpdateChannelClass = Shapes::StructureShape.new(name: 'UpdateChannelClass')
+    UpdateChannelClassRequest = Shapes::StructureShape.new(name: 'UpdateChannelClassRequest')
+    UpdateChannelClassResponse = Shapes::StructureShape.new(name: 'UpdateChannelClassResponse')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateChannelResultModel = Shapes::StructureShape.new(name: 'UpdateChannelResultModel')
@@ -883,6 +889,11 @@ module Aws::MediaLive
     DeleteReservationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DeleteReservationResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
     DeleteReservationResponse.struct_class = Types::DeleteReservationResponse
+
+    DeleteScheduleRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
+    DeleteScheduleRequest.struct_class = Types::DeleteScheduleRequest
+
+    DeleteScheduleResponse.struct_class = Types::DeleteScheduleResponse
 
     DeleteTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     DeleteTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
@@ -1695,6 +1706,8 @@ module Aws::MediaLive
     ScheduleActionStartSettings.add_member(:follow_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: FollowModeScheduleActionStartSettings, location_name: "followModeScheduleActionStartSettings"))
     ScheduleActionStartSettings.struct_class = Types::ScheduleActionStartSettings
 
+    ScheduleDeleteResultModel.struct_class = Types::ScheduleDeleteResultModel
+
     ScheduleDescribeResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ScheduleDescribeResultModel.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, required: true, location_name: "scheduleActions"))
     ScheduleDescribeResultModel.struct_class = Types::ScheduleDescribeResultModel
@@ -1859,6 +1872,18 @@ module Aws::MediaLive
     UpdateChannel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateChannel.struct_class = Types::UpdateChannel
+
+    UpdateChannelClass.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, required: true, location_name: "channelClass"))
+    UpdateChannelClass.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
+    UpdateChannelClass.struct_class = Types::UpdateChannelClass
+
+    UpdateChannelClassRequest.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, required: true, location_name: "channelClass"))
+    UpdateChannelClassRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
+    UpdateChannelClassRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
+    UpdateChannelClassRequest.struct_class = Types::UpdateChannelClassRequest
+
+    UpdateChannelClassResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
+    UpdateChannelClassResponse.struct_class = Types::UpdateChannelClassResponse
 
     UpdateChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     UpdateChannelRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
@@ -2179,6 +2204,21 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSchedule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/channels/{channelId}/schedule"
+        o.input = Shapes::ShapeRef.new(shape: DeleteScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:delete_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTags"
         o.http_method = "DELETE"
@@ -2459,6 +2499,23 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_channel_class, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChannelClass"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/channels/{channelId}/channelClass"
+        o.input = Shapes::ShapeRef.new(shape: UpdateChannelClassRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChannelClassResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 

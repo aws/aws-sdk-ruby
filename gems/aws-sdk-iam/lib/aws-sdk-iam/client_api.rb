@@ -300,6 +300,7 @@ module Aws::IAM
     ServiceSpecificCredentialsListType = Shapes::ListShape.new(name: 'ServiceSpecificCredentialsListType')
     ServicesLastAccessed = Shapes::ListShape.new(name: 'ServicesLastAccessed')
     SetDefaultPolicyVersionRequest = Shapes::StructureShape.new(name: 'SetDefaultPolicyVersionRequest')
+    SetSecurityTokenServicePreferencesRequest = Shapes::StructureShape.new(name: 'SetSecurityTokenServicePreferencesRequest')
     SigningCertificate = Shapes::StructureShape.new(name: 'SigningCertificate')
     SimulateCustomPolicyRequest = Shapes::StructureShape.new(name: 'SimulateCustomPolicyRequest')
     SimulatePolicyResponse = Shapes::StructureShape.new(name: 'SimulatePolicyResponse')
@@ -373,6 +374,7 @@ module Aws::IAM
     entityNameType = Shapes::StringShape.new(name: 'entityNameType')
     entityTemporarilyUnmodifiableMessage = Shapes::StringShape.new(name: 'entityTemporarilyUnmodifiableMessage')
     existingUserNameType = Shapes::StringShape.new(name: 'existingUserNameType')
+    globalEndpointTokenVersion = Shapes::StringShape.new(name: 'globalEndpointTokenVersion')
     groupDetailListType = Shapes::ListShape.new(name: 'groupDetailListType')
     groupListType = Shapes::ListShape.new(name: 'groupListType')
     groupNameListType = Shapes::ListShape.new(name: 'groupNameListType')
@@ -423,6 +425,7 @@ module Aws::IAM
     publicKeyFingerprintType = Shapes::StringShape.new(name: 'publicKeyFingerprintType')
     publicKeyIdType = Shapes::StringShape.new(name: 'publicKeyIdType')
     publicKeyMaterialType = Shapes::StringShape.new(name: 'publicKeyMaterialType')
+    responseMarkerType = Shapes::StringShape.new(name: 'responseMarkerType')
     roleDescriptionType = Shapes::StringShape.new(name: 'roleDescriptionType')
     roleDetailListType = Shapes::ListShape.new(name: 'roleDetailListType')
     roleListType = Shapes::ListShape.new(name: 'roleListType')
@@ -794,7 +797,7 @@ module Aws::IAM
     GetAccountAuthorizationDetailsResponse.add_member(:role_detail_list, Shapes::ShapeRef.new(shape: roleDetailListType, location_name: "RoleDetailList"))
     GetAccountAuthorizationDetailsResponse.add_member(:policies, Shapes::ShapeRef.new(shape: ManagedPolicyDetailListType, location_name: "Policies"))
     GetAccountAuthorizationDetailsResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    GetAccountAuthorizationDetailsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    GetAccountAuthorizationDetailsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     GetAccountAuthorizationDetailsResponse.struct_class = Types::GetAccountAuthorizationDetailsResponse
 
     GetAccountPasswordPolicyResponse.add_member(:password_policy, Shapes::ShapeRef.new(shape: PasswordPolicy, required: true, location_name: "PasswordPolicy"))
@@ -835,7 +838,7 @@ module Aws::IAM
     GetGroupResponse.add_member(:group, Shapes::ShapeRef.new(shape: Group, required: true, location_name: "Group"))
     GetGroupResponse.add_member(:users, Shapes::ShapeRef.new(shape: userListType, required: true, location_name: "Users"))
     GetGroupResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    GetGroupResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    GetGroupResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     GetGroupResponse.struct_class = Types::GetGroupResponse
 
     GetInstanceProfileRequest.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: instanceProfileNameType, required: true, location_name: "InstanceProfileName"))
@@ -919,7 +922,7 @@ module Aws::IAM
     GetServiceLastAccessedDetailsResponse.add_member(:services_last_accessed, Shapes::ShapeRef.new(shape: ServicesLastAccessed, required: true, location_name: "ServicesLastAccessed"))
     GetServiceLastAccessedDetailsResponse.add_member(:job_completion_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "JobCompletionDate"))
     GetServiceLastAccessedDetailsResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    GetServiceLastAccessedDetailsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    GetServiceLastAccessedDetailsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     GetServiceLastAccessedDetailsResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
     GetServiceLastAccessedDetailsResponse.struct_class = Types::GetServiceLastAccessedDetailsResponse
 
@@ -934,7 +937,7 @@ module Aws::IAM
     GetServiceLastAccessedDetailsWithEntitiesResponse.add_member(:job_completion_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "JobCompletionDate"))
     GetServiceLastAccessedDetailsWithEntitiesResponse.add_member(:entity_details_list, Shapes::ShapeRef.new(shape: entityDetailsListType, required: true, location_name: "EntityDetailsList"))
     GetServiceLastAccessedDetailsWithEntitiesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    GetServiceLastAccessedDetailsWithEntitiesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    GetServiceLastAccessedDetailsWithEntitiesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     GetServiceLastAccessedDetailsWithEntitiesResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
     GetServiceLastAccessedDetailsWithEntitiesResponse.struct_class = Types::GetServiceLastAccessedDetailsWithEntitiesResponse
 
@@ -991,7 +994,7 @@ module Aws::IAM
 
     ListAccessKeysResponse.add_member(:access_key_metadata, Shapes::ShapeRef.new(shape: accessKeyMetadataListType, required: true, location_name: "AccessKeyMetadata"))
     ListAccessKeysResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListAccessKeysResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListAccessKeysResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListAccessKeysResponse.struct_class = Types::ListAccessKeysResponse
 
     ListAccountAliasesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
@@ -1000,7 +1003,7 @@ module Aws::IAM
 
     ListAccountAliasesResponse.add_member(:account_aliases, Shapes::ShapeRef.new(shape: accountAliasListType, required: true, location_name: "AccountAliases"))
     ListAccountAliasesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListAccountAliasesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListAccountAliasesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListAccountAliasesResponse.struct_class = Types::ListAccountAliasesResponse
 
     ListAttachedGroupPoliciesRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: groupNameType, required: true, location_name: "GroupName"))
@@ -1011,7 +1014,7 @@ module Aws::IAM
 
     ListAttachedGroupPoliciesResponse.add_member(:attached_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedPolicies"))
     ListAttachedGroupPoliciesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListAttachedGroupPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListAttachedGroupPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListAttachedGroupPoliciesResponse.struct_class = Types::ListAttachedGroupPoliciesResponse
 
     ListAttachedRolePoliciesRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
@@ -1022,7 +1025,7 @@ module Aws::IAM
 
     ListAttachedRolePoliciesResponse.add_member(:attached_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedPolicies"))
     ListAttachedRolePoliciesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListAttachedRolePoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListAttachedRolePoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListAttachedRolePoliciesResponse.struct_class = Types::ListAttachedRolePoliciesResponse
 
     ListAttachedUserPoliciesRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
@@ -1033,7 +1036,7 @@ module Aws::IAM
 
     ListAttachedUserPoliciesResponse.add_member(:attached_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedPolicies"))
     ListAttachedUserPoliciesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListAttachedUserPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListAttachedUserPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListAttachedUserPoliciesResponse.struct_class = Types::ListAttachedUserPoliciesResponse
 
     ListEntitiesForPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicyArn"))
@@ -1048,7 +1051,7 @@ module Aws::IAM
     ListEntitiesForPolicyResponse.add_member(:policy_users, Shapes::ShapeRef.new(shape: PolicyUserListType, location_name: "PolicyUsers"))
     ListEntitiesForPolicyResponse.add_member(:policy_roles, Shapes::ShapeRef.new(shape: PolicyRoleListType, location_name: "PolicyRoles"))
     ListEntitiesForPolicyResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListEntitiesForPolicyResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListEntitiesForPolicyResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListEntitiesForPolicyResponse.struct_class = Types::ListEntitiesForPolicyResponse
 
     ListGroupPoliciesRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: groupNameType, required: true, location_name: "GroupName"))
@@ -1058,7 +1061,7 @@ module Aws::IAM
 
     ListGroupPoliciesResponse.add_member(:policy_names, Shapes::ShapeRef.new(shape: policyNameListType, required: true, location_name: "PolicyNames"))
     ListGroupPoliciesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListGroupPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListGroupPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListGroupPoliciesResponse.struct_class = Types::ListGroupPoliciesResponse
 
     ListGroupsForUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
@@ -1068,7 +1071,7 @@ module Aws::IAM
 
     ListGroupsForUserResponse.add_member(:groups, Shapes::ShapeRef.new(shape: groupListType, required: true, location_name: "Groups"))
     ListGroupsForUserResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListGroupsForUserResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListGroupsForUserResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListGroupsForUserResponse.struct_class = Types::ListGroupsForUserResponse
 
     ListGroupsRequest.add_member(:path_prefix, Shapes::ShapeRef.new(shape: pathPrefixType, location_name: "PathPrefix"))
@@ -1078,7 +1081,7 @@ module Aws::IAM
 
     ListGroupsResponse.add_member(:groups, Shapes::ShapeRef.new(shape: groupListType, required: true, location_name: "Groups"))
     ListGroupsResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListGroupsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListGroupsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListGroupsResponse.struct_class = Types::ListGroupsResponse
 
     ListInstanceProfilesForRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
@@ -1088,7 +1091,7 @@ module Aws::IAM
 
     ListInstanceProfilesForRoleResponse.add_member(:instance_profiles, Shapes::ShapeRef.new(shape: instanceProfileListType, required: true, location_name: "InstanceProfiles"))
     ListInstanceProfilesForRoleResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListInstanceProfilesForRoleResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListInstanceProfilesForRoleResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListInstanceProfilesForRoleResponse.struct_class = Types::ListInstanceProfilesForRoleResponse
 
     ListInstanceProfilesRequest.add_member(:path_prefix, Shapes::ShapeRef.new(shape: pathPrefixType, location_name: "PathPrefix"))
@@ -1098,7 +1101,7 @@ module Aws::IAM
 
     ListInstanceProfilesResponse.add_member(:instance_profiles, Shapes::ShapeRef.new(shape: instanceProfileListType, required: true, location_name: "InstanceProfiles"))
     ListInstanceProfilesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListInstanceProfilesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListInstanceProfilesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListInstanceProfilesResponse.struct_class = Types::ListInstanceProfilesResponse
 
     ListMFADevicesRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, location_name: "UserName"))
@@ -1108,7 +1111,7 @@ module Aws::IAM
 
     ListMFADevicesResponse.add_member(:mfa_devices, Shapes::ShapeRef.new(shape: mfaDeviceListType, required: true, location_name: "MFADevices"))
     ListMFADevicesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListMFADevicesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListMFADevicesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListMFADevicesResponse.struct_class = Types::ListMFADevicesResponse
 
     ListOpenIDConnectProvidersRequest.struct_class = Types::ListOpenIDConnectProvidersRequest
@@ -1127,7 +1130,7 @@ module Aws::IAM
 
     ListPoliciesGrantingServiceAccessResponse.add_member(:policies_granting_service_access, Shapes::ShapeRef.new(shape: listPolicyGrantingServiceAccessResponseListType, required: true, location_name: "PoliciesGrantingServiceAccess"))
     ListPoliciesGrantingServiceAccessResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListPoliciesGrantingServiceAccessResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListPoliciesGrantingServiceAccessResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListPoliciesGrantingServiceAccessResponse.struct_class = Types::ListPoliciesGrantingServiceAccessResponse
 
     ListPoliciesRequest.add_member(:scope, Shapes::ShapeRef.new(shape: policyScopeType, location_name: "Scope"))
@@ -1140,7 +1143,7 @@ module Aws::IAM
 
     ListPoliciesResponse.add_member(:policies, Shapes::ShapeRef.new(shape: policyListType, location_name: "Policies"))
     ListPoliciesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListPoliciesResponse.struct_class = Types::ListPoliciesResponse
 
     ListPolicyVersionsRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicyArn"))
@@ -1150,7 +1153,7 @@ module Aws::IAM
 
     ListPolicyVersionsResponse.add_member(:versions, Shapes::ShapeRef.new(shape: policyDocumentVersionListType, location_name: "Versions"))
     ListPolicyVersionsResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListPolicyVersionsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListPolicyVersionsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListPolicyVersionsResponse.struct_class = Types::ListPolicyVersionsResponse
 
     ListRolePoliciesRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
@@ -1160,7 +1163,7 @@ module Aws::IAM
 
     ListRolePoliciesResponse.add_member(:policy_names, Shapes::ShapeRef.new(shape: policyNameListType, required: true, location_name: "PolicyNames"))
     ListRolePoliciesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListRolePoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListRolePoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListRolePoliciesResponse.struct_class = Types::ListRolePoliciesResponse
 
     ListRoleTagsRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
@@ -1170,7 +1173,7 @@ module Aws::IAM
 
     ListRoleTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
     ListRoleTagsResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListRoleTagsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListRoleTagsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListRoleTagsResponse.struct_class = Types::ListRoleTagsResponse
 
     ListRolesRequest.add_member(:path_prefix, Shapes::ShapeRef.new(shape: pathPrefixType, location_name: "PathPrefix"))
@@ -1180,7 +1183,7 @@ module Aws::IAM
 
     ListRolesResponse.add_member(:roles, Shapes::ShapeRef.new(shape: roleListType, required: true, location_name: "Roles"))
     ListRolesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListRolesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListRolesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListRolesResponse.struct_class = Types::ListRolesResponse
 
     ListSAMLProvidersRequest.struct_class = Types::ListSAMLProvidersRequest
@@ -1195,7 +1198,7 @@ module Aws::IAM
 
     ListSSHPublicKeysResponse.add_member(:ssh_public_keys, Shapes::ShapeRef.new(shape: SSHPublicKeyListType, location_name: "SSHPublicKeys"))
     ListSSHPublicKeysResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListSSHPublicKeysResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListSSHPublicKeysResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListSSHPublicKeysResponse.struct_class = Types::ListSSHPublicKeysResponse
 
     ListServerCertificatesRequest.add_member(:path_prefix, Shapes::ShapeRef.new(shape: pathPrefixType, location_name: "PathPrefix"))
@@ -1205,7 +1208,7 @@ module Aws::IAM
 
     ListServerCertificatesResponse.add_member(:server_certificate_metadata_list, Shapes::ShapeRef.new(shape: serverCertificateMetadataListType, required: true, location_name: "ServerCertificateMetadataList"))
     ListServerCertificatesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListServerCertificatesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListServerCertificatesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListServerCertificatesResponse.struct_class = Types::ListServerCertificatesResponse
 
     ListServiceSpecificCredentialsRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
@@ -1222,7 +1225,7 @@ module Aws::IAM
 
     ListSigningCertificatesResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: certificateListType, required: true, location_name: "Certificates"))
     ListSigningCertificatesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListSigningCertificatesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListSigningCertificatesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListSigningCertificatesResponse.struct_class = Types::ListSigningCertificatesResponse
 
     ListUserPoliciesRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
@@ -1232,7 +1235,7 @@ module Aws::IAM
 
     ListUserPoliciesResponse.add_member(:policy_names, Shapes::ShapeRef.new(shape: policyNameListType, required: true, location_name: "PolicyNames"))
     ListUserPoliciesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListUserPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListUserPoliciesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListUserPoliciesResponse.struct_class = Types::ListUserPoliciesResponse
 
     ListUserTagsRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
@@ -1242,7 +1245,7 @@ module Aws::IAM
 
     ListUserTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
     ListUserTagsResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListUserTagsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListUserTagsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListUserTagsResponse.struct_class = Types::ListUserTagsResponse
 
     ListUsersRequest.add_member(:path_prefix, Shapes::ShapeRef.new(shape: pathPrefixType, location_name: "PathPrefix"))
@@ -1252,7 +1255,7 @@ module Aws::IAM
 
     ListUsersResponse.add_member(:users, Shapes::ShapeRef.new(shape: userListType, required: true, location_name: "Users"))
     ListUsersResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListUsersResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListUsersResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
     ListVirtualMFADevicesRequest.add_member(:assignment_status, Shapes::ShapeRef.new(shape: assignmentStatusType, location_name: "AssignmentStatus"))
@@ -1262,7 +1265,7 @@ module Aws::IAM
 
     ListVirtualMFADevicesResponse.add_member(:virtual_mfa_devices, Shapes::ShapeRef.new(shape: virtualMFADeviceListType, required: true, location_name: "VirtualMFADevices"))
     ListVirtualMFADevicesResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    ListVirtualMFADevicesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    ListVirtualMFADevicesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     ListVirtualMFADevicesResponse.struct_class = Types::ListVirtualMFADevicesResponse
 
     LoginProfile.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
@@ -1521,6 +1524,9 @@ module Aws::IAM
     SetDefaultPolicyVersionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: policyVersionIdType, required: true, location_name: "VersionId"))
     SetDefaultPolicyVersionRequest.struct_class = Types::SetDefaultPolicyVersionRequest
 
+    SetSecurityTokenServicePreferencesRequest.add_member(:global_endpoint_token_version, Shapes::ShapeRef.new(shape: globalEndpointTokenVersion, required: true, location_name: "GlobalEndpointTokenVersion"))
+    SetSecurityTokenServicePreferencesRequest.struct_class = Types::SetSecurityTokenServicePreferencesRequest
+
     SigningCertificate.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
     SigningCertificate.add_member(:certificate_id, Shapes::ShapeRef.new(shape: certificateIdType, required: true, location_name: "CertificateId"))
     SigningCertificate.add_member(:certificate_body, Shapes::ShapeRef.new(shape: certificateBodyType, required: true, location_name: "CertificateBody"))
@@ -1542,7 +1548,7 @@ module Aws::IAM
 
     SimulatePolicyResponse.add_member(:evaluation_results, Shapes::ShapeRef.new(shape: EvaluationResultsListType, location_name: "EvaluationResults"))
     SimulatePolicyResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTruncated"))
-    SimulatePolicyResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
+    SimulatePolicyResponse.add_member(:marker, Shapes::ShapeRef.new(shape: responseMarkerType, location_name: "Marker"))
     SimulatePolicyResponse.struct_class = Types::SimulatePolicyResponse
 
     SimulatePrincipalPolicyRequest.add_member(:policy_source_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicySourceArn"))
@@ -3216,6 +3222,15 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:set_security_token_service_preferences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetSecurityTokenServicePreferences"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetSecurityTokenServicePreferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 

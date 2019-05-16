@@ -54,6 +54,7 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::JsonvalueConverter' => "#{core_plugins}/jsonvalue_converter.rb",
         'Aws::Plugins::ClientMetricsPlugin' => "#{core_plugins}/client_metrics_plugin.rb",
         'Aws::Plugins::ClientMetricsSendPlugin' => "#{core_plugins}/client_metrics_send_plugin.rb",
+        'Aws::Plugins::TransferEncoding' => "#{core_plugins}/transfer_encoding.rb"
       }
     end
 
@@ -64,6 +65,7 @@ module AwsSdkCodeGenerator
       plugins.delete('Aws::Plugins::EndpointPattern')
       plugins.delete('Aws::Plugins::ClientMetricsPlugin')
       plugins.delete('Aws::Plugins::ClientMetricsSendPlugin')
+      plugins.delete('Aws::Plugins::TransferEncoding')
       plugins['Aws::Plugins::InvocationId'] = "#{core_plugins}/invocation_id.rb"
       plugins
     end

@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::AlexaForBusiness
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -628,6 +630,46 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Creates a gateway group with the specified details.
+    #
+    # @option params [required, String] :name
+    #   The name of the gateway group.
+    #
+    # @option params [String] :description
+    #   The description of the gateway group.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateGatewayGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGatewayGroupResponse#gateway_group_arn #gateway_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_gateway_group({
+    #     name: "GatewayGroupName", # required
+    #     description: "GatewayGroupDescription",
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroup AWS API Documentation
+    #
+    # @overload create_gateway_group(params = {})
+    # @param [Hash] params ({})
+    def create_gateway_group(params = {}, options = {})
+      req = build_request(:create_gateway_group, params)
+      req.send_request(options)
+    end
+
     # Creates a new room profile with the specified details.
     #
     # @option params [required, String] :profile_name
@@ -958,6 +1000,57 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def delete_device(params = {}, options = {})
       req = build_request(:delete_device, params)
+      req.send_request(options)
+    end
+
+    # When this action is called for a specified shared device, it allows
+    # authorized users to delete the device's entire previous history of
+    # voice input data and associated response data. This action can be
+    # called once every 24 hours for a specific shared device.
+    #
+    # @option params [required, String] :device_arn
+    #   The ARN of the device.
+    #
+    # @option params [required, String] :device_usage_type
+    #   The type of usage data to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_device_usage_data({
+    #     device_arn: "Arn", # required
+    #     device_usage_type: "VOICE", # required, accepts VOICE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageData AWS API Documentation
+    #
+    # @overload delete_device_usage_data(params = {})
+    # @param [Hash] params ({})
+    def delete_device_usage_data(params = {}, options = {})
+      req = build_request(:delete_device_usage_data, params)
+      req.send_request(options)
+    end
+
+    # Deletes a gateway group.
+    #
+    # @option params [required, String] :gateway_group_arn
+    #   The ARN of the gateway group to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_gateway_group({
+    #     gateway_group_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroup AWS API Documentation
+    #
+    # @overload delete_gateway_group(params = {})
+    # @param [Hash] params ({})
+    def delete_gateway_group(params = {}, options = {})
+      req = build_request(:delete_gateway_group, params)
       req.send_request(options)
     end
 
@@ -1405,7 +1498,7 @@ module Aws::AlexaForBusiness
     #   resp.device.room_arn #=> String
     #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED"
     #   resp.device.device_status_info.device_status_details #=> Array
-    #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
+    #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
     #   resp.device.device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDevice AWS API Documentation
@@ -1414,6 +1507,68 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def get_device(params = {}, options = {})
       req = build_request(:get_device, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a gateway.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The ARN of the gateway to get.
+    #
+    # @return [Types::GetGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGatewayResponse#gateway #gateway} => Types::Gateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_gateway({
+    #     gateway_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway.arn #=> String
+    #   resp.gateway.name #=> String
+    #   resp.gateway.description #=> String
+    #   resp.gateway.gateway_group_arn #=> String
+    #   resp.gateway.software_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGateway AWS API Documentation
+    #
+    # @overload get_gateway(params = {})
+    # @param [Hash] params ({})
+    def get_gateway(params = {}, options = {})
+      req = build_request(:get_gateway, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a gateway group.
+    #
+    # @option params [required, String] :gateway_group_arn
+    #   The ARN of the gateway group to get.
+    #
+    # @return [Types::GetGatewayGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGatewayGroupResponse#gateway_group #gateway_group} => Types::GatewayGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_gateway_group({
+    #     gateway_group_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_group.arn #=> String
+    #   resp.gateway_group.name #=> String
+    #   resp.gateway_group.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroup AWS API Documentation
+    #
+    # @overload get_gateway_group(params = {})
+    # @param [Hash] params ({})
+    def get_gateway_group(params = {}, options = {})
+      req = build_request(:get_gateway_group, params)
       req.send_request(options)
     end
 
@@ -1729,6 +1884,92 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def list_device_events(params = {}, options = {})
       req = build_request(:list_device_events, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of gateway group summaries. Use GetGatewayGroup to
+    # retrieve details of a specific gateway group.
+    #
+    # @option params [String] :next_token
+    #   The token used to paginate though multiple pages of gateway group
+    #   summaries.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of gateway group summaries to return. The default
+    #   is 50.
+    #
+    # @return [Types::ListGatewayGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGatewayGroupsResponse#gateway_groups #gateway_groups} => Array&lt;Types::GatewayGroupSummary&gt;
+    #   * {Types::ListGatewayGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gateway_groups({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_groups #=> Array
+    #   resp.gateway_groups[0].arn #=> String
+    #   resp.gateway_groups[0].name #=> String
+    #   resp.gateway_groups[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroups AWS API Documentation
+    #
+    # @overload list_gateway_groups(params = {})
+    # @param [Hash] params ({})
+    def list_gateway_groups(params = {}, options = {})
+      req = build_request(:list_gateway_groups, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of gateway summaries. Use GetGateway to retrieve
+    # details of a specific gateway. An optional gateway group ARN can be
+    # provided to only retrieve gateway summaries of gateways that are
+    # associated with that gateway group ARN.
+    #
+    # @option params [String] :gateway_group_arn
+    #   The gateway group ARN for which to list gateways.
+    #
+    # @option params [String] :next_token
+    #   The token used to paginate though multiple pages of gateway summaries.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of gateway summaries to return. The default is 50.
+    #
+    # @return [Types::ListGatewaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGatewaysResponse#gateways #gateways} => Array&lt;Types::GatewaySummary&gt;
+    #   * {Types::ListGatewaysResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gateways({
+    #     gateway_group_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateways #=> Array
+    #   resp.gateways[0].arn #=> String
+    #   resp.gateways[0].name #=> String
+    #   resp.gateways[0].description #=> String
+    #   resp.gateways[0].gateway_group_arn #=> String
+    #   resp.gateways[0].software_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGateways AWS API Documentation
+    #
+    # @overload list_gateways(params = {})
+    # @param [Hash] params ({})
+    def list_gateways(params = {}, options = {})
+      req = build_request(:list_gateways, params)
       req.send_request(options)
     end
 
@@ -2446,7 +2687,7 @@ module Aws::AlexaForBusiness
     #   resp.devices[0].room_arn #=> String
     #   resp.devices[0].room_name #=> String
     #   resp.devices[0].device_status_info.device_status_details #=> Array
-    #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
+    #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
     #   resp.devices[0].device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
@@ -2734,6 +2975,80 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def search_users(params = {}, options = {})
       req = build_request(:search_users, params)
+      req.send_request(options)
+    end
+
+    # Triggers an asynchronous flow to send text, SSML, or audio
+    # announcements to rooms that are identified by a search or filter.
+    #
+    # @option params [required, Array<Types::Filter>] :room_filters
+    #   The filters to use to send an announcement to a specified list of
+    #   rooms. The supported filter keys are RoomName, ProfileName, RoomArn,
+    #   and ProfileArn. To send to all rooms, specify an empty RoomFilters
+    #   list.
+    #
+    # @option params [required, Types::Content] :content
+    #   The announcement content. This can contain only one of the three
+    #   possible announcement types (text, SSML or audio).
+    #
+    # @option params [Integer] :time_to_live_in_seconds
+    #   The time to live for an announcement. Default is 300. If delivery
+    #   doesn't occur within this time, the announcement is not delivered.
+    #
+    # @option params [required, String] :client_request_token
+    #   The unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SendAnnouncementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendAnnouncementResponse#announcement_arn #announcement_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_announcement({
+    #     room_filters: [ # required
+    #       {
+    #         key: "FilterKey", # required
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     content: { # required
+    #       text_list: [
+    #         {
+    #           locale: "en-US", # required, accepts en-US
+    #           value: "TextValue", # required
+    #         },
+    #       ],
+    #       ssml_list: [
+    #         {
+    #           locale: "en-US", # required, accepts en-US
+    #           value: "SsmlValue", # required
+    #         },
+    #       ],
+    #       audio_list: [
+    #         {
+    #           locale: "en-US", # required, accepts en-US
+    #           location: "AudioLocation", # required
+    #         },
+    #       ],
+    #     },
+    #     time_to_live_in_seconds: 1,
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.announcement_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncement AWS API Documentation
+    #
+    # @overload send_announcement(params = {})
+    # @param [Hash] params ({})
+    def send_announcement(params = {}, options = {})
+      req = build_request(:send_announcement, params)
       req.send_request(options)
     end
 
@@ -3063,6 +3378,73 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Updates the details of a gateway. If any optional field is not
+    # provided, the existing corresponding value is left unmodified.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The ARN of the gateway to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the gateway.
+    #
+    # @option params [String] :description
+    #   The updated description of the gateway.
+    #
+    # @option params [String] :software_version
+    #   The updated software version of the gateway. The gateway automatically
+    #   updates its software version during normal operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_gateway({
+    #     gateway_arn: "Arn", # required
+    #     name: "GatewayName",
+    #     description: "GatewayDescription",
+    #     software_version: "GatewayVersion",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGateway AWS API Documentation
+    #
+    # @overload update_gateway(params = {})
+    # @param [Hash] params ({})
+    def update_gateway(params = {}, options = {})
+      req = build_request(:update_gateway, params)
+      req.send_request(options)
+    end
+
+    # Updates the details of a gateway group. If any optional field is not
+    # provided, the existing corresponding value is left unmodified.
+    #
+    # @option params [required, String] :gateway_group_arn
+    #   The ARN of the gateway group to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the gateway group.
+    #
+    # @option params [String] :description
+    #   The updated description of the gateway group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_gateway_group({
+    #     gateway_group_arn: "Arn", # required
+    #     name: "GatewayGroupName",
+    #     description: "GatewayGroupDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroup AWS API Documentation
+    #
+    # @overload update_gateway_group(params = {})
+    # @param [Hash] params ({})
+    def update_gateway_group(params = {}, options = {})
+      req = build_request(:update_gateway_group, params)
+      req.send_request(options)
+    end
+
     # Updates an existing room profile by room profile ARN.
     #
     # @option params [String] :profile_arn
@@ -3207,7 +3589,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

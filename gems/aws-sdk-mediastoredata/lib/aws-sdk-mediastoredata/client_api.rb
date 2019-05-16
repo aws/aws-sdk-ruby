@@ -35,7 +35,7 @@ module Aws::MediaStoreData
     ObjectNotFoundException = Shapes::StructureShape.new(name: 'ObjectNotFoundException')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PathNaming = Shapes::StringShape.new(name: 'PathNaming')
-    PayloadBlob = Shapes::BlobShape.new(name: 'PayloadBlob')
+    PayloadBlob = Shapes::BlobShape.new(name: 'PayloadBlob', streaming: true)
     PutObjectRequest = Shapes::StructureShape.new(name: 'PutObjectRequest')
     PutObjectResponse = Shapes::StructureShape.new(name: 'PutObjectResponse')
     RangePattern = Shapes::StringShape.new(name: 'RangePattern')

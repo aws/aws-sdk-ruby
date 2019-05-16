@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::StorageGateway
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -1211,6 +1213,21 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    # @option params [Boolean] :smbacl_enabled
+    #   Set this value to "true to enable ACL (access control list) on the
+    #   SMB file share. Set it to "false" to map file and directory
+    #   permissions to the POSIX permissions.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
+    #   in the Storage Gateway User Guide.
+    #
+    # @option params [Array<String>] :admin_user_list
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed with
+    #   the @ character. For example `@group1`. Can only be set if
+    #   Authentication is set to `ActiveDirectory`.
+    #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
     #   access the file share. A group must be prefixed with the @ character.
@@ -1258,6 +1275,8 @@ module Aws::StorageGateway
     #     read_only: false,
     #     guess_mime_type_enabled: false,
     #     requester_pays: false,
+    #     smbacl_enabled: false,
+    #     admin_user_list: ["FileShareUser"],
     #     valid_user_list: ["FileShareUser"],
     #     invalid_user_list: ["FileShareUser"],
     #     authentication: "Authentication",
@@ -1327,6 +1346,17 @@ module Aws::StorageGateway
     #   field, and in the AWS Storage Gateway snapshot **Details** pane,
     #   **Description** field
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters: +
+    #   - = . \_ : / @. The maximum length of a tag's key is 128 characters,
+    #   and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #
     # @return [Types::CreateSnapshotOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSnapshotOutput#volume_arn #volume_arn} => String
@@ -1353,6 +1383,12 @@ module Aws::StorageGateway
     #   resp = client.create_snapshot({
     #     volume_arn: "VolumeARN", # required
     #     snapshot_description: "SnapshotDescription", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2764,6 +2800,9 @@ module Aws::StorageGateway
     #   resp.smb_file_share_info_list[0].read_only #=> Boolean
     #   resp.smb_file_share_info_list[0].guess_mime_type_enabled #=> Boolean
     #   resp.smb_file_share_info_list[0].requester_pays #=> Boolean
+    #   resp.smb_file_share_info_list[0].smbacl_enabled #=> Boolean
+    #   resp.smb_file_share_info_list[0].admin_user_list #=> Array
+    #   resp.smb_file_share_info_list[0].admin_user_list[0] #=> String
     #   resp.smb_file_share_info_list[0].valid_user_list #=> Array
     #   resp.smb_file_share_info_list[0].valid_user_list[0] #=> String
     #   resp.smb_file_share_info_list[0].invalid_user_list #=> Array
@@ -5303,6 +5342,21 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    # @option params [Boolean] :smbacl_enabled
+    #   Set this value to "true to enable ACL (access control list) on the
+    #   SMB file share. Set it to "false" to map file and directory
+    #   permissions to the POSIX permissions.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.htmlin
+    #   the Storage Gateway User Guide.
+    #
+    # @option params [Array<String>] :admin_user_list
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed with
+    #   the @ character. For example `@group1`. Can only be set if
+    #   Authentication is set to `ActiveDirectory`.
+    #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
     #   access the file share. A group must be prefixed with the @ character.
@@ -5330,6 +5384,8 @@ module Aws::StorageGateway
     #     read_only: false,
     #     guess_mime_type_enabled: false,
     #     requester_pays: false,
+    #     smbacl_enabled: false,
+    #     admin_user_list: ["FileShareUser"],
     #     valid_user_list: ["FileShareUser"],
     #     invalid_user_list: ["FileShareUser"],
     #   })
@@ -5376,6 +5432,17 @@ module Aws::StorageGateway
     #   Optional description of the snapshot that overwrites the existing
     #   description.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters: +
+    #   - = . \_ : / @. The maximum length of a tag's key is 128 characters,
+    #   and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #
     # @return [Types::UpdateSnapshotScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSnapshotScheduleOutput#volume_arn #volume_arn} => String
@@ -5404,6 +5471,12 @@ module Aws::StorageGateway
     #     start_at: 1, # required
     #     recurrence_in_hours: 1, # required
     #     description: "Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5486,7 +5559,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

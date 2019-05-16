@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -55,6 +56,7 @@ module Aws::MediaConvert
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -300,8 +302,10 @@ module Aws::MediaConvert
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
     # @option params [Types::AccelerationSettings] :acceleration_settings
-    #   This is a beta feature. If you are interested in using this feature,
-    #   please contact AWS customer support.
+    #   Accelerated transcoding can significantly speed up jobs with long,
+    #   visually complex content. Outputs that use this feature incur pro-tier
+    #   pricing. For information about feature limitations, see the AWS
+    #   Elemental MediaConvert User Guide.
     #
     # @option params [String] :billing_tags_source
     #   Optional. Choose a tag type that AWS Billing and Cost Management will
@@ -567,6 +571,7 @@ module Aws::MediaConvert
     #                 },
     #               },
     #               encryption: {
+    #                 playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
@@ -1331,6 +1336,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -1807,8 +1813,10 @@ module Aws::MediaConvert
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
     # @option params [Types::AccelerationSettings] :acceleration_settings
-    #   This is a beta feature. If you are interested in using this feature
-    #   please contact AWS customer support.
+    #   Accelerated transcoding can significantly speed up jobs with long,
+    #   visually complex content. Outputs that use this feature incur pro-tier
+    #   pricing. For information about feature limitations, see the AWS
+    #   Elemental MediaConvert User Guide.
     #
     # @option params [String] :category
     #   Optional. A category for the job template you are creating
@@ -2052,6 +2060,7 @@ module Aws::MediaConvert
     #                 },
     #               },
     #               encryption: {
+    #                 playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
@@ -2799,6 +2808,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4532,6 +4542,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -5148,6 +5159,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6232,6 +6244,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6888,6 +6901,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -7952,8 +7966,10 @@ module Aws::MediaConvert
     # Modify one of your existing job templates.
     #
     # @option params [Types::AccelerationSettings] :acceleration_settings
-    #   This is a beta feature. If you are interested in using this feature,
-    #   please contact AWS customer support.
+    #   Accelerated transcoding can significantly speed up jobs with long,
+    #   visually complex content. Outputs that use this feature incur pro-tier
+    #   pricing. For information about feature limitations, see the AWS
+    #   Elemental MediaConvert User Guide.
     #
     # @option params [String] :category
     #   The new category for the job template, if you are changing it.
@@ -8192,6 +8208,7 @@ module Aws::MediaConvert
     #                 },
     #               },
     #               encryption: {
+    #                 playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
@@ -8936,6 +8953,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -10367,7 +10385,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
