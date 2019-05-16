@@ -1719,6 +1719,7 @@ module Aws::S3
     PutBucketReplicationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketReplicationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketReplicationRequest.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, required: true, location_name: "ReplicationConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutBucketReplicationRequest.add_member(:token, Shapes::ShapeRef.new(shape: ObjectLockToken, location: "header", location_name: "x-amz-bucket-object-lock-token"))
     PutBucketReplicationRequest.struct_class = Types::PutBucketReplicationRequest
     PutBucketReplicationRequest[:payload] = :replication_configuration
     PutBucketReplicationRequest[:payload_member] = PutBucketReplicationRequest.member(:replication_configuration)
