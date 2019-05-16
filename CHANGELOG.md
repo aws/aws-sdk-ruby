@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MediaLive - Updated the API, and waiters for AWS Elemental MediaLive.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
 2.11.275 (2019-05-15)
 ------------------
 
