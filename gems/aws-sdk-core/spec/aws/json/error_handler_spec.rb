@@ -45,29 +45,29 @@ module Aws
       it 'extracts error data' do
         stub_request(:post, "https://dynamodb.us-west-2.amazonaws.com/").
           to_return(:status => 400, :body => error_resp)
-        begin
+        expect {
           client.batch_get_item(
             request_items: {}
           )
-        rescue SampleApi1::Errors::ProvisionedThroughputExceededException => e
+        }.to raise_error {|e|
           expect(e.code).to eq('ProvisionedThroughputExceededException')
           expect(e.message).to eq('foo')
           expect(e.foo).to eq('bar')
-        end
+        }
       end
 
       it 'ignore invalid characters when matching' do
         stub_request(:post, "https://dynamodb.us-west-2.amazonaws.com/").
           to_return(:status => 400, :body => invalid_error_resp)
-        begin
+        expect {
           client.batch_get_item(
             request_items: {}
           )
-        rescue SampleApi1::Errors::ProvisionedThroughputExceededException => e
+        }.to raise_error {|e|
           expect(e.code).to eq('ProvisionedThroughputExceededException')
           expect(e.message).to eq('foo')
           expect(e.foo).to eq('bar')
-        end
+        }
       end
 
       it 'extracts code and message for unmodeled errors' do

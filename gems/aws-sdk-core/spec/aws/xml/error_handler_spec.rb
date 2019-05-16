@@ -134,15 +134,16 @@ module Aws
         }
       end
 
-      it 'handles route53 error format' do
+      it 'handles route53 error format with message' do
         stub_request(:post, "https://route53.amazonaws.com/2013-04-01/hostedzone//rrset/").
           to_return(:status => 400, :body => route53_error)
-        #route53.change_resource_record_sets
-        # TODO, customization, code
-      end
-
-      it 'extracts error data' do
-        # TODO need to find examples
+        expect {
+          route53.change_resource_record_sets
+        }.to raise_error { |error|
+          expected_msg = "Tried to create resource record set "\
+            "duplicate.example.com. type A, but it already exists"
+          expect(error.message).to eq(expected_msg)
+        }
       end
 
       it 'supports unmodeled `ec2-query` error' do
