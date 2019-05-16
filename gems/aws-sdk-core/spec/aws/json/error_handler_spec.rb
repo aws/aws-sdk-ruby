@@ -77,7 +77,10 @@ module Aws
           client.batch_get_item(
             request_items: {}
           )
-        }.to raise_error(SampleApi1::Errors::UnModeledException, 'foo')
+        }.to raise_error {|e|
+          expect(e.code).to eq('UnModeledException')
+          expect(e.message).to eq('foo')
+        }
       end
 
       it 'extracts code and message for modeled empty struct errors' do
@@ -87,7 +90,10 @@ module Aws
           client.batch_get_item(
             request_items: {}
           )
-        }.to raise_error(SampleApi1::Errors::EmptyStructError, 'foo')
+        }.to raise_error {|e|
+          expect(e.code).to eq('EmptyStructError')
+          expect(e.message).to eq('foo')
+        }
       end
 
     end
