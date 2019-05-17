@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.277 (2019-05-17)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 2.11.276 (2019-05-16)
