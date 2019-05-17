@@ -334,8 +334,8 @@ module Aws::AppStream
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_account_credentials
-    #   The credentials for the service account used by the streaming
-    #   instance to connect to the directory.
+    #   The credentials for the service account used by the fleet or image
+    #   builder to connect to the directory.
     #   @return [Types::ServiceAccountCredentials]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfigRequest AWS API Documentation
@@ -386,6 +386,7 @@ module Aws::AppStream
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         idle_disconnect_timeout_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -471,14 +472,23 @@ module Aws::AppStream
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] max_user_duration_in_seconds
-    #   The maximum time that a streaming session can run, in seconds.
+    #   The maximum amount of time that a streaming session can remain
+    #   active, in seconds. If users are still connected to a streaming
+    #   instance five minutes before this limit is reached, they are
+    #   prompted to save any open documents before being disconnected. After
+    #   this time elapses, the instance is terminated and replaced by a new
+    #   instance.
+    #
     #   Specify a value between 600 and 360000.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
-    #   The time after disconnection when a session is considered to have
-    #   ended, in seconds. If a user who was disconnected reconnects within
-    #   this time interval, the user is connected to their previous session.
+    #   The amount of time that a streaming session remains active after
+    #   users disconnect. If users try to reconnect to the streaming session
+    #   after a disconnection or network interruption within this time
+    #   interval, they are connected to their previous session. Otherwise,
+    #   they are connected to a new session with a new streaming instance.
+    #
     #   Specify a value between 60 and 360000.
     #   @return [Integer]
     #
@@ -506,6 +516,11 @@ module Aws::AppStream
     #
     #   If you do not specify a value, the value is set to an empty string.
     #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
     #   For more information, see [Tagging Your Resources][1] in the *Amazon
     #   AppStream 2.0 Developer Guide*.
     #
@@ -513,6 +528,36 @@ module Aws::AppStream
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] idle_disconnect_timeout_in_seconds
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the
+    #   `DisconnectTimeoutInSeconds` time interval begins. Users are
+    #   notified before they are disconnected due to inactivity. If they try
+    #   to reconnect to the streaming session before the time interval
+    #   specified in `DisconnectTimeoutInSeconds` elapses, they are
+    #   connected to their previous session. Users are considered idle when
+    #   they stop providing keyboard or mouse input during their streaming
+    #   session. File uploads and downloads, audio in, audio out, and pixels
+    #   changing do not qualify as user activity. If users continue to be
+    #   idle after the time interval in `IdleDisconnectTimeoutInSeconds`
+    #   elapses, they are disconnected.
+    #
+    #   To prevent users from being disconnected due to inactivity, specify
+    #   a value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   default value is 900.
+    #
+    #   <note markdown="1"> If you enable this feature, we recommend that you specify a value
+    #   that corresponds exactly to a whole number of minutes (for example,
+    #   60, 120, and 180). If you don't do this, the value is rounded to
+    #   the nearest minute. For example, if you specify a value of 70, users
+    #   are disconnected after 1 minute of inactivity. If you specify a
+    #   value that is at the midpoint between two different minutes, the
+    #   value is rounded up. For example, if you specify a value of 90,
+    #   users are disconnected after 2 minutes of inactivity.
+    #
+    #    </note>
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
@@ -530,7 +575,8 @@ module Aws::AppStream
       :display_name,
       :enable_default_internet_access,
       :domain_join_info,
-      :tags)
+      :tags,
+      :idle_disconnect_timeout_in_seconds)
       include Aws::Structure
     end
 
@@ -618,6 +664,11 @@ module Aws::AppStream
     #   The tags to associate with the image builder. A tag is a key-value
     #   pair, and the value is optional. For example, Environment=Test. If
     #   you do not specify a value, Environment=.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
     #
     #   If you do not specify a value, the value is set to an empty string.
     #
@@ -776,6 +827,11 @@ module Aws::AppStream
     #
     #   If you do not specify a value, the value is set to an empty string.
     #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
     #   For more information about tags, see [Tagging Your Resources][1] in
     #   the *Amazon AppStream 2.0 Developer Guide*.
     #
@@ -882,6 +938,31 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUsageReportSubscriptionRequest AWS API Documentation
+    #
+    class CreateUsageReportSubscriptionRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] s3_bucket_name
+    #   The Amazon S3 bucket where generated reports are stored. When a
+    #   usage report subscription is enabled for the first time for an
+    #   account in an AWS Region, an S3 bucket is created. The bucket is
+    #   unique to the AWS account and the Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule for generating usage reports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUsageReportSubscriptionResult AWS API Documentation
+    #
+    class CreateUsageReportSubscriptionResult < Struct.new(
+      :s3_bucket_name,
+      :schedule)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateUserRequest
     #   data as a hash:
     #
@@ -895,6 +976,13 @@ module Aws::AppStream
     #
     # @!attribute [rw] user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive. During login, if they
+    #   specify an email address that doesn't use the same capitalization
+    #   as the email address specified when their user pool account was
+    #   created, a "user does not exist" error message displays.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] message_action
@@ -1091,6 +1179,16 @@ module Aws::AppStream
     #
     class DeleteStackResult < Aws::EmptyStructure; end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUsageReportSubscriptionRequest AWS API Documentation
+    #
+    class DeleteUsageReportSubscriptionRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUsageReportSubscriptionResult AWS API Documentation
+    #
+    class DeleteUsageReportSubscriptionResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteUserRequest
     #   data as a hash:
     #
@@ -1101,6 +1199,10 @@ module Aws::AppStream
     #
     # @!attribute [rw] user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] authentication_type
@@ -1416,9 +1518,8 @@ module Aws::AppStream
     #
     # @!attribute [rw] authentication_type
     #   The authentication method. Specify `API` for a user authenticated
-    #   using a streaming URL, `SAML` for a SAML 2.0-federated user, or
-    #   `USERPOOL` for a user in the AppStream 2.0 user pool. The default is
-    #   to authenticate users using a streaming URL.
+    #   using a streaming URL or `SAML` for a SAML federated user. The
+    #   default is to authenticate users using a streaming URL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessionsRequest AWS API Documentation
@@ -1492,6 +1593,48 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeUsageReportSubscriptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of each page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsageReportSubscriptionsRequest AWS API Documentation
+    #
+    class DescribeUsageReportSubscriptionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] usage_report_subscriptions
+    #   Information about the usage report subscription.
+    #   @return [Array<Types::UsageReportSubscription>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsageReportSubscriptionsResult AWS API Documentation
+    #
+    class DescribeUsageReportSubscriptionsResult < Struct.new(
+      :usage_report_subscriptions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeUserStackAssociationsRequest
     #   data as a hash:
     #
@@ -1509,6 +1652,10 @@ module Aws::AppStream
     #
     # @!attribute [rw] user_name
     #   The email address of the user who is associated with the stack.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] authentication_type
@@ -1602,8 +1749,8 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes the configuration information for the directory used to join
-    # a streaming instance to a Microsoft Active Directory domain.
+    # Describes the configuration information required to join fleets and
+    # image builders to Microsoft Active Directory domains.
     #
     # @!attribute [rw] directory_name
     #   The fully qualified name of the directory (for example,
@@ -1616,8 +1763,8 @@ module Aws::AppStream
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_account_credentials
-    #   The credentials for the service account used by the streaming
-    #   instance to connect to the directory.
+    #   The credentials for the service account used by the fleet or image
+    #   builder to connect to the directory.
     #   @return [Types::ServiceAccountCredentials]
     #
     # @!attribute [rw] created_time
@@ -1644,6 +1791,10 @@ module Aws::AppStream
     #
     # @!attribute [rw] user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] authentication_type
@@ -1729,6 +1880,13 @@ module Aws::AppStream
     #
     # @!attribute [rw] user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive. During login, if they
+    #   specify an email address that doesn't use the same capitalization
+    #   as the email address specified when their user pool account was
+    #   created, a "user does not exist" error message displays.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] authentication_type
@@ -1821,16 +1979,24 @@ module Aws::AppStream
     #   @return [Types::ComputeCapacityStatus]
     #
     # @!attribute [rw] max_user_duration_in_seconds
-    #   The maximum time that a streaming session can run, in seconds.
+    #   The maximum amount of time that a streaming session can remain
+    #   active, in seconds. If users are still connected to a streaming
+    #   instance five minutes before this limit is reached, they are
+    #   prompted to save any open documents before being disconnected. After
+    #   this time elapses, the instance is terminated and replaced by a new
+    #   instance.
+    #
     #   Specify a value between 600 and 360000.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
-    #   The time after disconnection when a session is considered to have
-    #   ended, in seconds. If a user who was disconnected reconnects within
-    #   this time interval, the user is connected to their previous session.
-    #   Specify a value between 60 and 360000. By default, this value is 900
-    #   seconds (15 minutes).
+    #   The amount of time that a streaming session remains active after
+    #   users disconnect. If they try to reconnect to the streaming session
+    #   after a disconnection or network interruption within this time
+    #   interval, they are connected to their previous session. Otherwise,
+    #   they are connected to a new session with a new streaming instance.
+    #
+    #   Specify a value between 60 and 360000.
     #   @return [Integer]
     #
     # @!attribute [rw] state
@@ -1858,6 +2024,36 @@ module Aws::AppStream
     #   join the fleet to a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
+    # @!attribute [rw] idle_disconnect_timeout_in_seconds
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the
+    #   `DisconnectTimeoutInSeconds` time interval begins. Users are
+    #   notified before they are disconnected due to inactivity. If users
+    #   try to reconnect to the streaming session before the time interval
+    #   specified in `DisconnectTimeoutInSeconds` elapses, they are
+    #   connected to their previous session. Users are considered idle when
+    #   they stop providing keyboard or mouse input during their streaming
+    #   session. File uploads and downloads, audio in, audio out, and pixels
+    #   changing do not qualify as user activity. If users continue to be
+    #   idle after the time interval in `IdleDisconnectTimeoutInSeconds`
+    #   elapses, they are disconnected.
+    #
+    #   To prevent users from being disconnected due to inactivity, specify
+    #   a value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   default value is 900.
+    #
+    #   <note markdown="1"> If you enable this feature, we recommend that you specify a value
+    #   that corresponds exactly to a whole number of minutes (for example,
+    #   60, 120, and 180). If you don't do this, the value is rounded to
+    #   the nearest minute. For example, if you specify a value of 70, users
+    #   are disconnected after 1 minute of inactivity. If you specify a
+    #   value that is at the midpoint between two different minutes, the
+    #   value is rounded up. For example, if you specify a value of 90,
+    #   users are disconnected after 2 minutes of inactivity.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
     class Fleet < Struct.new(
@@ -1877,7 +2073,8 @@ module Aws::AppStream
       :created_time,
       :fleet_errors,
       :enable_default_internet_access,
-      :domain_join_info)
+      :domain_join_info,
+      :idle_disconnect_timeout_in_seconds)
       include Aws::Structure
     end
 
@@ -2135,6 +2332,27 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # Describes the error that is returned when a usage report can't be
+    # generated.
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the error that is returned when a usage report
+    #   can't be generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the error that is returned when a usage report
+    #   can't be generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/LastReportGenerationExecutionError AWS API Documentation
+    #
+    class LastReportGenerationExecutionError < Struct.new(
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAssociatedFleetsRequest
     #   data as a hash:
     #
@@ -2293,8 +2511,8 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes the credentials for the service account used by the
-    # streaming instance to connect to the directory.
+    # Describes the credentials for the service account used by the fleet or
+    # image builder to connect to the directory.
     #
     # @note When making an API call, you may pass ServiceAccountCredentials
     #   data as a hash:
@@ -2367,9 +2585,7 @@ module Aws::AppStream
     #
     # @!attribute [rw] authentication_type
     #   The authentication method. The user is authenticated using a
-    #   streaming URL (`API`), SAML 2.0 federation (`SAML`), or the
-    #   AppStream 2.0 user pool (`USERPOOL`). The default is to authenticate
-    #   users using a streaming URL.
+    #   streaming URL (`API`) or SAML 2.0 federation (`SAML`).
     #   @return [String]
     #
     # @!attribute [rw] network_access_configuration
@@ -2607,7 +2823,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes a connector to enable persistent storage for users.
+    # Describes a connector that enables persistent storage for users.
     #
     # @note When making an API call, you may pass StorageConnector
     #   data as a hash:
@@ -2659,6 +2875,11 @@ module Aws::AppStream
     #   value, Environment=.
     #
     #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/TagResourceRequest AWS API Documentation
@@ -2723,8 +2944,8 @@ module Aws::AppStream
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_account_credentials
-    #   The credentials for the service account used by the streaming
-    #   instance to connect to the directory.
+    #   The credentials for the service account used by the fleet or image
+    #   builder to connect to the directory.
     #   @return [Types::ServiceAccountCredentials]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigRequest AWS API Documentation
@@ -2772,6 +2993,7 @@ module Aws::AppStream
     #           directory_name: "DirectoryName",
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         },
+    #         idle_disconnect_timeout_in_seconds: 1,
     #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO
     #       }
     #
@@ -2841,17 +3063,24 @@ module Aws::AppStream
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] max_user_duration_in_seconds
-    #   The maximum time that a streaming session can run, in seconds.
-    #   Specify a value between 600 and 360000. By default, the value is 900
-    #   seconds (15 minutes).
+    #   The maximum amount of time that a streaming session can remain
+    #   active, in seconds. If users are still connected to a streaming
+    #   instance five minutes before this limit is reached, they are
+    #   prompted to save any open documents before being disconnected. After
+    #   this time elapses, the instance is terminated and replaced by a new
+    #   instance.
+    #
+    #   Specify a value between 600 and 360000.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
-    #   The time after disconnection when a session is considered to have
-    #   ended, in seconds. If a user who was disconnected reconnects within
-    #   this time interval, the user is connected to their previous session.
-    #   Specify a value between 60 and 360000. By default, the value is 900
-    #   seconds (15 minutes).
+    #   The amount of time that a streaming session remains active after
+    #   users disconnect. If users try to reconnect to the streaming session
+    #   after a disconnection or network interruption within this time
+    #   interval, they are connected to their previous session. Otherwise,
+    #   they are connected to a new session with a new streaming instance.
+    #
+    #   Specify a value between 60 and 360000.
     #   @return [Integer]
     #
     # @!attribute [rw] delete_vpc_config
@@ -2875,6 +3104,36 @@ module Aws::AppStream
     #   join the fleet to a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
+    # @!attribute [rw] idle_disconnect_timeout_in_seconds
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the
+    #   `DisconnectTimeoutInSeconds` time interval begins. Users are
+    #   notified before they are disconnected due to inactivity. If users
+    #   try to reconnect to the streaming session before the time interval
+    #   specified in `DisconnectTimeoutInSeconds` elapses, they are
+    #   connected to their previous session. Users are considered idle when
+    #   they stop providing keyboard or mouse input during their streaming
+    #   session. File uploads and downloads, audio in, audio out, and pixels
+    #   changing do not qualify as user activity. If users continue to be
+    #   idle after the time interval in `IdleDisconnectTimeoutInSeconds`
+    #   elapses, they are disconnected.
+    #
+    #   To prevent users from being disconnected due to inactivity, specify
+    #   a value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   default value is 900.
+    #
+    #   <note markdown="1"> If you enable this feature, we recommend that you specify a value
+    #   that corresponds exactly to a whole number of minutes (for example,
+    #   60, 120, and 180). If you don't do this, the value is rounded to
+    #   the nearest minute. For example, if you specify a value of 70, users
+    #   are disconnected after 1 minute of inactivity. If you specify a
+    #   value that is at the midpoint between two different minutes, the
+    #   value is rounded up. For example, if you specify a value of 90,
+    #   users are disconnected after 2 minutes of inactivity.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] attributes_to_delete
     #   The fleet attributes to delete.
     #   @return [Array<String>]
@@ -2895,6 +3154,7 @@ module Aws::AppStream
       :display_name,
       :enable_default_internet_access,
       :domain_join_info,
+      :idle_disconnect_timeout_in_seconds,
       :attributes_to_delete)
       include Aws::Structure
     end
@@ -3052,6 +3312,37 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # Describes information about the usage report subscription.
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The Amazon S3 bucket where generated reports are stored. When a
+    #   usage report subscription is enabled for the first time for an
+    #   account in an AWS Region, an S3 bucket is created. The bucket is
+    #   unique to the AWS account and the Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule for generating usage reports.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_generated_report_date
+    #   The time when the last usage report was generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] subscription_errors
+    #   The errors that are returned when usage reports can't be generated.
+    #   @return [Array<Types::LastReportGenerationExecutionError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UsageReportSubscription AWS API Documentation
+    #
+    class UsageReportSubscription < Struct.new(
+      :s3_bucket_name,
+      :schedule,
+      :last_generated_report_date,
+      :subscription_errors)
+      include Aws::Structure
+    end
+
     # Describes a user in the user pool.
     #
     # @!attribute [rw] arn
@@ -3060,6 +3351,10 @@ module Aws::AppStream
     #
     # @!attribute [rw] user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -3157,6 +3452,10 @@ module Aws::AppStream
     #
     # @!attribute [rw] user_name
     #   The email address of the user who is associated with the stack.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] authentication_type

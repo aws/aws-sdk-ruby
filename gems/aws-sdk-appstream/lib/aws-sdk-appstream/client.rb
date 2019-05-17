@@ -417,8 +417,8 @@ module Aws::AppStream
     end
 
     # Creates a Directory Config object in AppStream 2.0. This object
-    # includes the information required to join streaming instances to an
-    # Active Directory domain.
+    # includes the configuration information required to join fleets and
+    # image builders to Microsoft Active Directory domains.
     #
     # @option params [required, String] :directory_name
     #   The fully qualified name of the directory (for example,
@@ -429,8 +429,8 @@ module Aws::AppStream
     #   accounts.
     #
     # @option params [required, Types::ServiceAccountCredentials] :service_account_credentials
-    #   The credentials for the service account used by the streaming instance
-    #   to connect to the directory.
+    #   The credentials for the service account used by the fleet or image
+    #   builder to connect to the directory.
     #
     # @return [Types::CreateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -544,13 +544,21 @@ module Aws::AppStream
     #   The VPC configuration for the fleet.
     #
     # @option params [Integer] :max_user_duration_in_seconds
-    #   The maximum time that a streaming session can run, in seconds. Specify
-    #   a value between 600 and 360000.
+    #   The maximum amount of time that a streaming session can remain active,
+    #   in seconds. If users are still connected to a streaming instance five
+    #   minutes before this limit is reached, they are prompted to save any
+    #   open documents before being disconnected. After this time elapses, the
+    #   instance is terminated and replaced by a new instance.
+    #
+    #   Specify a value between 600 and 360000.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
-    #   The time after disconnection when a session is considered to have
-    #   ended, in seconds. If a user who was disconnected reconnects within
-    #   this time interval, the user is connected to their previous session.
+    #   The amount of time that a streaming session remains active after users
+    #   disconnect. If users try to reconnect to the streaming session after a
+    #   disconnection or network interruption within this time interval, they
+    #   are connected to their previous session. Otherwise, they are connected
+    #   to a new session with a new streaming instance.
+    #
     #   Specify a value between 60 and 360000.
     #
     # @option params [String] :description
@@ -573,12 +581,45 @@ module Aws::AppStream
     #
     #   If you do not specify a value, the value is set to an empty string.
     #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
     #   For more information, see [Tagging Your Resources][1] in the *Amazon
     #   AppStream 2.0 Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #
+    # @option params [Integer] :idle_disconnect_timeout_in_seconds
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the
+    #   `DisconnectTimeoutInSeconds` time interval begins. Users are notified
+    #   before they are disconnected due to inactivity. If they try to
+    #   reconnect to the streaming session before the time interval specified
+    #   in `DisconnectTimeoutInSeconds` elapses, they are connected to their
+    #   previous session. Users are considered idle when they stop providing
+    #   keyboard or mouse input during their streaming session. File uploads
+    #   and downloads, audio in, audio out, and pixels changing do not qualify
+    #   as user activity. If users continue to be idle after the time interval
+    #   in `IdleDisconnectTimeoutInSeconds` elapses, they are disconnected.
+    #
+    #   To prevent users from being disconnected due to inactivity, specify a
+    #   value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   default value is 900.
+    #
+    #   <note markdown="1"> If you enable this feature, we recommend that you specify a value that
+    #   corresponds exactly to a whole number of minutes (for example, 60,
+    #   120, and 180). If you don't do this, the value is rounded to the
+    #   nearest minute. For example, if you specify a value of 70, users are
+    #   disconnected after 1 minute of inactivity. If you specify a value that
+    #   is at the midpoint between two different minutes, the value is rounded
+    #   up. For example, if you specify a value of 90, users are disconnected
+    #   after 2 minutes of inactivity.
+    #
+    #    </note>
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -611,6 +652,7 @@ module Aws::AppStream
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     idle_disconnect_timeout_in_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -641,6 +683,7 @@ module Aws::AppStream
     #   resp.fleet.enable_default_internet_access #=> Boolean
     #   resp.fleet.domain_join_info.directory_name #=> String
     #   resp.fleet.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -695,6 +738,11 @@ module Aws::AppStream
     #   The tags to associate with the image builder. A tag is a key-value
     #   pair, and the value is optional. For example, Environment=Test. If you
     #   do not specify a value, Environment=.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
     #
     #   If you do not specify a value, the value is set to an empty string.
     #
@@ -845,6 +893,11 @@ module Aws::AppStream
     #
     #   If you do not specify a value, the value is set to an empty string.
     #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
     #   For more information about tags, see [Tagging Your Resources][1] in
     #   the *Amazon AppStream 2.0 Developer Guide*.
     #
@@ -978,10 +1031,39 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Creates a usage report subscription. Usage reports are generated
+    # daily.
+    #
+    # @return [Types::CreateUsageReportSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUsageReportSubscriptionResult#s3_bucket_name #s3_bucket_name} => String
+    #   * {Types::CreateUsageReportSubscriptionResult#schedule #schedule} => String
+    #
+    # @example Response structure
+    #
+    #   resp.s3_bucket_name #=> String
+    #   resp.schedule #=> String, one of "DAILY"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUsageReportSubscription AWS API Documentation
+    #
+    # @overload create_usage_report_subscription(params = {})
+    # @param [Hash] params ({})
+    def create_usage_report_subscription(params = {}, options = {})
+      req = build_request(:create_usage_report_subscription, params)
+      req.send_request(options)
+    end
+
     # Creates a new user in the user pool.
     #
     # @option params [required, String] :user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive. During login, if they
+    #   specify an email address that doesn't use the same capitalization as
+    #   the email address specified when their user pool account was created,
+    #   a "user does not exist" error message displays.
+    #
+    #    </note>
     #
     # @option params [String] :message_action
     #   The action to take for the welcome email that is sent to a user after
@@ -1229,10 +1311,27 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Disables usage report generation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUsageReportSubscription AWS API Documentation
+    #
+    # @overload delete_usage_report_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_usage_report_subscription(params = {}, options = {})
+      req = build_request(:delete_usage_report_subscription, params)
+      req.send_request(options)
+    end
+
     # Deletes a user from the user pool.
     #
     # @option params [required, String] :user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #
     # @option params [required, String] :authentication_type
     #   The authentication type for the user. You must specify USERPOOL.
@@ -1258,8 +1357,9 @@ module Aws::AppStream
     # Retrieves a list that describes one or more specified Directory Config
     # objects for AppStream 2.0, if the names for these objects are
     # provided. Otherwise, all Directory Config objects in the account are
-    # described. These objects include the information required to join
-    # streaming instances to an Active Directory domain.
+    # described. These objects include the configuration information
+    # required to join fleets and image builders to Microsoft Active
+    # Directory domains.
     #
     # Although the response syntax in this topic includes the account
     # password, this password is not returned in the actual response.
@@ -1359,6 +1459,7 @@ module Aws::AppStream
     #   resp.fleets[0].enable_default_internet_access #=> Boolean
     #   resp.fleets[0].domain_join_info.directory_name #=> String
     #   resp.fleets[0].domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.fleets[0].idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets AWS API Documentation
@@ -1559,11 +1660,11 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Retrieves a list that describes the active streaming sessions for a
-    # specified stack and fleet. If a value for `UserId` is provided for the
-    # stack and fleet, only streaming sessions for that user are described.
-    # If an authentication type is not provided, the default is to
-    # authenticate users using a streaming URL.
+    # Retrieves a list that describes the streaming sessions for a specified
+    # stack and fleet. If a UserId is provided for the stack and fleet, only
+    # streaming sessions for that user are described. If an authentication
+    # type is not provided, the default is to authenticate users using a
+    # streaming URL.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack. This value is case-sensitive.
@@ -1584,9 +1685,8 @@ module Aws::AppStream
     #
     # @option params [String] :authentication_type
     #   The authentication method. Specify `API` for a user authenticated
-    #   using a streaming URL, `SAML` for a SAML 2.0-federated user, or
-    #   `USERPOOL` for a user in the AppStream 2.0 user pool. The default is
-    #   to authenticate users using a streaming URL.
+    #   using a streaming URL or `SAML` for a SAML federated user. The default
+    #   is to authenticate users using a streaming URL.
     #
     # @return [Types::DescribeSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1687,6 +1787,48 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Retrieves a list that describes one or more usage report
+    # subscriptions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::DescribeUsageReportSubscriptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUsageReportSubscriptionsResult#usage_report_subscriptions #usage_report_subscriptions} => Array&lt;Types::UsageReportSubscription&gt;
+    #   * {Types::DescribeUsageReportSubscriptionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_usage_report_subscriptions({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_report_subscriptions #=> Array
+    #   resp.usage_report_subscriptions[0].s3_bucket_name #=> String
+    #   resp.usage_report_subscriptions[0].schedule #=> String, one of "DAILY"
+    #   resp.usage_report_subscriptions[0].last_generated_report_date #=> Time
+    #   resp.usage_report_subscriptions[0].subscription_errors #=> Array
+    #   resp.usage_report_subscriptions[0].subscription_errors[0].error_code #=> String, one of "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_SERVICE_ERROR"
+    #   resp.usage_report_subscriptions[0].subscription_errors[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsageReportSubscriptions AWS API Documentation
+    #
+    # @overload describe_usage_report_subscriptions(params = {})
+    # @param [Hash] params ({})
+    def describe_usage_report_subscriptions(params = {}, options = {})
+      req = build_request(:describe_usage_report_subscriptions, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list that describes the UserStackAssociation objects. You
     # must specify either or both of the following:
     #
@@ -1700,6 +1842,10 @@ module Aws::AppStream
     #
     # @option params [String] :user_name
     #   The email address of the user who is associated with the stack.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
     #
     # @option params [String] :authentication_type
     #   The authentication type for the user who is associated with the stack.
@@ -1801,6 +1947,10 @@ module Aws::AppStream
     # @option params [required, String] :user_name
     #   The email address of the user.
     #
+    #   <note markdown="1"> Users' email addresses are case-sensitive.
+    #
+    #    </note>
+    #
     # @option params [required, String] :authentication_type
     #   The authentication type for the user. You must specify USERPOOL.
     #
@@ -1854,6 +2004,13 @@ module Aws::AppStream
     #
     # @option params [required, String] :user_name
     #   The email address of the user.
+    #
+    #   <note markdown="1"> Users' email addresses are case-sensitive. During login, if they
+    #   specify an email address that doesn't use the same capitalization as
+    #   the email address specified when their user pool account was created,
+    #   a "user does not exist" error message displays.
+    #
+    #    </note>
     #
     # @option params [required, String] :authentication_type
     #   The authentication type for the user. You must specify USERPOOL.
@@ -2186,6 +2343,11 @@ module Aws::AppStream
     #
     #   If you do not specify a value, the value is set to an empty string.
     #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2243,8 +2405,8 @@ module Aws::AppStream
     end
 
     # Updates the specified Directory Config object in AppStream 2.0. This
-    # object includes the information required to join streaming instances
-    # to an Active Directory domain.
+    # object includes the configuration information required to join fleets
+    # and image builders to Microsoft Active Directory domains.
     #
     # @option params [required, String] :directory_name
     #   The name of the Directory Config object.
@@ -2254,8 +2416,8 @@ module Aws::AppStream
     #   accounts.
     #
     # @option params [Types::ServiceAccountCredentials] :service_account_credentials
-    #   The credentials for the service account used by the streaming instance
-    #   to connect to the directory.
+    #   The credentials for the service account used by the fleet or image
+    #   builder to connect to the directory.
     #
     # @return [Types::UpdateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2294,8 +2456,9 @@ module Aws::AppStream
     #
     # If the fleet is in the `STOPPED` state, you can update any attribute
     # except the fleet name. If the fleet is in the `RUNNING` state, you can
-    # update the `DisplayName` and `ComputeCapacity` attributes. If the
-    # fleet is in the `STARTING` or `STOPPING` state, you can't update it.
+    # update the `DisplayName`, `ComputeCapacity`, `ImageARN`, `ImageName`,
+    # and `DisconnectTimeoutInSeconds` attributes. If the fleet is in the
+    # `STARTING` or `STOPPING` state, you can't update it.
     #
     # @option params [String] :image_name
     #   The name of the image used to create the fleet.
@@ -2357,16 +2520,22 @@ module Aws::AppStream
     #   The VPC configuration for the fleet.
     #
     # @option params [Integer] :max_user_duration_in_seconds
-    #   The maximum time that a streaming session can run, in seconds. Specify
-    #   a value between 600 and 360000. By default, the value is 900 seconds
-    #   (15 minutes).
+    #   The maximum amount of time that a streaming session can remain active,
+    #   in seconds. If users are still connected to a streaming instance five
+    #   minutes before this limit is reached, they are prompted to save any
+    #   open documents before being disconnected. After this time elapses, the
+    #   instance is terminated and replaced by a new instance.
+    #
+    #   Specify a value between 600 and 360000.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
-    #   The time after disconnection when a session is considered to have
-    #   ended, in seconds. If a user who was disconnected reconnects within
-    #   this time interval, the user is connected to their previous session.
-    #   Specify a value between 60 and 360000. By default, the value is 900
-    #   seconds (15 minutes).
+    #   The amount of time that a streaming session remains active after users
+    #   disconnect. If users try to reconnect to the streaming session after a
+    #   disconnection or network interruption within this time interval, they
+    #   are connected to their previous session. Otherwise, they are connected
+    #   to a new session with a new streaming instance.
+    #
+    #   Specify a value between 60 and 360000.
     #
     # @option params [Boolean] :delete_vpc_config
     #   Deletes the VPC association for the specified fleet.
@@ -2383,6 +2552,34 @@ module Aws::AppStream
     # @option params [Types::DomainJoinInfo] :domain_join_info
     #   The name of the directory and organizational unit (OU) to use to join
     #   the fleet to a Microsoft Active Directory domain.
+    #
+    # @option params [Integer] :idle_disconnect_timeout_in_seconds
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the
+    #   `DisconnectTimeoutInSeconds` time interval begins. Users are notified
+    #   before they are disconnected due to inactivity. If users try to
+    #   reconnect to the streaming session before the time interval specified
+    #   in `DisconnectTimeoutInSeconds` elapses, they are connected to their
+    #   previous session. Users are considered idle when they stop providing
+    #   keyboard or mouse input during their streaming session. File uploads
+    #   and downloads, audio in, audio out, and pixels changing do not qualify
+    #   as user activity. If users continue to be idle after the time interval
+    #   in `IdleDisconnectTimeoutInSeconds` elapses, they are disconnected.
+    #
+    #   To prevent users from being disconnected due to inactivity, specify a
+    #   value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   default value is 900.
+    #
+    #   <note markdown="1"> If you enable this feature, we recommend that you specify a value that
+    #   corresponds exactly to a whole number of minutes (for example, 60,
+    #   120, and 180). If you don't do this, the value is rounded to the
+    #   nearest minute. For example, if you specify a value of 70, users are
+    #   disconnected after 1 minute of inactivity. If you specify a value that
+    #   is at the midpoint between two different minutes, the value is rounded
+    #   up. For example, if you specify a value of 90, users are disconnected
+    #   after 2 minutes of inactivity.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :attributes_to_delete
     #   The fleet attributes to delete.
@@ -2415,6 +2612,7 @@ module Aws::AppStream
     #       directory_name: "DirectoryName",
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
+    #     idle_disconnect_timeout_in_seconds: 1,
     #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO
     #   })
     #
@@ -2446,6 +2644,7 @@ module Aws::AppStream
     #   resp.fleet.enable_default_internet_access #=> Boolean
     #   resp.fleet.domain_join_info.directory_name #=> String
     #   resp.fleet.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -2608,7 +2807,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
