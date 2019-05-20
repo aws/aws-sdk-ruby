@@ -136,6 +136,7 @@ module Aws
     MediaConvert
     MediaLive
     MediaPackage
+    MediaPackageVod
     MediaStore
     MediaStoreData
     MediaTailor

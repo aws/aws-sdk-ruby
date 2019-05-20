@@ -290,6 +290,7 @@ to be backwards compatible.
 | AWS Elemental MediaConvert                            | MediaConvert                    | 2017-08-29  |
 | AWS Elemental MediaLive                               | MediaLive                       | 2017-10-14  |
 | AWS Elemental MediaPackage                            | MediaPackage                    | 2017-10-12  |
+| AWS Elemental MediaPackage VOD                        | MediaPackageVod                 | 2018-11-07  |
 | AWS Elemental MediaStore                              | MediaStore                      | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | MediaStoreData                  | 2017-09-01  |
 | AWS Global Accelerator                                | GlobalAccelerator               | 2018-08-08  |
@@ -305,8 +306,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
@@ -380,8 +381,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |
@@ -426,8 +427,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 

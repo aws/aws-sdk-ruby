@@ -450,6 +450,10 @@
     "models": "mediapackage/2017-10-12",
     "endpoint": "mediapackage"
   },
+  "MediaPackageVod": {
+    "models": "mediapackage-vod/2018-11-07",
+    "endpoint": "mediapackage-vod"
+  },
   "MediaStore": {
     "models": "mediastore/2017-09-01",
     "endpoint": "mediastore"

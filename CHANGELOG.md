@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::MarketplaceMetering - Updated the documentation for AWSMarketplace Metering.
+
+* Feature - Aws::MediaPackageVod - Added support for a new service, AWS Elemental MediaPackage VOD.
+
 2.11.277 (2019-05-17)
 ------------------
 
