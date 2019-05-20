@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.278 (2019-05-20)
+------------------
+
 * Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
 
 * Feature - Aws::MarketplaceMetering - Updated the documentation for AWSMarketplace Metering.
