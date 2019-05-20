@@ -126,6 +126,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-mediaconvert', '~> 1')
   spec.add_dependency('aws-sdk-medialive', '~> 1')
   spec.add_dependency('aws-sdk-mediapackage', '~> 1')
+  spec.add_dependency('aws-sdk-mediapackagevod', '~> 1')
   spec.add_dependency('aws-sdk-mediastore', '~> 1')
   spec.add_dependency('aws-sdk-mediastoredata', '~> 1')
   spec.add_dependency('aws-sdk-mediatailor', '~> 1')

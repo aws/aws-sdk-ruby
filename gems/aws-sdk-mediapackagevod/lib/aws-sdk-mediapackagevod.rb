@@ -8,15 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-kafka/types'
-require_relative 'aws-sdk-kafka/client_api'
-require_relative 'aws-sdk-kafka/client'
-require_relative 'aws-sdk-kafka/errors'
-require_relative 'aws-sdk-kafka/resource'
-require_relative 'aws-sdk-kafka/customizations'
+require_relative 'aws-sdk-mediapackagevod/types'
+require_relative 'aws-sdk-mediapackagevod/client_api'
+require_relative 'aws-sdk-mediapackagevod/client'
+require_relative 'aws-sdk-mediapackagevod/errors'
+require_relative 'aws-sdk-mediapackagevod/resource'
+require_relative 'aws-sdk-mediapackagevod/customizations'
 
-# This module provides support for Managed Streaming for Kafka. This module is available in the
-# `aws-sdk-kafka` gem.
+# This module provides support for AWS Elemental MediaPackage VOD. This module is available in the
+# `aws-sdk-mediapackagevod` gem.
 #
 # # Client
 #
@@ -28,20 +28,20 @@ require_relative 'aws-sdk-kafka/customizations'
 #
 # # Errors
 #
-# Errors returned from Managed Streaming for Kafka all
+# Errors returned from AWS Elemental MediaPackage VOD all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::Kafka::Errors::ServiceError
+#     rescue Aws::MediaPackageVod::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::Kafka
+module Aws::MediaPackageVod
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.0.0'
 
 end

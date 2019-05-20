@@ -116,6 +116,7 @@ module Aws
   autoload :MediaConvert, 'aws-sdk-mediaconvert'
   autoload :MediaLive, 'aws-sdk-medialive'
   autoload :MediaPackage, 'aws-sdk-mediapackage'
+  autoload :MediaPackageVod, 'aws-sdk-mediapackagevod'
   autoload :MediaStore, 'aws-sdk-mediastore'
   autoload :MediaStoreData, 'aws-sdk-mediastoredata'
   autoload :MediaTailor, 'aws-sdk-mediatailor'

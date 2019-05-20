@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.43.0 (2019-05-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mediapackagevod` gem.
+
 3.42.0 (2019-04-30)
 ------------------
 

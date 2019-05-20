@@ -332,6 +332,7 @@ module Aws
             'MediaConvert' => 'mediaconvert',
             'MediaLive' => 'medialive',
             'MediaPackage' => 'mediapackage',
+            'MediaPackageVod' => 'mediapackage-vod',
             'MediaStore' => 'mediastore',
             'MediaStoreData' => 'data.mediastore',
             'MediaTailor' => 'api.mediatailor',

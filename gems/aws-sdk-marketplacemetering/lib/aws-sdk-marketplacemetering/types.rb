@@ -87,8 +87,10 @@ module Aws::MarketplaceMetering
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   Timestamp of the hour, recorded in UTC. The seconds and milliseconds
-    #   portions of the timestamp will be ignored.
+    #   Timestamp, in UTC, for which the usage is being reported. Your
+    #   application can meter usage for up to one hour in the past. Make
+    #   sure the timestamp value is not before the start of the software
+    #   usage.
     #   @return [Time]
     #
     # @!attribute [rw] usage_dimension
@@ -241,10 +243,11 @@ module Aws::MarketplaceMetering
     #       }
     #
     # @!attribute [rw] timestamp
-    #   Timestamp of the hour, recorded in UTC. The seconds and milliseconds
-    #   portions of the timestamp will be ignored.
+    #   Timestamp, in UTC, for which the usage is being reported.
     #
     #   Your application can meter usage for up to one hour in the past.
+    #   Make sure the timestamp value is not before the start of the
+    #   software usage.
     #   @return [Time]
     #
     # @!attribute [rw] customer_identifier

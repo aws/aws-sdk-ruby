@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2019-05-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaPackageVod`.
+
 1.163.0 (2019-05-17)
 ------------------
 

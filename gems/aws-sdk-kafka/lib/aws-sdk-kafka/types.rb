@@ -109,7 +109,7 @@ module Aws::Kafka
     #
     # @!attribute [rw] configuration_revision
     #   The revision of the configuration to use.
-    #   @return [String]
+    #   @return [Integer]
     #
     # @!attribute [rw] kafka_version
     #   The version of Apache Kafka.
@@ -192,6 +192,91 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Represents an MSK Configuration.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kafka_versions
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] latest_revision
+    #   Describes a configuration revision.
+    #   @return [Types::ConfigurationRevision]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Configuration AWS API Documentation
+    #
+    class Configuration < Struct.new(
+      :arn,
+      :creation_time,
+      :description,
+      :kafka_versions,
+      :latest_revision,
+      :name)
+      include Aws::Structure
+    end
+
+    # Specifies the Kafka configuration to use for the brokers.
+    #
+    # @note When making an API call, you may pass ConfigurationInfo
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #         revision: 1, # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   ARN of the configuration to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the configuration to use.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConfigurationInfo AWS API Documentation
+    #
+    class ConfigurationInfo < Struct.new(
+      :arn,
+      :revision)
+      include Aws::Structure
+    end
+
+    # Describes a configuration revision.
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the configuration revision was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConfigurationRevision AWS API Documentation
+    #
+    class ConfigurationRevision < Struct.new(
+      :creation_time,
+      :description,
+      :revision)
+      include Aws::Structure
+    end
+
     # Creates a cluster.
     #
     # @note When making an API call, you may pass CreateClusterRequest
@@ -210,6 +295,10 @@ module Aws::Kafka
     #           },
     #         },
     #         cluster_name: "__stringMin1Max64", # required
+    #         configuration_info: {
+    #           arn: "__string", # required
+    #           revision: 1, # required
+    #         },
     #         encryption_info: {
     #           encryption_at_rest: {
     #             data_volume_kms_key_id: "__string", # required
@@ -227,6 +316,11 @@ module Aws::Kafka
     # @!attribute [rw] cluster_name
     #   The name of the cluster.
     #   @return [String]
+    #
+    # @!attribute [rw] configuration_info
+    #   Comprises of the Configuration to be used on Kafka brokers in a
+    #   cluster.
+    #   @return [Types::ConfigurationInfo]
     #
     # @!attribute [rw] encryption_info
     #   Includes all encryption-related information.
@@ -250,6 +344,7 @@ module Aws::Kafka
     class CreateClusterRequest < Struct.new(
       :broker_node_group_info,
       :cluster_name,
+      :configuration_info,
       :encryption_info,
       :enhanced_monitoring,
       :kafka_version,
@@ -278,6 +373,76 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_name,
       :state)
+      include Aws::Structure
+    end
+
+    # Request body for CreateConfiguration.
+    #
+    # @note When making an API call, you may pass CreateConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "__string",
+    #         kafka_versions: ["__string"], # required
+    #         name: "__string", # required
+    #         server_properties: "data", # required
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kafka_versions
+    #   The versions of Apache Kafka with which you can use this MSK
+    #   configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_properties
+    #   Contents of the server.properties file. When using the API, you must
+    #   ensure that the contents of the file are base64 encoded. When using
+    #   the AWS Management Console, the SDK, or the AWS CLI, the contents of
+    #   server.properties can be in plaintext.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfigurationRequest AWS API Documentation
+    #
+    class CreateConfigurationRequest < Struct.new(
+      :description,
+      :kafka_versions,
+      :name,
+      :server_properties)
+      include Aws::Structure
+    end
+
+    # Response body for CreateConfiguration
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_revision
+    #   Latest revision of the configuration.
+    #   @return [Types::ConfigurationRevision]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfigurationResponse AWS API Documentation
+    #
+    class CreateConfigurationResponse < Struct.new(
+      :arn,
+      :creation_time,
+      :latest_revision,
+      :name)
       include Aws::Structure
     end
 
@@ -349,6 +514,119 @@ module Aws::Kafka
     #
     class DescribeClusterResponse < Struct.new(
       :cluster_info)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationRequest AWS API Documentation
+    #
+    class DescribeConfigurationRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # Response body for DescribeConfiguration.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kafka_versions
+    #   The versions of Apache Kafka with which you can use this MSK
+    #   configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] latest_revision
+    #   Latest revision of the configuration.
+    #   @return [Types::ConfigurationRevision]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationResponse AWS API Documentation
+    #
+    class DescribeConfigurationResponse < Struct.new(
+      :arn,
+      :creation_time,
+      :description,
+      :kafka_versions,
+      :latest_revision,
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeConfigurationRevisionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #         revision: 1, # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationRevisionRequest AWS API Documentation
+    #
+    class DescribeConfigurationRevisionRequest < Struct.new(
+      :arn,
+      :revision)
+      include Aws::Structure
+    end
+
+    # Response body for DescribeConfigurationRevision.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_properties
+    #   Contents of the server.properties file. When using the API, you must
+    #   ensure that the contents of the file are base64 encoded. When using
+    #   the AWS Management Console, the SDK, or the AWS CLI, the contents of
+    #   server.properties can be in plaintext.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationRevisionResponse AWS API Documentation
+    #
+    class DescribeConfigurationRevisionResponse < Struct.new(
+      :arn,
+      :creation_time,
+      :description,
+      :revision,
+      :server_properties)
       include Aws::Structure
     end
 
@@ -510,6 +788,49 @@ module Aws::Kafka
     #
     class ListClustersResponse < Struct.new(
       :cluster_info_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: "__string",
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListConfigurationsRequest AWS API Documentation
+    #
+    class ListConfigurationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The response contains an array of Configuration and a next token if
+    # the response is truncated.
+    #
+    # @!attribute [rw] configurations
+    #   @return [Array<Types::Configuration>]
+    #
+    # @!attribute [rw] next_token
+    #   The paginated results marker. When the result of a
+    #   ListConfigurations operation is truncated, the call returns
+    #   NextToken in the response. To get another batch of configurations,
+    #   provide this token in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListConfigurationsResponse AWS API Documentation
+    #
+    class ListConfigurationsResponse < Struct.new(
+      :configurations,
       :next_token)
       include Aws::Structure
     end

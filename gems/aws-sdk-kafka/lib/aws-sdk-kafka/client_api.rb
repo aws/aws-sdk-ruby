@@ -18,13 +18,22 @@ module Aws::Kafka
     BrokerSoftwareInfo = Shapes::StructureShape.new(name: 'BrokerSoftwareInfo')
     ClusterInfo = Shapes::StructureShape.new(name: 'ClusterInfo')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
+    Configuration = Shapes::StructureShape.new(name: 'Configuration')
+    ConfigurationInfo = Shapes::StructureShape.new(name: 'ConfigurationInfo')
+    ConfigurationRevision = Shapes::StructureShape.new(name: 'ConfigurationRevision')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
+    CreateConfigurationRequest = Shapes::StructureShape.new(name: 'CreateConfigurationRequest')
+    CreateConfigurationResponse = Shapes::StructureShape.new(name: 'CreateConfigurationResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
     DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
+    DescribeConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationRequest')
+    DescribeConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeConfigurationResponse')
+    DescribeConfigurationRevisionRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationRevisionRequest')
+    DescribeConfigurationRevisionResponse = Shapes::StructureShape.new(name: 'DescribeConfigurationRevisionResponse')
     EBSStorageInfo = Shapes::StructureShape.new(name: 'EBSStorageInfo')
     EncryptionAtRest = Shapes::StructureShape.new(name: 'EncryptionAtRest')
     EncryptionInfo = Shapes::StructureShape.new(name: 'EncryptionInfo')
@@ -36,6 +45,8 @@ module Aws::Kafka
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
+    ListConfigurationsRequest = Shapes::StructureShape.new(name: 'ListConfigurationsRequest')
+    ListConfigurationsResponse = Shapes::StructureShape.new(name: 'ListConfigurationsResponse')
     ListNodesRequest = Shapes::StructureShape.new(name: 'ListNodesRequest')
     ListNodesResponse = Shapes::StructureShape.new(name: 'ListNodesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -51,12 +62,14 @@ module Aws::Kafka
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     ZookeeperNodeInfo = Shapes::StructureShape.new(name: 'ZookeeperNodeInfo')
+    __blob = Shapes::BlobShape.new(name: '__blob')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin1Max15 = Shapes::IntegerShape.new(name: '__integerMin1Max15')
     __integerMin1Max16384 = Shapes::IntegerShape.new(name: '__integerMin1Max16384')
     __listOfClusterInfo = Shapes::ListShape.new(name: '__listOfClusterInfo')
+    __listOfConfiguration = Shapes::ListShape.new(name: '__listOfConfiguration')
     __listOfNodeInfo = Shapes::ListShape.new(name: '__listOfNodeInfo')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
@@ -83,7 +96,7 @@ module Aws::Kafka
     BrokerNodeInfo.struct_class = Types::BrokerNodeInfo
 
     BrokerSoftwareInfo.add_member(:configuration_arn, Shapes::ShapeRef.new(shape: __string, location_name: "configurationArn"))
-    BrokerSoftwareInfo.add_member(:configuration_revision, Shapes::ShapeRef.new(shape: __string, location_name: "configurationRevision"))
+    BrokerSoftwareInfo.add_member(:configuration_revision, Shapes::ShapeRef.new(shape: __long, location_name: "configurationRevision"))
     BrokerSoftwareInfo.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __string, location_name: "kafkaVersion"))
     BrokerSoftwareInfo.struct_class = Types::BrokerSoftwareInfo
 
@@ -100,8 +113,26 @@ module Aws::Kafka
     ClusterInfo.add_member(:zookeeper_connect_string, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectString"))
     ClusterInfo.struct_class = Types::ClusterInfo
 
+    Configuration.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "arn"))
+    Configuration.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "creationTime"))
+    Configuration.add_member(:description, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "description"))
+    Configuration.add_member(:kafka_versions, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "kafkaVersions"))
+    Configuration.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, required: true, location_name: "latestRevision"))
+    Configuration.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    Configuration.struct_class = Types::Configuration
+
+    ConfigurationInfo.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "arn"))
+    ConfigurationInfo.add_member(:revision, Shapes::ShapeRef.new(shape: __long, required: true, location_name: "revision"))
+    ConfigurationInfo.struct_class = Types::ConfigurationInfo
+
+    ConfigurationRevision.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "creationTime"))
+    ConfigurationRevision.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    ConfigurationRevision.add_member(:revision, Shapes::ShapeRef.new(shape: __long, required: true, location_name: "revision"))
+    ConfigurationRevision.struct_class = Types::ConfigurationRevision
+
     CreateClusterRequest.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, required: true, location_name: "brokerNodeGroupInfo"))
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __stringMin1Max64, required: true, location_name: "clusterName"))
+    CreateClusterRequest.add_member(:configuration_info, Shapes::ShapeRef.new(shape: ConfigurationInfo, location_name: "configurationInfo"))
     CreateClusterRequest.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
     CreateClusterRequest.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
     CreateClusterRequest.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "kafkaVersion"))
@@ -112,6 +143,18 @@ module Aws::Kafka
     CreateClusterResponse.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __string, location_name: "clusterName"))
     CreateClusterResponse.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
     CreateClusterResponse.struct_class = Types::CreateClusterResponse
+
+    CreateConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    CreateConfigurationRequest.add_member(:kafka_versions, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "kafkaVersions"))
+    CreateConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    CreateConfigurationRequest.add_member(:server_properties, Shapes::ShapeRef.new(shape: __blob, required: true, location_name: "serverProperties"))
+    CreateConfigurationRequest.struct_class = Types::CreateConfigurationRequest
+
+    CreateConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateConfigurationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    CreateConfigurationResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
+    CreateConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateConfigurationResponse.struct_class = Types::CreateConfigurationResponse
 
     DeleteClusterRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     DeleteClusterRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "currentVersion"))
@@ -126,6 +169,28 @@ module Aws::Kafka
 
     DescribeClusterResponse.add_member(:cluster_info, Shapes::ShapeRef.new(shape: ClusterInfo, location_name: "clusterInfo"))
     DescribeClusterResponse.struct_class = Types::DescribeClusterResponse
+
+    DescribeConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
+    DescribeConfigurationRequest.struct_class = Types::DescribeConfigurationRequest
+
+    DescribeConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeConfigurationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    DescribeConfigurationResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    DescribeConfigurationResponse.add_member(:kafka_versions, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "kafkaVersions"))
+    DescribeConfigurationResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
+    DescribeConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeConfigurationResponse.struct_class = Types::DescribeConfigurationResponse
+
+    DescribeConfigurationRevisionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
+    DescribeConfigurationRevisionRequest.add_member(:revision, Shapes::ShapeRef.new(shape: __long, required: true, location: "uri", location_name: "revision"))
+    DescribeConfigurationRevisionRequest.struct_class = Types::DescribeConfigurationRevisionRequest
+
+    DescribeConfigurationRevisionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeConfigurationRevisionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    DescribeConfigurationRevisionResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    DescribeConfigurationRevisionResponse.add_member(:revision, Shapes::ShapeRef.new(shape: __long, location_name: "revision"))
+    DescribeConfigurationRevisionResponse.add_member(:server_properties, Shapes::ShapeRef.new(shape: __blob, location_name: "serverProperties"))
+    DescribeConfigurationRevisionResponse.struct_class = Types::DescribeConfigurationRevisionResponse
 
     EBSStorageInfo.add_member(:volume_size, Shapes::ShapeRef.new(shape: __integerMin1Max16384, location_name: "volumeSize"))
     EBSStorageInfo.struct_class = Types::EBSStorageInfo
@@ -154,6 +219,14 @@ module Aws::Kafka
     ListClustersResponse.add_member(:cluster_info_list, Shapes::ShapeRef.new(shape: __listOfClusterInfo, location_name: "clusterInfoList"))
     ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListClustersResponse.struct_class = Types::ListClustersResponse
+
+    ListConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maxResults"))
+    ListConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListConfigurationsRequest.struct_class = Types::ListConfigurationsRequest
+
+    ListConfigurationsResponse.add_member(:configurations, Shapes::ShapeRef.new(shape: __listOfConfiguration, location_name: "configurations"))
+    ListConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListConfigurationsResponse.struct_class = Types::ListConfigurationsResponse
 
     ListNodesRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     ListNodesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -197,6 +270,8 @@ module Aws::Kafka
 
     __listOfClusterInfo.member = Shapes::ShapeRef.new(shape: ClusterInfo)
 
+    __listOfConfiguration.member = Shapes::ShapeRef.new(shape: Configuration)
+
     __listOfNodeInfo.member = Shapes::ShapeRef.new(shape: NodeInfo)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
@@ -238,6 +313,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/configurations"
+        o.input = Shapes::ShapeRef.new(shape: CreateConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCluster"
         o.http_method = "DELETE"
@@ -263,6 +353,34 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
+      api.add_operation(:describe_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/configurations/{arn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_configuration_revision, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeConfigurationRevision"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/configurations/{arn}/revisions/{revision}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeConfigurationRevisionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeConfigurationRevisionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:get_bootstrap_brokers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBootstrapBrokers"
         o.http_method = "GET"
@@ -286,6 +404,31 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConfigurations"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/configurations"
+        o.input = Shapes::ShapeRef.new(shape: ListConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_nodes, Seahorse::Model::Operation.new.tap do |o|
@@ -298,6 +441,12 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

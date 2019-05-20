@@ -373,6 +373,9 @@
   "MediaPackage": {
     "models": "mediapackage/2017-10-12"
   },
+  "MediaPackageVod": {
+    "models": "mediapackage-vod/2018-11-07"
+  },
   "MediaStore": {
     "models": "mediastore/2017-09-01"
   },

@@ -258,6 +258,10 @@ module Aws::Kafka
     # @option params [required, String] :cluster_name
     #   The name of the cluster.
     #
+    # @option params [Types::ConfigurationInfo] :configuration_info
+    #   Comprises of the Configuration to be used on Kafka brokers in a
+    #   cluster.
+    #
     # @option params [Types::EncryptionInfo] :encryption_info
     #   Includes all encryption-related information.
     #
@@ -292,6 +296,10 @@ module Aws::Kafka
     #       },
     #     },
     #     cluster_name: "__stringMin1Max64", # required
+    #     configuration_info: {
+    #       arn: "__string", # required
+    #       revision: 1, # required
+    #     },
     #     encryption_info: {
     #       encryption_at_rest: {
     #         data_volume_kms_key_id: "__string", # required
@@ -314,6 +322,58 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def create_cluster(params = {}, options = {})
       req = build_request(:create_cluster, params)
+      req.send_request(options)
+    end
+
+    # Creates a new MSK configuration.
+    #
+    # @option params [String] :description
+    #   The description of the configuration.
+    #
+    # @option params [required, Array<String>] :kafka_versions
+    #   The versions of Apache Kafka with which you can use this MSK
+    #   configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the configuration.
+    #
+    # @option params [required, String, IO] :server_properties
+    #   Contents of the server.properties file. When using the API, you must
+    #   ensure that the contents of the file are base64 encoded. When using
+    #   the AWS Management Console, the SDK, or the AWS CLI, the contents of
+    #   server.properties can be in plaintext.
+    #
+    # @return [Types::CreateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConfigurationResponse#arn #arn} => String
+    #   * {Types::CreateConfigurationResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
+    #   * {Types::CreateConfigurationResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_configuration({
+    #     description: "__string",
+    #     kafka_versions: ["__string"], # required
+    #     name: "__string", # required
+    #     server_properties: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.latest_revision.creation_time #=> Time
+    #   resp.latest_revision.description #=> String
+    #   resp.latest_revision.revision #=> Integer
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfiguration AWS API Documentation
+    #
+    # @overload create_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_configuration(params = {}, options = {})
+      req = build_request(:create_configuration, params)
       req.send_request(options)
     end
 
@@ -378,7 +438,7 @@ module Aws::Kafka
     #   resp.cluster_info.cluster_name #=> String
     #   resp.cluster_info.creation_time #=> Time
     #   resp.cluster_info.current_broker_software_info.configuration_arn #=> String
-    #   resp.cluster_info.current_broker_software_info.configuration_revision #=> String
+    #   resp.cluster_info.current_broker_software_info.configuration_revision #=> Integer
     #   resp.cluster_info.current_broker_software_info.kafka_version #=> String
     #   resp.cluster_info.current_version #=> String
     #   resp.cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
@@ -393,6 +453,84 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def describe_cluster(params = {}, options = {})
       req = build_request(:describe_cluster, params)
+      req.send_request(options)
+    end
+
+    # Returns a description of this MSK configuration.
+    #
+    # @option params [required, String] :arn
+    #
+    # @return [Types::DescribeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConfigurationResponse#arn #arn} => String
+    #   * {Types::DescribeConfigurationResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeConfigurationResponse#description #description} => String
+    #   * {Types::DescribeConfigurationResponse#kafka_versions #kafka_versions} => Array&lt;String&gt;
+    #   * {Types::DescribeConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
+    #   * {Types::DescribeConfigurationResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_configuration({
+    #     arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.description #=> String
+    #   resp.kafka_versions #=> Array
+    #   resp.kafka_versions[0] #=> String
+    #   resp.latest_revision.creation_time #=> Time
+    #   resp.latest_revision.description #=> String
+    #   resp.latest_revision.revision #=> Integer
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfiguration AWS API Documentation
+    #
+    # @overload describe_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_configuration(params = {}, options = {})
+      req = build_request(:describe_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns a description of this revision of the configuration.
+    #
+    # @option params [required, String] :arn
+    #
+    # @option params [required, Integer] :revision
+    #
+    # @return [Types::DescribeConfigurationRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConfigurationRevisionResponse#arn #arn} => String
+    #   * {Types::DescribeConfigurationRevisionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeConfigurationRevisionResponse#description #description} => String
+    #   * {Types::DescribeConfigurationRevisionResponse#revision #revision} => Integer
+    #   * {Types::DescribeConfigurationRevisionResponse#server_properties #server_properties} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_configuration_revision({
+    #     arn: "__string", # required
+    #     revision: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.description #=> String
+    #   resp.revision #=> Integer
+    #   resp.server_properties #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationRevision AWS API Documentation
+    #
+    # @overload describe_configuration_revision(params = {})
+    # @param [Hash] params ({})
+    def describe_configuration_revision(params = {}, options = {})
+      req = build_request(:describe_configuration_revision, params)
       req.send_request(options)
     end
 
@@ -458,7 +596,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].cluster_name #=> String
     #   resp.cluster_info_list[0].creation_time #=> Time
     #   resp.cluster_info_list[0].current_broker_software_info.configuration_arn #=> String
-    #   resp.cluster_info_list[0].current_broker_software_info.configuration_revision #=> String
+    #   resp.cluster_info_list[0].current_broker_software_info.configuration_revision #=> Integer
     #   resp.cluster_info_list[0].current_broker_software_info.kafka_version #=> String
     #   resp.cluster_info_list[0].current_version #=> String
     #   resp.cluster_info_list[0].encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
@@ -474,6 +612,48 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def list_clusters(params = {}, options = {})
       req = build_request(:list_clusters, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the MSK configurations in this Region for this
+    # account.
+    #
+    # @option params [String] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfigurationsResponse#configurations #configurations} => Array&lt;Types::Configuration&gt;
+    #   * {Types::ListConfigurationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configurations({
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configurations #=> Array
+    #   resp.configurations[0].arn #=> String
+    #   resp.configurations[0].creation_time #=> Time
+    #   resp.configurations[0].description #=> String
+    #   resp.configurations[0].kafka_versions #=> Array
+    #   resp.configurations[0].kafka_versions[0] #=> String
+    #   resp.configurations[0].latest_revision.creation_time #=> Time
+    #   resp.configurations[0].latest_revision.description #=> String
+    #   resp.configurations[0].latest_revision.revision #=> Integer
+    #   resp.configurations[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListConfigurations AWS API Documentation
+    #
+    # @overload list_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_configurations(params = {}, options = {})
+      req = build_request(:list_configurations, params)
       req.send_request(options)
     end
 
@@ -508,7 +688,7 @@ module Aws::Kafka
     #   resp.node_info_list[0].broker_node_info.client_subnet #=> String
     #   resp.node_info_list[0].broker_node_info.client_vpc_ip_address #=> String
     #   resp.node_info_list[0].broker_node_info.current_broker_software_info.configuration_arn #=> String
-    #   resp.node_info_list[0].broker_node_info.current_broker_software_info.configuration_revision #=> String
+    #   resp.node_info_list[0].broker_node_info.current_broker_software_info.configuration_revision #=> Integer
     #   resp.node_info_list[0].broker_node_info.current_broker_software_info.kafka_version #=> String
     #   resp.node_info_list[0].instance_type #=> String
     #   resp.node_info_list[0].node_arn #=> String
@@ -619,7 +799,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
