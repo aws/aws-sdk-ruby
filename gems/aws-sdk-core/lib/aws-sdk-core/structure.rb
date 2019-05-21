@@ -29,7 +29,7 @@ module Aws
     def to_h(obj = self)
       case obj
       when Struct
-        obj.members.each.with_object({}) do |member, hash|
+        obj.each_pair.with_object({}) do |(member,_), hash|
           value = obj[member]
           hash[member] = to_hash(value) unless value.nil?
         end
