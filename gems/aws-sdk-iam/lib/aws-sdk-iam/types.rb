@@ -492,6 +492,20 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because multiple requests to change this
+    # object were submitted simultaneously. Wait a few minutes and submit
+    # your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about a condition context key. It includes the
     # name of the key and specifies the value (or values, if the context key
     # supports multiple values) to use in the simulation. This information
@@ -1545,6 +1559,52 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the most recent credential report has
+    # expired. To generate a new credential report, use
+    # GenerateCredentialReport. For more information about credential report
+    # expiration, see [Getting Credential Reports][1] in the *IAM User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CredentialReportExpiredException AWS API Documentation
+    #
+    class CredentialReportExpiredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the credential report does not exist.
+    # To generate a credential report, use GenerateCredentialReport.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CredentialReportNotPresentException AWS API Documentation
+    #
+    class CredentialReportNotPresentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the credential report is still being
+    # generated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CredentialReportNotReadyException AWS API Documentation
+    #
+    class CredentialReportNotReadyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeactivateMFADeviceRequest
     #   data as a hash:
     #
@@ -1654,6 +1714,20 @@ module Aws::IAM
     #
     class DeleteAccountAliasRequest < Struct.new(
       :account_alias)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to delete a resource
+    # that has attached subordinate entities. The error message describes
+    # these entities.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteConflictException AWS API Documentation
+    #
+    class DeleteConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2431,6 +2505,32 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the same certificate is associated
+    # with an IAM user in the account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DuplicateCertificateException AWS API Documentation
+    #
+    class DuplicateCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the SSH public key is already
+    # associated with the specified IAM user.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DuplicateSSHPublicKeyException AWS API Documentation
+    #
+    class DuplicateSSHPublicKeyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableMFADeviceRequest
     #   data as a hash:
     #
@@ -2509,6 +2609,19 @@ module Aws::IAM
       :serial_number,
       :authentication_code_1,
       :authentication_code_2)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create a resource
+    # that already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityAlreadyExistsException AWS API Documentation
+    #
+    class EntityAlreadyExistsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2591,6 +2704,22 @@ module Aws::IAM
       :type,
       :id,
       :path)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it referenced an entity that is
+    # temporarily unmodifiable, such as a user name that was deleted and
+    # then recreated. The error indicates that the request is likely to
+    # succeed if you try again after waiting several minutes. The error
+    # message describes the entity.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityTemporarilyUnmodifiableException AWS API Documentation
+    #
+    class EntityTemporarilyUnmodifiableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4306,6 +4435,97 @@ module Aws::IAM
       :arn,
       :create_date,
       :roles)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the authentication code was not
+    # recognized. The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidAuthenticationCodeException AWS API Documentation
+    #
+    class InvalidAuthenticationCodeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the certificate is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidCertificateException AWS API Documentation
+    #
+    class InvalidCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an invalid or out-of-range value was
+    # supplied for an input parameter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the public key is malformed or
+    # otherwise invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidPublicKeyException AWS API Documentation
+    #
+    class InvalidPublicKeyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the type of user for the transaction
+    # was incorrect.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidUserTypeException AWS API Documentation
+    #
+    class InvalidUserTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the public key certificate and the
+    # private key do not match.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/KeyPairMismatchException AWS API Documentation
+    #
+    class KeyPairMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create resources
+    # beyond the current AWS account limits. The error message describes the
+    # limit exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6723,6 +6943,32 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the certificate was malformed or
+    # expired. The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/MalformedCertificateException AWS API Documentation
+    #
+    class MalformedCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the policy document was malformed.
+    # The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about a managed policy, including the policy's
     # ARN, versions, and the number of principal entities (users, groups,
     # and roles) that the policy is attached to.
@@ -6858,6 +7104,19 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because it referenced a resource entity that
+    # does not exist. The error message describes the resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/NoSuchEntityException AWS API Documentation
+    #
+    class NoSuchEntityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect
     # provider.
     #
@@ -6961,6 +7220,19 @@ module Aws::IAM
       :max_password_age,
       :password_reuse_prevention,
       :hard_expiry)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the provided password did not meet
+    # the requirements imposed by the account password policy.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PasswordPolicyViolationException AWS API Documentation
+    #
+    class PasswordPolicyViolationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7110,6 +7382,20 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request failed because a provided policy could not be successfully
+    # evaluated. An additional detailed message indicates the source of the
+    # failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyEvaluationException AWS API Documentation
+    #
+    class PolicyEvaluationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about the permissions policies that are attached to
     # the specified identity (user, group, or role).
     #
@@ -7210,6 +7496,19 @@ module Aws::IAM
     class PolicyGroup < Struct.new(
       :group_name,
       :group_id)
+      include Aws::Structure
+    end
+
+    # The request failed because AWS service role policies can only be
+    # attached to the service-linked role for that service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyNotAttachableException AWS API Documentation
+    #
+    class PolicyNotAttachableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -8335,6 +8634,19 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request processing has failed because of an unknown error,
+    # exception or failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceFailureException AWS API Documentation
+    #
+    class ServiceFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about the most recent attempt to access the service.
     #
     # This data type is used as a response element in the
@@ -8408,6 +8720,18 @@ module Aws::IAM
       :service_namespace,
       :last_authenticated_entity,
       :total_authenticated_entities)
+      include Aws::Structure
+    end
+
+    # The specified service does not support service-specific credentials.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceNotSupportedException AWS API Documentation
+    #
+    class ServiceNotSupportedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -9273,6 +9597,34 @@ module Aws::IAM
     class TagUserRequest < Struct.new(
       :user_name,
       :tags)
+      include Aws::Structure
+    end
+
+    # The request was rejected because only the service that depends on the
+    # service-linked role can modify or delete the role on your behalf. The
+    # error message includes the name of the service that depends on this
+    # service-linked role. You must request the change through that service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UnmodifiableEntityException AWS API Documentation
+    #
+    class UnmodifiableEntityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the public key encoding format is
+    # unsupported or unrecognized.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UnrecognizedPublicKeyEncodingException AWS API Documentation
+    #
+    class UnrecognizedPublicKeyEncodingException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -9483,6 +9483,31 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Resource being accessed is in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceInUse AWS API Documentation
+    #
+    class ResourceInUse < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You have exceeded an Amazon SageMaker resource limit. For example, you
+    # might have too many training jobs created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceLimitExceeded AWS API Documentation
+    #
+    class ResourceLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Specifies the maximum number of training jobs and parallel training
     # jobs that a hyperparameter tuning job can launch.
     #
@@ -9509,6 +9534,18 @@ module Aws::SageMaker
     class ResourceLimits < Struct.new(
       :max_number_of_training_jobs,
       :max_parallel_training_jobs)
+      include Aws::Structure
+    end
+
+    # Resource being access is not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceNotFound AWS API Documentation
+    #
+    class ResourceNotFound < Struct.new(
+      :message)
       include Aws::Structure
     end
 

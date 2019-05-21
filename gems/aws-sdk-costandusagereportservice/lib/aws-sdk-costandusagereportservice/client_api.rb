@@ -57,6 +57,12 @@ module Aws::CostandUsageReportService
     DescribeReportDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     DescribeReportDefinitionsResponse.struct_class = Types::DescribeReportDefinitionsResponse
 
+    DuplicateReportNameException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DuplicateReportNameException.struct_class = Types::DuplicateReportNameException
+
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
     PutReportDefinitionRequest.add_member(:report_definition, Shapes::ShapeRef.new(shape: ReportDefinition, required: true, location_name: "ReportDefinition"))
     PutReportDefinitionRequest.struct_class = Types::PutReportDefinitionRequest
 
@@ -77,7 +83,13 @@ module Aws::CostandUsageReportService
 
     ReportDefinitionList.member = Shapes::ShapeRef.new(shape: ReportDefinition)
 
+    ReportLimitReachedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ReportLimitReachedException.struct_class = Types::ReportLimitReachedException
+
     SchemaElementList.member = Shapes::ShapeRef.new(shape: SchemaElement)
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private

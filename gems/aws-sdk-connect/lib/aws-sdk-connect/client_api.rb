@@ -143,6 +143,9 @@ module Aws::Connect
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
 
+    ContactNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ContactNotFoundException.struct_class = Types::ContactNotFoundException
+
     CreateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: AgentUsername, required: true, location_name: "Username"))
     CreateUserRequest.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     CreateUserRequest.add_member(:identity_info, Shapes::ShapeRef.new(shape: UserIdentityInfo, location_name: "IdentityInfo"))
@@ -206,9 +209,15 @@ module Aws::Connect
     DescribeUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
+    DestinationNotAllowedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    DestinationNotAllowedException.struct_class = Types::DestinationNotAllowedException
+
     Dimensions.add_member(:queue, Shapes::ShapeRef.new(shape: QueueReference, location_name: "Queue"))
     Dimensions.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
     Dimensions.struct_class = Types::Dimensions
+
+    DuplicateResourceException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    DuplicateResourceException.struct_class = Types::DuplicateResourceException
 
     Filters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
     Filters.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
@@ -309,6 +318,18 @@ module Aws::Connect
 
     HistoricalMetrics.member = Shapes::ShapeRef.new(shape: HistoricalMetric)
 
+    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InternalServiceException.struct_class = Types::InternalServiceException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListRoutingProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListRoutingProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListRoutingProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
@@ -345,11 +366,17 @@ module Aws::Connect
     ListUsersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
+    OutboundContactNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    OutboundContactNotPermittedException.struct_class = Types::OutboundContactNotPermittedException
+
     QueueReference.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
     QueueReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     QueueReference.struct_class = Types::QueueReference
 
     Queues.member = Shapes::ShapeRef.new(shape: QueueId)
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RoutingProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
     RoutingProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -388,6 +415,9 @@ module Aws::Connect
     Threshold.add_member(:comparison, Shapes::ShapeRef.new(shape: Comparison, location_name: "Comparison"))
     Threshold.add_member(:threshold_value, Shapes::ShapeRef.new(shape: ThresholdValue, location_name: "ThresholdValue", metadata: {"box"=>true}))
     Threshold.struct_class = Types::Threshold
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     UpdateContactAttributesRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
     UpdateContactAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -436,6 +466,9 @@ module Aws::Connect
     UserIdentityInfo.add_member(:last_name, Shapes::ShapeRef.new(shape: AgentLastName, location_name: "LastName"))
     UserIdentityInfo.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
     UserIdentityInfo.struct_class = Types::UserIdentityInfo
+
+    UserNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    UserNotFoundException.struct_class = Types::UserNotFoundException
 
     UserPhoneConfig.add_member(:phone_type, Shapes::ShapeRef.new(shape: PhoneType, required: true, location_name: "PhoneType"))
     UserPhoneConfig.add_member(:auto_accept, Shapes::ShapeRef.new(shape: AutoAccept, location_name: "AutoAccept"))

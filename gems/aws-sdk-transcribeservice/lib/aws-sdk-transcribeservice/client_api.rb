@@ -60,6 +60,12 @@ module Aws::TranscribeService
     VocabularyName = Shapes::StringShape.new(name: 'VocabularyName')
     VocabularyState = Shapes::StringShape.new(name: 'VocabularyState')
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
     CreateVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     CreateVocabularyRequest.add_member(:phrases, Shapes::ShapeRef.new(shape: Phrases, location_name: "Phrases"))
@@ -96,6 +102,12 @@ module Aws::TranscribeService
     GetVocabularyResponse.add_member(:download_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "DownloadUri"))
     GetVocabularyResponse.struct_class = Types::GetVocabularyResponse
 
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListTranscriptionJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "Status"))
     ListTranscriptionJobsRequest.add_member(:job_name_contains, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "JobNameContains"))
     ListTranscriptionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -120,6 +132,9 @@ module Aws::TranscribeService
 
     Media.add_member(:media_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "MediaFileUri"))
     Media.struct_class = Types::Media
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     Phrases.member = Shapes::ShapeRef.new(shape: Phrase)
 

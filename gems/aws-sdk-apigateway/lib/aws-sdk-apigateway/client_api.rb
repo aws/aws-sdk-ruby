@@ -320,6 +320,9 @@ module Aws::APIGateway
     Authorizers.add_member(:items, Shapes::ShapeRef.new(shape: ListOfAuthorizer, location_name: "item"))
     Authorizers.struct_class = Types::Authorizers
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BasePathMapping.add_member(:base_path, Shapes::ShapeRef.new(shape: String, location_name: "basePath"))
     BasePathMapping.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, location_name: "restApiId"))
     BasePathMapping.add_member(:stage, Shapes::ShapeRef.new(shape: String, location_name: "stage"))
@@ -345,6 +348,9 @@ module Aws::APIGateway
     ClientCertificates.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
     ClientCertificates.add_member(:items, Shapes::ShapeRef.new(shape: ListOfClientCertificate, location_name: "item"))
     ClientCertificates.struct_class = Types::ClientCertificates
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateApiKeyRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     CreateApiKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -902,6 +908,10 @@ module Aws::APIGateway
     IntegrationResponse.add_member(:content_handling, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandling"))
     IntegrationResponse.struct_class = Types::IntegrationResponse
 
+    LimitExceededException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListOfARNs.member = Shapes::ShapeRef.new(shape: ProviderARN)
 
     ListOfApiKey.member = Shapes::ShapeRef.new(shape: ApiKey)
@@ -1030,6 +1040,9 @@ module Aws::APIGateway
     Models.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
     Models.add_member(:items, Shapes::ShapeRef.new(shape: ListOfModel, location_name: "item"))
     Models.struct_class = Types::Models
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     PatchOperation.add_member(:op, Shapes::ShapeRef.new(shape: Op, location_name: "op"))
     PatchOperation.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
@@ -1172,6 +1185,10 @@ module Aws::APIGateway
     SdkTypes.add_member(:items, Shapes::ShapeRef.new(shape: ListOfSdkType, location_name: "item"))
     SdkTypes.struct_class = Types::SdkTypes
 
+    ServiceUnavailableException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     Stage.add_member(:deployment_id, Shapes::ShapeRef.new(shape: String, location_name: "deploymentId"))
     Stage.add_member(:client_certificate_id, Shapes::ShapeRef.new(shape: String, location_name: "clientCertificateId"))
     Stage.add_member(:stage_name, Shapes::ShapeRef.new(shape: String, location_name: "stageName"))
@@ -1249,6 +1266,13 @@ module Aws::APIGateway
     ThrottleSettings.add_member(:burst_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "burstLimit"))
     ThrottleSettings.add_member(:rate_limit, Shapes::ShapeRef.new(shape: Double, location_name: "rateLimit"))
     ThrottleSettings.struct_class = Types::ThrottleSettings
+
+    TooManyRequestsException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ListOfString, required: true, location: "querystring", location_name: "tagKeys"))

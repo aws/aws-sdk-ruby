@@ -65,6 +65,18 @@ module Aws::RoboMaker
     #
     class CancelSimulationJobResponse < Aws::EmptyStructure; end
 
+    # The failure percentage threshold percentage was met.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ConcurrentDeploymentException AWS API Documentation
+    #
+    class ConcurrentDeploymentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDeploymentJobRequest
     #   data as a hash:
     #
@@ -1913,6 +1925,46 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # The request uses the same client token as a previous, but
+    # non-identical request. Do not reuse a client token with different
+    # requests, unless the requests are identical.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/IdempotentParameterMismatchException AWS API Documentation
+    #
+    class IdempotentParameterMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS RoboMaker experienced a service issue. Try your call again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A parameter specified in a request is not valid, is unsupported, or
+    # cannot be used. The returned message provides an explanation of the
+    # error value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a launch configuration.
     #
     # @note When making an API call, you may pass LaunchConfig
@@ -1944,6 +1996,20 @@ module Aws::RoboMaker
       :package_name,
       :launch_file,
       :environment_variables)
+      include Aws::Structure
+    end
+
+    # The requested resource exceeds the maximum number allowed, or the
+    # number of concurrent stream requests exceeds the maximum number
+    # allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2601,6 +2667,30 @@ module Aws::RoboMaker
     class RenderingEngine < Struct.new(
       :name,
       :version)
+      include Aws::Structure
+    end
+
+    # The specified resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3283,6 +3373,19 @@ module Aws::RoboMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # AWS RoboMaker is temporarily unable to process the request. Try your
+    # call again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:

@@ -142,6 +142,9 @@ module Aws::STS
     DecodeAuthorizationMessageResponse.add_member(:decoded_message, Shapes::ShapeRef.new(shape: decodedMessageType, location_name: "DecodedMessage"))
     DecodeAuthorizationMessageResponse.struct_class = Types::DecodeAuthorizationMessageResponse
 
+    ExpiredTokenException.add_member(:message, Shapes::ShapeRef.new(shape: expiredIdentityTokenMessage, location_name: "message"))
+    ExpiredTokenException.struct_class = Types::ExpiredTokenException
+
     FederatedUser.add_member(:federated_user_id, Shapes::ShapeRef.new(shape: federatedIdType, required: true, location_name: "FederatedUserId"))
     FederatedUser.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "Arn"))
     FederatedUser.struct_class = Types::FederatedUser
@@ -172,8 +175,29 @@ module Aws::STS
     GetSessionTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     GetSessionTokenResponse.struct_class = Types::GetSessionTokenResponse
 
+    IDPCommunicationErrorException.add_member(:message, Shapes::ShapeRef.new(shape: idpCommunicationErrorMessage, location_name: "message"))
+    IDPCommunicationErrorException.struct_class = Types::IDPCommunicationErrorException
+
+    IDPRejectedClaimException.add_member(:message, Shapes::ShapeRef.new(shape: idpRejectedClaimMessage, location_name: "message"))
+    IDPRejectedClaimException.struct_class = Types::IDPRejectedClaimException
+
+    InvalidAuthorizationMessageException.add_member(:message, Shapes::ShapeRef.new(shape: invalidAuthorizationMessage, location_name: "message"))
+    InvalidAuthorizationMessageException.struct_class = Types::InvalidAuthorizationMessageException
+
+    InvalidIdentityTokenException.add_member(:message, Shapes::ShapeRef.new(shape: invalidIdentityTokenMessage, location_name: "message"))
+    InvalidIdentityTokenException.struct_class = Types::InvalidIdentityTokenException
+
+    MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: malformedPolicyDocumentMessage, location_name: "message"))
+    MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
+
+    PackedPolicyTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: packedPolicyTooLargeMessage, location_name: "message"))
+    PackedPolicyTooLargeException.struct_class = Types::PackedPolicyTooLargeException
+
     PolicyDescriptorType.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "arn"))
     PolicyDescriptorType.struct_class = Types::PolicyDescriptorType
+
+    RegionDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: regionDisabledMessage, location_name: "message"))
+    RegionDisabledException.struct_class = Types::RegionDisabledException
 
     policyDescriptorListType.member = Shapes::ShapeRef.new(shape: PolicyDescriptorType)
 

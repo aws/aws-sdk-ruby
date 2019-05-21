@@ -153,6 +153,9 @@ module Aws::Budgets
 
     CreateSubscriberResponse.struct_class = Types::CreateSubscriberResponse
 
+    CreationLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    CreationLimitExceededException.struct_class = Types::CreationLimitExceededException
+
     DeleteBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     DeleteBudgetRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     DeleteBudgetRequest.struct_class = Types::DeleteBudgetRequest
@@ -223,6 +226,24 @@ module Aws::Budgets
     DescribeSubscribersForNotificationResponse.struct_class = Types::DescribeSubscribersForNotificationResponse
 
     DimensionValues.member = Shapes::ShapeRef.new(shape: GenericString)
+
+    DuplicateRecordException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    DuplicateRecordException.struct_class = Types::DuplicateRecordException
+
+    ExpiredNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    ExpiredNextTokenException.struct_class = Types::ExpiredNextTokenException
+
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     Notification.add_member(:notification_type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "NotificationType"))
     Notification.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))

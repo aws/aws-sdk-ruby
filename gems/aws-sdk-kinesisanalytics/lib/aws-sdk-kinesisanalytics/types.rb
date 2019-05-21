@@ -742,6 +742,34 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # User-provided application code (query) is invalid. This can be a
+    # simple syntax error.
+    #
+    # @!attribute [rw] message
+    #   Test
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CodeValidationException AWS API Documentation
+    #
+    class CodeValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception thrown as a result of concurrent modification to an
+    # application. For example, two individuals attempting to edit the same
+    # application at the same time.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # TBD
     #
     # @note When making an API call, you may pass CreateApplicationRequest
@@ -1994,6 +2022,31 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # User-provided application configuration is not valid.
+    #
+    # @!attribute [rw] message
+    #   test
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InvalidApplicationConfigurationException AWS API Documentation
+    #
+    class InvalidApplicationConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Specified input parameter value is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides additional mapping information when JSON is the record format
     # on the streaming source.
     #
@@ -2451,6 +2504,18 @@ module Aws::KinesisAnalytics
     class LambdaOutputUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update)
+      include Aws::Structure
+    end
+
+    # Exceeded the number of applications allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3021,6 +3086,46 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # Application is not available for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Specified application can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Discovery failed to get a record from the streaming source because of
+    # the Amazon Kinesis Streams ProvisionedThroughputExceededException. For
+    # more information, see
+    # [GetRecords](kinesis/latest/APIReference/API_GetRecords.html) in the
+    # Amazon Kinesis Streams API Reference.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ResourceProvisionedThroughputExceededException AWS API Documentation
+    #
+    class ResourceProvisionedThroughputExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides a description of an Amazon S3 data source, including the
     # Amazon Resource Name (ARN) of the S3 bucket, the ARN of the IAM role
     # that is used to access the bucket, and the name of the Amazon S3
@@ -3159,6 +3264,18 @@ module Aws::KinesisAnalytics
       :bucket_arn_update,
       :file_key_update,
       :reference_role_arn_update)
+      include Aws::Structure
+    end
+
+    # The service is unavailable. Back off and retry the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3342,6 +3459,55 @@ module Aws::KinesisAnalytics
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Application created with too many tags, or too many tags added to an
+    # application. Note that the maximum number of application tags includes
+    # system tags. The maximum number of user-defined application tags is
+    # 50.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Data format is not valid. Amazon Kinesis Analytics is not able to
+    # detect schema for the given streaming source.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_input_records
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] processed_input_records
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UnableToDetectSchemaException AWS API Documentation
+    #
+    class UnableToDetectSchemaException < Struct.new(
+      :message,
+      :raw_input_records,
+      :processed_input_records)
+      include Aws::Structure
+    end
+
+    # The request was rejected because a specified parameter is not
+    # supported or a specified resource is not valid for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:

@@ -1932,6 +1932,29 @@ module Aws::SWF
       include Aws::Structure
     end
 
+    # The `StartWorkflowExecution` API action was called without the
+    # required parameters set.
+    #
+    # Some workflow execution parameters, such as the decision `taskList`,
+    # must be set to start the execution. However, these parameters might
+    # have been set as defaults when the workflow type was registered. In
+    # this case, you can omit these parameters from the
+    # `StartWorkflowExecution` call and Amazon SWF uses the values defined
+    # in the workflow type.
+    #
+    # <note markdown="1"> If these parameters aren't set and no default parameters were defined
+    # in the workflow type, this error is displayed.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class DefaultUndefinedFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeprecateActivityTypeInput
     #   data as a hash:
     #
@@ -2091,6 +2114,18 @@ module Aws::SWF
       include Aws::Structure
     end
 
+    # Returned if the specified domain already exists. You get this fault
+    # even if the existing domain is in deprecated status.
+    #
+    # @!attribute [rw] message
+    #   A description that may help with diagnosing the cause of the fault.
+    #   @return [String]
+    #
+    class DomainAlreadyExistsFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains the configuration settings of a domain.
     #
     # @!attribute [rw] workflow_execution_retention_period_in_days
@@ -2099,6 +2134,17 @@ module Aws::SWF
     #
     class DomainConfiguration < Struct.new(
       :workflow_execution_retention_period_in_days)
+      include Aws::Structure
+    end
+
+    # Returned when the specified domain has been deprecated.
+    #
+    # @!attribute [rw] message
+    #   A description that may help with diagnosing the cause of the fault.
+    #   @return [String]
+    #
+    class DomainDeprecatedFault < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3100,6 +3146,19 @@ module Aws::SWF
       include Aws::Structure
     end
 
+    # Returned by any operation if a system imposed limitation has been
+    # reached. To address this fault you should either clean up unused
+    # resources or increase the limit by contacting AWS.
+    #
+    # @!attribute [rw] message
+    #   A description that may help with diagnosing the cause of the fault.
+    #   @return [String]
+    #
+    class LimitExceededFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListActivityTypesInput
     #   data as a hash:
     #
@@ -3538,6 +3597,18 @@ module Aws::SWF
       :marker_name,
       :details,
       :decision_task_completed_event_id)
+      include Aws::Structure
+    end
+
+    # Returned when the caller doesn't have sufficient permissions to
+    # invoke the action.
+    #
+    # @!attribute [rw] message
+    #   A description that may help with diagnosing the cause of the fault.
+    #   @return [String]
+    #
+    class OperationNotPermittedFault < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6034,6 +6105,46 @@ module Aws::SWF
       include Aws::Structure
     end
 
+    # Returned if the type already exists in the specified domain. You get
+    # this fault even if the existing type is in deprecated status. You can
+    # specify another version if the intent is to create a new distinct
+    # version of the type.
+    #
+    # @!attribute [rw] message
+    #   A description that may help with diagnosing the cause of the fault.
+    #   @return [String]
+    #
+    class TypeAlreadyExistsFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned when the specified activity or workflow type was already
+    # deprecated.
+    #
+    # @!attribute [rw] message
+    #   A description that may help with diagnosing the cause of the fault.
+    #   @return [String]
+    #
+    class TypeDeprecatedFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned when the named resource cannot be found with in the scope of
+    # this operation (region or domain). This could happen if the named
+    # resource was never created or is no longer available for this
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   A description that may help with diagnosing the cause of the fault.
+    #   @return [String]
+    #
+    class UnknownResourceFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a workflow execution.
     #
     # @note When making an API call, you may pass WorkflowExecution
@@ -6055,6 +6166,18 @@ module Aws::SWF
     class WorkflowExecution < Struct.new(
       :workflow_id,
       :run_id)
+      include Aws::Structure
+    end
+
+    # Returned by StartWorkflowExecution when an open execution with the
+    # same workflowId is already running in the specified domain.
+    #
+    # @!attribute [rw] message
+    #   A description that may help with diagnosing the cause of the fault.
+    #   @return [String]
+    #
+    class WorkflowExecutionAlreadyStartedFault < Struct.new(
+      :message)
       include Aws::Structure
     end
 

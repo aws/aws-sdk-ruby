@@ -51,6 +51,19 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
+    # Thrown if there are parallel requests to modify a resource.
+    #
+    # @!attribute [rw] message
+    #   The message returned by a ConcurrentModificationException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Input to the CreateIdentityPool action.
     #
     # @note When making an API call, you may pass CreateIdentityPoolInput
@@ -252,6 +265,34 @@ module Aws::CognitoIdentity
     #
     class DescribeIdentityPoolInput < Struct.new(
       :identity_pool_id)
+      include Aws::Structure
+    end
+
+    # The provided developer user identifier is already registered with
+    # Cognito under a different identity ID.
+    #
+    # @!attribute [rw] message
+    #   This developer user identifier is already registered with Cognito.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeveloperUserAlreadyRegisteredException AWS API Documentation
+    #
+    class DeveloperUserAlreadyRegisteredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An exception thrown when a dependent service such as Facebook or
+    # Twitter is not responding
+    #
+    # @!attribute [rw] message
+    #   The message returned by an ExternalServiceException
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ExternalServiceException AWS API Documentation
+    #
+    class ExternalServiceException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -692,6 +733,62 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
+    # Thrown when the service encounters an error during processing the
+    # request.
+    #
+    # @!attribute [rw] message
+    #   The message returned by an InternalErrorException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Thrown if the identity pool has no role associated for the given auth
+    # type (auth/unauth) or if the AssumeRole fails.
+    #
+    # @!attribute [rw] message
+    #   The message returned for an
+    #   `InvalidIdentityPoolConfigurationException`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/InvalidIdentityPoolConfigurationException AWS API Documentation
+    #
+    class InvalidIdentityPoolConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Thrown for missing or bad input parameter(s).
+    #
+    # @!attribute [rw] message
+    #   The message returned by an InvalidParameterException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Thrown when the total number of user pools has exceeded a preset
+    # limit.
+    #
+    # @!attribute [rw] message
+    #   The message returned by a LimitExceededException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Input to the ListIdentities action.
     #
     # @note When making an API call, you may pass ListIdentitiesInput
@@ -1013,6 +1110,47 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
+    # Thrown when a user is not authorized to access the requested resource.
+    #
+    # @!attribute [rw] message
+    #   The message returned by a NotAuthorizedException
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Thrown when a user tries to use a login which is already linked to
+    # another account.
+    #
+    # @!attribute [rw] message
+    #   The message returned by a ResourceConflictException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ResourceConflictException AWS API Documentation
+    #
+    class ResourceConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Thrown when the requested resource (for example, a dataset or record)
+    # does not exist.
+    #
+    # @!attribute [rw] message
+    #   The message returned by a ResourceNotFoundException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A role mapping.
     #
     # @note When making an API call, you may pass RoleMapping
@@ -1183,6 +1321,19 @@ module Aws::CognitoIdentity
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Thrown when a request is throttled.
+    #
+    # @!attribute [rw] message
+    #   Message returned by a TooManyRequestsException
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # Input to the `UnlinkDeveloperIdentity` action.
     #

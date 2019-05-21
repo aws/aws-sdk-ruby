@@ -8,6 +8,38 @@
 module Aws::TranscribeService
   module Types
 
+    # Your request didn't pass one or more validation tests. For example,
+    # if the transcription you're trying to delete doesn't exist or if it
+    # is in a non-terminal state (for example, it's "in progress"). See
+    # the exception `Message` field for more information.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # When you are using the `StartTranscriptionJob` operation, the
+    # `JobName` field is a duplicate of a previously entered job name.
+    # Resend your request with a different name.
+    #
+    # When you are using the `UpdateVocabulary` operation, there are two
+    # jobs running at the same time. Resend the second request later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateVocabularyRequest
     #   data as a hash:
     #
@@ -223,6 +255,33 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # There was an internal error. Check the error message and try your
+    # request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Either you have sent too many requests or your input file is too long.
+    # Wait before you resend your request, or use a smaller file and resend
+    # the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTranscriptionJobsRequest
     #   data as a hash:
     #
@@ -399,6 +458,19 @@ module Aws::TranscribeService
     #
     class Media < Struct.new(
       :media_file_uri)
+      include Aws::Structure
+    end
+
+    # We can't find the requested resource. Check the name and try your
+    # request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

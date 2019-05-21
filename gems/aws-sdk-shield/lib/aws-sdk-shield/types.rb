@@ -8,6 +8,40 @@
 module Aws::Shield
   module Types
 
+    # Exception that indicates the specified `AttackId` does not exist, or
+    # the requester does not have the appropriate permissions to access the
+    # `AttackId`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # In order to grant the necessary access to the DDoS Response Team, the
+    # user submitting `AssociateDRTRole` must have the `iam:PassRole`
+    # permission. This error indicates the user did not have the appropriate
+    # permissions. For more information, see [Granting a User Permissions to
+    # Pass a Role to an AWS Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AccessDeniedForDependencyException AWS API Documentation
+    #
+    class AccessDeniedForDependencyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateDRTLogBucketRequest
     #   data as a hash:
     #
@@ -566,6 +600,72 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # Exception that indicates that a problem occurred with the service
+    # infrastructure. You can retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the operation would not cause any change
+    # to occur.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the NextToken specified in the request
+    # is invalid. Submit the request using the NextToken value that was
+    # returned in the response.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidPaginationTokenException AWS API Documentation
+    #
+    class InvalidPaginationTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the parameters passed to the API are
+    # invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the resource is invalid. You might not
+    # have access to the resource, or the resource might not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidResourceException AWS API Documentation
+    #
+    class InvalidResourceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Specifies how many protections of a given type you can create.
     #
     # @!attribute [rw] type
@@ -582,6 +682,30 @@ module Aws::Shield
     class Limit < Struct.new(
       :type,
       :max)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the operation would exceed a limit.
+    #
+    # `Type` is the type of limit that would be exceeded.
+    #
+    # `Limit` is the threshold that would be exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/LimitsExceededException AWS API Documentation
+    #
+    class LimitsExceededException < Struct.new(
+      :message,
+      :type,
+      :limit)
       include Aws::Structure
     end
 
@@ -742,6 +866,21 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # You are trying to update a subscription that has not yet completed the
+    # 1-year commitment. You can change the `AutoRenew` parameter during the
+    # last 30 days of your subscription. This exception indicates that you
+    # are attempting to change `AutoRenew` prior to that period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/LockedSubscriptionException AWS API Documentation
+    #
+    class LockedSubscriptionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The mitigation applied to a DDoS attack.
     #
     # @!attribute [rw] mitigation_name
@@ -752,6 +891,31 @@ module Aws::Shield
     #
     class Mitigation < Struct.new(
       :mitigation_name)
+      include Aws::Structure
+    end
+
+    # The ARN of the role that you specifed does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/NoAssociatedRoleException AWS API Documentation
+    #
+    class NoAssociatedRoleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the protection state has been modified
+    # by another client. You can retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/OptimisticLockException AWS API Documentation
+    #
+    class OptimisticLockException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -777,6 +941,30 @@ module Aws::Shield
       :id,
       :name,
       :resource_arn)
+      include Aws::Structure
+    end
+
+    # Exception indicating the specified resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception indicating the specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

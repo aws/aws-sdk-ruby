@@ -224,6 +224,9 @@ module Aws::MediaPackageVod
     EgressEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     EgressEndpoint.struct_class = Types::EgressEndpoint
 
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     HlsEncryption.add_member(:encryption_method, Shapes::ShapeRef.new(shape: EncryptionMethod, location_name: "encryptionMethod"))
     HlsEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     HlsEncryption.struct_class = Types::HlsEncryption
@@ -241,6 +244,9 @@ module Aws::MediaPackageVod
     HlsPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
     HlsPackage.add_member(:use_audio_rendition_group, Shapes::ShapeRef.new(shape: __boolean, location_name: "useAudioRenditionGroup"))
     HlsPackage.struct_class = Types::HlsPackage
+
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
     ListAssetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAssetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -280,6 +286,9 @@ module Aws::MediaPackageVod
     MssPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
     MssPackage.struct_class = Types::MssPackage
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     PackagingConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     PackagingConfiguration.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
     PackagingConfiguration.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
@@ -312,6 +321,9 @@ module Aws::MediaPackageVod
     PackagingGroupList.add_member(:packaging_groups, Shapes::ShapeRef.new(shape: __listOfPackagingGroup, location_name: "packagingGroups"))
     PackagingGroupList.struct_class = Types::PackagingGroupList
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
     SpekeKeyProvider.add_member(:system_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "systemIds"))
     SpekeKeyProvider.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
@@ -321,6 +333,12 @@ module Aws::MediaPackageVod
     StreamSelection.add_member(:min_video_bits_per_second, Shapes::ShapeRef.new(shape: __integer, location_name: "minVideoBitsPerSecond"))
     StreamSelection.add_member(:stream_order, Shapes::ShapeRef.new(shape: StreamOrder, location_name: "streamOrder"))
     StreamSelection.struct_class = Types::StreamSelection
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
 
     __listOfAssetShallow.member = Shapes::ShapeRef.new(shape: AssetShallow)
 

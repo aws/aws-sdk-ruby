@@ -837,6 +837,16 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An HTTP Live Streaming (HLS) encryption configuration.
     #
     # @note When making an API call, you may pass HlsEncryption
@@ -995,6 +1005,16 @@ module Aws::MediaPackageVod
       :hls_manifests,
       :segment_duration_seconds,
       :use_audio_rendition_group)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1219,6 +1239,16 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A MediaPackage VOD PackagingConfiguration resource.
     #
     # @!attribute [rw] arn
@@ -1373,6 +1403,16 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A configuration for accessing an external Secure Packager and Encoder
     # Key Exchange (SPEKE) service that will provide encryption keys.
     #
@@ -1436,6 +1476,26 @@ module Aws::MediaPackageVod
       :max_video_bits_per_second,
       :min_video_bits_per_second,
       :stream_order)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/UnprocessableEntityException AWS API Documentation
+    #
+    class UnprocessableEntityException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

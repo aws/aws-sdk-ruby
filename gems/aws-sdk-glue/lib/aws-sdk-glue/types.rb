@@ -8,6 +8,19 @@
 module Aws::Glue
   module Types
 
+    # Access to a resource was denied.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Defines an action to be initiated by a trigger.
     #
     # @note When making an API call, you may pass Action
@@ -74,6 +87,19 @@ module Aws::Glue
       :timeout,
       :notification_property,
       :security_configuration)
+      include Aws::Structure
+    end
+
+    # A resource to be created or added already exists.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -932,6 +958,32 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Two processes are trying to modify a resource simultaneously.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Too many jobs are being run concurrently.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConcurrentRunsExceededException AWS API Documentation
+    #
+    class ConcurrentRunsExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Defines a condition under which a trigger fires.
     #
     # @note When making an API call, you may pass Condition
@@ -963,6 +1015,19 @@ module Aws::Glue
       :logical_operator,
       :job_name,
       :state)
+      include Aws::Structure
+    end
+
+    # A specified condition was not satisfied.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConditionCheckFailureException AWS API Documentation
+    #
+    class ConditionCheckFailureException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1345,6 +1410,46 @@ module Aws::Glue
       :tables_created,
       :tables_updated,
       :tables_deleted)
+      include Aws::Structure
+    end
+
+    # The specified crawler is not running.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerNotRunningException AWS API Documentation
+    #
+    class CrawlerNotRunningException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation cannot be performed because the crawler is already
+    # running.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerRunningException AWS API Documentation
+    #
+    class CrawlerRunningException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified crawler is stopping.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerStoppingException AWS API Documentation
+    #
+    class CrawlerStoppingException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3587,6 +3692,19 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A specified entity does not exist
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EntityNotFoundException AWS API Documentation
+    #
+    class EntityNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about an error.
     #
     # @!attribute [rw] error_code
@@ -5281,6 +5399,19 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # An encryption operation failed.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GlueEncryptionException AWS API Documentation
+    #
+    class GlueEncryptionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A classifier that uses `grok` patterns.
     #
     # @!attribute [rw] name
@@ -5336,6 +5467,19 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The same unique identifier was associated with two different records.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IdempotentParameterMismatchException AWS API Documentation
+    #
+    class IdempotentParameterMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportCatalogToGlueRequest
     #   data as a hash:
     #
@@ -5358,6 +5502,32 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ImportCatalogToGlueResponse AWS API Documentation
     #
     class ImportCatalogToGlueResponse < Aws::EmptyStructure; end
+
+    # An internal service error occurred.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The input provided was not valid.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # Specifies a JDBC data store to crawl.
     #
@@ -6406,6 +6576,19 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # There is no applicable schedule.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/NoScheduleException AWS API Documentation
+    #
+    class NoScheduleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Specifies configuration properties of a notification.
     #
     # @note When making an API call, you may pass NotificationProperty
@@ -6424,6 +6607,19 @@ module Aws::Glue
     #
     class NotificationProperty < Struct.new(
       :notify_delay_after)
+      include Aws::Structure
+    end
+
+    # The operation timed out.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OperationTimeoutException AWS API Documentation
+    #
+    class OperationTimeoutException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6833,6 +7029,19 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A resource numerical limit was exceeded.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResourceNumberLimitExceededException AWS API Documentation
+    #
+    class ResourceNumberLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # URIs for function resources.
     #
     # @note When making an API call, you may pass ResourceUri
@@ -6938,6 +7147,45 @@ module Aws::Glue
     class Schedule < Struct.new(
       :schedule_expression,
       :state)
+      include Aws::Structure
+    end
+
+    # The specified scheduler is not running.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchedulerNotRunningException AWS API Documentation
+    #
+    class SchedulerNotRunningException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified scheduler is already running.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchedulerRunningException AWS API Documentation
+    #
+    class SchedulerRunningException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified scheduler is transitioning.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchedulerTransitioningException AWS API Documentation
+    #
+    class SchedulerTransitioningException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -9027,6 +9275,32 @@ module Aws::Glue
       :owner_name,
       :owner_type,
       :resource_uris)
+      include Aws::Structure
+    end
+
+    # A value could not be validated.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There was a version conflict.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/VersionMismatchException AWS API Documentation
+    #
+    class VersionMismatchException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

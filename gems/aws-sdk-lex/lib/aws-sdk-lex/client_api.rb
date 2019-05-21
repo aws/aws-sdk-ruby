@@ -51,9 +51,21 @@ module Aws::Lex
     genericAttachmentList = Shapes::ListShape.new(name: 'genericAttachmentList')
     listOfButtons = Shapes::ListShape.new(name: 'listOfButtons')
 
+    BadGatewayException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BadGatewayException.struct_class = Types::BadGatewayException
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     Button.add_member(:text, Shapes::ShapeRef.new(shape: ButtonTextStringWithLength, required: true, location_name: "text"))
     Button.add_member(:value, Shapes::ShapeRef.new(shape: ButtonValueStringWithLength, required: true, location_name: "value"))
     Button.struct_class = Types::Button
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
+    DependencyFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DependencyFailedException.struct_class = Types::DependencyFailedException
 
     GenericAttachment.add_member(:title, Shapes::ShapeRef.new(shape: StringWithLength, location_name: "title"))
     GenericAttachment.add_member(:sub_title, Shapes::ShapeRef.new(shape: StringWithLength, location_name: "subTitle"))
@@ -61,6 +73,22 @@ module Aws::Lex
     GenericAttachment.add_member(:image_url, Shapes::ShapeRef.new(shape: StringUrlWithLength, location_name: "imageUrl"))
     GenericAttachment.add_member(:buttons, Shapes::ShapeRef.new(shape: listOfButtons, location_name: "buttons"))
     GenericAttachment.struct_class = Types::GenericAttachment
+
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    LimitExceededException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
+    LoopDetectedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LoopDetectedException.struct_class = Types::LoopDetectedException
+
+    NotAcceptableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotAcceptableException.struct_class = Types::NotAcceptableException
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     PostContentRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
     PostContentRequest.add_member(:bot_alias, Shapes::ShapeRef.new(shape: BotAlias, required: true, location: "uri", location_name: "botAlias"))
@@ -106,6 +134,9 @@ module Aws::Lex
     PostTextResponse.add_member(:response_card, Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
     PostTextResponse.struct_class = Types::PostTextResponse
 
+    RequestTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RequestTimeoutException.struct_class = Types::RequestTimeoutException
+
     ResponseCard.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     ResponseCard.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "contentType"))
     ResponseCard.add_member(:generic_attachments, Shapes::ShapeRef.new(shape: genericAttachmentList, location_name: "genericAttachments"))
@@ -113,6 +144,9 @@ module Aws::Lex
 
     StringMap.key = Shapes::ShapeRef.new(shape: String)
     StringMap.value = Shapes::ShapeRef.new(shape: String)
+
+    UnsupportedMediaTypeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    UnsupportedMediaTypeException.struct_class = Types::UnsupportedMediaTypeException
 
     genericAttachmentList.member = Shapes::ShapeRef.new(shape: GenericAttachment)
 

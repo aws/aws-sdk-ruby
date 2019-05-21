@@ -247,6 +247,22 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
+    # @!attribute [rw] code
+    #   403
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The 403 error message returned by the web server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDeviceMethodsRequest
     #   data as a hash:
     #
@@ -299,6 +315,38 @@ module Aws::IoT1ClickDevicesService
     #
     class InitiateDeviceClaimResponse < Struct.new(
       :state)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   500
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The 500 error message returned by the web server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   400
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The 400 error message returned by the web server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -464,6 +512,71 @@ module Aws::IoT1ClickDevicesService
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   412
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An error message explaining the error or its remedy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/PreconditionFailedException AWS API Documentation
+    #
+    class PreconditionFailedException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   416
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The requested number of results specified by nextToken cannot be
+    #   satisfied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/RangeNotSatisfiableException AWS API Documentation
+    #
+    class RangeNotSatisfiableException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   409
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An error message explaining the error or its remedy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ResourceConflictException AWS API Documentation
+    #
+    class ResourceConflictException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   404
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The requested device could not be found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 

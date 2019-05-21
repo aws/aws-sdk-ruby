@@ -8,6 +8,56 @@
 module Aws::Lightsail
   module Types
 
+    # Lightsail throws this exception when the user cannot be authenticated
+    # or uses invalid credentials to access a resource.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when an account is still in the setup
+    # in progress state.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccountSetupInProgressException AWS API Documentation
+    #
+    class AccountSetupInProgressException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AllocateStaticIpRequest
     #   data as a hash:
     #
@@ -5545,6 +5595,37 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Lightsail throws this exception when user input does not conform to
+    # the validation rules of an input field.
+    #
+    # <note markdown="1"> Domain-related APIs are only available in the N. Virginia (us-east-1)
+    # Region. Please set your AWS Region configuration to us-east-1 to
+    # create, view, or edit these resources.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeeredRequest AWS API Documentation
@@ -6086,6 +6167,30 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Lightsail throws this exception when it cannot find a resource.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass OpenInstancePublicPortsRequest
     #   data as a hash:
     #
@@ -6194,6 +6299,30 @@ module Aws::Lightsail
       :status_changed_at,
       :error_code,
       :error_details)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when an operation fails to execute.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OperationFailureException AWS API Documentation
+    #
+    class OperationFailureException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
       include Aws::Structure
     end
 
@@ -7016,6 +7145,30 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # A general service exception.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ServiceException AWS API Documentation
+    #
+    class ServiceException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartInstanceRequest
     #   data as a hash:
     #
@@ -7290,6 +7443,31 @@ module Aws::Lightsail
     #
     class TagResourceResult < Struct.new(
       :operations)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when the user has not been
+    # authenticated.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnauthenticatedException AWS API Documentation
+    #
+    class UnauthenticatedException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
       include Aws::Structure
     end
 

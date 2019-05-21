@@ -310,6 +310,9 @@ module Aws::CloudFront
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
+    AccessDenied.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    AccessDenied.struct_class = Types::AccessDenied
+
     ActiveTrustedSigners.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
     ActiveTrustedSigners.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     ActiveTrustedSigners.add_member(:items, Shapes::ShapeRef.new(shape: SignerList, location_name: "Items"))
@@ -327,6 +330,12 @@ module Aws::CloudFront
     AllowedMethods.struct_class = Types::AllowedMethods
 
     AwsAccountNumberList.member = Shapes::ShapeRef.new(shape: string, location_name: "AwsAccountNumber")
+
+    BatchTooLarge.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    BatchTooLarge.struct_class = Types::BatchTooLarge
+
+    CNAMEAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    CNAMEAlreadyExists.struct_class = Types::CNAMEAlreadyExists
 
     CacheBehavior.add_member(:path_pattern, Shapes::ShapeRef.new(shape: string, required: true, location_name: "PathPattern"))
     CacheBehavior.add_member(:target_origin_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "TargetOriginId"))
@@ -353,14 +362,23 @@ module Aws::CloudFront
     CachedMethods.add_member(:items, Shapes::ShapeRef.new(shape: MethodsList, required: true, location_name: "Items"))
     CachedMethods.struct_class = Types::CachedMethods
 
+    CannotChangeImmutablePublicKeyFields.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    CannotChangeImmutablePublicKeyFields.struct_class = Types::CannotChangeImmutablePublicKeyFields
+
     CloudFrontOriginAccessIdentity.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     CloudFrontOriginAccessIdentity.add_member(:s3_canonical_user_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "S3CanonicalUserId"))
     CloudFrontOriginAccessIdentity.add_member(:cloud_front_origin_access_identity_config, Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityConfig, location_name: "CloudFrontOriginAccessIdentityConfig"))
     CloudFrontOriginAccessIdentity.struct_class = Types::CloudFrontOriginAccessIdentity
 
+    CloudFrontOriginAccessIdentityAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    CloudFrontOriginAccessIdentityAlreadyExists.struct_class = Types::CloudFrontOriginAccessIdentityAlreadyExists
+
     CloudFrontOriginAccessIdentityConfig.add_member(:caller_reference, Shapes::ShapeRef.new(shape: string, required: true, location_name: "CallerReference"))
     CloudFrontOriginAccessIdentityConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Comment"))
     CloudFrontOriginAccessIdentityConfig.struct_class = Types::CloudFrontOriginAccessIdentityConfig
+
+    CloudFrontOriginAccessIdentityInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    CloudFrontOriginAccessIdentityInUse.struct_class = Types::CloudFrontOriginAccessIdentityInUse
 
     CloudFrontOriginAccessIdentityList.add_member(:marker, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Marker"))
     CloudFrontOriginAccessIdentityList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
@@ -582,6 +600,9 @@ module Aws::CloudFront
     Distribution.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig"))
     Distribution.struct_class = Types::Distribution
 
+    DistributionAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    DistributionAlreadyExists.struct_class = Types::DistributionAlreadyExists
+
     DistributionConfig.add_member(:caller_reference, Shapes::ShapeRef.new(shape: string, required: true, location_name: "CallerReference"))
     DistributionConfig.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
     DistributionConfig.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "DefaultRootObject"))
@@ -612,6 +633,9 @@ module Aws::CloudFront
     DistributionList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     DistributionList.add_member(:items, Shapes::ShapeRef.new(shape: DistributionSummaryList, location_name: "Items"))
     DistributionList.struct_class = Types::DistributionList
+
+    DistributionNotDisabled.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    DistributionNotDisabled.struct_class = Types::DistributionNotDisabled
 
     DistributionSummary.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     DistributionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ARN"))
@@ -658,6 +682,12 @@ module Aws::CloudFront
     FieldLevelEncryptionConfig.add_member(:content_type_profile_config, Shapes::ShapeRef.new(shape: ContentTypeProfileConfig, location_name: "ContentTypeProfileConfig"))
     FieldLevelEncryptionConfig.struct_class = Types::FieldLevelEncryptionConfig
 
+    FieldLevelEncryptionConfigAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    FieldLevelEncryptionConfigAlreadyExists.struct_class = Types::FieldLevelEncryptionConfigAlreadyExists
+
+    FieldLevelEncryptionConfigInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    FieldLevelEncryptionConfigInUse.struct_class = Types::FieldLevelEncryptionConfigInUse
+
     FieldLevelEncryptionList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
     FieldLevelEncryptionList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
     FieldLevelEncryptionList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
@@ -669,17 +699,26 @@ module Aws::CloudFront
     FieldLevelEncryptionProfile.add_member(:field_level_encryption_profile_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileConfig, required: true, location_name: "FieldLevelEncryptionProfileConfig"))
     FieldLevelEncryptionProfile.struct_class = Types::FieldLevelEncryptionProfile
 
+    FieldLevelEncryptionProfileAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    FieldLevelEncryptionProfileAlreadyExists.struct_class = Types::FieldLevelEncryptionProfileAlreadyExists
+
     FieldLevelEncryptionProfileConfig.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
     FieldLevelEncryptionProfileConfig.add_member(:caller_reference, Shapes::ShapeRef.new(shape: string, required: true, location_name: "CallerReference"))
     FieldLevelEncryptionProfileConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, location_name: "Comment"))
     FieldLevelEncryptionProfileConfig.add_member(:encryption_entities, Shapes::ShapeRef.new(shape: EncryptionEntities, required: true, location_name: "EncryptionEntities"))
     FieldLevelEncryptionProfileConfig.struct_class = Types::FieldLevelEncryptionProfileConfig
 
+    FieldLevelEncryptionProfileInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    FieldLevelEncryptionProfileInUse.struct_class = Types::FieldLevelEncryptionProfileInUse
+
     FieldLevelEncryptionProfileList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
     FieldLevelEncryptionProfileList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
     FieldLevelEncryptionProfileList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     FieldLevelEncryptionProfileList.add_member(:items, Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileSummaryList, location_name: "Items"))
     FieldLevelEncryptionProfileList.struct_class = Types::FieldLevelEncryptionProfileList
+
+    FieldLevelEncryptionProfileSizeExceeded.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    FieldLevelEncryptionProfileSizeExceeded.struct_class = Types::FieldLevelEncryptionProfileSizeExceeded
 
     FieldLevelEncryptionProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     FieldLevelEncryptionProfileSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
@@ -839,6 +878,84 @@ module Aws::CloudFront
     Headers.add_member(:items, Shapes::ShapeRef.new(shape: HeaderList, location_name: "Items"))
     Headers.struct_class = Types::Headers
 
+    IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior.struct_class = Types::IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
+
+    IllegalUpdate.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    IllegalUpdate.struct_class = Types::IllegalUpdate
+
+    InconsistentQuantities.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InconsistentQuantities.struct_class = Types::InconsistentQuantities
+
+    InvalidArgument.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidArgument.struct_class = Types::InvalidArgument
+
+    InvalidDefaultRootObject.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidDefaultRootObject.struct_class = Types::InvalidDefaultRootObject
+
+    InvalidErrorCode.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidErrorCode.struct_class = Types::InvalidErrorCode
+
+    InvalidForwardCookies.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidForwardCookies.struct_class = Types::InvalidForwardCookies
+
+    InvalidGeoRestrictionParameter.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidGeoRestrictionParameter.struct_class = Types::InvalidGeoRestrictionParameter
+
+    InvalidHeadersForS3Origin.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidHeadersForS3Origin.struct_class = Types::InvalidHeadersForS3Origin
+
+    InvalidIfMatchVersion.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidIfMatchVersion.struct_class = Types::InvalidIfMatchVersion
+
+    InvalidLambdaFunctionAssociation.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidLambdaFunctionAssociation.struct_class = Types::InvalidLambdaFunctionAssociation
+
+    InvalidLocationCode.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidLocationCode.struct_class = Types::InvalidLocationCode
+
+    InvalidMinimumProtocolVersion.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidMinimumProtocolVersion.struct_class = Types::InvalidMinimumProtocolVersion
+
+    InvalidOrigin.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidOrigin.struct_class = Types::InvalidOrigin
+
+    InvalidOriginAccessIdentity.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidOriginAccessIdentity.struct_class = Types::InvalidOriginAccessIdentity
+
+    InvalidOriginKeepaliveTimeout.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidOriginKeepaliveTimeout.struct_class = Types::InvalidOriginKeepaliveTimeout
+
+    InvalidOriginReadTimeout.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidOriginReadTimeout.struct_class = Types::InvalidOriginReadTimeout
+
+    InvalidProtocolSettings.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidProtocolSettings.struct_class = Types::InvalidProtocolSettings
+
+    InvalidQueryStringParameters.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidQueryStringParameters.struct_class = Types::InvalidQueryStringParameters
+
+    InvalidRelativePath.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidRelativePath.struct_class = Types::InvalidRelativePath
+
+    InvalidRequiredProtocol.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidRequiredProtocol.struct_class = Types::InvalidRequiredProtocol
+
+    InvalidResponseCode.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidResponseCode.struct_class = Types::InvalidResponseCode
+
+    InvalidTTLOrder.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidTTLOrder.struct_class = Types::InvalidTTLOrder
+
+    InvalidTagging.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidTagging.struct_class = Types::InvalidTagging
+
+    InvalidViewerCertificate.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidViewerCertificate.struct_class = Types::InvalidViewerCertificate
+
+    InvalidWebACLId.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidWebACLId.struct_class = Types::InvalidWebACLId
+
     Invalidation.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     Invalidation.add_member(:status, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Status"))
     Invalidation.add_member(:create_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreateTime"))
@@ -973,6 +1090,36 @@ module Aws::CloudFront
 
     MethodsList.member = Shapes::ShapeRef.new(shape: Method, location_name: "Method")
 
+    MissingBody.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    MissingBody.struct_class = Types::MissingBody
+
+    NoSuchCloudFrontOriginAccessIdentity.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchCloudFrontOriginAccessIdentity.struct_class = Types::NoSuchCloudFrontOriginAccessIdentity
+
+    NoSuchDistribution.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchDistribution.struct_class = Types::NoSuchDistribution
+
+    NoSuchFieldLevelEncryptionConfig.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchFieldLevelEncryptionConfig.struct_class = Types::NoSuchFieldLevelEncryptionConfig
+
+    NoSuchFieldLevelEncryptionProfile.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchFieldLevelEncryptionProfile.struct_class = Types::NoSuchFieldLevelEncryptionProfile
+
+    NoSuchInvalidation.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchInvalidation.struct_class = Types::NoSuchInvalidation
+
+    NoSuchOrigin.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchOrigin.struct_class = Types::NoSuchOrigin
+
+    NoSuchPublicKey.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchPublicKey.struct_class = Types::NoSuchPublicKey
+
+    NoSuchResource.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchResource.struct_class = Types::NoSuchResource
+
+    NoSuchStreamingDistribution.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchStreamingDistribution.struct_class = Types::NoSuchStreamingDistribution
+
     Origin.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     Origin.add_member(:domain_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "DomainName"))
     Origin.add_member(:origin_path, Shapes::ShapeRef.new(shape: string, location_name: "OriginPath"))
@@ -1026,16 +1173,25 @@ module Aws::CloudFront
     Paths.add_member(:items, Shapes::ShapeRef.new(shape: PathList, location_name: "Items"))
     Paths.struct_class = Types::Paths
 
+    PreconditionFailed.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    PreconditionFailed.struct_class = Types::PreconditionFailed
+
     PublicKey.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     PublicKey.add_member(:created_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedTime"))
     PublicKey.add_member(:public_key_config, Shapes::ShapeRef.new(shape: PublicKeyConfig, required: true, location_name: "PublicKeyConfig"))
     PublicKey.struct_class = Types::PublicKey
+
+    PublicKeyAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    PublicKeyAlreadyExists.struct_class = Types::PublicKeyAlreadyExists
 
     PublicKeyConfig.add_member(:caller_reference, Shapes::ShapeRef.new(shape: string, required: true, location_name: "CallerReference"))
     PublicKeyConfig.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
     PublicKeyConfig.add_member(:encoded_key, Shapes::ShapeRef.new(shape: string, required: true, location_name: "EncodedKey"))
     PublicKeyConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, location_name: "Comment"))
     PublicKeyConfig.struct_class = Types::PublicKeyConfig
+
+    PublicKeyInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    PublicKeyInUse.struct_class = Types::PublicKeyInUse
 
     PublicKeyList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
     PublicKeyList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
@@ -1059,6 +1215,9 @@ module Aws::CloudFront
     QueryArgProfileConfig.add_member(:forward_when_query_arg_profile_is_unknown, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "ForwardWhenQueryArgProfileIsUnknown"))
     QueryArgProfileConfig.add_member(:query_arg_profiles, Shapes::ShapeRef.new(shape: QueryArgProfiles, location_name: "QueryArgProfiles"))
     QueryArgProfileConfig.struct_class = Types::QueryArgProfileConfig
+
+    QueryArgProfileEmpty.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    QueryArgProfileEmpty.struct_class = Types::QueryArgProfileEmpty
 
     QueryArgProfileList.member = Shapes::ShapeRef.new(shape: QueryArgProfile, location_name: "QueryArgProfile")
 
@@ -1105,6 +1264,9 @@ module Aws::CloudFront
     StreamingDistribution.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig"))
     StreamingDistribution.struct_class = Types::StreamingDistribution
 
+    StreamingDistributionAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    StreamingDistributionAlreadyExists.struct_class = Types::StreamingDistributionAlreadyExists
+
     StreamingDistributionConfig.add_member(:caller_reference, Shapes::ShapeRef.new(shape: string, required: true, location_name: "CallerReference"))
     StreamingDistributionConfig.add_member(:s3_origin, Shapes::ShapeRef.new(shape: S3Origin, required: true, location_name: "S3Origin"))
     StreamingDistributionConfig.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
@@ -1126,6 +1288,9 @@ module Aws::CloudFront
     StreamingDistributionList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     StreamingDistributionList.add_member(:items, Shapes::ShapeRef.new(shape: StreamingDistributionSummaryList, location_name: "Items"))
     StreamingDistributionList.struct_class = Types::StreamingDistributionList
+
+    StreamingDistributionNotDisabled.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    StreamingDistributionNotDisabled.struct_class = Types::StreamingDistributionNotDisabled
 
     StreamingDistributionSummary.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     StreamingDistributionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ARN"))
@@ -1166,6 +1331,84 @@ module Aws::CloudFront
 
     Tags.add_member(:items, Shapes::ShapeRef.new(shape: TagList, location_name: "Items"))
     Tags.struct_class = Types::Tags
+
+    TooManyCacheBehaviors.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyCacheBehaviors.struct_class = Types::TooManyCacheBehaviors
+
+    TooManyCertificates.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyCertificates.struct_class = Types::TooManyCertificates
+
+    TooManyCloudFrontOriginAccessIdentities.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyCloudFrontOriginAccessIdentities.struct_class = Types::TooManyCloudFrontOriginAccessIdentities
+
+    TooManyCookieNamesInWhiteList.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyCookieNamesInWhiteList.struct_class = Types::TooManyCookieNamesInWhiteList
+
+    TooManyDistributionCNAMEs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyDistributionCNAMEs.struct_class = Types::TooManyDistributionCNAMEs
+
+    TooManyDistributions.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyDistributions.struct_class = Types::TooManyDistributions
+
+    TooManyDistributionsAssociatedToFieldLevelEncryptionConfig.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyDistributionsAssociatedToFieldLevelEncryptionConfig.struct_class = Types::TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
+
+    TooManyDistributionsWithLambdaAssociations.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyDistributionsWithLambdaAssociations.struct_class = Types::TooManyDistributionsWithLambdaAssociations
+
+    TooManyFieldLevelEncryptionConfigs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyFieldLevelEncryptionConfigs.struct_class = Types::TooManyFieldLevelEncryptionConfigs
+
+    TooManyFieldLevelEncryptionContentTypeProfiles.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyFieldLevelEncryptionContentTypeProfiles.struct_class = Types::TooManyFieldLevelEncryptionContentTypeProfiles
+
+    TooManyFieldLevelEncryptionEncryptionEntities.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyFieldLevelEncryptionEncryptionEntities.struct_class = Types::TooManyFieldLevelEncryptionEncryptionEntities
+
+    TooManyFieldLevelEncryptionFieldPatterns.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyFieldLevelEncryptionFieldPatterns.struct_class = Types::TooManyFieldLevelEncryptionFieldPatterns
+
+    TooManyFieldLevelEncryptionProfiles.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyFieldLevelEncryptionProfiles.struct_class = Types::TooManyFieldLevelEncryptionProfiles
+
+    TooManyFieldLevelEncryptionQueryArgProfiles.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyFieldLevelEncryptionQueryArgProfiles.struct_class = Types::TooManyFieldLevelEncryptionQueryArgProfiles
+
+    TooManyHeadersInForwardedValues.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyHeadersInForwardedValues.struct_class = Types::TooManyHeadersInForwardedValues
+
+    TooManyInvalidationsInProgress.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyInvalidationsInProgress.struct_class = Types::TooManyInvalidationsInProgress
+
+    TooManyLambdaFunctionAssociations.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyLambdaFunctionAssociations.struct_class = Types::TooManyLambdaFunctionAssociations
+
+    TooManyOriginCustomHeaders.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyOriginCustomHeaders.struct_class = Types::TooManyOriginCustomHeaders
+
+    TooManyOriginGroupsPerDistribution.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyOriginGroupsPerDistribution.struct_class = Types::TooManyOriginGroupsPerDistribution
+
+    TooManyOrigins.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyOrigins.struct_class = Types::TooManyOrigins
+
+    TooManyPublicKeys.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyPublicKeys.struct_class = Types::TooManyPublicKeys
+
+    TooManyQueryStringParameters.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyQueryStringParameters.struct_class = Types::TooManyQueryStringParameters
+
+    TooManyStreamingDistributionCNAMEs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyStreamingDistributionCNAMEs.struct_class = Types::TooManyStreamingDistributionCNAMEs
+
+    TooManyStreamingDistributions.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyStreamingDistributions.struct_class = Types::TooManyStreamingDistributions
+
+    TooManyTrustedSigners.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyTrustedSigners.struct_class = Types::TooManyTrustedSigners
+
+    TrustedSignerDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TrustedSignerDoesNotExist.struct_class = Types::TrustedSignerDoesNotExist
 
     TrustedSigners.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
     TrustedSigners.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))

@@ -103,6 +103,58 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # The accelerator that you specified could not be disabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorNotDisabledException AWS API Documentation
+    #
+    class AcceleratorNotDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorNotFoundException AWS API Documentation
+    #
+    class AcceleratorNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The listener that you specified has an endpoint group associated with
+    # it. You must remove all dependent resources from a listener before you
+    # can delete it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AssociatedEndpointGroupFoundException AWS API Documentation
+    #
+    class AssociatedEndpointGroupFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified has a listener associated with it.
+    # You must remove all dependent resources from an accelerator before you
+    # can delete it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AssociatedListenerFoundException AWS API Documentation
+    #
+    class AssociatedListenerFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAcceleratorRequest
     #   data as a hash:
     #
@@ -699,6 +751,79 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # The endpoint group that you specified already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroupAlreadyExistsException AWS API Documentation
+    #
+    class EndpointGroupAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The endpoint group that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroupNotFoundException AWS API Documentation
+    #
+    class EndpointGroupNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There was an internal error for AWS Global Accelerator.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An argument that you specified is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There isn't another item to return.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The port numbers that you specified are not valid numbers or are not
+    # unique for this accelerator.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidPortRangeException AWS API Documentation
+    #
+    class InvalidPortRangeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type for the set of IP addresses for an accelerator.
     #
     # @!attribute [rw] ip_family
@@ -715,6 +840,19 @@ module Aws::GlobalAccelerator
     class IpSet < Struct.new(
       :ip_family,
       :ip_addresses)
+      include Aws::Structure
+    end
+
+    # Processing your request would cause you to exceed an AWS Global
+    # Accelerator limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -908,6 +1046,18 @@ module Aws::GlobalAccelerator
       :port_ranges,
       :protocol,
       :client_affinity)
+      include Aws::Structure
+    end
+
+    # The listener that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListenerNotFoundException AWS API Documentation
+    #
+    class ListenerNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -104,6 +104,10 @@ module Aws::CloudHSM
 
     ClientList.member = Shapes::ShapeRef.new(shape: ClientArn)
 
+    CloudHsmServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    CloudHsmServiceException.add_member(:retryable, Shapes::ShapeRef.new(shape: Boolean, location_name: "retryable"))
+    CloudHsmServiceException.struct_class = Types::CloudHsmServiceException
+
     CreateHapgRequest.add_member(:label, Shapes::ShapeRef.new(shape: Label, required: true, location_name: "Label"))
     CreateHapgRequest.struct_class = Types::CreateHapgRequest
 

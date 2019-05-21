@@ -213,6 +213,13 @@ module Aws::Athena
     GetWorkGroupOutput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     GetWorkGroupOutput.struct_class = Types::GetWorkGroupOutput
 
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidRequestException.add_member(:athena_error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "AthenaErrorCode"))
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     ListNamedQueriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListNamedQueriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxNamedQueriesCount, location_name: "MaxResults"))
     ListNamedQueriesInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
@@ -287,6 +294,10 @@ module Aws::Athena
     QueryExecutionStatus.add_member(:completion_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CompletionDateTime"))
     QueryExecutionStatus.struct_class = Types::QueryExecutionStatus
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResultConfiguration.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
     ResultConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     ResultConfiguration.struct_class = Types::ResultConfiguration
@@ -337,6 +348,10 @@ module Aws::Athena
     TagResourceInput.struct_class = Types::TagResourceInput
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyRequestsException.add_member(:reason, Shapes::ShapeRef.new(shape: ThrottleReason, location_name: "Reason"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UnprocessedNamedQueryId.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, location_name: "NamedQueryId"))
     UnprocessedNamedQueryId.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))

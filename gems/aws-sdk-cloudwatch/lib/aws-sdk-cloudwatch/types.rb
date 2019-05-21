@@ -71,6 +71,34 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # Some part of the dashboard data is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_validation_messages
+    #   @return [Array<Types::DashboardValidationMessage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DashboardInvalidInputError AWS API Documentation
+    #
+    class DashboardInvalidInputError < Struct.new(
+      :message,
+      :dashboard_validation_messages)
+      include Aws::Structure
+    end
+
+    # The specified dashboard does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DashboardNotFoundError AWS API Documentation
+    #
+    class DashboardNotFoundError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An error or warning for the operation.
     #
     # @!attribute [rw] data_path
@@ -877,6 +905,79 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # Request processing has failed due to some unknown error, exception, or
+    # failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InternalServiceFault AWS API Documentation
+    #
+    class InternalServiceFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Data was not syntactically valid JSON.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InvalidFormatFault AWS API Documentation
+    #
+    class InvalidFormatFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The next token specified is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InvalidNextToken AWS API Documentation
+    #
+    class InvalidNextToken < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Parameters were used together that cannot be used together.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InvalidParameterCombinationException AWS API Documentation
+    #
+    class InvalidParameterCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value of an input parameter is bad or out-of-range.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The quota for alarms for this customer has already been reached.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/LimitExceededFault AWS API Documentation
+    #
+    class LimitExceededFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDashboardsInput
     #   data as a hash:
     #
@@ -1573,6 +1674,18 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # An input parameter that is required is missing.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MissingRequiredParameterException AWS API Documentation
+    #
+    class MissingRequiredParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutDashboardInput
     #   data as a hash:
     #
@@ -1996,6 +2109,34 @@ module Aws::CloudWatch
     class PutMetricDataInput < Struct.new(
       :namespace,
       :metric_data)
+      include Aws::Structure
+    end
+
+    # The named resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ResourceNotFound AWS API Documentation
+    #
+    class ResourceNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The named resource does not exist.
+    #
+    # @!attribute [rw] resource_type
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :resource_type,
+      :resource_id)
       include Aws::Structure
     end
 

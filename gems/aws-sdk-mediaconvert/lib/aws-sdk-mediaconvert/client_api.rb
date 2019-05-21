@@ -645,6 +645,9 @@ module Aws::MediaConvert
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: __stringMin14PatternS3BmpBMPPngPNG, location_name: "availBlankingImage"))
     AvailBlanking.struct_class = Types::AvailBlanking
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BurninDestinationSettings.add_member(:alignment, Shapes::ShapeRef.new(shape: BurninSubtitleAlignment, location_name: "alignment"))
     BurninDestinationSettings.add_member(:background_color, Shapes::ShapeRef.new(shape: BurninSubtitleBackgroundColor, location_name: "backgroundColor"))
     BurninDestinationSettings.add_member(:background_opacity, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "backgroundOpacity"))
@@ -740,6 +743,9 @@ module Aws::MediaConvert
     ColorCorrector.add_member(:hue, Shapes::ShapeRef.new(shape: __integerMinNegative180Max180, location_name: "hue"))
     ColorCorrector.add_member(:saturation, Shapes::ShapeRef.new(shape: __integerMin1Max100, location_name: "saturation"))
     ColorCorrector.struct_class = Types::ColorCorrector
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     ContainerSettings.add_member(:container, Shapes::ShapeRef.new(shape: ContainerType, location_name: "container"))
     ContainerSettings.add_member(:f4v_settings, Shapes::ShapeRef.new(shape: F4vSettings, location_name: "f4vSettings"))
@@ -944,6 +950,9 @@ module Aws::MediaConvert
     FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
     FileSourceSettings.struct_class = Types::FileSourceSettings
+
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
 
     FrameCaptureSettings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateDenominator"))
     FrameCaptureSettings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateNumerator"))
@@ -1189,6 +1198,9 @@ module Aws::MediaConvert
     InsertableImage.add_member(:start_time, Shapes::ShapeRef.new(shape: __stringPattern01D20305D205D, location_name: "startTime"))
     InsertableImage.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "width"))
     InsertableImage.struct_class = Types::InsertableImage
+
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
     Job.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     Job.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -1449,6 +1461,9 @@ module Aws::MediaConvert
     NoiseReducerSpatialFilterSettings.add_member(:strength, Shapes::ShapeRef.new(shape: __integerMin0Max16, location_name: "strength"))
     NoiseReducerSpatialFilterSettings.struct_class = Types::NoiseReducerSpatialFilterSettings
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     Output.add_member(:audio_descriptions, Shapes::ShapeRef.new(shape: __listOfAudioDescription, location_name: "audioDescriptions"))
     Output.add_member(:caption_descriptions, Shapes::ShapeRef.new(shape: __listOfCaptionDescription, location_name: "captionDescriptions"))
     Output.add_member(:container_settings, Shapes::ShapeRef.new(shape: ContainerSettings, location_name: "containerSettings"))
@@ -1608,6 +1623,9 @@ module Aws::MediaConvert
     Timing.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "startTime"))
     Timing.add_member(:submit_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "submitTime"))
     Timing.struct_class = Types::Timing
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     TrackSourceSettings.add_member(:track_number, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "trackNumber"))
     TrackSourceSettings.struct_class = Types::TrackSourceSettings

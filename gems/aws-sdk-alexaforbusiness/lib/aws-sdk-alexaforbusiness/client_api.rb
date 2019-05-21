@@ -27,6 +27,8 @@ module Aws::AlexaForBusiness
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateContactWithAddressBookRequest = Shapes::StructureShape.new(name: 'AssociateContactWithAddressBookRequest')
     AssociateContactWithAddressBookResponse = Shapes::StructureShape.new(name: 'AssociateContactWithAddressBookResponse')
+    AssociateDeviceWithNetworkProfileRequest = Shapes::StructureShape.new(name: 'AssociateDeviceWithNetworkProfileRequest')
+    AssociateDeviceWithNetworkProfileResponse = Shapes::StructureShape.new(name: 'AssociateDeviceWithNetworkProfileResponse')
     AssociateDeviceWithRoomRequest = Shapes::StructureShape.new(name: 'AssociateDeviceWithRoomRequest')
     AssociateDeviceWithRoomResponse = Shapes::StructureShape.new(name: 'AssociateDeviceWithRoomResponse')
     AssociateSkillGroupWithRoomRequest = Shapes::StructureShape.new(name: 'AssociateSkillGroupWithRoomRequest')
@@ -60,6 +62,7 @@ module Aws::AlexaForBusiness
     CategoryId = Shapes::IntegerShape.new(name: 'CategoryId')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     CategoryName = Shapes::StringShape.new(name: 'CategoryName')
+    CertificateTime = Shapes::TimestampShape.new(name: 'CertificateTime')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CommsProtocol = Shapes::StringShape.new(name: 'CommsProtocol')
@@ -86,6 +89,8 @@ module Aws::AlexaForBusiness
     CreateContactResponse = Shapes::StructureShape.new(name: 'CreateContactResponse')
     CreateGatewayGroupRequest = Shapes::StructureShape.new(name: 'CreateGatewayGroupRequest')
     CreateGatewayGroupResponse = Shapes::StructureShape.new(name: 'CreateGatewayGroupResponse')
+    CreateNetworkProfileRequest = Shapes::StructureShape.new(name: 'CreateNetworkProfileRequest')
+    CreateNetworkProfileResponse = Shapes::StructureShape.new(name: 'CreateNetworkProfileResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
     CreateProfileResponse = Shapes::StructureShape.new(name: 'CreateProfileResponse')
     CreateRoomRequest = Shapes::StructureShape.new(name: 'CreateRoomRequest')
@@ -94,6 +99,7 @@ module Aws::AlexaForBusiness
     CreateSkillGroupResponse = Shapes::StructureShape.new(name: 'CreateSkillGroupResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
+    CurrentWiFiPassword = Shapes::StringShape.new(name: 'CurrentWiFiPassword')
     CustomerS3BucketName = Shapes::StringShape.new(name: 'CustomerS3BucketName')
     Date = Shapes::StringShape.new(name: 'Date')
     DeleteAddressBookRequest = Shapes::StructureShape.new(name: 'DeleteAddressBookRequest')
@@ -110,6 +116,8 @@ module Aws::AlexaForBusiness
     DeleteDeviceUsageDataResponse = Shapes::StructureShape.new(name: 'DeleteDeviceUsageDataResponse')
     DeleteGatewayGroupRequest = Shapes::StructureShape.new(name: 'DeleteGatewayGroupRequest')
     DeleteGatewayGroupResponse = Shapes::StructureShape.new(name: 'DeleteGatewayGroupResponse')
+    DeleteNetworkProfileRequest = Shapes::StructureShape.new(name: 'DeleteNetworkProfileRequest')
+    DeleteNetworkProfileResponse = Shapes::StructureShape.new(name: 'DeleteNetworkProfileResponse')
     DeleteProfileRequest = Shapes::StructureShape.new(name: 'DeleteProfileRequest')
     DeleteProfileResponse = Shapes::StructureShape.new(name: 'DeleteProfileResponse')
     DeleteRoomRequest = Shapes::StructureShape.new(name: 'DeleteRoomRequest')
@@ -133,6 +141,7 @@ module Aws::AlexaForBusiness
     DeviceEventType = Shapes::StringShape.new(name: 'DeviceEventType')
     DeviceEventValue = Shapes::StringShape.new(name: 'DeviceEventValue')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
+    DeviceNetworkProfileInfo = Shapes::StructureShape.new(name: 'DeviceNetworkProfileInfo')
     DeviceNotRegisteredException = Shapes::StructureShape.new(name: 'DeviceNotRegisteredException')
     DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
     DeviceSerialNumberForAVS = Shapes::StringShape.new(name: 'DeviceSerialNumberForAVS')
@@ -201,6 +210,8 @@ module Aws::AlexaForBusiness
     GetGatewayResponse = Shapes::StructureShape.new(name: 'GetGatewayResponse')
     GetInvitationConfigurationRequest = Shapes::StructureShape.new(name: 'GetInvitationConfigurationRequest')
     GetInvitationConfigurationResponse = Shapes::StructureShape.new(name: 'GetInvitationConfigurationResponse')
+    GetNetworkProfileRequest = Shapes::StructureShape.new(name: 'GetNetworkProfileRequest')
+    GetNetworkProfileResponse = Shapes::StructureShape.new(name: 'GetNetworkProfileResponse')
     GetProfileRequest = Shapes::StructureShape.new(name: 'GetProfileRequest')
     GetProfileResponse = Shapes::StructureShape.new(name: 'GetProfileResponse')
     GetRoomRequest = Shapes::StructureShape.new(name: 'GetRoomRequest')
@@ -213,6 +224,8 @@ module Aws::AlexaForBusiness
     IconUrl = Shapes::StringShape.new(name: 'IconUrl')
     InvalidCertificateAuthorityException = Shapes::StructureShape.new(name: 'InvalidCertificateAuthorityException')
     InvalidDeviceException = Shapes::StructureShape.new(name: 'InvalidDeviceException')
+    InvalidSecretsManagerResourceException = Shapes::StructureShape.new(name: 'InvalidSecretsManagerResourceException')
+    InvalidServiceLinkedRoleStateException = Shapes::StructureShape.new(name: 'InvalidServiceLinkedRoleStateException')
     InvalidUserStatusException = Shapes::StructureShape.new(name: 'InvalidUserStatusException')
     InvocationPhrase = Shapes::StringShape.new(name: 'InvocationPhrase')
     Key = Shapes::StringShape.new(name: 'Key')
@@ -243,8 +256,17 @@ module Aws::AlexaForBusiness
     MaxVolumeLimit = Shapes::IntegerShape.new(name: 'MaxVolumeLimit')
     MeetingSetting = Shapes::StructureShape.new(name: 'MeetingSetting')
     NameInUseException = Shapes::StructureShape.new(name: 'NameInUseException')
+    NetworkEapMethod = Shapes::StringShape.new(name: 'NetworkEapMethod')
+    NetworkProfile = Shapes::StructureShape.new(name: 'NetworkProfile')
+    NetworkProfileData = Shapes::StructureShape.new(name: 'NetworkProfileData')
+    NetworkProfileDataList = Shapes::ListShape.new(name: 'NetworkProfileDataList')
+    NetworkProfileDescription = Shapes::StringShape.new(name: 'NetworkProfileDescription')
+    NetworkProfileName = Shapes::StringShape.new(name: 'NetworkProfileName')
+    NetworkSecurityType = Shapes::StringShape.new(name: 'NetworkSecurityType')
+    NetworkSsid = Shapes::StringShape.new(name: 'NetworkSsid')
     NewInThisVersionBulletPoints = Shapes::ListShape.new(name: 'NewInThisVersionBulletPoints')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NextWiFiPassword = Shapes::StringShape.new(name: 'NextWiFiPassword')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OneClickIdDelay = Shapes::StringShape.new(name: 'OneClickIdDelay')
     OneClickPinDelay = Shapes::StringShape.new(name: 'OneClickPinDelay')
@@ -299,6 +321,8 @@ module Aws::AlexaForBusiness
     SearchContactsResponse = Shapes::StructureShape.new(name: 'SearchContactsResponse')
     SearchDevicesRequest = Shapes::StructureShape.new(name: 'SearchDevicesRequest')
     SearchDevicesResponse = Shapes::StructureShape.new(name: 'SearchDevicesResponse')
+    SearchNetworkProfilesRequest = Shapes::StructureShape.new(name: 'SearchNetworkProfilesRequest')
+    SearchNetworkProfilesResponse = Shapes::StructureShape.new(name: 'SearchNetworkProfilesResponse')
     SearchProfilesRequest = Shapes::StructureShape.new(name: 'SearchProfilesRequest')
     SearchProfilesResponse = Shapes::StructureShape.new(name: 'SearchProfilesResponse')
     SearchRoomsRequest = Shapes::StructureShape.new(name: 'SearchRoomsRequest')
@@ -359,6 +383,8 @@ module Aws::AlexaForBusiness
     TimeToLiveInSeconds = Shapes::IntegerShape.new(name: 'TimeToLiveInSeconds')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
+    TrustAnchor = Shapes::StringShape.new(name: 'TrustAnchor')
+    TrustAnchorList = Shapes::ListShape.new(name: 'TrustAnchorList')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -376,6 +402,8 @@ module Aws::AlexaForBusiness
     UpdateGatewayGroupResponse = Shapes::StructureShape.new(name: 'UpdateGatewayGroupResponse')
     UpdateGatewayRequest = Shapes::StructureShape.new(name: 'UpdateGatewayRequest')
     UpdateGatewayResponse = Shapes::StructureShape.new(name: 'UpdateGatewayResponse')
+    UpdateNetworkProfileRequest = Shapes::StructureShape.new(name: 'UpdateNetworkProfileRequest')
+    UpdateNetworkProfileResponse = Shapes::StructureShape.new(name: 'UpdateNetworkProfileResponse')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
     UpdateProfileResponse = Shapes::StructureShape.new(name: 'UpdateProfileResponse')
     UpdateRoomRequest = Shapes::StructureShape.new(name: 'UpdateRoomRequest')
@@ -407,6 +435,9 @@ module Aws::AlexaForBusiness
 
     AddressBookDataList.member = Shapes::ShapeRef.new(shape: AddressBookData)
 
+    AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
     ApproveSkillRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
     ApproveSkillRequest.struct_class = Types::ApproveSkillRequest
 
@@ -417,6 +448,12 @@ module Aws::AlexaForBusiness
     AssociateContactWithAddressBookRequest.struct_class = Types::AssociateContactWithAddressBookRequest
 
     AssociateContactWithAddressBookResponse.struct_class = Types::AssociateContactWithAddressBookResponse
+
+    AssociateDeviceWithNetworkProfileRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DeviceArn"))
+    AssociateDeviceWithNetworkProfileRequest.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "NetworkProfileArn"))
+    AssociateDeviceWithNetworkProfileRequest.struct_class = Types::AssociateDeviceWithNetworkProfileRequest
+
+    AssociateDeviceWithNetworkProfileResponse.struct_class = Types::AssociateDeviceWithNetworkProfileResponse
 
     AssociateDeviceWithRoomRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
     AssociateDeviceWithRoomRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
@@ -486,6 +523,9 @@ module Aws::AlexaForBusiness
     Category.struct_class = Types::Category
 
     CategoryList.member = Shapes::ShapeRef.new(shape: Category)
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
     ConferencePreference.add_member(:default_conference_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DefaultConferenceProviderArn"))
     ConferencePreference.struct_class = Types::ConferencePreference
@@ -570,6 +610,21 @@ module Aws::AlexaForBusiness
     CreateGatewayGroupResponse.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GatewayGroupArn"))
     CreateGatewayGroupResponse.struct_class = Types::CreateGatewayGroupResponse
 
+    CreateNetworkProfileRequest.add_member(:network_profile_name, Shapes::ShapeRef.new(shape: NetworkProfileName, required: true, location_name: "NetworkProfileName"))
+    CreateNetworkProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: NetworkProfileDescription, location_name: "Description"))
+    CreateNetworkProfileRequest.add_member(:ssid, Shapes::ShapeRef.new(shape: NetworkSsid, required: true, location_name: "Ssid"))
+    CreateNetworkProfileRequest.add_member(:security_type, Shapes::ShapeRef.new(shape: NetworkSecurityType, required: true, location_name: "SecurityType"))
+    CreateNetworkProfileRequest.add_member(:eap_method, Shapes::ShapeRef.new(shape: NetworkEapMethod, location_name: "EapMethod"))
+    CreateNetworkProfileRequest.add_member(:current_password, Shapes::ShapeRef.new(shape: CurrentWiFiPassword, location_name: "CurrentPassword"))
+    CreateNetworkProfileRequest.add_member(:next_password, Shapes::ShapeRef.new(shape: NextWiFiPassword, location_name: "NextPassword"))
+    CreateNetworkProfileRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
+    CreateNetworkProfileRequest.add_member(:trust_anchors, Shapes::ShapeRef.new(shape: TrustAnchorList, location_name: "TrustAnchors"))
+    CreateNetworkProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkProfileRequest.struct_class = Types::CreateNetworkProfileRequest
+
+    CreateNetworkProfileResponse.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "NetworkProfileArn"))
+    CreateNetworkProfileResponse.struct_class = Types::CreateNetworkProfileResponse
+
     CreateProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location_name: "ProfileName"))
     CreateProfileRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, required: true, location_name: "Timezone"))
     CreateProfileRequest.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
@@ -651,6 +706,11 @@ module Aws::AlexaForBusiness
 
     DeleteGatewayGroupResponse.struct_class = Types::DeleteGatewayGroupResponse
 
+    DeleteNetworkProfileRequest.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "NetworkProfileArn"))
+    DeleteNetworkProfileRequest.struct_class = Types::DeleteNetworkProfileRequest
+
+    DeleteNetworkProfileResponse.struct_class = Types::DeleteNetworkProfileResponse
+
     DeleteProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     DeleteProfileRequest.struct_class = Types::DeleteProfileRequest
 
@@ -700,6 +760,7 @@ module Aws::AlexaForBusiness
     Device.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     Device.add_member(:device_status, Shapes::ShapeRef.new(shape: DeviceStatus, location_name: "DeviceStatus"))
     Device.add_member(:device_status_info, Shapes::ShapeRef.new(shape: DeviceStatusInfo, location_name: "DeviceStatusInfo"))
+    Device.add_member(:network_profile_info, Shapes::ShapeRef.new(shape: DeviceNetworkProfileInfo, location_name: "NetworkProfileInfo"))
     Device.struct_class = Types::Device
 
     DeviceData.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
@@ -709,6 +770,8 @@ module Aws::AlexaForBusiness
     DeviceData.add_member(:software_version, Shapes::ShapeRef.new(shape: SoftwareVersion, location_name: "SoftwareVersion"))
     DeviceData.add_member(:mac_address, Shapes::ShapeRef.new(shape: MacAddress, location_name: "MacAddress"))
     DeviceData.add_member(:device_status, Shapes::ShapeRef.new(shape: DeviceStatus, location_name: "DeviceStatus"))
+    DeviceData.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "NetworkProfileArn"))
+    DeviceData.add_member(:network_profile_name, Shapes::ShapeRef.new(shape: NetworkProfileName, location_name: "NetworkProfileName"))
     DeviceData.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     DeviceData.add_member(:room_name, Shapes::ShapeRef.new(shape: RoomName, location_name: "RoomName"))
     DeviceData.add_member(:device_status_info, Shapes::ShapeRef.new(shape: DeviceStatusInfo, location_name: "DeviceStatusInfo"))
@@ -723,6 +786,15 @@ module Aws::AlexaForBusiness
 
     DeviceEventList.member = Shapes::ShapeRef.new(shape: DeviceEvent)
 
+    DeviceNetworkProfileInfo.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "NetworkProfileArn"))
+    DeviceNetworkProfileInfo.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
+    DeviceNetworkProfileInfo.add_member(:certificate_expiration_time, Shapes::ShapeRef.new(shape: CertificateTime, location_name: "CertificateExpirationTime"))
+    DeviceNetworkProfileInfo.struct_class = Types::DeviceNetworkProfileInfo
+
+    DeviceNotRegisteredException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DeviceNotRegisteredException.struct_class = Types::DeviceNotRegisteredException
+
+    DeviceStatusDetail.add_member(:feature, Shapes::ShapeRef.new(shape: Feature, location_name: "Feature"))
     DeviceStatusDetail.add_member(:code, Shapes::ShapeRef.new(shape: DeviceStatusDetailCode, location_name: "Code"))
     DeviceStatusDetail.struct_class = Types::DeviceStatusDetail
 
@@ -853,6 +925,12 @@ module Aws::AlexaForBusiness
     GetInvitationConfigurationResponse.add_member(:private_skill_ids, Shapes::ShapeRef.new(shape: ShortSkillIdList, location_name: "PrivateSkillIds"))
     GetInvitationConfigurationResponse.struct_class = Types::GetInvitationConfigurationResponse
 
+    GetNetworkProfileRequest.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "NetworkProfileArn"))
+    GetNetworkProfileRequest.struct_class = Types::GetNetworkProfileRequest
+
+    GetNetworkProfileResponse.add_member(:network_profile, Shapes::ShapeRef.new(shape: NetworkProfile, location_name: "NetworkProfile"))
+    GetNetworkProfileResponse.struct_class = Types::GetNetworkProfileResponse
+
     GetProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     GetProfileRequest.struct_class = Types::GetProfileRequest
 
@@ -882,6 +960,24 @@ module Aws::AlexaForBusiness
     IPDialIn.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "Endpoint"))
     IPDialIn.add_member(:comms_protocol, Shapes::ShapeRef.new(shape: CommsProtocol, required: true, location_name: "CommsProtocol"))
     IPDialIn.struct_class = Types::IPDialIn
+
+    InvalidCertificateAuthorityException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidCertificateAuthorityException.struct_class = Types::InvalidCertificateAuthorityException
+
+    InvalidDeviceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidDeviceException.struct_class = Types::InvalidDeviceException
+
+    InvalidSecretsManagerResourceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidSecretsManagerResourceException.struct_class = Types::InvalidSecretsManagerResourceException
+
+    InvalidServiceLinkedRoleStateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidServiceLinkedRoleStateException.struct_class = Types::InvalidServiceLinkedRoleStateException
+
+    InvalidUserStatusException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidUserStatusException.struct_class = Types::InvalidUserStatusException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListBusinessReportSchedulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListBusinessReportSchedulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -975,7 +1071,36 @@ module Aws::AlexaForBusiness
     MeetingSetting.add_member(:require_pin, Shapes::ShapeRef.new(shape: RequirePin, required: true, location_name: "RequirePin"))
     MeetingSetting.struct_class = Types::MeetingSetting
 
+    NameInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NameInUseException.struct_class = Types::NameInUseException
+
+    NetworkProfile.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "NetworkProfileArn"))
+    NetworkProfile.add_member(:network_profile_name, Shapes::ShapeRef.new(shape: NetworkProfileName, location_name: "NetworkProfileName"))
+    NetworkProfile.add_member(:description, Shapes::ShapeRef.new(shape: NetworkProfileDescription, location_name: "Description"))
+    NetworkProfile.add_member(:ssid, Shapes::ShapeRef.new(shape: NetworkSsid, location_name: "Ssid"))
+    NetworkProfile.add_member(:security_type, Shapes::ShapeRef.new(shape: NetworkSecurityType, location_name: "SecurityType"))
+    NetworkProfile.add_member(:eap_method, Shapes::ShapeRef.new(shape: NetworkEapMethod, location_name: "EapMethod"))
+    NetworkProfile.add_member(:current_password, Shapes::ShapeRef.new(shape: CurrentWiFiPassword, location_name: "CurrentPassword"))
+    NetworkProfile.add_member(:next_password, Shapes::ShapeRef.new(shape: NextWiFiPassword, location_name: "NextPassword"))
+    NetworkProfile.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
+    NetworkProfile.add_member(:trust_anchors, Shapes::ShapeRef.new(shape: TrustAnchorList, location_name: "TrustAnchors"))
+    NetworkProfile.struct_class = Types::NetworkProfile
+
+    NetworkProfileData.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "NetworkProfileArn"))
+    NetworkProfileData.add_member(:network_profile_name, Shapes::ShapeRef.new(shape: NetworkProfileName, location_name: "NetworkProfileName"))
+    NetworkProfileData.add_member(:description, Shapes::ShapeRef.new(shape: NetworkProfileDescription, location_name: "Description"))
+    NetworkProfileData.add_member(:ssid, Shapes::ShapeRef.new(shape: NetworkSsid, location_name: "Ssid"))
+    NetworkProfileData.add_member(:security_type, Shapes::ShapeRef.new(shape: NetworkSecurityType, location_name: "SecurityType"))
+    NetworkProfileData.add_member(:eap_method, Shapes::ShapeRef.new(shape: NetworkEapMethod, location_name: "EapMethod"))
+    NetworkProfileData.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
+    NetworkProfileData.struct_class = Types::NetworkProfileData
+
+    NetworkProfileDataList.member = Shapes::ShapeRef.new(shape: NetworkProfileData)
+
     NewInThisVersionBulletPoints.member = Shapes::ShapeRef.new(shape: BulletPoint)
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     PSTNDialIn.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "CountryCode"))
     PSTNDialIn.add_member(:phone_number, Shapes::ShapeRef.new(shape: OutboundPhoneNumber, required: true, location_name: "PhoneNumber"))
@@ -1059,6 +1184,13 @@ module Aws::AlexaForBusiness
     ResolveRoomResponse.add_member(:room_skill_parameters, Shapes::ShapeRef.new(shape: RoomSkillParameters, location_name: "RoomSkillParameters"))
     ResolveRoomResponse.struct_class = Types::ResolveRoomResponse
 
+    ResourceAssociatedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceAssociatedException.struct_class = Types::ResourceAssociatedException
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceInUseException.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
     Reviews.key = Shapes::ShapeRef.new(shape: ReviewKey)
     Reviews.value = Shapes::ShapeRef.new(shape: ReviewValue)
 
@@ -1125,6 +1257,17 @@ module Aws::AlexaForBusiness
     SearchDevicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     SearchDevicesResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
     SearchDevicesResponse.struct_class = Types::SearchDevicesResponse
+
+    SearchNetworkProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchNetworkProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    SearchNetworkProfilesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    SearchNetworkProfilesRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortList, location_name: "SortCriteria"))
+    SearchNetworkProfilesRequest.struct_class = Types::SearchNetworkProfilesRequest
+
+    SearchNetworkProfilesResponse.add_member(:network_profiles, Shapes::ShapeRef.new(shape: NetworkProfileDataList, location_name: "NetworkProfiles"))
+    SearchNetworkProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchNetworkProfilesResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
+    SearchNetworkProfilesResponse.struct_class = Types::SearchNetworkProfilesResponse
 
     SearchProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     SearchProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -1210,6 +1353,9 @@ module Aws::AlexaForBusiness
 
     SkillGroupDataList.member = Shapes::ShapeRef.new(shape: SkillGroupData)
 
+    SkillNotLinkedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SkillNotLinkedException.struct_class = Types::SkillNotLinkedException
+
     SkillSummary.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, location_name: "SkillId"))
     SkillSummary.add_member(:skill_name, Shapes::ShapeRef.new(shape: SkillName, location_name: "SkillName"))
     SkillSummary.add_member(:supports_linking, Shapes::ShapeRef.new(shape: boolean, location_name: "SupportsLinking"))
@@ -1283,6 +1429,11 @@ module Aws::AlexaForBusiness
 
     TextList.member = Shapes::ShapeRef.new(shape: Text)
 
+    TrustAnchorList.member = Shapes::ShapeRef.new(shape: TrustAnchor)
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
+
     UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -1344,6 +1495,17 @@ module Aws::AlexaForBusiness
     UpdateGatewayRequest.struct_class = Types::UpdateGatewayRequest
 
     UpdateGatewayResponse.struct_class = Types::UpdateGatewayResponse
+
+    UpdateNetworkProfileRequest.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "NetworkProfileArn"))
+    UpdateNetworkProfileRequest.add_member(:network_profile_name, Shapes::ShapeRef.new(shape: NetworkProfileName, location_name: "NetworkProfileName"))
+    UpdateNetworkProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: NetworkProfileDescription, location_name: "Description"))
+    UpdateNetworkProfileRequest.add_member(:current_password, Shapes::ShapeRef.new(shape: CurrentWiFiPassword, location_name: "CurrentPassword"))
+    UpdateNetworkProfileRequest.add_member(:next_password, Shapes::ShapeRef.new(shape: NextWiFiPassword, location_name: "NextPassword"))
+    UpdateNetworkProfileRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
+    UpdateNetworkProfileRequest.add_member(:trust_anchors, Shapes::ShapeRef.new(shape: TrustAnchorList, location_name: "TrustAnchors"))
+    UpdateNetworkProfileRequest.struct_class = Types::UpdateNetworkProfileRequest
+
+    UpdateNetworkProfileResponse.struct_class = Types::UpdateNetworkProfileResponse
 
     UpdateProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     UpdateProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "ProfileName"))
@@ -1422,6 +1584,17 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: AssociateContactWithAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateContactWithAddressBookResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:associate_device_with_network_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateDeviceWithNetworkProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateDeviceWithNetworkProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateDeviceWithNetworkProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
       end)
 
       api.add_operation(:associate_device_with_room, Seahorse::Model::Operation.new.tap do |o|
@@ -1511,6 +1684,19 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: CreateGatewayGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:create_network_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNetworkProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateNetworkProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNetworkProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateAuthorityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServiceLinkedRoleStateException)
       end)
 
       api.add_operation(:create_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1624,6 +1810,17 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: DeleteGatewayGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteGatewayGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAssociatedException)
+      end)
+
+      api.add_operation(:delete_network_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNetworkProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNetworkProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNetworkProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:delete_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1811,6 +2008,16 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: GetInvitationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetInvitationConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:get_network_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNetworkProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetNetworkProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetNetworkProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecretsManagerResourceException)
       end)
 
       api.add_operation(:get_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -2112,6 +2319,20 @@ module Aws::AlexaForBusiness
         )
       end)
 
+      api.add_operation(:search_network_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchNetworkProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SearchNetworkProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchNetworkProfilesResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:search_profiles, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchProfiles"
         o.http_method = "POST"
@@ -2294,6 +2515,19 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: UpdateGatewayGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NameInUseException)
+      end)
+
+      api.add_operation(:update_network_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNetworkProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNetworkProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNetworkProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NameInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateAuthorityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecretsManagerResourceException)
       end)
 
       api.add_operation(:update_profile, Seahorse::Model::Operation.new.tap do |o|

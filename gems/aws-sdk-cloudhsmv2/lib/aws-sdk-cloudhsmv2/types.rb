@@ -94,6 +94,69 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
+    # The request was rejected because the requester does not have
+    # permission to perform the requested operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmAccessDeniedException AWS API Documentation
+    #
+    class CloudHsmAccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because of an AWS CloudHSM internal failure.
+    # The request can be retried.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmInternalFailureException AWS API Documentation
+    #
+    class CloudHsmInternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it is not a valid request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmInvalidRequestException AWS API Documentation
+    #
+    class CloudHsmInvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it refers to a resource that cannot
+    # be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmResourceNotFoundException AWS API Documentation
+    #
+    class CloudHsmResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an error occurred.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmServiceException AWS API Documentation
+    #
+    class CloudHsmServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about an AWS CloudHSM cluster.
     #
     # @!attribute [rw] backup_policy

@@ -297,6 +297,9 @@ module Aws::DeviceFarm
 
     AndroidPaths.member = Shapes::ShapeRef.new(shape: String)
 
+    ArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ArgumentException.struct_class = Types::ArgumentException
+
     Artifact.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     Artifact.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Artifact.add_member(:type, Shapes::ShapeRef.new(shape: ArtifactType, location_name: "type"))
@@ -634,6 +637,9 @@ module Aws::DeviceFarm
     GetVPCEConfigurationResult.add_member(:vpce_configuration, Shapes::ShapeRef.new(shape: VPCEConfiguration, location_name: "vpceConfiguration"))
     GetVPCEConfigurationResult.struct_class = Types::GetVPCEConfigurationResult
 
+    IdempotencyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    IdempotencyException.struct_class = Types::IdempotencyException
+
     IncompatibilityMessage.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     IncompatibilityMessage.add_member(:type, Shapes::ShapeRef.new(shape: DeviceAttribute, location_name: "type"))
     IncompatibilityMessage.struct_class = Types::IncompatibilityMessage
@@ -659,6 +665,9 @@ module Aws::DeviceFarm
 
     InstanceProfiles.member = Shapes::ShapeRef.new(shape: InstanceProfile)
 
+    InvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
     IosPaths.member = Shapes::ShapeRef.new(shape: String)
 
     Job.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
@@ -679,6 +688,9 @@ module Aws::DeviceFarm
     Job.struct_class = Types::Job
 
     Jobs.member = Shapes::ShapeRef.new(shape: Job)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListArtifactsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     ListArtifactsRequest.add_member(:type, Shapes::ShapeRef.new(shape: ArtifactCategory, required: true, location_name: "type"))
@@ -860,6 +872,12 @@ module Aws::DeviceFarm
     NetworkProfile.struct_class = Types::NetworkProfile
 
     NetworkProfiles.member = Shapes::ShapeRef.new(shape: NetworkProfile)
+
+    NotEligibleException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    NotEligibleException.struct_class = Types::NotEligibleException
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     Offering.add_member(:id, Shapes::ShapeRef.new(shape: OfferingIdentifier, location_name: "id"))
     Offering.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
@@ -1057,6 +1075,9 @@ module Aws::DeviceFarm
     ScheduleRunTest.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
     ScheduleRunTest.add_member(:parameters, Shapes::ShapeRef.new(shape: TestParameters, location_name: "parameters"))
     ScheduleRunTest.struct_class = Types::ScheduleRunTest
+
+    ServiceAccountException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ServiceAccountException.struct_class = Types::ServiceAccountException
 
     StopJobRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     StopJobRequest.struct_class = Types::StopJobRequest

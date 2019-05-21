@@ -8,6 +8,20 @@
 module Aws::Organizations
   module Types
 
+    # Your account isn't a member of an organization. To make this request,
+    # you must use the credentials of an account that belongs to an
+    # organization.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AWSOrganizationsNotInUseException AWS API Documentation
+    #
+    class AWSOrganizationsNotInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AcceptHandshakeRequest
     #   data as a hash:
     #
@@ -41,6 +55,44 @@ module Aws::Organizations
     #
     class AcceptHandshakeResponse < Struct.new(
       :handshake)
+      include Aws::Structure
+    end
+
+    # You don't have permissions to perform the requested operation. The
+    # user or role that is making the request must have at least one IAM
+    # permissions policy attached that grants the required permissions. For
+    # more information, see [Access Management][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation that you attempted requires you to have the
+    # `iam:CreateServiceLinkedRole` for `organizations.amazonaws.com`
+    # permission so that AWS Organizations can create the required
+    # service-linked role. You don't have that permission.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AccessDeniedForDependencyException AWS API Documentation
+    #
+    class AccessDeniedForDependencyException < Struct.new(
+      :message,
+      :reason)
       include Aws::Structure
     end
 
@@ -114,6 +166,52 @@ module Aws::Organizations
       :status,
       :joined_method,
       :joined_timestamp)
+      include Aws::Structure
+    end
+
+    # We can't find an AWS account with the `AccountId` that you specified,
+    # or the account whose credentials you used to make this request isn't
+    # a member of an organization.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AccountNotFoundException AWS API Documentation
+    #
+    class AccountNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You can't invite an existing account to your organization until you
+    # verify that you own the email address associated with the master
+    # account. For more information, see [Email Address Verification][1] in
+    # the *AWS Organizations User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_create.html#about-email-verification
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AccountOwnerNotVerifiedException AWS API Documentation
+    #
+    class AccountOwnerNotVerifiedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This account is already a member of an organization. An account can
+    # belong to only one organization at a time.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AlreadyInOrganizationException AWS API Documentation
+    #
+    class AlreadyInOrganizationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -237,6 +335,155 @@ module Aws::Organizations
     class Child < Struct.new(
       :id,
       :type)
+      include Aws::Structure
+    end
+
+    # We can't find an organizational unit (OU) or AWS account with the
+    # `ChildId` that you specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ChildNotFoundException AWS API Documentation
+    #
+    class ChildNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The target of the operation is currently being modified by a different
+    # request. Try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Performing this operation violates a minimum or maximum value limit.
+    # For example, attempting to remove the last service control policy
+    # (SCP) from an OU or root, inviting or creating too many accounts to
+    # the organization, or attaching too many policies to an account, OU, or
+    # root. This exception includes a reason that contains additional
+    # information about the violated limit.
+    #
+    # Some of the reasons in the following list might not be applicable to
+    # this specific API or operation:
+    #
+    # * ACCOUNT\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the limit
+    #   on the number of accounts in an organization. If you need more
+    #   accounts, contact [AWS Support][1] to request an increase in your
+    #   limit.
+    #
+    #   Or the number of invitations that you tried to send would cause you
+    #   to exceed the limit of accounts in your organization. Send fewer
+    #   invitations or contact AWS Support to request an increase in the
+    #   number of accounts.
+    #
+    #   <note markdown="1"> Deleted and closed accounts still count toward your limit.
+    #
+    #    </note>
+    #
+    #   If you get receive this exception when running a command immediately
+    #   after creating the organization, wait one hour and try again. If
+    #   after an hour it continues to fail with this error, contact [AWS
+    #   Support][1].
+    #
+    # * HANDSHAKE\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed the number
+    #   of handshakes that you can send in one day.
+    #
+    # * OU\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number of
+    #   OUs that you can have in an organization.
+    #
+    # * OU\_DEPTH\_LIMIT\_EXCEEDED: You attempted to create an OU tree that
+    #   is too many levels deep.
+    #
+    # * ORGANIZATION\_NOT\_IN\_ALL\_FEATURES\_MODE: You attempted to perform
+    #   an operation that requires the organization to be configured to
+    #   support all features. An organization that supports only
+    #   consolidated billing features can't perform this operation.
+    #
+    # * POLICY\_NUMBER\_LIMIT\_EXCEEDED. You attempted to exceed the number
+    #   of policies that you can have in an organization.
+    #
+    # * MAX\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
+    #   exceed the number of policies of a certain type that can be attached
+    #   to an entity at one time.
+    #
+    # * MIN\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
+    #   detach a policy from an entity that would cause the entity to have
+    #   fewer than the minimum number of policies of a certain type
+    #   required.
+    #
+    # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_EULA: You attempted to remove an
+    #   account from the organization that doesn't yet have enough
+    #   information to exist as a standalone account. This account requires
+    #   you to first agree to the AWS Customer Agreement. Follow the steps
+    #   at [To leave an organization when all required account information
+    #   has not yet been provided][2] in the *AWS Organizations User Guide*.
+    #
+    # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_PHONE\_VERIFICATION: You attempted
+    #   to remove an account from the organization that doesn't yet have
+    #   enough information to exist as a standalone account. This account
+    #   requires you to first complete phone verification. Follow the steps
+    #   at [To leave an organization when all required account information
+    #   has not yet been provided][2] in the *AWS Organizations User Guide*.
+    #
+    # * MASTER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To create an
+    #   organization with this master account, you first must associate a
+    #   valid payment instrument, such as a credit card, with the account.
+    #   Follow the steps at [To leave an organization when all required
+    #   account information has not yet been provided][2] in the *AWS
+    #   Organizations User Guide*.
+    #
+    # * MEMBER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To complete this
+    #   operation with this member account, you first must associate a valid
+    #   payment instrument, such as a credit card, with the account. Follow
+    #   the steps at [To leave an organization when all required account
+    #   information has not yet been provided][2] in the *AWS Organizations
+    #   User Guide*.
+    #
+    # * ACCOUNT\_CREATION\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed
+    #   the number of accounts that you can create in one day.
+    #
+    # * MASTER\_ACCOUNT\_ADDRESS\_DOES\_NOT\_MATCH\_MARKETPLACE: To create
+    #   an account in this organization, you first must migrate the
+    #   organization's master account to the marketplace that corresponds
+    #   to the master account's address. For example, accounts with India
+    #   addresses must be associated with the AISPL marketplace. All
+    #   accounts in an organization must be associated with the same
+    #   marketplace.
+    #
+    # * MASTER\_ACCOUNT\_MISSING\_CONTACT\_INFO: To complete this operation,
+    #   you must first provide contact a valid address and phone number for
+    #   the master account. Then try the operation again.
+    #
+    # * MASTER\_ACCOUNT\_NOT\_GOVCLOUD\_ENABLED: To complete this operation,
+    #   the master account must have an associated account in the AWS
+    #   GovCloud (US-West) Region. For more information, see [AWS
+    #   Organizations][3] in the *AWS GovCloud User Guide.*
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/support/home#/
+    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [3]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ConstraintViolationException AWS API Documentation
+    #
+    class ConstraintViolationException < Struct.new(
+      :message,
+      :reason)
       include Aws::Structure
     end
 
@@ -425,6 +672,19 @@ module Aws::Organizations
       :account_id,
       :gov_cloud_account_id,
       :failure_reason)
+      include Aws::Structure
+    end
+
+    # We can't find an create account request with the
+    # `CreateAccountRequestId` that you specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatusNotFoundException AWS API Documentation
+    #
+    class CreateAccountStatusNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -997,6 +1257,19 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # We can't find the destination container (a root or OU) with the
+    # `ParentId` that you specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DestinationParentNotFoundException AWS API Documentation
+    #
+    class DestinationParentNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetachPolicyRequest
     #   data as a hash:
     #
@@ -1114,6 +1387,71 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # That account is already present in the specified destination.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DuplicateAccountException AWS API Documentation
+    #
+    class DuplicateAccountException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A handshake with the same action and target already exists. For
+    # example, if you invited an account to join your organization, the
+    # invited account might already have a pending invitation from this
+    # organization. If you intend to resend an invitation to an account,
+    # ensure that existing handshakes that might be considered duplicates
+    # are canceled or declined.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DuplicateHandshakeException AWS API Documentation
+    #
+    class DuplicateHandshakeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An OU with the same name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DuplicateOrganizationalUnitException AWS API Documentation
+    #
+    class DuplicateOrganizationalUnitException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The selected policy is already attached to the specified target.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DuplicatePolicyAttachmentException AWS API Documentation
+    #
+    class DuplicatePolicyAttachmentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A policy with the same name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DuplicatePolicyException AWS API Documentation
+    #
+    class DuplicatePolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableAWSServiceAccessRequest
     #   data as a hash:
     #
@@ -1214,6 +1552,25 @@ module Aws::Organizations
     class EnabledServicePrincipal < Struct.new(
       :service_principal,
       :date_enabled)
+      include Aws::Structure
+    end
+
+    # AWS Organizations couldn't perform the operation because your
+    # organization hasn't finished initializing. This can take up to an
+    # hour. Try again later. If after one hour you continue to receive this
+    # error, contact [AWS Support][1].
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/support/home#/
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/FinalizingOrganizationException AWS API Documentation
+    #
+    class FinalizingOrganizationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1336,6 +1693,81 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # The specified handshake is already in the requested state. For
+    # example, you can't accept a handshake that was already accepted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeAlreadyInStateException AWS API Documentation
+    #
+    class HandshakeAlreadyInStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation would violate the constraint identified in the
+    # reason code.
+    #
+    # <note markdown="1"> Some of the reasons in the following list might not be applicable to
+    # this specific API or operation:
+    #
+    #  </note>
+    #
+    # * ACCOUNT\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the limit
+    #   on the number of accounts in an organization. Note that deleted and
+    #   closed accounts still count toward your limit.
+    #
+    #   If you get this exception immediately after creating the
+    #   organization, wait one hour and try again. If after an hour it
+    #   continues to fail with this error, contact [AWS Support][1].
+    #
+    # * HANDSHAKE\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed the number
+    #   of handshakes that you can send in one day.
+    #
+    # * ALREADY\_IN\_AN\_ORGANIZATION: The handshake request is invalid
+    #   because the invited account is already a member of an organization.
+    #
+    # * ORGANIZATION\_ALREADY\_HAS\_ALL\_FEATURES: The handshake request is
+    #   invalid because the organization has already enabled all features.
+    #
+    # * INVITE\_DISABLED\_DURING\_ENABLE\_ALL\_FEATURES: You can't issue
+    #   new invitations to join an organization while it's in the process
+    #   of enabling all features. You can resume inviting accounts after you
+    #   finalize the process when all accounts have agreed to the change.
+    #
+    # * PAYMENT\_INSTRUMENT\_REQUIRED: You can't complete the operation
+    #   with an account that doesn't have a payment instrument, such as a
+    #   credit card, associated with it.
+    #
+    # * ORGANIZATION\_FROM\_DIFFERENT\_SELLER\_OF\_RECORD: The request
+    #   failed because the account is from a different marketplace than the
+    #   accounts in the organization. For example, accounts with India
+    #   addresses must be associated with the AISPL marketplace. All
+    #   accounts in an organization must be from the same marketplace.
+    #
+    # * ORGANIZATION\_MEMBERSHIP\_CHANGE\_RATE\_LIMIT\_EXCEEDED: You
+    #   attempted to change the membership of an account too quickly after
+    #   its previous change.
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/support/home#/
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeConstraintViolationException AWS API Documentation
+    #
+    class HandshakeConstraintViolationException < Struct.new(
+      :message,
+      :reason)
+      include Aws::Structure
+    end
+
     # Specifies the criteria that are used to select the handshakes for the
     # operation.
     #
@@ -1374,6 +1806,18 @@ module Aws::Organizations
     class HandshakeFilter < Struct.new(
       :action_type,
       :parent_handshake_id)
+      include Aws::Structure
+    end
+
+    # We can't find a handshake with the `HandshakeId` that you specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeNotFoundException AWS API Documentation
+    #
+    class HandshakeNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1450,6 +1894,96 @@ module Aws::Organizations
       :value,
       :type,
       :resources)
+      include Aws::Structure
+    end
+
+    # You can't perform the operation on the handshake in its current
+    # state. For example, you can't cancel a handshake that was already
+    # accepted or accept a handshake that was already declined.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InvalidHandshakeTransitionException AWS API Documentation
+    #
+    class InvalidHandshakeTransitionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation failed because you provided invalid values for
+    # one or more of the request parameters. This exception includes a
+    # reason that contains additional information about the violated limit:
+    #
+    # <note markdown="1"> Some of the reasons in the following list might not be applicable to
+    # this specific API or operation:
+    #
+    #  </note>
+    #
+    # * IMMUTABLE\_POLICY: You specified a policy that is managed by AWS and
+    #   can't be modified.
+    #
+    # * INPUT\_REQUIRED: You must include a value for all required
+    #   parameters.
+    #
+    # * INVALID\_ENUM: You specified a value that isn't valid for that
+    #   parameter.
+    #
+    # * INVALID\_FULL\_NAME\_TARGET: You specified a full name that contains
+    #   invalid characters.
+    #
+    # * INVALID\_LIST\_MEMBER: You provided a list to a parameter that
+    #   contains at least one invalid value.
+    #
+    # * INVALID\_PARTY\_TYPE\_TARGET: You specified the wrong type of entity
+    #   (account, organization, or email) as a party.
+    #
+    # * INVALID\_PAGINATION\_TOKEN: Get the value for the `NextToken`
+    #   parameter from the response to a previous call of the operation.
+    #
+    # * INVALID\_PATTERN: You provided a value that doesn't match the
+    #   required pattern.
+    #
+    # * INVALID\_PATTERN\_TARGET\_ID: You specified a policy target ID that
+    #   doesn't match the required pattern.
+    #
+    # * INVALID\_ROLE\_NAME: You provided a role name that isn't valid. A
+    #   role name can't begin with the reserved prefix `AWSServiceRoleFor`.
+    #
+    # * INVALID\_SYNTAX\_ORGANIZATION\_ARN: You specified an invalid Amazon
+    #   Resource Name (ARN) for the organization.
+    #
+    # * INVALID\_SYNTAX\_POLICY\_ID: You specified an invalid policy ID.
+    #
+    # * MAX\_FILTER\_LIMIT\_EXCEEDED: You can specify only one filter
+    #   parameter for the operation.
+    #
+    # * MAX\_LENGTH\_EXCEEDED: You provided a string parameter that is
+    #   longer than allowed.
+    #
+    # * MAX\_VALUE\_EXCEEDED: You provided a numeric parameter that has a
+    #   larger value than allowed.
+    #
+    # * MIN\_LENGTH\_EXCEEDED: You provided a string parameter that is
+    #   shorter than allowed.
+    #
+    # * MIN\_VALUE\_EXCEEDED: You provided a numeric parameter that has a
+    #   smaller value than allowed.
+    #
+    # * MOVING\_ACCOUNT\_BETWEEN\_DIFFERENT\_ROOTS: You can move an account
+    #   only between entities in the same root.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message,
+      :reason)
       include Aws::Structure
     end
 
@@ -2416,6 +2950,39 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # The provided policy document doesn't meet the requirements of the
+    # specified policy type. For example, the syntax might be incorrect. For
+    # details about service control policy syntax, see [Service Control
+    # Policy Syntax][1] in the *AWS Organizations User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You can't remove a master account from an organization. If you want
+    # the master account to become a member account in another organization,
+    # you must first delete the current organization of the master account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MasterCannotLeaveOrganizationException AWS API Documentation
+    #
+    class MasterCannotLeaveOrganizationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass MoveAccountRequest
     #   data as a hash:
     #
@@ -2582,6 +3149,20 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # The organization isn't empty. To delete an organization, you must
+    # first remove all accounts except the master account, delete all OUs,
+    # and delete all policies.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/OrganizationNotEmptyException AWS API Documentation
+    #
+    class OrganizationNotEmptyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about an organizational unit (OU). An OU is a
     # container of AWS accounts within a root of an organization. Policies
     # that are attached to an OU apply to all accounts contained in that OU
@@ -2632,6 +3213,32 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # The specified OU is not empty. Move all accounts to another root or to
+    # other OUs, remove all child OUs, and try the operation again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/OrganizationalUnitNotEmptyException AWS API Documentation
+    #
+    class OrganizationalUnitNotEmptyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # We can't find an OU with the `OrganizationalUnitId` that you
+    # specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/OrganizationalUnitNotFoundException AWS API Documentation
+    #
+    class OrganizationalUnitNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about either a root or an organizational unit
     # (OU) that can contain OUs or accounts in an organization.
     #
@@ -2666,6 +3273,18 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # We can't find a root or OU with the `ParentId` that you specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ParentNotFoundException AWS API Documentation
+    #
+    class ParentNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains rules to be applied to the affected accounts. Policies can be
     # attached directly to accounts, or to roots and OUs to affect all
     # accounts in those hierarchies.
@@ -2683,6 +3302,44 @@ module Aws::Organizations
     class Policy < Struct.new(
       :policy_summary,
       :content)
+      include Aws::Structure
+    end
+
+    # The policy is attached to one or more entities. You must detach it
+    # from all roots, OUs, and accounts before performing this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyInUseException AWS API Documentation
+    #
+    class PolicyInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The policy isn't attached to the specified target in the specified
+    # root.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyNotAttachedException AWS API Documentation
+    #
+    class PolicyNotAttachedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # We can't find a policy with the `PolicyId` that you specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyNotFoundException AWS API Documentation
+    #
+    class PolicyNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2810,6 +3467,58 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # The specified policy type is already enabled in the specified root.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTypeAlreadyEnabledException AWS API Documentation
+    #
+    class PolicyTypeAlreadyEnabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You can't use the specified policy type with the feature set
+    # currently enabled for this organization. For example, you can enable
+    # SCPs only after you enable all features in the organization. For more
+    # information, see [Enabling and Disabling a Policy Type on a Root][1]
+    # in the *AWS Organizations User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html#enable_policies_on_root
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTypeNotAvailableForOrganizationException AWS API Documentation
+    #
+    class PolicyTypeNotAvailableForOrganizationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified policy type isn't currently enabled in this root. You
+    # can't attach policies of the specified type to entities in a root
+    # until you enable that type in the root. For more information, see
+    # [Enabling All Features in Your Organization][1] in the *AWS
+    # Organizations User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTypeNotEnabledException AWS API Documentation
+    #
+    class PolicyTypeNotEnabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about a policy type and its status in the
     # associated root.
     #
@@ -2918,6 +3627,94 @@ module Aws::Organizations
       :arn,
       :name,
       :policy_types)
+      include Aws::Structure
+    end
+
+    # We can't find a root with the `RootId` that you specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RootNotFoundException AWS API Documentation
+    #
+    class RootNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS Organizations can't complete your request because of an internal
+    # service error. Try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ServiceException AWS API Documentation
+    #
+    class ServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # We can't find a source root or OU with the `ParentId` that you
+    # specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/SourceParentNotFoundException AWS API Documentation
+    #
+    class SourceParentNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # We can't find a root, OU, or account with the `TargetId` that you
+    # specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TargetNotFoundException AWS API Documentation
+    #
+    class TargetNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You've sent too many requests in too short a period of time. The
+    # limit helps protect against denial-of-service attacks. Try again
+    # later.
+    #
+    # For information on limits that affect Organizations, see [Limits of
+    # AWS Organizations][1] in the *AWS Organizations User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # This action isn't available in the current Region.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UnsupportedAPIEndpointException AWS API Documentation
+    #
+    class UnsupportedAPIEndpointException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

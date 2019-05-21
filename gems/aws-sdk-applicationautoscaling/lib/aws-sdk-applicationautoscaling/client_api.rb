@@ -93,6 +93,9 @@ module Aws::ApplicationAutoScaling
 
     Alarms.member = Shapes::ShapeRef.new(shape: Alarm)
 
+    ConcurrentUpdateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConcurrentUpdateException.struct_class = Types::ConcurrentUpdateException
+
     CustomizedMetricSpecification.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     CustomizedMetricSpecification.add_member(:namespace, Shapes::ShapeRef.new(shape: MetricNamespace, required: true, location_name: "Namespace"))
     CustomizedMetricSpecification.add_member(:dimensions, Shapes::ShapeRef.new(shape: MetricDimensions, location_name: "Dimensions"))
@@ -169,11 +172,26 @@ module Aws::ApplicationAutoScaling
     DescribeScheduledActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeScheduledActionsResponse.struct_class = Types::DescribeScheduledActionsResponse
 
+    FailedResourceAccessException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FailedResourceAccessException.struct_class = Types::FailedResourceAccessException
+
+    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServiceException.struct_class = Types::InternalServiceException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     MetricDimension.add_member(:name, Shapes::ShapeRef.new(shape: MetricDimensionName, required: true, location_name: "Name"))
     MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: MetricDimensionValue, required: true, location_name: "Value"))
     MetricDimension.struct_class = Types::MetricDimension
 
     MetricDimensions.member = Shapes::ShapeRef.new(shape: MetricDimension)
+
+    ObjectNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ObjectNotFoundException.struct_class = Types::ObjectNotFoundException
 
     PredefinedMetricSpecification.add_member(:predefined_metric_type, Shapes::ShapeRef.new(shape: MetricType, required: true, location_name: "PredefinedMetricType"))
     PredefinedMetricSpecification.add_member(:resource_label, Shapes::ShapeRef.new(shape: ResourceLabel, location_name: "ResourceLabel"))
@@ -295,6 +313,9 @@ module Aws::ApplicationAutoScaling
     TargetTrackingScalingPolicyConfiguration.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "ScaleInCooldown"))
     TargetTrackingScalingPolicyConfiguration.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: DisableScaleIn, location_name: "DisableScaleIn"))
     TargetTrackingScalingPolicyConfiguration.struct_class = Types::TargetTrackingScalingPolicyConfiguration
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private

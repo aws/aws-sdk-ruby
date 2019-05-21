@@ -8,6 +8,18 @@
 module Aws::Signer
   module Types
 
+    # You do not have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelSigningProfileRequest
     #   data as a hash:
     #
@@ -304,6 +316,18 @@ module Aws::Signer
       include Aws::Structure
     end
 
+    # An internal error occurred.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSigningJobsRequest
     #   data as a hash:
     #
@@ -546,6 +570,18 @@ module Aws::Signer
     #
     class PutSigningProfileResponse < Struct.new(
       :arn)
+      include Aws::Structure
+    end
+
+    # A specified resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -969,6 +1005,30 @@ module Aws::Signer
     #
     class StartSigningJobResponse < Struct.new(
       :job_id)
+      include Aws::Structure
+    end
+
+    # The signing job has been throttled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You signing certificate could not be validated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

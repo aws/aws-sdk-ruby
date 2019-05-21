@@ -188,6 +188,9 @@ module Aws::ElasticsearchService
     AdvancedOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     AdvancedOptionsStatus.struct_class = Types::AdvancedOptionsStatus
 
+    BaseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BaseException.struct_class = Types::BaseException
+
     CancelElasticsearchServiceSoftwareUpdateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CancelElasticsearchServiceSoftwareUpdateRequest.struct_class = Types::CancelElasticsearchServiceSoftwareUpdateRequest
 

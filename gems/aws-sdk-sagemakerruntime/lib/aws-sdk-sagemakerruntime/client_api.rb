@@ -25,6 +25,9 @@ module Aws::SageMakerRuntime
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
 
+    InternalFailure.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InternalFailure.struct_class = Types::InternalFailure
+
     InvokeEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location: "uri", location_name: "EndpointName"))
     InvokeEndpointInput.add_member(:body, Shapes::ShapeRef.new(shape: BodyBlob, required: true, location_name: "Body"))
     InvokeEndpointInput.add_member(:content_type, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "Content-Type"))
@@ -41,6 +44,18 @@ module Aws::SageMakerRuntime
     InvokeEndpointOutput.struct_class = Types::InvokeEndpointOutput
     InvokeEndpointOutput[:payload] = :body
     InvokeEndpointOutput[:payload_member] = InvokeEndpointOutput.member(:body)
+
+    ModelError.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ModelError.add_member(:original_status_code, Shapes::ShapeRef.new(shape: StatusCode, location_name: "OriginalStatusCode"))
+    ModelError.add_member(:original_message, Shapes::ShapeRef.new(shape: Message, location_name: "OriginalMessage"))
+    ModelError.add_member(:log_stream_arn, Shapes::ShapeRef.new(shape: LogStreamArn, location_name: "LogStreamArn"))
+    ModelError.struct_class = Types::ModelError
+
+    ServiceUnavailable.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ServiceUnavailable.struct_class = Types::ServiceUnavailable
+
+    ValidationError.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ValidationError.struct_class = Types::ValidationError
 
 
     # @api private

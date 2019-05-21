@@ -79,6 +79,20 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Another modification has already happened. Fetch `VersionId` again and
+    # use it to update the destination.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a `COPY` command for Amazon Redshift.
     #
     # @note When making an API call, you may pass CopyCommand
@@ -1958,6 +1972,19 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The specified input parameter has a value that is not valid.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes an encryption key for a destination in Amazon S3.
     #
     # @note When making an API call, you may pass KMSEncryptionConfig
@@ -2057,6 +2084,19 @@ module Aws::Firehose
       :kinesis_stream_arn,
       :role_arn,
       :delivery_start_timestamp)
+      include Aws::Structure
+    end
+
+    # You have already reached the limit for a requested resource.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3092,6 +3132,32 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The resource is already in use and not available for this operation.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the configuration of a destination in Amazon S3.
     #
     # @note When making an API call, you may pass S3DestinationConfiguration
@@ -3491,6 +3557,27 @@ module Aws::Firehose
     class Serializer < Struct.new(
       :parquet_ser_de,
       :orc_ser_de)
+      include Aws::Structure
+    end
+
+    # The service is unavailable. Back off and retry the operation. If you
+    # continue to see the exception, throughput limits for the delivery
+    # stream may have been exceeded. For more information about limits and
+    # how to request an increase, see [Amazon Kinesis Data Firehose
+    # Limits][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

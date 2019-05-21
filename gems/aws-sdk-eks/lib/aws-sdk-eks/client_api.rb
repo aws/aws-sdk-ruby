@@ -67,6 +67,10 @@ module Aws::EKS
     Certificate.add_member(:data, Shapes::ShapeRef.new(shape: String, location_name: "data"))
     Certificate.struct_class = Types::Certificate
 
+    ClientException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientException.struct_class = Types::ClientException
+
     Cluster.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     Cluster.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     Cluster.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
@@ -118,6 +122,14 @@ module Aws::EKS
 
     ErrorDetails.member = Shapes::ShapeRef.new(shape: ErrorDetail)
 
+    InvalidParameterException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidRequestException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListClustersRequestMaxResults, location: "querystring", location_name: "maxResults"))
     ListClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListClustersRequest.struct_class = Types::ListClustersRequest
@@ -146,7 +158,31 @@ module Aws::EKS
     Logging.add_member(:cluster_logging, Shapes::ShapeRef.new(shape: LogSetups, location_name: "clusterLogging"))
     Logging.struct_class = Types::Logging
 
+    ResourceInUseException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceLimitExceededException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
+
+    ResourceNotFoundException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ServerException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServerException.struct_class = Types::ServerException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    UnsupportedAvailabilityZoneException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    UnsupportedAvailabilityZoneException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    UnsupportedAvailabilityZoneException.add_member(:valid_zones, Shapes::ShapeRef.new(shape: StringList, location_name: "validZones"))
+    UnsupportedAvailabilityZoneException.struct_class = Types::UnsupportedAvailabilityZoneException
 
     Update.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Update.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "status"))

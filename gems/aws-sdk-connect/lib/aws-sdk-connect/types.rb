@@ -8,6 +8,19 @@
 module Aws::Connect
   module Types
 
+    # The contact with the specified ID is not active or does not exist.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactNotFoundException AWS API Documentation
+    #
+    class ContactNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateUserRequest
     #   data as a hash:
     #
@@ -371,6 +384,19 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Outbound calls to the destination number are not allowed.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DestinationNotAllowedException AWS API Documentation
+    #
+    class DestinationNotAllowedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A `Dimensions` object that includes the Channel and Queue for the
     # metric.
     #
@@ -388,6 +414,18 @@ module Aws::Connect
     class Dimensions < Struct.new(
       :queue,
       :channel)
+      include Aws::Structure
+    end
+
+    # A resource with that name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DuplicateResourceException AWS API Documentation
+    #
+    class DuplicateResourceException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1221,6 +1259,58 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Request processing failed due to an error or failure with the service.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more of the parameters provided to the operation are not valid.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The allowed limit for the resource has been reached.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRoutingProfilesRequest
     #   data as a hash:
     #
@@ -1447,6 +1537,19 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The contact is not permitted.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/OutboundContactNotPermittedException AWS API Documentation
+    #
+    class OutboundContactNotPermittedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A QueueReference object that contains the the QueueId and ARN for the
     # queue resource for which metrics are returned.
     #
@@ -1463,6 +1566,19 @@ module Aws::Connect
     class QueueReference < Struct.new(
       :id,
       :arn)
+      include Aws::Structure
+    end
+
+    # The specified resource was not found.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1681,6 +1797,18 @@ module Aws::Connect
     class Threshold < Struct.new(
       :comparison,
       :threshold_value)
+      include Aws::Structure
+    end
+
+    # The throttling limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2016,6 +2144,19 @@ module Aws::Connect
       :first_name,
       :last_name,
       :email)
+      include Aws::Structure
+    end
+
+    # No user with the specified credentials was found in the Amazon Connect
+    # instance.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserNotFoundException AWS API Documentation
+    #
+    class UserNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

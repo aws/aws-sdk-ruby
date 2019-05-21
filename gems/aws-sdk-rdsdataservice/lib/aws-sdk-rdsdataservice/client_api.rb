@@ -42,6 +42,9 @@ module Aws::RDSDataService
 
     ArrayValues.member = Shapes::ShapeRef.new(shape: Value)
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     ColumnMetadata.add_member(:array_base_column_type, Shapes::ShapeRef.new(shape: Integer, location_name: "arrayBaseColumnType"))
     ColumnMetadata.add_member(:is_auto_increment, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAutoIncrement"))
     ColumnMetadata.add_member(:is_case_sensitive, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCaseSensitive"))
@@ -69,6 +72,9 @@ module Aws::RDSDataService
 
     ExecuteSqlResponse.add_member(:sql_statement_results, Shapes::ShapeRef.new(shape: SqlStatementResults, required: true, location_name: "sqlStatementResults"))
     ExecuteSqlResponse.struct_class = Types::ExecuteSqlResponse
+
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
 
     Record.add_member(:values, Shapes::ShapeRef.new(shape: Row, location_name: "values"))
     Record.struct_class = Types::Record

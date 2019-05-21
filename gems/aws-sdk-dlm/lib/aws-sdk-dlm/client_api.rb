@@ -96,6 +96,16 @@ module Aws::DLM
     GetLifecyclePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: LifecyclePolicy, location_name: "Policy"))
     GetLifecyclePolicyResponse.struct_class = Types::GetLifecyclePolicyResponse
 
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    InvalidRequestException.add_member(:required_parameters, Shapes::ShapeRef.new(shape: ParameterList, location_name: "RequiredParameters"))
+    InvalidRequestException.add_member(:mutually_exclusive_parameters, Shapes::ShapeRef.new(shape: ParameterList, location_name: "MutuallyExclusiveParameters"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     LifecyclePolicy.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
     LifecyclePolicy.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description"))
     LifecyclePolicy.add_member(:state, Shapes::ShapeRef.new(shape: GettablePolicyStateValues, location_name: "State"))
@@ -112,6 +122,11 @@ module Aws::DLM
 
     LifecyclePolicySummaryList.member = Shapes::ShapeRef.new(shape: LifecyclePolicySummary)
 
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ParameterList.member = Shapes::ShapeRef.new(shape: Parameter)
 
     PolicyDetails.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeValuesList, location_name: "ResourceTypes"))
@@ -120,6 +135,12 @@ module Aws::DLM
     PolicyDetails.struct_class = Types::PolicyDetails
 
     PolicyIdList.member = Shapes::ShapeRef.new(shape: PolicyId)
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:resource_ids, Shapes::ShapeRef.new(shape: PolicyIdList, location_name: "ResourceIds"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceTypeValuesList.member = Shapes::ShapeRef.new(shape: ResourceTypeValues)
 

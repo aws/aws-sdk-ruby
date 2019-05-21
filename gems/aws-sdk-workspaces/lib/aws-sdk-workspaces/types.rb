@@ -8,6 +8,18 @@
 module Aws::WorkSpaces
   module Types
 
+    # The user is not authorized to access a resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a modification to the configuration of bring your own
     # license (BYOL) for the specified account.
     #
@@ -1005,6 +1017,31 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # One or more parameter values are not valid.
+    #
+    # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/InvalidParameterValuesException AWS API Documentation
+    #
+    class InvalidParameterValuesException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The state of the resource is not valid for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/InvalidResourceStateException AWS API Documentation
+    #
+    class InvalidResourceStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a rule for an IP access control group.
     #
     # @note When making an API call, you may pass IpRuleItem
@@ -1238,6 +1275,31 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # The properties of this WorkSpace are currently being modified. Try
+    # again in a moment.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/OperationInProgressException AWS API Documentation
+    #
+    class OperationInProgressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This operation is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/OperationNotSupportedException AWS API Documentation
+    #
+    class OperationNotSupportedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the information used to reboot a WorkSpace.
     #
     # @note When making an API call, you may pass RebootRequest
@@ -1347,6 +1409,91 @@ module Aws::WorkSpaces
     #
     class RebuildWorkspacesResult < Struct.new(
       :failed_requests)
+      include Aws::Structure
+    end
+
+    # The specified resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource is associated with a directory.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceAssociatedException AWS API Documentation
+    #
+    class ResourceAssociatedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource could not be created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceCreationFailedException AWS API Documentation
+    #
+    class ResourceCreationFailedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your resource limits have been exceeded.
+    #
+    # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   The resource could not be found.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that could not be found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # The specified resource is not available.
+    #
+    # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource that is not available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ResourceUnavailableException AWS API Documentation
+    #
+    class ResourceUnavailableException < Struct.new(
+      :message,
+      :resource_id)
       include Aws::Structure
     end
 
@@ -1573,6 +1720,24 @@ module Aws::WorkSpaces
     #
     class TerminateWorkspacesResult < Struct.new(
       :failed_requests)
+      include Aws::Structure
+    end
+
+    # The configuration of this WorkSpace is not supported for this
+    # operation. For more information, see the [Amazon WorkSpaces
+    # Administration Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UnsupportedWorkspaceConfigurationException AWS API Documentation
+    #
+    class UnsupportedWorkspaceConfigurationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

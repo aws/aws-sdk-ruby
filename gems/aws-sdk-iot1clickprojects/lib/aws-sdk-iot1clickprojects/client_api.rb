@@ -160,6 +160,14 @@ module Aws::IoT1ClickProjects
     GetDevicesInPlacementResponse.add_member(:devices, Shapes::ShapeRef.new(shape: DeviceMap, required: true, location_name: "devices"))
     GetDevicesInPlacementResponse.struct_class = Types::GetDevicesInPlacementResponse
 
+    InternalFailureException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    InvalidRequestException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     ListPlacementsRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     ListPlacementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListPlacementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -223,6 +231,14 @@ module Aws::IoT1ClickProjects
 
     ProjectSummaryList.member = Shapes::ShapeRef.new(shape: ProjectSummary)
 
+    ResourceConflictException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -233,6 +249,10 @@ module Aws::IoT1ClickProjects
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TooManyRequestsException.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))

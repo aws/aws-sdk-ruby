@@ -8,6 +8,29 @@
 module Aws::FSx
   module Types
 
+    # An Active Directory error.
+    #
+    # @!attribute [rw] active_directory_id
+    #   The directory ID of the directory that an error pertains to.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of Active Directory error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ActiveDirectoryError AWS API Documentation
+    #
+    class ActiveDirectoryError < Struct.new(
+      :active_directory_id,
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
     # A backup of an Amazon FSx for Windows File Server file system. You can
     # create a new file system from a backup to protect against data loss.
     #
@@ -79,6 +102,65 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupFailureDetails AWS API Documentation
     #
     class BackupFailureDetails < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Another backup is already under way. Wait for completion before
+    # initiating additional backups of this file system.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupInProgress AWS API Documentation
+    #
+    class BackupInProgress < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # No Amazon FSx backups were found based upon the supplied parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupNotFound AWS API Documentation
+    #
+    class BackupNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You can't delete a backup while it's being used to restore a file
+    # system.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The ID of a file system being restored from the backup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupRestoring AWS API Documentation
+    #
+    class BackupRestoring < Struct.new(
+      :message,
+      :file_system_id)
+      include Aws::Structure
+    end
+
+    # A generic error indicating a failure with a client request.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BadRequest AWS API Documentation
+    #
+    class BadRequest < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -961,6 +1043,19 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # No Amazon FSx file systems were found based upon supplied parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemNotFound AWS API Documentation
+    #
+    class FileSystemNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A filter used to restrict the results of describe calls. You can use
     # multiple filters to return results that meet all applied filter
     # requirements.
@@ -987,6 +1082,107 @@ module Aws::FSx
     class Filter < Struct.new(
       :name,
       :values)
+      include Aws::Structure
+    end
+
+    # The error returned when a second request is received with the same
+    # client request token but different parameters settings. A client
+    # request token should always uniquely identify a single request.
+    #
+    # @!attribute [rw] parameter
+    #   A parameter that is incompatible with the earlier request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/IncompatibleParameterError AWS API Documentation
+    #
+    class IncompatibleParameterError < Struct.new(
+      :parameter,
+      :message)
+      include Aws::Structure
+    end
+
+    # A generic error indicating a server-side failure.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The path provided for data repository export isn't valid.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidExportPath AWS API Documentation
+    #
+    class InvalidExportPath < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The path provided for data repository import isn't valid.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidImportPath AWS API Documentation
+    #
+    class InvalidImportPath < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more network settings specified in the request are invalid.
+    # `InvalidVpcId` means that the ID passed for the virtual private cloud
+    # (VPC) is invalid. `InvalidSubnetIds` returns the list of IDs for
+    # subnets that are either invalid or not part of the VPC specified.
+    # `InvalidSecurityGroupIds` returns the list of IDs for security groups
+    # that are either invalid or not part of the VPC specified.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] invalid_subnet_id
+    #   The ID for a subnet. A *subnet* is a range of IP addresses in your
+    #   virtual private cloud (VPC). For more information, see [VPC and
+    #   Subnets][1] in the *Amazon VPC User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
+    #   @return [String]
+    #
+    # @!attribute [rw] invalid_security_group_id
+    #   The ID of your Amazon EC2 security group. This ID is used to control
+    #   network access to the endpoint that Amazon FSx creates on your
+    #   behalf in each subnet. For more information, see [Amazon EC2
+    #   Security Groups for Linux Instances][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidNetworkSettings AWS API Documentation
+    #
+    class InvalidNetworkSettings < Struct.new(
+      :message,
+      :invalid_subnet_id,
+      :invalid_security_group_id)
       include Aws::Structure
     end
 
@@ -1064,6 +1260,96 @@ module Aws::FSx
     class LustreFileSystemConfiguration < Struct.new(
       :weekly_maintenance_start_time,
       :data_repository_configuration)
+      include Aws::Structure
+    end
+
+    # File system configuration is required for this operation.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/MissingFileSystemConfiguration AWS API Documentation
+    #
+    class MissingFileSystemConfiguration < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource specified for the tagging operation is not a resource
+    # type owned by Amazon FSx. Use the API of the relevant service to
+    # perform the operation.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the non-Amazon FSx resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/NotServiceResourceError AWS API Documentation
+    #
+    class NotServiceResourceError < Struct.new(
+      :resource_arn,
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource specified does not support tagging.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that doesn't support
+    #   tagging.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ResourceDoesNotSupportTagging AWS API Documentation
+    #
+    class ResourceDoesNotSupportTagging < Struct.new(
+      :resource_arn,
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource specified by the Amazon Resource Name (ARN) can't be
+    # found.
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN of the resource that can't be found.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ResourceNotFound AWS API Documentation
+    #
+    class ResourceNotFound < Struct.new(
+      :resource_arn,
+      :message)
+      include Aws::Structure
+    end
+
+    # An error indicating that a particular service limit was exceeded. You
+    # can increase some service limits by contacting AWS Support.
+    #
+    # @!attribute [rw] limit
+    #   Enumeration of the service limit that was exceeded.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ServiceLimitExceeded AWS API Documentation
+    #
+    class ServiceLimitExceeded < Struct.new(
+      :limit,
+      :message)
       include Aws::Structure
     end
 

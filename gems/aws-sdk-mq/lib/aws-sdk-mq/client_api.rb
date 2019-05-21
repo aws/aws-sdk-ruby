@@ -132,6 +132,10 @@ module Aws::MQ
     AvailabilityZone.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
+    BadRequestException.add_member(:error_attribute, Shapes::ShapeRef.new(shape: __string, location_name: "errorAttribute"))
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BrokerEngineType.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     BrokerEngineType.add_member(:engine_versions, Shapes::ShapeRef.new(shape: __listOfEngineVersion, location_name: "engineVersions"))
     BrokerEngineType.struct_class = Types::BrokerEngineType
@@ -190,6 +194,10 @@ module Aws::MQ
     Configurations.add_member(:history, Shapes::ShapeRef.new(shape: __listOfConfigurationId, location_name: "history"))
     Configurations.add_member(:pending, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "pending"))
     Configurations.struct_class = Types::Configurations
+
+    ConflictException.add_member(:error_attribute, Shapes::ShapeRef.new(shape: __string, location_name: "errorAttribute"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateBrokerInput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     CreateBrokerInput.add_member(:broker_name, Shapes::ShapeRef.new(shape: __string, location_name: "brokerName"))
@@ -419,6 +427,14 @@ module Aws::MQ
     Error.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     Error.struct_class = Types::Error
 
+    ForbiddenException.add_member(:error_attribute, Shapes::ShapeRef.new(shape: __string, location_name: "errorAttribute"))
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
+    InternalServerErrorException.add_member(:error_attribute, Shapes::ShapeRef.new(shape: __string, location_name: "errorAttribute"))
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
     ListBrokersOutput.add_member(:broker_summaries, Shapes::ShapeRef.new(shape: __listOfBrokerSummary, location_name: "brokerSummaries"))
     ListBrokersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListBrokersOutput.struct_class = Types::ListBrokersOutput
@@ -496,6 +512,10 @@ module Aws::MQ
     LogsSummary.add_member(:pending, Shapes::ShapeRef.new(shape: PendingLogs, location_name: "pending"))
     LogsSummary.struct_class = Types::LogsSummary
 
+    NotFoundException.add_member(:error_attribute, Shapes::ShapeRef.new(shape: __string, location_name: "errorAttribute"))
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     PendingLogs.add_member(:audit, Shapes::ShapeRef.new(shape: __boolean, location_name: "audit"))
     PendingLogs.add_member(:general, Shapes::ShapeRef.new(shape: __boolean, location_name: "general"))
     PendingLogs.struct_class = Types::PendingLogs
@@ -512,6 +532,10 @@ module Aws::MQ
 
     Tags.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     Tags.struct_class = Types::Tags
+
+    UnauthorizedException.add_member(:error_attribute, Shapes::ShapeRef.new(shape: __string, location_name: "errorAttribute"))
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UpdateBrokerInput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))

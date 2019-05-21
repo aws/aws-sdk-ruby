@@ -114,6 +114,11 @@ module Aws::FSx
     WeeklyTime = Shapes::StringShape.new(name: 'WeeklyTime')
     WindowsFileSystemConfiguration = Shapes::StructureShape.new(name: 'WindowsFileSystemConfiguration')
 
+    ActiveDirectoryError.add_member(:active_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ActiveDirectoryId"))
+    ActiveDirectoryError.add_member(:type, Shapes::ShapeRef.new(shape: ActiveDirectoryErrorType, location_name: "Type"))
+    ActiveDirectoryError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ActiveDirectoryError.struct_class = Types::ActiveDirectoryError
+
     Backup.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
     Backup.add_member(:lifecycle, Shapes::ShapeRef.new(shape: BackupLifecycle, required: true, location_name: "Lifecycle"))
     Backup.add_member(:failure_details, Shapes::ShapeRef.new(shape: BackupFailureDetails, location_name: "FailureDetails"))
@@ -131,7 +136,20 @@ module Aws::FSx
 
     BackupIds.member = Shapes::ShapeRef.new(shape: BackupId)
 
+    BackupInProgress.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BackupInProgress.struct_class = Types::BackupInProgress
+
+    BackupNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BackupNotFound.struct_class = Types::BackupNotFound
+
+    BackupRestoring.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BackupRestoring.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    BackupRestoring.struct_class = Types::BackupRestoring
+
     Backups.member = Shapes::ShapeRef.new(shape: Backup)
+
+    BadRequest.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BadRequest.struct_class = Types::BadRequest
 
     CreateBackupRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     CreateBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -255,6 +273,9 @@ module Aws::FSx
 
     FileSystemMaintenanceOperations.member = Shapes::ShapeRef.new(shape: FileSystemMaintenanceOperation)
 
+    FileSystemNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileSystemNotFound.struct_class = Types::FileSystemNotFound
+
     FileSystems.member = Shapes::ShapeRef.new(shape: FileSystem)
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "Name"))
@@ -264,6 +285,24 @@ module Aws::FSx
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
 
     Filters.member = Shapes::ShapeRef.new(shape: Filter)
+
+    IncompatibleParameterError.add_member(:parameter, Shapes::ShapeRef.new(shape: Parameter, required: true, location_name: "Parameter"))
+    IncompatibleParameterError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    IncompatibleParameterError.struct_class = Types::IncompatibleParameterError
+
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidExportPath.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidExportPath.struct_class = Types::InvalidExportPath
+
+    InvalidImportPath.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidImportPath.struct_class = Types::InvalidImportPath
+
+    InvalidNetworkSettings.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNetworkSettings.add_member(:invalid_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "InvalidSubnetId"))
+    InvalidNetworkSettings.add_member(:invalid_security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "InvalidSecurityGroupId"))
+    InvalidNetworkSettings.struct_class = Types::InvalidNetworkSettings
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -278,9 +317,28 @@ module Aws::FSx
     LustreFileSystemConfiguration.add_member(:data_repository_configuration, Shapes::ShapeRef.new(shape: DataRepositoryConfiguration, location_name: "DataRepositoryConfiguration"))
     LustreFileSystemConfiguration.struct_class = Types::LustreFileSystemConfiguration
 
+    MissingFileSystemConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MissingFileSystemConfiguration.struct_class = Types::MissingFileSystemConfiguration
+
     NetworkInterfaceIds.member = Shapes::ShapeRef.new(shape: NetworkInterfaceId)
 
+    NotServiceResourceError.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
+    NotServiceResourceError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotServiceResourceError.struct_class = Types::NotServiceResourceError
+
+    ResourceDoesNotSupportTagging.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
+    ResourceDoesNotSupportTagging.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceDoesNotSupportTagging.struct_class = Types::ResourceDoesNotSupportTagging
+
+    ResourceNotFound.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
+    ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFound.struct_class = Types::ResourceNotFound
+
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    ServiceLimitExceeded.add_member(:limit, Shapes::ShapeRef.new(shape: ServiceLimit, required: true, location_name: "Limit"))
+    ServiceLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceLimitExceeded.struct_class = Types::ServiceLimitExceeded
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 

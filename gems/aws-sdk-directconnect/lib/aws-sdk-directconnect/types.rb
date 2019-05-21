@@ -2075,6 +2075,18 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # One or more parameters are not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectClientException AWS API Documentation
+    #
+    class DirectConnectClientException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a Direct Connect gateway, which enables you to
     # connect virtual interfaces and virtual private gateway or transit
     # gateways.
@@ -2312,6 +2324,18 @@ module Aws::DirectConnect
       :attachment_state,
       :attachment_type,
       :state_change_error)
+      include Aws::Structure
+    end
+
+    # A server-side error occurred.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectServerException AWS API Documentation
+    #
+    class DirectConnectServerException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

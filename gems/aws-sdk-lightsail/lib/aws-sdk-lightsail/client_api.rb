@@ -380,6 +380,18 @@ module Aws::Lightsail
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
+    AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    AccessDeniedException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    AccessDeniedException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountSetupInProgressException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    AccountSetupInProgressException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    AccountSetupInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    AccountSetupInProgressException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    AccountSetupInProgressException.struct_class = Types::AccountSetupInProgressException
+
     AllocateStaticIpRequest.add_member(:static_ip_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "staticIpName"))
     AllocateStaticIpRequest.struct_class = Types::AllocateStaticIpRequest
 
@@ -1302,6 +1314,12 @@ module Aws::Lightsail
     InstanceState.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
     InstanceState.struct_class = Types::InstanceState
 
+    InvalidInputException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    InvalidInputException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidInputException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
     IsVpcPeeredRequest.struct_class = Types::IsVpcPeeredRequest
 
     IsVpcPeeredResult.add_member(:is_peered, Shapes::ShapeRef.new(shape: boolean, location_name: "isPeered"))
@@ -1418,6 +1436,12 @@ module Aws::Lightsail
     MonthlyTransfer.add_member(:gb_per_month_allocated, Shapes::ShapeRef.new(shape: integer, location_name: "gbPerMonthAllocated"))
     MonthlyTransfer.struct_class = Types::MonthlyTransfer
 
+    NotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    NotFoundException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    NotFoundException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     OpenInstancePublicPortsRequest.add_member(:port_info, Shapes::ShapeRef.new(shape: PortInfo, required: true, location_name: "portInfo"))
     OpenInstancePublicPortsRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     OpenInstancePublicPortsRequest.struct_class = Types::OpenInstancePublicPortsRequest
@@ -1438,6 +1462,12 @@ module Aws::Lightsail
     Operation.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "errorCode"))
     Operation.add_member(:error_details, Shapes::ShapeRef.new(shape: string, location_name: "errorDetails"))
     Operation.struct_class = Types::Operation
+
+    OperationFailureException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    OperationFailureException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    OperationFailureException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    OperationFailureException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    OperationFailureException.struct_class = Types::OperationFailureException
 
     OperationList.member = Shapes::ShapeRef.new(shape: Operation)
 
@@ -1612,6 +1642,12 @@ module Aws::Lightsail
 
     ResourceNameList.member = Shapes::ShapeRef.new(shape: ResourceName)
 
+    ServiceException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    ServiceException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ServiceException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    ServiceException.struct_class = Types::ServiceException
+
     StartInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     StartInstanceRequest.struct_class = Types::StartInstanceRequest
 
@@ -1667,6 +1703,12 @@ module Aws::Lightsail
 
     TagResourceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     TagResourceResult.struct_class = Types::TagResourceResult
+
+    UnauthenticatedException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    UnauthenticatedException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    UnauthenticatedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    UnauthenticatedException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    UnauthenticatedException.struct_class = Types::UnauthenticatedException
 
     UnpeerVpcRequest.struct_class = Types::UnpeerVpcRequest
 

@@ -72,6 +72,23 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # General error information.
+    #
+    # @!attribute [rw] error_details
+    #   A list of error details.
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :error_details,
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a bulk deployment. You cannot start a new bulk
     # deployment while another one is still running or in a non-terminal
     # state.
@@ -3997,6 +4014,23 @@ module Aws::Greengrass
       :logger_definition_version_arn,
       :resource_definition_version_arn,
       :subscription_definition_version_arn)
+      include Aws::Structure
+    end
+
+    # General error information.
+    #
+    # @!attribute [rw] error_details
+    #   A list of error details.
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :error_details,
+      :message)
       include Aws::Structure
     end
 

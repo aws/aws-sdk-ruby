@@ -747,7 +747,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

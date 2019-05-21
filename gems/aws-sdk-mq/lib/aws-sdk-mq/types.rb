@@ -21,6 +21,22 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
     # Types of broker engines.
     #
     # @!attribute [rw] engine_type
@@ -318,6 +334,22 @@ module Aws::MQ
       :current,
       :history,
       :pending)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :error_attribute,
+      :message)
       include Aws::Structure
     end
 
@@ -1479,6 +1511,38 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
     # A list of information about all brokers.
     #
     # @!attribute [rw] broker_summaries
@@ -1853,6 +1917,22 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
     # The list of information about logs to be enabled for the specified
     # broker.
     #
@@ -1929,6 +2009,22 @@ module Aws::MQ
     #
     class Tags < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :error_attribute,
+      :message)
       include Aws::Structure
     end
 

@@ -105,7 +105,19 @@ module Aws::GlobalAccelerator
     AcceleratorAttributes.add_member(:flow_logs_s3_prefix, Shapes::ShapeRef.new(shape: GenericString, location_name: "FlowLogsS3Prefix"))
     AcceleratorAttributes.struct_class = Types::AcceleratorAttributes
 
+    AcceleratorNotDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AcceleratorNotDisabledException.struct_class = Types::AcceleratorNotDisabledException
+
+    AcceleratorNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AcceleratorNotFoundException.struct_class = Types::AcceleratorNotFoundException
+
     Accelerators.member = Shapes::ShapeRef.new(shape: Accelerator)
+
+    AssociatedEndpointGroupFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AssociatedEndpointGroupFoundException.struct_class = Types::AssociatedEndpointGroupFoundException
+
+    AssociatedListenerFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AssociatedListenerFoundException.struct_class = Types::AssociatedListenerFoundException
 
     CreateAcceleratorRequest.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Name"))
     CreateAcceleratorRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
@@ -199,7 +211,25 @@ module Aws::GlobalAccelerator
     EndpointGroup.add_member(:threshold_count, Shapes::ShapeRef.new(shape: ThresholdCount, location_name: "ThresholdCount"))
     EndpointGroup.struct_class = Types::EndpointGroup
 
+    EndpointGroupAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    EndpointGroupAlreadyExistsException.struct_class = Types::EndpointGroupAlreadyExistsException
+
+    EndpointGroupNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    EndpointGroupNotFoundException.struct_class = Types::EndpointGroupNotFoundException
+
     EndpointGroups.member = Shapes::ShapeRef.new(shape: EndpointGroup)
+
+    InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
+
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidPortRangeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidPortRangeException.struct_class = Types::InvalidPortRangeException
 
     IpAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
 
@@ -208,6 +238,9 @@ module Aws::GlobalAccelerator
     IpSet.struct_class = Types::IpSet
 
     IpSets.member = Shapes::ShapeRef.new(shape: IpSet)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAcceleratorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListAcceleratorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
@@ -240,6 +273,9 @@ module Aws::GlobalAccelerator
     Listener.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
     Listener.add_member(:client_affinity, Shapes::ShapeRef.new(shape: ClientAffinity, location_name: "ClientAffinity"))
     Listener.struct_class = Types::Listener
+
+    ListenerNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ListenerNotFoundException.struct_class = Types::ListenerNotFoundException
 
     Listeners.member = Shapes::ShapeRef.new(shape: Listener)
 

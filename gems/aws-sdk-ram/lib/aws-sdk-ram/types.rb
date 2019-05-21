@@ -553,6 +553,92 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # A client token input parameter was reused with an operation, but at
+    # least one of the other input parameters is different from the previous
+    # call to the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/IdempotentParameterMismatchException AWS API Documentation
+    #
+    class IdempotentParameterMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A client token is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/InvalidClientTokenException AWS API Documentation
+    #
+    class InvalidClientTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified value for MaxResults is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/InvalidMaxResultsException AWS API Documentation
+    #
+    class InvalidMaxResultsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified value for NextToken is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A parameter is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource type is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/InvalidResourceTypeException AWS API Documentation
+    #
+    class InvalidResourceTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested state transition is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/InvalidStateTransitionException AWS API Documentation
+    #
+    class InvalidStateTransitionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPrincipalsRequest
     #   data as a hash:
     #
@@ -699,6 +785,42 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # The format of an Amazon Resource Name (ARN) is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/MalformedArnException AWS API Documentation
+    #
+    class MalformedArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A required input parameter is missing.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/MissingRequiredParameterException AWS API Documentation
+    #
+    class MissingRequiredParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation is not permitted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/OperationNotPermittedException AWS API Documentation
+    #
+    class OperationNotPermittedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a principal for use with AWS Resource Access Manager.
     #
     # @!attribute [rw] id
@@ -815,6 +937,18 @@ module Aws::RAM
       :status_message,
       :creation_time,
       :last_updated_time)
+      include Aws::Structure
+    end
+
+    # An Amazon Resource Name (ARN) was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceArnNotFoundException AWS API Documentation
+    #
+    class ResourceArnNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -971,6 +1105,91 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # The invitation was already accepted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareInvitationAlreadyAcceptedException AWS API Documentation
+    #
+    class ResourceShareInvitationAlreadyAcceptedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The invitation was already rejected.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareInvitationAlreadyRejectedException AWS API Documentation
+    #
+    class ResourceShareInvitationAlreadyRejectedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The Amazon Resource Name (ARN) for an invitation was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareInvitationArnNotFoundException AWS API Documentation
+    #
+    class ResourceShareInvitationArnNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The invitation is expired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareInvitationExpiredException AWS API Documentation
+    #
+    class ResourceShareInvitationExpiredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource share exceeds the limit for your account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareLimitExceededException AWS API Documentation
+    #
+    class ResourceShareLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The service could not respond to the request due to an internal
+    # problem.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ServerInternalException AWS API Documentation
+    #
+    class ServerInternalException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The service is not available.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a tag.
     #
     # @note When making an API call, you may pass Tag
@@ -1023,6 +1242,18 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # The requested tags exceed the limit for your account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/TagLimitExceededException AWS API Documentation
+    #
+    class TagLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -1055,6 +1286,18 @@ module Aws::RAM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # A specified resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UnknownResourceException AWS API Documentation
+    #
+    class UnknownResourceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:

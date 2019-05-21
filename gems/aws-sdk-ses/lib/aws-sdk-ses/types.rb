@@ -45,6 +45,21 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that a resource could not be created because of a naming
+    # conflict.
+    #
+    # @!attribute [rw] name
+    #   Indicates that a resource could not be created because the resource
+    #   name already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Represents the body of the message. You can specify text, HTML, or
     # both. If you use both, then the message should display correctly in
     # the widest variety of email clients.
@@ -365,6 +380,20 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the delete operation could not be completed.
+    #
+    # @!attribute [rw] name
+    #   Indicates that a resource could not be deleted because no resource
+    #   with the specified name exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CannotDeleteException AWS API Documentation
+    #
+    class CannotDeleteException < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Represents a request to create a receipt rule set by cloning an
     # existing one. You use receipt rule sets to receive email with Amazon
     # SES. For more information, see the [Amazon SES Developer Guide][1].
@@ -537,6 +566,50 @@ module Aws::SES
     #
     class ConfigurationSet < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # Indicates that the configuration set could not be created because of a
+    # naming conflict.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ConfigurationSetAlreadyExistsException AWS API Documentation
+    #
+    class ConfigurationSetAlreadyExistsException < Struct.new(
+      :configuration_set_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the configuration set does not exist.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ConfigurationSetDoesNotExistException AWS API Documentation
+    #
+    class ConfigurationSetDoesNotExistException < Struct.new(
+      :configuration_set_name)
+      include Aws::Structure
+    end
+
+    # Indicates that email sending is disabled for the configuration set.
+    #
+    # You can enable or disable email sending for a configuration set using
+    # UpdateConfigurationSetSendingEnabled.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set for which email sending is
+    #   disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ConfigurationSetSendingPausedException AWS API Documentation
+    #
+    class ConfigurationSetSendingPausedException < Struct.new(
+      :configuration_set_name)
       include Aws::Structure
     end
 
@@ -1008,6 +1081,36 @@ module Aws::SES
       :template_subject,
       :success_redirection_url,
       :failure_redirection_url)
+      include Aws::Structure
+    end
+
+    # Indicates that a custom verification email template with the name you
+    # specified already exists.
+    #
+    # @!attribute [rw] custom_verification_email_template_name
+    #   Indicates that the provided custom verification email template with
+    #   the specified template name already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CustomVerificationEmailTemplateAlreadyExistsException AWS API Documentation
+    #
+    class CustomVerificationEmailTemplateAlreadyExistsException < Struct.new(
+      :custom_verification_email_template_name)
+      include Aws::Structure
+    end
+
+    # Indicates that a custom verification email template with the name you
+    # specified does not exist.
+    #
+    # @!attribute [rw] custom_verification_email_template_name
+    #   Indicates that the provided custom verification email template does
+    #   not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CustomVerificationEmailTemplateDoesNotExistException AWS API Documentation
+    #
+    class CustomVerificationEmailTemplateDoesNotExistException < Struct.new(
+      :custom_verification_email_template_name)
       include Aws::Structure
     end
 
@@ -1703,6 +1806,43 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the event destination could not be created because of a
+    # naming conflict.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/EventDestinationAlreadyExistsException AWS API Documentation
+    #
+    class EventDestinationAlreadyExistsException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the event destination does not exist.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/EventDestinationDoesNotExistException AWS API Documentation
+    #
+    class EventDestinationDoesNotExistException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
     # Additional X-headers to include in the Delivery Status Notification
     # (DSN) when an email that Amazon SES receives on your behalf bounces.
     #
@@ -1737,6 +1877,22 @@ module Aws::SES
     class ExtensionField < Struct.new(
       :name,
       :value)
+      include Aws::Structure
+    end
+
+    # Indicates that the sender address specified for a custom verification
+    # email is not verified, and is therefore not eligible to send the
+    # custom verification email.
+    #
+    # @!attribute [rw] from_email_address
+    #   Indicates that the from email address associated with the custom
+    #   verification email template is not verified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/FromEmailAddressNotVerifiedException AWS API Documentation
+    #
+    class FromEmailAddressNotVerifiedException < Struct.new(
+      :from_email_address)
       include Aws::Structure
     end
 
@@ -2277,6 +2433,151 @@ module Aws::SES
     class IdentityVerificationAttributes < Struct.new(
       :verification_status,
       :verification_token)
+      include Aws::Structure
+    end
+
+    # Indicates that the Amazon CloudWatch destination is invalid. See the
+    # error message for details.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidCloudWatchDestinationException AWS API Documentation
+    #
+    class InvalidCloudWatchDestinationException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the Amazon Kinesis Firehose destination is invalid. See
+    # the error message for details.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidFirehoseDestinationException AWS API Documentation
+    #
+    class InvalidFirehoseDestinationException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided AWS Lambda function is invalid, or that
+    # Amazon SES could not execute the provided function, possibly due to
+    # permissions issues. For information about giving permissions, see the
+    # [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    #
+    # @!attribute [rw] function_arn
+    #   Indicates that the ARN of the function was not found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidLambdaFunctionException AWS API Documentation
+    #
+    class InvalidLambdaFunctionException < Struct.new(
+      :function_arn)
+      include Aws::Structure
+    end
+
+    # Indicates that one or more of the replacement values you provided is
+    # invalid. This error may occur when the TemplateData object contains
+    # invalid JSON.
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidRenderingParameterException AWS API Documentation
+    #
+    class InvalidRenderingParameterException < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided Amazon S3 bucket or AWS KMS encryption key
+    # is invalid, or that Amazon SES could not publish to the bucket,
+    # possibly due to permissions issues. For information about giving
+    # permissions, see the [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    #
+    # @!attribute [rw] bucket
+    #   Indicated that the S3 Bucket was not found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidS3ConfigurationException AWS API Documentation
+    #
+    class InvalidS3ConfigurationException < Struct.new(
+      :bucket)
+      include Aws::Structure
+    end
+
+    # Indicates that the Amazon Simple Notification Service (Amazon SNS)
+    # destination is invalid. See the error message for details.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidSNSDestinationException AWS API Documentation
+    #
+    class InvalidSNSDestinationException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided Amazon SNS topic is invalid, or that
+    # Amazon SES could not publish to the topic, possibly due to permissions
+    # issues. For information about giving permissions, see the [Amazon SES
+    # Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    #
+    # @!attribute [rw] topic
+    #   Indicates that the topic does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidSnsTopicException AWS API Documentation
+    #
+    class InvalidSnsTopicException < Struct.new(
+      :topic)
+      include Aws::Structure
+    end
+
+    # Indicates that the template that you specified could not be rendered.
+    # This issue may occur when a template refers to a partial that does not
+    # exist.
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidTemplateException AWS API Documentation
+    #
+    class InvalidTemplateException < Struct.new(
+      :template_name)
       include Aws::Structure
     end
 
@@ -2899,6 +3200,21 @@ module Aws::SES
     class MessageTag < Struct.new(
       :name,
       :value)
+      include Aws::Structure
+    end
+
+    # Indicates that one or more of the replacement values for the specified
+    # template was not specified. Ensure that the TemplateData object
+    # contains references to all of the replacement tags in the specified
+    # template.
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MissingRenderingAttributeException AWS API Documentation
+    #
+    class MissingRenderingAttributeException < Struct.new(
+      :template_name)
       include Aws::Structure
     end
 
@@ -3541,6 +3857,32 @@ module Aws::SES
       :sending_enabled,
       :reputation_metrics_enabled,
       :last_fresh_start)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided receipt rule does not exist.
+    #
+    # @!attribute [rw] name
+    #   Indicates that the named receipt rule does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RuleDoesNotExistException AWS API Documentation
+    #
+    class RuleDoesNotExistException < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided receipt rule set does not exist.
+    #
+    # @!attribute [rw] name
+    #   Indicates that the named receipt rule set does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RuleSetDoesNotExistException AWS API Documentation
+    #
+    class RuleSetDoesNotExistException < Struct.new(
+      :name)
       include Aws::Structure
     end
 
@@ -5168,6 +5510,19 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the Template object you specified does not exist in
+    # your Amazon SES account.
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TemplateDoesNotExistException AWS API Documentation
+    #
+    class TemplateDoesNotExistException < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
     # Contains information about an email template.
     #
     # @!attribute [rw] name
@@ -5251,6 +5606,36 @@ module Aws::SES
     #
     class TrackingOptions < Struct.new(
       :custom_redirect_domain)
+      include Aws::Structure
+    end
+
+    # Indicates that the configuration set you specified already contains a
+    # TrackingOptions object.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that a TrackingOptions object already exists in the
+    #   specified configuration set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TrackingOptionsAlreadyExistsException AWS API Documentation
+    #
+    class TrackingOptionsAlreadyExistsException < Struct.new(
+      :configuration_set_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the TrackingOptions object you specified does not
+    # exist.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that a TrackingOptions object does not exist in the
+    #   specified configuration set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TrackingOptionsDoesNotExistException AWS API Documentation
+    #
+    class TrackingOptionsDoesNotExistException < Struct.new(
+      :configuration_set_name)
       include Aws::Structure
     end
 

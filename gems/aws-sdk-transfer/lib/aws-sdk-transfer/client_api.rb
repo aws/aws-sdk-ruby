@@ -179,6 +179,15 @@ module Aws::Transfer
     ImportSshPublicKeyResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
     ImportSshPublicKeyResponse.struct_class = Types::ImportSshPublicKeyResponse
 
+    InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    InternalServiceError.struct_class = Types::InternalServiceError
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     ListServersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListServersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListServersRequest.struct_class = Types::ListServersRequest
@@ -226,6 +235,19 @@ module Aws::Transfer
     ListedUser.struct_class = Types::ListedUser
 
     ListedUsers.member = Shapes::ShapeRef.new(shape: ListedUser)
+
+    ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    ResourceExistsException.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
+    ResourceExistsException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    ResourceExistsException.struct_class = Types::ResourceExistsException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: "Message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SshPublicKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, required: true, location_name: "DateImported"))
     SshPublicKey.add_member(:ssh_public_key_body, Shapes::ShapeRef.new(shape: SshPublicKeyBody, required: true, location_name: "SshPublicKeyBody"))

@@ -561,6 +561,17 @@ module Aws::Budgets
     #
     class CreateSubscriberResponse < Aws::EmptyStructure; end
 
+    # You've exceeded the notification or subscriber limit.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class CreationLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Request of DeleteBudget
     #
     # @note When making an API call, you may pass DeleteBudgetRequest
@@ -954,6 +965,75 @@ module Aws::Budgets
     class DescribeSubscribersForNotificationResponse < Struct.new(
       :subscribers,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The budget name already exists. Budget names must be unique within an
+    # account.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class DuplicateRecordException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The pagination token expired.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class ExpiredNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An error on the server occurred during the processing of your request.
+    # Try again later.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The pagination token is invalid.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An error on the client occurred. Typically, the cause is an invalid
+    # input value.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # We can’t locate the resource that you specified.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

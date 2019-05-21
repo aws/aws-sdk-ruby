@@ -260,6 +260,19 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # An API error occurred. Wait a few minutes and try again.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CopyImageRequest
     #   data as a hash:
     #
@@ -2332,6 +2345,60 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The image does not support storage connectors.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/IncompatibleImageException AWS API Documentation
+    #
+    class IncompatibleImageException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource cannot be created because your AWS account is suspended.
+    # For assistance, contact AWS Support.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/InvalidAccountStatusException AWS API Documentation
+    #
+    class InvalidAccountStatusException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates an incorrect combination of parameters, or a missing
+    # parameter.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/InvalidParameterCombinationException AWS API Documentation
+    #
+    class InvalidParameterCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified role is invalid.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/InvalidRoleException AWS API Documentation
+    #
+    class InvalidRoleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the error that is returned when a usage report can't be
     # generated.
     #
@@ -2350,6 +2417,19 @@ module Aws::AppStream
     class LastReportGenerationExecutionError < Struct.new(
       :error_code,
       :error_message)
+      include Aws::Structure
+    end
+
+    # The requested limit exceeds the permitted limit for an account.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2488,6 +2568,32 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The attempted operation is not permitted.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/OperationNotPermittedException AWS API Documentation
+    #
+    class OperationNotPermittedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource already exists.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a resource error.
     #
     # @!attribute [rw] error_code
@@ -2508,6 +2614,45 @@ module Aws::AppStream
       :error_code,
       :error_message,
       :error_timestamp)
+      include Aws::Structure
+    end
+
+    # The specified resource is in use.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource exists and is not in use, but isn't available.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ResourceNotAvailableException AWS API Documentation
+    #
+    class ResourceNotAvailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource was not found.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

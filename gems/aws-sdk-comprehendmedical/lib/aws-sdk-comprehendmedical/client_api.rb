@@ -77,6 +77,24 @@ module Aws::ComprehendMedical
 
     EntityList.member = Shapes::ShapeRef.new(shape: Entity)
 
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidEncodingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidEncodingException.struct_class = Types::InvalidEncodingException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
+    TextSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TextSizeLimitExceededException.struct_class = Types::TextSizeLimitExceededException
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
     Trait.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, location_name: "Name"))
     Trait.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
     Trait.struct_class = Types::Trait

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.53.0 (2019-05-21)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Feature - Adding support for modeled exceptions
 
 3.52.1 (2019-05-15)

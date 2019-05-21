@@ -8,6 +8,19 @@
 module Aws::DatabaseMigrationService
   module Types
 
+    # AWS DMS was denied access to the endpoint. Check that the role is
+    # correctly configured.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AccessDeniedFault AWS API Documentation
+    #
+    class AccessDeniedFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a quota for an AWS account, for example, the number of
     # replication instances allowed.
     #
@@ -2702,6 +2715,128 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # There are not enough resources allocated to the database migration.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/InsufficientResourceCapacityFault AWS API Documentation
+    #
+    class InsufficientResourceCapacityFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The certificate was not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/InvalidCertificateFault AWS API Documentation
+    #
+    class InvalidCertificateFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource is in a state that prevents it from being used for
+    # database migration.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/InvalidResourceStateFault AWS API Documentation
+    #
+    class InvalidResourceStateFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The subnet provided is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/InvalidSubnet AWS API Documentation
+    #
+    class InvalidSubnet < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The ciphertext references a key that doesn't exist or DMS account
+    # doesn't have an access to
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KMSAccessDeniedFault AWS API Documentation
+    #
+    class KMSAccessDeniedFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified master key (CMK) isn't enabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KMSDisabledFault AWS API Documentation
+    #
+    class KMSDisabledFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The state of the specified KMS resource isn't valid for this request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KMSInvalidStateFault AWS API Documentation
+    #
+    class KMSInvalidStateFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS DMS cannot access the KMS key.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KMSKeyNotAccessibleFault AWS API Documentation
+    #
+    class KMSKeyNotAccessibleFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified KMS entity or resource can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KMSNotFoundFault AWS API Documentation
+    #
+    class KMSNotFoundFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This request triggered KMS request throttling.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KMSThrottlingFault AWS API Documentation
+    #
+    class KMSThrottlingFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass KinesisSettings
     #   data as a hash:
     #
@@ -4248,6 +4383,19 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # The replication subnet group does not cover enough Availability Zones
+    # (AZs). Edit the replication subnet group and add more AZs.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationSubnetGroupDoesNotCoverEnoughAZs AWS API Documentation
+    #
+    class ReplicationSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] replication_task_identifier
     #   The user-assigned replication task identifier or name.
     #
@@ -4453,6 +4601,34 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # The resource you are attempting to create already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ResourceAlreadyExistsFault AWS API Documentation
+    #
+    class ResourceAlreadyExistsFault < Struct.new(
+      :message,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # The resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ResourceNotFoundFault AWS API Documentation
+    #
+    class ResourceNotFoundFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_identifier
     #   The Amazon Resource Name (ARN) of the DMS resource that the pending
     #   maintenance action applies to. For information about creating an
@@ -4473,6 +4649,18 @@ module Aws::DatabaseMigrationService
     class ResourcePendingMaintenanceActions < Struct.new(
       :resource_identifier,
       :pending_maintenance_action_details)
+      include Aws::Structure
+    end
+
+    # The quota for this resource quota has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ResourceQuotaExceededFault AWS API Documentation
+    #
+    class ResourceQuotaExceededFault < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4672,6 +4860,30 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # The SNS topic is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SNSInvalidTopicFault AWS API Documentation
+    #
+    class SNSInvalidTopicFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You are not authorized for the SNS subscription.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SNSNoAuthorizationFault AWS API Documentation
+    #
+    class SNSNoAuthorizationFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartReplicationTaskAssessmentMessage
     #   data as a hash:
     #
@@ -4808,6 +5020,18 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # The storage quota has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StorageQuotaExceededFault AWS API Documentation
+    #
+    class StorageQuotaExceededFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] subnet_identifier
     #   The subnet identifier.
     #   @return [String]
@@ -4826,6 +5050,18 @@ module Aws::DatabaseMigrationService
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status)
+      include Aws::Structure
+    end
+
+    # The specified subnet is already in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SubnetAlreadyInUse AWS API Documentation
+    #
+    class SubnetAlreadyInUse < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5070,6 +5306,18 @@ module Aws::DatabaseMigrationService
     #
     class TestConnectionResponse < Struct.new(
       :connection)
+      include Aws::Structure
+    end
+
+    # An upgrade dependency is preventing the database migration.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/UpgradeDependencyFailureFault AWS API Documentation
+    #
+    class UpgradeDependencyFailureFault < Struct.new(
+      :message)
       include Aws::Structure
     end
 

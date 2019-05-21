@@ -83,6 +83,10 @@ module Aws::QuickSight
     UserRole = Shapes::StringShape.new(name: 'UserRole')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    AccessDeniedException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     CreateGroupMembershipRequest.add_member(:member_name, Shapes::ShapeRef.new(shape: GroupMemberName, required: true, location: "uri", location_name: "MemberName"))
     CreateGroupMembershipRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     CreateGroupMembershipRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -162,6 +166,10 @@ module Aws::QuickSight
     DescribeUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
+    DomainNotWhitelistedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DomainNotWhitelistedException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DomainNotWhitelistedException.struct_class = Types::DomainNotWhitelistedException
+
     GetDashboardEmbedUrlRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     GetDashboardEmbedUrlRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DashboardId"))
     GetDashboardEmbedUrlRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, required: true, location: "querystring", location_name: "creds-type"))
@@ -188,6 +196,27 @@ module Aws::QuickSight
     GroupMember.struct_class = Types::GroupMember
 
     GroupMemberList.member = Shapes::ShapeRef.new(shape: GroupMember)
+
+    IdentityTypeNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    IdentityTypeNotSupportedException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    IdentityTypeNotSupportedException.struct_class = Types::IdentityTypeNotSupportedException
+
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalFailureException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidNextTokenException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidParameterValueException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, location_name: "ResourceType"))
+    LimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListGroupMembershipsRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     ListGroupMembershipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
@@ -239,6 +268,14 @@ module Aws::QuickSight
     ListUsersResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
+    PreconditionNotMetException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    PreconditionNotMetException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    PreconditionNotMetException.struct_class = Types::PreconditionNotMetException
+
+    QuickSightUserNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    QuickSightUserNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    QuickSightUserNotFoundException.struct_class = Types::QuickSightUserNotFoundException
+
     RegisterUserRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, required: true, location_name: "IdentityType"))
     RegisterUserRequest.add_member(:email, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Email"))
     RegisterUserRequest.add_member(:user_role, Shapes::ShapeRef.new(shape: UserRole, required: true, location_name: "UserRole"))
@@ -254,6 +291,33 @@ module Aws::QuickSight
     RegisterUserResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     RegisterUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     RegisterUserResponse.struct_class = Types::RegisterUserResponse
+
+    ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceExistsException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, location_name: "ResourceType"))
+    ResourceExistsException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ResourceExistsException.struct_class = Types::ResourceExistsException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceUnavailableException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, location_name: "ResourceType"))
+    ResourceUnavailableException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ResourceUnavailableException.struct_class = Types::ResourceUnavailableException
+
+    SessionLifetimeInMinutesInvalidException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    SessionLifetimeInMinutesInvalidException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    SessionLifetimeInMinutesInvalidException.struct_class = Types::SessionLifetimeInMinutesInvalidException
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ThrottlingException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    UnsupportedUserEditionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedUserEditionException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UnsupportedUserEditionException.struct_class = Types::UnsupportedUserEditionException
 
     UpdateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     UpdateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: GroupDescription, location_name: "Description"))

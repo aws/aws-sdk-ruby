@@ -157,6 +157,122 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # Amazon Polly can't find the specified lexicon. Verify that the
+    # lexicon's name is spelled correctly, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/InvalidLexiconException AWS API Documentation
+    #
+    class InvalidLexiconException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The NextToken is invalid. Verify that it's spelled correctly, and
+    # then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided Amazon S3 bucket name is invalid. Please check your input
+    # with S3 bucket naming requirements and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/InvalidS3BucketException AWS API Documentation
+    #
+    class InvalidS3BucketException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided Amazon S3 key prefix is invalid. Please provide a valid
+    # S3 object key name.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/InvalidS3KeyException AWS API Documentation
+    #
+    class InvalidS3KeyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified sample rate is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/InvalidSampleRateException AWS API Documentation
+    #
+    class InvalidSampleRateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided SNS topic ARN is invalid. Please provide a valid SNS
+    # topic ARN and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/InvalidSnsTopicArnException AWS API Documentation
+    #
+    class InvalidSnsTopicArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The SSML you provided is invalid. Verify the SSML syntax, spelling of
+    # tags and values, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/InvalidSsmlException AWS API Documentation
+    #
+    class InvalidSsmlException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided Task ID is not valid. Please provide a valid Task ID and
+    # try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/InvalidTaskIdException AWS API Documentation
+    #
+    class InvalidTaskIdException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The language specified is not currently supported by Amazon Polly in
+    # this capacity.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/LanguageNotSupportedException AWS API Documentation
+    #
+    class LanguageNotSupportedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides lexicon name and lexicon content in string format. For more
     # information, see [Pronunciation Lexicon Specification (PLS) Version
     # 1.0][1].
@@ -244,6 +360,36 @@ module Aws::Polly
     class LexiconDescription < Struct.new(
       :name,
       :attributes)
+      include Aws::Structure
+    end
+
+    # Amazon Polly can't find the specified lexicon. This could be caused
+    # by a lexicon that is missing, its name is misspelled or specifying a
+    # lexicon that is in a different region.
+    #
+    # Verify that the lexicon exists, is in the region (see ListLexicons)
+    # and that you spelled its name is spelled correctly. Then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/LexiconNotFoundException AWS API Documentation
+    #
+    class LexiconNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum size of the specified lexicon would be exceeded by this
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/LexiconSizeExceededException AWS API Documentation
+    #
+    class LexiconSizeExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -337,6 +483,43 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # Speech marks are not supported for the `OutputFormat` selected. Speech
+    # marks are only available for content in `json` format.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/MarksNotSupportedForFormatException AWS API Documentation
+    #
+    class MarksNotSupportedForFormatException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum size of the lexeme would be exceeded by this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/MaxLexemeLengthExceededException AWS API Documentation
+    #
+    class MaxLexemeLengthExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of lexicons would be exceeded by this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/MaxLexiconsNumberExceededException AWS API Documentation
+    #
+    class MaxLexiconsNumberExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutLexiconInput
     #   data as a hash:
     #
@@ -366,6 +549,30 @@ module Aws::Polly
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconOutput AWS API Documentation
     #
     class PutLexiconOutput < Aws::EmptyStructure; end
+
+    # An unknown condition has caused a service failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ServiceFailureException AWS API Documentation
+    #
+    class ServiceFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # SSML speech marks are not supported for plain text-type input.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SsmlMarksNotSupportedForTextTypeException AWS API Documentation
+    #
+    class SsmlMarksNotSupportedForTextTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass StartSpeechSynthesisTaskInput
     #   data as a hash:
@@ -588,6 +795,18 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # The Speech Synthesis task with requested Task ID cannot be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesisTaskNotFoundException AWS API Documentation
+    #
+    class SynthesisTaskNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SynthesizeSpeechInput
     #   data as a hash:
     #
@@ -722,6 +941,53 @@ module Aws::Polly
       :audio_stream,
       :content_type,
       :request_characters)
+      include Aws::Structure
+    end
+
+    # The value of the "Text" parameter is longer than the accepted
+    # limits. For the `SynthesizeSpeech` API, the limit for input text is a
+    # maximum of 6000 characters total, of which no more than 3000 can be
+    # billed characters. For the `StartSpeechSynthesisTask` API, the maximum
+    # is 200,000 characters, of which no more than 100,000 can be billed
+    # characters. SSML tags are not counted as billed characters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/TextLengthExceededException AWS API Documentation
+    #
+    class TextLengthExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The alphabet specified by the lexicon is not a supported alphabet.
+    # Valid values are `x-sampa` and `ipa`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/UnsupportedPlsAlphabetException AWS API Documentation
+    #
+    class UnsupportedPlsAlphabetException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The language specified in the lexicon is unsupported. For a list of
+    # supported languages, see [Lexicon Attributes][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/UnsupportedPlsLanguageException AWS API Documentation
+    #
+    class UnsupportedPlsLanguageException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

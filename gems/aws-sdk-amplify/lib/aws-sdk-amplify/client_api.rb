@@ -164,6 +164,9 @@ module Aws::Amplify
 
     Apps.member = Shapes::ShapeRef.new(shape: App)
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     Branch.add_member(:branch_arn, Shapes::ShapeRef.new(shape: BranchArn, required: true, location_name: "branchArn"))
     Branch.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
     Branch.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
@@ -271,6 +274,9 @@ module Aws::Amplify
     DeleteJobResult.add_member(:job_summary, Shapes::ShapeRef.new(shape: JobSummary, required: true, location_name: "jobSummary"))
     DeleteJobResult.struct_class = Types::DeleteJobResult
 
+    DependentServiceFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DependentServiceFailureException.struct_class = Types::DependentServiceFailureException
+
     DomainAssociation.add_member(:domain_association_arn, Shapes::ShapeRef.new(shape: DomainAssociationArn, required: true, location_name: "domainAssociationArn"))
     DomainAssociation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
     DomainAssociation.add_member(:enable_auto_sub_domain, Shapes::ShapeRef.new(shape: EnableAutoSubDomain, required: true, location_name: "enableAutoSubDomain"))
@@ -313,6 +319,9 @@ module Aws::Amplify
     GetJobResult.add_member(:job, Shapes::ShapeRef.new(shape: Job, required: true, location_name: "job"))
     GetJobResult.struct_class = Types::GetJobResult
 
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
     Job.add_member(:summary, Shapes::ShapeRef.new(shape: JobSummary, required: true, location_name: "summary"))
     Job.add_member(:steps, Shapes::ShapeRef.new(shape: Steps, required: true, location_name: "steps"))
     Job.struct_class = Types::Job
@@ -329,6 +338,9 @@ module Aws::Amplify
     JobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "endTime"))
     JobSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, required: true, location_name: "jobType"))
     JobSummary.struct_class = Types::JobSummary
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAppsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAppsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -365,6 +377,9 @@ module Aws::Amplify
     ListJobsResult.add_member(:job_summaries, Shapes::ShapeRef.new(shape: JobSummaries, required: true, location_name: "jobSummaries"))
     ListJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListJobsResult.struct_class = Types::ListJobsResult
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     ProductionBranch.add_member(:last_deploy_time, Shapes::ShapeRef.new(shape: LastDeployTime, location_name: "lastDeployTime"))
     ProductionBranch.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
@@ -422,6 +437,9 @@ module Aws::Amplify
 
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UpdateAppRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     UpdateAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))

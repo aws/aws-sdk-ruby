@@ -190,6 +190,18 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The event was already logged.
+    #
+    # @!attribute [rw] expected_sequence_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DataAlreadyAcceptedException AWS API Documentation
+    #
+    class DataAlreadyAcceptedException < Struct.new(
+      :expected_sequence_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDestinationRequest
     #   data as a hash:
     #
@@ -1350,6 +1362,18 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The sequence token is not valid.
+    #
+    # @!attribute [rw] expected_sequence_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InvalidSequenceTokenException AWS API Documentation
+    #
+    class InvalidSequenceTokenException < Struct.new(
+      :expected_sequence_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsLogGroupRequest
     #   data as a hash:
     #
@@ -1500,6 +1524,27 @@ module Aws::CloudWatchLogs
       :upload_sequence_token,
       :arn,
       :stored_bytes)
+      include Aws::Structure
+    end
+
+    # The query string is not valid. Details about this error are displayed
+    # in a `QueryCompileError` object. For more information, see .
+    #
+    # For more information about valid query syntax, see [CloudWatch Logs
+    # Insights Query Syntax][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @!attribute [rw] query_compile_error
+    #   Reserved.
+    #   @return [Types::QueryCompileError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MalformedQueryException AWS API Documentation
+    #
+    class MalformedQueryException < Struct.new(
+      :query_compile_error)
       include Aws::Structure
     end
 

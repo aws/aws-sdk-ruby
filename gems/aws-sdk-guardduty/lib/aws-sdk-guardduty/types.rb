@@ -197,6 +197,22 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Error response object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message,
+      :type)
+      include Aws::Structure
+    end
+
     # City information of the remote IP address.
     #
     # @!attribute [rw] city_name
@@ -1579,6 +1595,22 @@ module Aws::GuardDuty
       :platform,
       :product_codes,
       :tags)
+      include Aws::Structure
+    end
+
+    # Error response object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message,
+      :type)
       include Aws::Structure
     end
 

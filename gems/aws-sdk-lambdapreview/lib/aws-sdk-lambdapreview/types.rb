@@ -317,6 +317,41 @@ module Aws::LambdaPreview
       include Aws::Structure
     end
 
+    # One of the parameters in the request is invalid. For example, if you
+    # provided an IAM role for AWS Lambda to assume in the `UploadFunction`
+    # or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to
+    # assume you will get this exception.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request body could not be parsed as JSON.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/InvalidRequestContentException AWS API Documentation
+    #
+    class InvalidRequestContentException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass InvokeAsyncRequest
     #   data as a hash:
     #
@@ -474,6 +509,39 @@ module Aws::LambdaPreview
     #
     class RemoveEventSourceRequest < Struct.new(
       :uuid)
+      include Aws::Structure
+    end
+
+    # The function or the event source specified in the request does not
+    # exist.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The AWS Lambda service encountered an internal error.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/ServiceException AWS API Documentation
+    #
+    class ServiceException < Struct.new(
+      :type,
+      :message)
       include Aws::Structure
     end
 

@@ -209,6 +209,19 @@ module Aws::MarketplaceCommerceAnalytics
       include Aws::Structure
     end
 
+    # This exception is thrown when an internal service error occurs.
+    #
+    # @!attribute [rw] message
+    #   This message describes details of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/MarketplaceCommerceAnalyticsException AWS API Documentation
+    #
+    class MarketplaceCommerceAnalyticsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the StartSupportDataExport operation.
     #
     # @note When making an API call, you may pass StartSupportDataExportRequest

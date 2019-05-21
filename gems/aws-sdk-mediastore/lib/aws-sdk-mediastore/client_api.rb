@@ -85,9 +85,18 @@ module Aws::MediaStore
     Container.add_member(:access_logging_enabled, Shapes::ShapeRef.new(shape: ContainerAccessLoggingEnabled, location_name: "AccessLoggingEnabled"))
     Container.struct_class = Types::Container
 
+    ContainerInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ContainerInUseException.struct_class = Types::ContainerInUseException
+
     ContainerList.member = Shapes::ShapeRef.new(shape: Container)
 
+    ContainerNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ContainerNotFoundException.struct_class = Types::ContainerNotFoundException
+
     CorsPolicy.member = Shapes::ShapeRef.new(shape: CorsRule)
+
+    CorsPolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CorsPolicyNotFoundException.struct_class = Types::CorsPolicyNotFoundException
 
     CorsRule.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: AllowedOrigins, required: true, location_name: "AllowedOrigins"))
     CorsRule.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: AllowedMethods, location_name: "AllowedMethods"))
@@ -148,6 +157,12 @@ module Aws::MediaStore
     GetLifecyclePolicyOutput.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicy, required: true, location_name: "LifecyclePolicy"))
     GetLifecyclePolicyOutput.struct_class = Types::GetLifecyclePolicyOutput
 
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListContainersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListContainersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ContainerListLimit, location_name: "MaxResults"))
     ListContainersInput.struct_class = Types::ListContainersInput
@@ -155,6 +170,9 @@ module Aws::MediaStore
     ListContainersOutput.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerList, required: true, location_name: "Containers"))
     ListContainersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListContainersOutput.struct_class = Types::ListContainersOutput
+
+    PolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PolicyNotFoundException.struct_class = Types::PolicyNotFoundException
 
     PutContainerPolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
     PutContainerPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: ContainerPolicy, required: true, location_name: "Policy"))

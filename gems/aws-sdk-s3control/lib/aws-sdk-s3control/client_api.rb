@@ -114,6 +114,9 @@ module Aws::S3Control
     UpdateJobStatusRequest = Shapes::StructureShape.new(name: 'UpdateJobStatusRequest')
     UpdateJobStatusResult = Shapes::StructureShape.new(name: 'UpdateJobStatusResult')
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     CreateJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     CreateJobRequest.add_member(:confirmation_required, Shapes::ShapeRef.new(shape: ConfirmationRequired, location_name: "ConfirmationRequired", metadata: {"box"=>true}))
     CreateJobRequest.add_member(:operation, Shapes::ShapeRef.new(shape: JobOperation, required: true, location_name: "Operation"))
@@ -145,6 +148,18 @@ module Aws::S3Control
 
     GetPublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     GetPublicAccessBlockRequest.struct_class = Types::GetPublicAccessBlockRequest
+
+    IdempotencyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    IdempotencyException.struct_class = Types::IdempotencyException
+
+    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InternalServiceException.struct_class = Types::InternalServiceException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
 
     JobDescriptor.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     JobDescriptor.add_member(:confirmation_required, Shapes::ShapeRef.new(shape: ConfirmationRequired, location_name: "ConfirmationRequired", metadata: {"box"=>true}))
@@ -217,6 +232,9 @@ module Aws::S3Control
     JobReport.add_member(:report_scope, Shapes::ShapeRef.new(shape: JobReportScope, location_name: "ReportScope", metadata: {"box"=>true}))
     JobReport.struct_class = Types::JobReport
 
+    JobStatusException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    JobStatusException.struct_class = Types::JobStatusException
+
     JobStatusList.member = Shapes::ShapeRef.new(shape: JobStatus)
 
     LambdaInvokeOperation.add_member(:function_arn, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "FunctionArn"))
@@ -231,6 +249,12 @@ module Aws::S3Control
     ListJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
     ListJobsResult.add_member(:jobs, Shapes::ShapeRef.new(shape: JobListDescriptorList, location_name: "Jobs"))
     ListJobsResult.struct_class = Types::ListJobsResult
+
+    NoSuchPublicAccessBlockConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: NoSuchPublicAccessBlockConfigurationMessage, location_name: "Message"))
+    NoSuchPublicAccessBlockConfiguration.struct_class = Types::NoSuchPublicAccessBlockConfiguration
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     PublicAccessBlockConfiguration.add_member(:block_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicAcls"))
     PublicAccessBlockConfiguration.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "IgnorePublicAcls"))
@@ -316,6 +340,9 @@ module Aws::S3Control
 
     S3UserMetadata.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)
     S3UserMetadata.value = Shapes::ShapeRef.new(shape: MaxLength1024String)
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UpdateJobPriorityRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     UpdateJobPriorityRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))

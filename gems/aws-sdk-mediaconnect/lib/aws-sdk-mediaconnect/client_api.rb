@@ -88,6 +88,9 @@ module Aws::MediaConnect
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
+    AddFlowOutputs420Exception.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    AddFlowOutputs420Exception.struct_class = Types::AddFlowOutputs420Exception
+
     AddFlowOutputsRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
     AddFlowOutputsRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: __listOfAddOutputRequest, required: true, location_name: "outputs"))
     AddFlowOutputsRequest.struct_class = Types::AddFlowOutputsRequest
@@ -106,6 +109,12 @@ module Aws::MediaConnect
     AddOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     AddOutputRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     AddOutputRequest.struct_class = Types::AddOutputRequest
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
+    CreateFlow420Exception.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    CreateFlow420Exception.struct_class = Types::CreateFlow420Exception
 
     CreateFlowRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: __string, location_name: "availabilityZone"))
     CreateFlowRequest.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfGrantEntitlementRequest, location_name: "entitlements"))
@@ -155,11 +164,17 @@ module Aws::MediaConnect
     Flow.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     Flow.struct_class = Types::Flow
 
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     GrantEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     GrantEntitlementRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
     GrantEntitlementRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     GrantEntitlementRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subscribers"))
     GrantEntitlementRequest.struct_class = Types::GrantEntitlementRequest
+
+    GrantFlowEntitlements420Exception.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    GrantFlowEntitlements420Exception.struct_class = Types::GrantFlowEntitlements420Exception
 
     GrantFlowEntitlementsRequest.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfGrantEntitlementRequest, required: true, location_name: "entitlements"))
     GrantFlowEntitlementsRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
@@ -168,6 +183,9 @@ module Aws::MediaConnect
     GrantFlowEntitlementsResponse.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfEntitlement, location_name: "entitlements"))
     GrantFlowEntitlementsResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     GrantFlowEntitlementsResponse.struct_class = Types::GrantFlowEntitlementsResponse
+
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
     ListEntitlementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListEntitlementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -206,6 +224,9 @@ module Aws::MediaConnect
     Messages.add_member(:errors, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "errors"))
     Messages.struct_class = Types::Messages
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     Output.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Output.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     Output.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
@@ -235,6 +256,9 @@ module Aws::MediaConnect
     RevokeFlowEntitlementResponse.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, location_name: "entitlementArn"))
     RevokeFlowEntitlementResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     RevokeFlowEntitlementResponse.struct_class = Types::RevokeFlowEntitlementResponse
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SetSourceRequest.add_member(:decryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "decryption"))
     SetSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -276,6 +300,9 @@ module Aws::MediaConnect
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     Transport.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
     Transport.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))

@@ -87,6 +87,9 @@ module Aws::Signer
     key = Shapes::StringShape.new(name: 'key')
     string = Shapes::StringShape.new(name: 'string')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     CancelSigningProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
     CancelSigningProfileRequest.struct_class = Types::CancelSigningProfileRequest
 
@@ -149,6 +152,9 @@ module Aws::Signer
 
     ImageFormats.member = Shapes::ShapeRef.new(shape: ImageFormat)
 
+    InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
+
     ListSigningJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: SigningStatus, location: "querystring", location_name: "status"))
     ListSigningJobsRequest.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, location: "querystring", location_name: "platformId"))
     ListSigningJobsRequest.add_member(:requested_by, Shapes::ShapeRef.new(shape: RequestedBy, location: "querystring", location_name: "requestedBy"))
@@ -189,6 +195,9 @@ module Aws::Signer
 
     PutSigningProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "arn"))
     PutSigningProfileResponse.struct_class = Types::PutSigningProfileResponse
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     S3Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucketName"))
     S3Destination.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "prefix"))
@@ -269,6 +278,12 @@ module Aws::Signer
 
     StartSigningJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     StartSigningJobResponse.struct_class = Types::StartSigningJobResponse
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private

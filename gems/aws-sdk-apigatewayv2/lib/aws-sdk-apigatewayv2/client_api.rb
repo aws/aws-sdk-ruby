@@ -270,6 +270,12 @@ module Aws::ApiGatewayV2
     Authorizers.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     Authorizers.struct_class = Types::Authorizers
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateApiInput.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     CreateApiInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateApiInput.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
@@ -950,6 +956,10 @@ module Aws::ApiGatewayV2
     Models.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     Models.struct_class = Types::Models
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: __string, location_name: "resourceType"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     ParameterConstraints.add_member(:required, Shapes::ShapeRef.new(shape: __boolean, location_name: "required"))
     ParameterConstraints.struct_class = Types::ParameterConstraints
 
@@ -1024,6 +1034,10 @@ module Aws::ApiGatewayV2
 
     TemplateMap.key = Shapes::ShapeRef.new(shape: __string)
     TemplateMap.value = Shapes::ShapeRef.new(shape: StringWithLengthBetween0And32K)
+
+    TooManyRequestsException.add_member(:limit_type, Shapes::ShapeRef.new(shape: __string, location_name: "limitType"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UpdateApiInput.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     UpdateApiInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))

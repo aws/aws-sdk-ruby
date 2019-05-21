@@ -385,6 +385,18 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # The submitted request is not valid, for example, the input is
+    # incomplete or incorrect. See the accompanying error message for
+    # details.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the base path that callers of the API must provide as part
     # of the URL after the domain name.
     #
@@ -554,6 +566,17 @@ module Aws::APIGateway
     class ClientCertificates < Struct.new(
       :position,
       :items)
+      include Aws::Structure
+    end
+
+    # The request configuration has conflicts. For details, see the
+    # accompanying error message.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4647,6 +4670,21 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # The request exceeded the rate limit. Retry after the specified time
+    # period.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class LimitExceededException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a client-facing interface by which the client calls the API
     # to access back-end resources. A **Method** resource is integrated with
     # an Integration resource. Both consist of a request and one or more
@@ -5111,6 +5149,17 @@ module Aws::APIGateway
     class Models < Struct.new(
       :position,
       :items)
+      include Aws::Structure
+    end
+
+    # The requested resource is not found. Make sure that the request URI is
+    # correct.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6175,6 +6224,21 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # The requested service is not available. For details see the
+    # accompanying error message. Retry after the specified time period.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a unique identifier for a version of a deployed RestApi
     # that is callable by users.
     #
@@ -6668,6 +6732,31 @@ module Aws::APIGateway
     class ThrottleSettings < Struct.new(
       :burst_limit,
       :rate_limit)
+      include Aws::Structure
+    end
+
+    # The request has reached its throttling limit. Retry after the
+    # specified time period.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TooManyRequestsException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is denied because the caller has insufficient permissions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -244,6 +244,45 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
+    # The request processing failed because of an unknown error, exception,
+    # or failure. You can retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A parameter is missing or a malformed string or invalid or
+    # out-of-range value was supplied for the request parameter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A `PaginationToken` is valid for a maximum of 15 minutes. Your request
+    # was denied because the specified `PaginationToken` has expired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/PaginationTokenExpiredException AWS API Documentation
+    #
+    class PaginationTokenExpiredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A list of resource ARNs and the tags (keys and values) that are
     # associated with each.
     #
@@ -363,6 +402,18 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class TagResourcesOutput < Struct.new(
       :failed_resources_map)
+      include Aws::Structure
+    end
+
+    # The request was denied to limit the frequency of submitted requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/ThrottledException AWS API Documentation
+    #
+    class ThrottledException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

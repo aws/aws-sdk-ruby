@@ -308,6 +308,9 @@ module Aws::ECS
     AwsVpcConfiguration.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "assignPublicIp"))
     AwsVpcConfiguration.struct_class = Types::AwsVpcConfiguration
 
+    ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientException.struct_class = Types::ClientException
+
     Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
     Cluster.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     Cluster.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
@@ -946,6 +949,9 @@ module Aws::ECS
     Secret.struct_class = Types::Secret
 
     SecretList.member = Shapes::ShapeRef.new(shape: Secret)
+
+    ServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServerException.struct_class = Types::ServerException
 
     Service.add_member(:service_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceArn"))
     Service.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))

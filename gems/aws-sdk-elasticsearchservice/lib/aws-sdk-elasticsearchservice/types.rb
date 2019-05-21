@@ -117,6 +117,17 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # An error occurred while processing the request.
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    class BaseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the
     # `CancelElasticsearchServiceSoftwareUpdate` operation. Specifies the
     # name of the Elasticsearch domain that you wish to cancel a service

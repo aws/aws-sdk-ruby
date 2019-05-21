@@ -8,6 +8,16 @@
 module Aws::ApiGatewayManagementApi
   module Types
 
+    # The data has exceeded the maximum size allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class PayloadTooLargeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PostToConnectionRequest
     #   data as a hash:
     #

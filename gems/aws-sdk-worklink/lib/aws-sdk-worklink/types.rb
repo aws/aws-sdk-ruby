@@ -666,6 +666,30 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDevicesRequest
     #   data as a hash:
     #
@@ -852,6 +876,30 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
+    # The resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RestoreDomainAccessRequest
     #   data as a hash:
     #
@@ -935,6 +983,30 @@ module Aws::WorkLink
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/SignOutUserResponse AWS API Documentation
     #
     class SignOutUserResponse < Aws::EmptyStructure; end
+
+    # The number of requests exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You are not authorized to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateAuditStreamConfigurationRequest
     #   data as a hash:

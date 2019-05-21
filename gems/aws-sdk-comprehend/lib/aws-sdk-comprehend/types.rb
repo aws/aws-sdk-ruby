@@ -381,6 +381,19 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # The number of documents in the request exceeds the limit of 25. Try
+    # your request again with fewer documents.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchSizeLimitExceededException AWS API Documentation
+    #
+    class BatchSizeLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the result metrics for the test data associated with an
     # documentation classifier.
     #
@@ -450,6 +463,19 @@ module Aws::Comprehend
       :number_of_trained_documents,
       :number_of_test_documents,
       :evaluation_metrics)
+      include Aws::Structure
+    end
+
+    # Concurrent modification of the tags associated with an Amazon
+    # Comprehend resource is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2281,6 +2307,55 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # An internal server error occurred. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The filter specified for the `ListDocumentClassificationJobs`
+    # operation is invalid. Specify a different filter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidFilterException AWS API Documentation
+    #
+    class InvalidFilterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified job was not found. Check the job ID and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/JobNotFoundException AWS API Documentation
+    #
+    class JobNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a key noun phrase.
     #
     # @!attribute [rw] score
@@ -2449,6 +2524,19 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      include Aws::Structure
+    end
+
+    # The KMS customer managed key (CMK) entered cannot be validated. Verify
+    # the key and re-enter it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KmsKeyValidationException AWS API Documentation
+    #
+    class KmsKeyValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2989,6 +3077,59 @@ module Aws::Comprehend
     class PartOfSpeechTag < Struct.new(
       :tag,
       :score)
+      include Aws::Structure
+    end
+
+    # The specified name is already in use. Use a different name and try
+    # your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of recognizers per account has been exceeded.
+    # Review the recognizers, perform cleanup, and then try your request
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource ARN was not found. Check the ARN and try your
+    # request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource is not available. Check to see if the resource
+    # is in the `TRAINED` state and try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceUnavailableException AWS API Documentation
+    #
+    class ResourceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4210,6 +4351,57 @@ module Aws::Comprehend
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The size of the input text exceeds the limit. Use a smaller document.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TextSizeLimitExceededException AWS API Documentation
+    #
+    class TextSizeLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The number of requests exceeds the limit. Resubmit your request later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request contains more tag keys than can be associated with a
+    # resource (50 tag keys per resource).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TooManyTagKeysException AWS API Documentation
+    #
+    class TooManyTagKeysException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request contains more tags than can be associated with a resource
+    # (50 tags per resource). The maximum number of tags includes both
+    # existing tags and those included in your current request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides information for filtering topic detection jobs. For more
     # information, see .
     #
@@ -4341,6 +4533,21 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      include Aws::Structure
+    end
+
+    # Amazon Comprehend can't process the language of the input text. For
+    # all custom entity recognition APIs (such as `CreateEntityRecognizer`),
+    # only English is accepted. For most other APIs, Amazon Comprehend
+    # accepts only English or Spanish text.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UnsupportedLanguageException AWS API Documentation
+    #
+    class UnsupportedLanguageException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

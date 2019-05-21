@@ -798,6 +798,8 @@ module Aws::DataSync
     #   * {Types::DescribeAgentResponse#status #status} => String
     #   * {Types::DescribeAgentResponse#last_connection_time #last_connection_time} => Time
     #   * {Types::DescribeAgentResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeAgentResponse#endpoint_options #endpoint_options} => Types::EndpointOptions
+    #   * {Types::DescribeAgentResponse#private_link_config #private_link_config} => Types::PrivateLinkConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -812,6 +814,13 @@ module Aws::DataSync
     #   resp.status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.last_connection_time #=> Time
     #   resp.creation_time #=> Time
+    #   resp.endpoint_options.fips #=> Boolean
+    #   resp.endpoint_options.private_link #=> Boolean
+    #   resp.private_link_config.private_link_endpoint #=> String
+    #   resp.private_link_config.subnet_arns #=> Array
+    #   resp.private_link_config.subnet_arns[0] #=> String
+    #   resp.private_link_config.security_group_arns #=> Array
+    #   resp.private_link_config.security_group_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgent AWS API Documentation
     #
@@ -1506,7 +1515,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

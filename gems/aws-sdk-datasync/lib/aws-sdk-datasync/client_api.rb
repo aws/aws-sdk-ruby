@@ -55,6 +55,7 @@ module Aws::DataSync
     Ec2SecurityGroupArnList = Shapes::ListShape.new(name: 'Ec2SecurityGroupArnList')
     Ec2SubnetArn = Shapes::StringShape.new(name: 'Ec2SubnetArn')
     EfsFilesystemArn = Shapes::StringShape.new(name: 'EfsFilesystemArn')
+    EndpointOptions = Shapes::StructureShape.new(name: 'EndpointOptions')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterRule = Shapes::StructureShape.new(name: 'FilterRule')
     FilterType = Shapes::StringShape.new(name: 'FilterType')
@@ -86,10 +87,13 @@ module Aws::DataSync
     NonEmptySubdirectory = Shapes::StringShape.new(name: 'NonEmptySubdirectory')
     OnPremConfig = Shapes::StructureShape.new(name: 'OnPremConfig')
     Options = Shapes::StructureShape.new(name: 'Options')
+    PLSecurityGroupArnList = Shapes::ListShape.new(name: 'PLSecurityGroupArnList')
+    PLSubnetArnList = Shapes::ListShape.new(name: 'PLSubnetArnList')
     PhaseStatus = Shapes::StringShape.new(name: 'PhaseStatus')
     PosixPermissions = Shapes::StringShape.new(name: 'PosixPermissions')
     PreserveDeletedFiles = Shapes::StringShape.new(name: 'PreserveDeletedFiles')
     PreserveDevices = Shapes::StringShape.new(name: 'PreserveDevices')
+    PrivateLinkConfig = Shapes::StructureShape.new(name: 'PrivateLinkConfig')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     ServerHostname = Shapes::StringShape.new(name: 'ServerHostname')
@@ -122,6 +126,7 @@ module Aws::DataSync
     UpdateTaskRequest = Shapes::StructureShape.new(name: 'UpdateTaskRequest')
     UpdateTaskResponse = Shapes::StructureShape.new(name: 'UpdateTaskResponse')
     VerifyMode = Shapes::StringShape.new(name: 'VerifyMode')
+    boolean = Shapes::BooleanShape.new(name: 'boolean')
     long = Shapes::IntegerShape.new(name: 'long')
     string = Shapes::StringShape.new(name: 'string')
 
@@ -210,6 +215,8 @@ module Aws::DataSync
     DescribeAgentResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "Status"))
     DescribeAgentResponse.add_member(:last_connection_time, Shapes::ShapeRef.new(shape: Time, location_name: "LastConnectionTime"))
     DescribeAgentResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeAgentResponse.add_member(:endpoint_options, Shapes::ShapeRef.new(shape: EndpointOptions, location_name: "EndpointOptions"))
+    DescribeAgentResponse.add_member(:private_link_config, Shapes::ShapeRef.new(shape: PrivateLinkConfig, location_name: "PrivateLinkConfig"))
     DescribeAgentResponse.struct_class = Types::DescribeAgentResponse
 
     DescribeLocationEfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
@@ -280,11 +287,23 @@ module Aws::DataSync
 
     Ec2SecurityGroupArnList.member = Shapes::ShapeRef.new(shape: Ec2SecurityGroupArn)
 
+    EndpointOptions.add_member(:fips, Shapes::ShapeRef.new(shape: boolean, location_name: "Fips"))
+    EndpointOptions.add_member(:private_link, Shapes::ShapeRef.new(shape: boolean, location_name: "PrivateLink"))
+    EndpointOptions.struct_class = Types::EndpointOptions
+
     FilterList.member = Shapes::ShapeRef.new(shape: FilterRule)
 
     FilterRule.add_member(:filter_type, Shapes::ShapeRef.new(shape: FilterType, location_name: "FilterType"))
     FilterRule.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, location_name: "Value"))
     FilterRule.struct_class = Types::FilterRule
+
+    InternalException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InternalException.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "errorCode"))
+    InternalException.struct_class = Types::InternalException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidRequestException.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "errorCode"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
 
     ListAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -350,6 +369,15 @@ module Aws::DataSync
     Options.add_member(:posix_permissions, Shapes::ShapeRef.new(shape: PosixPermissions, location_name: "PosixPermissions"))
     Options.add_member(:bytes_per_second, Shapes::ShapeRef.new(shape: BytesPerSecond, location_name: "BytesPerSecond"))
     Options.struct_class = Types::Options
+
+    PLSecurityGroupArnList.member = Shapes::ShapeRef.new(shape: Ec2SecurityGroupArn)
+
+    PLSubnetArnList.member = Shapes::ShapeRef.new(shape: Ec2SubnetArn)
+
+    PrivateLinkConfig.add_member(:private_link_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "PrivateLinkEndpoint"))
+    PrivateLinkConfig.add_member(:subnet_arns, Shapes::ShapeRef.new(shape: PLSubnetArnList, location_name: "SubnetArns"))
+    PrivateLinkConfig.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: PLSecurityGroupArnList, location_name: "SecurityGroupArns"))
+    PrivateLinkConfig.struct_class = Types::PrivateLinkConfig
 
     S3Config.add_member(:bucket_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "BucketAccessRoleArn"))
     S3Config.struct_class = Types::S3Config

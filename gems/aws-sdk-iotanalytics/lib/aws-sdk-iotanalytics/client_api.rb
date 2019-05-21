@@ -509,6 +509,12 @@ module Aws::IoTAnalytics
     GlueConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueDatabaseName, required: true, location_name: "databaseName"))
     GlueConfiguration.struct_class = Types::GlueConfiguration
 
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     IotEventsDestinationConfiguration.add_member(:input_name, Shapes::ShapeRef.new(shape: IotEventsInputName, required: true, location_name: "inputName"))
     IotEventsDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     IotEventsDestinationConfiguration.struct_class = Types::IotEventsDestinationConfiguration
@@ -518,6 +524,9 @@ module Aws::IoTAnalytics
     LambdaActivity.add_member(:batch_size, Shapes::ShapeRef.new(shape: ActivityBatchSize, required: true, location_name: "batchSize"))
     LambdaActivity.add_member(:next, Shapes::ShapeRef.new(shape: ActivityName, location_name: "next"))
     LambdaActivity.struct_class = Types::LambdaActivity
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -640,9 +649,17 @@ module Aws::IoTAnalytics
     ReprocessingSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     ReprocessingSummary.struct_class = Types::ReprocessingSummary
 
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceAlreadyExistsException.add_member(:resource_id, Shapes::ShapeRef.new(shape: resourceId, location_name: "resourceId"))
+    ResourceAlreadyExistsException.add_member(:resource_arn, Shapes::ShapeRef.new(shape: resourceArn, location_name: "resourceArn"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
     ResourceConfiguration.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, required: true, location_name: "computeType"))
     ResourceConfiguration.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: VolumeSizeInGB, required: true, location_name: "volumeSizeInGB"))
     ResourceConfiguration.struct_class = Types::ResourceConfiguration
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RetentionPeriod.add_member(:unlimited, Shapes::ShapeRef.new(shape: UnlimitedRetentionPeriod, location_name: "unlimited"))
     RetentionPeriod.add_member(:number_of_days, Shapes::ShapeRef.new(shape: RetentionPeriodInDays, location_name: "numberOfDays"))
@@ -679,6 +696,9 @@ module Aws::IoTAnalytics
     SelectAttributesActivity.add_member(:next, Shapes::ShapeRef.new(shape: ActivityName, location_name: "next"))
     SelectAttributesActivity.struct_class = Types::SelectAttributesActivity
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     SqlQueryDatasetAction.add_member(:sql_query, Shapes::ShapeRef.new(shape: SqlQuery, required: true, location_name: "sqlQuery"))
     SqlQueryDatasetAction.add_member(:filters, Shapes::ShapeRef.new(shape: QueryFilters, location_name: "filters"))
     SqlQueryDatasetAction.struct_class = Types::SqlQueryDatasetAction
@@ -704,6 +724,9 @@ module Aws::IoTAnalytics
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     TriggeringDataset.add_member(:name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "name"))
     TriggeringDataset.struct_class = Types::TriggeringDataset

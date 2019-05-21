@@ -517,6 +517,25 @@ module Aws::MachineLearning
     GetMLModelOutput.add_member(:schema, Shapes::ShapeRef.new(shape: DataSchema, location_name: "Schema"))
     GetMLModelOutput.struct_class = Types::GetMLModelOutput
 
+    IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    IdempotentParameterMismatchException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServerException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidInputException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
+    InvalidTagException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidTagException.struct_class = Types::InvalidTagException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     MLModel.add_member(:ml_model_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "MLModelId"))
     MLModel.add_member(:training_data_source_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "TrainingDataSourceId"))
     MLModel.add_member(:created_by_iam_user, Shapes::ShapeRef.new(shape: AwsUserArn, location_name: "CreatedByIamUser"))
@@ -559,6 +578,9 @@ module Aws::MachineLearning
     Prediction.add_member(:predicted_scores, Shapes::ShapeRef.new(shape: ScoreValuePerLabelMap, location_name: "predictedScores"))
     Prediction.add_member(:details, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "details"))
     Prediction.struct_class = Types::Prediction
+
+    PredictorNotMountedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    PredictorNotMountedException.struct_class = Types::PredictorNotMountedException
 
     RDSDataSpec.add_member(:database_information, Shapes::ShapeRef.new(shape: RDSDatabase, required: true, location_name: "DatabaseInformation"))
     RDSDataSpec.add_member(:select_sql_query, Shapes::ShapeRef.new(shape: RDSSelectSqlQuery, required: true, location_name: "SelectSqlQuery"))
@@ -620,6 +642,10 @@ module Aws::MachineLearning
     RedshiftMetadata.add_member(:select_sql_query, Shapes::ShapeRef.new(shape: RedshiftSelectSqlQuery, location_name: "SelectSqlQuery"))
     RedshiftMetadata.struct_class = Types::RedshiftMetadata
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     S3DataSpec.add_member(:data_location_s3, Shapes::ShapeRef.new(shape: S3Url, required: true, location_name: "DataLocationS3"))
     S3DataSpec.add_member(:data_rearrangement, Shapes::ShapeRef.new(shape: DataRearrangement, location_name: "DataRearrangement"))
     S3DataSpec.add_member(:data_schema, Shapes::ShapeRef.new(shape: DataSchema, location_name: "DataSchema"))
@@ -634,6 +660,9 @@ module Aws::MachineLearning
     Tag.struct_class = Types::Tag
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TagLimitExceededException.struct_class = Types::TagLimitExceededException
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 

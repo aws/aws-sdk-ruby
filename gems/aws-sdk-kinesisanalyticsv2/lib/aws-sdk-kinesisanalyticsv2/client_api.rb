@@ -420,6 +420,12 @@ module Aws::KinesisAnalyticsV2
     CodeContentUpdate.add_member(:s3_content_location_update, Shapes::ShapeRef.new(shape: S3ContentLocationUpdate, location_name: "S3ContentLocationUpdate"))
     CodeContentUpdate.struct_class = Types::CodeContentUpdate
 
+    CodeValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CodeValidationException.struct_class = Types::CodeValidationException
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     CreateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     CreateApplicationRequest.add_member(:application_description, Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: "ApplicationDescription"))
     CreateApplicationRequest.add_member(:runtime_environment, Shapes::ShapeRef.new(shape: RuntimeEnvironment, required: true, location_name: "RuntimeEnvironment"))
@@ -612,6 +618,15 @@ module Aws::KinesisAnalyticsV2
 
     Inputs.member = Shapes::ShapeRef.new(shape: Input)
 
+    InvalidApplicationConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidApplicationConfigurationException.struct_class = Types::InvalidApplicationConfigurationException
+
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     JSONMappingParameters.add_member(:record_row_path, Shapes::ShapeRef.new(shape: RecordRowPath, required: true, location_name: "RecordRowPath"))
     JSONMappingParameters.struct_class = Types::JSONMappingParameters
 
@@ -664,6 +679,9 @@ module Aws::KinesisAnalyticsV2
 
     LambdaOutputUpdate.add_member(:resource_arn_update, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARNUpdate"))
     LambdaOutputUpdate.struct_class = Types::LambdaOutputUpdate
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListApplicationSnapshotsRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     ListApplicationSnapshotsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListSnapshotsInputLimit, location_name: "Limit"))
@@ -806,6 +824,15 @@ module Aws::KinesisAnalyticsV2
 
     ReferenceDataSources.member = Shapes::ShapeRef.new(shape: ReferenceDataSource)
 
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceProvisionedThroughputExceededException.struct_class = Types::ResourceProvisionedThroughputExceededException
+
     RunConfiguration.add_member(:sql_run_configurations, Shapes::ShapeRef.new(shape: SqlRunConfigurations, location_name: "SqlRunConfigurations"))
     RunConfiguration.add_member(:application_restore_configuration, Shapes::ShapeRef.new(shape: ApplicationRestoreConfiguration, location_name: "ApplicationRestoreConfiguration"))
     RunConfiguration.struct_class = Types::RunConfiguration
@@ -847,6 +874,9 @@ module Aws::KinesisAnalyticsV2
     S3ReferenceDataSourceUpdate.add_member(:bucket_arn_update, Shapes::ShapeRef.new(shape: BucketARN, location_name: "BucketARNUpdate"))
     S3ReferenceDataSourceUpdate.add_member(:file_key_update, Shapes::ShapeRef.new(shape: FileKey, location_name: "FileKeyUpdate"))
     S3ReferenceDataSourceUpdate.struct_class = Types::S3ReferenceDataSourceUpdate
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SnapshotDetails.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotName, required: true, location_name: "SnapshotName"))
     SnapshotDetails.add_member(:snapshot_status, Shapes::ShapeRef.new(shape: SnapshotStatus, required: true, location_name: "SnapshotStatus"))
@@ -906,6 +936,17 @@ module Aws::KinesisAnalyticsV2
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UnableToDetectSchemaException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnableToDetectSchemaException.add_member(:raw_input_records, Shapes::ShapeRef.new(shape: RawInputRecords, location_name: "RawInputRecords"))
+    UnableToDetectSchemaException.add_member(:processed_input_records, Shapes::ShapeRef.new(shape: ProcessedInputRecords, location_name: "ProcessedInputRecords"))
+    UnableToDetectSchemaException.struct_class = Types::UnableToDetectSchemaException
+
+    UnsupportedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: KinesisAnalyticsARN, required: true, location_name: "ResourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))

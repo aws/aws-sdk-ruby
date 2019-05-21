@@ -355,6 +355,9 @@ module Aws::GameLift
 
     BuildList.member = Shapes::ShapeRef.new(shape: Build)
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, required: true, location_name: "Name"))
     CreateAliasInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
     CreateAliasInput.add_member(:routing_strategy, Shapes::ShapeRef.new(shape: RoutingStrategy, required: true, location_name: "RoutingStrategy"))
@@ -769,6 +772,9 @@ module Aws::GameLift
     FleetCapacity.add_member(:instance_counts, Shapes::ShapeRef.new(shape: EC2InstanceCounts, location_name: "InstanceCounts"))
     FleetCapacity.struct_class = Types::FleetCapacity
 
+    FleetCapacityExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    FleetCapacityExceededException.struct_class = Types::FleetCapacityExceededException
+
     FleetCapacityList.member = Shapes::ShapeRef.new(shape: FleetCapacity)
 
     FleetIdList.member = Shapes::ShapeRef.new(shape: FleetId)
@@ -817,6 +823,9 @@ module Aws::GameLift
     GameSessionDetail.struct_class = Types::GameSessionDetail
 
     GameSessionDetailList.member = Shapes::ShapeRef.new(shape: GameSessionDetail)
+
+    GameSessionFullException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    GameSessionFullException.struct_class = Types::GameSessionFullException
 
     GameSessionList.member = Shapes::ShapeRef.new(shape: GameSession)
 
@@ -868,6 +877,9 @@ module Aws::GameLift
     GetInstanceAccessOutput.add_member(:instance_access, Shapes::ShapeRef.new(shape: InstanceAccess, location_name: "InstanceAccess"))
     GetInstanceAccessOutput.struct_class = Types::GetInstanceAccessOutput
 
+    IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
     Instance.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
     Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     Instance.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
@@ -890,6 +902,18 @@ module Aws::GameLift
 
     InstanceList.member = Shapes::ShapeRef.new(shape: Instance)
 
+    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InternalServiceException.struct_class = Types::InternalServiceException
+
+    InvalidFleetStatusException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InvalidFleetStatusException.struct_class = Types::InvalidFleetStatusException
+
+    InvalidGameSessionStatusException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InvalidGameSessionStatusException.struct_class = Types::InvalidGameSessionStatusException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     IpPermission.add_member(:from_port, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "FromPort"))
     IpPermission.add_member(:to_port, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "ToPort"))
     IpPermission.add_member(:ip_range, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "IpRange"))
@@ -900,6 +924,9 @@ module Aws::GameLift
 
     LatencyMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     LatencyMap.value = Shapes::ShapeRef.new(shape: PositiveInteger)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAliasesInput.add_member(:routing_strategy_type, Shapes::ShapeRef.new(shape: RoutingStrategyType, location_name: "RoutingStrategyType"))
     ListAliasesInput.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
@@ -987,6 +1014,9 @@ module Aws::GameLift
     MatchmakingTicketList.member = Shapes::ShapeRef.new(shape: MatchmakingTicket)
 
     MetricGroupList.member = Shapes::ShapeRef.new(shape: MetricGroup)
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     PlacedPlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
     PlacedPlayerSession.add_member(:player_session_id, Shapes::ShapeRef.new(shape: PlayerSessionId, location_name: "PlayerSessionId"))
@@ -1191,6 +1221,15 @@ module Aws::GameLift
 
     TargetConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
     TargetConfiguration.struct_class = Types::TargetConfiguration
+
+    TerminalRoutingStrategyException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    TerminalRoutingStrategyException.struct_class = Types::TerminalRoutingStrategyException
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
+
+    UnsupportedRegionException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    UnsupportedRegionException.struct_class = Types::UnsupportedRegionException
 
     UpdateAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
     UpdateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, location_name: "Name"))

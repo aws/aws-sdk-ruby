@@ -138,6 +138,9 @@ module Aws::CostExplorer
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeType)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
+    BillExpirationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BillExpirationException.struct_class = Types::BillExpirationException
+
     Coverage.add_member(:coverage_hours, Shapes::ShapeRef.new(shape: CoverageHours, location_name: "CoverageHours"))
     Coverage.add_member(:coverage_normalized_units, Shapes::ShapeRef.new(shape: CoverageNormalizedUnits, location_name: "CoverageNormalizedUnits"))
     Coverage.add_member(:coverage_cost, Shapes::ShapeRef.new(shape: CoverageCost, location_name: "CoverageCost"))
@@ -164,6 +167,9 @@ module Aws::CostExplorer
     CoverageNormalizedUnits.struct_class = Types::CoverageNormalizedUnits
 
     CoveragesByTime.member = Shapes::ShapeRef.new(shape: CoverageByTime)
+
+    DataUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataUnavailableException.struct_class = Types::DataUnavailableException
 
     DateInterval.add_member(:start, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "Start"))
     DateInterval.add_member(:end, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "End"))
@@ -333,7 +339,13 @@ module Aws::CostExplorer
     InstanceDetails.add_member(:es_instance_details, Shapes::ShapeRef.new(shape: ESInstanceDetails, location_name: "ESInstanceDetails"))
     InstanceDetails.struct_class = Types::InstanceDetails
 
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
     Keys.member = Shapes::ShapeRef.new(shape: Key)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     MetricNames.member = Shapes::ShapeRef.new(shape: MetricName)
 
@@ -361,6 +373,9 @@ module Aws::CostExplorer
     RedshiftInstanceDetails.add_member(:current_generation, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "CurrentGeneration"))
     RedshiftInstanceDetails.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "SizeFlexEligible"))
     RedshiftInstanceDetails.struct_class = Types::RedshiftInstanceDetails
+
+    RequestChangedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RequestChangedException.struct_class = Types::RequestChangedException
 
     ReservationAggregates.add_member(:utilization_percentage, Shapes::ShapeRef.new(shape: UtilizationPercentage, location_name: "UtilizationPercentage"))
     ReservationAggregates.add_member(:utilization_percentage_in_units, Shapes::ShapeRef.new(shape: UtilizationPercentageInUnits, location_name: "UtilizationPercentageInUnits"))

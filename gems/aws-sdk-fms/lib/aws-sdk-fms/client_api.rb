@@ -154,8 +154,23 @@ module Aws::FMS
     GetProtectionStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetProtectionStatusResponse.struct_class = Types::GetProtectionStatusResponse
 
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
+    InvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
+    InvalidTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidTypeException.struct_class = Types::InvalidTypeException
+
     IssueInfoMap.key = Shapes::ShapeRef.new(shape: DependentServiceName)
     IssueInfoMap.value = Shapes::ShapeRef.new(shape: DetailedInfo)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListComplianceStatusRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
     ListComplianceStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -237,6 +252,9 @@ module Aws::FMS
     PutPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
     PutPolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "PolicyArn"))
     PutPolicyResponse.struct_class = Types::PutPolicyResponse
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceTag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     ResourceTag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))

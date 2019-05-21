@@ -133,6 +133,19 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # You already have an Auto Scaling group or launch configuration with
+    # this name.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AlreadyExistsFault AWS API Documentation
+    #
+    class AlreadyExistsFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AttachInstancesQuery
     #   data as a hash:
     #
@@ -2726,6 +2739,18 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # The `NextToken` value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InvalidNextToken AWS API Documentation
+    #
+    class InvalidNextToken < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a launch configuration.
     #
     # @!attribute [rw] launch_configuration_name
@@ -3234,6 +3259,20 @@ module Aws::AutoScaling
       :default_result,
       :notification_target_arn,
       :role_arn)
+      include Aws::Structure
+    end
+
+    # You have already reached a limit for your Amazon EC2 Auto Scaling
+    # resources (for example, Auto Scaling groups, launch configurations, or
+    # lifecycle hooks). For more information, see DescribeAccountLimits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LimitExceededFault AWS API Documentation
+    #
+    class LimitExceededFault < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4057,6 +4096,45 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # You already have a pending update to an Amazon EC2 Auto Scaling
+    # resource (for example, an Auto Scaling group, instance, or load
+    # balancer).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResourceContentionFault AWS API Documentation
+    #
+    class ResourceContentionFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation can't be performed because the resource is in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResourceInUseFault AWS API Documentation
+    #
+    class ResourceInUseFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation can't be performed because there are scaling activities
+    # in progress.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScalingActivityInProgressFault AWS API Documentation
+    #
+    class ScalingActivityInProgressFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a scaling policy.
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -4347,6 +4425,18 @@ module Aws::AutoScaling
       :min_size,
       :max_size,
       :desired_capacity)
+      include Aws::Structure
+    end
+
+    # The service-linked role is not yet ready for use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ServiceLinkedRoleFailure AWS API Documentation
+    #
+    class ServiceLinkedRoleFailure < Struct.new(
+      :message)
       include Aws::Structure
     end
 

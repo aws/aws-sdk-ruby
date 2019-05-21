@@ -825,6 +825,16 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Burn-In Destination Settings.
     #
     # @note When making an API call, you may pass BurninDestinationSettings
@@ -1820,6 +1830,16 @@ module Aws::MediaConvert
       :hdr_10_metadata,
       :hue,
       :saturation)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5567,6 +5587,16 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Required when you set (Codec) under (VideoDescription)>(CodecSettings)
     # to the value FRAME\_CAPTURE.
     #
@@ -7843,6 +7873,16 @@ module Aws::MediaConvert
       :opacity,
       :start_time,
       :width)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -11449,6 +11489,16 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An output object describes the settings for a single output file or
     # stream in an output group.
     #
@@ -14378,6 +14428,16 @@ module Aws::MediaConvert
       :finish_time,
       :start_time,
       :submit_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

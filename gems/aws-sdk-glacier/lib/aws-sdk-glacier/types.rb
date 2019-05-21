@@ -1521,6 +1521,47 @@ module Aws::Glacier
       include Aws::Structure
     end
 
+    # Returned if there is insufficient capacity to process this expedited
+    # request. This error only applies to expedited retrievals and not to
+    # standard or bulk retrievals.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InsufficientCapacityException < Struct.new(
+      :type,
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if a parameter of the request is incorrectly specified.
+    #
+    # @!attribute [rw] type
+    #   Client
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   400 Bad Request
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Returned if a parameter of the request is incorrectly specified.
+    #   @return [String]
+    #
+    class InvalidParameterValueException < Struct.new(
+      :type,
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the options for a range inventory retrieval job.
     #
     # @!attribute [rw] format
@@ -1772,6 +1813,29 @@ module Aws::Glacier
       :inventory_retrieval_parameters,
       :select_parameters,
       :output_location)
+      include Aws::Structure
+    end
+
+    # Returned if the request results in a vault or account limit being
+    # exceeded.
+    #
+    # @!attribute [rw] type
+    #   Client
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   400 Bad Request
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Returned if the request results in a vault limit or tags limit being
+    #   exceeded.
+    #   @return [String]
+    #
+    class LimitExceededException < Struct.new(
+      :type,
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -2156,6 +2220,28 @@ module Aws::Glacier
       include Aws::Structure
     end
 
+    # Returned if a required header or parameter is missing from the
+    # request.
+    #
+    # @!attribute [rw] type
+    #   Client.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   400 Bad Request
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Returned if no authentication data is found for the request.
+    #   @return [String]
+    #
+    class MissingParameterValueException < Struct.new(
+      :type,
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about the location where the select job results
     # are stored.
     #
@@ -2245,6 +2331,29 @@ module Aws::Glacier
       include Aws::Structure
     end
 
+    # Returned if a retrieval job would exceed the current data policy's
+    # retrieval rate limit. For more information about data retrieval
+    # policies,
+    #
+    # @!attribute [rw] type
+    #   Client
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   PolicyEnforcedException
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   InitiateJob request denied by current data retrieval policy.
+    #   @return [String]
+    #
+    class PolicyEnforcedException < Struct.new(
+      :type,
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # The definition for a provisioned capacity unit.
     #
     # @!attribute [rw] capacity_id
@@ -2330,6 +2439,52 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # Returned if, when uploading an archive, Amazon Glacier times out while
+    # receiving the upload.
+    #
+    # @!attribute [rw] type
+    #   Client
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   408 Request Timeout
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Returned if, when uploading an archive, Amazon Glacier times out
+    #   while receiving the upload.
+    #   @return [String]
+    #
+    class RequestTimeoutException < Struct.new(
+      :type,
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if the specified resource (such as a vault, upload ID, or job
+    # ID) doesn't exist.
+    #
+    # @!attribute [rw] type
+    #   Client
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   404 Not Found
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Returned if the specified resource (such as a vault, upload ID, or
+    #   job ID) doesn't exist.
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :type,
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -2464,6 +2619,27 @@ module Aws::Glacier
       :expression_type,
       :expression,
       :output_serialization)
+      include Aws::Structure
+    end
+
+    # Returned if the service cannot complete the request.
+    #
+    # @!attribute [rw] type
+    #   Server
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   500 Internal Server Error
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Returned if the service cannot complete the request.
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :type,
+      :code,
+      :message)
       include Aws::Structure
     end
 

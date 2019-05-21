@@ -328,6 +328,30 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InternalFailureException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidRequestException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPlacementsRequest
     #   data as a hash:
     #
@@ -614,6 +638,30 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ResourceConflictException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -645,6 +693,18 @@ module Aws::IoT1ClickProjects
     end
 
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TooManyRequestsException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:

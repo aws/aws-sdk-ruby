@@ -121,6 +121,9 @@ module Aws::CognitoIdentity
 
     CognitoIdentityProviderList.member = Shapes::ShapeRef.new(shape: CognitoIdentityProvider)
 
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     CreateIdentityPoolInput.add_member(:identity_pool_name, Shapes::ShapeRef.new(shape: IdentityPoolName, required: true, location_name: "IdentityPoolName"))
     CreateIdentityPoolInput.add_member(:allow_unauthenticated_identities, Shapes::ShapeRef.new(shape: IdentityPoolUnauthenticated, required: true, location_name: "AllowUnauthenticatedIdentities"))
     CreateIdentityPoolInput.add_member(:supported_login_providers, Shapes::ShapeRef.new(shape: IdentityProviders, location_name: "SupportedLoginProviders"))
@@ -152,7 +155,13 @@ module Aws::CognitoIdentity
     DescribeIdentityPoolInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
     DescribeIdentityPoolInput.struct_class = Types::DescribeIdentityPoolInput
 
+    DeveloperUserAlreadyRegisteredException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DeveloperUserAlreadyRegisteredException.struct_class = Types::DeveloperUserAlreadyRegisteredException
+
     DeveloperUserIdentifierList.member = Shapes::ShapeRef.new(shape: DeveloperUserIdentifier)
+
+    ExternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ExternalServiceException.struct_class = Types::ExternalServiceException
 
     GetCredentialsForIdentityInput.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "IdentityId"))
     GetCredentialsForIdentityInput.add_member(:logins, Shapes::ShapeRef.new(shape: LoginsMap, location_name: "Logins"))
@@ -232,6 +241,18 @@ module Aws::CognitoIdentity
     IdentityProviders.key = Shapes::ShapeRef.new(shape: IdentityProviderName)
     IdentityProviders.value = Shapes::ShapeRef.new(shape: IdentityProviderId)
 
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidIdentityPoolConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidIdentityPoolConfigurationException.struct_class = Types::InvalidIdentityPoolConfigurationException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListIdentitiesInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
     ListIdentitiesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: QueryLimit, required: true, location_name: "MaxResults"))
     ListIdentitiesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
@@ -291,7 +312,16 @@ module Aws::CognitoIdentity
     MergeDeveloperIdentitiesResponse.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, location_name: "IdentityId"))
     MergeDeveloperIdentitiesResponse.struct_class = Types::MergeDeveloperIdentitiesResponse
 
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
+
     OIDCProviderList.member = Shapes::ShapeRef.new(shape: ARNString)
+
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RoleMapping.add_member(:type, Shapes::ShapeRef.new(shape: RoleMappingType, required: true, location_name: "Type"))
     RoleMapping.add_member(:ambiguous_role_resolution, Shapes::ShapeRef.new(shape: AmbiguousRoleResolutionType, location_name: "AmbiguousRoleResolution"))
@@ -319,6 +349,9 @@ module Aws::CognitoIdentity
     TagResourceInput.struct_class = Types::TagResourceInput
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UnlinkDeveloperIdentityInput.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "IdentityId"))
     UnlinkDeveloperIdentityInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))

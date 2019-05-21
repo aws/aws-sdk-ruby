@@ -163,6 +163,21 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # These errors are usually caused by a client action, such as using an
+    # action or resource on behalf of a user that doesn't have permissions
+    # to use the action or resource, or specifying an identifier that is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClientException AWS API Documentation
+    #
+    class ClientException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A regional grouping of one or more container instances on which you
     # can run task requests. Each account receives a default cluster the
     # first time you use the Amazon ECS service, but you may also create
@@ -6163,6 +6178,18 @@ module Aws::ECS
     class Secret < Struct.new(
       :name,
       :value_from)
+      include Aws::Structure
+    end
+
+    # These errors are usually caused by a server issue.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServerException AWS API Documentation
+    #
+    class ServerException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

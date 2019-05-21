@@ -970,6 +970,26 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BadGatewayException AWS API Documentation
+    #
+    class BadGatewayException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A list of schedule actions to create (in a request) or that have been
     # created (in a response).
     #
@@ -2095,6 +2115,16 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5188,6 +5218,16 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Frame Capture Group Settings
     #
     # @note When making an API call, you may pass FrameCaptureGroupSettings
@@ -5257,6 +5297,16 @@ module Aws::MediaLive
     #
     class FrameCaptureSettings < Struct.new(
       :capture_interval)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GatewayTimeoutException AWS API Documentation
+    #
+    class GatewayTimeoutException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7196,6 +7246,16 @@ module Aws::MediaLive
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InternalServiceError AWS API Documentation
     #
     class InternalServiceError < Struct.new(
@@ -8490,6 +8550,16 @@ module Aws::MediaLive
     class NetworkInputSettings < Struct.new(
       :hls_input_settings,
       :server_validation)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -11393,6 +11463,16 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Ttml Destination Settings
     #
     # @note When making an API call, you may pass TtmlDestinationSettings
@@ -11640,6 +11720,20 @@ module Aws::MediaLive
       :container_settings,
       :destination,
       :fec_output_settings)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_errors
+    #   @return [Array<Types::ValidationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UnprocessableEntityException AWS API Documentation
+    #
+    class UnprocessableEntityException < Struct.new(
+      :message,
+      :validation_errors)
       include Aws::Structure
     end
 

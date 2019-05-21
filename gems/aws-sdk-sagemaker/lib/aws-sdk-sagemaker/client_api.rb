@@ -1798,9 +1798,18 @@ module Aws::SageMaker
     ResourceConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     ResourceConfig.struct_class = Types::ResourceConfig
 
+    ResourceInUse.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    ResourceInUse.struct_class = Types::ResourceInUse
+
+    ResourceLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    ResourceLimitExceeded.struct_class = Types::ResourceLimitExceeded
+
     ResourceLimits.add_member(:max_number_of_training_jobs, Shapes::ShapeRef.new(shape: MaxNumberOfTrainingJobs, required: true, location_name: "MaxNumberOfTrainingJobs"))
     ResourceLimits.add_member(:max_parallel_training_jobs, Shapes::ShapeRef.new(shape: MaxParallelTrainingJobs, required: true, location_name: "MaxParallelTrainingJobs"))
     ResourceLimits.struct_class = Types::ResourceLimits
+
+    ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    ResourceNotFound.struct_class = Types::ResourceNotFound
 
     ResponseMIMETypes.member = Shapes::ShapeRef.new(shape: ResponseMIMEType)
 

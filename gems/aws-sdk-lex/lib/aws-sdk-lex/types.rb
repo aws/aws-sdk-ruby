@@ -8,6 +8,34 @@
 module Aws::Lex
   module Types
 
+    # Either the Amazon Lex bot is still building, or one of the dependent
+    # services (Amazon Polly, AWS Lambda) failed with an internal service
+    # error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/BadGatewayException AWS API Documentation
+    #
+    class BadGatewayException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Request validation failed, there is no usable message in the context,
+    # or the bot build failed, is still in progress, or contains unbuilt
+    # changes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents an option to be shown on the client platform (Facebook,
     # Slack, etc.)
     #
@@ -26,6 +54,40 @@ module Aws::Lex
     class Button < Struct.new(
       :text,
       :value)
+      include Aws::Structure
+    end
+
+    # Two clients are using the same AWS account, Amazon Lex bot, and user
+    # ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One of the dependencies, such as AWS Lambda or Amazon Polly, threw an
+    # exception. For example,
+    #
+    # * If Amazon Lex does not have sufficient permissions to call a Lambda
+    #   function.
+    #
+    # * If a Lambda function takes longer than 30 seconds to execute.
+    #
+    # * If a fulfillment Lambda function returns a `Delegate` dialog action
+    #   without removing any slot values.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DependencyFailedException AWS API Documentation
+    #
+    class DependencyFailedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -60,6 +122,71 @@ module Aws::Lex
       :attachment_link_url,
       :image_url,
       :buttons)
+      include Aws::Structure
+    end
+
+    # Internal service error. Retry the call.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exceeded a limit.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is not used.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/LoopDetectedException AWS API Documentation
+    #
+    class LoopDetectedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accept header in the request does not have a valid value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/NotAcceptableException AWS API Documentation
+    #
+    class NotAcceptableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource (such as the Amazon Lex bot or an alias) that is referred
+    # to is not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -615,6 +742,18 @@ module Aws::Lex
       include Aws::Structure
     end
 
+    # The input speech is too long.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/RequestTimeoutException AWS API Documentation
+    #
+    class RequestTimeoutException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # If you configure a response card when creating your bots, Amazon Lex
     # substitutes the session attributes and slot values that are available,
     # and then returns it. The response card can also come from a Lambda
@@ -638,6 +777,18 @@ module Aws::Lex
       :version,
       :content_type,
       :generic_attachments)
+      include Aws::Structure
+    end
+
+    # The Content-Type header (`PostContent` API) has an invalid value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/UnsupportedMediaTypeException AWS API Documentation
+    #
+    class UnsupportedMediaTypeException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

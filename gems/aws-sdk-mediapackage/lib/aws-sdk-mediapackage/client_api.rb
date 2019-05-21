@@ -228,6 +228,9 @@ module Aws::MediaPackage
     DescribeOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     DescribeOriginEndpointResponse.struct_class = Types::DescribeOriginEndpointResponse
 
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     HlsEncryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
     HlsEncryption.add_member(:encryption_method, Shapes::ShapeRef.new(shape: EncryptionMethod, location_name: "encryptionMethod"))
     HlsEncryption.add_member(:key_rotation_interval_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "keyRotationIntervalSeconds"))
@@ -274,6 +277,9 @@ module Aws::MediaPackage
     IngestEndpoint.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
     IngestEndpoint.struct_class = Types::IngestEndpoint
 
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
     ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListChannelsRequest.struct_class = Types::ListChannelsRequest
@@ -305,6 +311,9 @@ module Aws::MediaPackage
     MssPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
     MssPackage.add_member(:stream_selection, Shapes::ShapeRef.new(shape: StreamSelection, location_name: "streamSelection"))
     MssPackage.struct_class = Types::MssPackage
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     OriginEndpoint.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     OriginEndpoint.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
@@ -372,6 +381,9 @@ module Aws::MediaPackage
     RotateIngestEndpointCredentialsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RotateIngestEndpointCredentialsResponse.struct_class = Types::RotateIngestEndpointCredentialsResponse
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     SpekeKeyProvider.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: __string, location_name: "certificateArn"))
     SpekeKeyProvider.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceId"))
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
@@ -393,6 +405,12 @@ module Aws::MediaPackage
 
     TagsModel.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
     TagsModel.struct_class = Types::TagsModel
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))

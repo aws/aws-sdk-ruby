@@ -969,6 +969,18 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Unable to modify the tag due to a simultaneous update request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input of a CreateCustomActionType operation.
     #
     # @note When making an API call, you may pass CreateCustomActionTypeInput
@@ -1799,6 +1811,30 @@ module Aws::CodePipeline
     #
     class InputArtifact < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # The specified resource ARN is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource tags are invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidTagsException AWS API Documentation
+    #
+    class InvalidTagsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3579,6 +3615,18 @@ module Aws::CodePipeline
       :id,
       :data,
       :nonce)
+      include Aws::Structure
+    end
+
+    # The tags limit for a resource has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

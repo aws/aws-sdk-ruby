@@ -562,6 +562,31 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The provided iterator exceeds the maximum age allowed.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ExpiredIteratorException AWS API Documentation
+    #
+    class ExpiredIteratorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The pagination token passed to the operation is expired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ExpiredNextTokenException AWS API Documentation
+    #
+    class ExpiredNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input for GetRecords.
     #
     # @note When making an API call, you may pass GetRecordsInput
@@ -766,6 +791,20 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # A specified parameter exceeds its restrictions, is not supported, or
+    # can't be used. For more information, see the returned message.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The ciphertext references a key that doesn't exist or that you don't
     # have access to.
     #
@@ -863,6 +902,21 @@ module Aws::Kinesis
     class KMSThrottlingException < Struct.new(
       :message,
       :event_type)
+      include Aws::Structure
+    end
+
+    # The requested resource exceeds the maximum number allowed, or the
+    # number of concurrent stream requests exceeds the maximum number
+    # allowed.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1226,6 +1280,28 @@ module Aws::Kinesis
       :stream_name,
       :shard_to_merge,
       :adjacent_shard_to_merge)
+      include Aws::Structure
+    end
+
+    # The request rate for the stream is too high, or the requested data is
+    # too large for the available throughput. Reduce the frequency or size
+    # of your requests. For more information, see [Streams Limits][1] in the
+    # *Amazon Kinesis Data Streams Developer Guide*, and [Error Retries and
+    # Exponential Backoff in AWS][2] in the *AWS General Reference*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [2]: http://docs.aws.amazon.com/general/latest/gr/api-retries.html
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ProvisionedThroughputExceededException AWS API Documentation
+    #
+    class ProvisionedThroughputExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

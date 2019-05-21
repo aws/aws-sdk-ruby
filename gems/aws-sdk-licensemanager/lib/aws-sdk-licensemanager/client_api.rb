@@ -89,6 +89,12 @@ module Aws::LicenseManager
     UpdateServiceSettingsRequest = Shapes::StructureShape.new(name: 'UpdateServiceSettingsRequest')
     UpdateServiceSettingsResponse = Shapes::StructureShape.new(name: 'UpdateServiceSettingsResponse')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AuthorizationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    AuthorizationException.struct_class = Types::AuthorizationException
+
     ConsumedLicenseSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ConsumedLicenseSummary.add_member(:consumed_licenses, Shapes::ShapeRef.new(shape: BoxLong, location_name: "ConsumedLicenses"))
     ConsumedLicenseSummary.struct_class = Types::ConsumedLicenseSummary
@@ -112,9 +118,15 @@ module Aws::LicenseManager
 
     DeleteLicenseConfigurationResponse.struct_class = Types::DeleteLicenseConfigurationResponse
 
+    FailedDependencyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    FailedDependencyException.struct_class = Types::FailedDependencyException
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "Values"))
     Filter.struct_class = Types::Filter
+
+    FilterLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    FilterLimitExceededException.struct_class = Types::FilterLimitExceededException
 
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
 
@@ -146,6 +158,12 @@ module Aws::LicenseManager
     GetServiceSettingsResponse.add_member(:organization_configuration, Shapes::ShapeRef.new(shape: OrganizationConfiguration, location_name: "OrganizationConfiguration"))
     GetServiceSettingsResponse.add_member(:enable_cross_accounts_discovery, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "EnableCrossAccountsDiscovery"))
     GetServiceSettingsResponse.struct_class = Types::GetServiceSettingsResponse
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidResourceStateException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InvalidResourceStateException.struct_class = Types::InvalidResourceStateException
 
     InventoryFilter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     InventoryFilter.add_member(:condition, Shapes::ShapeRef.new(shape: InventoryFilterCondition, required: true, location_name: "Condition"))
@@ -193,6 +211,9 @@ module Aws::LicenseManager
     LicenseSpecification.struct_class = Types::LicenseSpecification
 
     LicenseSpecifications.member = Shapes::ShapeRef.new(shape: LicenseSpecification)
+
+    LicenseUsageException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    LicenseUsageException.struct_class = Types::LicenseUsageException
 
     ListAssociationsForLicenseConfigurationRequest.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseConfigurationArn"))
     ListAssociationsForLicenseConfigurationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
@@ -256,6 +277,9 @@ module Aws::LicenseManager
     OrganizationConfiguration.add_member(:enable_integration, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EnableIntegration"))
     OrganizationConfiguration.struct_class = Types::OrganizationConfiguration
 
+    RateLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    RateLimitExceededException.struct_class = Types::RateLimitExceededException
+
     ResourceInventory.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ResourceInventory.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceInventory.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
@@ -265,6 +289,12 @@ module Aws::LicenseManager
     ResourceInventory.struct_class = Types::ResourceInventory
 
     ResourceInventoryList.member = Shapes::ShapeRef.new(shape: ResourceInventory)
+
+    ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
+
+    ServerInternalException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ServerInternalException.struct_class = Types::ServerInternalException
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 

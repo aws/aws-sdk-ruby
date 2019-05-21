@@ -250,6 +250,12 @@ module Aws::WorkLink
 
     FleetSummaryList.member = Shapes::ShapeRef.new(shape: FleetSummary)
 
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     ListDevicesRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     ListDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -285,6 +291,12 @@ module Aws::WorkLink
     ListWebsiteCertificateAuthoritiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListWebsiteCertificateAuthoritiesResponse.struct_class = Types::ListWebsiteCertificateAuthoritiesResponse
 
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     RestoreDomainAccessRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     RestoreDomainAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     RestoreDomainAccessRequest.struct_class = Types::RestoreDomainAccessRequest
@@ -306,6 +318,12 @@ module Aws::WorkLink
     SignOutUserResponse.struct_class = Types::SignOutUserResponse
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UpdateAuditStreamConfigurationRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     UpdateAuditStreamConfigurationRequest.add_member(:audit_stream_arn, Shapes::ShapeRef.new(shape: AuditStreamArn, location_name: "AuditStreamArn"))

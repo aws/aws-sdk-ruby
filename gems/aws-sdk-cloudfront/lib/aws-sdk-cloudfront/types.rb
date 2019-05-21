@@ -8,6 +8,18 @@
 module Aws::CloudFront
   module Types
 
+    # Access denied.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/AccessDenied AWS API Documentation
+    #
+    class AccessDenied < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that lists the AWS accounts, if any, that you included
     # in the `TrustedSigners` complex type for this distribution. These are
     # the accounts that you want to allow to create signed URLs for private
@@ -149,6 +161,26 @@ module Aws::CloudFront
       :quantity,
       :items,
       :cached_methods)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/BatchTooLarge AWS API Documentation
+    #
+    class BatchTooLarge < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CNAMEAlreadyExists AWS API Documentation
+    #
+    class CNAMEAlreadyExists < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -580,6 +612,18 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # You can't change the value of a public key.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CannotChangeImmutablePublicKeyFields AWS API Documentation
+    #
+    class CannotChangeImmutablePublicKeyFields < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # CloudFront origin access identity.
     #
     # @!attribute [rw] id
@@ -603,6 +647,22 @@ module Aws::CloudFront
       :id,
       :s3_canonical_user_id,
       :cloud_front_origin_access_identity_config)
+      include Aws::Structure
+    end
+
+    # If the `CallerReference` is a value you already sent in a previous
+    # request to create an identity but the content of the
+    # `CloudFrontOriginAccessIdentityConfig` is different from the original
+    # request, CloudFront returns a
+    # `CloudFrontOriginAccessIdentityAlreadyExists` error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CloudFrontOriginAccessIdentityAlreadyExists AWS API Documentation
+    #
+    class CloudFrontOriginAccessIdentityAlreadyExists < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -647,6 +707,16 @@ module Aws::CloudFront
     class CloudFrontOriginAccessIdentityConfig < Struct.new(
       :caller_reference,
       :comment)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CloudFrontOriginAccessIdentityInUse AWS API Documentation
+    #
+    class CloudFrontOriginAccessIdentityInUse < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2650,6 +2720,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The caller reference you attempted to create the distribution with is
+    # associated with another distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DistributionAlreadyExists AWS API Documentation
+    #
+    class DistributionAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A distribution configuration.
     #
     # @note When making an API call, you may pass DistributionConfig
@@ -3402,6 +3485,16 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DistributionNotDisabled AWS API Documentation
+    #
+    class DistributionNotDisabled < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A summary of the information about a CloudFront distribution.
     #
     # @!attribute [rw] id
@@ -3697,6 +3790,30 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The specified configuration for field-level encryption already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionConfigAlreadyExists AWS API Documentation
+    #
+    class FieldLevelEncryptionConfigAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified configuration for field-level encryption is in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionConfigInUse AWS API Documentation
+    #
+    class FieldLevelEncryptionConfigInUse < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # List of field-level encrpytion configurations.
     #
     # @!attribute [rw] next_marker
@@ -3754,6 +3871,18 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The specified profile for field-level encryption already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionProfileAlreadyExists AWS API Documentation
+    #
+    class FieldLevelEncryptionProfileAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex data type of profiles for the field-level encryption.
     #
     # @note When making an API call, you may pass FieldLevelEncryptionProfileConfig
@@ -3806,6 +3935,18 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The specified profile for field-level encryption is in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionProfileInUse AWS API Documentation
+    #
+    class FieldLevelEncryptionProfileInUse < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # List of field-level encryption profiles.
     #
     # @!attribute [rw] next_marker
@@ -3834,6 +3975,18 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items)
+      include Aws::Structure
+    end
+
+    # The maximum size of a profile for field-level encryption was exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionProfileSizeExceeded AWS API Documentation
+    #
+    class FieldLevelEncryptionProfileSizeExceeded < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4652,6 +4805,303 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The specified configuration for field-level encryption can't be
+    # associated with the specified cache behavior.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior AWS API Documentation
+    #
+    class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Origin and `CallerReference` cannot be updated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/IllegalUpdate AWS API Documentation
+    #
+    class IllegalUpdate < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value of `Quantity` and the size of `Items` don't match.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InconsistentQuantities AWS API Documentation
+    #
+    class InconsistentQuantities < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The argument is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidArgument AWS API Documentation
+    #
+    class InvalidArgument < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The default root object file name is too big or contains an invalid
+    # character.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidDefaultRootObject AWS API Documentation
+    #
+    class InvalidDefaultRootObject < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidErrorCode AWS API Documentation
+    #
+    class InvalidErrorCode < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your request contains forward cookies option which doesn't match with
+    # the expectation for the `whitelisted` list of cookie names. Either
+    # list of cookie names has been specified when not allowed or list of
+    # cookie names is missing when expected.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidForwardCookies AWS API Documentation
+    #
+    class InvalidForwardCookies < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidGeoRestrictionParameter AWS API Documentation
+    #
+    class InvalidGeoRestrictionParameter < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidHeadersForS3Origin AWS API Documentation
+    #
+    class InvalidHeadersForS3Origin < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The `If-Match` version is missing or not valid for the distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidIfMatchVersion AWS API Documentation
+    #
+    class InvalidIfMatchVersion < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified Lambda function association is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidLambdaFunctionAssociation AWS API Documentation
+    #
+    class InvalidLambdaFunctionAssociation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidLocationCode AWS API Documentation
+    #
+    class InvalidLocationCode < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidMinimumProtocolVersion AWS API Documentation
+    #
+    class InvalidMinimumProtocolVersion < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The Amazon S3 origin server specified does not refer to a valid Amazon
+    # S3 bucket.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidOrigin AWS API Documentation
+    #
+    class InvalidOrigin < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The origin access identity is not valid or doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidOriginAccessIdentity AWS API Documentation
+    #
+    class InvalidOriginAccessIdentity < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidOriginKeepaliveTimeout AWS API Documentation
+    #
+    class InvalidOriginKeepaliveTimeout < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidOriginReadTimeout AWS API Documentation
+    #
+    class InvalidOriginReadTimeout < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You cannot specify SSLv3 as the minimum protocol version if you only
+    # want to support only clients that support Server Name Indication
+    # (SNI).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidProtocolSettings AWS API Documentation
+    #
+    class InvalidProtocolSettings < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidQueryStringParameters AWS API Documentation
+    #
+    class InvalidQueryStringParameters < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The relative path is too big, is not URL-encoded, or does not begin
+    # with a slash (/).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidRelativePath AWS API Documentation
+    #
+    class InvalidRelativePath < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This operation requires the HTTPS protocol. Ensure that you specify
+    # the HTTPS protocol in your request, or omit the `RequiredProtocols`
+    # element from your distribution configuration.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidRequiredProtocol AWS API Documentation
+    #
+    class InvalidRequiredProtocol < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidResponseCode AWS API Documentation
+    #
+    class InvalidResponseCode < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidTTLOrder AWS API Documentation
+    #
+    class InvalidTTLOrder < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidTagging AWS API Documentation
+    #
+    class InvalidTagging < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidViewerCertificate AWS API Documentation
+    #
+    class InvalidViewerCertificate < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidWebACLId AWS API Documentation
+    #
+    class InvalidWebACLId < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An invalidation.
     #
     # @!attribute [rw] id
@@ -5393,6 +5843,125 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # This operation requires a body. Ensure that the body is present and
+    # the `Content-Type` header is set.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/MissingBody AWS API Documentation
+    #
+    class MissingBody < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified origin access identity does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/NoSuchCloudFrontOriginAccessIdentity AWS API Documentation
+    #
+    class NoSuchCloudFrontOriginAccessIdentity < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified distribution does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/NoSuchDistribution AWS API Documentation
+    #
+    class NoSuchDistribution < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified configuration for field-level encryption doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/NoSuchFieldLevelEncryptionConfig AWS API Documentation
+    #
+    class NoSuchFieldLevelEncryptionConfig < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified profile for field-level encryption doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/NoSuchFieldLevelEncryptionProfile AWS API Documentation
+    #
+    class NoSuchFieldLevelEncryptionProfile < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified invalidation does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/NoSuchInvalidation AWS API Documentation
+    #
+    class NoSuchInvalidation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # No origin exists with the specified `Origin Id`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/NoSuchOrigin AWS API Documentation
+    #
+    class NoSuchOrigin < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified public key doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/NoSuchPublicKey AWS API Documentation
+    #
+    class NoSuchPublicKey < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/NoSuchResource AWS API Documentation
+    #
+    class NoSuchResource < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified streaming distribution does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/NoSuchStreamingDistribution AWS API Documentation
+    #
+    class NoSuchStreamingDistribution < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that describes the Amazon S3 bucket, HTTP server (for
     # example, a web server), Amazon MediaStore, or other server from which
     # CloudFront gets your files. This can also be an origin group, if
@@ -5880,6 +6449,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The precondition given in one or more of the request-header fields
+    # evaluated to `false`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/PreconditionFailed AWS API Documentation
+    #
+    class PreconditionFailed < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex data type of public keys you add to CloudFront to use with
     # features like field-level encryption.
     #
@@ -5902,6 +6484,18 @@ module Aws::CloudFront
       :id,
       :created_time,
       :public_key_config)
+      include Aws::Structure
+    end
+
+    # The specified public key already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/PublicKeyAlreadyExists AWS API Documentation
+    #
+    class PublicKeyAlreadyExists < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5943,6 +6537,18 @@ module Aws::CloudFront
       :name,
       :encoded_key,
       :comment)
+      include Aws::Structure
+    end
+
+    # The specified public key is in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/PublicKeyInUse AWS API Documentation
+    #
+    class PublicKeyInUse < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6075,6 +6681,18 @@ module Aws::CloudFront
     class QueryArgProfileConfig < Struct.new(
       :forward_when_query_arg_profile_is_unknown,
       :query_arg_profiles)
+      include Aws::Structure
+    end
+
+    # No profile specified for the field-level encryption query argument.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/QueryArgProfileEmpty AWS API Documentation
+    #
+    class QueryArgProfileEmpty < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6385,6 +7003,16 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/StreamingDistributionAlreadyExists AWS API Documentation
+    #
+    class StreamingDistributionAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The RTMP distribution's configuration information.
     #
     # @note When making an API call, you may pass StreamingDistributionConfig
@@ -6585,6 +7213,16 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/StreamingDistributionNotDisabled AWS API Documentation
+    #
+    class StreamingDistributionNotDisabled < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6825,6 +7463,328 @@ module Aws::CloudFront
     #
     class Tags < Struct.new(
       :items)
+      include Aws::Structure
+    end
+
+    # You cannot create more cache behaviors for the distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyCacheBehaviors AWS API Documentation
+    #
+    class TooManyCacheBehaviors < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You cannot create anymore custom SSL/TLS certificates.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyCertificates AWS API Documentation
+    #
+    class TooManyCertificates < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Processing your request would cause you to exceed the maximum number
+    # of origin access identities allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyCloudFrontOriginAccessIdentities AWS API Documentation
+    #
+    class TooManyCloudFrontOriginAccessIdentities < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your request contains more cookie names in the whitelist than are
+    # allowed per cache behavior.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyCookieNamesInWhiteList AWS API Documentation
+    #
+    class TooManyCookieNamesInWhiteList < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your request contains more CNAMEs than are allowed per distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyDistributionCNAMEs AWS API Documentation
+    #
+    class TooManyDistributionCNAMEs < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Processing your request would cause you to exceed the maximum number
+    # of distributions allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyDistributions AWS API Documentation
+    #
+    class TooManyDistributions < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of distributions have been associated with the
+    # specified configuration for field-level encryption.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig AWS API Documentation
+    #
+    class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Processing your request would cause the maximum number of
+    # distributions with Lambda function associations per owner to be
+    # exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyDistributionsWithLambdaAssociations AWS API Documentation
+    #
+    class TooManyDistributionsWithLambdaAssociations < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of configurations for field-level encryption have
+    # been created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyFieldLevelEncryptionConfigs AWS API Documentation
+    #
+    class TooManyFieldLevelEncryptionConfigs < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of content type profiles for field-level encryption
+    # have been created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyFieldLevelEncryptionContentTypeProfiles AWS API Documentation
+    #
+    class TooManyFieldLevelEncryptionContentTypeProfiles < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of encryption entities for field-level encryption
+    # have been created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyFieldLevelEncryptionEncryptionEntities AWS API Documentation
+    #
+    class TooManyFieldLevelEncryptionEncryptionEntities < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of field patterns for field-level encryption have
+    # been created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyFieldLevelEncryptionFieldPatterns AWS API Documentation
+    #
+    class TooManyFieldLevelEncryptionFieldPatterns < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of profiles for field-level encryption have been
+    # created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyFieldLevelEncryptionProfiles AWS API Documentation
+    #
+    class TooManyFieldLevelEncryptionProfiles < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of query arg profiles for field-level encryption
+    # have been created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyFieldLevelEncryptionQueryArgProfiles AWS API Documentation
+    #
+    class TooManyFieldLevelEncryptionQueryArgProfiles < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyHeadersInForwardedValues AWS API Documentation
+    #
+    class TooManyHeadersInForwardedValues < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You have exceeded the maximum number of allowable InProgress
+    # invalidation batch requests, or invalidation objects.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyInvalidationsInProgress AWS API Documentation
+    #
+    class TooManyInvalidationsInProgress < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your request contains more Lambda function associations than are
+    # allowed per distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyLambdaFunctionAssociations AWS API Documentation
+    #
+    class TooManyLambdaFunctionAssociations < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyOriginCustomHeaders AWS API Documentation
+    #
+    class TooManyOriginCustomHeaders < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Processing your request would cause you to exceed the maximum number
+    # of origin groups allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyOriginGroupsPerDistribution AWS API Documentation
+    #
+    class TooManyOriginGroupsPerDistribution < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You cannot create more origins for the distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyOrigins AWS API Documentation
+    #
+    class TooManyOrigins < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of public keys for field-level encryption have been
+    # created. To create a new public key, delete one of the existing keys.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyPublicKeys AWS API Documentation
+    #
+    class TooManyPublicKeys < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyQueryStringParameters AWS API Documentation
+    #
+    class TooManyQueryStringParameters < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyStreamingDistributionCNAMEs AWS API Documentation
+    #
+    class TooManyStreamingDistributionCNAMEs < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Processing your request would cause you to exceed the maximum number
+    # of streaming distributions allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyStreamingDistributions AWS API Documentation
+    #
+    class TooManyStreamingDistributions < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your request contains more trusted signers than are allowed per
+    # distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TooManyTrustedSigners AWS API Documentation
+    #
+    class TooManyTrustedSigners < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more of your trusted signers don't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TrustedSignerDoesNotExist AWS API Documentation
+    #
+    class TrustedSignerDoesNotExist < Struct.new(
+      :message)
       include Aws::Structure
     end
 

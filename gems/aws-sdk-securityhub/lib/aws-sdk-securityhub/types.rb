@@ -38,6 +38,23 @@ module Aws::SecurityHub
     #
     class AcceptInvitationResponse < Aws::EmptyStructure; end
 
+    # You do not have permission to to perform the action specified in the
+    # request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
     # The details of an AWS account.
     #
     # @note When making an API call, you may pass AccountDetails
@@ -3687,6 +3704,56 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Internal server error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/InternalException AWS API Documentation
+    #
+    class InternalException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
+    # AWS Security Hub is not enabled for the account used to make this
+    # request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/InvalidAccessException AWS API Documentation
+    #
+    class InvalidAccessException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an invalid or out-of-range value was
+    # supplied for an input parameter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
     # The details of an invitation sent to an AWS account by the Security
     # Hub master account.
     #
@@ -3786,6 +3853,24 @@ module Aws::SecurityHub
     #
     class KeywordFilter < Struct.new(
       :value)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create resources
+    # beyond the current AWS account limits. The error code describes the
+    # limit exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message,
+      :code)
       include Aws::Structure
     end
 
@@ -4436,6 +4521,23 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The resource specified in the request conflicts with an existing
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceConflictException AWS API Documentation
+    #
+    class ResourceConflictException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
     # Provides additional details about the resource.
     #
     # @note When making an API call, you may pass ResourceDetails
@@ -4502,6 +4604,23 @@ module Aws::SecurityHub
       :aws_iam_access_key,
       :container,
       :other)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified resource cannot be
+    # found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :code)
       include Aws::Structure
     end
 

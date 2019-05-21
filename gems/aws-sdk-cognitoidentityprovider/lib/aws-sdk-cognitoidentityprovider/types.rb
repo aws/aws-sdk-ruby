@@ -1768,6 +1768,22 @@ module Aws::CognitoIdentityProvider
     #
     class AdminUserGlobalSignOutResponse < Aws::EmptyStructure; end
 
+    # This exception is thrown when a user tries to confirm the account with
+    # an email or phone number that has already been supplied as an alias
+    # from a different account. This exception tells user that an account
+    # with this email or phone already exists.
+    #
+    # @!attribute [rw] message
+    #   The message sent to the user when an alias exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AliasExistsException AWS API Documentation
+    #
+    class AliasExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The Amazon Pinpoint analytics configuration for collecting metrics for
     # a user pool.
     #
@@ -2071,6 +2087,35 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when a verification code fails to deliver
+    # successfully.
+    #
+    # @!attribute [rw] message
+    #   The message sent when a verification code fails to deliver
+    #   successfully.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CodeDeliveryFailureException AWS API Documentation
+    #
+    class CodeDeliveryFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown if the provided code does not match what the
+    # server was expecting.
+    #
+    # @!attribute [rw] message
+    #   The message provided when the code mismatch exception is thrown.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CodeMismatchException AWS API Documentation
+    #
+    class CodeMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The compromised credentials actions type
     #
     # @note When making an API call, you may pass CompromisedCredentialsActionsType
@@ -2117,6 +2162,20 @@ module Aws::CognitoIdentityProvider
     class CompromisedCredentialsRiskConfigurationType < Struct.new(
       :event_filter,
       :actions)
+      include Aws::Structure
+    end
+
+    # This exception is thrown if two or more modifications are happening
+    # concurrently.
+    #
+    # @!attribute [rw] message
+    #   The message provided when the concurrent exception is thrown.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3705,6 +3764,19 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when the provider is already supported by the
+    # user pool.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DuplicateProviderException AWS API Documentation
+    #
+    class DuplicateProviderException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The email configuration type.
     #
     # @note When making an API call, you may pass EmailConfigurationType
@@ -3793,6 +3865,20 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when there is a code mismatch and the service
+    # fails to configure the software token TOTP multi-factor authentication
+    # (MFA).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EnableSoftwareTokenMFAException AWS API Documentation
+    #
+    class EnableSoftwareTokenMFAException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Specifies the user context data captured at the time of an event
     # request.
     #
@@ -3865,6 +3951,19 @@ module Aws::CognitoIdentityProvider
     class EventRiskType < Struct.new(
       :risk_decision,
       :risk_level)
+      include Aws::Structure
+    end
+
+    # This exception is thrown if a code has expired.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the expired code exception is thrown.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ExpiredCodeException AWS API Documentation
+    #
+    class ExpiredCodeException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4349,6 +4448,19 @@ module Aws::CognitoIdentityProvider
     #
     class GlobalSignOutResponse < Aws::EmptyStructure; end
 
+    # This exception is thrown when Amazon Cognito encounters a group that
+    # already exists in the user pool.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GroupExistsException AWS API Documentation
+    #
+    class GroupExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The group type.
     #
     # @!attribute [rw] group_name
@@ -4658,6 +4770,140 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when Amazon Cognito encounters an internal
+    # error.
+    #
+    # @!attribute [rw] message
+    #   The message returned when Amazon Cognito throws an internal error
+    #   exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when Amazon Cognito is not allowed to use
+    # your email identity. HTTP status code: 400.
+    #
+    # @!attribute [rw] message
+    #   The message returned when you have an unverified email address or
+    #   the identity policy is not set on an email address that Amazon
+    #   Cognito can access.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InvalidEmailRoleAccessPolicyException AWS API Documentation
+    #
+    class InvalidEmailRoleAccessPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the Amazon Cognito service encounters an
+    # invalid AWS Lambda response.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the Amazon Cognito service throws an
+    #   invalid AWS Lambda response exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InvalidLambdaResponseException AWS API Documentation
+    #
+    class InvalidLambdaResponseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the specified OAuth flow is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InvalidOAuthFlowException AWS API Documentation
+    #
+    class InvalidOAuthFlowException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the Amazon Cognito service encounters an
+    # invalid parameter.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the Amazon Cognito service throws an
+    #   invalid parameter exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the Amazon Cognito service encounters an
+    # invalid password.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the Amazon Cognito service throws an
+    #   invalid user password exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InvalidPasswordException AWS API Documentation
+    #
+    class InvalidPasswordException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is returned when the role provided for SMS
+    # configuration does not have permission to publish using Amazon SNS.
+    #
+    # @!attribute [rw] message
+    #   The message retuned when the invalid SMS role access policy
+    #   exception is thrown.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InvalidSmsRoleAccessPolicyException AWS API Documentation
+    #
+    class InvalidSmsRoleAccessPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the trust relationship is invalid for
+    # the role provided for SMS configuration. This can happen if you do not
+    # trust **cognito-idp.amazonaws.com** or the external ID provided in the
+    # role does not match what is provided in the SMS configuration for the
+    # user pool.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the role trust relationship for the SMS
+    #   message is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InvalidSmsRoleTrustRelationshipException AWS API Documentation
+    #
+    class InvalidSmsRoleTrustRelationshipException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the user pool configuration is invalid.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the user pool configuration is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InvalidUserPoolConfigurationException AWS API Documentation
+    #
+    class InvalidUserPoolConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Specifies the configuration for AWS Lambda triggers.
     #
     # @note When making an API call, you may pass LambdaConfigType
@@ -4729,6 +4975,21 @@ module Aws::CognitoIdentityProvider
       :verify_auth_challenge_response,
       :pre_token_generation,
       :user_migration)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when a user exceeds the limit for a requested
+    # AWS resource.
+    #
+    # @!attribute [rw] message
+    #   The message returned when Amazon Cognito throws a limit exceeded
+    #   exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5289,6 +5550,21 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when Amazon Cognito cannot find a
+    # multi-factor authentication (MFA) method.
+    #
+    # @!attribute [rw] message
+    #   The message returned when Amazon Cognito throws an MFA method not
+    #   found exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/MFAMethodNotFoundException AWS API Documentation
+    #
+    class MFAMethodNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Specifies the different settings for multi-factor authentication
     # (MFA).
     #
@@ -5364,6 +5640,20 @@ module Aws::CognitoIdentityProvider
     class NewDeviceMetadataType < Struct.new(
       :device_key,
       :device_group_key)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when a user is not authorized.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the Amazon Cognito service returns a not
+    #   authorized exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5549,6 +5839,32 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when a password reset is required.
+    #
+    # @!attribute [rw] message
+    #   The message returned when a password reset is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/PasswordResetRequiredException AWS API Documentation
+    #
+    class PasswordResetRequiredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when a precondition is not met.
+    #
+    # @!attribute [rw] message
+    #   The message returned when a precondition is not met.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/PreconditionNotMetException AWS API Documentation
+    #
+    class PreconditionNotMetException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A container for identity provider details.
     #
     # @!attribute [rw] provider_name
@@ -5679,6 +5995,21 @@ module Aws::CognitoIdentityProvider
     #
     class ResendConfirmationCodeResponse < Struct.new(
       :code_delivery_details)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the Amazon Cognito service cannot find
+    # the requested resource.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the Amazon Cognito service returns a
+    #   resource not found exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6016,6 +6347,18 @@ module Aws::CognitoIdentityProvider
       :required,
       :number_attribute_constraints,
       :string_attribute_constraints)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the specified scope does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ScopeDoesNotExistException AWS API Documentation
+    #
+    class ScopeDoesNotExistException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6478,6 +6821,19 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when the software token TOTP multi-factor
+    # authentication (MFA) is not enabled for the user pool.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SoftwareTokenMFANotFoundException AWS API Documentation
+    #
+    class SoftwareTokenMFANotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The type used for enabling software token MFA at the user pool level.
     #
     # @note When making an API call, you may pass SoftwareTokenMfaConfigType
@@ -6663,6 +7019,36 @@ module Aws::CognitoIdentityProvider
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # This exception is thrown when the user has made too many failed
+    # attempts for a given action (e.g., sign in).
+    #
+    # @!attribute [rw] message
+    #   The message returned when the Amazon Cognito service returns a too
+    #   many failed attempts exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/TooManyFailedAttemptsException AWS API Documentation
+    #
+    class TooManyFailedAttemptsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the user has made too many requests for
+    # a given operation.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the Amazon Cognito service returns a too
+    #   many requests exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A container for the UI customization information for a user pool's
     # built-in app UI.
     #
@@ -6704,6 +7090,47 @@ module Aws::CognitoIdentityProvider
       :css_version,
       :last_modified_date,
       :creation_date)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the Amazon Cognito service encounters an
+    # unexpected exception with the AWS Lambda service.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the Amazon Cognito service returns an
+    #   unexpected AWS Lambda exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnexpectedLambdaException AWS API Documentation
+    #
+    class UnexpectedLambdaException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the specified identifier is not
+    # supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnsupportedIdentityProviderException AWS API Documentation
+    #
+    class UnsupportedIdentityProviderException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request failed because the user is in an unsupported state.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the user is in an unsupported state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnsupportedUserStateException AWS API Documentation
+    #
+    class UnsupportedUserStateException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7465,6 +7892,20 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when you are trying to modify a user pool
+    # while a user import job is in progress for that pool.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the user pool has an import job running.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserImportInProgressException AWS API Documentation
+    #
+    class UserImportInProgressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The user import job type.
     #
     # @!attribute [rw] job_name
@@ -7559,6 +8000,59 @@ module Aws::CognitoIdentityProvider
       :skipped_users,
       :failed_users,
       :completion_message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the Amazon Cognito service encounters a
+    # user validation exception with the AWS Lambda service.
+    #
+    # @!attribute [rw] message
+    #   The message returned when the Amazon Cognito service returns a user
+    #   validation exception with the AWS Lambda service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserLambdaValidationException AWS API Documentation
+    #
+    class UserLambdaValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when a user is not confirmed successfully.
+    #
+    # @!attribute [rw] message
+    #   The message returned when a user is not confirmed successfully.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserNotConfirmedException AWS API Documentation
+    #
+    class UserNotConfirmedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when a user is not found.
+    #
+    # @!attribute [rw] message
+    #   The message returned when a user is not found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserNotFoundException AWS API Documentation
+    #
+    class UserNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when user pool add-ons are not enabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolAddOnNotEnabledException AWS API Documentation
+    #
+    class UserPoolAddOnNotEnabledException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7818,6 +8312,19 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when a user pool tag cannot be set or
+    # updated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolTaggingException AWS API Documentation
+    #
+    class UserPoolTaggingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A container for information about the user pool.
     #
     # @!attribute [rw] id
@@ -8055,6 +8562,21 @@ module Aws::CognitoIdentityProvider
       :enabled,
       :user_status,
       :mfa_options)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when Amazon Cognito encounters a user name
+    # that already exists in the user pool.
+    #
+    # @!attribute [rw] message
+    #   The message returned when Amazon Cognito throws a user name exists
+    #   exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UsernameExistsException AWS API Documentation
+    #
+    class UsernameExistsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

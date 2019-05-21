@@ -242,6 +242,12 @@ module Aws::Health
 
     EventTypeList.member = Shapes::ShapeRef.new(shape: EventType)
 
+    InvalidPaginationToken.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidPaginationToken.struct_class = Types::InvalidPaginationToken
+
+    UnsupportedLocale.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    UnsupportedLocale.struct_class = Types::UnsupportedLocale
+
     availabilityZones.member = Shapes::ShapeRef.new(shape: availabilityZone)
 
     dateTimeRangeList.member = Shapes::ShapeRef.new(shape: DateTimeRange)

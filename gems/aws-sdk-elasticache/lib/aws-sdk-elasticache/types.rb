@@ -3569,6 +3569,33 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # Two or more incompatible parameters were specified.
+    #
+    # @!attribute [rw] message
+    #   Two or more parameters that must not be used together were used
+    #   together.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidParameterCombinationException AWS API Documentation
+    #
+    class InvalidParameterCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value for a parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   A parameter value is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The input parameters for the `ListAllowedNodeTypeModifications`
     # operation.
     #

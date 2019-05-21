@@ -73,6 +73,19 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # An invalid argument was specified.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ArgumentException AWS API Documentation
+    #
+    class ArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the output of a test. Examples of artifacts include logs
     # and screenshots.
     #
@@ -2362,6 +2375,19 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # An entity with the same name already exists.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/IdempotencyException AWS API Documentation
+    #
+    class IdempotencyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents information about incompatibility.
     #
     # @!attribute [rw] message
@@ -2480,6 +2506,19 @@ module Aws::DeviceFarm
       :reboot_after_use,
       :name,
       :description)
+      include Aws::Structure
+    end
+
+    # There was an error with the update request, or you do not have
+    # sufficient permissions to update this VPC endpoint configuration.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2641,6 +2680,19 @@ module Aws::DeviceFarm
       :device_minutes,
       :video_endpoint,
       :video_capture)
+      include Aws::Structure
+    end
+
+    # A limit was exceeded.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3880,6 +3932,33 @@ module Aws::DeviceFarm
       :downlink_jitter_ms,
       :uplink_loss_percent,
       :downlink_loss_percent)
+      include Aws::Structure
+    end
+
+    # Exception gets thrown when a user is not eligible to perform the
+    # specified transaction.
+    #
+    # @!attribute [rw] message
+    #   The HTTP response code of a Not Eligible exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/NotEligibleException AWS API Documentation
+    #
+    class NotEligibleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified entity was not found.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5295,6 +5374,19 @@ module Aws::DeviceFarm
       :test_spec_arn,
       :filter,
       :parameters)
+      include Aws::Structure
+    end
+
+    # There was a problem with the service account.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ServiceAccountException AWS API Documentation
+    #
+    class ServiceAccountException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

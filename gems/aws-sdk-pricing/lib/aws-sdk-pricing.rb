@@ -42,6 +42,6 @@ require_relative 'aws-sdk-pricing/customizations'
 # @service
 module Aws::Pricing
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

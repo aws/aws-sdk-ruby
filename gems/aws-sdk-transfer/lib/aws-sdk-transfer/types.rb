@@ -607,6 +607,43 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # This exception is thrown when an error occurs in the AWS Transfer for
+    # SFTP service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/InternalServiceError AWS API Documentation
+    #
+    class InternalServiceError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The `NextToken` parameter that was passed is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the client submits a malformed request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListServersRequest
     #   data as a hash:
     #
@@ -877,6 +914,60 @@ module Aws::Transfer
       :role,
       :ssh_public_key_count,
       :user_name)
+      include Aws::Structure
+    end
+
+    # The requested resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ResourceExistsException AWS API Documentation
+    #
+    class ResourceExistsException < Struct.new(
+      :message,
+      :resource,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when a resource is not found by the AWS
+    # Transfer for SFTP service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # The request has failed because the AWS Transfer for SFTP service is
+    # not available.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

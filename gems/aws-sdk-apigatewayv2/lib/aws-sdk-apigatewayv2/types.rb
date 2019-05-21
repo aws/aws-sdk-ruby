@@ -266,6 +266,32 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # The request is not valid, for example, the input is incomplete or
+    # incorrect. See the accompanying error message for details.
+    #
+    # @!attribute [rw] message
+    #   Describes the error encountered.
+    #   @return [String]
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation would cause a conflict with the current state
+    # of a service resource associated with the request. Resolve the
+    # conflict before retrying this request. See the accompanying error
+    # message for details.
+    #
+    # @!attribute [rw] message
+    #   Describes the error encountered.
+    #   @return [String]
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input parameters for a CreateApi request.
     #
     # @!attribute [rw] api_key_selection_expression
@@ -4073,6 +4099,23 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # The resource specified in the request was not found. See the message
+    # field for more information.
+    #
+    # @!attribute [rw] message
+    #   Describes the error encountered.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    class NotFoundException < Struct.new(
+      :message,
+      :resource_type)
+      include Aws::Structure
+    end
+
     # Validation constraints imposed on parameters of a request (path, query
     # string, headers).
     #
@@ -4366,6 +4409,21 @@ module Aws::ApiGatewayV2
     #
     class Template < Struct.new(
       :value)
+      include Aws::Structure
+    end
+
+    # A limit has been exceeded. See the accompanying error message for
+    # details.
+    #
+    # @!attribute [rw] limit_type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TooManyRequestsException < Struct.new(
+      :limit_type,
+      :message)
       include Aws::Structure
     end
 

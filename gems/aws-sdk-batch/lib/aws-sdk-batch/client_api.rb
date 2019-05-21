@@ -151,6 +151,9 @@ module Aws::Batch
 
     CancelJobResponse.struct_class = Types::CancelJobResponse
 
+    ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientException.struct_class = Types::ClientException
+
     ComputeEnvironmentDetail.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironmentName"))
     ComputeEnvironmentDetail.add_member(:compute_environment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironmentArn"))
     ComputeEnvironmentDetail.add_member(:ecs_cluster_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ecsClusterArn"))
@@ -478,6 +481,9 @@ module Aws::Batch
 
     RetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "attempts"))
     RetryStrategy.struct_class = Types::RetryStrategy
+
+    ServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServerException.struct_class = Types::ServerException
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 

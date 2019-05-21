@@ -960,6 +960,78 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
+    # This occurs when the provided nextToken is not valid.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that can contain more detail about a
+    #   nextToken failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource is in a state that does not allow you to perform a
+    # specified action.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that provides more detail if a
+    #   resource is in a state that is not valid for performing a specified
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The limit of servers or backups has been reached.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that the maximum allowed number of
+    #   servers or backups has been exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource cannot be created because it already exists.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message in response to a CreateServer request
+    #   that a resource cannot be created because it already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource does not exist, or access was denied.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that can contain more detail about
+    #   problems locating or accessing a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RestoreServerRequest
     #   data as a hash:
     #
@@ -1341,6 +1413,20 @@ module Aws::OpsWorksCM
     #
     class UpdateServerResponse < Struct.new(
       :server)
+      include Aws::Structure
+    end
+
+    # One or more of the provided request parameters are not valid.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that can contain more detail about a
+    #   validation failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
