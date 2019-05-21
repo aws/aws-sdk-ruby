@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.279 (2019-05-21)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
