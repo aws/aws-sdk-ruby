@@ -9,7 +9,7 @@ end
 def whitelist
   {
     "core" => {
-      "errors.rb" => 182,
+      "errors.rb" => 188,
       "signature_v4.rb" => 35,
       "stub_responses.rb" => 19
     },

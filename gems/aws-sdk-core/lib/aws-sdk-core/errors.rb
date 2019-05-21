@@ -13,9 +13,12 @@ module Aws
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      def initialize(context, message)
+      # @param [Aws::Structure] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
         @code = self.class.code
+        @message = message if message && !message.empty?
         @context = context
+        @data = data
         super(message)
       end
 
@@ -25,6 +28,9 @@ module Aws
       # @return [Seahorse::Client::RequestContext] The context of the request
       #   that triggered the remote service to return this error.
       attr_reader :context
+
+      # @return [Aws::Structure]
+      attr_reader :data
 
       class << self
 
@@ -240,7 +246,11 @@ Known AWS regions include (not specific to this service):
       def error_class(error_code)
         constant = error_class_constant(error_code)
         if error_const_set?(constant)
-          const_get(constant)
+          # modeled error class exist
+          # set code attribute
+          err_class = const_get(constant)
+          err_class.code = constant.to_s
+          err_class
         else
           set_error_constant(constant)
         end
