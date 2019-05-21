@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Adding support for modeled exceptions
+
 3.52.1 (2019-05-15)
 ------------------
 
