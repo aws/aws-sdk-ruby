@@ -44,6 +44,8 @@ module AwsSdkCodeGenerator
               end
             end
           end
+          # have a placeholder for input
+          pair << nil if pair.empty?
           if output = ref['output']
             output_shape = @service.api['shapes'][output['shape']]
             output_shape['members'].each do |_, m_ref|
@@ -56,7 +58,7 @@ module AwsSdkCodeGenerator
               end
             end
           end
-          es << pair
+          es << pair unless pair.compact.empty?
         end
         # rename eventstream when needed
         input_es = []
