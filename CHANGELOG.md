@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
+
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::WorkLink - Updated the API, and documentation for Amazon WorkLink.
+
 2.11.279 (2019-05-21)
 ------------------
 
