@@ -634,6 +634,12 @@ module Aws::MediaLive
     AvailSettings.add_member(:scte_35_time_signal_apos, Shapes::ShapeRef.new(shape: Scte35TimeSignalApos, location_name: "scte35TimeSignalApos"))
     AvailSettings.struct_class = Types::AvailSettings
 
+    BadGatewayException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadGatewayException.struct_class = Types::BadGatewayException
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BatchScheduleActionCreateRequest.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, required: true, location_name: "scheduleActions"))
     BatchScheduleActionCreateRequest.struct_class = Types::BatchScheduleActionCreateRequest
 
@@ -761,6 +767,9 @@ module Aws::MediaLive
     ChannelSummary.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ChannelSummary.struct_class = Types::ChannelSummary
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateChannel.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     CreateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
@@ -1088,6 +1097,9 @@ module Aws::MediaLive
     FollowModeScheduleActionStartSettings.add_member(:reference_action_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "referenceActionName"))
     FollowModeScheduleActionStartSettings.struct_class = Types::FollowModeScheduleActionStartSettings
 
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     FrameCaptureGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     FrameCaptureGroupSettings.struct_class = Types::FrameCaptureGroupSettings
 
@@ -1096,6 +1108,9 @@ module Aws::MediaLive
 
     FrameCaptureSettings.add_member(:capture_interval, Shapes::ShapeRef.new(shape: __integerMin1Max3600, required: true, location_name: "captureInterval"))
     FrameCaptureSettings.struct_class = Types::FrameCaptureSettings
+
+    GatewayTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    GatewayTimeoutException.struct_class = Types::GatewayTimeoutException
 
     GlobalConfiguration.add_member(:initial_audio_gain, Shapes::ShapeRef.new(shape: __integerMinNegative60Max60, location_name: "initialAudioGain"))
     GlobalConfiguration.add_member(:input_end_action, Shapes::ShapeRef.new(shape: GlobalConfigurationInputEndAction, location_name: "inputEndAction"))
@@ -1336,6 +1351,9 @@ module Aws::MediaLive
     InputWhitelistRuleCidr.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
     InputWhitelistRuleCidr.struct_class = Types::InputWhitelistRuleCidr
 
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
     InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServiceError.struct_class = Types::InternalServiceError
 
@@ -1543,6 +1561,9 @@ module Aws::MediaLive
     NetworkInputSettings.add_member(:hls_input_settings, Shapes::ShapeRef.new(shape: HlsInputSettings, location_name: "hlsInputSettings"))
     NetworkInputSettings.add_member(:server_validation, Shapes::ShapeRef.new(shape: NetworkInputServerValidation, location_name: "serverValidation"))
     NetworkInputSettings.struct_class = Types::NetworkInputSettings
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     Offering.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Offering.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
@@ -1847,6 +1868,9 @@ module Aws::MediaLive
     TimecodeConfig.add_member(:sync_threshold, Shapes::ShapeRef.new(shape: __integerMin1Max1000000, location_name: "syncThreshold"))
     TimecodeConfig.struct_class = Types::TimecodeConfig
 
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
     TtmlDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: TtmlDestinationStyleControl, location_name: "styleControl"))
     TtmlDestinationSettings.struct_class = Types::TtmlDestinationSettings
 
@@ -1863,6 +1887,10 @@ module Aws::MediaLive
     UdpOutputSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     UdpOutputSettings.add_member(:fec_output_settings, Shapes::ShapeRef.new(shape: FecOutputSettings, location_name: "fecOutputSettings"))
     UdpOutputSettings.struct_class = Types::UdpOutputSettings
+
+    UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    UnprocessableEntityException.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
+    UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
 
     UpdateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     UpdateChannel.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))

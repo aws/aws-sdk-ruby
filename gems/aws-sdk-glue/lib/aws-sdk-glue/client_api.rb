@@ -484,6 +484,9 @@ module Aws::Glue
     WorkerType = Shapes::StringShape.new(name: 'WorkerType')
     XMLClassifier = Shapes::StructureShape.new(name: 'XMLClassifier')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     Action.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
     Action.add_member(:arguments, Shapes::ShapeRef.new(shape: GenericMap, location_name: "Arguments"))
     Action.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
@@ -492,6 +495,9 @@ module Aws::Glue
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
+
+    AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    AlreadyExistsException.struct_class = Types::AlreadyExistsException
 
     BatchCreatePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     BatchCreatePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -667,10 +673,19 @@ module Aws::Glue
 
     ColumnValueStringList.member = Shapes::ShapeRef.new(shape: ColumnValuesString)
 
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConcurrentRunsExceededException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ConcurrentRunsExceededException.struct_class = Types::ConcurrentRunsExceededException
+
     Condition.add_member(:logical_operator, Shapes::ShapeRef.new(shape: LogicalOperator, location_name: "LogicalOperator"))
     Condition.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
     Condition.add_member(:state, Shapes::ShapeRef.new(shape: JobRunState, location_name: "State"))
     Condition.struct_class = Types::Condition
+
+    ConditionCheckFailureException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ConditionCheckFailureException.struct_class = Types::ConditionCheckFailureException
 
     ConditionList.member = Shapes::ShapeRef.new(shape: Condition)
 
@@ -739,6 +754,15 @@ module Aws::Glue
     CrawlerMetricsList.member = Shapes::ShapeRef.new(shape: CrawlerMetrics)
 
     CrawlerNameList.member = Shapes::ShapeRef.new(shape: NameString)
+
+    CrawlerNotRunningException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    CrawlerNotRunningException.struct_class = Types::CrawlerNotRunningException
+
+    CrawlerRunningException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    CrawlerRunningException.struct_class = Types::CrawlerRunningException
+
+    CrawlerStoppingException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    CrawlerStoppingException.struct_class = Types::CrawlerStoppingException
 
     CrawlerTargets.add_member(:s3_targets, Shapes::ShapeRef.new(shape: S3TargetList, location_name: "S3Targets"))
     CrawlerTargets.add_member(:jdbc_targets, Shapes::ShapeRef.new(shape: JdbcTargetList, location_name: "JdbcTargets"))
@@ -1078,6 +1102,9 @@ module Aws::Glue
     EncryptionConfiguration.add_member(:job_bookmarks_encryption, Shapes::ShapeRef.new(shape: JobBookmarksEncryption, location_name: "JobBookmarksEncryption"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
+    EntityNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    EntityNotFoundException.struct_class = Types::EntityNotFoundException
+
     ErrorByName.key = Shapes::ShapeRef.new(shape: NameString)
     ErrorByName.value = Shapes::ShapeRef.new(shape: ErrorDetail)
 
@@ -1375,6 +1402,9 @@ module Aws::Glue
     GetUserDefinedFunctionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetUserDefinedFunctionsResponse.struct_class = Types::GetUserDefinedFunctionsResponse
 
+    GlueEncryptionException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    GlueEncryptionException.struct_class = Types::GlueEncryptionException
+
     GrokClassifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GrokClassifier.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, required: true, location_name: "Classification"))
     GrokClassifier.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
@@ -1384,10 +1414,19 @@ module Aws::Glue
     GrokClassifier.add_member(:custom_patterns, Shapes::ShapeRef.new(shape: CustomPatterns, location_name: "CustomPatterns"))
     GrokClassifier.struct_class = Types::GrokClassifier
 
+    IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
     ImportCatalogToGlueRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     ImportCatalogToGlueRequest.struct_class = Types::ImportCatalogToGlueRequest
 
     ImportCatalogToGlueResponse.struct_class = Types::ImportCatalogToGlueResponse
+
+    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    InternalServiceException.struct_class = Types::InternalServiceException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    InvalidInputException.struct_class = Types::InvalidInputException
 
     JdbcTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
     JdbcTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
@@ -1554,8 +1593,14 @@ module Aws::Glue
 
     NameStringList.member = Shapes::ShapeRef.new(shape: NameString)
 
+    NoScheduleException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    NoScheduleException.struct_class = Types::NoScheduleException
+
     NotificationProperty.add_member(:notify_delay_after, Shapes::ShapeRef.new(shape: NotifyDelayAfter, location_name: "NotifyDelayAfter"))
     NotificationProperty.struct_class = Types::NotificationProperty
+
+    OperationTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    OperationTimeoutException.struct_class = Types::OperationTimeoutException
 
     Order.add_member(:column, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Column"))
     Order.add_member(:sort_order, Shapes::ShapeRef.new(shape: IntegerFlag, required: true, location_name: "SortOrder"))
@@ -1635,6 +1680,9 @@ module Aws::Glue
     ResetJobBookmarkResponse.add_member(:job_bookmark_entry, Shapes::ShapeRef.new(shape: JobBookmarkEntry, location_name: "JobBookmarkEntry"))
     ResetJobBookmarkResponse.struct_class = Types::ResetJobBookmarkResponse
 
+    ResourceNumberLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ResourceNumberLimitExceededException.struct_class = Types::ResourceNumberLimitExceededException
+
     ResourceUri.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceUri.add_member(:uri, Shapes::ShapeRef.new(shape: URI, location_name: "Uri"))
     ResourceUri.struct_class = Types::ResourceUri
@@ -1656,6 +1704,15 @@ module Aws::Glue
     Schedule.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: CronExpression, location_name: "ScheduleExpression"))
     Schedule.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
     Schedule.struct_class = Types::Schedule
+
+    SchedulerNotRunningException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    SchedulerNotRunningException.struct_class = Types::SchedulerNotRunningException
+
+    SchedulerRunningException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    SchedulerRunningException.struct_class = Types::SchedulerRunningException
+
+    SchedulerTransitioningException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    SchedulerTransitioningException.struct_class = Types::SchedulerTransitioningException
 
     SchemaChangePolicy.add_member(:update_behavior, Shapes::ShapeRef.new(shape: UpdateBehavior, location_name: "UpdateBehavior"))
     SchemaChangePolicy.add_member(:delete_behavior, Shapes::ShapeRef.new(shape: DeleteBehavior, location_name: "DeleteBehavior"))
@@ -1971,7 +2028,13 @@ module Aws::Glue
 
     UserDefinedFunctionList.member = Shapes::ShapeRef.new(shape: UserDefinedFunction)
 
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ValidationException.struct_class = Types::ValidationException
+
     ValueStringList.member = Shapes::ShapeRef.new(shape: ValueString)
+
+    VersionMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    VersionMismatchException.struct_class = Types::VersionMismatchException
 
     XMLClassifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     XMLClassifier.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, required: true, location_name: "Classification"))

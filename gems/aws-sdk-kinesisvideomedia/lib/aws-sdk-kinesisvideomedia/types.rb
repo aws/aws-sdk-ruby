@@ -8,6 +8,32 @@
 module Aws::KinesisVideoMedia
   module Types
 
+    # Kinesis Video Streams has throttled the request because you have
+    # exceeded the limit of allowed client calls. Try making the call later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/ClientLimitExceededException AWS API Documentation
+    #
+    class ClientLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Kinesis Video Streams has throttled the request because you have
+    # exceeded the limit of allowed client connections.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/ConnectionLimitExceededException AWS API Documentation
+    #
+    class ConnectionLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMediaInput
     #   data as a hash:
     #
@@ -111,6 +137,58 @@ module Aws::KinesisVideoMedia
     class GetMediaOutput < Struct.new(
       :content_type,
       :payload)
+      include Aws::Structure
+    end
+
+    # The value for this input parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Status Code: 400, Caller used wrong endpoint to write data to a
+    # stream. On receiving such an exception, the user must call
+    # `GetDataEndpoint` with `AccessMode` set to "READ" and use the
+    # endpoint Kinesis Video returns in the next `GetMedia` call.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/InvalidEndpointException AWS API Documentation
+    #
+    class InvalidEndpointException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Status Code: 403, The caller is not authorized to perform an operation
+    # on the given stream, or the token has expired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Status Code: 404, The stream with the given name does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

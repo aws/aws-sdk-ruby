@@ -808,6 +808,20 @@ module Aws::STS
       include Aws::Structure
     end
 
+    # The web identity token that was passed is expired or is not valid. Get
+    # a new identity token from the identity provider and then retry the
+    # request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/ExpiredTokenException AWS API Documentation
+    #
+    class ExpiredTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Identifiers for the federated user that is associated with the
     # credentials.
     #
@@ -1127,6 +1141,95 @@ module Aws::STS
       include Aws::Structure
     end
 
+    # The request could not be fulfilled because the non-AWS identity
+    # provider (IDP) that was asked to verify the incoming identity token
+    # could not be reached. This is often a transient error caused by
+    # network conditions. Retry the request a limited number of times so
+    # that you don't exceed the request rate. If the error persists, the
+    # non-AWS identity provider might be down or not responding.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/IDPCommunicationErrorException AWS API Documentation
+    #
+    class IDPCommunicationErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The identity provider (IdP) reported that authentication failed. This
+    # might be because the claim is invalid.
+    #
+    # If this error is returned for the `AssumeRoleWithWebIdentity`
+    # operation, it can also mean that the claim has expired or has been
+    # explicitly revoked.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/IDPRejectedClaimException AWS API Documentation
+    #
+    class IDPRejectedClaimException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The error returned if the message passed to
+    # `DecodeAuthorizationMessage` was invalid. This can happen if the token
+    # contains invalid characters, such as linebreaks.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/InvalidAuthorizationMessageException AWS API Documentation
+    #
+    class InvalidAuthorizationMessageException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The web identity token that was passed could not be validated by AWS.
+    # Get a new identity token from the identity provider and then retry the
+    # request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/InvalidIdentityTokenException AWS API Documentation
+    #
+    class InvalidIdentityTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the policy document was malformed.
+    # The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the policy document was too large.
+    # The error message describes how big the policy document is, in packed
+    # form, as a percentage of what the API allows.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/PackedPolicyTooLargeException AWS API Documentation
+    #
+    class PackedPolicyTooLargeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A reference to the IAM managed policy that is passed as a session
     # policy for a role session or a federated user session.
     #
@@ -1149,6 +1252,26 @@ module Aws::STS
     #
     class PolicyDescriptorType < Struct.new(
       :arn)
+      include Aws::Structure
+    end
+
+    # STS is not activated in the requested region for the account that is
+    # being asked to generate credentials. The account administrator must
+    # use the IAM console to activate STS in that region. For more
+    # information, see [Activating and Deactivating AWS STS in an AWS
+    # Region][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/RegionDisabledException AWS API Documentation
+    #
+    class RegionDisabledException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

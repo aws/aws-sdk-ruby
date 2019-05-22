@@ -233,6 +233,49 @@ module Aws::DLM
       include Aws::Structure
     end
 
+    # The service failed in an unexpected way.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
+    # Bad request. The request is missing required parameters or has invalid
+    # parameters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] required_parameters
+    #   The request omitted one or more required parameters.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mutually_exclusive_parameters
+    #   The request included parameters that cannot be provided together.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message,
+      :code,
+      :required_parameters,
+      :mutually_exclusive_parameters)
+      include Aws::Structure
+    end
+
     # Detailed information about a lifecycle policy.
     #
     # @!attribute [rw] policy_id
@@ -300,6 +343,27 @@ module Aws::DLM
       include Aws::Structure
     end
 
+    # The request failed because a limit was exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Value is the type of resource for which a limit was exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message,
+      :code,
+      :resource_type)
+      include Aws::Structure
+    end
+
     # Specifies the configuration of a lifecycle policy.
     #
     # @note When making an API call, you may pass PolicyDetails
@@ -353,6 +417,32 @@ module Aws::DLM
       :resource_types,
       :target_tags,
       :schedules)
+      include Aws::Structure
+    end
+
+    # A requested resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Value is the type of resource that was not found.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   Value is a list of resource IDs that were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :code,
+      :resource_type,
+      :resource_ids)
       include Aws::Structure
     end
 

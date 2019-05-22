@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2019-05-22)
+------------------
+
+* Feature - This release introduces support for tagging, tag-based access control, and resource-based access control.
+
+1.22.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.21.0 (2019-05-15)
 ------------------
 

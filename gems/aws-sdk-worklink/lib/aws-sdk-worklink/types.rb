@@ -14,8 +14,8 @@ module Aws::WorkLink
     #       {
     #         fleet_arn: "FleetArn", # required
     #         domain_name: "DomainName", # required
-    #         acm_certificate_arn: "AcmCertificateArn", # required
     #         display_name: "DisplayName",
+    #         acm_certificate_arn: "AcmCertificateArn", # required
     #       }
     #
     # @!attribute [rw] fleet_arn
@@ -26,13 +26,13 @@ module Aws::WorkLink
     #   The fully qualified domain name (FQDN).
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   The name to display.
+    #   @return [String]
+    #
     # @!attribute [rw] acm_certificate_arn
     #   The ARN of an issued ACM certificate that is valid for the domain
     #   being associated.
-    #   @return [String]
-    #
-    # @!attribute [rw] display_name
-    #   The name to display.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateDomainRequest AWS API Documentation
@@ -40,14 +40,56 @@ module Aws::WorkLink
     class AssociateDomainRequest < Struct.new(
       :fleet_arn,
       :domain_name,
-      :acm_certificate_arn,
-      :display_name)
+      :display_name,
+      :acm_certificate_arn)
       include Aws::Structure
     end
 
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateDomainResponse AWS API Documentation
     #
     class AssociateDomainResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateWebsiteAuthorizationProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         authorization_provider_type: "SAML", # required, accepts SAML
+    #         domain_name: "DomainName",
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The ARN of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_provider_type
+    #   The authorization provider type.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name of the authorization provider. This applies only to
+    #   SAML-based authorization providers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateWebsiteAuthorizationProviderRequest AWS API Documentation
+    #
+    class AssociateWebsiteAuthorizationProviderRequest < Struct.new(
+      :fleet_arn,
+      :authorization_provider_type,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization_provider_id
+    #   A unique identifier for the authorization provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateWebsiteAuthorizationProviderResponse AWS API Documentation
+    #
+    class AssociateWebsiteAuthorizationProviderResponse < Struct.new(
+      :authorization_provider_id)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass AssociateWebsiteCertificateAuthorityRequest
     #   data as a hash:
@@ -355,6 +397,10 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] display_name
     #   The name to display.
     #   @return [String]
@@ -367,12 +413,19 @@ module Aws::WorkLink
     #   The current state for the domain.
     #   @return [String]
     #
+    # @!attribute [rw] acm_certificate_arn
+    #   The ARN of an issued ACM certificate that is valid for the domain
+    #   being associated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeDomainResponse AWS API Documentation
     #
     class DescribeDomainResponse < Struct.new(
+      :domain_name,
       :display_name,
       :created_time,
-      :domain_status)
+      :domain_status,
+      :acm_certificate_arn)
       include Aws::Structure
     end
 
@@ -567,6 +620,34 @@ module Aws::WorkLink
     #
     class DisassociateDomainResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateWebsiteAuthorizationProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         authorization_provider_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The ARN of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_provider_id
+    #   A unique identifier for the authorization provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateWebsiteAuthorizationProviderRequest AWS API Documentation
+    #
+    class DisassociateWebsiteAuthorizationProviderRequest < Struct.new(
+      :fleet_arn,
+      :authorization_provider_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateWebsiteAuthorizationProviderResponse AWS API Documentation
+    #
+    class DisassociateWebsiteAuthorizationProviderResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateWebsiteCertificateAuthorityRequest
     #   data as a hash:
     #
@@ -601,6 +682,10 @@ module Aws::WorkLink
     #   The name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   The name to display.
+    #   @return [String]
+    #
     # @!attribute [rw] created_time
     #   The time that the domain was created.
     #   @return [Time]
@@ -609,17 +694,13 @@ module Aws::WorkLink
     #   The status of the domain.
     #   @return [String]
     #
-    # @!attribute [rw] display_name
-    #   The name to display.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DomainSummary AWS API Documentation
     #
     class DomainSummary < Struct.new(
       :domain_name,
+      :display_name,
       :created_time,
-      :domain_status,
-      :display_name)
+      :domain_status)
       include Aws::Structure
     end
 
@@ -663,6 +744,30 @@ module Aws::WorkLink
       :display_name,
       :company_code,
       :fleet_status)
+      include Aws::Structure
+    end
+
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -804,6 +909,54 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListWebsiteAuthorizationProvidersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The ARN of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be included in the next page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListWebsiteAuthorizationProvidersRequest AWS API Documentation
+    #
+    class ListWebsiteAuthorizationProvidersRequest < Struct.new(
+      :fleet_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] website_authorization_providers
+    #   The website authorization providers.
+    #   @return [Array<Types::WebsiteAuthorizationProviderSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListWebsiteAuthorizationProvidersResponse AWS API Documentation
+    #
+    class ListWebsiteAuthorizationProvidersResponse < Struct.new(
+      :website_authorization_providers,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListWebsiteCertificateAuthoritiesRequest
     #   data as a hash:
     #
@@ -849,6 +1002,30 @@ module Aws::WorkLink
     class ListWebsiteCertificateAuthoritiesResponse < Struct.new(
       :website_certificate_authorities,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -935,6 +1112,30 @@ module Aws::WorkLink
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/SignOutUserResponse AWS API Documentation
     #
     class SignOutUserResponse < Aws::EmptyStructure; end
+
+    # The number of requests exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You are not authorized to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateAuditStreamConfigurationRequest
     #   data as a hash:
@@ -1142,6 +1343,35 @@ module Aws::WorkLink
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateIdentityProviderConfigurationResponse AWS API Documentation
     #
     class UpdateIdentityProviderConfigurationResponse < Aws::EmptyStructure; end
+
+    # The summary of the website authorization provider.
+    #
+    # @!attribute [rw] authorization_provider_id
+    #   A unique identifier for the authorization provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_provider_type
+    #   The authorization provider type.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name of the authorization provider. This applies only to
+    #   SAML-based authorization providers.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time of creation.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/WebsiteAuthorizationProviderSummary AWS API Documentation
+    #
+    class WebsiteAuthorizationProviderSummary < Struct.new(
+      :authorization_provider_id,
+      :authorization_provider_type,
+      :domain_name,
+      :created_time)
+      include Aws::Structure
+    end
 
     # The summary of the certificate authority (CA).
     #

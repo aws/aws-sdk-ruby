@@ -8,6 +8,18 @@
 module Aws::MediaStoreData
   module Types
 
+    # The specified container was not found for the specified account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ContainerNotFoundException AWS API Documentation
+    #
+    class ContainerNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteObjectRequest
     #   data as a hash:
     #
@@ -209,6 +221,18 @@ module Aws::MediaStoreData
       include Aws::Structure
     end
 
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A metadata entry for a folder or object.
     #
     # @!attribute [rw] name
@@ -315,6 +339,18 @@ module Aws::MediaStoreData
       include Aws::Structure
     end
 
+    # Could not perform an operation on an object that does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ObjectNotFoundException AWS API Documentation
+    #
+    class ObjectNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutObjectRequest
     #   data as a hash:
     #
@@ -417,6 +453,18 @@ module Aws::MediaStoreData
       :content_sha256,
       :etag,
       :storage_class)
+      include Aws::Structure
+    end
+
+    # The requested content range is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/RequestedRangeNotSatisfiableException AWS API Documentation
+    #
+    class RequestedRangeNotSatisfiableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

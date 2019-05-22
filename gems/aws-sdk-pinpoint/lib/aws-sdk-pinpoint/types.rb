@@ -1240,6 +1240,22 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Simple message object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Baidu Cloud Push credentials
     #
     # @note When making an API call, you may pass BaiduChannelRequest
@@ -4783,6 +4799,22 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Simple message object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Google Cloud Messaging credentials
     #
     # @note When making an API call, you may pass GCMChannelRequest
@@ -6384,6 +6416,22 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Simple message object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # The response that's provided after registering the endpoint.
     #
     # @!attribute [rw] endpoint_item_response
@@ -7000,6 +7048,22 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Simple message object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MethodNotAllowedException AWS API Documentation
+    #
+    class MethodNotAllowedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Custom metric dimension
     #
     # @note When making an API call, you may pass MetricDimension
@@ -7025,6 +7089,22 @@ module Aws::Pinpoint
     class MetricDimension < Struct.new(
       :comparison_operator,
       :value)
+      include Aws::Structure
+    end
+
+    # Simple message object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -9299,6 +9379,22 @@ module Aws::Pinpoint
     #
     class TagsModel < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # Simple message object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 

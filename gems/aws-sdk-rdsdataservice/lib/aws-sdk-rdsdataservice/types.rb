@@ -8,6 +8,19 @@
 module Aws::RDSDataService
   module Types
 
+    # Access denied exception
+    #
+    # @!attribute [rw] message
+    #   Error message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Column value
     #
     # @!attribute [rw] array_values
@@ -189,6 +202,19 @@ module Aws::RDSDataService
     #
     class StructValue < Struct.new(
       :attributes)
+      include Aws::Structure
+    end
+
+    # Invalid Request exception
+    #
+    # @!attribute [rw] message
+    #   Error message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

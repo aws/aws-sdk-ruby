@@ -8,6 +8,19 @@
 module Aws::KinesisVideoArchivedMedia
   module Types
 
+    # Kinesis Video Streams has throttled the request because you have
+    # exceeded the limit of allowed client calls. Try making the call later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ClientLimitExceededException AWS API Documentation
+    #
+    class ClientLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a segment of video or other time-delimited data.
     #
     # @!attribute [rw] fragment_number
@@ -485,6 +498,32 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
+    # A specified parameter exceeds its restrictions, is not supported, or
+    # can't be used.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The codec private data in at least one of the tracks of the video
+    # stream is not valid for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/InvalidCodecPrivateDataException AWS API Documentation
+    #
+    class InvalidCodecPrivateDataException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListFragmentsInput
     #   data as a hash:
     #
@@ -552,6 +591,64 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
+    # No codec private data was found in at least one of tracks of the video
+    # stream.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/MissingCodecPrivateDataException AWS API Documentation
+    #
+    class MissingCodecPrivateDataException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A `PlaybackMode` of `ON_DEMAND` was requested for a stream that does
+    # not retain data (that is, has a `DataRetentionInHours` of 0).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/NoDataRetentionException AWS API Documentation
+    #
+    class NoDataRetentionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Status Code: 403, The caller is not authorized to perform an operation
+    # on the given stream, or the token has expired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # `GetMedia` throws this error when Kinesis Video Streams can't find
+    # the stream that you specified.
+    #
+    # `GetHLSStreamingSessionURL` throws this error if a session with a
+    # `PlaybackMode` of `ON_DEMAND` is requested for a stream that has no
+    # fragments within the requested time range, or if a session with a
+    # `PlaybackMode` of `LIVE` is requested for a stream that has no
+    # fragments within the last 30 seconds.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The range of timestamps for which to return fragments.
     #
     # @note When making an API call, you may pass TimestampRange
@@ -577,6 +674,22 @@ module Aws::KinesisVideoArchivedMedia
     class TimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp)
+      include Aws::Structure
+    end
+
+    # The type of the media (for example, h.264 video or ACC audio) could
+    # not be determined from the codec IDs of the tracks in the first
+    # fragment for a playback session. The codec ID for track 1 should be
+    # `V_MPEG/ISO/AVC` and, optionally, the codec ID for track 2 should be
+    # `A_AAC`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/UnsupportedStreamMediaTypeException AWS API Documentation
+    #
+    class UnsupportedStreamMediaTypeException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

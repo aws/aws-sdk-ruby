@@ -790,6 +790,14 @@ module Aws::StorageGateway
 
     Initiators.member = Shapes::ShapeRef.new(shape: Initiator)
 
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InternalServerError.add_member(:error, Shapes::ShapeRef.new(shape: StorageGatewayError, location_name: "error"))
+    InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidGatewayRequestException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidGatewayRequestException.add_member(:error, Shapes::ShapeRef.new(shape: StorageGatewayError, location_name: "error"))
+    InvalidGatewayRequestException.struct_class = Types::InvalidGatewayRequestException
+
     JoinDomainInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     JoinDomainInput.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     JoinDomainInput.add_member(:organizational_unit, Shapes::ShapeRef.new(shape: OrganizationalUnit, location_name: "OrganizationalUnit"))
@@ -967,6 +975,10 @@ module Aws::StorageGateway
     SMBFileShareInfo.struct_class = Types::SMBFileShareInfo
 
     SMBFileShareInfoList.member = Shapes::ShapeRef.new(shape: SMBFileShareInfo)
+
+    ServiceUnavailableError.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ServiceUnavailableError.add_member(:error, Shapes::ShapeRef.new(shape: StorageGatewayError, location_name: "error"))
+    ServiceUnavailableError.struct_class = Types::ServiceUnavailableError
 
     SetLocalConsolePasswordInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     SetLocalConsolePasswordInput.add_member(:local_console_password, Shapes::ShapeRef.new(shape: LocalConsolePassword, required: true, location_name: "LocalConsolePassword"))

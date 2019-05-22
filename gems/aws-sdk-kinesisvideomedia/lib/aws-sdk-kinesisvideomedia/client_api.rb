@@ -30,6 +30,12 @@ module Aws::KinesisVideoMedia
     StreamName = Shapes::StringShape.new(name: 'StreamName')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
 
+    ClientLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ClientLimitExceededException.struct_class = Types::ClientLimitExceededException
+
+    ConnectionLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConnectionLimitExceededException.struct_class = Types::ConnectionLimitExceededException
+
     GetMediaInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     GetMediaInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
     GetMediaInput.add_member(:start_selector, Shapes::ShapeRef.new(shape: StartSelector, required: true, location_name: "StartSelector"))
@@ -40,6 +46,18 @@ module Aws::KinesisVideoMedia
     GetMediaOutput.struct_class = Types::GetMediaOutput
     GetMediaOutput[:payload] = :payload
     GetMediaOutput[:payload_member] = GetMediaOutput.member(:payload)
+
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
+    InvalidEndpointException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidEndpointException.struct_class = Types::InvalidEndpointException
+
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     StartSelector.add_member(:start_selector_type, Shapes::ShapeRef.new(shape: StartSelectorType, required: true, location_name: "StartSelectorType"))
     StartSelector.add_member(:after_fragment_number, Shapes::ShapeRef.new(shape: FragmentNumberString, location_name: "AfterFragmentNumber"))

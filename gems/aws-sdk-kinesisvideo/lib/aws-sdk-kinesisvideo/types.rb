@@ -8,6 +8,31 @@
 module Aws::KinesisVideo
   module Types
 
+    # The number of streams created for the account is too high.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/AccountStreamLimitExceededException AWS API Documentation
+    #
+    class AccountStreamLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Kinesis Video Streams has throttled the request because you have
+    # exceeded the limit of allowed client calls. Try making the call later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ClientLimitExceededException AWS API Documentation
+    #
+    class ClientLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateStreamInput
     #   data as a hash:
     #
@@ -181,6 +206,18 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
+    # Not implemented.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeviceStreamLimitExceededException AWS API Documentation
+    #
+    class DeviceStreamLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDataEndpointInput
     #   data as a hash:
     #
@@ -223,6 +260,42 @@ module Aws::KinesisVideo
     #
     class GetDataEndpointOutput < Struct.new(
       :data_endpoint)
+      include Aws::Structure
+    end
+
+    # The value for this input parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Not implemented.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/InvalidDeviceException AWS API Documentation
+    #
+    class InvalidDeviceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The format of the `StreamARN` is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/InvalidResourceFormatException AWS API Documentation
+    #
+    class InvalidResourceFormatException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -332,6 +405,43 @@ module Aws::KinesisVideo
     class ListTagsForStreamOutput < Struct.new(
       :next_token,
       :tags)
+      include Aws::Structure
+    end
+
+    # The caller is not authorized to perform this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The stream is currently not available for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Amazon Kinesis Video Streams can't find the stream that you
+    # specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -458,6 +568,19 @@ module Aws::KinesisVideo
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagStreamOutput AWS API Documentation
     #
     class TagStreamOutput < Aws::EmptyStructure; end
+
+    # You have exceeded the limit of tags that you can associate with the
+    # resource. Kinesis video streams support up to 50 tags.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagsPerResourceExceededLimitException AWS API Documentation
+    #
+    class TagsPerResourceExceededLimitException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagStreamInput
     #   data as a hash:
@@ -611,6 +734,23 @@ module Aws::KinesisVideo
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamOutput AWS API Documentation
     #
     class UpdateStreamOutput < Aws::EmptyStructure; end
+
+    # The stream version that you specified is not the latest version. To
+    # get the latest version, use the [DescribeStream][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/VersionMismatchException AWS API Documentation
+    #
+    class VersionMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
   end
 end

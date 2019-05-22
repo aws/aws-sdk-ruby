@@ -54,6 +54,18 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The resource being created already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ApproveSkillRequest
     #   data as a hash:
     #
@@ -103,6 +115,34 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBookResponse AWS API Documentation
     #
     class AssociateContactWithAddressBookResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateDeviceWithNetworkProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_arn: "Arn", # required
+    #         network_profile_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] device_arn
+    #   The device ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_profile_arn
+    #   The ARN of the network profile to associate with a device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithNetworkProfileRequest AWS API Documentation
+    #
+    class AssociateDeviceWithNetworkProfileRequest < Struct.new(
+      :device_arn,
+      :network_profile_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithNetworkProfileResponse AWS API Documentation
+    #
+    class AssociateDeviceWithNetworkProfileResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass AssociateDeviceWithRoomRequest
     #   data as a hash:
@@ -417,6 +457,18 @@ module Aws::AlexaForBusiness
     class Category < Struct.new(
       :category_id,
       :category_name)
+      include Aws::Structure
+    end
+
+    # There is a concurrent modification of resources.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -897,6 +949,101 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateNetworkProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_profile_name: "NetworkProfileName", # required
+    #         description: "NetworkProfileDescription",
+    #         ssid: "NetworkSsid", # required
+    #         security_type: "OPEN", # required, accepts OPEN, WEP, WPA_PSK, WPA2_PSK, WPA2_ENTERPRISE
+    #         eap_method: "EAP_TLS", # accepts EAP_TLS
+    #         current_password: "CurrentWiFiPassword",
+    #         next_password: "NextWiFiPassword",
+    #         certificate_authority_arn: "Arn",
+    #         trust_anchors: ["TrustAnchor"],
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] network_profile_name
+    #   The name of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Detailed information about a device's network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssid
+    #   The SSID of the Wi-Fi network.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_type
+    #   The security type of the Wi-Fi network. This can be
+    #   WPA2\_ENTERPRISE, WPA2\_PSK, WPA\_PSK, WEP, or OPEN.
+    #   @return [String]
+    #
+    # @!attribute [rw] eap_method
+    #   The authentication standard that is used in the EAP framework.
+    #   Currently, EAP\_TLS is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_password
+    #   The current password of the Wi-Fi network.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_password
+    #   The next, or subsequent, password of the Wi-Fi network. This
+    #   password is asynchronously transmitted to the device and is used
+    #   when the password of the network changes to NextPassword.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The ARN of the Private Certificate Authority (PCA) created in AWS
+    #   Certificate Manager (ACM). This is used to issue certificates to the
+    #   devices.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_anchors
+    #   The root certificates of your authentication server that is
+    #   installed on your devices and used to trust your authentication
+    #   server during EAP negotiation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateNetworkProfileRequest AWS API Documentation
+    #
+    class CreateNetworkProfileRequest < Struct.new(
+      :network_profile_name,
+      :description,
+      :ssid,
+      :security_type,
+      :eap_method,
+      :current_password,
+      :next_password,
+      :certificate_authority_arn,
+      :trust_anchors,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateNetworkProfileResponse AWS API Documentation
+    #
+    class CreateNetworkProfileResponse < Struct.new(
+      :network_profile_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateProfileRequest
     #   data as a hash:
     #
@@ -1325,6 +1472,28 @@ module Aws::AlexaForBusiness
     #
     class DeleteGatewayGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteNetworkProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_profile_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteNetworkProfileRequest AWS API Documentation
+    #
+    class DeleteNetworkProfileRequest < Struct.new(
+      :network_profile_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteNetworkProfileResponse AWS API Documentation
+    #
+    class DeleteNetworkProfileResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteProfileRequest
     #   data as a hash:
     #
@@ -1550,6 +1719,10 @@ module Aws::AlexaForBusiness
     #   Detailed information about a device's status.
     #   @return [Types::DeviceStatusInfo]
     #
+    # @!attribute [rw] network_profile_info
+    #   Detailed information about a device's network profile.
+    #   @return [Types::DeviceNetworkProfileInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Device AWS API Documentation
     #
     class Device < Struct.new(
@@ -1561,7 +1734,8 @@ module Aws::AlexaForBusiness
       :mac_address,
       :room_arn,
       :device_status,
-      :device_status_info)
+      :device_status_info,
+      :network_profile_info)
       include Aws::Structure
     end
 
@@ -1595,6 +1769,14 @@ module Aws::AlexaForBusiness
     #   The status of a device.
     #   @return [String]
     #
+    # @!attribute [rw] network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_profile_name
+    #   The name of the network profile associated with a device.
+    #   @return [String]
+    #
     # @!attribute [rw] room_arn
     #   The room ARN associated with a device.
     #   @return [String]
@@ -1617,6 +1799,8 @@ module Aws::AlexaForBusiness
       :software_version,
       :mac_address,
       :device_status,
+      :network_profile_arn,
+      :network_profile_name,
       :room_arn,
       :room_name,
       :device_status_info)
@@ -1646,7 +1830,47 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # Detailed information about a device's network profile.
+    #
+    # @!attribute [rw] network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The ARN of the certificate associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_expiration_time
+    #   The time (in epoch) when the certificate expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceNetworkProfileInfo AWS API Documentation
+    #
+    class DeviceNetworkProfileInfo < Struct.new(
+      :network_profile_arn,
+      :certificate_arn,
+      :certificate_expiration_time)
+      include Aws::Structure
+    end
+
+    # The request failed because this device is no longer registered and
+    # therefore no longer managed by this account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceNotRegisteredException AWS API Documentation
+    #
+    class DeviceNotRegisteredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Details of a device’s status.
+    #
+    # @!attribute [rw] feature
+    #   The list of available features on the device.
+    #   @return [String]
     #
     # @!attribute [rw] code
     #   The device status detail code.
@@ -1655,6 +1879,7 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusDetail AWS API Documentation
     #
     class DeviceStatusDetail < Struct.new(
+      :feature,
       :code)
       include Aws::Structure
     end
@@ -2193,6 +2418,35 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetNetworkProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_profile_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetNetworkProfileRequest AWS API Documentation
+    #
+    class GetNetworkProfileRequest < Struct.new(
+      :network_profile_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_profile
+    #   The network profile associated with a device.
+    #   @return [Types::NetworkProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetNetworkProfileResponse AWS API Documentation
+    #
+    class GetNetworkProfileResponse < Struct.new(
+      :network_profile)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetProfileRequest
     #   data as a hash:
     #
@@ -2346,6 +2600,80 @@ module Aws::AlexaForBusiness
     class IPDialIn < Struct.new(
       :endpoint,
       :comms_protocol)
+      include Aws::Structure
+    end
+
+    # The Certificate Authority can't issue or revoke a certificate.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/InvalidCertificateAuthorityException AWS API Documentation
+    #
+    class InvalidCertificateAuthorityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The device is in an invalid state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/InvalidDeviceException AWS API Documentation
+    #
+    class InvalidDeviceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A password in SecretsManager is in an invalid state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/InvalidSecretsManagerResourceException AWS API Documentation
+    #
+    class InvalidSecretsManagerResourceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The service linked role is locked for deletion.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/InvalidServiceLinkedRoleStateException AWS API Documentation
+    #
+    class InvalidServiceLinkedRoleStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The attempt to update a user is invalid due to the user's current
+    # status.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/InvalidUserStatusException AWS API Documentation
+    #
+    class InvalidUserStatusException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You are performing an action that would put you beyond your account's
+    # limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2866,6 +3194,143 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The name sent in the request is already in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/NameInUseException AWS API Documentation
+    #
+    class NameInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The network profile associated with a device.
+    #
+    # @!attribute [rw] network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_profile_name
+    #   The name of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Detailed information about a device's network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssid
+    #   The SSID of the Wi-Fi network.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_type
+    #   The security type of the Wi-Fi network. This can be
+    #   WPA2\_ENTERPRISE, WPA2\_PSK, WPA\_PSK, WEP, or OPEN.
+    #   @return [String]
+    #
+    # @!attribute [rw] eap_method
+    #   The authentication standard that is used in the EAP framework.
+    #   Currently, EAP\_TLS is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_password
+    #   The current password of the Wi-Fi network.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_password
+    #   The next, or subsequent, password of the Wi-Fi network. This
+    #   password is asynchronously transmitted to the device and is used
+    #   when the password of the network changes to NextPassword.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The ARN of the Private Certificate Authority (PCA) created in AWS
+    #   Certificate Manager (ACM). This is used to issue certificates to the
+    #   devices.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_anchors
+    #   The root certificates of your authentication server, which is
+    #   installed on your devices and used to trust your authentication
+    #   server during EAP negotiation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/NetworkProfile AWS API Documentation
+    #
+    class NetworkProfile < Struct.new(
+      :network_profile_arn,
+      :network_profile_name,
+      :description,
+      :ssid,
+      :security_type,
+      :eap_method,
+      :current_password,
+      :next_password,
+      :certificate_authority_arn,
+      :trust_anchors)
+      include Aws::Structure
+    end
+
+    # The data associated with a network profile.
+    #
+    # @!attribute [rw] network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_profile_name
+    #   The name of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Detailed information about a device's network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssid
+    #   The SSID of the Wi-Fi network.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_type
+    #   The security type of the Wi-Fi network. This can be
+    #   WPA2\_ENTERPRISE, WPA2\_PSK, WPA\_PSK, WEP, or OPEN.
+    #   @return [String]
+    #
+    # @!attribute [rw] eap_method
+    #   The authentication standard that is used in the EAP framework.
+    #   Currently, EAP\_TLS is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The ARN of the Private Certificate Authority (PCA) created in AWS
+    #   Certificate Manager (ACM). This is used to issue certificates to the
+    #   devices.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/NetworkProfileData AWS API Documentation
+    #
+    class NetworkProfileData < Struct.new(
+      :network_profile_arn,
+      :network_profile_name,
+      :description,
+      :ssid,
+      :security_type,
+      :eap_method,
+      :certificate_authority_arn)
+      include Aws::Structure
+    end
+
+    # The resource is not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The information for public switched telephone network (PSTN)
     # conferencing.
     #
@@ -3291,6 +3756,36 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # Another resource is associated with the resource in the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ResourceAssociatedException AWS API Documentation
+    #
+    class ResourceAssociatedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource in the request is already in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message,
+      :client_request_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RevokeInvitationRequest
     #   data as a hash:
     #
@@ -3609,14 +4104,16 @@ module Aws::AlexaForBusiness
     # @!attribute [rw] filters
     #   The filters to use to list a specified set of devices. Supported
     #   filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode,
-    #   RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and
-    #   ConnectionStatus (ONLINE and OFFLINE).
+    #   RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly,
+    #   ConnectionStatus (ONLINE and OFFLINE), NetworkProfileName,
+    #   NetworkProfileArn, Feature, and FailureCode.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] sort_criteria
     #   The sort order to use in listing the specified set of devices.
     #   Supported sort keys are DeviceName, DeviceStatus, RoomName,
-    #   DeviceType, DeviceSerialNumber, and ConnectionStatus.
+    #   DeviceType, DeviceSerialNumber, ConnectionStatus,
+    #   NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.
     #   @return [Array<Types::Sort>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchDevicesRequest AWS API Documentation
@@ -3646,6 +4143,86 @@ module Aws::AlexaForBusiness
     #
     class SearchDevicesResponse < Struct.new(
       :devices,
+      :next_token,
+      :total_count)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchNetworkProfilesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             key: "FilterKey", # required
+    #             values: ["FilterValue"], # required
+    #           },
+    #         ],
+    #         sort_criteria: [
+    #           {
+    #             key: "SortKey", # required
+    #             value: "ASC", # required, accepts ASC, DESC
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response includes only results beyond the token, up
+    #   to the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response. If more
+    #   results exist than the specified MaxResults value, a token is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The filters to use to list a specified set of network profiles.
+    #   Valid filters are NetworkProfileName, Ssid, and SecurityType.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] sort_criteria
+    #   The sort order to use to list the specified set of network profiles.
+    #   Valid sort criteria includes NetworkProfileName, Ssid, and
+    #   SecurityType.
+    #   @return [Array<Types::Sort>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchNetworkProfilesRequest AWS API Documentation
+    #
+    class SearchNetworkProfilesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters,
+      :sort_criteria)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_profiles
+    #   The network profiles that meet the specified set of filter criteria,
+    #   in sort order. It is a list of NetworkProfileData objects.
+    #   @return [Array<Types::NetworkProfileData>]
+    #
+    # @!attribute [rw] next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response includes only results beyond the token, up
+    #   to the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of network profiles returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchNetworkProfilesResponse AWS API Documentation
+    #
+    class SearchNetworkProfilesResponse < Struct.new(
+      :network_profiles,
       :next_token,
       :total_count)
       include Aws::Structure
@@ -4164,6 +4741,18 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The skill must be linked to a third-party account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillNotLinkedException AWS API Documentation
+    #
+    class SkillNotLinkedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The summary of skills.
     #
     # @!attribute [rw] skill_id
@@ -4328,7 +4917,7 @@ module Aws::AlexaForBusiness
     #       {
     #         room_arn: "Arn",
     #         device_arn: "Arn",
-    #         features: ["BLUETOOTH"], # required, accepts BLUETOOTH, VOLUME, NOTIFICATIONS, LISTS, SKILLS, ALL
+    #         features: ["BLUETOOTH"], # required, accepts BLUETOOTH, VOLUME, NOTIFICATIONS, LISTS, SKILLS, NETWORK_PROFILE, SETTINGS, ALL
     #       }
     #
     # @!attribute [rw] room_arn
@@ -4462,6 +5051,19 @@ module Aws::AlexaForBusiness
     class Text < Struct.new(
       :locale,
       :value)
+      include Aws::Structure
+    end
+
+    # The caller has no permissions to operate on the resource involved in
+    # the API call.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4788,6 +5390,70 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayResponse AWS API Documentation
     #
     class UpdateGatewayResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateNetworkProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_profile_arn: "Arn", # required
+    #         network_profile_name: "NetworkProfileName",
+    #         description: "NetworkProfileDescription",
+    #         current_password: "CurrentWiFiPassword",
+    #         next_password: "NextWiFiPassword",
+    #         certificate_authority_arn: "Arn",
+    #         trust_anchors: ["TrustAnchor"],
+    #       }
+    #
+    # @!attribute [rw] network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_profile_name
+    #   The name of the network profile associated with a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Detailed information about a device's network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_password
+    #   The current password of the Wi-Fi network.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_password
+    #   The next, or subsequent, password of the Wi-Fi network. This
+    #   password is asynchronously transmitted to the device and is used
+    #   when the password of the network changes to NextPassword.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The ARN of the Private Certificate Authority (PCA) created in AWS
+    #   Certificate Manager (ACM). This is used to issue certificates to the
+    #   devices.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_anchors
+    #   The root certificate(s) of your authentication server that will be
+    #   installed on your devices and used to trust your authentication
+    #   server during EAP negotiation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateNetworkProfileRequest AWS API Documentation
+    #
+    class UpdateNetworkProfileRequest < Struct.new(
+      :network_profile_arn,
+      :network_profile_name,
+      :description,
+      :current_password,
+      :next_password,
+      :certificate_authority_arn,
+      :trust_anchors)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateNetworkProfileResponse AWS API Documentation
+    #
+    class UpdateNetworkProfileResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateProfileRequest
     #   data as a hash:

@@ -8,6 +8,18 @@
 module Aws::CostExplorer
   module Types
 
+    # The requested report expired. Update the date interval and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/BillExpirationException AWS API Documentation
+    #
+    class BillExpirationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The amount of instance usage that a reservation covered.
     #
     # @!attribute [rw] coverage_hours
@@ -140,6 +152,18 @@ module Aws::CostExplorer
       :reserved_normalized_units,
       :total_running_normalized_units,
       :coverage_normalized_units_percentage)
+      include Aws::Structure
+    end
+
+    # The requested data is unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DataUnavailableException AWS API Documentation
+    #
+    class DataUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1630,6 +1654,30 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # The pagination token is invalid. Try again without a pagination token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You made too many calls in a short period of time. Try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The aggregated value for a metric.
     #
     # @!attribute [rw] amount
@@ -1735,6 +1783,19 @@ module Aws::CostExplorer
       :region,
       :current_generation,
       :size_flex_eligible)
+      include Aws::Structure
+    end
+
+    # Your request parameters changed between pages. Try again with the old
+    # parameters or without a pagination token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RequestChangedException AWS API Documentation
+    #
+    class RequestChangedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

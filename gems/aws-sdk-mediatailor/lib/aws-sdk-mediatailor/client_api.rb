@@ -43,6 +43,9 @@ module Aws::MediaTailor
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     CdnConfiguration.add_member(:ad_segment_url_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "AdSegmentUrlPrefix"))
     CdnConfiguration.add_member(:content_segment_url_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ContentSegmentUrlPrefix"))
     CdnConfiguration.struct_class = Types::CdnConfiguration

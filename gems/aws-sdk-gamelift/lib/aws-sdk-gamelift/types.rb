@@ -261,6 +261,20 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # The requested operation would cause a conflict with the current state
+    # of a service resource associated with the request. Resolve the
+    # conflict before retrying this request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input for a request action.
     #
     # @note When making an API call, you may pass CreateAliasInput
@@ -3324,6 +3338,20 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # The specified fleet has no available instances to fulfill a
+    # `CreateGameSession` request. Clients can retry such requests
+    # immediately or after a waiting period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetCapacityExceededException AWS API Documentation
+    #
+    class FleetCapacityExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Current status of fleet utilization, including the number of game and
     # player sessions being hosted.
     #
@@ -3657,6 +3685,20 @@ module Aws::GameLift
     class GameSessionDetail < Struct.new(
       :game_session,
       :protection_policy)
+      include Aws::Structure
+    end
+
+    # The game instance is currently full and cannot allow the requested
+    # player(s) to join. Clients can retry such requests immediately or
+    # after a waiting period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionFullException AWS API Documentation
+    #
+    class GameSessionFullException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4017,6 +4059,19 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # A game session with this custom ID string already exists in this
+    # fleet. Resolve this conflict before retrying this request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/IdempotentParameterMismatchException AWS API Documentation
+    #
+    class IdempotentParameterMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Properties that describe an instance of a virtual computing resource
     # that hosts one or more game servers. A fleet may contain zero or more
     # instances.
@@ -4136,6 +4191,61 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # The service encountered an unrecoverable internal failure while
+    # processing the request. Clients can retry such requests immediately or
+    # after a waiting period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation would cause a conflict with the current state
+    # of a resource associated with the request and/or the fleet. Resolve
+    # the conflict before retrying.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InvalidFleetStatusException AWS API Documentation
+    #
+    class InvalidFleetStatusException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation would cause a conflict with the current state
+    # of a resource associated with the request and/or the game instance.
+    # Resolve the conflict before retrying.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InvalidGameSessionStatusException AWS API Documentation
+    #
+    class InvalidGameSessionStatusException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more parameter values in the request are invalid. Correct the
+    # invalid parameter values before retrying.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A range of IP addresses and port settings that allow inbound traffic
     # to connect to server processes on an Amazon GameLift. New game
     # sessions that are started on the fleet are assigned an IP address/port
@@ -4181,6 +4291,19 @@ module Aws::GameLift
       :to_port,
       :ip_range,
       :protocol)
+      include Aws::Structure
+    end
+
+    # The requested operation would cause the resource to exceed the allowed
+    # service limit. Resolve the issue before retrying.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4760,6 +4883,19 @@ module Aws::GameLift
       :players,
       :game_session_connection_info,
       :estimated_wait_time)
+      include Aws::Structure
+    end
+
+    # A service resource associated with the request could not be found.
+    # Clients should not retry such requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6402,6 +6538,47 @@ module Aws::GameLift
     #
     class TargetConfiguration < Struct.new(
       :target_value)
+      include Aws::Structure
+    end
+
+    # The service is unable to resolve the routing for a particular alias
+    # because it has a terminal RoutingStrategy associated with it. The
+    # message returned in this exception is the message defined in the
+    # routing strategy itself. Such requests should only be retried if the
+    # routing strategy for the specified alias is modified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/TerminalRoutingStrategyException AWS API Documentation
+    #
+    class TerminalRoutingStrategyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The client failed authentication. Clients should not retry such
+    # requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation is not supported in the region specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UnsupportedRegionException AWS API Documentation
+    #
+    class UnsupportedRegionException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

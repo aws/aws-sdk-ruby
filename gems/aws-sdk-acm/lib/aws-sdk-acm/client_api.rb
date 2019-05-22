@@ -205,6 +205,21 @@ module Aws::ACM
 
     InUseList.member = Shapes::ShapeRef.new(shape: String)
 
+    InvalidArgsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidArgsException.struct_class = Types::InvalidArgsException
+
+    InvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidArnException.struct_class = Types::InvalidArnException
+
+    InvalidDomainValidationOptionsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidDomainValidationOptionsException.struct_class = Types::InvalidDomainValidationOptionsException
+
+    InvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidStateException.struct_class = Types::InvalidStateException
+
+    InvalidTagException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidTagException.struct_class = Types::InvalidTagException
+
     KeyAlgorithmList.member = Shapes::ShapeRef.new(shape: KeyAlgorithm)
 
     KeyUsage.add_member(:name, Shapes::ShapeRef.new(shape: KeyUsageName, location_name: "Name"))
@@ -213,6 +228,9 @@ module Aws::ACM
     KeyUsageFilterList.member = Shapes::ShapeRef.new(shape: KeyUsageName)
 
     KeyUsageList.member = Shapes::ShapeRef.new(shape: KeyUsage)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListCertificatesRequest.add_member(:certificate_statuses, Shapes::ShapeRef.new(shape: CertificateStatuses, location_name: "CertificateStatuses"))
     ListCertificatesRequest.add_member(:includes, Shapes::ShapeRef.new(shape: Filters, location_name: "Includes"))
@@ -255,10 +273,19 @@ module Aws::ACM
     RequestCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
     RequestCertificateResponse.struct_class = Types::RequestCertificateResponse
 
+    RequestInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RequestInProgressException.struct_class = Types::RequestInProgressException
+
     ResendValidationEmailRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     ResendValidationEmailRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "Domain"))
     ResendValidationEmailRequest.add_member(:validation_domain, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "ValidationDomain"))
     ResendValidationEmailRequest.struct_class = Types::ResendValidationEmailRequest
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceRecord.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     ResourceRecord.add_member(:type, Shapes::ShapeRef.new(shape: RecordType, required: true, location_name: "Type"))
@@ -270,6 +297,9 @@ module Aws::ACM
     Tag.struct_class = Types::Tag
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     UpdateCertificateOptionsRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     UpdateCertificateOptionsRequest.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, required: true, location_name: "Options"))

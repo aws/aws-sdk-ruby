@@ -14,9 +14,12 @@ module Aws::WorkLink
     AcmCertificateArn = Shapes::StringShape.new(name: 'AcmCertificateArn')
     AssociateDomainRequest = Shapes::StructureShape.new(name: 'AssociateDomainRequest')
     AssociateDomainResponse = Shapes::StructureShape.new(name: 'AssociateDomainResponse')
+    AssociateWebsiteAuthorizationProviderRequest = Shapes::StructureShape.new(name: 'AssociateWebsiteAuthorizationProviderRequest')
+    AssociateWebsiteAuthorizationProviderResponse = Shapes::StructureShape.new(name: 'AssociateWebsiteAuthorizationProviderResponse')
     AssociateWebsiteCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'AssociateWebsiteCertificateAuthorityRequest')
     AssociateWebsiteCertificateAuthorityResponse = Shapes::StructureShape.new(name: 'AssociateWebsiteCertificateAuthorityResponse')
     AuditStreamArn = Shapes::StringShape.new(name: 'AuditStreamArn')
+    AuthorizationProviderType = Shapes::StringShape.new(name: 'AuthorizationProviderType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Certificate = Shapes::StringShape.new(name: 'Certificate')
     CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
@@ -52,6 +55,8 @@ module Aws::WorkLink
     DeviceSummaryList = Shapes::ListShape.new(name: 'DeviceSummaryList')
     DisassociateDomainRequest = Shapes::StructureShape.new(name: 'DisassociateDomainRequest')
     DisassociateDomainResponse = Shapes::StructureShape.new(name: 'DisassociateDomainResponse')
+    DisassociateWebsiteAuthorizationProviderRequest = Shapes::StructureShape.new(name: 'DisassociateWebsiteAuthorizationProviderRequest')
+    DisassociateWebsiteAuthorizationProviderResponse = Shapes::StructureShape.new(name: 'DisassociateWebsiteAuthorizationProviderResponse')
     DisassociateWebsiteCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'DisassociateWebsiteCertificateAuthorityRequest')
     DisassociateWebsiteCertificateAuthorityResponse = Shapes::StructureShape.new(name: 'DisassociateWebsiteCertificateAuthorityResponse')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
@@ -75,6 +80,8 @@ module Aws::WorkLink
     ListDomainsResponse = Shapes::StructureShape.new(name: 'ListDomainsResponse')
     ListFleetsRequest = Shapes::StructureShape.new(name: 'ListFleetsRequest')
     ListFleetsResponse = Shapes::StructureShape.new(name: 'ListFleetsResponse')
+    ListWebsiteAuthorizationProvidersRequest = Shapes::StructureShape.new(name: 'ListWebsiteAuthorizationProvidersRequest')
+    ListWebsiteAuthorizationProvidersResponse = Shapes::StructureShape.new(name: 'ListWebsiteAuthorizationProvidersResponse')
     ListWebsiteCertificateAuthoritiesRequest = Shapes::StructureShape.new(name: 'ListWebsiteCertificateAuthoritiesRequest')
     ListWebsiteCertificateAuthoritiesResponse = Shapes::StructureShape.new(name: 'ListWebsiteCertificateAuthoritiesResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -108,16 +115,26 @@ module Aws::WorkLink
     UpdateIdentityProviderConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateIdentityProviderConfigurationResponse')
     Username = Shapes::StringShape.new(name: 'Username')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    WebsiteAuthorizationProviderSummary = Shapes::StructureShape.new(name: 'WebsiteAuthorizationProviderSummary')
+    WebsiteAuthorizationProvidersSummaryList = Shapes::ListShape.new(name: 'WebsiteAuthorizationProvidersSummaryList')
     WebsiteCaSummary = Shapes::StructureShape.new(name: 'WebsiteCaSummary')
     WebsiteCaSummaryList = Shapes::ListShape.new(name: 'WebsiteCaSummaryList')
 
     AssociateDomainRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     AssociateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
-    AssociateDomainRequest.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location_name: "AcmCertificateArn"))
     AssociateDomainRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    AssociateDomainRequest.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location_name: "AcmCertificateArn"))
     AssociateDomainRequest.struct_class = Types::AssociateDomainRequest
 
     AssociateDomainResponse.struct_class = Types::AssociateDomainResponse
+
+    AssociateWebsiteAuthorizationProviderRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    AssociateWebsiteAuthorizationProviderRequest.add_member(:authorization_provider_type, Shapes::ShapeRef.new(shape: AuthorizationProviderType, required: true, location_name: "AuthorizationProviderType"))
+    AssociateWebsiteAuthorizationProviderRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    AssociateWebsiteAuthorizationProviderRequest.struct_class = Types::AssociateWebsiteAuthorizationProviderRequest
+
+    AssociateWebsiteAuthorizationProviderResponse.add_member(:authorization_provider_id, Shapes::ShapeRef.new(shape: Id, location_name: "AuthorizationProviderId"))
+    AssociateWebsiteAuthorizationProviderResponse.struct_class = Types::AssociateWebsiteAuthorizationProviderResponse
 
     AssociateWebsiteCertificateAuthorityRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     AssociateWebsiteCertificateAuthorityRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, required: true, location_name: "Certificate"))
@@ -179,9 +196,11 @@ module Aws::WorkLink
     DescribeDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     DescribeDomainRequest.struct_class = Types::DescribeDomainRequest
 
+    DescribeDomainResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     DescribeDomainResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     DescribeDomainResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedTime"))
     DescribeDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
+    DescribeDomainResponse.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, location_name: "AcmCertificateArn"))
     DescribeDomainResponse.struct_class = Types::DescribeDomainResponse
 
     DescribeFleetMetadataRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
@@ -225,6 +244,12 @@ module Aws::WorkLink
 
     DisassociateDomainResponse.struct_class = Types::DisassociateDomainResponse
 
+    DisassociateWebsiteAuthorizationProviderRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    DisassociateWebsiteAuthorizationProviderRequest.add_member(:authorization_provider_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "AuthorizationProviderId"))
+    DisassociateWebsiteAuthorizationProviderRequest.struct_class = Types::DisassociateWebsiteAuthorizationProviderRequest
+
+    DisassociateWebsiteAuthorizationProviderResponse.struct_class = Types::DisassociateWebsiteAuthorizationProviderResponse
+
     DisassociateWebsiteCertificateAuthorityRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     DisassociateWebsiteCertificateAuthorityRequest.add_member(:website_ca_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "WebsiteCaId"))
     DisassociateWebsiteCertificateAuthorityRequest.struct_class = Types::DisassociateWebsiteCertificateAuthorityRequest
@@ -232,9 +257,9 @@ module Aws::WorkLink
     DisassociateWebsiteCertificateAuthorityResponse.struct_class = Types::DisassociateWebsiteCertificateAuthorityResponse
 
     DomainSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    DomainSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     DomainSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreatedTime"))
     DomainSummary.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, required: true, location_name: "DomainStatus"))
-    DomainSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     DomainSummary.struct_class = Types::DomainSummary
 
     DomainSummaryList.member = Shapes::ShapeRef.new(shape: DomainSummary)
@@ -249,6 +274,12 @@ module Aws::WorkLink
     FleetSummary.struct_class = Types::FleetSummary
 
     FleetSummaryList.member = Shapes::ShapeRef.new(shape: FleetSummary)
+
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
 
     ListDevicesRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     ListDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -276,6 +307,15 @@ module Aws::WorkLink
     ListFleetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFleetsResponse.struct_class = Types::ListFleetsResponse
 
+    ListWebsiteAuthorizationProvidersRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    ListWebsiteAuthorizationProvidersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListWebsiteAuthorizationProvidersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListWebsiteAuthorizationProvidersRequest.struct_class = Types::ListWebsiteAuthorizationProvidersRequest
+
+    ListWebsiteAuthorizationProvidersResponse.add_member(:website_authorization_providers, Shapes::ShapeRef.new(shape: WebsiteAuthorizationProvidersSummaryList, location_name: "WebsiteAuthorizationProviders"))
+    ListWebsiteAuthorizationProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListWebsiteAuthorizationProvidersResponse.struct_class = Types::ListWebsiteAuthorizationProvidersResponse
+
     ListWebsiteCertificateAuthoritiesRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     ListWebsiteCertificateAuthoritiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListWebsiteCertificateAuthoritiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -284,6 +324,12 @@ module Aws::WorkLink
     ListWebsiteCertificateAuthoritiesResponse.add_member(:website_certificate_authorities, Shapes::ShapeRef.new(shape: WebsiteCaSummaryList, location_name: "WebsiteCertificateAuthorities"))
     ListWebsiteCertificateAuthoritiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListWebsiteCertificateAuthoritiesResponse.struct_class = Types::ListWebsiteCertificateAuthoritiesResponse
+
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RestoreDomainAccessRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     RestoreDomainAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -306,6 +352,12 @@ module Aws::WorkLink
     SignOutUserResponse.struct_class = Types::SignOutUserResponse
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UpdateAuditStreamConfigurationRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     UpdateAuditStreamConfigurationRequest.add_member(:audit_stream_arn, Shapes::ShapeRef.new(shape: AuditStreamArn, location_name: "AuditStreamArn"))
@@ -348,6 +400,14 @@ module Aws::WorkLink
 
     UpdateIdentityProviderConfigurationResponse.struct_class = Types::UpdateIdentityProviderConfigurationResponse
 
+    WebsiteAuthorizationProviderSummary.add_member(:authorization_provider_id, Shapes::ShapeRef.new(shape: Id, location_name: "AuthorizationProviderId"))
+    WebsiteAuthorizationProviderSummary.add_member(:authorization_provider_type, Shapes::ShapeRef.new(shape: AuthorizationProviderType, required: true, location_name: "AuthorizationProviderType"))
+    WebsiteAuthorizationProviderSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    WebsiteAuthorizationProviderSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedTime"))
+    WebsiteAuthorizationProviderSummary.struct_class = Types::WebsiteAuthorizationProviderSummary
+
+    WebsiteAuthorizationProvidersSummaryList.member = Shapes::ShapeRef.new(shape: WebsiteAuthorizationProviderSummary)
+
     WebsiteCaSummary.add_member(:website_ca_id, Shapes::ShapeRef.new(shape: Id, location_name: "WebsiteCaId"))
     WebsiteCaSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedTime"))
     WebsiteCaSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
@@ -380,6 +440,20 @@ module Aws::WorkLink
         o.http_request_uri = "/associateDomain"
         o.input = Shapes::ShapeRef.new(shape: AssociateDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:associate_website_authorization_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateWebsiteAuthorizationProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/associateWebsiteAuthorizationProvider"
+        o.input = Shapes::ShapeRef.new(shape: AssociateWebsiteAuthorizationProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateWebsiteAuthorizationProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -546,6 +620,20 @@ module Aws::WorkLink
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:disassociate_website_authorization_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateWebsiteAuthorizationProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/disassociateWebsiteAuthorizationProvider"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateWebsiteAuthorizationProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateWebsiteAuthorizationProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:disassociate_website_certificate_authority, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateWebsiteCertificateAuthority"
         o.http_method = "POST"
@@ -605,6 +693,25 @@ module Aws::WorkLink
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_website_authorization_providers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWebsiteAuthorizationProviders"
+        o.http_method = "POST"
+        o.http_request_uri = "/listWebsiteAuthorizationProviders"
+        o.input = Shapes::ShapeRef.new(shape: ListWebsiteAuthorizationProvidersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWebsiteAuthorizationProvidersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

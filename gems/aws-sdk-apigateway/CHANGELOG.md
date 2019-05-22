@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-05-22)
+------------------
+
+* Feature - This release adds support for tagging of Amazon API Gateway resources.
+
+1.29.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.28.0 (2019-05-15)
 ------------------
 

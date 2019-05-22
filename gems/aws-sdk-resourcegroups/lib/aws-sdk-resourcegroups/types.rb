@@ -8,6 +8,19 @@
 module Aws::ResourceGroups
   module Types
 
+    # The request does not comply with validation rules that are defined for
+    # the request parameters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateGroupInput
     #   data as a hash:
     #
@@ -107,6 +120,18 @@ module Aws::ResourceGroups
     #
     class DeleteGroupOutput < Struct.new(
       :group)
+      include Aws::Structure
+    end
+
+    # The caller is not authorized to make the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -293,6 +318,18 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # An internal error occurred while processing the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListGroupResourcesInput
     #   data as a hash:
     #
@@ -437,6 +474,31 @@ module Aws::ResourceGroups
       :group_identifiers,
       :groups,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The request uses an HTTP method which is not allowed for the specified
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/MethodNotAllowedException AWS API Documentation
+    #
+    class MethodNotAllowedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more resources specified in the request do not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -692,6 +754,31 @@ module Aws::ResourceGroups
     class TagOutput < Struct.new(
       :arn,
       :tags)
+      include Aws::Structure
+    end
+
+    # The caller has exceeded throttling limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request has not been applied because it lacks valid authentication
+    # credentials for the target resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

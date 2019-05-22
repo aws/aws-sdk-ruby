@@ -264,6 +264,9 @@ module Aws::ECR
     DescribeRepositoriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeRepositoriesResponse.struct_class = Types::DescribeRepositoriesResponse
 
+    EmptyUploadException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    EmptyUploadException.struct_class = Types::EmptyUploadException
+
     GetAuthorizationTokenRegistryIdList.member = Shapes::ShapeRef.new(shape: RegistryId)
 
     GetAuthorizationTokenRequest.add_member(:registry_ids, Shapes::ShapeRef.new(shape: GetAuthorizationTokenRegistryIdList, location_name: "registryIds"))
@@ -323,6 +326,9 @@ module Aws::ECR
     Image.add_member(:image_manifest, Shapes::ShapeRef.new(shape: ImageManifest, location_name: "imageManifest"))
     Image.struct_class = Types::Image
 
+    ImageAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageAlreadyExistsException.struct_class = Types::ImageAlreadyExistsException
+
     ImageDetail.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     ImageDetail.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     ImageDetail.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageDigest"))
@@ -348,6 +354,9 @@ module Aws::ECR
 
     ImageList.member = Shapes::ShapeRef.new(shape: Image)
 
+    ImageNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageNotFoundException.struct_class = Types::ImageNotFoundException
+
     ImageTagList.member = Shapes::ShapeRef.new(shape: ImageTag)
 
     InitiateLayerUploadRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -358,11 +367,30 @@ module Aws::ECR
     InitiateLayerUploadResponse.add_member(:part_size, Shapes::ShapeRef.new(shape: PartSize, location_name: "partSize"))
     InitiateLayerUploadResponse.struct_class = Types::InitiateLayerUploadResponse
 
+    InvalidLayerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidLayerException.struct_class = Types::InvalidLayerException
+
+    InvalidLayerPartException.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    InvalidLayerPartException.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    InvalidLayerPartException.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId"))
+    InvalidLayerPartException.add_member(:last_valid_byte_received, Shapes::ShapeRef.new(shape: PartSize, location_name: "lastValidByteReceived"))
+    InvalidLayerPartException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidLayerPartException.struct_class = Types::InvalidLayerPartException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidTagParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidTagParameterException.struct_class = Types::InvalidTagParameterException
+
     Layer.add_member(:layer_digest, Shapes::ShapeRef.new(shape: LayerDigest, location_name: "layerDigest"))
     Layer.add_member(:layer_availability, Shapes::ShapeRef.new(shape: LayerAvailability, location_name: "layerAvailability"))
     Layer.add_member(:layer_size, Shapes::ShapeRef.new(shape: LayerSizeInBytes, location_name: "layerSize"))
     Layer.add_member(:media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "mediaType"))
     Layer.struct_class = Types::Layer
+
+    LayerAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LayerAlreadyExistsException.struct_class = Types::LayerAlreadyExistsException
 
     LayerDigestList.member = Shapes::ShapeRef.new(shape: LayerDigest)
 
@@ -373,10 +401,28 @@ module Aws::ECR
 
     LayerFailureList.member = Shapes::ShapeRef.new(shape: LayerFailure)
 
+    LayerInaccessibleException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LayerInaccessibleException.struct_class = Types::LayerInaccessibleException
+
     LayerList.member = Shapes::ShapeRef.new(shape: Layer)
+
+    LayerPartTooSmallException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LayerPartTooSmallException.struct_class = Types::LayerPartTooSmallException
+
+    LayersNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LayersNotFoundException.struct_class = Types::LayersNotFoundException
+
+    LifecyclePolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LifecyclePolicyNotFoundException.struct_class = Types::LifecyclePolicyNotFoundException
 
     LifecyclePolicyPreviewFilter.add_member(:tag_status, Shapes::ShapeRef.new(shape: TagStatus, location_name: "tagStatus"))
     LifecyclePolicyPreviewFilter.struct_class = Types::LifecyclePolicyPreviewFilter
+
+    LifecyclePolicyPreviewInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LifecyclePolicyPreviewInProgressException.struct_class = Types::LifecyclePolicyPreviewInProgressException
+
+    LifecyclePolicyPreviewNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LifecyclePolicyPreviewNotFoundException.struct_class = Types::LifecyclePolicyPreviewNotFoundException
 
     LifecyclePolicyPreviewResult.add_member(:image_tags, Shapes::ShapeRef.new(shape: ImageTagList, location_name: "imageTags"))
     LifecyclePolicyPreviewResult.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageDigest"))
@@ -392,6 +438,9 @@ module Aws::ECR
 
     LifecyclePolicyRuleAction.add_member(:type, Shapes::ShapeRef.new(shape: ImageActionType, location_name: "type"))
     LifecyclePolicyRuleAction.struct_class = Types::LifecyclePolicyRuleAction
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListImagesFilter.add_member(:tag_status, Shapes::ShapeRef.new(shape: TagStatus, location_name: "tagStatus"))
     ListImagesFilter.struct_class = Types::ListImagesFilter
@@ -441,9 +490,24 @@ module Aws::ECR
     Repository.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
     Repository.struct_class = Types::Repository
 
+    RepositoryAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryAlreadyExistsException.struct_class = Types::RepositoryAlreadyExistsException
+
     RepositoryList.member = Shapes::ShapeRef.new(shape: Repository)
 
     RepositoryNameList.member = Shapes::ShapeRef.new(shape: RepositoryName)
+
+    RepositoryNotEmptyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryNotEmptyException.struct_class = Types::RepositoryNotEmptyException
+
+    RepositoryNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryNotFoundException.struct_class = Types::RepositoryNotFoundException
+
+    RepositoryPolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RepositoryPolicyNotFoundException.struct_class = Types::RepositoryPolicyNotFoundException
+
+    ServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ServerException.struct_class = Types::ServerException
 
     SetRepositoryPolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     SetRepositoryPolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -481,6 +545,9 @@ module Aws::ECR
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -500,6 +567,9 @@ module Aws::ECR
     UploadLayerPartResponse.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId"))
     UploadLayerPartResponse.add_member(:last_byte_received, Shapes::ShapeRef.new(shape: PartSize, location_name: "lastByteReceived"))
     UploadLayerPartResponse.struct_class = Types::UploadLayerPartResponse
+
+    UploadNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UploadNotFoundException.struct_class = Types::UploadNotFoundException
 
 
     # @api private

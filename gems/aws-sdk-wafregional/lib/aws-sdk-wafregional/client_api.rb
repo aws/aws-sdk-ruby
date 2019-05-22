@@ -1170,6 +1170,53 @@ module Aws::WAFRegional
     UpdateXssMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     UpdateXssMatchSetResponse.struct_class = Types::UpdateXssMatchSetResponse
 
+    WAFDisallowedNameException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFDisallowedNameException.struct_class = Types::WAFDisallowedNameException
+
+    WAFInternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFInternalErrorException.struct_class = Types::WAFInternalErrorException
+
+    WAFInvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFInvalidOperationException.struct_class = Types::WAFInvalidOperationException
+
+    WAFInvalidParameterException.add_member(:field, Shapes::ShapeRef.new(shape: ParameterExceptionField, location_name: "field"))
+    WAFInvalidParameterException.add_member(:parameter, Shapes::ShapeRef.new(shape: ParameterExceptionParameter, location_name: "parameter"))
+    WAFInvalidParameterException.add_member(:reason, Shapes::ShapeRef.new(shape: ParameterExceptionReason, location_name: "reason"))
+    WAFInvalidParameterException.struct_class = Types::WAFInvalidParameterException
+
+    WAFInvalidPermissionPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFInvalidPermissionPolicyException.struct_class = Types::WAFInvalidPermissionPolicyException
+
+    WAFInvalidRegexPatternException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFInvalidRegexPatternException.struct_class = Types::WAFInvalidRegexPatternException
+
+    WAFLimitsExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFLimitsExceededException.struct_class = Types::WAFLimitsExceededException
+
+    WAFNonEmptyEntityException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFNonEmptyEntityException.struct_class = Types::WAFNonEmptyEntityException
+
+    WAFNonexistentContainerException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFNonexistentContainerException.struct_class = Types::WAFNonexistentContainerException
+
+    WAFNonexistentItemException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFNonexistentItemException.struct_class = Types::WAFNonexistentItemException
+
+    WAFReferencedItemException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFReferencedItemException.struct_class = Types::WAFReferencedItemException
+
+    WAFServiceLinkedRoleErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFServiceLinkedRoleErrorException.struct_class = Types::WAFServiceLinkedRoleErrorException
+
+    WAFStaleDataException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFStaleDataException.struct_class = Types::WAFStaleDataException
+
+    WAFSubscriptionNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFSubscriptionNotFoundException.struct_class = Types::WAFSubscriptionNotFoundException
+
+    WAFUnavailableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFUnavailableEntityException.struct_class = Types::WAFUnavailableEntityException
+
     WafAction.add_member(:type, Shapes::ShapeRef.new(shape: WafActionType, required: true, location_name: "Type"))
     WafAction.struct_class = Types::WafAction
 

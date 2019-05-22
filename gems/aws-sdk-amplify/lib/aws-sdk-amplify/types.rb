@@ -107,6 +107,18 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Exception thrown when a request contains unexpected data.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Branch for an Amplify App, which maps to a 3rd party repository
     # branch.
     #
@@ -694,6 +706,19 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Exception thrown when an operation fails due to a dependent service
+    # throwing an exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DependentServiceFailureException AWS API Documentation
+    #
+    class DependentServiceFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Structure for Domain Association, which associates a custom domain
     # with an Amplify App.
     #
@@ -890,6 +915,19 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Exception thrown when the service fails to perform an operation due to
+    # an internal issue.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Structure for an execution job for an Amplify App.
     #
     # @!attribute [rw] summary
@@ -958,6 +996,19 @@ module Aws::Amplify
       :status,
       :end_time,
       :job_type)
+      include Aws::Structure
+    end
+
+    # Exception thrown when a resource could not be created because of
+    # service limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1174,6 +1225,19 @@ module Aws::Amplify
     class ListJobsResult < Struct.new(
       :job_summaries,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Exception thrown when an entity has not been found during an
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1415,6 +1479,18 @@ module Aws::Amplify
     class SubDomainSetting < Struct.new(
       :prefix,
       :branch_name)
+      include Aws::Structure
+    end
+
+    # Exception thrown when an operation fails due to a lack of access.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -123,6 +123,10 @@ module Aws::IoT1ClickDevicesService
     FinalizeDeviceClaimResponse.add_member(:state, Shapes::ShapeRef.new(shape: __string, location_name: "state"))
     FinalizeDeviceClaimResponse.struct_class = Types::FinalizeDeviceClaimResponse
 
+    ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     GetDeviceMethodsRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "deviceId"))
     GetDeviceMethodsRequest.struct_class = Types::GetDeviceMethodsRequest
 
@@ -134,6 +138,14 @@ module Aws::IoT1ClickDevicesService
 
     InitiateDeviceClaimResponse.add_member(:state, Shapes::ShapeRef.new(shape: __string, location_name: "state"))
     InitiateDeviceClaimResponse.struct_class = Types::InitiateDeviceClaimResponse
+
+    InternalFailureException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    InvalidRequestException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
 
     InvokeDeviceMethodRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "deviceId"))
     InvokeDeviceMethodRequest.add_member(:device_method, Shapes::ShapeRef.new(shape: DeviceMethod, location_name: "deviceMethod"))
@@ -168,6 +180,22 @@ module Aws::IoT1ClickDevicesService
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    PreconditionFailedException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    PreconditionFailedException.struct_class = Types::PreconditionFailedException
+
+    RangeNotSatisfiableException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    RangeNotSatisfiableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    RangeNotSatisfiableException.struct_class = Types::RangeNotSatisfiableException
+
+    ResourceConflictException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))

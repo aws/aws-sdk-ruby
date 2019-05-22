@@ -666,6 +666,13 @@ module Aws::EMR
 
     InstanceTypeSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceTypeSpecification)
 
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidRequestException.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     JobFlowDetail.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "JobFlowId"))
     JobFlowDetail.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Name"))
     JobFlowDetail.add_member(:log_uri, Shapes::ShapeRef.new(shape: XmlString, location_name: "LogUri"))

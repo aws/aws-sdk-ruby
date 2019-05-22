@@ -267,6 +267,19 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # The health check for the instance that is specified by `ServiceId` and
+    # `InstanceId` is not a custom health check.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CustomHealthNotFound AWS API Documentation
+    #
+    class CustomHealthNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteNamespaceRequest
     #   data as a hash:
     #
@@ -677,6 +690,23 @@ module Aws::ServiceDiscovery
     class DnsRecord < Struct.new(
       :type,
       :ttl)
+      include Aws::Structure
+    end
+
+    # The operation is already in progress.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] duplicate_operation_id
+    #   The ID of the operation that is already in progress.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DuplicateRequest AWS API Documentation
+    #
+    class DuplicateRequest < Struct.new(
+      :message,
+      :duplicate_operation_id)
       include Aws::Structure
     end
 
@@ -1297,6 +1327,19 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # No instance exists with the specified ID, or the instance was recently
+    # registered, and information about the instance hasn't propagated yet.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/InstanceNotFound AWS API Documentation
+    #
+    class InstanceNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains information about the instances that you
     # registered by using a specified service.
     #
@@ -1340,6 +1383,20 @@ module Aws::ServiceDiscovery
     class InstanceSummary < Struct.new(
       :id,
       :attributes)
+      include Aws::Structure
+    end
+
+    # One or more specified values aren't valid. For example, a required
+    # value might be missing, a numeric value might be outside the allowed
+    # range, or a string value might exceed length constraints.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/InvalidInput AWS API Documentation
+    #
+    class InvalidInput < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1712,6 +1769,28 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # The namespace that you're trying to create already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_request_id
+    #   The `CreatorRequestId` that was used to create the namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_id
+    #   The ID of the existing namespace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/NamespaceAlreadyExists AWS API Documentation
+    #
+    class NamespaceAlreadyExists < Struct.new(
+      :message,
+      :creator_request_id,
+      :namespace_id)
+      include Aws::Structure
+    end
+
     # A complex type that identifies the namespaces that you want to list.
     # You can choose to list public or private namespaces.
     #
@@ -1757,6 +1836,18 @@ module Aws::ServiceDiscovery
       :name,
       :values,
       :condition)
+      include Aws::Structure
+    end
+
+    # No namespace exists with the specified ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/NamespaceNotFound AWS API Documentation
+    #
+    class NamespaceNotFound < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2000,6 +2091,18 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # No operation exists with the specified ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/OperationNotFound AWS API Documentation
+    #
+    class OperationNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains information about an operation that
     # matches the criteria that you specified in a ListOperations request.
     #
@@ -2209,6 +2312,33 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # The specified resource can't be deleted because it contains other
+    # resources. For example, you can't delete a service that contains any
+    # instances.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ResourceInUse AWS API Documentation
+    #
+    class ResourceInUse < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource can't be created because you've reached the limit on
+    # the number of resources.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ResourceLimitExceeded AWS API Documentation
+    #
+    class ResourceLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains information about the specified service.
     #
     # @!attribute [rw] id
@@ -2295,6 +2425,29 @@ module Aws::ServiceDiscovery
       :health_check_custom_config,
       :create_date,
       :creator_request_id)
+      include Aws::Structure
+    end
+
+    # The service can't be created because a service with the same name
+    # already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_request_id
+    #   The `CreatorRequestId` that was used to create the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the existing service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceAlreadyExists AWS API Documentation
+    #
+    class ServiceAlreadyExists < Struct.new(
+      :message,
+      :creator_request_id,
+      :service_id)
       include Aws::Structure
     end
 
@@ -2453,6 +2606,18 @@ module Aws::ServiceDiscovery
       :name,
       :values,
       :condition)
+      include Aws::Structure
+    end
+
+    # No service exists with the specified ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceNotFound AWS API Documentation
+    #
+    class ServiceNotFound < Struct.new(
+      :message)
       include Aws::Structure
     end
 

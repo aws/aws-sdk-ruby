@@ -520,6 +520,9 @@ module Aws::IAM
     ChangePasswordRequest.add_member(:new_password, Shapes::ShapeRef.new(shape: passwordType, required: true, location_name: "NewPassword"))
     ChangePasswordRequest.struct_class = Types::ChangePasswordRequest
 
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ConcurrentModificationMessage, location_name: "message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     ContextEntry.add_member(:context_key_name, Shapes::ShapeRef.new(shape: ContextKeyNameType, location_name: "ContextKeyName"))
     ContextEntry.add_member(:context_key_values, Shapes::ShapeRef.new(shape: ContextKeyValueListType, location_name: "ContextKeyValues"))
     ContextEntry.add_member(:context_key_type, Shapes::ShapeRef.new(shape: ContextKeyTypeEnum, location_name: "ContextKeyType"))
@@ -637,6 +640,15 @@ module Aws::IAM
     CreateVirtualMFADeviceResponse.add_member(:virtual_mfa_device, Shapes::ShapeRef.new(shape: VirtualMFADevice, required: true, location_name: "VirtualMFADevice"))
     CreateVirtualMFADeviceResponse.struct_class = Types::CreateVirtualMFADeviceResponse
 
+    CredentialReportExpiredException.add_member(:message, Shapes::ShapeRef.new(shape: credentialReportExpiredExceptionMessage, location_name: "message"))
+    CredentialReportExpiredException.struct_class = Types::CredentialReportExpiredException
+
+    CredentialReportNotPresentException.add_member(:message, Shapes::ShapeRef.new(shape: credentialReportNotPresentExceptionMessage, location_name: "message"))
+    CredentialReportNotPresentException.struct_class = Types::CredentialReportNotPresentException
+
+    CredentialReportNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: credentialReportNotReadyExceptionMessage, location_name: "message"))
+    CredentialReportNotReadyException.struct_class = Types::CredentialReportNotReadyException
+
     DeactivateMFADeviceRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     DeactivateMFADeviceRequest.add_member(:serial_number, Shapes::ShapeRef.new(shape: serialNumberType, required: true, location_name: "SerialNumber"))
     DeactivateMFADeviceRequest.struct_class = Types::DeactivateMFADeviceRequest
@@ -647,6 +659,9 @@ module Aws::IAM
 
     DeleteAccountAliasRequest.add_member(:account_alias, Shapes::ShapeRef.new(shape: accountAliasType, required: true, location_name: "AccountAlias"))
     DeleteAccountAliasRequest.struct_class = Types::DeleteAccountAliasRequest
+
+    DeleteConflictException.add_member(:message, Shapes::ShapeRef.new(shape: deleteConflictMessage, location_name: "message"))
+    DeleteConflictException.struct_class = Types::DeleteConflictException
 
     DeleteGroupPolicyRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: groupNameType, required: true, location_name: "GroupName"))
     DeleteGroupPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
@@ -734,11 +749,20 @@ module Aws::IAM
     DetachUserPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicyArn"))
     DetachUserPolicyRequest.struct_class = Types::DetachUserPolicyRequest
 
+    DuplicateCertificateException.add_member(:message, Shapes::ShapeRef.new(shape: duplicateCertificateMessage, location_name: "message"))
+    DuplicateCertificateException.struct_class = Types::DuplicateCertificateException
+
+    DuplicateSSHPublicKeyException.add_member(:message, Shapes::ShapeRef.new(shape: duplicateSSHPublicKeyMessage, location_name: "message"))
+    DuplicateSSHPublicKeyException.struct_class = Types::DuplicateSSHPublicKeyException
+
     EnableMFADeviceRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     EnableMFADeviceRequest.add_member(:serial_number, Shapes::ShapeRef.new(shape: serialNumberType, required: true, location_name: "SerialNumber"))
     EnableMFADeviceRequest.add_member(:authentication_code_1, Shapes::ShapeRef.new(shape: authenticationCodeType, required: true, location_name: "AuthenticationCode1"))
     EnableMFADeviceRequest.add_member(:authentication_code_2, Shapes::ShapeRef.new(shape: authenticationCodeType, required: true, location_name: "AuthenticationCode2"))
     EnableMFADeviceRequest.struct_class = Types::EnableMFADeviceRequest
+
+    EntityAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: entityAlreadyExistsMessage, location_name: "message"))
+    EntityAlreadyExistsException.struct_class = Types::EntityAlreadyExistsException
 
     EntityDetails.add_member(:entity_info, Shapes::ShapeRef.new(shape: EntityInfo, required: true, location_name: "EntityInfo"))
     EntityDetails.add_member(:last_authenticated, Shapes::ShapeRef.new(shape: dateType, location_name: "LastAuthenticated"))
@@ -750,6 +774,9 @@ module Aws::IAM
     EntityInfo.add_member(:id, Shapes::ShapeRef.new(shape: idType, required: true, location_name: "Id"))
     EntityInfo.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
     EntityInfo.struct_class = Types::EntityInfo
+
+    EntityTemporarilyUnmodifiableException.add_member(:message, Shapes::ShapeRef.new(shape: entityTemporarilyUnmodifiableMessage, location_name: "message"))
+    EntityTemporarilyUnmodifiableException.struct_class = Types::EntityTemporarilyUnmodifiableException
 
     ErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: stringType, required: true, location_name: "Message"))
     ErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: stringType, required: true, location_name: "Code"))
@@ -986,6 +1013,27 @@ module Aws::IAM
     InstanceProfile.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
     InstanceProfile.add_member(:roles, Shapes::ShapeRef.new(shape: roleListType, required: true, location_name: "Roles"))
     InstanceProfile.struct_class = Types::InstanceProfile
+
+    InvalidAuthenticationCodeException.add_member(:message, Shapes::ShapeRef.new(shape: invalidAuthenticationCodeMessage, location_name: "message"))
+    InvalidAuthenticationCodeException.struct_class = Types::InvalidAuthenticationCodeException
+
+    InvalidCertificateException.add_member(:message, Shapes::ShapeRef.new(shape: invalidCertificateMessage, location_name: "message"))
+    InvalidCertificateException.struct_class = Types::InvalidCertificateException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: invalidInputMessage, location_name: "message"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
+    InvalidPublicKeyException.add_member(:message, Shapes::ShapeRef.new(shape: invalidPublicKeyMessage, location_name: "message"))
+    InvalidPublicKeyException.struct_class = Types::InvalidPublicKeyException
+
+    InvalidUserTypeException.add_member(:message, Shapes::ShapeRef.new(shape: invalidUserTypeMessage, location_name: "message"))
+    InvalidUserTypeException.struct_class = Types::InvalidUserTypeException
+
+    KeyPairMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: keyPairMismatchMessage, location_name: "message"))
+    KeyPairMismatchException.struct_class = Types::KeyPairMismatchException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: limitExceededMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAccessKeysRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, location_name: "UserName"))
     ListAccessKeysRequest.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
@@ -1278,6 +1326,12 @@ module Aws::IAM
     MFADevice.add_member(:enable_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "EnableDate"))
     MFADevice.struct_class = Types::MFADevice
 
+    MalformedCertificateException.add_member(:message, Shapes::ShapeRef.new(shape: malformedCertificateMessage, location_name: "message"))
+    MalformedCertificateException.struct_class = Types::MalformedCertificateException
+
+    MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: malformedPolicyDocumentMessage, location_name: "message"))
+    MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
+
     ManagedPolicyDetail.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, location_name: "PolicyName"))
     ManagedPolicyDetail.add_member(:policy_id, Shapes::ShapeRef.new(shape: idType, location_name: "PolicyId"))
     ManagedPolicyDetail.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "Arn"))
@@ -1293,6 +1347,9 @@ module Aws::IAM
     ManagedPolicyDetail.struct_class = Types::ManagedPolicyDetail
 
     ManagedPolicyDetailListType.member = Shapes::ShapeRef.new(shape: ManagedPolicyDetail)
+
+    NoSuchEntityException.add_member(:message, Shapes::ShapeRef.new(shape: noSuchEntityMessage, location_name: "message"))
+    NoSuchEntityException.struct_class = Types::NoSuchEntityException
 
     OpenIDConnectProviderListEntry.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "Arn"))
     OpenIDConnectProviderListEntry.struct_class = Types::OpenIDConnectProviderListEntry
@@ -1314,6 +1371,9 @@ module Aws::IAM
     PasswordPolicy.add_member(:hard_expiry, Shapes::ShapeRef.new(shape: booleanObjectType, location_name: "HardExpiry"))
     PasswordPolicy.struct_class = Types::PasswordPolicy
 
+    PasswordPolicyViolationException.add_member(:message, Shapes::ShapeRef.new(shape: passwordPolicyViolationMessage, location_name: "message"))
+    PasswordPolicyViolationException.struct_class = Types::PasswordPolicyViolationException
+
     Policy.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, location_name: "PolicyName"))
     Policy.add_member(:policy_id, Shapes::ShapeRef.new(shape: idType, location_name: "PolicyId"))
     Policy.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "Arn"))
@@ -1331,6 +1391,9 @@ module Aws::IAM
     PolicyDetail.add_member(:policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "PolicyDocument"))
     PolicyDetail.struct_class = Types::PolicyDetail
 
+    PolicyEvaluationException.add_member(:message, Shapes::ShapeRef.new(shape: policyEvaluationErrorMessage, location_name: "message"))
+    PolicyEvaluationException.struct_class = Types::PolicyEvaluationException
+
     PolicyGrantingServiceAccess.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
     PolicyGrantingServiceAccess.add_member(:policy_type, Shapes::ShapeRef.new(shape: policyType, required: true, location_name: "PolicyType"))
     PolicyGrantingServiceAccess.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "PolicyArn"))
@@ -1343,6 +1406,9 @@ module Aws::IAM
     PolicyGroup.struct_class = Types::PolicyGroup
 
     PolicyGroupListType.member = Shapes::ShapeRef.new(shape: PolicyGroup)
+
+    PolicyNotAttachableException.add_member(:message, Shapes::ShapeRef.new(shape: policyNotAttachableMessage, location_name: "message"))
+    PolicyNotAttachableException.struct_class = Types::PolicyNotAttachableException
 
     PolicyRole.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, location_name: "RoleName"))
     PolicyRole.add_member(:role_id, Shapes::ShapeRef.new(shape: idType, location_name: "RoleId"))
@@ -1492,12 +1558,18 @@ module Aws::IAM
     ServerCertificateMetadata.add_member(:expiration, Shapes::ShapeRef.new(shape: dateType, location_name: "Expiration"))
     ServerCertificateMetadata.struct_class = Types::ServerCertificateMetadata
 
+    ServiceFailureException.add_member(:message, Shapes::ShapeRef.new(shape: serviceFailureExceptionMessage, location_name: "message"))
+    ServiceFailureException.struct_class = Types::ServiceFailureException
+
     ServiceLastAccessed.add_member(:service_name, Shapes::ShapeRef.new(shape: serviceNameType, required: true, location_name: "ServiceName"))
     ServiceLastAccessed.add_member(:last_authenticated, Shapes::ShapeRef.new(shape: dateType, location_name: "LastAuthenticated"))
     ServiceLastAccessed.add_member(:service_namespace, Shapes::ShapeRef.new(shape: serviceNamespaceType, required: true, location_name: "ServiceNamespace"))
     ServiceLastAccessed.add_member(:last_authenticated_entity, Shapes::ShapeRef.new(shape: arnType, location_name: "LastAuthenticatedEntity"))
     ServiceLastAccessed.add_member(:total_authenticated_entities, Shapes::ShapeRef.new(shape: integerType, location_name: "TotalAuthenticatedEntities"))
     ServiceLastAccessed.struct_class = Types::ServiceLastAccessed
+
+    ServiceNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: serviceNotSupportedMessage, location_name: "message"))
+    ServiceNotSupportedException.struct_class = Types::ServiceNotSupportedException
 
     ServiceSpecificCredential.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
     ServiceSpecificCredential.add_member(:service_name, Shapes::ShapeRef.new(shape: serviceName, required: true, location_name: "ServiceName"))
@@ -1585,6 +1657,12 @@ module Aws::IAM
     TagUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     TagUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
     TagUserRequest.struct_class = Types::TagUserRequest
+
+    UnmodifiableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: unmodifiableEntityMessage, location_name: "message"))
+    UnmodifiableEntityException.struct_class = Types::UnmodifiableEntityException
+
+    UnrecognizedPublicKeyEncodingException.add_member(:message, Shapes::ShapeRef.new(shape: unrecognizedPublicKeyEncodingMessage, location_name: "message"))
+    UnrecognizedPublicKeyEncodingException.struct_class = Types::UnrecognizedPublicKeyEncodingException
 
     UntagRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
     UntagRoleRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: tagKeyListType, required: true, location_name: "TagKeys"))

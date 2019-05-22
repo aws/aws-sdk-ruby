@@ -163,6 +163,10 @@ module Aws::CloudSearch
     AvailabilityOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     AvailabilityOptionsStatus.struct_class = Types::AvailabilityOptionsStatus
 
+    BaseException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    BaseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BaseException.struct_class = Types::BaseException
+
     BuildSuggestersRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     BuildSuggestersRequest.struct_class = Types::BuildSuggestersRequest
 

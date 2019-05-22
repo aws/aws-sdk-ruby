@@ -145,11 +145,17 @@ module Aws::SNS
     AddPermissionInput.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionsList, required: true, location_name: "ActionName"))
     AddPermissionInput.struct_class = Types::AddPermissionInput
 
+    AuthorizationErrorException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    AuthorizationErrorException.struct_class = Types::AuthorizationErrorException
+
     CheckIfPhoneNumberIsOptedOutInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "phoneNumber"))
     CheckIfPhoneNumberIsOptedOutInput.struct_class = Types::CheckIfPhoneNumberIsOptedOutInput
 
     CheckIfPhoneNumberIsOptedOutResponse.add_member(:is_opted_out, Shapes::ShapeRef.new(shape: boolean, location_name: "isOptedOut"))
     CheckIfPhoneNumberIsOptedOutResponse.struct_class = Types::CheckIfPhoneNumberIsOptedOutResponse
+
+    ConcurrentAccessException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ConcurrentAccessException.struct_class = Types::ConcurrentAccessException
 
     ConfirmSubscriptionInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     ConfirmSubscriptionInput.add_member(:token, Shapes::ShapeRef.new(shape: token, required: true, location_name: "Token"))
@@ -199,6 +205,12 @@ module Aws::SNS
     Endpoint.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, location_name: "Attributes"))
     Endpoint.struct_class = Types::Endpoint
 
+    EndpointDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    EndpointDisabledException.struct_class = Types::EndpointDisabledException
+
+    FilterPolicyLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    FilterPolicyLimitExceededException.struct_class = Types::FilterPolicyLimitExceededException
+
     GetEndpointAttributesInput.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     GetEndpointAttributesInput.struct_class = Types::GetEndpointAttributesInput
 
@@ -228,6 +240,36 @@ module Aws::SNS
 
     GetTopicAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: TopicAttributesMap, location_name: "Attributes"))
     GetTopicAttributesResponse.struct_class = Types::GetTopicAttributesResponse
+
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidSecurityException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidSecurityException.struct_class = Types::InvalidSecurityException
+
+    KMSAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSAccessDeniedException.struct_class = Types::KMSAccessDeniedException
+
+    KMSDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSDisabledException.struct_class = Types::KMSDisabledException
+
+    KMSInvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSInvalidStateException.struct_class = Types::KMSInvalidStateException
+
+    KMSNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSNotFoundException.struct_class = Types::KMSNotFoundException
+
+    KMSOptInRequired.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSOptInRequired.struct_class = Types::KMSOptInRequired
+
+    KMSThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSThrottlingException.struct_class = Types::KMSThrottlingException
 
     ListEndpointsByPlatformApplicationInput.add_member(:platform_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PlatformApplicationArn"))
     ListEndpointsByPlatformApplicationInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -296,6 +338,9 @@ module Aws::SNS
     MessageAttributeValue.add_member(:binary_value, Shapes::ShapeRef.new(shape: Binary, location_name: "BinaryValue"))
     MessageAttributeValue.struct_class = Types::MessageAttributeValue
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     OptInPhoneNumberInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "phoneNumber"))
     OptInPhoneNumberInput.struct_class = Types::OptInPhoneNumberInput
 
@@ -306,6 +351,9 @@ module Aws::SNS
     PlatformApplication.add_member(:platform_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "PlatformApplicationArn"))
     PlatformApplication.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, location_name: "Attributes"))
     PlatformApplication.struct_class = Types::PlatformApplication
+
+    PlatformApplicationDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    PlatformApplicationDisabledException.struct_class = Types::PlatformApplicationDisabledException
 
     PublishInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
     PublishInput.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
@@ -322,6 +370,9 @@ module Aws::SNS
     RemovePermissionInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     RemovePermissionInput.add_member(:label, Shapes::ShapeRef.new(shape: label, required: true, location_name: "Label"))
     RemovePermissionInput.struct_class = Types::RemovePermissionInput
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SetEndpointAttributesInput.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     SetEndpointAttributesInput.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, required: true, location_name: "Attributes"))
@@ -346,6 +397,9 @@ module Aws::SNS
     SetTopicAttributesInput.add_member(:attribute_value, Shapes::ShapeRef.new(shape: attributeValue, location_name: "AttributeValue"))
     SetTopicAttributesInput.struct_class = Types::SetTopicAttributesInput
 
+    StaleTagException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    StaleTagException.struct_class = Types::StaleTagException
+
     SubscribeInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     SubscribeInput.add_member(:protocol, Shapes::ShapeRef.new(shape: protocol, required: true, location_name: "Protocol"))
     SubscribeInput.add_member(:endpoint, Shapes::ShapeRef.new(shape: endpoint, location_name: "Endpoint"))
@@ -366,6 +420,9 @@ module Aws::SNS
     SubscriptionAttributesMap.key = Shapes::ShapeRef.new(shape: attributeName)
     SubscriptionAttributesMap.value = Shapes::ShapeRef.new(shape: attributeValue)
 
+    SubscriptionLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    SubscriptionLimitExceededException.struct_class = Types::SubscriptionLimitExceededException
+
     SubscriptionsList.member = Shapes::ShapeRef.new(shape: Subscription)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
@@ -374,7 +431,13 @@ module Aws::SNS
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
+    TagLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    TagLimitExceededException.struct_class = Types::TagLimitExceededException
+
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    TagPolicyException.struct_class = Types::TagPolicyException
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -382,11 +445,17 @@ module Aws::SNS
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    ThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ThrottledException.struct_class = Types::ThrottledException
+
     Topic.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
     Topic.struct_class = Types::Topic
 
     TopicAttributesMap.key = Shapes::ShapeRef.new(shape: attributeName)
     TopicAttributesMap.value = Shapes::ShapeRef.new(shape: attributeValue)
+
+    TopicLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    TopicLimitExceededException.struct_class = Types::TopicLimitExceededException
 
     TopicsList.member = Shapes::ShapeRef.new(shape: Topic)
 

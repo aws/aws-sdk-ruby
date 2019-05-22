@@ -1696,6 +1696,26 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # There was an internal failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Configuration information for delivery of data set contents to AWS IoT
     # Events.
     #
@@ -1760,6 +1780,16 @@ module Aws::IoTAnalytics
       :lambda_name,
       :batch_size,
       :next)
+      include Aws::Structure
+    end
+
+    # The command caused an internal limit to be exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2399,6 +2429,26 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # A resource with the same name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_arn)
+      include Aws::Structure
+    end
+
     # The configuration of the resource used to execute the
     # "containerAction".
     #
@@ -2424,6 +2474,16 @@ module Aws::IoTAnalytics
     class ResourceConfiguration < Struct.new(
       :compute_type,
       :volume_size_in_gb)
+      include Aws::Structure
+    end
+
+    # A resource with the specified name could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2700,6 +2760,16 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The SQL query to modify the message.
     #
     # @note When making an API call, you may pass SqlQueryDatasetAction
@@ -2820,6 +2890,16 @@ module Aws::IoTAnalytics
     end
 
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # Information about the data set whose content generation triggers the
     # new data set content generation.

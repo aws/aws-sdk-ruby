@@ -248,6 +248,10 @@ module Aws::Lambda
     AliasRoutingConfiguration.add_member(:additional_version_weights, Shapes::ShapeRef.new(shape: AdditionalVersionWeights, location_name: "AdditionalVersionWeights"))
     AliasRoutingConfiguration.struct_class = Types::AliasRoutingConfiguration
 
+    CodeStorageExceededException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    CodeStorageExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    CodeStorageExceededException.struct_class = Types::CodeStorageExceededException
+
     CompatibleRuntimes.member = Shapes::ShapeRef.new(shape: Runtime)
 
     Concurrency.add_member(:reserved_concurrent_executions, Shapes::ShapeRef.new(shape: ReservedConcurrentExecutions, location_name: "ReservedConcurrentExecutions"))
@@ -306,6 +310,23 @@ module Aws::Lambda
     DeleteLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     DeleteLayerVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     DeleteLayerVersionRequest.struct_class = Types::DeleteLayerVersionRequest
+
+    EC2AccessDeniedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    EC2AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EC2AccessDeniedException.struct_class = Types::EC2AccessDeniedException
+
+    EC2ThrottledException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    EC2ThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EC2ThrottledException.struct_class = Types::EC2ThrottledException
+
+    EC2UnexpectedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    EC2UnexpectedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EC2UnexpectedException.add_member(:ec2_error_code, Shapes::ShapeRef.new(shape: String, location_name: "EC2ErrorCode"))
+    EC2UnexpectedException.struct_class = Types::EC2UnexpectedException
+
+    ENILimitReachedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ENILimitReachedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ENILimitReachedException.struct_class = Types::ENILimitReachedException
 
     Environment.add_member(:variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "Variables"))
     Environment.struct_class = Types::Environment
@@ -427,6 +448,30 @@ module Aws::Lambda
     GetPolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     GetPolicyResponse.struct_class = Types::GetPolicyResponse
 
+    InvalidParameterValueException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidRequestContentException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidRequestContentException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidRequestContentException.struct_class = Types::InvalidRequestContentException
+
+    InvalidRuntimeException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidRuntimeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidRuntimeException.struct_class = Types::InvalidRuntimeException
+
+    InvalidSecurityGroupIDException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidSecurityGroupIDException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidSecurityGroupIDException.struct_class = Types::InvalidSecurityGroupIDException
+
+    InvalidSubnetIDException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidSubnetIDException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidSubnetIDException.struct_class = Types::InvalidSubnetIDException
+
+    InvalidZipFileException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidZipFileException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidZipFileException.struct_class = Types::InvalidZipFileException
+
     InvocationRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     InvocationRequest.add_member(:invocation_type, Shapes::ShapeRef.new(shape: InvocationType, location: "header", location_name: "X-Amz-Invocation-Type"))
     InvocationRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location: "header", location_name: "X-Amz-Log-Type"))
@@ -454,6 +499,22 @@ module Aws::Lambda
 
     InvokeAsyncResponse.add_member(:status, Shapes::ShapeRef.new(shape: HttpStatus, location: "statusCode", location_name: "Status"))
     InvokeAsyncResponse.struct_class = Types::InvokeAsyncResponse
+
+    KMSAccessDeniedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    KMSAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    KMSAccessDeniedException.struct_class = Types::KMSAccessDeniedException
+
+    KMSDisabledException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    KMSDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    KMSDisabledException.struct_class = Types::KMSDisabledException
+
+    KMSInvalidStateException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    KMSInvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    KMSInvalidStateException.struct_class = Types::KMSInvalidStateException
+
+    KMSNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    KMSNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    KMSNotFoundException.struct_class = Types::KMSNotFoundException
 
     Layer.add_member(:arn, Shapes::ShapeRef.new(shape: LayerVersionArn, location_name: "Arn"))
     Layer.add_member(:code_size, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSize"))
@@ -555,6 +616,14 @@ module Aws::Lambda
     ListVersionsByFunctionResponse.add_member(:versions, Shapes::ShapeRef.new(shape: FunctionList, location_name: "Versions"))
     ListVersionsByFunctionResponse.struct_class = Types::ListVersionsByFunctionResponse
 
+    PolicyLengthExceededException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    PolicyLengthExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    PolicyLengthExceededException.struct_class = Types::PolicyLengthExceededException
+
+    PreconditionFailedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    PreconditionFailedException.struct_class = Types::PreconditionFailedException
+
     PublishLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     PublishLayerVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     PublishLayerVersionRequest.add_member(:content, Shapes::ShapeRef.new(shape: LayerVersionContentInput, required: true, location_name: "Content"))
@@ -594,7 +663,31 @@ module Aws::Lambda
     RemovePermissionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "RevisionId"))
     RemovePermissionRequest.struct_class = Types::RemovePermissionRequest
 
+    RequestTooLargeException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    RequestTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RequestTooLargeException.struct_class = Types::RequestTooLargeException
+
+    ResourceConflictException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
+    ResourceInUseException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    ServiceException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceException.struct_class = Types::ServiceException
+
+    SubnetIPAddressLimitReachedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    SubnetIPAddressLimitReachedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    SubnetIPAddressLimitReachedException.struct_class = Types::SubnetIPAddressLimitReachedException
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -607,11 +700,21 @@ module Aws::Lambda
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
 
+    TooManyRequestsException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
+    TooManyRequestsException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyRequestsException.add_member(:reason, Shapes::ShapeRef.new(shape: ThrottleReason, location_name: "Reason"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
     TracingConfig.add_member(:mode, Shapes::ShapeRef.new(shape: TracingMode, location_name: "Mode"))
     TracingConfig.struct_class = Types::TracingConfig
 
     TracingConfigResponse.add_member(:mode, Shapes::ShapeRef.new(shape: TracingMode, location_name: "Mode"))
     TracingConfigResponse.struct_class = Types::TracingConfigResponse
+
+    UnsupportedMediaTypeException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    UnsupportedMediaTypeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    UnsupportedMediaTypeException.struct_class = Types::UnsupportedMediaTypeException
 
     UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))

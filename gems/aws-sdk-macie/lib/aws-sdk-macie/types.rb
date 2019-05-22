@@ -8,6 +8,23 @@
 module Aws::Macie
   module Types
 
+    # You do not have required permissions to access the requested resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type that caused the exception
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :resource_type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateMemberAccountRequest
     #   data as a hash:
     #
@@ -220,6 +237,70 @@ module Aws::Macie
       :failed_item,
       :error_code,
       :error_message)
+      include Aws::Structure
+    end
+
+    # Internal server error.
+    #
+    # @!attribute [rw] error_code
+    #   Error code for the exception
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/InternalException AWS API Documentation
+    #
+    class InternalException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an invalid or out-of-range value was
+    # supplied for an input parameter.
+    #
+    # @!attribute [rw] error_code
+    #   Error code for the exception
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] field_name
+    #   Field that has invalid input
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :error_code,
+      :message,
+      :field_name)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create resources
+    # beyond the current AWS account limits. The error code describes the
+    # limit exceeded.
+    #
+    # @!attribute [rw] error_code
+    #   Error code for the exception
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type that caused the exception
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :error_code,
+      :message,
+      :resource_type)
       include Aws::Structure
     end
 

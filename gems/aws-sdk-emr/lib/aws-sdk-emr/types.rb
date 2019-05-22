@@ -2848,6 +2848,38 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # This exception occurs when there is an internal failure in the EMR
+    # service.
+    #
+    # @!attribute [rw] message
+    #   The message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception occurs when there is something wrong with user input.
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # A description of a cluster (job flow).
     #
     # @!attribute [rw] job_flow_id

@@ -2419,6 +2419,19 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # A generic service exception has occurred.
+    #
+    # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ElasticBeanstalkServiceException AWS API Documentation
+    #
+    class ElasticBeanstalkServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the properties of an environment.
     #
     # @!attribute [rw] environment_name

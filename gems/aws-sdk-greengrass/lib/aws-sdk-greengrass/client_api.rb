@@ -290,6 +290,10 @@ module Aws::Greengrass
     AssociateServiceRoleToAccountResponse.add_member(:associated_at, Shapes::ShapeRef.new(shape: __string, location_name: "AssociatedAt"))
     AssociateServiceRoleToAccountResponse.struct_class = Types::AssociateServiceRoleToAccountResponse
 
+    BadRequestException.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BulkDeployment.add_member(:bulk_deployment_arn, Shapes::ShapeRef.new(shape: __string, location_name: "BulkDeploymentArn"))
     BulkDeployment.add_member(:bulk_deployment_id, Shapes::ShapeRef.new(shape: __string, location_name: "BulkDeploymentId"))
     BulkDeployment.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "CreatedAt"))
@@ -1004,6 +1008,10 @@ module Aws::Greengrass
     GroupVersion.add_member(:resource_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ResourceDefinitionVersionArn"))
     GroupVersion.add_member(:subscription_definition_version_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SubscriptionDefinitionVersionArn"))
     GroupVersion.struct_class = Types::GroupVersion
+
+    InternalServerErrorException.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
     ListBulkDeploymentDetailedReportsRequest.add_member(:bulk_deployment_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "BulkDeploymentId"))
     ListBulkDeploymentDetailedReportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "MaxResults"))

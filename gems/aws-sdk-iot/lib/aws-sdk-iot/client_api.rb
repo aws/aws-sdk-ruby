@@ -1107,6 +1107,9 @@ module Aws::IoT
     Certificate.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
     Certificate.struct_class = Types::Certificate
 
+    CertificateConflictException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    CertificateConflictException.struct_class = Types::CertificateConflictException
+
     CertificateDescription.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
     CertificateDescription.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "certificateId"))
     CertificateDescription.add_member(:ca_certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "caCertificateId"))
@@ -1121,6 +1124,12 @@ module Aws::IoT
     CertificateDescription.add_member(:generation_id, Shapes::ShapeRef.new(shape: GenerationId, location_name: "generationId"))
     CertificateDescription.add_member(:validity, Shapes::ShapeRef.new(shape: CertificateValidity, location_name: "validity"))
     CertificateDescription.struct_class = Types::CertificateDescription
+
+    CertificateStateException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    CertificateStateException.struct_class = Types::CertificateStateException
+
+    CertificateValidationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    CertificateValidationException.struct_class = Types::CertificateValidationException
 
     CertificateValidity.add_member(:not_before, Shapes::ShapeRef.new(shape: DateType, location_name: "notBefore"))
     CertificateValidity.add_member(:not_after, Shapes::ShapeRef.new(shape: DateType, location_name: "notAfter"))
@@ -1162,6 +1171,9 @@ module Aws::IoT
 
     Configuration.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     Configuration.struct_class = Types::Configuration
+
+    ConflictingResourceUpdateException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ConflictingResourceUpdateException.struct_class = Types::ConflictingResourceUpdateException
 
     CreateAuthorizerRequest.add_member(:authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, required: true, location: "uri", location_name: "authorizerName"))
     CreateAuthorizerRequest.add_member(:authorizer_function_arn, Shapes::ShapeRef.new(shape: AuthorizerFunctionArn, required: true, location_name: "authorizerFunctionArn"))
@@ -1389,6 +1401,9 @@ module Aws::IoT
     DeleteCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     DeleteCertificateRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: ForceDelete, location: "querystring", location_name: "forceDelete"))
     DeleteCertificateRequest.struct_class = Types::DeleteCertificateRequest
+
+    DeleteConflictException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    DeleteConflictException.struct_class = Types::DeleteConflictException
 
     DeleteDynamicThingGroupRequest.add_member(:thing_group_name, Shapes::ShapeRef.new(shape: ThingGroupName, required: true, location: "uri", location_name: "thingGroupName"))
     DeleteDynamicThingGroupRequest.add_member(:expected_version, Shapes::ShapeRef.new(shape: OptionalVersion, location: "querystring", location_name: "expectedVersion"))
@@ -1841,6 +1856,30 @@ module Aws::IoT
 
     IndexNamesList.member = Shapes::ShapeRef.new(shape: IndexName)
 
+    IndexNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    IndexNotReadyException.struct_class = Types::IndexNotReadyException
+
+    InternalException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InternalException.struct_class = Types::InternalException
+
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    InvalidAggregationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidAggregationException.struct_class = Types::InvalidAggregationException
+
+    InvalidQueryException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidQueryException.struct_class = Types::InvalidQueryException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    InvalidResponseException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidResponseException.struct_class = Types::InvalidResponseException
+
+    InvalidStateTransitionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidStateTransitionException.struct_class = Types::InvalidStateTransitionException
+
     IotAnalyticsAction.add_member(:channel_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "channelArn"))
     IotAnalyticsAction.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName"))
     IotAnalyticsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
@@ -1945,6 +1984,9 @@ module Aws::IoT
 
     LambdaAction.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location_name: "functionArn"))
     LambdaAction.struct_class = Types::LambdaAction
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListActiveViolationsRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location: "querystring", location_name: "thingName"))
     ListActiveViolationsRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location: "querystring", location_name: "securityProfileName"))
@@ -2340,6 +2382,9 @@ module Aws::IoT
     LoggingOptionsPayload.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     LoggingOptionsPayload.struct_class = Types::LoggingOptionsPayload
 
+    MalformedPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    MalformedPolicyException.struct_class = Types::MalformedPolicyException
+
     MetricValue.add_member(:count, Shapes::ShapeRef.new(shape: UnsignedLong, location_name: "count"))
     MetricValue.add_member(:cidrs, Shapes::ShapeRef.new(shape: Cidrs, location_name: "cidrs"))
     MetricValue.add_member(:ports, Shapes::ShapeRef.new(shape: Ports, location_name: "ports"))
@@ -2351,6 +2396,9 @@ module Aws::IoT
     NonCompliantResource.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
     NonCompliantResource.add_member(:additional_info, Shapes::ShapeRef.new(shape: StringMap, location_name: "additionalInfo"))
     NonCompliantResource.struct_class = Types::NonCompliantResource
+
+    NotConfiguredException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    NotConfiguredException.struct_class = Types::NotConfiguredException
 
     OTAUpdateFile.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "fileName"))
     OTAUpdateFile.add_member(:file_version, Shapes::ShapeRef.new(shape: OTAUpdateFileVersion, location_name: "fileVersion"))
@@ -2469,6 +2517,9 @@ module Aws::IoT
     RegisterThingResponse.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArns, location_name: "resourceArns"))
     RegisterThingResponse.struct_class = Types::RegisterThingResponse
 
+    RegistrationCodeValidationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    RegistrationCodeValidationException.struct_class = Types::RegistrationCodeValidationException
+
     RegistrationConfig.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "templateBody"))
     RegistrationConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     RegistrationConfig.struct_class = Types::RegistrationConfig
@@ -2510,6 +2561,11 @@ module Aws::IoT
     RepublishAction.add_member(:topic, Shapes::ShapeRef.new(shape: TopicPattern, required: true, location_name: "topic"))
     RepublishAction.struct_class = Types::RepublishAction
 
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceAlreadyExistsException.add_member(:resource_id, Shapes::ShapeRef.new(shape: resourceId, location_name: "resourceId"))
+    ResourceAlreadyExistsException.add_member(:resource_arn, Shapes::ShapeRef.new(shape: resourceArn, location_name: "resourceArn"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
     ResourceArns.key = Shapes::ShapeRef.new(shape: ResourceLogicalId)
     ResourceArns.value = Shapes::ShapeRef.new(shape: ResourceArn)
 
@@ -2520,6 +2576,12 @@ module Aws::IoT
     ResourceIdentifier.add_member(:policy_version_identifier, Shapes::ShapeRef.new(shape: PolicyVersionIdentifier, location_name: "policyVersionIdentifier"))
     ResourceIdentifier.add_member(:account, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "account"))
     ResourceIdentifier.struct_class = Types::ResourceIdentifier
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceRegistrationFailureException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceRegistrationFailureException.struct_class = Types::ResourceRegistrationFailureException
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
@@ -2595,6 +2657,9 @@ module Aws::IoT
 
     SecurityProfileTargets.member = Shapes::ShapeRef.new(shape: SecurityProfileTarget)
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     SetDefaultAuthorizerRequest.add_member(:authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, required: true, location_name: "authorizerName"))
     SetDefaultAuthorizerRequest.struct_class = Types::SetDefaultAuthorizerRequest
 
@@ -2629,6 +2694,9 @@ module Aws::IoT
     SnsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     SnsAction.add_member(:message_format, Shapes::ShapeRef.new(shape: MessageFormat, location_name: "messageFormat"))
     SnsAction.struct_class = Types::SnsAction
+
+    SqlParseException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    SqlParseException.struct_class = Types::SqlParseException
 
     SqsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     SqsAction.add_member(:queue_url, Shapes::ShapeRef.new(shape: QueueUrl, required: true, location_name: "queueUrl"))
@@ -2828,6 +2896,9 @@ module Aws::IoT
     ThingTypeProperties.add_member(:searchable_attributes, Shapes::ShapeRef.new(shape: SearchableAttributes, location_name: "searchableAttributes"))
     ThingTypeProperties.struct_class = Types::ThingTypeProperties
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     TimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: InProgressTimeoutInMinutes, location_name: "inProgressTimeoutInMinutes"))
     TimeoutConfig.struct_class = Types::TimeoutConfig
 
@@ -2858,6 +2929,9 @@ module Aws::IoT
     TopicRulePayload.add_member(:error_action, Shapes::ShapeRef.new(shape: Action, location_name: "errorAction"))
     TopicRulePayload.struct_class = Types::TopicRulePayload
 
+    TransferAlreadyCompletedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    TransferAlreadyCompletedException.struct_class = Types::TransferAlreadyCompletedException
+
     TransferCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     TransferCertificateRequest.add_member(:target_aws_account, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "querystring", location_name: "targetAwsAccount"))
     TransferCertificateRequest.add_member(:transfer_message, Shapes::ShapeRef.new(shape: Message, location_name: "transferMessage"))
@@ -2866,12 +2940,18 @@ module Aws::IoT
     TransferCertificateResponse.add_member(:transferred_certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "transferredCertificateArn"))
     TransferCertificateResponse.struct_class = Types::TransferCertificateResponse
 
+    TransferConflictException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    TransferConflictException.struct_class = Types::TransferConflictException
+
     TransferData.add_member(:transfer_message, Shapes::ShapeRef.new(shape: Message, location_name: "transferMessage"))
     TransferData.add_member(:reject_reason, Shapes::ShapeRef.new(shape: Message, location_name: "rejectReason"))
     TransferData.add_member(:transfer_date, Shapes::ShapeRef.new(shape: DateType, location_name: "transferDate"))
     TransferData.add_member(:accept_date, Shapes::ShapeRef.new(shape: DateType, location_name: "acceptDate"))
     TransferData.add_member(:reject_date, Shapes::ShapeRef.new(shape: DateType, location_name: "rejectDate"))
     TransferData.struct_class = Types::TransferData
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
@@ -3035,6 +3115,12 @@ module Aws::IoT
     ValidationError.struct_class = Types::ValidationError
 
     ValidationErrors.member = Shapes::ShapeRef.new(shape: ValidationError)
+
+    VersionConflictException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    VersionConflictException.struct_class = Types::VersionConflictException
+
+    VersionsLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    VersionsLimitExceededException.struct_class = Types::VersionsLimitExceededException
 
     ViolationEvent.add_member(:violation_id, Shapes::ShapeRef.new(shape: ViolationId, location_name: "violationId"))
     ViolationEvent.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "thingName"))

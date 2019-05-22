@@ -459,6 +459,9 @@ module Aws::SWF
     DecisionTaskTimedOutEventAttributes.add_member(:started_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "startedEventId"))
     DecisionTaskTimedOutEventAttributes.struct_class = Types::DecisionTaskTimedOutEventAttributes
 
+    DefaultUndefinedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DefaultUndefinedFault.struct_class = Types::DefaultUndefinedFault
+
     DeprecateActivityTypeInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     DeprecateActivityTypeInput.add_member(:activity_type, Shapes::ShapeRef.new(shape: ActivityType, required: true, location_name: "activityType"))
     DeprecateActivityTypeInput.struct_class = Types::DeprecateActivityTypeInput
@@ -485,8 +488,14 @@ module Aws::SWF
     DescribeWorkflowTypeInput.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "workflowType"))
     DescribeWorkflowTypeInput.struct_class = Types::DescribeWorkflowTypeInput
 
+    DomainAlreadyExistsFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DomainAlreadyExistsFault.struct_class = Types::DomainAlreadyExistsFault
+
     DomainConfiguration.add_member(:workflow_execution_retention_period_in_days, Shapes::ShapeRef.new(shape: DurationInDays, required: true, location_name: "workflowExecutionRetentionPeriodInDays"))
     DomainConfiguration.struct_class = Types::DomainConfiguration
+
+    DomainDeprecatedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DomainDeprecatedFault.struct_class = Types::DomainDeprecatedFault
 
     DomainDetail.add_member(:domain_info, Shapes::ShapeRef.new(shape: DomainInfo, required: true, location_name: "domainInfo"))
     DomainDetail.add_member(:configuration, Shapes::ShapeRef.new(shape: DomainConfiguration, required: true, location_name: "configuration"))
@@ -622,6 +631,9 @@ module Aws::SWF
     LambdaFunctionTimedOutEventAttributes.add_member(:timeout_type, Shapes::ShapeRef.new(shape: LambdaFunctionTimeoutType, location_name: "timeoutType"))
     LambdaFunctionTimedOutEventAttributes.struct_class = Types::LambdaFunctionTimedOutEventAttributes
 
+    LimitExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededFault.struct_class = Types::LimitExceededFault
+
     ListActivityTypesInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     ListActivityTypesInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     ListActivityTypesInput.add_member(:registration_status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "registrationStatus"))
@@ -670,6 +682,9 @@ module Aws::SWF
     MarkerRecordedEventAttributes.add_member(:details, Shapes::ShapeRef.new(shape: Data, location_name: "details"))
     MarkerRecordedEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
     MarkerRecordedEventAttributes.struct_class = Types::MarkerRecordedEventAttributes
+
+    OperationNotPermittedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    OperationNotPermittedFault.struct_class = Types::OperationNotPermittedFault
 
     PendingTaskCount.add_member(:count, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "count"))
     PendingTaskCount.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "truncated"))
@@ -938,9 +953,21 @@ module Aws::SWF
     TimerStartedEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
     TimerStartedEventAttributes.struct_class = Types::TimerStartedEventAttributes
 
+    TypeAlreadyExistsFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TypeAlreadyExistsFault.struct_class = Types::TypeAlreadyExistsFault
+
+    TypeDeprecatedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TypeDeprecatedFault.struct_class = Types::TypeDeprecatedFault
+
+    UnknownResourceFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnknownResourceFault.struct_class = Types::UnknownResourceFault
+
     WorkflowExecution.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
     WorkflowExecution.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunId, required: true, location_name: "runId"))
     WorkflowExecution.struct_class = Types::WorkflowExecution
+
+    WorkflowExecutionAlreadyStartedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    WorkflowExecutionAlreadyStartedFault.struct_class = Types::WorkflowExecutionAlreadyStartedFault
 
     WorkflowExecutionCancelRequestedEventAttributes.add_member(:external_workflow_execution, Shapes::ShapeRef.new(shape: WorkflowExecution, location_name: "externalWorkflowExecution"))
     WorkflowExecutionCancelRequestedEventAttributes.add_member(:external_initiated_event_id, Shapes::ShapeRef.new(shape: EventId, location_name: "externalInitiatedEventId"))

@@ -43,6 +43,6 @@ require_relative 'aws-sdk-docdb/customizations'
 # @service
 module Aws::DocDB
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end

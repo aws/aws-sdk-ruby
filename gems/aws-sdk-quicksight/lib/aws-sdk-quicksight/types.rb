@@ -8,6 +8,27 @@
 module Aws::QuickSight
   module Types
 
+    # You don't have access to this. The provided credentials couldn't be
+    # validated. You might not be authorized to carry out the request.
+    # Ensure that your account is authorized to use the Amazon QuickSight
+    # service, that your policies have the correct permissions, and that you
+    # are using the correct access keys.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request id for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateGroupMembershipRequest
     #   data as a hash:
     #
@@ -435,6 +456,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The domain specified is not on the allowlist. All domains for embedded
+    # dashboards must be added to the approved list by an Amazon QuickSight
+    # admin.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DomainNotWhitelistedException AWS API Documentation
+    #
+    class DomainNotWhitelistedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDashboardEmbedUrlRequest
     #   data as a hash:
     #
@@ -557,6 +597,97 @@ module Aws::QuickSight
     class GroupMember < Struct.new(
       :arn,
       :member_name)
+      include Aws::Structure
+    end
+
+    # The identity type specified is not supported. Supported identity types
+    # include IAM and QUICKSIGHT.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdentityTypeNotSupportedException AWS API Documentation
+    #
+    class IdentityTypeNotSupportedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # An internal failure occurred.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The `NextToken` value isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # One or more parameters don't have a valid value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # A limit is exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Limit exceeded.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message,
+      :resource_type,
+      :request_id)
       include Aws::Structure
     end
 
@@ -828,6 +959,42 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # One or more preconditions aren't met.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PreconditionNotMetException AWS API Documentation
+    #
+    class PreconditionNotMetException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The user is not found. This error can happen in any operation that
+    # requires finding a user based on a provided user name, such as
+    # `DeleteUser`, `DescribeUser`, and so on.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QuickSightUserNotFoundException AWS API Documentation
+    #
+    class QuickSightUserNotFoundException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterUserRequest
     #   data as a hash:
     #
@@ -941,6 +1108,128 @@ module Aws::QuickSight
       :user_invitation_url,
       :request_id,
       :status)
+      include Aws::Structure
+    end
+
+    # The resource specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourceExistsException AWS API Documentation
+    #
+    class ResourceExistsException < Struct.new(
+      :message,
+      :resource_type,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # One or more resources can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_type,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # This resource is currently unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type for this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourceUnavailableException AWS API Documentation
+    #
+    class ResourceUnavailableException < Struct.new(
+      :message,
+      :resource_type,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The number of minutes specified for the lifetime of a session is not
+    # valid. The session lifetime must be from 15 to 600 minutes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SessionLifetimeInMinutesInvalidException AWS API Documentation
+    #
+    class SessionLifetimeInMinutesInvalidException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Access is throttled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # This error indicates that you are calling an operation on an Amazon
+    # QuickSight subscription where the edition doesn't include support for
+    # that operation. Amazon QuickSight currently has Standard Edition and
+    # Enterprise Edition. Not every operation and capability is available in
+    # every edition.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UnsupportedUserEditionException AWS API Documentation
+    #
+    class UnsupportedUserEditionException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 

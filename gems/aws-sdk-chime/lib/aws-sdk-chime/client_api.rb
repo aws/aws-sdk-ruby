@@ -237,6 +237,10 @@ module Aws::Chime
     AssociatePhoneNumbersWithVoiceConnectorResponse.add_member(:phone_number_errors, Shapes::ShapeRef.new(shape: PhoneNumberErrorList, location_name: "PhoneNumberErrors"))
     AssociatePhoneNumbersWithVoiceConnectorResponse.struct_class = Types::AssociatePhoneNumbersWithVoiceConnectorResponse
 
+    BadRequestException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BatchDeletePhoneNumberRequest.add_member(:phone_number_ids, Shapes::ShapeRef.new(shape: NonEmptyStringList, required: true, location_name: "PhoneNumberIds"))
     BatchDeletePhoneNumberRequest.struct_class = Types::BatchDeletePhoneNumberRequest
 
@@ -287,6 +291,10 @@ module Aws::Chime
     BusinessCallingSettings.struct_class = Types::BusinessCallingSettings
 
     CallingRegionList.member = Shapes::ShapeRef.new(shape: CallingRegion)
+
+    ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateAccountRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "Name"))
     CreateAccountRequest.struct_class = Types::CreateAccountRequest
@@ -366,6 +374,10 @@ module Aws::Chime
     EventsConfiguration.add_member(:outbound_events_https_endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "OutboundEventsHTTPSEndpoint"))
     EventsConfiguration.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "LambdaFunctionArn"))
     EventsConfiguration.struct_class = Types::EventsConfiguration
+
+    ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
 
     GetAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     GetAccountRequest.struct_class = Types::GetAccountRequest
@@ -535,6 +547,10 @@ module Aws::Chime
 
     NonEmptyStringList.member = Shapes::ShapeRef.new(shape: String)
 
+    NotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     OrderedPhoneNumber.add_member(:e164_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "E164PhoneNumber"))
     OrderedPhoneNumber.add_member(:status, Shapes::ShapeRef.new(shape: OrderedPhoneNumberStatus, location_name: "Status"))
     OrderedPhoneNumber.struct_class = Types::OrderedPhoneNumber
@@ -640,6 +656,10 @@ module Aws::Chime
     ResetPersonalPINResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
     ResetPersonalPINResponse.struct_class = Types::ResetPersonalPINResponse
 
+    ResourceLimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
+
     RestorePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "phoneNumberId"))
     RestorePhoneNumberRequest.struct_class = Types::RestorePhoneNumberRequest
 
@@ -659,6 +679,14 @@ module Aws::Chime
 
     SensitiveStringList.member = Shapes::ShapeRef.new(shape: SensitiveString)
 
+    ServiceFailureException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ServiceFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceFailureException.struct_class = Types::ServiceFailureException
+
+    ServiceUnavailableException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     TelephonySettings.add_member(:inbound_calling, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "InboundCalling"))
@@ -676,6 +704,18 @@ module Aws::Chime
     TerminationHealth.add_member(:timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "Timestamp"))
     TerminationHealth.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "Source"))
     TerminationHealth.struct_class = Types::TerminationHealth
+
+    ThrottledClientException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ThrottledClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ThrottledClientException.struct_class = Types::ThrottledClientException
+
+    UnauthorizedClientException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    UnauthorizedClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnauthorizedClientException.struct_class = Types::UnauthorizedClientException
+
+    UnprocessableEntityException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
 
     UpdateAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateAccountRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, location_name: "Name"))

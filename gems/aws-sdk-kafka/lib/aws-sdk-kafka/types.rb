@@ -8,6 +8,22 @@
 module Aws::Kafka
   module Types
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :invalid_parameter,
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the setup to be used for Kafka broker nodes in the cluster.
     #
     # @note When making an API call, you may pass BrokerNodeGroupInfo
@@ -274,6 +290,22 @@ module Aws::Kafka
       :creation_time,
       :description,
       :revision)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :invalid_parameter,
+      :message)
       include Aws::Structure
     end
 
@@ -713,6 +745,22 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :invalid_parameter,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetBootstrapBrokersRequest
     #   data as a hash:
     #
@@ -740,6 +788,22 @@ module Aws::Kafka
     #
     class GetBootstrapBrokersResponse < Struct.new(
       :bootstrap_broker_string)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :invalid_parameter,
+      :message)
       include Aws::Structure
     end
 
@@ -951,6 +1015,38 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :invalid_parameter,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :invalid_parameter,
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about storage volumes attached to MSK broker
     # nodes.
     #
@@ -998,6 +1094,38 @@ module Aws::Kafka
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :invalid_parameter,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :invalid_parameter,
+      :message)
       include Aws::Structure
     end
 

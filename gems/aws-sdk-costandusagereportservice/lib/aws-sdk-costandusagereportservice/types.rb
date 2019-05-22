@@ -88,6 +88,34 @@ module Aws::CostandUsageReportService
       include Aws::Structure
     end
 
+    # A report with the specified name already exists in the account.
+    # Specify a different report name.
+    #
+    # @!attribute [rw] message
+    #   A message to show the detail of the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DuplicateReportNameException AWS API Documentation
+    #
+    class DuplicateReportNameException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An error on the server occurred during the processing of your request.
+    # Try again later.
+    #
+    # @!attribute [rw] message
+    #   A message to show the detail of the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Creates a Cost and Usage Report.
     #
     # @note When making an API call, you may pass PutReportDefinitionRequest
@@ -216,6 +244,34 @@ module Aws::CostandUsageReportService
       :additional_artifacts,
       :refresh_closed_reports,
       :report_versioning)
+      include Aws::Structure
+    end
+
+    # This account already has five reports defined. To define a new report,
+    # you must delete an existing report.
+    #
+    # @!attribute [rw] message
+    #   A message to show the detail of the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ReportLimitReachedException AWS API Documentation
+    #
+    class ReportLimitReachedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The input fails to satisfy the constraints specified by an AWS
+    # service.
+    #
+    # @!attribute [rw] message
+    #   A message to show the detail of the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -19,6 +19,9 @@ module Aws::ApiGatewayManagementApi
     PostToConnectionRequest = Shapes::StructureShape.new(name: 'PostToConnectionRequest')
     __string = Shapes::StringShape.new(name: '__string')
 
+    PayloadTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    PayloadTooLargeException.struct_class = Types::PayloadTooLargeException
+
     PostToConnectionRequest.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
     PostToConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectionId"))
     PostToConnectionRequest.struct_class = Types::PostToConnectionRequest

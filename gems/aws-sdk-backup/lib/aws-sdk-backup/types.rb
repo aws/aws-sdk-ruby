@@ -8,6 +8,38 @@
 module Aws::Backup
   module Types
 
+    # The required resource already exists.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_request_id
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :code,
+      :message,
+      :creator_request_id,
+      :arn,
+      :type,
+      :context)
+      include Aws::Structure
+    end
+
     # Contains detailed information about a backup job.
     #
     # @!attribute [rw] backup_job_id
@@ -1042,6 +1074,31 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # A dependent AWS service or resource returned an error to the AWS
+    # Backup service, and the action cannot be completed.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DependencyFailureException AWS API Documentation
+    #
+    class DependencyFailureException < Struct.new(
+      :code,
+      :message,
+      :type,
+      :context)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeBackupJobInput
     #   data as a hash:
     #
@@ -1978,6 +2035,56 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # Indicates that something is wrong with a parameter's value. For
+    # example, the value is out of range.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :code,
+      :message,
+      :type,
+      :context)
+      include Aws::Structure
+    end
+
+    # Indicates that something is wrong with the input to the request. For
+    # example, a parameter is of the wrong type.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :code,
+      :message,
+      :type,
+      :context)
+      include Aws::Structure
+    end
+
     # Contains an array of `Transition` objects specifying how long in days
     # before a recovery point transitions to cold storage or is deleted.
     #
@@ -2004,6 +2111,31 @@ module Aws::Backup
     class Lifecycle < Struct.new(
       :move_to_cold_storage_after_days,
       :delete_after_days)
+      include Aws::Structure
+    end
+
+    # A limit in the request has been exceeded; for example, a maximum
+    # number of items allowed in a request.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :code,
+      :message,
+      :type,
+      :context)
       include Aws::Structure
     end
 
@@ -2655,6 +2787,30 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # Indicates that a required parameter is missing.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/MissingParameterValueException AWS API Documentation
+    #
+    class MissingParameterValueException < Struct.new(
+      :code,
+      :message,
+      :type,
+      :context)
+      include Aws::Structure
+    end
+
     # A structure that contains information about a backed-up resource.
     #
     # @!attribute [rw] resource_arn
@@ -2952,6 +3108,30 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # A resource that is required for the action doesn't exist.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :code,
+      :message,
+      :type,
+      :context)
+      include Aws::Structure
+    end
+
     # Contains metadata about a restore job.
     #
     # @!attribute [rw] restore_job_id
@@ -3025,6 +3205,30 @@ module Aws::Backup
       :iam_role_arn,
       :expected_completion_time_minutes,
       :created_resource_arn)
+      include Aws::Structure
+    end
+
+    # The request failed due to a temporary failure of the server.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :code,
+      :message,
+      :type,
+      :context)
       include Aws::Structure
     end
 

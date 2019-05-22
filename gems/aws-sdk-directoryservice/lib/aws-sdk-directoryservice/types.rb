@@ -39,6 +39,24 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # You do not have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddIpRoutesRequest
     #   data as a hash:
     #
@@ -201,6 +219,24 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # An authentication error occurred.
+    #
+    # @!attribute [rw] message
+    #   The textual message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The identifier of the request that caused the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AuthenticationFailedException AWS API Documentation
+    #
+    class AuthenticationFailedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelSchemaExtensionRequest
     #   data as a hash:
     #
@@ -229,6 +265,24 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtensionResult AWS API Documentation
     #
     class CancelSchemaExtensionResult < Aws::EmptyStructure; end
+
+    # A client exception has occurred.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ClientException AWS API Documentation
+    #
+    class ClientException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
 
     # Contains information about a computer account in a directory.
     #
@@ -1447,6 +1501,24 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The specified directory has already been shared with this AWS account.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryAlreadySharedException AWS API Documentation
+    #
+    class DirectoryAlreadySharedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Contains information for the ConnectDirectory operation when an AD
     # Connector directory is being created.
     #
@@ -1687,6 +1759,26 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The maximum number of directories in the region has been reached. You
+    # can use the GetDirectoryLimits operation to determine your directory
+    # limits in the region.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryLimitExceededException AWS API Documentation
+    #
+    class DirectoryLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Contains directory limit information for a region.
     #
     # @!attribute [rw] cloud_only_directories_limit
@@ -1740,6 +1832,42 @@ module Aws::DirectoryService
       :connected_directories_limit,
       :connected_directories_current_count,
       :connected_directories_limit_reached)
+      include Aws::Structure
+    end
+
+    # The specified directory has not been shared with this AWS account.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryNotSharedException AWS API Documentation
+    #
+    class DirectoryNotSharedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The specified directory is unavailable or could not be found.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryUnavailableException AWS API Documentation
+    #
+    class DirectoryUnavailableException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -1936,6 +2064,25 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The maximum allowed number of domain controllers per directory was
+    # exceeded. The default limit per directory is 20 domain controllers.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DomainControllerLimitExceededException AWS API Documentation
+    #
+    class DomainControllerLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Contains the inputs for the EnableRadius operation.
     #
     # @note When making an API call, you may pass EnableRadiusRequest
@@ -2025,6 +2172,42 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSsoResult AWS API Documentation
     #
     class EnableSsoResult < Aws::EmptyStructure; end
+
+    # The specified entity already exists.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EntityAlreadyExistsException AWS API Documentation
+    #
+    class EntityAlreadyExistsException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The specified entity could not be found.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EntityDoesNotExistException AWS API Documentation
+    #
+    class EntityDoesNotExistException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
 
     # Information about SNS topic and AWS Directory Service directory
     # associations.
@@ -2119,6 +2302,98 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The account does not have sufficient permission to perform the
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InsufficientPermissionsException AWS API Documentation
+    #
+    class InsufficientPermissionsException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The `NextToken` value is not valid.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # One or more parameters are not valid.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The new password provided by the user does not meet the password
+    # complexity requirements defined in your directory.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidPasswordException AWS API Documentation
+    #
+    class InvalidPasswordException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The specified shared target is not valid.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidTargetException AWS API Documentation
+    #
+    class InvalidTargetException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # IP address block. This is often the address block of the DNS server
     # used for your on-premises domain.
     #
@@ -2184,6 +2459,25 @@ module Aws::DirectoryService
       :added_date_time,
       :ip_route_status_reason,
       :description)
+      include Aws::Structure
+    end
+
+    # The maximum allowed number of IP addresses was exceeded. The default
+    # limit is 100 IP address blocks.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/IpRouteLimitExceededException AWS API Documentation
+    #
+    class IpRouteLimitExceededException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -2409,6 +2703,24 @@ module Aws::DirectoryService
       :directory_id,
       :log_group_name,
       :subscription_created_date_time)
+      include Aws::Structure
+    end
+
+    # Exception encountered while trying to access your AWS organization.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/OrganizationsException AWS API Documentation
+    #
+    class OrganizationsException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -2752,6 +3064,24 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # An exception has occurred in AWS Directory Service.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ServiceException AWS API Documentation
+    #
+    class ServiceException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ShareDirectoryRequest
     #   data as a hash:
     #
@@ -2808,6 +3138,25 @@ module Aws::DirectoryService
     #
     class ShareDirectoryResult < Struct.new(
       :shared_directory_id)
+      include Aws::Structure
+    end
+
+    # The maximum number of AWS accounts that you can share with this
+    # directory has been reached.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareLimitExceededException AWS API Documentation
+    #
+    class ShareLimitExceededException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -2942,6 +3291,26 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The maximum number of manual snapshots for the directory has been
+    # reached. You can use the GetSnapshotLimits operation to determine the
+    # snapshot limits for a directory.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SnapshotLimitExceededException AWS API Documentation
+    #
+    class SnapshotLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Contains manual snapshot limit information for a directory.
     #
     # @!attribute [rw] manual_snapshots_limit
@@ -3048,6 +3417,24 @@ module Aws::DirectoryService
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # The maximum allowed number of tags was exceeded.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/TagLimitExceededException AWS API Documentation
+    #
+    class TagLimitExceededException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -3182,6 +3569,24 @@ module Aws::DirectoryService
     class UnshareTarget < Struct.new(
       :id,
       :type)
+      include Aws::Structure
+    end
+
+    # The operation is not supported.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -3335,6 +3740,24 @@ module Aws::DirectoryService
     class UpdateTrustResult < Struct.new(
       :request_id,
       :trust_id)
+      include Aws::Structure
+    end
+
+    # The user provided a username that does not exist in your directory.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UserDoesNotExistException AWS API Documentation
+    #
+    class UserDoesNotExistException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 

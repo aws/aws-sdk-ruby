@@ -774,6 +774,7 @@ module Aws::EC2
     #       {
     #         client_vpn_endpoint_id: "String", # required
     #         subnet_id: "String", # required
+    #         client_token: "String",
     #         dry_run: false,
     #       }
     #
@@ -783,6 +784,19 @@ module Aws::EC2
     #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet to associate with the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -797,6 +811,7 @@ module Aws::EC2
     class AssociateClientVpnTargetNetworkRequest < Struct.new(
       :client_vpn_endpoint_id,
       :subnet_id,
+      :client_token,
       :dry_run)
       include Aws::Structure
     end
@@ -1431,6 +1446,7 @@ module Aws::EC2
     #         access_group_id: "String",
     #         authorize_all_groups: false,
     #         description: "String",
+    #         client_token: "String",
     #         dry_run: false,
     #       }
     #
@@ -1457,6 +1473,19 @@ module Aws::EC2
     #   A brief description of the authorization rule.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1472,6 +1501,7 @@ module Aws::EC2
       :access_group_id,
       :authorize_all_groups,
       :description,
+      :client_token,
       :dry_run)
       include Aws::Structure
     end
@@ -3655,11 +3685,6 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
-    #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
@@ -4197,16 +4222,16 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [ How to
-    #   Ensure Idempotency][1].
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -4259,6 +4284,7 @@ module Aws::EC2
     #         destination_cidr_block: "String", # required
     #         target_vpc_subnet_id: "String", # required
     #         description: "String",
+    #         client_token: "String",
     #         dry_run: false,
     #       }
     #
@@ -4292,6 +4318,19 @@ module Aws::EC2
     #   A brief description of the route.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -4306,6 +4345,7 @@ module Aws::EC2
       :destination_cidr_block,
       :target_vpc_subnet_id,
       :description,
+      :client_token,
       :dry_run)
       include Aws::Structure
     end
@@ -5984,12 +6024,12 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] interface_type
-    #   Indicates whether the network interface is an Elastic Fabric Adapter
-    #   (EFA). Only specify this parameter to create an EFA. For more
-    #   information, see [Elastic Fabric Adapter][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   Indicates the type of network interface. To create an Elastic Fabric
+    #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
+    #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   If you are not creating an EFA ENI, omit this parameter.
+    #   If you are not creating an EFA, specify `interface` or omit this
+    #   parameter.
     #
     #
     #
@@ -6930,18 +6970,21 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Specifies whether the volume should be encrypted. Encrypted Amazon
-    #   EBS volumes may only be attached to instances that support Amazon
-    #   EBS encryption. Volumes that are created from encrypted snapshots
-    #   are automatically encrypted. There is no way to create an encrypted
-    #   volume from an unencrypted snapshot or vice versa. If your AMI uses
-    #   encrypted volumes, you can only launch it on supported instance
-    #   types. For more information, see [Amazon EBS Encryption][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   Specifies the encryption state of the volume. The default effect of
+    #   setting this parameter depends on the volume's source and
+    #   ownership. Each default case can be overridden by specifying a
+    #   customer master key (CMK) with the `KeyKeyId` parameter. For a
+    #   complete list of possible encryption cases, see [Amazon EBS
+    #   Encryption][1].
+    #
+    #   Encrypted Amazon EBS volumes may only be attached to instances that
+    #   support Amazon EBS encryption. For more information, see [Supported
+    #   Instance Types][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
@@ -18446,9 +18489,11 @@ module Aws::EC2
     #   Cloud User Guide*.
     #
     #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    #   64,000IOPS for `io1` volumes, in most Regions. The maximum IOPS for
-    #   `io1` of 64,000 is guaranteed only on [Nitro-based instances][2].
-    #   Other instance families guarantee performance up to 32,000 IOPS.
+    #   64,000IOPS for `io1` volumes in most Regions. Maximum `io1`IOPS of
+    #   64,000 is guaranteed only on [Nitro-based instances][2]. Other
+    #   instance families guarantee performance up to 32,000 IOPS. For more
+    #   information, see [Amazon EBS Volume Types][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #   Condition: This parameter is required for requests to create `io1`
     #   volumes; it is not used in requests to create `gp2`, `st1`, `sc1`,
@@ -18485,16 +18530,25 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the EBS volume is encrypted. Encrypted volumes can
-    #   only be attached to instances that support Amazon EBS encryption.
+    #   Indicates whether the encryption state of an EBS volume is to be
+    #   changed while being restored from a backing snapshot. The default
+    #   effect of setting this parameter to `true` or leaving it unset
+    #   depends on the origin, starting encryption state, and ownership of
+    #   the volume. Each default case can be overridden by specifying a
+    #   customer master key (CMK) as argument to the `KmsKeyId` parameter in
+    #   addition to setting `Encrypted` = `true`. For a complete list of
+    #   possible encryption cases, see [Amazon EBS Encryption][1].
     #
-    #   If you are creating a volume from a snapshot, you cannot specify an
-    #   encryption value. This is because only blank volumes can be
-    #   encrypted on creation. If you are creating a snapshot from an
-    #   existing EBS volume, you cannot specify an encryption value that
-    #   differs from that of the EBS volume. We recommend that you omit the
-    #   encryption value from the block device mappings when creating an
-    #   image from an instance.
+    #   In no case can you remove encryption from an encrypted volume.
+    #
+    #   Encrypted volumes can only be attached to instances that support
+    #   Amazon EBS encryption. For more information, see [Supported Instance
+    #   Types][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
@@ -22956,6 +23010,8 @@ module Aws::EC2
     #
     # @!attribute [rw] interface_type
     #   Describes the type of network interface.
+    #
+    #   Valid values: `interface` \| `efa`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
@@ -23161,7 +23217,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] interface_type
-    #   The type of interface.
+    #   The type of network interface. To create an Elastic Fabric Adapter
+    #   (EFA), specify `efa`. For more information, see [Elastic Fabric
+    #   Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   If you are not creating an EFA, specify `interface` or omit this
+    #   parameter.
+    #
+    #   Valide values: `interface` \| `efa`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
@@ -28154,12 +28221,8 @@ module Aws::EC2
     # @!attribute [rw] tenancy
     #   The tenancy of the instance (if the instance is running in a VPC).
     #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware. The `host` tenancy is not supported for the
-    #   [ImportInstance][1] command.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
+    #   hardware. The `host` tenancy is not supported for the ImportInstance
+    #   command.
     #   @return [String]
     #
     # @!attribute [rw] spread_domain
@@ -32281,8 +32344,9 @@ module Aws::EC2
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI. An AMI is required to launch an instance and must
-    #   be specified here or in a launch template.
+    #   The ID of the AMI, which you can get by calling DescribeImages. An
+    #   AMI ID is required to launch an instance and must be specified here
+    #   or in a launch template.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -32463,16 +32527,12 @@ module Aws::EC2
     #   If you set this parameter to `true`, you can't terminate the
     #   instance using the Amazon EC2 console, CLI, or API; otherwise, you
     #   can. To change this attribute to `false` after launch, use
-    #   [ModifyInstanceAttribute][1]. Alternatively, if you set
+    #   ModifyInstanceAttribute. Alternatively, if you set
     #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can
     #   terminate the instance by running the shutdown command from the
     #   instance.
     #
     #   Default: `false`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run

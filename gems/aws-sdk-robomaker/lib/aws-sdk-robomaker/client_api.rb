@@ -195,6 +195,9 @@ module Aws::RoboMaker
 
     CancelSimulationJobResponse.struct_class = Types::CancelSimulationJobResponse
 
+    ConcurrentDeploymentException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ConcurrentDeploymentException.struct_class = Types::ConcurrentDeploymentException
+
     CreateDeploymentJobRequest.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "deploymentConfig"))
     CreateDeploymentJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateDeploymentJobRequest.add_member(:fleet, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "fleet"))
@@ -503,10 +506,22 @@ module Aws::RoboMaker
 
     Fleets.member = Shapes::ShapeRef.new(shape: Fleet)
 
+    IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
     LaunchConfig.add_member(:package_name, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "packageName"))
     LaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "launchFile"))
     LaunchConfig.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
     LaunchConfig.struct_class = Types::LaunchConfig
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListDeploymentJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
     ListDeploymentJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -591,6 +606,12 @@ module Aws::RoboMaker
     RenderingEngine.add_member(:name, Shapes::ShapeRef.new(shape: RenderingEngineType, location_name: "name"))
     RenderingEngine.add_member(:version, Shapes::ShapeRef.new(shape: RenderingEngineVersionType, location_name: "version"))
     RenderingEngine.struct_class = Types::RenderingEngine
+
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RestartSimulationJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
     RestartSimulationJobRequest.struct_class = Types::RestartSimulationJobRequest
@@ -736,6 +757,9 @@ module Aws::RoboMaker
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))

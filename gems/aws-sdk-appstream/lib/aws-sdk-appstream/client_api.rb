@@ -281,6 +281,9 @@ module Aws::AppStream
     ComputeCapacityStatus.add_member(:available, Shapes::ShapeRef.new(shape: Integer, location_name: "Available"))
     ComputeCapacityStatus.struct_class = Types::ComputeCapacityStatus
 
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     CopyImageRequest.add_member(:source_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "SourceImageName"))
     CopyImageRequest.add_member(:destination_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "DestinationImageName"))
     CopyImageRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "DestinationRegion"))
@@ -641,11 +644,26 @@ module Aws::AppStream
     ImageStateChangeReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ImageStateChangeReason.struct_class = Types::ImageStateChangeReason
 
+    IncompatibleImageException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    IncompatibleImageException.struct_class = Types::IncompatibleImageException
+
+    InvalidAccountStatusException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidAccountStatusException.struct_class = Types::InvalidAccountStatusException
+
+    InvalidParameterCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
+
+    InvalidRoleException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRoleException.struct_class = Types::InvalidRoleException
+
     LastReportGenerationExecutionError.add_member(:error_code, Shapes::ShapeRef.new(shape: UsageReportExecutionErrorCode, location_name: "ErrorCode"))
     LastReportGenerationExecutionError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
     LastReportGenerationExecutionError.struct_class = Types::LastReportGenerationExecutionError
 
     LastReportGenerationExecutionErrors.member = Shapes::ShapeRef.new(shape: LastReportGenerationExecutionError)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAssociatedFleetsRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
     ListAssociatedFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -676,7 +694,13 @@ module Aws::AppStream
     NetworkAccessConfiguration.add_member(:eni_id, Shapes::ShapeRef.new(shape: String, location_name: "EniId"))
     NetworkAccessConfiguration.struct_class = Types::NetworkAccessConfiguration
 
+    OperationNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
+
     OrganizationalUnitDistinguishedNamesList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName)
+
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
     ResourceError.add_member(:error_code, Shapes::ShapeRef.new(shape: FleetErrorCode, location_name: "ErrorCode"))
     ResourceError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -684,6 +708,15 @@ module Aws::AppStream
     ResourceError.struct_class = Types::ResourceError
 
     ResourceErrors.member = Shapes::ShapeRef.new(shape: ResourceError)
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotAvailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotAvailableException.struct_class = Types::ResourceNotAvailableException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String)
 

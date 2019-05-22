@@ -657,6 +657,12 @@ module Aws::ElastiCache
     IncreaseReplicaCountResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
     IncreaseReplicaCountResult.struct_class = Types::IncreaseReplicaCountResult
 
+    InvalidParameterCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
     ListAllowedNodeTypeModificationsMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))

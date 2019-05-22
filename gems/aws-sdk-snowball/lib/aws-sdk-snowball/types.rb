@@ -163,6 +163,21 @@ module Aws::Snowball
     #
     class CancelJobResult < Aws::EmptyStructure; end
 
+    # Job creation failed. Currently, clusters support five nodes. If you
+    # have less than five nodes for your cluster and you have more nodes to
+    # create for this cluster, try again and create jobs until your cluster
+    # has exactly five notes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterLimitExceededException AWS API Documentation
+    #
+    class ClusterLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains a cluster's state, a cluster's ID, and other important
     # information.
     #
@@ -903,6 +918,19 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # Your IAM user lacks the necessary Amazon EC2 permissions to perform
+    # the attempted action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2RequestFailedException AWS API Documentation
+    #
+    class Ec2RequestFailedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The container for the EventTriggerDefinition$EventResourceARN.
     #
     # @note When making an API call, you may pass EventTriggerDefinition
@@ -1006,6 +1034,78 @@ module Aws::Snowball
     class GetSnowballUsageResult < Struct.new(
       :snowball_limit,
       :snowballs_in_use)
+      include Aws::Structure
+    end
+
+    # The address provided was invalid. Check the address with your
+    # region's carrier, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidAddressException AWS API Documentation
+    #
+    class InvalidAddressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Job or cluster creation failed. One ore more inputs were invalid.
+    # Confirm that the CreateClusterRequest$SnowballType value supports your
+    # CreateJobRequest$JobType, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidInputCombinationException AWS API Documentation
+    #
+    class InvalidInputCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The action can't be performed because the job's current state
+    # doesn't allow that action to be performed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidJobStateException AWS API Documentation
+    #
+    class InvalidJobStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The `NextToken` string was altered unexpectedly, and the operation has
+    # stopped. Run the operation without changing the `NextToken` string,
+    # and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource can't be found. Check the information you
+    # provided in your last request, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The provided resource value is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidResourceException AWS API Documentation
+    #
+    class InvalidResourceException < Struct.new(
+      :message,
+      :resource_type)
       include Aws::Structure
     end
 
@@ -1289,6 +1389,19 @@ module Aws::Snowball
       :s3_resources,
       :lambda_resources,
       :ec2_ami_resources)
+      include Aws::Structure
+    end
+
+    # The provided AWS Key Management Service key lacks the permissions to
+    # perform the specified CreateJob or UpdateJob action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/KMSRequestFailedException AWS API Documentation
+    #
+    class KMSRequestFailedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1697,6 +1810,20 @@ module Aws::Snowball
       :shipping_option,
       :inbound_shipment,
       :outbound_shipment)
+      include Aws::Structure
+    end
+
+    # The address is either outside the serviceable area for your region, or
+    # an error occurred. Check the address with your region's carrier and
+    # try again. If the issue persists, contact AWS Support.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UnsupportedAddressException AWS API Documentation
+    #
+    class UnsupportedAddressException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -88,6 +88,10 @@ module Aws::EFS
     UnsupportedAvailabilityZone = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZone')
     UpdateFileSystemRequest = Shapes::StructureShape.new(name: 'UpdateFileSystemRequest')
 
+    BadRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    BadRequest.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BadRequest.struct_class = Types::BadRequest
+
     CreateFileSystemRequest.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken"))
     CreateFileSystemRequest.add_member(:performance_mode, Shapes::ShapeRef.new(shape: PerformanceMode, location_name: "PerformanceMode"))
     CreateFileSystemRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, location_name: "Encrypted"))
@@ -116,6 +120,10 @@ module Aws::EFS
     DeleteTagsRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     DeleteTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
     DeleteTagsRequest.struct_class = Types::DeleteTagsRequest
+
+    DependencyTimeout.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    DependencyTimeout.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DependencyTimeout.struct_class = Types::DependencyTimeout
 
     DescribeFileSystemsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "MaxItems"))
     DescribeFileSystemsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location: "querystring", location_name: "Marker"))
@@ -158,6 +166,11 @@ module Aws::EFS
     DescribeTagsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
     DescribeTagsResponse.struct_class = Types::DescribeTagsResponse
 
+    FileSystemAlreadyExists.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    FileSystemAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileSystemAlreadyExists.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    FileSystemAlreadyExists.struct_class = Types::FileSystemAlreadyExists
+
     FileSystemDescription.add_member(:owner_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "OwnerId"))
     FileSystemDescription.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken"))
     FileSystemDescription.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -176,11 +189,43 @@ module Aws::EFS
 
     FileSystemDescriptions.member = Shapes::ShapeRef.new(shape: FileSystemDescription)
 
+    FileSystemInUse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    FileSystemInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileSystemInUse.struct_class = Types::FileSystemInUse
+
+    FileSystemLimitExceeded.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    FileSystemLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileSystemLimitExceeded.struct_class = Types::FileSystemLimitExceeded
+
+    FileSystemNotFound.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    FileSystemNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileSystemNotFound.struct_class = Types::FileSystemNotFound
+
     FileSystemSize.add_member(:value, Shapes::ShapeRef.new(shape: FileSystemSizeValue, required: true, location_name: "Value"))
     FileSystemSize.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     FileSystemSize.add_member(:value_in_ia, Shapes::ShapeRef.new(shape: FileSystemNullableSizeValue, location_name: "ValueInIA"))
     FileSystemSize.add_member(:value_in_standard, Shapes::ShapeRef.new(shape: FileSystemNullableSizeValue, location_name: "ValueInStandard"))
     FileSystemSize.struct_class = Types::FileSystemSize
+
+    IncorrectFileSystemLifeCycleState.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    IncorrectFileSystemLifeCycleState.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    IncorrectFileSystemLifeCycleState.struct_class = Types::IncorrectFileSystemLifeCycleState
+
+    IncorrectMountTargetState.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    IncorrectMountTargetState.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    IncorrectMountTargetState.struct_class = Types::IncorrectMountTargetState
+
+    InsufficientThroughputCapacity.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    InsufficientThroughputCapacity.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InsufficientThroughputCapacity.struct_class = Types::InsufficientThroughputCapacity
+
+    InternalServerError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
+    IpAddressInUse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    IpAddressInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    IpAddressInUse.struct_class = Types::IpAddressInUse
 
     LifecycleConfigurationDescription.add_member(:lifecycle_policies, Shapes::ShapeRef.new(shape: LifecyclePolicies, location_name: "LifecyclePolicies"))
     LifecycleConfigurationDescription.struct_class = Types::LifecycleConfigurationDescription
@@ -194,6 +239,10 @@ module Aws::EFS
     ModifyMountTargetSecurityGroupsRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
     ModifyMountTargetSecurityGroupsRequest.struct_class = Types::ModifyMountTargetSecurityGroupsRequest
 
+    MountTargetConflict.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    MountTargetConflict.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MountTargetConflict.struct_class = Types::MountTargetConflict
+
     MountTargetDescription.add_member(:owner_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "OwnerId"))
     MountTargetDescription.add_member(:mount_target_id, Shapes::ShapeRef.new(shape: MountTargetId, required: true, location_name: "MountTargetId"))
     MountTargetDescription.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -205,11 +254,35 @@ module Aws::EFS
 
     MountTargetDescriptions.member = Shapes::ShapeRef.new(shape: MountTargetDescription)
 
+    MountTargetNotFound.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    MountTargetNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MountTargetNotFound.struct_class = Types::MountTargetNotFound
+
+    NetworkInterfaceLimitExceeded.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    NetworkInterfaceLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NetworkInterfaceLimitExceeded.struct_class = Types::NetworkInterfaceLimitExceeded
+
+    NoFreeAddressesInSubnet.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    NoFreeAddressesInSubnet.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NoFreeAddressesInSubnet.struct_class = Types::NoFreeAddressesInSubnet
+
     PutLifecycleConfigurationRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     PutLifecycleConfigurationRequest.add_member(:lifecycle_policies, Shapes::ShapeRef.new(shape: LifecyclePolicies, required: true, location_name: "LifecyclePolicies"))
     PutLifecycleConfigurationRequest.struct_class = Types::PutLifecycleConfigurationRequest
 
+    SecurityGroupLimitExceeded.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    SecurityGroupLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SecurityGroupLimitExceeded.struct_class = Types::SecurityGroupLimitExceeded
+
+    SecurityGroupNotFound.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    SecurityGroupNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SecurityGroupNotFound.struct_class = Types::SecurityGroupNotFound
+
     SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroup)
+
+    SubnetNotFound.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    SubnetNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SubnetNotFound.struct_class = Types::SubnetNotFound
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -218,6 +291,18 @@ module Aws::EFS
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
+    ThroughputLimitExceeded.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    ThroughputLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ThroughputLimitExceeded.struct_class = Types::ThroughputLimitExceeded
+
+    TooManyRequests.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    TooManyRequests.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyRequests.struct_class = Types::TooManyRequests
+
+    UnsupportedAvailabilityZone.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    UnsupportedAvailabilityZone.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnsupportedAvailabilityZone.struct_class = Types::UnsupportedAvailabilityZone
 
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     UpdateFileSystemRequest.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))

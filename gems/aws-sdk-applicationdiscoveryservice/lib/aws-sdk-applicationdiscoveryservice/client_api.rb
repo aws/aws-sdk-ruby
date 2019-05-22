@@ -194,6 +194,9 @@ module Aws::ApplicationDiscoveryService
 
     AssociateConfigurationItemsToApplicationResponse.struct_class = Types::AssociateConfigurationItemsToApplicationResponse
 
+    AuthorizationErrorException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    AuthorizationErrorException.struct_class = Types::AuthorizationErrorException
+
     BatchDeleteImportDataError.add_member(:import_task_id, Shapes::ShapeRef.new(shape: ImportTaskIdentifier, location_name: "importTaskId"))
     BatchDeleteImportDataError.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchDeleteImportDataErrorCode, location_name: "errorCode"))
     BatchDeleteImportDataError.add_member(:error_description, Shapes::ShapeRef.new(shape: BatchDeleteImportDataErrorDescription, location_name: "errorDescription"))
@@ -222,6 +225,9 @@ module Aws::ApplicationDiscoveryService
     ConfigurationTagSet.member = Shapes::ShapeRef.new(shape: ConfigurationTag)
 
     Configurations.member = Shapes::ShapeRef.new(shape: Configuration)
+
+    ConflictErrorException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ConflictErrorException.struct_class = Types::ConflictErrorException
 
     ContinuousExportDescription.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
     ContinuousExportDescription.add_member(:status, Shapes::ShapeRef.new(shape: ContinuousExportStatus, location_name: "status"))
@@ -422,6 +428,12 @@ module Aws::ApplicationDiscoveryService
 
     ImportTaskList.member = Shapes::ShapeRef.new(shape: ImportTask)
 
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
     ListConfigurationsRequest.add_member(:configuration_type, Shapes::ShapeRef.new(shape: ConfigurationItemType, required: true, location_name: "configurationType"))
     ListConfigurationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
     ListConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
@@ -454,14 +466,26 @@ module Aws::ApplicationDiscoveryService
 
     NeighborDetailsList.member = Shapes::ShapeRef.new(shape: NeighborConnectionDetail)
 
+    OperationNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
+
     OrderByElement.add_member(:field_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fieldName"))
     OrderByElement.add_member(:sort_order, Shapes::ShapeRef.new(shape: orderString, location_name: "sortOrder"))
     OrderByElement.struct_class = Types::OrderByElement
 
     OrderByList.member = Shapes::ShapeRef.new(shape: OrderByElement)
 
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     SchemaStorageConfig.key = Shapes::ShapeRef.new(shape: DatabaseName)
     SchemaStorageConfig.value = Shapes::ShapeRef.new(shape: String)
+
+    ServerInternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ServerInternalErrorException.struct_class = Types::ServerInternalErrorException
 
     StartContinuousExportRequest.struct_class = Types::StartContinuousExportRequest
 

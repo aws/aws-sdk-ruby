@@ -3225,6 +3225,46 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # An internal server error has occurred during the request. For more
+    # information, see the error and message fields.
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   A StorageGatewayError that provides more information about the cause
+    #   of the error.
+    #   @return [Types::StorageGatewayError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message,
+      :error)
+      include Aws::Structure
+    end
+
+    # An exception occurred because an invalid gateway request was issued to
+    # the service. For more information, see the error and message fields.
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   A StorageGatewayError that provides more detail about the cause of
+    #   the error.
+    #   @return [Types::StorageGatewayError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/InvalidGatewayRequestException AWS API Documentation
+    #
+    class InvalidGatewayRequestException < Struct.new(
+      :message,
+      :error)
+      include Aws::Structure
+    end
+
     # JoinDomainInput
     #
     # @note When making an API call, you may pass JoinDomainInput
@@ -4354,6 +4394,26 @@ module Aws::StorageGateway
       :invalid_user_list,
       :authentication,
       :tags)
+      include Aws::Structure
+    end
+
+    # An internal server error has occurred because the service is
+    # unavailable. For more information, see the error and message fields.
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   A StorageGatewayError that provides more information about the cause
+    #   of the error.
+    #   @return [Types::StorageGatewayError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ServiceUnavailableError AWS API Documentation
+    #
+    class ServiceUnavailableError < Struct.new(
+      :message,
+      :error)
       include Aws::Structure
     end
 

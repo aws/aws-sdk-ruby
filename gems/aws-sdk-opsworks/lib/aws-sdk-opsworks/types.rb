@@ -5190,6 +5190,19 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
+    # Indicates that a resource was not found.
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a user's SSH information.
     #
     # @!attribute [rw] iam_user_arn
@@ -7038,6 +7051,19 @@ module Aws::OpsWorks
       :ssh_username,
       :ssh_public_key,
       :allow_self_management)
+      include Aws::Structure
+    end
+
+    # Indicates that a request was not valid.
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

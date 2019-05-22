@@ -216,6 +216,9 @@ module Aws::DatabaseMigrationService
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
     VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
 
+    AccessDeniedFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    AccessDeniedFault.struct_class = Types::AccessDeniedFault
+
     AccountQuota.add_member(:account_quota_name, Shapes::ShapeRef.new(shape: String, location_name: "AccountQuotaName"))
     AccountQuota.add_member(:used, Shapes::ShapeRef.new(shape: Long, location_name: "Used"))
     AccountQuota.add_member(:max, Shapes::ShapeRef.new(shape: Long, location_name: "Max"))
@@ -637,6 +640,36 @@ module Aws::DatabaseMigrationService
     ImportCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
     ImportCertificateResponse.struct_class = Types::ImportCertificateResponse
 
+    InsufficientResourceCapacityFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InsufficientResourceCapacityFault.struct_class = Types::InsufficientResourceCapacityFault
+
+    InvalidCertificateFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidCertificateFault.struct_class = Types::InvalidCertificateFault
+
+    InvalidResourceStateFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidResourceStateFault.struct_class = Types::InvalidResourceStateFault
+
+    InvalidSubnet.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidSubnet.struct_class = Types::InvalidSubnet
+
+    KMSAccessDeniedFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KMSAccessDeniedFault.struct_class = Types::KMSAccessDeniedFault
+
+    KMSDisabledFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KMSDisabledFault.struct_class = Types::KMSDisabledFault
+
+    KMSInvalidStateFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KMSInvalidStateFault.struct_class = Types::KMSInvalidStateFault
+
+    KMSKeyNotAccessibleFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KMSKeyNotAccessibleFault.struct_class = Types::KMSKeyNotAccessibleFault
+
+    KMSNotFoundFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KMSNotFoundFault.struct_class = Types::KMSNotFoundFault
+
+    KMSThrottlingFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KMSThrottlingFault.struct_class = Types::KMSThrottlingFault
+
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
     KinesisSettings.add_member(:stream_arn, Shapes::ShapeRef.new(shape: String, location_name: "StreamArn"))
@@ -874,6 +907,9 @@ module Aws::DatabaseMigrationService
     ReplicationSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     ReplicationSubnetGroup.struct_class = Types::ReplicationSubnetGroup
 
+    ReplicationSubnetGroupDoesNotCoverEnoughAZs.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReplicationSubnetGroupDoesNotCoverEnoughAZs.struct_class = Types::ReplicationSubnetGroupDoesNotCoverEnoughAZs
+
     ReplicationSubnetGroups.member = Shapes::ShapeRef.new(shape: ReplicationSubnetGroup)
 
     ReplicationTask.add_member(:replication_task_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIdentifier"))
@@ -916,9 +952,19 @@ module Aws::DatabaseMigrationService
     ReplicationTaskStats.add_member(:tables_errored, Shapes::ShapeRef.new(shape: Integer, location_name: "TablesErrored"))
     ReplicationTaskStats.struct_class = Types::ReplicationTaskStats
 
+    ResourceAlreadyExistsFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResourceAlreadyExistsFault.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
+    ResourceAlreadyExistsFault.struct_class = Types::ResourceAlreadyExistsFault
+
+    ResourceNotFoundFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResourceNotFoundFault.struct_class = Types::ResourceNotFoundFault
+
     ResourcePendingMaintenanceActions.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ResourceIdentifier"))
     ResourcePendingMaintenanceActions.add_member(:pending_maintenance_action_details, Shapes::ShapeRef.new(shape: PendingMaintenanceActionDetails, location_name: "PendingMaintenanceActionDetails"))
     ResourcePendingMaintenanceActions.struct_class = Types::ResourcePendingMaintenanceActions
+
+    ResourceQuotaExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ResourceQuotaExceededFault.struct_class = Types::ResourceQuotaExceededFault
 
     S3Settings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
     S3Settings.add_member(:external_table_definition, Shapes::ShapeRef.new(shape: String, location_name: "ExternalTableDefinition"))
@@ -938,6 +984,12 @@ module Aws::DatabaseMigrationService
     S3Settings.add_member(:enable_statistics, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableStatistics"))
     S3Settings.add_member(:cdc_inserts_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CdcInsertsOnly"))
     S3Settings.struct_class = Types::S3Settings
+
+    SNSInvalidTopicFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SNSInvalidTopicFault.struct_class = Types::SNSInvalidTopicFault
+
+    SNSNoAuthorizationFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SNSNoAuthorizationFault.struct_class = Types::SNSNoAuthorizationFault
 
     SchemaList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -965,10 +1017,16 @@ module Aws::DatabaseMigrationService
     StopReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
     StopReplicationTaskResponse.struct_class = Types::StopReplicationTaskResponse
 
+    StorageQuotaExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    StorageQuotaExceededFault.struct_class = Types::StorageQuotaExceededFault
+
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "SubnetAvailabilityZone"))
     Subnet.add_member(:subnet_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetStatus"))
     Subnet.struct_class = Types::Subnet
+
+    SubnetAlreadyInUse.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SubnetAlreadyInUse.struct_class = Types::SubnetAlreadyInUse
 
     SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1020,6 +1078,9 @@ module Aws::DatabaseMigrationService
 
     TestConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     TestConnectionResponse.struct_class = Types::TestConnectionResponse
+
+    UpgradeDependencyFailureFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UpgradeDependencyFailureFault.struct_class = Types::UpgradeDependencyFailureFault
 
     VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String)
 

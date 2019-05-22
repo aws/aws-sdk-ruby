@@ -190,6 +190,22 @@ module Aws::CloudSearch
       include Aws::Structure
     end
 
+    # An error occurred while processing the request.
+    #
+    # @!attribute [rw] code
+    #   A machine-parsable string error or warning code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable string error or warning message.
+    #   @return [String]
+    #
+    class BaseException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `BuildSuggester` operation.
     # Specifies the name of the domain you want to update.
     #

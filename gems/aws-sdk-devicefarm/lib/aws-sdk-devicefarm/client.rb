@@ -3810,6 +3810,40 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # List the tags for an AWS Device Farm resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) for which to list
+    #   tags. You can associate tags with the following Device Farm resources:
+    #   `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Gets information about tests in a given test suite.
     #
     # @option params [required, String] :arn
@@ -4835,6 +4869,76 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Associates the specified tags to a resource with the specified
+    # `resourceArn`. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are deleted as well.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) to which to add
+    #   tags. You can associate tags with the following Device Farm resources:
+    #   `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to add to the resource. A tag is an array of key-value pairs.
+    #   Tag keys can have a maximum character length of 128 characters, and
+    #   tag values can have a maximum length of 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) from which to delete
+    #   tags. You can associate tags with the following Device Farm resources:
+    #   `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates information about an existing private device instance.
     #
     # @option params [required, String] :arn
@@ -5331,7 +5435,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -85,6 +85,7 @@ module Aws::DeviceFarm
     DeviceSelectionResult = Shapes::StructureShape.new(name: 'DeviceSelectionResult')
     Devices = Shapes::ListShape.new(name: 'Devices')
     Double = Shapes::FloatShape.new(name: 'Double')
+    ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExecutionConfiguration = Shapes::StructureShape.new(name: 'ExecutionConfiguration')
     ExecutionResult = Shapes::StringShape.new(name: 'ExecutionResult')
     ExecutionResultCode = Shapes::StringShape.new(name: 'ExecutionResultCode')
@@ -170,6 +171,8 @@ module Aws::DeviceFarm
     ListSamplesResult = Shapes::StructureShape.new(name: 'ListSamplesResult')
     ListSuitesRequest = Shapes::StructureShape.new(name: 'ListSuitesRequest')
     ListSuitesResult = Shapes::StructureShape.new(name: 'ListSuitesResult')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTestsRequest = Shapes::StructureShape.new(name: 'ListTestsRequest')
     ListTestsResult = Shapes::StructureShape.new(name: 'ListTestsResult')
     ListUniqueProblemsRequest = Shapes::StructureShape.new(name: 'ListUniqueProblemsRequest')
@@ -247,16 +250,28 @@ module Aws::DeviceFarm
     String = Shapes::StringShape.new(name: 'String')
     Suite = Shapes::StructureShape.new(name: 'Suite')
     Suites = Shapes::ListShape.new(name: 'Suites')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagOperationException = Shapes::StructureShape.new(name: 'TagOperationException')
+    TagPolicyException = Shapes::StructureShape.new(name: 'TagPolicyException')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Test = Shapes::StructureShape.new(name: 'Test')
     TestParameters = Shapes::MapShape.new(name: 'TestParameters')
     TestType = Shapes::StringShape.new(name: 'TestType')
     Tests = Shapes::ListShape.new(name: 'Tests')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TransactionIdentifier = Shapes::StringShape.new(name: 'TransactionIdentifier')
     TrialMinutes = Shapes::StructureShape.new(name: 'TrialMinutes')
     URL = Shapes::StringShape.new(name: 'URL')
     UniqueProblem = Shapes::StructureShape.new(name: 'UniqueProblem')
     UniqueProblems = Shapes::ListShape.new(name: 'UniqueProblems')
     UniqueProblemsByExecutionResultMap = Shapes::MapShape.new(name: 'UniqueProblemsByExecutionResultMap')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDeviceInstanceRequest = Shapes::StructureShape.new(name: 'UpdateDeviceInstanceRequest')
     UpdateDeviceInstanceResult = Shapes::StructureShape.new(name: 'UpdateDeviceInstanceResult')
     UpdateDevicePoolRequest = Shapes::StructureShape.new(name: 'UpdateDevicePoolRequest')
@@ -296,6 +311,9 @@ module Aws::DeviceFarm
     AmazonResourceNames.member = Shapes::ShapeRef.new(shape: AmazonResourceName)
 
     AndroidPaths.member = Shapes::ShapeRef.new(shape: String)
+
+    ArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ArgumentException.struct_class = Types::ArgumentException
 
     Artifact.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     Artifact.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -634,6 +652,9 @@ module Aws::DeviceFarm
     GetVPCEConfigurationResult.add_member(:vpce_configuration, Shapes::ShapeRef.new(shape: VPCEConfiguration, location_name: "vpceConfiguration"))
     GetVPCEConfigurationResult.struct_class = Types::GetVPCEConfigurationResult
 
+    IdempotencyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    IdempotencyException.struct_class = Types::IdempotencyException
+
     IncompatibilityMessage.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     IncompatibilityMessage.add_member(:type, Shapes::ShapeRef.new(shape: DeviceAttribute, location_name: "type"))
     IncompatibilityMessage.struct_class = Types::IncompatibilityMessage
@@ -659,6 +680,9 @@ module Aws::DeviceFarm
 
     InstanceProfiles.member = Shapes::ShapeRef.new(shape: InstanceProfile)
 
+    InvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
     IosPaths.member = Shapes::ShapeRef.new(shape: String)
 
     Job.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
@@ -679,6 +703,9 @@ module Aws::DeviceFarm
     Job.struct_class = Types::Job
 
     Jobs.member = Shapes::ShapeRef.new(shape: Job)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListArtifactsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     ListArtifactsRequest.add_member(:type, Shapes::ShapeRef.new(shape: ArtifactCategory, required: true, location_name: "type"))
@@ -801,6 +828,12 @@ module Aws::DeviceFarm
     ListSuitesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListSuitesResult.struct_class = Types::ListSuitesResult
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListTestsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     ListTestsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListTestsRequest.struct_class = Types::ListTestsRequest
@@ -860,6 +893,12 @@ module Aws::DeviceFarm
     NetworkProfile.struct_class = Types::NetworkProfile
 
     NetworkProfiles.member = Shapes::ShapeRef.new(shape: NetworkProfile)
+
+    NotEligibleException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    NotEligibleException.struct_class = Types::NotEligibleException
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     Offering.add_member(:id, Shapes::ShapeRef.new(shape: OfferingIdentifier, location_name: "id"))
     Offering.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
@@ -1058,6 +1097,9 @@ module Aws::DeviceFarm
     ScheduleRunTest.add_member(:parameters, Shapes::ShapeRef.new(shape: TestParameters, location_name: "parameters"))
     ScheduleRunTest.struct_class = Types::ScheduleRunTest
 
+    ServiceAccountException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ServiceAccountException.struct_class = Types::ServiceAccountException
+
     StopJobRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     StopJobRequest.struct_class = Types::StopJobRequest
 
@@ -1091,6 +1133,28 @@ module Aws::DeviceFarm
 
     Suites.member = Shapes::ShapeRef.new(shape: Suite)
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TagOperationException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceName"))
+    TagOperationException.struct_class = Types::TagOperationException
+
+    TagPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TagPolicyException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceName"))
+    TagPolicyException.struct_class = Types::TagPolicyException
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     Test.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     Test.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Test.add_member(:type, Shapes::ShapeRef.new(shape: TestType, location_name: "type"))
@@ -1109,6 +1173,10 @@ module Aws::DeviceFarm
 
     Tests.member = Shapes::ShapeRef.new(shape: Test)
 
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
     TrialMinutes.add_member(:total, Shapes::ShapeRef.new(shape: Double, location_name: "total"))
     TrialMinutes.add_member(:remaining, Shapes::ShapeRef.new(shape: Double, location_name: "remaining"))
     TrialMinutes.struct_class = Types::TrialMinutes
@@ -1121,6 +1189,12 @@ module Aws::DeviceFarm
 
     UniqueProblemsByExecutionResultMap.key = Shapes::ShapeRef.new(shape: ExecutionResult)
     UniqueProblemsByExecutionResultMap.value = Shapes::ShapeRef.new(shape: UniqueProblems)
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateDeviceInstanceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     UpdateDeviceInstanceRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "profileArn"))
@@ -1283,6 +1357,7 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOperationException)
       end)
 
       api.add_operation(:create_remote_access_session, Seahorse::Model::Operation.new.tap do |o|
@@ -1858,6 +1933,16 @@ module Aws::DeviceFarm
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOperationException)
+      end)
+
       api.add_operation(:list_tests, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTests"
         o.http_method = "POST"
@@ -1992,6 +2077,28 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOperationException)
       end)
 
       api.add_operation(:update_device_instance, Seahorse::Model::Operation.new.tap do |o|

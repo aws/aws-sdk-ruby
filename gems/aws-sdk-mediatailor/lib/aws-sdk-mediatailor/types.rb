@@ -8,6 +8,19 @@
 module Aws::MediaTailor
   module Types
 
+    # One of the parameters in the request is invalid.
+    #
+    # @!attribute [rw] message
+    #   One of the parameters in the request is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The configuration for using a content delivery network (CDN), like
     # Amazon CloudFront, for content and ad segment management.
     #

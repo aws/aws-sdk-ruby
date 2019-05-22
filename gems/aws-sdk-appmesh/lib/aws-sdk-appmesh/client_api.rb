@@ -168,6 +168,12 @@ module Aws::AppMesh
 
     Backends.member = Shapes::ShapeRef.new(shape: Backend)
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateMeshInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     CreateMeshInput.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
@@ -327,6 +333,9 @@ module Aws::AppMesh
     FileAccessLog.add_member(:path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "path"))
     FileAccessLog.struct_class = Types::FileAccessLog
 
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     HealthCheckPolicy.add_member(:healthy_threshold, Shapes::ShapeRef.new(shape: HealthCheckThreshold, required: true, location_name: "healthyThreshold"))
     HealthCheckPolicy.add_member(:interval_millis, Shapes::ShapeRef.new(shape: HealthCheckIntervalMillis, required: true, location_name: "intervalMillis"))
     HealthCheckPolicy.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
@@ -345,6 +354,12 @@ module Aws::AppMesh
 
     HttpRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "prefix"))
     HttpRouteMatch.struct_class = Types::HttpRouteMatch
+
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListMeshesInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListMeshesLimit, location: "querystring", location_name: "limit"))
     ListMeshesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -427,9 +442,15 @@ module Aws::AppMesh
     MeshStatus.add_member(:status, Shapes::ShapeRef.new(shape: MeshStatusCode, location_name: "status"))
     MeshStatus.struct_class = Types::MeshStatus
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     PortMapping.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "port"))
     PortMapping.add_member(:protocol, Shapes::ShapeRef.new(shape: PortProtocol, required: true, location_name: "protocol"))
     PortMapping.struct_class = Types::PortMapping
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
 
     ResourceMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     ResourceMetadata.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
@@ -464,6 +485,9 @@ module Aws::AppMesh
     ServiceDiscovery.add_member(:dns, Shapes::ShapeRef.new(shape: DnsServiceDiscovery, location_name: "dns"))
     ServiceDiscovery.struct_class = Types::ServiceDiscovery
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagList.member = Shapes::ShapeRef.new(shape: TagRef)
@@ -483,6 +507,12 @@ module Aws::AppMesh
 
     TcpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
     TcpRouteAction.struct_class = Types::TcpRouteAction
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))

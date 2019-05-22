@@ -2536,6 +2536,74 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
+    # A second request to use or change an object was not allowed. This can
+    # result from retrying a request using a parameter that was not present
+    # in the original request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [Integer]
+    #
+    class IdempotentParameterMismatchException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
+    # An error on the server occurred when trying to process a request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [Integer]
+    #
+    class InternalServerException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
+    # An error on the client occurred. Typically, the cause is an invalid
+    # input value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [Integer]
+    #
+    class InvalidInputException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidTagException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The subscriber exceeded the maximum number of operations. This
+    # exception can occur when listing objects such as `DataSource`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [Integer]
+    #
+    class LimitExceededException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
     # Represents the output of a `GetMLModel` operation.
     #
     # The content consists of the detailed metadata and the current status
@@ -2828,6 +2896,17 @@ module Aws::MachineLearning
       :predicted_value,
       :predicted_scores,
       :details)
+      include Aws::Structure
+    end
+
+    # The exception is thrown when a predict request is made to an unmounted
+    # `MLModel`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class PredictorNotMountedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3499,6 +3578,20 @@ module Aws::MachineLearning
       include Aws::Structure
     end
 
+    # A specified resource cannot be located.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [Integer]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
     # Describes the data specification of a `DataSource`.
     #
     # @note When making an API call, you may pass S3DataSpec
@@ -3691,6 +3784,14 @@ module Aws::MachineLearning
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TagLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

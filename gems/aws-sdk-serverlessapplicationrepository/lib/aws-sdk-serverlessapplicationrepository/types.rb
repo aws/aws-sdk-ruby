@@ -281,6 +281,24 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
+    # One of the parameters in the request is invalid.
+    #
+    # @!attribute [rw] error_code
+    #   400
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   One of the parameters in the request is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # Details of the change set.
     #
     # @!attribute [rw] application_id
@@ -316,6 +334,24 @@ module Aws::ServerlessApplicationRepository
       :change_set_id,
       :semantic_version,
       :stack_id)
+      include Aws::Structure
+    end
+
+    # The resource already exists.
+    #
+    # @!attribute [rw] error_code
+    #   409
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The resource already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :error_code,
+      :message)
       include Aws::Structure
     end
 
@@ -1056,6 +1092,24 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
+    # The client is not authenticated.
+    #
+    # @!attribute [rw] error_code
+    #   403
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The client is not authenticated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetApplicationPolicyRequest
     #   data as a hash:
     #
@@ -1212,6 +1266,26 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
+    # The AWS Serverless Application Repository service encountered an
+    # internal error.
+    #
+    # @!attribute [rw] error_code
+    #   500
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The AWS Serverless Application Repository service encountered an
+    #   internal error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListApplicationDependenciesRequest
     #   data as a hash:
     #
@@ -1332,6 +1406,26 @@ module Aws::ServerlessApplicationRepository
     class ListApplicationsResponse < Struct.new(
       :applications,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The resource (for example, an access policy statement) specified in
+    # the request doesn't exist.
+    #
+    # @!attribute [rw] error_code
+    #   404
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The resource (for example, an access policy statement) specified in
+    #   the request doesn't exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :error_code,
+      :message)
       include Aws::Structure
     end
 
@@ -1687,6 +1781,26 @@ module Aws::ServerlessApplicationRepository
       :status,
       :template_id,
       :template_url)
+      include Aws::Structure
+    end
+
+    # The client is sending more than the allowed number of requests per
+    # unit of time.
+    #
+    # @!attribute [rw] error_code
+    #   429
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The client is sending more than the allowed number of requests per
+    #   unit of time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :error_code,
+      :message)
       include Aws::Structure
     end
 

@@ -562,6 +562,29 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/IllegalActionException AWS API Documentation
+    #
+    class IllegalActionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The action or operation requested is invalid. Verify that the action
+    # is typed correctly.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An invitation to an AWS account to create a member and join the
     # network.
     #
@@ -1800,6 +1823,58 @@ module Aws::ManagedBlockchain
     #
     class RemoveAction < Struct.new(
       :member_id)
+      include Aws::Structure
+    end
+
+    # A resource request is issued for a resource that already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of resources of that type already exist. Ensure the
+    # resources requested are within the boundaries of the service edition
+    # and your account limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A requested resource does not exist on the network. It may have been
+    # deleted or referenced inaccurately.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource exists but is not in a status that can complete
+    # the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ResourceNotReadyException AWS API Documentation
+    #
+    class ResourceNotReadyException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

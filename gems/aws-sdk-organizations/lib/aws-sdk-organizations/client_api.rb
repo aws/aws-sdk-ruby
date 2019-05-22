@@ -210,11 +210,21 @@ module Aws::Organizations
     UpdatePolicyRequest = Shapes::StructureShape.new(name: 'UpdatePolicyRequest')
     UpdatePolicyResponse = Shapes::StructureShape.new(name: 'UpdatePolicyResponse')
 
+    AWSOrganizationsNotInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AWSOrganizationsNotInUseException.struct_class = Types::AWSOrganizationsNotInUseException
+
     AcceptHandshakeRequest.add_member(:handshake_id, Shapes::ShapeRef.new(shape: HandshakeId, required: true, location_name: "HandshakeId"))
     AcceptHandshakeRequest.struct_class = Types::AcceptHandshakeRequest
 
     AcceptHandshakeResponse.add_member(:handshake, Shapes::ShapeRef.new(shape: Handshake, location_name: "Handshake"))
     AcceptHandshakeResponse.struct_class = Types::AcceptHandshakeResponse
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccessDeniedForDependencyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccessDeniedForDependencyException.add_member(:reason, Shapes::ShapeRef.new(shape: AccessDeniedForDependencyExceptionReason, location_name: "Reason"))
+    AccessDeniedForDependencyException.struct_class = Types::AccessDeniedForDependencyException
 
     Account.add_member(:id, Shapes::ShapeRef.new(shape: AccountId, location_name: "Id"))
     Account.add_member(:arn, Shapes::ShapeRef.new(shape: AccountArn, location_name: "Arn"))
@@ -225,7 +235,16 @@ module Aws::Organizations
     Account.add_member(:joined_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "JoinedTimestamp"))
     Account.struct_class = Types::Account
 
+    AccountNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccountNotFoundException.struct_class = Types::AccountNotFoundException
+
+    AccountOwnerNotVerifiedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccountOwnerNotVerifiedException.struct_class = Types::AccountOwnerNotVerifiedException
+
     Accounts.member = Shapes::ShapeRef.new(shape: Account)
+
+    AlreadyInOrganizationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AlreadyInOrganizationException.struct_class = Types::AlreadyInOrganizationException
 
     AttachPolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
     AttachPolicyRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: PolicyTargetId, required: true, location_name: "TargetId"))
@@ -241,7 +260,17 @@ module Aws::Organizations
     Child.add_member(:type, Shapes::ShapeRef.new(shape: ChildType, location_name: "Type"))
     Child.struct_class = Types::Child
 
+    ChildNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ChildNotFoundException.struct_class = Types::ChildNotFoundException
+
     Children.member = Shapes::ShapeRef.new(shape: Child)
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConstraintViolationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ConstraintViolationException.add_member(:reason, Shapes::ShapeRef.new(shape: ConstraintViolationExceptionReason, location_name: "Reason"))
+    ConstraintViolationException.struct_class = Types::ConstraintViolationException
 
     CreateAccountRequest.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "Email"))
     CreateAccountRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
@@ -263,6 +292,9 @@ module Aws::Organizations
     CreateAccountStatus.add_member(:gov_cloud_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "GovCloudAccountId"))
     CreateAccountStatus.add_member(:failure_reason, Shapes::ShapeRef.new(shape: CreateAccountFailureReason, location_name: "FailureReason"))
     CreateAccountStatus.struct_class = Types::CreateAccountStatus
+
+    CreateAccountStatusNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    CreateAccountStatusNotFoundException.struct_class = Types::CreateAccountStatusNotFoundException
 
     CreateAccountStatuses.member = Shapes::ShapeRef.new(shape: CreateAccountStatus)
 
@@ -342,6 +374,9 @@ module Aws::Organizations
     DescribePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
     DescribePolicyResponse.struct_class = Types::DescribePolicyResponse
 
+    DestinationParentNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DestinationParentNotFoundException.struct_class = Types::DestinationParentNotFoundException
+
     DetachPolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
     DetachPolicyRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: PolicyTargetId, required: true, location_name: "TargetId"))
     DetachPolicyRequest.struct_class = Types::DetachPolicyRequest
@@ -355,6 +390,21 @@ module Aws::Organizations
 
     DisablePolicyTypeResponse.add_member(:root, Shapes::ShapeRef.new(shape: Root, location_name: "Root"))
     DisablePolicyTypeResponse.struct_class = Types::DisablePolicyTypeResponse
+
+    DuplicateAccountException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DuplicateAccountException.struct_class = Types::DuplicateAccountException
+
+    DuplicateHandshakeException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DuplicateHandshakeException.struct_class = Types::DuplicateHandshakeException
+
+    DuplicateOrganizationalUnitException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DuplicateOrganizationalUnitException.struct_class = Types::DuplicateOrganizationalUnitException
+
+    DuplicatePolicyAttachmentException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DuplicatePolicyAttachmentException.struct_class = Types::DuplicatePolicyAttachmentException
+
+    DuplicatePolicyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DuplicatePolicyException.struct_class = Types::DuplicatePolicyException
 
     EnableAWSServiceAccessRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, required: true, location_name: "ServicePrincipal"))
     EnableAWSServiceAccessRequest.struct_class = Types::EnableAWSServiceAccessRequest
@@ -377,6 +427,9 @@ module Aws::Organizations
 
     EnabledServicePrincipals.member = Shapes::ShapeRef.new(shape: EnabledServicePrincipal)
 
+    FinalizingOrganizationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    FinalizingOrganizationException.struct_class = Types::FinalizingOrganizationException
+
     Handshake.add_member(:id, Shapes::ShapeRef.new(shape: HandshakeId, location_name: "Id"))
     Handshake.add_member(:arn, Shapes::ShapeRef.new(shape: HandshakeArn, location_name: "Arn"))
     Handshake.add_member(:parties, Shapes::ShapeRef.new(shape: HandshakeParties, location_name: "Parties"))
@@ -387,9 +440,19 @@ module Aws::Organizations
     Handshake.add_member(:resources, Shapes::ShapeRef.new(shape: HandshakeResources, location_name: "Resources"))
     Handshake.struct_class = Types::Handshake
 
+    HandshakeAlreadyInStateException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    HandshakeAlreadyInStateException.struct_class = Types::HandshakeAlreadyInStateException
+
+    HandshakeConstraintViolationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    HandshakeConstraintViolationException.add_member(:reason, Shapes::ShapeRef.new(shape: HandshakeConstraintViolationExceptionReason, location_name: "Reason"))
+    HandshakeConstraintViolationException.struct_class = Types::HandshakeConstraintViolationException
+
     HandshakeFilter.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, location_name: "ActionType"))
     HandshakeFilter.add_member(:parent_handshake_id, Shapes::ShapeRef.new(shape: HandshakeId, location_name: "ParentHandshakeId"))
     HandshakeFilter.struct_class = Types::HandshakeFilter
+
+    HandshakeNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    HandshakeNotFoundException.struct_class = Types::HandshakeNotFoundException
 
     HandshakeParties.member = Shapes::ShapeRef.new(shape: HandshakeParty)
 
@@ -405,6 +468,13 @@ module Aws::Organizations
     HandshakeResources.member = Shapes::ShapeRef.new(shape: HandshakeResource)
 
     Handshakes.member = Shapes::ShapeRef.new(shape: Handshake)
+
+    InvalidHandshakeTransitionException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidHandshakeTransitionException.struct_class = Types::InvalidHandshakeTransitionException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidInputException.add_member(:reason, Shapes::ShapeRef.new(shape: InvalidInputExceptionReason, location_name: "Reason"))
+    InvalidInputException.struct_class = Types::InvalidInputException
 
     InviteAccountToOrganizationRequest.add_member(:target, Shapes::ShapeRef.new(shape: HandshakeParty, required: true, location_name: "Target"))
     InviteAccountToOrganizationRequest.add_member(:notes, Shapes::ShapeRef.new(shape: HandshakeNotes, location_name: "Notes"))
@@ -529,6 +599,12 @@ module Aws::Organizations
     ListTargetsForPolicyResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTargetsForPolicyResponse.struct_class = Types::ListTargetsForPolicyResponse
 
+    MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
+
+    MasterCannotLeaveOrganizationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    MasterCannotLeaveOrganizationException.struct_class = Types::MasterCannotLeaveOrganizationException
+
     MoveAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     MoveAccountRequest.add_member(:source_parent_id, Shapes::ShapeRef.new(shape: ParentId, required: true, location_name: "SourceParentId"))
     MoveAccountRequest.add_member(:destination_parent_id, Shapes::ShapeRef.new(shape: ParentId, required: true, location_name: "DestinationParentId"))
@@ -543,16 +619,28 @@ module Aws::Organizations
     Organization.add_member(:available_policy_types, Shapes::ShapeRef.new(shape: PolicyTypes, location_name: "AvailablePolicyTypes"))
     Organization.struct_class = Types::Organization
 
+    OrganizationNotEmptyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    OrganizationNotEmptyException.struct_class = Types::OrganizationNotEmptyException
+
     OrganizationalUnit.add_member(:id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "Id"))
     OrganizationalUnit.add_member(:arn, Shapes::ShapeRef.new(shape: OrganizationalUnitArn, location_name: "Arn"))
     OrganizationalUnit.add_member(:name, Shapes::ShapeRef.new(shape: OrganizationalUnitName, location_name: "Name"))
     OrganizationalUnit.struct_class = Types::OrganizationalUnit
+
+    OrganizationalUnitNotEmptyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    OrganizationalUnitNotEmptyException.struct_class = Types::OrganizationalUnitNotEmptyException
+
+    OrganizationalUnitNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    OrganizationalUnitNotFoundException.struct_class = Types::OrganizationalUnitNotFoundException
 
     OrganizationalUnits.member = Shapes::ShapeRef.new(shape: OrganizationalUnit)
 
     Parent.add_member(:id, Shapes::ShapeRef.new(shape: ParentId, location_name: "Id"))
     Parent.add_member(:type, Shapes::ShapeRef.new(shape: ParentType, location_name: "Type"))
     Parent.struct_class = Types::Parent
+
+    ParentNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ParentNotFoundException.struct_class = Types::ParentNotFoundException
 
     Parents.member = Shapes::ShapeRef.new(shape: Parent)
 
@@ -561,6 +649,15 @@ module Aws::Organizations
     Policy.add_member(:policy_summary, Shapes::ShapeRef.new(shape: PolicySummary, location_name: "PolicySummary"))
     Policy.add_member(:content, Shapes::ShapeRef.new(shape: PolicyContent, location_name: "Content"))
     Policy.struct_class = Types::Policy
+
+    PolicyInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    PolicyInUseException.struct_class = Types::PolicyInUseException
+
+    PolicyNotAttachedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    PolicyNotAttachedException.struct_class = Types::PolicyNotAttachedException
+
+    PolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    PolicyNotFoundException.struct_class = Types::PolicyNotFoundException
 
     PolicySummary.add_member(:id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "Id"))
     PolicySummary.add_member(:arn, Shapes::ShapeRef.new(shape: PolicyArn, location_name: "Arn"))
@@ -578,6 +675,15 @@ module Aws::Organizations
 
     PolicyTargets.member = Shapes::ShapeRef.new(shape: PolicyTargetSummary)
 
+    PolicyTypeAlreadyEnabledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    PolicyTypeAlreadyEnabledException.struct_class = Types::PolicyTypeAlreadyEnabledException
+
+    PolicyTypeNotAvailableForOrganizationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    PolicyTypeNotAvailableForOrganizationException.struct_class = Types::PolicyTypeNotAvailableForOrganizationException
+
+    PolicyTypeNotEnabledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    PolicyTypeNotEnabledException.struct_class = Types::PolicyTypeNotEnabledException
+
     PolicyTypeSummary.add_member(:type, Shapes::ShapeRef.new(shape: PolicyType, location_name: "Type"))
     PolicyTypeSummary.add_member(:status, Shapes::ShapeRef.new(shape: PolicyTypeStatus, location_name: "Status"))
     PolicyTypeSummary.struct_class = Types::PolicyTypeSummary
@@ -593,7 +699,26 @@ module Aws::Organizations
     Root.add_member(:policy_types, Shapes::ShapeRef.new(shape: PolicyTypes, location_name: "PolicyTypes"))
     Root.struct_class = Types::Root
 
+    RootNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    RootNotFoundException.struct_class = Types::RootNotFoundException
+
     Roots.member = Shapes::ShapeRef.new(shape: Root)
+
+    ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ServiceException.struct_class = Types::ServiceException
+
+    SourceParentNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    SourceParentNotFoundException.struct_class = Types::SourceParentNotFoundException
+
+    TargetNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TargetNotFoundException.struct_class = Types::TargetNotFoundException
+
+    TooManyRequestsException.add_member(:type, Shapes::ShapeRef.new(shape: ExceptionType, location_name: "Type"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UnsupportedAPIEndpointException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    UnsupportedAPIEndpointException.struct_class = Types::UnsupportedAPIEndpointException
 
     UpdateOrganizationalUnitRequest.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, required: true, location_name: "OrganizationalUnitId"))
     UpdateOrganizationalUnitRequest.add_member(:name, Shapes::ShapeRef.new(shape: OrganizationalUnitName, location_name: "Name"))

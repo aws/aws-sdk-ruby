@@ -186,6 +186,21 @@ module Aws::Batch
     #
     class CancelJobResponse < Aws::EmptyStructure; end
 
+    # These errors are usually caused by a client action, such as using an
+    # action or resource on behalf of a user that doesn't have permissions
+    # to use the action or resource, or specifying an identifier that is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ClientException AWS API Documentation
+    #
+    class ClientException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing an AWS Batch compute environment.
     #
     # @!attribute [rw] compute_environment_name
@@ -2644,6 +2659,18 @@ module Aws::Batch
     #
     class RetryStrategy < Struct.new(
       :attempts)
+      include Aws::Structure
+    end
+
+    # These errors are usually caused by a server issue.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServerException AWS API Documentation
+    #
+    class ServerException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

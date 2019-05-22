@@ -545,6 +545,10 @@ module Aws::Pinpoint
     AttributesResource.add_member(:attributes, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Attributes"))
     AttributesResource.struct_class = Types::AttributesResource
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    BadRequestException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BaiduChannelRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: __string, location_name: "ApiKey"))
     BaiduChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     BaiduChannelRequest.add_member(:secret_key, Shapes::ShapeRef.new(shape: __string, location_name: "SecretKey"))
@@ -1058,6 +1062,10 @@ module Aws::Pinpoint
     ExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ExportJobsResponse.struct_class = Types::ExportJobsResponse
 
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    ForbiddenException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     GCMChannelRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: __string, location_name: "ApiKey"))
     GCMChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     GCMChannelRequest.struct_class = Types::GCMChannelRequest
@@ -1431,6 +1439,10 @@ module Aws::Pinpoint
     ImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ImportJobsResponse.struct_class = Types::ImportJobsResponse
 
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    InternalServerErrorException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
     ItemResponse.add_member(:endpoint_item_response, Shapes::ShapeRef.new(shape: EndpointItemResponse, location_name: "EndpointItemResponse"))
     ItemResponse.add_member(:events_item_response, Shapes::ShapeRef.new(shape: MapOfEventItemResponse, location_name: "EventsItemResponse"))
     ItemResponse.struct_class = Types::ItemResponse
@@ -1566,9 +1578,17 @@ module Aws::Pinpoint
     MessageResult.add_member(:updated_token, Shapes::ShapeRef.new(shape: __string, location_name: "UpdatedToken"))
     MessageResult.struct_class = Types::MessageResult
 
+    MethodNotAllowedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    MethodNotAllowedException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
+    MethodNotAllowedException.struct_class = Types::MethodNotAllowedException
+
     MetricDimension.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: __string, location_name: "ComparisonOperator"))
     MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: __double, location_name: "Value"))
     MetricDimension.struct_class = Types::MetricDimension
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    NotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     NumberValidateRequest.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: __string, location_name: "IsoCountryCode"))
     NumberValidateRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: __string, location_name: "PhoneNumber"))
@@ -1819,6 +1839,10 @@ module Aws::Pinpoint
 
     TagsModel.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, required: true, location_name: "tags"))
     TagsModel.struct_class = Types::TagsModel
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    TooManyRequestsException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     TreatmentResource.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     TreatmentResource.add_member(:message_configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "MessageConfiguration"))

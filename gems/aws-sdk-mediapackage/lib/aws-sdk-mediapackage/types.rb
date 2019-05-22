@@ -859,6 +859,16 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An HTTP Live Streaming (HLS) encryption configuration.
     #
     # @note When making an API call, you may pass HlsEncryption
@@ -1198,6 +1208,16 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListChannelsRequest
     #   data as a hash:
     #
@@ -1377,6 +1397,16 @@ module Aws::MediaPackage
       :manifest_window_seconds,
       :segment_duration_seconds,
       :stream_selection)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1714,6 +1744,16 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A configuration for accessing an external Secure Packager and Encoder
     # Key Exchange (SPEKE) service that will provide encryption keys.
     #
@@ -1825,6 +1865,26 @@ module Aws::MediaPackage
     #
     class TagsModel < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UnprocessableEntityException AWS API Documentation
+    #
+    class UnprocessableEntityException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

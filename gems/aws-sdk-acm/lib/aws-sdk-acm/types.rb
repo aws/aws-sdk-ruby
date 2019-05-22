@@ -704,6 +704,70 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # One or more of of request parameters specified is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidArgsException AWS API Documentation
+    #
+    class InvalidArgsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested Amazon Resource Name (ARN) does not refer to an existing
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more values in the DomainValidationOption structure is
+    # incorrect.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidDomainValidationOptionsException AWS API Documentation
+    #
+    class InvalidDomainValidationOptionsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Processing has reached an invalid state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or both of the values that make up the key-value pair is not
+    # valid. For example, you cannot specify a tag value that begins with
+    # `aws:`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidTagException AWS API Documentation
+    #
+    class InvalidTagException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The Key Usage X.509 v3 extension defines the purpose of the public key
     # contained in the certificate.
     #
@@ -715,6 +779,18 @@ module Aws::ACM
     #
     class KeyUsage < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # An ACM limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1083,6 +1159,19 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # The certificate request is in process and the certificate in your
+    # account has not yet been issued.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestInProgressException AWS API Documentation
+    #
+    class RequestInProgressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ResendValidationEmailRequest
     #   data as a hash:
     #
@@ -1137,6 +1226,32 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # The certificate is in use by another AWS service in the caller's
+    # account. Remove the association and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified certificate cannot be found in the caller's account or
+    # the caller's account cannot be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains a DNS record value that you can use to can use to validate
     # ownership or control of a domain. This is used by the
     # DescribeCertificate action.
@@ -1188,6 +1303,19 @@ module Aws::ACM
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # The request contains too many tags. Try the request again with fewer
+    # tags.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

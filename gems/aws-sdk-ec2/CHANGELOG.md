@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2019-05-22)
+------------------
+
+* Feature - This release adds idempotency support for associate, create route and authorization APIs for AWS Client VPN Endpoints.
+
+1.85.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.84.0 (2019-05-15)
 ------------------
 

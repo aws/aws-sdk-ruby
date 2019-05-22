@@ -212,6 +212,9 @@ module Aws::CloudWatchLogs
     CreateLogStreamRequest.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, required: true, location_name: "logStreamName"))
     CreateLogStreamRequest.struct_class = Types::CreateLogStreamRequest
 
+    DataAlreadyAcceptedException.add_member(:expected_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "expectedSequenceToken"))
+    DataAlreadyAcceptedException.struct_class = Types::DataAlreadyAcceptedException
+
     DeleteDestinationRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "destinationName"))
     DeleteDestinationRequest.struct_class = Types::DeleteDestinationRequest
 
@@ -421,6 +424,9 @@ module Aws::CloudWatchLogs
 
     InputLogStreamNames.member = Shapes::ShapeRef.new(shape: LogStreamName)
 
+    InvalidSequenceTokenException.add_member(:expected_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "expectedSequenceToken"))
+    InvalidSequenceTokenException.struct_class = Types::InvalidSequenceTokenException
+
     ListTagsLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     ListTagsLogGroupRequest.struct_class = Types::ListTagsLogGroupRequest
 
@@ -458,6 +464,9 @@ module Aws::CloudWatchLogs
     LogStream.struct_class = Types::LogStream
 
     LogStreams.member = Shapes::ShapeRef.new(shape: LogStream)
+
+    MalformedQueryException.add_member(:query_compile_error, Shapes::ShapeRef.new(shape: QueryCompileError, location_name: "queryCompileError"))
+    MalformedQueryException.struct_class = Types::MalformedQueryException
 
     MetricFilter.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, location_name: "filterName"))
     MetricFilter.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "filterPattern"))

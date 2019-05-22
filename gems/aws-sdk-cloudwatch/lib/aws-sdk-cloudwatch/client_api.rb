@@ -180,7 +180,14 @@ module Aws::CloudWatch
     DashboardEntry.add_member(:size, Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
     DashboardEntry.struct_class = Types::DashboardEntry
 
+    DashboardInvalidInputError.add_member(:message, Shapes::ShapeRef.new(shape: DashboardErrorMessage, location_name: "message"))
+    DashboardInvalidInputError.add_member(:dashboard_validation_messages, Shapes::ShapeRef.new(shape: DashboardValidationMessages, location_name: "dashboardValidationMessages"))
+    DashboardInvalidInputError.struct_class = Types::DashboardInvalidInputError
+
     DashboardNames.member = Shapes::ShapeRef.new(shape: DashboardName)
+
+    DashboardNotFoundError.add_member(:message, Shapes::ShapeRef.new(shape: DashboardErrorMessage, location_name: "message"))
+    DashboardNotFoundError.struct_class = Types::DashboardNotFoundError
 
     DashboardValidationMessage.add_member(:data_path, Shapes::ShapeRef.new(shape: DataPath, location_name: "DataPath"))
     DashboardValidationMessage.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -312,6 +319,24 @@ module Aws::CloudWatch
     GetMetricWidgetImageOutput.add_member(:metric_widget_image, Shapes::ShapeRef.new(shape: MetricWidgetImage, location_name: "MetricWidgetImage"))
     GetMetricWidgetImageOutput.struct_class = Types::GetMetricWidgetImageOutput
 
+    InternalServiceFault.add_member(:message, Shapes::ShapeRef.new(shape: FaultDescription, location_name: "Message"))
+    InternalServiceFault.struct_class = Types::InternalServiceFault
+
+    InvalidFormatFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidFormatFault.struct_class = Types::InvalidFormatFault
+
+    InvalidNextToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidNextToken.struct_class = Types::InvalidNextToken
+
+    InvalidParameterCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    LimitExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededFault.struct_class = Types::LimitExceededFault
+
     ListDashboardsInput.add_member(:dashboard_name_prefix, Shapes::ShapeRef.new(shape: DashboardNamePrefix, location_name: "DashboardNamePrefix"))
     ListDashboardsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDashboardsInput.struct_class = Types::ListDashboardsInput
@@ -417,6 +442,9 @@ module Aws::CloudWatch
 
     Metrics.member = Shapes::ShapeRef.new(shape: Metric)
 
+    MissingRequiredParameterException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    MissingRequiredParameterException.struct_class = Types::MissingRequiredParameterException
+
     PutDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "DashboardName"))
     PutDashboardInput.add_member(:dashboard_body, Shapes::ShapeRef.new(shape: DashboardBody, required: true, location_name: "DashboardBody"))
     PutDashboardInput.struct_class = Types::PutDashboardInput
@@ -452,6 +480,13 @@ module Aws::CloudWatch
     PutMetricDataInput.struct_class = Types::PutMetricDataInput
 
     ResourceList.member = Shapes::ShapeRef.new(shape: ResourceName)
+
+    ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFound.struct_class = Types::ResourceNotFound
+
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SetAlarmStateInput.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "AlarmName"))
     SetAlarmStateInput.add_member(:state_value, Shapes::ShapeRef.new(shape: StateValue, required: true, location_name: "StateValue"))

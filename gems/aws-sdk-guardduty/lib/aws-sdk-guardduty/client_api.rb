@@ -245,6 +245,10 @@ module Aws::GuardDuty
     AwsApiCallAction.add_member(:service_name, Shapes::ShapeRef.new(shape: __string, location_name: "serviceName"))
     AwsApiCallAction.struct_class = Types::AwsApiCallAction
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestException.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "__type"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     City.add_member(:city_name, Shapes::ShapeRef.new(shape: __string, location_name: "cityName"))
     City.struct_class = Types::City
 
@@ -512,6 +516,10 @@ module Aws::GuardDuty
     InstanceDetails.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodes, location_name: "productCodes"))
     InstanceDetails.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     InstanceDetails.struct_class = Types::InstanceDetails
+
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorException.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "__type"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
     Invitation.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     Invitation.add_member(:invitation_id, Shapes::ShapeRef.new(shape: InvitationId, location_name: "invitationId"))

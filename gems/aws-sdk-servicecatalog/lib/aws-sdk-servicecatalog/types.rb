@@ -6249,7 +6249,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_name
-    #   The updated name of the provisioned product. You cannot specify both
+    #   The name of the provisioned product. You cannot specify both
     #   `ProvisionedProductName` and `ProvisionedProductId`.
     #   @return [String]
     #
@@ -6318,6 +6318,102 @@ module Aws::ServiceCatalog
     #
     class UpdateProvisionedProductOutput < Struct.new(
       :record_detail)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateProvisionedProductPropertiesInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         provisioned_product_id: "Id", # required
+    #         provisioned_product_properties: { # required
+    #           "OWNER" => "PropertyValue",
+    #         },
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   The identifier of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_properties
+    #   A map that contains the provisioned product properties to be
+    #   updated.
+    #
+    #   The `OWNER` key only accepts user ARNs. The owner is the user that
+    #   is allowed to see, update, terminate, and execute service actions in
+    #   the provisioned product.
+    #
+    #   The administrator can change the owner of a provisioned product to
+    #   another IAM user within the same account. Both end user owners and
+    #   administrators can see ownership history of the provisioned product
+    #   using the `ListRecordHistory` API. The new owner can describe all
+    #   past records for the provisioned product using the `DescribeRecord`
+    #   API. The previous owner can no longer use `DescribeRecord`, but can
+    #   still see the product's history from when he was an owner using
+    #   `ListRecordHistory`.
+    #
+    #   If a provisioned product ownership is assigned to an end user, they
+    #   can see and perform any action through the API or Service Catalog
+    #   console such as update, terminate, and execute service actions. If
+    #   an end user provisions a product and the owner is updated to someone
+    #   else, they will no longer be able to see or perform any actions
+    #   through API or the Service Catalog console on that provisioned
+    #   product.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   The idempotency token that uniquely identifies the provisioning
+    #   product update request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductPropertiesInput AWS API Documentation
+    #
+    class UpdateProvisionedProductPropertiesInput < Struct.new(
+      :accept_language,
+      :provisioned_product_id,
+      :provisioned_product_properties,
+      :idempotency_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioned_product_id
+    #   The provisioned product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_properties
+    #   A map that contains the properties updated.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] record_id
+    #   The identifier of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductPropertiesOutput AWS API Documentation
+    #
+    class UpdateProvisionedProductPropertiesOutput < Struct.new(
+      :provisioned_product_id,
+      :provisioned_product_properties,
+      :record_id,
+      :status)
       include Aws::Structure
     end
 

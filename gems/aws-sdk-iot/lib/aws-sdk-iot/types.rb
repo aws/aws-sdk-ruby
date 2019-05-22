@@ -1363,6 +1363,20 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Unable to verify the CA certificate used to sign the device
+    # certificate you are attempting to register. This is happens when you
+    # have registered more than one CA certificate that has the same subject
+    # field and public key.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class CertificateConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a certificate.
     #
     # @!attribute [rw] certificate_arn
@@ -1432,6 +1446,28 @@ module Aws::IoT
       :transfer_data,
       :generation_id,
       :validity)
+      include Aws::Structure
+    end
+
+    # The certificate operation is not allowed.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class CertificateStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The certificate is invalid.
+    #
+    # @!attribute [rw] message
+    #   Additional information about the exception.
+    #   @return [String]
+    #
+    class CertificateValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1662,6 +1698,18 @@ module Aws::IoT
     #
     class Configuration < Struct.new(
       :enabled)
+      include Aws::Structure
+    end
+
+    # A conflicting resource update exception. This exception is thrown when
+    # two pending updates cause a conflict.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ConflictingResourceUpdateException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3257,6 +3305,18 @@ module Aws::IoT
     class DeleteCertificateRequest < Struct.new(
       :certificate_id,
       :force_delete)
+      include Aws::Structure
+    end
+
+    # You can't delete the resource because it is attached to one or more
+    # resources.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class DeleteConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5471,6 +5531,95 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The index is not ready.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class IndexNotReadyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An unexpected error has occurred.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InternalException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An unexpected error has occurred.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The aggregation is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidAggregationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The query is invalid.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidQueryException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The response is invalid.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidResponseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An attempt was made to change to an invalid state, for example by
+    # deleting a job or a job execution which is "IN\_PROGRESS" without
+    # setting the `force` parameter.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidStateTransitionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Sends messge data to an AWS IoT Analytics channel.
     #
     # @note When making an API call, you may pass IotAnalyticsAction
@@ -6002,6 +6151,17 @@ module Aws::IoT
     #
     class LambdaAction < Struct.new(
       :function_arn)
+      include Aws::Structure
+    end
+
+    # A limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -8007,6 +8167,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The policy documentation is not valid.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class MalformedPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The value to be compared with the `metric`.
     #
     # @note When making an API call, you may pass MetricValue
@@ -8059,6 +8230,17 @@ module Aws::IoT
       :resource_type,
       :resource_identifier,
       :additional_info)
+      include Aws::Structure
+    end
+
+    # The resource is not configured.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class NotConfiguredException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -8582,6 +8764,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The registration code is invalid.
+    #
+    # @!attribute [rw] message
+    #   Additional information about the exception.
+    #   @return [String]
+    #
+    class RegistrationCodeValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The registration configuration.
     #
     # @note When making an API call, you may pass RegistrationConfig
@@ -8965,6 +9158,27 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The resource already exists.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that caused the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource that caused the exception.
+    #   @return [String]
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_arn)
+      include Aws::Structure
+    end
+
     # Information identifying the non-compliant resource.
     #
     # @note When making an API call, you may pass ResourceIdentifier
@@ -9013,6 +9227,28 @@ module Aws::IoT
       :client_id,
       :policy_version_identifier,
       :account)
+      include Aws::Structure
+    end
+
+    # The specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource registration failed.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ResourceRegistrationFailureException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -9324,6 +9560,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SetDefaultAuthorizerRequest
     #   data as a hash:
     #
@@ -9519,6 +9766,17 @@ module Aws::IoT
       :target_arn,
       :role_arn,
       :message_format)
+      include Aws::Structure
+    end
+
+    # The Rule-SQL expression can't be parsed correctly.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class SqlParseException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -10416,6 +10674,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The rate exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Specifies the amount of time each device has to finish its execution
     # of the job. A timer is started when the job execution status is set to
     # `IN_PROGRESS`. If the job execution status is not set to another
@@ -10761,6 +11030,18 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # You can't revert the certificate transfer because the transfer is
+    # already complete.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class TransferAlreadyCompletedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The input for the TransferCertificate operation.
     #
     # @note When making an API call, you may pass TransferCertificateRequest
@@ -10803,6 +11084,18 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # You can't transfer the certificate because authorization policies are
+    # still attached.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class TransferConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Data used to transfer a certificate to an AWS account.
     #
     # @!attribute [rw] transfer_message
@@ -10831,6 +11124,17 @@ module Aws::IoT
       :transfer_date,
       :accept_date,
       :reject_date)
+      include Aws::Structure
+    end
+
+    # You are not authorized to perform this operation.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -11818,6 +12122,30 @@ module Aws::IoT
     #
     class ValidationError < Struct.new(
       :error_message)
+      include Aws::Structure
+    end
+
+    # An exception thrown when the version of an entity specified with the
+    # `expectedVersion` parameter does not match the latest version in the
+    # system.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class VersionConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The number of policy versions exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class VersionsLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -31,6 +31,19 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because it attempted to create a resource
+    # that already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelKeyDeletionRequest
     #   data as a hash:
     #
@@ -71,6 +84,143 @@ module Aws::KMS
     #
     class CancelKeyDeletionResponse < Struct.new(
       :key_id)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified AWS CloudHSM cluster is
+    # already associated with a custom key store or it shares a backup
+    # history with a cluster that is associated with a custom key store.
+    # Each custom key store must be associated with a different AWS CloudHSM
+    # cluster.
+    #
+    # Clusters that share a backup history have the same cluster
+    # certificate. To view the cluster certificate of a cluster, use the
+    # [DescribeClusters][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterInUseException AWS API Documentation
+    #
+    class CloudHsmClusterInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the associated AWS CloudHSM cluster
+    # did not meet the configuration requirements for a custom key store.
+    #
+    # * The cluster must be configured with private subnets in at least two
+    #   different Availability Zones in the Region.
+    #
+    # * The [security group for the cluster][1]
+    #   (cloudhsm-cluster-*&lt;cluster-id&gt;*-sg) must include inbound
+    #   rules and outbound rules that allow TCP traffic on ports 2223-2225.
+    #   The **Source** in the inbound rules and the **Destination** in the
+    #   outbound rules must match the security group ID. These rules are set
+    #   by default when you create the cluster. Do not delete or change
+    #   them. To get information about a particular security group, use the
+    #   [DescribeSecurityGroups][2] operation.
+    #
+    # * The cluster must contain at least as many HSMs as the operation
+    #   requires. To add HSMs, use the AWS CloudHSM [CreateHsm][3]
+    #   operation.
+    #
+    #   For the CreateCustomKeyStore, UpdateCustomKeyStore, and CreateKey
+    #   operations, the AWS CloudHSM cluster must have at least two active
+    #   HSMs, each in a different Availability Zone. For the
+    #   ConnectCustomKeyStore operation, the AWS CloudHSM must contain at
+    #   least one active HSM.
+    #
+    # For information about the requirements for an AWS CloudHSM cluster
+    # that is associated with a custom key store, see [Assemble the
+    # Prerequisites][4] in the *AWS Key Management Service Developer Guide*.
+    # For information about creating a private subnet for an AWS CloudHSM
+    # cluster, see [Create a Private Subnet][5] in the *AWS CloudHSM User
+    # Guide*. For information about cluster security groups, see [Configure
+    # a Default Security Group][1] in the <i> <i>AWS CloudHSM User Guide</i>
+    # </i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html
+    # [3]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore
+    # [5]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/create-subnets.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterInvalidConfigurationException AWS API Documentation
+    #
+    class CloudHsmClusterInvalidConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the AWS CloudHSM cluster that is
+    # associated with the custom key store is not active. Initialize and
+    # activate the cluster and try the command again. For detailed
+    # instructions, see [Getting Started][1] in the *AWS CloudHSM User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/getting-started.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterNotActiveException AWS API Documentation
+    #
+    class CloudHsmClusterNotActiveException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because AWS KMS cannot find the AWS CloudHSM
+    # cluster with the specified cluster ID. Retry the request with a
+    # different cluster ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterNotFoundException AWS API Documentation
+    #
+    class CloudHsmClusterNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified AWS CloudHSM cluster
+    # has a different cluster certificate than the original cluster. You
+    # cannot use the operation to specify an unrelated cluster.
+    #
+    # Specify a cluster that shares a backup history with the original
+    # cluster. This includes clusters that were created from a backup of the
+    # current cluster, and clusters that were created from the same backup
+    # that produced the current cluster.
+    #
+    # Clusters that share a backup history have the same cluster
+    # certificate. To view the cluster certificate of a cluster, use the
+    # [DescribeClusters][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CloudHsmClusterNotRelatedException AWS API Documentation
+    #
+    class CloudHsmClusterNotRelatedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -530,6 +680,77 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because the custom key store contains AWS KMS
+    # customer master keys (CMKs). After verifying that you do not need to
+    # use the CMKs, use the ScheduleKeyDeletion operation to delete the
+    # CMKs. After they are deleted, you can delete the custom key store.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoreHasCMKsException AWS API Documentation
+    #
+    class CustomKeyStoreHasCMKsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because of the `ConnectionState` of the
+    # custom key store. To get the `ConnectionState` of a custom key store,
+    # use the DescribeCustomKeyStores operation.
+    #
+    # This exception is thrown under the following conditions:
+    #
+    # * You requested the CreateKey or GenerateRandom operation in a custom
+    #   key store that is not connected. These operations are valid only
+    #   when the custom key store `ConnectionState` is `CONNECTED`.
+    #
+    # * You requested the UpdateCustomKeyStore or DeleteCustomKeyStore
+    #   operation on a custom key store that is not disconnected. This
+    #   operation is valid only when the custom key store `ConnectionState`
+    #   is `DISCONNECTED`.
+    #
+    # * You requested the ConnectCustomKeyStore operation on a custom key
+    #   store with a `ConnectionState` of `DISCONNECTING` or `FAILED`. This
+    #   operation is valid for all other `ConnectionState` values.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoreInvalidStateException AWS API Documentation
+    #
+    class CustomKeyStoreInvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified custom key store name
+    # is already assigned to another custom key store in the account. Try
+    # again with a custom key store name that is unique in the account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoreNameInUseException AWS API Documentation
+    #
+    class CustomKeyStoreNameInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because AWS KMS cannot find a custom key
+    # store with the specified key store name or ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoreNotFoundException AWS API Documentation
+    #
+    class CustomKeyStoreNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about each custom key store in the custom key
     # store list.
     #
@@ -768,6 +989,19 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The system timed out while trying to fulfill the request. The request
+    # can be retried.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DependencyTimeoutException AWS API Documentation
+    #
+    class DependencyTimeoutException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeCustomKeyStoresRequest
     #   data as a hash:
     #
@@ -974,6 +1208,18 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because the specified CMK is not enabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisabledException AWS API Documentation
+    #
+    class DisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisconnectCustomKeyStoreRequest
     #   data as a hash:
     #
@@ -1143,6 +1389,21 @@ module Aws::KMS
     class EncryptResponse < Struct.new(
       :ciphertext_blob,
       :key_id)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the provided import token is expired.
+    # Use GetParametersForImport to get a new import token and public key,
+    # use the new public key to encrypt the key material, and then try the
+    # request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ExpiredImportTokenException AWS API Documentation
+    #
+    class ExpiredImportTokenException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1774,6 +2035,180 @@ module Aws::KMS
     #
     class ImportKeyMaterialResponse < Aws::EmptyStructure; end
 
+    # The request was rejected because the provided key material is invalid
+    # or is not the same key material that was previously imported into this
+    # customer master key (CMK).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/IncorrectKeyMaterialException AWS API Documentation
+    #
+    class IncorrectKeyMaterialException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the trust anchor certificate in the
+    # request is not the trust anchor certificate for the specified AWS
+    # CloudHSM cluster.
+    #
+    # When you [initialize the cluster][1], you create the trust anchor
+    # certificate and save it in the `customerCA.crt` file.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/IncorrectTrustAnchorException AWS API Documentation
+    #
+    class IncorrectTrustAnchorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified alias name is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidAliasNameException AWS API Documentation
+    #
+    class InvalidAliasNameException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because a specified ARN, or an ARN in a key
+    # policy, is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified ciphertext, or
+    # additional authenticated data incorporated into the ciphertext, such
+    # as the encryption context, is corrupted, missing, or otherwise
+    # invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidCiphertextException AWS API Documentation
+    #
+    class InvalidCiphertextException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified `GrantId` is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidGrantIdException AWS API Documentation
+    #
+    class InvalidGrantIdException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified grant token is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidGrantTokenException AWS API Documentation
+    #
+    class InvalidGrantTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the provided import token is invalid
+    # or is associated with a different customer master key (CMK).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidImportTokenException AWS API Documentation
+    #
+    class InvalidImportTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified `KeySpec` value is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidKeyUsageException AWS API Documentation
+    #
+    class InvalidKeyUsageException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the marker that specifies where
+    # pagination should next begin is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/InvalidMarkerException AWS API Documentation
+    #
+    class InvalidMarkerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an internal exception occurred. The
+    # request can be retried.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KMSInternalException AWS API Documentation
+    #
+    class KMSInternalException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the state of the specified resource
+    # is not valid for this request.
+    #
+    # For more information about how key state affects the use of a CMK, see
+    # [How Key State Affects Use of a Customer Master Key][1] in the *AWS
+    # Key Management Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KMSInvalidStateException AWS API Documentation
+    #
+    class KMSInvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about each entry in the key list.
     #
     # @!attribute [rw] key_id
@@ -1925,6 +2360,37 @@ module Aws::KMS
       :cloud_hsm_cluster_id,
       :expiration_model,
       :key_manager)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified CMK was not available.
+    # The request can be retried.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyUnavailableException AWS API Documentation
+    #
+    class KeyUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because a limit was exceeded. For more
+    # information, see [Limits][1] in the *AWS Key Management Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2336,6 +2802,32 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because the specified policy is not
+    # syntactically or semantically correct.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified entity or resource
+    # could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutKeyPolicyRequest
     #   data as a hash:
     #
@@ -2695,6 +3187,18 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because one or more tags are not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagException AWS API Documentation
+    #
+    class TagException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -2733,6 +3237,19 @@ module Aws::KMS
     class TagResourceRequest < Struct.new(
       :key_id,
       :tags)
+      include Aws::Structure
+    end
+
+    # The request was rejected because a specified parameter is not
+    # supported or a specified resource is not valid for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

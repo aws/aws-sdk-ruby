@@ -26,6 +26,20 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
+    # Concurrent updates caused an exception, for example, if you request an
+    # update to an Application Auto Scaling resource that already has a
+    # pending update.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ConcurrentUpdateException AWS API Documentation
+    #
+    class ConcurrentUpdateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a CloudWatch metric of your choosing for a target tracking
     # scaling policy to use with Application Auto Scaling.
     #
@@ -1078,6 +1092,67 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
+    # Failed access to resources caused an exception. This exception is
+    # thrown when Application Auto Scaling is unable to retrieve the alarms
+    # associated with a scaling policy due to a client error, for example,
+    # if the role ARN specified for a scalable target does not have
+    # permission to call the CloudWatch [DescribeAlarms][1] on your behalf.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/FailedResourceAccessException AWS API Documentation
+    #
+    class FailedResourceAccessException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The service encountered an internal error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The next token supplied was invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A per-account resource limit is exceeded. For more information, see
+    # [Application Auto Scaling Limits][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ApplicationAutoScaling/latest/userguide/application-auto-scaling-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the dimension names and values associated with a metric.
     #
     # @note When making an API call, you may pass MetricDimension
@@ -1101,6 +1176,23 @@ module Aws::ApplicationAutoScaling
     class MetricDimension < Struct.new(
       :name,
       :value)
+      include Aws::Structure
+    end
+
+    # The specified object could not be found. For any operation that
+    # depends on the existence of a scalable target, this exception is
+    # thrown if the scalable target with the specified service namespace,
+    # resource ID, and scalable dimension does not exist. For any operation
+    # that deletes or deregisters a resource, this exception is thrown if
+    # the resource cannot be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ObjectNotFoundException AWS API Documentation
+    #
+    class ObjectNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2520,6 +2612,19 @@ module Aws::ApplicationAutoScaling
       :scale_out_cooldown,
       :scale_in_cooldown,
       :disable_scale_in)
+      include Aws::Structure
+    end
+
+    # An exception was thrown for a validation issue. Review the available
+    # parameters for the API request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

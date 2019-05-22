@@ -48,6 +48,24 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
+    # Indicates that an exception occurred in the AWS CloudHSM service.
+    #
+    # @!attribute [rw] message
+    #   Additional information about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] retryable
+    #   Indicates if the action can be retried.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CloudHsmServiceException AWS API Documentation
+    #
+    class CloudHsmServiceException < Struct.new(
+      :message,
+      :retryable)
+      include Aws::Structure
+    end
+
     # Contains the inputs for the CreateHapgRequest action.
     #
     # @note When making an API call, you may pass CreateHapgRequest

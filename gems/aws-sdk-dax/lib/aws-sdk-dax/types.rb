@@ -958,6 +958,30 @@ module Aws::DAX
       include Aws::Structure
     end
 
+    # Two or more incompatible parameters were specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidParameterCombinationException AWS API Documentation
+    #
+    class InvalidParameterCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value for a parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsRequest
     #   data as a hash:
     #

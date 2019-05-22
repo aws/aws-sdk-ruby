@@ -532,6 +532,9 @@ module Aws::DirectConnect
     DescribeVirtualInterfacesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
     DescribeVirtualInterfacesRequest.struct_class = Types::DescribeVirtualInterfacesRequest
 
+    DirectConnectClientException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DirectConnectClientException.struct_class = Types::DirectConnectClientException
+
     DirectConnectGateway.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
     DirectConnectGateway.add_member(:direct_connect_gateway_name, Shapes::ShapeRef.new(shape: DirectConnectGatewayName, location_name: "directConnectGatewayName"))
     DirectConnectGateway.add_member(:amazon_side_asn, Shapes::ShapeRef.new(shape: LongAsn, location_name: "amazonSideAsn"))
@@ -577,6 +580,9 @@ module Aws::DirectConnect
     DirectConnectGatewayAttachmentList.member = Shapes::ShapeRef.new(shape: DirectConnectGatewayAttachment)
 
     DirectConnectGatewayList.member = Shapes::ShapeRef.new(shape: DirectConnectGateway)
+
+    DirectConnectServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DirectConnectServerException.struct_class = Types::DirectConnectServerException
 
     DisassociateConnectionFromLagRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     DisassociateConnectionFromLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))

@@ -173,6 +173,10 @@ module Aws::SecurityHub
 
     AcceptInvitationResponse.struct_class = Types::AcceptInvitationResponse
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AccountDetails.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     AccountDetails.add_member(:email, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Email"))
     AccountDetails.struct_class = Types::AccountDetails
@@ -508,6 +512,18 @@ module Aws::SecurityHub
     InsightResults.add_member(:result_values, Shapes::ShapeRef.new(shape: InsightResultValueList, required: true, location_name: "ResultValues"))
     InsightResults.struct_class = Types::InsightResults
 
+    InternalException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InternalException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    InternalException.struct_class = Types::InternalException
+
+    InvalidAccessException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InvalidAccessException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    InvalidAccessException.struct_class = Types::InvalidAccessException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InvalidInputException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
     Invitation.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Invitation.add_member(:invitation_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InvitationId"))
     Invitation.add_member(:invited_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InvitedAt"))
@@ -531,6 +547,10 @@ module Aws::SecurityHub
     KeywordFilter.struct_class = Types::KeywordFilter
 
     KeywordFilterList.member = Shapes::ShapeRef.new(shape: KeywordFilter)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    LimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListEnabledProductsForImportRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListEnabledProductsForImportRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
@@ -642,6 +662,10 @@ module Aws::SecurityHub
     Resource.add_member(:details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "Details"))
     Resource.struct_class = Types::Resource
 
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ResourceConflictException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
     ResourceDetails.add_member(:aws_ec2_instance, Shapes::ShapeRef.new(shape: AwsEc2InstanceDetails, location_name: "AwsEc2Instance"))
     ResourceDetails.add_member(:aws_s3_bucket, Shapes::ShapeRef.new(shape: AwsS3BucketDetails, location_name: "AwsS3Bucket"))
     ResourceDetails.add_member(:aws_iam_access_key, Shapes::ShapeRef.new(shape: AwsIamAccessKeyDetails, location_name: "AwsIamAccessKey"))
@@ -650,6 +674,10 @@ module Aws::SecurityHub
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     Result.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Result.add_member(:processing_result, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProcessingResult"))

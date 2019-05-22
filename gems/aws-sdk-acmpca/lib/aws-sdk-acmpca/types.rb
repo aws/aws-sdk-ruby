@@ -266,6 +266,31 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # The certificate authority certificate you are importing does not
+    # comply with conditions specified in the certificate that signed it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateMismatchException AWS API Documentation
+    #
+    class CertificateMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A previous update to your private CA is still ongoing.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateCertificateAuthorityAuditReportRequest
     #   data as a hash:
     #
@@ -901,6 +926,83 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # One or more of the specified arguments was not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/InvalidArgsException AWS API Documentation
+    #
+    class InvalidArgsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested Amazon Resource Name (ARN) does not refer to an existing
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The token specified in the `NextToken` argument is not valid. Use the
+    # token returned from your previous call to ListCertificateAuthorities.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The S3 bucket policy is not valid. The policy must give ACM PCA rights
+    # to read from and write to the bucket and find the bucket location.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/InvalidPolicyException AWS API Documentation
+    #
+    class InvalidPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The private CA is in a state during which a report or certificate
+    # cannot be generated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The tag associated with the CA is not valid. The invalid argument is
+    # contained in the message field.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/InvalidTagException AWS API Documentation
+    #
+    class InvalidTagException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass IssueCertificateRequest
     #   data as a hash:
     #
@@ -982,6 +1084,19 @@ module Aws::ACMPCA
     #
     class IssueCertificateResponse < Struct.new(
       :certificate_arn)
+      include Aws::Structure
+    end
+
+    # An ACM PCA limit has been exceeded. See the exception message returned
+    # to determine the limit that was exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1151,6 +1266,30 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # The certificate signing request is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/MalformedCSRException AWS API Documentation
+    #
+    class MalformedCSRException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more fields in the certificate are invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/MalformedCertificateException AWS API Documentation
+    #
+    class MalformedCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Permissions designate which private CA operations can be performed by
     # an AWS service or entity. In order for ACM to automatically renew
     # private certificates, you must give the ACM service principal all
@@ -1195,6 +1334,67 @@ module Aws::ACMPCA
       :source_account,
       :actions,
       :policy)
+      include Aws::Structure
+    end
+
+    # The designated permission has already been given to the user.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/PermissionAlreadyExistsException AWS API Documentation
+    #
+    class PermissionAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your request has already been completed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RequestAlreadyProcessedException AWS API Documentation
+    #
+    class RequestAlreadyProcessedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request has failed for an unspecified reason.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RequestFailedException AWS API Documentation
+    #
+    class RequestFailedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your request is already in progress.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RequestInProgressException AWS API Documentation
+    #
+    class RequestInProgressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A resource such as a private CA, S3 bucket, certificate, or audit
+    # report cannot be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1361,6 +1561,19 @@ module Aws::ACMPCA
     class TagCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       :tags)
+      include Aws::Structure
+    end
+
+    # You can associate up to 50 tags with a private CA. Exception
+    # information is contained in the exception message field.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

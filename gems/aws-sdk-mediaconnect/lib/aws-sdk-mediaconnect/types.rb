@@ -8,6 +8,20 @@
 module Aws::MediaConnect
   module Types
 
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowOutputs420Exception AWS API Documentation
+    #
+    class AddFlowOutputs420Exception < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Adds outputs to an existing flow. You can create up to 20 outputs per
     # flow.
     #
@@ -145,6 +159,34 @@ module Aws::MediaConnect
       :protocol,
       :smoothing_latency,
       :stream_id)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlow420Exception AWS API Documentation
+    #
+    class CreateFlow420Exception < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -461,6 +503,20 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The entitlements that you want to grant on a flow.
     #
     # @note When making an API call, you may pass GrantEntitlementRequest
@@ -507,6 +563,20 @@ module Aws::MediaConnect
       :encryption,
       :name,
       :subscribers)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantFlowEntitlements420Exception AWS API Documentation
+    #
+    class GrantFlowEntitlements420Exception < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -562,6 +632,20 @@ module Aws::MediaConnect
     class GrantFlowEntitlementsResponse < Struct.new(
       :entitlements,
       :flow_arn)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -765,6 +849,20 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The settings for an output.
     #
     # @!attribute [rw] description
@@ -919,6 +1017,20 @@ module Aws::MediaConnect
     class RevokeFlowEntitlementResponse < Struct.new(
       :entitlement_arn,
       :flow_arn)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1170,6 +1282,20 @@ module Aws::MediaConnect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

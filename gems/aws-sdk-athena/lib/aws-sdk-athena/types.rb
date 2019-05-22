@@ -513,6 +513,38 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # Indicates a platform issue, which may be due to a transient condition
+    # or outage.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that something is wrong with the input to the request. For
+    # example, a required parameter may be missing or out of range.
+    #
+    # @!attribute [rw] athena_error_code
+    #   The error code returned when the query execution failed to process,
+    #   or when the processing request for the named query failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :athena_error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListNamedQueriesInput
     #   data as a hash:
     #
@@ -870,6 +902,22 @@ module Aws::Athena
       :state_change_reason,
       :submission_date_time,
       :completion_date_time)
+      include Aws::Structure
+    end
+
+    # A resource, such as a workgroup, was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_name)
       include Aws::Structure
     end
 
@@ -1233,6 +1281,24 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
+
+    # Indicates that the request was throttled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the query throttling, for example, when it exceeds
+    #   the concurrent query limit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message,
+      :reason)
+      include Aws::Structure
+    end
 
     # Information about a named query ID that could not be processed.
     #

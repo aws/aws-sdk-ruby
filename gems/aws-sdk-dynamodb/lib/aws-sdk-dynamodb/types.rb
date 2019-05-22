@@ -606,6 +606,32 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # There is another ongoing conflicting backup control plane operation on
+    # the table. The backup is either being created, deleted or restored to
+    # a table.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupInUseException AWS API Documentation
+    #
+    class BackupInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Backup not found for the given BackupARN.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupNotFoundException AWS API Documentation
+    #
+    class BackupNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details for the backup.
     #
     # @!attribute [rw] table_name
@@ -1424,6 +1450,19 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # A condition specified in the operation could not be evaluated.
+    #
+    # @!attribute [rw] message
+    #   The conditional request failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ConditionalCheckFailedException AWS API Documentation
+    #
+    class ConditionalCheckFailedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The capacity units consumed by an operation. The data returned
     # includes the total provisioned throughput consumed, along with
     # statistics for the table and any indexes involved in the operation.
@@ -1497,6 +1536,18 @@ module Aws::DynamoDB
     class ContinuousBackupsDescription < Struct.new(
       :continuous_backups_status,
       :point_in_time_recovery_description)
+      include Aws::Structure
+    end
+
+    # Backups have not yet been enabled for this table.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ContinuousBackupsUnavailableException AWS API Documentation
+    #
+    class ContinuousBackupsUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3540,6 +3591,18 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The specified global table already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableAlreadyExistsException AWS API Documentation
+    #
+    class GlobalTableAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about the global table.
     #
     # @!attribute [rw] replication_group
@@ -3631,6 +3694,70 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The specified global table does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableNotFoundException AWS API Documentation
+    #
+    class GlobalTableNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # DynamoDB rejected the request because you retried a request with a
+    # different payload but with an idempotent token that was already used.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/IdempotentParameterMismatchException AWS API Documentation
+    #
+    class IdempotentParameterMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation tried to access a nonexistent index.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/IndexNotFoundException AWS API Documentation
+    #
+    class IndexNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An error occurred on the server side.
+    #
+    # @!attribute [rw] message
+    #   The server encountered an internal error trying to fulfill the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An invalid restore time was specified. RestoreDateTime must be between
+    # EarliestRestorableDateTime and LatestRestorableDateTime.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/InvalidRestoreTimeException AWS API Documentation
+    #
+    class InvalidRestoreTimeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about item collections, if any, that were affected by the
     # operation. `ItemCollectionMetrics` is only returned if the request
     # asked for it. If the table does not have any local secondary indexes,
@@ -3658,6 +3785,21 @@ module Aws::DynamoDB
     class ItemCollectionMetrics < Struct.new(
       :item_collection_key,
       :size_estimate_range_gb)
+      include Aws::Structure
+    end
+
+    # An item collection is too large. This exception is only returned for
+    # tables that have one or more local secondary indexes.
+    #
+    # @!attribute [rw] message
+    #   The total size of an item collection has exceeded the maximum limit
+    #   of 10 gigabytes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ItemCollectionSizeLimitExceededException AWS API Documentation
+    #
+    class ItemCollectionSizeLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3854,6 +3996,32 @@ module Aws::DynamoDB
       :consistent_read,
       :projection_expression,
       :expression_attribute_names)
+      include Aws::Structure
+    end
+
+    # There is no limit to the number of daily on-demand backups that can be
+    # taken.
+    #
+    # Up to 50 simultaneous table operations are allowed per account. These
+    # operations include `CreateTable`, `UpdateTable`,
+    # `DeleteTable`,`UpdateTimeToLive`, `RestoreTableFromBackup`, and
+    # `RestoreTableToPointInTime`.
+    #
+    # The only exception is when you are creating a table with one or more
+    # secondary indexes. You can have up to 25 such requests running at a
+    # time; however, if the table or index specifications are complex,
+    # DynamoDB might temporarily reduce the number of concurrent operations.
+    #
+    # There is a soft account limit of 256 tables.
+    #
+    # @!attribute [rw] message
+    #   Too many operations for a given subscriber.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4315,6 +4483,18 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Point in time recovery has not yet been enabled for this source table.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PointInTimeRecoveryUnavailableException AWS API Documentation
+    #
+    class PointInTimeRecoveryUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents attributes that are copied (projected) from the table into
     # an index. These are in addition to the primary key attributes and
     # index key attributes, which are automatically projected.
@@ -4459,6 +4639,28 @@ module Aws::DynamoDB
       :number_of_decreases_today,
       :read_capacity_units,
       :write_capacity_units)
+      include Aws::Structure
+    end
+
+    # Your request rate is too high. The AWS SDKs for DynamoDB automatically
+    # retry requests that receive this exception. Your request is eventually
+    # successful, unless your retry queue is too large to finish. Reduce the
+    # frequency of requests and use exponential backoff. For more
+    # information, go to [Error Retries and Exponential Backoff][1] in the
+    # *Amazon DynamoDB Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff
+    #
+    # @!attribute [rw] message
+    #   You exceeded your maximum allowed provisioned throughput.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughputExceededException AWS API Documentation
+    #
+    class ProvisionedThroughputExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5402,6 +5604,18 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The specified replica is already part of the global table.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaAlreadyExistsException AWS API Documentation
+    #
+    class ReplicaAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains the details of the replica.
     #
     # @!attribute [rw] region_name
@@ -5513,6 +5727,18 @@ module Aws::DynamoDB
       :index_name,
       :provisioned_read_capacity_units,
       :provisioned_read_capacity_auto_scaling_settings_update)
+      include Aws::Structure
+    end
+
+    # The specified replica is no longer part of the global table.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaNotFoundException AWS API Documentation
+    #
+    class ReplicaNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5704,6 +5930,54 @@ module Aws::DynamoDB
     class ReplicaUpdate < Struct.new(
       :create,
       :delete)
+      include Aws::Structure
+    end
+
+    # Throughput exceeds the current throughput limit for your account.
+    # Please contact AWS Support at [AWS Support][1] to request a limit
+    # increase.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/support
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RequestLimitExceeded AWS API Documentation
+    #
+    class RequestLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation conflicts with the resource's availability. For
+    # example, you attempted to recreate an existing table, or tried to
+    # delete a table currently in the `CREATING` state.
+    #
+    # @!attribute [rw] message
+    #   The resource which is being attempted to be changed is in use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation tried to access a nonexistent table or index. The
+    # resource might not be specified correctly, or its status might not be
+    # `ACTIVE`.
+    #
+    # @!attribute [rw] message
+    #   The resource which is being requested does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6498,6 +6772,18 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # A target table with the specified name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableAlreadyExistsException AWS API Documentation
+    #
+    class TableAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the properties of a table.
     #
     # @!attribute [rw] attribute_definitions
@@ -6772,6 +7058,32 @@ module Aws::DynamoDB
       :latest_stream_arn,
       :restore_summary,
       :sse_description)
+      include Aws::Structure
+    end
+
+    # A target table with the specified name is either being created or
+    # deleted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableInUseException AWS API Documentation
+    #
+    class TableInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A source table with the name `TableName` does not currently exist
+    # within the subscriber's account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableNotFoundException AWS API Documentation
+    #
+    class TableNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7250,6 +7562,84 @@ module Aws::DynamoDB
     class TransactWriteItemsOutput < Struct.new(
       :consumed_capacity,
       :item_collection_metrics)
+      include Aws::Structure
+    end
+
+    # The entire transaction request was rejected.
+    #
+    # DynamoDB rejects a `TransactWriteItems` request under the following
+    # circumstances:
+    #
+    # * A condition in one of the condition expressions is not met.
+    #
+    # * A table in the `TransactWriteItems` request is in a different
+    #   account or region.
+    #
+    # * More than one action in the `TransactWriteItems` operation targets
+    #   the same item.
+    #
+    # * There is insufficient provisioned capacity for the transaction to be
+    #   completed.
+    #
+    # * An item size becomes too large (larger than 400 KB), or a local
+    #   secondary index (LSI) becomes too large, or a similar validation
+    #   error occurs because of changes made by the transaction.
+    #
+    # * There is a user error, such as an invalid data format.
+    #
+    # DynamoDB rejects a `TransactGetItems` request under the following
+    # circumstances:
+    #
+    # * There is an ongoing `TransactGetItems` operation that conflicts with
+    #   a concurrent `PutItem`, `UpdateItem`, `DeleteItem` or
+    #   `TransactWriteItems` request. In this case the `TransactGetItems`
+    #   operation fails with a `TransactionCanceledException`.
+    #
+    # * A table in the `TransactGetItems` request is in a different account
+    #   or region.
+    #
+    # * There is insufficient provisioned capacity for the transaction to be
+    #   completed.
+    #
+    # * There is a user error, such as an invalid data format.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] cancellation_reasons
+    #   A list of cancellation reasons.
+    #   @return [Array<Types::CancellationReason>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactionCanceledException AWS API Documentation
+    #
+    class TransactionCanceledException < Struct.new(
+      :message,
+      :cancellation_reasons)
+      include Aws::Structure
+    end
+
+    # Operation was rejected because there is an ongoing transaction for the
+    # item.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactionConflictException AWS API Documentation
+    #
+    class TransactionConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The transaction with the given request token is already in progress.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactionInProgressException AWS API Documentation
+    #
+    class TransactionInProgressException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

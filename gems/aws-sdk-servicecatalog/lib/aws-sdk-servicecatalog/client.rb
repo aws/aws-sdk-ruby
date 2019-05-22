@@ -2299,6 +2299,15 @@ module Aws::ServiceCatalog
     # ProvisionProduct, TerminateProvisionedProduct, or
     # UpdateProvisionedProduct).
     #
+    # <note markdown="1"> If a provisioned product was transferred to a new owner using
+    # UpdateProvisionedProductProperties, the new owner will be able to
+    # describe all past records for that product. The previous owner will no
+    # longer be able to describe the records, but will be able to use
+    # ListRecordHistory to see the product's history from when he was the
+    # owner.
+    #
+    #  </note>
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -4615,7 +4624,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [String] :provisioned_product_name
-    #   The updated name of the provisioned product. You cannot specify both
+    #   The name of the provisioned product. You cannot specify both
     #   `ProvisionedProductName` and `ProvisionedProductId`.
     #
     # @option params [String] :provisioned_product_id
@@ -4715,6 +4724,87 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def update_provisioned_product(params = {}, options = {})
       req = build_request(:update_provisioned_product, params)
+      req.send_request(options)
+    end
+
+    # Requests updates to the properties of the specified provisioned
+    # product.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :provisioned_product_id
+    #   The identifier of the provisioned product.
+    #
+    # @option params [required, Hash<String,String>] :provisioned_product_properties
+    #   A map that contains the provisioned product properties to be updated.
+    #
+    #   The `OWNER` key only accepts user ARNs. The owner is the user that is
+    #   allowed to see, update, terminate, and execute service actions in the
+    #   provisioned product.
+    #
+    #   The administrator can change the owner of a provisioned product to
+    #   another IAM user within the same account. Both end user owners and
+    #   administrators can see ownership history of the provisioned product
+    #   using the `ListRecordHistory` API. The new owner can describe all past
+    #   records for the provisioned product using the `DescribeRecord` API.
+    #   The previous owner can no longer use `DescribeRecord`, but can still
+    #   see the product's history from when he was an owner using
+    #   `ListRecordHistory`.
+    #
+    #   If a provisioned product ownership is assigned to an end user, they
+    #   can see and perform any action through the API or Service Catalog
+    #   console such as update, terminate, and execute service actions. If an
+    #   end user provisions a product and the owner is updated to someone
+    #   else, they will no longer be able to see or perform any actions
+    #   through API or the Service Catalog console on that provisioned
+    #   product.
+    #
+    # @option params [required, String] :idempotency_token
+    #   The idempotency token that uniquely identifies the provisioning
+    #   product update request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateProvisionedProductPropertiesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProvisionedProductPropertiesOutput#provisioned_product_id #provisioned_product_id} => String
+    #   * {Types::UpdateProvisionedProductPropertiesOutput#provisioned_product_properties #provisioned_product_properties} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateProvisionedProductPropertiesOutput#record_id #record_id} => String
+    #   * {Types::UpdateProvisionedProductPropertiesOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_provisioned_product_properties({
+    #     accept_language: "AcceptLanguage",
+    #     provisioned_product_id: "Id", # required
+    #     provisioned_product_properties: { # required
+    #       "OWNER" => "PropertyValue",
+    #     },
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.provisioned_product_id #=> String
+    #   resp.provisioned_product_properties #=> Hash
+    #   resp.provisioned_product_properties["PropertyKey"] #=> String
+    #   resp.record_id #=> String
+    #   resp.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductProperties AWS API Documentation
+    #
+    # @overload update_provisioned_product_properties(params = {})
+    # @param [Hash] params ({})
+    def update_provisioned_product_properties(params = {}, options = {})
+      req = build_request(:update_provisioned_product_properties, params)
       req.send_request(options)
     end
 
@@ -4895,7 +4985,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -129,11 +129,19 @@ module Aws::ServerlessApplicationRepository
     ApplicationVersionPage.add_member(:versions, Shapes::ShapeRef.new(shape: __listOfVersionSummary, required: true, location_name: "versions"))
     ApplicationVersionPage.struct_class = Types::ApplicationVersionPage
 
+    BadRequestException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     ChangeSetDetails.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "applicationId"))
     ChangeSetDetails.add_member(:change_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "changeSetId"))
     ChangeSetDetails.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "semanticVersion"))
     ChangeSetDetails.add_member(:stack_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "stackId"))
     ChangeSetDetails.struct_class = Types::ChangeSetDetails
+
+    ConflictException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateApplicationInput.add_member(:author, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "author"))
     CreateApplicationInput.add_member(:description, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "description"))
@@ -258,6 +266,10 @@ module Aws::ServerlessApplicationRepository
     DeleteApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
+    ForbiddenException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     GetApplicationPolicyRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     GetApplicationPolicyRequest.struct_class = Types::GetApplicationPolicyRequest
 
@@ -294,6 +306,10 @@ module Aws::ServerlessApplicationRepository
     GetCloudFormationTemplateResponse.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
     GetCloudFormationTemplateResponse.struct_class = Types::GetCloudFormationTemplateResponse
 
+    InternalServerErrorException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
     ListApplicationDependenciesRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     ListApplicationDependenciesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "maxItems"))
     ListApplicationDependenciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -320,6 +336,10 @@ module Aws::ServerlessApplicationRepository
     ListApplicationsResponse.add_member(:applications, Shapes::ShapeRef.new(shape: __listOfApplicationSummary, location_name: "applications"))
     ListApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
+
+    NotFoundException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     ParameterDefinition.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: __string, location_name: "allowedPattern"))
     ParameterDefinition.add_member(:allowed_values, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "allowedValues"))
@@ -367,6 +387,10 @@ module Aws::ServerlessApplicationRepository
     TemplateDetails.add_member(:template_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "templateId"))
     TemplateDetails.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "templateUrl"))
     TemplateDetails.struct_class = Types::TemplateDetails
+
+    TooManyRequestsException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UpdateApplicationInput.add_member(:author, Shapes::ShapeRef.new(shape: __string, location_name: "author"))
     UpdateApplicationInput.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))

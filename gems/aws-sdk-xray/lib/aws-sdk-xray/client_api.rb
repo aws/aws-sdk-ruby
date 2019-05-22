@@ -443,6 +443,9 @@ module Aws::XRay
     InstanceIdDetail.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     InstanceIdDetail.struct_class = Types::InstanceIdDetail
 
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     PutEncryptionConfigRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: EncryptionKeyId, location_name: "KeyId"))
     PutEncryptionConfigRequest.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "Type"))
     PutEncryptionConfigRequest.struct_class = Types::PutEncryptionConfigRequest
@@ -494,6 +497,9 @@ module Aws::XRay
     RootCauseException.struct_class = Types::RootCauseException
 
     RootCauseExceptions.member = Shapes::ShapeRef.new(shape: RootCauseException)
+
+    RuleLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RuleLimitExceededException.struct_class = Types::RuleLimitExceededException
 
     SamplingRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, location_name: "RuleName"))
     SamplingRule.add_member(:rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "RuleARN"))
@@ -612,6 +618,9 @@ module Aws::XRay
     TelemetryRecord.struct_class = Types::TelemetryRecord
 
     TelemetryRecordList.member = Shapes::ShapeRef.new(shape: TelemetryRecord)
+
+    ThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ThrottledException.struct_class = Types::ThrottledException
 
     TimeSeriesServiceStatistics.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     TimeSeriesServiceStatistics.add_member(:edge_summary_statistics, Shapes::ShapeRef.new(shape: EdgeStatistics, location_name: "EdgeSummaryStatistics"))

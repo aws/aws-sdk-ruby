@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-05-22)
+------------------
+
+* Feature - Service Catalog UpdateProvisionedProductProperties API enables customers to manage provisioned product ownership. Administrators can now update the user associated to a provisioned product to another user within the same account allowing the new user to describe, update, terminate and execute service actions in that Service Catalog resource. New owner will also be able to list and describe all past records executed for that provisioned product.
+
+1.25.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.24.0 (2019-05-15)
 ------------------
 

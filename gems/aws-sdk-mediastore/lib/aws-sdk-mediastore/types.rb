@@ -65,6 +65,43 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
+    # The container that you specified in the request already exists or is
+    # being updated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ContainerInUseException AWS API Documentation
+    #
+    class ContainerInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The container that you specified in the request does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ContainerNotFoundException AWS API Documentation
+    #
+    class ContainerNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The CORS policy that you specified in the request does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CorsPolicyNotFoundException AWS API Documentation
+    #
+    class CorsPolicyNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A rule for a CORS policy. You can add up to 100 rules to a CORS
     # policy. If more than one rule applies, the service uses the first
     # applicable rule listed.
@@ -390,6 +427,30 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A service limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListContainersInput
     #   data as a hash:
     #
@@ -434,6 +495,18 @@ module Aws::MediaStore
     class ListContainersOutput < Struct.new(
       :containers,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The policy that you specified in the request does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PolicyNotFoundException AWS API Documentation
+    #
+    class PolicyNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

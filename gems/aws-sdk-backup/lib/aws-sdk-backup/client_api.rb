@@ -162,6 +162,14 @@ module Aws::Backup
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
+    AlreadyExistsException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    AlreadyExistsException.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
+    AlreadyExistsException.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "Arn"))
+    AlreadyExistsException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    AlreadyExistsException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
     BackupJob.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
     BackupJob.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     BackupJob.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
@@ -329,6 +337,12 @@ module Aws::Backup
     DeleteRecoveryPointInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
     DeleteRecoveryPointInput.struct_class = Types::DeleteRecoveryPointInput
 
+    DependencyFailureException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    DependencyFailureException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    DependencyFailureException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    DependencyFailureException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    DependencyFailureException.struct_class = Types::DependencyFailureException
+
     DescribeBackupJobInput.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupJobId"))
     DescribeBackupJobInput.struct_class = Types::DescribeBackupJobInput
 
@@ -481,9 +495,27 @@ module Aws::Backup
     GetSupportedResourceTypesOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
     GetSupportedResourceTypesOutput.struct_class = Types::GetSupportedResourceTypesOutput
 
+    InvalidParameterValueException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidParameterValueException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    InvalidParameterValueException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidRequestException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidRequestException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    InvalidRequestException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     Lifecycle.add_member(:move_to_cold_storage_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "MoveToColdStorageAfterDays"))
     Lifecycle.add_member(:delete_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "DeleteAfterDays"))
     Lifecycle.struct_class = Types::Lifecycle
+
+    LimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    LimitExceededException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    LimitExceededException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListBackupJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListBackupJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -595,6 +627,12 @@ module Aws::Backup
     Metadata.key = Shapes::ShapeRef.new(shape: MetadataKey)
     Metadata.value = Shapes::ShapeRef.new(shape: MetadataValue)
 
+    MissingParameterValueException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    MissingParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    MissingParameterValueException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    MissingParameterValueException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    MissingParameterValueException.struct_class = Types::MissingParameterValueException
+
     ProtectedResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     ProtectedResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ProtectedResource.add_member(:last_backup_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastBackupTime"))
@@ -649,6 +687,12 @@ module Aws::Backup
 
     ResourceArns.member = Shapes::ShapeRef.new(shape: ARN)
 
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    ResourceNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    ResourceNotFoundException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResourceTypes.member = Shapes::ShapeRef.new(shape: ResourceType)
 
     RestoreJobsList.member = Shapes::ShapeRef.new(shape: RestoreJobsListMember)
@@ -665,6 +709,12 @@ module Aws::Backup
     RestoreJobsListMember.add_member(:expected_completion_time_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "ExpectedCompletionTimeMinutes"))
     RestoreJobsListMember.add_member(:created_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "CreatedResourceArn"))
     RestoreJobsListMember.struct_class = Types::RestoreJobsListMember
+
+    ServiceUnavailableException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    ServiceUnavailableException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    ServiceUnavailableException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     StartBackupJobInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location_name: "BackupVaultName"))
     StartBackupJobInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ResourceArn"))

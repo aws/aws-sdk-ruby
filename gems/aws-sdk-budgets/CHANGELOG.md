@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-05-22)
+------------------
+
+* Feature - Added new datatype PlannedBudgetLimits to Budget model, and updated examples for AWS Budgets API for UpdateBudget, CreateBudget, DescribeBudget, and DescribeBudgets
+
+1.21.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.20.0 (2019-05-15)
 ------------------
 

@@ -46,6 +46,9 @@ module Aws::MediaStoreData
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
     statusCode = Shapes::IntegerShape.new(name: 'statusCode')
 
+    ContainerNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ContainerNotFoundException.struct_class = Types::ContainerNotFoundException
+
     DeleteObjectRequest.add_member(:path, Shapes::ShapeRef.new(shape: PathNaming, required: true, location: "uri", location_name: "Path"))
     DeleteObjectRequest.struct_class = Types::DeleteObjectRequest
 
@@ -77,6 +80,9 @@ module Aws::MediaStoreData
     GetObjectResponse[:payload] = :body
     GetObjectResponse[:payload_member] = GetObjectResponse.member(:body)
 
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
     Item.add_member(:name, Shapes::ShapeRef.new(shape: ItemName, location_name: "Name"))
     Item.add_member(:type, Shapes::ShapeRef.new(shape: ItemType, location_name: "Type"))
     Item.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
@@ -96,6 +102,9 @@ module Aws::MediaStoreData
     ListItemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListItemsResponse.struct_class = Types::ListItemsResponse
 
+    ObjectNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ObjectNotFoundException.struct_class = Types::ObjectNotFoundException
+
     PutObjectRequest.add_member(:body, Shapes::ShapeRef.new(shape: PayloadBlob, required: true, location_name: "Body"))
     PutObjectRequest.add_member(:path, Shapes::ShapeRef.new(shape: PathNaming, required: true, location: "uri", location_name: "Path"))
     PutObjectRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "header", location_name: "Content-Type"))
@@ -109,6 +118,9 @@ module Aws::MediaStoreData
     PutObjectResponse.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
     PutObjectResponse.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
     PutObjectResponse.struct_class = Types::PutObjectResponse
+
+    RequestedRangeNotSatisfiableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RequestedRangeNotSatisfiableException.struct_class = Types::RequestedRangeNotSatisfiableException
 
 
     # @api private

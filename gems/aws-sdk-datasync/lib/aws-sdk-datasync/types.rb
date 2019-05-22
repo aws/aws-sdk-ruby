@@ -624,6 +624,12 @@ module Aws::DataSync
     #   account).
     #   @return [Time]
     #
+    # @!attribute [rw] endpoint_options
+    #   @return [Types::EndpointOptions]
+    #
+    # @!attribute [rw] private_link_config
+    #   @return [Types::PrivateLinkConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgentResponse AWS API Documentation
     #
     class DescribeAgentResponse < Struct.new(
@@ -631,7 +637,9 @@ module Aws::DataSync
       :name,
       :status,
       :last_connection_time,
-      :creation_time)
+      :creation_time,
+      :endpoint_options,
+      :private_link_config)
       include Aws::Structure
     end
 
@@ -1073,6 +1081,20 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # @!attribute [rw] fips
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] private_link
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/EndpointOptions AWS API Documentation
+    #
+    class EndpointOptions < Struct.new(
+      :fips,
+      :private_link)
+      include Aws::Structure
+    end
+
     # A pattern that determines which files to include in the transfer or
     # which files to exclude.
     #
@@ -1099,6 +1121,39 @@ module Aws::DataSync
     class FilterRule < Struct.new(
       :filter_type,
       :value)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when an error occurs in the AWS DataSync
+    # service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/InternalException AWS API Documentation
+    #
+    class InternalException < Struct.new(
+      :message,
+      :error_code)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the client submits a malformed request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message,
+      :error_code)
       include Aws::Structure
     end
 
@@ -1598,6 +1653,24 @@ module Aws::DataSync
       :preserve_devices,
       :posix_permissions,
       :bytes_per_second)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] private_link_endpoint
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_arns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_arns
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/PrivateLinkConfig AWS API Documentation
+    #
+    class PrivateLinkConfig < Struct.new(
+      :private_link_endpoint,
+      :subnet_arns,
+      :security_group_arns)
       include Aws::Structure
     end
 

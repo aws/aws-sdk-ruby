@@ -322,6 +322,18 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # The request has failed due to a temporary failure of the service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_router
     #   A full description of the virtual router that was updated.
     #   @return [Types::VirtualRouterData]
@@ -465,6 +477,19 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # You can't delete the specified resource because it's in use or
+    # required by another resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_node
     #   A full description of the virtual node that was updated.
     #   @return [Types::VirtualNodeData]
@@ -514,6 +539,19 @@ module Aws::AppMesh
     #
     class VirtualServiceBackend < Struct.new(
       :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # The request syntax was malformed. Check your request syntax and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -929,6 +967,23 @@ module Aws::AppMesh
     #
     class DescribeVirtualNodeOutput < Struct.new(
       :virtual_node)
+      include Aws::Structure
+    end
+
+    # You have exceeded a service limit for your account. For more
+    # information, see [Service Limits][1] in the *AWS App Mesh User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/service_limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1543,6 +1598,20 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # The maximum request rate permitted by the App Mesh APIs has been
+    # exceeded for your account. For best results, use an increasing or
+    # variable sleep interval between requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing the specification of a virtual node.
     #
     # @note When making an API call, you may pass VirtualNodeSpec
@@ -1635,6 +1704,20 @@ module Aws::AppMesh
     class ListMeshesOutput < Struct.new(
       :meshes,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The request contains a client token that was used for a previous
+    # update resource call with different specifications. Try the request
+    # again with a new client token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2068,6 +2151,19 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # The request processing has failed because of an unknown error,
+    # exception, or failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeVirtualRouterInput
     #   data as a hash:
     #
@@ -2095,6 +2191,33 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
+
+    # You don't have permissions to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request exceeds the maximum allowed number of tags allowed per
+    # resource. The current limit is 50 user tags per resource. You must
+    # reduce the number of tags in the request. None of the tags in this
+    # request were applied.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @!attribute [rw] mesh
     #   The service mesh that was deleted.
@@ -2441,6 +2564,19 @@ module Aws::AppMesh
       :spec,
       :tags,
       :virtual_node_name)
+      include Aws::Structure
+    end
+
+    # The specified resource doesn't exist. Check your request syntax and
+    # try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

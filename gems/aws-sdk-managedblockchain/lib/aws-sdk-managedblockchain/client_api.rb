@@ -211,6 +211,12 @@ module Aws::ManagedBlockchain
     GetProposalOutput.add_member(:proposal, Shapes::ShapeRef.new(shape: Proposal, location_name: "Proposal"))
     GetProposalOutput.struct_class = Types::GetProposalOutput
 
+    IllegalActionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    IllegalActionException.struct_class = Types::IllegalActionException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     Invitation.add_member(:invitation_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "InvitationId"))
     Invitation.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     Invitation.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationDate"))
@@ -430,6 +436,18 @@ module Aws::ManagedBlockchain
     RemoveAction.struct_class = Types::RemoveAction
 
     RemoveActionList.member = Shapes::ShapeRef.new(shape: RemoveAction)
+
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
 
     VoteOnProposalInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     VoteOnProposalInput.add_member(:proposal_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "proposalId"))

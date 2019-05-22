@@ -51,6 +51,9 @@ module Aws::KinesisVideoArchivedMedia
     TimestampRange = Shapes::StructureShape.new(name: 'TimestampRange')
     UnsupportedStreamMediaTypeException = Shapes::StructureShape.new(name: 'UnsupportedStreamMediaTypeException')
 
+    ClientLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ClientLimitExceededException.struct_class = Types::ClientLimitExceededException
+
     Fragment.add_member(:fragment_number, Shapes::ShapeRef.new(shape: String, location_name: "FragmentNumber"))
     Fragment.add_member(:fragment_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "FragmentSizeInBytes"))
     Fragment.add_member(:producer_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ProducerTimestamp"))
@@ -98,6 +101,12 @@ module Aws::KinesisVideoArchivedMedia
     HLSTimestampRange.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
     HLSTimestampRange.struct_class = Types::HLSTimestampRange
 
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
+    InvalidCodecPrivateDataException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidCodecPrivateDataException.struct_class = Types::InvalidCodecPrivateDataException
+
     ListFragmentsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     ListFragmentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxResults"))
     ListFragmentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -108,9 +117,24 @@ module Aws::KinesisVideoArchivedMedia
     ListFragmentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListFragmentsOutput.struct_class = Types::ListFragmentsOutput
 
+    MissingCodecPrivateDataException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MissingCodecPrivateDataException.struct_class = Types::MissingCodecPrivateDataException
+
+    NoDataRetentionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NoDataRetentionException.struct_class = Types::NoDataRetentionException
+
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     TimestampRange.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTimestamp"))
     TimestampRange.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTimestamp"))
     TimestampRange.struct_class = Types::TimestampRange
+
+    UnsupportedStreamMediaTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnsupportedStreamMediaTypeException.struct_class = Types::UnsupportedStreamMediaTypeException
 
 
     # @api private
