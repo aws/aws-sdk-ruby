@@ -19,6 +19,13 @@ module AwsSdkCodeGenerator
           if protocol_settings['h2'] == 'eventstream'
             # h2 supported, only generate for async client
             if async_client
+              if es_input == es_output
+                # input & output eventstream sharing
+                # same eventstream shape
+                # see EventStreamModule
+                es_input = "Input" + es_input
+                es_output = "Output" + es_output
+              end
               ops << Operation.new(
                 name: method_name,
                 documentation: ClientOperationDocumentation.new(

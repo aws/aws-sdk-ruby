@@ -28,19 +28,19 @@ module AwsSdkCodeGenerator
       end
 
       def extract_eventstreams
-        input_es = []
-        output_es = []
+        es = []
         @service.api['operations'].each do |_, ref|
+          pair = []
           if input = ref['input']
             input_shape = @service.api['shapes'][input['shape']]
             input_shape['members'].each do |_, m_ref|
               if @service.api['shapes'][m_ref['shape']]['eventstream']
                 shape = @service.api['shapes'][m_ref['shape']]
-                input_es << EventStreamClass.new(
+                pair << {
                   class_name: m_ref['shape'],
                   event_entries: eventstream_members_w_doc(shape),
                   types: eventstream_members(shape)
-                )
+                }
               end
             end
           end
@@ -49,13 +49,27 @@ module AwsSdkCodeGenerator
             output_shape['members'].each do |_, m_ref|
               if @service.api['shapes'][m_ref['shape']]['eventstream']
                 shape = @service.api['shapes'][m_ref['shape']]
-                output_es << EventStreamClass.new(
+                pair << {
                   class_name: m_ref['shape'],
                   types: eventstream_members(shape)
-                )
+                }
               end
             end
           end
+          es << pair
+        end
+        # rename eventstream when needed
+        input_es = []
+        output_es = []
+        es.each do |pair|
+          input, output = pair
+          # bidirectional and sharing same eventstream shape
+          if input && output && input[:class_name] == output[:class_name]
+            input[:class_name] = "Input" + input[:class_name]
+            output[:class_name] = "Output" + output[:class_name]
+          end
+          input_es << EventStreamClass.new(input) if input
+          output_es << EventStreamClass.new(output) if output
         end
         [input_es, output_es]
       end
