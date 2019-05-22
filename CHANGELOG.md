@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.280 (2019-05-22)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
