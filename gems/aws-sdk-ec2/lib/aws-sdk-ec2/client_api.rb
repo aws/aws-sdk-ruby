@@ -1616,6 +1616,7 @@ module Aws::EC2
 
     AssociateClientVpnTargetNetworkRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
     AssociateClientVpnTargetNetworkRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubnetId"))
+    AssociateClientVpnTargetNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     AssociateClientVpnTargetNetworkRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     AssociateClientVpnTargetNetworkRequest.struct_class = Types::AssociateClientVpnTargetNetworkRequest
 
@@ -1739,6 +1740,7 @@ module Aws::EC2
     AuthorizeClientVpnIngressRequest.add_member(:access_group_id, Shapes::ShapeRef.new(shape: String, location_name: "AccessGroupId"))
     AuthorizeClientVpnIngressRequest.add_member(:authorize_all_groups, Shapes::ShapeRef.new(shape: Boolean, location_name: "AuthorizeAllGroups"))
     AuthorizeClientVpnIngressRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    AuthorizeClientVpnIngressRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     AuthorizeClientVpnIngressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     AuthorizeClientVpnIngressRequest.struct_class = Types::AuthorizeClientVpnIngressRequest
 
@@ -2199,6 +2201,7 @@ module Aws::EC2
     CreateClientVpnRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
     CreateClientVpnRouteRequest.add_member(:target_vpc_subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetVpcSubnetId"))
     CreateClientVpnRouteRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateClientVpnRouteRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateClientVpnRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateClientVpnRouteRequest.struct_class = Types::CreateClientVpnRouteRequest
 

@@ -396,8 +396,9 @@ module Aws::EC2
     #   not blank and its encryption status is used for the volume encryption
     #   status.
     # @option options [String] :image_id
-    #   The ID of the AMI. An AMI is required to launch an instance and must
-    #   be specified here or in a launch template.
+    #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
+    #   ID is required to launch an instance and must be specified here or in
+    #   a launch template.
     # @option options [String] :instance_type
     #   The instance type. For more information, see [Instance Types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
@@ -538,15 +539,11 @@ module Aws::EC2
     #   If you set this parameter to `true`, you can't terminate the instance
     #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
     #   change this attribute to `false` after launch, use
-    #   [ModifyInstanceAttribute][1]. Alternatively, if you set
+    #   ModifyInstanceAttribute. Alternatively, if you set
     #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
     #   the instance by running the shutdown command from the instance.
     #
     #   Default: `false`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -738,12 +735,12 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
     # @option options [String] :interface_type
-    #   Indicates whether the network interface is an Elastic Fabric Adapter
-    #   (EFA). Only specify this parameter to create an EFA. For more
-    #   information, see [Elastic Fabric Adapter][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   Indicates the type of network interface. To create an Elastic Fabric
+    #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
+    #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   If you are not creating an EFA ENI, omit this parameter.
+    #   If you are not creating an EFA, specify `interface` or omit this
+    #   parameter.
     #
     #
     #

@@ -753,10 +753,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -766,10 +766,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -779,10 +779,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -792,10 +792,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #

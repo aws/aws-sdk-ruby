@@ -3511,6 +3511,42 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) for which to list
+    #   tags. You can associate tags with the following Device Farm
+    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Represents a request to the list tests operation.
     #
     # @note When making an API call, you may pass ListTestsRequest
@@ -5631,6 +5667,112 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # The metadata that you apply to a resource to help you categorize and
+    # organize it. Each tag consists of a key and an optional value, both of
+    # which you define. Tag keys can have a maximum character length of 128
+    # characters, and tag values can have a maximum length of 256
+    # characters.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that make up a tag. A `key` is a
+    #   general label that acts like a category for more specific tag
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that make up a tag. A `value`
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # The operation was not successful. Try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagOperationException AWS API Documentation
+    #
+    class TagOperationException < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # The request doesn't comply with the AWS Identity and Access
+    # Management (IAM) tag policy. Correct your request and then retry it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagPolicyException AWS API Documentation
+    #
+    class TagPolicyException < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) to which to add
+    #   tags. You can associate tags with the following Device Farm
+    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Represents a condition that is evaluated.
     #
     # @!attribute [rw] arn
@@ -5772,6 +5914,23 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # The list of tags on the repository is over the limit. The maximum
+    # number of tags that can be applied to a repository is 50.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
     # Represents information about free trial device minutes for an AWS
     # account.
     #
@@ -5809,6 +5968,38 @@ module Aws::DeviceFarm
       :problems)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) from which to
+    #   delete tags. You can associate tags with the following Device Farm
+    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDeviceInstanceRequest
     #   data as a hash:

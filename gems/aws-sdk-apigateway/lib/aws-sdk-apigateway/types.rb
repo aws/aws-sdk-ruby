@@ -152,6 +152,11 @@ module Aws::APIGateway
     #   resource.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class ApiKey < Struct.new(
       :id,
       :value,
@@ -161,7 +166,8 @@ module Aws::APIGateway
       :enabled,
       :created_date,
       :last_updated_date,
-      :stage_keys)
+      :stage_keys,
+      :tags)
       include Aws::Structure
     end
 
@@ -537,12 +543,18 @@ module Aws::APIGateway
     #   The timestamp when the client certificate will expire.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class ClientCertificate < Struct.new(
       :client_certificate_id,
       :description,
       :pem_encoded_certificate,
       :created_date,
-      :expiration_date)
+      :expiration_date,
+      :tags)
       include Aws::Structure
     end
 
@@ -598,6 +610,9 @@ module Aws::APIGateway
     #           },
     #         ],
     #         customer_id: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -631,6 +646,12 @@ module Aws::APIGateway
     #   AWS SaaS Marketplace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateApiKeyRequest < Struct.new(
       :name,
       :description,
@@ -638,7 +659,8 @@ module Aws::APIGateway
       :generate_distinct_id,
       :value,
       :stage_keys,
-      :customer_id)
+      :customer_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -982,6 +1004,9 @@ module Aws::APIGateway
     #         endpoint_configuration: {
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
     #         },
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1037,6 +1062,12 @@ module Aws::APIGateway
     #   types of the domain name.
     #   @return [Types::EndpointConfiguration]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :certificate_name,
@@ -1046,7 +1077,8 @@ module Aws::APIGateway
       :certificate_arn,
       :regional_certificate_name,
       :regional_certificate_arn,
-      :endpoint_configuration)
+      :endpoint_configuration,
+      :tags)
       include Aws::Structure
     end
 
@@ -1184,6 +1216,9 @@ module Aws::APIGateway
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
     #         },
     #         policy: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1234,6 +1269,12 @@ module Aws::APIGateway
     #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateRestApiRequest < Struct.new(
       :name,
       :description,
@@ -1243,7 +1284,8 @@ module Aws::APIGateway
       :minimum_compression_size,
       :api_key_source,
       :endpoint_configuration,
-      :policy)
+      :policy,
+      :tags)
       include Aws::Structure
     end
 
@@ -1408,6 +1450,9 @@ module Aws::APIGateway
     #           offset: 1,
     #           period: "DAY", # accepts DAY, WEEK, MONTH
     #         },
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1430,12 +1475,19 @@ module Aws::APIGateway
     #   The quota of the usage plan.
     #   @return [Types::QuotaSettings]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateUsagePlanRequest < Struct.new(
       :name,
       :description,
       :api_stages,
       :throttle,
-      :quota)
+      :quota,
+      :tags)
       include Aws::Structure
     end
 
@@ -1451,6 +1503,9 @@ module Aws::APIGateway
     #         name: "String", # required
     #         description: "String",
     #         target_arns: ["String"], # required
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1467,10 +1522,17 @@ module Aws::APIGateway
     #   same AWS account of the API owner.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateVpcLinkRequest < Struct.new(
       :name,
       :description,
-      :target_arns)
+      :target_arns,
+      :tags)
       include Aws::Structure
     end
 
@@ -2492,6 +2554,11 @@ module Aws::APIGateway
     #   types of the domain name.
     #   @return [Types::EndpointConfiguration]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class DomainName < Struct.new(
       :domain_name,
       :certificate_name,
@@ -2503,7 +2570,8 @@ module Aws::APIGateway
       :regional_certificate_arn,
       :distribution_domain_name,
       :distribution_hosted_zone_id,
-      :endpoint_configuration)
+      :endpoint_configuration,
+      :tags)
       include Aws::Structure
     end
 
@@ -2777,14 +2845,24 @@ module Aws::APIGateway
     #
     #       {
     #         description: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] description
     #   The description of the ClientCertificate.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class GenerateClientCertificateRequest < Struct.new(
-      :description)
+      :description,
+      :tags)
       include Aws::Structure
     end
 
@@ -6088,6 +6166,11 @@ module Aws::APIGateway
     #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class RestApi < Struct.new(
       :id,
       :name,
@@ -6099,7 +6182,8 @@ module Aws::APIGateway
       :minimum_compression_size,
       :api_key_source,
       :endpoint_configuration,
-      :policy)
+      :policy,
+      :tags)
       include Aws::Structure
     end
 
@@ -7745,6 +7829,11 @@ module Aws::APIGateway
     #   plan as a SaaS product on AWS Marketplace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class UsagePlan < Struct.new(
       :id,
       :name,
@@ -7752,7 +7841,8 @@ module Aws::APIGateway
       :api_stages,
       :throttle,
       :quota,
-      :product_code)
+      :product_code,
+      :tags)
       include Aws::Structure
     end
 
@@ -7888,13 +7978,19 @@ module Aws::APIGateway
     #   A description about the VPC link status.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class VpcLink < Struct.new(
       :id,
       :name,
       :description,
       :target_arns,
       :status,
-      :status_message)
+      :status_message,
+      :tags)
       include Aws::Structure
     end
 

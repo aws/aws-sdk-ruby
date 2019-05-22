@@ -65,6 +65,7 @@ module Aws::Budgets
     Notifications = Shapes::ListShape.new(name: 'Notifications')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NumericValue = Shapes::StringShape.new(name: 'NumericValue')
+    PlannedBudgetLimits = Shapes::MapShape.new(name: 'PlannedBudgetLimits')
     Spend = Shapes::StructureShape.new(name: 'Spend')
     Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
     SubscriberAddress = Shapes::StringShape.new(name: 'SubscriberAddress')
@@ -84,6 +85,7 @@ module Aws::Budgets
 
     Budget.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     Budget.add_member(:budget_limit, Shapes::ShapeRef.new(shape: Spend, location_name: "BudgetLimit"))
+    Budget.add_member(:planned_budget_limits, Shapes::ShapeRef.new(shape: PlannedBudgetLimits, location_name: "PlannedBudgetLimits"))
     Budget.add_member(:cost_filters, Shapes::ShapeRef.new(shape: CostFilters, location_name: "CostFilters"))
     Budget.add_member(:cost_types, Shapes::ShapeRef.new(shape: CostTypes, location_name: "CostTypes"))
     Budget.add_member(:time_unit, Shapes::ShapeRef.new(shape: TimeUnit, required: true, location_name: "TimeUnit"))
@@ -259,6 +261,9 @@ module Aws::Budgets
     NotificationWithSubscribersList.member = Shapes::ShapeRef.new(shape: NotificationWithSubscribers)
 
     Notifications.member = Shapes::ShapeRef.new(shape: Notification)
+
+    PlannedBudgetLimits.key = Shapes::ShapeRef.new(shape: GenericString)
+    PlannedBudgetLimits.value = Shapes::ShapeRef.new(shape: Spend)
 
     Spend.add_member(:amount, Shapes::ShapeRef.new(shape: NumericValue, required: true, location_name: "Amount"))
     Spend.add_member(:unit, Shapes::ShapeRef.new(shape: UnitValue, required: true, location_name: "Unit"))

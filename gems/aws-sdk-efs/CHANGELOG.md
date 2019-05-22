@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2019-05-22)
+------------------
+
+* Feature - AWS EFS documentation updated to reflect the minimum required value for ProvisionedThroughputInMibps is 1 from the previously documented 0. The service has always required a minimum value of 1, therefor service behavior is not changed.
+
 1.16.0 (2019-05-21)
 ------------------
 

@@ -25,6 +25,12 @@ module Aws::Budgets
     #           amount: "NumericValue", # required
     #           unit: "UnitValue", # required
     #         },
+    #         planned_budget_limits: {
+    #           "GenericString" => {
+    #             amount: "NumericValue", # required
+    #             unit: "UnitValue", # required
+    #           },
+    #         },
     #         cost_filters: {
     #           "GenericString" => ["GenericString"],
     #         },
@@ -61,7 +67,7 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] budget_name
-    #   The name of a budget. The name must be unique within accounts. The
+    #   The name of a budget. The name must be unique within an account. The
     #   `:` and `` characters aren't allowed in `BudgetName`.
     #   @return [String]
     #
@@ -72,11 +78,49 @@ module Aws::Budgets
     #   `BudgetLimit` is required for cost or usage budgets, but optional
     #   for RI utilization or coverage budgets. RI utilization or coverage
     #   budgets default to `100`, which is the only valid value for RI
-    #   utilization or coverage budgets.
+    #   utilization or coverage budgets. You can't use `BudgetLimit` with
+    #   `PlannedBudgetLimits` for `CreateBudget` and `UpdateBudget` actions.
     #   @return [Types::Spend]
     #
+    # @!attribute [rw] planned_budget_limits
+    #   A map containing multiple `BudgetLimit`, including current or future
+    #   limits.
+    #
+    #   `PlannedBudgetLimits` is available for cost or usage budget and
+    #   supports monthly and quarterly `TimeUnit`.
+    #
+    #   For monthly budgets, provide 12 months of `PlannedBudgetLimits`
+    #   values. This must start from the current month and include the next
+    #   11 months. The `key` is the start of the month, `UTC` in epoch
+    #   seconds.
+    #
+    #   For quarterly budgets, provide 4 quarters of `PlannedBudgetLimits`
+    #   value entries in standard calendar quarter increments. This must
+    #   start from the current quarter and include the next 3 quarters. The
+    #   `key` is the start of the quarter, `UTC` in epoch seconds.
+    #
+    #   If the planned budget expires before 12 months for monthly or 4
+    #   quarters for quarterly, provide the `PlannedBudgetLimits` values
+    #   only for the remaining periods.
+    #
+    #   If the budget begins at a date in the future, provide
+    #   `PlannedBudgetLimits` values from the start date of the budget.
+    #
+    #   After all of the `BudgetLimit` values in `PlannedBudgetLimits` are
+    #   used, the budget continues to use the last limit as the
+    #   `BudgetLimit`. At that point, the planned budget provides the same
+    #   experience as a fixed budget.
+    #
+    #   `DescribeBudget` and `DescribeBudgets` response along with
+    #   `PlannedBudgetLimits` will also contain `BudgetLimit` representing
+    #   the current month or quarter limit present in `PlannedBudgetLimits`.
+    #   This only applies to budgets created with `PlannedBudgetLimits`.
+    #   Budgets created without `PlannedBudgetLimits` will only contain
+    #   `BudgetLimit`, and no `PlannedBudgetLimits`.
+    #   @return [Hash<String,Types::Spend>]
+    #
     # @!attribute [rw] cost_filters
-    #   The cost filters, such as service or region, that are applied to a
+    #   The cost filters, such as service or tag, that are applied to a
     #   budget.
     #
     #   AWS Budgets supports the following services as a filter for RI
@@ -132,8 +176,8 @@ module Aws::Budgets
     #   @return [Types::CalculatedSpend]
     #
     # @!attribute [rw] budget_type
-    #   Whether this budget tracks monetary costs, usage, RI utilization, or
-    #   RI coverage.
+    #   Whether this budget tracks costs, usage, RI utilization, or RI
+    #   coverage.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time
@@ -143,6 +187,7 @@ module Aws::Budgets
     class Budget < Struct.new(
       :budget_name,
       :budget_limit,
+      :planned_budget_limits,
       :cost_filters,
       :cost_types,
       :time_unit,
@@ -373,6 +418,12 @@ module Aws::Budgets
     #           budget_limit: {
     #             amount: "NumericValue", # required
     #             unit: "UnitValue", # required
+    #           },
+    #           planned_budget_limits: {
+    #             "GenericString" => {
+    #               amount: "NumericValue", # required
+    #               unit: "UnitValue", # required
+    #             },
     #           },
     #           cost_filters: {
     #             "GenericString" => ["GenericString"],
@@ -1200,6 +1251,9 @@ module Aws::Budgets
     # @!attribute [rw] address
     #   The address that AWS sends budget notifications to, either an SNS
     #   topic or an email.
+    #
+    #   AWS validates the address for a `CreateSubscriber` request with the
+    #   `.*` regex.
     #   @return [String]
     #
     class Subscriber < Struct.new(
@@ -1261,6 +1315,12 @@ module Aws::Budgets
     #           budget_limit: {
     #             amount: "NumericValue", # required
     #             unit: "UnitValue", # required
+    #           },
+    #           planned_budget_limits: {
+    #             "GenericString" => {
+    #               amount: "NumericValue", # required
+    #               unit: "UnitValue", # required
+    #             },
     #           },
     #           cost_filters: {
     #             "GenericString" => ["GenericString"],

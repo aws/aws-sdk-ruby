@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.53.1 (2019-05-22)
+------------------
+
 * Issue - Support #to_hash for Struct with `:members` member #2053
 
 3.53.0 (2019-05-21)

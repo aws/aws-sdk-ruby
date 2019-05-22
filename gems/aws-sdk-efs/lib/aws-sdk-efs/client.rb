@@ -354,18 +354,26 @@ module Aws::EFS
     #
     # @option params [String] :throughput_mode
     #   The throughput mode for the file system to be created. There are two
-    #   throughput modes to choose from for your file system: bursting and
-    #   provisioned. You can decrease your file system's throughput in
-    #   Provisioned Throughput mode or change between the throughput modes as
-    #   long as it’s been more than 24 hours since the last decrease or
-    #   throughput mode change.
+    #   throughput modes to choose from for your file system: `bursting` and
+    #   `provisioned`. If you set `ThroughputMode` to `provisioned`, you must
+    #   also set a value for `ProvisionedThroughPutInMibps`. You can decrease
+    #   your file system's throughput in Provisioned Throughput mode or
+    #   change between the throughput modes as long as it’s been more than 24
+    #   hours since the last decrease or throughput mode change. For more, see
+    #   [Specifying Throughput with Provisioned Mode][1] in the *Amazon EFS
+    #   User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput
     #
     # @option params [Float] :provisioned_throughput_in_mibps
     #   The throughput, measured in MiB/s, that you want to provision for a
-    #   file system that you're creating. The limit on throughput is 1024
-    #   MiB/s. You can get these limits increased by contacting AWS Support.
-    #   For more information, see [Amazon EFS Limits That You Can Increase][1]
-    #   in the *Amazon EFS User Guide.*
+    #   file system that you're creating. Valid values are 1-1024. Required
+    #   if `ThroughputMode` is set to `provisioned`. The upper limit for
+    #   throughput is 1024 MiB/s. You can get this limit increased by
+    #   contacting AWS Support. For more information, see [Amazon EFS Limits
+    #   That You Can Increase][1] in the *Amazon EFS User Guide.*
     #
     #
     #
@@ -911,7 +919,8 @@ module Aws::EFS
     # @option params [Integer] :max_items
     #   (Optional) Specifies the maximum number of file systems to return in
     #   the response (integer). Currently, this number is automatically set to
-    #   10.
+    #   10, and other values are ignored. The response is paginated at 10 per
+    #   page if you have more than 10 file systems.
     #
     # @option params [String] :marker
     #   (Optional) Opaque pagination token returned from a previous
@@ -1134,7 +1143,9 @@ module Aws::EFS
     #
     # @option params [Integer] :max_items
     #   (Optional) Maximum number of mount targets to return in the response.
-    #   Currently, this number is automatically set to 10.
+    #   Currently, this number is automatically set to 10, and other values
+    #   are ignored. The response is paginated at 10 per page if you have more
+    #   than 10 mount targets.
     #
     # @option params [String] :marker
     #   (Optional) Opaque pagination token returned from a previous
@@ -1222,7 +1233,9 @@ module Aws::EFS
     #
     # @option params [Integer] :max_items
     #   (Optional) The maximum number of file system tags to return in the
-    #   response. Currently, this number is automatically set to 10.
+    #   response. Currently, this number is automatically set to 10, and other
+    #   values are ignored. The response is paginated at 10 per page if you
+    #   have more than 10 tags.
     #
     # @option params [String] :marker
     #   (Optional) An opaque pagination token returned from a previous
@@ -1445,13 +1458,16 @@ module Aws::EFS
     # @option params [String] :throughput_mode
     #   (Optional) The throughput mode that you want your file system to use.
     #   If you're not updating your throughput mode, you don't need to
-    #   provide this value in your request.
+    #   provide this value in your request. If you are changing the
+    #   `ThroughputMode` to `provisioned`, you must also set a value for
+    #   `ProvisionedThroughputInMibps`.
     #
     # @option params [Float] :provisioned_throughput_in_mibps
     #   (Optional) The amount of throughput, in MiB/s, that you want to
-    #   provision for your file system. If you're not updating the amount of
-    #   provisioned throughput for your file system, you don't need to
-    #   provide this value in your request.
+    #   provision for your file system. Valid values are 1-1024. Required if
+    #   `ThroughputMode` is changed to `provisioned` on update. If you're not
+    #   updating the amount of provisioned throughput for your file system,
+    #   you don't need to provide this value in your request.
     #
     # @return [Types::FileSystemDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1522,7 +1538,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

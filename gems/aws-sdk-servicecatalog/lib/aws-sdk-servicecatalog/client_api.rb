@@ -251,7 +251,9 @@ module Aws::ServiceCatalog
     ProductViewSortBy = Shapes::StringShape.new(name: 'ProductViewSortBy')
     ProductViewSummaries = Shapes::ListShape.new(name: 'ProductViewSummaries')
     ProductViewSummary = Shapes::StructureShape.new(name: 'ProductViewSummary')
+    PropertyKey = Shapes::StringShape.new(name: 'PropertyKey')
     PropertyName = Shapes::StringShape.new(name: 'PropertyName')
+    PropertyValue = Shapes::StringShape.new(name: 'PropertyValue')
     ProviderName = Shapes::StringShape.new(name: 'ProviderName')
     ProvisionProductInput = Shapes::StructureShape.new(name: 'ProvisionProductInput')
     ProvisionProductOutput = Shapes::StructureShape.new(name: 'ProvisionProductOutput')
@@ -269,6 +271,7 @@ module Aws::ServiceCatalog
     ProvisionedProductPlanSummary = Shapes::StructureShape.new(name: 'ProvisionedProductPlanSummary')
     ProvisionedProductPlanType = Shapes::StringShape.new(name: 'ProvisionedProductPlanType')
     ProvisionedProductPlans = Shapes::ListShape.new(name: 'ProvisionedProductPlans')
+    ProvisionedProductProperties = Shapes::MapShape.new(name: 'ProvisionedProductProperties')
     ProvisionedProductStatus = Shapes::StringShape.new(name: 'ProvisionedProductStatus')
     ProvisionedProductStatusMessage = Shapes::StringShape.new(name: 'ProvisionedProductStatusMessage')
     ProvisionedProductType = Shapes::StringShape.new(name: 'ProvisionedProductType')
@@ -408,6 +411,8 @@ module Aws::ServiceCatalog
     UpdateProductOutput = Shapes::StructureShape.new(name: 'UpdateProductOutput')
     UpdateProvisionedProductInput = Shapes::StructureShape.new(name: 'UpdateProvisionedProductInput')
     UpdateProvisionedProductOutput = Shapes::StructureShape.new(name: 'UpdateProvisionedProductOutput')
+    UpdateProvisionedProductPropertiesInput = Shapes::StructureShape.new(name: 'UpdateProvisionedProductPropertiesInput')
+    UpdateProvisionedProductPropertiesOutput = Shapes::StructureShape.new(name: 'UpdateProvisionedProductPropertiesOutput')
     UpdateProvisioningArtifactInput = Shapes::StructureShape.new(name: 'UpdateProvisioningArtifactInput')
     UpdateProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'UpdateProvisioningArtifactOutput')
     UpdateProvisioningParameter = Shapes::StructureShape.new(name: 'UpdateProvisioningParameter')
@@ -1221,6 +1226,9 @@ module Aws::ServiceCatalog
 
     ProvisionedProductPlans.member = Shapes::ShapeRef.new(shape: ProvisionedProductPlanSummary)
 
+    ProvisionedProductProperties.key = Shapes::ShapeRef.new(shape: PropertyKey)
+    ProvisionedProductProperties.value = Shapes::ShapeRef.new(shape: PropertyValue)
+
     ProvisionedProductViewFilterValues.member = Shapes::ShapeRef.new(shape: ProvisionedProductViewFilterValue)
 
     ProvisioningArtifact.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
@@ -1555,6 +1563,18 @@ module Aws::ServiceCatalog
 
     UpdateProvisionedProductOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
     UpdateProvisionedProductOutput.struct_class = Types::UpdateProvisionedProductOutput
+
+    UpdateProvisionedProductPropertiesInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    UpdateProvisionedProductPropertiesInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisionedProductId"))
+    UpdateProvisionedProductPropertiesInput.add_member(:provisioned_product_properties, Shapes::ShapeRef.new(shape: ProvisionedProductProperties, required: true, location_name: "ProvisionedProductProperties"))
+    UpdateProvisionedProductPropertiesInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    UpdateProvisionedProductPropertiesInput.struct_class = Types::UpdateProvisionedProductPropertiesInput
+
+    UpdateProvisionedProductPropertiesOutput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisionedProductId"))
+    UpdateProvisionedProductPropertiesOutput.add_member(:provisioned_product_properties, Shapes::ShapeRef.new(shape: ProvisionedProductProperties, location_name: "ProvisionedProductProperties"))
+    UpdateProvisionedProductPropertiesOutput.add_member(:record_id, Shapes::ShapeRef.new(shape: Id, location_name: "RecordId"))
+    UpdateProvisionedProductPropertiesOutput.add_member(:status, Shapes::ShapeRef.new(shape: RecordStatus, location_name: "Status"))
+    UpdateProvisionedProductPropertiesOutput.struct_class = Types::UpdateProvisionedProductPropertiesOutput
 
     UpdateProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     UpdateProvisioningArtifactInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
@@ -2508,6 +2528,17 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: UpdateProvisionedProductOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_provisioned_product_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProvisionedProductProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProvisionedProductPropertiesInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProvisionedProductPropertiesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:update_provisioning_artifact, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2019-05-22)
+------------------
+
+* Feature - Documentation updates for rds
+
 1.53.0 (2019-05-21)
 ------------------
 

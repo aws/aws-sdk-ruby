@@ -288,6 +288,7 @@ module Aws::APIGateway
     ApiKey.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     ApiKey.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
     ApiKey.add_member(:stage_keys, Shapes::ShapeRef.new(shape: ListOfString, location_name: "stageKeys"))
+    ApiKey.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     ApiKey.struct_class = Types::ApiKey
 
     ApiKeyIds.add_member(:ids, Shapes::ShapeRef.new(shape: ListOfString, location_name: "ids"))
@@ -343,6 +344,7 @@ module Aws::APIGateway
     ClientCertificate.add_member(:pem_encoded_certificate, Shapes::ShapeRef.new(shape: String, location_name: "pemEncodedCertificate"))
     ClientCertificate.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     ClientCertificate.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationDate"))
+    ClientCertificate.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     ClientCertificate.struct_class = Types::ClientCertificate
 
     ClientCertificates.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
@@ -359,6 +361,7 @@ module Aws::APIGateway
     CreateApiKeyRequest.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     CreateApiKeyRequest.add_member(:stage_keys, Shapes::ShapeRef.new(shape: ListOfStageKeys, location_name: "stageKeys"))
     CreateApiKeyRequest.add_member(:customer_id, Shapes::ShapeRef.new(shape: String, location_name: "customerId"))
+    CreateApiKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateApiKeyRequest.struct_class = Types::CreateApiKeyRequest
 
     CreateAuthorizerRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -410,6 +413,7 @@ module Aws::APIGateway
     CreateDomainNameRequest.add_member(:regional_certificate_name, Shapes::ShapeRef.new(shape: String, location_name: "regionalCertificateName"))
     CreateDomainNameRequest.add_member(:regional_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "regionalCertificateArn"))
     CreateDomainNameRequest.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
+    CreateDomainNameRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateModelRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -439,6 +443,7 @@ module Aws::APIGateway
     CreateRestApiRequest.add_member(:api_key_source, Shapes::ShapeRef.new(shape: ApiKeySourceType, location_name: "apiKeySource"))
     CreateRestApiRequest.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     CreateRestApiRequest.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
+    CreateRestApiRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateRestApiRequest.struct_class = Types::CreateRestApiRequest
 
     CreateStageRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -464,11 +469,13 @@ module Aws::APIGateway
     CreateUsagePlanRequest.add_member(:api_stages, Shapes::ShapeRef.new(shape: ListOfApiStage, location_name: "apiStages"))
     CreateUsagePlanRequest.add_member(:throttle, Shapes::ShapeRef.new(shape: ThrottleSettings, location_name: "throttle"))
     CreateUsagePlanRequest.add_member(:quota, Shapes::ShapeRef.new(shape: QuotaSettings, location_name: "quota"))
+    CreateUsagePlanRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateUsagePlanRequest.struct_class = Types::CreateUsagePlanRequest
 
     CreateVpcLinkRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     CreateVpcLinkRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateVpcLinkRequest.add_member(:target_arns, Shapes::ShapeRef.new(shape: ListOfString, required: true, location_name: "targetArns"))
+    CreateVpcLinkRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateVpcLinkRequest.struct_class = Types::CreateVpcLinkRequest
 
     DeleteApiKeyRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "api_Key"))
@@ -610,6 +617,7 @@ module Aws::APIGateway
     DomainName.add_member(:distribution_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "distributionDomainName"))
     DomainName.add_member(:distribution_hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "distributionHostedZoneId"))
     DomainName.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
+    DomainName.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     DomainName.struct_class = Types::DomainName
 
     DomainNames.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
@@ -646,6 +654,7 @@ module Aws::APIGateway
     GatewayResponses.struct_class = Types::GatewayResponses
 
     GenerateClientCertificateRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    GenerateClientCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     GenerateClientCertificateRequest.struct_class = Types::GenerateClientCertificateRequest
 
     GetAccountRequest.struct_class = Types::GetAccountRequest
@@ -1155,6 +1164,7 @@ module Aws::APIGateway
     RestApi.add_member(:api_key_source, Shapes::ShapeRef.new(shape: ApiKeySourceType, location_name: "apiKeySource"))
     RestApi.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     RestApi.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
+    RestApi.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     RestApi.struct_class = Types::RestApi
 
     RestApis.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
@@ -1400,6 +1410,7 @@ module Aws::APIGateway
     UsagePlan.add_member(:throttle, Shapes::ShapeRef.new(shape: ThrottleSettings, location_name: "throttle"))
     UsagePlan.add_member(:quota, Shapes::ShapeRef.new(shape: QuotaSettings, location_name: "quota"))
     UsagePlan.add_member(:product_code, Shapes::ShapeRef.new(shape: String, location_name: "productCode"))
+    UsagePlan.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     UsagePlan.struct_class = Types::UsagePlan
 
     UsagePlanKey.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -1422,6 +1433,7 @@ module Aws::APIGateway
     VpcLink.add_member(:target_arns, Shapes::ShapeRef.new(shape: ListOfString, location_name: "targetArns"))
     VpcLink.add_member(:status, Shapes::ShapeRef.new(shape: VpcLinkStatus, location_name: "status"))
     VpcLink.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    VpcLink.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     VpcLink.struct_class = Types::VpcLink
 
     VpcLinks.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
