@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::WAFRegional - Updated the documentation for AWS WAF Regional.
+
 2.11.280 (2019-05-22)
 ------------------
 
