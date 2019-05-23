@@ -201,9 +201,8 @@ module Aws::EC2
     #   not blank and its encryption status is used for the volume encryption
     #   status.
     # @option options [String] :image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
-    #   ID is required to launch an instance and must be specified here or in
-    #   a launch template.
+    #   The ID of the AMI. An AMI ID is required to launch an instance and
+    #   must be specified here or in a launch template.
     # @option options [String] :instance_type
     #   The instance type. For more information, see [Instance Types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
@@ -348,12 +347,16 @@ module Aws::EC2
     # @option options [Boolean] :disable_api_termination
     #   If you set this parameter to `true`, you can't terminate the instance
     #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
-    #   change this attribute to `false` after launch, use
-    #   ModifyInstanceAttribute. Alternatively, if you set
-    #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
-    #   the instance by running the shutdown command from the instance.
+    #   change this attribute after launch, use [ModifyInstanceAttribute][1].
+    #   Alternatively, if you set `InstanceInitiatedShutdownBehavior` to
+    #   `terminate`, you can terminate the instance by running the shutdown
+    #   command from the instance.
     #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -878,15 +881,17 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :availability_zone
-    #   The Availability Zone in which to create the volume. Use
-    #   DescribeAvailabilityZones to list the Availability Zones that are
-    #   currently available to you.
+    #   The Availability Zone in which to create the volume.
     # @option options [Boolean] :encrypted
     #   Specifies the encryption state of the volume. The default effect of
-    #   setting this parameter depends on the volume's source and ownership.
-    #   Each default case can be overridden by specifying a customer master
-    #   key (CMK) with the `KeyKeyId` parameter. For a complete list of
-    #   possible encryption cases, see [Amazon EBS Encryption][1].
+    #   setting the `Encrypted` parameter to `true` through the console, API,
+    #   or CLI depends on the volume's origin (new or from a snapshot),
+    #   starting encryption state, ownership, and whether [account-level
+    #   encryption][1] is enabled. Each default case can be overridden by
+    #   specifying a customer master key (CMK) with the `KmsKeyId` parameter
+    #   in addition to setting `Encrypted` to `true`. For a complete list of
+    #   possible encryption cases, see [Amazon EBS
+    #   Encryption](AWSEC2/latest/UserGuide/EBSEncryption.htm).
     #
     #   Encrypted Amazon EBS volumes may only be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
@@ -894,7 +899,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     # @option options [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
@@ -912,10 +917,10 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     # @option options [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If a
-    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   master key (CMK) to use to encrypt the volume. This parameter is only
+    #   required if you want to use a non-default CMK; if this parameter is
+    #   not specified, the default CMK for EBS is used. If a `KmsKeyId` is
+    #   specified, the `Encrypted` flag must also be set.
     #
     #   The CMK identifier may be provided in any of the following formats:
     #
@@ -951,7 +956,7 @@ module Aws::EC2
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
     #
-    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #   <note markdown="1"> At least one of Size or SnapshotId is required.
     #
     #    </note>
     # @option options [String] :snapshot_id

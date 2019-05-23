@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2019-05-23)
+------------------
+
+* Feature - New APIs to enable EBS encryption by default feature. Once EBS encryption by default is enabled in a region within the account, all new EBS volumes and snapshot copies are always encrypted
+
 1.86.0 (2019-05-22)
 ------------------
 

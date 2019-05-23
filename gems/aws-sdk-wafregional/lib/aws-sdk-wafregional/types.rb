@@ -681,8 +681,10 @@ module Aws::WAFRegional
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this
     #   `RateBasedRule`. The name can contain only alphanumeric characters
-    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't
-    #   change the name of the metric after you create the `RateBasedRule`.
+    #   (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It
+    #   can't contain whitespace or metric names reserved for AWS WAF,
+    #   including "All" and "Default\_Action." You can't change the
+    #   name of the metric after you create the `RateBasedRule`.
     #   @return [String]
     #
     # @!attribute [rw] rate_key
@@ -840,9 +842,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change the name of
-    #   the metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `RuleGroup`.
     #   @return [String]
     #
     # @!attribute [rw] change_token
@@ -892,9 +896,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain white space. You can't change the name of the
-    #   metric after you create the `Rule`.
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `Rule`.
     #   @return [String]
     #
     # @!attribute [rw] change_token
@@ -1039,10 +1045,12 @@ module Aws::WAFRegional
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   A friendly name or description for the metrics for this `WebACL`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain white space. You can't change `MetricName`
-    #   after you create the `WebACL`.
+    #   A friendly name or description for the metrics for this `WebACL`.The
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change `MetricName` after you
+    #   create the `WebACL`.
     #   @return [String]
     #
     # @!attribute [rw] default_action
@@ -3915,8 +3923,10 @@ module Aws::WAFRegional
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for a
     #   `RateBasedRule`. The name can contain only alphanumeric characters
-    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't
-    #   change the name of the metric after you create the `RateBasedRule`.
+    #   (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It
+    #   can't contain whitespace or metric names reserved for AWS WAF,
+    #   including "All" and "Default\_Action." You can't change the
+    #   name of the metric after you create the `RateBasedRule`.
     #   @return [String]
     #
     # @!attribute [rw] match_predicates
@@ -4321,9 +4331,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change `MetricName` after
-    #   you create the `Rule`.
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change `MetricName` after you
+    #   create the `Rule`.
     #   @return [String]
     #
     # @!attribute [rw] predicates
@@ -4370,9 +4382,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change the name of
-    #   the metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `RuleGroup`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleGroup AWS API Documentation
@@ -5044,9 +5058,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change the name of
-    #   the metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `RuleGroup`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SubscribedRuleGroupSummary AWS API Documentation
@@ -6288,9 +6304,11 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `WebACL`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change `MetricName`
-    #   after you create the `WebACL`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change `MetricName` after you
+    #   create the `WebACL`.
     #   @return [String]
     #
     # @!attribute [rw] default_action

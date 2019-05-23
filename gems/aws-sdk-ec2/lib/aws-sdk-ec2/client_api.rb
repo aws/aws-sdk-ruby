@@ -595,6 +595,8 @@ module Aws::EC2
     DhcpOptionsList = Shapes::ListShape.new(name: 'DhcpOptionsList')
     DirectoryServiceAuthentication = Shapes::StructureShape.new(name: 'DirectoryServiceAuthentication')
     DirectoryServiceAuthenticationRequest = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationRequest')
+    DisableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultRequest')
+    DisableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultResult')
     DisableTransitGatewayRouteTablePropagationRequest = Shapes::StructureShape.new(name: 'DisableTransitGatewayRouteTablePropagationRequest')
     DisableTransitGatewayRouteTablePropagationResult = Shapes::StructureShape.new(name: 'DisableTransitGatewayRouteTablePropagationResult')
     DisableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'DisableVgwRoutePropagationRequest')
@@ -650,6 +652,8 @@ module Aws::EC2
     ElasticInferenceAcceleratorAssociation = Shapes::StructureShape.new(name: 'ElasticInferenceAcceleratorAssociation')
     ElasticInferenceAcceleratorAssociationList = Shapes::ListShape.new(name: 'ElasticInferenceAcceleratorAssociationList')
     ElasticInferenceAccelerators = Shapes::ListShape.new(name: 'ElasticInferenceAccelerators')
+    EnableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultRequest')
+    EnableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultResult')
     EnableTransitGatewayRouteTablePropagationRequest = Shapes::StructureShape.new(name: 'EnableTransitGatewayRouteTablePropagationRequest')
     EnableTransitGatewayRouteTablePropagationResult = Shapes::StructureShape.new(name: 'EnableTransitGatewayRouteTablePropagationResult')
     EnableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'EnableVgwRoutePropagationRequest')
@@ -716,6 +720,10 @@ module Aws::EC2
     GetConsoleOutputResult = Shapes::StructureShape.new(name: 'GetConsoleOutputResult')
     GetConsoleScreenshotRequest = Shapes::StructureShape.new(name: 'GetConsoleScreenshotRequest')
     GetConsoleScreenshotResult = Shapes::StructureShape.new(name: 'GetConsoleScreenshotResult')
+    GetEbsDefaultKmsKeyIdRequest = Shapes::StructureShape.new(name: 'GetEbsDefaultKmsKeyIdRequest')
+    GetEbsDefaultKmsKeyIdResult = Shapes::StructureShape.new(name: 'GetEbsDefaultKmsKeyIdResult')
+    GetEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'GetEbsEncryptionByDefaultRequest')
+    GetEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'GetEbsEncryptionByDefaultResult')
     GetHostReservationPurchasePreviewRequest = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewRequest')
     GetHostReservationPurchasePreviewResult = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewResult')
     GetLaunchTemplateDataRequest = Shapes::StructureShape.new(name: 'GetLaunchTemplateDataRequest')
@@ -946,6 +954,8 @@ module Aws::EC2
     ModifyCapacityReservationResult = Shapes::StructureShape.new(name: 'ModifyCapacityReservationResult')
     ModifyClientVpnEndpointRequest = Shapes::StructureShape.new(name: 'ModifyClientVpnEndpointRequest')
     ModifyClientVpnEndpointResult = Shapes::StructureShape.new(name: 'ModifyClientVpnEndpointResult')
+    ModifyEbsDefaultKmsKeyIdRequest = Shapes::StructureShape.new(name: 'ModifyEbsDefaultKmsKeyIdRequest')
+    ModifyEbsDefaultKmsKeyIdResult = Shapes::StructureShape.new(name: 'ModifyEbsDefaultKmsKeyIdResult')
     ModifyFleetRequest = Shapes::StructureShape.new(name: 'ModifyFleetRequest')
     ModifyFleetResult = Shapes::StructureShape.new(name: 'ModifyFleetResult')
     ModifyFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'ModifyFpgaImageAttributeRequest')
@@ -1171,6 +1181,8 @@ module Aws::EC2
     ReservedInstancesOfferingIdStringList = Shapes::ListShape.new(name: 'ReservedInstancesOfferingIdStringList')
     ReservedInstancesOfferingList = Shapes::ListShape.new(name: 'ReservedInstancesOfferingList')
     ReservedIntancesIds = Shapes::ListShape.new(name: 'ReservedIntancesIds')
+    ResetEbsDefaultKmsKeyIdRequest = Shapes::StructureShape.new(name: 'ResetEbsDefaultKmsKeyIdRequest')
+    ResetEbsDefaultKmsKeyIdResult = Shapes::StructureShape.new(name: 'ResetEbsDefaultKmsKeyIdResult')
     ResetFpgaImageAttributeName = Shapes::StringShape.new(name: 'ResetFpgaImageAttributeName')
     ResetFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'ResetFpgaImageAttributeRequest')
     ResetFpgaImageAttributeResult = Shapes::StructureShape.new(name: 'ResetFpgaImageAttributeResult')
@@ -3973,6 +3985,12 @@ module Aws::EC2
     DirectoryServiceAuthenticationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: String, location_name: "DirectoryId"))
     DirectoryServiceAuthenticationRequest.struct_class = Types::DirectoryServiceAuthenticationRequest
 
+    DisableEbsEncryptionByDefaultRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableEbsEncryptionByDefaultRequest.struct_class = Types::DisableEbsEncryptionByDefaultRequest
+
+    DisableEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
+    DisableEbsEncryptionByDefaultResult.struct_class = Types::DisableEbsEncryptionByDefaultResult
+
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayRouteTableId"))
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayAttachmentId"))
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -4151,6 +4169,12 @@ module Aws::EC2
     ElasticInferenceAcceleratorAssociationList.member = Shapes::ShapeRef.new(shape: ElasticInferenceAcceleratorAssociation, location_name: "item")
 
     ElasticInferenceAccelerators.member = Shapes::ShapeRef.new(shape: ElasticInferenceAccelerator, location_name: "item")
+
+    EnableEbsEncryptionByDefaultRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableEbsEncryptionByDefaultRequest.struct_class = Types::EnableEbsEncryptionByDefaultRequest
+
+    EnableEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
+    EnableEbsEncryptionByDefaultResult.struct_class = Types::EnableEbsEncryptionByDefaultResult
 
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayRouteTableId"))
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayAttachmentId"))
@@ -4379,6 +4403,18 @@ module Aws::EC2
     GetConsoleScreenshotResult.add_member(:image_data, Shapes::ShapeRef.new(shape: String, location_name: "imageData"))
     GetConsoleScreenshotResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     GetConsoleScreenshotResult.struct_class = Types::GetConsoleScreenshotResult
+
+    GetEbsDefaultKmsKeyIdRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetEbsDefaultKmsKeyIdRequest.struct_class = Types::GetEbsDefaultKmsKeyIdRequest
+
+    GetEbsDefaultKmsKeyIdResult.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    GetEbsDefaultKmsKeyIdResult.struct_class = Types::GetEbsDefaultKmsKeyIdResult
+
+    GetEbsEncryptionByDefaultRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetEbsEncryptionByDefaultRequest.struct_class = Types::GetEbsEncryptionByDefaultRequest
+
+    GetEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
+    GetEbsEncryptionByDefaultResult.struct_class = Types::GetEbsEncryptionByDefaultResult
 
     GetHostReservationPurchasePreviewRequest.add_member(:host_id_set, Shapes::ShapeRef.new(shape: RequestHostIdSet, required: true, location_name: "HostIdSet"))
     GetHostReservationPurchasePreviewRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OfferingId"))
@@ -5367,6 +5403,13 @@ module Aws::EC2
     ModifyClientVpnEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyClientVpnEndpointResult.struct_class = Types::ModifyClientVpnEndpointResult
 
+    ModifyEbsDefaultKmsKeyIdRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "KmsKeyId"))
+    ModifyEbsDefaultKmsKeyIdRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyEbsDefaultKmsKeyIdRequest.struct_class = Types::ModifyEbsDefaultKmsKeyIdRequest
+
+    ModifyEbsDefaultKmsKeyIdResult.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    ModifyEbsDefaultKmsKeyIdResult.struct_class = Types::ModifyEbsDefaultKmsKeyIdResult
+
     ModifyFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyFleetRequest.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: FleetExcessCapacityTerminationPolicy, location_name: "ExcessCapacityTerminationPolicy"))
     ModifyFleetRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, required: true, location_name: "FleetId"))
@@ -6330,6 +6373,12 @@ module Aws::EC2
     ReservedInstancesOfferingList.member = Shapes::ShapeRef.new(shape: ReservedInstancesOffering, location_name: "item")
 
     ReservedIntancesIds.member = Shapes::ShapeRef.new(shape: ReservedInstancesId, location_name: "item")
+
+    ResetEbsDefaultKmsKeyIdRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ResetEbsDefaultKmsKeyIdRequest.struct_class = Types::ResetEbsDefaultKmsKeyIdRequest
+
+    ResetEbsDefaultKmsKeyIdResult.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    ResetEbsDefaultKmsKeyIdResult.struct_class = Types::ResetEbsDefaultKmsKeyIdResult
 
     ResetFpgaImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ResetFpgaImageAttributeRequest.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FpgaImageId"))
@@ -9752,6 +9801,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:disable_ebs_encryption_by_default, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableEbsEncryptionByDefault"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableEbsEncryptionByDefaultRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableEbsEncryptionByDefaultResult)
+      end)
+
       api.add_operation(:disable_transit_gateway_route_table_propagation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableTransitGatewayRouteTablePropagation"
         o.http_method = "POST"
@@ -9840,6 +9897,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisassociateVpcCidrBlockResult)
       end)
 
+      api.add_operation(:enable_ebs_encryption_by_default, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableEbsEncryptionByDefault"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableEbsEncryptionByDefaultRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableEbsEncryptionByDefaultResult)
+      end)
+
       api.add_operation(:enable_transit_gateway_route_table_propagation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EnableTransitGatewayRouteTablePropagation"
         o.http_method = "POST"
@@ -9918,6 +9983,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetConsoleScreenshotRequest)
         o.output = Shapes::ShapeRef.new(shape: GetConsoleScreenshotResult)
+      end)
+
+      api.add_operation(:get_ebs_default_kms_key_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEbsDefaultKmsKeyId"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEbsDefaultKmsKeyIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEbsDefaultKmsKeyIdResult)
+      end)
+
+      api.add_operation(:get_ebs_encryption_by_default, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEbsEncryptionByDefault"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEbsEncryptionByDefaultRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEbsEncryptionByDefaultResult)
       end)
 
       api.add_operation(:get_host_reservation_purchase_preview, Seahorse::Model::Operation.new.tap do |o|
@@ -10056,6 +10137,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyClientVpnEndpointRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyClientVpnEndpointResult)
+      end)
+
+      api.add_operation(:modify_ebs_default_kms_key_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyEbsDefaultKmsKeyId"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyEbsDefaultKmsKeyIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyEbsDefaultKmsKeyIdResult)
       end)
 
       api.add_operation(:modify_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -10456,6 +10545,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RequestSpotInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: RequestSpotInstancesResult)
+      end)
+
+      api.add_operation(:reset_ebs_default_kms_key_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetEbsDefaultKmsKeyId"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResetEbsDefaultKmsKeyIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetEbsDefaultKmsKeyIdResult)
       end)
 
       api.add_operation(:reset_fpga_image_attribute, Seahorse::Model::Operation.new.tap do |o|

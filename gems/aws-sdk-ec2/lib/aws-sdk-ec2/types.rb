@@ -6964,18 +6964,19 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone in which to create the volume. Use
-    #   DescribeAvailabilityZones to list the Availability Zones that are
-    #   currently available to you.
+    #   The Availability Zone in which to create the volume.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
     #   Specifies the encryption state of the volume. The default effect of
-    #   setting this parameter depends on the volume's source and
-    #   ownership. Each default case can be overridden by specifying a
-    #   customer master key (CMK) with the `KeyKeyId` parameter. For a
-    #   complete list of possible encryption cases, see [Amazon EBS
-    #   Encryption][1].
+    #   setting the `Encrypted` parameter to `true` through the console,
+    #   API, or CLI depends on the volume's origin (new or from a
+    #   snapshot), starting encryption state, ownership, and whether
+    #   [account-level encryption][1] is enabled. Each default case can be
+    #   overridden by specifying a customer master key (CMK) with the
+    #   `KmsKeyId` parameter in addition to setting `Encrypted` to `true`.
+    #   For a complete list of possible encryption cases, see [Amazon EBS
+    #   Encryption](AWSEC2/latest/UserGuide/EBSEncryption.htm).
     #
     #   Encrypted Amazon EBS volumes may only be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
@@ -6983,7 +6984,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
@@ -7006,10 +7007,10 @@ module Aws::EC2
     #
     # @!attribute [rw] kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If
-    #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   master key (CMK) to use to encrypt the volume. This parameter is
+    #   only required if you want to use a non-default CMK; if this
+    #   parameter is not specified, the default CMK for EBS is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
     #   The CMK identifier may be provided in any of the following formats:
     #
@@ -7047,7 +7048,7 @@ module Aws::EC2
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
     #
-    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #   <note markdown="1"> At least one of Size or SnapshotId is required.
     #
     #    </note>
     #   @return [Integer]
@@ -7259,7 +7260,7 @@ module Aws::EC2
     #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
     #
-    #   Default: `false`
+    #   Default: `true`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointRequest AWS API Documentation
@@ -7515,7 +7516,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of VPN connection (`ipsec.1`).
+    #   The type of VPN connection (`ipsec.1` \| `ipsec.2`).
     #   @return [String]
     #
     # @!attribute [rw] vpn_gateway_id
@@ -17875,6 +17876,38 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableEbsEncryptionByDefaultRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableEbsEncryptionByDefaultRequest AWS API Documentation
+    #
+    class DisableEbsEncryptionByDefaultRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ebs_encryption_by_default
+    #   Account-level encryption status after performing the action.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableEbsEncryptionByDefaultResult AWS API Documentation
+    #
+    class DisableEbsEncryptionByDefaultResult < Struct.new(
+      :ebs_encryption_by_default)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableTransitGatewayRouteTablePropagationRequest
     #   data as a hash:
     #
@@ -18489,7 +18522,7 @@ module Aws::EC2
     #   Cloud User Guide*.
     #
     #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    #   64,000IOPS for `io1` volumes in most Regions. Maximum `io1`IOPS of
+    #   64,000IOPS for `io1` volumes in most Regions. Maximum `io1` IOPS of
     #   64,000 is guaranteed only on [Nitro-based instances][2]. Other
     #   instance families guarantee performance up to 32,000 IOPS. For more
     #   information, see [Amazon EBS Volume Types][1] in the *Amazon Elastic
@@ -18530,25 +18563,28 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the encryption state of an EBS volume is to be
-    #   changed while being restored from a backing snapshot. The default
-    #   effect of setting this parameter to `true` or leaving it unset
-    #   depends on the origin, starting encryption state, and ownership of
-    #   the volume. Each default case can be overridden by specifying a
-    #   customer master key (CMK) as argument to the `KmsKeyId` parameter in
-    #   addition to setting `Encrypted` = `true`. For a complete list of
-    #   possible encryption cases, see [Amazon EBS Encryption][1].
+    #   Indicates whether the encryption state of an EBS volume is changed
+    #   while being restored from a backing snapshot. The default effect of
+    #   setting the `Encrypted` parameter to `true` through the console,
+    #   API, or CLI depends on the volume's origin (new or from a
+    #   snapshot), starting encryption state, ownership, and whether
+    #   [account-level encryption][1] is enabled. Each default case can be
+    #   overridden by specifying a customer master key (CMK) with the
+    #   `KmsKeyId` parameter in addition to setting `Encrypted` to `true`.
+    #   For a complete list of possible encryption cases, see [Amazon EBS
+    #   Encryption][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   In no case can you remove encryption from an encrypted volume.
     #
     #   Encrypted volumes can only be attached to instances that support
     #   Amazon EBS encryption. For more information, see [Supported Instance
-    #   Types][2].
+    #   Types][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
@@ -18819,6 +18855,38 @@ module Aws::EC2
       :elastic_inference_accelerator_association_id,
       :elastic_inference_accelerator_association_state,
       :elastic_inference_accelerator_association_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableEbsEncryptionByDefaultRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableEbsEncryptionByDefaultRequest AWS API Documentation
+    #
+    class EnableEbsEncryptionByDefaultRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ebs_encryption_by_default
+    #   Account-level encryption status after performing the action.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableEbsEncryptionByDefaultResult AWS API Documentation
+    #
+    class EnableEbsEncryptionByDefaultResult < Struct.new(
+      :ebs_encryption_by_default)
       include Aws::Structure
     end
 
@@ -20141,6 +20209,73 @@ module Aws::EC2
     class GetConsoleScreenshotResult < Struct.new(
       :image_data,
       :instance_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEbsDefaultKmsKeyIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsDefaultKmsKeyIdRequest AWS API Documentation
+    #
+    class GetEbsDefaultKmsKeyIdRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The full ARN of the default CMK that your account uses to encrypt an
+    #   EBS volume when no CMK is specified in the API call that creates the
+    #   volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsDefaultKmsKeyIdResult AWS API Documentation
+    #
+    class GetEbsDefaultKmsKeyIdResult < Struct.new(
+      :kms_key_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEbsEncryptionByDefaultRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsEncryptionByDefaultRequest AWS API Documentation
+    #
+    class GetEbsEncryptionByDefaultRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ebs_encryption_by_default
+    #   Indicates whether default encryption for EBS volumes is enabled or
+    #   disabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsEncryptionByDefaultResult AWS API Documentation
+    #
+    class GetEbsEncryptionByDefaultResult < Struct.new(
+      :ebs_encryption_by_default)
       include Aws::Structure
     end
 
@@ -25443,6 +25578,67 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyEbsDefaultKmsKeyIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use to encrypt the volume. This parameter is
+    #   only required if you want to use a non-default CMK; if this
+    #   parameter is not specified, the default CMK for EBS is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the Region of the CMK, the AWS account ID
+    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
+    #     For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyEbsDefaultKmsKeyIdRequest AWS API Documentation
+    #
+    class ModifyEbsDefaultKmsKeyIdRequest < Struct.new(
+      :kms_key_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The full ARN of the default CMK that your account uses to encrypt an
+    #   EBS volume when no CMK is specified in the API call that creates the
+    #   volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyEbsDefaultKmsKeyIdResult AWS API Documentation
+    #
+    class ModifyEbsDefaultKmsKeyIdResult < Struct.new(
+      :kms_key_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyFleetRequest
     #   data as a hash:
     #
@@ -26585,11 +26781,8 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] map_public_ip_on_launch
-    #   Specify `true` to indicate that network interfaces created in the
-    #   specified subnet should be assigned a public IPv4 address. This
-    #   includes a network interface that's created when launching an
-    #   instance into the subnet (the instance therefore receives a public
-    #   IPv4 address).
+    #   Specify `true` to indicate that ENIs attached to instances created
+    #   in the specified subnet should be assigned a public IPv4 address.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] subnet_id
@@ -30030,11 +30223,7 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI, which you can get by using [DescribeImages][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
+    #   The ID of the AMI.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -30081,9 +30270,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] disable_api_termination
-    #   If set to `true`, you can't terminate the instance using the Amazon
-    #   EC2 console, CLI, or API. To change this attribute to `false` after
-    #   launch, use [ ModifyInstanceAttribute][1].
+    #   If you set this parameter to `true`, you can't terminate the
+    #   instance using the Amazon EC2 console, CLI, or API; otherwise, you
+    #   can. To change this attribute after launch, use
+    #   [ModifyInstanceAttribute][1]. Alternatively, if you set
+    #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can
+    #   terminate the instance by running the shutdown command from the
+    #   instance.
     #
     #
     #
@@ -31311,6 +31504,40 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResetEbsDefaultKmsKeyIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetEbsDefaultKmsKeyIdRequest AWS API Documentation
+    #
+    class ResetEbsDefaultKmsKeyIdRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The full ARN of the default CMK that your account uses to encrypt an
+    #   EBS volume when no CMK is specified in the API call that creates the
+    #   volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetEbsDefaultKmsKeyIdResult AWS API Documentation
+    #
+    class ResetEbsDefaultKmsKeyIdResult < Struct.new(
+      :kms_key_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ResetFpgaImageAttributeRequest
     #   data as a hash:
     #
@@ -32344,9 +32571,8 @@ module Aws::EC2
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages. An
-    #   AMI ID is required to launch an instance and must be specified here
-    #   or in a launch template.
+    #   The ID of the AMI. An AMI ID is required to launch an instance and
+    #   must be specified here or in a launch template.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -32526,13 +32752,17 @@ module Aws::EC2
     # @!attribute [rw] disable_api_termination
     #   If you set this parameter to `true`, you can't terminate the
     #   instance using the Amazon EC2 console, CLI, or API; otherwise, you
-    #   can. To change this attribute to `false` after launch, use
-    #   ModifyInstanceAttribute. Alternatively, if you set
+    #   can. To change this attribute after launch, use
+    #   [ModifyInstanceAttribute][1]. Alternatively, if you set
     #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can
     #   terminate the instance by running the shutdown command from the
     #   instance.
     #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run

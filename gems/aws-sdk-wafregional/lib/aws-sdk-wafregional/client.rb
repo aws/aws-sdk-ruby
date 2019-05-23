@@ -597,8 +597,10 @@ module Aws::WAFRegional
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this
     #   `RateBasedRule`. The name can contain only alphanumeric characters
-    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change
-    #   the name of the metric after you create the `RateBasedRule`.
+    #   (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It
+    #   can't contain whitespace or metric names reserved for AWS WAF,
+    #   including "All" and "Default\_Action." You can't change the name
+    #   of the metric after you create the `RateBasedRule`.
     #
     # @option params [required, String] :rate_key
     #   The field that AWS WAF uses to determine if requests are likely
@@ -836,9 +838,11 @@ module Aws::WAFRegional
     #
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain white space. You can't change the name of the
-    #   metric after you create the `Rule`.
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All" and
+    #   "Default\_Action." You can't change the name of the metric after
+    #   you create the `Rule`.
     #
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
@@ -930,9 +934,11 @@ module Aws::WAFRegional
     #
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change the name of the
-    #   metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All" and
+    #   "Default\_Action." You can't change the name of the metric after
+    #   you create the `RuleGroup`.
     #
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
@@ -1203,10 +1209,12 @@ module Aws::WAFRegional
     #   after you create the `WebACL`.
     #
     # @option params [required, String] :metric_name
-    #   A friendly name or description for the metrics for this `WebACL`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain white space. You can't change `MetricName` after
-    #   you create the `WebACL`.
+    #   A friendly name or description for the metrics for this `WebACL`.The
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All" and
+    #   "Default\_Action." You can't change `MetricName` after you create
+    #   the `WebACL`.
     #
     # @option params [required, Types::WafAction] :default_action
     #   The action that you want AWS WAF to take when a request doesn't match
@@ -3987,6 +3995,11 @@ module Aws::WAFRegional
     #     you are operating. However, if you are capturing logs for Amazon
     #     CloudFront, always create the firehose in US East (N. Virginia).
     #
+    #     <note markdown="1"> Do not create the data firehose using a `Kinesis stream` as your
+    #     source.
+    #
+    #      </note>
+    #
     # 2.  Associate that firehose to your web ACL using a
     #     `PutLoggingConfiguration` request.
     #
@@ -5524,7 +5537,7 @@ module Aws::WAFRegional
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafregional'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

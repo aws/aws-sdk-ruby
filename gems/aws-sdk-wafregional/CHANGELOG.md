@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-05-23)
+------------------
+
+* Feature - Documentation updates for waf-regional
+
 1.20.0 (2019-05-21)
 ------------------
 
