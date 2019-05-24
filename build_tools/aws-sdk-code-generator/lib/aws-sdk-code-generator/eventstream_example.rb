@@ -9,9 +9,17 @@ module AwsSdkCodeGenerator
       @resp_var = options.fetch(:resp_var)
       @operation = options.fetch(:operation)
       @input_eventstream_member, @input_eventstream_shape = input_eventstream_shape
-      @input_eventstream = "#{@module_name}::EventStreams::#{@input_eventstream_shape}" if @input_eventstream_shape
       @output_eventstream_member, @output_eventstream_shape = output_eventstream_shape
-      @output_eventstream = "#{@module_name}::EventStreams::#{@output_eventstream_shape}" if @output_eventstream_shape
+      if @input_eventstream_shape && @output_eventstream_shape &&
+          @input_eventstream_shape == @output_eventstream_shape
+        # input and output sharing same eventstream
+        # renaming, see EventStreamModules
+        @input_eventstream = "#{@module_name}::EventStreams::Input#{@input_eventstream_shape}"
+        @output_eventstream = "#{@module_name}::EventStreams::Output#{@output_eventstream_shape}"
+      else
+        @input_eventstream = "#{@module_name}::EventStreams::#{@input_eventstream_shape}" if @input_eventstream_shape
+        @output_eventstream = "#{@module_name}::EventStreams::#{@output_eventstream_shape}" if @output_eventstream_shape
+      end
     end
 
     def format

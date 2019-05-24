@@ -15,9 +15,32 @@
       },
       "input": { "shape": "FooRequest" },
       "output": { "shape": "FooResponse" }
+    },
+    "Baz": {
+      "name": "Baz",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "BazRequest"},
+      "output": {"shape": "BazResponse"}
     }
   },
   "shapes": {
+    "BazRequest": {
+      "type": "structure",
+      "members": {
+        "Stream": { "shape": "BazStream"}
+      },
+      "payload": "Stream"
+    },
+    "BazResponse": {
+      "type": "structure",
+      "members": {
+        "Stream": { "shape": "BazStream"}
+      },
+      "payload": "Stream"
+    },
     "FooRequest": {
       "type": "structure",
       "members": {
@@ -34,6 +57,13 @@
       "type": "structure",
       "members": {
         "Bar": { "shape": "BarEvent" }
+      },
+      "eventstream": true
+    },
+    "BazStream": {
+      "type": "structure",
+      "members": {
+        "Bar": { "shape": "BarEvent"}
       },
       "eventstream": true
     },

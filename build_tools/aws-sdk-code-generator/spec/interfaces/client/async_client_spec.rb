@@ -26,6 +26,31 @@ describe 'Client Interface:' do
         )
       }
 
+      it 'supports same eventstream shape at input and output' do
+        input = Async::EventStreams::InputBazStream.new
+        output = Async::EventStreams::OutputBazStream.new
+        same_client = Async::AsyncClient.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('akid', 'secret'),
+          stub_responses: {baz: {
+            stream: [
+              { message_type: 'event', event_type: :baz_result, result: { details: [ "foo" ]}}
+            ].each
+          }}
+        )
+        output.on_baz_result_event do |e|
+          expect(e.result.to_hash).to eq({ details: [ "foo" ]})
+        end
+        same_client.baz(input_event_stream_handler: input,
+          output_event_stream_handler: output)
+        input.signal_baz_result_event(result: {details: ["baz"]})
+        input.signal_end_stream
+
+        sent_event = same_client.send_events[0]
+        expect(sent_event.headers[":event-type"].value).to eq('BazResult')
+        expect(sent_event.payload.read).to eq("{\"Details\":[\"baz\"]}")
+      end
+
       it 'allows disable event validation' do
         input_stream = Async::EventStreams::FooStream.new
         no_validate_client = Async::AsyncClient.new(
