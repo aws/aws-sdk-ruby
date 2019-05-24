@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::MediaStoreData - Updated the API, and documentation for AWS Elemental MediaStore Data Plane.
+
+* Feature - Aws::OpsWorksCM - Updated the documentation for AWS OpsWorks for Chef Automate.
+
 2.11.281 (2019-05-23)
 ------------------
 
