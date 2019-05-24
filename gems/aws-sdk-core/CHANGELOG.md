@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Rescue `JSON::ParserError` from Credentials Providers to `Aws::Errors::MetadataParserError` or `Aws::Errors::InvalidProcessCredentialsPayload`
+
 3.53.1 (2019-05-22)
 ------------------
 
