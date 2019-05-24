@@ -455,7 +455,7 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :engine
     #   The configuration management engine to use. Valid values include
-    #   `Chef` and `Puppet`.
+    #   `ChefAutomate` and `Puppet`.
     #
     # @option params [String] :engine_model
     #   The engine model of the server. Valid values in this release include
@@ -471,19 +471,19 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a Chef createServer request:**
     #
-    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
+    #   * `CHEF_AUTOMATE_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
     #     corresponding private key is required to access the Chef API. When
-    #     no CHEF\_PIVOTAL\_KEY is set, a private key is generated and
-    #     returned in the response.
+    #     no CHEF\_AUTOMATE\_PIVOTAL\_KEY is set, a private key is generated
+    #     and returned in the response.
     #
-    #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the administrative
-    #     user in the Chef Automate GUI. The password length is a minimum of
-    #     eight characters, and a maximum of 32. The password can contain
-    #     letters, numbers, and special characters (!/@#$%^&amp;+=\_). The
-    #     password must contain at least one lower case letter, one upper case
-    #     letter, one number, and one special character. When no
-    #     CHEF\_DELIVERY\_ADMIN\_PASSWORD is set, one is generated and
-    #     returned in the response.
+    #   * `CHEF_AUTOMATE_ADMIN_PASSWORD`\: The password for the administrative
+    #     user in the Chef Automate web-based dashboard. The password length
+    #     is a minimum of eight characters, and a maximum of 32. The password
+    #     can contain letters, numbers, and special characters
+    #     (!/@#$%^&amp;+=\_). The password must contain at least one lower
+    #     case letter, one upper case letter, one number, and one special
+    #     character. When no CHEF\_AUTOMATE\_ADMIN\_PASSWORD is set, one is
+    #     generated and returned in the response.
     #
     #   **Attributes accepted in a Puppet createServer request:**
     #
@@ -496,8 +496,8 @@ module Aws::OpsWorksCM
     #     r10k remote opens TCP port 8170.
     #
     #   * `PUPPET_R10K_PRIVATE_KEY`\: If you are using a private Git
-    #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify an SSH URL and
-    #     a PEM-encoded private SSH key.
+    #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify a PEM-encoded
+    #     private SSH key.
     #
     # @option params [Integer] :backup_retention_count
     #   The number of automated backups that you want to keep. Whenever a new
@@ -520,9 +520,7 @@ module Aws::OpsWorksCM
     #   instance profile you need.
     #
     # @option params [required, String] :instance_type
-    #   The Amazon EC2 instance type to use. For example, `m4.large`.
-    #   Recommended instance types include `t2.medium` and greater, `m4.*`, or
-    #   `c4.xlarge` and greater.
+    #   The Amazon EC2 instance type to use. For example, `m5.large`.
     #
     # @option params [String] :key_pair
     #   The Amazon EC2 key pair to set for the instance. This parameter is
@@ -733,8 +731,7 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Describes your account attributes, and creates requests to increase
-    # limits before they are reached or exceeded.
+    # Describes your OpsWorks-CM account attributes.
     #
     # This operation is synchronous.
     #
@@ -1167,8 +1164,8 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :instance_type
     #   The type of the instance to create. Valid values must be specified in
-    #   the following format: `^([cm][34]|t2).*` For example, `m4.large`.
-    #   Valid values are `t2.medium`, `m4.large`, and `m4.2xlarge`. If you do
+    #   the following format: `^([cm][34]|t2).*` For example, `m5.large`.
+    #   Valid values are `m5.large`, `r5.xlarge`, and `r5.2xlarge`. If you do
     #   not specify this parameter, RestoreServer uses the instance type from
     #   the specified backup.
     #
@@ -1437,7 +1434,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

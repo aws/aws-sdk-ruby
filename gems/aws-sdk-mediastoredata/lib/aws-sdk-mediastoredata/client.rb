@@ -312,7 +312,9 @@ module Aws::MediaStoreData
       req.send_request(options)
     end
 
-    # Downloads the object at the specified path.
+    # Downloads the object at the specified path. If the object’s upload
+    # availability is set to `streaming`, AWS Elemental MediaStore downloads
+    # the object even if it’s still uploading the object.
     #
     # @option params [required, String] :path
     #   The path (including the file name) where the object is stored in the
@@ -348,8 +350,10 @@ module Aws::MediaStoreData
     #
     # @option params [String] :range
     #   The range bytes of an object to retrieve. For more information about
-    #   the `Range` header, go to
+    #   the `Range` header, see
     #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #   AWS Elemental MediaStore ignores this header for partially uploaded
+    #   objects that have streaming upload availability.
     #
     #
     #
@@ -455,7 +459,8 @@ module Aws::MediaStoreData
     end
 
     # Uploads an object to the specified path. Object sizes are limited to
-    # 25 MB.
+    # 25 MB for standard upload availability and 10 MB for streaming upload
+    # availability.
     #
     # @option params [required, String, IO] :body
     #   The bytes to be stored.
@@ -512,6 +517,17 @@ module Aws::MediaStoreData
     #   high-performance temporal storage class, and objects are persisted
     #   into durable storage shortly after being received.
     #
+    # @option params [String] :upload_availability
+    #   Indicates the availability of an object while it is still uploading.
+    #   If the value is set to `streaming`, the object is available for
+    #   downloading after some initial buffering but before the object is
+    #   uploaded completely. If the value is set to `standard`, the object is
+    #   available for downloading only when it is uploaded completely. The
+    #   default value for this header is `standard`.
+    #
+    #   To use this header, you must also set the HTTP `Transfer-Encoding`
+    #   header to `chunked`.
+    #
     # @return [Types::PutObjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutObjectResponse#content_sha256 #content_sha256} => String
@@ -526,6 +542,7 @@ module Aws::MediaStoreData
     #     content_type: "ContentType",
     #     cache_control: "StringPrimitive",
     #     storage_class: "TEMPORAL", # accepts TEMPORAL
+    #     upload_availability: "STANDARD", # accepts STANDARD, STREAMING
     #   })
     #
     # @example Response structure
@@ -556,7 +573,7 @@ module Aws::MediaStoreData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastoredata'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

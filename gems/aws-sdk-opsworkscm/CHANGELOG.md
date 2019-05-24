@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-05-24)
+------------------
+
+* Feature - Documentation updates for OpsWorks for Chef Automate; attribute values updated for Chef Automate 2.0 release.
+
 1.19.0 (2019-05-21)
 ------------------
 

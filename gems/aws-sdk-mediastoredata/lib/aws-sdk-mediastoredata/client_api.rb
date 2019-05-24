@@ -44,6 +44,7 @@ module Aws::MediaStoreData
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     StringPrimitive = Shapes::StringShape.new(name: 'StringPrimitive')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
+    UploadAvailability = Shapes::StringShape.new(name: 'UploadAvailability')
     statusCode = Shapes::IntegerShape.new(name: 'statusCode')
 
     ContainerNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -110,6 +111,7 @@ module Aws::MediaStoreData
     PutObjectRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "header", location_name: "Content-Type"))
     PutObjectRequest.add_member(:cache_control, Shapes::ShapeRef.new(shape: StringPrimitive, location: "header", location_name: "Cache-Control"))
     PutObjectRequest.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location: "header", location_name: "x-amz-storage-class"))
+    PutObjectRequest.add_member(:upload_availability, Shapes::ShapeRef.new(shape: UploadAvailability, location: "header", location_name: "x-amz-upload-availability"))
     PutObjectRequest.struct_class = Types::PutObjectRequest
     PutObjectRequest[:payload] = :body
     PutObjectRequest[:payload_member] = PutObjectRequest.member(:body)
@@ -182,6 +184,12 @@ module Aws::MediaStoreData
         o.output = Shapes::ShapeRef.new(shape: ListItemsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_object, Seahorse::Model::Operation.new.tap do |o|

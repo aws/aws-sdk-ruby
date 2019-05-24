@@ -148,8 +148,10 @@ module Aws::MediaStoreData
     #
     # @!attribute [rw] range
     #   The range bytes of an object to retrieve. For more information about
-    #   the `Range` header, go to
+    #   the `Range` header, see
     #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #   AWS Elemental MediaStore ignores this header for partially uploaded
+    #   objects that have streaming upload availability.
     #
     #
     #
@@ -360,6 +362,7 @@ module Aws::MediaStoreData
     #         content_type: "ContentType",
     #         cache_control: "StringPrimitive",
     #         storage_class: "TEMPORAL", # accepts TEMPORAL
+    #         upload_availability: "STANDARD", # accepts STANDARD, STREAMING
     #       }
     #
     # @!attribute [rw] body
@@ -423,6 +426,18 @@ module Aws::MediaStoreData
     #   into durable storage shortly after being received.
     #   @return [String]
     #
+    # @!attribute [rw] upload_availability
+    #   Indicates the availability of an object while it is still uploading.
+    #   If the value is set to `streaming`, the object is available for
+    #   downloading after some initial buffering but before the object is
+    #   uploaded completely. If the value is set to `standard`, the object
+    #   is available for downloading only when it is uploaded completely.
+    #   The default value for this header is `standard`.
+    #
+    #   To use this header, you must also set the HTTP `Transfer-Encoding`
+    #   header to `chunked`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectRequest AWS API Documentation
     #
     class PutObjectRequest < Struct.new(
@@ -430,7 +445,8 @@ module Aws::MediaStoreData
       :path,
       :content_type,
       :cache_control,
-      :storage_class)
+      :storage_class,
+      :upload_availability)
       include Aws::Structure
     end
 

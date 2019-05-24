@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-05-24)
+------------------
+
+* Feature - AWS CodeDeploy now supports tagging for the application and deployment group resources.
+
 1.21.0 (2019-05-21)
 ------------------
 
