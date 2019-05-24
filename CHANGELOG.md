@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.282 (2019-05-24)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
 
 * Feature - Aws::MediaStoreData - Updated the API, and documentation for AWS Elemental MediaStore Data Plane.
