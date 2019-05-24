@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Wraps raw JSON ParserError from Credential Providers
+
 2.11.282 (2019-05-24)
 ------------------
 

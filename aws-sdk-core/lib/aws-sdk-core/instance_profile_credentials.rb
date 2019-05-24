@@ -51,7 +51,7 @@ module Aws
       super
     end
 
-    # @return [Integer] The number of times to retry failed atttempts to
+    # @return [Integer] The number of times to retry failed attempts to
     #   fetch credentials from the instance metadata service. Defaults to 0.
     attr_reader :retries
 
@@ -69,14 +69,18 @@ module Aws
       # Retry loading credentials up to 3 times is the instance metadata
       # service is responding but is returning invalid JSON documents
       # in response to the GET profile credentials call.
-      retry_errors([JSON::ParserError, StandardError], max_retries: 3) do
-        c = JSON.parse(get_credentials.to_s)
-        @credentials = Credentials.new(
-          c['AccessKeyId'],
-          c['SecretAccessKey'],
-          c['Token']
-        )
-        @expiration = c['Expiration'] ? Time.parse(c['Expiration']) : nil
+      begin
+        retry_errors([JSON::ParserError, StandardError], max_retries: 3) do
+          c = JSON.parse(get_credentials.to_s)
+          @credentials = Credentials.new(
+            c['AccessKeyId'],
+            c['SecretAccessKey'],
+            c['Token']
+          )
+          @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
+        end
+      rescue JSON::ParserError
+        raise Aws::Errors::MetadataParserError.new
       end
     end
 
