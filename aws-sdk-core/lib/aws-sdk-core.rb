@@ -99,6 +99,7 @@ module Aws
     GlobalAccelerator
     Glue
     Greengrass
+    GroundStation
     GuardDuty
     Health
     IAM

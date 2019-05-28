@@ -296,6 +296,7 @@ to be backwards compatible.
 | AWS Global Accelerator                                | GlobalAccelerator               | 2018-08-08  |
 | AWS Glue                                              | Glue                            | 2017-03-31  |
 | AWS Greengrass                                        | Greengrass                      | 2017-06-07  |
+| AWS Ground Station                                    | GroundStation                   | 2019-05-23  |
 | AWS Health APIs and Notifications                     | Health                          | 2016-08-04  |
 | AWS Identity and Access Management                    | IAM                             | 2010-05-08  |
 | AWS Import/Export                                     | ImportExport                    | 2010-06-01  |
@@ -381,8 +382,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |
@@ -427,8 +428,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 

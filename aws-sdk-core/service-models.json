@@ -302,6 +302,10 @@
     "models": "greengrass/2017-06-07",
     "endpoint": "greengrass"
   },
+  "GroundStation": {
+    "models": "groundstation/2019-05-23",
+    "endpoint": "groundstation"
+  },
   "GuardDuty": {
     "models": "guardduty/2017-11-28",
     "endpoint": "guardduty"
