@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2019-05-28)
+------------------
+
+* Feature - Added support for an additional robot software suite (Gazebo 9) and for cancelling deployment jobs.
+
 1.8.0 (2019-05-21)
 ------------------
 

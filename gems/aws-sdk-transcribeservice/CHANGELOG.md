@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2019-05-28)
+------------------
+
+* Feature - Amazon Transcribe - support transcriptions from audio sources in Modern Standard Arabic (ar-SA).
+
 1.22.0 (2019-05-21)
 ------------------
 

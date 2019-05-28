@@ -1823,6 +1823,10 @@ module Aws::Chime
     #   The phone number, in E.164 format.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The phone number type.
+    #   @return [String]
+    #
     # @!attribute [rw] product_type
     #   The phone number product type.
     #   @return [String]
@@ -1856,6 +1860,7 @@ module Aws::Chime
     class PhoneNumber < Struct.new(
       :phone_number_id,
       :e164_phone_number,
+      :type,
       :product_type,
       :status,
       :capabilities,
@@ -2286,6 +2291,7 @@ module Aws::Chime
     #         city: "String",
     #         country: "String",
     #         state: "String",
+    #         toll_free_prefix: "TollFreePrefix",
     #         max_results: 1,
     #         next_token: "String",
     #       }
@@ -2306,6 +2312,10 @@ module Aws::Chime
     #   The state used to filter results.
     #   @return [String]
     #
+    # @!attribute [rw] toll_free_prefix
+    #   The toll-free prefix that you use to filter results.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call.
     #   @return [Integer]
@@ -2321,6 +2331,7 @@ module Aws::Chime
       :city,
       :country,
       :state,
+      :toll_free_prefix,
       :max_results,
       :next_token)
       include Aws::Structure

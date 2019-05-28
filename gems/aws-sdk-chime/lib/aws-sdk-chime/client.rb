@@ -455,7 +455,9 @@ module Aws::Chime
     end
 
     # Updates phone number product types. Choose from Amazon Chime Business
-    # Calling and Amazon Chime Voice Connector product types.
+    # Calling and Amazon Chime Voice Connector product types. For toll-free
+    # numbers, you can use only the Amazon Chime Voice Connector product
+    # type.
     #
     # @option params [required, Array<Types::UpdatePhoneNumberRequestItem>] :update_phone_number_request_items
     #   The request containing the phone number IDs and product types to
@@ -623,7 +625,8 @@ module Aws::Chime
 
     # Creates an order for phone numbers to be provisioned. Choose from
     # Amazon Chime Business Calling and Amazon Chime Voice Connector product
-    # types.
+    # types. For toll-free numbers, you can use only the Amazon Chime Voice
+    # Connector product type.
     #
     # @option params [required, String] :product_type
     #   The phone number product type.
@@ -1145,6 +1148,7 @@ module Aws::Chime
     #
     #   resp.phone_number.phone_number_id #=> String
     #   resp.phone_number.e164_phone_number #=> String
+    #   resp.phone_number.type #=> String, one of "Local", "TollFree"
     #   resp.phone_number.product_type #=> String, one of "BusinessCalling", "VoiceConnector"
     #   resp.phone_number.status #=> String, one of "AcquireInProgress", "AcquireFailed", "Unassigned", "Assigned", "ReleaseInProgress", "DeleteInProgress", "ReleaseFailed", "DeleteFailed"
     #   resp.phone_number.capabilities.inbound_call #=> Boolean
@@ -1649,6 +1653,7 @@ module Aws::Chime
     #   resp.phone_numbers #=> Array
     #   resp.phone_numbers[0].phone_number_id #=> String
     #   resp.phone_numbers[0].e164_phone_number #=> String
+    #   resp.phone_numbers[0].type #=> String, one of "Local", "TollFree"
     #   resp.phone_numbers[0].product_type #=> String, one of "BusinessCalling", "VoiceConnector"
     #   resp.phone_numbers[0].status #=> String, one of "AcquireInProgress", "AcquireFailed", "Unassigned", "Assigned", "ReleaseInProgress", "DeleteInProgress", "ReleaseFailed", "DeleteFailed"
     #   resp.phone_numbers[0].capabilities.inbound_call #=> Boolean
@@ -2104,6 +2109,7 @@ module Aws::Chime
     #
     #   resp.phone_number.phone_number_id #=> String
     #   resp.phone_number.e164_phone_number #=> String
+    #   resp.phone_number.type #=> String, one of "Local", "TollFree"
     #   resp.phone_number.product_type #=> String, one of "BusinessCalling", "VoiceConnector"
     #   resp.phone_number.status #=> String, one of "AcquireInProgress", "AcquireFailed", "Unassigned", "Assigned", "ReleaseInProgress", "DeleteInProgress", "ReleaseFailed", "DeleteFailed"
     #   resp.phone_number.capabilities.inbound_call #=> Boolean
@@ -2143,6 +2149,9 @@ module Aws::Chime
     # @option params [String] :state
     #   The state used to filter results.
     #
+    # @option params [String] :toll_free_prefix
+    #   The toll-free prefix that you use to filter results.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
     #
@@ -2160,6 +2169,7 @@ module Aws::Chime
     #     city: "String",
     #     country: "String",
     #     state: "String",
+    #     toll_free_prefix: "TollFreePrefix",
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -2332,7 +2342,8 @@ module Aws::Chime
     end
 
     # Updates phone number details, such as product type, for the specified
-    # phone number ID.
+    # phone number ID. For toll-free numbers, you can use only the Amazon
+    # Chime Voice Connector product type.
     #
     # @option params [required, String] :phone_number_id
     #   The phone number ID.
@@ -2355,6 +2366,7 @@ module Aws::Chime
     #
     #   resp.phone_number.phone_number_id #=> String
     #   resp.phone_number.e164_phone_number #=> String
+    #   resp.phone_number.type #=> String, one of "Local", "TollFree"
     #   resp.phone_number.product_type #=> String, one of "BusinessCalling", "VoiceConnector"
     #   resp.phone_number.status #=> String, one of "AcquireInProgress", "AcquireFailed", "Unassigned", "Assigned", "ReleaseInProgress", "DeleteInProgress", "ReleaseFailed", "DeleteFailed"
     #   resp.phone_number.capabilities.inbound_call #=> Boolean
@@ -2520,7 +2532,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

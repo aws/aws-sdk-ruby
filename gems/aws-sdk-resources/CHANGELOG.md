@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.44.0 (2019-05-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-groundstation` gem.
+
 3.43.0 (2019-05-20)
 ------------------
 

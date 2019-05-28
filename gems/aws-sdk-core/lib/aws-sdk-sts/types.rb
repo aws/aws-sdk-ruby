@@ -81,7 +81,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [Array<Types::PolicyDescriptorType>]
     #
     # @!attribute [rw] policy
@@ -116,7 +116,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -321,7 +321,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [Array<Types::PolicyDescriptorType>]
     #
     # @!attribute [rw] policy
@@ -356,7 +356,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -572,7 +572,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [Array<Types::PolicyDescriptorType>]
     #
     # @!attribute [rw] policy
@@ -607,7 +607,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -934,7 +934,7 @@ module Aws::STS
     #   you pass. This gives you a way to further restrict the permissions
     #   for a federated user. You cannot use session policies to grant more
     #   permissions than those that are defined in the permissions policy of
-    #   the IAM user. For more information, see [Session Policies][2] in the
+    #   the IAM user. For more information, see [Session Policies][1] in the
     #   *IAM User Guide*.
     #
     #   The plain text that you use for both inline and managed session
@@ -956,7 +956,6 @@ module Aws::STS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [String]
     #
     # @!attribute [rw] policy_arns
@@ -988,7 +987,7 @@ module Aws::STS
     #   you pass. This gives you a way to further restrict the permissions
     #   for a federated user. You cannot use session policies to grant more
     #   permissions than those that are defined in the permissions policy of
-    #   the IAM user. For more information, see [Session Policies][2] in the
+    #   the IAM user. For more information, see [Session Policies][1] in the
     #   *IAM User Guide*.
     #
     #   <note markdown="1"> The characters in this parameter count towards the 2048 character
@@ -1003,7 +1002,6 @@ module Aws::STS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [Array<Types::PolicyDescriptorType>]
     #
     # @!attribute [rw] duration_seconds

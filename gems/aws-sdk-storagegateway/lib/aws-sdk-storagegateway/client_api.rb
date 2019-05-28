@@ -22,6 +22,8 @@ module Aws::StorageGateway
     AddUploadBufferOutput = Shapes::StructureShape.new(name: 'AddUploadBufferOutput')
     AddWorkingStorageInput = Shapes::StructureShape.new(name: 'AddWorkingStorageInput')
     AddWorkingStorageOutput = Shapes::StructureShape.new(name: 'AddWorkingStorageOutput')
+    AssignTapePoolInput = Shapes::StructureShape.new(name: 'AssignTapePoolInput')
+    AssignTapePoolOutput = Shapes::StructureShape.new(name: 'AssignTapePoolOutput')
     AttachVolumeInput = Shapes::StructureShape.new(name: 'AttachVolumeInput')
     AttachVolumeOutput = Shapes::StructureShape.new(name: 'AttachVolumeOutput')
     Authentication = Shapes::StringShape.new(name: 'Authentication')
@@ -345,6 +347,13 @@ module Aws::StorageGateway
 
     AddWorkingStorageOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     AddWorkingStorageOutput.struct_class = Types::AddWorkingStorageOutput
+
+    AssignTapePoolInput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, required: true, location_name: "TapeARN"))
+    AssignTapePoolInput.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, required: true, location_name: "PoolId"))
+    AssignTapePoolInput.struct_class = Types::AssignTapePoolInput
+
+    AssignTapePoolOutput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    AssignTapePoolOutput.struct_class = Types::AssignTapePoolOutput
 
     AttachVolumeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     AttachVolumeInput.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName"))
@@ -1284,6 +1293,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AddWorkingStorageInput)
         o.output = Shapes::ShapeRef.new(shape: AddWorkingStorageOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:assign_tape_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssignTapePool"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssignTapePoolInput)
+        o.output = Shapes::ShapeRef.new(shape: AssignTapePoolOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

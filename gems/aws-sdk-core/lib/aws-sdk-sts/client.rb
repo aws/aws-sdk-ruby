@@ -303,7 +303,7 @@ module Aws::STS
     # AWS API calls to access resources in the account that owns the role.
     # You cannot use session policies to grant more permissions than those
     # allowed by the identity-based policy of the role that is being
-    # assumed. For more information, see [Session Policies][7] in the *IAM
+    # assumed. For more information, see [Session Policies][6] in the *IAM
     # User Guide*.
     #
     # To assume a role from a different account, your AWS account must be
@@ -326,7 +326,7 @@ module Aws::STS
     # In this case, the trust policy acts as an IAM resource-based policy.
     # Users in the same account as the role do not need explicit permission
     # to assume the role. For more information about trust policies and
-    # resource-based policies, see [IAM Policies][8] in the *IAM User
+    # resource-based policies, see [IAM Policies][7] in the *IAM User
     # Guide*.
     #
     # **Using MFA with AssumeRole**
@@ -343,7 +343,7 @@ module Aws::STS
     #
     # `"Condition": \{"Bool": \{"aws:MultiFactorAuthPresent": true\}\}`
     #
-    # For more information, see [Configuring MFA-Protected API Access][9] in
+    # For more information, see [Configuring MFA-Protected API Access][8] in
     # the *IAM User Guide* guide.
     #
     # To use MFA with `AssumeRole`, you pass values for the `SerialNumber`
@@ -359,9 +359,8 @@ module Aws::STS
     # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
     # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
-    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/MFAProtectedAPI.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/MFAProtectedAPI.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role to assume.
@@ -415,7 +414,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [String] :policy
     #   An IAM policy in JSON format that you want to use as an inline session
@@ -449,7 +448,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [Integer] :duration_seconds
     #   The duration, in seconds, of the role session. The value can range
@@ -640,7 +639,7 @@ module Aws::STS
     # AWS API calls to access resources in the account that owns the role.
     # You cannot use session policies to grant more permissions than those
     # allowed by the identity-based policy of the role that is being
-    # assumed. For more information, see [Session Policies][6] in the *IAM
+    # assumed. For more information, see [Session Policies][5] in the *IAM
     # User Guide*.
     #
     # Before your application can call `AssumeRoleWithSAML`, you must
@@ -664,13 +663,13 @@ module Aws::STS
     #
     # For more information, see the following resources:
     #
-    # * [About SAML 2.0-based Federation][7] in the *IAM User Guide*.
+    # * [About SAML 2.0-based Federation][6] in the *IAM User Guide*.
     #
-    # * [Creating SAML Identity Providers][8] in the *IAM User Guide*.
+    # * [Creating SAML Identity Providers][7] in the *IAM User Guide*.
     #
-    # * [Configuring a Relying Party and Claims][9] in the *IAM User Guide*.
+    # * [Configuring a Relying Party and Claims][8] in the *IAM User Guide*.
     #
-    # * [Creating a Role for SAML 2.0 Federation][10] in the *IAM User
+    # * [Creating a Role for SAML 2.0 Federation][9] in the *IAM User
     #   Guide*.
     #
     #
@@ -680,11 +679,10 @@ module Aws::STS
     # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
     # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
-    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html
-    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html
-    # [10]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html
+    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html
+    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role that the caller is
@@ -736,7 +734,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [String] :policy
     #   An IAM policy in JSON format that you want to use as an inline session
@@ -770,7 +768,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [Integer] :duration_seconds
     #   The duration, in seconds, of the role session. Your role session lasts
@@ -917,7 +915,7 @@ module Aws::STS
     # AWS API calls to access resources in the account that owns the role.
     # You cannot use session policies to grant more permissions than those
     # allowed by the identity-based policy of the role that is being
-    # assumed. For more information, see [Session Policies][10] in the *IAM
+    # assumed. For more information, see [Session Policies][9] in the *IAM
     # User Guide*.
     #
     # Before your application can call `AssumeRoleWithWebIdentity`, you must
@@ -928,19 +926,19 @@ module Aws::STS
     # specified in the role's trust policy.
     #
     # Calling `AssumeRoleWithWebIdentity` can result in an entry in your AWS
-    # CloudTrail logs. The entry includes the [Subject][11] of the provided
+    # CloudTrail logs. The entry includes the [Subject][10] of the provided
     # Web Identity Token. We recommend that you avoid using any personally
     # identifiable information (PII) in this field. For example, you could
     # instead use a GUID or a pairwise identifier, as [suggested in the OIDC
-    # specification][12].
+    # specification][11].
     #
     # For more information about how to use web identity federation and the
     # `AssumeRoleWithWebIdentity` API, see the following resources:
     #
-    # * [Using Web Identity Federation API Operations for Mobile Apps][13]
-    #   and [Federation Through a Web-based Identity Provider][14].
+    # * [Using Web Identity Federation API Operations for Mobile Apps][12]
+    #   and [Federation Through a Web-based Identity Provider][13].
     #
-    # * [ Web Identity Federation Playground][15]. Walk through the process
+    # * [ Web Identity Federation Playground][14]. Walk through the process
     #   of authenticating through Login with Amazon, Facebook, or Google,
     #   getting temporary security credentials, and then using those
     #   credentials to make a request to AWS.
@@ -951,7 +949,7 @@ module Aws::STS
     #   information from these providers to get and use temporary security
     #   credentials.
     #
-    # * [Web Identity Federation with Mobile Applications][16]. This article
+    # * [Web Identity Federation with Mobile Applications][15]. This article
     #   discusses web identity federation and shows an example of how to use
     #   web identity federation to get access to content in Amazon S3.
     #
@@ -966,13 +964,12 @@ module Aws::STS
     # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
     # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [10]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [11]: http://openid.net/specs/openid-connect-core-1_0.html#Claims
-    # [12]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
-    # [13]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
-    # [14]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
-    # [15]: https://web-identity-federation-playground.s3.amazonaws.com/index.html
-    # [16]: http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications
+    # [10]: http://openid.net/specs/openid-connect-core-1_0.html#Claims
+    # [11]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
+    # [12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
+    # [13]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
+    # [14]: https://web-identity-federation-playground.s3.amazonaws.com/index.html
+    # [15]: http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role that the caller is
@@ -1041,7 +1038,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [String] :policy
     #   An IAM policy in JSON format that you want to use as an inline session
@@ -1075,7 +1072,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [Integer] :duration_seconds
     #   The duration, in seconds, of the role session. The value can range
@@ -1396,9 +1393,9 @@ module Aws::STS
     # permissions for a federated user. You cannot use session policies to
     # grant more permissions than those that are defined in the permissions
     # policy of the IAM user. For more information, see [Session
-    # Policies][7] in the *IAM User Guide*. For information about using
+    # Policies][6] in the *IAM User Guide*. For information about using
     # `GetFederationToken` to create temporary security credentials, see
-    # [GetFederationToken—Federation Through a Custom Identity Broker][8].
+    # [GetFederationToken—Federation Through a Custom Identity Broker][7].
     #
     #
     #
@@ -1408,8 +1405,7 @@ module Aws::STS
     # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
     # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
     # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getfederationtoken
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getfederationtoken
     #
     # @option params [required, String] :name
     #   The name of the federated user. The name is used as an identifier for
@@ -1443,7 +1439,7 @@ module Aws::STS
     #   you pass. This gives you a way to further restrict the permissions for
     #   a federated user. You cannot use session policies to grant more
     #   permissions than those that are defined in the permissions policy of
-    #   the IAM user. For more information, see [Session Policies][2] in the
+    #   the IAM user. For more information, see [Session Policies][1] in the
     #   *IAM User Guide*.
     #
     #   The plain text that you use for both inline and managed session
@@ -1465,7 +1461,6 @@ module Aws::STS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [Array<Types::PolicyDescriptorType>] :policy_arns
     #   The Amazon Resource Names (ARNs) of the IAM managed policies that you
@@ -1494,7 +1489,7 @@ module Aws::STS
     #   you pass. This gives you a way to further restrict the permissions for
     #   a federated user. You cannot use session policies to grant more
     #   permissions than those that are defined in the permissions policy of
-    #   the IAM user. For more information, see [Session Policies][2] in the
+    #   the IAM user. For more information, see [Session Policies][1] in the
     #   *IAM User Guide*.
     #
     #   <note markdown="1"> The characters in this parameter count towards the 2048 character
@@ -1509,7 +1504,6 @@ module Aws::STS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [Integer] :duration_seconds
     #   The duration, in seconds, that the session should last. Acceptable
@@ -1736,7 +1730,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.53.1'
+      context[:gem_version] = '3.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

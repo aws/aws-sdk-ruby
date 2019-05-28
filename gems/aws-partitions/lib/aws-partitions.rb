@@ -296,6 +296,7 @@ module Aws
             'GlobalAccelerator' => 'globalaccelerator',
             'Glue' => 'glue',
             'Greengrass' => 'greengrass',
+            'GroundStation' => 'groundstation',
             'GuardDuty' => 'guardduty',
             'Health' => 'health',
             'IAM' => 'iam',

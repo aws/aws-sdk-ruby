@@ -668,6 +668,51 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Assigns a tape to a tape pool for archiving. The tape assigned to a
+    # pool is archived in the S3 storage class that is associated with the
+    # pool. When you use your backup application to eject the tape, the tape
+    # is archived directly into the S3 storage class (Glacier or Deep
+    # Archive) that corresponds to the pool.
+    #
+    # Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #
+    # @option params [required, String] :tape_arn
+    #   The unique Amazon Resource Name (ARN) of the virtual tape that you
+    #   want to add to the tape pool.
+    #
+    # @option params [required, String] :pool_id
+    #   The ID of the pool that you want to add your tape to for archiving.
+    #   The tape in this pool is archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #
+    # @return [Types::AssignTapePoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssignTapePoolOutput#tape_arn #tape_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.assign_tape_pool({
+    #     tape_arn: "TapeARN", # required
+    #     pool_id: "PoolId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tape_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssignTapePool AWS API Documentation
+    #
+    # @overload assign_tape_pool(params = {})
+    # @param [Hash] params ({})
+    def assign_tape_pool(params = {}, options = {})
+      req = build_request(:assign_tape_pool, params)
+      req.send_request(options)
+    end
+
     # Connects a volume to an iSCSI connection and then attaches the volume
     # to the specified gateway. Detaching and attaching a volume enables you
     # to recover your data from one gateway to a different gateway without
@@ -5559,7 +5604,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

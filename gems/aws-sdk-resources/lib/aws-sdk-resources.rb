@@ -79,6 +79,7 @@ module Aws
   autoload :GlobalAccelerator, 'aws-sdk-globalaccelerator'
   autoload :Glue, 'aws-sdk-glue'
   autoload :Greengrass, 'aws-sdk-greengrass'
+  autoload :GroundStation, 'aws-sdk-groundstation'
   autoload :GuardDuty, 'aws-sdk-guardduty'
   autoload :Health, 'aws-sdk-health'
   autoload :IAM, 'aws-sdk-iam'

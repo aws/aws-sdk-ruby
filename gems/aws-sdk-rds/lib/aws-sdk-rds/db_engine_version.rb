@@ -124,6 +124,13 @@ module Aws::RDS
       data[:supported_feature_names]
     end
 
+    # The status of the DB engine version, either `available` or
+    # `deprecated`.
+    # @return [String]
+    def status
+      data[:status]
+    end
+
     # @!endgroup
 
     # @return [Client]

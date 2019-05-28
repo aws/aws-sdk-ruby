@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.54.0 (2019-05-28)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.53.1 (2019-05-22)
 ------------------
 

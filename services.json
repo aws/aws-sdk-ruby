@@ -258,6 +258,9 @@
   "Greengrass": {
     "models": "greengrass/2017-06-07"
   },
+  "GroundStation": {
+    "models": "groundstation/2019-05-23"
+  },
   "GuardDuty": {
     "models": "guardduty/2017-11-28"
   },
