@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.283 (2019-05-28)
+------------------
+
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
 
 * Feature - Aws::PinpointEmail - Updated the API, and documentation for Amazon Pinpoint Email Service.
