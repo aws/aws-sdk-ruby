@@ -40,6 +40,15 @@ module Aws
       end
     end
 
+    # Raised when InstanceProfileCredentialsProvider or
+    # EcsCredentialsProvider fails to parse the metadata response after retries
+    class MetadataParserError < RuntimeError
+      def initialize(*args)
+        msg = "Failed to parse metadata service response."
+        super(msg)
+      end
+    end
+
     # Raised when a `streaming` operation has `requiresLength` trait
     # enabled but request payload size/length cannot be calculated
     class MissingContentLength < RuntimeError
