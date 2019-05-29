@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information. 
+
 2.11.284 (2019-05-29)
 ------------------
 

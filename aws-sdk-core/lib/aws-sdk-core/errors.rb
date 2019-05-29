@@ -34,6 +34,15 @@ module Aws
       end
     end
 
+    # Raised when InstanceProfileCredentialsProvider or
+    # EcsCredentialsProvider fails to parse the metadata response after retries
+    class MetadataParserError < RuntimeError
+      def initialize(*args)
+        msg = "Failed to parse metadata service response."
+        super(msg)
+      end
+    end
+
     # Various plugins perform client-side checksums of responses.
     # This error indicates a checksum failed.
     class ChecksumError < RuntimeError; end
