@@ -229,10 +229,10 @@ module Aws::AutoScaling
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [AutoScalingGroup]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       AutoScalingGroup.new({
         name: @name,
@@ -246,10 +246,10 @@ module Aws::AutoScaling
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [AutoScalingGroup]
-    def wait_until_in_service(options = {})
+    def wait_until_in_service(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupInService.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       AutoScalingGroup.new({
         name: @name,
@@ -263,10 +263,10 @@ module Aws::AutoScaling
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [AutoScalingGroup]
-    def wait_until_not_exists(options = {})
+    def wait_until_not_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupNotExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       AutoScalingGroup.new({
         name: @name,

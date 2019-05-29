@@ -168,10 +168,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Snapshot]
-    def wait_until_completed(options = {})
+    def wait_until_completed(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::SnapshotCompleted.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(snapshot_ids: [@id]))
       Snapshot.new({
         id: @id,

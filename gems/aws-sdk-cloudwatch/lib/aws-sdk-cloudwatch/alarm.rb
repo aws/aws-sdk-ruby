@@ -253,10 +253,10 @@ module Aws::CloudWatch
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Alarm]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::AlarmExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(alarm_names: [@name]))
       Alarm.new({
         name: @name,

@@ -38,31 +38,31 @@ module Aws::TranscribeStreamingService
       end
 
       def on_transcript_event_event(&block)
-        @event_emitter.on(:transcript_event, Proc.new)
+        @event_emitter.on(:transcript_event, block) if block_given?
       end
 
       def on_bad_request_exception_event(&block)
-        @event_emitter.on(:bad_request_exception, Proc.new)
+        @event_emitter.on(:bad_request_exception, block) if block_given?
       end
 
       def on_limit_exceeded_exception_event(&block)
-        @event_emitter.on(:limit_exceeded_exception, Proc.new)
+        @event_emitter.on(:limit_exceeded_exception, block) if block_given?
       end
 
       def on_internal_failure_exception_event(&block)
-        @event_emitter.on(:internal_failure_exception, Proc.new)
+        @event_emitter.on(:internal_failure_exception, block) if block_given?
       end
 
       def on_conflict_exception_event(&block)
-        @event_emitter.on(:conflict_exception, Proc.new)
+        @event_emitter.on(:conflict_exception, block) if block_given?
       end
 
       def on_error_event(&block)
-        @event_emitter.on(:error, Proc.new)
+        @event_emitter.on(:error, block) if block_given?
       end
 
       def on_initial_response_event(&block)
-        @event_emitter.on(:initial_response, Proc.new)
+        @event_emitter.on(:initial_response, block) if block_given?
       end
 
       def on_event(&block)

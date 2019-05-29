@@ -187,10 +187,10 @@ module Aws::IAM
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [User]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::UserExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(user_name: @name))
       User.new({
         name: @name,

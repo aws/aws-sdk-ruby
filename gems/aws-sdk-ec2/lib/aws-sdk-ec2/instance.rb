@@ -374,10 +374,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Instance]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(instance_ids: [@id]))
       Instance.new({
         id: @id,
@@ -392,10 +392,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Instance]
-    def wait_until_running(options = {})
+    def wait_until_running(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceRunning.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(instance_ids: [@id]))
       Instance.new({
         id: @id,
@@ -410,10 +410,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Instance]
-    def wait_until_stopped(options = {})
+    def wait_until_stopped(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceStopped.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(instance_ids: [@id]))
       Instance.new({
         id: @id,
@@ -428,10 +428,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Instance]
-    def wait_until_terminated(options = {})
+    def wait_until_terminated(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceTerminated.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(instance_ids: [@id]))
       Instance.new({
         id: @id,
