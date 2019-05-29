@@ -302,6 +302,10 @@
     "models": "greengrass/2017-06-07",
     "endpoint": "greengrass"
   },
+  "GroundStation": {
+    "models": "groundstation/2019-05-23",
+    "endpoint": "groundstation"
+  },
   "GuardDuty": {
     "models": "guardduty/2017-11-28",
     "endpoint": "guardduty"
@@ -345,6 +349,10 @@
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29",
     "endpoint": "data.jobs.iot"
+  },
+  "IoTThingsGraph": {
+    "models": "iotthingsgraph/2018-09-06",
+    "endpoint": "iotthingsgraph"
   },
   "KMS": {
     "models": "kms/2014-11-01",

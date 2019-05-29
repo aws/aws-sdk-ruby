@@ -1,7 +1,43 @@
 Unreleased Changes
 ------------------
 
-* Issue - Wraps raw JSON ParserError from Credential Providers
+* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information. 
+
+2.11.284 (2019-05-29)
+------------------
+
+* Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
+* Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::IoTThingsGraph - Added support for a new service, AWS IoT Things Graph.
+
+2.11.283 (2019-05-28)
+------------------
+
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::PinpointEmail - Updated the API, and documentation for Amazon Pinpoint Email Service.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::RoboMaker - Updated the API, and documentation for AWS RoboMaker.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::STS - Updated the documentation for AWS Security Token Service.
+
+* Feature - Aws::TranscribeService - Updated the API for Amazon Transcribe Service.
+
+* Feature - Aws::WAF - Updated the documentation for AWS WAF.
+
+* Feature - Aws::GroundStation - Added support for a new service, AWS Ground Station.
 
 2.11.282 (2019-05-24)
 ------------------

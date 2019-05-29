@@ -99,6 +99,7 @@ module Aws
     GlobalAccelerator
     Glue
     Greengrass
+    GroundStation
     GuardDuty
     Health
     IAM
@@ -110,6 +111,7 @@ module Aws
     IoTAnalytics
     IoTDataPlane
     IoTJobsDataPlane
+    IoTThingsGraph
     KMS
     Kafka
     Kinesis
