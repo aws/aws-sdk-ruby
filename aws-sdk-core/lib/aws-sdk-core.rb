@@ -111,6 +111,7 @@ module Aws
     IoTAnalytics
     IoTDataPlane
     IoTJobsDataPlane
+    IoTThingsGraph
     KMS
     Kafka
     Kinesis

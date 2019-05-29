@@ -306,6 +306,7 @@ to be backwards compatible.
 | AWS IoT Analytics                                     | IoTAnalytics                    | 2017-11-27  |
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
+| AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |

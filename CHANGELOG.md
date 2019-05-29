@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
+* Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::IoTThingsGraph - Added support for a new service, AWS IoT Things Graph.
+
 2.11.283 (2019-05-28)
 ------------------
 
