@@ -37,16 +37,16 @@ module {{module_name}}
 
       {{#types}}
       def on_{{.}}_event(&block)
-        @event_emitter.on(:{{.}}, Proc.new)
+        @event_emitter.on(:{{.}}, block) if block_given?
       end
 
       {{/types}}
       def on_error_event(&block)
-        @event_emitter.on(:error, Proc.new)
+        @event_emitter.on(:error, block) if block_given?
       end
 
       def on_initial_response_event(&block)
-        @event_emitter.on(:initial_response, Proc.new)
+        @event_emitter.on(:initial_response, block) if block_given?
       end
 
       def on_event(&block)

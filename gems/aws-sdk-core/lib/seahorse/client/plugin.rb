@@ -58,7 +58,7 @@ module Seahorse
           else
             options[:default] = default
           end
-          options[:default_block] = Proc.new if block_given?
+          options[:default_block] = block if block_given?
           self.options << PluginOption.new(name, options)
         end
 
