@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.169.0 (2019-05-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTThingsGraph`.
+
 1.168.0 (2019-05-28)
 ------------------
 

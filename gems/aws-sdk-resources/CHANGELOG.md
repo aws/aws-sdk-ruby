@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.45.0 (2019-05-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iotthingsgraph` gem.
+
 3.44.0 (2019-05-28)
 ------------------
 

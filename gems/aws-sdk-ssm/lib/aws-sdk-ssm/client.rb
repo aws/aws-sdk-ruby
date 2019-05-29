@@ -262,7 +262,7 @@ module Aws::SSM
 
     # Adds or overwrites one or more tags for the specified resource. Tags
     # are metadata that you can assign to your documents, managed instances,
-    # Maintenance Windows, Parameter Store parameters, and patch baselines.
+    # maintenance windows, Parameter Store parameters, and patch baselines.
     # Tags enable you to categorize your resources in different ways, for
     # example, by purpose, owner, or environment. Each tag consists of a key
     # and an optional value, both of which you define. For example, you
@@ -291,9 +291,8 @@ module Aws::SSM
     #   Specifies the type of resource you are tagging.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
@@ -311,9 +310,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
@@ -378,12 +376,12 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Stops a Maintenance Window execution that is already in progress and
+    # Stops a maintenance window execution that is already in progress and
     # cancels any tasks in the window that have not already starting
     # running. (Tasks already in progress will continue to completion.)
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution to stop.
+    #   The ID of the maintenance window execution to stop.
     #
     # @return [Types::CancelMaintenanceWindowExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -412,7 +410,7 @@ module Aws::SSM
     # so that you can manage these resources using Run Command. An
     # on-premises server or virtual machine that has been registered with
     # EC2 is called a managed instance. For more information about
-    # activations, see [Setting Up Systems Manager in Hybrid
+    # activations, see [Setting Up AWS Systems Manager for Hybrid
     # Environments][1].
     #
     #
@@ -934,33 +932,33 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Creates a new Maintenance Window.
+    # Creates a new maintenance window.
     #
     # @option params [required, String] :name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #
     # @option params [String] :description
-    #   An optional description for the Maintenance Window. We recommend
-    #   specifying a description to help you organize your Maintenance
-    #   Windows.
+    #   An optional description for the maintenance window. We recommend
+    #   specifying a description to help you organize your maintenance
+    #   windows.
     #
     # @option params [String] :start_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
-    #   Maintenance Window to become active. StartDate allows you to delay
-    #   activation of the Maintenance Window until the specified future date.
+    #   maintenance window to become active. StartDate allows you to delay
+    #   activation of the maintenance window until the specified future date.
     #
     # @option params [String] :end_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
-    #   Maintenance Window to become inactive. EndDate allows you to set a
-    #   date and time in the future when the Maintenance Window will no longer
+    #   maintenance window to become inactive. EndDate allows you to set a
+    #   date and time in the future when the maintenance window will no longer
     #   run.
     #
     # @option params [required, String] :schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #
     # @option params [String] :schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
     #   more information, see the [Time Zone Database][1] on the IANA website.
@@ -970,21 +968,21 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #
     # @option params [required, Integer] :duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #
     # @option params [required, Integer] :cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #
     # @option params [required, Boolean] :allow_unassociated_targets
-    #   Enables a Maintenance Window task to run on managed instances, even if
+    #   Enables a maintenance window task to run on managed instances, even if
     #   you have not registered those instances as targets. If enabled, then
     #   you must specify the unregistered instances (by instance ID) when you
-    #   register a task with the Maintenance Window
+    #   register a task with the maintenance window.
     #
     #   If you don't enable this option, then you must specify
     #   previously-registered targets when you register a task with the
-    #   Maintenance Window.
+    #   maintenance window.
     #
     # @option params [String] :client_token
     #   User-provided idempotency token.
@@ -995,7 +993,7 @@ module Aws::SSM
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata that you assign to a resource. Tags enable you to
     #   categorize a resource in different ways, such as by purpose, owner, or
-    #   environment. For example, you might want to tag a Maintenance Window
+    #   environment. For example, you might want to tag a maintenance window
     #   to identify the type of tasks it will run, the types of targets, and
     #   the environment it will run in. In this case, you could specify the
     #   following key name/value pairs:
@@ -1006,7 +1004,7 @@ module Aws::SSM
     #
     #   * `Key=Environment,Value=Production`
     #
-    #   <note markdown="1"> To add tags to an existing Maintenance Window, use the
+    #   <note markdown="1"> To add tags to an existing maintenance window, use the
     #   AddTagsToResource action.
     #
     #    </note>
@@ -1375,7 +1373,7 @@ module Aws::SSM
     #   DisableSchema: If you choose this option, the system ignores all
     #   inventory data for the specified version, and any earlier versions. To
     #   enable this schema again, you must call the `PutInventory` action for
-    #   a version greater than the disbled version.
+    #   a version greater than the disabled version.
     #
     #   DeleteSchema: This option deletes the specified custom type from the
     #   Inventory service. You can recreate the schema later, if you want.
@@ -1428,10 +1426,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Deletes a Maintenance Window.
+    # Deletes a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window to delete.
+    #   The ID of the maintenance window to delete.
     #
     # @return [Types::DeleteMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1625,10 +1623,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Removes a target from a Maintenance Window.
+    # Removes a target from a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window the target should be removed from.
+    #   The ID of the maintenance window the target should be removed from.
     #
     # @option params [required, String] :window_target_id
     #   The ID of the target definition to remove.
@@ -1636,7 +1634,7 @@ module Aws::SSM
     # @option params [Boolean] :safe
     #   The system checks if the target is being referenced by a task. If the
     #   target is being referenced, the system returns an error and does not
-    #   deregister the target from the Maintenance Window.
+    #   deregister the target from the maintenance window.
     #
     # @return [Types::DeregisterTargetFromMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1665,13 +1663,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Removes a task from a Maintenance Window.
+    # Removes a task from a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window the task should be removed from.
+    #   The ID of the maintenance window the task should be removed from.
     #
     # @option params [required, String] :window_task_id
-    #   The ID of the task to remove from the Maintenance Window.
+    #   The ID of the task to remove from the maintenance window.
     #
     # @return [Types::DeregisterTaskFromMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2818,13 +2816,13 @@ module Aws::SSM
     end
 
     # Retrieves the individual task executions (one per target) for a
-    # particular task run as part of a Maintenance Window execution.
+    # particular task run as part of a maintenance window execution.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution the task is part of.
+    #   The ID of the maintenance window execution the task is part of.
     #
     # @option params [required, String] :task_id
-    #   The ID of the specific task in the Maintenance Window task that should
+    #   The ID of the specific task in the maintenance window task that should
     #   be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
@@ -2887,11 +2885,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # For a given Maintenance Window execution, lists the tasks that were
+    # For a given maintenance window execution, lists the tasks that were
     # run.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution whose task executions
+    #   The ID of the maintenance window execution whose task executions
     #   should be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
@@ -2949,13 +2947,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the executions of a Maintenance Window. This includes
-    # information about when the Maintenance Window was scheduled to be
+    # Lists the executions of a maintenance window. This includes
+    # information about when the maintenance window was scheduled to be
     # active, and information about tasks registered and run with the
-    # Maintenance Window.
+    # maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window whose executions should be retrieved.
+    #   The ID of the maintenance window whose executions should be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Each entry in the array is a structure containing:
@@ -3015,11 +3013,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves information about upcoming executions of a Maintenance
-    # Window.
+    # Retrieves information about upcoming executions of a maintenance
+    # window.
     #
     # @option params [String] :window_id
-    #   The ID of the Maintenance Window to retrieve information about.
+    #   The ID of the maintenance window to retrieve information about.
     #
     # @option params [Array<Types::Target>] :targets
     #   The instance ID or key/value pair to retrieve information about.
@@ -3030,7 +3028,7 @@ module Aws::SSM
     #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
     #   Filters used to limit the range of results. For example, you can limit
-    #   Maintenance Window executions to only those scheduled before or after
+    #   maintenance window executions to only those scheduled before or after
     #   a certain date and time.
     #
     # @option params [Integer] :max_results
@@ -3085,10 +3083,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the targets registered with the Maintenance Window.
+    # Lists the targets registered with the maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window whose targets should be retrieved.
+    #   The ID of the maintenance window whose targets should be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters that can be used to narrow down the scope of the
@@ -3147,10 +3145,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the tasks in a Maintenance Window.
+    # Lists the tasks in a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window whose tasks should be retrieved.
+    #   The ID of the maintenance window whose tasks should be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters used to narrow down the scope of the returned tasks.
@@ -3219,11 +3217,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves the Maintenance Windows in an AWS account.
+    # Retrieves the maintenance windows in an AWS account.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters used to narrow down the scope of the returned
-    #   Maintenance Windows. Supported filter keys are **Name** and
+    #   maintenance windows. Supported filter keys are **Name** and
     #   **Enabled**.
     #
     # @option params [Integer] :max_results
@@ -3278,7 +3276,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves information about the Maintenance Windows targets or tasks
+    # Retrieves information about the maintenance window targets or tasks
     # that an instance is associated with.
     #
     # @option params [required, Array<Types::Target>] :targets
@@ -4226,10 +4224,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves a Maintenance Window.
+    # Retrieves a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the desired Maintenance Window.
+    #   The ID of the maintenance window for which you want to retrieve
+    #   information.
     #
     # @return [Types::GetMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4280,11 +4279,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves details about a specific task run as part of a Maintenance
-    # Window execution.
+    # Retrieves details about a specific task run as part of a maintenance
+    # window execution.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #
     # @return [Types::GetMaintenanceWindowExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4321,13 +4320,13 @@ module Aws::SSM
     end
 
     # Retrieves the details about a specific task run as part of a
-    # Maintenance Window execution.
+    # maintenance window execution.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #
     # @option params [required, String] :task_id
-    #   The ID of the specific task execution in the Maintenance Window task
+    #   The ID of the specific task execution in the maintenance window task
     #   that should be retrieved.
     #
     # @return [Types::GetMaintenanceWindowExecutionTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4382,15 +4381,15 @@ module Aws::SSM
     end
 
     # Retrieves a task invocation. A task invocation is a specific task
-    # running on a specific target. Maintenance Windows report status for
+    # running on a specific target. maintenance windows report status for
     # all invocations.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution for which the task is a
+    #   The ID of the maintenance window execution for which the task is a
     #   part.
     #
     # @option params [required, String] :task_id
-    #   The ID of the specific task in the Maintenance Window task that should
+    #   The ID of the specific task in the maintenance window task that should
     #   be retrieved.
     #
     # @option params [required, String] :invocation_id
@@ -4443,13 +4442,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the tasks in a Maintenance Window.
+    # Lists the tasks in a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The Maintenance Window ID that includes the task to retrieve.
+    #   The maintenance window ID that includes the task to retrieve.
     #
     # @option params [required, String] :window_task_id
-    #   The Maintenance Window task ID to retrieve.
+    #   The maintenance window task ID to retrieve.
     #
     # @return [Types::GetMaintenanceWindowTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6284,31 +6283,45 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Registers a target with a Maintenance Window.
+    # Registers a target with a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window the target should be registered with.
+    #   The ID of the maintenance window the target should be registered with.
     #
     # @option params [required, String] :resource_type
-    #   The type of target being registered with the Maintenance Window.
+    #   The type of target being registered with the maintenance window.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   The targets (either instances or tags).
+    #   The targets to register with the maintenance window. In other words,
+    #   the instances to run commands on when the maintenance window runs.
     #
-    #   Specify instances using the following format:
+    #   You can specify targets using either instance IDs or tags that have
+    #   been applied to instances.
     #
-    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #   **Example 1**\: Specify instance IDs
     #
-    #   Specify tags using either of the following formats:
+    #   `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3 `
     #
-    #   `Key=tag:<tag-key>,Values=<tag-value-1>,<tag-value-2>`
+    #   **Example 2**\: Use tag key-pairs applied to instances
     #
-    #   `Key=tag-key,Values=<tag-key-1>,<tag-key-2>`
+    #   `Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2 `
+    #
+    #   **Example 3**\: Use tag-keys applied to instances
+    #
+    #   `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
+    #
+    #   For more information about these examples formats, including the best
+    #   use case for each one, see [Examples: Register Targets with a
+    #   Maintenance Window][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html
     #
     # @option params [String] :owner_information
     #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   raised while running tasks for these targets in this maintenance
+    #   window.
     #
     # @option params [String] :name
     #   An optional name for the target.
@@ -6356,19 +6369,19 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Adds a new task to a Maintenance Window.
+    # Adds a new task to a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window the task should be added to.
+    #   The ID of the maintenance window the task should be added to.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   The targets (either instances or Maintenance Window targets).
+    #   The targets (either instances or maintenance window targets).
     #
     #   Specify instances using the following format:
     #
     #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
     #
-    #   Specify Maintenance Window targets using the following format:
+    #   Specify maintenance window targets using the following format:
     #
     #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
     #
@@ -6376,18 +6389,19 @@ module Aws::SSM
     #   The ARN of the task to run.
     #
     # @option params [String] :service_role_arn
-    #   The role to assume when running the Maintenance Window task.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default. If
+    #   The ARN of the IAM service role for Systems Manager to assume when
+    #   running a maintenance window task. If you do not specify a service
+    #   role ARN, Systems Manager uses your account's service-linked role. If
     #   no service-linked role for Systems Manager exists in your account, it
-    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
-    #   without specifying a service role ARN.
+    #   is created when you run `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Service-Linked Role Permissions for Systems
-    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
-    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
-    #   Manager User Guide*.
+    #   For more information, see the following topics in the in the *AWS
+    #   Systems Manager User Guide*\:
+    #
+    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #
+    #   * [Should I Use a Service-Linked Role or a Custom Service Role to Run
+    #     Maintenance Window Tasks? ][2]
     #
     #
     #
@@ -6403,8 +6417,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
     #   a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #
@@ -6414,8 +6428,8 @@ module Aws::SSM
     #   empty.
     #
     # @option params [Integer] :priority
-    #   The priority of the task in the Maintenance Window, the lower the
-    #   number the higher the priority. Tasks in a Maintenance Window are
+    #   The priority of the task in the maintenance window, the lower the
+    #   number the higher the priority. Tasks in a maintenance window are
     #   scheduled in priority order with tasks that have the same priority
     #   scheduled in parallel.
     #
@@ -6434,7 +6448,7 @@ module Aws::SSM
     #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     #   options in the `TaskInvocationParameters` structure. For information
     #   about how Systems Manager handles these options for the supported
-    #   Maintenance Window task types, see
+    #   maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -6539,9 +6553,8 @@ module Aws::SSM
     #   The type of resource of which you want to remove a tag.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
@@ -6558,9 +6571,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
@@ -6683,12 +6695,26 @@ module Aws::SSM
     #   want to send the signal to.
     #
     # @option params [required, String] :signal_type
-    #   The type of signal. Valid signal types include the following: Approve
-    #   and Reject
+    #   The type of signal to send to an Automation execution.
     #
     # @option params [Hash<String,Array>] :payload
     #   The data sent with the signal. The data schema depends on the type of
     #   signal used in the request.
+    #
+    #   For `Approve` and `Reject` signal types, the payload is an optional
+    #   comment that you can send with the signal type. For example:
+    #
+    #   `Comment="Looks good"`
+    #
+    #   For `StartStep` and `Resume` signal types, you must send the name of
+    #   the Automation step to start or resume as the payload. For example:
+    #
+    #   `StepName="step1"`
+    #
+    #   For the `StopStep` signal type, you must send the step execution ID as
+    #   the payload. For example:
+    #
+    #   `StepExecutionId="97fff367-fc5a-4299-aed8-0123456789ab"`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6817,7 +6843,9 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors
     #
     # @option params [String] :service_role_arn
-    #   The IAM role that Systems Manager uses to send notifications.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for Run Command
+    #   commands.
     #
     # @option params [Types::NotificationConfig] :notification_config
     #   Configurations for sending notifications.
@@ -7545,20 +7573,20 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Updates an existing Maintenance Window. Only specified parameters are
+    # Updates an existing maintenance window. Only specified parameters are
     # modified.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window to update.
+    #   The ID of the maintenance window to update.
     #
     # @option params [String] :name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #
     # @option params [String] :description
     #   An optional description for the update request.
     #
     # @option params [String] :start_date
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
     #   more information, see the [Time Zone Database][1] on the IANA website.
@@ -7569,16 +7597,16 @@ module Aws::SSM
     #
     # @option params [String] :end_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
-    #   Maintenance Window to become inactive. EndDate allows you to set a
-    #   date and time in the future when the Maintenance Window will no longer
+    #   maintenance window to become inactive. EndDate allows you to set a
+    #   date and time in the future when the maintenance window will no longer
     #   run.
     #
     # @option params [String] :schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #
     # @option params [String] :schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
     #   more information, see the [Time Zone Database][1] on the IANA website.
@@ -7588,18 +7616,18 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #
     # @option params [Integer] :duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #
     # @option params [Integer] :cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #
     # @option params [Boolean] :allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window before
+    #   Whether targets must be registered with the maintenance window before
     #   tasks can be defined for those targets.
     #
     # @option params [Boolean] :enabled
-    #   Whether the Maintenance Window is enabled.
+    #   Whether the maintenance window is enabled.
     #
     # @option params [Boolean] :replace
     #   If True, then all fields that are required by the
@@ -7660,7 +7688,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Modifies the target of an existing Maintenance Window. You can't
+    # Modifies the target of an existing maintenance window. You can't
     # change the target type, but you can change the following:
     #
     # The target from being an ID target to a Tag target, or a Tag target to
@@ -7679,7 +7707,7 @@ module Aws::SSM
     # If a parameter is null, then the corresponding field is not modified.
     #
     # @option params [required, String] :window_id
-    #   The Maintenance Window ID with which to modify the target.
+    #   The maintenance window ID with which to modify the target.
     #
     # @option params [required, String] :window_target_id
     #   The target ID to modify.
@@ -7689,8 +7717,8 @@ module Aws::SSM
     #
     # @option params [String] :owner_information
     #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   raised while running tasks for these targets in this maintenance
+    #   window.
     #
     # @option params [String] :name
     #   A name for the update.
@@ -7750,7 +7778,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Modifies a task assigned to a Maintenance Window. You can't change
+    # Modifies a task assigned to a maintenance window. You can't change
     # the task type, but you can change the following values:
     #
     # * TaskARN. For example, you can change a RUN\_COMMAND task from
@@ -7772,7 +7800,7 @@ module Aws::SSM
     # request. Optional fields that aren't specified are set to null.
     #
     # @option params [required, String] :window_id
-    #   The Maintenance Window ID that contains the task to modify.
+    #   The maintenance window ID that contains the task to modify.
     #
     # @option params [required, String] :window_task_id
     #   The task ID to modify.
@@ -7786,19 +7814,19 @@ module Aws::SSM
     #   The task ARN to modify.
     #
     # @option params [String] :service_role_arn
-    #   The IAM service role ARN to modify. The system assumes this role
-    #   during task execution.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default. If
+    #   The ARN of the IAM service role for Systems Manager to assume when
+    #   running a maintenance window task. If you do not specify a service
+    #   role ARN, Systems Manager uses your account's service-linked role. If
     #   no service-linked role for Systems Manager exists in your account, it
-    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
-    #   without specifying a service role ARN.
+    #   is created when you run `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Service-Linked Role Permissions for Systems
-    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
-    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
-    #   Manager User Guide*.
+    #   For more information, see the following topics in the in the *AWS
+    #   Systems Manager User Guide*\:
+    #
+    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #
+    #   * [Should I Use a Service-Linked Role or a Custom Service Role to Run
+    #     Maintenance Window Tasks? ][2]
     #
     #
     #
@@ -7811,8 +7839,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
     #   a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #
@@ -7849,7 +7877,7 @@ module Aws::SSM
     #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     #   options in the `TaskInvocationParameters` structure. For information
     #   about how Systems Manager handles these options for the supported
-    #   Maintenance Window task types, see
+    #   maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -8270,7 +8298,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

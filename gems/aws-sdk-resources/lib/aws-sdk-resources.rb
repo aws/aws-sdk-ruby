@@ -91,6 +91,7 @@ module Aws
   autoload :IoTAnalytics, 'aws-sdk-iotanalytics'
   autoload :IoTDataPlane, 'aws-sdk-iotdataplane'
   autoload :IoTJobsDataPlane, 'aws-sdk-iotjobsdataplane'
+  autoload :IoTThingsGraph, 'aws-sdk-iotthingsgraph'
   autoload :KMS, 'aws-sdk-kms'
   autoload :Kafka, 'aws-sdk-kafka'
   autoload :Kinesis, 'aws-sdk-kinesis'

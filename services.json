@@ -295,6 +295,9 @@
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
   },
+  "IoTThingsGraph": {
+    "models": "iotthingsgraph/2018-09-06"
+  },
   "KMS": {
     "models": "kms/2014-11-01"
   },

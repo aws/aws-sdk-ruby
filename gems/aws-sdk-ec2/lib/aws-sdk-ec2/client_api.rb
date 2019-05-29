@@ -199,6 +199,7 @@ module Aws::EC2
     CopyImageResult = Shapes::StructureShape.new(name: 'CopyImageResult')
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
+    CopyTagsFromSource = Shapes::StringShape.new(name: 'CopyTagsFromSource')
     CpuOptions = Shapes::StructureShape.new(name: 'CpuOptions')
     CpuOptionsRequest = Shapes::StructureShape.new(name: 'CpuOptionsRequest')
     CreateCapacityReservationRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationRequest')
@@ -257,6 +258,8 @@ module Aws::EC2
     CreateSecurityGroupRequest = Shapes::StructureShape.new(name: 'CreateSecurityGroupRequest')
     CreateSecurityGroupResult = Shapes::StructureShape.new(name: 'CreateSecurityGroupResult')
     CreateSnapshotRequest = Shapes::StructureShape.new(name: 'CreateSnapshotRequest')
+    CreateSnapshotsRequest = Shapes::StructureShape.new(name: 'CreateSnapshotsRequest')
+    CreateSnapshotsResult = Shapes::StructureShape.new(name: 'CreateSnapshotsResult')
     CreateSpotDatafeedSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateSpotDatafeedSubscriptionRequest')
     CreateSpotDatafeedSubscriptionResult = Shapes::StructureShape.new(name: 'CreateSpotDatafeedSubscriptionResult')
     CreateSubnetRequest = Shapes::StructureShape.new(name: 'CreateSubnetRequest')
@@ -842,6 +845,7 @@ module Aws::EC2
     InstanceNetworkInterfaceSpecificationList = Shapes::ListShape.new(name: 'InstanceNetworkInterfaceSpecificationList')
     InstancePrivateIpAddress = Shapes::StructureShape.new(name: 'InstancePrivateIpAddress')
     InstancePrivateIpAddressList = Shapes::ListShape.new(name: 'InstancePrivateIpAddressList')
+    InstanceSpecification = Shapes::StructureShape.new(name: 'InstanceSpecification')
     InstanceState = Shapes::StructureShape.new(name: 'InstanceState')
     InstanceStateChange = Shapes::StructureShape.new(name: 'InstanceStateChange')
     InstanceStateChangeList = Shapes::ListShape.new(name: 'InstanceStateChangeList')
@@ -1265,7 +1269,9 @@ module Aws::EC2
     SnapshotDetailList = Shapes::ListShape.new(name: 'SnapshotDetailList')
     SnapshotDiskContainer = Shapes::StructureShape.new(name: 'SnapshotDiskContainer')
     SnapshotIdStringList = Shapes::ListShape.new(name: 'SnapshotIdStringList')
+    SnapshotInfo = Shapes::StructureShape.new(name: 'SnapshotInfo')
     SnapshotList = Shapes::ListShape.new(name: 'SnapshotList')
+    SnapshotSet = Shapes::ListShape.new(name: 'SnapshotSet')
     SnapshotState = Shapes::StringShape.new(name: 'SnapshotState')
     SnapshotTaskDetail = Shapes::StructureShape.new(name: 'SnapshotTaskDetail')
     SpotAllocationStrategy = Shapes::StringShape.new(name: 'SpotAllocationStrategy')
@@ -2480,6 +2486,16 @@ module Aws::EC2
     CreateSnapshotRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSnapshotRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateSnapshotRequest.struct_class = Types::CreateSnapshotRequest
+
+    CreateSnapshotsRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateSnapshotsRequest.add_member(:instance_specification, Shapes::ShapeRef.new(shape: InstanceSpecification, required: true, location_name: "InstanceSpecification"))
+    CreateSnapshotsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateSnapshotsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateSnapshotsRequest.add_member(:copy_tags_from_source, Shapes::ShapeRef.new(shape: CopyTagsFromSource, location_name: "CopyTagsFromSource"))
+    CreateSnapshotsRequest.struct_class = Types::CreateSnapshotsRequest
+
+    CreateSnapshotsResult.add_member(:snapshots, Shapes::ShapeRef.new(shape: SnapshotSet, location_name: "snapshotSet"))
+    CreateSnapshotsResult.struct_class = Types::CreateSnapshotsResult
 
     CreateSpotDatafeedSubscriptionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: String, required: true, location_name: "bucket"))
     CreateSpotDatafeedSubscriptionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -4996,6 +5012,10 @@ module Aws::EC2
 
     InstancePrivateIpAddressList.member = Shapes::ShapeRef.new(shape: InstancePrivateIpAddress, location_name: "item")
 
+    InstanceSpecification.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceId"))
+    InstanceSpecification.add_member(:exclude_boot_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExcludeBootVolume"))
+    InstanceSpecification.struct_class = Types::InstanceSpecification
+
     InstanceState.add_member(:code, Shapes::ShapeRef.new(shape: Integer, location_name: "code"))
     InstanceState.add_member(:name, Shapes::ShapeRef.new(shape: InstanceStateName, location_name: "name"))
     InstanceState.struct_class = Types::InstanceState
@@ -6823,7 +6843,21 @@ module Aws::EC2
 
     SnapshotIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "SnapshotId")
 
+    SnapshotInfo.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SnapshotInfo.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SnapshotInfo.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
+    SnapshotInfo.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
+    SnapshotInfo.add_member(:state, Shapes::ShapeRef.new(shape: SnapshotState, location_name: "state"))
+    SnapshotInfo.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSize"))
+    SnapshotInfo.add_member(:start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startTime"))
+    SnapshotInfo.add_member(:progress, Shapes::ShapeRef.new(shape: String, location_name: "progress"))
+    SnapshotInfo.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    SnapshotInfo.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    SnapshotInfo.struct_class = Types::SnapshotInfo
+
     SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot, location_name: "item")
+
+    SnapshotSet.member = Shapes::ShapeRef.new(shape: SnapshotInfo, location_name: "item")
 
     SnapshotTaskDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     SnapshotTaskDetail.add_member(:disk_image_size, Shapes::ShapeRef.new(shape: Double, location_name: "diskImageSize"))
@@ -8186,6 +8220,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateSnapshotRequest)
         o.output = Shapes::ShapeRef.new(shape: Snapshot)
+      end)
+
+      api.add_operation(:create_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSnapshotsResult)
       end)
 
       api.add_operation(:create_spot_datafeed_subscription, Seahorse::Model::Operation.new.tap do |o|

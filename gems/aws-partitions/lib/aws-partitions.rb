@@ -307,6 +307,7 @@ module Aws
             'IoT1ClickProjects' => 'projects.iot1click',
             'IoTAnalytics' => 'iotanalytics',
             'IoTJobsDataPlane' => 'data.jobs.iot',
+            'IoTThingsGraph' => 'iotthingsgraph',
             'KMS' => 'kms',
             'Kafka' => 'kafka',
             'Kinesis' => 'kinesis',

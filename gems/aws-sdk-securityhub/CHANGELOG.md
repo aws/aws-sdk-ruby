@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2019-05-29)
+------------------
+
+* Feature - This update adds the ListProductSubscribers API, DescribeProducts API, removes CONTAINS as a comparison value for the StringFilter, and only allows use of EQUALS instead of CONTAINS in MapFilter.
+
 1.7.0 (2019-05-21)
 ------------------
 
