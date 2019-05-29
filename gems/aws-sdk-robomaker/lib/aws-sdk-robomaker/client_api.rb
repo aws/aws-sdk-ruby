@@ -17,6 +17,8 @@ module Aws::RoboMaker
     BatchDescribeSimulationJobRequest = Shapes::StructureShape.new(name: 'BatchDescribeSimulationJobRequest')
     BatchDescribeSimulationJobResponse = Shapes::StructureShape.new(name: 'BatchDescribeSimulationJobResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CancelDeploymentJobRequest = Shapes::StructureShape.new(name: 'CancelDeploymentJobRequest')
+    CancelDeploymentJobResponse = Shapes::StructureShape.new(name: 'CancelDeploymentJobResponse')
     CancelSimulationJobRequest = Shapes::StructureShape.new(name: 'CancelSimulationJobRequest')
     CancelSimulationJobResponse = Shapes::StructureShape.new(name: 'CancelSimulationJobResponse')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
@@ -87,6 +89,7 @@ module Aws::RoboMaker
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     JobDuration = Shapes::IntegerShape.new(name: 'JobDuration')
+    LastStartedAt = Shapes::TimestampShape.new(name: 'LastStartedAt')
     LastUpdatedAt = Shapes::TimestampShape.new(name: 'LastUpdatedAt')
     LaunchConfig = Shapes::StructureShape.new(name: 'LaunchConfig')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -189,6 +192,11 @@ module Aws::RoboMaker
     BatchDescribeSimulationJobResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: SimulationJobs, location_name: "jobs"))
     BatchDescribeSimulationJobResponse.add_member(:unprocessed_jobs, Shapes::ShapeRef.new(shape: Arns, location_name: "unprocessedJobs"))
     BatchDescribeSimulationJobResponse.struct_class = Types::BatchDescribeSimulationJobResponse
+
+    CancelDeploymentJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
+    CancelDeploymentJobRequest.struct_class = Types::CancelDeploymentJobRequest
+
+    CancelDeploymentJobResponse.struct_class = Types::CancelDeploymentJobResponse
 
     CancelSimulationJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
     CancelSimulationJobRequest.struct_class = Types::CancelSimulationJobRequest
@@ -317,6 +325,7 @@ module Aws::RoboMaker
 
     CreateSimulationJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     CreateSimulationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: SimulationJobStatus, location_name: "status"))
+    CreateSimulationJobResponse.add_member(:last_started_at, Shapes::ShapeRef.new(shape: LastStartedAt, location_name: "lastStartedAt"))
     CreateSimulationJobResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
     CreateSimulationJobResponse.add_member(:failure_behavior, Shapes::ShapeRef.new(shape: FailureBehavior, location_name: "failureBehavior"))
     CreateSimulationJobResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: SimulationJobErrorCode, location_name: "failureCode"))
@@ -470,6 +479,7 @@ module Aws::RoboMaker
     DescribeSimulationJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     DescribeSimulationJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     DescribeSimulationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: SimulationJobStatus, location_name: "status"))
+    DescribeSimulationJobResponse.add_member(:last_started_at, Shapes::ShapeRef.new(shape: LastStartedAt, location_name: "lastStartedAt"))
     DescribeSimulationJobResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
     DescribeSimulationJobResponse.add_member(:failure_behavior, Shapes::ShapeRef.new(shape: FailureBehavior, location_name: "failureBehavior"))
     DescribeSimulationJobResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: SimulationJobErrorCode, location_name: "failureCode"))
@@ -644,6 +654,7 @@ module Aws::RoboMaker
     RobotApplicationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     RobotApplicationSummary.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     RobotApplicationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
+    RobotApplicationSummary.add_member(:robot_software_suite, Shapes::ShapeRef.new(shape: RobotSoftwareSuite, location_name: "robotSoftwareSuite"))
     RobotApplicationSummary.struct_class = Types::RobotApplicationSummary
 
     RobotDeployment.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
@@ -680,11 +691,14 @@ module Aws::RoboMaker
     SimulationApplicationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     SimulationApplicationSummary.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     SimulationApplicationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
+    SimulationApplicationSummary.add_member(:robot_software_suite, Shapes::ShapeRef.new(shape: RobotSoftwareSuite, location_name: "robotSoftwareSuite"))
+    SimulationApplicationSummary.add_member(:simulation_software_suite, Shapes::ShapeRef.new(shape: SimulationSoftwareSuite, location_name: "simulationSoftwareSuite"))
     SimulationApplicationSummary.struct_class = Types::SimulationApplicationSummary
 
     SimulationJob.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     SimulationJob.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     SimulationJob.add_member(:status, Shapes::ShapeRef.new(shape: SimulationJobStatus, location_name: "status"))
+    SimulationJob.add_member(:last_started_at, Shapes::ShapeRef.new(shape: LastStartedAt, location_name: "lastStartedAt"))
     SimulationJob.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
     SimulationJob.add_member(:failure_behavior, Shapes::ShapeRef.new(shape: FailureBehavior, location_name: "failureBehavior"))
     SimulationJob.add_member(:failure_code, Shapes::ShapeRef.new(shape: SimulationJobErrorCode, location_name: "failureCode"))
@@ -837,6 +851,18 @@ module Aws::RoboMaker
         o.http_request_uri = "/batchDescribeSimulationJob"
         o.input = Shapes::ShapeRef.new(shape: BatchDescribeSimulationJobRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchDescribeSimulationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:cancel_deployment_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelDeploymentJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/cancelDeploymentJob"
+        o.input = Shapes::ShapeRef.new(shape: CancelDeploymentJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelDeploymentJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

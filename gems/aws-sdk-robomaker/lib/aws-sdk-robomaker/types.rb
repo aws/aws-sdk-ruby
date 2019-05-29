@@ -43,6 +43,28 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelDeploymentJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] job
+    #   The deployment job ARN to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelDeploymentJobRequest AWS API Documentation
+    #
+    class CancelDeploymentJobRequest < Struct.new(
+      :job)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelDeploymentJobResponse AWS API Documentation
+    #
+    class CancelDeploymentJobResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CancelSimulationJobRequest
     #   data as a hash:
     #
@@ -880,6 +902,11 @@ module Aws::RoboMaker
     #   The status of the simulation job.
     #   @return [String]
     #
+    # @!attribute [rw] last_started_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   was last started.
+    #   @return [Time]
+    #
     # @!attribute [rw] last_updated_at
     #   The time, in milliseconds since the epoch, when the simulation job
     #   was last updated.
@@ -997,6 +1024,7 @@ module Aws::RoboMaker
     class CreateSimulationJobResponse < Struct.new(
       :arn,
       :status,
+      :last_started_at,
       :last_updated_at,
       :failure_behavior,
       :failure_code,
@@ -1716,6 +1744,11 @@ module Aws::RoboMaker
     #   The status of the simulation job.
     #   @return [String]
     #
+    # @!attribute [rw] last_started_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   was last started.
+    #   @return [Time]
+    #
     # @!attribute [rw] last_updated_at
     #   The time, in milliseconds since the epoch, when the simulation job
     #   was last updated.
@@ -1844,6 +1877,7 @@ module Aws::RoboMaker
       :arn,
       :name,
       :status,
+      :last_started_at,
       :last_updated_at,
       :failure_behavior,
       :failure_code,
@@ -2556,11 +2590,11 @@ module Aws::RoboMaker
     #
     #   : Validating the deployment.
     #
-    #   Downloading/Extracting
+    #   DownloadingExtracting
     #
     #   : Downloading and extracting the bundle on the robot.
     #
-    #   Executing pre-launch script(s)
+    #   ExecutingPreLaunch
     #
     #   : Executing pre-launch script(s) if provided.
     #
@@ -2568,7 +2602,7 @@ module Aws::RoboMaker
     #
     #   : Launching the robot application.
     #
-    #   Executing post-launch script(s)
+    #   ExecutingPostLaunch
     #
     #   : Executing post-launch script(s) if provided.
     #
@@ -2827,13 +2861,18 @@ module Aws::RoboMaker
     #   application was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] robot_software_suite
+    #   Information about a robot software suite.
+    #   @return [Types::RobotSoftwareSuite]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationSummary AWS API Documentation
     #
     class RobotApplicationSummary < Struct.new(
       :name,
       :arn,
       :version,
-      :last_updated_at)
+      :last_updated_at,
+      :robot_software_suite)
       include Aws::Structure
     end
 
@@ -2965,13 +3004,23 @@ module Aws::RoboMaker
     #   application was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] robot_software_suite
+    #   Information about a robot software suite.
+    #   @return [Types::RobotSoftwareSuite]
+    #
+    # @!attribute [rw] simulation_software_suite
+    #   Information about a simulation software suite.
+    #   @return [Types::SimulationSoftwareSuite]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationSummary AWS API Documentation
     #
     class SimulationApplicationSummary < Struct.new(
       :name,
       :arn,
       :version,
-      :last_updated_at)
+      :last_updated_at,
+      :robot_software_suite,
+      :simulation_software_suite)
       include Aws::Structure
     end
 
@@ -2988,6 +3037,11 @@ module Aws::RoboMaker
     # @!attribute [rw] status
     #   Status of the simulation job.
     #   @return [String]
+    #
+    # @!attribute [rw] last_started_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   was last started.
+    #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
     #   The time, in milliseconds since the epoch, when the simulation job
@@ -3034,12 +3088,7 @@ module Aws::RoboMaker
     # @!attribute [rw] iam_role
     #   The IAM role that allows the simulation instance to call the AWS
     #   APIs that are specified in its associated policies on your behalf.
-    #   This is how credentials are passed in to your simulation job. See
-    #   how to [specify AWS security credentials for your application][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials
+    #   This is how credentials are passed in to your simulation job.
     #   @return [String]
     #
     # @!attribute [rw] robot_applications
@@ -3065,6 +3114,7 @@ module Aws::RoboMaker
       :arn,
       :name,
       :status,
+      :last_started_at,
       :last_updated_at,
       :failure_behavior,
       :failure_code,

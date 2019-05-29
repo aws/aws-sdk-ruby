@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2019-05-29)
+------------------
+
+* Feature - Documentation updates for rds
+
+1.55.0 (2019-05-28)
+------------------
+
+* Feature - Add a new output field Status to DBEngineVersion which shows the status of the engine version (either available or deprecated). Add a new parameter IncludeAll to DescribeDBEngineVersions to make it possible to return both available and deprecated engine versions. These changes enable a user to create a Read Replica of an DB instance on a deprecated engine version.
+
 1.54.0 (2019-05-22)
 ------------------
 

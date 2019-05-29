@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2019-05-28)
+------------------
+
+* Feature - This release adds the ability to search and order toll free phone numbers for Voice Connectors.
+
 1.9.0 (2019-05-21)
 ------------------
 

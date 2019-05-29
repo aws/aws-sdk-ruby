@@ -4900,6 +4900,11 @@ module Aws::RDS
     #   ^
     #   @return [Array<String>]
     #
+    # @!attribute [rw] status
+    #   The status of the DB engine version, either `available` or
+    #   `deprecated`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -4916,7 +4921,8 @@ module Aws::RDS
       :supports_log_exports_to_cloudwatch_logs,
       :supports_read_replica,
       :supported_engine_modes,
-      :supported_feature_names)
+      :supported_feature_names,
+      :status)
       include Aws::Structure
     end
 
@@ -7236,6 +7242,7 @@ module Aws::RDS
     #         default_only: false,
     #         list_supported_character_sets: false,
     #         list_supported_timezones: false,
+    #         include_all: false,
     #       }
     #
     # @!attribute [rw] engine
@@ -7304,6 +7311,12 @@ module Aws::RDS
     #   list of supported time zones for each engine version.
     #   @return [Boolean]
     #
+    # @!attribute [rw] include_all
+    #   A value that indicates whether to include engine versions that
+    #   aren't available in the list. The default is to list only available
+    #   engine versions.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersionsMessage AWS API Documentation
     #
     class DescribeDBEngineVersionsMessage < Struct.new(
@@ -7315,7 +7328,8 @@ module Aws::RDS
       :marker,
       :default_only,
       :list_supported_character_sets,
-      :list_supported_timezones)
+      :list_supported_timezones,
+      :include_all)
       include Aws::Structure
     end
 

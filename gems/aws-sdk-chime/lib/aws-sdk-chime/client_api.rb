@@ -146,6 +146,7 @@ module Aws::Chime
     PhoneNumberOrderStatus = Shapes::StringShape.new(name: 'PhoneNumberOrderStatus')
     PhoneNumberProductType = Shapes::StringShape.new(name: 'PhoneNumberProductType')
     PhoneNumberStatus = Shapes::StringShape.new(name: 'PhoneNumberStatus')
+    PhoneNumberType = Shapes::StringShape.new(name: 'PhoneNumberType')
     Port = Shapes::IntegerShape.new(name: 'Port')
     ProfileServiceMaxResults = Shapes::IntegerShape.new(name: 'ProfileServiceMaxResults')
     PutEventsConfigurationRequest = Shapes::StructureShape.new(name: 'PutEventsConfigurationRequest')
@@ -176,6 +177,7 @@ module Aws::Chime
     Termination = Shapes::StructureShape.new(name: 'Termination')
     TerminationHealth = Shapes::StructureShape.new(name: 'TerminationHealth')
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
+    TollFreePrefix = Shapes::StringShape.new(name: 'TollFreePrefix')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
     UpdateAccountRequest = Shapes::StructureShape.new(name: 'UpdateAccountRequest')
@@ -572,6 +574,7 @@ module Aws::Chime
 
     PhoneNumber.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumberId"))
     PhoneNumber.add_member(:e164_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "E164PhoneNumber"))
+    PhoneNumber.add_member(:type, Shapes::ShapeRef.new(shape: PhoneNumberType, location_name: "Type"))
     PhoneNumber.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, location_name: "ProductType"))
     PhoneNumber.add_member(:status, Shapes::ShapeRef.new(shape: PhoneNumberStatus, location_name: "Status"))
     PhoneNumber.add_member(:capabilities, Shapes::ShapeRef.new(shape: PhoneNumberCapabilities, location_name: "Capabilities"))
@@ -670,6 +673,7 @@ module Aws::Chime
     SearchAvailablePhoneNumbersRequest.add_member(:city, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "city"))
     SearchAvailablePhoneNumbersRequest.add_member(:country, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "country"))
     SearchAvailablePhoneNumbersRequest.add_member(:state, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "state"))
+    SearchAvailablePhoneNumbersRequest.add_member(:toll_free_prefix, Shapes::ShapeRef.new(shape: TollFreePrefix, location: "querystring", location_name: "toll-free-prefix"))
     SearchAvailablePhoneNumbersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PhoneNumberMaxResults, location: "querystring", location_name: "max-results"))
     SearchAvailablePhoneNumbersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     SearchAvailablePhoneNumbersRequest.struct_class = Types::SearchAvailablePhoneNumbersRequest

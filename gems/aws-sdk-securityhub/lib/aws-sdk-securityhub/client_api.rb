@@ -33,6 +33,7 @@ module Aws::SecurityHub
     BatchImportFindingsRequest = Shapes::StructureShape.new(name: 'BatchImportFindingsRequest')
     BatchImportFindingsResponse = Shapes::StructureShape.new(name: 'BatchImportFindingsResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     Compliance = Shapes::StructureShape.new(name: 'Compliance')
     ComplianceStatus = Shapes::StringShape.new(name: 'ComplianceStatus')
     ContainerDetails = Shapes::StructureShape.new(name: 'ContainerDetails')
@@ -52,6 +53,8 @@ module Aws::SecurityHub
     DeleteInvitationsResponse = Shapes::StructureShape.new(name: 'DeleteInvitationsResponse')
     DeleteMembersRequest = Shapes::StructureShape.new(name: 'DeleteMembersRequest')
     DeleteMembersResponse = Shapes::StructureShape.new(name: 'DeleteMembersResponse')
+    DescribeProductsRequest = Shapes::StructureShape.new(name: 'DescribeProductsRequest')
+    DescribeProductsResponse = Shapes::StructureShape.new(name: 'DescribeProductsResponse')
     DisableImportFindingsForProductRequest = Shapes::StructureShape.new(name: 'DisableImportFindingsForProductRequest')
     DisableImportFindingsForProductResponse = Shapes::StructureShape.new(name: 'DisableImportFindingsForProductResponse')
     DisableSecurityHubRequest = Shapes::StructureShape.new(name: 'DisableSecurityHubRequest')
@@ -106,6 +109,8 @@ module Aws::SecurityHub
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
+    ListProductSubscribersRequest = Shapes::StructureShape.new(name: 'ListProductSubscribersRequest')
+    ListProductSubscribersResponse = Shapes::StructureShape.new(name: 'ListProductSubscribersResponse')
     Malware = Shapes::StructureShape.new(name: 'Malware')
     MalwareList = Shapes::ListShape.new(name: 'MalwareList')
     MalwareState = Shapes::StringShape.new(name: 'MalwareState')
@@ -126,7 +131,10 @@ module Aws::SecurityHub
     NumberFilterList = Shapes::ListShape.new(name: 'NumberFilterList')
     Partition = Shapes::StringShape.new(name: 'Partition')
     ProcessDetails = Shapes::StructureShape.new(name: 'ProcessDetails')
+    Product = Shapes::StructureShape.new(name: 'Product')
+    ProductSubscribersList = Shapes::ListShape.new(name: 'ProductSubscribersList')
     ProductSubscriptionArnList = Shapes::ListShape.new(name: 'ProductSubscriptionArnList')
+    ProductsList = Shapes::ListShape.new(name: 'ProductsList')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     RecordState = Shapes::StringShape.new(name: 'RecordState')
     RelatedFinding = Shapes::StructureShape.new(name: 'RelatedFinding')
@@ -346,6 +354,8 @@ module Aws::SecurityHub
     BatchImportFindingsResponse.add_member(:failed_findings, Shapes::ShapeRef.new(shape: ImportFindingsErrorList, location_name: "FailedFindings"))
     BatchImportFindingsResponse.struct_class = Types::BatchImportFindingsResponse
 
+    CategoryList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     Compliance.add_member(:status, Shapes::ShapeRef.new(shape: ComplianceStatus, location_name: "Status"))
     Compliance.struct_class = Types::Compliance
 
@@ -403,6 +413,14 @@ module Aws::SecurityHub
 
     DeleteMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
     DeleteMembersResponse.struct_class = Types::DeleteMembersResponse
+
+    DescribeProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    DescribeProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    DescribeProductsRequest.struct_class = Types::DescribeProductsRequest
+
+    DescribeProductsResponse.add_member(:products, Shapes::ShapeRef.new(shape: ProductsList, required: true, location_name: "Products"))
+    DescribeProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeProductsResponse.struct_class = Types::DescribeProductsResponse
 
     DisableImportFindingsForProductRequest.add_member(:product_subscription_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "ProductSubscriptionArn"))
     DisableImportFindingsForProductRequest.struct_class = Types::DisableImportFindingsForProductRequest
@@ -577,6 +595,15 @@ module Aws::SecurityHub
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
 
+    ListProductSubscribersRequest.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location: "querystring", location_name: "ProductArn"))
+    ListProductSubscribersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListProductSubscribersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListProductSubscribersRequest.struct_class = Types::ListProductSubscribersRequest
+
+    ListProductSubscribersResponse.add_member(:product_subscribers, Shapes::ShapeRef.new(shape: ProductSubscribersList, location_name: "ProductSubscribers"))
+    ListProductSubscribersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListProductSubscribersResponse.struct_class = Types::ListProductSubscribersResponse
+
     Malware.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
     Malware.add_member(:type, Shapes::ShapeRef.new(shape: MalwareType, location_name: "Type"))
     Malware.add_member(:path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Path"))
@@ -639,7 +666,21 @@ module Aws::SecurityHub
     ProcessDetails.add_member(:terminated_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TerminatedAt"))
     ProcessDetails.struct_class = Types::ProcessDetails
 
+    Product.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProductArn"))
+    Product.add_member(:product_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProductName"))
+    Product.add_member(:company_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CompanyName"))
+    Product.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    Product.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryList, location_name: "Categories"))
+    Product.add_member(:marketplace_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MarketplaceUrl"))
+    Product.add_member(:activation_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ActivationUrl"))
+    Product.add_member(:product_subscription_resource_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProductSubscriptionResourcePolicy"))
+    Product.struct_class = Types::Product
+
+    ProductSubscribersList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     ProductSubscriptionArnList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    ProductsList.member = Shapes::ShapeRef.new(shape: Product)
 
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Text"))
     Recommendation.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Url"))
@@ -893,6 +934,24 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_products, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProducts"
+        o.http_method = "GET"
+        o.http_request_uri = "/products"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProductsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProductsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:disable_import_findings_for_product, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableImportFindingsForProduct"
         o.http_method = "DELETE"
@@ -1122,6 +1181,24 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:list_product_subscribers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProductSubscribers"
+        o.http_method = "GET"
+        o.http_request_uri = "/productSubscribers/"
+        o.input = Shapes::ShapeRef.new(shape: ListProductSubscribersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProductSubscribersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:update_findings, Seahorse::Model::Operation.new.tap do |o|

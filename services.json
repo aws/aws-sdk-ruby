@@ -258,6 +258,9 @@
   "Greengrass": {
     "models": "greengrass/2017-06-07"
   },
+  "GroundStation": {
+    "models": "groundstation/2019-05-23"
+  },
   "GuardDuty": {
     "models": "guardduty/2017-11-28"
   },
@@ -291,6 +294,9 @@
   },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
+  },
+  "IoTThingsGraph": {
+    "models": "iotthingsgraph/2018-09-06"
   },
   "KMS": {
     "models": "kms/2014-11-01"
@@ -470,7 +476,7 @@
     "models": "s3/2006-03-01",
     "dependencies": {
       "aws-sdk-kms": "~> 1",
-      "aws-sigv4": "~> 1.0"
+      "aws-sigv4": "~> 1.1"
     },
     "removePlugins": [
       "Aws::Plugins::SignatureV4"
@@ -495,7 +501,7 @@
   "S3Control": {
     "models": "s3control/2018-08-20",
     "dependencies": {
-      "aws-sigv4": "~> 1.0"
+      "aws-sigv4": "~> 1.1"
     },
     "removePlugins": [
       "Aws::Plugins::SignatureV4"

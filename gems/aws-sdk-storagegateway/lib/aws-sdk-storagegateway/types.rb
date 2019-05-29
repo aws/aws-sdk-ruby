@@ -338,6 +338,49 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssignTapePoolInput
+    #   data as a hash:
+    #
+    #       {
+    #         tape_arn: "TapeARN", # required
+    #         pool_id: "PoolId", # required
+    #       }
+    #
+    # @!attribute [rw] tape_arn
+    #   The unique Amazon Resource Name (ARN) of the virtual tape that you
+    #   want to add to the tape pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_id
+    #   The ID of the pool that you want to add your tape to for archiving.
+    #   The tape in this pool is archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssignTapePoolInput AWS API Documentation
+    #
+    class AssignTapePoolInput < Struct.new(
+      :tape_arn,
+      :pool_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tape_arn
+    #   The unique Amazon Resource Names (ARN) of the virtual tape that was
+    #   added to the tape pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssignTapePoolOutput AWS API Documentation
+    #
+    class AssignTapePoolOutput < Struct.new(
+      :tape_arn)
+      include Aws::Structure
+    end
+
     # AttachVolumeInput
     #
     # @note When making an API call, you may pass AttachVolumeInput

@@ -258,6 +258,7 @@ module Aws::RDS
     #     default_only: false,
     #     list_supported_character_sets: false,
     #     list_supported_timezones: false,
+    #     include_all: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :engine_version
@@ -292,6 +293,10 @@ module Aws::RDS
     #   If this parameter is enabled and the requested engine supports the
     #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
     #   list of supported time zones for each engine version.
+    # @option options [Boolean] :include_all
+    #   A value that indicates whether to include engine versions that aren't
+    #   available in the list. The default is to list only available engine
+    #   versions.
     # @return [DBEngineVersion::Collection]
     def versions(options = {})
       batches = Enumerator.new do |y|

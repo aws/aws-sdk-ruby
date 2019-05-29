@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-05-28)
+------------------
+
+* Feature - Introduce AssignTapePool operation to allow customers to migrate tapes between pools.
+
 1.25.0 (2019-05-21)
 ------------------
 

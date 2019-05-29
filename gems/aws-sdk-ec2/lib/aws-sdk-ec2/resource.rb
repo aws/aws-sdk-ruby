@@ -884,23 +884,23 @@ module Aws::EC2
     #   The Availability Zone in which to create the volume.
     # @option options [Boolean] :encrypted
     #   Specifies the encryption state of the volume. The default effect of
-    #   setting the `Encrypted` parameter to `true` through the console, API,
-    #   or CLI depends on the volume's origin (new or from a snapshot),
-    #   starting encryption state, ownership, and whether [account-level
-    #   encryption][1] is enabled. Each default case can be overridden by
-    #   specifying a customer master key (CMK) with the `KmsKeyId` parameter
-    #   in addition to setting `Encrypted` to `true`. For a complete list of
-    #   possible encryption cases, see [Amazon EBS
-    #   Encryption](AWSEC2/latest/UserGuide/EBSEncryption.htm).
+    #   setting the `Encrypted` parameter to `true` depends on the volume
+    #   origin (new or from a snapshot), starting encryption state, ownership,
+    #   and whether [account-level encryption][1] is enabled. Each default
+    #   case can be overridden by specifying a customer master key (CMK) using
+    #   the `KmsKeyId` parameter, in addition to setting `Encrypted` to
+    #   `true`. For a complete list of possible encryption cases, see [Amazon
+    #   EBS Encryption][2].
     #
     #   Encrypted Amazon EBS volumes may only be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
-    #   Instance Types][2].
+    #   Instance Types][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     # @option options [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
     #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
@@ -1157,7 +1157,14 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [String] :image_location
-    #   The full path to your AMI manifest in Amazon S3 storage.
+    #   The full path to your AMI manifest in Amazon S3 storage. The specified
+    #   bucket must have the `aws-exec-read` canned access control list (ACL)
+    #   to ensure that it can be accessed by Amazon EC2. For more information,
+    #   see [Canned ACLs][1] in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     # @option options [String] :architecture
     #   The architecture of the AMI.
     #

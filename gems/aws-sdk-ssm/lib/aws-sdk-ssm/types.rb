@@ -91,8 +91,8 @@ module Aws::SSM
     #   Specifies the type of resource you are tagging.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example,
     #   mi-1a2b3c4d5e6f.
     #
     #    </note>
@@ -112,8 +112,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example,
     #   mi-1a2b3c4d5e6f.
     #
     #    </note>
@@ -1230,7 +1230,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution to stop.
+    #   The ID of the maintenance window execution to stop.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionRequest AWS API Documentation
@@ -1241,7 +1241,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that has been stopped.
+    #   The ID of the maintenance window execution that has been stopped.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionResult AWS API Documentation
@@ -2716,36 +2716,36 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   An optional description for the Maintenance Window. We recommend
-    #   specifying a description to help you organize your Maintenance
-    #   Windows.
+    #   An optional description for the maintenance window. We recommend
+    #   specifying a description to help you organize your maintenance
+    #   windows.
     #   @return [String]
     #
     # @!attribute [rw] start_date
     #   The date and time, in ISO-8601 Extended format, for when you want
-    #   the Maintenance Window to become active. StartDate allows you to
-    #   delay activation of the Maintenance Window until the specified
+    #   the maintenance window to become active. StartDate allows you to
+    #   delay activation of the maintenance window until the specified
     #   future date.
     #   @return [String]
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when you want
-    #   the Maintenance Window to become inactive. EndDate allows you to set
-    #   a date and time in the future when the Maintenance Window will no
+    #   the maintenance window to become inactive. EndDate allows you to set
+    #   a date and time in the future when the maintenance window will no
     #   longer run.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -2757,23 +2757,23 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Enables a Maintenance Window task to run on managed instances, even
+    #   Enables a maintenance window task to run on managed instances, even
     #   if you have not registered those instances as targets. If enabled,
     #   then you must specify the unregistered instances (by instance ID)
-    #   when you register a task with the Maintenance Window
+    #   when you register a task with the maintenance window.
     #
     #   If you don't enable this option, then you must specify
     #   previously-registered targets when you register a task with the
-    #   Maintenance Window.
+    #   maintenance window.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
@@ -2786,8 +2786,8 @@ module Aws::SSM
     # @!attribute [rw] tags
     #   Optional metadata that you assign to a resource. Tags enable you to
     #   categorize a resource in different ways, such as by purpose, owner,
-    #   or environment. For example, you might want to tag a Maintenance
-    #   Window to identify the type of tasks it will run, the types of
+    #   or environment. For example, you might want to tag a maintenance
+    #   window to identify the type of tasks it will run, the types of
     #   targets, and the environment it will run in. In this case, you could
     #   specify the following key name/value pairs:
     #
@@ -2797,7 +2797,7 @@ module Aws::SSM
     #
     #   * `Key=Environment,Value=Production`
     #
-    #   <note markdown="1"> To add tags to an existing Maintenance Window, use the
+    #   <note markdown="1"> To add tags to an existing maintenance window, use the
     #   AddTagsToResource action.
     #
     #    </note>
@@ -2821,7 +2821,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the created Maintenance Window.
+    #   The ID of the created maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindowResult AWS API Documentation
@@ -3168,7 +3168,7 @@ module Aws::SSM
     #   DisableSchema: If you choose this option, the system ignores all
     #   inventory data for the specified version, and any earlier versions.
     #   To enable this schema again, you must call the `PutInventory` action
-    #   for a version greater than the disbled version.
+    #   for a version greater than the disabled version.
     #
     #   DeleteSchema: This option deletes the specified custom type from the
     #   Inventory service. You can recreate the schema later, if you want.
@@ -3237,7 +3237,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to delete.
+    #   The ID of the maintenance window to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindowRequest AWS API Documentation
@@ -3248,7 +3248,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the deleted Maintenance Window.
+    #   The ID of the deleted maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindowResult AWS API Documentation
@@ -3440,7 +3440,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the target should be removed from.
+    #   The ID of the maintenance window the target should be removed from.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -3450,7 +3450,7 @@ module Aws::SSM
     # @!attribute [rw] safe
     #   The system checks if the target is being referenced by a task. If
     #   the target is being referenced, the system returns an error and does
-    #   not deregister the target from the Maintenance Window.
+    #   not deregister the target from the maintenance window.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindowRequest AWS API Documentation
@@ -3463,7 +3463,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the target was removed from.
+    #   The ID of the maintenance window the target was removed from.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -3487,11 +3487,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the task should be removed from.
+    #   The ID of the maintenance window the task should be removed from.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The ID of the task to remove from the Maintenance Window.
+    #   The ID of the task to remove from the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindowRequest AWS API Documentation
@@ -3503,11 +3503,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the task was removed from.
+    #   The ID of the maintenance window the task was removed from.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The ID of the task removed from the Maintenance Window.
+    #   The ID of the task removed from the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindowResult AWS API Documentation
@@ -4541,11 +4541,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution the task is part of.
+    #   The ID of the maintenance window execution the task is part of.
     #   @return [String]
     #
     # @!attribute [rw] task_id
-    #   The ID of the specific task in the Maintenance Window task that
+    #   The ID of the specific task in the maintenance window task that
     #   should be retrieved.
     #   @return [String]
     #
@@ -4611,7 +4611,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution whose task executions
+    #   The ID of the maintenance window execution whose task executions
     #   should be retrieved.
     #   @return [String]
     #
@@ -4676,7 +4676,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window whose executions should be
+    #   The ID of the maintenance window whose executions should be
     #   retrieved.
     #   @return [String]
     #
@@ -4714,7 +4714,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_executions
-    #   Information about the Maintenance Windows execution.
+    #   Information about the maintenance window executions.
     #   @return [Array<Types::MaintenanceWindowExecution>]
     #
     # @!attribute [rw] next_token
@@ -4753,7 +4753,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to retrieve information about.
+    #   The ID of the maintenance window to retrieve information about.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -4767,7 +4767,7 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   Filters used to limit the range of results. For example, you can
-    #   limit Maintenance Window executions to only those scheduled before
+    #   limit maintenance window executions to only those scheduled before
     #   or after a certain date and time.
     #   @return [Array<Types::PatchOrchestratorFilter>]
     #
@@ -4795,7 +4795,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] scheduled_window_executions
-    #   Information about Maintenance Window executions scheduled for the
+    #   Information about maintenance window executions scheduled for the
     #   specified time range.
     #   @return [Array<Types::ScheduledWindowExecution>]
     #
@@ -4828,7 +4828,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window whose targets should be retrieved.
+    #   The ID of the maintenance window whose targets should be retrieved.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -4859,7 +4859,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] targets
-    #   Information about the targets in the Maintenance Window.
+    #   Information about the targets in the maintenance window.
     #   @return [Array<Types::MaintenanceWindowTarget>]
     #
     # @!attribute [rw] next_token
@@ -4891,7 +4891,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window whose tasks should be retrieved.
+    #   The ID of the maintenance window whose tasks should be retrieved.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -4922,7 +4922,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] tasks
-    #   Information about the tasks in the Maintenance Window.
+    #   Information about the tasks in the maintenance window.
     #   @return [Array<Types::MaintenanceWindowTask>]
     #
     # @!attribute [rw] next_token
@@ -4984,7 +4984,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_identities
-    #   Information about the Maintenance Window targets and tasks an
+    #   Information about the maintenance window targets and tasks an
     #   instance is associated with.
     #   @return [Array<Types::MaintenanceWindowIdentityForTarget>]
     #
@@ -5017,7 +5017,7 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   Optional filters used to narrow down the scope of the returned
-    #   Maintenance Windows. Supported filter keys are **Name** and
+    #   maintenance windows. Supported filter keys are **Name** and
     #   **Enabled**.
     #   @return [Array<Types::MaintenanceWindowFilter>]
     #
@@ -5042,7 +5042,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_identities
-    #   Information about the Maintenance Windows.
+    #   Information about the maintenance windows.
     #   @return [Array<Types::MaintenanceWindowIdentity>]
     #
     # @!attribute [rw] next_token
@@ -5896,7 +5896,7 @@ module Aws::SSM
     end
 
     # Error returned when the ID specified for a resource, such as a
-    # Maintenance Window or Patch baseline, doesn't exist.
+    # maintenance window or Patch baseline, doesn't exist.
     #
     # For information about resource limits in Systems Manager, see [AWS
     # Systems Manager Limits][1].
@@ -6662,7 +6662,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionRequest AWS API Documentation
@@ -6673,15 +6673,15 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution.
+    #   The ID of the maintenance window execution.
     #   @return [String]
     #
     # @!attribute [rw] task_ids
-    #   The ID of the task executions from the Maintenance Window execution.
+    #   The ID of the task executions from the maintenance window execution.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
-    #   The status of the Maintenance Window execution.
+    #   The status of the maintenance window execution.
     #   @return [String]
     #
     # @!attribute [rw] status_details
@@ -6690,11 +6690,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The time the Maintenance Window started running.
+    #   The time the maintenance window started running.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The time the Maintenance Window finished running.
+    #   The time the maintenance window finished running.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionResult AWS API Documentation
@@ -6719,12 +6719,12 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution for which the task is a
+    #   The ID of the maintenance window execution for which the task is a
     #   part.
     #   @return [String]
     #
     # @!attribute [rw] task_id
-    #   The ID of the specific task in the Maintenance Window task that
+    #   The ID of the specific task in the maintenance window task that
     #   should be retrieved.
     #   @return [String]
     #
@@ -6742,7 +6742,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_execution_id
-    #   The Maintenance Window execution ID.
+    #   The maintenance window execution ID.
     #   @return [String]
     #
     # @!attribute [rw] task_execution_id
@@ -6758,7 +6758,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_type
-    #   Retrieves the task type for a Maintenance Window. Task types include
+    #   Retrieves the task type for a maintenance window. Task types include
     #   the following: LAMBDA, STEP\_FUNCTION, AUTOMATION, RUN\_COMMAND.
     #   @return [String]
     #
@@ -6785,11 +6785,11 @@ module Aws::SSM
     #
     # @!attribute [rw] owner_information
     #   User-provided value to be included in any CloudWatch events raised
-    #   while running tasks for these targets in this Maintenance Window.
+    #   while running tasks for these targets in this maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
-    #   The Maintenance Window target ID.
+    #   The maintenance window target ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocationResult AWS API Documentation
@@ -6819,11 +6819,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #   @return [String]
     #
     # @!attribute [rw] task_id
-    #   The ID of the specific task execution in the Maintenance Window task
+    #   The ID of the specific task execution in the maintenance window task
     #   that should be retrieved.
     #   @return [String]
     #
@@ -6836,11 +6836,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #   @return [String]
     #
     # @!attribute [rw] task_execution_id
-    #   The ID of the specific task execution in the Maintenance Window task
+    #   The ID of the specific task execution in the maintenance window task
     #   that was retrieved.
     #   @return [String]
     #
@@ -6862,8 +6862,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #
@@ -6933,7 +6933,8 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the desired Maintenance Window.
+    #   The ID of the maintenance window for which you want to retrieve
+    #   information.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowRequest AWS API Documentation
@@ -6944,36 +6945,36 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the created Maintenance Window.
+    #   The ID of the created maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the Maintenance Window.
+    #   The description of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] start_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become active. The Maintenance
-    #   Window will not run before this specified time.
+    #   maintenance window is scheduled to become active. The maintenance
+    #   window will not run before this specified time.
     #   @return [String]
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become inactive. The Maintenance
-    #   Window will not run after this specified time.
+    #   maintenance window is scheduled to become inactive. The maintenance
+    #   window will not run after this specified time.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -6985,35 +6986,35 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] next_execution_time
-    #   The next time the Maintenance Window will actually run, taking into
-    #   account any specified times for the Maintenance Window to become
+    #   The next time the maintenance window will actually run, taking into
+    #   account any specified times for the maintenance window to become
     #   active or inactive.
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window
+    #   Whether targets must be registered with the maintenance window
     #   before tasks can be defined for those targets.
     #   @return [Boolean]
     #
     # @!attribute [rw] enabled
-    #   Whether the Maintenance Windows is enabled.
+    #   Indicates whether the maintenance window is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_date
-    #   The date the Maintenance Window was created.
+    #   The date the maintenance window was created.
     #   @return [Time]
     #
     # @!attribute [rw] modified_date
-    #   The date the Maintenance Window was last modified.
+    #   The date the maintenance window was last modified.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowResult AWS API Documentation
@@ -7045,11 +7046,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID that includes the task to retrieve.
+    #   The maintenance window ID that includes the task to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The Maintenance Window task ID to retrieve.
+    #   The maintenance window task ID to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTaskRequest AWS API Documentation
@@ -7061,11 +7062,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The retrieved Maintenance Window ID.
+    #   The retrieved maintenance window ID.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The retrieved Maintenance Window task ID.
+    #   The retrieved maintenance window task ID.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -7081,7 +7082,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role to assume during task execution.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for maintenance
+    #   window Run Command tasks.
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -7094,8 +7097,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
@@ -7126,7 +7129,7 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -7373,7 +7376,7 @@ module Aws::SSM
     #
     # @!attribute [rw] invalid_parameters
     #   A list of parameters that are not formatted correctly or do not run
-    #   when executed.
+    #   during an execution.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersResult AWS API Documentation
@@ -7742,7 +7745,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   The association document verions.
+    #   The association document versions.
     #   @return [String]
     #
     # @!attribute [rw] association_version
@@ -8285,7 +8288,7 @@ module Aws::SSM
     end
 
     # The ID specified for the delete operation does not exist or is not
-    # valide. Verify the ID and try again.
+    # valid. Verify the ID and try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -8777,7 +8780,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete
     #   @return [Types::InventoryDeletionSummary]
     #
     # @!attribute [rw] last_status_update_time
@@ -9914,7 +9917,7 @@ module Aws::SSM
     # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     # options in the `TaskInvocationParameters` structure. For information
     # about how Systems Manager handles these options for the supported
-    # Maintenance Window task types, see
+    # maintenance window task types, see
     # MaintenanceWindowTaskInvocationParameters.
     #
     #  </note>
@@ -9975,14 +9978,14 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    For AUTOMATION task types, Systems Manager ignores any values
     #   specified for these parameters.
@@ -9998,14 +10001,14 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes the information about an execution of a Maintenance Window.
+    # Describes the information about an execution of a maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window.
+    #   The ID of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution.
+    #   The ID of the maintenance window execution.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -10037,15 +10040,15 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about a task execution performed as part of a Maintenance
-    # Window execution.
+    # Information about a task execution performed as part of a maintenance
+    # window execution.
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that ran the task.
+    #   The ID of the maintenance window execution that ran the task.
     #   @return [String]
     #
     # @!attribute [rw] task_execution_id
-    #   The ID of the specific task execution in the Maintenance Window
+    #   The ID of the specific task execution in the maintenance window
     #   execution.
     #   @return [String]
     #
@@ -10089,15 +10092,15 @@ module Aws::SSM
     end
 
     # Describes the information about a task invocation for a particular
-    # target as part of a task execution performed as part of a Maintenance
-    # Window execution.
+    # target as part of a task execution performed as part of a maintenance
+    # window execution.
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that ran the task.
+    #   The ID of the maintenance window execution that ran the task.
     #   @return [String]
     #
     # @!attribute [rw] task_execution_id
-    #   The ID of the specific task execution in the Maintenance Window
+    #   The ID of the specific task execution in the maintenance window
     #   execution.
     #   @return [String]
     #
@@ -10139,12 +10142,12 @@ module Aws::SSM
     #
     # @!attribute [rw] owner_information
     #   User-provided value that was specified when the target was
-    #   registered with the Maintenance Window. This was also included in
+    #   registered with the maintenance window. This was also included in
     #   any CloudWatch events raised during the task invocation.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
-    #   The ID of the target definition in this Maintenance Window the
+    #   The ID of the target definition in this maintenance window the
     #   invocation was performed for.
     #   @return [String]
     #
@@ -10193,56 +10196,56 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about the Maintenance Window.
+    # Information about the maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window.
+    #   The ID of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the Maintenance Window.
+    #   A description of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Whether the Maintenance Window is enabled.
+    #   Indicates whether the maintenance window is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format.
     #   @return [String]
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become inactive.
+    #   maintenance window is scheduled to become inactive.
     #   @return [String]
     #
     # @!attribute [rw] start_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become active.
+    #   maintenance window is scheduled to become active.
     #   @return [String]
     #
     # @!attribute [rw] next_execution_time
-    #   The next time the Maintenance Window will actually run, taking into
-    #   account any specified times for the Maintenance Window to become
+    #   The next time the maintenance window will actually run, taking into
+    #   account any specified times for the maintenance window to become
     #   active or inactive.
     #   @return [String]
     #
@@ -10263,14 +10266,14 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The Maintenance Window to which the specified target belongs.
+    # The maintenance window to which the specified target belongs.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window.
+    #   The ID of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentityForTarget AWS API Documentation
@@ -10290,14 +10293,14 @@ module Aws::SSM
     # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     # options in the `TaskInvocationParameters` structure. For information
     # about how Systems Manager handles these options for the supported
-    # Maintenance Window task types, see
+    # maintenance window task types, see
     # MaintenanceWindowTaskInvocationParameters.
     #
     #  `TaskParameters` has been deprecated. To specify parameters to pass to
     # a task when it runs, instead use the `Parameters` option in the
     # `TaskInvocationParameters` structure. For information about how
-    # Systems Manager handles these options for the supported Maintenance
-    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    # Systems Manager handles these options for the supported maintenance
+    # window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #  For Lambda tasks, Systems Manager ignores any values specified for
     # TaskParameters and LoggingInfo.
@@ -10349,14 +10352,14 @@ module Aws::SSM
     # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     # options in the `TaskInvocationParameters` structure. For information
     # about how Systems Manager handles these options for the supported
-    # Maintenance Window task types, see
+    # maintenance window task types, see
     # MaintenanceWindowTaskInvocationParameters.
     #
     #  `TaskParameters` has been deprecated. To specify parameters to pass to
     # a task when it runs, instead use the `Parameters` option in the
     # `TaskInvocationParameters` structure. For information about how
-    # Systems Manager handles these options for the supported Maintenance
-    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    # Systems Manager handles these options for the supported maintenance
+    # window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #  For Run Command tasks, Systems Manager uses specified values for
     # `TaskParameters` and `LoggingInfo` only if no values are specified for
@@ -10386,7 +10389,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] comment
-    #   Information about the command(s) to run.
+    #   Information about the commands to run.
     #   @return [String]
     #
     # @!attribute [rw] document_hash
@@ -10416,7 +10419,9 @@ module Aws::SSM
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role to assume during task execution.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for maintenance
+    #   window Run Command tasks.
     #   @return [String]
     #
     # @!attribute [rw] timeout_seconds
@@ -10448,14 +10453,14 @@ module Aws::SSM
     # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     # options in the `TaskInvocationParameters` structure. For information
     # about how Systems Manager handles these options for the supported
-    # Maintenance Window task types, see
+    # maintenance window task types, see
     # MaintenanceWindowTaskInvocationParameters.
     #
     #  `TaskParameters` has been deprecated. To specify parameters to pass to
     # a task when it runs, instead use the `Parameters` option in the
     # `TaskInvocationParameters` structure. For information about how
-    # Systems Manager handles these options for the supported Maintenance
-    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    # Systems Manager handles these options for the supported maintenance
+    # window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #  For Step Functions tasks, Systems Manager ignores any values specified
     # for `TaskParameters` and `LoggingInfo`.
@@ -10486,10 +10491,10 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The target registered with the Maintenance Window.
+    # The target registered with the maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to register the target with.
+    #   The ID of the maintenance window to register the target with.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -10497,8 +10502,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of target that is being registered with the Maintenance
-    #   Window.
+    #   The type of target that is being registered with the maintenance
+    #   window.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -10516,11 +10521,11 @@ module Aws::SSM
     # @!attribute [rw] owner_information
     #   A user-provided value that will be included in any CloudWatch events
     #   that are raised while running tasks for these targets in this
-    #   Maintenance Window.
+    #   maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The target name.
+    #   The name for the maintenance window target.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -10540,10 +10545,10 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about a task defined for a Maintenance Window.
+    # Information about a task defined for a maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window where the task is registered.
+    #   The ID of the maintenance window where the task is registered.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
@@ -10575,14 +10580,14 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] priority
-    #   The priority of the task in the Maintenance Window. The lower the
+    #   The priority of the task in the maintenance window. The lower the
     #   number, the higher the priority. Tasks that have the same priority
     #   are scheduled in parallel.
     #   @return [Integer]
@@ -10594,14 +10599,16 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] service_role_arn
-    #   The role that should be assumed when running the task.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for maintenance
+    #   window Run Command tasks.
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
@@ -10816,21 +10823,21 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] notification_arn
-    #   An Amazon Resource Name (ARN) for a Simple Notification Service
-    #   (SNS) topic. Run Command pushes notifications about command status
-    #   changes to this topic.
+    #   An Amazon Resource Name (ARN) for an Amazon Simple Notification
+    #   Service (Amazon SNS) topic. Run Command pushes notifications about
+    #   command status changes to this topic.
     #   @return [String]
     #
     # @!attribute [rw] notification_events
     #   The different events for which you can receive notifications. These
     #   events include the following: All (events), InProgress, Success,
     #   TimedOut, Cancelled, Failed. To learn more about these events, see
-    #   [Configuring Amazon SNS Notifications for Run Command][1] in the
-    #   *AWS Systems Manager User Guide*.
+    #   [Configuring Amazon SNS Notifications for AWS Systems Manager][1] in
+    #   the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] notification_type
@@ -10991,6 +10998,13 @@ module Aws::SSM
     #
     # @!attribute [rw] policies
     #   Information about the policies assigned to a parameter.
+    #
+    #   [Working with Parameter Policies][1] in the *AWS Systems Manager
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #   @return [Array<Types::ParameterInlinePolicy>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
@@ -11063,7 +11077,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Metada includes information like the ARN of the last user and the
+    # Metadata includes information like the ARN of the last user and the
     # date/time the parameter was last used.
     #
     # @!attribute [rw] name
@@ -12184,32 +12198,46 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the target should be registered
+    #   The ID of the maintenance window the target should be registered
     #   with.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of target being registered with the Maintenance Window.
+    #   The type of target being registered with the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags).
+    #   The targets to register with the maintenance window. In other words,
+    #   the instances to run commands on when the maintenance window runs.
     #
-    #   Specify instances using the following format:
+    #   You can specify targets using either instance IDs or tags that have
+    #   been applied to instances.
     #
-    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #   **Example 1**\: Specify instance IDs
     #
-    #   Specify tags using either of the following formats:
+    #   `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3 `
     #
-    #   `Key=tag:<tag-key>,Values=<tag-value-1>,<tag-value-2>`
+    #   **Example 2**\: Use tag key-pairs applied to instances
     #
-    #   `Key=tag-key,Values=<tag-key-1>,<tag-key-2>`
+    #   `Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2 `
+    #
+    #   **Example 3**\: Use tag-keys applied to instances
+    #
+    #   `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
+    #
+    #   For more information about these examples formats, including the
+    #   best use case for each one, see [Examples: Register Targets with a
+    #   Maintenance Window][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] owner_information
     #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   raised while running tasks for these targets in this maintenance
+    #   window.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -12241,7 +12269,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_target_id
-    #   The ID of the target definition in this Maintenance Window.
+    #   The ID of the target definition in this maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindowResult AWS API Documentation
@@ -12318,17 +12346,17 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the task should be added to.
+    #   The ID of the maintenance window the task should be added to.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or Maintenance Window targets).
+    #   The targets (either instances or maintenance window targets).
     #
     #   Specify instances using the following format:
     #
     #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
     #
-    #   Specify Maintenance Window targets using the following format:
+    #   Specify maintenance window targets using the following format:
     #
     #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
     #   @return [Array<Types::Target>]
@@ -12338,19 +12366,20 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The role to assume when running the Maintenance Window task.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default.
+    #   The ARN of the IAM service role for Systems Manager to assume when
+    #   running a maintenance window task. If you do not specify a service
+    #   role ARN, Systems Manager uses your account's service-linked role.
     #   If no service-linked role for Systems Manager exists in your
-    #   account, it will be created when you run
-    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
-    #   role ARN.
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Service-Linked Role Permissions for
-    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
-    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
-    #   *AWS Systems Manager User Guide*.
+    #   For more information, see the following topics in the in the *AWS
+    #   Systems Manager User Guide*\:
+    #
+    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #
+    #   * [Should I Use a Service-Linked Role or a Custom Service Role to
+    #     Run Maintenance Window Tasks? ][2]
     #
     #
     #
@@ -12368,8 +12397,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
@@ -12381,8 +12410,8 @@ module Aws::SSM
     #   @return [Types::MaintenanceWindowTaskInvocationParameters]
     #
     # @!attribute [rw] priority
-    #   The priority of the task in the Maintenance Window, the lower the
-    #   number the higher the priority. Tasks in a Maintenance Window are
+    #   The priority of the task in the maintenance window, the lower the
+    #   number the higher the priority. Tasks in a maintenance window are
     #   scheduled in priority order with tasks that have the same priority
     #   scheduled in parallel.
     #   @return [Integer]
@@ -12404,7 +12433,7 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -12446,7 +12475,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_task_id
-    #   The ID of the task in the Maintenance Window.
+    #   The ID of the task in the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowResult AWS API Documentation
@@ -12469,8 +12498,8 @@ module Aws::SSM
     #   The type of resource of which you want to remove a tag.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example,
     #   mi-1a2b3c4d5e6f.
     #
     #    </note>
@@ -12489,8 +12518,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example,
     #   mi-1a2b3c4d5e6f.
     #
     #    </note>
@@ -12745,7 +12774,7 @@ module Aws::SSM
     #
     # @!attribute [rw] awskms_key_arn
     #   The ARN of an encryption key for a destination in Amazon S3. Must
-    #   belong to the same region as the destination Amazon S3 bucket.
+    #   belong to the same Region as the destination Amazon S3 bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncS3Destination AWS API Documentation
@@ -12773,7 +12802,7 @@ module Aws::SSM
     end
 
     # Error returned when the caller has exceeded the default resource
-    # limits. For example, too many Maintenance Windows or Patch baselines
+    # limits. For example, too many maintenance windows or patch baselines
     # have been created.
     #
     # For information about resource limits in Systems Manager, see [AWS
@@ -12920,18 +12949,18 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about a scheduled execution for a Maintenance Window.
+    # Information about a scheduled execution for a maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to be run.
+    #   The ID of the maintenance window to be run.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window to be run.
+    #   The name of the maintenance window to be run.
     #   @return [String]
     #
     # @!attribute [rw] execution_time
-    #   The time, in ISO-8601 Extended format, that the Maintenance Window
+    #   The time, in ISO-8601 Extended format, that the maintenance window
     #   is scheduled to be run.
     #   @return [String]
     #
@@ -12961,13 +12990,27 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] signal_type
-    #   The type of signal. Valid signal types include the following:
-    #   Approve and Reject
+    #   The type of signal to send to an Automation execution.
     #   @return [String]
     #
     # @!attribute [rw] payload
     #   The data sent with the signal. The data schema depends on the type
     #   of signal used in the request.
+    #
+    #   For `Approve` and `Reject` signal types, the payload is an optional
+    #   comment that you can send with the signal type. For example:
+    #
+    #   `Comment="Looks good"`
+    #
+    #   For `StartStep` and `Resume` signal types, you must send the name of
+    #   the Automation step to start or resume as the payload. For example:
+    #
+    #   `StepName="step1"`
+    #
+    #   For the `StopStep` signal type, you must send the step execution ID
+    #   as the payload. For example:
+    #
+    #   `StepExecutionId="97fff367-fc5a-4299-aed8-0123456789ab"`
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignalRequest AWS API Documentation
@@ -13138,7 +13181,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM role that Systems Manager uses to send notifications.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for Run Command
+    #   commands.
     #   @return [String]
     #
     # @!attribute [rw] notification_config
@@ -13886,7 +13931,7 @@ module Aws::SSM
     # Metadata that you assign to your AWS resources. Tags enable you to
     # categorize your resources in different ways, for example, by purpose,
     # owner, or environment. In Systems Manager, you can apply tags to
-    # documents, managed instances, Maintenance Windows, Parameter Store
+    # documents, managed instances, maintenance windows, Parameter Store
     # parameters, and patch baselines.
     #
     # @note When making an API call, you may pass Tag
@@ -13997,13 +14042,13 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_location_max_concurrency
-    #   The maxium number of AWS accounts and AWS regions allowed to run the
-    #   Automation concurrently
+    #   The maximum number of AWS accounts and AWS regions allowed to run
+    #   the Automation concurrently
     #   @return [String]
     #
     # @!attribute [rw] target_location_max_errors
-    #   The maxium number of errors allowed before the system stops queueing
-    #   additional Automation executions for the currently running
+    #   The maximum number of errors allowed before the system stops
+    #   queueing additional Automation executions for the currently running
     #   Automation.
     #   @return [String]
     #
@@ -14097,6 +14142,16 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Microsoft application patching is only available on EC2 instances and
+    # Advanced Instances. To patch Microsoft applications on on-premises
+    # servers and VMs, you must enable Advanced Instances. For more
+    # information, see [Using the Advanced-Instances Tier][1] in the *AWS
+    # Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -14523,11 +14578,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to update.
+    #   The ID of the maintenance window to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -14535,7 +14590,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] start_date
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -14548,18 +14603,18 @@ module Aws::SSM
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when you want
-    #   the Maintenance Window to become inactive. EndDate allows you to set
-    #   a date and time in the future when the Maintenance Window will no
+    #   the maintenance window to become inactive. EndDate allows you to set
+    #   a date and time in the future when the maintenance window will no
     #   longer run.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -14571,21 +14626,21 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window
+    #   Whether targets must be registered with the maintenance window
     #   before tasks can be defined for those targets.
     #   @return [Boolean]
     #
     # @!attribute [rw] enabled
-    #   Whether the Maintenance Window is enabled.
+    #   Whether the maintenance window is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] replace
@@ -14613,11 +14668,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the created Maintenance Window.
+    #   The ID of the created maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -14626,23 +14681,23 @@ module Aws::SSM
     #
     # @!attribute [rw] start_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become active. The Maintenance
-    #   Window will not run before this specified time.
+    #   maintenance window is scheduled to become active. The maintenance
+    #   window will not run before this specified time.
     #   @return [String]
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become inactive. The Maintenance
-    #   Window will not run after this specified time.
+    #   maintenance window is scheduled to become inactive. The maintenance
+    #   window will not run after this specified time.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -14654,21 +14709,21 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window
+    #   Whether targets must be registered with the maintenance window
     #   before tasks can be defined for those targets.
     #   @return [Boolean]
     #
     # @!attribute [rw] enabled
-    #   Whether the Maintenance Window is enabled.
+    #   Whether the maintenance window is enabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowResult AWS API Documentation
@@ -14707,7 +14762,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID with which to modify the target.
+    #   The maintenance window ID with which to modify the target.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -14720,8 +14775,8 @@ module Aws::SSM
     #
     # @!attribute [rw] owner_information
     #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   raised while running tasks for these targets in this maintenance
+    #   window.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -14753,7 +14808,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID specified in the update request.
+    #   The maintenance window ID specified in the update request.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -14855,7 +14910,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID that contains the task to modify.
+    #   The maintenance window ID that contains the task to modify.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
@@ -14873,20 +14928,20 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role ARN to modify. The system assumes this role
-    #   during task execution.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default.
+    #   The ARN of the IAM service role for Systems Manager to assume when
+    #   running a maintenance window task. If you do not specify a service
+    #   role ARN, Systems Manager uses your account's service-linked role.
     #   If no service-linked role for Systems Manager exists in your
-    #   account, it will be created when you run
-    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
-    #   role ARN.
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Service-Linked Role Permissions for
-    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
-    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
-    #   *AWS Systems Manager User Guide*.
+    #   For more information, see the following topics in the in the *AWS
+    #   Systems Manager User Guide*\:
+    #
+    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #
+    #   * [Should I Use a Service-Linked Role or a Custom Service Role to
+    #     Run Maintenance Window Tasks? ][2]
     #
     #
     #
@@ -14900,8 +14955,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #
@@ -14944,7 +14999,7 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -14985,11 +15040,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window that was updated.
+    #   The ID of the maintenance window that was updated.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The task ID of the Maintenance Window that was updated.
+    #   The task ID of the maintenance window that was updated.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -15001,7 +15056,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The updated service role ARN value.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for maintenance
+    #   window Run Command tasks.
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
@@ -15010,8 +15067,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
@@ -15039,7 +15096,7 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>

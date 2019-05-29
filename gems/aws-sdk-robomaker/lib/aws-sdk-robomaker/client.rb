@@ -272,6 +272,7 @@ module Aws::RoboMaker
     #   resp.jobs[0].arn #=> String
     #   resp.jobs[0].name #=> String
     #   resp.jobs[0].status #=> String, one of "Pending", "Preparing", "Running", "Restarting", "Completed", "Failed", "RunningFailed", "Terminating", "Terminated", "Canceled"
+    #   resp.jobs[0].last_started_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].failure_behavior #=> String, one of "Fail", "Continue"
     #   resp.jobs[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
@@ -313,6 +314,28 @@ module Aws::RoboMaker
     # @param [Hash] params ({})
     def batch_describe_simulation_job(params = {}, options = {})
       req = build_request(:batch_describe_simulation_job, params)
+      req.send_request(options)
+    end
+
+    # Cancels the specified deployment job.
+    #
+    # @option params [required, String] :job
+    #   The deployment job ARN to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_deployment_job({
+    #     job: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelDeploymentJob AWS API Documentation
+    #
+    # @overload cancel_deployment_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_deployment_job(params = {}, options = {})
+      req = build_request(:cancel_deployment_job, params)
       req.send_request(options)
     end
 
@@ -420,7 +443,7 @@ module Aws::RoboMaker
     #
     #   resp.arn #=> String
     #   resp.fleet #=> String
-    #   resp.status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded"
+    #   resp.status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded", "Canceled"
     #   resp.deployment_application_configs #=> Array
     #   resp.deployment_application_configs[0].application #=> String
     #   resp.deployment_application_configs[0].application_version #=> String
@@ -874,6 +897,7 @@ module Aws::RoboMaker
     #
     #   * {Types::CreateSimulationJobResponse#arn #arn} => String
     #   * {Types::CreateSimulationJobResponse#status #status} => String
+    #   * {Types::CreateSimulationJobResponse#last_started_at #last_started_at} => Time
     #   * {Types::CreateSimulationJobResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateSimulationJobResponse#failure_behavior #failure_behavior} => String
     #   * {Types::CreateSimulationJobResponse#failure_code #failure_code} => String
@@ -938,6 +962,7 @@ module Aws::RoboMaker
     #
     #   resp.arn #=> String
     #   resp.status #=> String, one of "Pending", "Preparing", "Running", "Restarting", "Completed", "Failed", "RunningFailed", "Terminating", "Terminated", "Canceled"
+    #   resp.last_started_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
     #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
@@ -1138,7 +1163,7 @@ module Aws::RoboMaker
     #
     #   resp.arn #=> String
     #   resp.fleet #=> String
-    #   resp.status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded"
+    #   resp.status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded", "Canceled"
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
     #   resp.deployment_application_configs #=> Array
@@ -1213,7 +1238,7 @@ module Aws::RoboMaker
     #   resp.robots[0].last_deployment_job #=> String
     #   resp.robots[0].last_deployment_time #=> Time
     #   resp.created_at #=> Time
-    #   resp.last_deployment_status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded"
+    #   resp.last_deployment_status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded", "Canceled"
     #   resp.last_deployment_job #=> String
     #   resp.last_deployment_time #=> Time
     #   resp.tags #=> Hash
@@ -1395,6 +1420,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeSimulationJobResponse#arn #arn} => String
     #   * {Types::DescribeSimulationJobResponse#name #name} => String
     #   * {Types::DescribeSimulationJobResponse#status #status} => String
+    #   * {Types::DescribeSimulationJobResponse#last_started_at #last_started_at} => Time
     #   * {Types::DescribeSimulationJobResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::DescribeSimulationJobResponse#failure_behavior #failure_behavior} => String
     #   * {Types::DescribeSimulationJobResponse#failure_code #failure_code} => String
@@ -1420,6 +1446,7 @@ module Aws::RoboMaker
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.status #=> String, one of "Pending", "Preparing", "Running", "Restarting", "Completed", "Failed", "RunningFailed", "Terminating", "Terminated", "Canceled"
+    #   resp.last_started_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
     #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
@@ -1525,7 +1552,7 @@ module Aws::RoboMaker
     #   resp.deployment_jobs #=> Array
     #   resp.deployment_jobs[0].arn #=> String
     #   resp.deployment_jobs[0].fleet #=> String
-    #   resp.deployment_jobs[0].status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded"
+    #   resp.deployment_jobs[0].status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded", "Canceled"
     #   resp.deployment_jobs[0].deployment_application_configs #=> Array
     #   resp.deployment_jobs[0].deployment_application_configs[0].application #=> String
     #   resp.deployment_jobs[0].deployment_application_configs[0].application_version #=> String
@@ -1606,7 +1633,7 @@ module Aws::RoboMaker
     #   resp.fleet_details[0].name #=> String
     #   resp.fleet_details[0].arn #=> String
     #   resp.fleet_details[0].created_at #=> Time
-    #   resp.fleet_details[0].last_deployment_status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded"
+    #   resp.fleet_details[0].last_deployment_status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded", "Canceled"
     #   resp.fleet_details[0].last_deployment_job #=> String
     #   resp.fleet_details[0].last_deployment_time #=> Time
     #   resp.next_token #=> String
@@ -1682,6 +1709,8 @@ module Aws::RoboMaker
     #   resp.robot_application_summaries[0].arn #=> String
     #   resp.robot_application_summaries[0].version #=> String
     #   resp.robot_application_summaries[0].last_updated_at #=> Time
+    #   resp.robot_application_summaries[0].robot_software_suite.name #=> String, one of "ROS"
+    #   resp.robot_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotApplications AWS API Documentation
@@ -1830,6 +1859,10 @@ module Aws::RoboMaker
     #   resp.simulation_application_summaries[0].arn #=> String
     #   resp.simulation_application_summaries[0].version #=> String
     #   resp.simulation_application_summaries[0].last_updated_at #=> Time
+    #   resp.simulation_application_summaries[0].robot_software_suite.name #=> String, one of "ROS"
+    #   resp.simulation_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.simulation_application_summaries[0].simulation_software_suite.name #=> String, one of "Gazebo"
+    #   resp.simulation_application_summaries[0].simulation_software_suite.version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationApplications AWS API Documentation
@@ -2037,7 +2070,7 @@ module Aws::RoboMaker
     #
     #   resp.arn #=> String
     #   resp.fleet #=> String
-    #   resp.status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded"
+    #   resp.status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded", "Canceled"
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
     #   resp.deployment_application_configs #=> Array
@@ -2303,7 +2336,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

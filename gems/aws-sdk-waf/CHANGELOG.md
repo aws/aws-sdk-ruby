@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-05-28)
+------------------
+
+* Feature - Documentation updates for waf
+
 1.19.0 (2019-05-21)
 ------------------
 

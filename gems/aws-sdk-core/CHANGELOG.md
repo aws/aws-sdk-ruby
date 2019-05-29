@@ -1,7 +1,14 @@
 Unreleased Changes
 ------------------
 
-* Issue - Wraps `JSON::ParserError` from Credentials Providers to `Aws::Errors::MetadataParserError` or `Aws::Errors::InvalidProcessCredentialsPayload`
+* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information. 
+
+3.54.0 (2019-05-28)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
 
 3.53.1 (2019-05-22)
 ------------------

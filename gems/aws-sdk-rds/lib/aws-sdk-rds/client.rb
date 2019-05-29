@@ -6654,6 +6654,11 @@ module Aws::RDS
     #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
     #   list of supported time zones for each engine version.
     #
+    # @option params [Boolean] :include_all
+    #   A value that indicates whether to include engine versions that aren't
+    #   available in the list. The default is to list only available engine
+    #   versions.
+    #
     # @return [Types::DBEngineVersionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBEngineVersionMessage#marker #marker} => String
@@ -6693,6 +6698,7 @@ module Aws::RDS
     #     default_only: false,
     #     list_supported_character_sets: false,
     #     list_supported_timezones: false,
+    #     include_all: false,
     #   })
     #
     # @example Response structure
@@ -6725,6 +6731,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supported_engine_modes[0] #=> String
     #   resp.db_engine_versions[0].supported_feature_names #=> Array
     #   resp.db_engine_versions[0].supported_feature_names[0] #=> String
+    #   resp.db_engine_versions[0].status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -15994,7 +16001,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2019-05-29)
+------------------
+
+* Feature - Systems Manager - Documentation updates
+
 1.47.0 (2019-05-21)
 ------------------
 
