@@ -104,7 +104,7 @@ module Seahorse
       #
       # @return [self]
       def add_option(name, default = nil, &block)
-        default = DynamicDefault.new(Proc.new) if block_given?
+        default = DynamicDefault.new(block) if block_given?
         @defaults[name.to_sym] << default
         self
       end

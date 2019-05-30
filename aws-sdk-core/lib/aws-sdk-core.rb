@@ -555,7 +555,7 @@ module Aws
     # each new service added after the callback is registered.
     # @api private
     def service_added(&block)
-      callback = Proc.new
+      callback = block if block_given?
       @services.each do |svc_name, (svc_module, options)|
         yield(svc_name, svc_module, options)
       end
