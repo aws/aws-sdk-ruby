@@ -50,7 +50,7 @@ module Aws
       #
       # @yieldparam [Integer] attempts The number of attempts made.
       def before_attempt(&block)
-        @before_attempt << Proc.new
+        @before_attempt << block if block_given?
       end
 
       # Register a callback that is invoked after an attempt but before
@@ -81,7 +81,7 @@ module Aws
       # @yieldparam [Seahorse::Client::Response] response The response from
       #   the previous polling attempts.
       def before_wait(&block)
-        @before_wait << Proc.new
+        @before_wait << block if block_given?
       end
 
       # @option options [Client] :client
