@@ -170,8 +170,12 @@ module Aws::CodeCommit
     InvalidRepositoryTriggerEventsException = Shapes::StructureShape.new(name: 'InvalidRepositoryTriggerEventsException')
     InvalidRepositoryTriggerNameException = Shapes::StructureShape.new(name: 'InvalidRepositoryTriggerNameException')
     InvalidRepositoryTriggerRegionException = Shapes::StructureShape.new(name: 'InvalidRepositoryTriggerRegionException')
+    InvalidResourceArnException = Shapes::StructureShape.new(name: 'InvalidResourceArnException')
     InvalidSortByException = Shapes::StructureShape.new(name: 'InvalidSortByException')
     InvalidSourceCommitSpecifierException = Shapes::StructureShape.new(name: 'InvalidSourceCommitSpecifierException')
+    InvalidSystemTagUsageException = Shapes::StructureShape.new(name: 'InvalidSystemTagUsageException')
+    InvalidTagKeysListException = Shapes::StructureShape.new(name: 'InvalidTagKeysListException')
+    InvalidTagsMapException = Shapes::StructureShape.new(name: 'InvalidTagsMapException')
     InvalidTargetException = Shapes::StructureShape.new(name: 'InvalidTargetException')
     InvalidTargetsException = Shapes::StructureShape.new(name: 'InvalidTargetsException')
     InvalidTitleException = Shapes::StructureShape.new(name: 'InvalidTitleException')
@@ -188,6 +192,8 @@ module Aws::CodeCommit
     ListPullRequestsOutput = Shapes::StructureShape.new(name: 'ListPullRequestsOutput')
     ListRepositoriesInput = Shapes::StructureShape.new(name: 'ListRepositoriesInput')
     ListRepositoriesOutput = Shapes::StructureShape.new(name: 'ListRepositoriesOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     Location = Shapes::StructureShape.new(name: 'Location')
     ManualMergeRequiredException = Shapes::StructureShape.new(name: 'ManualMergeRequiredException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -285,6 +291,8 @@ module Aws::CodeCommit
     RepositoryTriggersConfigurationId = Shapes::StringShape.new(name: 'RepositoryTriggersConfigurationId')
     RepositoryTriggersList = Shapes::ListShape.new(name: 'RepositoryTriggersList')
     RepositoryTriggersListRequiredException = Shapes::StructureShape.new(name: 'RepositoryTriggersListRequiredException')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceArnRequiredException = Shapes::StructureShape.new(name: 'ResourceArnRequiredException')
     RestrictedSourceFileException = Shapes::StructureShape.new(name: 'RestrictedSourceFileException')
     SameFileContentException = Shapes::StructureShape.new(name: 'SameFileContentException')
     SamePathRequestException = Shapes::StructureShape.new(name: 'SamePathRequestException')
@@ -298,6 +306,14 @@ module Aws::CodeCommit
     SubModuleList = Shapes::ListShape.new(name: 'SubModuleList')
     SymbolicLink = Shapes::StructureShape.new(name: 'SymbolicLink')
     SymbolicLinkList = Shapes::ListShape.new(name: 'SymbolicLinkList')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeysList = Shapes::ListShape.new(name: 'TagKeysList')
+    TagKeysListRequiredException = Shapes::StructureShape.new(name: 'TagKeysListRequiredException')
+    TagPolicyException = Shapes::StructureShape.new(name: 'TagPolicyException')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TagsMap = Shapes::MapShape.new(name: 'TagsMap')
+    TagsMapRequiredException = Shapes::StructureShape.new(name: 'TagsMapRequiredException')
     Target = Shapes::StructureShape.new(name: 'Target')
     TargetList = Shapes::ListShape.new(name: 'TargetList')
     TargetRequiredException = Shapes::StructureShape.new(name: 'TargetRequiredException')
@@ -308,6 +324,8 @@ module Aws::CodeCommit
     TipsDivergenceExceededException = Shapes::StructureShape.new(name: 'TipsDivergenceExceededException')
     Title = Shapes::StringShape.new(name: 'Title')
     TitleRequiredException = Shapes::StructureShape.new(name: 'TitleRequiredException')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateCommentInput = Shapes::StructureShape.new(name: 'UpdateCommentInput')
     UpdateCommentOutput = Shapes::StructureShape.new(name: 'UpdateCommentOutput')
     UpdateDefaultBranchInput = Shapes::StructureShape.new(name: 'UpdateDefaultBranchInput')
@@ -419,6 +437,7 @@ module Aws::CodeCommit
 
     CreateRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     CreateRepositoryInput.add_member(:repository_description, Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "repositoryDescription"))
+    CreateRepositoryInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateRepositoryInput.struct_class = Types::CreateRepositoryInput
 
     CreateRepositoryOutput.add_member(:repository_metadata, Shapes::ShapeRef.new(shape: RepositoryMetadata, location_name: "repositoryMetadata"))
@@ -652,6 +671,14 @@ module Aws::CodeCommit
     ListRepositoriesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListRepositoriesOutput.struct_class = Types::ListRepositoriesOutput
 
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    ListTagsForResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ListTagsForResourceOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     Location.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, location_name: "filePath"))
     Location.add_member(:file_position, Shapes::ShapeRef.new(shape: Position, location_name: "filePosition"))
     Location.add_member(:relative_file_version, Shapes::ShapeRef.new(shape: RelativeFileVersionEnum, location_name: "relativeFileVersion"))
@@ -870,6 +897,15 @@ module Aws::CodeCommit
 
     SymbolicLinkList.member = Shapes::ShapeRef.new(shape: SymbolicLink)
 
+    TagKeysList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
     Target.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     Target.add_member(:source_reference, Shapes::ShapeRef.new(shape: ReferenceName, required: true, location_name: "sourceReference"))
     Target.add_member(:destination_reference, Shapes::ShapeRef.new(shape: ReferenceName, location_name: "destinationReference"))
@@ -884,6 +920,10 @@ module Aws::CodeCommit
     TestRepositoryTriggersOutput.add_member(:successful_executions, Shapes::ShapeRef.new(shape: RepositoryTriggerNameList, location_name: "successfulExecutions"))
     TestRepositoryTriggersOutput.add_member(:failed_executions, Shapes::ShapeRef.new(shape: RepositoryTriggerExecutionFailureList, location_name: "failedExecutions"))
     TestRepositoryTriggersOutput.struct_class = Types::TestRepositoryTriggersOutput
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeysList, required: true, location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UpdateCommentInput.add_member(:comment_id, Shapes::ShapeRef.new(shape: CommentId, required: true, location_name: "commentId"))
     UpdateCommentInput.add_member(:content, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "content"))
@@ -1082,6 +1122,10 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsMapException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSystemTagUsageException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
       end)
 
       api.add_operation(:delete_branch, Seahorse::Model::Operation.new.tap do |o|
@@ -1525,6 +1569,18 @@ module Aws::CodeCommit
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceArnRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceArnException)
+      end)
+
       api.add_operation(:merge_pull_request_by_fast_forward, Seahorse::Model::Operation.new.tap do |o|
         o.name = "MergePullRequestByFastForward"
         o.http_method = "POST"
@@ -1699,6 +1755,23 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceArnRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceArnException)
+        o.errors << Shapes::ShapeRef.new(shape: TagsMapRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsMapException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSystemTagUsageException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+      end)
+
       api.add_operation(:test_repository_triggers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TestRepositoryTriggers"
         o.http_method = "POST"
@@ -1726,6 +1799,23 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceArnRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceArnException)
+        o.errors << Shapes::ShapeRef.new(shape: TagKeysListRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagKeysListException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSystemTagUsageException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
       end)
 
       api.add_operation(:update_comment, Seahorse::Model::Operation.new.tap do |o|

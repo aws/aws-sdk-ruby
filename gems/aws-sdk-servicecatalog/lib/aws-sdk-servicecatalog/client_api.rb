@@ -196,6 +196,8 @@ module Aws::ServiceCatalog
     ListServiceActionsForProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'ListServiceActionsForProvisioningArtifactOutput')
     ListServiceActionsInput = Shapes::StructureShape.new(name: 'ListServiceActionsInput')
     ListServiceActionsOutput = Shapes::StructureShape.new(name: 'ListServiceActionsOutput')
+    ListStackInstancesForProvisionedProductInput = Shapes::StructureShape.new(name: 'ListStackInstancesForProvisionedProductInput')
+    ListStackInstancesForProvisionedProductOutput = Shapes::StructureShape.new(name: 'ListStackInstancesForProvisionedProductOutput')
     ListTagOptionsFilters = Shapes::StructureShape.new(name: 'ListTagOptionsFilters')
     ListTagOptionsInput = Shapes::StructureShape.new(name: 'ListTagOptionsInput')
     ListTagOptionsOutput = Shapes::StructureShape.new(name: 'ListTagOptionsOutput')
@@ -371,6 +373,9 @@ module Aws::ServiceCatalog
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SourceProvisioningArtifactProperties = Shapes::ListShape.new(name: 'SourceProvisioningArtifactProperties')
     SourceProvisioningArtifactPropertiesMap = Shapes::MapShape.new(name: 'SourceProvisioningArtifactPropertiesMap')
+    StackInstance = Shapes::StructureShape.new(name: 'StackInstance')
+    StackInstanceStatus = Shapes::StringShape.new(name: 'StackInstanceStatus')
+    StackInstances = Shapes::ListShape.new(name: 'StackInstances')
     StackSetAccounts = Shapes::ListShape.new(name: 'StackSetAccounts')
     StackSetFailureToleranceCount = Shapes::IntegerShape.new(name: 'StackSetFailureToleranceCount')
     StackSetFailureTolerancePercentage = Shapes::IntegerShape.new(name: 'StackSetFailureTolerancePercentage')
@@ -1067,6 +1072,16 @@ module Aws::ServiceCatalog
     ListServiceActionsOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     ListServiceActionsOutput.struct_class = Types::ListServiceActionsOutput
 
+    ListStackInstancesForProvisionedProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    ListStackInstancesForProvisionedProductInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisionedProductId"))
+    ListStackInstancesForProvisionedProductInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListStackInstancesForProvisionedProductInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListStackInstancesForProvisionedProductInput.struct_class = Types::ListStackInstancesForProvisionedProductInput
+
+    ListStackInstancesForProvisionedProductOutput.add_member(:stack_instances, Shapes::ShapeRef.new(shape: StackInstances, location_name: "StackInstances"))
+    ListStackInstancesForProvisionedProductOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
+    ListStackInstancesForProvisionedProductOutput.struct_class = Types::ListStackInstancesForProvisionedProductOutput
+
     ListTagOptionsFilters.add_member(:key, Shapes::ShapeRef.new(shape: TagOptionKey, location_name: "Key"))
     ListTagOptionsFilters.add_member(:value, Shapes::ShapeRef.new(shape: TagOptionValue, location_name: "Value"))
     ListTagOptionsFilters.add_member(:active, Shapes::ShapeRef.new(shape: TagOptionActive, location_name: "Active"))
@@ -1467,6 +1482,13 @@ module Aws::ServiceCatalog
 
     SourceProvisioningArtifactPropertiesMap.key = Shapes::ShapeRef.new(shape: ProvisioningArtifactPropertyName)
     SourceProvisioningArtifactPropertiesMap.value = Shapes::ShapeRef.new(shape: ProvisioningArtifactPropertyValue)
+
+    StackInstance.add_member(:account, Shapes::ShapeRef.new(shape: AccountId, location_name: "Account"))
+    StackInstance.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    StackInstance.add_member(:stack_instance_status, Shapes::ShapeRef.new(shape: StackInstanceStatus, location_name: "StackInstanceStatus"))
+    StackInstance.struct_class = Types::StackInstance
+
+    StackInstances.member = Shapes::ShapeRef.new(shape: StackInstance)
 
     StackSetAccounts.member = Shapes::ShapeRef.new(shape: AccountId)
 
@@ -2385,6 +2407,16 @@ module Aws::ServiceCatalog
             "next_page_token" => "page_token"
           }
         )
+      end)
+
+      api.add_operation(:list_stack_instances_for_provisioned_product, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStackInstancesForProvisionedProduct"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStackInstancesForProvisionedProductInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStackInstancesForProvisionedProductOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_tag_options, Seahorse::Model::Operation.new.tap do |o|

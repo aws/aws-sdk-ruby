@@ -306,6 +306,8 @@ module Aws
             'IoT1ClickDevicesService' => 'devices.iot1click',
             'IoT1ClickProjects' => 'projects.iot1click',
             'IoTAnalytics' => 'iotanalytics',
+            'IoTEvents' => 'iotevents',
+            'IoTEventsData' => 'data.iotevents',
             'IoTJobsDataPlane' => 'data.jobs.iot',
             'IoTThingsGraph' => 'iotthingsgraph',
             'KMS' => 'kms',

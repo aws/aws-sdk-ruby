@@ -100,6 +100,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-iot1clickprojects', '~> 1')
   spec.add_dependency('aws-sdk-iotanalytics', '~> 1')
   spec.add_dependency('aws-sdk-iotdataplane', '~> 1')
+  spec.add_dependency('aws-sdk-iotevents', '~> 1')
+  spec.add_dependency('aws-sdk-ioteventsdata', '~> 1')
   spec.add_dependency('aws-sdk-iotjobsdataplane', '~> 1')
   spec.add_dependency('aws-sdk-iotthingsgraph', '~> 1')
   spec.add_dependency('aws-sdk-kms', '~> 1')

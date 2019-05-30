@@ -4151,6 +4151,27 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] activity_stream_mode
+    #   The mode of the database activity stream. Database events such as a
+    #   change or access generate an activity stream event. The database
+    #   session can handle these events either synchronously or
+    #   asynchronously.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity_stream_status
+    #   The status of the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity_stream_kms_key_id
+    #   The AWS KMS key identifier used for encrypting messages in the
+    #   database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity_stream_kinesis_stream_name
+    #   The name of the Amazon Kinesis data stream used for the database
+    #   activity stream.
+    #   @return [String]
+    #
     # @!attribute [rw] copy_tags_to_snapshot
     #   Specifies whether tags are copied from the DB cluster to snapshots
     #   of the DB cluster.
@@ -4204,6 +4225,10 @@ module Aws::RDS
       :scaling_configuration_info,
       :deletion_protection,
       :http_endpoint_enabled,
+      :activity_stream_mode,
+      :activity_stream_status,
+      :activity_stream_kms_key_id,
+      :activity_stream_kinesis_stream_name,
       :copy_tags_to_snapshot)
       include Aws::Structure
     end
@@ -15563,6 +15588,85 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartActivityStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         mode: "sync", # required, accepts sync, async
+    #         kms_key_id: "String", # required
+    #         apply_immediately: false,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster, for example
+    #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   Specifies the mode of the database activity stream. Database events
+    #   such as a change or access generate an activity stream event. The
+    #   database session can handle these events either synchronously or
+    #   asynchronously.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key identifier for encrypting messages in the database
+    #   activity stream. The key identifier can be either a key ID, a key
+    #   ARN, or a key alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_immediately
+    #   Specifies whether or not the database activity stream is to start as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartActivityStreamRequest AWS API Documentation
+    #
+    class StartActivityStreamRequest < Struct.new(
+      :resource_arn,
+      :mode,
+      :kms_key_id,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key identifier for encryption of messages in the
+    #   database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_stream_name
+    #   The name of the Amazon Kinesis data stream to be used for the
+    #   database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_immediately
+    #   Indicates whether or not the database activity stream will start as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartActivityStreamResponse AWS API Documentation
+    #
+    class StartActivityStreamResponse < Struct.new(
+      :kms_key_id,
+      :kinesis_stream_name,
+      :status,
+      :mode,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartDBClusterMessage
     #   data as a hash:
     #
@@ -15625,6 +15729,57 @@ module Aws::RDS
     #
     class StartDBInstanceResult < Struct.new(
       :db_instance)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopActivityStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         apply_immediately: false,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster for the database
+    #   activity stream. For example,
+    #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_immediately
+    #   Specifies whether or not the database activity stream is to stop as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopActivityStreamRequest AWS API Documentation
+    #
+    class StopActivityStreamRequest < Struct.new(
+      :resource_arn,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key identifier used for encrypting messages in the
+    #   database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_stream_name
+    #   The name of the Amazon Kinesis data stream used for the database
+    #   activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the database activity stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopActivityStreamResponse AWS API Documentation
+    #
+    class StopActivityStreamResponse < Struct.new(
+      :kms_key_id,
+      :kinesis_stream_name,
+      :status)
       include Aws::Structure
     end
 

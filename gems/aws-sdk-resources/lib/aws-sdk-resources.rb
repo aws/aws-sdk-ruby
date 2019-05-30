@@ -90,6 +90,8 @@ module Aws
   autoload :IoT1ClickProjects, 'aws-sdk-iot1clickprojects'
   autoload :IoTAnalytics, 'aws-sdk-iotanalytics'
   autoload :IoTDataPlane, 'aws-sdk-iotdataplane'
+  autoload :IoTEvents, 'aws-sdk-iotevents'
+  autoload :IoTEventsData, 'aws-sdk-ioteventsdata'
   autoload :IoTJobsDataPlane, 'aws-sdk-iotjobsdataplane'
   autoload :IoTThingsGraph, 'aws-sdk-iotthingsgraph'
   autoload :KMS, 'aws-sdk-kms'

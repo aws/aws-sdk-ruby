@@ -3710,6 +3710,61 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Returns summary information about stack instances that are associated
+    # with the specified `CFN_STACKSET` type provisioned product. You can
+    # filter for stack instances that are associated with a specific AWS
+    # account name or region.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :provisioned_product_id
+    #   The identifier of the provisioned product.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @return [Types::ListStackInstancesForProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStackInstancesForProvisionedProductOutput#stack_instances #stack_instances} => Array&lt;Types::StackInstance&gt;
+    #   * {Types::ListStackInstancesForProvisionedProductOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_stack_instances_for_provisioned_product({
+    #     accept_language: "AcceptLanguage",
+    #     provisioned_product_id: "Id", # required
+    #     page_token: "PageToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stack_instances #=> Array
+    #   resp.stack_instances[0].account #=> String
+    #   resp.stack_instances[0].region #=> String
+    #   resp.stack_instances[0].stack_instance_status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListStackInstancesForProvisionedProduct AWS API Documentation
+    #
+    # @overload list_stack_instances_for_provisioned_product(params = {})
+    # @param [Hash] params ({})
+    def list_stack_instances_for_provisioned_product(params = {}, options = {})
+      req = build_request(:list_stack_instances_for_provisioned_product, params)
+      req.send_request(options)
+    end
+
     # Lists the specified TagOptions or all TagOptions.
     #
     # @option params [Types::ListTagOptionsFilters] :filters
@@ -4985,7 +5040,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

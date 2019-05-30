@@ -561,6 +561,9 @@ module Aws::CodeCommit
     #       {
     #         repository_name: "RepositoryName", # required
     #         repository_description: "RepositoryDescription",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] repository_name
@@ -577,7 +580,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
     #   @return [String]
     #
     # @!attribute [rw] repository_description
@@ -593,11 +596,16 @@ module Aws::CodeCommit
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more tag key-value pairs to use when tagging this repository.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepositoryInput AWS API Documentation
     #
     class CreateRepositoryInput < Struct.new(
       :repository_name,
-      :repository_description)
+      :repository_description,
+      :tags)
       include Aws::Structure
     end
 
@@ -1877,6 +1885,50 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   get information about tags, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with the specified
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that allows the operation to batch the next
+    #   results of the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Returns information about the location of a change or comment in the
     # comparison between two commits or a pull request.
     #
@@ -2999,6 +3051,33 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add or update tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair to use when tagging this repository.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
     # Returns information about a target for a pull request.
     #
     # @note When making an API call, you may pass Target
@@ -3086,6 +3165,31 @@ module Aws::CodeCommit
     class TestRepositoryTriggersOutput < Struct.new(
       :successful_executions,
       :failed_executions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   remove tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 

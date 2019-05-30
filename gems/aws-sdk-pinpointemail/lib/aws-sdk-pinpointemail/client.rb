@@ -291,6 +291,7 @@ module Aws::PinpointEmail
     #       custom_redirect_domain: "CustomRedirectDomain", # required
     #     },
     #     delivery_options: {
+    #       tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #       sending_pool_name: "PoolName",
     #     },
     #     reputation_options: {
@@ -764,6 +765,7 @@ module Aws::PinpointEmail
     #
     #   resp.configuration_set_name #=> String
     #   resp.tracking_options.custom_redirect_domain #=> String
+    #   resp.delivery_options.tls_policy #=> String, one of "REQUIRE", "OPTIONAL"
     #   resp.delivery_options.sending_pool_name #=> String
     #   resp.reputation_options.reputation_metrics_enabled #=> Boolean
     #   resp.reputation_options.last_fresh_start #=> Time
@@ -1537,6 +1539,11 @@ module Aws::PinpointEmail
     #   The name of the configuration set that you want to associate with a
     #   dedicated IP pool.
     #
+    # @option params [String] :tls_policy
+    #   Whether Amazon Pinpoint should require that incoming email is
+    #   delivered over a connection encrypted with Transport Layer Security
+    #   (TLS).
+    #
     # @option params [String] :sending_pool_name
     #   The name of the dedicated IP pool that you want to associate with the
     #   configuration set.
@@ -1547,6 +1554,7 @@ module Aws::PinpointEmail
     #
     #   resp = client.put_configuration_set_delivery_options({
     #     configuration_set_name: "ConfigurationSetName", # required
+    #     tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #     sending_pool_name: "SendingPoolName",
     #   })
     #
@@ -2148,7 +2156,7 @@ module Aws::PinpointEmail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointemail'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

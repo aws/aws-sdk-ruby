@@ -161,6 +161,10 @@ module Aws::IoTAnalytics
     #   The name of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] storage
+    #   Where channel data is stored.
+    #   @return [Types::ChannelStorage]
+    #
     # @!attribute [rw] arn
     #   The ARN of the channel.
     #   @return [String]
@@ -183,6 +187,7 @@ module Aws::IoTAnalytics
     #
     class Channel < Struct.new(
       :name,
+      :storage,
       :arn,
       :status,
       :retention_period,
@@ -233,11 +238,62 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Where channel data is stored.
+    #
+    # @note When making an API call, you may pass ChannelStorage
+    #   data as a hash:
+    #
+    #       {
+    #         service_managed_s3: {
+    #         },
+    #         customer_managed_s3: {
+    #           bucket: "BucketName", # required
+    #           key_prefix: "S3KeyPrefix",
+    #           role_arn: "RoleArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] service_managed_s3
+    #   Use this to store channel data in an S3 bucket managed by the AWS
+    #   IoT Analytics service.
+    #   @return [Types::ServiceManagedChannelS3Storage]
+    #
+    # @!attribute [rw] customer_managed_s3
+    #   Use this to store channel data in an S3 bucket that you manage.
+    #   @return [Types::CustomerManagedChannelS3Storage]
+    #
+    class ChannelStorage < Struct.new(
+      :service_managed_s3,
+      :customer_managed_s3)
+      include Aws::Structure
+    end
+
+    # Where channel data is stored.
+    #
+    # @!attribute [rw] service_managed_s3
+    #   Used to store channel data in an S3 bucket managed by the AWS IoT
+    #   Analytics service.
+    #   @return [Types::ServiceManagedChannelS3StorageSummary]
+    #
+    # @!attribute [rw] customer_managed_s3
+    #   Used to store channel data in an S3 bucket that you manage.
+    #   @return [Types::CustomerManagedChannelS3StorageSummary]
+    #
+    class ChannelStorageSummary < Struct.new(
+      :service_managed_s3,
+      :customer_managed_s3)
+      include Aws::Structure
+    end
+
     # A summary of information about a channel.
     #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
+    #
+    # @!attribute [rw] channel_storage
+    #   Where channel data is stored.
+    #   @return [Types::ChannelStorageSummary]
     #
     # @!attribute [rw] status
     #   The status of the channel.
@@ -253,6 +309,7 @@ module Aws::IoTAnalytics
     #
     class ChannelSummary < Struct.new(
       :channel_name,
+      :channel_storage,
       :status,
       :creation_time,
       :last_update_time)
@@ -326,6 +383,15 @@ module Aws::IoTAnalytics
     #
     #       {
     #         channel_name: "ChannelName", # required
+    #         channel_storage: {
+    #           service_managed_s3: {
+    #           },
+    #           customer_managed_s3: {
+    #             bucket: "BucketName", # required
+    #             key_prefix: "S3KeyPrefix",
+    #             role_arn: "RoleArn", # required
+    #           },
+    #         },
     #         retention_period: {
     #           unlimited: false,
     #           number_of_days: 1,
@@ -342,6 +408,10 @@ module Aws::IoTAnalytics
     #   The name of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] channel_storage
+    #   Where channel data is stored.
+    #   @return [Types::ChannelStorage]
+    #
     # @!attribute [rw] retention_period
     #   How long, in days, message data is kept for the channel.
     #   @return [Types::RetentionPeriod]
@@ -352,6 +422,7 @@ module Aws::IoTAnalytics
     #
     class CreateChannelRequest < Struct.new(
       :channel_name,
+      :channel_storage,
       :retention_period,
       :tags)
       include Aws::Structure
@@ -566,6 +637,15 @@ module Aws::IoTAnalytics
     #
     #       {
     #         datastore_name: "DatastoreName", # required
+    #         datastore_storage: {
+    #           service_managed_s3: {
+    #           },
+    #           customer_managed_s3: {
+    #             bucket: "BucketName", # required
+    #             key_prefix: "S3KeyPrefix",
+    #             role_arn: "RoleArn", # required
+    #           },
+    #         },
     #         retention_period: {
     #           unlimited: false,
     #           number_of_days: 1,
@@ -582,6 +662,10 @@ module Aws::IoTAnalytics
     #   The name of the data store.
     #   @return [String]
     #
+    # @!attribute [rw] datastore_storage
+    #   Where data store data is stored.
+    #   @return [Types::DatastoreStorage]
+    #
     # @!attribute [rw] retention_period
     #   How long, in days, message data is kept for the data store.
     #   @return [Types::RetentionPeriod]
@@ -592,6 +676,7 @@ module Aws::IoTAnalytics
     #
     class CreateDatastoreRequest < Struct.new(
       :datastore_name,
+      :datastore_storage,
       :retention_period,
       :tags)
       include Aws::Structure
@@ -732,6 +817,124 @@ module Aws::IoTAnalytics
     class CreatePipelineResponse < Struct.new(
       :pipeline_name,
       :pipeline_arn)
+      include Aws::Structure
+    end
+
+    # Use this to store channel data in an S3 bucket that you manage.
+    #
+    # @note When making an API call, you may pass CustomerManagedChannelS3Storage
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket in which channel data is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The prefix used to create the keys of the channel data objects. Each
+    #   object in an Amazon S3 bucket has a key that is its unique
+    #   identifier within the bucket (each object in a bucket has exactly
+    #   one key).
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role which grants AWS IoT Analytics permission to
+    #   interact with your Amazon S3 resources.
+    #   @return [String]
+    #
+    class CustomerManagedChannelS3Storage < Struct.new(
+      :bucket,
+      :key_prefix,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Used to store channel data in an S3 bucket that you manage.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket in which channel data is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The prefix used to create the keys of the channel data objects. Each
+    #   object in an Amazon S3 bucket has a key that is its unique
+    #   identifier within the bucket (each object in a bucket has exactly
+    #   one key).
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role which grants AWS IoT Analytics permission to
+    #   interact with your Amazon S3 resources.
+    #   @return [String]
+    #
+    class CustomerManagedChannelS3StorageSummary < Struct.new(
+      :bucket,
+      :key_prefix,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Use this to store data store data in an S3 bucket that you manage.
+    #
+    # @note When making an API call, you may pass CustomerManagedDatastoreS3Storage
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket in which data store data is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The prefix used to create the keys of the data store data objects.
+    #   Each object in an Amazon S3 bucket has a key that is its unique
+    #   identifier within the bucket (each object in a bucket has exactly
+    #   one key).
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role which grants AWS IoT Analytics permission to
+    #   interact with your Amazon S3 resources.
+    #   @return [String]
+    #
+    class CustomerManagedDatastoreS3Storage < Struct.new(
+      :bucket,
+      :key_prefix,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Used to store data store data in an S3 bucket that you manage.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket in which data store data is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The prefix used to create the keys of the data store data objects.
+    #   Each object in an Amazon S3 bucket has a key that is its unique
+    #   identifier within the bucket (each object in a bucket has exactly
+    #   one key).
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role which grants AWS IoT Analytics permission to
+    #   interact with your Amazon S3 resources.
+    #   @return [String]
+    #
+    class CustomerManagedDatastoreS3StorageSummary < Struct.new(
+      :bucket,
+      :key_prefix,
+      :role_arn)
       include Aws::Structure
     end
 
@@ -1117,6 +1320,10 @@ module Aws::IoTAnalytics
     #   The name of the data store.
     #   @return [String]
     #
+    # @!attribute [rw] storage
+    #   Where data store data is stored.
+    #   @return [Types::DatastoreStorage]
+    #
     # @!attribute [rw] arn
     #   The ARN of the data store.
     #   @return [String]
@@ -1151,6 +1358,7 @@ module Aws::IoTAnalytics
     #
     class Datastore < Struct.new(
       :name,
+      :storage,
       :arn,
       :status,
       :retention_period,
@@ -1195,11 +1403,62 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Where data store data is stored.
+    #
+    # @note When making an API call, you may pass DatastoreStorage
+    #   data as a hash:
+    #
+    #       {
+    #         service_managed_s3: {
+    #         },
+    #         customer_managed_s3: {
+    #           bucket: "BucketName", # required
+    #           key_prefix: "S3KeyPrefix",
+    #           role_arn: "RoleArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] service_managed_s3
+    #   Use this to store data store data in an S3 bucket managed by the AWS
+    #   IoT Analytics service.
+    #   @return [Types::ServiceManagedDatastoreS3Storage]
+    #
+    # @!attribute [rw] customer_managed_s3
+    #   Use this to store data store data in an S3 bucket that you manage.
+    #   @return [Types::CustomerManagedDatastoreS3Storage]
+    #
+    class DatastoreStorage < Struct.new(
+      :service_managed_s3,
+      :customer_managed_s3)
+      include Aws::Structure
+    end
+
+    # Where data store data is stored.
+    #
+    # @!attribute [rw] service_managed_s3
+    #   Used to store data store data in an S3 bucket managed by the AWS IoT
+    #   Analytics service.
+    #   @return [Types::ServiceManagedDatastoreS3StorageSummary]
+    #
+    # @!attribute [rw] customer_managed_s3
+    #   Used to store data store data in an S3 bucket that you manage.
+    #   @return [Types::CustomerManagedDatastoreS3StorageSummary]
+    #
+    class DatastoreStorageSummary < Struct.new(
+      :service_managed_s3,
+      :customer_managed_s3)
+      include Aws::Structure
+    end
+
     # A summary of information about a data store.
     #
     # @!attribute [rw] datastore_name
     #   The name of the data store.
     #   @return [String]
+    #
+    # @!attribute [rw] datastore_storage
+    #   Where data store data is stored.
+    #   @return [Types::DatastoreStorageSummary]
     #
     # @!attribute [rw] status
     #   The status of the data store.
@@ -1215,6 +1474,7 @@ module Aws::IoTAnalytics
     #
     class DatastoreSummary < Struct.new(
       :datastore_name,
+      :datastore_storage,
       :status,
       :creation_time,
       :last_update_time)
@@ -2760,6 +3020,30 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Use this to store channel data in an S3 bucket managed by the AWS IoT
+    # Analytics service.
+    #
+    # @api private
+    #
+    class ServiceManagedChannelS3Storage < Aws::EmptyStructure; end
+
+    # Used to store channel data in an S3 bucket managed by the AWS IoT
+    # Analytics service.
+    #
+    class ServiceManagedChannelS3StorageSummary < Aws::EmptyStructure; end
+
+    # Use this to store data store data in an S3 bucket managed by the AWS
+    # IoT Analytics service.
+    #
+    # @api private
+    #
+    class ServiceManagedDatastoreS3Storage < Aws::EmptyStructure; end
+
+    # Used to store data store data in an S3 bucket managed by the AWS IoT
+    # Analytics service.
+    #
+    class ServiceManagedDatastoreS3StorageSummary < Aws::EmptyStructure; end
+
     # The service is temporarily unavailable.
     #
     # @!attribute [rw] message
@@ -2950,6 +3234,15 @@ module Aws::IoTAnalytics
     #
     #       {
     #         channel_name: "ChannelName", # required
+    #         channel_storage: {
+    #           service_managed_s3: {
+    #           },
+    #           customer_managed_s3: {
+    #             bucket: "BucketName", # required
+    #             key_prefix: "S3KeyPrefix",
+    #             role_arn: "RoleArn", # required
+    #           },
+    #         },
     #         retention_period: {
     #           unlimited: false,
     #           number_of_days: 1,
@@ -2960,12 +3253,17 @@ module Aws::IoTAnalytics
     #   The name of the channel to be updated.
     #   @return [String]
     #
+    # @!attribute [rw] channel_storage
+    #   Where channel data is stored.
+    #   @return [Types::ChannelStorage]
+    #
     # @!attribute [rw] retention_period
     #   How long, in days, message data is kept for the channel.
     #   @return [Types::RetentionPeriod]
     #
     class UpdateChannelRequest < Struct.new(
       :channel_name,
+      :channel_storage,
       :retention_period)
       include Aws::Structure
     end
@@ -3102,6 +3400,15 @@ module Aws::IoTAnalytics
     #           unlimited: false,
     #           number_of_days: 1,
     #         },
+    #         datastore_storage: {
+    #           service_managed_s3: {
+    #           },
+    #           customer_managed_s3: {
+    #             bucket: "BucketName", # required
+    #             key_prefix: "S3KeyPrefix",
+    #             role_arn: "RoleArn", # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] datastore_name
@@ -3112,9 +3419,14 @@ module Aws::IoTAnalytics
     #   How long, in days, message data is kept for the data store.
     #   @return [Types::RetentionPeriod]
     #
+    # @!attribute [rw] datastore_storage
+    #   Where data store data is stored.
+    #   @return [Types::DatastoreStorage]
+    #
     class UpdateDatastoreRequest < Struct.new(
       :datastore_name,
-      :retention_period)
+      :retention_period,
+      :datastore_storage)
       include Aws::Structure
     end
 

@@ -2044,6 +2044,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
@@ -4809,6 +4813,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
@@ -6585,6 +6593,10 @@ module Aws::RDS
     #   resp.db_clusters[0].scaling_configuration_info.timeout_action #=> String
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].http_endpoint_enabled #=> Boolean
+    #   resp.db_clusters[0].activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_clusters[0].activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_clusters[0].activity_stream_kms_key_id #=> String
+    #   resp.db_clusters[0].activity_stream_kinesis_stream_name #=> String
     #   resp.db_clusters[0].copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
@@ -9416,6 +9428,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
@@ -9931,6 +9947,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
@@ -11993,6 +12013,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
@@ -13085,6 +13109,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
@@ -13392,6 +13420,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
@@ -13720,6 +13752,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
@@ -15462,6 +15498,68 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Starts a database activity stream to monitor activity on the database.
+    # For more information, see [Database Activity Streams][1] in the
+    # *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster, for example
+    #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
+    #
+    # @option params [required, String] :mode
+    #   Specifies the mode of the database activity stream. Database events
+    #   such as a change or access generate an activity stream event. The
+    #   database session can handle these events either synchronously or
+    #   asynchronously.
+    #
+    # @option params [required, String] :kms_key_id
+    #   The AWS KMS key identifier for encrypting messages in the database
+    #   activity stream. The key identifier can be either a key ID, a key ARN,
+    #   or a key alias.
+    #
+    # @option params [Boolean] :apply_immediately
+    #   Specifies whether or not the database activity stream is to start as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #
+    # @return [Types::StartActivityStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartActivityStreamResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::StartActivityStreamResponse#kinesis_stream_name #kinesis_stream_name} => String
+    #   * {Types::StartActivityStreamResponse#status #status} => String
+    #   * {Types::StartActivityStreamResponse#mode #mode} => String
+    #   * {Types::StartActivityStreamResponse#apply_immediately #apply_immediately} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_activity_stream({
+    #     resource_arn: "String", # required
+    #     mode: "sync", # required, accepts sync, async
+    #     kms_key_id: "String", # required
+    #     apply_immediately: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #   resp.kinesis_stream_name #=> String
+    #   resp.status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.mode #=> String, one of "sync", "async"
+    #   resp.apply_immediately #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartActivityStream AWS API Documentation
+    #
+    # @overload start_activity_stream(params = {})
+    # @param [Hash] params ({})
+    def start_activity_stream(params = {}, options = {})
+      req = build_request(:start_activity_stream, params)
+      req.send_request(options)
+    end
+
     # Starts an Amazon Aurora DB cluster that was stopped using the AWS
     # console, the stop-db-cluster AWS CLI command, or the StopDBCluster
     # action.
@@ -15557,6 +15655,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
@@ -15721,6 +15823,55 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Stops a database activity stream that was started using the AWS
+    # console, the `start-activity-stream` AWS CLI command, or the
+    # `StartActivityStream` action.
+    #
+    # For more information, see [Database Activity Streams][1] in the
+    # *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster for the database
+    #   activity stream. For example,
+    #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
+    #
+    # @option params [Boolean] :apply_immediately
+    #   Specifies whether or not the database activity stream is to stop as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #
+    # @return [Types::StopActivityStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopActivityStreamResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::StopActivityStreamResponse#kinesis_stream_name #kinesis_stream_name} => String
+    #   * {Types::StopActivityStreamResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_activity_stream({
+    #     resource_arn: "String", # required
+    #     apply_immediately: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #   resp.kinesis_stream_name #=> String
+    #   resp.status #=> String, one of "stopped", "starting", "started", "stopping"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopActivityStream AWS API Documentation
+    #
+    # @overload stop_activity_stream(params = {})
+    # @param [Hash] params ({})
+    def stop_activity_stream(params = {}, options = {})
+      req = build_request(:stop_activity_stream, params)
+      req.send_request(options)
+    end
+
     # Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora
     # retains the DB cluster's metadata, including its endpoints and DB
     # parameter groups. Aurora also retains the transaction logs so you can
@@ -15817,6 +15968,10 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
@@ -16001,7 +16156,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

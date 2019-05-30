@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.46.0 (2019-05-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ioteventsdata` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotevents` gem.
+
 3.45.0 (2019-05-29)
 ------------------
 

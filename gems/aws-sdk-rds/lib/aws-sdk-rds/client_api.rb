@@ -14,6 +14,8 @@ module Aws::RDS
     AccountAttributesMessage = Shapes::StructureShape.new(name: 'AccountAttributesMessage')
     AccountQuota = Shapes::StructureShape.new(name: 'AccountQuota')
     AccountQuotaList = Shapes::ListShape.new(name: 'AccountQuotaList')
+    ActivityStreamMode = Shapes::StringShape.new(name: 'ActivityStreamMode')
+    ActivityStreamStatus = Shapes::StringShape.new(name: 'ActivityStreamStatus')
     AddRoleToDBClusterMessage = Shapes::StructureShape.new(name: 'AddRoleToDBClusterMessage')
     AddRoleToDBInstanceMessage = Shapes::StructureShape.new(name: 'AddRoleToDBInstanceMessage')
     AddSourceIdentifierToSubscriptionMessage = Shapes::StructureShape.new(name: 'AddSourceIdentifierToSubscriptionMessage')
@@ -439,10 +441,14 @@ module Aws::RDS
     SourceRegionList = Shapes::ListShape.new(name: 'SourceRegionList')
     SourceRegionMessage = Shapes::StructureShape.new(name: 'SourceRegionMessage')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StartActivityStreamRequest = Shapes::StructureShape.new(name: 'StartActivityStreamRequest')
+    StartActivityStreamResponse = Shapes::StructureShape.new(name: 'StartActivityStreamResponse')
     StartDBClusterMessage = Shapes::StructureShape.new(name: 'StartDBClusterMessage')
     StartDBClusterResult = Shapes::StructureShape.new(name: 'StartDBClusterResult')
     StartDBInstanceMessage = Shapes::StructureShape.new(name: 'StartDBInstanceMessage')
     StartDBInstanceResult = Shapes::StructureShape.new(name: 'StartDBInstanceResult')
+    StopActivityStreamRequest = Shapes::StructureShape.new(name: 'StopActivityStreamRequest')
+    StopActivityStreamResponse = Shapes::StructureShape.new(name: 'StopActivityStreamResponse')
     StopDBClusterMessage = Shapes::StructureShape.new(name: 'StopDBClusterMessage')
     StopDBClusterResult = Shapes::StructureShape.new(name: 'StopDBClusterResult')
     StopDBInstanceMessage = Shapes::StructureShape.new(name: 'StopDBInstanceMessage')
@@ -878,6 +884,10 @@ module Aws::RDS
     DBCluster.add_member(:scaling_configuration_info, Shapes::ShapeRef.new(shape: ScalingConfigurationInfo, location_name: "ScalingConfigurationInfo"))
     DBCluster.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtection"))
     DBCluster.add_member(:http_endpoint_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "HttpEndpointEnabled"))
+    DBCluster.add_member(:activity_stream_mode, Shapes::ShapeRef.new(shape: ActivityStreamMode, location_name: "ActivityStreamMode"))
+    DBCluster.add_member(:activity_stream_status, Shapes::ShapeRef.new(shape: ActivityStreamStatus, location_name: "ActivityStreamStatus"))
+    DBCluster.add_member(:activity_stream_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "ActivityStreamKmsKeyId"))
+    DBCluster.add_member(:activity_stream_kinesis_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "ActivityStreamKinesisStreamName"))
     DBCluster.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: Boolean, location_name: "CopyTagsToSnapshot"))
     DBCluster.struct_class = Types::DBCluster
 
@@ -2435,6 +2445,19 @@ module Aws::RDS
     SourceRegionMessage.add_member(:source_regions, Shapes::ShapeRef.new(shape: SourceRegionList, location_name: "SourceRegions"))
     SourceRegionMessage.struct_class = Types::SourceRegionMessage
 
+    StartActivityStreamRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    StartActivityStreamRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ActivityStreamMode, required: true, location_name: "Mode"))
+    StartActivityStreamRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "KmsKeyId"))
+    StartActivityStreamRequest.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ApplyImmediately"))
+    StartActivityStreamRequest.struct_class = Types::StartActivityStreamRequest
+
+    StartActivityStreamResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    StartActivityStreamResponse.add_member(:kinesis_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "KinesisStreamName"))
+    StartActivityStreamResponse.add_member(:status, Shapes::ShapeRef.new(shape: ActivityStreamStatus, location_name: "Status"))
+    StartActivityStreamResponse.add_member(:mode, Shapes::ShapeRef.new(shape: ActivityStreamMode, location_name: "Mode"))
+    StartActivityStreamResponse.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplyImmediately"))
+    StartActivityStreamResponse.struct_class = Types::StartActivityStreamResponse
+
     StartDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     StartDBClusterMessage.struct_class = Types::StartDBClusterMessage
 
@@ -2446,6 +2469,15 @@ module Aws::RDS
 
     StartDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     StartDBInstanceResult.struct_class = Types::StartDBInstanceResult
+
+    StopActivityStreamRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    StopActivityStreamRequest.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ApplyImmediately"))
+    StopActivityStreamRequest.struct_class = Types::StopActivityStreamRequest
+
+    StopActivityStreamResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    StopActivityStreamResponse.add_member(:kinesis_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "KinesisStreamName"))
+    StopActivityStreamResponse.add_member(:status, Shapes::ShapeRef.new(shape: ActivityStreamStatus, location_name: "Status"))
+    StopActivityStreamResponse.struct_class = Types::StopActivityStreamResponse
 
     StopDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     StopDBClusterMessage.struct_class = Types::StopDBClusterMessage
@@ -3899,6 +3931,20 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
       end)
 
+      api.add_operation(:start_activity_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartActivityStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartActivityStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartActivityStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+      end)
+
       api.add_operation(:start_db_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartDBCluster"
         o.http_method = "POST"
@@ -3927,6 +3973,19 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+      end)
+
+      api.add_operation(:stop_activity_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopActivityStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopActivityStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopActivityStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
       end)
 
       api.add_operation(:stop_db_cluster, Seahorse::Model::Operation.new.tap do |o|

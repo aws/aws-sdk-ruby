@@ -382,6 +382,35 @@ module Aws::RDS
       data[:http_endpoint_enabled]
     end
 
+    # The mode of the database activity stream. Database events such as a
+    # change or access generate an activity stream event. The database
+    # session can handle these events either synchronously or
+    # asynchronously.
+    # @return [String]
+    def activity_stream_mode
+      data[:activity_stream_mode]
+    end
+
+    # The status of the database activity stream.
+    # @return [String]
+    def activity_stream_status
+      data[:activity_stream_status]
+    end
+
+    # The AWS KMS key identifier used for encrypting messages in the
+    # database activity stream.
+    # @return [String]
+    def activity_stream_kms_key_id
+      data[:activity_stream_kms_key_id]
+    end
+
+    # The name of the Amazon Kinesis data stream used for the database
+    # activity stream.
+    # @return [String]
+    def activity_stream_kinesis_stream_name
+      data[:activity_stream_kinesis_stream_name]
+    end
+
     # Specifies whether tags are copied from the DB cluster to snapshots of
     # the DB cluster.
     # @return [Boolean]

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2019-05-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTEventsData`.
+
+* Feature - Added support for enumerating regions for `Aws::IoTEvents`.
+
 1.169.0 (2019-05-29)
 ------------------
 
