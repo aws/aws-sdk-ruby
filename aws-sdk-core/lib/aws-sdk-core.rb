@@ -110,6 +110,8 @@ module Aws
     IoT1ClickProjects
     IoTAnalytics
     IoTDataPlane
+    IoTEvents
+    IoTEventsData
     IoTJobsDataPlane
     IoTThingsGraph
     KMS

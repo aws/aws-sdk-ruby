@@ -346,6 +346,14 @@
     "models": "iot-data/2015-05-28",
     "endpoint": "data.iot"
   },
+  "IoTEvents": {
+    "models": "iotevents/2018-07-27",
+    "endpoint": "iotevents"
+  },
+  "IoTEventsData": {
+    "models": "iotevents-data/2018-10-23",
+    "endpoint": "data.iotevents"
+  },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29",
     "endpoint": "data.jobs.iot"

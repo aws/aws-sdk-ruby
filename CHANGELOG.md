@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
+
+* Feature - Aws::IoTAnalytics - Updated the API, and documentation for AWS IoT Analytics.
+
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::PinpointEmail - Updated the API, and documentation for Amazon Pinpoint Email Service.
+
+* Feature - Aws::RDSDataService - Updated the API, and documentation for AWS RDS DataService.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::IoTEventsData - Added support for a new service, AWS IoT Events Data.
+
+* Feature - Aws::IoTEvents - Added support for a new service, AWS IoT Events.
+
 * Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information. 
 
 2.11.284 (2019-05-29)

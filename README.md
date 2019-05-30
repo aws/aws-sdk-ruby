@@ -305,6 +305,8 @@ to be backwards compatible.
 | AWS IoT 1-Click Projects Service                      | IoT1ClickProjects               | 2018-05-14  |
 | AWS IoT Analytics                                     | IoTAnalytics                    | 2017-11-27  |
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
+| AWS IoT Events                                        | IoTEvents                       | 2018-07-27  |
+| AWS IoT Events Data                                   | IoTEventsData                   | 2018-10-23  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
@@ -429,8 +431,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 
