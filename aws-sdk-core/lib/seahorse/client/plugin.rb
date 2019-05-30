@@ -40,7 +40,7 @@ module Seahorse
 
         def option(name, default = nil, &block)
           if block_given?
-            options << [[name], Proc.new]
+            options << [[name], block]
           else
             options << [[name, default]]
           end

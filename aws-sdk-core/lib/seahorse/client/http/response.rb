@@ -117,15 +117,15 @@ module Seahorse
         end
 
         def on_headers(status_code_range = nil, &block)
-          @listeners[:headers] << listener(status_code_range, Proc.new)
+          @listeners[:headers] << listener(status_code_range, block)
         end
 
         def on_data(&callback)
-          @listeners[:data] << Proc.new
+          @listeners[:data] << callback
         end
 
         def on_done(status_code_range = nil, &callback)
-          listener = listener(status_code_range, Proc.new)
+          listener = listener(status_code_range, callback)
           if @done
             listener.call
           else

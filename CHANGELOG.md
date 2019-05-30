@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Mirgate Proc.new without a block usage #2058.
+
 2.11.285 (2019-05-30)
 ------------------
 
