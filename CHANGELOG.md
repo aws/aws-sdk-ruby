@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.285 (2019-05-30)
+------------------
+
 * Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
 
 * Feature - Aws::IoTAnalytics - Updated the API, and documentation for AWS IoT Analytics.
