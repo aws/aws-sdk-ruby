@@ -257,6 +257,7 @@ module Aws::PinpointEmail
     #           custom_redirect_domain: "CustomRedirectDomain", # required
     #         },
     #         delivery_options: {
+    #           tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #           sending_pool_name: "PoolName",
     #         },
     #         reputation_options: {
@@ -772,8 +773,17 @@ module Aws::PinpointEmail
     #   data as a hash:
     #
     #       {
+    #         tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #         sending_pool_name: "PoolName",
     #       }
+    #
+    # @!attribute [rw] tls_policy
+    #   Specifies whether Amazon Pinpoint should require that incoming email
+    #   is delivered over a connection that’s encrypted by using Transport
+    #   Layer Security (TLS). If this value is set to `Require`, Amazon
+    #   Pinpoint will bounce email messages that cannot be delivered over
+    #   TLS. The default value is `Optional`.
+    #   @return [String]
     #
     # @!attribute [rw] sending_pool_name
     #   The name of the dedicated IP pool that you want to associate with
@@ -783,6 +793,7 @@ module Aws::PinpointEmail
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeliveryOptions AWS API Documentation
     #
     class DeliveryOptions < Struct.new(
+      :tls_policy,
       :sending_pool_name)
       include Aws::Structure
     end
@@ -2664,12 +2675,19 @@ module Aws::PinpointEmail
     #
     #       {
     #         configuration_set_name: "ConfigurationSetName", # required
+    #         tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #         sending_pool_name: "SendingPoolName",
     #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to associate with a
     #   dedicated IP pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_policy
+    #   Whether Amazon Pinpoint should require that incoming email is
+    #   delivered over a connection encrypted with Transport Layer Security
+    #   (TLS).
     #   @return [String]
     #
     # @!attribute [rw] sending_pool_name
@@ -2681,6 +2699,7 @@ module Aws::PinpointEmail
     #
     class PutConfigurationSetDeliveryOptionsRequest < Struct.new(
       :configuration_set_name,
+      :tls_policy,
       :sending_pool_name)
       include Aws::Structure
     end

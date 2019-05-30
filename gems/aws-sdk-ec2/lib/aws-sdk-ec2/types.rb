@@ -3681,20 +3681,18 @@ module Aws::EC2
     #   this parameter is not specified, the default CMK for EBS is used. If
     #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   "alias/". For example:
     #
-    #   * Key ID
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID
-    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
-    #     For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
     #
     #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
     #   call may appear to complete even though you provided an invalid
@@ -6431,6 +6429,77 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "String",
+    #         instance_specification: { # required
+    #           instance_id: "String",
+    #           exclude_boot_volume: false,
+    #         },
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         copy_tags_from_source: "volume", # accepts volume
+    #       }
+    #
+    # @!attribute [rw] description
+    #   A description propagated to every snapshot specified by the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_specification
+    #   The instance to specify which volumes should be included in the
+    #   snapshots.
+    #   @return [Types::InstanceSpecification]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Tags to apply to every snapshot specified by the instance.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action
+    #   without actually making the request. Provides an error response. If
+    #   you have the required permissions, the error response is
+    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] copy_tags_from_source
+    #   Copies the tags from the specified instance to all snapshots.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshotsRequest AWS API Documentation
+    #
+    class CreateSnapshotsRequest < Struct.new(
+      :description,
+      :instance_specification,
+      :tag_specifications,
+      :dry_run,
+      :copy_tags_from_source)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshots
+    #   List of snapshots.
+    #   @return [Array<Types::SnapshotInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshotsResult AWS API Documentation
+    #
+    class CreateSnapshotsResult < Struct.new(
+      :snapshots)
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateSpotDatafeedSubscription.
     #
     # @note When making an API call, you may pass CreateSpotDatafeedSubscriptionRequest
@@ -6969,23 +7038,23 @@ module Aws::EC2
     #
     # @!attribute [rw] encrypted
     #   Specifies the encryption state of the volume. The default effect of
-    #   setting the `Encrypted` parameter to `true` through the console,
-    #   API, or CLI depends on the volume's origin (new or from a
-    #   snapshot), starting encryption state, ownership, and whether
-    #   [account-level encryption][1] is enabled. Each default case can be
-    #   overridden by specifying a customer master key (CMK) with the
-    #   `KmsKeyId` parameter in addition to setting `Encrypted` to `true`.
-    #   For a complete list of possible encryption cases, see [Amazon EBS
-    #   Encryption](AWSEC2/latest/UserGuide/EBSEncryption.htm).
+    #   setting the `Encrypted` parameter to `true` depends on the volume
+    #   origin (new or from a snapshot), starting encryption state,
+    #   ownership, and whether [account-level encryption][1] is enabled.
+    #   Each default case can be overridden by specifying a customer master
+    #   key (CMK) using the `KmsKeyId` parameter, in addition to setting
+    #   `Encrypted` to `true`. For a complete list of possible encryption
+    #   cases, see [Amazon EBS Encryption][2].
     #
     #   Encrypted Amazon EBS volumes may only be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
-    #   Instance Types][2].
+    #   Instance Types][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
@@ -8039,6 +8108,8 @@ module Aws::EC2
     #
     # @!attribute [rw] flow_log_ids
     #   One or more flow log IDs.
+    #
+    #   Constraint: Maximum of 1000 flow log IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFlowLogsRequest AWS API Documentation
@@ -10918,6 +10989,8 @@ module Aws::EC2
     #
     # @!attribute [rw] flow_log_ids
     #   One or more flow log IDs.
+    #
+    #   Constraint: Maximum of 1000 flow log IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -23359,7 +23432,7 @@ module Aws::EC2
     #   If you are not creating an EFA, specify `interface` or omit this
     #   parameter.
     #
-    #   Valide values: `interface` \| `efa`
+    #   Valid values: `interface` \| `efa`
     #
     #
     #
@@ -23412,6 +23485,32 @@ module Aws::EC2
       :primary,
       :private_dns_name,
       :private_ip_address)
+      include Aws::Structure
+    end
+
+    # The instance details to specify which volumes should be snapshotted.
+    #
+    # @note When making an API call, you may pass InstanceSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "String",
+    #         exclude_boot_volume: false,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The instance to specify which volumes should be snapshotted.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclude_boot_volume
+    #   Excludes the root volume from being snapshotted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSpecification AWS API Documentation
+    #
+    class InstanceSpecification < Struct.new(
+      :instance_id,
+      :exclude_boot_volume)
       include Aws::Structure
     end
 
@@ -24762,7 +24861,18 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] interface_type
-    #   The type of networking interface.
+    #   The type of network interface. To create an Elastic Fabric Adapter
+    #   (EFA), specify `efa`. For more information, see [Elastic Fabric
+    #   Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   If you are not creating an EFA, specify `interface` or omit this
+    #   parameter.
+    #
+    #   Valid values: `interface` \| `efa`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_address_count
@@ -29306,7 +29416,15 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] image_location
-    #   The full path to your AMI manifest in Amazon S3 storage.
+    #   The full path to your AMI manifest in Amazon S3 storage. The
+    #   specified bucket must have the `aws-exec-read` canned access control
+    #   list (ACL) to ensure that it can be accessed by Amazon EC2. For more
+    #   information, see [Canned ACLs][1] in the *Amazon S3 Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     #   @return [String]
     #
     # @!attribute [rw] architecture
@@ -34475,6 +34593,66 @@ module Aws::EC2
       :format,
       :url,
       :user_bucket)
+      include Aws::Structure
+    end
+
+    # Object that contains information about a snapshot.
+    #
+    # @!attribute [rw] description
+    #   Description specified by the CreateSnapshotRequest that has been
+    #   applied to all snapshots.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with this snapshot.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] encrypted
+    #   Boolean that specifies whether or not this snapshot is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] volume_id
+    #   Source volume from which this snapshot was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Current state of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size
+    #   Size of the volume from which this snapshot was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   Time this snapshot was started. This is the same for all snapshots
+    #   initiated by the same request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] progress
+    #   Progress this snapshot has made towards completing.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   Account id used when creating this snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   Snapshot id that can be used to describe this snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotInfo AWS API Documentation
+    #
+    class SnapshotInfo < Struct.new(
+      :description,
+      :tags,
+      :encrypted,
+      :volume_id,
+      :state,
+      :volume_size,
+      :start_time,
+      :progress,
+      :owner_id,
+      :snapshot_id)
       include Aws::Structure
     end
 

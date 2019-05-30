@@ -342,9 +342,9 @@ module Aws::RDS
     # @option options [Array<String>] :options_to_remove
     #   Options in this list are removed from the option group.
     # @option options [Boolean] :apply_immediately
-    #   Indicates whether the changes should be applied immediately, or during
-    #   the next maintenance window for each instance associated with the
-    #   option group.
+    #   A value that indicates whether to apply the change immediately or
+    #   during the next maintenance window for each instance associated with
+    #   the option group.
     # @return [OptionGroup]
     def modify(options = {})
       options = options.merge(option_group_name: @name)

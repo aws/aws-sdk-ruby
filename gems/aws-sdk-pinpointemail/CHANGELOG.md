@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2019-05-30)
+------------------
+
+* Feature - You can now specify whether the Amazon Pinpoint Email service must deliver email over a connection that is encrypted using Transport Layer Security (TLS).
+
 1.10.0 (2019-05-28)
 ------------------
 

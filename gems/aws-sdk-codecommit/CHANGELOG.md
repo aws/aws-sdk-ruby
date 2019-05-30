@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-05-30)
+------------------
+
+* Feature - This release adds APIs that allow adding and removing tags to a repository, and viewing tags for a repository. It also enables adding tags when creating a repository.
+
 1.20.0 (2019-05-21)
 ------------------
 

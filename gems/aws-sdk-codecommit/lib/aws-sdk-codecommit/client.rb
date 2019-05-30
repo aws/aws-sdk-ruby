@@ -547,7 +547,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
     #
     # @option params [String] :repository_description
     #   A comment or description about the new repository.
@@ -561,6 +561,9 @@ module Aws::CodeCommit
     #
     #    </note>
     #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tag key-value pairs to use when tagging this repository.
+    #
     # @return [Types::CreateRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRepositoryOutput#repository_metadata #repository_metadata} => Types::RepositoryMetadata
@@ -570,6 +573,9 @@ module Aws::CodeCommit
     #   resp = client.create_repository({
     #     repository_name: "RepositoryName", # required
     #     repository_description: "RepositoryDescription",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1646,6 +1652,50 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Gets information about AWS tags for a specified Amazon Resource Name
+    # (ARN) in AWS CodeCommit. For a list of valid resources in AWS
+    # CodeCommit, see [CodeCommit Resources and Operations][1] in the AWS
+    # CodeCommit User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   get information about tags, if any.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Closes a pull request and attempts to merge the source commit of a
     # pull request into the specified destination branch for that pull
     # request at the specified commit using the fast-forward merge option.
@@ -2060,6 +2110,41 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Adds or updates tags for a resource in AWS CodeCommit. For a list of
+    # valid resources in AWS CodeCommit, see [CodeCommit Resources and
+    # Operations][1] in the AWS CodeCommit User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add or update tags.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The key-value pair to use when tagging this repository.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
     # Tests the functionality of repository triggers by sending information
     # to the trigger target. If real data is available in the repository,
     # the test will send data from the last commit. If no data is available,
@@ -2105,6 +2190,39 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def test_repository_triggers(params = {}, options = {})
       req = build_request(:test_repository_triggers, params)
+      req.send_request(options)
+    end
+
+    # Removes tags for a resource in AWS CodeCommit. For a list of valid
+    # resources in AWS CodeCommit, see [CodeCommit Resources and
+    # Operations][1] in the AWS CodeCommit User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   remove tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2378,7 +2496,7 @@ module Aws::CodeCommit
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
     #
     # @option params [required, String] :old_name
     #   The existing name of the repository.
@@ -2417,7 +2535,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -292,8 +292,17 @@
     "models": "iot-data/2015-05-28",
     "partitionsKey": null
   },
+  "IoTEvents": {
+    "models": "iotevents/2018-07-27"
+  },
+  "IoTEventsData": {
+    "models": "iotevents-data/2018-10-23"
+  },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
+  },
+  "IoTThingsGraph": {
+    "models": "iotthingsgraph/2018-09-06"
   },
   "KMS": {
     "models": "kms/2014-11-01"

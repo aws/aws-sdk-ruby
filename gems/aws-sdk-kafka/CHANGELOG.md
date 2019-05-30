@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2019-05-30)
+------------------
+
+* Feature - Updated APIs for Amazon MSK to enable new features such as encryption in transit, client authentication, and scaling storage.
+
 1.8.0 (2019-05-21)
 ------------------
 

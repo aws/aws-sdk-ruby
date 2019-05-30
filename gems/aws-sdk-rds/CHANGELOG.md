@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2019-05-30)
+------------------
+
+* Feature - This release adds support for Activity Streams for database clusters.
+
+1.56.0 (2019-05-29)
+------------------
+
+* Feature - Documentation updates for rds
+
 1.55.0 (2019-05-28)
 ------------------
 

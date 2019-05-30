@@ -1850,8 +1850,8 @@ module Aws::EC2
     # use with a VPC.
     #
     # An outbound rule permits instances to send traffic to the specified
-    # destination IPv4 or IPv6 CIDR address ranges, or to the specified
-    # destination security groups for the same VPC.
+    # IPv4 or IPv6 CIDR address ranges, or to the instances associated with
+    # the specified destination security groups.
     #
     # You specify a protocol for each rule (for example, TCP). For the TCP
     # and UDP protocols, you must also specify the destination port or port
@@ -2015,8 +2015,8 @@ module Aws::EC2
     # Adds the specified ingress rules to a security group.
     #
     # An inbound rule permits instances to receive traffic from the
-    # specified destination IPv4 or IPv6 CIDR address ranges, or from the
-    # specified destination security groups.
+    # specified IPv4 or IPv6 CIDR address ranges, or from the instances
+    # associated with the specified destination security groups.
     #
     # You specify a protocol for each rule (for example, TCP). For TCP and
     # UDP, you must also specify the destination port or port range. For
@@ -2912,20 +2912,18 @@ module Aws::EC2
     #   this parameter is not specified, the default CMK for EBS is used. If a
     #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   "alias/". For example:
     #
-    #   * Key ID
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
     #
     #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
     #   may appear to complete even though you provided an invalid identifier.
@@ -6541,6 +6539,83 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates crash-consistent snapshots of multiple EBS volumes and stores
+    # the data in S3. Volumes are chosen by specifying an instance. Any
+    # attached volumes will produce one snapshot each that is
+    # crash-consistent across the instance. Boot volumes can be excluded by
+    # changing the paramaters.
+    #
+    # @option params [String] :description
+    #   A description propagated to every snapshot specified by the instance.
+    #
+    # @option params [required, Types::InstanceSpecification] :instance_specification
+    #   The instance to specify which volumes should be included in the
+    #   snapshots.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to apply to every snapshot specified by the instance.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action
+    #   without actually making the request. Provides an error response. If
+    #   you have the required permissions, the error response is
+    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #
+    # @option params [String] :copy_tags_from_source
+    #   Copies the tags from the specified instance to all snapshots.
+    #
+    # @return [Types::CreateSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSnapshotsResult#snapshots #snapshots} => Array&lt;Types::SnapshotInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapshots({
+    #     description: "String",
+    #     instance_specification: { # required
+    #       instance_id: "String",
+    #       exclude_boot_volume: false,
+    #     },
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     copy_tags_from_source: "volume", # accepts volume
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshots #=> Array
+    #   resp.snapshots[0].description #=> String
+    #   resp.snapshots[0].tags #=> Array
+    #   resp.snapshots[0].tags[0].key #=> String
+    #   resp.snapshots[0].tags[0].value #=> String
+    #   resp.snapshots[0].encrypted #=> Boolean
+    #   resp.snapshots[0].volume_id #=> String
+    #   resp.snapshots[0].state #=> String, one of "pending", "completed", "error"
+    #   resp.snapshots[0].volume_size #=> Integer
+    #   resp.snapshots[0].start_time #=> Time
+    #   resp.snapshots[0].progress #=> String
+    #   resp.snapshots[0].owner_id #=> String
+    #   resp.snapshots[0].snapshot_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshots AWS API Documentation
+    #
+    # @overload create_snapshots(params = {})
+    # @param [Hash] params ({})
+    def create_snapshots(params = {}, options = {})
+      req = build_request(:create_snapshots, params)
+      req.send_request(options)
+    end
+
     # Creates a data feed for Spot Instances, enabling you to view Spot
     # Instance usage logs. You can create one data feed per AWS account. For
     # more information, see [Spot Instance Data Feed][1] in the *Amazon EC2
@@ -7148,23 +7223,23 @@ module Aws::EC2
     #
     # @option params [Boolean] :encrypted
     #   Specifies the encryption state of the volume. The default effect of
-    #   setting the `Encrypted` parameter to `true` through the console, API,
-    #   or CLI depends on the volume's origin (new or from a snapshot),
-    #   starting encryption state, ownership, and whether [account-level
-    #   encryption][1] is enabled. Each default case can be overridden by
-    #   specifying a customer master key (CMK) with the `KmsKeyId` parameter
-    #   in addition to setting `Encrypted` to `true`. For a complete list of
-    #   possible encryption cases, see [Amazon EBS
-    #   Encryption](AWSEC2/latest/UserGuide/EBSEncryption.htm).
+    #   setting the `Encrypted` parameter to `true` depends on the volume
+    #   origin (new or from a snapshot), starting encryption state, ownership,
+    #   and whether [account-level encryption][1] is enabled. Each default
+    #   case can be overridden by specifying a customer master key (CMK) using
+    #   the `KmsKeyId` parameter, in addition to setting `Encrypted` to
+    #   `true`. For a complete list of possible encryption cases, see [Amazon
+    #   EBS Encryption][2].
     #
     #   Encrypted Amazon EBS volumes may only be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
-    #   Instance Types][2].
+    #   Instance Types][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #
     # @option params [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
@@ -8376,6 +8451,8 @@ module Aws::EC2
     #
     # @option params [required, Array<String>] :flow_log_ids
     #   One or more flow log IDs.
+    #
+    #   Constraint: Maximum of 1000 flow log IDs.
     #
     # @return [Types::DeleteFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11883,6 +11960,8 @@ module Aws::EC2
     #
     # @option params [Array<String>] :flow_log_ids
     #   One or more flow log IDs.
+    #
+    #   Constraint: Maximum of 1000 flow log IDs.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -21813,7 +21892,7 @@ module Aws::EC2
     # Any volume restored from an encrypted snapshot is also encrypted. For
     # more information, see [Amazon EBS Snapshots][1].
     #
-    # Once EBS encryption by default is enabled, you can no longer launch
+    # After EBS encryption by default is enabled, you can no longer launch
     # older-generation instance types that do not support encryption. For
     # more information, see [Supported Instance Types][2].
     #
@@ -23769,7 +23848,7 @@ module Aws::EC2
     end
 
     # Changes the default customer master key (CMK) that your account uses
-    # to encrypt EBS volumes if you don’t specify a CMK in the API call.
+    # to encrypt EBS volumes if you don't specify a CMK in the API call.
     #
     # Your account has an AWS-managed default CMK that is used for
     # encrypting an EBS volume when no CMK is specified in the API call that
@@ -26641,7 +26720,14 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html
     #
     # @option params [String] :image_location
-    #   The full path to your AMI manifest in Amazon S3 storage.
+    #   The full path to your AMI manifest in Amazon S3 storage. The specified
+    #   bucket must have the `aws-exec-read` canned access control list (ACL)
+    #   to ensure that it can be accessed by Amazon EC2. For more information,
+    #   see [Canned ACLs][1] in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     #
     # @option params [String] :architecture
     #   The architecture of the AMI.
@@ -30627,7 +30713,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

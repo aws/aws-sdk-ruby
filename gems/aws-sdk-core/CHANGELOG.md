@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Mirgate Proc.new without a block usage #2058.
 
+3.54.1 (2019-05-30)
+------------------
+
+* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information. 
+
 3.54.0 (2019-05-28)
 ------------------
 

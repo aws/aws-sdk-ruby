@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-05-30)
+------------------
+
+* Feature - IoT Analytics adds the option to use your own S3 bucket to store channel and data store resources. Previously, only service-managed storage was used.
+
 1.20.0 (2019-05-21)
 ------------------
 

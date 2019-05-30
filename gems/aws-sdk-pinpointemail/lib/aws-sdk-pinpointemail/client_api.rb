@@ -210,6 +210,7 @@ module Aws::PinpointEmail
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TlsPolicy = Shapes::StringShape.new(name: 'TlsPolicy')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TrackingOptions = Shapes::StructureShape.new(name: 'TrackingOptions')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -340,6 +341,7 @@ module Aws::PinpointEmail
 
     DeliverabilityTestReports.member = Shapes::ShapeRef.new(shape: DeliverabilityTestReport)
 
+    DeliveryOptions.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     DeliveryOptions.add_member(:sending_pool_name, Shapes::ShapeRef.new(shape: PoolName, location_name: "SendingPoolName"))
     DeliveryOptions.struct_class = Types::DeliveryOptions
 
@@ -627,6 +629,7 @@ module Aws::PinpointEmail
     PutAccountSendingAttributesResponse.struct_class = Types::PutAccountSendingAttributesResponse
 
     PutConfigurationSetDeliveryOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     PutConfigurationSetDeliveryOptionsRequest.add_member(:sending_pool_name, Shapes::ShapeRef.new(shape: SendingPoolName, location_name: "SendingPoolName"))
     PutConfigurationSetDeliveryOptionsRequest.struct_class = Types::PutConfigurationSetDeliveryOptionsRequest
 
@@ -769,7 +772,6 @@ module Aws::PinpointEmail
         "serviceId" => "Pinpoint Email",
         "signatureVersion" => "v4",
         "signingName" => "ses",
-        "targetPrefix" => "com.amazonaws.services.pinpoint.email",
         "uid" => "pinpoint-email-2018-07-26",
       }
 
