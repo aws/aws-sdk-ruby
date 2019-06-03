@@ -4130,11 +4130,6 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] http_endpoint_enabled
-    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
-    #   subject to change.
-    #
-    #    </note>
-    #
     #   A value that indicates whether the HTTP endpoint for an Aurora
     #   Serverless DB cluster is enabled.
     #
@@ -4143,12 +4138,12 @@ module Aws::RDS
     #   cluster. You can also query your database from inside the RDS
     #   console with the query editor.
     #
-    #   For more information about Aurora Serverless, see [Using Amazon
-    #   Aurora Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora
+    #   Serverless][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     #   @return [Boolean]
     #
     # @!attribute [rw] activity_stream_mode
@@ -10024,11 +10019,6 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_http_endpoint
-    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
-    #   subject to change.
-    #
-    #    </note>
-    #
     #   A value that indicates whether to enable the HTTP endpoint for an
     #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
     #   disabled.
@@ -10038,12 +10028,12 @@ module Aws::RDS
     #   cluster. You can also query your database from inside the RDS
     #   console with the query editor.
     #
-    #   For more information about Aurora Serverless, see [Using Amazon
-    #   Aurora Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora
+    #   Serverless][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     #   @return [Boolean]
     #
     # @!attribute [rw] copy_tags_to_snapshot

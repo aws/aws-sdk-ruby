@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2019-06-03)
+------------------
+
+* Feature - Amazon RDS Data API is generally available. Removing beta notes in the documentation.
+
 1.57.0 (2019-05-30)
 ------------------
 

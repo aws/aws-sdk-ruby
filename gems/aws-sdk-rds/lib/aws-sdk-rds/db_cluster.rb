@@ -358,11 +358,6 @@ module Aws::RDS
       data[:deletion_protection]
     end
 
-    # <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
-    # subject to change.
-    #
-    #  </note>
-    #
     # A value that indicates whether the HTTP endpoint for an Aurora
     # Serverless DB cluster is enabled.
     #
@@ -371,12 +366,12 @@ module Aws::RDS
     # can also query your database from inside the RDS console with the
     # query editor.
     #
-    # For more information about Aurora Serverless, see [Using Amazon Aurora
+    # For more information, see [Using the Data API for Aurora
     # Serverless][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     # @return [Boolean]
     def http_endpoint_enabled
       data[:http_endpoint_enabled]
@@ -1138,11 +1133,6 @@ module Aws::RDS
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled. By default, deletion protection is disabled.
     # @option options [Boolean] :enable_http_endpoint
-    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
-    #   subject to change.
-    #
-    #    </note>
-    #
     #   A value that indicates whether to enable the HTTP endpoint for an
     #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
     #   disabled.
@@ -1152,12 +1142,12 @@ module Aws::RDS
     #   can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information about Aurora Serverless, see [Using Amazon Aurora
+    #   For more information, see [Using the Data API for Aurora
     #   Serverless][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.

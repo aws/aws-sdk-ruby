@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2019-06-03)
+------------------
+
+* Feature - Amazon EC2 I3en instances are the new storage-optimized instances offering up to 60 TB NVMe SSD instance storage and up to 100 Gbps of network bandwidth.
+
 1.88.0 (2019-05-29)
 ------------------
 
