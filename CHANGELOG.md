@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
 * Issue - Mirgate Proc.new without a block usage #2058.
 
 2.11.285 (2019-05-30)
