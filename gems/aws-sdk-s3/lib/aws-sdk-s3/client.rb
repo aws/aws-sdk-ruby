@@ -322,10 +322,13 @@ module Aws::S3
     # ensure the parts list is empty.
     #
     # @option params [required, String] :bucket
+    #   Name of the bucket to which the multipart upload was initiated.
     #
     # @option params [required, String] :key
+    #   Key of the object for which the multipart upload was initiated.
     #
     # @option params [required, String] :upload_id
+    #   Upload ID that identifies the multipart upload.
     #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
@@ -606,10 +609,10 @@ module Aws::S3
     #   as URL Query parameters
     #
     # @option params [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to the copied object.
+    #   The object lock mode that you want to apply to the copied object.
     #
     # @option params [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want the copied object's Object Lock to
+    #   The date and time when you want the copied object's object lock to
     #   expire.
     #
     # @option params [String] :object_lock_legal_hold_status
@@ -738,8 +741,8 @@ module Aws::S3
     #   Allows grantee to write the ACL for the applicable bucket.
     #
     # @option params [Boolean] :object_lock_enabled_for_bucket
-    #   Specifies whether you want S3 Object Lock to be enabled for the new
-    #   bucket.
+    #   Specifies whether you want Amazon S3 object lock to be enabled for the
+    #   new bucket.
     #
     # @return [Types::CreateBucketOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -902,11 +905,11 @@ module Aws::S3
     #   parameters
     #
     # @option params [String] :object_lock_mode
-    #   Specifies the Object Lock mode that you want to apply to the uploaded
+    #   Specifies the object lock mode that you want to apply to the uploaded
     #   object.
     #
     # @option params [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   Specifies the date and time when you want the Object Lock to expire.
+    #   Specifies the date and time when you want the object lock to expire.
     #
     # @option params [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the uploaded
@@ -1032,12 +1035,17 @@ module Aws::S3
     # Deletes an analytics configuration for the bucket (specified by the
     # analytics configuration ID).
     #
+    # To use this operation, you must have permissions to perform the
+    # s3:PutAnalyticsConfiguration action. The bucket owner has this
+    # permission by default. The bucket owner can grant this permission to
+    # others.
+    #
     # @option params [required, String] :bucket
     #   The name of the bucket from which an analytics configuration is
     #   deleted.
     #
     # @option params [required, String] :id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1347,7 +1355,7 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [Boolean] :bypass_governance_retention
-    #   Indicates whether S3 Object Lock should bypass Governance-mode
+    #   Indicates whether Amazon S3 object lock should bypass governance-mode
     #   restrictions to process this operation.
     #
     # @return [Types::DeleteObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1491,7 +1499,7 @@ module Aws::S3
     #
     # @option params [Boolean] :bypass_governance_retention
     #   Specifies whether you want to delete this object even if it has a
-    #   Governance-type Object Lock in place. You must have sufficient
+    #   Governance-type object lock in place. You must have sufficient
     #   permissions to perform this operation.
     #
     # @return [Types::DeleteObjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1711,7 +1719,7 @@ module Aws::S3
     #   retrieved.
     #
     # @option params [required, String] :id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #
     # @return [Types::GetBucketAnalyticsConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3056,12 +3064,12 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Gets the Object Lock configuration for a bucket. The rule specified in
-    # the Object Lock configuration will be applied by default to every new
+    # Gets the object lock configuration for a bucket. The rule specified in
+    # the object lock configuration will be applied by default to every new
     # object placed in the specified bucket.
     #
     # @option params [required, String] :bucket
-    #   The bucket whose Object Lock configuration you want to retrieve.
+    #   The bucket whose object lock configuration you want to retrieve.
     #
     # @return [Types::GetObjectLockConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4484,6 +4492,8 @@ module Aws::S3
     #   The canned ACL to apply to the bucket.
     #
     # @option params [Types::AccessControlPolicy] :access_control_policy
+    #   Contains the elements that set the ACL permissions for an object per
+    #   grantee.
     #
     # @option params [required, String] :bucket
     #
@@ -4568,7 +4578,7 @@ module Aws::S3
     #   The name of the bucket to which an analytics configuration is stored.
     #
     # @option params [required, String] :id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #
     # @option params [required, Types::AnalyticsConfiguration] :analytics_configuration
     #   The configuration and any analyses for the analytics filter.
@@ -4708,17 +4718,22 @@ module Aws::S3
     # existing one, if present).
     #
     # @option params [required, String] :bucket
-    #   The name of the bucket for which the server-side encryption
-    #   configuration is set.
+    #   Specifies default encryption for a bucket using server-side encryption
+    #   with Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys
+    #   (SSE-KMS). For information about the Amazon S3 default encryption
+    #   feature, see [Amazon S3 Default Bucket Encryption][1] in the *Amazon
+    #   Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
     #
     # @option params [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the server-side encryption
     #   configuration. This parameter is auto-populated when using the command
-    #   from the CLI
+    #   from the CLI.
     #
     # @option params [required, Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   Container for server-side encryption configuration rules. Currently S3
-    #   supports one rule only.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5135,9 +5150,6 @@ module Aws::S3
     # @option params [required, String] :bucket
     #
     # @option params [required, Types::NotificationConfiguration] :notification_configuration
-    #   A container for specifying the notification configuration of the
-    #   bucket. If this element is empty, notifications are turned off for the
-    #   bucket.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5228,8 +5240,7 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Replaces a policy on a bucket. If the bucket already has a policy, the
-    # one in this request completely replaces it.
+    # Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
     #
     # @option params [required, String] :bucket
     #
@@ -5273,19 +5284,25 @@ module Aws::S3
     end
 
     # Creates a replication configuration or replaces an existing one. For
-    # more information, see [Cross-Region Replication (CRR)](
-    # https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    # more information, see [Cross-Region Replication (CRR)][1] in the
     # *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html
     #
     # @option params [required, String] :bucket
     #
     # @option params [String] :content_md5
+    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   header as a message integrity check to verify that the request body
+    #   was not corrupted in transit.
     #
     # @option params [required, Types::ReplicationConfiguration] :replication_configuration
-    #   A container for replication rules. You can add up to 1,000 rules. The
-    #   maximum size of a replication configuration is 2 MB.
     #
     # @option params [String] :token
+    #   A token that allows Amazon S3 object lock to be enabled for an
+    #   existing bucket.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5626,7 +5643,8 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
-    #   is auto-populated when using the command from the CLI
+    #   is auto-populated when using the command from the CLI. This parameted
+    #   is required if object lock parameters are specified.
     #
     # @option params [String] :content_type
     #   A standard MIME type describing the format of the object data.
@@ -5700,10 +5718,10 @@ module Aws::S3
     #   parameters. (For example, "Key1=Value1")
     #
     # @option params [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to this object.
+    #   The object lock mode that you want to apply to this object.
     #
     # @option params [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want this object's Object Lock to expire.
+    #   The date and time when you want this object's object lock to expire.
     #
     # @option params [String] :object_lock_legal_hold_status
     #   The Legal Hold status that you want to apply to the specified object.
@@ -5919,6 +5937,8 @@ module Aws::S3
     #   The canned ACL to apply to the object.
     #
     # @option params [Types::AccessControlPolicy] :access_control_policy
+    #   Contains the elements that set the ACL permissions for an object per
+    #   grantee.
     #
     # @option params [required, String] :bucket
     #
@@ -6079,16 +6099,16 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Places an Object Lock configuration on the specified bucket. The rule
-    # specified in the Object Lock configuration will be applied by default
+    # Places an object lock configuration on the specified bucket. The rule
+    # specified in the object lock configuration will be applied by default
     # to every new object placed in the specified bucket.
     #
     # @option params [required, String] :bucket
-    #   The bucket whose Object Lock configuration you want to create or
+    #   The bucket whose object lock configuration you want to create or
     #   replace.
     #
     # @option params [Types::ObjectLockConfiguration] :object_lock_configuration
-    #   The Object Lock configuration that you want to apply to the specified
+    #   The object lock configuration that you want to apply to the specified
     #   bucket.
     #
     # @option params [String] :request_payer
@@ -6099,7 +6119,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [String] :token
-    #   A token to allow Object Lock to be enabled for an existing bucket.
+    #   A token to allow Amazon S3 object lock to be enabled for an existing
+    #   bucket.
     #
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
@@ -6330,7 +6351,6 @@ module Aws::S3
     # @option params [String] :version_id
     #
     # @option params [Types::RestoreRequest] :restore_request
-    #   Container for restore job parameters.
     #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
@@ -6761,7 +6781,9 @@ module Aws::S3
     #   the body cannot be determined automatically.
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
+    #   is auto-populated when using the command from the CLI. This parameted
+    #   is required if object lock parameters are specified.
     #
     # @option params [required, String] :key
     #   Object key for which the multipart upload was initiated.
@@ -7046,7 +7068,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

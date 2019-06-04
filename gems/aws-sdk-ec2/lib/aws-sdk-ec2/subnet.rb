@@ -390,11 +390,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   The block device mapping entries. You can't specify both a snapshot
-    #   ID and an encryption value. This is because only blank volumes can be
-    #   encrypted on creation. If a snapshot is the basis for a volume, it is
-    #   not blank and its encryption status is used for the volume encryption
-    #   status.
+    #   The block device mapping entries.
     # @option options [String] :image_id
     #   The ID of the AMI. An AMI ID is required to launch an instance and
     #   must be specified here or in a launch template.

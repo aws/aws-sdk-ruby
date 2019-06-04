@@ -658,11 +658,11 @@ module Aws::EC2
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, String] :instance_type
     #   Specifies the instance type for which to configure your Dedicated
@@ -675,6 +675,17 @@ module Aws::EC2
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the Dedicated Host during creation.
+    #
+    # @option params [String] :host_recovery
+    #   Indicates whether to enable or disable host recovery for the Dedicated
+    #   Host. Host recovery is disabled by default. For more information, see
+    #   [ Host Recovery][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `off`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
     #
     # @return [Types::AllocateHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -699,6 +710,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     host_recovery: "on", # accepts on, off
     #   })
     #
     # @example Response structure
@@ -3050,34 +3062,30 @@ module Aws::EC2
     #
     # @option params [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If a
+    #   master key (CMK) to use to encrypt the volume. This parameter is only
+    #   required if you want to use a customer-managed CMK; if this parameter
+    #   is not specified, your AWS-managed CMK for the account is used. If a
     #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
     #   The CMK identifier may be provided in any of the following formats:
     #
-    #   * Key ID
+    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #   * Key alias: For example, alias/ExampleAlias.
+    #
+    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace, followed
+    #     by the Region of the CMK, the AWS account ID of the CMK owner, the
+    #     `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
     #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
-    #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
-    #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   The action will eventually fail.
+    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
+    #   you call may appear to complete even though you provided an invalid
+    #   identifier. The action will eventually fail.
     #
     # @option params [String] :presigned_url
     #   When you copy an encrypted source snapshot using the Amazon EC2 Query
@@ -4462,9 +4470,9 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   Tthe block device mappings. This parameter cannot be used to modify
-    #   the encryption status of existing volumes or snapshots. To create an
-    #   AMI with encrypted snapshots, use the CopyImage action.
+    #   The block device mappings. This parameter cannot be used to modify the
+    #   encryption status of existing volumes or snapshots. To create an AMI
+    #   with encrypted snapshots, use the CopyImage action.
     #
     # @option params [String] :description
     #   A description for the new image.
@@ -7238,7 +7246,7 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
     #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #
     # @option params [Integer] :iops
@@ -7259,33 +7267,29 @@ module Aws::EC2
     # @option params [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
     #   master key (CMK) to use to encrypt the volume. This parameter is only
-    #   required if you want to use a non-default CMK; if this parameter is
-    #   not specified, the default CMK for EBS is used. If a `KmsKeyId` is
-    #   specified, the `Encrypted` flag must also be set.
+    #   required if you want to use a customer-managed CMK; if this parameter
+    #   is not specified, your AWS-managed CMK for the account is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
     #   The CMK identifier may be provided in any of the following formats:
     #
-    #   * Key ID
+    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #   * Key alias: For example, alias/ExampleAlias.
+    #
+    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace, followed
+    #     by the Region of the CMK, the AWS account ID of the CMK owner, the
+    #     `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
     #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
-    #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
-    #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   The action will eventually fail.
+    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
+    #   you call may appear to complete even though you provided an invalid
+    #   identifier. The action will eventually fail.
     #
     # @option params [Integer] :size
     #   The size of the volume, in GiBs.
@@ -12400,11 +12404,13 @@ module Aws::EC2
     #   page. The remaining results can be seen by sending another request
     #   with the returned `nextToken` value. This value can be between 5 and
     #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error. You cannot specify this parameter and the host IDs parameter in
-    #   the same request.
+    #   error.
+    #
+    #   You cannot specify this parameter and the host IDs parameter in the
+    #   same request.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token to use to retrieve the next page of results.
     #
     # @return [Types::DescribeHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12445,12 +12451,13 @@ module Aws::EC2
     #   resp.hosts[0].instances #=> Array
     #   resp.hosts[0].instances[0].instance_id #=> String
     #   resp.hosts[0].instances[0].instance_type #=> String
-    #   resp.hosts[0].state #=> String, one of "available", "under-assessment", "permanent-failure", "released", "released-permanent-failure"
+    #   resp.hosts[0].state #=> String, one of "available", "under-assessment", "permanent-failure", "released", "released-permanent-failure", "pending"
     #   resp.hosts[0].allocation_time #=> Time
     #   resp.hosts[0].release_time #=> Time
     #   resp.hosts[0].tags #=> Array
     #   resp.hosts[0].tags[0].key #=> String
     #   resp.hosts[0].tags[0].value #=> String
+    #   resp.hosts[0].host_recovery #=> String, one of "on", "off"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts AWS API Documentation
@@ -21880,19 +21887,18 @@ module Aws::EC2
     #
     # If you do not specify a customer master key (CMK) in the API call that
     # creates the EBS volume, then the volume is encrypted to your AWS
-    # account's default CMK.
+    # account's managed CMK.
     #
-    # You can specify a default CMK of your choice using
-    # ModifyEbsDefaultKmsKeyId.
+    # You can specify a CMK of your choice using ModifyEbsDefaultKmsKeyId.
     #
-    # Enabling default encryption for EBS volumes has no effect on existing
-    # unencrypted volumes in your account. Encrypting the data in these
-    # requires manual action. You can either create an encrypted snapshot of
-    # an unencrypted volume, or encrypt a copy of an unencrypted snapshot.
-    # Any volume restored from an encrypted snapshot is also encrypted. For
-    # more information, see [Amazon EBS Snapshots][1].
+    # Enabling encryption-by-default for EBS volumes has no effect on
+    # existing unencrypted volumes in your account. Encrypting the data in
+    # these requires manual action. You can either create an encrypted
+    # snapshot of an unencrypted volume, or encrypt a copy of an unencrypted
+    # snapshot. Any volume restored from an encrypted snapshot is also
+    # encrypted. For more information, see [Amazon EBS Snapshots][1].
     #
-    # After EBS encryption by default is enabled, you can no longer launch
+    # After EBS encryption-by-default is enabled, you can no longer launch
     # older-generation instance types that do not support encryption. For
     # more information, see [Supported Instance Types][2].
     #
@@ -23847,40 +23853,43 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Changes the default customer master key (CMK) that your account uses
-    # to encrypt EBS volumes if you don't specify a CMK in the API call.
+    # Changes the customer master key (CMK) that your account uses to
+    # encrypt EBS volumes if you don't specify a CMK in the API call.
     #
-    # Your account has an AWS-managed default CMK that is used for
+    # By default, your account has an AWS-managed CMK that is used for
     # encrypting an EBS volume when no CMK is specified in the API call that
     # creates the volume. By calling this API, you can specify a
-    # customer-managed CMK to use in place of the AWS-managed default CMK.
+    # customer-managed CMK to use in place of the AWS-managed CMK.
     #
-    # Note: Deleting or disabling the custom CMK that you have specified to
-    # act as your default CMK will result in instance-launch failures.
+    # Note: Deleting or disabling the CMK that you have specified to act as
+    # your default CMK will result in instance-launch failures.
     #
     # @option params [required, String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
     #   master key (CMK) to use to encrypt the volume. This parameter is only
-    #   required if you want to use a non-default CMK; if this parameter is
-    #   not specified, the default CMK for EBS is used. If a `KmsKeyId` is
-    #   specified, the `Encrypted` flag must also be set.
+    #   required if you want to use a customer-managed CMK; if this parameter
+    #   is not specified, your AWS-managed CMK for the account is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
     #   The CMK identifier may be provided in any of the following formats:
     #
-    #   * Key ID
+    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias
+    #   * Key alias: For example, alias/ExampleAlias.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace, followed
+    #     by the Region of the CMK, the AWS account ID of the CMK owner, the
+    #     `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
+    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
+    #   you call may appear to complete even though you provided an invalid
+    #   identifier. The action will eventually fail.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -24066,11 +24075,20 @@ module Aws::EC2
     # provided, the instance is launched onto a suitable host with
     # auto-placement enabled.
     #
-    # @option params [required, String] :auto_placement
+    # @option params [String] :auto_placement
     #   Specify whether to enable or disable auto-placement.
     #
     # @option params [required, Array<String>] :host_ids
     #   The IDs of the Dedicated Hosts to modify.
+    #
+    # @option params [String] :host_recovery
+    #   Indicates whether to enable or disable host recovery for the Dedicated
+    #   Host. For more information, see [ Host Recovery][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
     #
     # @return [Types::ModifyHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -24080,8 +24098,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_hosts({
-    #     auto_placement: "on", # required, accepts on, off
+    #     auto_placement: "on", # accepts on, off
     #     host_ids: ["String"], # required
+    #     host_recovery: "on", # accepts on, off
     #   })
     #
     # @example Response structure
@@ -26355,13 +26374,13 @@ module Aws::EC2
     # specified reservation being purchased and charged to your account.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [How to Ensure Idempotency][1]
-    #   in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :currency_code
     #   The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
@@ -28993,11 +29012,7 @@ module Aws::EC2
     # [8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   The block device mapping entries. You can't specify both a snapshot
-    #   ID and an encryption value. This is because only blank volumes can be
-    #   encrypted on creation. If a snapshot is the basis for a volume, it is
-    #   not blank and its encryption status is used for the volume encryption
-    #   status.
+    #   The block device mapping entries.
     #
     # @option params [String] :image_id
     #   The ID of the AMI. An AMI ID is required to launch an instance and
@@ -30713,7 +30728,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

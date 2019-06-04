@@ -216,13 +216,13 @@ module Aws::S3
       data[:parts_count]
     end
 
-    # The Object Lock mode currently in place for this object.
+    # The object lock mode currently in place for this object.
     # @return [String]
     def object_lock_mode
       data[:object_lock_mode]
     end
 
-    # The date and time when this object's Object Lock will expire.
+    # The date and time when this object's object lock expires.
     # @return [Time]
     def object_lock_retain_until_date
       data[:object_lock_retain_until_date]
@@ -558,9 +558,9 @@ module Aws::S3
     #   in conjunction with the TaggingDirective. The tag-set must be encoded
     #   as URL Query parameters
     # @option options [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to the copied object.
+    #   The object lock mode that you want to apply to the copied object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want the copied object's Object Lock to
+    #   The date and time when you want the copied object's object lock to
     #   expire.
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the copied object.
@@ -595,7 +595,7 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
-    #   Indicates whether S3 Object Lock should bypass Governance-mode
+    #   Indicates whether Amazon S3 object lock should bypass governance-mode
     #   restrictions to process this operation.
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
@@ -789,10 +789,10 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters
     # @option options [String] :object_lock_mode
-    #   Specifies the Object Lock mode that you want to apply to the uploaded
+    #   Specifies the object lock mode that you want to apply to the uploaded
     #   object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   Specifies the date and time when you want the Object Lock to expire.
+    #   Specifies the date and time when you want the object lock to expire.
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the uploaded
     #   object.
@@ -864,7 +864,8 @@ module Aws::S3
     #   the body cannot be determined automatically.
     # @option options [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
-    #   is auto-populated when using the command from the CLI
+    #   is auto-populated when using the command from the CLI. This parameted
+    #   is required if object lock parameters are specified.
     # @option options [String] :content_type
     #   A standard MIME type describing the format of the object data.
     # @option options [Time,DateTime,Date,Integer,String] :expires
@@ -918,9 +919,9 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
     # @option options [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to this object.
+    #   The object lock mode that you want to apply to this object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want this object's Object Lock to expire.
+    #   The date and time when you want this object's object lock to expire.
     # @option options [String] :object_lock_legal_hold_status
     #   The Legal Hold status that you want to apply to the specified object.
     # @return [Types::PutObjectOutput]
@@ -1023,7 +1024,6 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :version_id
     # @option options [Types::RestoreRequest] :restore_request
-    #   Container for restore job parameters.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -1163,7 +1163,7 @@ module Aws::S3
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
-      #   Governance-type Object Lock in place. You must have sufficient
+      #   Governance-type object lock in place. You must have sufficient
       #   permissions to perform this operation.
       # @return [void]
       def batch_delete!(options = {})

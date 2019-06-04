@@ -242,8 +242,8 @@ module Aws::S3
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
     # @option options [Boolean] :object_lock_enabled_for_bucket
-    #   Specifies whether you want S3 Object Lock to be enabled for the new
-    #   bucket.
+    #   Specifies whether you want Amazon S3 object lock to be enabled for the
+    #   new bucket.
     # @return [Types::CreateBucketOutput]
     def create(options = {})
       options = options.merge(bucket: @name)
@@ -291,7 +291,7 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Specifies whether you want to delete this object even if it has a
-    #   Governance-type Object Lock in place. You must have sufficient
+    #   Governance-type object lock in place. You must have sufficient
     #   permissions to perform this operation.
     # @return [Types::DeleteObjectsOutput]
     def delete_objects(options = {})
@@ -354,7 +354,8 @@ module Aws::S3
     #   the body cannot be determined automatically.
     # @option options [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
-    #   is auto-populated when using the command from the CLI
+    #   is auto-populated when using the command from the CLI. This parameted
+    #   is required if object lock parameters are specified.
     # @option options [String] :content_type
     #   A standard MIME type describing the format of the object data.
     # @option options [Time,DateTime,Date,Integer,String] :expires
@@ -410,9 +411,9 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
     # @option options [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to this object.
+    #   The object lock mode that you want to apply to this object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want this object's Object Lock to expire.
+    #   The date and time when you want this object's object lock to expire.
     # @option options [String] :object_lock_legal_hold_status
     #   The Legal Hold status that you want to apply to the specified object.
     # @return [Object]

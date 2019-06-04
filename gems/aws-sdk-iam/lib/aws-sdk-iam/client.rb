@@ -1470,10 +1470,11 @@ module Aws::IAM
     #   The trust relationship policy document that grants an entity
     #   permission to assume the role.
     #
-    #   You must provide policies in JSON format in IAM. However, for AWS
-    #   CloudFormation templates formatted in YAML, you can provide the policy
-    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
-    #   policy to JSON format before submitting it to IAM.
+    #   in IAM, you must provide a JSON policy that has been converted to a
+    #   string. However, for AWS CloudFormation templates formatted in YAML,
+    #   you can provide the policy in JSON or YAML format. AWS CloudFormation
+    #   always converts a YAML policy to JSON format before submitting it to
+    #   IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
@@ -1486,6 +1487,9 @@ module Aws::IAM
     #
     #   * The special characters tab (\\u0009), line feed (\\u000A), and
     #     carriage return (\\u000D)
+    #
+    #   Upon success, the response includes the same trust policy as a
+    #   URL-encoded JSON string.
     #
     #
     #
@@ -1542,11 +1546,11 @@ module Aws::IAM
     #
     # @example Example: To create an IAM role
     #
-    #   # The following command creates a role named Test-Role and attaches a trust policy to it that is provided as a URL-encoded
-    #   # JSON string.
+    #   # The following command creates a role named Test-Role and attaches a trust policy that you must convert from JSON to a
+    #   # string. Upon success, the response includes the same policy as a URL-encoded JSON string.
     #
     #   resp = client.create_role({
-    #     assume_role_policy_document: "<URL-encoded-JSON>", 
+    #     assume_role_policy_document: "<Stringified-JSON>", 
     #     path: "/", 
     #     role_name: "Test-Role", 
     #   })
@@ -10962,7 +10966,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

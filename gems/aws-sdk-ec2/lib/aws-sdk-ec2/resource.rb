@@ -195,11 +195,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   The block device mapping entries. You can't specify both a snapshot
-    #   ID and an encryption value. This is because only blank volumes can be
-    #   encrypted on creation. If a snapshot is the basis for a volume, it is
-    #   not blank and its encryption status is used for the volume encryption
-    #   status.
+    #   The block device mapping entries.
     # @option options [String] :image_id
     #   The ID of the AMI. An AMI ID is required to launch an instance and
     #   must be specified here or in a launch template.
@@ -899,7 +895,7 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
     #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     # @option options [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
@@ -918,33 +914,29 @@ module Aws::EC2
     # @option options [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
     #   master key (CMK) to use to encrypt the volume. This parameter is only
-    #   required if you want to use a non-default CMK; if this parameter is
-    #   not specified, the default CMK for EBS is used. If a `KmsKeyId` is
-    #   specified, the `Encrypted` flag must also be set.
+    #   required if you want to use a customer-managed CMK; if this parameter
+    #   is not specified, your AWS-managed CMK for the account is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
     #   The CMK identifier may be provided in any of the following formats:
     #
-    #   * Key ID
+    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #   * Key alias: For example, alias/ExampleAlias.
+    #
+    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace, followed
+    #     by the Region of the CMK, the AWS account ID of the CMK owner, the
+    #     `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
     #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
-    #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
-    #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   The action will eventually fail.
+    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
+    #   you call may appear to complete even though you provided an invalid
+    #   identifier. The action will eventually fail.
     # @option options [Integer] :size
     #   The size of the volume, in GiBs.
     #

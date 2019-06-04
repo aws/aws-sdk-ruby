@@ -2633,6 +2633,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeGatewayInformationOutput#ec2_instance_id #ec2_instance_id} => String
     #   * {Types::DescribeGatewayInformationOutput#ec2_instance_region #ec2_instance_region} => String
     #   * {Types::DescribeGatewayInformationOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::DescribeGatewayInformationOutput#vpc_endpoint #vpc_endpoint} => String
     #
     #
     # @example Example: To describe metadata about the gateway
@@ -2686,6 +2687,7 @@ module Aws::StorageGateway
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.vpc_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation AWS API Documentation
     #
@@ -2879,6 +2881,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeSMBSettingsOutput#gateway_arn #gateway_arn} => String
     #   * {Types::DescribeSMBSettingsOutput#domain_name #domain_name} => String
     #   * {Types::DescribeSMBSettingsOutput#smb_guest_password_set #smb_guest_password_set} => Boolean
+    #   * {Types::DescribeSMBSettingsOutput#smb_security_strategy #smb_security_strategy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2891,6 +2894,7 @@ module Aws::StorageGateway
     #   resp.gateway_arn #=> String
     #   resp.domain_name #=> String
     #   resp.smb_guest_password_set #=> Boolean
+    #   resp.smb_security_strategy #=> String, one of "ClientSpecified", "MandatorySigning", "MandatoryEncryption"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettings AWS API Documentation
     #
@@ -5448,6 +5452,49 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Updates the SMB security strategy on a file gateway. This action is
+    # only supported in file gateways.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #
+    # @option params [required, String] :smb_security_strategy
+    #   Specifies the type of security strategy.
+    #
+    #   ClientSpecified: SMBv1 is enabled, SMB signing is offered but not
+    #   required, SMB encryption is offered but not required.
+    #
+    #   MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB
+    #   encryption is offered but not required.
+    #
+    #   MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not
+    #   required, SMB encryption is required.
+    #
+    # @return [Types::UpdateSMBSecurityStrategyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSMBSecurityStrategyOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_smb_security_strategy({
+    #     gateway_arn: "GatewayARN", # required
+    #     smb_security_strategy: "ClientSpecified", # required, accepts ClientSpecified, MandatorySigning, MandatoryEncryption
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBSecurityStrategy AWS API Documentation
+    #
+    # @overload update_smb_security_strategy(params = {})
+    # @param [Hash] params ({})
+    def update_smb_security_strategy(params = {}, options = {})
+      req = build_request(:update_smb_security_strategy, params)
+      req.send_request(options)
+    end
+
     # Updates a snapshot schedule configured for a gateway volume. This
     # operation is only supported in the cached volume and stored volume
     # gateway types.
@@ -5604,7 +5651,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

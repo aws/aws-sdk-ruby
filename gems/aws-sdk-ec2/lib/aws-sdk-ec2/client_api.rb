@@ -760,6 +760,7 @@ module Aws::EC2
     HostOffering = Shapes::StructureShape.new(name: 'HostOffering')
     HostOfferingSet = Shapes::ListShape.new(name: 'HostOfferingSet')
     HostProperties = Shapes::StructureShape.new(name: 'HostProperties')
+    HostRecovery = Shapes::StringShape.new(name: 'HostRecovery')
     HostReservation = Shapes::StructureShape.new(name: 'HostReservation')
     HostReservationIdSet = Shapes::ListShape.new(name: 'HostReservationIdSet')
     HostReservationSet = Shapes::ListShape.new(name: 'HostReservationSet')
@@ -1583,6 +1584,7 @@ module Aws::EC2
     AllocateHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceType"))
     AllocateHostsRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "quantity"))
     AllocateHostsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    AllocateHostsRequest.add_member(:host_recovery, Shapes::ShapeRef.new(shape: HostRecovery, location_name: "HostRecovery"))
     AllocateHostsRequest.struct_class = Types::AllocateHostsRequest
 
     AllocateHostsResult.add_member(:host_ids, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "hostIdSet"))
@@ -4553,6 +4555,7 @@ module Aws::EC2
     Host.add_member(:allocation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "allocationTime"))
     Host.add_member(:release_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "releaseTime"))
     Host.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    Host.add_member(:host_recovery, Shapes::ShapeRef.new(shape: HostRecovery, location_name: "hostRecovery"))
     Host.struct_class = Types::Host
 
     HostInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -5454,8 +5457,9 @@ module Aws::EC2
     ModifyFpgaImageAttributeResult.add_member(:fpga_image_attribute, Shapes::ShapeRef.new(shape: FpgaImageAttribute, location_name: "fpgaImageAttribute"))
     ModifyFpgaImageAttributeResult.struct_class = Types::ModifyFpgaImageAttributeResult
 
-    ModifyHostsRequest.add_member(:auto_placement, Shapes::ShapeRef.new(shape: AutoPlacement, required: true, location_name: "autoPlacement"))
+    ModifyHostsRequest.add_member(:auto_placement, Shapes::ShapeRef.new(shape: AutoPlacement, location_name: "autoPlacement"))
     ModifyHostsRequest.add_member(:host_ids, Shapes::ShapeRef.new(shape: RequestHostIdList, required: true, location_name: "hostId"))
+    ModifyHostsRequest.add_member(:host_recovery, Shapes::ShapeRef.new(shape: HostRecovery, location_name: "HostRecovery"))
     ModifyHostsRequest.struct_class = Types::ModifyHostsRequest
 
     ModifyHostsResult.add_member(:successful, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "successful"))

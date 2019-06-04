@@ -2285,6 +2285,11 @@ module Aws::StorageGateway
     #   the `ListTagsForResource` API operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] vpc_endpoint
+    #   The configuration settings for the virtual private cloud (VPC)
+    #   endpoint for your gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
     #
     class DescribeGatewayInformationOutput < Struct.new(
@@ -2299,7 +2304,8 @@ module Aws::StorageGateway
       :last_software_update,
       :ec2_instance_id,
       :ec2_instance_region,
-      :tags)
+      :tags,
+      :vpc_endpoint)
       include Aws::Structure
     end
 
@@ -2489,12 +2495,26 @@ module Aws::StorageGateway
     #   set, and otherwise false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] smb_security_strategy
+    #   The type of security strategy that was specified for file gateway.
+    #
+    #   ClientSpecified: SMBv1 is enabled, SMB signing is offered but not
+    #   required, SMB encryption is offered but not required.
+    #
+    #   MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB
+    #   encryption is offered but not required.
+    #
+    #   MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but
+    #   not required, SMB encryption is required.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsOutput AWS API Documentation
     #
     class DescribeSMBSettingsOutput < Struct.new(
       :gateway_arn,
       :domain_name,
-      :smb_guest_password_set)
+      :smb_guest_password_set,
+      :smb_security_strategy)
       include Aws::Structure
     end
 
@@ -5565,6 +5585,52 @@ module Aws::StorageGateway
     #
     class UpdateSMBFileShareOutput < Struct.new(
       :file_share_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSMBSecurityStrategyInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #         smb_security_strategy: "ClientSpecified", # required, accepts ClientSpecified, MandatorySigning, MandatoryEncryption
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] smb_security_strategy
+    #   Specifies the type of security strategy.
+    #
+    #   ClientSpecified: SMBv1 is enabled, SMB signing is offered but not
+    #   required, SMB encryption is offered but not required.
+    #
+    #   MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB
+    #   encryption is offered but not required.
+    #
+    #   MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but
+    #   not required, SMB encryption is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBSecurityStrategyInput AWS API Documentation
+    #
+    class UpdateSMBSecurityStrategyInput < Struct.new(
+      :gateway_arn,
+      :smb_security_strategy)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBSecurityStrategyOutput AWS API Documentation
+    #
+    class UpdateSMBSecurityStrategyOutput < Struct.new(
+      :gateway_arn)
       include Aws::Structure
     end
 

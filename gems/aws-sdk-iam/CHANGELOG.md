@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-06-04)
+------------------
+
+* Feature - This release adds validation for policy path field. This field is now restricted to be max 512 characters.
+
 1.23.0 (2019-05-21)
 ------------------
 

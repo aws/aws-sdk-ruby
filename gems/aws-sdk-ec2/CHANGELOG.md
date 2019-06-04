@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2019-06-04)
+------------------
+
+* Feature - This release adds support for Host Recovery feature which automatically restarts instances on to a new replacement host if failures are detected on Dedicated Host.
+
 1.89.0 (2019-06-03)
 ------------------
 
