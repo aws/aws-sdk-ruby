@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
 2.11.287 (2019-06-04)
 ------------------
 
