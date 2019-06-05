@@ -59,12 +59,12 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] timeout
-    #   The JobRun timeout in minutes. This is the maximum time that a job
+    #   The `JobRun` timeout in minutes. This is the maximum time that a job
     #   run can consume resources before it is terminated and enters
     #   `TIMEOUT` status. The default is 2,880 minutes (48 hours). This
     #   overrides the timeout value set in the parent job.
@@ -75,8 +75,8 @@ module Aws::Glue
     #   @return [Types::NotificationProperty]
     #
     # @!attribute [rw] security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
-    #   action.
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Action AWS API Documentation
@@ -474,7 +474,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_names
-    #   A list of job names, which may be the names returned from the
+    #   A list of job names, which might be the names returned from the
     #   `ListJobs` operation.
     #   @return [Array<String>]
     #
@@ -598,11 +598,12 @@ module Aws::Glue
     # run.
     #
     # @!attribute [rw] job_name
-    #   The name of the job definition used in the job run in question.
+    #   The name of the job definition that is used in the job run in
+    #   question.
     #   @return [String]
     #
     # @!attribute [rw] job_run_id
-    #   The JobRunId of the job run in question.
+    #   The `JobRunId` of the job run in question.
     #   @return [String]
     #
     # @!attribute [rw] error_detail
@@ -631,7 +632,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] job_run_ids
-    #   A list of the JobRunIds that should be stopped for that job
+    #   A list of the `JobRunIds` that should be stopped for that job
     #   definition.
     #   @return [Array<String>]
     #
@@ -648,9 +649,9 @@ module Aws::Glue
     #   @return [Array<Types::BatchStopJobRunSuccessfulSubmission>]
     #
     # @!attribute [rw] errors
-    #   A list of the errors that were encountered in tryng to stop JobRuns,
-    #   including the JobRunId for which each error was encountered and
-    #   details about the error.
+    #   A list of the errors that were encountered in trying to stop
+    #   `JobRuns`, including the `JobRunId` for which each error was
+    #   encountered and details about the error.
     #   @return [Array<Types::BatchStopJobRunError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunResponse AWS API Documentation
@@ -661,14 +662,14 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Records a successful request to stop a specified JobRun.
+    # Records a successful request to stop a specified `JobRun`.
     #
     # @!attribute [rw] job_name
     #   The name of the job definition used in the job run that was stopped.
     #   @return [String]
     #
     # @!attribute [rw] job_run_id
-    #   The JobRunId of the job run that was stopped.
+    #   The `JobRunId` of the job run that was stopped.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunSuccessfulSubmission AWS API Documentation
@@ -1000,13 +1001,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] job_name
-    #   The name of the Job to whose JobRuns this condition applies and on
-    #   which this trigger waits.
+    #   The name of the job whose `JobRuns` this condition applies to, and
+    #   on which this trigger waits.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The condition state. Currently, the values supported are SUCCEEDED,
-    #   STOPPED, TIMEOUT and FAILED.
+    #   The condition state. Currently, the values supported are
+    #   `SUCCEEDED`, `STOPPED`, `TIMEOUT`, and `FAILED`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Condition AWS API Documentation
@@ -2116,6 +2117,7 @@ module Aws::Glue
     #         command: { # required
     #           name: "GenericString",
     #           script_location: "ScriptLocationString",
+    #           python_version: "PythonVersionString",
     #         },
     #         default_arguments: {
     #           "GenericString" => "GenericString",
@@ -2152,16 +2154,17 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The name or ARN of the IAM role associated with this job.
+    #   The name or Amazon Resource Name (ARN) of the IAM role associated
+    #   with this job.
     #   @return [String]
     #
     # @!attribute [rw] execution_property
-    #   An ExecutionProperty specifying the maximum number of concurrent
+    #   An `ExecutionProperty` specifying the maximum number of concurrent
     #   runs allowed for this job.
     #   @return [Types::ExecutionProperty]
     #
     # @!attribute [rw] command
-    #   The JobCommand that executes this job.
+    #   The `JobCommand` that executes this job.
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
@@ -2180,8 +2183,8 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -2196,7 +2199,7 @@ module Aws::Glue
     #   This parameter is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of AWS Glue data processing units (DPUs) to allocate to
-    #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   this Job. You can allocate from 2 to 100 DPUs; the default is 10. A
     #   DPU is a relative measure of processing power that consists of 4
     #   vCPUs of compute capacity and 16 GB of memory. For more information,
     #   see the [AWS Glue pricing page][1].
@@ -2223,9 +2226,9 @@ module Aws::Glue
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a python shell job, or an Apache Spark ETL job:
+    #   you are running a Python shell job or an Apache Spark ETL job:
     #
-    #   * When you specify a python shell job
+    #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
@@ -2250,11 +2253,13 @@ module Aws::Glue
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
     #
-    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
-    #     memory and a 64GB disk, and 1 executor per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16
+    #     GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
-    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
-    #     memory and a 128GB disk, and 1 executor per worker.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
+    #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -2266,8 +2271,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
-    #   job.
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this job.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2277,7 +2282,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
@@ -2705,13 +2710,13 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] predicate
     #   A predicate to specify when the new trigger should fire.
     #
-    #   This field is required when the trigger type is CONDITIONAL.
+    #   This field is required when the trigger type is `CONDITIONAL`.
     #   @return [Types::Predicate]
     #
     # @!attribute [rw] actions
@@ -2723,8 +2728,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] start_on_creation
-    #   Set to true to start SCHEDULED and CONDITIONAL triggers when
-    #   created. True not supported for ON\_DEMAND triggers.
+    #   Set to `true` to start `SCHEDULED` and `CONDITIONAL` triggers when
+    #   created. True is not supported for `ON_DEMAND` triggers.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -2734,7 +2739,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTriggerRequest AWS API Documentation
@@ -4426,11 +4431,11 @@ module Aws::Glue
     end
 
     # @!attribute [rw] job_runs
-    #   A list of job-run metatdata objects.
+    #   A list of job-run metadata objects.
     #   @return [Array<Types::JobRun>]
     #
     # @!attribute [rw] next_token
-    #   A continuation token, if not all reequested job runs have been
+    #   A continuation token, if not all requested job runs have been
     #   returned.
     #   @return [String]
     #
@@ -5197,7 +5202,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon ARN of the resource for which to retrieve tags.
+    #   The Amazon Resource Name (ARN) of the resource for which to retrieve
+    #   tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTagsRequest AWS API Documentation
@@ -5261,9 +5267,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] dependent_job_name
-    #   The name of the job for which to retrieve triggers. The trigger that
-    #   can start this job will be returned, and if there is no such
-    #   trigger, all triggers will be returned.
+    #   The name of the job to retrieve triggers for. The trigger that can
+    #   start this job is returned, and if there is no such trigger, all
+    #   triggers are returned.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5573,7 +5579,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the job being defined.
+    #   A description of the job.
     #   @return [String]
     #
     # @!attribute [rw] log_uri
@@ -5581,7 +5587,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The name or ARN of the IAM role associated with this job.
+    #   The name or Amazon Resource Name (ARN) of the IAM role associated
+    #   with this job.
     #   @return [String]
     #
     # @!attribute [rw] created_on
@@ -5593,12 +5600,12 @@ module Aws::Glue
     #   @return [Time]
     #
     # @!attribute [rw] execution_property
-    #   An ExecutionProperty specifying the maximum number of concurrent
+    #   An `ExecutionProperty` specifying the maximum number of concurrent
     #   runs allowed for this job.
     #   @return [Types::ExecutionProperty]
     #
     # @!attribute [rw] command
-    #   The JobCommand that executes this job.
+    #   The `JobCommand` that executes this job.
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
@@ -5617,8 +5624,8 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -5630,10 +5637,10 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_capacity
-    #   This field is deprecated, use `MaxCapacity` instead.
+    #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of AWS Glue data processing units (DPUs) allocated to
-    #   runs of this job. From 2 to 100 DPUs can be allocated; the default
+    #   runs of this job. You can allocate from 2 to 100 DPUs; the default
     #   is 10. A DPU is a relative measure of processing power that consists
     #   of 4 vCPUs of compute capacity and 16 GB of memory. For more
     #   information, see the [AWS Glue pricing page][1].
@@ -5662,9 +5669,9 @@ module Aws::Glue
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a python shell job, or an Apache Spark ETL job:
+    #   you are running a Python shell job or an Apache Spark ETL job:
     #
-    #   * When you specify a python shell job
+    #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
@@ -5685,11 +5692,13 @@ module Aws::Glue
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
     #
-    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
-    #     memory and a 64GB disk, and 1 executor per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16
+    #     GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
-    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
-    #     memory and a 128GB disk, and 1 executor per worker.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
+    #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -5701,8 +5710,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
-    #   job.
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this job.
     #   @return [String]
     #
     # @!attribute [rw] notification_property
@@ -5800,22 +5809,30 @@ module Aws::Glue
     #       {
     #         name: "GenericString",
     #         script_location: "ScriptLocationString",
+    #         python_version: "PythonVersionString",
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the job command: this must be `glueetl`, for an Apache
-    #   Spark ETL job, or `pythonshell`, for a Python shell job.
+    #   The name of the job command. For an Apache Spark ETL job, this must
+    #   be `glueetl`. For a Python shell job, it must be `pythonshell`.
     #   @return [String]
     #
     # @!attribute [rw] script_location
-    #   Specifies the S3 path to a script that executes a job (required).
+    #   Specifies the Amazon Simple Storage Service (Amazon S3) path to a
+    #   script that executes a job (required).
+    #   @return [String]
+    #
+    # @!attribute [rw] python_version
+    #   The Python version being used to execute a Python shell job. Allowed
+    #   values are 2 or 3.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobCommand AWS API Documentation
     #
     class JobCommand < Struct.new(
       :name,
-      :script_location)
+      :script_location,
+      :python_version)
       include Aws::Structure
     end
 
@@ -5830,8 +5847,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] previous_run_id
-    #   The ID of the previous run of this job. For example, the JobRunId
-    #   specified in the StartJobRun action.
+    #   The ID of the previous run of this job. For example, the `JobRunId`
+    #   specified in the `StartJobRun` action.
     #   @return [String]
     #
     # @!attribute [rw] trigger_name
@@ -5847,11 +5864,11 @@ module Aws::Glue
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_on
-    #   The last time this job run was modified.
+    #   The last time that this job run was modified.
     #   @return [Time]
     #
     # @!attribute [rw] completed_on
-    #   The date and time this job run completed.
+    #   The date and time that this job run completed.
     #   @return [Time]
     #
     # @!attribute [rw] job_run_state
@@ -5875,8 +5892,8 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] error_message
@@ -5888,7 +5905,7 @@ module Aws::Glue
     #   @return [Array<Types::Predecessor>]
     #
     # @!attribute [rw] allocated_capacity
-    #   This field is deprecated, use `MaxCapacity` instead.
+    #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of AWS Glue data processing units (DPUs) allocated to
     #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10.
@@ -5906,7 +5923,7 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
-    #   The JobRun timeout in minutes. This is the maximum time that a job
+    #   The `JobRun` timeout in minutes. This is the maximum time that a job
     #   run can consume resources before it is terminated and enters
     #   `TIMEOUT` status. The default is 2,880 minutes (48 hours). This
     #   overrides the timeout value set in the parent job.
@@ -5923,9 +5940,9 @@ module Aws::Glue
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a python shell job, or an Apache Spark ETL job:
+    #   you are running a Python shell job or an Apache Spark ETL job:
     #
-    #   * When you specify a python shell job
+    #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
@@ -5936,7 +5953,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: https://aws.amazon.com/glue/pricing/
+    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] notification_property
@@ -5966,18 +5983,18 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
-    #   job run.
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this job run.
     #   @return [String]
     #
     # @!attribute [rw] log_group_name
-    #   The name of the log group for secure logging, that can be
-    #   server-side encrypted in CloudWatch using KMS. This name can be
+    #   The name of the log group for secure logging that can be server-side
+    #   encrypted in Amazon CloudWatch using AWS KMS. This name can be
     #   `/aws-glue/jobs/`, in which case the default encryption is `NONE`.
-    #   If you add a role name and SecurityConfiguration name (in other
+    #   If you add a role name and `SecurityConfiguration` name (in other
     #   words,
     #   `/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/`), then
-    #   that security configuration will be used to encrypt the log group.
+    #   that security configuration is used to encrypt the log group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
@@ -6007,9 +6024,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies information used to update an existing job definition. Note
-    # that the previous job definition will be completely overwritten by
-    # this information.
+    # Specifies information used to update an existing job definition. The
+    # previous job definition is completely overwritten by this information.
     #
     # @note When making an API call, you may pass JobUpdate
     #   data as a hash:
@@ -6024,6 +6040,7 @@ module Aws::Glue
     #         command: {
     #           name: "GenericString",
     #           script_location: "ScriptLocationString",
+    #           python_version: "PythonVersionString",
     #         },
     #         default_arguments: {
     #           "GenericString" => "GenericString",
@@ -6052,16 +6069,17 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The name or ARN of the IAM role associated with this job (required).
+    #   The name or Amazon Resource Name (ARN) of the IAM role associated
+    #   with this job (required).
     #   @return [String]
     #
     # @!attribute [rw] execution_property
-    #   An ExecutionProperty specifying the maximum number of concurrent
+    #   An `ExecutionProperty` specifying the maximum number of concurrent
     #   runs allowed for this job.
     #   @return [Types::ExecutionProperty]
     #
     # @!attribute [rw] command
-    #   The JobCommand that executes this job (required).
+    #   The `JobCommand` that executes this job (required).
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
@@ -6080,8 +6098,8 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -6096,7 +6114,7 @@ module Aws::Glue
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of AWS Glue data processing units (DPUs) to allocate to
-    #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   this job. You can allocate from 2 to 100 DPUs; the default is 10. A
     #   DPU is a relative measure of processing power that consists of 4
     #   vCPUs of compute capacity and 16 GB of memory. For more information,
     #   see the [AWS Glue pricing page][1].
@@ -6123,9 +6141,9 @@ module Aws::Glue
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a python shell job, or an Apache Spark ETL job:
+    #   you are running a Python shell job or an Apache Spark ETL job:
     #
-    #   * When you specify a python shell job
+    #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
@@ -6146,11 +6164,13 @@ module Aws::Glue
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
     #
-    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
-    #     memory and a 64GB disk, and 1 executor per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16
+    #     GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
-    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
-    #     memory and a 128GB disk, and 1 executor per worker.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
+    #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -6162,12 +6182,12 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
-    #   job.
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this job.
     #   @return [String]
     #
     # @!attribute [rw] notification_property
-    #   Specifies configuration properties of a job notification.
+    #   Specifies the configuration properties of a job notification.
     #   @return [Types::NotificationProperty]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
@@ -6351,8 +6371,8 @@ module Aws::Glue
     end
 
     # @!attribute [rw] dev_endpoint_names
-    #   The names of all DevEndpoints in the account, or the DevEndpoints
-    #   with the specified tags.
+    #   The names of all the `DevEndpoint`s in the account, or the
+    #   `DevEndpoint`s with the specified tags.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -6436,8 +6456,8 @@ module Aws::Glue
     #
     # @!attribute [rw] dependent_job_name
     #   The name of the job for which to retrieve triggers. The trigger that
-    #   can start this job will be returned, and if there is no such
-    #   trigger, all triggers will be returned.
+    #   can start this job is returned. If there is no such trigger, all
+    #   triggers are returned.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6897,7 +6917,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] logical
-    #   Optional field if only one condition is listed. If multiple
+    #   An optional field if only one condition is listed. If multiple
     #   conditions are listed, then this field is required.
     #   @return [String]
     #
@@ -7410,7 +7430,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] job_run_id
-    #   The ID of a previous JobRun to retry.
+    #   The ID of a previous `JobRun` to retry.
     #   @return [String]
     #
     # @!attribute [rw] arguments
@@ -7430,12 +7450,12 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] allocated_capacity
-    #   This field is deprecated, use `MaxCapacity` instead.
+    #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of AWS Glue data processing units (DPUs) to allocate to
     #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10.
@@ -7445,11 +7465,11 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: https://aws.amazon.com/glue/pricing/
+    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
-    #   The JobRun timeout in minutes. This is the maximum time that a job
+    #   The `JobRun` timeout in minutes. This is the maximum time that a job
     #   run can consume resources before it is terminated and enters
     #   `TIMEOUT` status. The default is 2,880 minutes (48 hours). This
     #   overrides the timeout value set in the parent job.
@@ -7466,9 +7486,9 @@ module Aws::Glue
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a python shell job, or an Apache Spark ETL job:
+    #   you are running a Python shell job, or an Apache Spark ETL job:
     #
-    #   * When you specify a python shell job
+    #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
@@ -7479,7 +7499,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: https://aws.amazon.com/glue/pricing/
+    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] worker_type
@@ -7505,8 +7525,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
-    #   job run.
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this job run.
     #   @return [String]
     #
     # @!attribute [rw] notification_property
@@ -8083,7 +8103,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
     #   @return [String]
     #
     # @!attribute [rw] tags_to_add
@@ -8105,7 +8125,7 @@ module Aws::Glue
     # Information about a specific trigger.
     #
     # @!attribute [rw] name
-    #   Name of the trigger.
+    #   The name of the trigger.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -8131,7 +8151,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -8157,8 +8177,8 @@ module Aws::Glue
     end
 
     # A structure used to provide information used to update a trigger. This
-    # object will update the the previous trigger definition by overwriting
-    # it completely.
+    # object updates the previous trigger definition by overwriting it
+    # completely.
     #
     # @note When making an API call, you may pass TriggerUpdate
     #   data as a hash:
@@ -8207,7 +8227,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -8238,7 +8258,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource from which to remove the tags.
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   the tags.
     #   @return [String]
     #
     # @!attribute [rw] tags_to_remove
@@ -8760,6 +8781,7 @@ module Aws::Glue
     #           command: {
     #             name: "GenericString",
     #             script_location: "ScriptLocationString",
+    #             python_version: "PythonVersionString",
     #           },
     #           default_arguments: {
     #             "GenericString" => "GenericString",
@@ -8781,7 +8803,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_name
-    #   Name of the job definition to update.
+    #   The name of the job definition to update.
     #   @return [String]
     #
     # @!attribute [rw] job_update

@@ -690,7 +690,7 @@ module Aws::Glue
     # conditions that uses tags.
     #
     # @option params [required, Array<String>] :job_names
-    #   A list of job names, which may be the names returned from the
+    #   A list of job names, which might be the names returned from the
     #   `ListJobs` operation.
     #
     # @return [Types::BatchGetJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -716,6 +716,7 @@ module Aws::Glue
     #   resp.jobs[0].execution_property.max_concurrent_runs #=> Integer
     #   resp.jobs[0].command.name #=> String
     #   resp.jobs[0].command.script_location #=> String
+    #   resp.jobs[0].command.python_version #=> String
     #   resp.jobs[0].default_arguments #=> Hash
     #   resp.jobs[0].default_arguments["GenericString"] #=> String
     #   resp.jobs[0].connections.connections #=> Array
@@ -885,7 +886,7 @@ module Aws::Glue
     #   The name of the job definition for which to stop job runs.
     #
     # @option params [required, Array<String>] :job_run_ids
-    #   A list of the JobRunIds that should be stopped for that job
+    #   A list of the `JobRunIds` that should be stopped for that job
     #   definition.
     #
     # @return [Types::BatchStopJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1329,14 +1330,15 @@ module Aws::Glue
     #   This field is reserved for future use.
     #
     # @option params [required, String] :role
-    #   The name or ARN of the IAM role associated with this job.
+    #   The name or Amazon Resource Name (ARN) of the IAM role associated with
+    #   this job.
     #
     # @option params [Types::ExecutionProperty] :execution_property
-    #   An ExecutionProperty specifying the maximum number of concurrent runs
-    #   allowed for this job.
+    #   An `ExecutionProperty` specifying the maximum number of concurrent
+    #   runs allowed for this job.
     #
     # @option params [required, Types::JobCommand] :command
-    #   The JobCommand that executes this job.
+    #   The `JobCommand` that executes this job.
     #
     # @option params [Hash<String,String>] :default_arguments
     #   The default arguments for this job.
@@ -1354,8 +1356,8 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #
     # @option params [Types::ConnectionsList] :connections
     #   The connections used for this job.
@@ -1367,7 +1369,7 @@ module Aws::Glue
     #   This parameter is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of AWS Glue data processing units (DPUs) to allocate to
-    #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   this Job. You can allocate from 2 to 100 DPUs; the default is 10. A
     #   DPU is a relative measure of processing power that consists of 4 vCPUs
     #   of compute capacity and 16 GB of memory. For more information, see the
     #   [AWS Glue pricing page][1].
@@ -1391,9 +1393,9 @@ module Aws::Glue
     #   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a python shell job, or an Apache Spark ETL job:
+    #   you are running a Python shell job or an Apache Spark ETL job:
     #
-    #   * When you specify a python shell job
+    #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either 0.0625
     #     or 1 DPU. The default is 0.0625 DPU.
     #
@@ -1416,11 +1418,13 @@ module Aws::Glue
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
     #
-    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
-    #     memory and a 64GB disk, and 1 executor per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16 GB
+    #     of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
-    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
-    #     memory and a 128GB disk, and 1 executor per worker.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
+    #     of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
@@ -1430,7 +1434,7 @@ module Aws::Glue
     #   149 for `G.2X`.
     #
     # @option params [String] :security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
+    #   The name of the `SecurityConfiguration` structure to be used with this
     #   job.
     #
     # @option params [Hash<String,String>] :tags
@@ -1440,7 +1444,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1459,6 +1463,7 @@ module Aws::Glue
     #     command: { # required
     #       name: "GenericString",
     #       script_location: "ScriptLocationString",
+    #       python_version: "PythonVersionString",
     #     },
     #     default_arguments: {
     #       "GenericString" => "GenericString",
@@ -1792,12 +1797,12 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @option params [Types::Predicate] :predicate
     #   A predicate to specify when the new trigger should fire.
     #
-    #   This field is required when the trigger type is CONDITIONAL.
+    #   This field is required when the trigger type is `CONDITIONAL`.
     #
     # @option params [required, Array<Types::Action>] :actions
     #   The actions initiated by this trigger when it fires.
@@ -1806,8 +1811,8 @@ module Aws::Glue
     #   A description of the new trigger.
     #
     # @option params [Boolean] :start_on_creation
-    #   Set to true to start SCHEDULED and CONDITIONAL triggers when created.
-    #   True not supported for ON\_DEMAND triggers.
+    #   Set to `true` to start `SCHEDULED` and `CONDITIONAL` triggers when
+    #   created. True is not supported for `ON_DEMAND` triggers.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this trigger. You may use tags to limit access to
@@ -1816,7 +1821,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
     # @return [Types::CreateTriggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3070,6 +3075,7 @@ module Aws::Glue
     #   resp.job.execution_property.max_concurrent_runs #=> Integer
     #   resp.job.command.name #=> String
     #   resp.job.command.script_location #=> String
+    #   resp.job.command.python_version #=> String
     #   resp.job.default_arguments #=> Hash
     #   resp.job.default_arguments["GenericString"] #=> String
     #   resp.job.connections.connections #=> Array
@@ -3245,6 +3251,7 @@ module Aws::Glue
     #   resp.jobs[0].execution_property.max_concurrent_runs #=> Integer
     #   resp.jobs[0].command.name #=> String
     #   resp.jobs[0].command.script_location #=> String
+    #   resp.jobs[0].command.python_version #=> String
     #   resp.jobs[0].default_arguments #=> Hash
     #   resp.jobs[0].default_arguments["GenericString"] #=> String
     #   resp.jobs[0].connections.connections #=> Array
@@ -4160,7 +4167,8 @@ module Aws::Glue
     # Retrieves a list of tags associated with a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon ARN of the resource for which to retrieve tags.
+    #   The Amazon Resource Name (ARN) of the resource for which to retrieve
+    #   tags.
     #
     # @return [Types::GetTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4237,9 +4245,9 @@ module Aws::Glue
     #   A continuation token, if this is a continuation call.
     #
     # @option params [String] :dependent_job_name
-    #   The name of the job for which to retrieve triggers. The trigger that
-    #   can start this job will be returned, and if there is no such trigger,
-    #   all triggers will be returned.
+    #   The name of the job to retrieve triggers for. The trigger that can
+    #   start this job is returned, and if there is no such trigger, all
+    #   triggers are returned.
     #
     # @option params [Integer] :max_results
     #   The maximum size of the response.
@@ -4416,10 +4424,10 @@ module Aws::Glue
     # the resources with the specified tag. This operation allows you to see
     # which resources are available in your account, and their names.
     #
-    # This operation takes the optional `Tags` field which you can use as a
+    # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
     # group. If you choose to use tags filtering, only resources with the
-    # tag will be retrieved.
+    # tag are retrieved.
     #
     # @option params [Integer] :max_results
     #   The maximum size of a list to return.
@@ -4460,14 +4468,15 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the names of all DevEndpoint resources in this AWS account,
-    # or the resources with the specified tag. This operation allows you to
-    # see which resources are available in your account, and their names.
+    # Retrieves the names of all `DevEndpoint` resources in this AWS
+    # account, or the resources with the specified tag. This operation
+    # allows you to see which resources are available in your account, and
+    # their names.
     #
-    # This operation takes the optional `Tags` field which you can use as a
+    # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
     # group. If you choose to use tags filtering, only resources with the
-    # tag will be retrieved.
+    # tag are retrieved.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
@@ -4512,10 +4521,10 @@ module Aws::Glue
     # resources with the specified tag. This operation allows you to see
     # which resources are available in your account, and their names.
     #
-    # This operation takes the optional `Tags` field which you can use as a
+    # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
     # group. If you choose to use tags filtering, only resources with the
-    # tag will be retrieved.
+    # tag are retrieved.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
@@ -4560,18 +4569,18 @@ module Aws::Glue
     # the resources with the specified tag. This operation allows you to see
     # which resources are available in your account, and their names.
     #
-    # This operation takes the optional `Tags` field which you can use as a
+    # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
     # group. If you choose to use tags filtering, only resources with the
-    # tag will be retrieved.
+    # tag are retrieved.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
     #
     # @option params [String] :dependent_job_name
     #   The name of the job for which to retrieve triggers. The trigger that
-    #   can start this job will be returned, and if there is no such trigger,
-    #   all triggers will be returned.
+    #   can start this job is returned. If there is no such trigger, all
+    #   triggers are returned.
     #
     # @option params [Integer] :max_results
     #   The maximum size of a list to return.
@@ -4781,7 +4790,7 @@ module Aws::Glue
     #   The name of the job definition to use.
     #
     # @option params [String] :job_run_id
-    #   The ID of a previous JobRun to retry.
+    #   The ID of a previous `JobRun` to retry.
     #
     # @option params [Hash<String,String>] :arguments
     #   The job arguments specifically for this run. For this job run, they
@@ -4800,11 +4809,11 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #
     # @option params [Integer] :allocated_capacity
-    #   This field is deprecated, use `MaxCapacity` instead.
+    #   This field is deprecated. Use `MaxCapacity` instead.
     #
     #   The number of AWS Glue data processing units (DPUs) to allocate to
     #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A
@@ -4814,11 +4823,11 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: https://aws.amazon.com/glue/pricing/
+    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #
     # @option params [Integer] :timeout
-    #   The JobRun timeout in minutes. This is the maximum time that a job run
-    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   The `JobRun` timeout in minutes. This is the maximum time that a job
+    #   run can consume resources before it is terminated and enters `TIMEOUT`
     #   status. The default is 2,880 minutes (48 hours). This overrides the
     #   timeout value set in the parent job.
     #
@@ -4832,9 +4841,9 @@ module Aws::Glue
     #   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a python shell job, or an Apache Spark ETL job:
+    #   you are running a Python shell job, or an Apache Spark ETL job:
     #
-    #   * When you specify a python shell job
+    #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either 0.0625
     #     or 1 DPU. The default is 0.0625 DPU.
     #
@@ -4845,7 +4854,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: https://aws.amazon.com/glue/pricing/
+    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
@@ -4868,7 +4877,7 @@ module Aws::Glue
     #   149 for `G.2X`.
     #
     # @option params [String] :security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
+    #   The name of the `SecurityConfiguration` structure to be used with this
     #   job run.
     #
     # @option params [Types::NotificationProperty] :notification_property
@@ -4915,7 +4924,7 @@ module Aws::Glue
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/glue/latest/dg/trigger-job.html
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html
     #
     # @option params [required, String] :name
     #   The name of the trigger to start.
@@ -5023,7 +5032,7 @@ module Aws::Glue
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the AWS Glue resource to which to add the tags. For more
@@ -5032,7 +5041,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
     #
     # @option params [required, Hash<String,String>] :tags_to_add
     #   Tags to add to this resource.
@@ -5060,7 +5069,8 @@ module Aws::Glue
     # Removes tags from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource from which to remove the tags.
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   the tags.
     #
     # @option params [required, Array<String>] :tags_to_remove
     #   Tags to remove from this resource.
@@ -5427,7 +5437,7 @@ module Aws::Glue
     # Updates an existing job definition.
     #
     # @option params [required, String] :job_name
-    #   Name of the job definition to update.
+    #   The name of the job definition to update.
     #
     # @option params [required, Types::JobUpdate] :job_update
     #   Specifies the values with which to update the job definition.
@@ -5450,6 +5460,7 @@ module Aws::Glue
     #       command: {
     #         name: "GenericString",
     #         script_location: "ScriptLocationString",
+    #         python_version: "PythonVersionString",
     #       },
     #       default_arguments: {
     #         "GenericString" => "GenericString",
@@ -5804,7 +5815,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

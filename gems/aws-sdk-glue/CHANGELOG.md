@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2019-06-05)
+------------------
+
+* Feature - Support specifying python version for Python shell jobs. A new parameter PythonVersion is added to the JobCommand data type.
+
 1.34.0 (2019-05-21)
 ------------------
 

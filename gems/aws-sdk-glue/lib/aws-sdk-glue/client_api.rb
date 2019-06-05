@@ -366,6 +366,7 @@ module Aws::Glue
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PythonScript = Shapes::StringShape.new(name: 'PythonScript')
+    PythonVersionString = Shapes::StringShape.new(name: 'PythonVersionString')
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
     ResourceNumberLimitExceededException = Shapes::StructureShape.new(name: 'ResourceNumberLimitExceededException')
@@ -1468,6 +1469,7 @@ module Aws::Glue
 
     JobCommand.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
     JobCommand.add_member(:script_location, Shapes::ShapeRef.new(shape: ScriptLocationString, location_name: "ScriptLocation"))
+    JobCommand.add_member(:python_version, Shapes::ShapeRef.new(shape: PythonVersionString, location_name: "PythonVersion"))
     JobCommand.struct_class = Types::JobCommand
 
     JobList.member = Shapes::ShapeRef.new(shape: Job)
