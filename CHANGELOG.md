@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.289 (2019-06-06)
+------------------
+
 * Feature - Aws::DynamoDB - Updated the documentation for Amazon DynamoDB.
 
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
