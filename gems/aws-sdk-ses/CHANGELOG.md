@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-06-06)
+------------------
+
+* Feature - You can now specify whether the Amazon Simple Email Service must deliver email over a connection that is encrypted using Transport Layer Security (TLS).
+
 1.21.0 (2019-05-21)
 ------------------
 

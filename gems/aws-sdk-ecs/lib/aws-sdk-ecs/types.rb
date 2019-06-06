@@ -189,7 +189,7 @@ module Aws::ECS
     #   contains the `arn:aws:ecs` namespace, followed by the Region of the
     #   cluster, the AWS account ID of the cluster owner, the `cluster`
     #   namespace, and then the cluster name. For example,
-    #   `arn:aws:ecs:region:012345678910:cluster/test `..
+    #   `arn:aws:ecs:region:012345678910:cluster/test`.
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
@@ -489,9 +489,9 @@ module Aws::ECS
     #   together in a task definition, the `name` of one container can be
     #   entered in the `links` of another container to connect the
     #   containers. Up to 255 letters (uppercase and lowercase), numbers,
-    #   hyphens, and underscores are allowed. This parameter maps to `name`
-    #   in the [Create a container][1] section of the [Docker Remote API][2]
-    #   and the `--name` option to [docker run][3].
+    #   and hyphens are allowed. This parameter maps to `name` in the
+    #   [Create a container][1] section of the [Docker Remote API][2] and
+    #   the `--name` option to [docker run][3].
     #
     #
     #
@@ -617,16 +617,16 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] memory
-    #   The hard limit (in MiB) of memory to present to the container. If
-    #   your container attempts to exceed the memory specified here, the
-    #   container is killed. This parameter maps to `Memory` in the [Create
+    #   The amount (in MiB) of memory to present to the container. If your
+    #   container attempts to exceed the memory specified here, the
+    #   container is killed. The total amount of memory reserved for all
+    #   containers within a task must be lower than the task `memory` value,
+    #   if one is specified. This parameter maps to `Memory` in the [Create
     #   a container][1] section of the [Docker Remote API][2] and the
     #   `--memory` option to [docker run][3].
     #
     #   If your containers are part of a task using the Fargate launch type,
-    #   this field is optional and the only requirement is that the total
-    #   amount of memory reserved for all containers within a task be lower
-    #   than the task `memory` value.
+    #   this field is optional.
     #
     #   For containers that are part of a task using the EC2 launch type,
     #   you must specify a non-zero integer for one or both of `memory` or
@@ -685,17 +685,16 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] links
-    #   The `link` parameter allows containers to communicate with each
-    #   other without the need for port mappings. Only supported if the
-    #   network mode of a task definition is set to `bridge`. The
+    #   The `links` parameter allows containers to communicate with each
+    #   other without the need for port mappings. This parameter is only
+    #   supported if the network mode of a task definition is `bridge`. The
     #   `name:internalName` construct is analogous to `name:alias` in Docker
-    #   links. Up to 255 letters (uppercase and lowercase), numbers,
-    #   hyphens, and underscores are allowed. For more information about
-    #   linking Docker containers, go to
-    #   [https://docs.docker.com/engine/userguide/networking/default\_network/dockerlinks/][1].
-    #   This parameter maps to `Links` in the [Create a container][2]
-    #   section of the [Docker Remote API][3] and the `--link` option to [
-    #   `docker run` ][4].
+    #   links. Up to 255 letters (uppercase and lowercase), numbers, and
+    #   hyphens are allowed. For more information about linking Docker
+    #   containers, go to [Legacy container links][1] in the Docker
+    #   documentation. This parameter maps to `Links` in the [Create a
+    #   container][2] section of the [Docker Remote API][3] and the `--link`
+    #   option to [docker run][4].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -708,10 +707,10 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
+    #   [1]: https://docs.docker.com/network/links/
     #   [2]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [3]: https://docs.docker.com/engine/api/v1.35/
-    #   [4]: https://docs.docker.com/engine/reference/commandline/run/
+    #   [4]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
     # @!attribute [rw] port_mappings
@@ -855,7 +854,8 @@ module Aws::ECS
     #
     # @!attribute [rw] linux_parameters
     #   Linux-specific modifications that are applied to the container, such
-    #   as Linux KernelCapabilities.
+    #   as Linux kernel capabilities. For more information see
+    #   KernelCapabilities.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -869,7 +869,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
     #   @return [Array<Types::Secret>]
     #
     # @!attribute [rw] depends_on
@@ -898,8 +898,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
-    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Array<Types::ContainerDependency>]
     #
     # @!attribute [rw] start_timeout
@@ -932,8 +932,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
-    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Integer]
     #
     # @!attribute [rw] stop_timeout
@@ -962,8 +962,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
-    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Integer]
     #
     # @!attribute [rw] hostname
@@ -1146,7 +1146,9 @@ module Aws::ECS
     #   information, see [Amazon ECS Container Agent Configuration][4] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
-    #    This parameter is not supported for Windows containers.
+    #    </note>
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
     #
@@ -1386,8 +1388,8 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
-    # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #
     # @note When making an API call, you may pass ContainerDependency
     #   data as a hash:
@@ -1441,8 +1443,7 @@ module Aws::ECS
     #   container instance, the AWS account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
-    #   `.
+    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_id
@@ -1488,17 +1489,36 @@ module Aws::ECS
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] status
-    #   The status of the container instance. The valid values are `ACTIVE`,
-    #   `INACTIVE`, or `DRAINING`. `ACTIVE` indicates that the container
-    #   instance can accept tasks. `DRAINING` indicates that new tasks are
-    #   not placed on the container instance and any service tasks running
-    #   on the container instance are removed if possible. For more
-    #   information, see [Container Instance Draining][1] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
+    #   The status of the container instance. The valid values are
+    #   `REGISTERING`, `REGISTRATION_FAILED`, `ACTIVE`, `INACTIVE`,
+    #   `DEREGISTERING`, or `DRAINING`.
+    #
+    #   If your account has opted in to the `awsvpcTrunking` account
+    #   setting, then any newly registered container instance will
+    #   transition to a `REGISTERING` status while the trunk elastic network
+    #   interface is provisioned for the instance. If the registration
+    #   fails, the instance will transition to a `REGISTRATION_FAILED`
+    #   status. You can describe the container instance and see the reason
+    #   for failure in the `statusReason` parameter. Once the container
+    #   instance is terminated, the instance transitions to a
+    #   `DEREGISTERING` status while the trunk elastic network interface is
+    #   deprovisioned. The instance then transitions to an `INACTIVE`
+    #   status.
+    #
+    #   The `ACTIVE` status indicates that the container instance can accept
+    #   tasks. The `DRAINING` indicates that new tasks are not placed on the
+    #   container instance and any service tasks running on the container
+    #   instance are removed if possible. For more information, see
+    #   [Container Instance Draining][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason that the container instance reached its current status.
     #   @return [String]
     #
     # @!attribute [rw] agent_connected
@@ -1534,8 +1554,8 @@ module Aws::ECS
     #   @return [Time]
     #
     # @!attribute [rw] attachments
-    #   The elastic network interfaces associated with the container
-    #   instance.
+    #   The resources attached to a container instance, such as elastic
+    #   network interfaces.
     #   @return [Array<Types::Attachment>]
     #
     # @!attribute [rw] tags
@@ -1556,6 +1576,7 @@ module Aws::ECS
       :remaining_resources,
       :registered_resources,
       :status,
+      :status_reason,
       :agent_connected,
       :running_tasks_count,
       :pending_tasks_count,
@@ -1567,7 +1588,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # The overrides that should be sent to a container.
+    # The overrides that should be sent to a container. An empty container
+    # override can be passed in. An example of an empty container override
+    # would be `\{"containerOverrides": [ ] \}`. If a non-empty container
+    # override is specified, the `name` parameter must be included.
     #
     # @note When making an API call, you may pass ContainerOverride
     #   data as a hash:
@@ -1717,8 +1741,7 @@ module Aws::ECS
     # @!attribute [rw] cluster_name
     #   The name of your cluster. If you do not specify a name for your
     #   cluster, you create a cluster named `default`. Up to 255 letters
-    #   (uppercase and lowercase), numbers, hyphens, and underscores are
-    #   allowed.
+    #   (uppercase and lowercase), numbers, and hyphens are allowed.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1822,10 +1845,9 @@ module Aws::ECS
     #
     # @!attribute [rw] service_name
     #   The name of your service. Up to 255 letters (uppercase and
-    #   lowercase), numbers, hyphens, and underscores are allowed. Service
-    #   names must be unique within a cluster, but you can have similarly
-    #   named services in multiple clusters within a Region or across
-    #   multiple Regions.
+    #   lowercase), numbers, and hyphens are allowed. Service names must be
+    #   unique within a cluster, but you can have similarly named services
+    #   in multiple clusters within a Region or across multiple Regions.
     #   @return [String]
     #
     # @!attribute [rw] task_definition
@@ -1898,8 +1920,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
-    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] desired_count
@@ -1961,7 +1983,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
     #   @return [String]
     #
@@ -1993,7 +2015,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] health_check_grace_period_seconds
@@ -2038,7 +2060,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
     #   @return [String]
     #
     # @!attribute [rw] deployment_controller
@@ -2062,7 +2084,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
@@ -2198,7 +2220,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] launch_type
@@ -2263,26 +2285,28 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
     #         principal_arn: "String",
     #       }
     #
     # @!attribute [rw] name
-    #   The resource name for which to disable the new format. If
+    #   The resource name for which to disable the account setting. If
     #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
     #   services is affected. If `taskLongArnFormat` is specified, the ARN
     #   and resource ID for your Amazon ECS tasks is affected. If
     #   `containerInstanceLongArnFormat` is specified, the ARN and resource
-    #   ID for your Amazon ECS container instances is affected.
+    #   ID for your Amazon ECS container instances is affected. If
+    #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
+    #   container instances is affected.
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. If you specify the root user, it modifies the ARN and
-    #   resource ID format for all IAM users, IAM roles, and the root user
-    #   of the account unless an IAM user or role explicitly overrides these
-    #   settings for themselves. If this field is omitted, the setting are
-    #   changed only for the authenticated user.
+    #   root user. If you specify the root user, it disables the account
+    #   setting for all IAM users, IAM roles, and the root user of the
+    #   account unless an IAM user or role explicitly overrides these
+    #   settings. If this field is omitted, the setting is changed only for
+    #   the authenticated user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAccountSettingRequest AWS API Documentation
@@ -2657,7 +2681,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
     #
     # @note When making an API call, you may pass DeploymentController
     #   data as a hash:
@@ -2722,8 +2746,7 @@ module Aws::ECS
     #   by the Region of the container instance, the AWS account ID of the
     #   container instance owner, the `container-instance` namespace, and
     #   then the container instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
-    #   `.
+    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #   @return [String]
     #
     # @!attribute [rw] force
@@ -2864,7 +2887,10 @@ module Aws::ECS
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instances to describe. If you do not
-    #   specify a cluster, the default cluster is assumed.
+    #   specify a cluster, the default cluster is assumed. This parameter is
+    #   required if the container instance or container instances you are
+    #   describing were launched in any cluster other than the default
+    #   cluster.
     #   @return [String]
     #
     # @!attribute [rw] container_instances
@@ -2916,7 +2942,9 @@ module Aws::ECS
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN)the cluster that
     #   hosts the service to describe. If you do not specify a cluster, the
-    #   default cluster is assumed.
+    #   default cluster is assumed. This parameter is required if the
+    #   service or services you are describing were launched in any cluster
+    #   other than the default cluster.
     #   @return [String]
     #
     # @!attribute [rw] services
@@ -3063,8 +3091,10 @@ module Aws::ECS
     #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
-    #   that hosts the task to describe. If you do not specify a cluster,
-    #   the default cluster is assumed.
+    #   that hosts the task or tasks to describe. If you do not specify a
+    #   cluster, the default cluster is assumed. This parameter is required
+    #   if the task or tasks you are describing were launched in any cluster
+    #   other than the default cluster.
     #   @return [String]
     #
     # @!attribute [rw] tasks
@@ -3150,8 +3180,7 @@ module Aws::ECS
     #   the container instance, the AWS account ID of the container instance
     #   owner, the `container-instance` namespace, and then the container
     #   instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
-    #   `.
+    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #   @return [String]
     #
     # @!attribute [rw] cluster
@@ -3229,8 +3258,8 @@ module Aws::ECS
     #   method, use Docker plugin discovery to retrieve the driver name. For
     #   more information, see [Docker plugin discovery][1]. This parameter
     #   maps to `Driver` in the [Create a volume][2] section of the [Docker
-    #   Remote API][3] and the `xxdriver` option to [ `docker volume create`
-    #   ][4].
+    #   Remote API][3] and the `xxdriver` option to [docker volume
+    #   create][4].
     #
     #
     #
@@ -3243,8 +3272,8 @@ module Aws::ECS
     # @!attribute [rw] driver_opts
     #   A map of Docker driver-specific options passed through. This
     #   parameter maps to `DriverOpts` in the [Create a volume][1] section
-    #   of the [Docker Remote API][2] and the `xxopt` option to [ `docker
-    #   volume create` ][3].
+    #   of the [Docker Remote API][2] and the `xxopt` option to [docker
+    #   volume create][3].
     #
     #
     #
@@ -3256,7 +3285,7 @@ module Aws::ECS
     # @!attribute [rw] labels
     #   Custom metadata to add to your Docker volume. This parameter maps to
     #   `Labels` in the [Create a volume][1] section of the [Docker Remote
-    #   API][2] and the `xxlabel` option to [ `docker volume create` ][3].
+    #   API][2] and the `xxlabel` option to [docker volume create][3].
     #
     #
     #
@@ -3669,7 +3698,7 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #         name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
     #         value: "String",
     #         principal_arn: "String",
     #         effective_settings: false,
@@ -3695,9 +3724,9 @@ module Aws::ECS
     # @!attribute [rw] effective_settings
     #   Specifies whether to return the effective settings. If `true`, the
     #   account settings for the root user or the default setting for the
-    #   `principalArn`. If `false`, the account settings for the
-    #   `principalArn` are returned if they are set. Otherwise, no account
-    #   settings are returned.
+    #   `principalArn` are returned. If `false`, the account settings for
+    #   the `principalArn` are returned if they are set. Otherwise, no
+    #   account settings are returned.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
@@ -3913,7 +3942,7 @@ module Aws::ECS
     #         filter: "String",
     #         next_token: "String",
     #         max_results: 1,
-    #         status: "ACTIVE", # accepts ACTIVE, DRAINING
+    #         status: "ACTIVE", # accepts ACTIVE, DRAINING, REGISTERING, DEREGISTERING, REGISTRATION_FAILED
     #       }
     #
     # @!attribute [rw] cluster
@@ -3964,8 +3993,8 @@ module Aws::ECS
     #   specify the `DRAINING` status, the results include only container
     #   instances that have been set to `DRAINING` using
     #   UpdateContainerInstancesState. If you do not specify this parameter,
-    #   the default is to include container instances set to `ACTIVE` and
-    #   `DRAINING`.
+    #   the default is to include container instances set to all states
+    #   other than `INACTIVE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstancesRequest AWS API Documentation
@@ -4418,7 +4447,7 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Details on a load balancer that is used with a service.
+    # Details on a load balancer to be used with a service or task set.
     #
     # If the service is using the `ECS` deployment controller, you are
     # limited to one load balancer or target group.
@@ -4453,10 +4482,16 @@ module Aws::ECS
     #
     # @!attribute [rw] target_group_arn
     #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
-    #   target group or groups associated with a service. For services using
-    #   the `ECS` deployment controller, you are limited to one target
-    #   group. For services using the `CODE_DEPLOY` deployment controller,
-    #   you are required to define two target groups for the load balancer.
+    #   target group or groups associated with a service or task set.
+    #
+    #   A target group ARN is only specified when using an application load
+    #   balancer or a network load balancer. If you are using a classic load
+    #   balancer this should be omitted.
+    #
+    #   For services using the `ECS` deployment controller, you are limited
+    #   to one target group. For services using the `CODE_DEPLOY` deployment
+    #   controller, you are required to define two target groups for the
+    #   load balancer.
     #
     #   If your service's task definition uses the `awsvpc` network mode
     #   (which is required for the Fargate launch type), you must choose
@@ -4466,7 +4501,12 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
-    #   The name of a load balancer.
+    #   The name of the load balancer to associate with the Amazon ECS
+    #   service or task set.
+    #
+    #   A load balancer name is only specified when using a classic load
+    #   balancer. If you are using an application load balancer or a network
+    #   load balancer this should be omitted.
     #   @return [String]
     #
     # @!attribute [rw] container_name
@@ -4858,6 +4898,9 @@ module Aws::ECS
     #   more information, see `hostPort`. Port mappings that are
     #   automatically assigned in this way do not count toward the 100
     #   reserved ports limit of a container instance.
+    #
+    #   You cannot expose the same container port for multiple protocols. An
+    #   error will be returned if this is attempted.
     #   @return [Integer]
     #
     # @!attribute [rw] host_port
@@ -4925,13 +4968,12 @@ module Aws::ECS
     # see [Amazon ECS-optimized Linux AMI][1] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
-    # This parameter is available for tasks using the Fargate launch type in
-    # the Ohio (us-east-2) region only and the task or service requires
+    # For tasks using the Fargate launch type, the task or service requires
     # platform version 1.3.0 or later.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #
     # @note When making an API call, you may pass ProxyConfiguration
     #   data as a hash:
@@ -4967,7 +5009,7 @@ module Aws::ECS
     #   * `IgnoredGID` - (Required) The group ID (GID) of the proxy
     #     container as defined by the `user` parameter in a container
     #     definition. This is used to ensure the proxy ignores its own
-    #     traffic. If `IgnoredGID` is specified, this field can be empty.
+    #     traffic. If `IgnoredUID` is specified, this field can be empty.
     #
     #   * `AppPorts` - (Required) The list of ports that the application
     #     uses. Network traffic to these ports is forwarded to the
@@ -5001,17 +5043,19 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
     #         value: "String", # required
     #       }
     #
     # @!attribute [rw] name
-    #   The resource type to enable the new format for. If
+    #   The resource name for which to modify the account setting. If
     #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
     #   services is affected. If `taskLongArnFormat` is specified, the ARN
-    #   and resource ID for your Amazon ECS tasks are affected. If
+    #   and resource ID for your Amazon ECS tasks is affected. If
     #   `containerInstanceLongArnFormat` is specified, the ARN and resource
-    #   ID for your Amazon ECS container instances are affected.
+    #   ID for your Amazon ECS container instances is affected. If
+    #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
+    #   container instances is affected.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -5042,18 +5086,20 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
     #         value: "String", # required
     #         principal_arn: "String",
     #       }
     #
     # @!attribute [rw] name
-    #   The resource name for which to enable the new format. If
+    #   The resource name for which to modify the account setting. If
     #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
     #   services is affected. If `taskLongArnFormat` is specified, the ARN
     #   and resource ID for your Amazon ECS tasks is affected. If
     #   `containerInstanceLongArnFormat` is specified, the ARN and resource
-    #   ID for your Amazon ECS container instances is affected.
+    #   ID for your Amazon ECS container instances is affected. If
+    #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
+    #   container instances is affected.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -5063,11 +5109,11 @@ module Aws::ECS
     #
     # @!attribute [rw] principal_arn
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. If you specify the root user, it modifies the ARN and
-    #   resource ID format for all IAM users, IAM roles, and the root user
-    #   of the account unless an IAM user or role explicitly overrides these
-    #   settings for themselves. If this field is omitted, the settings are
-    #   changed only for the authenticated user.
+    #   root user. If you specify the root user, it modifies the account
+    #   setting for all IAM users, IAM roles, and the root user of the
+    #   account unless an IAM user or role explicitly overrides these
+    #   settings. If this field is omitted, the setting is changed only for
+    #   the authenticated user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingRequest AWS API Documentation
@@ -5454,8 +5500,7 @@ module Aws::ECS
     #   You must specify a `family` for a task definition, which allows you
     #   to track multiple versions of the same task definition. The `family`
     #   is used as a name for your task definition. Up to 255 letters
-    #   (uppercase and lowercase), numbers, hyphens, and underscores are
-    #   allowed.
+    #   (uppercase and lowercase), numbers, and hyphens are allowed.
     #   @return [String]
     #
     # @!attribute [rw] task_role_arn
@@ -5521,7 +5566,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #   @return [String]
     #
@@ -5692,7 +5737,7 @@ module Aws::ECS
     #
     #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
     #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
     # @!attribute [rw] proxy_configuration
@@ -5707,13 +5752,12 @@ module Aws::ECS
     #   information, see [Amazon ECS-optimized Linux AMI][1] in the *Amazon
     #   Elastic Container Service Developer Guide*.
     #
-    #   This parameter is available for tasks using the Fargate launch type
-    #   in the Ohio (us-east-2) region only and the task or service requires
-    #   platform version 1.3.0 or later.
+    #   For tasks using the Fargate launch type, the task or service
+    #   requires platform version 1.3.0 or later.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Types::ProxyConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
@@ -5844,7 +5888,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
     #
     # @note When making an API call, you may pass ResourceRequirement
     #   data as a hash:
@@ -6033,7 +6077,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] tags
@@ -6051,7 +6095,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
@@ -6146,7 +6190,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
     #
     # @note When making an API call, you may pass Secret
     #   data as a hash:
@@ -6200,15 +6244,14 @@ module Aws::ECS
     #   `arn:aws:ecs` namespace, followed by the Region of the service, the
     #   AWS account ID of the service owner, the `service` namespace, and
     #   then the service name. For example,
-    #   `arn:aws:ecs:region:012345678910:service/my-service `.
+    #   `arn:aws:ecs:region:012345678910:service/my-service`.
     #   @return [String]
     #
     # @!attribute [rw] service_name
     #   The name of your service. Up to 255 letters (uppercase and
-    #   lowercase), numbers, hyphens, and underscores are allowed. Service
-    #   names must be unique within a cluster, but you can have similarly
-    #   named services in multiple clusters within a Region or across
-    #   multiple Regions.
+    #   lowercase), numbers, and hyphens are allowed. Service names must be
+    #   unique within a cluster, but you can have similarly named services
+    #   in multiple clusters within a Region or across multiple Regions.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
@@ -6237,7 +6280,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] status
@@ -6261,9 +6304,10 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which your service is running. For more
-    #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   The launch type on which your service is running. If no value is
+    #   specified, it will default to `EC2`. Valid values include `EC2` and
+    #   `FARGATE`. For more information, see [Amazon ECS Launch Types][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -6271,10 +6315,10 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] platform_version
-    #   The platform version on which your tasks in the service are running.
-    #   A platform version is only specified for tasks using the Fargate
-    #   launch type. If one is not specified, the `LATEST` platform version
-    #   is used by default. For more information, see [AWS Fargate Platform
+    #   The platform version on which to run your service. A platform
+    #   version is only specified for tasks using the Fargate launch type.
+    #   If one is not specified, the `LATEST` platform version is used by
+    #   default. For more information, see [AWS Fargate Platform
     #   Versions][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
@@ -6365,7 +6409,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
     #   @return [String]
     #
     # @!attribute [rw] deployment_controller
@@ -6392,7 +6436,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
@@ -6672,7 +6716,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
@@ -6758,6 +6802,47 @@ module Aws::ECS
     #
     class StopTaskResponse < Struct.new(
       :task)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SubmitAttachmentStateChangesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String",
+    #         attachments: [ # required
+    #           {
+    #             attachment_arn: "String", # required
+    #             status: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full ARN of the cluster that hosts the container
+    #   instance the attachment belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachments
+    #   Any attachments associated with the state change request.
+    #   @return [Array<Types::AttachmentStateChange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitAttachmentStateChangesRequest AWS API Documentation
+    #
+    class SubmitAttachmentStateChangesRequest < Struct.new(
+      :cluster,
+      :attachments)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acknowledgment
+    #   Acknowledgement of the state change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitAttachmentStateChangesResponse AWS API Documentation
+    #
+    class SubmitAttachmentStateChangesResponse < Struct.new(
+      :acknowledgment)
       include Aws::Structure
     end
 
@@ -7083,7 +7168,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_life_cycle.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html
     #   @return [String]
     #
     # @!attribute [rw] desired_status
@@ -7092,7 +7177,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_life_cycle.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html
     #   @return [String]
     #
     # @!attribute [rw] cpu
@@ -7320,7 +7405,11 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Details of a task definition.
+    # The details of a task definition which describes the container and
+    # volume definitions of an Amazon Elastic Container Service task. You
+    # can specify which Docker images to use, the required resources, and
+    # other configurations related to launching the task definition through
+    # an Amazon ECS service or task.
     #
     # @!attribute [rw] task_definition_arn
     #   The full Amazon Resource Name (ARN) of the task definition.
@@ -7339,29 +7428,37 @@ module Aws::ECS
     #   @return [Array<Types::ContainerDefinition>]
     #
     # @!attribute [rw] family
-    #   The family of your task definition, used as the definition name.
+    #   The name of a family that this task definition is registered to. A
+    #   family groups multiple versions of a task definition. Amazon ECS
+    #   gives the first task definition that you registered to a family a
+    #   revision number of 1. Amazon ECS gives sequential revision numbers
+    #   to each task definition that you add.
     #   @return [String]
     #
     # @!attribute [rw] task_role_arn
-    #   The ARN of the IAM role that containers in this task can assume. All
-    #   containers in this task are granted the permissions that are
-    #   specified in this role.
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that grants containers in the task permission
+    #   to call AWS APIs on your behalf. For more information, see [Amazon
+    #   ECS Task Role][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
     #
     #   IAM roles for tasks on Windows require that the `-EnableTaskIAMRole`
     #   option is set when you launch the Amazon ECS-optimized Windows AMI.
     #   Your containers must also run some configuration code in order to
     #   take advantage of the feature. For more information, see [Windows
-    #   IAM Roles for Tasks][1] in the *Amazon Elastic Container Service
+    #   IAM Roles for Tasks][2] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_IAM_role.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Amazon Resource Name (ARN) of the task execution role that the
-    #   Amazon ECS container agent and the Docker daemon can assume.
+    #   The Amazon Resource Name (ARN) of the task execution role that
+    #   containers in this task can assume. All containers in this task are
+    #   granted the permissions that are specified in this role.
     #   @return [String]
     #
     # @!attribute [rw] network_mode
@@ -7410,7 +7507,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #   @return [String]
     #
@@ -7424,9 +7521,9 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] volumes
-    #   The list of volumes in a task.
+    #   The list of volume definitions for the task.
     #
-    #   If you are using the Fargate launch type, the `host` and
+    #   If your tasks are using the Fargate launch type, the `host` and
     #   `sourcePath` parameters are not supported.
     #
     #   For more information about volume definition parameters and
@@ -7464,7 +7561,8 @@ module Aws::ECS
     #   @return [Array<String>]
     #
     # @!attribute [rw] requires_compatibilities
-    #   The launch type that the task is using.
+    #   The launch type the task requires. If no value is specified, it will
+    #   default to `EC2`. Valid values include `EC2` and `FARGATE`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu
@@ -7578,7 +7676,7 @@ module Aws::ECS
     #
     #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
     #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
     # @!attribute [rw] proxy_configuration
@@ -7595,7 +7693,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Types::ProxyConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition AWS API Documentation
@@ -7853,7 +7951,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] scale
@@ -7875,6 +7973,13 @@ module Aws::ECS
     #
     #   * All tasks are reporting a healthy status from the load balancers,
     #     service discovery, and container health checks.
+    #
+    #     <note markdown="1"> If a `healthCheckGracePeriodSeconds` value was set when the
+    #     service was created, you may see a `STEADY_STATE` reached since
+    #     unhealthy Elastic Load Balancing target health checks will be
+    #     ignored until it expires.
+    #
+    #      </note>
     #
     #   If any of those conditions are not met, the stability status returns
     #   `STABILIZING`.
@@ -8059,7 +8164,7 @@ module Aws::ECS
     #       {
     #         cluster: "String",
     #         container_instances: ["String"], # required
-    #         status: "ACTIVE", # required, accepts ACTIVE, DRAINING
+    #         status: "ACTIVE", # required, accepts ACTIVE, DRAINING, REGISTERING, DEREGISTERING, REGISTRATION_FAILED
     #       }
     #
     # @!attribute [rw] cluster
@@ -8074,7 +8179,12 @@ module Aws::ECS
     #
     # @!attribute [rw] status
     #   The container instance state with which to update the container
-    #   instance.
+    #   instance. The only valid values for this action are `ACTIVE` and
+    #   `DRAINING`. A container instance can only be updated to `DRAINING`
+    #   status once it has reached an `ACTIVE` state. If a container
+    #   instance is in `REGISTERING`, `DEREGISTERING`, or
+    #   `REGISTRATION_FAILED` state you can describe the container instance
+    #   but will be unable to update the container instance state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesStateRequest AWS API Documentation
@@ -8221,7 +8331,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] platform_version
@@ -8387,7 +8497,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
     #
     # @note When making an API call, you may pass Volume
     #   data as a hash:
@@ -8412,9 +8522,8 @@ module Aws::ECS
     #
     # @!attribute [rw] name
     #   The name of the volume. Up to 255 letters (uppercase and lowercase),
-    #   numbers, hyphens, and underscores are allowed. This name is
-    #   referenced in the `sourceVolume` parameter of container definition
-    #   `mountPoints`.
+    #   numbers, and hyphens are allowed. This name is referenced in the
+    #   `sourceVolume` parameter of container definition `mountPoints`.
     #   @return [String]
     #
     # @!attribute [rw] host

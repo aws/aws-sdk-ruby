@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2019-06-06)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for launching container instances using supported Amazon EC2 instance types that have increased elastic network interface density. Using these instance types and opting in to the awsvpcTrunking account setting provides increased elastic network interface (ENI) density on newly launched container instances which allows you to place more tasks on each container instance.
+
 1.40.0 (2019-05-21)
 ------------------
 

@@ -273,9 +273,14 @@ module Aws::MediaConnect
     #         destination: "__string", # required
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         max_latency: 1,
     #         name: "__string",
@@ -294,9 +299,14 @@ module Aws::MediaConnect
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].destination #=> String
     #   resp.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.outputs[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.outputs[0].encryption.constant_initialization_vector #=> String
+    #   resp.outputs[0].encryption.device_id #=> String
+    #   resp.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.outputs[0].encryption.region #=> String
+    #   resp.outputs[0].encryption.resource_id #=> String
     #   resp.outputs[0].encryption.role_arn #=> String
     #   resp.outputs[0].encryption.secret_arn #=> String
+    #   resp.outputs[0].encryption.url #=> String
     #   resp.outputs[0].entitlement_arn #=> String
     #   resp.outputs[0].media_live_input_arn #=> String
     #   resp.outputs[0].name #=> String
@@ -350,9 +360,14 @@ module Aws::MediaConnect
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         name: "__string",
     #         subscribers: ["__string"], # required
@@ -365,9 +380,14 @@ module Aws::MediaConnect
     #         destination: "__string", # required
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         max_latency: 1,
     #         name: "__string",
@@ -380,9 +400,14 @@ module Aws::MediaConnect
     #     source: { # required
     #       decryption: {
     #         algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #         key_type: "static-key", # accepts static-key
+    #         constant_initialization_vector: "__string",
+    #         device_id: "__string",
+    #         key_type: "speke", # accepts speke, static-key
+    #         region: "__string",
+    #         resource_id: "__string",
     #         role_arn: "__string", # required
-    #         secret_arn: "__string", # required
+    #         secret_arn: "__string",
+    #         url: "__string",
     #       },
     #       description: "__string",
     #       entitlement_arn: "__string",
@@ -404,9 +429,14 @@ module Aws::MediaConnect
     #   resp.flow.entitlements #=> Array
     #   resp.flow.entitlements[0].description #=> String
     #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.entitlements[0].encryption.device_id #=> String
+    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.entitlements[0].encryption.region #=> String
+    #   resp.flow.entitlements[0].encryption.resource_id #=> String
     #   resp.flow.entitlements[0].encryption.role_arn #=> String
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
+    #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
@@ -417,9 +447,14 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].description #=> String
     #   resp.flow.outputs[0].destination #=> String
     #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.flow.outputs[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.outputs[0].encryption.device_id #=> String
+    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.outputs[0].encryption.region #=> String
+    #   resp.flow.outputs[0].encryption.resource_id #=> String
     #   resp.flow.outputs[0].encryption.role_arn #=> String
     #   resp.flow.outputs[0].encryption.secret_arn #=> String
+    #   resp.flow.outputs[0].encryption.url #=> String
     #   resp.flow.outputs[0].entitlement_arn #=> String
     #   resp.flow.outputs[0].media_live_input_arn #=> String
     #   resp.flow.outputs[0].name #=> String
@@ -431,9 +466,14 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.source.decryption.key_type #=> String, one of "static-key"
+    #   resp.flow.source.decryption.constant_initialization_vector #=> String
+    #   resp.flow.source.decryption.device_id #=> String
+    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.source.decryption.region #=> String
+    #   resp.flow.source.decryption.resource_id #=> String
     #   resp.flow.source.decryption.role_arn #=> String
     #   resp.flow.source.decryption.secret_arn #=> String
+    #   resp.flow.source.decryption.url #=> String
     #   resp.flow.source.description #=> String
     #   resp.flow.source.entitlement_arn #=> String
     #   resp.flow.source.ingest_ip #=> String
@@ -511,9 +551,14 @@ module Aws::MediaConnect
     #   resp.flow.entitlements #=> Array
     #   resp.flow.entitlements[0].description #=> String
     #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.entitlements[0].encryption.device_id #=> String
+    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.entitlements[0].encryption.region #=> String
+    #   resp.flow.entitlements[0].encryption.resource_id #=> String
     #   resp.flow.entitlements[0].encryption.role_arn #=> String
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
+    #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
@@ -524,9 +569,14 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].description #=> String
     #   resp.flow.outputs[0].destination #=> String
     #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.flow.outputs[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.outputs[0].encryption.device_id #=> String
+    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.outputs[0].encryption.region #=> String
+    #   resp.flow.outputs[0].encryption.resource_id #=> String
     #   resp.flow.outputs[0].encryption.role_arn #=> String
     #   resp.flow.outputs[0].encryption.secret_arn #=> String
+    #   resp.flow.outputs[0].encryption.url #=> String
     #   resp.flow.outputs[0].entitlement_arn #=> String
     #   resp.flow.outputs[0].media_live_input_arn #=> String
     #   resp.flow.outputs[0].name #=> String
@@ -538,9 +588,14 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.flow.source.decryption.key_type #=> String, one of "static-key"
+    #   resp.flow.source.decryption.constant_initialization_vector #=> String
+    #   resp.flow.source.decryption.device_id #=> String
+    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.source.decryption.region #=> String
+    #   resp.flow.source.decryption.resource_id #=> String
     #   resp.flow.source.decryption.role_arn #=> String
     #   resp.flow.source.decryption.secret_arn #=> String
+    #   resp.flow.source.decryption.url #=> String
     #   resp.flow.source.description #=> String
     #   resp.flow.source.entitlement_arn #=> String
     #   resp.flow.source.ingest_ip #=> String
@@ -586,9 +641,14 @@ module Aws::MediaConnect
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         name: "__string",
     #         subscribers: ["__string"], # required
@@ -602,9 +662,14 @@ module Aws::MediaConnect
     #   resp.entitlements #=> Array
     #   resp.entitlements[0].description #=> String
     #   resp.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.entitlements[0].encryption.key_type #=> String, one of "static-key"
+    #   resp.entitlements[0].encryption.constant_initialization_vector #=> String
+    #   resp.entitlements[0].encryption.device_id #=> String
+    #   resp.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.entitlements[0].encryption.region #=> String
+    #   resp.entitlements[0].encryption.resource_id #=> String
     #   resp.entitlements[0].encryption.role_arn #=> String
     #   resp.entitlements[0].encryption.secret_arn #=> String
+    #   resp.entitlements[0].encryption.url #=> String
     #   resp.entitlements[0].entitlement_arn #=> String
     #   resp.entitlements[0].name #=> String
     #   resp.entitlements[0].subscribers #=> Array
@@ -939,9 +1004,14 @@ module Aws::MediaConnect
     #     description: "__string",
     #     encryption: {
     #       algorithm: "aes128", # accepts aes128, aes192, aes256
-    #       key_type: "static-key", # accepts static-key
+    #       constant_initialization_vector: "__string",
+    #       device_id: "__string",
+    #       key_type: "speke", # accepts speke, static-key
+    #       region: "__string",
+    #       resource_id: "__string",
     #       role_arn: "__string",
     #       secret_arn: "__string",
+    #       url: "__string",
     #     },
     #     entitlement_arn: "__string", # required
     #     flow_arn: "__string", # required
@@ -952,9 +1022,14 @@ module Aws::MediaConnect
     #
     #   resp.entitlement.description #=> String
     #   resp.entitlement.encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.entitlement.encryption.key_type #=> String, one of "static-key"
+    #   resp.entitlement.encryption.constant_initialization_vector #=> String
+    #   resp.entitlement.encryption.device_id #=> String
+    #   resp.entitlement.encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.entitlement.encryption.region #=> String
+    #   resp.entitlement.encryption.resource_id #=> String
     #   resp.entitlement.encryption.role_arn #=> String
     #   resp.entitlement.encryption.secret_arn #=> String
+    #   resp.entitlement.encryption.url #=> String
     #   resp.entitlement.entitlement_arn #=> String
     #   resp.entitlement.name #=> String
     #   resp.entitlement.subscribers #=> Array
@@ -1015,9 +1090,14 @@ module Aws::MediaConnect
     #     destination: "__string",
     #     encryption: {
     #       algorithm: "aes128", # accepts aes128, aes192, aes256
-    #       key_type: "static-key", # accepts static-key
+    #       constant_initialization_vector: "__string",
+    #       device_id: "__string",
+    #       key_type: "speke", # accepts speke, static-key
+    #       region: "__string",
+    #       resource_id: "__string",
     #       role_arn: "__string",
     #       secret_arn: "__string",
+    #       url: "__string",
     #     },
     #     flow_arn: "__string", # required
     #     max_latency: 1,
@@ -1034,9 +1114,14 @@ module Aws::MediaConnect
     #   resp.output.description #=> String
     #   resp.output.destination #=> String
     #   resp.output.encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.output.encryption.key_type #=> String, one of "static-key"
+    #   resp.output.encryption.constant_initialization_vector #=> String
+    #   resp.output.encryption.device_id #=> String
+    #   resp.output.encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.output.encryption.region #=> String
+    #   resp.output.encryption.resource_id #=> String
     #   resp.output.encryption.role_arn #=> String
     #   resp.output.encryption.secret_arn #=> String
+    #   resp.output.encryption.url #=> String
     #   resp.output.entitlement_arn #=> String
     #   resp.output.media_live_input_arn #=> String
     #   resp.output.name #=> String
@@ -1106,9 +1191,14 @@ module Aws::MediaConnect
     #   resp = client.update_flow_source({
     #     decryption: {
     #       algorithm: "aes128", # accepts aes128, aes192, aes256
-    #       key_type: "static-key", # accepts static-key
+    #       constant_initialization_vector: "__string",
+    #       device_id: "__string",
+    #       key_type: "speke", # accepts speke, static-key
+    #       region: "__string",
+    #       resource_id: "__string",
     #       role_arn: "__string",
     #       secret_arn: "__string",
+    #       url: "__string",
     #     },
     #     description: "__string",
     #     entitlement_arn: "__string",
@@ -1126,9 +1216,14 @@ module Aws::MediaConnect
     #
     #   resp.flow_arn #=> String
     #   resp.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
-    #   resp.source.decryption.key_type #=> String, one of "static-key"
+    #   resp.source.decryption.constant_initialization_vector #=> String
+    #   resp.source.decryption.device_id #=> String
+    #   resp.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.source.decryption.region #=> String
+    #   resp.source.decryption.resource_id #=> String
     #   resp.source.decryption.role_arn #=> String
     #   resp.source.decryption.secret_arn #=> String
+    #   resp.source.decryption.url #=> String
     #   resp.source.description #=> String
     #   resp.source.entitlement_arn #=> String
     #   resp.source.ingest_ip #=> String
@@ -1164,7 +1259,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

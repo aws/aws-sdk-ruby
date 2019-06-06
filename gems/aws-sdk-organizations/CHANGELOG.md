@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-06-06)
+------------------
+
+* Feature - You can tag and untag accounts in your organization and view tags on an account in your organization.
+
 1.27.0 (2019-05-21)
 ------------------
 

@@ -141,9 +141,14 @@ module Aws::MediaConnect
     DescribeFlowResponse.struct_class = Types::DescribeFlowResponse
 
     Encryption.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, required: true, location_name: "algorithm"))
+    Encryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
+    Encryption.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, location_name: "deviceId"))
     Encryption.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, location_name: "keyType"))
+    Encryption.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    Encryption.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     Encryption.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
-    Encryption.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secretArn"))
+    Encryption.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "secretArn"))
+    Encryption.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     Encryption.struct_class = Types::Encryption
 
     Entitlement.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -316,9 +321,14 @@ module Aws::MediaConnect
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateEncryption.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, location_name: "algorithm"))
+    UpdateEncryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
+    UpdateEncryption.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, location_name: "deviceId"))
     UpdateEncryption.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, location_name: "keyType"))
+    UpdateEncryption.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    UpdateEncryption.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     UpdateEncryption.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateEncryption.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "secretArn"))
+    UpdateEncryption.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     UpdateEncryption.struct_class = Types::UpdateEncryption
 
     UpdateFlowEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))

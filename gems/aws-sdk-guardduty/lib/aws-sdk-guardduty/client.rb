@@ -253,23 +253,24 @@ module Aws::GuardDuty
     # Accepts the invitation to be monitored by a master GuardDuty account.
     #
     # @option params [required, String] :detector_id
-    #
-    # @option params [required, String] :invitation_id
-    #   This value is used to validate the master account to the member
-    #   account.
+    #   The unique ID of the detector of the GuardDuty member account.
     #
     # @option params [required, String] :master_id
     #   The account ID of the master GuardDuty account whose invitation
     #   you're accepting.
+    #
+    # @option params [required, String] :invitation_id
+    #   This value is used to validate the master account to the member
+    #   account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_invitation({
-    #     detector_id: "__string", # required
-    #     invitation_id: "InvitationId", # required
-    #     master_id: "MasterId", # required
+    #     detector_id: "DetectorId", # required
+    #     master_id: "String", # required
+    #     invitation_id: "String", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitation AWS API Documentation
@@ -285,6 +286,8 @@ module Aws::GuardDuty
     # IDs.
     #
     # @option params [required, String] :detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to archive.
     #
     # @option params [required, Array<String>] :finding_ids
     #   IDs of the findings that you want to archive.
@@ -294,7 +297,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.archive_findings({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     finding_ids: ["FindingId"], # required
     #   })
     #
@@ -311,12 +314,14 @@ module Aws::GuardDuty
     # that represents the GuardDuty service. A detector must be created in
     # order for GuardDuty to become operational.
     #
-    # @option params [String] :client_token
-    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @option params [required, Boolean] :enable
     #   A boolean value that specifies whether the detector is to be enabled.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [String] :finding_publishing_frequency
     #   A enum value that specifies how frequently customer got Finding
@@ -329,8 +334,8 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_detector({
-    #     client_token: "__stringMin0Max64",
     #     enable: false, # required
+    #     client_token: "ClientToken",
     #     finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
     #   })
     #
@@ -349,30 +354,34 @@ module Aws::GuardDuty
 
     # Creates a filter using the specified finding criteria.
     #
-    # @option params [String] :action
-    #   Specifies the action that is to be applied to the findings that match
-    #   the filter.
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create a filter.
     #
-    # @option params [String] :client_token
-    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
+    # @option params [required, String] :name
+    #   The name of the filter.
     #
     # @option params [String] :description
     #   The description of the filter.
     #
-    # @option params [required, String] :detector_id
-    #
-    # @option params [required, Types::FindingCriteria] :finding_criteria
-    #   Represents the criteria to be used in the filter for querying
-    #   findings.
-    #
-    # @option params [required, String] :name
-    #   The name of the filter.
+    # @option params [String] :action
+    #   Specifies the action that is to be applied to the findings that match
+    #   the filter.
     #
     # @option params [Integer] :rank
     #   Specifies the position of the filter in the list of current filters.
     #   Also specifies the order in which this filter is applied to the
     #   findings.
+    #
+    # @option params [required, Types::FindingCriteria] :finding_criteria
+    #   Represents the criteria to be used in the filter for querying
+    #   findings.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -381,24 +390,30 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_filter({
-    #     action: "NOOP", # accepts NOOP, ARCHIVE
-    #     client_token: "__stringMin0Max64",
+    #     detector_id: "DetectorId", # required
+    #     name: "FilterName", # required
     #     description: "FilterDescription",
-    #     detector_id: "__string", # required
+    #     action: "NOOP", # accepts NOOP, ARCHIVE
+    #     rank: 1,
     #     finding_criteria: { # required
     #       criterion: {
-    #         "__string" => {
-    #           eq: ["__string"],
+    #         "String" => {
+    #           eq: ["String"],
+    #           neq: ["String"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
     #           lte: 1,
-    #           neq: ["__string"],
+    #           equals: ["String"],
+    #           not_equals: ["String"],
+    #           greater_than: 1,
+    #           greater_than_or_equal: 1,
+    #           less_than: 1,
+    #           less_than_or_equal: 1,
     #         },
     #       },
     #     },
-    #     name: "FilterName", # required
-    #     rank: 1,
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -418,15 +433,14 @@ module Aws::GuardDuty
     # whitelisted for secure communication with AWS infrastructure and
     # applications.
     #
-    # @option params [required, Boolean] :activate
-    #   A boolean value that indicates whether GuardDuty is to start using the
-    #   uploaded IPSet.
-    #
-    # @option params [String] :client_token
-    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create an IPSet.
+    #
+    # @option params [required, String] :name
+    #   The user friendly name to identify the IPSet. This name is displayed
+    #   in all findings that are triggered by activity that involves IP
+    #   addresses included in this IPSet.
     #
     # @option params [required, String] :format
     #   The format of the file that contains the IPSet.
@@ -435,10 +449,15 @@ module Aws::GuardDuty
     #   The URI of the file that contains the IPSet. For example
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
     #
-    # @option params [required, String] :name
-    #   The user friendly name to identify the IPSet. This name is displayed
-    #   in all findings that are triggered by activity that involves IP
-    #   addresses included in this IPSet.
+    # @option params [required, Boolean] :activate
+    #   A boolean value that indicates whether GuardDuty is to start using the
+    #   uploaded IPSet.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -447,12 +466,12 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_ip_set({
-    #     activate: false, # required
-    #     client_token: "__stringMin0Max64",
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     name: "Name", # required
     #     format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
     #     location: "Location", # required
-    #     name: "Name", # required
+    #     activate: false, # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -472,11 +491,13 @@ module Aws::GuardDuty
     # list of AWS account IDs. The current AWS account can then invite these
     # members to manage GuardDuty in their accounts.
     #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account with which you
+    #   want to associate member accounts.
+    #
     # @option params [required, Array<Types::AccountDetail>] :account_details
     #   A list of account ID and email address pairs of the accounts that you
     #   want to associate with the master GuardDuty account.
-    #
-    # @option params [required, String] :detector_id
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -485,13 +506,13 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_members({
+    #     detector_id: "DetectorId", # required
     #     account_details: [ # required
     #       {
     #         account_id: "AccountId", # required
     #         email: "Email", # required
     #       },
     #     ],
-    #     detector_id: "__string", # required
     #   })
     #
     # @example Response structure
@@ -514,6 +535,7 @@ module Aws::GuardDuty
     # example findings of all supported finding types.
     #
     # @option params [required, String] :detector_id
+    #   The ID of the detector to create sample findings for.
     #
     # @option params [Array<String>] :finding_types
     #   Types of sample findings that you want to generate.
@@ -523,7 +545,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_sample_findings({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     finding_types: ["FindingType"],
     #   })
     #
@@ -540,15 +562,14 @@ module Aws::GuardDuty
     # malicious IP addresses. GuardDuty generates findings based on
     # ThreatIntelSets.
     #
-    # @option params [required, Boolean] :activate
-    #   A boolean value that indicates whether GuardDuty is to start using the
-    #   uploaded ThreatIntelSet.
-    #
-    # @option params [String] :client_token
-    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create a threatIntelSet.
+    #
+    # @option params [required, String] :name
+    #   A user-friendly ThreatIntelSet name that is displayed in all finding
+    #   generated by activity that involves IP addresses included in this
+    #   ThreatIntelSet.
     #
     # @option params [required, String] :format
     #   The format of the file that contains the ThreatIntelSet.
@@ -557,10 +578,15 @@ module Aws::GuardDuty
     #   The URI of the file that contains the ThreatIntelSet. For example
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
     #
-    # @option params [required, String] :name
-    #   A user-friendly ThreatIntelSet name that is displayed in all finding
-    #   generated by activity that involves IP addresses included in this
-    #   ThreatIntelSet.
+    # @option params [required, Boolean] :activate
+    #   A boolean value that indicates whether GuardDuty is to start using the
+    #   uploaded ThreatIntelSet.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateThreatIntelSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -569,12 +595,12 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_threat_intel_set({
-    #     activate: false, # required
-    #     client_token: "__stringMin0Max64",
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     name: "Name", # required
     #     format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
     #     location: "Location", # required
-    #     name: "Name", # required
+    #     activate: false, # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -604,7 +630,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.decline_invitations({
-    #     account_ids: ["__string"], # required
+    #     account_ids: ["AccountId"], # required
     #   })
     #
     # @example Response structure
@@ -625,13 +651,14 @@ module Aws::GuardDuty
     # Deletes a Amazon GuardDuty detector specified by the detector ID.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_detector({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetector AWS API Documentation
@@ -646,16 +673,18 @@ module Aws::GuardDuty
     # Deletes the filter specified by the filter name.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the filter is associated with.
     #
     # @option params [required, String] :filter_name
+    #   The name of the filter you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_filter({
-    #     detector_id: "__string", # required
-    #     filter_name: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     filter_name: "String", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilter AWS API Documentation
@@ -670,16 +699,18 @@ module Aws::GuardDuty
     # Deletes the IPSet specified by the IPSet ID.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the ipSet is associated with.
     #
     # @option params [required, String] :ip_set_id
+    #   The unique ID of the ipSet you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_ip_set({
-    #     detector_id: "__string", # required
-    #     ip_set_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     ip_set_id: "String", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSet AWS API Documentation
@@ -705,7 +736,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_invitations({
-    #     account_ids: ["__string"], # required
+    #     account_ids: ["AccountId"], # required
     #   })
     #
     # @example Response structure
@@ -726,11 +757,13 @@ module Aws::GuardDuty
     # Deletes GuardDuty member accounts (to the current GuardDuty master
     # account) specified by the account IDs.
     #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account whose members
+    #   you want to delete.
+    #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to delete.
-    #
-    # @option params [required, String] :detector_id
     #
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -739,8 +772,8 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_members({
-    #     account_ids: ["__string"], # required
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
     #   })
     #
     # @example Response structure
@@ -761,16 +794,18 @@ module Aws::GuardDuty
     # Deletes ThreatIntelSet specified by the ThreatIntelSet ID.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the threatIntelSet is associated with.
     #
     # @option params [required, String] :threat_intel_set_id
+    #   The unique ID of the threatIntelSet you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_threat_intel_set({
-    #     detector_id: "__string", # required
-    #     threat_intel_set_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     threat_intel_set_id: "String", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSet AWS API Documentation
@@ -786,13 +821,14 @@ module Aws::GuardDuty
     # account.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_from_master_account({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccount AWS API Documentation
@@ -807,11 +843,13 @@ module Aws::GuardDuty
     # Disassociates GuardDuty member accounts (to the current GuardDuty
     # master account) specified by the account IDs.
     #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account whose members
+    #   you want to disassociate from master.
+    #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to disassociate from master.
-    #
-    # @option params [required, String] :detector_id
     #
     # @return [Types::DisassociateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -820,8 +858,8 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_members({
-    #     account_ids: ["__string"], # required
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
     #   })
     #
     # @example Response structure
@@ -842,6 +880,7 @@ module Aws::GuardDuty
     # Retrieves an Amazon GuardDuty detector specified by the detectorId.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector that you want to get.
     #
     # @return [Types::GetDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -854,7 +893,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_detector({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #   })
     #
     # @example Response structure
@@ -877,39 +916,49 @@ module Aws::GuardDuty
     # Returns the details of the filter specified by the filter name.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the filter is associated with.
     #
     # @option params [required, String] :filter_name
+    #   The name of the filter you want to get.
     #
     # @return [Types::GetFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetFilterResponse#action #action} => String
-    #   * {Types::GetFilterResponse#description #description} => String
-    #   * {Types::GetFilterResponse#finding_criteria #finding_criteria} => Types::FindingCriteria
     #   * {Types::GetFilterResponse#name #name} => String
+    #   * {Types::GetFilterResponse#description #description} => String
+    #   * {Types::GetFilterResponse#action #action} => String
     #   * {Types::GetFilterResponse#rank #rank} => Integer
+    #   * {Types::GetFilterResponse#finding_criteria #finding_criteria} => Types::FindingCriteria
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_filter({
-    #     detector_id: "__string", # required
-    #     filter_name: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     filter_name: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.action #=> String, one of "NOOP", "ARCHIVE"
-    #   resp.description #=> String
-    #   resp.finding_criteria.criterion #=> Hash
-    #   resp.finding_criteria.criterion["__string"].eq #=> Array
-    #   resp.finding_criteria.criterion["__string"].eq[0] #=> String
-    #   resp.finding_criteria.criterion["__string"].gt #=> Integer
-    #   resp.finding_criteria.criterion["__string"].gte #=> Integer
-    #   resp.finding_criteria.criterion["__string"].lt #=> Integer
-    #   resp.finding_criteria.criterion["__string"].lte #=> Integer
-    #   resp.finding_criteria.criterion["__string"].neq #=> Array
-    #   resp.finding_criteria.criterion["__string"].neq[0] #=> String
     #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.action #=> String, one of "NOOP", "ARCHIVE"
     #   resp.rank #=> Integer
+    #   resp.finding_criteria.criterion #=> Hash
+    #   resp.finding_criteria.criterion["String"].eq #=> Array
+    #   resp.finding_criteria.criterion["String"].eq[0] #=> String
+    #   resp.finding_criteria.criterion["String"].neq #=> Array
+    #   resp.finding_criteria.criterion["String"].neq[0] #=> String
+    #   resp.finding_criteria.criterion["String"].gt #=> Integer
+    #   resp.finding_criteria.criterion["String"].gte #=> Integer
+    #   resp.finding_criteria.criterion["String"].lt #=> Integer
+    #   resp.finding_criteria.criterion["String"].lte #=> Integer
+    #   resp.finding_criteria.criterion["String"].equals #=> Array
+    #   resp.finding_criteria.criterion["String"].equals[0] #=> String
+    #   resp.finding_criteria.criterion["String"].not_equals #=> Array
+    #   resp.finding_criteria.criterion["String"].not_equals[0] #=> String
+    #   resp.finding_criteria.criterion["String"].greater_than #=> Integer
+    #   resp.finding_criteria.criterion["String"].greater_than_or_equal #=> Integer
+    #   resp.finding_criteria.criterion["String"].less_than #=> Integer
+    #   resp.finding_criteria.criterion["String"].less_than_or_equal #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilter AWS API Documentation
     #
@@ -923,6 +972,8 @@ module Aws::GuardDuty
     # Describes Amazon GuardDuty findings specified by finding IDs.
     #
     # @option params [required, String] :detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to retrieve.
     #
     # @option params [required, Array<String>] :finding_ids
     #   IDs of the findings that you want to retrieve.
@@ -937,10 +988,10 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_findings({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     finding_ids: ["FindingId"], # required
     #     sort_criteria: {
-    #       attribute_name: "__string",
+    #       attribute_name: "String",
     #       order_by: "ASC", # accepts ASC, DESC
     #     },
     #   })
@@ -997,6 +1048,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.action_type #=> String
     #   resp.findings[0].service.action.aws_api_call_action.api #=> String
     #   resp.findings[0].service.action.aws_api_call_action.caller_type #=> String
+    #   resp.findings[0].service.action.aws_api_call_action.domain_details.domain #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.country.country_name #=> String
@@ -1066,12 +1118,14 @@ module Aws::GuardDuty
     # detector ID.
     #
     # @option params [required, String] :detector_id
-    #
-    # @option params [Types::FindingCriteria] :finding_criteria
-    #   Represents the criteria used for querying findings.
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings' statistics you want to retrieve.
     #
     # @option params [required, Array<String>] :finding_statistic_types
     #   Types of finding statistics to retrieve.
+    #
+    # @option params [Types::FindingCriteria] :finding_criteria
+    #   Represents the criteria used for querying findings.
     #
     # @return [Types::GetFindingsStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1080,26 +1134,32 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_findings_statistics({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     finding_statistic_types: ["COUNT_BY_SEVERITY"], # required, accepts COUNT_BY_SEVERITY
     #     finding_criteria: {
     #       criterion: {
-    #         "__string" => {
-    #           eq: ["__string"],
+    #         "String" => {
+    #           eq: ["String"],
+    #           neq: ["String"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
     #           lte: 1,
-    #           neq: ["__string"],
+    #           equals: ["String"],
+    #           not_equals: ["String"],
+    #           greater_than: 1,
+    #           greater_than_or_equal: 1,
+    #           less_than: 1,
+    #           less_than_or_equal: 1,
     #         },
     #       },
     #     },
-    #     finding_statistic_types: ["COUNT_BY_SEVERITY"], # required, accepts COUNT_BY_SEVERITY
     #   })
     #
     # @example Response structure
     #
     #   resp.finding_statistics.count_by_severity #=> Hash
-    #   resp.finding_statistics.count_by_severity["__string"] #=> Integer
+    #   resp.finding_statistics.count_by_severity["String"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatistics AWS API Documentation
     #
@@ -1113,28 +1173,30 @@ module Aws::GuardDuty
     # Retrieves the IPSet specified by the IPSet ID.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the ipSet is associated with.
     #
     # @option params [required, String] :ip_set_id
+    #   The unique ID of the ipSet you want to get.
     #
     # @return [Types::GetIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetIPSetResponse#name #name} => String
     #   * {Types::GetIPSetResponse#format #format} => String
     #   * {Types::GetIPSetResponse#location #location} => String
-    #   * {Types::GetIPSetResponse#name #name} => String
     #   * {Types::GetIPSetResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_ip_set({
-    #     detector_id: "__string", # required
-    #     ip_set_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     ip_set_id: "String", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.name #=> String
     #   resp.format #=> String, one of "TXT", "STIX", "OTX_CSV", "ALIEN_VAULT", "PROOF_POINT", "FIRE_EYE"
     #   resp.location #=> String
-    #   resp.name #=> String
     #   resp.status #=> String, one of "INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet AWS API Documentation
@@ -1171,6 +1233,7 @@ module Aws::GuardDuty
     # GuardDuty member account.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
     #
     # @return [Types::GetMasterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1179,15 +1242,15 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_master_account({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.master.account_id #=> String
     #   resp.master.invitation_id #=> String
-    #   resp.master.invited_at #=> String
     #   resp.master.relationship_status #=> String
+    #   resp.master.invited_at #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccount AWS API Documentation
     #
@@ -1201,11 +1264,13 @@ module Aws::GuardDuty
     # Retrieves GuardDuty member accounts (to the current GuardDuty master
     # account) specified by the account IDs.
     #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account whose members
+    #   you want to retrieve.
+    #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to describe.
-    #
-    # @option params [required, String] :detector_id
     #
     # @return [Types::GetMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1215,8 +1280,8 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_members({
-    #     account_ids: ["__string"], # required
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
     #   })
     #
     # @example Response structure
@@ -1224,10 +1289,10 @@ module Aws::GuardDuty
     #   resp.members #=> Array
     #   resp.members[0].account_id #=> String
     #   resp.members[0].detector_id #=> String
-    #   resp.members[0].email #=> String
-    #   resp.members[0].invited_at #=> String
     #   resp.members[0].master_id #=> String
+    #   resp.members[0].email #=> String
     #   resp.members[0].relationship_status #=> String
+    #   resp.members[0].invited_at #=> String
     #   resp.members[0].updated_at #=> String
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
@@ -1246,28 +1311,30 @@ module Aws::GuardDuty
     # ID.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the threatIntelSet is associated with.
     #
     # @option params [required, String] :threat_intel_set_id
+    #   The unique ID of the threatIntelSet you want to get.
     #
     # @return [Types::GetThreatIntelSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetThreatIntelSetResponse#name #name} => String
     #   * {Types::GetThreatIntelSetResponse#format #format} => String
     #   * {Types::GetThreatIntelSetResponse#location #location} => String
-    #   * {Types::GetThreatIntelSetResponse#name #name} => String
     #   * {Types::GetThreatIntelSetResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_threat_intel_set({
-    #     detector_id: "__string", # required
-    #     threat_intel_set_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     threat_intel_set_id: "String", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.name #=> String
     #   resp.format #=> String, one of "TXT", "STIX", "OTX_CSV", "ALIEN_VAULT", "PROOF_POINT", "FIRE_EYE"
     #   resp.location #=> String
-    #   resp.name #=> String
     #   resp.status #=> String, one of "INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet AWS API Documentation
@@ -1284,11 +1351,13 @@ module Aws::GuardDuty
     # AWS account to view and manage these accounts' GuardDuty findings on
     # their behalf as the master account.
     #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account with which you
+    #   want to invite members.
+    #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the accounts that you want to invite to
     #   GuardDuty as members.
-    #
-    # @option params [required, String] :detector_id
     #
     # @option params [Boolean] :disable_email_notification
     #   A boolean value that specifies whether you want to disable email
@@ -1306,10 +1375,10 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.invite_members({
-    #     account_ids: ["__string"], # required
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
     #     disable_email_notification: false,
-    #     message: "Message",
+    #     message: "String",
     #   })
     #
     # @example Response structure
@@ -1331,10 +1400,16 @@ module Aws::GuardDuty
     # resources.
     #
     # @option params [Integer] :max_results
-    #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 50. The maximum value is
+    #   50.
     #
     # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with the
+    #   value of NextToken from the previous response to continue listing
+    #   data.
     #
     # @return [Types::ListDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1345,7 +1420,7 @@ module Aws::GuardDuty
     #
     #   resp = client.list_detectors({
     #     max_results: 1,
-    #     next_token: "__string",
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -1366,12 +1441,19 @@ module Aws::GuardDuty
     # Returns a paginated list of the current filters.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the filter is associated with.
     #
     # @option params [Integer] :max_results
-    #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 50. The maximum value is
+    #   50.
     #
     # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with the
+    #   value of NextToken from the previous response to continue listing
+    #   data.
     #
     # @return [Types::ListFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1381,9 +1463,9 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_filters({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     max_results: 1,
-    #     next_token: "__string",
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -1404,9 +1486,14 @@ module Aws::GuardDuty
     # Lists Amazon GuardDuty findings for the specified detector ID.
     #
     # @option params [required, String] :detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to list.
     #
     # @option params [Types::FindingCriteria] :finding_criteria
     #   Represents the criteria used for querying findings.
+    #
+    # @option params [Types::SortCriteria] :sort_criteria
+    #   Represents the criteria used for sorting findings.
     #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items you
@@ -1415,13 +1502,10 @@ module Aws::GuardDuty
     #
     # @option params [String] :next_token
     #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the ListFindings action.
-    #   For subsequent calls to the action fill nextToken in the request with
-    #   the value of nextToken from the previous response to continue listing
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with the
+    #   value of NextToken from the previous response to continue listing
     #   data.
-    #
-    # @option params [Types::SortCriteria] :sort_criteria
-    #   Represents the criteria used for sorting findings.
     #
     # @return [Types::ListFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1431,25 +1515,31 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_findings({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     finding_criteria: {
     #       criterion: {
-    #         "__string" => {
-    #           eq: ["__string"],
+    #         "String" => {
+    #           eq: ["String"],
+    #           neq: ["String"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
     #           lte: 1,
-    #           neq: ["__string"],
+    #           equals: ["String"],
+    #           not_equals: ["String"],
+    #           greater_than: 1,
+    #           greater_than_or_equal: 1,
+    #           less_than: 1,
+    #           less_than_or_equal: 1,
     #         },
     #       },
     #     },
-    #     max_results: 1,
-    #     next_token: "NextToken",
     #     sort_criteria: {
-    #       attribute_name: "__string",
+    #       attribute_name: "String",
     #       order_by: "ASC", # accepts ASC, DESC
     #     },
+    #     max_results: 1,
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -1471,12 +1561,19 @@ module Aws::GuardDuty
     # ID.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the ipSet is associated with.
     #
     # @option params [Integer] :max_results
-    #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 50. The maximum value is
+    #   50.
     #
     # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with the
+    #   value of NextToken from the previous response to continue listing
+    #   data.
     #
     # @return [Types::ListIPSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1486,9 +1583,9 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ip_sets({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     max_results: 1,
-    #     next_token: "__string",
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -1510,10 +1607,16 @@ module Aws::GuardDuty
     # current AWS account.
     #
     # @option params [Integer] :max_results
-    #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 50. The maximum value is
+    #   50.
     #
     # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with the
+    #   value of NextToken from the previous response to continue listing
+    #   data.
     #
     # @return [Types::ListInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1524,7 +1627,7 @@ module Aws::GuardDuty
     #
     #   resp = client.list_invitations({
     #     max_results: 1,
-    #     next_token: "__string",
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -1532,8 +1635,8 @@ module Aws::GuardDuty
     #   resp.invitations #=> Array
     #   resp.invitations[0].account_id #=> String
     #   resp.invitations[0].invitation_id #=> String
-    #   resp.invitations[0].invited_at #=> String
     #   resp.invitations[0].relationship_status #=> String
+    #   resp.invitations[0].invited_at #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitations AWS API Documentation
@@ -1549,14 +1652,24 @@ module Aws::GuardDuty
     # master account.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the member is associated with.
     #
     # @option params [Integer] :max_results
-    #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 50. The maximum value is
+    #   50.
     #
     # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with the
+    #   value of NextToken from the previous response to continue listing
+    #   data.
     #
     # @option params [String] :only_associated
+    #   Specifies whether to only return associated members or to return all
+    #   members (including members which haven't been invited yet or have
+    #   been disassociated).
     #
     # @return [Types::ListMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1566,10 +1679,10 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_members({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     max_results: 1,
-    #     next_token: "__string",
-    #     only_associated: "__string",
+    #     next_token: "String",
+    #     only_associated: "String",
     #   })
     #
     # @example Response structure
@@ -1577,10 +1690,10 @@ module Aws::GuardDuty
     #   resp.members #=> Array
     #   resp.members[0].account_id #=> String
     #   resp.members[0].detector_id #=> String
-    #   resp.members[0].email #=> String
-    #   resp.members[0].invited_at #=> String
     #   resp.members[0].master_id #=> String
+    #   resp.members[0].email #=> String
     #   resp.members[0].relationship_status #=> String
+    #   resp.members[0].invited_at #=> String
     #   resp.members[0].updated_at #=> String
     #   resp.next_token #=> String
     #
@@ -1597,31 +1710,38 @@ module Aws::GuardDuty
     # detector ID.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector the threatIntelSet is associated with.
     #
     # @option params [Integer] :max_results
-    #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 50. The maximum value is
+    #   50.
     #
     # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with the
+    #   value of NextToken from the previous response to continue listing
+    #   data.
     #
     # @return [Types::ListThreatIntelSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListThreatIntelSetsResponse#next_token #next_token} => String
     #   * {Types::ListThreatIntelSetsResponse#threat_intel_set_ids #threat_intel_set_ids} => Array&lt;String&gt;
+    #   * {Types::ListThreatIntelSetsResponse#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_threat_intel_sets({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     max_results: 1,
-    #     next_token: "__string",
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.threat_intel_set_ids #=> Array
     #   resp.threat_intel_set_ids[0] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSets AWS API Documentation
     #
@@ -1637,11 +1757,13 @@ module Aws::GuardDuty
     # command after disabling GuardDuty from monitoring these members'
     # findings by running StopMonitoringMembers.
     #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account whom you want
+    #   to re-enable to monitor members' findings.
+    #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts whose findings
     #   you want the master account to monitor.
-    #
-    # @option params [required, String] :detector_id
     #
     # @return [Types::StartMonitoringMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1650,8 +1772,8 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_monitoring_members({
-    #     account_ids: ["__string"], # required
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
     #   })
     #
     # @example Response structure
@@ -1674,11 +1796,13 @@ module Aws::GuardDuty
     # GuardDuty account can run StartMonitoringMembers to re-enable
     # GuardDuty to monitor these members’ findings.
     #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector of the GuardDuty account that you want
+    #   to stop from monitor members' findings.
+    #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts whose findings
     #   you want the master account to stop monitoring.
-    #
-    # @option params [required, String] :detector_id
     #
     # @return [Types::StopMonitoringMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1687,8 +1811,8 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_monitoring_members({
-    #     account_ids: ["__string"], # required
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
     #   })
     #
     # @example Response structure
@@ -1710,6 +1834,8 @@ module Aws::GuardDuty
     # IDs.
     #
     # @option params [required, String] :detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to unarchive.
     #
     # @option params [required, Array<String>] :finding_ids
     #   IDs of the findings that you want to unarchive.
@@ -1719,7 +1845,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.unarchive_findings({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     finding_ids: ["FindingId"], # required
     #   })
     #
@@ -1735,6 +1861,7 @@ module Aws::GuardDuty
     # Updates an Amazon GuardDuty detector specified by the detectorId.
     #
     # @option params [required, String] :detector_id
+    #   The unique ID of the detector that you want to update.
     #
     # @option params [Boolean] :enable
     #   Updated boolean value for the detector that specifies whether the
@@ -1749,7 +1876,7 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_detector({
-    #     detector_id: "__string", # required
+    #     detector_id: "DetectorId", # required
     #     enable: false,
     #     finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
     #   })
@@ -1765,24 +1892,27 @@ module Aws::GuardDuty
 
     # Updates the filter specified by the filter name.
     #
-    # @option params [String] :action
-    #   Specifies the action that is to be applied to the findings that match
-    #   the filter.
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector that specifies the GuardDuty service
+    #   where you want to update a filter.
+    #
+    # @option params [required, String] :filter_name
+    #   The name of the filter.
     #
     # @option params [String] :description
     #   The description of the filter.
     #
-    # @option params [required, String] :detector_id
-    #
-    # @option params [required, String] :filter_name
-    #
-    # @option params [Types::FindingCriteria] :finding_criteria
-    #   Represents the criteria to be used in the filter for querying
-    #   findings.
+    # @option params [String] :action
+    #   Specifies the action that is to be applied to the findings that match
+    #   the filter.
     #
     # @option params [Integer] :rank
     #   Specifies the position of the filter in the list of current filters.
     #   Also specifies the order in which this filter is applied to the
+    #   findings.
+    #
+    # @option params [Types::FindingCriteria] :finding_criteria
+    #   Represents the criteria to be used in the filter for querying
     #   findings.
     #
     # @return [Types::UpdateFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1792,23 +1922,29 @@ module Aws::GuardDuty
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_filter({
-    #     action: "NOOP", # accepts NOOP, ARCHIVE
+    #     detector_id: "DetectorId", # required
+    #     filter_name: "String", # required
     #     description: "FilterDescription",
-    #     detector_id: "__string", # required
-    #     filter_name: "__string", # required
+    #     action: "NOOP", # accepts NOOP, ARCHIVE
+    #     rank: 1,
     #     finding_criteria: {
     #       criterion: {
-    #         "__string" => {
-    #           eq: ["__string"],
+    #         "String" => {
+    #           eq: ["String"],
+    #           neq: ["String"],
     #           gt: 1,
     #           gte: 1,
     #           lt: 1,
     #           lte: 1,
-    #           neq: ["__string"],
+    #           equals: ["String"],
+    #           not_equals: ["String"],
+    #           greater_than: 1,
+    #           greater_than_or_equal: 1,
+    #           less_than: 1,
+    #           less_than_or_equal: 1,
     #         },
     #       },
     #     },
-    #     rank: 1,
     #   })
     #
     # @example Response structure
@@ -1826,26 +1962,28 @@ module Aws::GuardDuty
 
     # Marks specified Amazon GuardDuty findings as useful or not useful.
     #
-    # @option params [String] :comments
-    #   Additional feedback about the GuardDuty findings.
-    #
     # @option params [required, String] :detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to mark as useful or not useful.
+    #
+    # @option params [required, Array<String>] :finding_ids
+    #   IDs of the findings that you want to mark as useful or not useful.
     #
     # @option params [required, String] :feedback
     #   Valid values: USEFUL \| NOT\_USEFUL
     #
-    # @option params [required, Array<String>] :finding_ids
-    #   IDs of the findings that you want to mark as useful or not useful.
+    # @option params [String] :comments
+    #   Additional feedback about the GuardDuty findings.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_findings_feedback({
-    #     comments: "Comments",
-    #     detector_id: "__string", # required
-    #     feedback: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
+    #     detector_id: "DetectorId", # required
     #     finding_ids: ["FindingId"], # required
+    #     feedback: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
+    #     comments: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback AWS API Documentation
@@ -1859,31 +1997,34 @@ module Aws::GuardDuty
 
     # Updates the IPSet specified by the IPSet ID.
     #
-    # @option params [Boolean] :activate
-    #   The updated boolean value that specifies whether the IPSet is active
-    #   or not.
-    #
     # @option params [required, String] :detector_id
+    #   The detectorID that specifies the GuardDuty service whose IPSet you
+    #   want to update.
     #
     # @option params [required, String] :ip_set_id
+    #   The unique ID that specifies the IPSet that you want to update.
+    #
+    # @option params [String] :name
+    #   The unique ID that specifies the IPSet that you want to update.
     #
     # @option params [String] :location
     #   The updated URI of the file that contains the IPSet. For example
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
     #
-    # @option params [String] :name
-    #   The unique ID that specifies the IPSet that you want to update.
+    # @option params [Boolean] :activate
+    #   The updated boolean value that specifies whether the IPSet is active
+    #   or not.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_ip_set({
-    #     activate: false,
-    #     detector_id: "__string", # required
-    #     ip_set_id: "__string", # required
-    #     location: "Location",
+    #     detector_id: "DetectorId", # required
+    #     ip_set_id: "String", # required
     #     name: "Name",
+    #     location: "Location",
+    #     activate: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSet AWS API Documentation
@@ -1897,32 +2038,36 @@ module Aws::GuardDuty
 
     # Updates the ThreatIntelSet specified by ThreatIntelSet ID.
     #
-    # @option params [Boolean] :activate
-    #   The updated boolean value that specifies whether the ThreateIntelSet
-    #   is active or not.
-    #
     # @option params [required, String] :detector_id
+    #   The detectorID that specifies the GuardDuty service whose
+    #   ThreatIntelSet you want to update.
     #
-    # @option params [String] :location
-    #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+    # @option params [required, String] :threat_intel_set_id
+    #   The unique ID that specifies the ThreatIntelSet that you want to
+    #   update.
     #
     # @option params [String] :name
     #   The unique ID that specifies the ThreatIntelSet that you want to
     #   update.
     #
-    # @option params [required, String] :threat_intel_set_id
+    # @option params [String] :location
+    #   The updated URI of the file that contains the ThreateIntelSet. For
+    #   example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+    #
+    # @option params [Boolean] :activate
+    #   The updated boolean value that specifies whether the ThreateIntelSet
+    #   is active or not.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_threat_intel_set({
-    #     activate: false,
-    #     detector_id: "__string", # required
-    #     location: "Location",
+    #     detector_id: "DetectorId", # required
+    #     threat_intel_set_id: "String", # required
     #     name: "Name",
-    #     threat_intel_set_id: "__string", # required
+    #     location: "Location",
+    #     activate: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet AWS API Documentation
@@ -1947,7 +2092,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

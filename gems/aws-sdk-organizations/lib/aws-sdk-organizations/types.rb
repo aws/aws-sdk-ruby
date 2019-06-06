@@ -61,7 +61,7 @@ module Aws::Organizations
     # You don't have permissions to perform the requested operation. The
     # user or role that is making the request must have at least one IAM
     # permissions policy attached that grants the required permissions. For
-    # more information, see [Access Management][1] in the *IAM User Guide*.
+    # more information, see [Access Management][1] in the *IAM User Guide.*
     #
     #
     #
@@ -374,9 +374,26 @@ module Aws::Organizations
     # Some of the reasons in the following list might not be applicable to
     # this specific API or operation:
     #
+    # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_EULA: You attempted to remove an
+    #   account from the organization that doesn't yet have enough
+    #   information to exist as a standalone account. This account requires
+    #   you to first agree to the AWS Customer Agreement. Follow the steps
+    #   at [To leave an organization when all required account information
+    #   has not yet been provided][1] in the *AWS Organizations User Guide.*
+    #
+    # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_PHONE\_VERIFICATION: You attempted
+    #   to remove an account from the organization that doesn't yet have
+    #   enough information to exist as a standalone account. This account
+    #   requires you to first complete phone verification. Follow the steps
+    #   at [To leave an organization when all required account information
+    #   has not yet been provided][1] in the *AWS Organizations User Guide.*
+    #
+    # * ACCOUNT\_CREATION\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed
+    #   the number of accounts that you can create in one day.
+    #
     # * ACCOUNT\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the limit
     #   on the number of accounts in an organization. If you need more
-    #   accounts, contact [AWS Support][1] to request an increase in your
+    #   accounts, contact [AWS Support][2] to request an increase in your
     #   limit.
     #
     #   Or the number of invitations that you tried to send would cause you
@@ -391,64 +408,10 @@ module Aws::Organizations
     #   If you get receive this exception when running a command immediately
     #   after creating the organization, wait one hour and try again. If
     #   after an hour it continues to fail with this error, contact [AWS
-    #   Support][1].
+    #   Support][2].
     #
     # * HANDSHAKE\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed the number
     #   of handshakes that you can send in one day.
-    #
-    # * OU\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number of
-    #   OUs that you can have in an organization.
-    #
-    # * OU\_DEPTH\_LIMIT\_EXCEEDED: You attempted to create an OU tree that
-    #   is too many levels deep.
-    #
-    # * ORGANIZATION\_NOT\_IN\_ALL\_FEATURES\_MODE: You attempted to perform
-    #   an operation that requires the organization to be configured to
-    #   support all features. An organization that supports only
-    #   consolidated billing features can't perform this operation.
-    #
-    # * POLICY\_NUMBER\_LIMIT\_EXCEEDED. You attempted to exceed the number
-    #   of policies that you can have in an organization.
-    #
-    # * MAX\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
-    #   exceed the number of policies of a certain type that can be attached
-    #   to an entity at one time.
-    #
-    # * MIN\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
-    #   detach a policy from an entity that would cause the entity to have
-    #   fewer than the minimum number of policies of a certain type
-    #   required.
-    #
-    # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_EULA: You attempted to remove an
-    #   account from the organization that doesn't yet have enough
-    #   information to exist as a standalone account. This account requires
-    #   you to first agree to the AWS Customer Agreement. Follow the steps
-    #   at [To leave an organization when all required account information
-    #   has not yet been provided][2] in the *AWS Organizations User Guide*.
-    #
-    # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_PHONE\_VERIFICATION: You attempted
-    #   to remove an account from the organization that doesn't yet have
-    #   enough information to exist as a standalone account. This account
-    #   requires you to first complete phone verification. Follow the steps
-    #   at [To leave an organization when all required account information
-    #   has not yet been provided][2] in the *AWS Organizations User Guide*.
-    #
-    # * MASTER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To create an
-    #   organization with this master account, you first must associate a
-    #   valid payment instrument, such as a credit card, with the account.
-    #   Follow the steps at [To leave an organization when all required
-    #   account information has not yet been provided][2] in the *AWS
-    #   Organizations User Guide*.
-    #
-    # * MEMBER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To complete this
-    #   operation with this member account, you first must associate a valid
-    #   payment instrument, such as a credit card, with the account. Follow
-    #   the steps at [To leave an organization when all required account
-    #   information has not yet been provided][2] in the *AWS Organizations
-    #   User Guide*.
-    #
-    # * ACCOUNT\_CREATION\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed
-    #   the number of accounts that you can create in one day.
     #
     # * MASTER\_ACCOUNT\_ADDRESS\_DOES\_NOT\_MATCH\_MARKETPLACE: To create
     #   an account in this organization, you first must migrate the
@@ -467,10 +430,50 @@ module Aws::Organizations
     #   GovCloud (US-West) Region. For more information, see [AWS
     #   Organizations][3] in the *AWS GovCloud User Guide.*
     #
+    # * MASTER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To create an
+    #   organization with this master account, you first must associate a
+    #   valid payment instrument, such as a credit card, with the account.
+    #   Follow the steps at [To leave an organization when all required
+    #   account information has not yet been provided][1] in the *AWS
+    #   Organizations User Guide.*
+    #
+    # * MAX\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
+    #   exceed the number of policies of a certain type that can be attached
+    #   to an entity at one time.
+    #
+    # * MAX\_TAG\_LIMIT\_EXCEEDED: You have exceeded the number of tags
+    #   allowed on this resource.
+    #
+    # * MEMBER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To complete this
+    #   operation with this member account, you first must associate a valid
+    #   payment instrument, such as a credit card, with the account. Follow
+    #   the steps at [To leave an organization when all required account
+    #   information has not yet been provided][1] in the *AWS Organizations
+    #   User Guide.*
+    #
+    # * MIN\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
+    #   detach a policy from an entity that would cause the entity to have
+    #   fewer than the minimum number of policies of a certain type
+    #   required.
+    #
+    # * OU\_DEPTH\_LIMIT\_EXCEEDED: You attempted to create an OU tree that
+    #   is too many levels deep.
+    #
+    # * ORGANIZATION\_NOT\_IN\_ALL\_FEATURES\_MODE: You attempted to perform
+    #   an operation that requires the organization to be configured to
+    #   support all features. An organization that supports only
+    #   consolidated billing features can't perform this operation.
+    #
+    # * OU\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number of
+    #   OUs that you can have in an organization.
+    #
+    # * POLICY\_NUMBER\_LIMIT\_EXCEEDED. You attempted to exceed the number
+    #   of policies that you can have in an organization.
     #
     #
-    # [1]: https://console.aws.amazon.com/support/home#/
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    #
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [2]: https://console.aws.amazon.com/support/home#/
     # [3]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
     #
     # @!attribute [rw] message
@@ -525,7 +528,7 @@ module Aws::Organizations
     #   account, see [Accessing and Administering the Member Accounts in
     #   Your Organization][1] in the *AWS Organizations User Guide*, and
     #   steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
-    #   Using IAM Roles][2] in the *IAM User Guide*.
+    #   Using IAM Roles][2] in the *IAM User Guide.*
     #
     #   The [regex pattern][3] that is used to validate this parameter is a
     #   string of characters that can consist of uppercase letters,
@@ -638,6 +641,8 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] gov_cloud_account_id
+    #   If the account was created successfully, the unique identifier (ID)
+    #   of the new account in the AWS GovCloud (US) Region.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -797,19 +802,19 @@ module Aws::Organizations
     #   Specifies the feature set supported by the new organization. Each
     #   feature set supports different levels of functionality.
     #
-    #   * *CONSOLIDATED\_BILLING*\: All member accounts have their bills
+    #   * `CONSOLIDATED_BILLING`\: All member accounts have their bills
     #     consolidated to and paid by the master account. For more
     #     information, see [Consolidated billing][1] in the *AWS
-    #     Organizations User Guide*.
+    #     Organizations User Guide.*
     #
     #     The consolidated billing feature subset isn't available for
     #     organizations in the AWS GovCloud (US) Region.
     #
-    #   * *ALL*\: In addition to all the features supported by the
+    #   * `ALL`\: In addition to all the features supported by the
     #     consolidated billing feature set, the master account can also
     #     apply any type of policy to any member account in the
     #     organization. For more information, see [All features][2] in the
-    #     *AWS Organizations User Guide*.
+    #     *AWS Organizations User Guide.*
     #
     #
     #
@@ -845,8 +850,8 @@ module Aws::Organizations
     #       }
     #
     # @!attribute [rw] parent_id
-    #   The unique identifier (ID) of the parent root or OU in which you
-    #   want to create the new OU.
+    #   The unique identifier (ID) of the parent root or OU that you want to
+    #   create the new OU in.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -903,7 +908,7 @@ module Aws::Organizations
     #   text that specifies the permissions that admins in attached accounts
     #   can delegate to their users, groups, and roles. For more information
     #   about the SCP syntax, see [Service Control Policy Syntax][2] in the
-    #   *AWS Organizations User Guide*.
+    #   *AWS Organizations User Guide.*
     #
     #
     #
@@ -1292,10 +1297,9 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The unique identifier (ID) of the root, OU, or account from which
-    #   you want to detach the policy. You can get the ID from the
-    #   ListRoots, ListOrganizationalUnitsForParent, or ListAccounts
-    #   operations.
+    #   The unique identifier (ID) of the root, OU, or account that you want
+    #   to detach the policy from. You can get the ID from the ListRoots,
+    #   ListOrganizationalUnitsForParent, or ListAccounts operations.
     #
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
@@ -1722,23 +1726,19 @@ module Aws::Organizations
     #   organization, wait one hour and try again. If after an hour it
     #   continues to fail with this error, contact [AWS Support][1].
     #
-    # * HANDSHAKE\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed the number
-    #   of handshakes that you can send in one day.
-    #
     # * ALREADY\_IN\_AN\_ORGANIZATION: The handshake request is invalid
     #   because the invited account is already a member of an organization.
     #
-    # * ORGANIZATION\_ALREADY\_HAS\_ALL\_FEATURES: The handshake request is
-    #   invalid because the organization has already enabled all features.
+    # * HANDSHAKE\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed the number
+    #   of handshakes that you can send in one day.
     #
     # * INVITE\_DISABLED\_DURING\_ENABLE\_ALL\_FEATURES: You can't issue
     #   new invitations to join an organization while it's in the process
     #   of enabling all features. You can resume inviting accounts after you
     #   finalize the process when all accounts have agreed to the change.
     #
-    # * PAYMENT\_INSTRUMENT\_REQUIRED: You can't complete the operation
-    #   with an account that doesn't have a payment instrument, such as a
-    #   credit card, associated with it.
+    # * ORGANIZATION\_ALREADY\_HAS\_ALL\_FEATURES: The handshake request is
+    #   invalid because the organization has already enabled all features.
     #
     # * ORGANIZATION\_FROM\_DIFFERENT\_SELLER\_OF\_RECORD: The request
     #   failed because the account is from a different marketplace than the
@@ -1749,6 +1749,10 @@ module Aws::Organizations
     # * ORGANIZATION\_MEMBERSHIP\_CHANGE\_RATE\_LIMIT\_EXCEEDED: You
     #   attempted to change the membership of an account too quickly after
     #   its previous change.
+    #
+    # * PAYMENT\_INSTRUMENT\_REQUIRED: You can't complete the operation
+    #   with an account that doesn't have a payment instrument, such as a
+    #   credit card, associated with it.
     #
     #
     #
@@ -1935,11 +1939,11 @@ module Aws::Organizations
     # * INVALID\_LIST\_MEMBER: You provided a list to a parameter that
     #   contains at least one invalid value.
     #
-    # * INVALID\_PARTY\_TYPE\_TARGET: You specified the wrong type of entity
-    #   (account, organization, or email) as a party.
-    #
     # * INVALID\_PAGINATION\_TOKEN: Get the value for the `NextToken`
     #   parameter from the response to a previous call of the operation.
+    #
+    # * INVALID\_PARTY\_TYPE\_TARGET: You specified the wrong type of entity
+    #   (account, organization, or email) as a party.
     #
     # * INVALID\_PATTERN: You provided a value that doesn't match the
     #   required pattern.
@@ -1954,6 +1958,11 @@ module Aws::Organizations
     #   Resource Name (ARN) for the organization.
     #
     # * INVALID\_SYNTAX\_POLICY\_ID: You specified an invalid policy ID.
+    #
+    # * INVALID\_SYSTEM\_TAGS\_PARAMETER: You specified a tag key that is a
+    #   system tag. You can’t add, edit, or delete system tag keys because
+    #   they're reserved for AWS use. System tags don’t count against your
+    #   tags per resource limit.
     #
     # * MAX\_FILTER\_LIMIT\_EXCEEDED: You can specify only one filter
     #   parameter for the operation.
@@ -2010,10 +2019,9 @@ module Aws::Organizations
     #
     #   `--target Id=123456789012,Type=ACCOUNT`
     #
-    #   If you specify `"Type": "ACCOUNT"`, then you must provide the AWS
-    #   account ID number as the `Id`. If you specify `"Type": "EMAIL"`,
-    #   then you must specify the email address that is associated with the
-    #   account.
+    #   If you specify `"Type": "ACCOUNT"`, you must provide the AWS account
+    #   ID number as the `Id`. If you specify `"Type": "EMAIL"`, you must
+    #   specify the email address that is associated with the account.
     #
     #   `--target Id=diego@example.com,Type=EMAIL`
     #   @return [Types::HandshakeParty]
@@ -2316,8 +2324,8 @@ module Aws::Organizations
     #
     # @!attribute [rw] states
     #   A list of one or more states that you want included in the response.
-    #   If this parameter is not present, then all requests are included in
-    #   the response.
+    #   If this parameter isn't present, all requests are included in the
+    #   response.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -2606,7 +2614,7 @@ module Aws::Organizations
     #
     # @!attribute [rw] child_id
     #   The unique identifier (ID) of the OU or account whose parent
-    #   containers you want to list. Do not specify a root.
+    #   containers you want to list. Don't specify a root.
     #
     #   The [regex pattern][1] for a child ID string requires one of the
     #   following:
@@ -2803,7 +2811,7 @@ module Aws::Organizations
 
     # @!attribute [rw] policies
     #   A list of policies that match the filter criteria in the request.
-    #   The output list does not include the policy contents. To see the
+    #   The output list doesn't include the policy contents. To see the
     #   content for a policy, see DescribePolicy.
     #   @return [Array<Types::PolicySummary>]
     #
@@ -2879,6 +2887,53 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "TaggableResourceId", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that you want to retrieve tags for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Use this parameter if you receive a `NextToken` response in a
+    #   previous request that indicates that there is more output available.
+    #   Set it to the value of the previous call's `NextToken` response to
+    #   indicate where the output should continue from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_id,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags that are assigned to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, this value indicates that there is more output available
+    #   than is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTargetsForPolicyRequest
     #   data as a hash:
     #
@@ -2889,8 +2944,8 @@ module Aws::Organizations
     #       }
     #
     # @!attribute [rw] policy_id
-    #   The unique identifier (ID) of the policy for which you want to know
-    #   its attachments.
+    #   The unique identifier (ID) of the policy whose attachments you want
+    #   to know.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
     #   followed by from 8 to 128 lower-case letters or digits.
@@ -2953,7 +3008,7 @@ module Aws::Organizations
     # The provided policy document doesn't meet the requirements of the
     # specified policy type. For example, the syntax might be incorrect. For
     # details about service control policy syntax, see [Service Control
-    # Policy Syntax][1] in the *AWS Organizations User Guide*.
+    # Policy Syntax][1] in the *AWS Organizations User Guide.*
     #
     #
     #
@@ -3483,7 +3538,7 @@ module Aws::Organizations
     # currently enabled for this organization. For example, you can enable
     # SCPs only after you enable all features in the organization. For more
     # information, see [Enabling and Disabling a Policy Type on a Root][1]
-    # in the *AWS Organizations User Guide*.
+    # in the *AWS Organizations User Guide.*
     #
     #
     #
@@ -3503,7 +3558,7 @@ module Aws::Organizations
     # can't attach policies of the specified type to entities in a root
     # until you enable that type in the root. For more information, see
     # [Enabling All Features in Your Organization][1] in the *AWS
-    # Organizations User Guide*.
+    # Organizations User Guide.*
     #
     #
     #
@@ -3668,6 +3723,62 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # A custom key-value pair associated with a resource such as an account
+    # within your organization.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key identifier, or name, of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The string value that's associated with the key of the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "TaggableResourceId", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource to add a tag to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag to add to the specified resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_id,
+      :tags)
+      include Aws::Structure
+    end
+
     # We can't find a root, OU, or account with the `TargetId` that you
     # specified.
     #
@@ -3681,12 +3792,12 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # You've sent too many requests in too short a period of time. The
+    # You have sent too many requests in too short a period of time. The
     # limit helps protect against denial-of-service attacks. Try again
     # later.
     #
-    # For information on limits that affect Organizations, see [Limits of
-    # AWS Organizations][1] in the *AWS Organizations User Guide*.
+    # For information on limits that affect AWS Organizations, see [Limits
+    # of AWS Organizations][1] in the *AWS Organizations User Guide.*
     #
     #
     #
@@ -3715,6 +3826,30 @@ module Aws::Organizations
     #
     class UnsupportedAPIEndpointException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "TaggableResourceId", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource to remove the tag from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag to remove from the specified resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_id,
+      :tag_keys)
       include Aws::Structure
     end
 
@@ -3811,7 +3946,7 @@ module Aws::Organizations
     #   If provided, the new content for the policy. The text must be
     #   correctly formatted JSON that complies with the syntax for the
     #   policy's type. For more information, see [Service Control Policy
-    #   Syntax][1] in the *AWS Organizations User Guide*.
+    #   Syntax][1] in the *AWS Organizations User Guide.*
     #
     #
     #

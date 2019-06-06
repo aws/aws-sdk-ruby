@@ -77,7 +77,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #         resource_id: "ResourceId", # required
     #         tags: [ # required
     #           {
@@ -2831,6 +2831,128 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateOpsItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "OpsItemDescription", # required
+    #         operational_data: {
+    #           "OpsItemDataKey" => {
+    #             value: "OpsItemDataValueString",
+    #             type: "SearchableString", # accepts SearchableString, String
+    #           },
+    #         },
+    #         notifications: [
+    #           {
+    #             arn: "String",
+    #           },
+    #         ],
+    #         priority: 1,
+    #         related_ops_items: [
+    #           {
+    #             ops_item_id: "String", # required
+    #           },
+    #         ],
+    #         source: "OpsItemSource", # required
+    #         title: "OpsItemTitle", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] description
+    #   Information about the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] operational_data
+    #   Operational data is custom data that provides useful reference
+    #   details about the OpsItem. For example, you can specify log files,
+    #   error strings, license keys, troubleshooting tips, or other relevant
+    #   data. You enter operational data as key-value pairs. The key has a
+    #   maximum length of 128 characters. The value has a maximum size of 20
+    #   KB.
+    #
+    #   This custom data is searchable, but with restrictions. For the
+    #   `Searchable operational data` feature, all users with access to the
+    #   OpsItem Overview page (as provided by the DescribeOpsItems API
+    #   action) can view and search on the specified data. For the `Private
+    #   operational data` feature, the data is only viewable by users who
+    #   have access to the OpsItem (as provided by the GetOpsItem API
+    #   action).
+    #   @return [Hash<String,Types::OpsItemDataValue>]
+    #
+    # @!attribute [rw] notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications
+    #   are sent when this OpsItem is edited or changed.
+    #   @return [Array<Types::OpsItemNotification>]
+    #
+    # @!attribute [rw] priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItems. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #   @return [Array<Types::RelatedOpsItem>]
+    #
+    # @!attribute [rw] source
+    #   The origin of the OpsItem, such as Amazon EC2 or AWS Systems
+    #   Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag an OpsItem to
+    #   identify the AWS resource or the type of issue. In this case, you
+    #   could specify the following key name/value pairs:
+    #
+    #   * `Key=source,Value=EC2-instance`
+    #
+    #   * `Key=status,Value=stopped`
+    #
+    #   <note markdown="1"> To add tags to an existing OpsItem, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItemRequest AWS API Documentation
+    #
+    class CreateOpsItemRequest < Struct.new(
+      :description,
+      :operational_data,
+      :notifications,
+      :priority,
+      :related_ops_items,
+      :source,
+      :title,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItemResponse AWS API Documentation
+    #
+    class CreateOpsItemResponse < Struct.new(
+      :ops_item_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreatePatchBaselineRequest
     #   data as a hash:
     #
@@ -5058,6 +5180,114 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeOpsItemsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_item_filters: [
+    #           {
+    #             key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId
+    #             values: ["OpsItemFilterValue"], # required
+    #             operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] ops_item_filters
+    #   One or more filters to limit the reponse.
+    #
+    #   * Key: CreatedTime
+    #
+    #     Operations: GreaterThan, LessThan
+    #
+    #   * Key: LastModifiedBy
+    #
+    #     Operations: Contains, Equals
+    #
+    #   * Key: LastModifiedTime
+    #
+    #     Operations: GreaterThan, LessThan
+    #
+    #   * Key: Priority
+    #
+    #     Operations: Equals
+    #
+    #   * Key: Source
+    #
+    #     Operations: Contains, Equals
+    #
+    #   * Key: Status
+    #
+    #     Operations: Equals
+    #
+    #   * Key: Title
+    #
+    #     Operations: Contains
+    #
+    #   * Key: OperationalData
+    #
+    #     Operations: Equals
+    #
+    #   * Key: OperationalDataKey
+    #
+    #     Operations: Equals
+    #
+    #   * Key: OperationalDataValue
+    #
+    #     Operations: Equals, Contains
+    #
+    #   * Key: OpsItemId
+    #
+    #     Operations: Equals
+    #
+    #   * Key: ResourceId
+    #
+    #     Operations: Contains
+    #
+    #   * Key: AutomationId
+    #
+    #     Operations: Equals
+    #   @return [Array<Types::OpsItemFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeOpsItemsRequest AWS API Documentation
+    #
+    class DescribeOpsItemsRequest < Struct.new(
+      :ops_item_filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_summaries
+    #   A list of OpsItems.
+    #   @return [Array<Types::OpsItemSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeOpsItemsResponse AWS API Documentation
+    #
+    class DescribeOpsItemsResponse < Struct.new(
+      :next_token,
+      :ops_item_summaries)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeParametersRequest
     #   data as a hash:
     #
@@ -7160,6 +7390,117 @@ module Aws::SSM
       :logging_info,
       :name,
       :description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOpsItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_item_id: "OpsItemId", # required
+    #       }
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem that you want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItemRequest AWS API Documentation
+    #
+    class GetOpsItemRequest < Struct.new(
+      :ops_item_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ops_item
+    #   The OpsItem.
+    #   @return [Types::OpsItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItemResponse AWS API Documentation
+    #
+    class GetOpsItemResponse < Struct.new(
+      :ops_item)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOpsSummaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "OpsFilterKey", # required
+    #             values: ["OpsFilterValue"], # required
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #           },
+    #         ],
+    #         aggregators: [ # required
+    #           {
+    #             aggregator_type: "OpsAggregatorType",
+    #             type_name: "OpsDataTypeName",
+    #             attribute_name: "OpsDataAttributeName",
+    #             values: {
+    #               "OpsAggregatorValueKey" => "OpsAggregatorValue",
+    #             },
+    #             filters: [
+    #               {
+    #                 key: "OpsFilterKey", # required
+    #                 values: ["OpsFilterValue"], # required
+    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #               },
+    #             ],
+    #             aggregators: {
+    #               # recursive OpsAggregatorList
+    #             },
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Optional filters used to scope down the returned OpsItems.
+    #   @return [Array<Types::OpsFilter>]
+    #
+    # @!attribute [rw] aggregators
+    #   Optional aggregators that return counts of OpsItems based on one or
+    #   more expressions.
+    #   @return [Array<Types::OpsAggregator>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsSummaryRequest AWS API Documentation
+    #
+    class GetOpsSummaryRequest < Struct.new(
+      :filters,
+      :aggregators,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   The list of aggregated and filtered OpsItems.
+    #   @return [Array<Types::OpsEntity>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsSummaryResult AWS API Documentation
+    #
+    class GetOpsSummaryResult < Struct.new(
+      :entities,
+      :next_token)
       include Aws::Structure
     end
 
@@ -9880,7 +10221,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #         resource_id: "ResourceId", # required
     #       }
     #
@@ -10853,6 +11194,494 @@ module Aws::SSM
       :notification_arn,
       :notification_events,
       :notification_type)
+      include Aws::Structure
+    end
+
+    # One or more aggregators for viewing counts of OpsItems using different
+    # dimensions such as `Source`, `CreatedTime`, or `Source and
+    # CreatedTime`, to name a few.
+    #
+    # @note When making an API call, you may pass OpsAggregator
+    #   data as a hash:
+    #
+    #       {
+    #         aggregator_type: "OpsAggregatorType",
+    #         type_name: "OpsDataTypeName",
+    #         attribute_name: "OpsDataAttributeName",
+    #         values: {
+    #           "OpsAggregatorValueKey" => "OpsAggregatorValue",
+    #         },
+    #         filters: [
+    #           {
+    #             key: "OpsFilterKey", # required
+    #             values: ["OpsFilterValue"], # required
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #           },
+    #         ],
+    #         aggregators: [
+    #           {
+    #             aggregator_type: "OpsAggregatorType",
+    #             type_name: "OpsDataTypeName",
+    #             attribute_name: "OpsDataAttributeName",
+    #             values: {
+    #               "OpsAggregatorValueKey" => "OpsAggregatorValue",
+    #             },
+    #             filters: [
+    #               {
+    #                 key: "OpsFilterKey", # required
+    #                 values: ["OpsFilterValue"], # required
+    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #               },
+    #             ],
+    #             aggregators: {
+    #               # recursive OpsAggregatorList
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aggregator_type
+    #   Either a Range or Count aggregator for limiting an OpsItem summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The data type name to use for viewing counts of OpsItems.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of an OpsItem attribute on which to limit the count of
+    #   OpsItems.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The aggregator value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] filters
+    #   The aggregator filters.
+    #   @return [Array<Types::OpsFilter>]
+    #
+    # @!attribute [rw] aggregators
+    #   A nested aggregator for viewing counts of OpsItems.
+    #   @return [Array<Types::OpsAggregator>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsAggregator AWS API Documentation
+    #
+    class OpsAggregator < Struct.new(
+      :aggregator_type,
+      :type_name,
+      :attribute_name,
+      :values,
+      :filters,
+      :aggregators)
+      include Aws::Structure
+    end
+
+    # The result of the query.
+    #
+    # @!attribute [rw] id
+    #   The query ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The data returned by the query.
+    #   @return [Hash<String,Types::OpsEntityItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsEntity AWS API Documentation
+    #
+    class OpsEntity < Struct.new(
+      :id,
+      :data)
+      include Aws::Structure
+    end
+
+    # The OpsItem summaries result item.
+    #
+    # @!attribute [rw] content
+    #   The detailed data content for an OpsItem summaries result item.
+    #   @return [Array<Hash<String,String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsEntityItem AWS API Documentation
+    #
+    class OpsEntityItem < Struct.new(
+      :content)
+      include Aws::Structure
+    end
+
+    # A filter for viewing OpsItem summaries.
+    #
+    # @note When making an API call, you may pass OpsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "OpsFilterKey", # required
+    #         values: ["OpsFilterValue"], # required
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The filter value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type of filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsFilter AWS API Documentation
+    #
+    class OpsFilter < Struct.new(
+      :key,
+      :values,
+      :type)
+      include Aws::Structure
+    end
+
+    # Operations engineers and IT professionals use the Systems Manager
+    # OpsItems capability to view, investigate, and remediate operational
+    # issues impacting the performance and health of their AWS resources.
+    # For more information, see [AWS Systems Manager OpsItems][1] in the
+    # *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html
+    #
+    # @!attribute [rw] created_by
+    #   The ARN of the AWS account that created the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the OpsItem was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The OpsItem description.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The ARN of the AWS account that last updated the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the OpsItem was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications
+    #   are sent when this OpsItem is edited or changed.
+    #   @return [Array<Types::OpsItemNotification>]
+    #
+    # @!attribute [rw] priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItems. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #   @return [Array<Types::RelatedOpsItem>]
+    #
+    # @!attribute [rw] status
+    #   The OpsItem status. Status can be `Open`, `In Progress`, or
+    #   `Resolved`. For more information, see [Editing OpsItem Details][1]
+    #   in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of this OpsItem. Each time the OpsItem is edited the
+    #   version number increments by one.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The origin of the OpsItem, such as Amazon EC2 or AWS Systems
+    #   Manager. The impacted resource is a subset of source.
+    #   @return [String]
+    #
+    # @!attribute [rw] operational_data
+    #   Operational data is custom data that provides useful reference
+    #   details about the OpsItem. For example, you can specify log files,
+    #   error strings, license keys, troubleshooting tips, or other relevant
+    #   data. You enter operational data as key-value pairs. The key has a
+    #   maximum length of 128 characters. The value has a maximum size of 20
+    #   KB.
+    #
+    #   This custom data is searchable, but with restrictions. For the
+    #   `Searchable operational data` feature, all users with access to the
+    #   OpsItem Overview page (as provided by the DescribeOpsItems API
+    #   action) can view and search on the specified data. For the `Private
+    #   operational data` feature, the data is only viewable by users who
+    #   have access to the OpsItem (as provided by the GetOpsItem API
+    #   action).
+    #   @return [Hash<String,Types::OpsItemDataValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItem AWS API Documentation
+    #
+    class OpsItem < Struct.new(
+      :created_by,
+      :created_time,
+      :description,
+      :last_modified_by,
+      :last_modified_time,
+      :notifications,
+      :priority,
+      :related_ops_items,
+      :status,
+      :ops_item_id,
+      :version,
+      :title,
+      :source,
+      :operational_data)
+      include Aws::Structure
+    end
+
+    # The OpsItem already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemAlreadyExistsException AWS API Documentation
+    #
+    class OpsItemAlreadyExistsException < Struct.new(
+      :message,
+      :ops_item_id)
+      include Aws::Structure
+    end
+
+    # An object that defines the value of the key and its type in the
+    # OperationalData map.
+    #
+    # @note When making an API call, you may pass OpsItemDataValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "OpsItemDataValueString",
+    #         type: "SearchableString", # accepts SearchableString, String
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value of the OperationalData key.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of key-value pair. Valid types include `SearchableString`
+    #   and `String`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemDataValue AWS API Documentation
+    #
+    class OpsItemDataValue < Struct.new(
+      :value,
+      :type)
+      include Aws::Structure
+    end
+
+    # Describes an OpsCenter filter.
+    #
+    # @note When making an API call, you may pass OpsItemFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId
+    #         values: ["OpsItemFilterValue"], # required
+    #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The filter value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator used by the filter call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemFilter AWS API Documentation
+    #
+    class OpsItemFilter < Struct.new(
+      :key,
+      :values,
+      :operator)
+      include Aws::Structure
+    end
+
+    # A specified parameter argument isn't valid. Verify the available
+    # arguments and try again.
+    #
+    # @!attribute [rw] parameter_names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemInvalidParameterException AWS API Documentation
+    #
+    class OpsItemInvalidParameterException < Struct.new(
+      :parameter_names,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request caused OpsItems to exceed one or more limits. For
+    # information about OpsItem limits, see [What are the resource limits
+    # for OpsItems?][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-learn-more.html#OpsItems-learn-more-limits
+    #
+    # @!attribute [rw] resource_types
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] limit_type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemLimitExceededException AWS API Documentation
+    #
+    class OpsItemLimitExceededException < Struct.new(
+      :resource_types,
+      :limit,
+      :limit_type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified OpsItem ID doesn't exist. Verify the ID and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemNotFoundException AWS API Documentation
+    #
+    class OpsItemNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A notification about the OpsItem.
+    #
+    # @note When making an API call, you may pass OpsItemNotification
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "String",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications
+    #   are sent when this OpsItem is edited or changed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemNotification AWS API Documentation
+    #
+    class OpsItemNotification < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # A count of OpsItems.
+    #
+    # @!attribute [rw] created_by
+    #   The Amazon Resource Name (ARN) of the IAM entity that created the
+    #   OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the OpsItem was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the IAM entity that created the
+    #   OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the OpsItem was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source
+    #   The impacted AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The OpsItem status. Status can be `Open`, `In Progress`, or
+    #   `Resolved`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] operational_data
+    #   Operational data is custom data that provides useful reference
+    #   details about the OpsItem. For example, you can specify log files,
+    #   error strings, license keys, troubleshooting tips, or other relevant
+    #   data. You enter operational data as key-value pairs. The key has a
+    #   maximum length of 128 characters. The value has a maximum size of 20
+    #   KB.
+    #
+    #   This custom data is searchable, but with restrictions. For the
+    #   `Searchable operational data` feature, all users with access to the
+    #   OpsItem Overview page (as provided by the DescribeOpsItems API
+    #   action) can view and search on the specified data. For the `Private
+    #   operational data` feature, the data is only viewable by users who
+    #   have access to the OpsItem (as provided by the GetOpsItem API
+    #   action).
+    #   @return [Hash<String,Types::OpsItemDataValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemSummary AWS API Documentation
+    #
+    class OpsItemSummary < Struct.new(
+      :created_by,
+      :created_time,
+      :last_modified_by,
+      :last_modified_time,
+      :priority,
+      :source,
+      :status,
+      :ops_item_id,
+      :title,
+      :operational_data)
       include Aws::Structure
     end
 
@@ -12485,11 +13314,33 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # An OpsItems that shares something in common with the current OpsItems.
+    # For example, related OpsItems can include OpsItems with similar error
+    # messages, impacted resources, or statuses for the impacted resource.
+    #
+    # @note When making an API call, you may pass RelatedOpsItem
+    #   data as a hash:
+    #
+    #       {
+    #         ops_item_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of an OpsItem related to the current OpsItem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RelatedOpsItem AWS API Documentation
+    #
+    class RelatedOpsItem < Struct.new(
+      :ops_item_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemoveTagsFromResourceRequest
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #         resource_id: "ResourceId", # required
     #         tag_keys: ["TagKey"], # required
     #       }
@@ -15156,6 +16007,119 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRoleResult AWS API Documentation
     #
     class UpdateManagedInstanceRoleResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateOpsItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "OpsItemDescription",
+    #         operational_data: {
+    #           "OpsItemDataKey" => {
+    #             value: "OpsItemDataValueString",
+    #             type: "SearchableString", # accepts SearchableString, String
+    #           },
+    #         },
+    #         operational_data_to_delete: ["String"],
+    #         notifications: [
+    #           {
+    #             arn: "String",
+    #           },
+    #         ],
+    #         priority: 1,
+    #         related_ops_items: [
+    #           {
+    #             ops_item_id: "String", # required
+    #           },
+    #         ],
+    #         status: "Open", # accepts Open, InProgress, Resolved
+    #         ops_item_id: "OpsItemId", # required
+    #         title: "OpsItemTitle",
+    #       }
+    #
+    # @!attribute [rw] description
+    #   Update the information about the OpsItem. Provide enough information
+    #   so that users reading this OpsItem for the first time understand the
+    #   issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] operational_data
+    #   Add new keys or edit existing key-value pairs of the OperationalData
+    #   map in the OpsItem object.
+    #
+    #   Operational data is custom data that provides useful reference
+    #   details about the OpsItem. For example, you can specify log files,
+    #   error strings, license keys, troubleshooting tips, or other relevant
+    #   data. You enter operational data as key-value pairs. The key has a
+    #   maximum length of 128 characters. The value has a maximum size of 20
+    #   KB.
+    #
+    #   This custom data is searchable, but with restrictions. For the
+    #   `Searchable operational data` feature, all users with access to the
+    #   OpsItem Overview page (as provided by the DescribeOpsItems API
+    #   action) can view and search on the specified data. For the `Private
+    #   operational data` feature, the data is only viewable by users who
+    #   have access to the OpsItem (as provided by the GetOpsItem API
+    #   action).
+    #   @return [Hash<String,Types::OpsItemDataValue>]
+    #
+    # @!attribute [rw] operational_data_to_delete
+    #   Keys that you want to remove from the OperationalData map.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications
+    #   are sent when this OpsItem is edited or changed.
+    #   @return [Array<Types::OpsItemNotification>]
+    #
+    # @!attribute [rw] priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItems. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #   @return [Array<Types::RelatedOpsItem>]
+    #
+    # @!attribute [rw] status
+    #   The OpsItem status. Status can be `Open`, `In Progress`, or
+    #   `Resolved`. For more information, see [Editing OpsItem Details][1]
+    #   in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItemRequest AWS API Documentation
+    #
+    class UpdateOpsItemRequest < Struct.new(
+      :description,
+      :operational_data,
+      :operational_data_to_delete,
+      :notifications,
+      :priority,
+      :related_ops_items,
+      :status,
+      :ops_item_id,
+      :title)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItemResponse AWS API Documentation
+    #
+    class UpdateOpsItemResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePatchBaselineRequest
     #   data as a hash:

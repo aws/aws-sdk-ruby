@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2019-06-06)
+------------------
+
+* Feature - This release adds support for encrypting entitlements using Secure Packager and Encoder Key Exchange (SPEKE).
+
 1.8.0 (2019-05-21)
 ------------------
 

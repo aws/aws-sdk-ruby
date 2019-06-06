@@ -93,6 +93,7 @@ module Aws::SES
     DeleteTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTemplateRequest')
     DeleteTemplateResponse = Shapes::StructureShape.new(name: 'DeleteTemplateResponse')
     DeleteVerifiedEmailAddressRequest = Shapes::StructureShape.new(name: 'DeleteVerifiedEmailAddressRequest')
+    DeliveryOptions = Shapes::StructureShape.new(name: 'DeliveryOptions')
     DescribeActiveReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'DescribeActiveReceiptRuleSetRequest')
     DescribeActiveReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'DescribeActiveReceiptRuleSetResponse')
     DescribeConfigurationSetRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationSetRequest')
@@ -155,6 +156,7 @@ module Aws::SES
     IdentityVerificationAttributes = Shapes::StructureShape.new(name: 'IdentityVerificationAttributes')
     InvalidCloudWatchDestinationException = Shapes::StructureShape.new(name: 'InvalidCloudWatchDestinationException')
     InvalidConfigurationSetException = Shapes::StructureShape.new(name: 'InvalidConfigurationSetException')
+    InvalidDeliveryOptionsException = Shapes::StructureShape.new(name: 'InvalidDeliveryOptionsException')
     InvalidFirehoseDestinationException = Shapes::StructureShape.new(name: 'InvalidFirehoseDestinationException')
     InvalidLambdaFunctionException = Shapes::StructureShape.new(name: 'InvalidLambdaFunctionException')
     InvalidPolicyException = Shapes::StructureShape.new(name: 'InvalidPolicyException')
@@ -211,6 +213,8 @@ module Aws::SES
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyNameList = Shapes::ListShape.new(name: 'PolicyNameList')
     ProductionAccessNotGrantedException = Shapes::StructureShape.new(name: 'ProductionAccessNotGrantedException')
+    PutConfigurationSetDeliveryOptionsRequest = Shapes::StructureShape.new(name: 'PutConfigurationSetDeliveryOptionsRequest')
+    PutConfigurationSetDeliveryOptionsResponse = Shapes::StructureShape.new(name: 'PutConfigurationSetDeliveryOptionsResponse')
     PutIdentityPolicyRequest = Shapes::StructureShape.new(name: 'PutIdentityPolicyRequest')
     PutIdentityPolicyResponse = Shapes::StructureShape.new(name: 'PutIdentityPolicyResponse')
     RawMessage = Shapes::StructureShape.new(name: 'RawMessage')
@@ -518,6 +522,9 @@ module Aws::SES
     DeleteVerifiedEmailAddressRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "EmailAddress"))
     DeleteVerifiedEmailAddressRequest.struct_class = Types::DeleteVerifiedEmailAddressRequest
 
+    DeliveryOptions.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
+    DeliveryOptions.struct_class = Types::DeliveryOptions
+
     DescribeActiveReceiptRuleSetRequest.struct_class = Types::DescribeActiveReceiptRuleSetRequest
 
     DescribeActiveReceiptRuleSetResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: ReceiptRuleSetMetadata, location_name: "Metadata"))
@@ -531,6 +538,7 @@ module Aws::SES
     DescribeConfigurationSetResponse.add_member(:configuration_set, Shapes::ShapeRef.new(shape: ConfigurationSet, location_name: "ConfigurationSet"))
     DescribeConfigurationSetResponse.add_member(:event_destinations, Shapes::ShapeRef.new(shape: EventDestinations, location_name: "EventDestinations"))
     DescribeConfigurationSetResponse.add_member(:tracking_options, Shapes::ShapeRef.new(shape: TrackingOptions, location_name: "TrackingOptions"))
+    DescribeConfigurationSetResponse.add_member(:delivery_options, Shapes::ShapeRef.new(shape: DeliveryOptions, location_name: "DeliveryOptions"))
     DescribeConfigurationSetResponse.add_member(:reputation_options, Shapes::ShapeRef.new(shape: ReputationOptions, location_name: "ReputationOptions"))
     DescribeConfigurationSetResponse.struct_class = Types::DescribeConfigurationSetResponse
 
@@ -787,6 +795,12 @@ module Aws::SES
     PolicyMap.value = Shapes::ShapeRef.new(shape: Policy)
 
     PolicyNameList.member = Shapes::ShapeRef.new(shape: PolicyName)
+
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:delivery_options, Shapes::ShapeRef.new(shape: DeliveryOptions, location_name: "DeliveryOptions"))
+    PutConfigurationSetDeliveryOptionsRequest.struct_class = Types::PutConfigurationSetDeliveryOptionsRequest
+
+    PutConfigurationSetDeliveryOptionsResponse.struct_class = Types::PutConfigurationSetDeliveryOptionsResponse
 
     PutIdentityPolicyRequest.add_member(:identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "Identity"))
     PutIdentityPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "PolicyName"))
@@ -1527,6 +1541,16 @@ module Aws::SES
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: ListVerifiedEmailAddressesResponse)
+      end)
+
+      api.add_operation(:put_configuration_set_delivery_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutConfigurationSetDeliveryOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutConfigurationSetDeliveryOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutConfigurationSetDeliveryOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDeliveryOptionsException)
       end)
 
       api.add_operation(:put_identity_policy, Seahorse::Model::Operation.new.tap do |o|

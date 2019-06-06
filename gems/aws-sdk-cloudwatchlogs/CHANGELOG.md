@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-06-06)
+------------------
+
+* Feature - Documentation updates for logs
+
 1.20.0 (2019-05-21)
 ------------------
 

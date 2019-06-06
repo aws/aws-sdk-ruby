@@ -5939,7 +5939,7 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/support
+    # [1]: https://aws.amazon.com/support
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6097,32 +6097,26 @@ module Aws::DynamoDB
     # table.
     #
     # @!attribute [rw] status
-    #   The current state of server-side encryption:
-    #
-    #   * `ENABLING` - Server-side encryption is being enabled.
+    #   Represents the current state of server-side encryption. The only
+    #   supported values are:
     #
     #   * `ENABLED` - Server-side encryption is enabled.
-    #
-    #   * `DISABLING` - Server-side encryption is being disabled.
-    #
-    #   * `DISABLED` - Server-side encryption is disabled.
     #
     #   * `UPDATING` - Server-side encryption is being updated.
     #   @return [String]
     #
     # @!attribute [rw] sse_type
-    #   Server-side encryption type:
-    #
-    #   * `AES256` - Server-side encryption which uses the AES256 algorithm
-    #     (not applicable).
+    #   Server-side encryption type. The only supported value is:
     #
     #   * `KMS` - Server-side encryption which uses AWS Key Management
     #     Service. Key is stored in your account and is managed by AWS KMS
     #     (KMS charges apply).
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_arn
-    #   The KMS master key ARN used for the KMS encryption.
+    #   The KMS customer master key (CMK) ARN used for the KMS encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSEDescription AWS API Documentation
@@ -6146,29 +6140,29 @@ module Aws::DynamoDB
     #       }
     #
     # @!attribute [rw] enabled
-    #   Indicates whether server-side encryption is enabled (true) or
-    #   disabled (false) on the table. If enabled (true), server-side
-    #   encryption type is set to `KMS`. If disabled (false) or not
-    #   specified, server-side encryption is set to AWS owned CMK.
+    #   Indicates whether server-side encryption is done using an AWS
+    #   managed CMK or an AWS owned CMK. If enabled (true), server-side
+    #   encryption type is set to `KMS` and an AWS managed CMK is used (AWS
+    #   KMS charges apply). If disabled (false) or not specified,
+    #   server-side encryption is set to AWS owned CMK.
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_type
-    #   Server-side encryption type:
-    #
-    #   * `AES256` - Server-side encryption which uses the AES256 algorithm
-    #     (not applicable).
+    #   Server-side encryption type. The only supported value is:
     #
     #   * `KMS` - Server-side encryption which uses AWS Key Management
     #     Service. Key is stored in your account and is managed by AWS KMS
     #     (KMS charges apply).
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The KMS Master Key (CMK) which should be used for the KMS
+    #   The KMS Customer Master Key (CMK) which should be used for the KMS
     #   encryption. To specify a CMK, use its key ID, Amazon Resource Name
     #   (ARN), alias name, or alias ARN. Note that you should only provide
-    #   this parameter if the key is different from the default DynamoDB KMS
-    #   Master Key alias/aws/dynamodb.
+    #   this parameter if the key is different from the default DynamoDB
+    #   Customer Master Key alias/aws/dynamodb.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSESpecification AWS API Documentation
@@ -7565,9 +7559,9 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # The entire transaction request was rejected.
+    # The entire transaction request was canceled.
     #
-    # DynamoDB rejects a `TransactWriteItems` request under the following
+    # DynamoDB cancels a `TransactWriteItems` request under the following
     # circumstances:
     #
     # * A condition in one of the condition expressions is not met.
@@ -7587,7 +7581,7 @@ module Aws::DynamoDB
     #
     # * There is a user error, such as an invalid data format.
     #
-    # DynamoDB rejects a `TransactGetItems` request under the following
+    # DynamoDB cancels a `TransactGetItems` request under the following
     # circumstances:
     #
     # * There is an ongoing `TransactGetItems` operation that conflicts with
@@ -7602,6 +7596,122 @@ module Aws::DynamoDB
     #   completed.
     #
     # * There is a user error, such as an invalid data format.
+    #
+    # <note markdown="1"> If using Java, DynamoDB lists the cancellation reasons on the
+    # `CancellationReasons` property. This property is not set for other
+    # languages. Transaction cancellation reasons are ordered in the order
+    # of requested items, if an item has no error it will have `NONE` code
+    # and `Null` message.
+    #
+    #  </note>
+    #
+    # Cancellation reason codes and possible error messages:
+    #
+    # * No Errors:
+    #
+    #   * Code: `NONE`
+    #
+    #   * Message: `null`
+    #
+    # * Conditional Check Failed:
+    #
+    #   * Code: `ConditionalCheckFailed`
+    #
+    #   * Message: The conditional request failed.
+    #
+    # * Item Collection Size Limit Exceeded:
+    #
+    #   * Code: `ItemCollectionSizeLimitExceeded`
+    #
+    #   * Message: Collection size exceeded.
+    #
+    # * Transaction Conflict:
+    #
+    #   * Code: `TransactionConflict`
+    #
+    #   * Message: Transaction is ongoing for the item.
+    #
+    # * Provisioned Throughput Exceeded:
+    #
+    #   * Code: `ProvisionedThroughputExceeded`
+    #
+    #   * Messages:
+    #
+    #     * The level of configured provisioned throughput for the table was
+    #       exceeded. Consider increasing your provisioning level with the
+    #       UpdateTable API.
+    #
+    #       <note markdown="1"> This Message is received when provisioned throughput is exceeded
+    #       is on a provisioned DynamoDB table.
+    #
+    #        </note>
+    #
+    #     * The level of configured provisioned throughput for one or more
+    #       global secondary indexes of the table was exceeded. Consider
+    #       increasing your provisioning level for the under-provisioned
+    #       global secondary indexes with the UpdateTable API.
+    #
+    #       <note markdown="1"> This message is returned when provisioned throughput is exceeded
+    #       is on a provisioned GSI.
+    #
+    #        </note>
+    #
+    # * Throttling Error:
+    #
+    #   * Code: `ThrottlingError`
+    #
+    #   * Messages:
+    #
+    #     * Throughput exceeds the current capacity of your table or index.
+    #       DynamoDB is automatically scaling your table or index so please
+    #       try again shortly. If exceptions persist, check if you have a
+    #       hot key:
+    #       https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.
+    #
+    #       <note markdown="1"> This message is returned when writes get throttled on an
+    #       On-Demand table as DynamoDB is automatically scaling the table.
+    #
+    #        </note>
+    #
+    #     * Throughput exceeds the current capacity for one or more global
+    #       secondary indexes. DynamoDB is automatically scaling your index
+    #       so please try again shortly.
+    #
+    #       <note markdown="1"> This message is returned when when writes get throttled on an
+    #       On-Demand GSI as DynamoDB is automatically scaling the GSI.
+    #
+    #        </note>
+    #
+    # * Validation Error:
+    #
+    #   * Code: `ValidationError`
+    #
+    #   * Messages:
+    #
+    #     * One or more parameter values were invalid.
+    #
+    #     * The update expression attempted to update the secondary index
+    #       key beyond allowed size limits.
+    #
+    #     * The update expression attempted to update the secondary index
+    #       key to unsupported type.
+    #
+    #     * An operand in the update expression has an incorrect data type.
+    #
+    #     * Item size to update has exceeded the maximum allowed size.
+    #
+    #     * Number overflow. Attempting to store a number with magnitude
+    #       larger than supported range.
+    #
+    #     * Type mismatch for attribute to update.
+    #
+    #     * Nesting Levels have exceeded supported limits.
+    #
+    #     * The document path provided in the update expression is invalid
+    #       for update.
+    #
+    #     * The provided expression refers to an attribute that does not
+    #       exist in the item.
     #
     # @!attribute [rw] message
     #   @return [String]

@@ -1046,6 +1046,11 @@ module Aws::CloudWatchLogs
     #   all the matched log events in the first log stream are searched
     #   first, then those in the next log stream, and so on. The default is
     #   false.
+    #
+    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
+    #   ignored and the value will be assumed to be true. The response from
+    #   this operation will always interleave events from multiple log
+    #   streams within a log group.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEventsRequest AWS API Documentation
@@ -1321,8 +1326,12 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] status
     #   The status of the most recent running of the query. Possible values
-    #   are `Cancelled`, `Complete`, `Failed`, `Running`, `Scheduled`, and
-    #   `Unknown`.
+    #   are `Cancelled`, `Complete`, `Failed`, `Running`, `Scheduled`,
+    #   `Timeout`, and `Unknown`.
+    #
+    #   Queries time out after 15 minutes of execution. To avoid having your
+    #   queries time out, reduce the time range being searched, or partition
+    #   your query into a number of queries.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsResponse AWS API Documentation
@@ -1511,6 +1520,11 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] stored_bytes
     #   The number of bytes stored.
+    #
+    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
+    #   deprecated for log streams, and will be reported as zero. This
+    #   change applies only to log streams. The `storedBytes` parameter for
+    #   log groups is not affected.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogStream AWS API Documentation
@@ -1610,7 +1624,7 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # Indicates how to transform ingested log eventsto metric data in a
+    # Indicates how to transform ingested log events to metric data in a
     # CloudWatch metric.
     #
     # @note When making an API call, you may pass MetricTransformation
@@ -1867,7 +1881,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] policy_document
     #   Details of the new policy, including the identity of the principal
     #   that is enabled to put logs to this account. This is formatted as a
-    #   JSON string.
+    #   JSON string. This parameter is required.
     #
     #   The following example creates a resource policy enabling the Route
     #   53 service to put DNS query logs in to the specified log group.

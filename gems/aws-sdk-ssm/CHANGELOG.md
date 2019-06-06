@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2019-06-06)
+------------------
+
+* Feature - OpsCenter is a new Systems Manager capability that allows you to view, diagnose, and remediate, operational issues, aka OpsItems, related to various AWS resources by bringing together contextually relevant investigation information. New APIs to create, update, describe, and get OpsItems as well as OpsItems summary API.
+
 1.48.0 (2019-05-29)
 ------------------
 

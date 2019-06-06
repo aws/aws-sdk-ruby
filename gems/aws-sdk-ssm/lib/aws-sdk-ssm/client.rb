@@ -327,7 +327,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #     resource_id: "ResourceId", # required
     #     tags: [ # required
     #       {
@@ -1044,6 +1044,123 @@ module Aws::SSM
     # @param [Hash] params ({})
     def create_maintenance_window(params = {}, options = {})
       req = build_request(:create_maintenance_window, params)
+      req.send_request(options)
+    end
+
+    # Creates a new OpsItem. You must have permission in AWS Identity and
+    # Access Management (IAM) to create a new OpsItem. For more information,
+    # see [Getting Started with OpsItems][1] in the *AWS Systems Manager
+    # User Guide*.
+    #
+    # Operations engineers and IT professionals use the Systems Manager
+    # OpsItems capability to view, investigate, and remediate operational
+    # issues impacting the performance and health of their AWS resources.
+    # For more information, see [AWS Systems Manager OpsItems][2] in the
+    # *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html
+    #
+    # @option params [required, String] :description
+    #   Information about the OpsItem.
+    #
+    # @option params [Hash<String,Types::OpsItemDataValue>] :operational_data
+    #   Operational data is custom data that provides useful reference details
+    #   about the OpsItem. For example, you can specify log files, error
+    #   strings, license keys, troubleshooting tips, or other relevant data.
+    #   You enter operational data as key-value pairs. The key has a maximum
+    #   length of 128 characters. The value has a maximum size of 20 KB.
+    #
+    #   This custom data is searchable, but with restrictions. For the
+    #   `Searchable operational data` feature, all users with access to the
+    #   OpsItem Overview page (as provided by the DescribeOpsItems API action)
+    #   can view and search on the specified data. For the `Private
+    #   operational data` feature, the data is only viewable by users who have
+    #   access to the OpsItem (as provided by the GetOpsItem API action).
+    #
+    # @option params [Array<Types::OpsItemNotification>] :notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications are
+    #   sent when this OpsItem is edited or changed.
+    #
+    # @option params [Integer] :priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #
+    # @option params [Array<Types::RelatedOpsItem>] :related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItems. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #
+    # @option params [required, String] :source
+    #   The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager.
+    #
+    # @option params [required, String] :title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag an OpsItem to identify
+    #   the AWS resource or the type of issue. In this case, you could specify
+    #   the following key name/value pairs:
+    #
+    #   * `Key=source,Value=EC2-instance`
+    #
+    #   * `Key=status,Value=stopped`
+    #
+    #   <note markdown="1"> To add tags to an existing OpsItem, use the AddTagsToResource action.
+    #
+    #    </note>
+    #
+    # @return [Types::CreateOpsItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOpsItemResponse#ops_item_id #ops_item_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ops_item({
+    #     description: "OpsItemDescription", # required
+    #     operational_data: {
+    #       "OpsItemDataKey" => {
+    #         value: "OpsItemDataValueString",
+    #         type: "SearchableString", # accepts SearchableString, String
+    #       },
+    #     },
+    #     notifications: [
+    #       {
+    #         arn: "String",
+    #       },
+    #     ],
+    #     priority: 1,
+    #     related_ops_items: [
+    #       {
+    #         ops_item_id: "String", # required
+    #       },
+    #     ],
+    #     source: "OpsItemSource", # required
+    #     title: "OpsItemTitle", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ops_item_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItem AWS API Documentation
+    #
+    # @overload create_ops_item(params = {})
+    # @param [Hash] params ({})
+    def create_ops_item(params = {}, options = {})
+      req = build_request(:create_ops_item, params)
       req.send_request(options)
     end
 
@@ -3330,6 +3447,131 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Query a set of OpsItems. You must have permission in AWS Identity and
+    # Access Management (IAM) to query a list of OpsItems. For more
+    # information, see [Getting Started with OpsItems][1] in the *AWS
+    # Systems Manager User Guide*.
+    #
+    # Operations engineers and IT professionals use the Systems Manager
+    # OpsItems capability to view, investigate, and remediate operational
+    # issues impacting the performance and health of their AWS resources.
+    # For more information, see [AWS Systems Manager OpsItems][2] in the
+    # *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html
+    #
+    # @option params [Array<Types::OpsItemFilter>] :ops_item_filters
+    #   One or more filters to limit the reponse.
+    #
+    #   * Key: CreatedTime
+    #
+    #     Operations: GreaterThan, LessThan
+    #
+    #   * Key: LastModifiedBy
+    #
+    #     Operations: Contains, Equals
+    #
+    #   * Key: LastModifiedTime
+    #
+    #     Operations: GreaterThan, LessThan
+    #
+    #   * Key: Priority
+    #
+    #     Operations: Equals
+    #
+    #   * Key: Source
+    #
+    #     Operations: Contains, Equals
+    #
+    #   * Key: Status
+    #
+    #     Operations: Equals
+    #
+    #   * Key: Title
+    #
+    #     Operations: Contains
+    #
+    #   * Key: OperationalData
+    #
+    #     Operations: Equals
+    #
+    #   * Key: OperationalDataKey
+    #
+    #     Operations: Equals
+    #
+    #   * Key: OperationalDataValue
+    #
+    #     Operations: Equals, Contains
+    #
+    #   * Key: OpsItemId
+    #
+    #     Operations: Equals
+    #
+    #   * Key: ResourceId
+    #
+    #     Operations: Contains
+    #
+    #   * Key: AutomationId
+    #
+    #     Operations: Equals
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::DescribeOpsItemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOpsItemsResponse#next_token #next_token} => String
+    #   * {Types::DescribeOpsItemsResponse#ops_item_summaries #ops_item_summaries} => Array&lt;Types::OpsItemSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ops_items({
+    #     ops_item_filters: [
+    #       {
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId
+    #         values: ["OpsItemFilterValue"], # required
+    #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.ops_item_summaries #=> Array
+    #   resp.ops_item_summaries[0].created_by #=> String
+    #   resp.ops_item_summaries[0].created_time #=> Time
+    #   resp.ops_item_summaries[0].last_modified_by #=> String
+    #   resp.ops_item_summaries[0].last_modified_time #=> Time
+    #   resp.ops_item_summaries[0].priority #=> Integer
+    #   resp.ops_item_summaries[0].source #=> String
+    #   resp.ops_item_summaries[0].status #=> String, one of "Open", "InProgress", "Resolved"
+    #   resp.ops_item_summaries[0].ops_item_id #=> String
+    #   resp.ops_item_summaries[0].title #=> String
+    #   resp.ops_item_summaries[0].operational_data #=> Hash
+    #   resp.ops_item_summaries[0].operational_data["OpsItemDataKey"].value #=> String
+    #   resp.ops_item_summaries[0].operational_data["OpsItemDataKey"].type #=> String, one of "SearchableString", "String"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeOpsItems AWS API Documentation
+    #
+    # @overload describe_ops_items(params = {})
+    # @param [Hash] params ({})
+    def describe_ops_items(params = {}, options = {})
+      req = build_request(:describe_ops_items, params)
+      req.send_request(options)
+    end
+
     # Get information about a parameter.
     #
     # Request results are returned on a best-effort basis. If you specify
@@ -4526,6 +4768,141 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_maintenance_window_task(params = {}, options = {})
       req = build_request(:get_maintenance_window_task, params)
+      req.send_request(options)
+    end
+
+    # Get information about an OpsItem by using the ID. You must have
+    # permission in AWS Identity and Access Management (IAM) to view
+    # information about an OpsItem. For more information, see [Getting
+    # Started with OpsItems][1] in the *AWS Systems Manager User Guide*.
+    #
+    # Operations engineers and IT professionals use the Systems Manager
+    # OpsItems capability to view, investigate, and remediate operational
+    # issues impacting the performance and health of their AWS resources.
+    # For more information, see [AWS Systems Manager OpsItems][2] in the
+    # *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html
+    #
+    # @option params [required, String] :ops_item_id
+    #   The ID of the OpsItem that you want to get.
+    #
+    # @return [Types::GetOpsItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOpsItemResponse#ops_item #ops_item} => Types::OpsItem
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ops_item({
+    #     ops_item_id: "OpsItemId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ops_item.created_by #=> String
+    #   resp.ops_item.created_time #=> Time
+    #   resp.ops_item.description #=> String
+    #   resp.ops_item.last_modified_by #=> String
+    #   resp.ops_item.last_modified_time #=> Time
+    #   resp.ops_item.notifications #=> Array
+    #   resp.ops_item.notifications[0].arn #=> String
+    #   resp.ops_item.priority #=> Integer
+    #   resp.ops_item.related_ops_items #=> Array
+    #   resp.ops_item.related_ops_items[0].ops_item_id #=> String
+    #   resp.ops_item.status #=> String, one of "Open", "InProgress", "Resolved"
+    #   resp.ops_item.ops_item_id #=> String
+    #   resp.ops_item.version #=> String
+    #   resp.ops_item.title #=> String
+    #   resp.ops_item.source #=> String
+    #   resp.ops_item.operational_data #=> Hash
+    #   resp.ops_item.operational_data["OpsItemDataKey"].value #=> String
+    #   resp.ops_item.operational_data["OpsItemDataKey"].type #=> String, one of "SearchableString", "String"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItem AWS API Documentation
+    #
+    # @overload get_ops_item(params = {})
+    # @param [Hash] params ({})
+    def get_ops_item(params = {}, options = {})
+      req = build_request(:get_ops_item, params)
+      req.send_request(options)
+    end
+
+    # View a summary of OpsItems based on specified filters and aggregators.
+    #
+    # @option params [Array<Types::OpsFilter>] :filters
+    #   Optional filters used to scope down the returned OpsItems.
+    #
+    # @option params [required, Array<Types::OpsAggregator>] :aggregators
+    #   Optional aggregators that return counts of OpsItems based on one or
+    #   more expressions.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @return [Types::GetOpsSummaryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOpsSummaryResult#entities #entities} => Array&lt;Types::OpsEntity&gt;
+    #   * {Types::GetOpsSummaryResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ops_summary({
+    #     filters: [
+    #       {
+    #         key: "OpsFilterKey", # required
+    #         values: ["OpsFilterValue"], # required
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #       },
+    #     ],
+    #     aggregators: [ # required
+    #       {
+    #         aggregator_type: "OpsAggregatorType",
+    #         type_name: "OpsDataTypeName",
+    #         attribute_name: "OpsDataAttributeName",
+    #         values: {
+    #           "OpsAggregatorValueKey" => "OpsAggregatorValue",
+    #         },
+    #         filters: [
+    #           {
+    #             key: "OpsFilterKey", # required
+    #             values: ["OpsFilterValue"], # required
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #           },
+    #         ],
+    #         aggregators: {
+    #           # recursive OpsAggregatorList
+    #         },
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].id #=> String
+    #   resp.entities[0].data #=> Hash
+    #   resp.entities[0].data["OpsEntityItemKey"].content #=> Array
+    #   resp.entities[0].data["OpsEntityItemKey"].content[0] #=> Hash
+    #   resp.entities[0].data["OpsEntityItemKey"].content[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsSummary AWS API Documentation
+    #
+    # @overload get_ops_summary(params = {})
+    # @param [Hash] params ({})
+    def get_ops_summary(params = {}, options = {})
+      req = build_request(:get_ops_summary, params)
       req.send_request(options)
     end
 
@@ -5790,7 +6167,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #     resource_id: "ResourceId", # required
     #   })
     #
@@ -6584,7 +6961,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
@@ -8055,6 +8432,115 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Edit or change an OpsItem. You must have permission in AWS Identity
+    # and Access Management (IAM) to update an OpsItem. For more
+    # information, see [Getting Started with OpsItems][1] in the *AWS
+    # Systems Manager User Guide*.
+    #
+    # Operations engineers and IT professionals use the Systems Manager
+    # OpsItems capability to view, investigate, and remediate operational
+    # issues impacting the performance and health of their AWS resources.
+    # For more information, see [AWS Systems Manager OpsItems][2] in the
+    # *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html
+    #
+    # @option params [String] :description
+    #   Update the information about the OpsItem. Provide enough information
+    #   so that users reading this OpsItem for the first time understand the
+    #   issue.
+    #
+    # @option params [Hash<String,Types::OpsItemDataValue>] :operational_data
+    #   Add new keys or edit existing key-value pairs of the OperationalData
+    #   map in the OpsItem object.
+    #
+    #   Operational data is custom data that provides useful reference details
+    #   about the OpsItem. For example, you can specify log files, error
+    #   strings, license keys, troubleshooting tips, or other relevant data.
+    #   You enter operational data as key-value pairs. The key has a maximum
+    #   length of 128 characters. The value has a maximum size of 20 KB.
+    #
+    #   This custom data is searchable, but with restrictions. For the
+    #   `Searchable operational data` feature, all users with access to the
+    #   OpsItem Overview page (as provided by the DescribeOpsItems API action)
+    #   can view and search on the specified data. For the `Private
+    #   operational data` feature, the data is only viewable by users who have
+    #   access to the OpsItem (as provided by the GetOpsItem API action).
+    #
+    # @option params [Array<String>] :operational_data_to_delete
+    #   Keys that you want to remove from the OperationalData map.
+    #
+    # @option params [Array<Types::OpsItemNotification>] :notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications are
+    #   sent when this OpsItem is edited or changed.
+    #
+    # @option params [Integer] :priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #
+    # @option params [Array<Types::RelatedOpsItem>] :related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItems. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #
+    # @option params [String] :status
+    #   The OpsItem status. Status can be `Open`, `In Progress`, or
+    #   `Resolved`. For more information, see [Editing OpsItem Details][1] in
+    #   the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html
+    #
+    # @option params [required, String] :ops_item_id
+    #   The ID of the OpsItem.
+    #
+    # @option params [String] :title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ops_item({
+    #     description: "OpsItemDescription",
+    #     operational_data: {
+    #       "OpsItemDataKey" => {
+    #         value: "OpsItemDataValueString",
+    #         type: "SearchableString", # accepts SearchableString, String
+    #       },
+    #     },
+    #     operational_data_to_delete: ["String"],
+    #     notifications: [
+    #       {
+    #         arn: "String",
+    #       },
+    #     ],
+    #     priority: 1,
+    #     related_ops_items: [
+    #       {
+    #         ops_item_id: "String", # required
+    #       },
+    #     ],
+    #     status: "Open", # accepts Open, InProgress, Resolved
+    #     ops_item_id: "OpsItemId", # required
+    #     title: "OpsItemTitle",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItem AWS API Documentation
+    #
+    # @overload update_ops_item(params = {})
+    # @param [Hash] params ({})
+    def update_ops_item(params = {}, options = {})
+      req = build_request(:update_ops_item, params)
+      req.send_request(options)
+    end
+
     # Modifies an existing patch baseline. Fields not specified in the
     # request are left unchanged.
     #
@@ -8298,7 +8784,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

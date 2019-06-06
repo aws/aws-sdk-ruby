@@ -271,10 +271,10 @@ module Aws::Organizations
     #
     #   The user who calls the API for an invitation to join must have the
     #   `organizations:AcceptHandshake` permission. If you enabled all
-    #   features in the organization, then the user must also have the
-    #   `iam:CreateServiceLinkedRole` permission so that Organizations can
-    #   create the required service-linked role named
-    #   *AWSServiceRoleForOrganizations*. For more information, see [AWS
+    #   features in the organization, the user must also have the
+    #   `iam:CreateServiceLinkedRole` permission so that AWS Organizations
+    #   can create the required service-linked role named
+    #   `AWSServiceRoleForOrganizations`. For more information, see [AWS
     #   Organizations and Service-Linked Roles][1] in the *AWS Organizations
     #   User Guide*.
     #
@@ -282,13 +282,13 @@ module Aws::Organizations
     #   principal from the master account.
     #
     #   For more information about invitations, see [Inviting an AWS Account
-    #   to Join Your Organization][2] in the *AWS Organizations User Guide*.
+    #   to Join Your Organization][2] in the *AWS Organizations User Guide.*
     #   For more information about requests to enable all features in the
     #   organization, see [Enabling All Features in Your Organization][3] in
-    #   the *AWS Organizations User Guide*.
+    #   the *AWS Organizations User Guide.*
     #
     # After you accept a handshake, it continues to appear in the results of
-    # relevant APIs for only 30 days. After that it is deleted.
+    # relevant APIs for only 30 days. After that, it's deleted.
     #
     #
     #
@@ -406,29 +406,28 @@ module Aws::Organizations
     #   influence for a policy depends on what you attach the policy to:
     #
     #   * If you attach an SCP to a root, it affects all accounts in the
-    #     organization.
+    #     organization
     #
     #   * If you attach an SCP to an OU, it affects all accounts in that OU
-    #     and in any child OUs.
+    #     and in any child OUs
     #
-    #   * If you attach the policy directly to an account, then it affects
-    #     only that account.
+    #   * If you attach the policy directly to an account, it affects only
+    #     that account
     #
     #   SCPs are JSON policies that specify the maximum permissions for an
     #   organization or organizational unit (OU). When you attach one SCP to
     #   a higher level root or OU, and you also attach a different SCP to a
     #   child OU or to an account, the child policy can further restrict
     #   only the permissions that pass through the parent filter and are
-    #   available to the child. An SCP that is attached to a child cannot
-    #   grant a permission that is not already granted by the parent. For
+    #   available to the child. An SCP that is attached to a child can't
+    #   grant a permission that the paren't hasn't already granted. For
     #   example, imagine that the parent SCP allows permissions A, B, C, D,
     #   and E. The child SCP allows C, D, E, F, and G. The result is that
     #   the accounts affected by the child SCP are allowed to use only C, D,
-    #   and E. They cannot use A or B because they were filtered out by the
-    #   child OU. They also cannot use F and G because they were filtered
-    #   out by the parent OU. They cannot be granted back by the child SCP;
-    #   child SCPs can only filter the permissions they receive from the
-    #   parent SCP.
+    #   and E. They can't use A or B because the child OU filtered them
+    #   out. They also can't use F and G because the parent OU filtered
+    #   them out. They can't be granted back by the child SCP; child SCPs
+    #   can only filter the permissions they receive from the parent SCP.
     #
     #   AWS Organizations attaches a default SCP named `"FullAWSAccess` to
     #   every root, OU, and account. This default SCP allows all services
@@ -437,9 +436,9 @@ module Aws::Organizations
     #   policy, you must replace it with a policy that specifies the
     #   permissions that you want to allow in that OU or account.
     #
-    #   For more information about how Organizations policies permissions
-    #   work, see [Using Service Control Policies][1] in the *AWS
-    #   Organizations User Guide*.
+    #   For more information about how AWS Organizations policies
+    #   permissions work, see [Using Service Control Policies][1] in the
+    #   *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
     # account.
@@ -528,7 +527,7 @@ module Aws::Organizations
     # recipient can no longer respond to that handshake.
     #
     # After you cancel a handshake, it continues to appear in the results of
-    # relevant APIs for only 30 days. After that it is deleted.
+    # relevant APIs for only 30 days. After that, it's deleted.
     #
     # @option params [required, String] :handshake_id
     #   The unique identifier (ID) of the handshake that you want to cancel.
@@ -649,7 +648,7 @@ module Aws::Organizations
     #   provide as a parameter to the DescribeCreateAccountStatus operation.
     #
     # * Check the AWS CloudTrail log for the `CreateAccountResult` event.
-    #   For information on using AWS CloudTrail with Organizations, see
+    #   For information on using AWS CloudTrail with AWS Organizations, see
     #   [Monitoring the Activity in Your Organization][1] in the *AWS
     #   Organizations User Guide.*
     #
@@ -692,7 +691,7 @@ module Aws::Organizations
     #   because your organization is still initializing, wait one hour and
     #   then try again. If the error persists, contact [AWS Support][5].
     #
-    # * Using CreateAccount to create multiple temporary accounts isn't
+    # * Using `CreateAccount` to create multiple temporary accounts isn't
     #   recommended. You can only close an account from the Billing and Cost
     #   Management Console, and you must be signed in as the root user. For
     #   information on the requirements and process for closing an account,
@@ -746,7 +745,7 @@ module Aws::Organizations
     #   account, see [Accessing and Administering the Member Accounts in Your
     #   Organization][1] in the *AWS Organizations User Guide*, and steps 2
     #   and 3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
-    #   Roles][2] in the *IAM User Guide*.
+    #   Roles][2] in the *IAM User Guide.*
     #
     #   The [regex pattern][3] that is used to validate this parameter is a
     #   string of characters that can consist of uppercase letters, lowercase
@@ -831,7 +830,7 @@ module Aws::Organizations
 
     # This action is available if all of the following are true:
     #
-    # * You are authorized to create accounts in the AWS GovCloud (US)
+    # * You're authorized to create accounts in the AWS GovCloud (US)
     #   Region. For more information on the AWS GovCloud (US) Region, see
     #   the [ *AWS GovCloud User Guide*.][1]
     #
@@ -845,7 +844,7 @@ module Aws::Organizations
     #   Organizations creates the required service-linked role named
     #   `AWSServiceRoleForOrganizations`. For more information, see [AWS
     #   Organizations and Service-Linked Roles][2] in the *AWS Organizations
-    #   User Guide*.
+    #   User Guide.*
     #
     # AWS automatically enables AWS CloudTrail for AWS GovCloud (US)
     # accounts, but you should also do the following:
@@ -1044,7 +1043,7 @@ module Aws::Organizations
     end
 
     # Creates an AWS organization. The account whose user is calling the
-    # CreateOrganization operation automatically becomes the [master
+    # `CreateOrganization` operation automatically becomes the [master
     # account][1] of the new organization.
     #
     # This operation must be called using credentials from the account that
@@ -1056,8 +1055,8 @@ module Aws::Organizations
     # control policies automatically enabled in the root. If you instead
     # choose to create the organization supporting only the consolidated
     # billing features by setting the `FeatureSet` parameter to
-    # `CONSOLIDATED_BILLING"`, then no policy types are enabled by default
-    # and you cannot use organization policies.
+    # `CONSOLIDATED_BILLING"`, no policy types are enabled by default, and
+    # you can't use organization policies.
     #
     #
     #
@@ -1067,19 +1066,19 @@ module Aws::Organizations
     #   Specifies the feature set supported by the new organization. Each
     #   feature set supports different levels of functionality.
     #
-    #   * *CONSOLIDATED\_BILLING*\: All member accounts have their bills
+    #   * `CONSOLIDATED_BILLING`\: All member accounts have their bills
     #     consolidated to and paid by the master account. For more
     #     information, see [Consolidated billing][1] in the *AWS Organizations
-    #     User Guide*.
+    #     User Guide.*
     #
     #     The consolidated billing feature subset isn't available for
     #     organizations in the AWS GovCloud (US) Region.
     #
-    #   * *ALL*\: In addition to all the features supported by the
+    #   * `ALL`\: In addition to all the features supported by the
     #     consolidated billing feature set, the master account can also apply
     #     any type of policy to any member account in the organization. For
     #     more information, see [All features][2] in the *AWS Organizations
-    #     User Guide*.
+    #     User Guide.*
     #
     #
     #
@@ -1176,7 +1175,7 @@ module Aws::Organizations
     # is five.
     #
     # For more information about OUs, see [Managing Organizational Units][1]
-    # in the *AWS Organizations User Guide*.
+    # in the *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
     # account.
@@ -1186,8 +1185,8 @@ module Aws::Organizations
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html
     #
     # @option params [required, String] :parent_id
-    #   The unique identifier (ID) of the parent root or OU in which you want
-    #   to create the new OU.
+    #   The unique identifier (ID) of the parent root or OU that you want to
+    #   create the new OU in.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -1271,7 +1270,7 @@ module Aws::Organizations
     #   text that specifies the permissions that admins in attached accounts
     #   can delegate to their users, groups, and roles. For more information
     #   about the SCP syntax, see [Service Control Policy Syntax][2] in the
-    #   *AWS Organizations User Guide*.
+    #   *AWS Organizations User Guide.*
     #
     #
     #
@@ -1365,10 +1364,10 @@ module Aws::Organizations
     # This operation can be called only from the account that received the
     # handshake. The originator of the handshake can use CancelHandshake
     # instead. The originator can't reactivate a declined request, but can
-    # re-initiate the process with a new handshake request.
+    # reinitiate the process with a new handshake request.
     #
     # After you decline a handshake, it continues to appear in the results
-    # of relevant APIs for only 30 days. After that it is deleted.
+    # of relevant APIs for only 30 days. After that, it's deleted.
     #
     # @option params [required, String] :handshake_id
     #   The unique identifier (ID) of the handshake that you want to decline.
@@ -1581,7 +1580,7 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Retrieves Organizations-related information about the specified
+    # Retrieves AWS Organizations-related information about the specified
     # account.
     #
     # This operation can be called only from the organization's master
@@ -1720,9 +1719,9 @@ module Aws::Organizations
     # handshake ID comes from the response to the original
     # InviteAccountToOrganization operation that generated the handshake.
     #
-    # You can access handshakes that are ACCEPTED, DECLINED, or CANCELED for
-    # only 30 days after they change to that state. They are then deleted
-    # and no longer accessible.
+    # You can access handshakes that are `ACCEPTED`, `DECLINED`, or
+    # `CANCELED` for only 30 days after they change to that state. They're
+    # then deleted and no longer accessible.
     #
     # This operation can be called from any account in the organization.
     #
@@ -1832,8 +1831,8 @@ module Aws::Organizations
     #
     # This operation can be called from any account in the organization.
     #
-    # <note markdown="1"> Even if a policy type is shown as available in the organization, it
-    # can be disabled separately at the root level with DisablePolicyType.
+    # <note markdown="1"> Even if a policy type is shown as available in the organization, you
+    # can disable it separately at the root level with DisablePolicyType.
     # Use ListRoots to see the status of policy types for a specified root.
     #
     #  </note>
@@ -2027,13 +2026,13 @@ module Aws::Organizations
     #
     # **Note:** Every root, OU, and account must have at least one SCP
     # attached. If you want to replace the default `FullAWSAccess` policy
-    # with one that limits the permissions that can be delegated, then you
-    # must attach the replacement policy before you can remove the default
-    # one. This is the authorization strategy of [whitelisting][1]. If you
+    # with one that limits the permissions that can be delegated, you must
+    # attach the replacement policy before you can remove the default one.
+    # This is the authorization strategy of [whitelisting][1]. If you
     # instead attach a second SCP and leave the `FullAWSAccess` SCP still
     # attached, and specify `"Effect": "Deny"` in the second SCP to override
     # the `"Effect": "Allow"` in the `FullAWSAccess` policy (or any other
-    # attached SCP), then you are using the authorization strategy of
+    # attached SCP), you're using the authorization strategy of
     # [blacklisting][2].
     #
     # This operation can be called only from the organization's master
@@ -2056,8 +2055,8 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :target_id
-    #   The unique identifier (ID) of the root, OU, or account from which you
-    #   want to detach the policy. You can get the ID from the ListRoots,
+    #   The unique identifier (ID) of the root, OU, or account that you want
+    #   to detach the policy from. You can get the ID from the ListRoots,
     #   ListOrganizationalUnitsForParent, or ListAccounts operations.
     #
     #   The [regex pattern][1] for a target ID string requires one of the
@@ -2132,7 +2131,7 @@ module Aws::Organizations
     # For more information about integrating other services with AWS
     # Organizations, including the list of services that work with
     # Organizations, see [Integrating AWS Organizations with Other AWS
-    # Services][2] in the *AWS Organizations User Guide*.
+    # Services][2] in the *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2264,7 +2263,7 @@ module Aws::Organizations
     #
     # For more information about enabling services to integrate with AWS
     # Organizations, see [Integrating AWS Organizations with Other AWS
-    # Services][2] in the *AWS Organizations User Guide*.
+    # Services][2] in the *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
     # account and only if the organization has [enabled all features][3].
@@ -2303,7 +2302,7 @@ module Aws::Organizations
     # access only to consolidated billing, and you can't use any of the
     # advanced account administration features that AWS Organizations
     # supports. For more information, see [Enabling All Features in Your
-    # Organization][1] in the *AWS Organizations User Guide*.
+    # Organization][1] in the *AWS Organizations User Guide.*
     #
     # This operation is required only for organizations that were created
     # explicitly with only the consolidated billing features enabled.
@@ -2484,24 +2483,24 @@ module Aws::Organizations
     end
 
     # Sends an invitation to another account to join your organization as a
-    # member account. Organizations sends email on your behalf to the email
-    # address that is associated with the other account's owner. The
+    # member account. AWS Organizations sends email on your behalf to the
+    # email address that is associated with the other account's owner. The
     # invitation is implemented as a Handshake whose details are in the
     # response.
     #
     # * You can invite AWS accounts only from the same seller as the master
     #   account. For example, if your organization's master account was
     #   created by Amazon Internet Services Pvt. Ltd (AISPL), an AWS seller
-    #   in India, then you can only invite other AISPL accounts to your
-    #   organization. You can't combine accounts from AISPL and AWS, or any
-    #   other AWS seller. For more information, see [Consolidated Billing in
-    #   India][1].
+    #   in India, you can invite only other AISPL accounts to your
+    #   organization. You can't combine accounts from AISPL and AWS or from
+    #   any other AWS seller. For more information, see [Consolidated
+    #   Billing in India][1].
     #
     # * If you receive an exception that indicates that you exceeded your
     #   account limits for the organization or that the operation failed
     #   because your organization is still initializing, wait one hour and
-    #   then try again. If the error persists after an hour, then contact
-    #   [AWS Customer Support][2].
+    #   then try again. If the error persists after an hour, contact [AWS
+    #   Support][2].
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2523,10 +2522,9 @@ module Aws::Organizations
     #
     #   `--target Id=123456789012,Type=ACCOUNT`
     #
-    #   If you specify `"Type": "ACCOUNT"`, then you must provide the AWS
-    #   account ID number as the `Id`. If you specify `"Type": "EMAIL"`, then
-    #   you must specify the email address that is associated with the
-    #   account.
+    #   If you specify `"Type": "ACCOUNT"`, you must provide the AWS account
+    #   ID number as the `Id`. If you specify `"Type": "EMAIL"`, you must
+    #   specify the email address that is associated with the account.
     #
     #   `--target Id=diego@example.com,Type=EMAIL`
     #
@@ -2653,19 +2651,19 @@ module Aws::Organizations
     #   using the AWS Organizations console, API, or CLI commands, the
     #   information required of standalone accounts is *not* automatically
     #   collected. For each account that you want to make standalone, you
-    #   must accept the End User License Agreement (EULA), choose a support
+    #   must accept the end user license agreement (EULA), choose a support
     #   plan, provide and verify the required contact information, and
     #   provide a current payment method. AWS uses the payment method to
     #   charge for any billable (not free tier) AWS activity that occurs
-    #   while the account is not attached to an organization. Follow the
+    #   while the account isn't attached to an organization. Follow the
     #   steps at [ To leave an organization when all required account
     #   information has not yet been provided][1] in the *AWS Organizations
-    #   User Guide*.
+    #   User Guide.*
     #
     # * You can leave an organization only after you enable IAM user access
     #   to billing in your account. For more information, see [Activating
     #   Access to the Billing and Cost Management Console][2] in the *AWS
-    #   Billing and Cost Management User Guide*.
+    #   Billing and Cost Management User Guide.*
     #
     #
     #
@@ -2699,7 +2697,7 @@ module Aws::Organizations
     # For more information about integrating other services with AWS
     # Organizations, including the list of services that currently work with
     # Organizations, see [Integrating AWS Organizations with Other AWS
-    # Services][1] in the *AWS Organizations User Guide*.
+    # Services][1] in the *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2872,8 +2870,8 @@ module Aws::Organizations
 
     # Lists the accounts in an organization that are contained by the
     # specified target root or organizational unit (OU). If you specify the
-    # root, you get a list of all the accounts that are not in any OU. If
-    # you specify an OU, you get a list of all the accounts in only that OU,
+    # root, you get a list of all the accounts that aren't in any OU. If
+    # you specify an OU, you get a list of all the accounts in only that OU
     # and not in any child OUs. To get a list of all accounts in the
     # organization, use the ListAccounts operation.
     #
@@ -3103,8 +3101,8 @@ module Aws::Organizations
     #
     # @option params [Array<String>] :states
     #   A list of one or more states that you want included in the response.
-    #   If this parameter is not present, then all requests are included in
-    #   the response.
+    #   If this parameter isn't present, all requests are included in the
+    #   response.
     #
     # @option params [String] :next_token
     #   Use this parameter if you receive a `NextToken` response in a previous
@@ -3211,9 +3209,9 @@ module Aws::Organizations
     # Lists the current handshakes that are associated with the account of
     # the requesting user.
     #
-    # Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the
-    # results of this API for only 30 days after changing to that state.
-    # After that they are deleted and no longer accessible.
+    # Handshakes that are `ACCEPTED`, `DECLINED`, or `CANCELED` appear in
+    # the results of this API for only 30 days after changing to that state.
+    # After that, they're deleted and no longer accessible.
     #
     # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
     # when calling a `List*` operation. These operations can occasionally
@@ -3357,9 +3355,9 @@ module Aws::Organizations
     # operation returns a list of handshake structures. Each structure
     # contains details and status about a handshake.
     #
-    # Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the
-    # results of this API for only 30 days after changing to that state.
-    # After that they are deleted and no longer accessible.
+    # Handshakes that are `ACCEPTED`, `DECLINED`, or `CANCELED` appear in
+    # the results of this API for only 30 days after changing to that state.
+    # After that, they're deleted and no longer accessible.
     #
     # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
     # when calling a `List*` operation. These operations can occasionally
@@ -3668,7 +3666,7 @@ module Aws::Organizations
     #
     # @option params [required, String] :child_id
     #   The unique identifier (ID) of the OU or account whose parent
-    #   containers you want to list. Do not specify a root.
+    #   containers you want to list. Don't specify a root.
     #
     #   The [regex pattern][1] for a child ID string requires one of the
     #   following:
@@ -3988,7 +3986,7 @@ module Aws::Organizations
     # account.
     #
     # <note markdown="1"> Policy types can be enabled and disabled in roots. This is distinct
-    # from whether they are available in the organization. When you enable
+    # from whether they're available in the organization. When you enable
     # all features, you make policy types available for use in that
     # organization. Individual policy types can then be enabled and disabled
     # in a root. To see the availability of a policy type in an
@@ -4071,8 +4069,49 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Lists all the roots, organizational units (OUs), and accounts to which
-    # the specified policy is attached.
+    # Lists tags for the specified resource.
+    #
+    # Currently, you can list tags on an account in AWS Organizations.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource that you want to retrieve tags for.
+    #
+    # @option params [String] :next_token
+    #   Use this parameter if you receive a `NextToken` response in a previous
+    #   request that indicates that there is more output available. Set it to
+    #   the value of the previous call's `NextToken` response to indicate
+    #   where the output should continue from.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_id: "TaggableResourceId", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Lists all the roots, organizational units (OUs), and accounts that the
+    # specified policy is attached to.
     #
     # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
     # when calling a `List*` operation. These operations can occasionally
@@ -4086,8 +4125,8 @@ module Aws::Organizations
     # account.
     #
     # @option params [required, String] :policy_id
-    #   The unique identifier (ID) of the policy for which you want to know
-    #   its attachments.
+    #   The unique identifier (ID) of the policy whose attachments you want to
+    #   know.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
     #   by from 8 to 128 lower-case letters or digits.
@@ -4265,11 +4304,11 @@ module Aws::Organizations
 
     # Removes the specified account from the organization.
     #
-    # The removed account becomes a stand-alone account that is not a member
-    # of any organization. It is no longer subject to any policies and is
+    # The removed account becomes a standalone account that isn't a member
+    # of any organization. It's no longer subject to any policies and is
     # responsible for its own bill payments. The organization's master
     # account is no longer charged for any expenses accrued by the member
-    # account after it is removed from the organization.
+    # account after it's removed from the organization.
     #
     # This operation can be called only from the organization's master
     # account. Member accounts can remove themselves with LeaveOrganization
@@ -4280,16 +4319,16 @@ module Aws::Organizations
     # account. When you create an account in an organization using the AWS
     # Organizations console, API, or CLI commands, the information required
     # of standalone accounts is *not* automatically collected. For an
-    # account that you want to make standalone, you must accept the End User
-    # License Agreement (EULA), choose a support plan, provide and verify
+    # account that you want to make standalone, you must accept the end user
+    # license agreement (EULA), choose a support plan, provide and verify
     # the required contact information, and provide a current payment
     # method. AWS uses the payment method to charge for any billable (not
-    # free tier) AWS activity that occurs while the account is not attached
-    # to an organization. To remove an account that does not yet have this
+    # free tier) AWS activity that occurs while the account isn't attached
+    # to an organization. To remove an account that doesn't yet have this
     # information, you must sign in as the member account and follow the
     # steps at [ To leave an organization when all required account
     # information has not yet been provided][1] in the *AWS Organizations
-    # User Guide*.
+    # User Guide.*
     #
     #
     #
@@ -4332,7 +4371,68 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Renames the specified organizational unit (OU). The ID and ARN do not
+    # Adds one or more tags to the specified resource.
+    #
+    # Currently, you can tag and untag accounts in AWS Organizations.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource to add a tag to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tag to add to the specified resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_id: "TaggableResourceId", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes a tag from the specified resource.
+    #
+    # Currently, you can tag and untag accounts in AWS Organizations.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource to remove the tag from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag to remove from the specified resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_id: "TaggableResourceId", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Renames the specified organizational unit (OU). The ID and ARN don't
     # change. The child OUs and accounts remain in place, and any attached
     # policies of the OU remain attached.
     #
@@ -4408,8 +4508,8 @@ module Aws::Organizations
     end
 
     # Updates an existing policy with a new name, description, or content.
-    # If any parameter is not supplied, that value remains unchanged. Note
-    # that you cannot change a policy's type.
+    # If you don't supply any parameter, that value remains unchanged. You
+    # can't change a policy's type.
     #
     # This operation can be called only from the organization's master
     # account.
@@ -4441,7 +4541,7 @@ module Aws::Organizations
     #   If provided, the new content for the policy. The text must be
     #   correctly formatted JSON that complies with the syntax for the
     #   policy's type. For more information, see [Service Control Policy
-    #   Syntax][1] in the *AWS Organizations User Guide*.
+    #   Syntax][1] in the *AWS Organizations User Guide.*
     #
     #
     #
@@ -4544,7 +4644,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

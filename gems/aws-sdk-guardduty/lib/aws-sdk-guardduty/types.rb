@@ -8,23 +8,17 @@
 module Aws::GuardDuty
   module Types
 
-    # AcceptInvitation request body.
-    #
     # @note When making an API call, you may pass AcceptInvitationRequest
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
-    #         invitation_id: "InvitationId", # required
-    #         master_id: "MasterId", # required
+    #         detector_id: "DetectorId", # required
+    #         master_id: "String", # required
+    #         invitation_id: "String", # required
     #       }
     #
     # @!attribute [rw] detector_id
-    #   @return [String]
-    #
-    # @!attribute [rw] invitation_id
-    #   This value is used to validate the master account to the member
-    #   account.
+    #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
     #
     # @!attribute [rw] master_id
@@ -32,12 +26,17 @@ module Aws::GuardDuty
     #   you're accepting.
     #   @return [String]
     #
+    # @!attribute [rw] invitation_id
+    #   This value is used to validate the master account to the member
+    #   account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitationRequest AWS API Documentation
     #
     class AcceptInvitationRequest < Struct.new(
       :detector_id,
-      :invitation_id,
-      :master_id)
+      :master_id,
+      :invitation_id)
       include Aws::Structure
     end
 
@@ -45,9 +44,6 @@ module Aws::GuardDuty
     #
     class AcceptInvitationResponse < Aws::EmptyStructure; end
 
-    # The IAM access key details (IAM user information) of a user that
-    # engaged in the activity that prompted GuardDuty to generate a finding.
-    #
     # @!attribute [rw] access_key_id
     #   Access key ID of the user.
     #   @return [String]
@@ -74,8 +70,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # An object containing the member's accountId and email address.
-    #
     # @note When making an API call, you may pass AccountDetail
     #   data as a hash:
     #
@@ -100,8 +94,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Information about the activity described in a finding.
-    #
     # @!attribute [rw] action_type
     #   GuardDuty Finding activity type.
     #   @return [String]
@@ -135,17 +127,17 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Archive Findings Request
-    #
     # @note When making an API call, you may pass ArchiveFindingsRequest
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         finding_ids: ["FindingId"], # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to archive.
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -164,8 +156,6 @@ module Aws::GuardDuty
     #
     class ArchiveFindingsResponse < Aws::EmptyStructure; end
 
-    # Information about the AWS\_API\_CALL action described in this finding.
-    #
     # @!attribute [rw] api
     #   AWS API name.
     #   @return [String]
@@ -197,12 +187,14 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Error response object.
+    # Bad request exception object.
     #
     # @!attribute [rw] message
+    #   The error message.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The error type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/BadRequestException AWS API Documentation
@@ -213,8 +205,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # City information of the remote IP address.
-    #
     # @!attribute [rw] city_name
     #   City name of the remote IP address.
     #   @return [String]
@@ -226,19 +216,22 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Finding attribute (for example, accountId) for which conditions and
-    # values must be specified when querying findings.
-    #
     # @note When making an API call, you may pass Condition
     #   data as a hash:
     #
     #       {
-    #         eq: ["__string"],
+    #         eq: ["String"],
+    #         neq: ["String"],
     #         gt: 1,
     #         gte: 1,
     #         lt: 1,
     #         lte: 1,
-    #         neq: ["__string"],
+    #         equals: ["String"],
+    #         not_equals: ["String"],
+    #         greater_than: 1,
+    #         greater_than_or_equal: 1,
+    #         less_than: 1,
+    #         less_than_or_equal: 1,
     #       }
     #
     # @!attribute [rw] eq
@@ -246,45 +239,75 @@ module Aws::GuardDuty
     #   querying for findings.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] gt
-    #   Represents the greater than condition to be applied to a single
-    #   field when querying for findings.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] gte
-    #   Represents the greater than equal condition to be applied to a
-    #   single field when querying for findings.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] lt
-    #   Represents the less than condition to be applied to a single field
-    #   when querying for findings.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] lte
-    #   Represents the less than equal condition to be applied to a single
-    #   field when querying for findings.
-    #   @return [Integer]
-    #
     # @!attribute [rw] neq
     #   Represents the not equal condition to be applied to a single field
     #   when querying for findings.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] gt
+    #   Represents a greater than condition to be applied to a single field
+    #   when querying for findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gte
+    #   Represents a greater than equal condition to be applied to a single
+    #   field when querying for findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lt
+    #   Represents a less than condition to be applied to a single field
+    #   when querying for findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lte
+    #   Represents a less than equal condition to be applied to a single
+    #   field when querying for findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] equals
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_equals
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] greater_than
+    #   Represents a greater than condition to be applied to a single field
+    #   when querying for findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] greater_than_or_equal
+    #   Represents a greater than equal condition to be applied to a single
+    #   field when querying for findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] less_than
+    #   Represents a less than condition to be applied to a single field
+    #   when querying for findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] less_than_or_equal
+    #   Represents a less than equal condition to be applied to a single
+    #   field when querying for findings.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Condition AWS API Documentation
     #
     class Condition < Struct.new(
       :eq,
+      :neq,
       :gt,
       :gte,
       :lt,
       :lte,
-      :neq)
+      :equals,
+      :not_equals,
+      :greater_than,
+      :greater_than_or_equal,
+      :less_than,
+      :less_than_or_equal)
       include Aws::Structure
     end
 
-    # Country information of the remote IP address.
-    #
     # @!attribute [rw] country_code
     #   Country code of the remote IP address.
     #   @return [String]
@@ -301,26 +324,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Create Detector Request
-    #
     # @note When making an API call, you may pass CreateDetectorRequest
     #   data as a hash:
     #
     #       {
-    #         client_token: "__stringMin0Max64",
     #         enable: false, # required
+    #         client_token: "ClientToken",
     #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
     #       }
-    #
-    # @!attribute [rw] client_token
-    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
     #
     # @!attribute [rw] enable
     #   A boolean value that specifies whether the detector is to be
     #   enabled.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
     #
     # @!attribute [rw] finding_publishing_frequency
     #   A enum value that specifies how frequently customer got Finding
@@ -330,14 +353,12 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorRequest AWS API Documentation
     #
     class CreateDetectorRequest < Struct.new(
-      :client_token,
       :enable,
+      :client_token,
       :finding_publishing_frequency)
       include Aws::Structure
     end
 
-    # CreateDetector response object.
-    #
     # @!attribute [rw] detector_id
     #   The unique ID of the created detector.
     #   @return [String]
@@ -349,56 +370,52 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # CreateFilter request object.
-    #
     # @note When making an API call, you may pass CreateFilterRequest
     #   data as a hash:
     #
     #       {
-    #         action: "NOOP", # accepts NOOP, ARCHIVE
-    #         client_token: "__stringMin0Max64",
+    #         detector_id: "DetectorId", # required
+    #         name: "FilterName", # required
     #         description: "FilterDescription",
-    #         detector_id: "__string", # required
+    #         action: "NOOP", # accepts NOOP, ARCHIVE
+    #         rank: 1,
     #         finding_criteria: { # required
     #           criterion: {
-    #             "__string" => {
-    #               eq: ["__string"],
+    #             "String" => {
+    #               eq: ["String"],
+    #               neq: ["String"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
     #               lte: 1,
-    #               neq: ["__string"],
+    #               equals: ["String"],
+    #               not_equals: ["String"],
+    #               greater_than: 1,
+    #               greater_than_or_equal: 1,
+    #               less_than: 1,
+    #               less_than_or_equal: 1,
     #             },
     #           },
     #         },
-    #         name: "FilterName", # required
-    #         rank: 1,
+    #         client_token: "ClientToken",
     #       }
     #
-    # @!attribute [rw] action
-    #   Specifies the action that is to be applied to the findings that
-    #   match the filter.
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create a filter.
     #   @return [String]
     #
-    # @!attribute [rw] client_token
-    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
+    # @!attribute [rw] name
+    #   The name of the filter.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the filter.
     #   @return [String]
     #
-    # @!attribute [rw] detector_id
-    #   @return [String]
-    #
-    # @!attribute [rw] finding_criteria
-    #   Represents the criteria to be used in the filter for querying
-    #   findings.
-    #   @return [Types::FindingCriteria]
-    #
-    # @!attribute [rw] name
-    #   The name of the filter.
+    # @!attribute [rw] action
+    #   Specifies the action that is to be applied to the findings that
+    #   match the filter.
     #   @return [String]
     #
     # @!attribute [rw] rank
@@ -407,21 +424,31 @@ module Aws::GuardDuty
     #   findings.
     #   @return [Integer]
     #
+    # @!attribute [rw] finding_criteria
+    #   Represents the criteria to be used in the filter for querying
+    #   findings.
+    #   @return [Types::FindingCriteria]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilterRequest AWS API Documentation
     #
     class CreateFilterRequest < Struct.new(
-      :action,
-      :client_token,
-      :description,
       :detector_id,
-      :finding_criteria,
       :name,
-      :rank)
+      :description,
+      :action,
+      :rank,
+      :finding_criteria,
+      :client_token)
       include Aws::Structure
     end
 
-    # CreateFilter response object.
-    #
     # @!attribute [rw] name
     #   The name of the successfully created filter.
     #   @return [String]
@@ -433,31 +460,27 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Create IP Set Request
-    #
     # @note When making an API call, you may pass CreateIPSetRequest
     #   data as a hash:
     #
     #       {
-    #         activate: false, # required
-    #         client_token: "__stringMin0Max64",
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         name: "Name", # required
     #         format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
     #         location: "Location", # required
-    #         name: "Name", # required
+    #         activate: false, # required
+    #         client_token: "ClientToken",
     #       }
     #
-    # @!attribute [rw] activate
-    #   A boolean value that indicates whether GuardDuty is to start using
-    #   the uploaded IPSet.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] client_token
-    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create an IPSet.
     #   @return [String]
     #
-    # @!attribute [rw] detector_id
+    # @!attribute [rw] name
+    #   The user friendly name to identify the IPSet. This name is displayed
+    #   in all findings that are triggered by activity that involves IP
+    #   addresses included in this IPSet.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -469,28 +492,32 @@ module Aws::GuardDuty
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The user friendly name to identify the IPSet. This name is displayed
-    #   in all findings that are triggered by activity that involves IP
-    #   addresses included in this IPSet.
+    # @!attribute [rw] activate
+    #   A boolean value that indicates whether GuardDuty is to start using
+    #   the uploaded IPSet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetRequest AWS API Documentation
     #
     class CreateIPSetRequest < Struct.new(
-      :activate,
-      :client_token,
       :detector_id,
+      :name,
       :format,
       :location,
-      :name)
+      :activate,
+      :client_token)
       include Aws::Structure
     end
 
-    # CreateIPSet response object.
-    #
     # @!attribute [rw] ip_set_id
-    #   The unique identifier for an IP Set
+    #   The ID of the IPSet resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetResponse AWS API Documentation
@@ -500,39 +527,37 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # CreateMembers body
-    #
     # @note When making an API call, you may pass CreateMembersRequest
     #   data as a hash:
     #
     #       {
+    #         detector_id: "DetectorId", # required
     #         account_details: [ # required
     #           {
     #             account_id: "AccountId", # required
     #             email: "Email", # required
     #           },
     #         ],
-    #         detector_id: "__string", # required
     #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account with which
+    #   you want to associate member accounts.
+    #   @return [String]
     #
     # @!attribute [rw] account_details
     #   A list of account ID and email address pairs of the accounts that
     #   you want to associate with the master GuardDuty account.
     #   @return [Array<Types::AccountDetail>]
     #
-    # @!attribute [rw] detector_id
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembersRequest AWS API Documentation
     #
     class CreateMembersRequest < Struct.new(
-      :account_details,
-      :detector_id)
+      :detector_id,
+      :account_details)
       include Aws::Structure
     end
 
-    # CreateMembers response object.
-    #
     # @!attribute [rw] unprocessed_accounts
     #   A list of objects containing the unprocessed account and a result
     #   string explaining why it was unprocessed.
@@ -545,17 +570,16 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Create Sample Findings Request
-    #
     # @note When making an API call, you may pass CreateSampleFindingsRequest
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         finding_types: ["FindingType"],
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The ID of the detector to create sample findings for.
     #   @return [String]
     #
     # @!attribute [rw] finding_types
@@ -574,31 +598,27 @@ module Aws::GuardDuty
     #
     class CreateSampleFindingsResponse < Aws::EmptyStructure; end
 
-    # Create Threat Intel Set Request
-    #
     # @note When making an API call, you may pass CreateThreatIntelSetRequest
     #   data as a hash:
     #
     #       {
-    #         activate: false, # required
-    #         client_token: "__stringMin0Max64",
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         name: "Name", # required
     #         format: "TXT", # required, accepts TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE
     #         location: "Location", # required
-    #         name: "Name", # required
+    #         activate: false, # required
+    #         client_token: "ClientToken",
     #       }
     #
-    # @!attribute [rw] activate
-    #   A boolean value that indicates whether GuardDuty is to start using
-    #   the uploaded ThreatIntelSet.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] client_token
-    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create a threatIntelSet.
     #   @return [String]
     #
-    # @!attribute [rw] detector_id
+    # @!attribute [rw] name
+    #   A user-friendly ThreatIntelSet name that is displayed in all finding
+    #   generated by activity that involves IP addresses included in this
+    #   ThreatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -610,28 +630,32 @@ module Aws::GuardDuty
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   A user-friendly ThreatIntelSet name that is displayed in all finding
-    #   generated by activity that involves IP addresses included in this
-    #   ThreatIntelSet.
+    # @!attribute [rw] activate
+    #   A boolean value that indicates whether GuardDuty is to start using
+    #   the uploaded ThreatIntelSet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetRequest AWS API Documentation
     #
     class CreateThreatIntelSetRequest < Struct.new(
-      :activate,
-      :client_token,
       :detector_id,
+      :name,
       :format,
       :location,
-      :name)
+      :activate,
+      :client_token)
       include Aws::Structure
     end
 
-    # CreateThreatIntelSet response object.
-    #
     # @!attribute [rw] threat_intel_set_id
-    #   The unique identifier for an threat intel set
+    #   The ID of the ThreatIntelSet resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetResponse AWS API Documentation
@@ -641,13 +665,11 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # DeclineInvitations request body.
-    #
     # @note When making an API call, you may pass DeclineInvitationsRequest
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"], # required
+    #         account_ids: ["AccountId"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -663,8 +685,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # DeclineInvitations response object.
-    #
     # @!attribute [rw] unprocessed_accounts
     #   A list of objects containing the unprocessed account and a result
     #   string explaining why it was unprocessed.
@@ -681,10 +701,11 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorRequest AWS API Documentation
@@ -702,14 +723,16 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
-    #         filter_name: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         filter_name: "String", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the filter is associated with.
     #   @return [String]
     #
     # @!attribute [rw] filter_name
+    #   The name of the filter you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilterRequest AWS API Documentation
@@ -728,14 +751,16 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
-    #         ip_set_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         ip_set_id: "String", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the ipSet is associated with.
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
+    #   The unique ID of the ipSet you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSetRequest AWS API Documentation
@@ -750,13 +775,11 @@ module Aws::GuardDuty
     #
     class DeleteIPSetResponse < Aws::EmptyStructure; end
 
-    # DeleteInvitations request body.
-    #
     # @note When making an API call, you may pass DeleteInvitationsRequest
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"], # required
+    #         account_ids: ["AccountId"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -771,8 +794,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # DeleteInvitations response object.
-    #
     # @!attribute [rw] unprocessed_accounts
     #   A list of objects containing the unprocessed account and a result
     #   string explaining why it was unprocessed.
@@ -785,34 +806,32 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # DeleteMembers request body.
-    #
     # @note When making an API call, you may pass DeleteMembersRequest
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"], # required
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
     #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account whose members
+    #   you want to delete.
+    #   @return [String]
     #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to delete.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] detector_id
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembersRequest AWS API Documentation
     #
     class DeleteMembersRequest < Struct.new(
-      :account_ids,
-      :detector_id)
+      :detector_id,
+      :account_ids)
       include Aws::Structure
     end
 
-    # DeleteMembers response object.
-    #
     # @!attribute [rw] unprocessed_accounts
     #   A list of objects containing the unprocessed account and a result
     #   string explaining why it was unprocessed.
@@ -829,14 +848,16 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
-    #         threat_intel_set_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         threat_intel_set_id: "String", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the threatIntelSet is associated with.
     #   @return [String]
     #
     # @!attribute [rw] threat_intel_set_id
+    #   The unique ID of the threatIntelSet you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetRequest AWS API Documentation
@@ -855,10 +876,11 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccountRequest AWS API Documentation
@@ -872,34 +894,32 @@ module Aws::GuardDuty
     #
     class DisassociateFromMasterAccountResponse < Aws::EmptyStructure; end
 
-    # DisassociateMembers request body.
-    #
     # @note When making an API call, you may pass DisassociateMembersRequest
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"], # required
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
     #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account whose members
+    #   you want to disassociate from master.
+    #   @return [String]
     #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to disassociate from master.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] detector_id
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersRequest AWS API Documentation
     #
     class DisassociateMembersRequest < Struct.new(
-      :account_ids,
-      :detector_id)
+      :detector_id,
+      :account_ids)
       include Aws::Structure
     end
 
-    # DisassociateMembers response object.
-    #
     # @!attribute [rw] unprocessed_accounts
     #   A list of objects containing the unprocessed account and a result
     #   string explaining why it was unprocessed.
@@ -912,8 +932,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Information about the DNS\_REQUEST action described in this finding.
-    #
     # @!attribute [rw] domain
     #   Domain information for the DNS request.
     #   @return [String]
@@ -925,32 +943,17 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Domain information for the AWS API call.
+    # @!attribute [rw] domain
+    #   Domain information for the AWS API call.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DomainDetails AWS API Documentation
     #
-    class DomainDetails < Aws::EmptyStructure; end
-
-    # Error response object.
-    #
-    # @!attribute [rw] message
-    #   The error message.
-    #   @return [String]
-    #
-    # @!attribute [rw] type
-    #   The error type.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ErrorResponse AWS API Documentation
-    #
-    class ErrorResponse < Struct.new(
-      :message,
-      :type)
+    class DomainDetails < Struct.new(
+      :domain)
       include Aws::Structure
     end
 
-    # Representation of a abnormal or suspicious activity.
-    #
     # @!attribute [rw] account_id
     #   AWS account ID where the activity occurred that prompted GuardDuty
     #   to generate a finding.
@@ -1037,20 +1040,24 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Represents the criteria used for querying findings.
-    #
     # @note When making an API call, you may pass FindingCriteria
     #   data as a hash:
     #
     #       {
     #         criterion: {
-    #           "__string" => {
-    #             eq: ["__string"],
+    #           "String" => {
+    #             eq: ["String"],
+    #             neq: ["String"],
     #             gt: 1,
     #             gte: 1,
     #             lt: 1,
     #             lte: 1,
-    #             neq: ["__string"],
+    #             equals: ["String"],
+    #             not_equals: ["String"],
+    #             greater_than: 1,
+    #             greater_than_or_equal: 1,
+    #             less_than: 1,
+    #             less_than_or_equal: 1,
     #           },
     #         },
     #       }
@@ -1067,8 +1074,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Finding statistics object.
-    #
     # @!attribute [rw] count_by_severity
     #   Represents a map of severity to count statistic for a set of
     #   findings
@@ -1081,8 +1086,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Location information of the remote IP address.
-    #
     # @!attribute [rw] lat
     #   Latitude information of remote IP address.
     #   @return [Float]
@@ -1103,10 +1106,11 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector that you want to get.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorRequest AWS API Documentation
@@ -1116,27 +1120,24 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # GetDetector response object.
-    #
     # @!attribute [rw] created_at
-    #   The first time a resource was created. The format will be ISO-8601.
+    #   Detector creation timestamp.
     #   @return [String]
     #
     # @!attribute [rw] finding_publishing_frequency
-    #   A enum value that specifies how frequently customer got Finding
-    #   updates published.
+    #   Finding publishing frequency.
     #   @return [String]
     #
     # @!attribute [rw] service_role
-    #   Customer serviceRole name or ARN for accessing customer resources
+    #   The GuardDuty service role.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of detector.
+    #   The detector status.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The first time a resource was created. The format will be ISO-8601.
+    #   Detector last update timestamp.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorResponse AWS API Documentation
@@ -1154,14 +1155,16 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
-    #         filter_name: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         filter_name: "String", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the filter is associated with.
     #   @return [String]
     #
     # @!attribute [rw] filter_name
+    #   The name of the filter you want to get.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilterRequest AWS API Documentation
@@ -1172,24 +1175,17 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # GetFilter response object.
-    #
-    # @!attribute [rw] action
-    #   Specifies the action that is to be applied to the findings that
-    #   match the filter.
+    # @!attribute [rw] name
+    #   The name of the filter.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the filter.
     #   @return [String]
     #
-    # @!attribute [rw] finding_criteria
-    #   Represents the criteria to be used in the filter for querying
-    #   findings.
-    #   @return [Types::FindingCriteria]
-    #
-    # @!attribute [rw] name
-    #   The name of the filter.
+    # @!attribute [rw] action
+    #   Specifies the action that is to be applied to the findings that
+    #   match the filter.
     #   @return [String]
     #
     # @!attribute [rw] rank
@@ -1198,32 +1194,37 @@ module Aws::GuardDuty
     #   findings.
     #   @return [Integer]
     #
+    # @!attribute [rw] finding_criteria
+    #   Represents the criteria to be used in the filter for querying
+    #   findings.
+    #   @return [Types::FindingCriteria]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilterResponse AWS API Documentation
     #
     class GetFilterResponse < Struct.new(
-      :action,
-      :description,
-      :finding_criteria,
       :name,
-      :rank)
+      :description,
+      :action,
+      :rank,
+      :finding_criteria)
       include Aws::Structure
     end
 
-    # Get Findings Request
-    #
     # @note When making an API call, you may pass GetFindingsRequest
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         finding_ids: ["FindingId"], # required
     #         sort_criteria: {
-    #           attribute_name: "__string",
+    #           attribute_name: "String",
     #           order_by: "ASC", # accepts ASC, DESC
     #         },
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -1243,8 +1244,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # GetFindings response object.
-    #
     # @!attribute [rw] findings
     #   A list of findings.
     #   @return [Array<Types::Finding>]
@@ -1256,50 +1255,54 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Get Findings Statistics Request
-    #
     # @note When making an API call, you may pass GetFindingsStatisticsRequest
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         finding_statistic_types: ["COUNT_BY_SEVERITY"], # required, accepts COUNT_BY_SEVERITY
     #         finding_criteria: {
     #           criterion: {
-    #             "__string" => {
-    #               eq: ["__string"],
+    #             "String" => {
+    #               eq: ["String"],
+    #               neq: ["String"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
     #               lte: 1,
-    #               neq: ["__string"],
+    #               equals: ["String"],
+    #               not_equals: ["String"],
+    #               greater_than: 1,
+    #               greater_than_or_equal: 1,
+    #               less_than: 1,
+    #               less_than_or_equal: 1,
     #             },
     #           },
     #         },
-    #         finding_statistic_types: ["COUNT_BY_SEVERITY"], # required, accepts COUNT_BY_SEVERITY
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings' statistics you want to retrieve.
     #   @return [String]
-    #
-    # @!attribute [rw] finding_criteria
-    #   Represents the criteria used for querying findings.
-    #   @return [Types::FindingCriteria]
     #
     # @!attribute [rw] finding_statistic_types
     #   Types of finding statistics to retrieve.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] finding_criteria
+    #   Represents the criteria used for querying findings.
+    #   @return [Types::FindingCriteria]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsRequest AWS API Documentation
     #
     class GetFindingsStatisticsRequest < Struct.new(
       :detector_id,
-      :finding_criteria,
-      :finding_statistic_types)
+      :finding_statistic_types,
+      :finding_criteria)
       include Aws::Structure
     end
 
-    # GetFindingsStatistics response object.
-    #
     # @!attribute [rw] finding_statistics
     #   Finding statistics object.
     #   @return [Types::FindingStatistics]
@@ -1315,14 +1318,16 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
-    #         ip_set_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         ip_set_id: "String", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the ipSet is associated with.
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
+    #   The unique ID of the ipSet you want to get.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetRequest AWS API Documentation
@@ -1333,7 +1338,11 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # GetIPSet response object.
+    # @!attribute [rw] name
+    #   The user friendly name to identify the IPSet. This name is displayed
+    #   in all findings that are triggered by activity that involves IP
+    #   addresses included in this IPSet.
+    #   @return [String]
     #
     # @!attribute [rw] format
     #   The format of the file that contains the IPSet.
@@ -1344,12 +1353,6 @@ module Aws::GuardDuty
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The user friendly name to identify the IPSet. This name is displayed
-    #   in all findings that are triggered by activity that involves IP
-    #   addresses included in this IPSet.
-    #   @return [String]
-    #
     # @!attribute [rw] status
     #   The status of ipSet file uploaded.
     #   @return [String]
@@ -1357,9 +1360,9 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetResponse AWS API Documentation
     #
     class GetIPSetResponse < Struct.new(
+      :name,
       :format,
       :location,
-      :name,
       :status)
       include Aws::Structure
     end
@@ -1370,8 +1373,6 @@ module Aws::GuardDuty
     #
     class GetInvitationsCountRequest < Aws::EmptyStructure; end
 
-    # GetInvitationsCount response object.
-    #
     # @!attribute [rw] invitations_count
     #   The number of received invitations.
     #   @return [Integer]
@@ -1387,10 +1388,11 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountRequest AWS API Documentation
@@ -1400,10 +1402,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # GetMasterAccount response object.
-    #
     # @!attribute [rw] master
-    #   Contains details about the master account.
+    #   Master account details.
     #   @return [Types::Master]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountResponse AWS API Documentation
@@ -1413,36 +1413,34 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # GetMembers request body.
-    #
     # @note When making an API call, you may pass GetMembersRequest
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"], # required
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
     #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account whose members
+    #   you want to retrieve.
+    #   @return [String]
     #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to describe.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] detector_id
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembersRequest AWS API Documentation
     #
     class GetMembersRequest < Struct.new(
-      :account_ids,
-      :detector_id)
+      :detector_id,
+      :account_ids)
       include Aws::Structure
     end
 
-    # GetMembers response object.
-    #
     # @!attribute [rw] members
-    #   A list of member descriptions.
+    #   A list of members.
     #   @return [Array<Types::Member>]
     #
     # @!attribute [rw] unprocessed_accounts
@@ -1462,14 +1460,16 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
-    #         threat_intel_set_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         threat_intel_set_id: "String", # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the threatIntelSet is associated with.
     #   @return [String]
     #
     # @!attribute [rw] threat_intel_set_id
+    #   The unique ID of the threatIntelSet you want to get.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetRequest AWS API Documentation
@@ -1480,7 +1480,11 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # GetThreatIntelSet response object
+    # @!attribute [rw] name
+    #   A user-friendly ThreatIntelSet name that is displayed in all finding
+    #   generated by activity that involves IP addresses included in this
+    #   ThreatIntelSet.
+    #   @return [String]
     #
     # @!attribute [rw] format
     #   The format of the threatIntelSet.
@@ -1491,12 +1495,6 @@ module Aws::GuardDuty
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   A user-friendly ThreatIntelSet name that is displayed in all finding
-    #   generated by activity that involves IP addresses included in this
-    #   ThreatIntelSet.
-    #   @return [String]
-    #
     # @!attribute [rw] status
     #   The status of threatIntelSet file uploaded.
     #   @return [String]
@@ -1504,15 +1502,13 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetResponse AWS API Documentation
     #
     class GetThreatIntelSetResponse < Struct.new(
+      :name,
       :format,
       :location,
-      :name,
       :status)
       include Aws::Structure
     end
 
-    # The profile information of the EC2 instance.
-    #
     # @!attribute [rw] arn
     #   AWS EC2 instance profile ARN.
     #   @return [String]
@@ -1529,9 +1525,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # The information about the EC2 instance associated with the activity
-    # that prompted GuardDuty to generate a finding.
-    #
     # @!attribute [rw] availability_zone
     #   The availability zone of the EC2 instance.
     #   @return [String]
@@ -1598,12 +1591,14 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Error response object.
+    # Internal server error exception object.
     #
     # @!attribute [rw] message
+    #   The error message.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The error type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InternalServerErrorException AWS API Documentation
@@ -1614,9 +1609,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Invitation from an AWS account to become the current account's
-    # master.
-    #
     # @!attribute [rw] account_id
     #   Inviter account ID
     #   @return [String]
@@ -1626,13 +1618,13 @@ module Aws::GuardDuty
     #   account.
     #   @return [String]
     #
-    # @!attribute [rw] invited_at
-    #   Timestamp at which the invitation was sent
-    #   @return [String]
-    #
     # @!attribute [rw] relationship_status
     #   The status of the relationship between the inviter and invitee
     #   accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] invited_at
+    #   Timestamp at which the invitation was sent
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Invitation AWS API Documentation
@@ -1640,30 +1632,30 @@ module Aws::GuardDuty
     class Invitation < Struct.new(
       :account_id,
       :invitation_id,
-      :invited_at,
-      :relationship_status)
+      :relationship_status,
+      :invited_at)
       include Aws::Structure
     end
 
-    # InviteMembers request body.
-    #
     # @note When making an API call, you may pass InviteMembersRequest
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"], # required
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
     #         disable_email_notification: false,
-    #         message: "Message",
+    #         message: "String",
     #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account with which
+    #   you want to invite members.
+    #   @return [String]
     #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the accounts that you want to invite to
     #   GuardDuty as members.
     #   @return [Array<String>]
-    #
-    # @!attribute [rw] detector_id
-    #   @return [String]
     #
     # @!attribute [rw] disable_email_notification
     #   A boolean value that specifies whether you want to disable email
@@ -1679,15 +1671,13 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersRequest AWS API Documentation
     #
     class InviteMembersRequest < Struct.new(
-      :account_ids,
       :detector_id,
+      :account_ids,
       :disable_email_notification,
       :message)
       include Aws::Structure
     end
 
-    # InviteMembers response object.
-    #
     # @!attribute [rw] unprocessed_accounts
     #   A list of objects containing the unprocessed account and a result
     #   string explaining why it was unprocessed.
@@ -1705,15 +1695,21 @@ module Aws::GuardDuty
     #
     #       {
     #         max_results: 1,
-    #         next_token: "__string",
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   you want in the response. The default value is 50. The maximum value
+    #   is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsRequest AWS API Documentation
@@ -1724,18 +1720,13 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # ListDetectors response object.
-    #
     # @!attribute [rw] detector_ids
     #   A list of detector Ids.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
-    #   the value of NextToken from the previous response to continue
-    #   listing data.
+    #   Pagination parameter to be used on the next list operation to
+    #   retrieve more items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsResponse AWS API Documentation
@@ -1750,20 +1741,27 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         max_results: 1,
-    #         next_token: "__string",
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the filter is associated with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   you want in the response. The default value is 50. The maximum value
+    #   is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFiltersRequest AWS API Documentation
@@ -1775,18 +1773,13 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # ListFilters response object.
-    #
     # @!attribute [rw] filter_names
     #   A list of filter names
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
-    #   the value of NextToken from the previous response to continue
-    #   listing data.
+    #   Pagination parameter to be used on the next list operation to
+    #   retrieve more items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFiltersResponse AWS API Documentation
@@ -1797,39 +1790,49 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # List Findings Request
-    #
     # @note When making an API call, you may pass ListFindingsRequest
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         finding_criteria: {
     #           criterion: {
-    #             "__string" => {
-    #               eq: ["__string"],
+    #             "String" => {
+    #               eq: ["String"],
+    #               neq: ["String"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
     #               lte: 1,
-    #               neq: ["__string"],
+    #               equals: ["String"],
+    #               not_equals: ["String"],
+    #               greater_than: 1,
+    #               greater_than_or_equal: 1,
+    #               less_than: 1,
+    #               less_than_or_equal: 1,
     #             },
     #           },
     #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
     #         sort_criteria: {
-    #           attribute_name: "__string",
+    #           attribute_name: "String",
     #           order_by: "ASC", # accepts ASC, DESC
     #         },
+    #         max_results: 1,
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to list.
     #   @return [String]
     #
     # @!attribute [rw] finding_criteria
     #   Represents the criteria used for querying findings.
     #   @return [Types::FindingCriteria]
+    #
+    # @!attribute [rw] sort_criteria
+    #   Represents the criteria used for sorting findings.
+    #   @return [Types::SortCriteria]
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
@@ -1839,39 +1842,30 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] next_token
     #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the ListFindings
-    #   action. For subsequent calls to the action fill nextToken in the
-    #   request with the value of nextToken from the previous response to
-    #   continue listing data.
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data.
     #   @return [String]
-    #
-    # @!attribute [rw] sort_criteria
-    #   Represents the criteria used for sorting findings.
-    #   @return [Types::SortCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsRequest AWS API Documentation
     #
     class ListFindingsRequest < Struct.new(
       :detector_id,
       :finding_criteria,
+      :sort_criteria,
       :max_results,
-      :next_token,
-      :sort_criteria)
+      :next_token)
       include Aws::Structure
     end
 
-    # ListFindings response object.
-    #
     # @!attribute [rw] finding_ids
-    #   The list of the Findings.
+    #   The IDs of the findings you are listing.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
-    #   the value of NextToken from the previous response to continue
-    #   listing data.
+    #   Pagination parameter to be used on the next list operation to
+    #   retrieve more items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsResponse AWS API Documentation
@@ -1886,20 +1880,27 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         max_results: 1,
-    #         next_token: "__string",
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the ipSet is associated with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   you want in the response. The default value is 50. The maximum value
+    #   is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsRequest AWS API Documentation
@@ -1911,18 +1912,13 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # ListIPSets response object.
-    #
     # @!attribute [rw] ip_set_ids
-    #   A list of the IP set IDs
+    #   The IDs of the IPSet resources.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
-    #   the value of NextToken from the previous response to continue
-    #   listing data.
+    #   Pagination parameter to be used on the next list operation to
+    #   retrieve more items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsResponse AWS API Documentation
@@ -1938,15 +1934,21 @@ module Aws::GuardDuty
     #
     #       {
     #         max_results: 1,
-    #         next_token: "__string",
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   you want in the response. The default value is 50. The maximum value
+    #   is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsRequest AWS API Documentation
@@ -1957,18 +1959,13 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # ListInvitations response object.
-    #
     # @!attribute [rw] invitations
     #   A list of invitation descriptions.
     #   @return [Array<Types::Invitation>]
     #
     # @!attribute [rw] next_token
-    #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
-    #   the value of NextToken from the previous response to continue
-    #   listing data.
+    #   Pagination parameter to be used on the next list operation to
+    #   retrieve more items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsResponse AWS API Documentation
@@ -1983,24 +1980,34 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         max_results: 1,
-    #         next_token: "__string",
-    #         only_associated: "__string",
+    #         next_token: "String",
+    #         only_associated: "String",
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the member is associated with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   you want in the response. The default value is 50. The maximum value
+    #   is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data.
     #   @return [String]
     #
     # @!attribute [rw] only_associated
+    #   Specifies whether to only return associated members or to return all
+    #   members (including members which haven't been invited yet or have
+    #   been disassociated).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest AWS API Documentation
@@ -2013,18 +2020,13 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # ListMembers response object.
-    #
     # @!attribute [rw] members
-    #   A list of member descriptions.
+    #   A list of members.
     #   @return [Array<Types::Member>]
     #
     # @!attribute [rw] next_token
-    #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
-    #   the value of NextToken from the previous response to continue
-    #   listing data.
+    #   Pagination parameter to be used on the next list operation to
+    #   retrieve more items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersResponse AWS API Documentation
@@ -2039,20 +2041,27 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         max_results: 1,
-    #         next_token: "__string",
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector the threatIntelSet is associated with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   that you want in the response.
+    #   you want in the response. The default value is 50. The maximum value
+    #   is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsRequest AWS API Documentation
@@ -2064,30 +2073,23 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # ListThreatIntelSets response object.
+    # @!attribute [rw] threat_intel_set_ids
+    #   The IDs of the ThreatIntelSet resources.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   You can use this parameter when paginating results. Set the value of
-    #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
-    #   the value of NextToken from the previous response to continue
-    #   listing data.
+    #   Pagination parameter to be used on the next list operation to
+    #   retrieve more items.
     #   @return [String]
-    #
-    # @!attribute [rw] threat_intel_set_ids
-    #   The list of the threat intel set IDs
-    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsResponse AWS API Documentation
     #
     class ListThreatIntelSetsResponse < Struct.new(
-      :next_token,
-      :threat_intel_set_ids)
+      :threat_intel_set_ids,
+      :next_token)
       include Aws::Structure
     end
 
-    # Local port information of the connection.
-    #
     # @!attribute [rw] port
     #   Port number of the local connection.
     #   @return [Integer]
@@ -2104,8 +2106,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains details about the master account.
-    #
     # @!attribute [rw] account_id
     #   Master account ID
     #   @return [String]
@@ -2115,13 +2115,13 @@ module Aws::GuardDuty
     #   account.
     #   @return [String]
     #
-    # @!attribute [rw] invited_at
-    #   Timestamp at which the invitation was sent
-    #   @return [String]
-    #
     # @!attribute [rw] relationship_status
     #   The status of the relationship between the master and member
     #   accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] invited_at
+    #   Timestamp at which the invitation was sent
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Master AWS API Documentation
@@ -2129,39 +2129,37 @@ module Aws::GuardDuty
     class Master < Struct.new(
       :account_id,
       :invitation_id,
-      :invited_at,
-      :relationship_status)
+      :relationship_status,
+      :invited_at)
       include Aws::Structure
     end
 
-    # Contains details about the member account.
-    #
     # @!attribute [rw] account_id
-    #   AWS account ID.
+    #   Member account ID.
     #   @return [String]
     #
     # @!attribute [rw] detector_id
-    #   The unique identifier for a detector.
+    #   Member account's detector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_id
+    #   Master account ID.
     #   @return [String]
     #
     # @!attribute [rw] email
     #   Member account's email address.
     #   @return [String]
     #
-    # @!attribute [rw] invited_at
-    #   Timestamp at which the invitation was sent
-    #   @return [String]
-    #
-    # @!attribute [rw] master_id
-    #   The master account ID.
-    #   @return [String]
-    #
     # @!attribute [rw] relationship_status
     #   The status of the relationship between the member and the master.
     #   @return [String]
     #
+    # @!attribute [rw] invited_at
+    #   Timestamp at which the invitation was sent
+    #   @return [String]
+    #
     # @!attribute [rw] updated_at
-    #   The first time a resource was created. The format will be ISO-8601.
+    #   Member last updated timestamp.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Member AWS API Documentation
@@ -2169,17 +2167,14 @@ module Aws::GuardDuty
     class Member < Struct.new(
       :account_id,
       :detector_id,
-      :email,
-      :invited_at,
       :master_id,
+      :email,
       :relationship_status,
+      :invited_at,
       :updated_at)
       include Aws::Structure
     end
 
-    # Information about the NETWORK\_CONNECTION action described in this
-    # finding.
-    #
     # @!attribute [rw] blocked
     #   Network connection blocked information.
     #   @return [Boolean]
@@ -2216,8 +2211,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # The network interface information of the EC2 instance.
-    #
     # @!attribute [rw] ipv_6_addresses
     #   A list of EC2 instance IPv6 address information.
     #   @return [Array<String>]
@@ -2274,8 +2267,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # ISP Organization information of the remote IP address.
-    #
     # @!attribute [rw] asn
     #   Autonomous system number of the internet provider of the remote IP
     #   address.
@@ -2303,8 +2294,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Information about the PORT\_PROBE action described in this finding.
-    #
     # @!attribute [rw] blocked
     #   Port probe blocked information.
     #   @return [Boolean]
@@ -2321,8 +2310,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Details about the port probe finding.
-    #
     # @!attribute [rw] local_port_details
     #   Local port information of the connection.
     #   @return [Types::LocalPortDetails]
@@ -2339,8 +2326,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Other private IP address information of the EC2 instance.
-    #
     # @!attribute [rw] private_dns_name
     #   Private DNS name of the EC2 instance.
     #   @return [String]
@@ -2357,8 +2342,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # The product code of the EC2 instance.
-    #
     # @!attribute [rw] code
     #   Product code information.
     #   @return [String]
@@ -2375,8 +2358,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Remote IP information of the connection.
-    #
     # @!attribute [rw] city
     #   City information of the remote IP address.
     #   @return [Types::City]
@@ -2408,8 +2389,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Remote port information of the connection.
-    #
     # @!attribute [rw] port
     #   Port number of the remote connection.
     #   @return [Integer]
@@ -2426,9 +2405,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # The AWS resource associated with the activity that prompted GuardDuty
-    # to generate a finding.
-    #
     # @!attribute [rw] access_key_details
     #   The IAM access key details (IAM user information) of a user that
     #   engaged in the activity that prompted GuardDuty to generate a
@@ -2453,8 +2429,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Security groups associated with the EC2 instance.
-    #
     # @!attribute [rw] group_id
     #   EC2 instance's security group ID.
     #   @return [String]
@@ -2471,8 +2445,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Additional information assigned to the generated finding by GuardDuty.
-    #
     # @!attribute [rw] action
     #   Information about the activity described in a finding.
     #   @return [Types::Action]
@@ -2526,13 +2498,11 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Represents the criteria used for sorting findings.
-    #
     # @note When making an API call, you may pass SortCriteria
     #   data as a hash:
     #
     #       {
-    #         attribute_name: "__string",
+    #         attribute_name: "String",
     #         order_by: "ASC", # accepts ASC, DESC
     #       }
     #
@@ -2553,34 +2523,32 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # StartMonitoringMembers request body.
-    #
     # @note When making an API call, you may pass StartMonitoringMembersRequest
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"], # required
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
     #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account whom you want
+    #   to re-enable to monitor members' findings.
+    #   @return [String]
     #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the GuardDuty member accounts whose
     #   findings you want the master account to monitor.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] detector_id
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersRequest AWS API Documentation
     #
     class StartMonitoringMembersRequest < Struct.new(
-      :account_ids,
-      :detector_id)
+      :detector_id,
+      :account_ids)
       include Aws::Structure
     end
 
-    # StartMonitoringMembers response object.
-    #
     # @!attribute [rw] unprocessed_accounts
     #   A list of objects containing the unprocessed account and a result
     #   string explaining why it was unprocessed.
@@ -2593,34 +2561,32 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # StopMonitoringMembers request body.
-    #
     # @note When making an API call, you may pass StopMonitoringMembersRequest
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["__string"], # required
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
     #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector of the GuardDuty account that you want
+    #   to stop from monitor members' findings.
+    #   @return [String]
     #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the GuardDuty member accounts whose
     #   findings you want the master account to stop monitoring.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] detector_id
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembersRequest AWS API Documentation
     #
     class StopMonitoringMembersRequest < Struct.new(
-      :account_ids,
-      :detector_id)
+      :detector_id,
+      :account_ids)
       include Aws::Structure
     end
 
-    # StopMonitoringMembers response object.
-    #
     # @!attribute [rw] unprocessed_accounts
     #   A list of objects containing the unprocessed account and a result
     #   string explaining why it was unprocessed.
@@ -2633,8 +2599,6 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # A tag of the EC2 instance.
-    #
     # @!attribute [rw] key
     #   EC2 instance tag key.
     #   @return [String]
@@ -2651,17 +2615,17 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Unrchive Findings Request
-    #
     # @note When making an API call, you may pass UnarchiveFindingsRequest
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         finding_ids: ["FindingId"], # required
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to unarchive.
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -2680,9 +2644,6 @@ module Aws::GuardDuty
     #
     class UnarchiveFindingsResponse < Aws::EmptyStructure; end
 
-    # An object containing the unprocessed account and a result string
-    # explaining why it was unprocessed.
-    #
     # @!attribute [rw] account_id
     #   AWS Account ID.
     #   @return [String]
@@ -2699,18 +2660,17 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Update Detector Request
-    #
     # @note When making an API call, you may pass UpdateDetectorRequest
     #   data as a hash:
     #
     #       {
-    #         detector_id: "__string", # required
+    #         detector_id: "DetectorId", # required
     #         enable: false,
     #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
     #       }
     #
     # @!attribute [rw] detector_id
+    #   The unique ID of the detector that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] enable
@@ -2736,50 +2696,52 @@ module Aws::GuardDuty
     #
     class UpdateDetectorResponse < Aws::EmptyStructure; end
 
-    # UpdateFilter request object.
-    #
     # @note When making an API call, you may pass UpdateFilterRequest
     #   data as a hash:
     #
     #       {
-    #         action: "NOOP", # accepts NOOP, ARCHIVE
+    #         detector_id: "DetectorId", # required
+    #         filter_name: "String", # required
     #         description: "FilterDescription",
-    #         detector_id: "__string", # required
-    #         filter_name: "__string", # required
+    #         action: "NOOP", # accepts NOOP, ARCHIVE
+    #         rank: 1,
     #         finding_criteria: {
     #           criterion: {
-    #             "__string" => {
-    #               eq: ["__string"],
+    #             "String" => {
+    #               eq: ["String"],
+    #               neq: ["String"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
     #               lte: 1,
-    #               neq: ["__string"],
+    #               equals: ["String"],
+    #               not_equals: ["String"],
+    #               greater_than: 1,
+    #               greater_than_or_equal: 1,
+    #               less_than: 1,
+    #               less_than_or_equal: 1,
     #             },
     #           },
     #         },
-    #         rank: 1,
     #       }
     #
-    # @!attribute [rw] action
-    #   Specifies the action that is to be applied to the findings that
-    #   match the filter.
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector that specifies the GuardDuty service
+    #   where you want to update a filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_name
+    #   The name of the filter.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the filter.
     #   @return [String]
     #
-    # @!attribute [rw] detector_id
+    # @!attribute [rw] action
+    #   Specifies the action that is to be applied to the findings that
+    #   match the filter.
     #   @return [String]
-    #
-    # @!attribute [rw] filter_name
-    #   @return [String]
-    #
-    # @!attribute [rw] finding_criteria
-    #   Represents the criteria to be used in the filter for querying
-    #   findings.
-    #   @return [Types::FindingCriteria]
     #
     # @!attribute [rw] rank
     #   Specifies the position of the filter in the list of current filters.
@@ -2787,20 +2749,23 @@ module Aws::GuardDuty
     #   findings.
     #   @return [Integer]
     #
+    # @!attribute [rw] finding_criteria
+    #   Represents the criteria to be used in the filter for querying
+    #   findings.
+    #   @return [Types::FindingCriteria]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilterRequest AWS API Documentation
     #
     class UpdateFilterRequest < Struct.new(
-      :action,
-      :description,
       :detector_id,
       :filter_name,
-      :finding_criteria,
-      :rank)
+      :description,
+      :action,
+      :rank,
+      :finding_criteria)
       include Aws::Structure
     end
 
-    # UpdateFilter response object.
-    #
     # @!attribute [rw] name
     #   The name of the filter.
     #   @return [String]
@@ -2812,40 +2777,40 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Update findings feedback body
-    #
     # @note When making an API call, you may pass UpdateFindingsFeedbackRequest
     #   data as a hash:
     #
     #       {
-    #         comments: "Comments",
-    #         detector_id: "__string", # required
-    #         feedback: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
+    #         detector_id: "DetectorId", # required
     #         finding_ids: ["FindingId"], # required
+    #         feedback: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
+    #         comments: "String",
     #       }
     #
-    # @!attribute [rw] comments
-    #   Additional feedback about the GuardDuty findings.
-    #   @return [String]
-    #
     # @!attribute [rw] detector_id
-    #   @return [String]
-    #
-    # @!attribute [rw] feedback
-    #   Valid values: USEFUL \| NOT\_USEFUL
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   findings you want to mark as useful or not useful.
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
     #   IDs of the findings that you want to mark as useful or not useful.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] feedback
+    #   Valid values: USEFUL \| NOT\_USEFUL
+    #   @return [String]
+    #
+    # @!attribute [rw] comments
+    #   Additional feedback about the GuardDuty findings.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackRequest AWS API Documentation
     #
     class UpdateFindingsFeedbackRequest < Struct.new(
-      :comments,
       :detector_id,
+      :finding_ids,
       :feedback,
-      :finding_ids)
+      :comments)
       include Aws::Structure
     end
 
@@ -2853,28 +2818,28 @@ module Aws::GuardDuty
     #
     class UpdateFindingsFeedbackResponse < Aws::EmptyStructure; end
 
-    # Update IP Set Request
-    #
     # @note When making an API call, you may pass UpdateIPSetRequest
     #   data as a hash:
     #
     #       {
-    #         activate: false,
-    #         detector_id: "__string", # required
-    #         ip_set_id: "__string", # required
-    #         location: "Location",
+    #         detector_id: "DetectorId", # required
+    #         ip_set_id: "String", # required
     #         name: "Name",
+    #         location: "Location",
+    #         activate: false,
     #       }
     #
-    # @!attribute [rw] activate
-    #   The updated boolean value that specifies whether the IPSet is active
-    #   or not.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] detector_id
+    #   The detectorID that specifies the GuardDuty service whose IPSet you
+    #   want to update.
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
+    #   The unique ID that specifies the IPSet that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The unique ID that specifies the IPSet that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -2882,18 +2847,19 @@ module Aws::GuardDuty
     #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The unique ID that specifies the IPSet that you want to update.
-    #   @return [String]
+    # @!attribute [rw] activate
+    #   The updated boolean value that specifies whether the IPSet is active
+    #   or not.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSetRequest AWS API Documentation
     #
     class UpdateIPSetRequest < Struct.new(
-      :activate,
       :detector_id,
       :ip_set_id,
+      :name,
       :location,
-      :name)
+      :activate)
       include Aws::Structure
     end
 
@@ -2901,30 +2867,25 @@ module Aws::GuardDuty
     #
     class UpdateIPSetResponse < Aws::EmptyStructure; end
 
-    # Update Threat Intel Set Request
-    #
     # @note When making an API call, you may pass UpdateThreatIntelSetRequest
     #   data as a hash:
     #
     #       {
-    #         activate: false,
-    #         detector_id: "__string", # required
-    #         location: "Location",
+    #         detector_id: "DetectorId", # required
+    #         threat_intel_set_id: "String", # required
     #         name: "Name",
-    #         threat_intel_set_id: "__string", # required
+    #         location: "Location",
+    #         activate: false,
     #       }
     #
-    # @!attribute [rw] activate
-    #   The updated boolean value that specifies whether the ThreateIntelSet
-    #   is active or not.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] detector_id
+    #   The detectorID that specifies the GuardDuty service whose
+    #   ThreatIntelSet you want to update.
     #   @return [String]
     #
-    # @!attribute [rw] location
-    #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+    # @!attribute [rw] threat_intel_set_id
+    #   The unique ID that specifies the ThreatIntelSet that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2932,17 +2893,24 @@ module Aws::GuardDuty
     #   update.
     #   @return [String]
     #
-    # @!attribute [rw] threat_intel_set_id
+    # @!attribute [rw] location
+    #   The updated URI of the file that contains the ThreateIntelSet. For
+    #   example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
     #   @return [String]
+    #
+    # @!attribute [rw] activate
+    #   The updated boolean value that specifies whether the ThreateIntelSet
+    #   is active or not.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetRequest AWS API Documentation
     #
     class UpdateThreatIntelSetRequest < Struct.new(
-      :activate,
       :detector_id,
-      :location,
+      :threat_intel_set_id,
       :name,
-      :threat_intel_set_id)
+      :location,
+      :activate)
       include Aws::Structure
     end
 

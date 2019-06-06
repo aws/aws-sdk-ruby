@@ -36,9 +36,14 @@ module Aws::MediaConnect
     #             destination: "__string", # required
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #               key_type: "static-key", # accepts static-key
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
     #               role_arn: "__string", # required
-    #               secret_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
     #             },
     #             max_latency: 1,
     #             name: "__string",
@@ -94,9 +99,14 @@ module Aws::MediaConnect
     #         destination: "__string", # required
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         max_latency: 1,
     #         name: "__string",
@@ -203,9 +213,14 @@ module Aws::MediaConnect
     #             description: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #               key_type: "static-key", # accepts static-key
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
     #               role_arn: "__string", # required
-    #               secret_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
     #             },
     #             name: "__string",
     #             subscribers: ["__string"], # required
@@ -218,9 +233,14 @@ module Aws::MediaConnect
     #             destination: "__string", # required
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #               key_type: "static-key", # accepts static-key
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
     #               role_arn: "__string", # required
-    #               secret_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
     #             },
     #             max_latency: 1,
     #             name: "__string",
@@ -233,9 +253,14 @@ module Aws::MediaConnect
     #         source: { # required
     #           decryption: {
     #             algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #             key_type: "static-key", # accepts static-key
+    #             constant_initialization_vector: "__string",
+    #             device_id: "__string",
+    #             key_type: "speke", # accepts speke, static-key
+    #             region: "__string",
+    #             resource_id: "__string",
     #             role_arn: "__string", # required
-    #             secret_arn: "__string", # required
+    #             secret_arn: "__string",
+    #             url: "__string",
     #           },
     #           description: "__string",
     #           entitlement_arn: "__string",
@@ -374,9 +399,14 @@ module Aws::MediaConnect
     #
     #       {
     #         algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #         key_type: "static-key", # accepts static-key
+    #         constant_initialization_vector: "__string",
+    #         device_id: "__string",
+    #         key_type: "speke", # accepts speke, static-key
+    #         region: "__string",
+    #         resource_id: "__string",
     #         role_arn: "__string", # required
-    #         secret_arn: "__string", # required
+    #         secret_arn: "__string",
+    #         url: "__string",
     #       }
     #
     # @!attribute [rw] algorithm
@@ -384,9 +414,35 @@ module Aws::MediaConnect
     #   aes128, aes192, or aes256).
     #   @return [String]
     #
+    # @!attribute [rw] constant_initialization_vector
+    #   A 128-bit, 16-byte hex value represented by a 32-character string,
+    #   to be used with the key for encrypting content. This parameter is
+    #   not valid for static key encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The value of one of the devices that you configured with your
+    #   digital rights management (DRM) platform key provider. This
+    #   parameter is required for SPEKE encryption and is not valid for
+    #   static key encryption.
+    #   @return [String]
+    #
     # @!attribute [rw] key_type
     #   The type of key that is used for the encryption. If no keyType is
     #   provided, the service will use the default setting (static-key).
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region that the API Gateway proxy endpoint was created in.
+    #   This parameter is required for SPEKE encryption and is not valid for
+    #   static key encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   An identifier for the content. The service sends this value to the
+    #   key server to identify the current endpoint. The resource ID is also
+    #   known as the content ID. This parameter is required for SPEKE
+    #   encryption and is not valid for static key encryption.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -395,17 +451,29 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The ARN that was assigned to the secret that you created in AWS
-    #   Secrets Manager to store the encryption key.
+    #   The ARN of the secret that you created in AWS Secrets Manager to
+    #   store the encryption key. This parameter is required for static key
+    #   encryption and is not valid for SPEKE encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL from the API Gateway proxy that you set up to talk to your
+    #   key server. This parameter is required for SPEKE encryption and is
+    #   not valid for static key encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Encryption AWS API Documentation
     #
     class Encryption < Struct.new(
       :algorithm,
+      :constant_initialization_vector,
+      :device_id,
       :key_type,
+      :region,
+      :resource_id,
       :role_arn,
-      :secret_arn)
+      :secret_arn,
+      :url)
       include Aws::Structure
     end
 
@@ -526,9 +594,14 @@ module Aws::MediaConnect
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         name: "__string",
     #         subscribers: ["__string"], # required
@@ -591,9 +664,14 @@ module Aws::MediaConnect
     #             description: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #               key_type: "static-key", # accepts static-key
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
     #               role_arn: "__string", # required
-    #               secret_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
     #             },
     #             name: "__string",
     #             subscribers: ["__string"], # required
@@ -1042,9 +1120,14 @@ module Aws::MediaConnect
     #       {
     #         decryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         description: "__string",
     #         entitlement_arn: "__string",
@@ -1363,9 +1446,14 @@ module Aws::MediaConnect
     #
     #       {
     #         algorithm: "aes128", # accepts aes128, aes192, aes256
-    #         key_type: "static-key", # accepts static-key
+    #         constant_initialization_vector: "__string",
+    #         device_id: "__string",
+    #         key_type: "speke", # accepts speke, static-key
+    #         region: "__string",
+    #         resource_id: "__string",
     #         role_arn: "__string",
     #         secret_arn: "__string",
+    #         url: "__string",
     #       }
     #
     # @!attribute [rw] algorithm
@@ -1373,9 +1461,35 @@ module Aws::MediaConnect
     #   aes128, aes192, or aes256).
     #   @return [String]
     #
+    # @!attribute [rw] constant_initialization_vector
+    #   A 128-bit, 16-byte hex value represented by a 32-character string,
+    #   to be used with the key for encrypting content. This parameter is
+    #   not valid for static key encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The value of one of the devices that you configured with your
+    #   digital rights management (DRM) platform key provider. This
+    #   parameter is required for SPEKE encryption and is not valid for
+    #   static key encryption.
+    #   @return [String]
+    #
     # @!attribute [rw] key_type
     #   The type of key that is used for the encryption. If no keyType is
     #   provided, the service will use the default setting (static-key).
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region that the API Gateway proxy endpoint was created in.
+    #   This parameter is required for SPEKE encryption and is not valid for
+    #   static key encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   An identifier for the content. The service sends this value to the
+    #   key server to identify the current endpoint. The resource ID is also
+    #   known as the content ID. This parameter is required for SPEKE
+    #   encryption and is not valid for static key encryption.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1384,17 +1498,29 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The ARN that was assigned to the secret that you created in AWS
-    #   Secrets Manager to store the encryption key.
+    #   The ARN of the secret that you created in AWS Secrets Manager to
+    #   store the encryption key. This parameter is required for static key
+    #   encryption and is not valid for SPEKE encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL from the API Gateway proxy that you set up to talk to your
+    #   key server. This parameter is required for SPEKE encryption and is
+    #   not valid for static key encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateEncryption AWS API Documentation
     #
     class UpdateEncryption < Struct.new(
       :algorithm,
+      :constant_initialization_vector,
+      :device_id,
       :key_type,
+      :region,
+      :resource_id,
       :role_arn,
-      :secret_arn)
+      :secret_arn,
+      :url)
       include Aws::Structure
     end
 
@@ -1407,9 +1533,14 @@ module Aws::MediaConnect
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string",
     #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         entitlement_arn: "__string", # required
     #         flow_arn: "__string", # required
@@ -1481,9 +1612,14 @@ module Aws::MediaConnect
     #         destination: "__string",
     #         encryption: {
     #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string",
     #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         flow_arn: "__string", # required
     #         max_latency: 1,
@@ -1579,9 +1715,14 @@ module Aws::MediaConnect
     #       {
     #         decryption: {
     #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string",
     #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         description: "__string",
     #         entitlement_arn: "__string",

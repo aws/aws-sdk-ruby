@@ -220,6 +220,8 @@ module Aws::ECS
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
+    SubmitAttachmentStateChangesRequest = Shapes::StructureShape.new(name: 'SubmitAttachmentStateChangesRequest')
+    SubmitAttachmentStateChangesResponse = Shapes::StructureShape.new(name: 'SubmitAttachmentStateChangesResponse')
     SubmitContainerStateChangeRequest = Shapes::StructureShape.new(name: 'SubmitContainerStateChangeRequest')
     SubmitContainerStateChangeResponse = Shapes::StructureShape.new(name: 'SubmitContainerStateChangeResponse')
     SubmitTaskStateChangeRequest = Shapes::StructureShape.new(name: 'SubmitTaskStateChangeRequest')
@@ -397,6 +399,7 @@ module Aws::ECS
     ContainerInstance.add_member(:remaining_resources, Shapes::ShapeRef.new(shape: Resources, location_name: "remainingResources"))
     ContainerInstance.add_member(:registered_resources, Shapes::ShapeRef.new(shape: Resources, location_name: "registeredResources"))
     ContainerInstance.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    ContainerInstance.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     ContainerInstance.add_member(:agent_connected, Shapes::ShapeRef.new(shape: Boolean, location_name: "agentConnected"))
     ContainerInstance.add_member(:running_tasks_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningTasksCount"))
     ContainerInstance.add_member(:pending_tasks_count, Shapes::ShapeRef.new(shape: Integer, location_name: "pendingTasksCount"))
@@ -1039,6 +1042,13 @@ module Aws::ECS
 
     StringMap.key = Shapes::ShapeRef.new(shape: String)
     StringMap.value = Shapes::ShapeRef.new(shape: String)
+
+    SubmitAttachmentStateChangesRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
+    SubmitAttachmentStateChangesRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentStateChanges, required: true, location_name: "attachments"))
+    SubmitAttachmentStateChangesRequest.struct_class = Types::SubmitAttachmentStateChangesRequest
+
+    SubmitAttachmentStateChangesResponse.add_member(:acknowledgment, Shapes::ShapeRef.new(shape: String, location_name: "acknowledgment"))
+    SubmitAttachmentStateChangesResponse.struct_class = Types::SubmitAttachmentStateChangesResponse
 
     SubmitContainerStateChangeRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     SubmitContainerStateChangeRequest.add_member(:task, Shapes::ShapeRef.new(shape: String, location_name: "task"))
@@ -1736,6 +1746,18 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+      end)
+
+      api.add_operation(:submit_attachment_state_changes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SubmitAttachmentStateChanges"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SubmitAttachmentStateChangesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SubmitAttachmentStateChangesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:submit_container_state_change, Seahorse::Model::Operation.new.tap do |o|

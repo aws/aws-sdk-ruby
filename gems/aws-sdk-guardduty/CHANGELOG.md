@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-06-06)
+------------------
+
+* Feature - Improve FindingCriteria Condition field names, support long-typed conditions and deprecate old Condition field names.
+
 1.17.0 (2019-05-21)
 ------------------
 
