@@ -3798,9 +3798,7 @@ module Aws::EC2
     # @!attribute [rw] encrypted
     #   Specifies whether the destination snapshot should be encrypted. You
     #   can encrypt a copy of an unencrypted snapshot, but you cannot use it
-    #   to create an unencrypted copy of an encrypted snapshot. Your default
-    #   CMK for EBS is used unless you specify a non-default AWS Key
-    #   Management Service (AWS KMS) CMK using `KmsKeyId`. For more
+    #   to create an unencrypted copy of an encrypted snapshot. For more
     #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
@@ -3810,32 +3808,26 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use to encrypt the volume. This parameter is
-    #   only required if you want to use a customer-managed CMK; if this
-    #   parameter is not specified, your AWS-managed CMK for the account is
-    #   used. If a `KmsKeyId` is specified, the `Encrypted` flag must also
-    #   be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If
+    #   `KmsKeyId` is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias: For example, alias/ExampleAlias.
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
-    #   you call may appear to complete even though you provided an invalid
-    #   identifier. The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
+    #   an ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #   @return [String]
     #
     # @!attribute [rw] presigned_url
@@ -7049,24 +7041,21 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Specifies the encryption state of the volume. The default effect of
-    #   setting the `Encrypted` parameter to `true` depends on the volume
-    #   origin (new or from a snapshot), starting encryption state,
-    #   ownership, and whether [account-level encryption][1] is enabled.
-    #   Each default case can be overridden by specifying a customer master
-    #   key (CMK) using the `KmsKeyId` parameter, in addition to setting
-    #   `Encrypted` to `true`. For a complete list of possible encryption
-    #   cases, see [Amazon EBS Encryption][2].
+    #   Specifies whether the volume should be encrypted. The effect of
+    #   setting the encryption state to `true` depends on the volume origin
+    #   (new or from a snapshot), starting encryption state, ownership, and
+    #   whether encryption by default is enabled. For more information, see
+    #   [Encryption by Default][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
     #
-    #   Encrypted Amazon EBS volumes may only be attached to instances that
+    #   Encrypted Amazon EBS volumes must be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
-    #   Instance Types][3].
+    #   Instance Types][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
@@ -7087,32 +7076,26 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use to encrypt the volume. This parameter is
-    #   only required if you want to use a customer-managed CMK; if this
-    #   parameter is not specified, your AWS-managed CMK for the account is
-    #   used. If a `KmsKeyId` is specified, the `Encrypted` flag must also
-    #   be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If
+    #   `KmsKeyId` is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias: For example, alias/ExampleAlias.
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
-    #   you call may appear to complete even though you provided an invalid
-    #   identifier. The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
+    #   an ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -11660,7 +11643,8 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters.
     #
-    #   * `architecture` - The image architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The image architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `block-device-mapping.delete-on-termination` - A Boolean value
     #     that indicates whether the Amazon EBS volume is deleted on
@@ -12209,7 +12193,8 @@ module Aws::EC2
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -17982,7 +17967,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] ebs_encryption_by_default
-    #   Account-level encryption status after performing the action.
+    #   The updated status of encryption by default.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableEbsEncryptionByDefaultResult AWS API Documentation
@@ -18964,7 +18949,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] ebs_encryption_by_default
-    #   Account-level encryption status after performing the action.
+    #   The updated status of encryption by default.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableEbsEncryptionByDefaultResult AWS API Documentation
@@ -19452,7 +19437,7 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `attachment.transit-gateway-attachment-id`- The id of the transit
+    #   * `attachment.transit-gateway-attachment-id` - The id of the transit
     #     gateway attachment.
     #
     #   * `attachment.resource-id` - The resource id of the transit gateway
@@ -19479,7 +19464,7 @@ module Aws::EC2
     #
     #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
     #
-    #   * `type` - The type of roue (`active` \| `blackhole`).
+    #   * `type` - The type of route (`active` \| `blackhole`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] s3_bucket
@@ -19956,7 +19941,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number of the launch template.
+    #   The version number of the launch template. Note: This is a required
+    #   parameter and will be updated soon.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecificationRequest AWS API Documentation
@@ -20318,9 +20304,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the default CMK that your account uses to encrypt an
-    #   EBS volume when no CMK is specified in the API call that creates the
-    #   volume.
+    #   The Amazon Resource Name (ARN) of the default CMK for encryption by
+    #   default.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsDefaultKmsKeyIdResult AWS API Documentation
@@ -20352,8 +20337,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] ebs_encryption_by_default
-    #   Indicates whether default encryption for EBS volumes is enabled or
-    #   disabled.
+    #   Indicates whether encryption by default is enabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsEncryptionByDefaultResult AWS API Documentation
@@ -21687,7 +21671,7 @@ module Aws::EC2
     # @!attribute [rw] architecture
     #   The architecture of the virtual machine.
     #
-    #   Valid values: `i386` \| `x86_64`
+    #   Valid values: `i386` \| `x86_64` \| `arm64`
     #   @return [String]
     #
     # @!attribute [rw] client_data
@@ -21900,7 +21884,7 @@ module Aws::EC2
     # @!attribute [rw] architecture
     #   The architecture of the virtual machine.
     #
-    #   Valid values: `i386` \| `x86_64`
+    #   Valid values: `i386` \| `x86_64` \| `arm64`
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -25714,32 +25698,26 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use to encrypt the volume. This parameter is
-    #   only required if you want to use a customer-managed CMK; if this
-    #   parameter is not specified, your AWS-managed CMK for the account is
-    #   used. If a `KmsKeyId` is specified, the `Encrypted` flag must also
-    #   be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If
+    #   `KmsKeyId` is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias: For example, alias/ExampleAlias.
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
-    #   you call may appear to complete even though you provided an invalid
-    #   identifier. The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
+    #   an ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -25758,9 +25736,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the default CMK that your account uses to encrypt an
-    #   EBS volume when no CMK is specified in the API call that creates the
-    #   volume.
+    #   The Amazon Resource Name (ARN) of the default CMK for encryption by
+    #   default.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyEbsDefaultKmsKeyIdResult AWS API Documentation
@@ -31677,9 +31654,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the default CMK that your account uses to encrypt an
-    #   EBS volume when no CMK is specified in the API call that creates the
-    #   volume.
+    #   The Amazon Resource Name (ARN) of the default CMK for EBS encryption
+    #   by default.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetEbsDefaultKmsKeyIdResult AWS API Documentation
@@ -34086,11 +34062,9 @@ module Aws::EC2
     #     supernet-of-match as 10.0.1.0/30, then the result returns
     #     10.0.1.0/29.
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the route (`active` \| `blackhole`).
     #
-    #   * `type` - The type of roue (`active` \| `blackhole`).
+    #   * `type` - The type of roue (`propagated` \| `static`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -34434,8 +34408,8 @@ module Aws::EC2
     #   data encryption keys are inherited by volumes created from
     #   snapshots, and vice versa, if snapshots share the same data
     #   encryption key identifier, then they belong to the same
-    #   volume/snapshot lineage. This parameter is only returned by the
-    #   DescribeSnapshots API operation.
+    #   volume/snapshot lineage. This parameter is only returned by
+    #   DescribeSnapshots.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -34447,9 +34421,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) that was used to protect the volume encryption key
-    #   for the parent volume.
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) customer master key (CMK) that was used to protect the
+    #   volume encryption key for the parent volume.
     #   @return [String]
     #
     # @!attribute [rw] owner_id
@@ -34478,8 +34452,8 @@ module Aws::EC2
     #   snapshot copy operation fails (for example, if the proper AWS Key
     #   Management Service (AWS KMS) permissions are not obtained) this
     #   field displays error state details to help you diagnose why the
-    #   error occurred. This parameter is only returned by the
-    #   DescribeSnapshots API operation.
+    #   error occurred. This parameter is only returned by
+    #   DescribeSnapshots.
     #   @return [String]
     #
     # @!attribute [rw] volume_id
@@ -34625,7 +34599,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Object that contains information about a snapshot.
+    # Information about a snapshot.
     #
     # @!attribute [rw] description
     #   Description specified by the CreateSnapshotRequest that has been
@@ -34637,7 +34611,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] encrypted
-    #   Boolean that specifies whether or not this snapshot is encrypted.
+    #   Indicates whether the snapshot is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] volume_id
@@ -37818,13 +37792,13 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the volume will be encrypted.
+    #   Indicates whether the volume is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) that was used to protect the volume encryption key
-    #   for the volume.
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) customer master key (CMK) that was used to protect the
+    #   volume encryption key for the volume.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -38363,6 +38337,10 @@ module Aws::EC2
     #   Any tags assigned to the VPC endpoint.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the VPC endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
     #
     class VpcEndpoint < Struct.new(
@@ -38380,7 +38358,8 @@ module Aws::EC2
       :network_interface_ids,
       :dns_entries,
       :creation_timestamp,
-      :tags)
+      :tags,
+      :owner_id)
       include Aws::Structure
     end
 
@@ -38406,6 +38385,15 @@ module Aws::EC2
     #   The date and time the VPC endpoint was created.
     #   @return [Time]
     #
+    # @!attribute [rw] dns_entries
+    #   The DNS entries for the VPC endpoint.
+    #   @return [Array<Types::DnsEntry>]
+    #
+    # @!attribute [rw] network_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of the network load balancers for
+    #   the service.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpointConnection AWS API Documentation
     #
     class VpcEndpointConnection < Struct.new(
@@ -38413,7 +38401,9 @@ module Aws::EC2
       :vpc_endpoint_id,
       :vpc_endpoint_owner,
       :vpc_endpoint_state,
-      :creation_timestamp)
+      :creation_timestamp,
+      :dns_entries,
+      :network_load_balancer_arns)
       include Aws::Structure
     end
 

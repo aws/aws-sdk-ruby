@@ -7560,6 +7560,7 @@ module Aws::EC2
     VpcEndpoint.add_member(:dns_entries, Shapes::ShapeRef.new(shape: DnsEntrySet, location_name: "dnsEntrySet"))
     VpcEndpoint.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "creationTimestamp"))
     VpcEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    VpcEndpoint.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     VpcEndpoint.struct_class = Types::VpcEndpoint
 
     VpcEndpointConnection.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
@@ -7567,6 +7568,8 @@ module Aws::EC2
     VpcEndpointConnection.add_member(:vpc_endpoint_owner, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointOwner"))
     VpcEndpointConnection.add_member(:vpc_endpoint_state, Shapes::ShapeRef.new(shape: State, location_name: "vpcEndpointState"))
     VpcEndpointConnection.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "creationTimestamp"))
+    VpcEndpointConnection.add_member(:dns_entries, Shapes::ShapeRef.new(shape: DnsEntrySet, location_name: "dnsEntrySet"))
+    VpcEndpointConnection.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "networkLoadBalancerArnSet"))
     VpcEndpointConnection.struct_class = Types::VpcEndpointConnection
 
     VpcEndpointConnectionSet.member = Shapes::ShapeRef.new(shape: VpcEndpointConnection, location_name: "item")

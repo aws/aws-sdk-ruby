@@ -1396,7 +1396,7 @@ module Aws::EC2
     #   resp.association.transit_gateway_route_table_id #=> String
     #   resp.association.transit_gateway_attachment_id #=> String
     #   resp.association.resource_id #=> String
-    #   resp.association.resource_type #=> String, one of "vpc", "vpn"
+    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTransitGatewayRouteTable AWS API Documentation
@@ -1635,15 +1635,12 @@ module Aws::EC2
     # Attaches an EBS volume to a running or stopped instance and exposes it
     # to the instance with the specified device name.
     #
-    # Encrypted EBS volumes may only be attached to instances that support
+    # Encrypted EBS volumes must be attached to instances that support
     # Amazon EBS encryption. For more information, see [Amazon EBS
     # Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    # For a list of supported device names, see [Attaching an EBS Volume to
-    # an Instance][2]. Any device names that aren't reserved for instance
-    # store volumes can be used for EBS volumes. For more information, see
-    # [Amazon EC2 Instance Store][3] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # After you attach an EBS volume, you must make it available. For more
+    # information, see [Making an EBS Volume Available For Use][2].
     #
     # If a volume has an AWS Marketplace product code:
     #
@@ -1658,14 +1655,14 @@ module Aws::EC2
     #   the product. For example, you can't detach a volume from a Windows
     #   instance and attach it to a Linux instance.
     #
-    # For more information about EBS volumes, see [Attaching Amazon EBS
-    # Volumes][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # For more information, see [Attaching Amazon EBS Volumes][3] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html
     #
     # @option params [required, String] :device
     #   The device name (for example, `/dev/sdh` or `xvdh`).
@@ -3009,15 +3006,13 @@ module Aws::EC2
     # Copies a point-in-time snapshot of an EBS volume and stores it in
     # Amazon S3. You can copy the snapshot within the same Region or from
     # one Region to another. You can use the snapshot to create EBS volumes
-    # or Amazon Machine Images (AMIs). The snapshot is copied to the
-    # regional endpoint that you send the HTTP request to.
+    # or Amazon Machine Images (AMIs).
     #
     # Copies of encrypted EBS snapshots remain encrypted. Copies of
-    # unencrypted snapshots remain unencrypted, unless the `Encrypted` flag
-    # is specified during the snapshot copy operation. By default, encrypted
-    # snapshot copies use the default AWS Key Management Service (AWS KMS)
-    # customer master key (CMK); however, you can specify a non-default CMK
-    # with the `KmsKeyId` parameter.
+    # unencrypted snapshots remain unencrypted, unless you enable encryption
+    # for the snapshot copy operation. By default, encrypted snapshot copies
+    # use the default AWS Key Management Service (AWS KMS) customer master
+    # key (CMK); however, you can specify a different CMK.
     #
     # To copy an encrypted snapshot that has been shared from another
     # account, you must have permissions for the CMK used to encrypt the
@@ -3050,9 +3045,7 @@ module Aws::EC2
     # @option params [Boolean] :encrypted
     #   Specifies whether the destination snapshot should be encrypted. You
     #   can encrypt a copy of an unencrypted snapshot, but you cannot use it
-    #   to create an unencrypted copy of an encrypted snapshot. Your default
-    #   CMK for EBS is used unless you specify a non-default AWS Key
-    #   Management Service (AWS KMS) CMK using `KmsKeyId`. For more
+    #   to create an unencrypted copy of an encrypted snapshot. For more
     #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
@@ -3061,31 +3054,26 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use to encrypt the volume. This parameter is only
-    #   required if you want to use a customer-managed CMK; if this parameter
-    #   is not specified, your AWS-managed CMK for the account is used. If a
-    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
+    #   is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias: For example, alias/ExampleAlias.
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace, followed
-    #     by the Region of the CMK, the AWS account ID of the CMK owner, the
-    #     `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
-    #   you call may appear to complete even though you provided an invalid
-    #   identifier. The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #
     # @option params [String] :presigned_url
     #   When you copy an encrypted source snapshot using the Amazon EC2 Query
@@ -7040,7 +7028,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn"
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
@@ -7205,12 +7193,11 @@ module Aws::EC2
     # snapshot. Any AWS Marketplace product codes from the snapshot are
     # propagated to the volume.
     #
-    # You can create encrypted volumes with the `Encrypted` parameter.
-    # Encrypted volumes may only be attached to instances that support
-    # Amazon EBS encryption. Volumes that are created from encrypted
-    # snapshots are also automatically encrypted. For more information, see
-    # [Amazon EBS Encryption][2] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # You can create encrypted volumes. Encrypted volumes must be attached
+    # to instances that support Amazon EBS encryption. Volumes that are
+    # created from encrypted snapshots are also automatically encrypted. For
+    # more information, see [Amazon EBS Encryption][2] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     # You can tag your volumes during creation. For more information, see
     # [Tagging Your Amazon EC2 Resources][3] in the *Amazon Elastic Compute
@@ -7230,24 +7217,21 @@ module Aws::EC2
     #   The Availability Zone in which to create the volume.
     #
     # @option params [Boolean] :encrypted
-    #   Specifies the encryption state of the volume. The default effect of
-    #   setting the `Encrypted` parameter to `true` depends on the volume
-    #   origin (new or from a snapshot), starting encryption state, ownership,
-    #   and whether [account-level encryption][1] is enabled. Each default
-    #   case can be overridden by specifying a customer master key (CMK) using
-    #   the `KmsKeyId` parameter, in addition to setting `Encrypted` to
-    #   `true`. For a complete list of possible encryption cases, see [Amazon
-    #   EBS Encryption][2].
+    #   Specifies whether the volume should be encrypted. The effect of
+    #   setting the encryption state to `true` depends on the volume origin
+    #   (new or from a snapshot), starting encryption state, ownership, and
+    #   whether encryption by default is enabled. For more information, see
+    #   [Encryption by Default][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
     #
-    #   Encrypted Amazon EBS volumes may only be attached to instances that
+    #   Encrypted Amazon EBS volumes must be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
-    #   Instance Types][3].
+    #   Instance Types][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #
     # @option params [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
@@ -7265,31 +7249,26 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #
     # @option params [String] :kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use to encrypt the volume. This parameter is only
-    #   required if you want to use a customer-managed CMK; if this parameter
-    #   is not specified, your AWS-managed CMK for the account is used. If a
-    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
+    #   is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias: For example, alias/ExampleAlias.
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace, followed
-    #     by the Region of the CMK, the AWS account ID of the CMK owner, the
-    #     `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
-    #   you call may appear to complete even though you provided an invalid
-    #   identifier. The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #
     # @option params [Integer] :size
     #   The size of the volume, in GiBs.
@@ -7706,6 +7685,7 @@ module Aws::EC2
     #   resp.vpc_endpoint.tags #=> Array
     #   resp.vpc_endpoint.tags[0].key #=> String
     #   resp.vpc_endpoint.tags[0].value #=> String
+    #   resp.vpc_endpoint.owner_id #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpoint AWS API Documentation
@@ -9452,7 +9432,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn"
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
@@ -12802,7 +12782,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
-    #   * `architecture` - The image architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The image architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `block-device-mapping.delete-on-termination` - A Boolean value that
     #     indicates whether the Amazon EBS volume is deleted on instance
@@ -13651,7 +13632,8 @@ module Aws::EC2
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -18979,7 +18961,7 @@ module Aws::EC2
     #   resp.transit_gateway_attachments[0].transit_gateway_id #=> String
     #   resp.transit_gateway_attachments[0].transit_gateway_owner_id #=> String
     #   resp.transit_gateway_attachments[0].resource_owner_id #=> String
-    #   resp.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn"
+    #   resp.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.transit_gateway_attachments[0].resource_id #=> String
     #   resp.transit_gateway_attachments[0].state #=> String, one of "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_attachments[0].association.transit_gateway_route_table_id #=> String
@@ -20219,6 +20201,11 @@ module Aws::EC2
     #   resp.vpc_endpoint_connections[0].vpc_endpoint_owner #=> String
     #   resp.vpc_endpoint_connections[0].vpc_endpoint_state #=> String, one of "PendingAcceptance", "Pending", "Available", "Deleting", "Deleted", "Rejected", "Failed", "Expired"
     #   resp.vpc_endpoint_connections[0].creation_timestamp #=> Time
+    #   resp.vpc_endpoint_connections[0].dns_entries #=> Array
+    #   resp.vpc_endpoint_connections[0].dns_entries[0].dns_name #=> String
+    #   resp.vpc_endpoint_connections[0].dns_entries[0].hosted_zone_id #=> String
+    #   resp.vpc_endpoint_connections[0].network_load_balancer_arns #=> Array
+    #   resp.vpc_endpoint_connections[0].network_load_balancer_arns[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnections AWS API Documentation
@@ -20572,6 +20559,7 @@ module Aws::EC2
     #   resp.vpc_endpoints[0].tags #=> Array
     #   resp.vpc_endpoints[0].tags[0].key #=> String
     #   resp.vpc_endpoints[0].tags[0].value #=> String
+    #   resp.vpc_endpoints[0].owner_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpoints AWS API Documentation
@@ -21335,17 +21323,21 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Disables default encryption for EBS volumes that are created in your
-    # account in the current region.
+    # Disables EBS encryption by default for your account in the current
+    # Region.
     #
-    # Call this API if you have enabled default encryption using
-    # EnableEbsEncryptionByDefault and want to disable default EBS
-    # encryption. Once default EBS encryption is disabled, you can still
-    # create an encrypted volume by setting *encrypted* to *true* in the API
-    # call that creates the volume.
+    # After you disable encryption by default, you can still create
+    # encrypted volumes by enabling encryption when you create each volume.
     #
-    # Disabling default EBS encryption will not change the encryption status
-    # of any of your existing volumes.
+    # Disabling encryption by default does not change the encryption status
+    # of your existing volumes.
+    #
+    # For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21407,7 +21399,7 @@ module Aws::EC2
     #
     #   resp.propagation.transit_gateway_attachment_id #=> String
     #   resp.propagation.resource_id #=> String
-    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn"
+    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.propagation.transit_gateway_route_table_id #=> String
     #   resp.propagation.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
     #
@@ -21818,7 +21810,7 @@ module Aws::EC2
     #   resp.association.transit_gateway_route_table_id #=> String
     #   resp.association.transit_gateway_attachment_id #=> String
     #   resp.association.resource_id #=> String
-    #   resp.association.resource_type #=> String, one of "vpc", "vpn"
+    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTransitGatewayRouteTable AWS API Documentation
@@ -21875,36 +21867,28 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Enables default encryption for EBS volumes that are created in your
-    # account in the current region.
+    # Enables EBS encryption by default for your account in the current
+    # Region.
     #
-    # Once encryption is enabled with this action, EBS volumes that are
-    # created in your account will always be encrypted even if encryption is
-    # not specified at launch. This setting overrides the *encrypted*
-    # setting to *true* in all API calls that create EBS volumes in your
-    # account. A volume will be encrypted even if you specify *encryption*
-    # to be *false* in the API call that creates the volume.
+    # After you enable encryption by default, the EBS volumes that you
+    # create are are always encrypted, either using the default CMK or the
+    # CMK that you specified when you created each volume. For more
+    # information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
-    # If you do not specify a customer master key (CMK) in the API call that
-    # creates the EBS volume, then the volume is encrypted to your AWS
-    # account's managed CMK.
+    # You can specify the default CMK for encryption by default using
+    # ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId.
     #
-    # You can specify a CMK of your choice using ModifyEbsDefaultKmsKeyId.
+    # Enabling encryption by default has no effect on the encryption status
+    # of your existing volumes.
     #
-    # Enabling encryption-by-default for EBS volumes has no effect on
-    # existing unencrypted volumes in your account. Encrypting the data in
-    # these requires manual action. You can either create an encrypted
-    # snapshot of an unencrypted volume, or encrypt a copy of an unencrypted
-    # snapshot. Any volume restored from an encrypted snapshot is also
-    # encrypted. For more information, see [Amazon EBS Snapshots][1].
-    #
-    # After EBS encryption-by-default is enabled, you can no longer launch
-    # older-generation instance types that do not support encryption. For
+    # After you enable encryption by default, you can no longer launch
+    # instances using instance types that do not support encryption. For
     # more information, see [Supported Instance Types][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #
     # @option params [Boolean] :dry_run
@@ -21967,7 +21951,7 @@ module Aws::EC2
     #
     #   resp.propagation.transit_gateway_attachment_id #=> String
     #   resp.propagation.resource_id #=> String
-    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn"
+    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.propagation.transit_gateway_route_table_id #=> String
     #   resp.propagation.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
     #
@@ -22231,7 +22215,7 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `attachment.transit-gateway-attachment-id`- The id of the transit
+    #   * `attachment.transit-gateway-attachment-id` - The id of the transit
     #     gateway attachment.
     #
     #   * `attachment.resource-id` - The resource id of the transit gateway
@@ -22258,7 +22242,7 @@ module Aws::EC2
     #
     #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
     #
-    #   * `type` - The type of roue (`active` \| `blackhole`).
+    #   * `type` - The type of route (`active` \| `blackhole`).
     #
     # @option params [required, String] :s3_bucket
     #   The name of the S3 bucket.
@@ -22427,9 +22411,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the default customer master key (CMK) that your account uses
-    # to encrypt EBS volumes if you don’t specify a CMK in the API call. You
-    # can change this default using ModifyEbsDefaultKmsKeyId.
+    # Describes the default customer master key (CMK) for EBS encryption by
+    # default for your account in this Region. You can change the default
+    # CMK for encryption by default using ModifyEbsDefaultKmsKeyId or
+    # ResetEbsDefaultKmsKeyId.
+    #
+    # For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -22460,8 +22452,15 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes whether default EBS encryption is enabled for your account
-    # in the current region.
+    # Describes whether EBS encryption by default is enabled for your
+    # account in the current Region.
+    #
+    # For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -22976,7 +22975,7 @@ module Aws::EC2
     #   resp.associations #=> Array
     #   resp.associations[0].transit_gateway_attachment_id #=> String
     #   resp.associations[0].resource_id #=> String
-    #   resp.associations[0].resource_type #=> String, one of "vpc", "vpn"
+    #   resp.associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.associations[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #   resp.next_token #=> String
     #
@@ -23043,7 +23042,7 @@ module Aws::EC2
     #   resp.transit_gateway_route_table_propagations #=> Array
     #   resp.transit_gateway_route_table_propagations[0].transit_gateway_attachment_id #=> String
     #   resp.transit_gateway_route_table_propagations[0].resource_id #=> String
-    #   resp.transit_gateway_route_table_propagations[0].resource_type #=> String, one of "vpc", "vpn"
+    #   resp.transit_gateway_route_table_propagations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.transit_gateway_route_table_propagations[0].state #=> String, one of "enabling", "enabled", "disabling", "disabled"
     #   resp.next_token #=> String
     #
@@ -23119,7 +23118,7 @@ module Aws::EC2
     # @option params [String] :architecture
     #   The architecture of the virtual machine.
     #
-    #   Valid values: `i386` \| `x86_64`
+    #   Valid values: `i386` \| `x86_64` \| `arm64`
     #
     # @option params [Types::ClientData] :client_data
     #   The client-specific data.
@@ -23853,43 +23852,47 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Changes the customer master key (CMK) that your account uses to
-    # encrypt EBS volumes if you don't specify a CMK in the API call.
+    # Changes the default customer master key (CMK) for EBS encryption by
+    # default for your account in this Region.
     #
-    # By default, your account has an AWS-managed CMK that is used for
-    # encrypting an EBS volume when no CMK is specified in the API call that
-    # creates the volume. By calling this API, you can specify a
-    # customer-managed CMK to use in place of the AWS-managed CMK.
+    # AWS creates a unique AWS managed CMK in each Region for use with
+    # encryption by default. If you change the default CMK to a customer
+    # managed CMK, it is used instead of the AWS managed CMK. To reset the
+    # default CMK to the AWS managed CMK for EBS, use
+    # ResetEbsDefaultKmsKeyId.
     #
-    # Note: Deleting or disabling the CMK that you have specified to act as
-    # your default CMK will result in instance-launch failures.
+    # If you delete or disable the customer managed CMK that you specified
+    # for use with encryption by default, your instances will fail to
+    # launch.
+    #
+    # For more information, see [Amazon EBS Encryption][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [required, String] :kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use to encrypt the volume. This parameter is only
-    #   required if you want to use a customer-managed CMK; if this parameter
-    #   is not specified, your AWS-managed CMK for the account is used. If a
-    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
+    #   is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias: For example, alias/ExampleAlias.
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * Key ARN: The key ARN contains the `arn:aws:kms` namespace, followed
-    #     by the Region of the CMK, the AWS account ID of the CMK owner, the
-    #     `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * Alias ARN: The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS authenticates `KmsKeyId` asynchronously, meaning that the action
-    #   you call may appear to complete even though you provided an invalid
-    #   identifier. The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -25114,9 +25117,9 @@ module Aws::EC2
 
     # Adds or removes permission settings for the specified snapshot. You
     # may add or remove specified AWS account IDs from a snapshot's list of
-    # create volume permissions, but you cannot do both in a single API
-    # call. If you need to both add and remove account IDs for a snapshot,
-    # you must use multiple API calls.
+    # create volume permissions, but you cannot do both in a single
+    # operation. If you need to both add and remove account IDs for a
+    # snapshot, you must use multiple operations.
     #
     # Encrypted snapshots and snapshots with AWS Marketplace product codes
     # cannot be made public. Snapshots encrypted with your default CMK
@@ -25462,8 +25465,8 @@ module Aws::EC2
     # You can use CloudWatch Events to check the status of a modification to
     # an EBS volume. For information about CloudWatch Events, see the
     # [Amazon CloudWatch Events User Guide][5]. You can also track the
-    # status of a modification using the DescribeVolumesModifications API.
-    # For information about tracking status changes using either method, see
+    # status of a modification using DescribeVolumesModifications. For
+    # information about tracking status changes using either method, see
     # [Monitoring Volume Modifications][6].
     #
     # With previous-generation instance types, resizing an EBS volume may
@@ -27524,7 +27527,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn"
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
@@ -28298,20 +28301,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Resets the account's default customer master key (CMK) to the
-    # account's AWS-managed default CMK. This default CMK is used to
-    # encrypt EBS volumes when you have enabled EBS encryption by default
-    # without specifying a CMK in the API call. If you have not enabled
-    # encryption by default, then this CMK is used when you set the
-    # `Encrypted` parameter to true without specifying a custom CMK in the
-    # API call.
+    # Resets the default customer master key (CMK) for EBS encryption for
+    # your account in this Region to the AWS managed CMK for EBS.
     #
-    # Call this API if you have modified the default CMK that is used for
-    # encrypting your EBS volume using ModifyEbsDefaultKmsKeyId and you want
-    # to reset it to the AWS-managed default CMK. After resetting, you can
-    # continue to provide a CMK of your choice in the API call that creates
-    # the volume. However, if no CMK is specified, your account will encrypt
-    # the volume to the AWS-managed default CMK.
+    # After resetting the default CMK to the AWS managed CMK, you can
+    # continue to encrypt by a customer managed CMK by specifying it when
+    # you create the volume. For more information, see [Amazon EBS
+    # Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -29866,11 +29866,9 @@ module Aws::EC2
     #     supernet-of-match as 10.0.1.0/30, then the result returns
     #     10.0.1.0/29.
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the route (`active` \| `blackhole`).
     #
-    #   * `type` - The type of roue (`active` \| `blackhole`).
+    #   * `type` - The type of roue (`propagated` \| `static`).
     #
     # @option params [Integer] :max_results
     #   The maximum number of routes to return.
@@ -29907,7 +29905,7 @@ module Aws::EC2
     #   resp.routes[0].transit_gateway_attachments #=> Array
     #   resp.routes[0].transit_gateway_attachments[0].resource_id #=> String
     #   resp.routes[0].transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.routes[0].transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn"
+    #   resp.routes[0].transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway"
     #   resp.routes[0].type #=> String, one of "static", "propagated"
     #   resp.routes[0].state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #   resp.additional_routes_available #=> Boolean
@@ -30728,7 +30726,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

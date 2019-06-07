@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2019-06-07)
+------------------
+
+* Feature - Adds DNS entries and NLB ARNs to describe-vpc-endpoint-connections API response. Adds owner ID to describe-vpc-endpoints and create-vpc-endpoint API responses.
+
 1.90.0 (2019-06-04)
 ------------------
 
