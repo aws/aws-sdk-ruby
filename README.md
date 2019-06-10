@@ -310,8 +310,8 @@ to be backwards compatible.
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
@@ -399,6 +399,9 @@ to be backwards compatible.
 | Amazon Managed Blockchain                             | ManagedBlockchain               | 2018-09-24  |
 | Amazon Mechanical Turk                                | MTurk                           | 2017-01-17  |
 | Amazon Neptune                                        | Neptune                         | 2014-10-31  |
+| Amazon Personalize                                    | Personalize                     | 2018-05-22  |
+| Amazon Personalize Events                             | PersonalizeEvents               | 2018-03-22  |
+| Amazon Personalize Runtime                            | PersonalizeRuntime              | 2018-05-22  |
 | Amazon Pinpoint                                       | Pinpoint                        | 2016-12-01  |
 | Amazon Pinpoint Email Service                         | PinpointEmail                   | 2018-07-26  |
 | Amazon Pinpoint SMS and Voice Service                 | PinpointSMSVoice                | 2018-09-05  |

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
+
+* Feature - Aws::PersonalizeEvents - Added support for a new service, Amazon Personalize Events.
+
+* Feature - Aws::PersonalizeRuntime - Added support for a new service, Amazon Personalize Runtime.
+
+* Feature - Aws::Personalize - Added support for a new service, Amazon Personalize.
+
 2.11.290 (2019-06-07)
 ------------------
 

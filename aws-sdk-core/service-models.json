@@ -510,6 +510,18 @@
     "models": "pi/2018-02-27",
     "endpoint": "pi"
   },
+  "Personalize": {
+    "models": "personalize/2018-05-22",
+    "endpoint": "personalize"
+  },
+  "PersonalizeEvents": {
+    "models": "personalize-events/2018-03-22",
+    "endpoint": "personalize-events"
+  },
+  "PersonalizeRuntime": {
+    "models": "personalize-runtime/2018-05-22",
+    "endpoint": "personalize-runtime"
+  },
   "Pinpoint": {
     "models": "pinpoint/2016-12-01",
     "endpoint": "pinpoint"

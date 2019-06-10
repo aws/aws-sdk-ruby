@@ -151,6 +151,9 @@ module Aws
     OpsWorksCM
     Organizations
     PI
+    Personalize
+    PersonalizeEvents
+    PersonalizeRuntime
     Pinpoint
     PinpointEmail
     PinpointSMSVoice
