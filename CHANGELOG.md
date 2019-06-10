@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.291 (2019-06-10)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
 
 * Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
