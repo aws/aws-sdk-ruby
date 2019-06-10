@@ -193,6 +193,21 @@ module Aws
       end
     end
 
+    def csm_host(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["csm_host"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["csm_host"]
+        end
+        value
+      else
+        nil
+      end
+    end
+
     private
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||
