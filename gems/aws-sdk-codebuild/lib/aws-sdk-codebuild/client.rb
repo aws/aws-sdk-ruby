@@ -714,6 +714,10 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.projects[0].secondary_sources[0].insecure_ssl #=> Boolean
     #   resp.projects[0].secondary_sources[0].source_identifier #=> String
+    #   resp.projects[0].source_version #=> String
+    #   resp.projects[0].secondary_source_versions #=> Array
+    #   resp.projects[0].secondary_source_versions[0].source_identifier #=> String
+    #   resp.projects[0].secondary_source_versions[0].source_version #=> String
     #   resp.projects[0].artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.projects[0].artifacts.location #=> String
     #   resp.projects[0].artifacts.path #=> String
@@ -806,6 +810,44 @@ module Aws::CodeBuild
     #
     # @option params [Array<Types::ProjectSource>] :secondary_sources
     #   An array of `ProjectSource` objects.
+    #
+    # @option params [String] :source_version
+    #   A version of the build input to be built for this project. If not
+    #   specified, the latest version is used. If specified, it must be one
+    #   of:
+    #
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag name
+    #     that corresponds to the version of the source code you want to
+    #     build. If a pull request ID is specified, it must use the format
+    #     `pr/pull-request-ID` (for example `pr/25`). If a branch name is
+    #     specified, the branch's HEAD commit ID is used. If not specified,
+    #     the default branch's HEAD commit ID is used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build. If
+    #     a branch name is specified, the branch's HEAD commit ID is used. If
+    #     not specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of the
+    #     object that represents the build input ZIP file to use.
+    #
+    #   If `sourceVersion` is specified at the build level, then that version
+    #   takes precedence over this `sourceVersion` (at the project level).
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1] in
+    #   the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
+    #
+    # @option params [Array<Types::ProjectSourceVersion>] :secondary_source_versions
+    #   An array of `ProjectSourceVersion` objects. If
+    #   `secondarySourceVersions` is specified at the build level, then they
+    #   take precedence over these `secondarySourceVersions` (at the project
+    #   level).
     #
     # @option params [required, Types::ProjectArtifacts] :artifacts
     #   Information about the build output artifacts for the build project.
@@ -905,6 +947,13 @@ module Aws::CodeBuild
     #         report_build_status: false,
     #         insecure_ssl: false,
     #         source_identifier: "String",
+    #       },
+    #     ],
+    #     source_version: "String",
+    #     secondary_source_versions: [
+    #       {
+    #         source_identifier: "String", # required
+    #         source_version: "String", # required
     #       },
     #     ],
     #     artifacts: { # required
@@ -1011,6 +1060,10 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
     #   resp.project.secondary_sources[0].insecure_ssl #=> Boolean
     #   resp.project.secondary_sources[0].source_identifier #=> String
+    #   resp.project.source_version #=> String
+    #   resp.project.secondary_source_versions #=> Array
+    #   resp.project.secondary_source_versions[0].source_identifier #=> String
+    #   resp.project.secondary_source_versions[0].source_version #=> String
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
     #   resp.project.artifacts.path #=> String
@@ -1562,6 +1615,16 @@ module Aws::CodeBuild
     #   * For Amazon Simple Storage Service (Amazon S3): the version ID of the
     #     object that represents the build input ZIP file to use.
     #
+    #   If `sourceVersion` is specified at the project level, then this
+    #   `sourceVersion` (at the build level) takes precedence.
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1] in
+    #   the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
+    #
     # @option params [Types::ProjectArtifacts] :artifacts_override
     #   Build output artifact settings that override, for this build only, the
     #   latest ones already defined in the build project.
@@ -2033,6 +2096,43 @@ module Aws::CodeBuild
     # @option params [Array<Types::ProjectSource>] :secondary_sources
     #   An array of `ProjectSource` objects.
     #
+    # @option params [String] :source_version
+    #   A version of the build input to be built for this project. If not
+    #   specified, the latest version is used. If specified, it must be one
+    #   of:
+    #
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag name
+    #     that corresponds to the version of the source code you want to
+    #     build. If a pull request ID is specified, it must use the format
+    #     `pr/pull-request-ID` (for example `pr/25`). If a branch name is
+    #     specified, the branch's HEAD commit ID is used. If not specified,
+    #     the default branch's HEAD commit ID is used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build. If
+    #     a branch name is specified, the branch's HEAD commit ID is used. If
+    #     not specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of the
+    #     object that represents the build input ZIP file to use.
+    #
+    #   If `sourceVersion` is specified at the build level, then that version
+    #   takes precedence over this `sourceVersion` (at the project level).
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1] in
+    #   the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
+    #
+    # @option params [Array<Types::ProjectSourceVersion>] :secondary_source_versions
+    #   An array of `ProjectSourceVersion` objects. If
+    #   `secondarySourceVersions` is specified at the build level, then they
+    #   take over these `secondarySourceVersions` (at the project level).
+    #
     # @option params [Types::ProjectArtifacts] :artifacts
     #   Information to be changed about the build output artifacts for the
     #   build project.
@@ -2132,6 +2232,13 @@ module Aws::CodeBuild
     #         report_build_status: false,
     #         insecure_ssl: false,
     #         source_identifier: "String",
+    #       },
+    #     ],
+    #     source_version: "String",
+    #     secondary_source_versions: [
+    #       {
+    #         source_identifier: "String", # required
+    #         source_version: "String", # required
     #       },
     #     ],
     #     artifacts: {
@@ -2238,6 +2345,10 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
     #   resp.project.secondary_sources[0].insecure_ssl #=> Boolean
     #   resp.project.secondary_sources[0].source_identifier #=> String
+    #   resp.project.source_version #=> String
+    #   resp.project.secondary_source_versions #=> Array
+    #   resp.project.secondary_source_versions[0].source_identifier #=> String
+    #   resp.project.secondary_source_versions[0].source_version #=> String
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
     #   resp.project.artifacts.path #=> String
@@ -2401,7 +2512,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.174.0 (2019-06-10)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PersonalizeRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::PersonalizeEvents`.
+
+* Feature - Added support for enumerating regions for `Aws::Personalize`.
+
 1.173.0 (2019-06-07)
 ------------------
 

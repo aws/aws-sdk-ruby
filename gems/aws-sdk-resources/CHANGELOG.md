@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.47.0 (2019-06-10)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-personalizeruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-personalizeevents` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-personalize` gem.
+
 3.46.0 (2019-05-30)
 ------------------
 

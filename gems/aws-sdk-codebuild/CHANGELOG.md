@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2019-06-10)
+------------------
+
+* Feature - AWS CodeBuild adds support for source version on project level.
+
 1.35.0 (2019-05-21)
 ------------------
 

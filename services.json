@@ -418,6 +418,15 @@
   "PI": {
     "models": "pi/2018-02-27"
   },
+  "Personalize": {
+    "models": "personalize/2018-05-22"
+  },
+  "PersonalizeEvents": {
+    "models": "personalize-events/2018-03-22"
+  },
+  "PersonalizeRuntime": {
+    "models": "personalize-runtime/2018-05-22"
+  },
   "Pinpoint": {
     "models": "pinpoint/2016-12-01"
   },
