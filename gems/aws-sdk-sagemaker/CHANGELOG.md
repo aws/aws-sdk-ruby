@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2019-06-11)
+------------------
+
+* Feature - The default TaskTimeLimitInSeconds of labeling job is increased to 8 hours. Batch Transform introduces a new DataProcessing field which supports input and output filtering and data joining. Training job increases the max allowed input channels from 8 to 20.
+
 1.37.0 (2019-05-21)
 ------------------
 

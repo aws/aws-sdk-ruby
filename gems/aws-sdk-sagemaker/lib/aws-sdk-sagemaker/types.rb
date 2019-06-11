@@ -933,7 +933,8 @@ module Aws::SageMaker
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] model_package_name
-    #   The name of the model package to use to create the model.
+    #   The name or Amazon Resource Name (ARN) of the model package to use
+    #   to create the model.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition AWS API Documentation
@@ -992,7 +993,7 @@ module Aws::SageMaker
     #
     #   Logarithmic
     #
-    #   : Hyperparemeter tuning searches the values in the hyperparameter
+    #   : Hyperparameter tuning searches the values in the hyperparameter
     #     range by using a logarithmic scale.
     #
     #     Logarithmic scaling works only for ranges that have only values
@@ -1334,7 +1335,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288
+    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, sbe_c
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -1382,7 +1383,9 @@ module Aws::SageMaker
     #   @return [Types::OutputConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   The duration allowed for model compilation.
+    #   Specifies a limit to how long a model compilation job can run. When
+    #   the job reaches the time limit, Amazon SageMaker ends the
+    #   compilation job. Use this API to cap model training costs.
     #   @return [Types::StoppingCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCompilationJobRequest AWS API Documentation
@@ -2640,17 +2643,14 @@ module Aws::SageMaker
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   Sets a duration for training. Use this parameter to cap model
-    #   training costs. To stop a job, Amazon SageMaker sends the algorithm
-    #   the `SIGTERM` signal, which delays job termination for 120 seconds.
-    #   Algorithms might use this 120-second window to save the model
-    #   artifacts.
+    #   Specifies a limit to how long a model training job can run. When the
+    #   job reaches the time limit, Amazon SageMaker ends the training job.
+    #   Use this API to cap model training costs.
     #
-    #   When Amazon SageMaker terminates a job because the stopping
-    #   condition has been met, training algorithms provided by Amazon
-    #   SageMaker save the intermediate results of the job. This
-    #   intermediate data is a valid model artifact. You can use it to
-    #   create a model using the `CreateModel` API.
+    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
+    #   signal, which delays job termination for 120 seconds. Algorithms can
+    #   use this 120-second window to save the model artifacts, so the
+    #   results of training are not lost.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] tags
@@ -2756,6 +2756,11 @@ module Aws::SageMaker
     #           instance_count: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
     #         },
+    #         data_processing: {
+    #           input_filter: "JsonPath",
+    #           output_filter: "JsonPath",
+    #           join_source: "Input", # accepts Input, None
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -2843,6 +2848,16 @@ module Aws::SageMaker
     #   count, to use for the transform job.
     #   @return [Types::TransformResources]
     #
+    # @!attribute [rw] data_processing
+    #   The data structure used for combining the input data and inference
+    #   in the output file. For more information, see [Batch Transform I/O
+    #   Join][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html
+    #   @return [Types::DataProcessing]
+    #
     # @!attribute [rw] tags
     #   (Optional) An array of key-value pairs. For more information, see
     #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
@@ -2865,6 +2880,7 @@ module Aws::SageMaker
       :transform_input,
       :transform_output,
       :transform_resources,
+      :data_processing,
       :tags)
       include Aws::Structure
     end
@@ -2955,6 +2971,82 @@ module Aws::SageMaker
     #
     class CreateWorkteamResponse < Struct.new(
       :workteam_arn)
+      include Aws::Structure
+    end
+
+    # The data structure used to combine the input data and transformed data
+    # from the batch transform output into a joined dataset and to store it
+    # in an output file. It also contains information on how to filter the
+    # input data and the joined dataset. For more information, see [Batch
+    # Transform I/O Join][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html
+    #
+    # @note When making an API call, you may pass DataProcessing
+    #   data as a hash:
+    #
+    #       {
+    #         input_filter: "JsonPath",
+    #         output_filter: "JsonPath",
+    #         join_source: "Input", # accepts Input, None
+    #       }
+    #
+    # @!attribute [rw] input_filter
+    #   A JSONPath expression used to select a portion of the input data to
+    #   pass to the algorithm. Use the `InputFilter` parameter to exclude
+    #   fields, such as an ID column, from the input. If you want Amazon
+    #   SageMaker to pass the entire input dataset to the algorithm, accept
+    #   the default value `$`.
+    #
+    #   Examples: `"$"`, `"$[1:]"`, `"$.features"`
+    #   @return [String]
+    #
+    # @!attribute [rw] output_filter
+    #   A JSONPath expression used to select a portion of the joined dataset
+    #   to save in the output file for a batch transform job. If you want
+    #   Amazon SageMaker to store the entire input dataset in the output
+    #   file, leave the default value, `$`. If you specify indexes that
+    #   aren't within the dimension size of the joined dataset, you get an
+    #   error.
+    #
+    #   Examples: `"$"`, `"$[0,5:]"`, `"$.['id','SageMakerOutput']"`
+    #   @return [String]
+    #
+    # @!attribute [rw] join_source
+    #   Specifies the source of the data to join with the transformed data.
+    #   The valid values are `None` and `Input` The default value is `None`
+    #   which specifies not to join the input with the transformed data. If
+    #   you want the batch transform job to join the original input data
+    #   with the transformed data, set `JoinSource` to `Input`. To join
+    #   input and output, the batch transform job must satisfy the
+    #   [Requirements for Using Batch Transform I/O Join][1].
+    #
+    #   For JSON or JSONLines objects, such as a JSON array, Amazon
+    #   SageMaker adds the transformed data to the input JSON object in an
+    #   attribute called `SageMakerOutput`. The joined result for JSON must
+    #   be a key-value pair object. If the input is not a key-value pair
+    #   object, Amazon SageMaker creates a new JSON file. In the new JSON
+    #   file, and the input data is stored under the `SageMakerInput` key
+    #   and the results are stored in `SageMakerOutput`.
+    #
+    #   For CSV files, Amazon SageMaker combines the transformed data with
+    #   the input data at the end of the input data and stores it in the
+    #   output file. The joined data has the joined input data followed by
+    #   the transformed data and the output is a CSV file.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataProcessing AWS API Documentation
+    #
+    class DataProcessing < Struct.new(
+      :input_filter,
+      :output_filter,
+      :join_source)
       include Aws::Structure
     end
 
@@ -3409,7 +3501,9 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] stopping_condition
-    #   The duration allowed for model compilation.
+    #   Specifies a limit to how long a model compilation job can run. When
+    #   the job reaches the time limit, Amazon SageMaker ends the
+    #   compilation job. Use this API to cap model training costs.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] creation_time
@@ -4474,7 +4568,14 @@ module Aws::SageMaker
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   The condition under which to stop the training job.
+    #   Specifies a limit to how long a model training job can run. When the
+    #   job reaches the time limit, Amazon SageMaker ends the training job.
+    #   Use this API to cap model training costs.
+    #
+    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
+    #   signal, which delays job termination for 120 seconds. Algorithms can
+    #   use this 120-second window to save the model artifacts, so the
+    #   results of training are not lost.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] creation_time
@@ -4535,7 +4636,7 @@ module Aws::SageMaker
     #   distributed training, choose `True`. Encryption provides greater
     #   security for distributed training, but training might take longer.
     #   How long it takes depends on the amount of communication between
-    #   compute instances, especially if you use a deep learning algorithm
+    #   compute instances, especially if you use a deep learning algorithms
     #   in distributed training.
     #   @return [Boolean]
     #
@@ -4676,6 +4777,18 @@ module Aws::SageMaker
     #   labeling job that created the transform or training job.
     #   @return [String]
     #
+    # @!attribute [rw] data_processing
+    #   The data structure used to combine the input data and transformed
+    #   data from the batch transform output into a joined dataset and to
+    #   store it in an output file. It also contains information on how to
+    #   filter the input data and the joined dataset. For more information,
+    #   see [Batch Transform I/O Join][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html
+    #   @return [Types::DataProcessing]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJobResponse AWS API Documentation
     #
     class DescribeTransformJobResponse < Struct.new(
@@ -4694,7 +4807,8 @@ module Aws::SageMaker
       :creation_time,
       :transform_start_time,
       :transform_end_time,
-      :labeling_job_arn)
+      :labeling_job_arn,
+      :data_processing)
       include Aws::Structure
     end
 
@@ -5199,7 +5313,7 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass`
     #
-    #   **Asia Pacific (Tokyo (ap-northeast-1):**
+    #   **Asia Pacific (Tokyo) (ap-northeast-1):**
     #
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-BoundingBox`
     #
@@ -5209,7 +5323,7 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass`
     #
-    #   **Asia Pacific (Sydney (ap-southeast-1):**
+    #   **Asia Pacific (Sydney) (ap-southeast-1):**
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox`
     #
@@ -5538,16 +5652,9 @@ module Aws::SageMaker
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   Sets a maximum duration for the training jobs that the tuning job
-    #   launches. Use this parameter to limit model training costs.
-    #
-    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    #   signal. This delays job termination for 120 seconds. Algorithms
-    #   might use this 120-second window to save the model artifacts.
-    #
-    #   When Amazon SageMaker terminates a job because the stopping
-    #   condition has been met, training algorithms provided by Amazon
-    #   SageMaker save the intermediate results of the job.
+    #   Specifies a limit to how long a model hyperparameter training job
+    #   can run. When the job reaches the time limit, Amazon SageMaker ends
+    #   the training job. Use this API to cap model training costs.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] enable_network_isolation
@@ -6475,6 +6582,28 @@ module Aws::SageMaker
     # @!attribute [rw] kms_key_id
     #   The AWS Key Management Service ID of the key used to encrypt the
     #   output data, if any.
+    #
+    #   If you use a KMS key ID or an alias of your master key, the Amazon
+    #   SageMaker execution role must include permissions to call
+    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
+    #   uses the default KMS key for Amazon S3 for your role's account.
+    #   Amazon SageMaker uses server-side encryption with KMS-managed keys
+    #   for `LabelingJobOutputConfig`. If you use a bucket policy with an
+    #   `s3:PutObject` permission that only allows objects with server-side
+    #   encryption, set the condition key of
+    #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
+    #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
+    #   Simple Storage Service Developer Guide.*
+    #
+    #   The KMS key policy must grant permission to the IAM role that you
+    #   specify in your `CreateLabelingJob` request. For more information,
+    #   see [Using Key Policies in AWS KMS][2] in the *AWS Key Management
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutputConfig AWS API Documentation
@@ -8855,7 +8984,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288
+    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, sbe_c
     #       }
     #
     # @!attribute [rw] s3_output_location
@@ -8909,14 +9038,22 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you don't provide a KMS key ID, Amazon SageMaker uses the
-    #   default KMS key for Amazon S3 for your role's account. For more
+    #   If you use a KMS key ID or an alias of your master key, the Amazon
+    #   SageMaker execution role must include permissions to call
+    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
+    #   uses the default KMS key for Amazon S3 for your role's account.
+    #   Amazon SageMaker uses server-side encryption with KMS-managed keys
+    #   for `OutputDataConfig`. If you use a bucket policy with an
+    #   `s3:PutObject` permission that only allows objects with server-side
+    #   encryption, set the condition key of
+    #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
     #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
     #   Simple Storage Service Developer Guide.*
     #
     #   The KMS key policy must grant permission to the IAM role that you
-    #   specify in your `CreateTramsformJob` request. For more information,
-    #   see [Using Key Policies in AWS KMS][2] in the *AWS Key Management
+    #   specify in your `CreateTrainingJob`, `CreateTransformJob`, or
+    #   `CreateHyperParameterTuningJob` requests. For more information, see
+    #   [Using Key Policies in AWS KMS][2] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -9977,10 +10114,9 @@ module Aws::SageMaker
     #   examples, don't use status messages in if statements.
     #
     #   To have an overview of your training job's progress, view
-    #   `TrainingJobStatus` and `SecondaryStatus` in
-    #   DescribeTrainingJobResponse, and `StatusMessage` together. For
-    #   example, at the start of a training job, you might see the
-    #   following:
+    #   `TrainingJobStatus` and `SecondaryStatus` in DescribeTrainingJob,
+    #   and `StatusMessage` together. For example, at the start of a
+    #   training job, you might see the following:
     #
     #   * `TrainingJobStatus` - InProgress
     #
@@ -10219,20 +10355,28 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies how long model training can run. When model training reaches
-    # the limit, Amazon SageMaker ends the training job. Use this API to cap
-    # model training cost.
+    # Specifies a limit to how long a model training or compilation job can
+    # run. When the job reaches the time limit, Amazon SageMaker ends the
+    # training or compilation job. Use this API to cap model training costs.
     #
     # To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    # signal, which delays job termination for120 seconds. Algorithms might
+    # signal, which delays job termination for 120 seconds. Algorithms can
     # use this 120-second window to save the model artifacts, so the results
-    # of training is not lost.
+    # of training are not lost.
     #
-    # Training algorithms provided by Amazon SageMaker automatically saves
-    # the intermediate results of a model training job (it is best effort
-    # case, as model might not be ready to save as some stages, for example
-    # training just started). This intermediate data is a valid model
-    # artifact. You can use it to create a model (`CreateModel`).
+    # The training algorithms provided by Amazon SageMaker automatically
+    # save the intermediate results of a model training job when possible.
+    # This attempt to save artifacts is only a best effort case as model
+    # might not be in a state from which it can be saved. For example, if
+    # training has just started, the model might not be ready to save. When
+    # saved, this intermediate data is a valid model artifact. You can use
+    # it to create a model with `CreateModel`.
+    #
+    # <note markdown="1"> The Neural Topic Model (NTM) currently does not support saving
+    # intermediate model artifacts. When training NTMs, make sure that the
+    # maximum runtime is sufficient for the training job to complete.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass StoppingCondition
     #   data as a hash:
@@ -10242,10 +10386,10 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] max_runtime_in_seconds
-    #   The maximum length of time, in seconds, that the training job can
-    #   run. If model training does not complete during this time, Amazon
-    #   SageMaker ends the job. If value is not specified, default value is
-    #   1 day. Maximum value is 28 days.
+    #   The maximum length of time, in seconds, that the training or
+    #   compilation job can run. If job does not complete during this time,
+    #   Amazon SageMaker ends the job. If value is not specified, default
+    #   value is 1 day. The maximum value is 28 days.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation
@@ -10483,7 +10627,14 @@ module Aws::SageMaker
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   The condition under which to stop the training job.
+    #   Specifies a limit to how long a model training job can run. When the
+    #   job reaches the time limit, Amazon SageMaker ends the training job.
+    #   Use this API to cap model training costs.
+    #
+    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
+    #   signal, which delays job termination for 120 seconds. Algorithms can
+    #   use this 120-second window to save the model artifacts, so the
+    #   results of training are not lost.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] creation_time
@@ -10661,12 +10812,13 @@ module Aws::SageMaker
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   Sets a duration for training. Use this parameter to cap model
-    #   training costs.
+    #   Specifies a limit to how long a model training job can run. When the
+    #   job reaches the time limit, Amazon SageMaker ends the training job.
+    #   Use this API to cap model training costs.
     #
     #   To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
-    #   signal, which delays job termination for 120 seconds. Algorithms
-    #   might use this 120-second window to save the model artifacts.
+    #   signal, which delays job termination for 120 seconds. Algorithms can
+    #   use this 120-second window to save the model artifacts.
     #   @return [Types::StoppingCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobDefinition AWS API Documentation
@@ -11226,16 +11378,15 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] instance_type
-    #   The ML compute instance type for the transform job. For using
-    #   built-in algorithms to transform moderately sized datasets,
-    #   ml.m4.xlarge or `ml.m5.large` should suffice. There is no default
-    #   value for `InstanceType`.
+    #   The ML compute instance type for the transform job. If you are using
+    #   built-in algorithms to transform moderately sized datasets, we
+    #   recommend using ml.m4.xlarge or `ml.m5.large`instance types.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
     #   The number of ML compute instances to use in the transform job. For
-    #   distributed transform, provide a value greater than 1. The default
-    #   value is `1`.
+    #   distributed transform jobs, specify a value greater than 1. The
+    #   default value is `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
@@ -11594,7 +11745,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
-    #   instance. The default value is 5 GB.
+    #   instance. The default value is 5 GB. ML storage volumes are
+    #   encrypted, so Amazon SageMaker can't determine the amount of
+    #   available free space on the volume. Because of this, you can
+    #   increase the volume size when you update a notebook instance, but
+    #   you can't decrease the volume size. If you want to decrease the
+    #   size of the ML storage volume in use, create a new notebook instance
+    #   with the desired size.
     #   @return [Integer]
     #
     # @!attribute [rw] default_code_repository

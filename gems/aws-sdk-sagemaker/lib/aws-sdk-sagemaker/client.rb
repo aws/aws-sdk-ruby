@@ -665,7 +665,9 @@ module Aws::SageMaker
     #   and the target device the model runs on.
     #
     # @option params [required, Types::StoppingCondition] :stopping_condition
-    #   The duration allowed for model compilation.
+    #   Specifies a limit to how long a model compilation job can run. When
+    #   the job reaches the time limit, Amazon SageMaker ends the compilation
+    #   job. Use this API to cap model training costs.
     #
     # @return [Types::CreateCompilationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -683,7 +685,7 @@ module Aws::SageMaker
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
-    #       target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288
+    #       target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, sbe_c
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -1841,11 +1843,10 @@ module Aws::SageMaker
     # showing the Jupyter server home page from the notebook instance. The
     # console uses this API to get the URL and show the page.
     #
-    # You can restrict access to this API and to the URL that it returns to
-    # a list of IP addresses that you specify. To restrict access, attach an
-    # IAM policy that denies access to this API unless the call comes from
-    # an IP address in the specified list to every AWS Identity and Access
-    # Management user, group, or role used to access the notebook instance.
+    # IAM authorization policies for this API are also enforced for every
+    # HTTP request and WebSocket frame that attempts to connect to the
+    # notebook instance.For example, you can restrict access to this API and
+    # to the URL that it returns to a list of IP addresses that you specify.
     # Use the `NotIpAddress` condition operator and the `aws:SourceIP`
     # condition context key to specify the list of IP addresses that you
     # want to have access to the notebook instance. For more information,
@@ -1906,9 +1907,10 @@ module Aws::SageMaker
     # * `AlgorithmSpecification` - Identifies the training algorithm to use.
     #
     # * `HyperParameters` - Specify these algorithm-specific parameters to
-    #   influence the quality of the final model. For a list of
-    #   hyperparameters for each training algorithm provided by Amazon
-    #   SageMaker, see [Algorithms][1].
+    #   enable the estimation of model parameters during training.
+    #   Hyperparameters can be tuned to optimize this learning process. For
+    #   a list of hyperparameters for each training algorithm provided by
+    #   Amazon SageMaker, see [Algorithms][1].
     #
     # * `InputDataConfig` - Describes the training dataset and the Amazon S3
     #   location where it is stored.
@@ -1927,7 +1929,7 @@ module Aws::SageMaker
     #   must grant this role the necessary permissions so that Amazon
     #   SageMaker can successfully complete model training.
     #
-    # * `StoppingCondition` - Sets a duration for training. Use this
+    # * `StoppingCondition` - Sets a time limit for training. Use this
     #   parameter to cap model training costs.
     #
     # For more information about Amazon SageMaker, see [How It Works][2].
@@ -2030,17 +2032,14 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #
     # @option params [required, Types::StoppingCondition] :stopping_condition
-    #   Sets a duration for training. Use this parameter to cap model training
-    #   costs. To stop a job, Amazon SageMaker sends the algorithm the
-    #   `SIGTERM` signal, which delays job termination for 120 seconds.
-    #   Algorithms might use this 120-second window to save the model
-    #   artifacts.
+    #   Specifies a limit to how long a model training job can run. When the
+    #   job reaches the time limit, Amazon SageMaker ends the training job.
+    #   Use this API to cap model training costs.
     #
-    #   When Amazon SageMaker terminates a job because the stopping condition
-    #   has been met, training algorithms provided by Amazon SageMaker save
-    #   the intermediate results of the job. This intermediate data is a valid
-    #   model artifact. You can use it to create a model using the
-    #   `CreateModel` API.
+    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
+    #   signal, which delays job termination for 120 seconds. Algorithms can
+    #   use this 120-second window to save the model artifacts, so the results
+    #   of training are not lost.
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. For more information, see [Using Cost
@@ -2262,6 +2261,15 @@ module Aws::SageMaker
     #   Describes the resources, including ML instance types and ML instance
     #   count, to use for the transform job.
     #
+    # @option params [Types::DataProcessing] :data_processing
+    #   The data structure used for combining the input data and inference in
+    #   the output file. For more information, see [Batch Transform I/O
+    #   Join][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html
+    #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) An array of key-value pairs. For more information, see
     #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
@@ -2307,6 +2315,11 @@ module Aws::SageMaker
     #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
     #       instance_count: 1, # required
     #       volume_kms_key_id: "KmsKeyId",
+    #     },
+    #     data_processing: {
+    #       input_filter: "JsonPath",
+    #       output_filter: "JsonPath",
+    #       join_source: "Input", # accepts Input, None
     #     },
     #     tags: [
     #       {
@@ -2898,7 +2911,7 @@ module Aws::SageMaker
     #   resp.input_config.data_input_config #=> String
     #   resp.input_config.framework #=> String, one of "TENSORFLOW", "MXNET", "ONNX", "PYTORCH", "XGBOOST"
     #   resp.output_config.s3_output_location #=> String
-    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "jetson_nano", "rasp3b", "deeplens", "rk3399", "rk3288"
+    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "jetson_nano", "rasp3b", "deeplens", "rk3399", "rk3288", "sbe_c"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob AWS API Documentation
     #
@@ -3657,6 +3670,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTransformJobResponse#transform_start_time #transform_start_time} => Time
     #   * {Types::DescribeTransformJobResponse#transform_end_time #transform_end_time} => Time
     #   * {Types::DescribeTransformJobResponse#labeling_job_arn #labeling_job_arn} => String
+    #   * {Types::DescribeTransformJobResponse#data_processing #data_processing} => Types::DataProcessing
     #
     # @example Request syntax with placeholder values
     #
@@ -3692,6 +3706,9 @@ module Aws::SageMaker
     #   resp.transform_start_time #=> Time
     #   resp.transform_end_time #=> Time
     #   resp.labeling_job_arn #=> String
+    #   resp.data_processing.input_filter #=> String
+    #   resp.data_processing.output_filter #=> String
+    #   resp.data_processing.join_source #=> String, one of "Input", "None"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJob AWS API Documentation
     #
@@ -3999,7 +4016,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].creation_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_start_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_end_time #=> Time
-    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "jetson_nano", "rasp3b", "deeplens", "rk3399", "rk3288"
+    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "jetson_nano", "rasp3b", "deeplens", "rk3399", "rk3288", "sbe_c"
     #   resp.compilation_job_summaries[0].last_modified_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
     #   resp.next_token #=> String
@@ -5694,7 +5711,12 @@ module Aws::SageMaker
     #
     # @option params [Integer] :volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
-    #   instance. The default value is 5 GB.
+    #   instance. The default value is 5 GB. ML storage volumes are encrypted,
+    #   so Amazon SageMaker can't determine the amount of available free
+    #   space on the volume. Because of this, you can increase the volume size
+    #   when you update a notebook instance, but you can't decrease the
+    #   volume size. If you want to decrease the size of the ML storage volume
+    #   in use, create a new notebook instance with the desired size.
     #
     # @option params [String] :default_code_repository
     #   The Git repository to associate with the notebook instance as its
@@ -5910,7 +5932,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
