@@ -1069,6 +1069,11 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] tags
     #   One or more tags.
+    #
+    #   If the plan is for an existing provisioned product, the product must
+    #   have a `RESOURCE_UPDATE` constraint with
+    #   `TagUpdatesOnProvisionedProduct` set to `ALLOWED` to allow tag
+    #   updates.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisionedProductPlanInput AWS API Documentation
@@ -4626,13 +4631,19 @@ module Aws::ServiceCatalog
     #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
+    # @!attribute [rw] guidance
+    #   Information set by the administrator to provide guidance to end
+    #   users about which provisioning artifacts to use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifact AWS API Documentation
     #
     class ProvisioningArtifact < Struct.new(
       :id,
       :name,
       :description,
-      :created_time)
+      :created_time,
+      :guidance)
       include Aws::Structure
     end
 
@@ -4669,6 +4680,11 @@ module Aws::ServiceCatalog
     #   Indicates whether the product version is active.
     #   @return [Boolean]
     #
+    # @!attribute [rw] guidance
+    #   Information set by the administrator to provide guidance to end
+    #   users about which provisioning artifacts to use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactDetail AWS API Documentation
     #
     class ProvisioningArtifactDetail < Struct.new(
@@ -4677,7 +4693,8 @@ module Aws::ServiceCatalog
       :description,
       :type,
       :created_time,
-      :active)
+      :active,
+      :guidance)
       include Aws::Structure
     end
 
@@ -6535,6 +6552,7 @@ module Aws::ServiceCatalog
     #         name: "ProvisioningArtifactName",
     #         description: "ProvisioningArtifactDescription",
     #         active: false,
+    #         guidance: "DEFAULT", # accepts DEFAULT, DEPRECATED
     #       }
     #
     # @!attribute [rw] accept_language
@@ -6567,6 +6585,18 @@ module Aws::ServiceCatalog
     #   Indicates whether the product version is active.
     #   @return [Boolean]
     #
+    # @!attribute [rw] guidance
+    #   Information set by the administrator to provide guidance to end
+    #   users about which provisioning artifacts to use.
+    #
+    #   The `DEFAULT` value indicates that the product version is active.
+    #
+    #   The administrator can set the guidance to `DEPRECATED` to inform
+    #   users that the product version is deprecated. Users are able to make
+    #   updates to a provisioned product of a deprecated version but cannot
+    #   launch new provisioned products using a deprecated version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactInput AWS API Documentation
     #
     class UpdateProvisioningArtifactInput < Struct.new(
@@ -6575,7 +6605,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :name,
       :description,
-      :active)
+      :active,
+      :guidance)
       include Aws::Structure
     end
 
