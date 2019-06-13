@@ -331,6 +331,9 @@ module Aws::GuardDuty
     #         enable: false, # required
     #         client_token: "ClientToken",
     #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] enable
@@ -350,12 +353,17 @@ module Aws::GuardDuty
     #   updates published.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be added to a new detector resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorRequest AWS API Documentation
     #
     class CreateDetectorRequest < Struct.new(
       :enable,
       :client_token,
-      :finding_publishing_frequency)
+      :finding_publishing_frequency,
+      :tags)
       include Aws::Structure
     end
 
@@ -398,6 +406,9 @@ module Aws::GuardDuty
     #           },
     #         },
     #         client_token: "ClientToken",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] detector_id
@@ -436,6 +447,10 @@ module Aws::GuardDuty
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be added to a new filter resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilterRequest AWS API Documentation
     #
     class CreateFilterRequest < Struct.new(
@@ -445,7 +460,8 @@ module Aws::GuardDuty
       :action,
       :rank,
       :finding_criteria,
-      :client_token)
+      :client_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -470,6 +486,9 @@ module Aws::GuardDuty
     #         location: "Location", # required
     #         activate: false, # required
     #         client_token: "ClientToken",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] detector_id
@@ -504,6 +523,10 @@ module Aws::GuardDuty
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be added to a new IP set resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetRequest AWS API Documentation
     #
     class CreateIPSetRequest < Struct.new(
@@ -512,7 +535,8 @@ module Aws::GuardDuty
       :format,
       :location,
       :activate,
-      :client_token)
+      :client_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -608,6 +632,9 @@ module Aws::GuardDuty
     #         location: "Location", # required
     #         activate: false, # required
     #         client_token: "ClientToken",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] detector_id
@@ -642,6 +669,10 @@ module Aws::GuardDuty
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be added to a new Threat List resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetRequest AWS API Documentation
     #
     class CreateThreatIntelSetRequest < Struct.new(
@@ -650,7 +681,8 @@ module Aws::GuardDuty
       :format,
       :location,
       :activate,
-      :client_token)
+      :client_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -1140,6 +1172,10 @@ module Aws::GuardDuty
     #   Detector last update timestamp.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags of the detector resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorResponse AWS API Documentation
     #
     class GetDetectorResponse < Struct.new(
@@ -1147,7 +1183,8 @@ module Aws::GuardDuty
       :finding_publishing_frequency,
       :service_role,
       :status,
-      :updated_at)
+      :updated_at,
+      :tags)
       include Aws::Structure
     end
 
@@ -1199,6 +1236,10 @@ module Aws::GuardDuty
     #   findings.
     #   @return [Types::FindingCriteria]
     #
+    # @!attribute [rw] tags
+    #   The tags of the filter resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilterResponse AWS API Documentation
     #
     class GetFilterResponse < Struct.new(
@@ -1206,7 +1247,8 @@ module Aws::GuardDuty
       :description,
       :action,
       :rank,
-      :finding_criteria)
+      :finding_criteria,
+      :tags)
       include Aws::Structure
     end
 
@@ -1357,13 +1399,18 @@ module Aws::GuardDuty
     #   The status of ipSet file uploaded.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags of the IP set resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetResponse AWS API Documentation
     #
     class GetIPSetResponse < Struct.new(
       :name,
       :format,
       :location,
-      :status)
+      :status,
+      :tags)
       include Aws::Structure
     end
 
@@ -1499,13 +1546,18 @@ module Aws::GuardDuty
     #   The status of threatIntelSet file uploaded.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags of the Threat List resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetResponse AWS API Documentation
     #
     class GetThreatIntelSetResponse < Struct.new(
       :name,
       :format,
       :location,
-      :status)
+      :status,
+      :tags)
       include Aws::Structure
     end
 
@@ -2034,6 +2086,34 @@ module Aws::GuardDuty
     class ListMembersResponse < Struct.new(
       :members,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GuardDutyArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -2615,6 +2695,36 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GuardDutyArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be added to a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UnarchiveFindingsRequest
     #   data as a hash:
     #
@@ -2659,6 +2769,34 @@ module Aws::GuardDuty
       :result)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GuardDutyArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys to remove from a resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDetectorRequest
     #   data as a hash:

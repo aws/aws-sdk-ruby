@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2019-06-13)
+------------------
+
+* Feature - This release adds support for AWS Cloud Map as a service discovery method for virtual nodes.
+
 1.9.0 (2019-05-21)
 ------------------
 

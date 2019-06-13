@@ -433,8 +433,8 @@ module Aws::AppMesh
     #
     # A virtual node acts as a logical pointer to a particular task group,
     # such as an Amazon ECS service or a Kubernetes deployment. When you
-    # create a virtual node, you must specify the DNS service discovery
-    # hostname for your task group.
+    # create a virtual node, you can specify the service discovery
+    # information for your task group.
     #
     # Any inbound traffic that your virtual node expects should be specified
     # as a `listener`. Any outbound traffic that your virtual node expects
@@ -522,6 +522,16 @@ module Aws::AppMesh
     #         },
     #       },
     #       service_discovery: {
+    #         aws_cloud_map: {
+    #           attributes: [
+    #             {
+    #               key: "AwsCloudMapInstanceAttributeKey", # required
+    #               value: "AwsCloudMapInstanceAttributeValue", # required
+    #             },
+    #           ],
+    #           namespace_name: "AwsCloudMapName", # required
+    #           service_name: "AwsCloudMapName", # required
+    #         },
     #         dns: {
     #           hostname: "Hostname", # required
     #         },
@@ -557,6 +567,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -614,7 +629,7 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
-    #       listeners: [ # required
+    #       listeners: [
     #         {
     #           port_mapping: { # required
     #             port: 1, # required
@@ -871,6 +886,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -1096,6 +1116,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -1770,6 +1795,16 @@ module Aws::AppMesh
     #         },
     #       },
     #       service_discovery: {
+    #         aws_cloud_map: {
+    #           attributes: [
+    #             {
+    #               key: "AwsCloudMapInstanceAttributeKey", # required
+    #               value: "AwsCloudMapInstanceAttributeValue", # required
+    #             },
+    #           ],
+    #           namespace_name: "AwsCloudMapName", # required
+    #           service_name: "AwsCloudMapName", # required
+    #         },
     #         dns: {
     #           hostname: "Hostname", # required
     #         },
@@ -1799,6 +1834,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -1842,7 +1882,7 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
-    #       listeners: [ # required
+    #       listeners: [
     #         {
     #           port_mapping: { # required
     #             port: 1, # required
@@ -1954,7 +1994,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

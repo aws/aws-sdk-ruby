@@ -4580,6 +4580,10 @@ module Aws::ElastiCache
     #   The endpoint of the primary node in this node group (shard).
     #   @return [Types::Endpoint]
     #
+    # @!attribute [rw] reader_endpoint
+    #   The endpoint of the replica nodes in this node group (shard).
+    #   @return [Types::Endpoint]
+    #
     # @!attribute [rw] slots
     #   The keyspace for this node group (shard).
     #   @return [String]
@@ -4595,6 +4599,7 @@ module Aws::ElastiCache
       :node_group_id,
       :status,
       :primary_endpoint,
+      :reader_endpoint,
       :slots,
       :node_group_members)
       include Aws::Structure

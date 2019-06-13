@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-06-13)
+------------------
+
+* Feature - This release is to add support for reader endpoint for cluster-mode disabled Amazon ElastiCache for Redis clusters.
+
 1.18.0 (2019-06-04)
 ------------------
 

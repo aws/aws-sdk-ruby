@@ -418,7 +418,7 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/Amazon/red-ug/applying-updates.html
+    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/applying-updates.html
     #
     # @option params [required, Array<String>] :replication_group_ids
     #   The replication group IDs
@@ -2034,6 +2034,8 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].status #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].reader_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].reader_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].slots #=> String
     #   resp.replication_group.node_groups[0].node_group_members #=> Array
     #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
@@ -2343,6 +2345,8 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].status #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].reader_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].reader_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].slots #=> String
     #   resp.replication_group.node_groups[0].node_group_members #=> Array
     #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
@@ -2703,6 +2707,8 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].status #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].reader_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].reader_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].slots #=> String
     #   resp.replication_group.node_groups[0].node_group_members #=> Array
     #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
@@ -5047,6 +5053,8 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].node_groups[0].status #=> String
     #   resp.replication_groups[0].node_groups[0].primary_endpoint.address #=> String
     #   resp.replication_groups[0].node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_groups[0].node_groups[0].reader_endpoint.address #=> String
+    #   resp.replication_groups[0].node_groups[0].reader_endpoint.port #=> Integer
     #   resp.replication_groups[0].node_groups[0].slots #=> String
     #   resp.replication_groups[0].node_groups[0].node_group_members #=> Array
     #   resp.replication_groups[0].node_groups[0].node_group_members[0].cache_cluster_id #=> String
@@ -6093,6 +6101,8 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].status #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].reader_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].reader_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].slots #=> String
     #   resp.replication_group.node_groups[0].node_group_members #=> Array
     #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
@@ -7143,6 +7153,8 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].status #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].reader_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].reader_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].slots #=> String
     #   resp.replication_group.node_groups[0].node_group_members #=> Array
     #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
@@ -7253,6 +7265,8 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].status #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].reader_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].reader_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].slots #=> String
     #   resp.replication_group.node_groups[0].node_group_members #=> Array
     #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
@@ -7800,6 +7814,8 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].status #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].reader_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].reader_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].slots #=> String
     #   resp.replication_group.node_groups[0].node_group_members #=> Array
     #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
@@ -7842,7 +7858,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
