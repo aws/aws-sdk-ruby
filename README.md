@@ -397,7 +397,7 @@ to be backwards compatible.
 | Amazon Athena                                         | Aws::Athena                          | aws-sdk-athena                          | 2017-05-18  |
 | Amazon Chime                                          | Aws::Chime                           | aws-sdk-chime                           | 2018-05-01  |
 | Amazon CloudDirectory                                 | Aws::CloudDirectory                  | aws-sdk-clouddirectory                  | 2017-01-11  |
-| Amazon CloudFront                                     | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2018-11-05  |
+| Amazon CloudFront                                     | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2019-03-26  |
 | Amazon CloudHSM                                       | Aws::CloudHSM                        | aws-sdk-cloudhsm                        | 2014-05-30  |
 | Amazon CloudSearch                                    | Aws::CloudSearch                     | aws-sdk-cloudsearch                     | 2013-01-01  |
 | Amazon CloudSearch Domain                             | Aws::CloudSearchDomain               | aws-sdk-cloudsearchdomain               | 2013-01-01  |

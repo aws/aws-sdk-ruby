@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2019-06-14)
+------------------
+
+* Feature - Correction to enumerations in EC2 client.
+
 1.92.0 (2019-06-13)
 ------------------
 

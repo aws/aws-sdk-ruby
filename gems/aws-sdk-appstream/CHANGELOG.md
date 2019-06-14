@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-06-14)
+------------------
+
+* Feature - Added 2 new values(WINDOWS_SERVER_2016, WINDOWS_SERVER_2019) for PlatformType enum.
+
 1.29.0 (2019-05-21)
 ------------------
 
