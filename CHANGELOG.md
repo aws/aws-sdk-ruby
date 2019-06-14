@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppStream - Updated the API for Amazon AppStream.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Personalize - Updated the documentation for Amazon Personalize.
+
+* Feature - Aws::CloudFront - Added support for the new 2019-03-26 API version of Amazon CloudFront.
+
 2.11.294 (2019-06-13)
 ------------------
 

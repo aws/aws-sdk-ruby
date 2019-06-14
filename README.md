@@ -352,7 +352,7 @@ to be backwards compatible.
 | Amazon Athena                                         | Athena                          | 2017-05-18  |
 | Amazon Chime                                          | Chime                           | 2018-05-01  |
 | Amazon CloudDirectory                                 | CloudDirectory                  | 2017-01-11  |
-| Amazon CloudFront                                     | CloudFront                      | 2018-11-05  |
+| Amazon CloudFront                                     | CloudFront                      | 2019-03-26  |
 | Amazon CloudHSM                                       | CloudHSM                        | 2014-05-30  |
 | Amazon CloudSearch                                    | CloudSearch                     | 2013-01-01  |
 | Amazon CloudSearch Domain                             | CloudSearchDomain               | 2013-01-01  |
