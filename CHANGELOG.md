@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.295 (2019-06-14)
+------------------
+
 * Feature - Aws::AppStream - Updated the API for Amazon AppStream.
 
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
