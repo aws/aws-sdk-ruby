@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.296 (2019-06-17)
+------------------
+
 * Feature - Aws::Neptune - Updated the API, and documentation for Amazon Neptune.
 
 * Feature - Aws::RoboMaker - Updated the API, and documentation for AWS RoboMaker.
