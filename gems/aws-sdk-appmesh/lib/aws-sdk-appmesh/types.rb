@@ -71,6 +71,16 @@ module Aws::AppMesh
     #             },
     #           },
     #           service_discovery: {
+    #             aws_cloud_map: {
+    #               attributes: [
+    #                 {
+    #                   key: "AwsCloudMapInstanceAttributeKey", # required
+    #                   value: "AwsCloudMapInstanceAttributeValue", # required
+    #                 },
+    #               ],
+    #               namespace_name: "AwsCloudMapName", # required
+    #               service_name: "AwsCloudMapName", # required
+    #             },
     #             dns: {
     #               hostname: "Hostname", # required
     #             },
@@ -201,7 +211,7 @@ module Aws::AppMesh
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
     #         spec: { # required
-    #           listeners: [ # required
+    #           listeners: [
     #             {
     #               port_mapping: { # required
     #                 port: 1, # required
@@ -1123,6 +1133,37 @@ module Aws::AppMesh
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # An object representing the AWS Cloud Map attribute information for
+    # your virtual node.
+    #
+    # @note When making an API call, you may pass AwsCloudMapInstanceAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         key: "AwsCloudMapInstanceAttributeKey", # required
+    #         value: "AwsCloudMapInstanceAttributeValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of an AWS Cloud Map service instance attribute key. Any AWS
+    #   Cloud Map service instance that contains the specified key and value
+    #   is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of an AWS Cloud Map service instance attribute key. Any
+    #   AWS Cloud Map service instance that contains the specified key and
+    #   value is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapInstanceAttribute AWS API Documentation
+    #
+    class AwsCloudMapInstanceAttribute < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
     # An object representing the specification of a virtual service.
     #
     # @note When making an API call, you may pass VirtualServiceSpec
@@ -1401,7 +1442,7 @@ module Aws::AppMesh
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
     #         spec: { # required
-    #           listeners: [ # required
+    #           listeners: [
     #             {
     #               port_mapping: { # required
     #                 port: 1, # required
@@ -1575,7 +1616,7 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
-    #         listeners: [ # required
+    #         listeners: [
     #           {
     #             port_mapping: { # required
     #               port: 1, # required
@@ -1650,6 +1691,16 @@ module Aws::AppMesh
     #           },
     #         },
     #         service_discovery: {
+    #           aws_cloud_map: {
+    #             attributes: [
+    #               {
+    #                 key: "AwsCloudMapInstanceAttributeKey", # required
+    #                 value: "AwsCloudMapInstanceAttributeValue", # required
+    #               },
+    #             ],
+    #             namespace_name: "AwsCloudMapName", # required
+    #             service_name: "AwsCloudMapName", # required
+    #           },
     #           dns: {
     #             hostname: "Hostname", # required
     #           },
@@ -2378,6 +2429,47 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object representing the AWS Cloud Map service discovery information
+    # for your virtual node.
+    #
+    # @note When making an API call, you may pass AwsCloudMapServiceDiscovery
+    #   data as a hash:
+    #
+    #       {
+    #         attributes: [
+    #           {
+    #             key: "AwsCloudMapInstanceAttributeKey", # required
+    #             value: "AwsCloudMapInstanceAttributeValue", # required
+    #           },
+    #         ],
+    #         namespace_name: "AwsCloudMapName", # required
+    #         service_name: "AwsCloudMapName", # required
+    #       }
+    #
+    # @!attribute [rw] attributes
+    #   A string map that contains attributes with values that you can use
+    #   to filter instances by any custom attribute that you specified when
+    #   you registered the instance. Only instances that match all of the
+    #   specified key/value pairs will be returned.
+    #   @return [Array<Types::AwsCloudMapInstanceAttribute>]
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of the AWS Cloud Map namespace to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the AWS Cloud Map service to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapServiceDiscovery AWS API Documentation
+    #
+    class AwsCloudMapServiceDiscovery < Struct.new(
+      :attributes,
+      :namespace_name,
+      :service_name)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_service
     #   A full description of the virtual service that was updated.
     #   @return [Types::VirtualServiceData]
@@ -2513,6 +2605,16 @@ module Aws::AppMesh
     #             },
     #           },
     #           service_discovery: {
+    #             aws_cloud_map: {
+    #               attributes: [
+    #                 {
+    #                   key: "AwsCloudMapInstanceAttributeKey", # required
+    #                   value: "AwsCloudMapInstanceAttributeValue", # required
+    #                 },
+    #               ],
+    #               namespace_name: "AwsCloudMapName", # required
+    #               service_name: "AwsCloudMapName", # required
+    #             },
     #             dns: {
     #               hostname: "Hostname", # required
     #             },
@@ -2815,10 +2917,24 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         aws_cloud_map: {
+    #           attributes: [
+    #             {
+    #               key: "AwsCloudMapInstanceAttributeKey", # required
+    #               value: "AwsCloudMapInstanceAttributeValue", # required
+    #             },
+    #           ],
+    #           namespace_name: "AwsCloudMapName", # required
+    #           service_name: "AwsCloudMapName", # required
+    #         },
     #         dns: {
     #           hostname: "Hostname", # required
     #         },
     #       }
+    #
+    # @!attribute [rw] aws_cloud_map
+    #   Specifies any AWS Cloud Map information for the virtual node.
+    #   @return [Types::AwsCloudMapServiceDiscovery]
     #
     # @!attribute [rw] dns
     #   Specifies the DNS information for the virtual node.
@@ -2827,6 +2943,7 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ServiceDiscovery AWS API Documentation
     #
     class ServiceDiscovery < Struct.new(
+      :aws_cloud_map,
       :dns)
       include Aws::Structure
     end

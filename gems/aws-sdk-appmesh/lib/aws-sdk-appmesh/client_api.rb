@@ -13,6 +13,12 @@ module Aws::AppMesh
 
     AccessLog = Shapes::StructureShape.new(name: 'AccessLog')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AwsCloudMapInstanceAttribute = Shapes::StructureShape.new(name: 'AwsCloudMapInstanceAttribute')
+    AwsCloudMapInstanceAttributeKey = Shapes::StringShape.new(name: 'AwsCloudMapInstanceAttributeKey')
+    AwsCloudMapInstanceAttributeValue = Shapes::StringShape.new(name: 'AwsCloudMapInstanceAttributeValue')
+    AwsCloudMapInstanceAttributes = Shapes::ListShape.new(name: 'AwsCloudMapInstanceAttributes')
+    AwsCloudMapName = Shapes::StringShape.new(name: 'AwsCloudMapName')
+    AwsCloudMapServiceDiscovery = Shapes::StructureShape.new(name: 'AwsCloudMapServiceDiscovery')
     Backend = Shapes::StructureShape.new(name: 'Backend')
     Backends = Shapes::ListShape.new(name: 'Backends')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -162,6 +168,17 @@ module Aws::AppMesh
 
     AccessLog.add_member(:file, Shapes::ShapeRef.new(shape: FileAccessLog, location_name: "file"))
     AccessLog.struct_class = Types::AccessLog
+
+    AwsCloudMapInstanceAttribute.add_member(:key, Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttributeKey, required: true, location_name: "key"))
+    AwsCloudMapInstanceAttribute.add_member(:value, Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttributeValue, required: true, location_name: "value"))
+    AwsCloudMapInstanceAttribute.struct_class = Types::AwsCloudMapInstanceAttribute
+
+    AwsCloudMapInstanceAttributes.member = Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttribute)
+
+    AwsCloudMapServiceDiscovery.add_member(:attributes, Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttributes, location_name: "attributes"))
+    AwsCloudMapServiceDiscovery.add_member(:namespace_name, Shapes::ShapeRef.new(shape: AwsCloudMapName, required: true, location_name: "namespaceName"))
+    AwsCloudMapServiceDiscovery.add_member(:service_name, Shapes::ShapeRef.new(shape: AwsCloudMapName, required: true, location_name: "serviceName"))
+    AwsCloudMapServiceDiscovery.struct_class = Types::AwsCloudMapServiceDiscovery
 
     Backend.add_member(:virtual_service, Shapes::ShapeRef.new(shape: VirtualServiceBackend, location_name: "virtualService"))
     Backend.struct_class = Types::Backend
@@ -482,6 +499,7 @@ module Aws::AppMesh
     RouteStatus.add_member(:status, Shapes::ShapeRef.new(shape: RouteStatusCode, required: true, location_name: "status"))
     RouteStatus.struct_class = Types::RouteStatus
 
+    ServiceDiscovery.add_member(:aws_cloud_map, Shapes::ShapeRef.new(shape: AwsCloudMapServiceDiscovery, location_name: "awsCloudMap"))
     ServiceDiscovery.add_member(:dns, Shapes::ShapeRef.new(shape: DnsServiceDiscovery, location_name: "dns"))
     ServiceDiscovery.struct_class = Types::ServiceDiscovery
 
@@ -623,7 +641,7 @@ module Aws::AppMesh
     VirtualRouterServiceProvider.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     VirtualRouterServiceProvider.struct_class = Types::VirtualRouterServiceProvider
 
-    VirtualRouterSpec.add_member(:listeners, Shapes::ShapeRef.new(shape: VirtualRouterListeners, required: true, location_name: "listeners"))
+    VirtualRouterSpec.add_member(:listeners, Shapes::ShapeRef.new(shape: VirtualRouterListeners, location_name: "listeners"))
     VirtualRouterSpec.struct_class = Types::VirtualRouterSpec
 
     VirtualRouterStatus.add_member(:status, Shapes::ShapeRef.new(shape: VirtualRouterStatusCode, required: true, location_name: "status"))

@@ -1067,6 +1067,7 @@ module Aws::AppStream
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateUsageReportSubscriptionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateUsageReportSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
       end)
 

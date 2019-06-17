@@ -2648,7 +2648,7 @@ module Aws::Personalize
     # @!attribute [rw] recipe_type
     #   One of the following values:
     #
-    #   * SEARCH\_PERSONALIZATION
+    #   * PERSONALIZED\_RANKING
     #
     #   * RELATED\_ITEMS
     #

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2019-06-14)
+------------------
+
+* Feature - Correction to enumerations in EC2 client.
+
+1.92.0 (2019-06-13)
+------------------
+
+* Feature - G4 instances are Amazon EC2 instances based on NVIDIA T4 GPUs and are designed to provide cost-effective machine learning inference for applications, like image classification, object detection, recommender systems, automated speech recognition, and language translation. G4 instances are also a cost-effective platform for building and running graphics-intensive applications, such as remote graphics workstations, video transcoding, photo-realistic design, and game streaming in the cloud. To get started with G4 instances visit https://aws.amazon.com/ec2/instance-types/g4.
+
 1.91.0 (2019-06-07)
 ------------------
 

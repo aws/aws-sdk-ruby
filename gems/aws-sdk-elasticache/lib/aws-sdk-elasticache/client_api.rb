@@ -798,6 +798,7 @@ module Aws::ElastiCache
     NodeGroup.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupId"))
     NodeGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     NodeGroup.add_member(:primary_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "PrimaryEndpoint"))
+    NodeGroup.add_member(:reader_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "ReaderEndpoint"))
     NodeGroup.add_member(:slots, Shapes::ShapeRef.new(shape: String, location_name: "Slots"))
     NodeGroup.add_member(:node_group_members, Shapes::ShapeRef.new(shape: NodeGroupMemberList, location_name: "NodeGroupMembers"))
     NodeGroup.struct_class = Types::NodeGroup

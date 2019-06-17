@@ -327,6 +327,9 @@ module Aws::GuardDuty
     #   A enum value that specifies how frequently customer got Finding
     #   updates published.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be added to a new detector resource.
+    #
     # @return [Types::CreateDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDetectorResponse#detector_id #detector_id} => String
@@ -337,6 +340,9 @@ module Aws::GuardDuty
     #     enable: false, # required
     #     client_token: "ClientToken",
     #     finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -383,6 +389,9 @@ module Aws::GuardDuty
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be added to a new filter resource.
+    #
     # @return [Types::CreateFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFilterResponse#name #name} => String
@@ -414,6 +423,9 @@ module Aws::GuardDuty
     #       },
     #     },
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -459,6 +471,9 @@ module Aws::GuardDuty
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be added to a new IP set resource.
+    #
     # @return [Types::CreateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIPSetResponse#ip_set_id #ip_set_id} => String
@@ -472,6 +487,9 @@ module Aws::GuardDuty
     #     location: "Location", # required
     #     activate: false, # required
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -588,6 +606,9 @@ module Aws::GuardDuty
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be added to a new Threat List resource.
+    #
     # @return [Types::CreateThreatIntelSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateThreatIntelSetResponse#threat_intel_set_id #threat_intel_set_id} => String
@@ -601,6 +622,9 @@ module Aws::GuardDuty
     #     location: "Location", # required
     #     activate: false, # required
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -889,6 +913,7 @@ module Aws::GuardDuty
     #   * {Types::GetDetectorResponse#service_role #service_role} => String
     #   * {Types::GetDetectorResponse#status #status} => String
     #   * {Types::GetDetectorResponse#updated_at #updated_at} => String
+    #   * {Types::GetDetectorResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -903,6 +928,8 @@ module Aws::GuardDuty
     #   resp.service_role #=> String
     #   resp.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.updated_at #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector AWS API Documentation
     #
@@ -928,6 +955,7 @@ module Aws::GuardDuty
     #   * {Types::GetFilterResponse#action #action} => String
     #   * {Types::GetFilterResponse#rank #rank} => Integer
     #   * {Types::GetFilterResponse#finding_criteria #finding_criteria} => Types::FindingCriteria
+    #   * {Types::GetFilterResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -959,6 +987,8 @@ module Aws::GuardDuty
     #   resp.finding_criteria.criterion["String"].greater_than_or_equal #=> Integer
     #   resp.finding_criteria.criterion["String"].less_than #=> Integer
     #   resp.finding_criteria.criterion["String"].less_than_or_equal #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilter AWS API Documentation
     #
@@ -1184,6 +1214,7 @@ module Aws::GuardDuty
     #   * {Types::GetIPSetResponse#format #format} => String
     #   * {Types::GetIPSetResponse#location #location} => String
     #   * {Types::GetIPSetResponse#status #status} => String
+    #   * {Types::GetIPSetResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1198,6 +1229,8 @@ module Aws::GuardDuty
     #   resp.format #=> String, one of "TXT", "STIX", "OTX_CSV", "ALIEN_VAULT", "PROOF_POINT", "FIRE_EYE"
     #   resp.location #=> String
     #   resp.status #=> String, one of "INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet AWS API Documentation
     #
@@ -1322,6 +1355,7 @@ module Aws::GuardDuty
     #   * {Types::GetThreatIntelSetResponse#format #format} => String
     #   * {Types::GetThreatIntelSetResponse#location #location} => String
     #   * {Types::GetThreatIntelSetResponse#status #status} => String
+    #   * {Types::GetThreatIntelSetResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1336,6 +1370,8 @@ module Aws::GuardDuty
     #   resp.format #=> String, one of "TXT", "STIX", "OTX_CSV", "ALIEN_VAULT", "PROOF_POINT", "FIRE_EYE"
     #   resp.location #=> String
     #   resp.status #=> String, one of "INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet AWS API Documentation
     #
@@ -1706,6 +1742,38 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Lists tags for a resource. Tagging is currently supported for
+    # detectors, finding filters, IP sets, and Threat Intel sets, with a
+    # limit of 50 tags per resource. When invoked, this operation returns
+    # all assigned tags for a given resource..
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "GuardDutyArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Lists the ThreatIntelSets of the GuardDuty service specified by the
     # detector ID.
     #
@@ -1830,6 +1898,34 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Adds tags to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to be added to a resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "GuardDutyArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
     # Unarchives Amazon GuardDuty findings specified by the list of finding
     # IDs.
     #
@@ -1855,6 +1951,32 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def unarchive_findings(params = {}, options = {})
       req = build_request(:unarchive_findings, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys to remove from a resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "GuardDutyArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2092,7 +2214,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

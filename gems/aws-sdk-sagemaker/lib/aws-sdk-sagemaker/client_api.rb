@@ -107,6 +107,7 @@ module Aws::SageMaker
     CreateWorkteamResponse = Shapes::StructureShape.new(name: 'CreateWorkteamResponse')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
     DataInputConfig = Shapes::StringShape.new(name: 'DataInputConfig')
+    DataProcessing = Shapes::StructureShape.new(name: 'DataProcessing')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DeleteAlgorithmInput = Shapes::StructureShape.new(name: 'DeleteAlgorithmInput')
     DeleteCodeRepositoryInput = Shapes::StructureShape.new(name: 'DeleteCodeRepositoryInput')
@@ -227,6 +228,8 @@ module Aws::SageMaker
     IntegerParameterRanges = Shapes::ListShape.new(name: 'IntegerParameterRanges')
     JobReferenceCode = Shapes::StringShape.new(name: 'JobReferenceCode')
     JobReferenceCodeContains = Shapes::StringShape.new(name: 'JobReferenceCodeContains')
+    JoinSource = Shapes::StringShape.new(name: 'JoinSource')
+    JsonPath = Shapes::StringShape.new(name: 'JsonPath')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LabelAttributeName = Shapes::StringShape.new(name: 'LabelAttributeName')
     LabelCounter = Shapes::IntegerShape.new(name: 'LabelCounter')
@@ -811,6 +814,7 @@ module Aws::SageMaker
     CreateTransformJobRequest.add_member(:transform_input, Shapes::ShapeRef.new(shape: TransformInput, required: true, location_name: "TransformInput"))
     CreateTransformJobRequest.add_member(:transform_output, Shapes::ShapeRef.new(shape: TransformOutput, required: true, location_name: "TransformOutput"))
     CreateTransformJobRequest.add_member(:transform_resources, Shapes::ShapeRef.new(shape: TransformResources, required: true, location_name: "TransformResources"))
+    CreateTransformJobRequest.add_member(:data_processing, Shapes::ShapeRef.new(shape: DataProcessing, location_name: "DataProcessing"))
     CreateTransformJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTransformJobRequest.struct_class = Types::CreateTransformJobRequest
 
@@ -826,6 +830,11 @@ module Aws::SageMaker
 
     CreateWorkteamResponse.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, location_name: "WorkteamArn"))
     CreateWorkteamResponse.struct_class = Types::CreateWorkteamResponse
+
+    DataProcessing.add_member(:input_filter, Shapes::ShapeRef.new(shape: JsonPath, location_name: "InputFilter"))
+    DataProcessing.add_member(:output_filter, Shapes::ShapeRef.new(shape: JsonPath, location_name: "OutputFilter"))
+    DataProcessing.add_member(:join_source, Shapes::ShapeRef.new(shape: JoinSource, location_name: "JoinSource"))
+    DataProcessing.struct_class = Types::DataProcessing
 
     DataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataSource, location_name: "S3DataSource"))
     DataSource.struct_class = Types::DataSource
@@ -1100,6 +1109,7 @@ module Aws::SageMaker
     DescribeTransformJobResponse.add_member(:transform_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformStartTime"))
     DescribeTransformJobResponse.add_member(:transform_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformEndTime"))
     DescribeTransformJobResponse.add_member(:labeling_job_arn, Shapes::ShapeRef.new(shape: LabelingJobArn, location_name: "LabelingJobArn"))
+    DescribeTransformJobResponse.add_member(:data_processing, Shapes::ShapeRef.new(shape: DataProcessing, location_name: "DataProcessing"))
     DescribeTransformJobResponse.struct_class = Types::DescribeTransformJobResponse
 
     DescribeWorkteamRequest.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))

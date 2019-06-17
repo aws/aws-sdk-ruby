@@ -70,7 +70,7 @@
     "models": "cloudformation/2010-05-15"
   },
   "CloudFront": {
-    "models": "cloudfront/2018-11-05"
+    "models": "cloudfront/2019-03-26"
   },
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
