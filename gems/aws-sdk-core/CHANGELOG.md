@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `:client_side_monitoring_host` configuration for CSM
+
 3.55.0 (2019-06-14)
 ------------------
 

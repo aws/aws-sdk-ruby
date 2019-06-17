@@ -131,6 +131,14 @@ module Aws
         expect(publisher.agent_port).to eq(1234)
       end
 
+      it "allow the setting of an agent host" do
+        publisher = Aws::ClientSideMonitoring::Publisher.new
+        expect(publisher.agent_host).to eq("127.0.0.1")
+
+        publisher = Aws::ClientSideMonitoring::Publisher.new(agent_host: 'dnshost')
+        expect(publisher.agent_host).to eq('dnshost')
+      end
+
       it 'publishes JSON messages to a UDP socket' do
         publisher = Aws::ClientSideMonitoring::Publisher.new(agent_port: 1234)
         stub_socket = double
