@@ -143,6 +143,7 @@ module Aws::RoboMaker
     S3Etag = Shapes::StringShape.new(name: 'S3Etag')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
+    ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SimulationApplicationConfig = Shapes::StructureShape.new(name: 'SimulationApplicationConfig')
     SimulationApplicationConfigs = Shapes::ListShape.new(name: 'SimulationApplicationConfigs')
     SimulationApplicationNames = Shapes::ListShape.new(name: 'SimulationApplicationNames')
@@ -676,6 +677,9 @@ module Aws::RoboMaker
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: GenericString)
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     SimulationApplicationConfig.add_member(:application, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "application"))
     SimulationApplicationConfig.add_member(:application_version, Shapes::ShapeRef.new(shape: Version, location_name: "applicationVersion"))
     SimulationApplicationConfig.add_member(:launch_config, Shapes::ShapeRef.new(shape: LaunchConfig, required: true, location_name: "launchConfig"))
@@ -987,6 +991,7 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_fleet, Seahorse::Model::Operation.new.tap do |o|

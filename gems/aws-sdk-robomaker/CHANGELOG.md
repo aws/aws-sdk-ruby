@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2019-06-17)
+------------------
+
+* Feature - Add the ServiceUnavailableException (503) into CreateSimulationJob API.
+
 1.9.0 (2019-05-28)
 ------------------
 

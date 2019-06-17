@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-06-17)
+------------------
+
+* Feature - Restrict concurrent calls by a single customer account for CreatePortfolioShare and DeletePortfolioShare when sharing/unsharing to an Organization.
+
 1.28.0 (2019-06-12)
 ------------------
 

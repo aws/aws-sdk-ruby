@@ -215,6 +215,9 @@ module Aws::Neptune
     # The configuration setting for the log types to be enabled for export
     # to CloudWatch Logs for a specific DB instance or DB cluster.
     #
+    # The `EnableLogTypes` and `DisableLogTypes` arrays determine which logs
+    # will be exported (or not exported) to CloudWatch Logs.
+    #
     # @note When making an API call, you may pass CloudwatchLogsExportConfiguration
     #   data as a hash:
     #
@@ -547,6 +550,7 @@ module Aws::Neptune
     #         kms_key_id: "String",
     #         pre_signed_url: "String",
     #         enable_iam_database_authentication: false,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -764,6 +768,11 @@ module Aws::Neptune
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBClusterMessage AWS API Documentation
     #
     class CreateDBClusterMessage < Struct.new(
@@ -788,7 +797,8 @@ module Aws::Neptune
       :storage_encrypted,
       :kms_key_id,
       :pre_signed_url,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -1814,6 +1824,11 @@ module Aws::Neptune
     #   Coordinated Time (UTC).
     #   @return [Time]
     #
+    # @!attribute [rw] enabled_cloudwatch_logs_exports
+    #   A list of log types that this DB cluster is configured to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -1851,7 +1866,8 @@ module Aws::Neptune
       :associated_roles,
       :iam_database_authentication_enabled,
       :clone_group_id,
-      :cluster_create_time)
+      :cluster_create_time,
+      :enabled_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -4803,6 +4819,10 @@ module Aws::Neptune
     #         preferred_backup_window: "String",
     #         preferred_maintenance_window: "String",
     #         enable_iam_database_authentication: false,
+    #         cloudwatch_logs_export_configuration: {
+    #           enable_log_types: ["String"],
+    #           disable_log_types: ["String"],
+    #         },
     #         engine_version: "String",
     #       }
     #
@@ -4944,6 +4964,11 @@ module Aws::Neptune
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB cluster.
+    #   @return [Types::CloudwatchLogsExportConfiguration]
+    #
     # @!attribute [rw] engine_version
     #   The version number of the database engine to which you want to
     #   upgrade. Changing this parameter results in an outage. The change is
@@ -4969,6 +4994,7 @@ module Aws::Neptune
       :preferred_backup_window,
       :preferred_maintenance_window,
       :enable_iam_database_authentication,
+      :cloudwatch_logs_export_configuration,
       :engine_version)
       include Aws::Structure
     end
@@ -6480,6 +6506,7 @@ module Aws::Neptune
     #         ],
     #         kms_key_id: "String",
     #         enable_iam_database_authentication: false,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #         db_cluster_parameter_group_name: "String",
     #       }
     #
@@ -6593,6 +6620,11 @@ module Aws::Neptune
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to Amazon
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with the new
     #   DB cluster.
@@ -6621,6 +6653,7 @@ module Aws::Neptune
       :tags,
       :kms_key_id,
       :enable_iam_database_authentication,
+      :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name)
       include Aws::Structure
     end
@@ -6660,6 +6693,7 @@ module Aws::Neptune
     #         ],
     #         kms_key_id: "String",
     #         enable_iam_database_authentication: false,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #         db_cluster_parameter_group_name: "String",
     #       }
     #
@@ -6676,8 +6710,17 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] restore_type
-    #   The type of restore to be performed. The only type of restore
-    #   currently supported is `full-copy` (the default).
+    #   The type of restore to be performed. You can specify one of the
+    #   following values:
+    #
+    #   * `full-copy` - The new DB cluster is restored as a full copy of the
+    #     source DB cluster.
+    #
+    #   * `copy-on-write` - The new DB cluster is restored as a clone of the
+    #     source DB cluster.
+    #
+    #   If you don't specify a `RestoreType` value, then the new DB cluster
+    #   is restored as a full copy of the source DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] source_db_cluster_identifier
@@ -6785,6 +6828,11 @@ module Aws::Neptune
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with the new
     #   DB cluster.
@@ -6812,6 +6860,7 @@ module Aws::Neptune
       :tags,
       :kms_key_id,
       :enable_iam_database_authentication,
+      :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name)
       include Aws::Structure
     end

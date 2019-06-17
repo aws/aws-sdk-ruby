@@ -2947,6 +2947,18 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # The request has failed due to a temporary failure of the server.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a simulation application configuration.
     #
     # @note When making an API call, you may pass SimulationApplicationConfig

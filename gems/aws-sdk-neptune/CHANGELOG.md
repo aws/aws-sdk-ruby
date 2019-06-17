@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2019-06-17)
+------------------
+
+* Feature - This release adds a feature to configure Amazon Neptune to publish audit logs to Amazon CloudWatch Logs.
+
 1.15.0 (2019-05-21)
 ------------------
 
