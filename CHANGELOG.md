@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Updated the API, and documentation for AWS Resource Groups Tagging API.
+
 2.11.296 (2019-06-17)
 ------------------
 
