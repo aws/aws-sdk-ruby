@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2019-06-18)
+------------------
+
+* Feature - You can now launch new 12xlarge, 24xlarge, and metal instance sizes on the Amazon EC2 compute optimized C5 instance types featuring 2nd Gen Intel Xeon Scalable Processors.
+
 1.94.0 (2019-06-17)
 ------------------
 
