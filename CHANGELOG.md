@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.298 (2019-06-19)
+------------------
+
 * Feature - Aws::EKS - Updated the documentation for Amazon Elastic Container Service for Kubernetes.
 
 2.11.297 (2019-06-18)
