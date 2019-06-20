@@ -1974,6 +1974,7 @@ module Aws::RDS
     #           },
     #         ],
     #         deletion_protection: false,
+    #         max_allocated_storage: 1,
     #       }
     #
     # @!attribute [rw] db_name
@@ -2827,6 +2828,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -2874,7 +2880,8 @@ module Aws::RDS
       :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :deletion_protection)
+      :deletion_protection,
+      :max_allocated_storage)
       include Aws::Structure
     end
 
@@ -5311,6 +5318,11 @@ module Aws::RDS
     #   Specifies the listener connection endpoint for SQL Server Always On.
     #   @return [Types::Endpoint]
     #
+    # @!attribute [rw] max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -5370,7 +5382,8 @@ module Aws::RDS
       :processor_features,
       :deletion_protection,
       :associated_roles,
-      :listener_endpoint)
+      :listener_endpoint,
+      :max_allocated_storage)
       include Aws::Structure
     end
 
@@ -10244,6 +10257,7 @@ module Aws::RDS
     #         ],
     #         use_default_processor_features: false,
     #         deletion_protection: false,
+    #         max_allocated_storage: 1,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -10867,6 +10881,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -10909,7 +10928,8 @@ module Aws::RDS
       :cloudwatch_logs_export_configuration,
       :processor_features,
       :use_default_processor_features,
-      :deletion_protection)
+      :deletion_protection,
+      :max_allocated_storage)
       include Aws::Structure
     end
 
@@ -11960,6 +11980,11 @@ module Aws::RDS
     #   A list of the supported DB engine modes.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supports_storage_autoscaling
+    #   Whether or not Amazon RDS can automatically scale storage for DB
+    #   instances that use the specified instance class.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -11984,7 +12009,8 @@ module Aws::RDS
       :min_iops_per_gib,
       :max_iops_per_gib,
       :available_processor_features,
-      :supported_engine_modes)
+      :supported_engine_modes,
+      :supports_storage_autoscaling)
       include Aws::Structure
     end
 
@@ -16015,13 +16041,19 @@ module Aws::RDS
     #   be between 3 and 10 times storage.
     #   @return [Array<Types::DoubleRange>]
     #
+    # @!attribute [rw] supports_storage_autoscaling
+    #   Whether or not Amazon RDS can automatically scale storage for DB
+    #   instances that use the new instance class.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidStorageOptions AWS API Documentation
     #
     class ValidStorageOptions < Struct.new(
       :storage_type,
       :storage_size,
       :provisioned_iops,
-      :iops_to_storage_ratio)
+      :iops_to_storage_ratio,
+      :supports_storage_autoscaling)
       include Aws::Structure
     end
 

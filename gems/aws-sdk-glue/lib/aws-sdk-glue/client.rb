@@ -855,6 +855,7 @@ module Aws::Glue
     #
     #   resp.triggers #=> Array
     #   resp.triggers[0].name #=> String
+    #   resp.triggers[0].workflow_name #=> String
     #   resp.triggers[0].id #=> String
     #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.triggers[0].state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
@@ -865,13 +866,16 @@ module Aws::Glue
     #   resp.triggers[0].actions[0].arguments #=> Hash
     #   resp.triggers[0].actions[0].arguments["GenericString"] #=> String
     #   resp.triggers[0].actions[0].timeout #=> Integer
-    #   resp.triggers[0].actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.triggers[0].actions[0].security_configuration #=> String
+    #   resp.triggers[0].actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.triggers[0].actions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.logical #=> String, one of "AND", "ANY"
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.triggers[0].predicate.conditions[0].job_name #=> String
     #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
+    #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #   resp.triggers_not_found #=> Array
     #   resp.triggers_not_found[0] #=> String
     #
@@ -881,6 +885,188 @@ module Aws::Glue
     # @param [Hash] params ({})
     def batch_get_triggers(params = {}, options = {})
       req = build_request(:batch_get_triggers, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of resource metadata for a given list of workflow
+    # names. After calling the `ListWorkflows` operation, you can call this
+    # operation to access the data to which you have been granted
+    # permissions. This operation supports all IAM permissions, including
+    # permission conditions that uses tags.
+    #
+    # @option params [required, Array<String>] :names
+    #   A list of workflow names, which may be the names returned from the
+    #   `ListWorkflows` operation.
+    #
+    # @option params [Boolean] :include_graph
+    #   Specifies whether to include a graph when returning the workflow
+    #   resource metadata.
+    #
+    # @return [Types::BatchGetWorkflowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetWorkflowsResponse#workflows #workflows} => Array&lt;Types::Workflow&gt;
+    #   * {Types::BatchGetWorkflowsResponse#missing_workflows #missing_workflows} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_workflows({
+    #     names: ["NameString"], # required
+    #     include_graph: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflows #=> Array
+    #   resp.workflows[0].name #=> String
+    #   resp.workflows[0].description #=> String
+    #   resp.workflows[0].default_run_properties #=> Hash
+    #   resp.workflows[0].default_run_properties["IdString"] #=> String
+    #   resp.workflows[0].created_on #=> Time
+    #   resp.workflows[0].last_modified_on #=> Time
+    #   resp.workflows[0].last_run.name #=> String
+    #   resp.workflows[0].last_run.workflow_run_id #=> String
+    #   resp.workflows[0].last_run.workflow_run_properties #=> Hash
+    #   resp.workflows[0].last_run.workflow_run_properties["IdString"] #=> String
+    #   resp.workflows[0].last_run.started_on #=> Time
+    #   resp.workflows[0].last_run.completed_on #=> Time
+    #   resp.workflows[0].last_run.status #=> String, one of "RUNNING", "COMPLETED"
+    #   resp.workflows[0].last_run.statistics.total_actions #=> Integer
+    #   resp.workflows[0].last_run.statistics.timeout_actions #=> Integer
+    #   resp.workflows[0].last_run.statistics.failed_actions #=> Integer
+    #   resp.workflows[0].last_run.statistics.stopped_actions #=> Integer
+    #   resp.workflows[0].last_run.statistics.succeeded_actions #=> Integer
+    #   resp.workflows[0].last_run.statistics.running_actions #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes #=> Array
+    #   resp.workflows[0].last_run.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
+    #   resp.workflows[0].last_run.graph.nodes[0].name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].unique_id #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.id #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.description #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.schedule #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.actions #=> Array
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.actions[0].job_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.actions[0].arguments #=> Hash
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.actions[0].arguments["GenericString"] #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.actions[0].timeout #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.actions[0].security_configuration #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.actions[0].crawler_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.logical #=> String, one of "AND", "ANY"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs #=> Array
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].id #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].error_message #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].predecessor_runs #=> Array
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].job_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].run_id #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].allocated_capacity #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls #=> Array
+    #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
+    #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
+    #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].error_message #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].log_group #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].log_stream #=> String
+    #   resp.workflows[0].last_run.graph.edges #=> Array
+    #   resp.workflows[0].last_run.graph.edges[0].source_id #=> String
+    #   resp.workflows[0].last_run.graph.edges[0].destination_id #=> String
+    #   resp.workflows[0].graph.nodes #=> Array
+    #   resp.workflows[0].graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
+    #   resp.workflows[0].graph.nodes[0].name #=> String
+    #   resp.workflows[0].graph.nodes[0].unique_id #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.name #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.workflow_name #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.id #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.description #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.schedule #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.actions #=> Array
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.actions[0].job_name #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.actions[0].arguments #=> Hash
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.actions[0].arguments["GenericString"] #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.actions[0].timeout #=> Integer
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.actions[0].security_configuration #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.actions[0].crawler_name #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.logical #=> String, one of "AND", "ANY"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs #=> Array
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].id #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].error_message #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].predecessor_runs #=> Array
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].job_name #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].run_id #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].allocated_capacity #=> Integer
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflows[0].graph.nodes[0].crawler_details.crawls #=> Array
+    #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
+    #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
+    #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].error_message #=> String
+    #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].log_group #=> String
+    #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].log_stream #=> String
+    #   resp.workflows[0].graph.edges #=> Array
+    #   resp.workflows[0].graph.edges[0].source_id #=> String
+    #   resp.workflows[0].graph.edges[0].destination_id #=> String
+    #   resp.missing_workflows #=> Array
+    #   resp.missing_workflows[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetWorkflows AWS API Documentation
+    #
+    # @overload batch_get_workflows(params = {})
+    # @param [Hash] params ({})
+    def batch_get_workflows(params = {}, options = {})
+      req = build_request(:batch_get_workflows, params)
       req.send_request(options)
     end
 
@@ -1412,8 +1598,28 @@ module Aws::Glue
     #
     #   [1]: https://aws.amazon.com/glue/pricing/
     #
+    # @option params [String] :security_configuration
+    #   The name of the `SecurityConfiguration` structure to be used with this
+    #   job.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to use with this job. You may use tags to limit access to the
+    #   job. For more information about tags in AWS Glue, see [AWS Tags in AWS
+    #   Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #
     # @option params [Types::NotificationProperty] :notification_property
     #   Specifies configuration properties of a job notification.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   when a job runs.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
@@ -1429,26 +1635,6 @@ module Aws::Glue
     #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
     #     of memory, 128 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for memory-intensive jobs.
-    #
-    # @option params [Integer] :number_of_workers
-    #   The number of workers of a defined `workerType` that are allocated
-    #   when a job runs.
-    #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
-    #
-    # @option params [String] :security_configuration
-    #   The name of the `SecurityConfiguration` structure to be used with this
-    #   job.
-    #
-    # @option params [Hash<String,String>] :tags
-    #   The tags to use with this job. You may use tags to limit access to the
-    #   job. For more information about tags in AWS Glue, see [AWS Tags in AWS
-    #   Glue][1] in the developer guide.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1479,15 +1665,15 @@ module Aws::Glue
     #     allocated_capacity: 1,
     #     timeout: 1,
     #     max_capacity: 1.0,
-    #     notification_property: {
-    #       notify_delay_after: 1,
-    #     },
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
-    #     number_of_workers: 1,
     #     security_configuration: "NameString",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     notification_property: {
+    #       notify_delay_after: 1,
+    #     },
+    #     number_of_workers: 1,
+    #     worker_type: "NameString",
     #   })
     #
     # @example Response structure
@@ -1789,6 +1975,9 @@ module Aws::Glue
     # @option params [required, String] :name
     #   The name of the trigger.
     #
+    # @option params [String] :workflow_name
+    #   The name of the workflow associated with the trigger.
+    #
     # @option params [required, String] :type
     #   The type of the new trigger.
     #
@@ -1835,6 +2024,7 @@ module Aws::Glue
     #
     #   resp = client.create_trigger({
     #     name: "NameString", # required
+    #     workflow_name: "NameString",
     #     type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND
     #     schedule: "GenericString",
     #     predicate: {
@@ -1844,6 +2034,8 @@ module Aws::Glue
     #           logical_operator: "EQUALS", # accepts EQUALS
     #           job_name: "NameString",
     #           state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #           crawler_name: "NameString",
+    #           crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
     #         },
     #       ],
     #     },
@@ -1854,10 +2046,11 @@ module Aws::Glue
     #           "GenericString" => "GenericString",
     #         },
     #         timeout: 1,
+    #         security_configuration: "NameString",
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
-    #         security_configuration: "NameString",
+    #         crawler_name: "NameString",
     #       },
     #     ],
     #     description: "DescriptionString",
@@ -1920,6 +2113,52 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_user_defined_function(params = {}, options = {})
       req = build_request(:create_user_defined_function, params)
+      req.send_request(options)
+    end
+
+    # Creates a new workflow.
+    #
+    # @option params [required, String] :name
+    #   The name to be assigned to the workflow. It should be unique within
+    #   your account.
+    #
+    # @option params [String] :description
+    #   A description of the workflow.
+    #
+    # @option params [Hash<String,String>] :default_run_properties
+    #   A collection of properties to be used as part of each execution of the
+    #   workflow.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be used with this workflow.
+    #
+    # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkflowResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workflow({
+    #     name: "NameString", # required
+    #     description: "GenericString",
+    #     default_run_properties: {
+    #       "IdString" => "GenericString",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateWorkflow AWS API Documentation
+    #
+    # @overload create_workflow(params = {})
+    # @param [Hash] params ({})
+    def create_workflow(params = {}, options = {})
+      req = build_request(:create_workflow, params)
       req.send_request(options)
     end
 
@@ -2309,6 +2548,34 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_user_defined_function(params = {}, options = {})
       req = build_request(:delete_user_defined_function, params)
+      req.send_request(options)
+    end
+
+    # Deletes a workflow.
+    #
+    # @option params [required, String] :name
+    #   Name of the workflow to be deleted.
+    #
+    # @return [Types::DeleteWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteWorkflowResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workflow({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteWorkflow AWS API Documentation
+    #
+    # @overload delete_workflow(params = {})
+    # @param [Hash] params ({})
+    def delete_workflow(params = {}, options = {})
+      req = build_request(:delete_workflow, params)
       req.send_request(options)
     end
 
@@ -3146,11 +3413,11 @@ module Aws::Glue
     #   resp.job_run.execution_time #=> Integer
     #   resp.job_run.timeout #=> Integer
     #   resp.job_run.max_capacity #=> Float
-    #   resp.job_run.notification_property.notify_delay_after #=> Integer
     #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
     #   resp.job_run.number_of_workers #=> Integer
     #   resp.job_run.security_configuration #=> String
     #   resp.job_run.log_group_name #=> String
+    #   resp.job_run.notification_property.notify_delay_after #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -3207,11 +3474,11 @@ module Aws::Glue
     #   resp.job_runs[0].execution_time #=> Integer
     #   resp.job_runs[0].timeout #=> Integer
     #   resp.job_runs[0].max_capacity #=> Float
-    #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
     #   resp.job_runs[0].number_of_workers #=> Integer
     #   resp.job_runs[0].security_configuration #=> String
     #   resp.job_runs[0].log_group_name #=> String
+    #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -4216,6 +4483,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.trigger.name #=> String
+    #   resp.trigger.workflow_name #=> String
     #   resp.trigger.id #=> String
     #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
@@ -4226,13 +4494,16 @@ module Aws::Glue
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
     #   resp.trigger.actions[0].timeout #=> Integer
-    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.trigger.actions[0].security_configuration #=> String
+    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.trigger.actions[0].crawler_name #=> String
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
     #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.trigger.predicate.conditions[0].crawler_name #=> String
+    #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTrigger AWS API Documentation
     #
@@ -4273,6 +4544,7 @@ module Aws::Glue
     #
     #   resp.triggers #=> Array
     #   resp.triggers[0].name #=> String
+    #   resp.triggers[0].workflow_name #=> String
     #   resp.triggers[0].id #=> String
     #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.triggers[0].state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
@@ -4283,13 +4555,16 @@ module Aws::Glue
     #   resp.triggers[0].actions[0].arguments #=> Hash
     #   resp.triggers[0].actions[0].arguments["GenericString"] #=> String
     #   resp.triggers[0].actions[0].timeout #=> Integer
-    #   resp.triggers[0].actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.triggers[0].actions[0].security_configuration #=> String
+    #   resp.triggers[0].actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.triggers[0].actions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.logical #=> String, one of "AND", "ANY"
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.triggers[0].predicate.conditions[0].job_name #=> String
     #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
+    #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggers AWS API Documentation
@@ -4398,6 +4673,437 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_user_defined_functions(params = {}, options = {})
       req = build_request(:get_user_defined_functions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves resource metadata for a workflow.
+    #
+    # @option params [required, String] :name
+    #   The name of the workflow to retrieve.
+    #
+    # @option params [Boolean] :include_graph
+    #   Specifies whether to include a graph when returning the workflow
+    #   resource metadata.
+    #
+    # @return [Types::GetWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowResponse#workflow #workflow} => Types::Workflow
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow({
+    #     name: "NameString", # required
+    #     include_graph: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow.name #=> String
+    #   resp.workflow.description #=> String
+    #   resp.workflow.default_run_properties #=> Hash
+    #   resp.workflow.default_run_properties["IdString"] #=> String
+    #   resp.workflow.created_on #=> Time
+    #   resp.workflow.last_modified_on #=> Time
+    #   resp.workflow.last_run.name #=> String
+    #   resp.workflow.last_run.workflow_run_id #=> String
+    #   resp.workflow.last_run.workflow_run_properties #=> Hash
+    #   resp.workflow.last_run.workflow_run_properties["IdString"] #=> String
+    #   resp.workflow.last_run.started_on #=> Time
+    #   resp.workflow.last_run.completed_on #=> Time
+    #   resp.workflow.last_run.status #=> String, one of "RUNNING", "COMPLETED"
+    #   resp.workflow.last_run.statistics.total_actions #=> Integer
+    #   resp.workflow.last_run.statistics.timeout_actions #=> Integer
+    #   resp.workflow.last_run.statistics.failed_actions #=> Integer
+    #   resp.workflow.last_run.statistics.stopped_actions #=> Integer
+    #   resp.workflow.last_run.statistics.succeeded_actions #=> Integer
+    #   resp.workflow.last_run.statistics.running_actions #=> Integer
+    #   resp.workflow.last_run.graph.nodes #=> Array
+    #   resp.workflow.last_run.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
+    #   resp.workflow.last_run.graph.nodes[0].name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].unique_id #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.id #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.description #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.schedule #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.actions #=> Array
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.actions[0].job_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.actions[0].arguments #=> Hash
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.actions[0].arguments["GenericString"] #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.actions[0].timeout #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.actions[0].security_configuration #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.actions[0].crawler_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.logical #=> String, one of "AND", "ANY"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs #=> Array
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].id #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].error_message #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].predecessor_runs #=> Array
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].job_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].run_id #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].allocated_capacity #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls #=> Array
+    #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
+    #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
+    #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].error_message #=> String
+    #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].log_group #=> String
+    #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].log_stream #=> String
+    #   resp.workflow.last_run.graph.edges #=> Array
+    #   resp.workflow.last_run.graph.edges[0].source_id #=> String
+    #   resp.workflow.last_run.graph.edges[0].destination_id #=> String
+    #   resp.workflow.graph.nodes #=> Array
+    #   resp.workflow.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
+    #   resp.workflow.graph.nodes[0].name #=> String
+    #   resp.workflow.graph.nodes[0].unique_id #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.name #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.id #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.description #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.schedule #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.actions #=> Array
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.actions[0].job_name #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.actions[0].arguments #=> Hash
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.actions[0].arguments["GenericString"] #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.actions[0].timeout #=> Integer
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.actions[0].security_configuration #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.actions[0].crawler_name #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.logical #=> String, one of "AND", "ANY"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs #=> Array
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].id #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].error_message #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].predecessor_runs #=> Array
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].job_name #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].run_id #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].allocated_capacity #=> Integer
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflow.graph.nodes[0].crawler_details.crawls #=> Array
+    #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
+    #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
+    #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].error_message #=> String
+    #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].log_group #=> String
+    #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].log_stream #=> String
+    #   resp.workflow.graph.edges #=> Array
+    #   resp.workflow.graph.edges[0].source_id #=> String
+    #   resp.workflow.graph.edges[0].destination_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflow AWS API Documentation
+    #
+    # @overload get_workflow(params = {})
+    # @param [Hash] params ({})
+    def get_workflow(params = {}, options = {})
+      req = build_request(:get_workflow, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the metadata for a given workflow run.
+    #
+    # @option params [required, String] :name
+    #   Name of the workflow being run.
+    #
+    # @option params [required, String] :run_id
+    #   The ID of the workflow run.
+    #
+    # @option params [Boolean] :include_graph
+    #   Specifies whether to include the workflow graph in response or not.
+    #
+    # @return [Types::GetWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowRunResponse#run #run} => Types::WorkflowRun
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow_run({
+    #     name: "NameString", # required
+    #     run_id: "IdString", # required
+    #     include_graph: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run.name #=> String
+    #   resp.run.workflow_run_id #=> String
+    #   resp.run.workflow_run_properties #=> Hash
+    #   resp.run.workflow_run_properties["IdString"] #=> String
+    #   resp.run.started_on #=> Time
+    #   resp.run.completed_on #=> Time
+    #   resp.run.status #=> String, one of "RUNNING", "COMPLETED"
+    #   resp.run.statistics.total_actions #=> Integer
+    #   resp.run.statistics.timeout_actions #=> Integer
+    #   resp.run.statistics.failed_actions #=> Integer
+    #   resp.run.statistics.stopped_actions #=> Integer
+    #   resp.run.statistics.succeeded_actions #=> Integer
+    #   resp.run.statistics.running_actions #=> Integer
+    #   resp.run.graph.nodes #=> Array
+    #   resp.run.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
+    #   resp.run.graph.nodes[0].name #=> String
+    #   resp.run.graph.nodes[0].unique_id #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.name #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.id #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.description #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.schedule #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.actions #=> Array
+    #   resp.run.graph.nodes[0].trigger_details.trigger.actions[0].job_name #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.actions[0].arguments #=> Hash
+    #   resp.run.graph.nodes[0].trigger_details.trigger.actions[0].arguments["GenericString"] #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.actions[0].timeout #=> Integer
+    #   resp.run.graph.nodes[0].trigger_details.trigger.actions[0].security_configuration #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.run.graph.nodes[0].trigger_details.trigger.actions[0].crawler_name #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.logical #=> String, one of "AND", "ANY"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.run.graph.nodes[0].job_details.job_runs #=> Array
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].id #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].error_message #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].predecessor_runs #=> Array
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].job_name #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].run_id #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].allocated_capacity #=> Integer
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.run.graph.nodes[0].crawler_details.crawls #=> Array
+    #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
+    #   resp.run.graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
+    #   resp.run.graph.nodes[0].crawler_details.crawls[0].error_message #=> String
+    #   resp.run.graph.nodes[0].crawler_details.crawls[0].log_group #=> String
+    #   resp.run.graph.nodes[0].crawler_details.crawls[0].log_stream #=> String
+    #   resp.run.graph.edges #=> Array
+    #   resp.run.graph.edges[0].source_id #=> String
+    #   resp.run.graph.edges[0].destination_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRun AWS API Documentation
+    #
+    # @overload get_workflow_run(params = {})
+    # @param [Hash] params ({})
+    def get_workflow_run(params = {}, options = {})
+      req = build_request(:get_workflow_run, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the workflow run properties which were set during the run.
+    #
+    # @option params [required, String] :name
+    #   Name of the workflow which was run.
+    #
+    # @option params [required, String] :run_id
+    #   The ID of the workflow run whose run properties should be returned.
+    #
+    # @return [Types::GetWorkflowRunPropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowRunPropertiesResponse#run_properties #run_properties} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow_run_properties({
+    #     name: "NameString", # required
+    #     run_id: "IdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run_properties #=> Hash
+    #   resp.run_properties["IdString"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRunProperties AWS API Documentation
+    #
+    # @overload get_workflow_run_properties(params = {})
+    # @param [Hash] params ({})
+    def get_workflow_run_properties(params = {}, options = {})
+      req = build_request(:get_workflow_run_properties, params)
+      req.send_request(options)
+    end
+
+    # Retrieves metadata for all runs of a given workflow.
+    #
+    # @option params [required, String] :name
+    #   Name of the workflow whose metadata of runs should be returned.
+    #
+    # @option params [Boolean] :include_graph
+    #   Specifies whether to include the workflow graph in response or not.
+    #
+    # @option params [String] :next_token
+    #   The maximum size of the response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of workflow runs to be included in the response.
+    #
+    # @return [Types::GetWorkflowRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowRunsResponse#runs #runs} => Array&lt;Types::WorkflowRun&gt;
+    #   * {Types::GetWorkflowRunsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow_runs({
+    #     name: "NameString", # required
+    #     include_graph: false,
+    #     next_token: "GenericString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.runs #=> Array
+    #   resp.runs[0].name #=> String
+    #   resp.runs[0].workflow_run_id #=> String
+    #   resp.runs[0].workflow_run_properties #=> Hash
+    #   resp.runs[0].workflow_run_properties["IdString"] #=> String
+    #   resp.runs[0].started_on #=> Time
+    #   resp.runs[0].completed_on #=> Time
+    #   resp.runs[0].status #=> String, one of "RUNNING", "COMPLETED"
+    #   resp.runs[0].statistics.total_actions #=> Integer
+    #   resp.runs[0].statistics.timeout_actions #=> Integer
+    #   resp.runs[0].statistics.failed_actions #=> Integer
+    #   resp.runs[0].statistics.stopped_actions #=> Integer
+    #   resp.runs[0].statistics.succeeded_actions #=> Integer
+    #   resp.runs[0].statistics.running_actions #=> Integer
+    #   resp.runs[0].graph.nodes #=> Array
+    #   resp.runs[0].graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
+    #   resp.runs[0].graph.nodes[0].name #=> String
+    #   resp.runs[0].graph.nodes[0].unique_id #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.name #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.workflow_name #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.id #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.description #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.schedule #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.actions #=> Array
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.actions[0].job_name #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.actions[0].arguments #=> Hash
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.actions[0].arguments["GenericString"] #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.actions[0].timeout #=> Integer
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.actions[0].security_configuration #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.actions[0].crawler_name #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.logical #=> String, one of "AND", "ANY"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs #=> Array
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].id #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].error_message #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].predecessor_runs #=> Array
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].job_name #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].predecessor_runs[0].run_id #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].allocated_capacity #=> Integer
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.runs[0].graph.nodes[0].crawler_details.crawls #=> Array
+    #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
+    #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].completed_on #=> Time
+    #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].error_message #=> String
+    #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].log_group #=> String
+    #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].log_stream #=> String
+    #   resp.runs[0].graph.edges #=> Array
+    #   resp.runs[0].graph.edges[0].source_id #=> String
+    #   resp.runs[0].graph.edges[0].destination_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRuns AWS API Documentation
+    #
+    # @overload get_workflow_runs(params = {})
+    # @param [Hash] params ({})
+    def get_workflow_runs(params = {}, options = {})
+      req = build_request(:get_workflow_runs, params)
       req.send_request(options)
     end
 
@@ -4623,6 +5329,41 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Lists names of workflows created in the account.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of a list to return.
+    #
+    # @return [Types::ListWorkflowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkflowsResponse#workflows #workflows} => Array&lt;String&gt;
+    #   * {Types::ListWorkflowsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workflows({
+    #     next_token: "GenericString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflows #=> Array
+    #   resp.workflows[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListWorkflows AWS API Documentation
+    #
+    # @overload list_workflows(params = {})
+    # @param [Hash] params ({})
+    def list_workflows(params = {}, options = {})
+      req = build_request(:list_workflows, params)
+      req.send_request(options)
+    end
+
     # Sets the security configuration for a specified catalog. After the
     # configuration has been set, the specified encryption is applied to
     # every catalog write thereafter.
@@ -4701,6 +5442,41 @@ module Aws::Glue
     # @param [Hash] params ({})
     def put_resource_policy(params = {}, options = {})
       req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Puts the specified workflow run properties for the given workflow run.
+    # If a property already exists for the specified run, then it overrides
+    # the value otherwise adds the property to existing properties.
+    #
+    # @option params [required, String] :name
+    #   Name of the workflow which was run.
+    #
+    # @option params [required, String] :run_id
+    #   The ID of the workflow run for which the run properties should be
+    #   updated.
+    #
+    # @option params [required, Hash<String,String>] :run_properties
+    #   The properties to put for the specified run.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_workflow_run_properties({
+    #     name: "NameString", # required
+    #     run_id: "IdString", # required
+    #     run_properties: { # required
+    #       "IdString" => "GenericString",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutWorkflowRunProperties AWS API Documentation
+    #
+    # @overload put_workflow_run_properties(params = {})
+    # @param [Hash] params ({})
+    def put_workflow_run_properties(params = {}, options = {})
+      req = build_request(:put_workflow_run_properties, params)
       req.send_request(options)
     end
 
@@ -4860,6 +5636,13 @@ module Aws::Glue
     #
     #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #
+    # @option params [String] :security_configuration
+    #   The name of the `SecurityConfiguration` structure to be used with this
+    #   job run.
+    #
+    # @option params [Types::NotificationProperty] :notification_property
+    #   Specifies configuration properties of a job run notification.
+    #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
     #   Accepts a value of Standard, G.1X, or G.2X.
@@ -4880,13 +5663,6 @@ module Aws::Glue
     #   The maximum number of workers you can define are 299 for `G.1X`, and
     #   149 for `G.2X`.
     #
-    # @option params [String] :security_configuration
-    #   The name of the `SecurityConfiguration` structure to be used with this
-    #   job run.
-    #
-    # @option params [Types::NotificationProperty] :notification_property
-    #   Specifies configuration properties of a job run notification.
-    #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartJobRunResponse#job_run_id #job_run_id} => String
@@ -4902,12 +5678,12 @@ module Aws::Glue
     #     allocated_capacity: 1,
     #     timeout: 1,
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
-    #     number_of_workers: 1,
     #     security_configuration: "NameString",
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
+    #     worker_type: "NameString",
+    #     number_of_workers: 1,
     #   })
     #
     # @example Response structure
@@ -4953,6 +5729,34 @@ module Aws::Glue
     # @param [Hash] params ({})
     def start_trigger(params = {}, options = {})
       req = build_request(:start_trigger, params)
+      req.send_request(options)
+    end
+
+    # Starts a new run of the specified workflow.
+    #
+    # @option params [required, String] :name
+    #   The name of the workflow to start.
+    #
+    # @return [Types::StartWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartWorkflowRunResponse#run_id #run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_workflow_run({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartWorkflowRun AWS API Documentation
+    #
+    # @overload start_workflow_run(params = {})
+    # @param [Hash] params ({})
+    def start_workflow_run(params = {}, options = {})
+      req = build_request(:start_workflow_run, params)
       req.send_request(options)
     end
 
@@ -5709,10 +6513,11 @@ module Aws::Glue
     #             "GenericString" => "GenericString",
     #           },
     #           timeout: 1,
+    #           security_configuration: "NameString",
     #           notification_property: {
     #             notify_delay_after: 1,
     #           },
-    #           security_configuration: "NameString",
+    #           crawler_name: "NameString",
     #         },
     #       ],
     #       predicate: {
@@ -5722,6 +6527,8 @@ module Aws::Glue
     #             logical_operator: "EQUALS", # accepts EQUALS
     #             job_name: "NameString",
     #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #             crawler_name: "NameString",
+    #             crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
     #           },
     #         ],
     #       },
@@ -5731,6 +6538,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.trigger.name #=> String
+    #   resp.trigger.workflow_name #=> String
     #   resp.trigger.id #=> String
     #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
@@ -5741,13 +6549,16 @@ module Aws::Glue
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
     #   resp.trigger.actions[0].timeout #=> Integer
-    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.trigger.actions[0].security_configuration #=> String
+    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.trigger.actions[0].crawler_name #=> String
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
     #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.trigger.predicate.conditions[0].crawler_name #=> String
+    #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTrigger AWS API Documentation
     #
@@ -5806,6 +6617,45 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Updates an existing workflow.
+    #
+    # @option params [required, String] :name
+    #   Name of the workflow to be updated.
+    #
+    # @option params [String] :description
+    #   The description of the workflow.
+    #
+    # @option params [Hash<String,String>] :default_run_properties
+    #   A collection of properties to be used as part of each execution of the
+    #   workflow.
+    #
+    # @return [Types::UpdateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateWorkflowResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workflow({
+    #     name: "NameString", # required
+    #     description: "GenericString",
+    #     default_run_properties: {
+    #       "IdString" => "GenericString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateWorkflow AWS API Documentation
+    #
+    # @overload update_workflow(params = {})
+    # @param [Hash] params ({})
+    def update_workflow(params = {}, options = {})
+      req = build_request(:update_workflow, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5819,7 +6669,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

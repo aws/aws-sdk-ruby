@@ -3175,6 +3175,10 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
+    # @option params [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -3257,6 +3261,7 @@ module Aws::RDS
     #       },
     #     ],
     #     deletion_protection: false,
+    #     max_allocated_storage: 1,
     #   })
     #
     # @example Response structure
@@ -3373,6 +3378,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -3912,6 +3918,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -5248,6 +5255,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -7065,6 +7073,7 @@ module Aws::RDS
     #   resp.db_instances[0].listener_endpoint.address #=> String
     #   resp.db_instances[0].listener_endpoint.port #=> Integer
     #   resp.db_instances[0].listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instances[0].max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -8675,6 +8684,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].available_processor_features[0].allowed_values #=> String
     #   resp.orderable_db_instance_options[0].supported_engine_modes #=> Array
     #   resp.orderable_db_instance_options[0].supported_engine_modes[0] #=> String
+    #   resp.orderable_db_instance_options[0].supports_storage_autoscaling #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -9194,6 +9204,7 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio #=> Array
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].from #=> Float
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].to #=> Float
+    #   resp.valid_db_instance_modifications_message.storage[0].supports_storage_autoscaling #=> Boolean
     #   resp.valid_db_instance_modifications_message.valid_processor_features #=> Array
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].name #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
@@ -10818,6 +10829,10 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
+    # @option params [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -10895,6 +10910,7 @@ module Aws::RDS
     #     ],
     #     use_default_processor_features: false,
     #     deletion_protection: false,
+    #     max_allocated_storage: 1,
     #   })
     #
     # @example Response structure
@@ -11011,6 +11027,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -11908,6 +11925,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -12289,6 +12307,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -14305,6 +14324,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -14842,6 +14862,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -15398,6 +15419,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -15812,6 +15834,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -16132,6 +16155,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -16155,7 +16179,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
