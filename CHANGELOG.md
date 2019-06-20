@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.299 (2019-06-20)
+------------------
+
 * Feature - Aws::ACMPCA - Updated the API, and documentation for AWS Certificate Manager Private Certificate Authority.
 
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
