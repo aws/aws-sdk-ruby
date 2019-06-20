@@ -25,7 +25,7 @@ module Aws
     }
 
     let(:token_file) {
-      Tempfile.new
+      Tempfile.new("token.jwt")
     }
 
     let(:token_file_path) {
