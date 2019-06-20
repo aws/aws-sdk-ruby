@@ -158,6 +158,18 @@ module Aws
       end
     end
 
+    # Raised when :web_identity_token_file parameter is not
+    # provided or the file doesn't exist when initializing
+    # AssumeRoleWebIdentityCredentials credential provider
+    class MissingWebIdentityTokenFile < RuntimeError
+      def initialize(*args)
+        msg = 'Missing :web_identity_token_file parameter or'\
+          ' invalid file path provided for'\
+          ' Aws::AssumeRoleWebIdentityCredentials provider'
+        super(msg)
+      end
+    end
+
     # Raised when a credentials provider process returns a JSON
     # payload with either invalid version number or malformed contents
     class InvalidProcessCredentialsPayload < RuntimeError; end
