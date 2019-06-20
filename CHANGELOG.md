@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACMPCA - Updated the API, and documentation for AWS Certificate Manager Private Certificate Authority.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::Health - Updated the API, and documentation for AWS Health APIs and Notifications.
+
+* Feature - Aws::IoTEventsData - Updated the API, and documentation for AWS IoT Events Data.
+
+* Feature - Aws::OpsWorks - Updated the documentation for AWS OpsWorks.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
 2.11.298 (2019-06-19)
 ------------------
 
