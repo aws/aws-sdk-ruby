@@ -4,7 +4,7 @@ Unreleased Changes
 1.2.0 (2019-06-20)
 ------------------
 
-* Feature - "The colon character ':' is now permitted in Detector Model 'key' parameter values.
+* Feature - The colon character ':' is now permitted in Detector Model 'key' parameter values.
 
 1.1.0 (2019-06-17)
 ------------------
