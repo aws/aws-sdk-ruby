@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Updated the documentation for AWS Device Farm.
+
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::KinesisVideoMedia - Updated the documentation for Amazon Kinesis Video Streams Media.
+
+* Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
+
 2.11.299 (2019-06-20)
 ------------------
 
