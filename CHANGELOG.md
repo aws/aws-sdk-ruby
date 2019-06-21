@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.300 (2019-06-21)
+------------------
+
 * Feature - Aws::DeviceFarm - Updated the documentation for AWS Device Farm.
 
 * Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
