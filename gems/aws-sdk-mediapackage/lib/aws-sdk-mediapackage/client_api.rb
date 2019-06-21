@@ -12,6 +12,8 @@ module Aws::MediaPackage
     include Seahorse::Model
 
     AdMarkers = Shapes::StringShape.new(name: 'AdMarkers')
+    AdTriggers = Shapes::ListShape.new(name: 'AdTriggers')
+    AdsOnDeliveryRestrictions = Shapes::StringShape.new(name: 'AdsOnDeliveryRestrictions')
     Channel = Shapes::StructureShape.new(name: 'Channel')
     ChannelCreateParameters = Shapes::StructureShape.new(name: 'ChannelCreateParameters')
     ChannelList = Shapes::StructureShape.new(name: 'ChannelList')
@@ -78,6 +80,7 @@ module Aws::MediaPackage
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateOriginEndpointRequest = Shapes::StructureShape.new(name: 'UpdateOriginEndpointRequest')
     UpdateOriginEndpointResponse = Shapes::StructureShape.new(name: 'UpdateOriginEndpointResponse')
+    __AdTriggersElement = Shapes::StringShape.new(name: '__AdTriggersElement')
     __PeriodTriggersElement = Shapes::StringShape.new(name: '__PeriodTriggersElement')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
@@ -92,6 +95,8 @@ module Aws::MediaPackage
     __long = Shapes::IntegerShape.new(name: '__long')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
+
+    AdTriggers.member = Shapes::ShapeRef.new(shape: __AdTriggersElement)
 
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Channel.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -176,6 +181,8 @@ module Aws::MediaPackage
     DashEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     DashEncryption.struct_class = Types::DashEncryption
 
+    DashPackage.add_member(:ad_triggers, Shapes::ShapeRef.new(shape: AdTriggers, location_name: "adTriggers"))
+    DashPackage.add_member(:ads_on_delivery_restrictions, Shapes::ShapeRef.new(shape: AdsOnDeliveryRestrictions, location_name: "adsOnDeliveryRestrictions"))
     DashPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: DashEncryption, location_name: "encryption"))
     DashPackage.add_member(:manifest_layout, Shapes::ShapeRef.new(shape: ManifestLayout, location_name: "manifestLayout"))
     DashPackage.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "manifestWindowSeconds"))
@@ -252,6 +259,8 @@ module Aws::MediaPackage
     HlsManifest.struct_class = Types::HlsManifest
 
     HlsManifestCreateOrUpdateParameters.add_member(:ad_markers, Shapes::ShapeRef.new(shape: AdMarkers, location_name: "adMarkers"))
+    HlsManifestCreateOrUpdateParameters.add_member(:ad_triggers, Shapes::ShapeRef.new(shape: AdTriggers, location_name: "adTriggers"))
+    HlsManifestCreateOrUpdateParameters.add_member(:ads_on_delivery_restrictions, Shapes::ShapeRef.new(shape: AdsOnDeliveryRestrictions, location_name: "adsOnDeliveryRestrictions"))
     HlsManifestCreateOrUpdateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     HlsManifestCreateOrUpdateParameters.add_member(:include_iframe_only_stream, Shapes::ShapeRef.new(shape: __boolean, location_name: "includeIframeOnlyStream"))
     HlsManifestCreateOrUpdateParameters.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
@@ -261,6 +270,8 @@ module Aws::MediaPackage
     HlsManifestCreateOrUpdateParameters.struct_class = Types::HlsManifestCreateOrUpdateParameters
 
     HlsPackage.add_member(:ad_markers, Shapes::ShapeRef.new(shape: AdMarkers, location_name: "adMarkers"))
+    HlsPackage.add_member(:ad_triggers, Shapes::ShapeRef.new(shape: AdTriggers, location_name: "adTriggers"))
+    HlsPackage.add_member(:ads_on_delivery_restrictions, Shapes::ShapeRef.new(shape: AdsOnDeliveryRestrictions, location_name: "adsOnDeliveryRestrictions"))
     HlsPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: HlsEncryption, location_name: "encryption"))
     HlsPackage.add_member(:include_iframe_only_stream, Shapes::ShapeRef.new(shape: __boolean, location_name: "includeIframeOnlyStream"))
     HlsPackage.add_member(:playlist_type, Shapes::ShapeRef.new(shape: PlaylistType, location_name: "playlistType"))

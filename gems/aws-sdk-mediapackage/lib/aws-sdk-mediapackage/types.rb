@@ -185,6 +185,8 @@ module Aws::MediaPackage
     #         hls_manifests: [
     #           {
     #             ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #             ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #             ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #             id: "__string", # required
     #             include_iframe_only_stream: false,
     #             manifest_name: "__string",
@@ -312,6 +314,8 @@ module Aws::MediaPackage
     #           hls_manifests: [
     #             {
     #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #               ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #               ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #               id: "__string", # required
     #               include_iframe_only_stream: false,
     #               manifest_name: "__string",
@@ -329,6 +333,8 @@ module Aws::MediaPackage
     #           },
     #         },
     #         dash_package: {
+    #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
@@ -357,6 +363,8 @@ module Aws::MediaPackage
     #         description: "__string",
     #         hls_package: {
     #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           encryption: {
     #             constant_initialization_vector: "__string",
     #             encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
@@ -579,6 +587,8 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
+    #         ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #         ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #         encryption: {
     #           key_rotation_interval_seconds: 1,
     #           speke_key_provider: { # required
@@ -604,6 +614,26 @@ module Aws::MediaPackage
     #         },
     #         suggested_presentation_delay_seconds: 1,
     #       }
+    #
+    # @!attribute [rw] ad_triggers
+    #   A list of SCTE-35 message types that are treated as ad markers in
+    #   the output. If empty, no ad markers are output. Specify multiple
+    #   items to create ad markers for all of the included message types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ads_on_delivery_restrictions
+    #   This setting allows the delivery restriction flags on SCTE-35
+    #   segmentation descriptors to determine whether a message signals an
+    #   ad. Choosing "NONE" means no SCTE-35 messages become ads. Choosing
+    #   "RESTRICTED" means SCTE-35 messages of the types specified in
+    #   AdTriggers that contain delivery restrictions will be treated as
+    #   ads. Choosing "UNRESTRICTED" means SCTE-35 messages of the types
+    #   specified in AdTriggers that do not contain delivery restrictions
+    #   will be treated as ads. Choosing "BOTH" means all SCTE-35 messages
+    #   of the types specified in AdTriggers will be treated as ads. Note
+    #   that Splice Insert messages do not have these flags and are always
+    #   treated as ads if specified in AdTriggers.
+    #   @return [String]
     #
     # @!attribute [rw] encryption
     #   A Dynamic Adaptive Streaming over HTTP (DASH) encryption
@@ -673,6 +703,8 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DashPackage AWS API Documentation
     #
     class DashPackage < Struct.new(
+      :ad_triggers,
+      :ads_on_delivery_restrictions,
       :encryption,
       :manifest_layout,
       :manifest_window_seconds,
@@ -1010,6 +1042,8 @@ module Aws::MediaPackage
     #
     #       {
     #         ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #         ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #         ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #         id: "__string", # required
     #         include_iframe_only_stream: false,
     #         manifest_name: "__string",
@@ -1026,6 +1060,26 @@ module Aws::MediaPackage
     #   Live Streaming (HLS) manifest. "SCTE35\_ENHANCED" generates ad
     #   markers and blackout tags based on SCTE-35 messages in the input
     #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] ad_triggers
+    #   A list of SCTE-35 message types that are treated as ad markers in
+    #   the output. If empty, no ad markers are output. Specify multiple
+    #   items to create ad markers for all of the included message types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ads_on_delivery_restrictions
+    #   This setting allows the delivery restriction flags on SCTE-35
+    #   segmentation descriptors to determine whether a message signals an
+    #   ad. Choosing "NONE" means no SCTE-35 messages become ads. Choosing
+    #   "RESTRICTED" means SCTE-35 messages of the types specified in
+    #   AdTriggers that contain delivery restrictions will be treated as
+    #   ads. Choosing "UNRESTRICTED" means SCTE-35 messages of the types
+    #   specified in AdTriggers that do not contain delivery restrictions
+    #   will be treated as ads. Choosing "BOTH" means all SCTE-35 messages
+    #   of the types specified in AdTriggers will be treated as ads. Note
+    #   that Splice Insert messages do not have these flags and are always
+    #   treated as ads if specified in AdTriggers.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1069,6 +1123,8 @@ module Aws::MediaPackage
     #
     class HlsManifestCreateOrUpdateParameters < Struct.new(
       :ad_markers,
+      :ad_triggers,
+      :ads_on_delivery_restrictions,
       :id,
       :include_iframe_only_stream,
       :manifest_name,
@@ -1085,6 +1141,8 @@ module Aws::MediaPackage
     #
     #       {
     #         ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #         ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #         ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #         encryption: {
     #           constant_initialization_vector: "__string",
     #           encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
@@ -1119,6 +1177,26 @@ module Aws::MediaPackage
     #   Live Streaming (HLS) manifest. "SCTE35\_ENHANCED" generates ad
     #   markers and blackout tags based on SCTE-35 messages in the input
     #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] ad_triggers
+    #   A list of SCTE-35 message types that are treated as ad markers in
+    #   the output. If empty, no ad markers are output. Specify multiple
+    #   items to create ad markers for all of the included message types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ads_on_delivery_restrictions
+    #   This setting allows the delivery restriction flags on SCTE-35
+    #   segmentation descriptors to determine whether a message signals an
+    #   ad. Choosing "NONE" means no SCTE-35 messages become ads. Choosing
+    #   "RESTRICTED" means SCTE-35 messages of the types specified in
+    #   AdTriggers that contain delivery restrictions will be treated as
+    #   ads. Choosing "UNRESTRICTED" means SCTE-35 messages of the types
+    #   specified in AdTriggers that do not contain delivery restrictions
+    #   will be treated as ads. Choosing "BOTH" means all SCTE-35 messages
+    #   of the types specified in AdTriggers will be treated as ads. Note
+    #   that Splice Insert messages do not have these flags and are always
+    #   treated as ads if specified in AdTriggers.
     #   @return [String]
     #
     # @!attribute [rw] encryption
@@ -1169,6 +1247,8 @@ module Aws::MediaPackage
     #
     class HlsPackage < Struct.new(
       :ad_markers,
+      :ad_triggers,
+      :ads_on_delivery_restrictions,
       :encryption,
       :include_iframe_only_stream,
       :playlist_type,
@@ -1978,6 +2058,8 @@ module Aws::MediaPackage
     #           hls_manifests: [
     #             {
     #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #               ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #               ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #               id: "__string", # required
     #               include_iframe_only_stream: false,
     #               manifest_name: "__string",
@@ -1995,6 +2077,8 @@ module Aws::MediaPackage
     #           },
     #         },
     #         dash_package: {
+    #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
@@ -2023,6 +2107,8 @@ module Aws::MediaPackage
     #         description: "__string",
     #         hls_package: {
     #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           encryption: {
     #             constant_initialization_vector: "__string",
     #             encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES

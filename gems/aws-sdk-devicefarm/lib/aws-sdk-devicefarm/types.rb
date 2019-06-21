@@ -43,7 +43,7 @@ module Aws::DeviceFarm
     #
     # @!attribute [rw] default_job_timeout_minutes
     #   The default number of minutes (at the account level) a test run will
-    #   execute before it times out. Default value is 60 minutes.
+    #   execute before it times out. The default value is 150 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] skip_app_resign
@@ -150,7 +150,7 @@ module Aws::DeviceFarm
     #   * APPLICATION\_CRASH\_REPORT: The application crash report output
     #     type.
     #
-    #   * XCTEST\_LOG: The XCode test output type.
+    #   * XCTEST\_LOG: The Xcode test output type.
     #
     #   * VIDEO: The Video output type.
     #
@@ -766,9 +766,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -799,7 +799,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #
     #   **Note** If you call `CreateUpload` with `WEB_APP` specified, AWS
     #   Device Farm throws an `ArgumentException` error.
@@ -1038,7 +1038,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the sesssion for which you want to
+    #   The Amazon Resource Name (ARN) of the session for which you want to
     #   delete remote access.
     #   @return [String]
     #
@@ -1892,9 +1892,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] test
@@ -2572,9 +2572,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -2898,7 +2898,7 @@ module Aws::DeviceFarm
     #   attribute, an operator, and one or more values.
     #
     #   * Attribute: The aspect of a device such as platform or model used
-    #     as the selction criteria in a device filter.
+    #     as the selection criteria in a device filter.
     #
     #     Allowed values include:
     #
@@ -3686,7 +3686,7 @@ module Aws::DeviceFarm
     #
     #   * IOS\_APP: An iOS upload.
     #
-    #   * WEB\_APP: A web appliction upload.
+    #   * WEB\_APP: A web application upload.
     #
     #   * EXTERNAL\_DATA: An external data upload.
     #
@@ -3727,9 +3727,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -3760,7 +3760,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4200,7 +4200,7 @@ module Aws::DeviceFarm
     #
     # @!attribute [rw] default_job_timeout_minutes
     #   The default number of minutes (at the project level) a test run will
-    #   execute before it times out. Default value is 60 minutes.
+    #   execute before it times out. The default value is 150 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] created
@@ -4438,7 +4438,7 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] device_minutes
-    #   The number of minutes a device is used in a remote access sesssion
+    #   The number of minutes a device is used in a remote access session
     #   (including setup and teardown minutes).
     #   @return [Types::DeviceMinutes]
     #
@@ -4741,9 +4741,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -5295,9 +5295,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] test_package_arn
@@ -5576,9 +5576,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -5823,9 +5823,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -6065,7 +6065,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resourc Name (ARN) of the Device Farm device pool you
+    #   The Amazon Resource Name (ARN) of the Device Farm device pool you
     #   wish to update.
     #   @return [String]
     #
@@ -6229,7 +6229,7 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The descriptoin of the network profile about which you are returning
+    #   The description of the network profile about which you are returning
     #   information.
     #   @return [String]
     #
@@ -6489,7 +6489,7 @@ module Aws::DeviceFarm
     #
     #   * IOS\_APP: An iOS upload.
     #
-    #   * WEB\_APP: A web appliction upload.
+    #   * WEB\_APP: A web application upload.
     #
     #   * EXTERNAL\_DATA: An external data upload.
     #
@@ -6530,9 +6530,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -6563,7 +6563,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #   @return [String]
     #
     # @!attribute [rw] status

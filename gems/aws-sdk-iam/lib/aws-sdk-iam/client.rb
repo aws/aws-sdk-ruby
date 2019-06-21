@@ -1474,7 +1474,7 @@ module Aws::IAM
     #   The trust relationship policy document that grants an entity
     #   permission to assume the role.
     #
-    #   in IAM, you must provide a JSON policy that has been converted to a
+    #   In IAM, you must provide a JSON policy that has been converted to a
     #   string. However, for AWS CloudFormation templates formatted in YAML,
     #   you can provide the policy in JSON or YAML format. AWS CloudFormation
     #   always converts a YAML policy to JSON format before submitting it to
@@ -3492,12 +3492,198 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Generates a request for a report that includes details about when an
-    # IAM resource (user, group, role, or policy) was last used in an
-    # attempt to access AWS services. Recent activity usually appears within
-    # four hours. IAM reports activity for the last 365 days, or less if
-    # your Region began supporting this feature within the last year. For
-    # more information, see [Regions Where Data Is Tracked][1].
+    # Generates a report for service last accessed data for AWS
+    # Organizations. You can generate a report for any entities
+    # (organization root, organizational unit, or account) or policies in
+    # your organization.
+    #
+    # To call this operation, you must be signed in using your AWS
+    # Organizations master account credentials. You can use your long-term
+    # IAM user or root user credentials, or temporary credentials from
+    # assuming an IAM role. SCPs must be enabled for your organization root.
+    # You must have the required IAM and AWS Organizations permissions. For
+    # more information, see [Refining Permissions Using Service Last
+    # Accessed Data][1] in the *IAM User Guide*.
+    #
+    # You can generate a service last accessed data report for entities by
+    # specifying only the entity's path. This data includes a list of
+    # services that are allowed by any service control policies (SCPs) that
+    # apply to the entity.
+    #
+    # You can generate a service last accessed data report for a policy by
+    # specifying an entity's path and an optional AWS Organizations policy
+    # ID. This data includes a list of services that are allowed by the
+    # specified SCP.
+    #
+    # For each service in both report types, the data includes the most
+    # recent account activity that the policy allows to account principals
+    # in the entity or the entity's children. For important information
+    # about the data, reporting period, permissions required,
+    # troubleshooting, and supported Regions see [Reducing Permissions Using
+    # Service Last Accessed Data][1] in the *IAM User Guide*.
+    #
+    # The data includes all attempts to access AWS, not just the successful
+    # ones. This includes all attempts that were made using the AWS
+    # Management Console, the AWS API through any of the SDKs, or any of the
+    # command line tools. An unexpected entry in the service last accessed
+    # data does not mean that an account has been compromised, because the
+    # request might have been denied. Refer to your CloudTrail logs as the
+    # authoritative source for information about all API calls and whether
+    # they were successful or denied access. For more information,
+    # see [Logging IAM Events with CloudTrail][2] in the *IAM User Guide*.
+    #
+    # This operation returns a `JobId`. Use this parameter in the `
+    # GetOrganizationsAccessReport ` operation to check the status of the
+    # report generation. To check the status of this request, use the
+    # `JobId` parameter in the ` GetOrganizationsAccessReport ` operation
+    # and test the `JobStatus` response parameter. When the job is complete,
+    # you can retrieve the report.
+    #
+    # To generate a service last accessed data report for entities, specify
+    # an entity path without specifying the optional AWS Organizations
+    # policy ID. The type of entity that you specify determines the data
+    # returned in the report.
+    #
+    # * **Root** – When you specify the organizations root as the entity,
+    #   the resulting report lists all of the services allowed by SCPs that
+    #   are attached to your root. For each service, the report includes
+    #   data for all accounts in your organization except the master
+    #   account, because the master account is not limited by SCPs.
+    #
+    # * **OU** – When you specify an organizational unit (OU) as the entity,
+    #   the resulting report lists all of the services allowed by SCPs that
+    #   are attached to the OU and its parents. For each service, the report
+    #   includes data for all accounts in the OU or its children. This data
+    #   excludes the master account, because the master account is not
+    #   limited by SCPs.
+    #
+    # * **Master account** – When you specify the master account, the
+    #   resulting report lists all AWS services, because the master account
+    #   is not limited by SCPs. For each service, the report includes data
+    #   for only the master account.
+    #
+    # * **Account** – When you specify another account as the entity, the
+    #   resulting report lists all of the services allowed by SCPs that are
+    #   attached to the account and its parents. For each service, the
+    #   report includes data for only the specified account.
+    #
+    # To generate a service last accessed data report for policies, specify
+    # an entity path and the optional AWS Organizations policy ID. The type
+    # of entity that you specify determines the data returned for each
+    # service.
+    #
+    # * **Root** – When you specify the root entity and a policy ID, the
+    #   resulting report lists all of the services that are allowed by the
+    #   specified SCP. For each service, the report includes data for all
+    #   accounts in your organization to which the SCP applies. This data
+    #   excludes the master account, because the master account is not
+    #   limited by SCPs. If the SCP is not attached to any entities in the
+    #   organization, then the report will return a list of services with no
+    #   data.
+    #
+    # * **OU** – When you specify an OU entity and a policy ID, the
+    #   resulting report lists all of the services that are allowed by the
+    #   specified SCP. For each service, the report includes data for all
+    #   accounts in the OU or its children to which the SCP applies. This
+    #   means that other accounts outside the OU that are affected by the
+    #   SCP might not be included in the data. This data excludes the master
+    #   account, because the master account is not limited by SCPs. If the
+    #   SCP is not attached to the OU or one of its children, the report
+    #   will return a list of services with no data.
+    #
+    # * **Master account** – When you specify the master account, the
+    #   resulting report lists all AWS services, because the master account
+    #   is not limited by SCPs. If you specify a policy ID in the CLI or
+    #   API, the policy is ignored. For each service, the report includes
+    #   data for only the master account.
+    #
+    # * **Account** – When you specify another account entity and a policy
+    #   ID, the resulting report lists all of the services that are allowed
+    #   by the specified SCP. For each service, the report includes data for
+    #   only the specified account. This means that other accounts in the
+    #   organization that are affected by the SCP might not be included in
+    #   the data. If the SCP is not attached to the account, the report will
+    #   return a list of services with no data.
+    #
+    # <note markdown="1"> Service last accessed data does not use other policy types when
+    # determining whether a principal could access a service. These other
+    # policy types include identity-based policies, resource-based policies,
+    # access control lists, IAM permissions boundaries, and STS assume role
+    # policies. It only applies SCP logic. For more about the evaluation of
+    # policy types, see [Evaluating Policies][3] in the *IAM User Guide*.
+    #
+    #  </note>
+    #
+    # For more information about service last accessed data, see [Reducing
+    # Policy Scope by Viewing User Activity][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
+    #
+    # @option params [required, String] :entity_path
+    #   The path of the AWS Organizations entity (root, OU, or account). You
+    #   can build an entity path using the known structure of your
+    #   organization. For example, assume that your account ID is
+    #   `123456789012` and its parent OU ID is `ou-rge0-awsabcde`. The
+    #   organization root ID is `r-f6g7h8i9j0example` and your organization ID
+    #   is `o-a1b2c3d4e5`. Your entity path is
+    #   `o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-rge0-awsabcde/123456789012`.
+    #
+    # @option params [String] :organizations_policy_id
+    #   The identifier of the AWS Organizations service control policy (SCP).
+    #   This parameter is optional.
+    #
+    #   This ID is used to generate information about when an account
+    #   principal that is limited by the SCP attempted to access an AWS
+    #   service.
+    #
+    # @return [Types::GenerateOrganizationsAccessReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateOrganizationsAccessReportResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: To generate a service last accessed data report for an organizational unit
+    #
+    #   # The following operation generates a report for the organizational unit ou-rge0-awexample
+    #
+    #   resp = client.generate_organizations_access_report({
+    #     entity_path: "o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-1a2b3c-k9l8m7n6o5example", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "examplea-1234-b567-cde8-90fg123abcd4", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_organizations_access_report({
+    #     entity_path: "organizationsEntityPathType", # required
+    #     organizations_policy_id: "organizationsPolicyIdType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateOrganizationsAccessReport AWS API Documentation
+    #
+    # @overload generate_organizations_access_report(params = {})
+    # @param [Hash] params ({})
+    def generate_organizations_access_report(params = {}, options = {})
+      req = build_request(:generate_organizations_access_report, params)
+      req.send_request(options)
+    end
+
+    # Generates a report that includes details about when an IAM resource
+    # (user, group, role, or policy) was last used in an attempt to access
+    # AWS services. Recent activity usually appears within four hours. IAM
+    # reports activity for the last 365 days, or less if your Region began
+    # supporting this feature within the last year. For more information,
+    # see [Regions Where Data Is Tracked][1].
     #
     # The service last accessed data includes all attempts to access an AWS
     # API, not just the successful ones. This includes all attempts that
@@ -4449,6 +4635,151 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Retrieves the service last accessed data report for AWS Organizations
+    # that was previously generated using the `
+    # GenerateOrganizationsAccessReport ` operation. This operation
+    # retrieves the status of your report job and the report contents.
+    #
+    # Depending on the parameters that you passed when you generated the
+    # report, the data returned could include different information. For
+    # details, see GenerateOrganizationsAccessReport.
+    #
+    # To call this operation, you must be signed in to the master account in
+    # your organization. SCPs must be enabled for your organization root.
+    # You must have permissions to perform this operation. For more
+    # information, see [Refining Permissions Using Service Last Accessed
+    # Data][1] in the *IAM User Guide*.
+    #
+    # For each service that principals in an account (root users, IAM users,
+    # or IAM roles) could access using SCPs, the operation returns details
+    # about the most recent access attempt. If there was no attempt, the
+    # service is listed without details about the most recent attempt to
+    # access the service. If the operation fails, it returns the reason that
+    # it failed.
+    #
+    # By default, the list is sorted by service namespace.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the request generated by the
+    #   GenerateOrganizationsAccessReport operation.
+    #
+    # @option params [Integer] :max_items
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is `true`.
+    #
+    #   If you do not include this parameter, the number of items defaults to
+    #   100. Note that IAM might return fewer results, even when there are
+    #   more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
+    #
+    # @option params [String] :marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you received
+    #   to indicate where the next call should start.
+    #
+    # @option params [String] :sort_key
+    #   The key that is used to sort the results. If you choose the namespace
+    #   key, the results are returned in alphabetical order. If you choose the
+    #   time key, the results are sorted numerically by the date and time.
+    #
+    # @return [Types::GetOrganizationsAccessReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOrganizationsAccessReportResponse#job_status #job_status} => String
+    #   * {Types::GetOrganizationsAccessReportResponse#job_creation_date #job_creation_date} => Time
+    #   * {Types::GetOrganizationsAccessReportResponse#job_completion_date #job_completion_date} => Time
+    #   * {Types::GetOrganizationsAccessReportResponse#number_of_services_accessible #number_of_services_accessible} => Integer
+    #   * {Types::GetOrganizationsAccessReportResponse#number_of_services_not_accessed #number_of_services_not_accessed} => Integer
+    #   * {Types::GetOrganizationsAccessReportResponse#access_details #access_details} => Array&lt;Types::AccessDetail&gt;
+    #   * {Types::GetOrganizationsAccessReportResponse#is_truncated #is_truncated} => Boolean
+    #   * {Types::GetOrganizationsAccessReportResponse#marker #marker} => String
+    #   * {Types::GetOrganizationsAccessReportResponse#error_details #error_details} => Types::ErrorDetails
+    #
+    #
+    # @example Example: To get details from a previously generated organizational unit report
+    #
+    #   # The following operation gets details about the report with the job ID: examplea-1234-b567-cde8-90fg123abcd4
+    #
+    #   resp = client.get_organizations_access_report({
+    #     job_id: "examplea-1234-b567-cde8-90fg123abcd4", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     access_details: [
+    #       {
+    #         entity_path: "o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-1a2b3c-k9l8m7n6o5example/111122223333", 
+    #         last_authenticated_time: Time.parse("2019-05-25T16:29:52Z"), 
+    #         region: "us-east-1", 
+    #         service_name: "Amazon DynamoDB", 
+    #         service_namespace: "dynamodb", 
+    #         total_authenticated_entities: 2, 
+    #       }, 
+    #       {
+    #         entity_path: "o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-1a2b3c-k9l8m7n6o5example/123456789012", 
+    #         last_authenticated_time: Time.parse("2019-06-15T13:12:06Z"), 
+    #         region: "us-east-1", 
+    #         service_name: "AWS Identity and Access Management", 
+    #         service_namespace: "iam", 
+    #         total_authenticated_entities: 4, 
+    #       }, 
+    #       {
+    #         service_name: "Amazon Simple Storage Service", 
+    #         service_namespace: "s3", 
+    #         total_authenticated_entities: 0, 
+    #       }, 
+    #     ], 
+    #     is_truncated: false, 
+    #     job_completion_date: Time.parse("2019-06-18T19:47:35.241Z"), 
+    #     job_creation_date: Time.parse("2019-06-18T19:47:31.466Z"), 
+    #     job_status: "COMPLETED", 
+    #     number_of_services_accessible: 3, 
+    #     number_of_services_not_accessed: 1, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_organizations_access_report({
+    #     job_id: "jobIDType", # required
+    #     max_items: 1,
+    #     marker: "markerType",
+    #     sort_key: "SERVICE_NAMESPACE_ASCENDING", # accepts SERVICE_NAMESPACE_ASCENDING, SERVICE_NAMESPACE_DESCENDING, LAST_AUTHENTICATED_TIME_ASCENDING, LAST_AUTHENTICATED_TIME_DESCENDING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.job_creation_date #=> Time
+    #   resp.job_completion_date #=> Time
+    #   resp.number_of_services_accessible #=> Integer
+    #   resp.number_of_services_not_accessed #=> Integer
+    #   resp.access_details #=> Array
+    #   resp.access_details[0].service_name #=> String
+    #   resp.access_details[0].service_namespace #=> String
+    #   resp.access_details[0].region #=> String
+    #   resp.access_details[0].entity_path #=> String
+    #   resp.access_details[0].last_authenticated_time #=> Time
+    #   resp.access_details[0].total_authenticated_entities #=> Integer
+    #   resp.is_truncated #=> Boolean
+    #   resp.marker #=> String
+    #   resp.error_details.message #=> String
+    #   resp.error_details.code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOrganizationsAccessReport AWS API Documentation
+    #
+    # @overload get_organizations_access_report(params = {})
+    # @param [Hash] params ({})
+    def get_organizations_access_report(params = {}, options = {})
+      req = build_request(:get_organizations_access_report, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the specified managed policy, including
     # the policy's default version and the total number of IAM users,
     # groups, and roles to which the policy is attached. To retrieve the
@@ -4933,11 +5264,13 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # After you generate a user, group, role, or policy report using the
-    # `GenerateServiceLastAccessedDetails` operation, you can use the
-    # `JobId` parameter in `GetServiceLastAccessedDetails`. This operation
-    # retrieves the status of your report job and a list of AWS services
-    # that the resource (user, group, role, or managed policy) can access.
+    # Retrieves a service last accessed report that was created using the
+    # `GenerateServiceLastAccessedDetails` operation. You can use the
+    # `JobId` parameter in `GetServiceLastAccessedDetails` to retrieve the
+    # status of your report job. When the report is complete, you can
+    # retrieve the generated report. The report includes a list of AWS
+    # services that the resource (user, group, role, or managed policy) can
+    # access.
     #
     # <note markdown="1"> Service last accessed data does not use other policy types when
     # determining whether a resource could access a service. These other
@@ -7926,7 +8259,14 @@ module Aws::IAM
     # @option params [required, String] :group_name
     #   The name of the group to associate the policy with.
     #
-    #   &amp;regex-name;.
+    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following characters:
+    #   \_+=,.@-.
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :policy_name
     #   The name of the policy document.
@@ -9131,7 +9471,7 @@ module Aws::IAM
     # @option params [Array<Types::ContextEntry>] :context_entries
     #   A list of context keys and corresponding values for the simulation to
     #   use. Whenever a context key is evaluated in one of the simulated IAM
-    #   permission policies, the corresponding value is supplied.
+    #   permissions policies, the corresponding value is supplied.
     #
     # @option params [String] :resource_handling_option
     #   Specifies the type of simulation to run. Different API operations that
@@ -10970,7 +11310,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

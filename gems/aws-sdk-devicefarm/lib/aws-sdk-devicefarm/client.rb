@@ -798,9 +798,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -831,7 +831,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #
     #   **Note** If you call `CreateUpload` with `WEB_APP` specified, AWS
     #   Device Farm throws an `ArgumentException` error.
@@ -1072,7 +1072,7 @@ module Aws::DeviceFarm
     # Deletes a completed remote access session and its results.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the sesssion for which you want to
+    #   The Amazon Resource Name (ARN) of the session for which you want to
     #   delete remote access.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1490,9 +1490,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #
     # @option params [Types::ScheduleRunTest] :test
     #   Information about the uploaded test to be run against the device pool.
@@ -2710,7 +2710,7 @@ module Aws::DeviceFarm
     #   an operator, and one or more values.
     #
     #   * Attribute: The aspect of a device such as platform or model used as
-    #     the selction criteria in a device filter.
+    #     the selection criteria in a device filter.
     #
     #     Allowed values include:
     #
@@ -4036,7 +4036,7 @@ module Aws::DeviceFarm
     #
     #   * IOS\_APP: An iOS upload.
     #
-    #   * WEB\_APP: A web appliction upload.
+    #   * WEB\_APP: A web application upload.
     #
     #   * EXTERNAL\_DATA: An external data upload.
     #
@@ -4075,9 +4075,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -4108,7 +4108,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -4998,7 +4998,7 @@ module Aws::DeviceFarm
     # they can only be updated as a whole (or not at all).
     #
     # @option params [required, String] :arn
-    #   The Amazon Resourc Name (ARN) of the Device Farm device pool you wish
+    #   The Amazon Resource Name (ARN) of the Device Farm device pool you wish
     #   to update.
     #
     # @option params [String] :name
@@ -5174,7 +5174,7 @@ module Aws::DeviceFarm
     #   information.
     #
     # @option params [String] :description
-    #   The descriptoin of the network profile about which you are returning
+    #   The description of the network profile about which you are returning
     #   information.
     #
     # @option params [String] :type
@@ -5439,7 +5439,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-06-21)
+------------------
+
+* Feature - Documentation updates for Amazon Kinesis Video Streams.
+
 1.14.0 (2019-06-17)
 ------------------
 

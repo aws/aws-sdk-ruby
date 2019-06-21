@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-06-21)
+------------------
+
+* Feature - Added two new origin endpoint fields for configuring which SCTE-35 messages are treated as advertisements.
+
 1.19.0 (2019-06-17)
 ------------------
 
