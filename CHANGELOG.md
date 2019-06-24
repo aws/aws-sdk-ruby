@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::FSx - Updated the API, and documentation for Amazon FSx.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Updated the API, and documentation for AWS Resource Groups Tagging API.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::ApplicationInsights - Added support for a new service, Amazon CloudWatch Application Insights.
+
+* Feature - Aws::ServiceQuotas - Added support for a new service, Service Quotas.
+
 2.11.300 (2019-06-21)
 ------------------
 

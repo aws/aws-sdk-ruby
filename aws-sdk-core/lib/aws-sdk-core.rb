@@ -35,6 +35,7 @@ module Aws
     AppSync
     ApplicationAutoScaling
     ApplicationDiscoveryService
+    ApplicationInsights
     Athena
     AutoScaling
     AutoScalingPlans
@@ -187,6 +188,7 @@ module Aws
     ServerlessApplicationRepository
     ServiceCatalog
     ServiceDiscovery
+    ServiceQuotas
     Shield
     Signer
     SimpleDB

@@ -47,6 +47,10 @@
     "models": "discovery/2015-11-01",
     "endpoint": "discovery"
   },
+  "ApplicationInsights": {
+    "models": "application-insights/2018-11-25",
+    "endpoint": "applicationinsights"
+  },
   "Athena": {
     "models": "athena/2017-05-18",
     "endpoint": "athena"
@@ -653,6 +657,10 @@
   "ServiceDiscovery": {
     "models": "servicediscovery/2017-03-14",
     "endpoint": "servicediscovery"
+  },
+  "ServiceQuotas": {
+    "models": "service-quotas/2019-06-24",
+    "endpoint": "servicequotas"
   },
   "Shield": {
     "models": "shield/2016-06-02",
