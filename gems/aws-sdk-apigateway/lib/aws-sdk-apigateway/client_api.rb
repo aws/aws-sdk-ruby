@@ -83,6 +83,7 @@ module Aws::APIGateway
     DocumentationVersion = Shapes::StructureShape.new(name: 'DocumentationVersion')
     DocumentationVersions = Shapes::StructureShape.new(name: 'DocumentationVersions')
     DomainName = Shapes::StructureShape.new(name: 'DomainName')
+    DomainNameStatus = Shapes::StringShape.new(name: 'DomainNameStatus')
     DomainNames = Shapes::StructureShape.new(name: 'DomainNames')
     Double = Shapes::FloatShape.new(name: 'Double')
     EndpointConfiguration = Shapes::StructureShape.new(name: 'EndpointConfiguration')
@@ -219,6 +220,7 @@ module Aws::APIGateway
     SdkResponse = Shapes::StructureShape.new(name: 'SdkResponse')
     SdkType = Shapes::StructureShape.new(name: 'SdkType')
     SdkTypes = Shapes::StructureShape.new(name: 'SdkTypes')
+    SecurityPolicy = Shapes::StringShape.new(name: 'SecurityPolicy')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     Stage = Shapes::StructureShape.new(name: 'Stage')
     StageKey = Shapes::StructureShape.new(name: 'StageKey')
@@ -414,6 +416,7 @@ module Aws::APIGateway
     CreateDomainNameRequest.add_member(:regional_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "regionalCertificateArn"))
     CreateDomainNameRequest.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     CreateDomainNameRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
+    CreateDomainNameRequest.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateModelRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -617,6 +620,9 @@ module Aws::APIGateway
     DomainName.add_member(:distribution_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "distributionDomainName"))
     DomainName.add_member(:distribution_hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "distributionHostedZoneId"))
     DomainName.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
+    DomainName.add_member(:domain_name_status, Shapes::ShapeRef.new(shape: DomainNameStatus, location_name: "domainNameStatus"))
+    DomainName.add_member(:domain_name_status_message, Shapes::ShapeRef.new(shape: String, location_name: "domainNameStatusMessage"))
+    DomainName.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
     DomainName.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     DomainName.struct_class = Types::DomainName
 

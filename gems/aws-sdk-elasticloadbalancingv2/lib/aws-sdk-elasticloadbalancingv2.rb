@@ -43,6 +43,6 @@ require_relative 'aws-sdk-elasticloadbalancingv2/customizations'
 # @service
 module Aws::ElasticLoadBalancingV2
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end

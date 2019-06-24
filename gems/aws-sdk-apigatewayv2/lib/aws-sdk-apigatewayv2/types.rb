@@ -877,6 +877,9 @@ module Aws::ApiGatewayV2
     #             certificate_upload_date: Time.now,
     #             endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #             hosted_zone_id: "__string",
+    #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #             domain_name_status_message: "__string",
     #           },
     #         ],
     #       }
@@ -2454,6 +2457,9 @@ module Aws::ApiGatewayV2
     #         certificate_upload_date: Time.now,
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
+    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #         domain_name_status_message: "__string",
     #       }
     #
     # @!attribute [rw] api_gateway_domain_name
@@ -2484,13 +2490,33 @@ module Aws::ApiGatewayV2
     #   The Amazon Route 53 Hosted Zone ID of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version of the security policy
+    #   for this domain name. The valid values are TLS\_1\_0 and TLS\_1\_2.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_status
+    #   The status of the domain name migration. The valid values are
+    #   AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot
+    #   be modified further until the existing operation is complete. If it
+    #   is AVAILABLE, the domain can be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_status_message
+    #   An optional text message containing detailed information about
+    #   status of the domain name migration.
+    #   @return [String]
+    #
     class DomainNameConfiguration < Struct.new(
       :api_gateway_domain_name,
       :certificate_arn,
       :certificate_name,
       :certificate_upload_date,
       :endpoint_type,
-      :hosted_zone_id)
+      :hosted_zone_id,
+      :security_policy,
+      :domain_name_status,
+      :domain_name_status_message)
       include Aws::Structure
     end
 
@@ -5006,6 +5032,9 @@ module Aws::ApiGatewayV2
     #             certificate_upload_date: Time.now,
     #             endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #             hosted_zone_id: "__string",
+    #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #             domain_name_status_message: "__string",
     #           },
     #         ],
     #       }

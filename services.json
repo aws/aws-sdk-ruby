@@ -39,6 +39,9 @@
   "ApplicationDiscoveryService": {
     "models": "discovery/2015-11-01"
   },
+  "ApplicationInsights": {
+    "models": "application-insights/2018-11-25"
+  },
   "Athena": {
     "models": "athena/2017-05-18"
   },
@@ -577,6 +580,9 @@
   },
   "ServiceDiscovery": {
     "models": "servicediscovery/2017-03-14"
+  },
+  "ServiceQuotas": {
+    "models": "service-quotas/2019-06-24"
   },
   "Shield": {
     "models": "shield/2016-06-02"

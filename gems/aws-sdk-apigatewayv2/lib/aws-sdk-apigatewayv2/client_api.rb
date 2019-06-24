@@ -76,6 +76,7 @@ module Aws::ApiGatewayV2
     DomainName = Shapes::StructureShape.new(name: 'DomainName')
     DomainNameConfiguration = Shapes::StructureShape.new(name: 'DomainNameConfiguration')
     DomainNameConfigurations = Shapes::ListShape.new(name: 'DomainNameConfigurations')
+    DomainNameStatus = Shapes::StringShape.new(name: 'DomainNameStatus')
     DomainNames = Shapes::StructureShape.new(name: 'DomainNames')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     GetApiMappingRequest = Shapes::StructureShape.new(name: 'GetApiMappingRequest')
@@ -152,6 +153,7 @@ module Aws::ApiGatewayV2
     RouteSettings = Shapes::StructureShape.new(name: 'RouteSettings')
     RouteSettingsMap = Shapes::MapShape.new(name: 'RouteSettingsMap')
     Routes = Shapes::StructureShape.new(name: 'Routes')
+    SecurityPolicy = Shapes::StringShape.new(name: 'SecurityPolicy')
     SelectionExpression = Shapes::StringShape.new(name: 'SelectionExpression')
     SelectionKey = Shapes::StringShape.new(name: 'SelectionKey')
     Stage = Shapes::StructureShape.new(name: 'Stage')
@@ -638,6 +640,9 @@ module Aws::ApiGatewayV2
     DomainNameConfiguration.add_member(:certificate_upload_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "certificateUploadDate"))
     DomainNameConfiguration.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "endpointType"))
     DomainNameConfiguration.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: __string, location_name: "hostedZoneId"))
+    DomainNameConfiguration.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
+    DomainNameConfiguration.add_member(:domain_name_status, Shapes::ShapeRef.new(shape: DomainNameStatus, location_name: "domainNameStatus"))
+    DomainNameConfiguration.add_member(:domain_name_status_message, Shapes::ShapeRef.new(shape: __string, location_name: "domainNameStatusMessage"))
     DomainNameConfiguration.struct_class = Types::DomainNameConfiguration
 
     DomainNameConfigurations.member = Shapes::ShapeRef.new(shape: DomainNameConfiguration)

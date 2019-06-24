@@ -17,13 +17,12 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] master_id
-    #   The account ID of the Security Hub master account whose invitation
-    #   you're accepting.
+    #   The account ID of the Security Hub master account that sent the
+    #   invitation.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
-    #   The ID of the invitation that the Security Hub master account sends
-    #   to the AWS account.
+    #   The ID of the invitation sent from the Security Hub master account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptInvitationRequest AWS API Documentation
@@ -78,6 +77,29 @@ module Aws::SecurityHub
     class AccountDetails < Struct.new(
       :account_id,
       :email)
+      include Aws::Structure
+    end
+
+    # An `ActionTarget` object.
+    #
+    # @!attribute [rw] action_target_arn
+    #   The ARN for the target action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the action target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the target action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionTarget AWS API Documentation
+    #
+    class ActionTarget < Struct.new(
+      :action_target_arn,
+      :name,
+      :description)
       include Aws::Structure
     end
 
@@ -208,7 +230,7 @@ module Aws::SecurityHub
     end
 
     # Provides consistent format for the contents of the Security
-    # Hub-aggregated findings. AwsSecurityFinding format enables you to
+    # Hub-aggregated findings. `AwsSecurityFinding` format enables you to
     # share findings between AWS security services and third-party
     # solutions, and compliance checks.
     #
@@ -238,8 +260,8 @@ module Aws::SecurityHub
     #         },
     #         confidence: 1,
     #         criticality: 1,
-    #         title: "NonEmptyString",
-    #         description: "NonEmptyString",
+    #         title: "NonEmptyString", # required
+    #         description: "NonEmptyString", # required
     #         remediation: {
     #           recommendation: {
     #             text: "NonEmptyString",
@@ -425,8 +447,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] criticality
     #   The level of importance assigned to the resources associated with
-    #   the finding. A score of 0 means the underlying resources have no
-    #   criticality, and a score of 100 is reserved for the most critical
+    #   the finding. A score of 0 means that the underlying resources have
+    #   no criticality, and a score of 100 is reserved for the most critical
     #   resources.
     #   @return [Integer]
     #
@@ -447,7 +469,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] remediation
-    #   An data type that describes the remediation options for a finding.
+    #   A data type that describes the remediation options for a finding.
     #   @return [Types::Remediation]
     #
     # @!attribute [rw] source_url
@@ -458,7 +480,7 @@ module Aws::SecurityHub
     # @!attribute [rw] product_fields
     #   A data type where security-findings providers can include additional
     #   solution-specific details that aren't part of the defined
-    #   AwsSecurityFinding format.
+    #   `AwsSecurityFinding` format.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_defined_fields
@@ -1180,8 +1202,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] criticality
     #   The level of importance assigned to the resources associated with
-    #   the finding. A score of 0 means the underlying resources have no
-    #   criticality, and a score of 100 is reserved for the most critical
+    #   the finding. A score of 0 means that the underlying resources have
+    #   no criticality, and a score of 100 is reserved for the most critical
     #   resources.
     #   @return [Array<Types::NumberFilter>]
     #
@@ -1206,7 +1228,7 @@ module Aws::SecurityHub
     # @!attribute [rw] product_fields
     #   A data type where security-findings providers can include additional
     #   solution-specific details that aren't part of the defined
-    #   AwsSecurityFinding format.
+    #   `AwsSecurityFinding` format.
     #   @return [Array<Types::MapFilter>]
     #
     # @!attribute [rw] product_name
@@ -1576,7 +1598,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] standards_subscription_arns
-    #   The ARNs of the standards subscriptions that you want to disable.
+    #   The ARNs of the standards subscriptions to disable.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDisableStandardsRequest AWS API Documentation
@@ -1612,12 +1634,12 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] standards_subscription_requests
-    #   The list of standards that you want to enable.
+    #   The list of standards compliance checks to enable.
     #
     #   In this release, Security Hub supports only the CIS AWS Foundations
     #   standard.
     #
-    #    Its ARN is
+    #    The ARN for the standard is
     #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
     #   @return [Array<Types::StandardsSubscriptionRequest>]
     #
@@ -1661,8 +1683,8 @@ module Aws::SecurityHub
     #             },
     #             confidence: 1,
     #             criticality: 1,
-    #             title: "NonEmptyString",
-    #             description: "NonEmptyString",
+    #             title: "NonEmptyString", # required
+    #             description: "NonEmptyString", # required
     #             remediation: {
     #               recommendation: {
     #                 text: "NonEmptyString",
@@ -1779,8 +1801,12 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] findings
-    #   A list of findings to import. You must submit them in the
-    #   AwsSecurityFinding format.
+    #   A list of findings to import. To successfully import a finding, it
+    #   must follow the [AWS Security Finding Format][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
     #   @return [Array<Types::AwsSecurityFinding>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchImportFindingsRequest AWS API Documentation
@@ -1795,7 +1821,7 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] success_count
-    #   The number of findings that were successfully imported
+    #   The number of findings that were successfully imported.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_findings
@@ -1858,7 +1884,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] launched_at
-    #   The date/time that the container was started.
+    #   The date and time when the container started.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ContainerDetails AWS API Documentation
@@ -1868,6 +1894,47 @@ module Aws::SecurityHub
       :image_id,
       :image_name,
       :launched_at)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateActionTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString", # required
+    #         description: "NonEmptyString", # required
+    #         id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the custom action target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the custom action target.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID for the custom action target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateActionTargetRequest AWS API Documentation
+    #
+    class CreateActionTargetRequest < Struct.new(
+      :name,
+      :description,
+      :id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_target_arn
+    #   The ARN for the custom action target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateActionTargetResponse AWS API Documentation
+    #
+    class CreateActionTargetResponse < Struct.new(
+      :action_target_arn)
       include Aws::Structure
     end
 
@@ -2429,20 +2496,18 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] name
-    #   The user-defined name that identifies the insight to create.
+    #   The name of the custom insight to create.
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A collection of attributes that are applied to all of the active
-    #   findings aggregated by Security Hub, and that result in a subset of
-    #   findings that are included in this insight.
+    #   One or more attributes used to filter the findings included in the
+    #   insight. Only findings that match the criteria defined in the
+    #   filters are included in the insight.
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] group_by_attribute
-    #   The attribute by which the insight's findings are grouped. This
-    #   attribute is used as a findings aggregator for the purposes of
-    #   viewing and managing multiple related findings under a single
-    #   operand.
+    #   The attribute used as the aggregator to group related findings for
+    #   the insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateInsightRequest AWS API Documentation
@@ -2491,7 +2556,7 @@ module Aws::SecurityHub
 
     # @!attribute [rw] unprocessed_accounts
     #   A list of account ID and email address pairs of the AWS accounts
-    #   that couldn't be processed.
+    #   that weren't processed.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateMembersResponse AWS API Documentation
@@ -2570,8 +2635,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] account_ids
-    #   A list of account IDs that specify the accounts from which
-    #   invitations to Security Hub are declined.
+    #   A list of account IDs that specify the accounts that invitations to
+    #   Security Hub are declined from.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeclineInvitationsRequest AWS API Documentation
@@ -2583,13 +2648,42 @@ module Aws::SecurityHub
 
     # @!attribute [rw] unprocessed_accounts
     #   A list of account ID and email address pairs of the AWS accounts
-    #   that couldn't be processed.
+    #   that weren't processed.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeclineInvitationsResponse AWS API Documentation
     #
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteActionTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_target_arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] action_target_arn
+    #   The ARN of the custom action target to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteActionTargetRequest AWS API Documentation
+    #
+    class DeleteActionTargetRequest < Struct.new(
+      :action_target_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_target_arn
+    #   The ARN of the custom action target that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteActionTargetResponse AWS API Documentation
+    #
+    class DeleteActionTargetResponse < Struct.new(
+      :action_target_arn)
       include Aws::Structure
     end
 
@@ -2630,8 +2724,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] account_ids
-    #   A list of account IDs that specify accounts whose invitations to
-    #   Security Hub you want to delete.
+    #   A list of the account IDs that sent the invitations to delete.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteInvitationsRequest AWS API Documentation
@@ -2643,7 +2736,7 @@ module Aws::SecurityHub
 
     # @!attribute [rw] unprocessed_accounts
     #   A list of account ID and email address pairs of the AWS accounts
-    #   that couldn't be processed.
+    #   that invitations weren't deleted for.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteInvitationsResponse AWS API Documentation
@@ -2661,8 +2754,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] account_ids
-    #   A list of account IDs of the Security Hub member accounts that you
-    #   want to delete.
+    #   A list of account IDs of the member accounts to delete.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteMembersRequest AWS API Documentation
@@ -2674,13 +2766,96 @@ module Aws::SecurityHub
 
     # @!attribute [rw] unprocessed_accounts
     #   A list of account ID and email address pairs of the AWS accounts
-    #   that couldn't be processed.
+    #   that weren't deleted.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteMembersResponse AWS API Documentation
     #
     class DeleteMembersResponse < Struct.new(
       :unprocessed_accounts)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeActionTargetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_target_arns: ["NonEmptyString"],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] action_target_arns
+    #   A list of custom action target ARNs for the custom action targets to
+    #   retrieve.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that is required for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeActionTargetsRequest AWS API Documentation
+    #
+    class DescribeActionTargetsRequest < Struct.new(
+      :action_target_arns,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_targets
+    #   A list of `ActionTarget` objects. Each object includes the
+    #   `ActionTargetArn`, `Description`, and `Name` of a custom action
+    #   target available in Security Hub.
+    #   @return [Array<Types::ActionTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that is required for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeActionTargetsResponse AWS API Documentation
+    #
+    class DescribeActionTargetsResponse < Struct.new(
+      :action_targets,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeHubRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hub_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] hub_arn
+    #   The ARN of the Hub resource to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHubRequest AWS API Documentation
+    #
+    class DescribeHubRequest < Struct.new(
+      :hub_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_arn
+    #   The ARN of the Hub resource retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscribed_at
+    #   The date and time when Security Hub was enabled in the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHubResponse AWS API Documentation
+    #
+    class DescribeHubResponse < Struct.new(
+      :hub_arn,
+      :subscribed_at)
       include Aws::Structure
     end
 
@@ -2709,7 +2884,7 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] products
-    #   A list of products.
+    #   A list of products, including details for each product.
     #   @return [Array<Types::Product>]
     #
     # @!attribute [rw] next_token
@@ -2732,8 +2907,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] product_subscription_arn
-    #   The ARN of a resource that represents your subscription to a
-    #   supported product.
+    #   The ARN of the integrated product to disable the integration for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableImportFindingsForProductRequest AWS API Documentation
@@ -2775,8 +2949,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] account_ids
-    #   The account IDs of the member accounts that you want to disassociate
-    #   from the master account.
+    #   The account IDs of the member accounts to disassociate from the
+    #   master account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateMembersRequest AWS API Documentation
@@ -2798,8 +2972,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] product_arn
-    #   The ARN of the product that generates findings that you want to
-    #   import into Security Hub.
+    #   The ARN of the product to enable the integration for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableImportFindingsForProductRequest AWS API Documentation
@@ -2810,9 +2983,8 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] product_subscription_arn
-    #   The ARN of a resource that represents your subscription to the
-    #   product that generates the findings that you want to import into
-    #   Security Hub.
+    #   The ARN of your subscription to the product to enable integrations
+    #   for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableImportFindingsForProductResponse AWS API Documentation
@@ -2822,11 +2994,25 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # @api private
+    # @note When making an API call, you may pass EnableSecurityHubRequest
+    #   data as a hash:
+    #
+    #       {
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the Hub resource when you enable Security Hub.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubRequest AWS API Documentation
     #
-    class EnableSecurityHubRequest < Aws::EmptyStructure; end
+    class EnableSecurityHubRequest < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
 
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubResponse AWS API Documentation
     #
@@ -2842,8 +3028,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] standards_subscription_arns
-    #   The list of standards subscription ARNS that you want to list and
-    #   describe.
+    #   A list of the standards subscription ARNs for the standards to
+    #   retrieve.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -2855,7 +3041,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items that you want in the response.
+    #   The maximum number of results to return in the response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandardsRequest AWS API Documentation
@@ -2868,7 +3054,8 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] standards_subscriptions
-    #   The standards subscription details returned by the operation.
+    #   A list of `StandardsSubscriptions` objects that include information
+    #   about the enabled standards.
     #   @return [Array<Types::StandardsSubscription>]
     #
     # @!attribute [rw] next_token
@@ -3447,11 +3634,12 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] filters
-    #   A collection of attributes that is used for querying findings.
+    #   The findings attributes used to define a condition to filter the
+    #   findings returned.
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] sort_criteria
-    #   A collection of attributes used for sorting findings.
+    #   Findings attributes used to sort the list of findings returned.
     #   @return [Array<Types::SortCriterion>]
     #
     # @!attribute [rw] next_token
@@ -3463,7 +3651,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Indicates the maximum number of items that you want in the response.
+    #   The maximum number of findings to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsRequest AWS API Documentation
@@ -3477,7 +3665,7 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] findings
-    #   Findings details returned by the operation.
+    #   The findings that matched the filters specified in the request.
     #   @return [Array<Types::AwsSecurityFinding>]
     #
     # @!attribute [rw] next_token
@@ -3679,9 +3867,9 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A collection of attributes that are applied to all active Security
-    #   Hub-aggregated findings and that result in a subset of findings that
-    #   are included in this insight.
+    #   One or more attributes used to filter the findings included in the
+    #   insight. Only findings that match the criteria defined in the
+    #   filters are included in the insight.
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] group_by_attribute
@@ -3798,16 +3986,15 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The details of an invitation that the Security Hub master account sent
-    # to an AWS account.
+    # Details about an invitation.
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Security Hub master account that sent the
-    #   invitation.
+    #   The account ID of the Security Hub master account that the
+    #   invitation was sent from.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
-    #   The ID of the invitation that the Security Hub master account sent.
+    #   The ID of the invitation sent to the member account.
     #   @return [String]
     #
     # @!attribute [rw] invited_at
@@ -3815,7 +4002,7 @@ module Aws::SecurityHub
     #   @return [Time]
     #
     # @!attribute [rw] member_status
-    #   The current relationship status between the inviter and invitee
+    #   The current status of the association between member and master
     #   accounts.
     #   @return [String]
     #
@@ -3860,7 +4047,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The IP filter for querying findings.&gt;
+    # The IP filter for querying findings.
     #
     # @note When making an API call, you may pass IpFilter
     #   data as a hash:
@@ -4061,49 +4248,32 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProductSubscribersRequest
+    # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
     #       {
-    #         product_arn: "NonEmptyString",
-    #         next_token: "NextToken",
-    #         max_results: 1,
+    #         resource_arn: "ResourceArn", # required
     #       }
     #
-    # @!attribute [rw] product_arn
-    #   The ARN of the product.
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource to retrieve tags for.
     #   @return [String]
     #
-    # @!attribute [rw] next_token
-    #   The token that is required for pagination.
-    #   @return [String]
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListTagsForResourceRequest AWS API Documentation
     #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListProductSubscribersRequest AWS API Documentation
-    #
-    class ListProductSubscribersRequest < Struct.new(
-      :product_arn,
-      :next_token,
-      :max_results)
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
       include Aws::Structure
     end
 
-    # @!attribute [rw] product_subscribers
-    #   A list of account IDs that are subscribed to the product.
-    #   @return [Array<String>]
+    # @!attribute [rw] tags
+    #   The tags associated with a resource.
+    #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] next_token
-    #   The token that is required for pagination.
-    #   @return [String]
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListTagsForResourceResponse AWS API Documentation
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListProductSubscribersResponse AWS API Documentation
-    #
-    class ListProductSubscribersResponse < Struct.new(
-      :product_subscribers,
-      :next_token)
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -4165,8 +4335,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] comparison
-    #   The condition to be applied to a key value when querying for
-    #   findings with a map filter.
+    #   The condition to apply to a key value when querying for findings
+    #   with a map filter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/MapFilter AWS API Documentation
@@ -4178,19 +4348,19 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The details for a Security Hub member account.
+    # The details about a member account.
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of a Security Hub member account.
+    #   The AWS account ID of the member account.
     #   @return [String]
     #
     # @!attribute [rw] email
-    #   The email of a Security Hub member account.
+    #   The email address of the member account.
     #   @return [String]
     #
     # @!attribute [rw] master_id
-    #   The AWS account ID of the Security Hub master account to this member
-    #   account.
+    #   The AWS account ID of the Security Hub master account associated
+    #   with this member account.
     #   @return [String]
     #
     # @!attribute [rw] member_status
@@ -4199,12 +4369,13 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] invited_at
-    #   The timestamp of when the member account was invited to Security
-    #   Hub.
+    #   A timestamp for the date and time when the invitation was sent to
+    #   the member account.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp of when this member account was updated.
+    #   The timestamp for the date and time when the member account was
+    #   updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Member AWS API Documentation
@@ -4433,7 +4604,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] terminated_at
-    #   The date/time that the process was terminated.
+    #   The date and time when the process was terminated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProcessDetails AWS API Documentation
@@ -4480,7 +4651,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] product_subscription_resource_policy
-    #   The resource policy asasociated with the product.
+    #   The resource policy associated with the product.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Product AWS API Documentation
@@ -4509,13 +4680,13 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] text
-    #   The recommendation of what to do about the issue described in a
-    #   finding.
+    #   Describes the recommended steps to take to remediate an issue
+    #   identified in a finding.
     #   @return [String]
     #
     # @!attribute [rw] url
-    #   A URL to link to general remediation information for the finding
-    #   type of a finding.
+    #   A URL to a page or site that contains information about how to
+    #   remediate a finding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Recommendation AWS API Documentation
@@ -4526,7 +4697,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A related finding's details.
+    # Details about a related finding.
     #
     # @note When making an API call, you may pass RelatedFinding
     #   data as a hash:
@@ -4537,11 +4708,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] product_arn
-    #   The ARN of the solution that generated a related finding.
+    #   The ARN of the product that generated a related finding.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The solution-generated identifier for a related finding.
+    #   The product-generated identifier for a related finding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RelatedFinding AWS API Documentation
@@ -4552,7 +4723,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The remediation options for a finding.
+    # Details about the remediation steps for a finding.
     #
     # @note When making an API call, you may pass Remediation
     #   data as a hash:
@@ -4565,8 +4736,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] recommendation
-    #   A recommendation on how to remediate the issue identified within a
-    #   finding.
+    #   A recommendation on the steps to take to remediate the issue
+    #   identified by a finding.
     #   @return [Types::Recommendation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Remediation AWS API Documentation
@@ -4576,8 +4747,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A resource data type that describes a resource that the finding refers
-    # to.
+    # A resource related to a finding.
     #
     # @note When making an API call, you may pass Resource
     #   data as a hash:
@@ -4646,7 +4816,7 @@ module Aws::SecurityHub
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] details
-    #   Additional details about the resource.
+    #   Additional details about the resource related to a finding.
     #   @return [Types::ResourceDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Resource AWS API Documentation
@@ -4678,7 +4848,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Additional details about the resource.
+    # Additional details about a resource related to a finding.
     #
     # @note When making an API call, you may pass ResourceDetails
     #   data as a hash:
@@ -4716,24 +4886,23 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] aws_ec2_instance
-    #   The details of an Amazon EC2 instance.
+    #   Details about an Amazon EC2 instance related to a finding.
     #   @return [Types::AwsEc2InstanceDetails]
     #
     # @!attribute [rw] aws_s3_bucket
-    #   The details of an Amazon S3 Bucket.
+    #   Details about an Amazon S3 Bucket related to a finding.
     #   @return [Types::AwsS3BucketDetails]
     #
     # @!attribute [rw] aws_iam_access_key
-    #   IAM access key details related to a finding.
+    #   Details about an IAM access key related to a finding.
     #   @return [Types::AwsIamAccessKeyDetails]
     #
     # @!attribute [rw] container
-    #   Container details related to a finding.
+    #   Details about a container resource related to a finding.
     #   @return [Types::ContainerDetails]
     #
     # @!attribute [rw] other
-    #   The details of a resource that doesn't have a specific subfield for
-    #   the resource type defined.
+    #   Details about a resource that doesn't have a specific type defined.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
@@ -4764,14 +4933,14 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The account details that couldn't be processed.
+    # Details about the account that wasn't processed.
     #
     # @!attribute [rw] account_id
-    #   An ID of the AWS account that couldn't be processed.
+    #   An AWS account ID of the account that wasn't be processed.
     #   @return [String]
     #
     # @!attribute [rw] processing_result
-    #   The reason for why an account couldn't be processed.
+    #   The reason that the account wasn't be processed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Result AWS API Documentation
@@ -4782,7 +4951,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A finding's severity.
+    # The severity of the finding.
     #
     # @note When making an API call, you may pass Severity
     #   data as a hash:
@@ -4793,8 +4962,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] product
-    #   The native severity as defined by the security-findings provider's
-    #   solution that generated the finding.
+    #   The native severity as defined by the AWS service or integrated
+    #   partner product that generated the finding.
     #   @return [Float]
     #
     # @!attribute [rw] normalized
@@ -4809,7 +4978,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A collection of attributes used for sorting findings.
+    # A collection of finding attributes used to sort findings.
     #
     # @note When making an API call, you may pass SortCriterion
     #   data as a hash:
@@ -4820,11 +4989,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] field
-    #   The finding attribute used for sorting findings.
+    #   The finding attribute used to sort findings.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The order used for sorting findings.
+    #   The order used to sort findings.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SortCriterion AWS API Documentation
@@ -4846,17 +5015,16 @@ module Aws::SecurityHub
     #   The ARN of a standard.
     #
     #   In this release, Security Hub supports only the CIS AWS Foundations
-    #   standard.
-    #
-    #    Its ARN is
-    #   arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
+    #   standard, which uses the following ARN:
+    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.`
     #   @return [String]
     #
     # @!attribute [rw] standards_input
+    #   A key-value pair of input for the standard.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] standards_status
-    #   The standard's status.
+    #   The status of the standards subscription.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscription AWS API Documentation
@@ -4888,10 +5056,11 @@ module Aws::SecurityHub
     #   standard.
     #
     #    Its ARN is
-    #   arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
+    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
     #   @return [String]
     #
     # @!attribute [rw] standards_input
+    #   A key-value pair of input for the standard.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscriptionRequest AWS API Documentation
@@ -4929,7 +5098,37 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Threat intel details related to a finding.
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource to apply the tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Details about the threat intel related to a finding.
     #
     # @note When making an API call, you may pass ThreatIntelIndicator
     #   data as a hash:
@@ -4956,15 +5155,17 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] last_observed_at
-    #   The date/time of the last observation of a threat intel indicator.
+    #   The date and time when the most recent instance of a threat intel
+    #   indicator was observed.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The source of the threat intel.
+    #   The source of the threat intel indicator.
     #   @return [String]
     #
     # @!attribute [rw] source_url
-    #   The URL for more details from the source of the threat intel.
+    #   The URL to the page or site where you can get more information about
+    #   the threat intel indicator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ThreatIntelIndicator AWS API Documentation
@@ -4978,6 +5179,68 @@ module Aws::SecurityHub
       :source_url)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource to remove the tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys associated with the tags to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateActionTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_target_arn: "NonEmptyString", # required
+    #         name: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] action_target_arn
+    #   The ARN of the custom action target to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the custom action target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description for the custom action target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateActionTargetRequest AWS API Documentation
+    #
+    class UpdateActionTargetRequest < Struct.new(
+      :action_target_arn,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateActionTargetResponse AWS API Documentation
+    #
+    class UpdateActionTargetResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateFindingsRequest
     #   data as a hash:

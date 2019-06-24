@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-06-24)
+------------------
+
+* Feature - Updated service APIs and documentation.
+
 1.14.0 (2019-06-18)
 ------------------
 

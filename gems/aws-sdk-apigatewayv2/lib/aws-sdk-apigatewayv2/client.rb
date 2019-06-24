@@ -540,6 +540,9 @@ module Aws::ApiGatewayV2
     #         certificate_upload_date: Time.now,
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
+    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #         domain_name_status_message: "__string",
     #       },
     #     ],
     #   })
@@ -555,6 +558,9 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].certificate_upload_date #=> Time
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
+    #   resp.domain_name_configurations[0].domain_name_status_message #=> String
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -1723,6 +1729,9 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].certificate_upload_date #=> Time
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
+    #   resp.domain_name_configurations[0].domain_name_status_message #=> String
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -1761,6 +1770,9 @@ module Aws::ApiGatewayV2
     #   resp.items[0].domain_name_configurations[0].certificate_upload_date #=> Time
     #   resp.items[0].domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.items[0].domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.items[0].domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.items[0].domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
+    #   resp.items[0].domain_name_configurations[0].domain_name_status_message #=> String
     #   resp.next_token #=> String
     #
     # @overload get_domain_names(params = {})
@@ -2653,6 +2665,9 @@ module Aws::ApiGatewayV2
     #         certificate_upload_date: Time.now,
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
+    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #         domain_name_status_message: "__string",
     #       },
     #     ],
     #   })
@@ -2668,6 +2683,9 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].certificate_upload_date #=> Time
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
+    #   resp.domain_name_configurations[0].domain_name_status_message #=> String
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -3271,7 +3289,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

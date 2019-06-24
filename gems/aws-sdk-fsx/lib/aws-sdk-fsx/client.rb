@@ -392,7 +392,7 @@ module Aws::FSx
     #   resp.backup.file_system.creation_time #=> Time
     #   resp.backup.file_system.file_system_id #=> String
     #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backup.file_system.failure_details.message #=> String
     #   resp.backup.file_system.storage_capacity #=> Integer
     #   resp.backup.file_system.vpc_id #=> String
@@ -407,6 +407,12 @@ module Aws::FSx
     #   resp.backup.file_system.tags[0].key #=> String
     #   resp.backup.file_system.tags[0].value #=> String
     #   resp.backup.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
     #   resp.backup.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.backup.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -418,6 +424,8 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backup.directory_information.domain_name #=> String
+    #   resp.backup.directory_information.active_directory_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackup AWS API Documentation
     #
@@ -472,10 +480,10 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [required, String] :file_system_type
-    #   The type of file system.
+    #   The type of Amazon FSx file system to create.
     #
     # @option params [required, Integer] :storage_capacity
-    #   The storage capacity of the file system.
+    #   The storage capacity of the file system being created.
     #
     #   For Windows file systems, the storage capacity has a minimum of 300
     #   GiB, and a maximum of 65,536 GiB.
@@ -484,20 +492,18 @@ module Aws::FSx
     #   GiB. Storage capacity is provisioned in increments of 3,600 GiB.
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   A list of IDs for the subnets that the file system will be accessible
-    #   from. File systems support only one subnet. The file server is also
-    #   launched in that subnet's Availability Zone.
+    #   The IDs of the subnets that the file system will be accessible from.
+    #   File systems support only one subnet. The file server is also launched
+    #   in that subnet's Availability Zone.
     #
     # @option params [Array<String>] :security_group_ids
-    #   A list of IDs for the security groups that apply to the specified
-    #   network interfaces created for file system access. These security
-    #   groups will apply to all network interfaces. This list isn't returned
-    #   in later describe requests.
+    #   A list of IDs specifying the security groups to apply to all network
+    #   interfaces created for file system access. This list isn't returned
+    #   in later requests to describe the file system.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be applied to the file system at file system creation. The
-    #   key value of the `Name` tag appears in the console as the file system
-    #   name.
+    #   The tags to apply to the file system being created. The key value of
+    #   the `Name` tag appears in the console as the file system name.
     #
     # @option params [String] :kms_key_id
     #   The ID of your AWS Key Management Service (AWS KMS) key. This ID is
@@ -510,11 +516,12 @@ module Aws::FSx
     #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #
     # @option params [Types::CreateFileSystemWindowsConfiguration] :windows_configuration
-    #   The configuration for this Microsoft Windows file system.
+    #   The Microsoft Windows configuration for the file system being created.
+    #   This value is required if `FileSystemType` is set to `WINDOWS`.
     #
     # @option params [Types::CreateFileSystemLustreConfiguration] :lustre_configuration
-    #   The configuration object for Lustre file systems used in the
-    #   `CreateFileSystem` operation.
+    #   The Lustre configuration for the file system being created. This value
+    #   is required if `FileSystemType` is set to `LUSTRE`.
     #
     # @return [Types::CreateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -599,6 +606,14 @@ module Aws::FSx
     #     kms_key_id: "KmsKeyId",
     #     windows_configuration: {
     #       active_directory_id: "DirectoryId",
+    #       self_managed_active_directory_configuration: {
+    #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #         user_name: "DirectoryUserName", # required
+    #         password: "DirectoryPassword", # required
+    #         dns_ips: ["IpAddress"], # required
+    #       },
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
@@ -619,7 +634,7 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
     #   resp.file_system.vpc_id #=> String
@@ -634,6 +649,12 @@ module Aws::FSx
     #   resp.file_system.tags[0].key #=> String
     #   resp.file_system.tags[0].value #=> String
     #   resp.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
     #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -659,9 +680,9 @@ module Aws::FSx
     # Windows File Server backup.
     #
     # If a file system with the specified client request token exists and
-    # the parameters match, this call returns the description of the
-    # existing file system. If a client request token specified by the file
-    # system exists and the parameters don't match, this call returns
+    # the parameters match, this operation returns the description of the
+    # file system. If a client request token specified by the file system
+    # exists and the parameters don't match, this call returns
     # `IncompatibleParameterError`. If a file system with the specified
     # client request token doesn't exist, this operation does the
     # following:
@@ -693,7 +714,8 @@ module Aws::FSx
     #  </note>
     #
     # @option params [required, String] :backup_id
-    #   The ID of the backup.
+    #   The ID of the backup. Specifies the backup to use if you're creating
+    #   a file system from an existing backup.
     #
     # @option params [String] :client_request_token
     #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
@@ -798,6 +820,14 @@ module Aws::FSx
     #     ],
     #     windows_configuration: {
     #       active_directory_id: "DirectoryId",
+    #       self_managed_active_directory_configuration: {
+    #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #         user_name: "DirectoryUserName", # required
+    #         password: "DirectoryPassword", # required
+    #         dns_ips: ["IpAddress"], # required
+    #       },
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
@@ -812,7 +842,7 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
     #   resp.file_system.vpc_id #=> String
@@ -827,6 +857,12 @@ module Aws::FSx
     #   resp.file_system.tags[0].key #=> String
     #   resp.file_system.tags[0].value #=> String
     #   resp.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
     #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -984,7 +1020,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.file_system_id #=> String
-    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.windows_response.final_backup_id #=> String
     #   resp.windows_response.final_backup_tags #=> Array
     #   resp.windows_response.final_backup_tags[0].key #=> String
@@ -1122,7 +1158,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.creation_time #=> Time
     #   resp.backups[0].file_system.file_system_id #=> String
     #   resp.backups[0].file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.backups[0].file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.backups[0].file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backups[0].file_system.failure_details.message #=> String
     #   resp.backups[0].file_system.storage_capacity #=> Integer
     #   resp.backups[0].file_system.vpc_id #=> String
@@ -1137,6 +1173,12 @@ module Aws::FSx
     #   resp.backups[0].file_system.tags[0].key #=> String
     #   resp.backups[0].file_system.tags[0].value #=> String
     #   resp.backups[0].file_system.windows_configuration.active_directory_id #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
     #   resp.backups[0].file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.backups[0].file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1148,6 +1190,8 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backups[0].directory_information.domain_name #=> String
+    #   resp.backups[0].directory_information.active_directory_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackups AWS API Documentation
@@ -1266,7 +1310,7 @@ module Aws::FSx
     #   resp.file_systems[0].creation_time #=> Time
     #   resp.file_systems[0].file_system_id #=> String
     #   resp.file_systems[0].file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.file_systems[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.file_systems[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_systems[0].failure_details.message #=> String
     #   resp.file_systems[0].storage_capacity #=> Integer
     #   resp.file_systems[0].vpc_id #=> String
@@ -1281,6 +1325,12 @@ module Aws::FSx
     #   resp.file_systems[0].tags[0].key #=> String
     #   resp.file_systems[0].tags[0].value #=> String
     #   resp.file_systems[0].windows_configuration.active_directory_id #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
     #   resp.file_systems[0].windows_configuration.throughput_capacity #=> Integer
     #   resp.file_systems[0].windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_systems[0].windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1492,8 +1542,9 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [Types::UpdateFileSystemWindowsConfiguration] :windows_configuration
-    #   The configuration for this Microsoft Windows file system. The only
-    #   supported options are for backup and maintenance.
+    #   The configuration update for this Microsoft Windows file system. The
+    #   only supported options are for backup and maintenance and for
+    #   self-managed Active Directory configuration.
     #
     # @option params [Types::UpdateFileSystemLustreConfiguration] :lustre_configuration
     #   The configuration object for Amazon FSx for Lustre file systems used
@@ -1556,6 +1607,11 @@ module Aws::FSx
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
+    #       self_managed_active_directory_configuration: {
+    #         user_name: "DirectoryUserName",
+    #         password: "DirectoryPassword",
+    #         dns_ips: ["IpAddress"],
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -1568,7 +1624,7 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
     #   resp.file_system.vpc_id #=> String
@@ -1583,6 +1639,12 @@ module Aws::FSx
     #   resp.file_system.tags[0].key #=> String
     #   resp.file_system.tags[0].value #=> String
     #   resp.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
     #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1617,7 +1679,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

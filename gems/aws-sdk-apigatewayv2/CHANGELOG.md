@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2019-06-24)
+------------------
+
+* Feature - Customers can get information about security policies set on custom domain resources in API Gateway
+
 1.8.0 (2019-06-17)
 ------------------
 

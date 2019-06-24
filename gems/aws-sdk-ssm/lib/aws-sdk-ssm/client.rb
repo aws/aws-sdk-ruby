@@ -1053,19 +1053,19 @@ module Aws::SSM
 
     # Creates a new OpsItem. You must have permission in AWS Identity and
     # Access Management (IAM) to create a new OpsItem. For more information,
-    # see [Getting Started with OpsItems][1] in the *AWS Systems Manager
+    # see [Getting Started with OpsCenter][1] in the *AWS Systems Manager
     # User Guide*.
     #
-    # Operations engineers and IT professionals use the Systems Manager
-    # OpsItems capability to view, investigate, and remediate operational
-    # issues impacting the performance and health of their AWS resources.
-    # For more information, see [AWS Systems Manager OpsItems][2] in the
-    # *AWS Systems Manager User Guide*.
+    # Operations engineers and IT professionals use OpsCenter to view,
+    # investigate, and remediate operational issues impacting the
+    # performance and health of their AWS resources. For more information,
+    # see [AWS Systems Manager OpsCenter][2] in the *AWS Systems Manager
+    # User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html
-    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [required, String] :description
     #   Information about the OpsItem.
@@ -1077,12 +1077,26 @@ module Aws::SSM
     #   You enter operational data as key-value pairs. The key has a maximum
     #   length of 128 characters. The value has a maximum size of 20 KB.
     #
-    #   This custom data is searchable, but with restrictions. For the
-    #   `Searchable operational data` feature, all users with access to the
-    #   OpsItem Overview page (as provided by the DescribeOpsItems API action)
-    #   can view and search on the specified data. For the `Private
-    #   operational data` feature, the data is only viewable by users who have
-    #   access to the OpsItem (as provided by the GetOpsItem API action).
+    #   Operational data keys *can't* begin with the following: amazon, aws,
+    #   amzn, ssm, /amazon, /aws, /amzn, /ssm.
+    #
+    #   You can choose to make the data searchable by other users in the
+    #   account or you can restrict search access. Searchable data means that
+    #   all users with access to the OpsItem Overview page (as provided by the
+    #   DescribeOpsItems API action) can view and search on the specified
+    #   data. Operational data that is not searchable is only viewable by
+    #   users who have access to the OpsItem (as provided by the GetOpsItem
+    #   API action).
+    #
+    #   Use the `/aws/resources` key in OperationalData to specify a related
+    #   resource in the request. Use the `/aws/automations` key in
+    #   OperationalData to associate an Automation runbook with the OpsItem.
+    #   To view AWS CLI example commands that use these keys, see [Creating
+    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
     #
     # @option params [Array<Types::OpsItemNotification>] :notifications
     #   The Amazon Resource Name (ARN) of an SNS topic where notifications are
@@ -1106,19 +1120,22 @@ module Aws::SSM
     #   impacted resource.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Optional metadata that you assign to a resource. Tags enable you to
-    #   categorize a resource in different ways, such as by purpose, owner, or
-    #   environment. For example, you might want to tag an OpsItem to identify
-    #   the AWS resource or the type of issue. In this case, you could specify
-    #   the following key name/value pairs:
+    #   Optional metadata that you assign to a resource. You can restrict
+    #   access to OpsItems by using an inline IAM policy that specifies tags.
+    #   For more information, see [Getting Started with OpsCenter][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
-    #   * `Key=source,Value=EC2-instance`
+    #   Tags use a key-value pair. For example:
     #
-    #   * `Key=status,Value=stopped`
+    #   `Key=Department,Value=Finance`
     #
     #   <note markdown="1"> To add tags to an existing OpsItem, use the AddTagsToResource action.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions
     #
     # @return [Types::CreateOpsItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1460,12 +1477,22 @@ module Aws::SSM
     # @option params [required, String] :name
     #   The name of the document.
     #
+    # @option params [String] :document_version
+    #   (Optional) The version of the document that you want to delete. If not
+    #   provided, all versions of the document are deleted.
+    #
+    # @option params [String] :version_name
+    #   (Optional) The version name of the document that you want to delete.
+    #   If not provided, all versions of the document are deleted.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_document({
     #     name: "DocumentName", # required
+    #     document_version: "DocumentVersion",
+    #     version_name: "DocumentVersionName",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocument AWS API Documentation
@@ -3453,19 +3480,19 @@ module Aws::SSM
 
     # Query a set of OpsItems. You must have permission in AWS Identity and
     # Access Management (IAM) to query a list of OpsItems. For more
-    # information, see [Getting Started with OpsItems][1] in the *AWS
+    # information, see [Getting Started with OpsCenter][1] in the *AWS
     # Systems Manager User Guide*.
     #
-    # Operations engineers and IT professionals use the Systems Manager
-    # OpsItems capability to view, investigate, and remediate operational
-    # issues impacting the performance and health of their AWS resources.
-    # For more information, see [AWS Systems Manager OpsItems][2] in the
-    # *AWS Systems Manager User Guide*.
+    # Operations engineers and IT professionals use OpsCenter to view,
+    # investigate, and remediate operational issues impacting the
+    # performance and health of their AWS resources. For more information,
+    # see [AWS Systems Manager OpsCenter][2] in the *AWS Systems Manager
+    # User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html
-    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [Array<Types::OpsItemFilter>] :ops_item_filters
     #   One or more filters to limit the reponse.
@@ -3498,7 +3525,7 @@ module Aws::SSM
     #
     #     Operations: Contains
     #
-    #   * Key: OperationalData
+    #   * Key: OperationalData*
     #
     #     Operations: Equals
     #
@@ -3521,6 +3548,10 @@ module Aws::SSM
     #   * Key: AutomationId
     #
     #     Operations: Equals
+    #
+    #   *If you filter the response by using the OperationalData operator,
+    #   specify a key-value pair by using the following JSON format:
+    #   \\\{"key":"key\_name","value":"a\_value"\\}
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -4778,18 +4809,18 @@ module Aws::SSM
     # Get information about an OpsItem by using the ID. You must have
     # permission in AWS Identity and Access Management (IAM) to view
     # information about an OpsItem. For more information, see [Getting
-    # Started with OpsItems][1] in the *AWS Systems Manager User Guide*.
+    # Started with OpsCenter][1] in the *AWS Systems Manager User Guide*.
     #
-    # Operations engineers and IT professionals use the Systems Manager
-    # OpsItems capability to view, investigate, and remediate operational
-    # issues impacting the performance and health of their AWS resources.
-    # For more information, see [AWS Systems Manager OpsItems][2] in the
-    # *AWS Systems Manager User Guide*.
+    # Operations engineers and IT professionals use OpsCenter to view,
+    # investigate, and remediate operational issues impacting the
+    # performance and health of their AWS resources. For more information,
+    # see [AWS Systems Manager OpsCenter][2] in the *AWS Systems Manager
+    # User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html
-    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [required, String] :ops_item_id
     #   The ID of the OpsItem that you want to get.
@@ -8438,19 +8469,19 @@ module Aws::SSM
 
     # Edit or change an OpsItem. You must have permission in AWS Identity
     # and Access Management (IAM) to update an OpsItem. For more
-    # information, see [Getting Started with OpsItems][1] in the *AWS
+    # information, see [Getting Started with OpsCenter][1] in the *AWS
     # Systems Manager User Guide*.
     #
-    # Operations engineers and IT professionals use the Systems Manager
-    # OpsItems capability to view, investigate, and remediate operational
-    # issues impacting the performance and health of their AWS resources.
-    # For more information, see [AWS Systems Manager OpsItems][2] in the
-    # *AWS Systems Manager User Guide*.
+    # Operations engineers and IT professionals use OpsCenter to view,
+    # investigate, and remediate operational issues impacting the
+    # performance and health of their AWS resources. For more information,
+    # see [AWS Systems Manager OpsCenter][2] in the *AWS Systems Manager
+    # User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html
-    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [String] :description
     #   Update the information about the OpsItem. Provide enough information
@@ -8467,12 +8498,26 @@ module Aws::SSM
     #   You enter operational data as key-value pairs. The key has a maximum
     #   length of 128 characters. The value has a maximum size of 20 KB.
     #
-    #   This custom data is searchable, but with restrictions. For the
-    #   `Searchable operational data` feature, all users with access to the
-    #   OpsItem Overview page (as provided by the DescribeOpsItems API action)
-    #   can view and search on the specified data. For the `Private
-    #   operational data` feature, the data is only viewable by users who have
-    #   access to the OpsItem (as provided by the GetOpsItem API action).
+    #   Operational data keys *can't* begin with the following: amazon, aws,
+    #   amzn, ssm, /amazon, /aws, /amzn, /ssm.
+    #
+    #   You can choose to make the data searchable by other users in the
+    #   account or you can restrict search access. Searchable data means that
+    #   all users with access to the OpsItem Overview page (as provided by the
+    #   DescribeOpsItems API action) can view and search on the specified
+    #   data. Operational data that is not searchable is only viewable by
+    #   users who have access to the OpsItem (as provided by the GetOpsItem
+    #   API action).
+    #
+    #   Use the `/aws/resources` key in OperationalData to specify a related
+    #   resource in the request. Use the `/aws/automations` key in
+    #   OperationalData to associate an Automation runbook with the OpsItem.
+    #   To view AWS CLI example commands that use these keys, see [Creating
+    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
     #
     # @option params [Array<String>] :operational_data_to_delete
     #   Keys that you want to remove from the OperationalData map.
@@ -8498,7 +8543,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
     #
     # @option params [required, String] :ops_item_id
     #   The ID of the OpsItem.
@@ -8788,7 +8833,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

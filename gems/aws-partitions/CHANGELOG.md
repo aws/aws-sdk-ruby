@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2019-06-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ServiceQuotas`.
+
+* Feature - Added support for enumerating regions for `Aws::ApplicationInsights`.
+
 1.177.0 (2019-06-20)
 ------------------
 

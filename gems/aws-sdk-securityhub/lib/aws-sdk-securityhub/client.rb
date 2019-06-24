@@ -254,16 +254,17 @@ module Aws::SecurityHub
 
     # @!group API Operations
 
-    # Accepts the invitation to be monitored by a Security Hub master
-    # account.
+    # Accepts the invitation to be a member account and be monitored by the
+    # Security Hub master account that the invitation was sent from. When
+    # the member account accepts the invitation, permission is granted to
+    # the master account to view findings generated in the member account.
     #
     # @option params [String] :master_id
-    #   The account ID of the Security Hub master account whose invitation
-    #   you're accepting.
+    #   The account ID of the Security Hub master account that sent the
+    #   invitation.
     #
     # @option params [String] :invitation_id
-    #   The ID of the invitation that the Security Hub master account sends to
-    #   the AWS account.
+    #   The ID of the invitation sent from the Security Hub master account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -283,14 +284,16 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disables the standards specified by the standards subscription ARNs.
-    # In the context of Security Hub, supported standards (for example, CIS
-    # AWS Foundations) are automated and continuous checks that help
-    # determine your compliance status against security industry (including
-    # AWS) best practices.
+    # Disables the standards specified by the provided
+    # `StandardsSubscriptionArns`. For more information, see [Standards
+    # Supported in AWS Security Hub][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html
     #
     # @option params [required, Array<String>] :standards_subscription_arns
-    #   The ARNs of the standards subscriptions that you want to disable.
+    #   The ARNs of the standards subscriptions to disable.
     #
     # @return [Types::BatchDisableStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -320,19 +323,21 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables the standards specified by the standards ARNs. In the context
-    # of Security Hub, supported standards (for example, CIS AWS
-    # Foundations) are automated and continuous checks that help determine
-    # your compliance status against security industry (including AWS) best
-    # practices.
+    # Enables the standards specified by the provided `standardsArn`. In
+    # this release, only CIS AWS Foundations standards are supported. For
+    # more information, see [Standards Supported in AWS Security Hub][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html
     #
     # @option params [required, Array<Types::StandardsSubscriptionRequest>] :standards_subscription_requests
-    #   The list of standards that you want to enable.
+    #   The list of standards compliance checks to enable.
     #
     #   In this release, Security Hub supports only the CIS AWS Foundations
     #   standard.
     #
-    #    Its ARN is
+    #    The ARN for the standard is
     #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
     #
     # @return [Types::BatchEnableStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -371,11 +376,18 @@ module Aws::SecurityHub
     end
 
     # Imports security findings generated from an integrated third-party
-    # product into Security Hub.
+    # product into Security Hub. This action is requested by the integrated
+    # product to import its findings into Security Hub. The maximum allowed
+    # size for a finding is 240 Kb. An error is returned for any finding
+    # larger than 240 Kb.
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
-    #   A list of findings to import. You must submit them in the
-    #   AwsSecurityFinding format.
+    #   A list of findings to import. To successfully import a finding, it
+    #   must follow the [AWS Security Finding Format][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
     #
     # @return [Types::BatchImportFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -404,8 +416,8 @@ module Aws::SecurityHub
     #         },
     #         confidence: 1,
     #         criticality: 1,
-    #         title: "NonEmptyString",
-    #         description: "NonEmptyString",
+    #         title: "NonEmptyString", # required
+    #         description: "NonEmptyString", # required
     #         remediation: {
     #           recommendation: {
     #             text: "NonEmptyString",
@@ -539,21 +551,60 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates an insight, which is a consolidation of findings that
-    # identifies a security area that requires attention or intervention.
+    # Creates a custom action target in Security Hub. You can use custom
+    # actions on findings and insights in Security Hub to trigger target
+    # actions in Amazon CloudWatch Events.
     #
     # @option params [required, String] :name
-    #   The user-defined name that identifies the insight to create.
+    #   The name of the custom action target.
+    #
+    # @option params [required, String] :description
+    #   The description for the custom action target.
+    #
+    # @option params [required, String] :id
+    #   The ID for the custom action target.
+    #
+    # @return [Types::CreateActionTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateActionTargetResponse#action_target_arn #action_target_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_action_target({
+    #     name: "NonEmptyString", # required
+    #     description: "NonEmptyString", # required
+    #     id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_target_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateActionTarget AWS API Documentation
+    #
+    # @overload create_action_target(params = {})
+    # @param [Hash] params ({})
+    def create_action_target(params = {}, options = {})
+      req = build_request(:create_action_target, params)
+      req.send_request(options)
+    end
+
+    # Creates a custom insight in Security Hub. An insight is a
+    # consolidation of findings that relate to a security issue that
+    # requires attention or remediation. Use the `GroupByAttribute` to group
+    # the related findings in the insight.
+    #
+    # @option params [required, String] :name
+    #   The name of the custom insight to create.
     #
     # @option params [required, Types::AwsSecurityFindingFilters] :filters
-    #   A collection of attributes that are applied to all of the active
-    #   findings aggregated by Security Hub, and that result in a subset of
-    #   findings that are included in this insight.
+    #   One or more attributes used to filter the findings included in the
+    #   insight. Only findings that match the criteria defined in the filters
+    #   are included in the insight.
     #
     # @option params [required, String] :group_by_attribute
-    #   The attribute by which the insight's findings are grouped. This
-    #   attribute is used as a findings aggregator for the purposes of viewing
-    #   and managing multiple related findings under a single operand.
+    #   The attribute used as the aggregator to group related findings for the
+    #   insight.
     #
     # @return [Types::CreateInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1128,9 +1179,25 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates Security Hub member accounts associated with the account used
-    # for this action, which becomes the Security Hub Master account.
-    # Security Hub must be enabled in the account used to make this request.
+    # Creates a member association in Security Hub between the specified
+    # accounts and the account used to make the request, which is the master
+    # account. To successfully create a member, you must use this action
+    # from an account that already has Security Hub enabled. You can use the
+    # EnableSecurityHub to enable Security Hub.
+    #
+    # After you use `CreateMembers` to create member account associations in
+    # Security Hub, you need to use the InviteMembers action, which invites
+    # the accounts to enable Security Hub and become member accounts in
+    # Security Hub. If the invitation is accepted by the account owner, the
+    # account becomes a member account in Security Hub, and a permission
+    # policy is added that permits the master account to view the findings
+    # generated in the member account. When Security Hub is enabled in the
+    # invited account, findings start being sent to both the member and
+    # master accounts.
+    #
+    # You can remove the association between the master and member accounts
+    # by using the DisassociateFromMasterAccount or DisassociateMembers
+    # operation.
     #
     # @option params [Array<Types::AccountDetails>] :account_details
     #   A list of account ID and email address pairs of the accounts to
@@ -1166,13 +1233,11 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Declines invitations that are sent to this AWS account (invitee) from
-    # the AWS accounts (inviters) that are specified by the provided
-    # `AccountIds`.
+    # Declines invitations to become a member account.
     #
     # @option params [Array<String>] :account_ids
-    #   A list of account IDs that specify the accounts from which invitations
-    #   to Security Hub are declined.
+    #   A list of account IDs that specify the accounts that invitations to
+    #   Security Hub are declined from.
     #
     # @return [Types::DeclineInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1196,6 +1261,36 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def decline_invitations(params = {}, options = {})
       req = build_request(:decline_invitations, params)
+      req.send_request(options)
+    end
+
+    # Deletes a custom action target from Security Hub. Deleting a custom
+    # action target doesn't affect any findings or insights that were
+    # already sent to Amazon CloudWatch Events using the custom action.
+    #
+    # @option params [required, String] :action_target_arn
+    #   The ARN of the custom action target to delete.
+    #
+    # @return [Types::DeleteActionTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteActionTargetResponse#action_target_arn #action_target_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_action_target({
+    #     action_target_arn: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_target_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteActionTarget AWS API Documentation
+    #
+    # @overload delete_action_target(params = {})
+    # @param [Hash] params ({})
+    def delete_action_target(params = {}, options = {})
+      req = build_request(:delete_action_target, params)
       req.send_request(options)
     end
 
@@ -1227,12 +1322,11 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes invitations that were sent to theis AWS account (invitee) by
-    # the AWS accounts (inviters) that are specified by their account IDs.
+    # Deletes invitations received by the AWS account to become a member
+    # account.
     #
     # @option params [Array<String>] :account_ids
-    #   A list of account IDs that specify accounts whose invitations to
-    #   Security Hub you want to delete.
+    #   A list of the account IDs that sent the invitations to delete.
     #
     # @return [Types::DeleteInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1259,11 +1353,10 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes the Security Hub member accounts that the account IDs specify.
+    # Deletes the specified member accounts from Security Hub.
     #
     # @option params [Array<String>] :account_ids
-    #   A list of account IDs of the Security Hub member accounts that you
-    #   want to delete.
+    #   A list of account IDs of the member accounts to delete.
     #
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1290,8 +1383,82 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns a list of the custom action targets in Security Hub in your
+    # account.
+    #
+    # @option params [Array<String>] :action_target_arns
+    #   A list of custom action target ARNs for the custom action targets to
+    #   retrieve.
+    #
+    # @option params [String] :next_token
+    #   The token that is required for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::DescribeActionTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeActionTargetsResponse#action_targets #action_targets} => Array&lt;Types::ActionTarget&gt;
+    #   * {Types::DescribeActionTargetsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_action_targets({
+    #     action_target_arns: ["NonEmptyString"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_targets #=> Array
+    #   resp.action_targets[0].action_target_arn #=> String
+    #   resp.action_targets[0].name #=> String
+    #   resp.action_targets[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeActionTargets AWS API Documentation
+    #
+    # @overload describe_action_targets(params = {})
+    # @param [Hash] params ({})
+    def describe_action_targets(params = {}, options = {})
+      req = build_request(:describe_action_targets, params)
+      req.send_request(options)
+    end
+
+    # Returns details about the Hub resource in your account, including the
+    # `HubArn` and the time when you enabled Security Hub.
+    #
+    # @option params [String] :hub_arn
+    #   The ARN of the Hub resource to retrieve.
+    #
+    # @return [Types::DescribeHubResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHubResponse#hub_arn #hub_arn} => String
+    #   * {Types::DescribeHubResponse#subscribed_at #subscribed_at} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_hub({
+    #     hub_arn: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_arn #=> String
+    #   resp.subscribed_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHub AWS API Documentation
+    #
+    # @overload describe_hub(params = {})
+    # @param [Hash] params ({})
+    def describe_hub(params = {}, options = {})
+      req = build_request(:describe_hub, params)
+      req.send_request(options)
+    end
+
     # Returns information about the products available that you can
-    # subscribe to.
+    # subscribe to and integrate with Security Hub to consolidate findings.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination.
@@ -1334,12 +1501,12 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Cancels the subscription that allows a findings-generating solution
-    # (product) to import its findings into Security Hub.
+    # Disables the integration of the specified product with Security Hub.
+    # Findings from that product are no longer sent to Security Hub after
+    # the integration is disabled.
     #
     # @option params [required, String] :product_subscription_arn
-    #   The ARN of a resource that represents your subscription to a supported
-    #   product.
+    #   The ARN of the integrated product to disable the integration for.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1358,7 +1525,18 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disables the Security Hub service.
+    # Disables Security Hub in your account only in the current Region. To
+    # disable Security Hub in all Regions, you must submit one request per
+    # Region where you have enabled Security Hub. When you disable Security
+    # Hub for a master account, it doesn't disable Security Hub for any
+    # associated member accounts.
+    #
+    # When you disable Security Hub, your existing findings and insights and
+    # any Security Hub configuration settings are deleted after 90 days and
+    # can't be recovered. Any standards that were enabled are disabled, and
+    # your master and member account associations are removed. If you want
+    # to save your existing findings, you must export them before you
+    # disable Security Hub.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1371,8 +1549,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disassociates the current Security Hub member account from its master
-    # account.
+    # Disassociates the current Security Hub member account from the
+    # associated master account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1385,12 +1563,12 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disassociates the Security Hub member accounts that are specified by
-    # the account IDs from their master account.
+    # Disassociates the specified member accounts from the associated master
+    # account.
     #
     # @option params [Array<String>] :account_ids
-    #   The account IDs of the member accounts that you want to disassociate
-    #   from the master account.
+    #   The account IDs of the member accounts to disassociate from the master
+    #   account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1409,12 +1587,13 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Sets up the subscription that enables a findings-generating solution
-    # (product) to import its findings into Security Hub.
+    # Enables the integration of a partner product with Security Hub.
+    # Integrated products send findings to Security Hub. When you enable a
+    # product integration, a permission policy that grants permission for
+    # the product to send findings to Security Hub is applied.
     #
     # @option params [required, String] :product_arn
-    #   The ARN of the product that generates findings that you want to import
-    #   into Security Hub.
+    #   The ARN of the product to enable the integration for.
     #
     # @return [Types::EnableImportFindingsForProductResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1439,9 +1618,28 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables the Security Hub service.
+    # Enables Security Hub for your account in the current Region or the
+    # Region you specify in the request. When you enable Security Hub, you
+    # grant to Security Hub the permissions necessary to gather findings
+    # from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie.
+    # To learn more, see [Setting Up AWS Security Hub][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the Hub resource when you enable Security Hub.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_security_hub({
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHub AWS API Documentation
     #
@@ -1452,11 +1650,11 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists and describes enabled standards.
+    # Returns a list of the standards that are currently enabled.
     #
     # @option params [Array<String>] :standards_subscription_arns
-    #   The list of standards subscription ARNS that you want to list and
-    #   describe.
+    #   A list of the standards subscription ARNs for the standards to
+    #   retrieve.
     #
     # @option params [String] :next_token
     #   Paginates results. On your first call to the `GetEnabledStandards`
@@ -1465,7 +1663,7 @@ module Aws::SecurityHub
     #   of `nextToken` from the previous response to continue listing data.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items that you want in the response.
+    #   The maximum number of results to return in the response.
     #
     # @return [Types::GetEnabledStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1499,14 +1697,14 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists and describes Security Hub-aggregated findings that filter
-    # attributes specify.
+    # Returns a list of findings that match the specified criteria.
     #
     # @option params [Types::AwsSecurityFindingFilters] :filters
-    #   A collection of attributes that is used for querying findings.
+    #   The findings attributes used to define a condition to filter the
+    #   findings returned.
     #
     # @option params [Array<Types::SortCriterion>] :sort_criteria
-    #   A collection of attributes used for sorting findings.
+    #   Findings attributes used to sort the list of findings returned.
     #
     # @option params [String] :next_token
     #   Paginates results. On your first call to the `GetFindings` operation,
@@ -1515,7 +1713,7 @@ module Aws::SecurityHub
     #   `nextToken` from the previous response to continue listing data.
     #
     # @option params [Integer] :max_results
-    #   Indicates the maximum number of items that you want in the response.
+    #   The maximum number of findings to return.
     #
     # @return [Types::GetFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2627,10 +2825,13 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Invites other AWS accounts to enable Security Hub and become Security
-    # Hub member accounts. When an account accepts the invitation and
-    # becomes a member account, the master account can view Security Hub
-    # findings of the member account.
+    # Invites other AWS accounts to become member accounts for the Security
+    # Hub master account that the invitation is sent from. Before you can
+    # use this action to invite a member, you must first create the member
+    # account in Security Hub by using the CreateMembers action. When the
+    # account owner accepts the invitation to become a member account and
+    # enables Security Hub, the master account can view the findings
+    # generated from member account.
     #
     # @option params [Array<String>] :account_ids
     #   A list of IDs of the AWS accounts that you want to invite to Security
@@ -2796,42 +2997,117 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns a list of account IDs that are subscribed to the product.
+    # Returns a list of tags associated with a resource.
     #
-    # @option params [String] :product_arn
-    #   The ARN of the product.
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource to retrieve tags for.
     #
-    # @option params [String] :next_token
-    #   The token that is required for pagination.
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return.
-    #
-    # @return [Types::ListProductSubscribersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListProductSubscribersResponse#product_subscribers #product_subscribers} => Array&lt;String&gt;
-    #   * {Types::ListProductSubscribersResponse#next_token #next_token} => String
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.list_product_subscribers({
-    #     product_arn: "NonEmptyString",
-    #     next_token: "NextToken",
-    #     max_results: 1,
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.product_subscribers #=> Array
-    #   resp.product_subscribers[0] #=> String
-    #   resp.next_token #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListProductSubscribers AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListTagsForResource AWS API Documentation
     #
-    # @overload list_product_subscribers(params = {})
+    # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
-    def list_product_subscribers(params = {}, options = {})
-      req = build_request(:list_product_subscribers, params)
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds one or more tags to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource to apply the tags to.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource to remove the tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys associated with the tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the name and description of a custom action target in Security
+    # Hub.
+    #
+    # @option params [required, String] :action_target_arn
+    #   The ARN of the custom action target to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the custom action target.
+    #
+    # @option params [String] :description
+    #   The updated description for the custom action target.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_action_target({
+    #     action_target_arn: "NonEmptyString", # required
+    #     name: "NonEmptyString",
+    #     description: "NonEmptyString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateActionTarget AWS API Documentation
+    #
+    # @overload update_action_target(params = {})
+    # @param [Hash] params ({})
+    def update_action_target(params = {}, options = {})
+      req = build_request(:update_action_target, params)
       req.send_request(options)
     end
 
@@ -4014,7 +4290,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
