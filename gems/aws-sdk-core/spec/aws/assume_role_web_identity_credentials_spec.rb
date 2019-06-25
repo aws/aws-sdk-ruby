@@ -151,6 +151,8 @@ module Aws
     it 'auto refreshes credentials when near expiration' do
       allow(credentials).to receive(:expiration).and_return(Time.now)
       expect(client).to receive(:assume_role_with_web_identity).exactly(4).times
+      expect(File).to receive(:read).with(token_file_path).exactly(4).times
+
       c = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,

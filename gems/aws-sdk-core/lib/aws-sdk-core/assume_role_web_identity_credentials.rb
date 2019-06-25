@@ -39,9 +39,7 @@ module Aws
     def initialize(options = {})
       client_opts = {}
       @assume_role_web_identity_params = {}
-      @assume_role_web_identity_params[:web_identity_token] = _token_from_file(
-        options.delete(:web_identity_token_file))
-
+      @token_file = options.delete(:web_identity_token_file)
       options.each_pair do |key, value|
         if self.class.assume_role_web_identity_options.include?(key)
           @assume_role_web_identity_params[key] = value
@@ -64,6 +62,9 @@ module Aws
     private
 
     def refresh
+      # read from token file everytime it refreshes
+      @assume_role_web_identity_params[:web_identity_token] = _token_from_file(@token_file)
+
       c = @client.assume_role_with_web_identity(
         @assume_role_web_identity_params).credentials
       @credentials = Credentials.new(
