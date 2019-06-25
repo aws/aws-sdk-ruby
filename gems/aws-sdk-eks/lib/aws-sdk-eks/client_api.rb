@@ -240,7 +240,7 @@ module Aws::EKS
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceAbbreviation" => "Amazon EKS",
-        "serviceFullName" => "Amazon Elastic Container Service for Kubernetes",
+        "serviceFullName" => "Amazon Elastic Kubernetes Service",
         "serviceId" => "EKS",
         "signatureVersion" => "v4",
         "signingName" => "eks",

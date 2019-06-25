@@ -342,7 +342,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -567,8 +567,8 @@ module Aws::EC2
     #   Default: `stop`
     # @option options [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
     #   The network interfaces to associate with the instance. If you specify
-    #   a network interface, you must specify any security groups as part of
-    #   the network interface.
+    #   a network interface, you must specify any security groups and subnets
+    #   as part of the network interface.
     # @option options [String] :private_ip_address
     #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
     #   the IPv4 address range of the subnet.

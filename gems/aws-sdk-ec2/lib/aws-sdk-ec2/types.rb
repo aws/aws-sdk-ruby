@@ -433,7 +433,7 @@ module Aws::EC2
     #         quantity: 1, # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -2181,8 +2181,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CancelConversionTask.
-    #
     # @note When making an API call, you may pass CancelConversionRequest
     #   data as a hash:
     #
@@ -2216,8 +2214,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CancelExportTask.
-    #
     # @note When making an API call, you may pass CancelExportTaskRequest
     #   data as a hash:
     #
@@ -2237,8 +2233,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CancelImportTask.
-    #
     # @note When making an API call, you may pass CancelImportTaskRequest
     #   data as a hash:
     #
@@ -2272,8 +2266,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for CancelImportTask.
-    #
     # @!attribute [rw] import_task_id
     #   The ID of the task being canceled.
     #   @return [String]
@@ -3960,7 +3952,7 @@ module Aws::EC2
     #         instance_match_criteria: "open", # accepts open, targeted
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -4149,7 +4141,7 @@ module Aws::EC2
     #         client_token: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -4732,7 +4724,7 @@ module Aws::EC2
     #         replace_unhealthy_instances: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -5179,8 +5171,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateInstanceExportTask.
-    #
     # @note When making an API call, you may pass CreateInstanceExportTaskRequest
     #   data as a hash:
     #
@@ -5223,8 +5213,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for CreateInstanceExportTask.
-    #
     # @!attribute [rw] export_task
     #   Information about the instance export task.
     #   @return [Types::ExportTask]
@@ -5374,7 +5362,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -5561,7 +5549,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -6392,7 +6380,7 @@ module Aws::EC2
     #         volume_id: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -6444,7 +6432,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -6663,6 +6651,447 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTrafficMirrorFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to a Traffic Mirror filter.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRequest AWS API Documentation
+    #
+    class CreateTrafficMirrorFilterRequest < Struct.new(
+      :description,
+      :tag_specifications,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter
+    #   Information about the Traffic Mirror filter.
+    #   @return [Types::TrafficMirrorFilter]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterResult AWS API Documentation
+    #
+    class CreateTrafficMirrorFilterResult < Struct.new(
+      :traffic_mirror_filter,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTrafficMirrorFilterRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_id: "String", # required
+    #         traffic_direction: "ingress", # required, accepts ingress, egress
+    #         rule_number: 1, # required
+    #         rule_action: "accept", # required, accepts accept, reject
+    #         destination_port_range: {
+    #           from_port: 1,
+    #           to_port: 1,
+    #         },
+    #         source_port_range: {
+    #           from_port: 1,
+    #           to_port: 1,
+    #         },
+    #         protocol: 1,
+    #         destination_cidr_block: "String", # required
+    #         source_cidr_block: "String", # required
+    #         description: "String",
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the filter that this rule is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_direction
+    #   The type of traffic (`ingress` \| `egress`).
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_number
+    #   The number of the Traffic Mirror rule. This number must be unique
+    #   for each Traffic Mirror rule in a given direction. The rules are
+    #   processed in ascending order by rule number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_action
+    #   The action to take (`accept` \| `reject`) on the filtered traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination port range.
+    #   @return [Types::TrafficMirrorPortRangeRequest]
+    #
+    # @!attribute [rw] source_port_range
+    #   The source port range.
+    #   @return [Types::TrafficMirrorPortRangeRequest]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol, for example UDP, to assign to the Traffic Mirror rule.
+    #
+    #   For information about the protocol value, see [Protocol Numbers][1]
+    #   on the Internet Assigned Numbers Authority (IANA) website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The destination CIDR block to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cidr_block
+    #   The source CIDR block to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRuleRequest AWS API Documentation
+    #
+    class CreateTrafficMirrorFilterRuleRequest < Struct.new(
+      :traffic_mirror_filter_id,
+      :traffic_direction,
+      :rule_number,
+      :rule_action,
+      :destination_port_range,
+      :source_port_range,
+      :protocol,
+      :destination_cidr_block,
+      :source_cidr_block,
+      :description,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rule
+    #   The Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorFilterRule]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRuleResult AWS API Documentation
+    #
+    class CreateTrafficMirrorFilterRuleResult < Struct.new(
+      :traffic_mirror_filter_rule,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTrafficMirrorSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_interface_id: "String", # required
+    #         traffic_mirror_target_id: "String", # required
+    #         traffic_mirror_filter_id: "String", # required
+    #         packet_length: 1,
+    #         session_number: 1, # required
+    #         virtual_network_id: 1,
+    #         description: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the source network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] packet_length
+    #   The number of bytes in each packet to mirror. These are bytes after
+    #   the VXLAN header. Do not specify this parameter when you want to
+    #   mirror the entire packet. To mirror a subset of the packet, set this
+    #   to the length (in bytes) that you want to mirror. For example, if
+    #   you set this value to 1network0, then the first 100 bytes that meet
+    #   the filter criteria are copied to the target.
+    #
+    #   If you do not want to mirror the entire packet, use the
+    #   `PacketLength` parameter to specify the number of bytes in each
+    #   packet to mirror.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_number
+    #   The session number determines the order in which sessions are
+    #   evaluated when an interface is used by multiple sessions. The first
+    #   session with a matching filter is the one that mirrors the packets.
+    #
+    #   Valid values are 1-32766.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] virtual_network_id
+    #   The VXLAN ID for the Traffic Mirror session. For more information
+    #   about the VXLAN protocol, see [RFC 7348][1]. If you do not specify a
+    #   `VirtualNetworkId`, an account-wide unique id is chosen at random.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7348
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to a Traffic Mirror session.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSessionRequest AWS API Documentation
+    #
+    class CreateTrafficMirrorSessionRequest < Struct.new(
+      :network_interface_id,
+      :traffic_mirror_target_id,
+      :traffic_mirror_filter_id,
+      :packet_length,
+      :session_number,
+      :virtual_network_id,
+      :description,
+      :tag_specifications,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_session
+    #   Information about the Traffic Mirror session.
+    #   @return [Types::TrafficMirrorSession]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSessionResult AWS API Documentation
+    #
+    class CreateTrafficMirrorSessionResult < Struct.new(
+      :traffic_mirror_session,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTrafficMirrorTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_interface_id: "String",
+    #         network_load_balancer_arn: "String",
+    #         description: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID that is associated with the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the Network Load Balancer that is
+    #   associated with the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the Traffic Mirror target.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTargetRequest AWS API Documentation
+    #
+    class CreateTrafficMirrorTargetRequest < Struct.new(
+      :network_interface_id,
+      :network_load_balancer_arn,
+      :description,
+      :tag_specifications,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_target
+    #   Information about the Traffic Mirror target.
+    #   @return [Types::TrafficMirrorTarget]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTargetResult AWS API Documentation
+    #
+    class CreateTrafficMirrorTargetResult < Struct.new(
+      :traffic_mirror_target,
+      :client_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTransitGatewayRequest
     #   data as a hash:
     #
@@ -6678,7 +7107,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -6794,7 +7223,7 @@ module Aws::EC2
     #         transit_gateway_id: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -6854,7 +7283,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -7025,7 +7454,7 @@ module Aws::EC2
     #         dry_run: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -7577,7 +8006,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of VPN connection (`ipsec.1` \| `ipsec.2`).
+    #   The type of VPN connection (`ipsec.1`).
     #   @return [String]
     #
     # @!attribute [rw] vpn_gateway_id
@@ -8800,6 +9229,158 @@ module Aws::EC2
       :dry_run,
       :resources,
       :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTrafficMirrorFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterRequest AWS API Documentation
+    #
+    class DeleteTrafficMirrorFilterRequest < Struct.new(
+      :traffic_mirror_filter_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterResult AWS API Documentation
+    #
+    class DeleteTrafficMirrorFilterResult < Struct.new(
+      :traffic_mirror_filter_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTrafficMirrorFilterRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_rule_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_rule_id
+    #   The ID of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterRuleRequest AWS API Documentation
+    #
+    class DeleteTrafficMirrorFilterRuleRequest < Struct.new(
+      :traffic_mirror_filter_rule_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rule_id
+    #   The ID of the deleted Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterRuleResult AWS API Documentation
+    #
+    class DeleteTrafficMirrorFilterRuleResult < Struct.new(
+      :traffic_mirror_filter_rule_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTrafficMirrorSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_session_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_session_id
+    #   The ID of the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorSessionRequest AWS API Documentation
+    #
+    class DeleteTrafficMirrorSessionRequest < Struct.new(
+      :traffic_mirror_session_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_session_id
+    #   The ID of the deleted Traffic Mirror session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorSessionResult AWS API Documentation
+    #
+    class DeleteTrafficMirrorSessionResult < Struct.new(
+      :traffic_mirror_session_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTrafficMirrorTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_target_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorTargetRequest AWS API Documentation
+    #
+    class DeleteTrafficMirrorTargetRequest < Struct.new(
+      :traffic_mirror_target_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the deleted Traffic Mirror target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorTargetResult AWS API Documentation
+    #
+    class DeleteTrafficMirrorTargetResult < Struct.new(
+      :traffic_mirror_target_id)
       include Aws::Structure
     end
 
@@ -10204,8 +10785,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeConversionTasks.
-    #
     # @note When making an API call, you may pass DescribeConversionTasksRequest
     #   data as a hash:
     #
@@ -10233,8 +10812,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for DescribeConversionTasks.
-    #
     # @!attribute [rw] conversion_tasks
     #   Information about the conversion tasks.
     #   @return [Array<Types::ConversionTask>]
@@ -10566,8 +11143,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeExportTasks.
-    #
     # @note When making an API call, you may pass DescribeExportTasksRequest
     #   data as a hash:
     #
@@ -10586,8 +11161,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for DescribeExportTasks.
-    #
     # @!attribute [rw] export_tasks
     #   Information about the export tasks.
     #   @return [Array<Types::ExportTask>]
@@ -11777,8 +12350,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeImportImageTasks.
-    #
     # @note When making an API call, you may pass DescribeImportImageTasksRequest
     #   data as a hash:
     #
@@ -11832,8 +12403,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for DescribeImportImageTasks.
-    #
     # @!attribute [rw] import_image_tasks
     #   A list of zero or more import image tasks that are currently active
     #   or were completed or canceled in the previous 7 days.
@@ -11852,8 +12421,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeImportSnapshotTasks.
-    #
     # @note When making an API call, you may pass DescribeImportSnapshotTasksRequest
     #   data as a hash:
     #
@@ -11906,8 +12473,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for DescribeImportSnapshotTasks.
-    #
     # @!attribute [rw] import_snapshot_tasks
     #   A list of zero or more import snapshot tasks that are currently
     #   active or were completed or canceled in the previous 7 days.
@@ -15843,6 +16408,254 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeTrafficMirrorFiltersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_ids: ["String"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_ids
+    #   The ID of the Traffic Mirror filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `description`\: The Traffic Mirror filter description.
+    #
+    #   * `traffic-mirror-filter-id`\: The ID of the Traffic Mirror filter.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorFiltersRequest AWS API Documentation
+    #
+    class DescribeTrafficMirrorFiltersRequest < Struct.new(
+      :traffic_mirror_filter_ids,
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filters
+    #   Information about one or more Traffic Mirror filters.
+    #   @return [Array<Types::TrafficMirrorFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorFiltersResult AWS API Documentation
+    #
+    class DescribeTrafficMirrorFiltersResult < Struct.new(
+      :traffic_mirror_filters,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTrafficMirrorSessionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_session_ids: ["String"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_session_ids
+    #   The ID of the Traffic Mirror session.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `description`\: The Traffic Mirror session description.
+    #
+    #   * `network-interface-id`\: The ID of the Traffic Mirror session
+    #     network interface.
+    #
+    #   * `owner-id`\: The ID of the account that owns the Traffic Mirror
+    #     session.
+    #
+    #   * `packet-length`\: The assigned number of packets to mirror.
+    #
+    #   * `session-number`\: The assigned session number.
+    #
+    #   * `traffic-mirror-filter-id`\: The ID of the Traffic Mirror filter.
+    #
+    #   * `traffic-mirror-session-id`\: The ID of the Traffic Mirror
+    #     session.
+    #
+    #   * `traffic-mirror-target-id`\: The ID of the Traffic Mirror target.
+    #
+    #   * `virtual-network-id`\: The virtual network ID of the Traffic
+    #     Mirror session.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorSessionsRequest AWS API Documentation
+    #
+    class DescribeTrafficMirrorSessionsRequest < Struct.new(
+      :traffic_mirror_session_ids,
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_sessions
+    #   Describes one or more Traffic Mirror sessions. By default, all
+    #   Traffic Mirror sessions are described. Alternatively, you can filter
+    #   the results.
+    #   @return [Array<Types::TrafficMirrorSession>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorSessionsResult AWS API Documentation
+    #
+    class DescribeTrafficMirrorSessionsResult < Struct.new(
+      :traffic_mirror_sessions,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTrafficMirrorTargetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_target_ids: ["String"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_target_ids
+    #   The ID of the Traffic Mirror targets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `description`\: The Traffic Mirror target description.
+    #
+    #   * `network-interface-id`\: The ID of the Traffic Mirror session
+    #     network interface.
+    #
+    #   * `network-load-balancer-arn`\: The Amazon Resource Name (ARN) of
+    #     the Network Load Balancer that is associated with the session.
+    #
+    #   * `owner-id`\: The ID of the account that owns the Traffic Mirror
+    #     session.
+    #
+    #   * `traffic-mirror-target-id`\: The ID of the Traffic Mirror target.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorTargetsRequest AWS API Documentation
+    #
+    class DescribeTrafficMirrorTargetsRequest < Struct.new(
+      :traffic_mirror_target_ids,
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_targets
+    #   Information about one or more Traffic Mirror targets.
+    #   @return [Array<Types::TrafficMirrorTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorTargetsResult AWS API Documentation
+    #
+    class DescribeTrafficMirrorTargetsResult < Struct.new(
+      :traffic_mirror_targets,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeTransitGatewayAttachmentsRequest
     #   data as a hash:
     #
@@ -18633,32 +19446,27 @@ module Aws::EC2
     #
     # @!attribute [rw] encrypted
     #   Indicates whether the encryption state of an EBS volume is changed
-    #   while being restored from a backing snapshot. The default effect of
-    #   setting the `Encrypted` parameter to `true` through the console,
-    #   API, or CLI depends on the volume's origin (new or from a
-    #   snapshot), starting encryption state, ownership, and whether
-    #   [account-level encryption][1] is enabled. Each default case can be
-    #   overridden by specifying a customer master key (CMK) with the
-    #   `KmsKeyId` parameter in addition to setting `Encrypted` to `true`.
-    #   For a complete list of possible encryption cases, see [Amazon EBS
-    #   Encryption][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   while being restored from a backing snapshot. The effect of setting
+    #   the encryption state to `true` depends on the volume origin (new or
+    #   from a snapshot), starting encryption state, ownership, and whether
+    #   encryption by default is enabled. For more information, see [Amazon
+    #   EBS Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   In no case can you remove encryption from an encrypted volume.
     #
     #   Encrypted volumes can only be attached to instances that support
     #   Amazon EBS encryption. For more information, see [Supported Instance
-    #   Types][3].
+    #   Types][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a
-    #   user-managed CMK under which the EBS volume is encrypted.
+    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer
+    #   managed CMK under which the EBS volume is encrypted.
     #
     #   This parameter is only supported on `BlockDeviceMapping` objects
     #   called by [RunInstances][1], [RequestSpotFleet][2], and
@@ -21375,7 +22183,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The value is `Windows` for Windows AMIs; otherwise blank.
+    #   This value is set for Windows AMIs; otherwise, it is blank.
     #   @return [String]
     #
     # @!attribute [rw] product_codes
@@ -21631,8 +22439,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ImportImage.
-    #
     # @note When making an API call, you may pass ImportImageRequest
     #   data as a hash:
     #
@@ -21754,22 +22560,15 @@ module Aws::EC2
     #   The license type to be used for the Amazon Machine Image (AMI) after
     #   importing.
     #
-    #   **Note:** You may only use BYOL if you have existing licenses with
-    #   rights to use these licenses in a third party cloud like AWS. For
-    #   more information, see [Prerequisites][1] in the VM Import/Export
-    #   User Guide.
+    #   By default, we detect the source-system operating system (OS) and
+    #   apply the appropriate license. Specify `AWS` to replace the
+    #   source-system license with an AWS license, if appropriate. Specify
+    #   `BYOL` to retain the source-system license, if appropriate.
     #
-    #   Valid values include:
-    #
-    #   * `Auto` - Detects the source-system operating system (OS) and
-    #     applies the appropriate license.
-    #
-    #   * `AWS` - Replaces the source-system license with an AWS license, if
-    #     appropriate.
-    #
-    #   * `BYOL` - Retains the source-system license, if appropriate.
-    #
-    #   Default value: `Auto`
+    #   To use `BYOL`, you must have existing licenses with rights to use
+    #   these licenses in a third party cloud, such as AWS. For more
+    #   information, see [Prerequisites][1] in the VM Import/Export User
+    #   Guide.
     #
     #
     #
@@ -21805,8 +22604,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for ImportImage.
-    #
     # @!attribute [rw] architecture
     #   The architecture of the virtual machine.
     #   @return [String]
@@ -22057,8 +22854,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ImportInstance.
-    #
     # @note When making an API call, you may pass ImportInstanceRequest
     #   data as a hash:
     #
@@ -22138,8 +22933,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for ImportInstance.
-    #
     # @!attribute [rw] conversion_task
     #   Information about the conversion task.
     #   @return [Types::ConversionTask]
@@ -22273,8 +23066,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ImportSnapshot.
-    #
     # @note When making an API call, you may pass ImportSnapshotRequest
     #   data as a hash:
     #
@@ -22391,8 +23182,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for ImportSnapshot.
-    #
     # @!attribute [rw] description
     #   A description of the import snapshot task.
     #   @return [String]
@@ -22437,8 +23226,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ImportVolume.
-    #
     # @note When making an API call, you may pass ImportVolumeRequest
     #   data as a hash:
     #
@@ -22490,8 +23277,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for ImportVolume.
-    #
     # @!attribute [rw] conversion_task
     #   Information about the conversion task.
     #   @return [Types::ConversionTask]
@@ -25261,7 +26046,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -26918,6 +27703,264 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyTrafficMirrorFilterNetworkServicesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_id: "String", # required
+    #         add_network_services: ["amazon-dns"], # accepts amazon-dns
+    #         remove_network_services: ["amazon-dns"], # accepts amazon-dns
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_network_services
+    #   The network service, for example Amazon DNS, that you want to
+    #   mirror.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_network_services
+    #   The network service, for example Amazon DNS, that you no longer want
+    #   to mirror.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterNetworkServicesRequest AWS API Documentation
+    #
+    class ModifyTrafficMirrorFilterNetworkServicesRequest < Struct.new(
+      :traffic_mirror_filter_id,
+      :add_network_services,
+      :remove_network_services,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter
+    #   The Traffic Mirror filter that the network service is associated
+    #   with.
+    #   @return [Types::TrafficMirrorFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterNetworkServicesResult AWS API Documentation
+    #
+    class ModifyTrafficMirrorFilterNetworkServicesResult < Struct.new(
+      :traffic_mirror_filter)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyTrafficMirrorFilterRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_rule_id: "String", # required
+    #         traffic_direction: "ingress", # accepts ingress, egress
+    #         rule_number: 1,
+    #         rule_action: "accept", # accepts accept, reject
+    #         destination_port_range: {
+    #           from_port: 1,
+    #           to_port: 1,
+    #         },
+    #         source_port_range: {
+    #           from_port: 1,
+    #           to_port: 1,
+    #         },
+    #         protocol: 1,
+    #         destination_cidr_block: "String",
+    #         source_cidr_block: "String",
+    #         description: "String",
+    #         remove_fields: ["destination-port-range"], # accepts destination-port-range, source-port-range, protocol, description
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_rule_id
+    #   The ID of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_direction
+    #   The type of traffic (`ingress` \| `egress`) to assign to the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_number
+    #   The number of the Traffic Mirror rule. This number must be unique
+    #   for each Traffic Mirror rule in a given direction. The rules are
+    #   processed in ascending order by rule number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_action
+    #   The action to assign to the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination ports that are associated with the Traffic Mirror
+    #   rule.
+    #   @return [Types::TrafficMirrorPortRangeRequest]
+    #
+    # @!attribute [rw] source_port_range
+    #   The port range to assign to the Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorPortRangeRequest]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol, for example TCP, to assign to the Traffic Mirror rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The destination CIDR block to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cidr_block
+    #   The source CIDR block to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_fields
+    #   The properties that you want to remove from the Traffic Mirror
+    #   filter rule.
+    #
+    #   When you remove a property from a Traffic Mirror filter rule, the
+    #   property is set to the default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterRuleRequest AWS API Documentation
+    #
+    class ModifyTrafficMirrorFilterRuleRequest < Struct.new(
+      :traffic_mirror_filter_rule_id,
+      :traffic_direction,
+      :rule_number,
+      :rule_action,
+      :destination_port_range,
+      :source_port_range,
+      :protocol,
+      :destination_cidr_block,
+      :source_cidr_block,
+      :description,
+      :remove_fields,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rule
+    #   Modifies a Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorFilterRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterRuleResult AWS API Documentation
+    #
+    class ModifyTrafficMirrorFilterRuleResult < Struct.new(
+      :traffic_mirror_filter_rule)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyTrafficMirrorSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_session_id: "String", # required
+    #         traffic_mirror_target_id: "String",
+    #         traffic_mirror_filter_id: "String",
+    #         packet_length: 1,
+    #         session_number: 1,
+    #         virtual_network_id: 1,
+    #         description: "String",
+    #         remove_fields: ["packet-length"], # accepts packet-length, description, virtual-network-id
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_session_id
+    #   The ID of the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The Traffic Mirror target. The target must be in the same VPC as the
+    #   source, or have a VPC peering connection with the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] packet_length
+    #   The number of bytes in each packet to mirror. These are bytes after
+    #   the VXLAN header. To mirror a subset, set this to the length (in
+    #   bytes) to mirror. For example, if you set this value to 100, then
+    #   the first 100 bytes that meet the filter criteria are copied to the
+    #   target. Do not specify this parameter when you want to mirror the
+    #   entire packet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_number
+    #   The session number determines the order in which sessions are
+    #   evaluated when an interface is used by multiple sessions. The first
+    #   session with a matching filter is the one that mirrors the packets.
+    #
+    #   Valid values are 1-32766.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] virtual_network_id
+    #   The virtual network ID of the Traffic Mirror session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description to assign to the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_fields
+    #   The properties that you want to remove from the Traffic Mirror
+    #   session.
+    #
+    #   When you remove a property from a Traffic Mirror session, the
+    #   property is set to the default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorSessionRequest AWS API Documentation
+    #
+    class ModifyTrafficMirrorSessionRequest < Struct.new(
+      :traffic_mirror_session_id,
+      :traffic_mirror_target_id,
+      :traffic_mirror_filter_id,
+      :packet_length,
+      :session_number,
+      :virtual_network_id,
+      :description,
+      :remove_fields,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_session
+    #   Information about the Traffic Mirror session.
+    #   @return [Types::TrafficMirrorSession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorSessionResult AWS API Documentation
+    #
+    class ModifyTrafficMirrorSessionResult < Struct.new(
+      :traffic_mirror_session)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyTransitGatewayVpcAttachmentRequest
     #   data as a hash:
     #
@@ -27771,7 +28814,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [Types::ProvisionedBandwidth]
     #
@@ -28908,7 +29951,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     # [2]: https://console.aws.amazon.com/support/home?
     #
     # @!attribute [rw] provision_time
@@ -28917,7 +29960,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [Time]
     #
@@ -28927,7 +29970,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [String]
     #
@@ -28937,7 +29980,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [Time]
     #
@@ -28947,7 +29990,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [String]
     #
@@ -28957,7 +30000,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [String]
     #
@@ -30254,7 +31297,7 @@ module Aws::EC2
     #         user_data: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -30346,8 +31389,8 @@ module Aws::EC2
     #
     # @!attribute [rw] network_interfaces
     #   One or more network interfaces. If you specify a network interface,
-    #   you must specify any security groups as part of the network
-    #   interface.
+    #   you must specify any security groups and subnets as part of the
+    #   network interface.
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
@@ -30631,7 +31674,7 @@ module Aws::EC2
     #               weighted_capacity: 1.0,
     #               tag_specifications: [
     #                 {
-    #                   resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #                   resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #                   tags: [
     #                     {
     #                       key: "String",
@@ -32642,7 +33685,7 @@ module Aws::EC2
     #         ],
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -32838,8 +33881,8 @@ module Aws::EC2
     # @!attribute [rw] subnet_id
     #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   If you specify a network interface, you must specify any subnets as
+    #   part of the network interface.
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -32920,8 +33963,8 @@ module Aws::EC2
     #
     # @!attribute [rw] network_interfaces
     #   The network interfaces to associate with the instance. If you
-    #   specify a network interface, you must specify any security groups as
-    #   part of the network interface.
+    #   specify a network interface, you must specify any security groups
+    #   and subnets as part of the network interface.
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] private_ip_address
@@ -34842,7 +35885,7 @@ module Aws::EC2
     #         weighted_capacity: 1.0,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -35128,7 +36171,7 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             tag_specifications: [
     #               {
-    #                 resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #                 resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #                 tags: [
     #                   {
     #                     key: "String",
@@ -35369,7 +36412,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -36312,7 +37355,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -36696,6 +37739,269 @@ module Aws::EC2
     #
     class TerminateInstancesResult < Struct.new(
       :terminating_instances)
+      include Aws::Structure
+    end
+
+    # Describes the Traffic Mirror filter.
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_filter_rules
+    #   Information about the ingress rules that are associated with the
+    #   Traffic Mirror filter.
+    #   @return [Array<Types::TrafficMirrorFilterRule>]
+    #
+    # @!attribute [rw] egress_filter_rules
+    #   Information about the egress rules that are associated with the
+    #   Traffic Mirror filter.
+    #   @return [Array<Types::TrafficMirrorFilterRule>]
+    #
+    # @!attribute [rw] network_services
+    #   The network service traffic that is associated with the Traffic
+    #   Mirror filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Traffic Mirror filter.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilter AWS API Documentation
+    #
+    class TrafficMirrorFilter < Struct.new(
+      :traffic_mirror_filter_id,
+      :ingress_filter_rules,
+      :egress_filter_rules,
+      :network_services,
+      :description,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes the Traffic Mirror rule.
+    #
+    # @!attribute [rw] traffic_mirror_filter_rule_id
+    #   The ID of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter that the rule is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_direction
+    #   The traffic direction assigned to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number of the Traffic Mirror rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_action
+    #   The action assigned to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol assigned to the Traffic Mirror rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination port range assigned to the Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorPortRange]
+    #
+    # @!attribute [rw] source_port_range
+    #   The source port range assigned to the Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorPortRange]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The destination CIDR block assigned to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cidr_block
+    #   The source CIDR block assigned to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilterRule AWS API Documentation
+    #
+    class TrafficMirrorFilterRule < Struct.new(
+      :traffic_mirror_filter_rule_id,
+      :traffic_mirror_filter_id,
+      :traffic_direction,
+      :rule_number,
+      :rule_action,
+      :protocol,
+      :destination_port_range,
+      :source_port_range,
+      :destination_cidr_block,
+      :source_cidr_block,
+      :description)
+      include Aws::Structure
+    end
+
+    # Describes the Traffic Mirror port range.
+    #
+    # @!attribute [rw] from_port
+    #   The start of the Traffic Mirror port range. This applies to the TCP
+    #   and UDP protocols.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The end of the Traffic Mirror port range. This applies to the TCP
+    #   and UDP protocols.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorPortRange AWS API Documentation
+    #
+    class TrafficMirrorPortRange < Struct.new(
+      :from_port,
+      :to_port)
+      include Aws::Structure
+    end
+
+    # Information about the Traffic Mirror filter rule port range.
+    #
+    # @note When making an API call, you may pass TrafficMirrorPortRangeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       }
+    #
+    # @!attribute [rw] from_port
+    #   The first port in the Traffic Mirror port range. This applies to the
+    #   TCP and UDP protocols.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The last port in the Traffic Mirror port range. This applies to the
+    #   TCP and UDP protocols.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorPortRangeRequest AWS API Documentation
+    #
+    class TrafficMirrorPortRangeRequest < Struct.new(
+      :from_port,
+      :to_port)
+      include Aws::Structure
+    end
+
+    # Describes a Traffic Mirror session.
+    #
+    # @!attribute [rw] traffic_mirror_session_id
+    #   The ID for the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the Traffic Mirror session's network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the account that owns the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] packet_length
+    #   The number of bytes in each packet to mirror. These are the bytes
+    #   after the VXLAN header. To mirror a subset, set this to the length
+    #   (in bytes) to mirror. For example, if you set this value to 100,
+    #   then the first 100 bytes that meet the filter criteria are copied to
+    #   the target. Do not specify this parameter when you want to mirror
+    #   the entire packet
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_number
+    #   The session number determines the order in which sessions are
+    #   evaluated when an interface is used by multiple sessions. The first
+    #   session with a matching filter is the one that mirrors the packets.
+    #
+    #   Valid values are 1-32766.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] virtual_network_id
+    #   The virtual network ID associated with the Traffic Mirror session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Traffic Mirror session.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorSession AWS API Documentation
+    #
+    class TrafficMirrorSession < Struct.new(
+      :traffic_mirror_session_id,
+      :traffic_mirror_target_id,
+      :traffic_mirror_filter_id,
+      :network_interface_id,
+      :owner_id,
+      :packet_length,
+      :session_number,
+      :virtual_network_id,
+      :description,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes a Traffic Mirror target.
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID that is attached to the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the Network Load Balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Information about the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the account that owns the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Traffic Mirror target.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorTarget AWS API Documentation
+    #
+    class TrafficMirrorTarget < Struct.new(
+      :traffic_mirror_target_id,
+      :network_interface_id,
+      :network_load_balancer_arn,
+      :type,
+      :description,
+      :owner_id,
+      :tags)
       include Aws::Structure
     end
 

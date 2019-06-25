@@ -419,8 +419,8 @@ to be backwards compatible.
 | Amazon EC2 Container Service                          | Aws::ECS                             | aws-sdk-ecs                             | 2014-11-13  |
 | Amazon ElastiCache                                    | Aws::ElastiCache                     | aws-sdk-elasticache                     | 2015-02-02  |
 | Amazon Elastic Compute Cloud                          | Aws::EC2                             | aws-sdk-ec2                             | 2016-11-15  |
-| Amazon Elastic Container Service for Kubernetes       | Aws::EKS                             | aws-sdk-eks                             | 2017-11-01  |
 | Amazon Elastic File System                            | Aws::EFS                             | aws-sdk-efs                             | 2015-02-01  |
+| Amazon Elastic Kubernetes Service                     | Aws::EKS                             | aws-sdk-eks                             | 2017-11-01  |
 | Amazon Elastic MapReduce                              | Aws::EMR                             | aws-sdk-emr                             | 2009-03-31  |
 | Amazon Elastic Transcoder                             | Aws::ElasticTranscoder               | aws-sdk-elastictranscoder               | 2012-09-25  |
 | Amazon Elasticsearch Service                          | Aws::ElasticsearchService            | aws-sdk-elasticsearchservice            | 2015-01-01  |

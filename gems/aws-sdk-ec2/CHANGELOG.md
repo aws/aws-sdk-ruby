@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2019-06-25)
+------------------
+
+* Feature - Starting today, you can use Traffic Mirroring  to copy network traffic from an elastic network interface of Amazon EC2 instances and then send it to out-of-band security and monitoring appliances for content inspection, threat monitoring, and troubleshooting. These appliances can be deployed as individual instances, or as a fleet of instances behind a Network Load Balancer with a User Datagram Protocol (UDP) listener. Traffic Mirroring supports filters and packet truncation, so that you only extract the traffic of interest to monitor by using monitoring tools of your choice.
+
 1.95.0 (2019-06-18)
 ------------------
 

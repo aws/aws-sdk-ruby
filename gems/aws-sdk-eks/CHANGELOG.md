@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-06-25)
+------------------
+
+* Feature - Changing Amazon EKS full service name to Amazon Elastic Kubernetes Service.
+
 1.21.0 (2019-06-19)
 ------------------
 

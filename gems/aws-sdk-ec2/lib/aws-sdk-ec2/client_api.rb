@@ -265,6 +265,14 @@ module Aws::EC2
     CreateSubnetRequest = Shapes::StructureShape.new(name: 'CreateSubnetRequest')
     CreateSubnetResult = Shapes::StructureShape.new(name: 'CreateSubnetResult')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
+    CreateTrafficMirrorFilterRequest = Shapes::StructureShape.new(name: 'CreateTrafficMirrorFilterRequest')
+    CreateTrafficMirrorFilterResult = Shapes::StructureShape.new(name: 'CreateTrafficMirrorFilterResult')
+    CreateTrafficMirrorFilterRuleRequest = Shapes::StructureShape.new(name: 'CreateTrafficMirrorFilterRuleRequest')
+    CreateTrafficMirrorFilterRuleResult = Shapes::StructureShape.new(name: 'CreateTrafficMirrorFilterRuleResult')
+    CreateTrafficMirrorSessionRequest = Shapes::StructureShape.new(name: 'CreateTrafficMirrorSessionRequest')
+    CreateTrafficMirrorSessionResult = Shapes::StructureShape.new(name: 'CreateTrafficMirrorSessionResult')
+    CreateTrafficMirrorTargetRequest = Shapes::StructureShape.new(name: 'CreateTrafficMirrorTargetRequest')
+    CreateTrafficMirrorTargetResult = Shapes::StructureShape.new(name: 'CreateTrafficMirrorTargetResult')
     CreateTransitGatewayRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayRequest')
     CreateTransitGatewayResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayResult')
     CreateTransitGatewayRouteRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteRequest')
@@ -349,6 +357,14 @@ module Aws::EC2
     DeleteSpotDatafeedSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteSpotDatafeedSubscriptionRequest')
     DeleteSubnetRequest = Shapes::StructureShape.new(name: 'DeleteSubnetRequest')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
+    DeleteTrafficMirrorFilterRequest = Shapes::StructureShape.new(name: 'DeleteTrafficMirrorFilterRequest')
+    DeleteTrafficMirrorFilterResult = Shapes::StructureShape.new(name: 'DeleteTrafficMirrorFilterResult')
+    DeleteTrafficMirrorFilterRuleRequest = Shapes::StructureShape.new(name: 'DeleteTrafficMirrorFilterRuleRequest')
+    DeleteTrafficMirrorFilterRuleResult = Shapes::StructureShape.new(name: 'DeleteTrafficMirrorFilterRuleResult')
+    DeleteTrafficMirrorSessionRequest = Shapes::StructureShape.new(name: 'DeleteTrafficMirrorSessionRequest')
+    DeleteTrafficMirrorSessionResult = Shapes::StructureShape.new(name: 'DeleteTrafficMirrorSessionResult')
+    DeleteTrafficMirrorTargetRequest = Shapes::StructureShape.new(name: 'DeleteTrafficMirrorTargetRequest')
+    DeleteTrafficMirrorTargetResult = Shapes::StructureShape.new(name: 'DeleteTrafficMirrorTargetResult')
     DeleteTransitGatewayRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRequest')
     DeleteTransitGatewayResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayResult')
     DeleteTransitGatewayRouteRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRouteRequest')
@@ -539,6 +555,12 @@ module Aws::EC2
     DescribeSubnetsResult = Shapes::StructureShape.new(name: 'DescribeSubnetsResult')
     DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
     DescribeTagsResult = Shapes::StructureShape.new(name: 'DescribeTagsResult')
+    DescribeTrafficMirrorFiltersRequest = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorFiltersRequest')
+    DescribeTrafficMirrorFiltersResult = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorFiltersResult')
+    DescribeTrafficMirrorSessionsRequest = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorSessionsRequest')
+    DescribeTrafficMirrorSessionsResult = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorSessionsResult')
+    DescribeTrafficMirrorTargetsRequest = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorTargetsRequest')
+    DescribeTrafficMirrorTargetsResult = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorTargetsResult')
     DescribeTransitGatewayAttachmentsRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayAttachmentsRequest')
     DescribeTransitGatewayAttachmentsResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayAttachmentsResult')
     DescribeTransitGatewayRouteTablesRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayRouteTablesRequest')
@@ -988,6 +1010,12 @@ module Aws::EC2
     ModifySpotFleetRequestRequest = Shapes::StructureShape.new(name: 'ModifySpotFleetRequestRequest')
     ModifySpotFleetRequestResponse = Shapes::StructureShape.new(name: 'ModifySpotFleetRequestResponse')
     ModifySubnetAttributeRequest = Shapes::StructureShape.new(name: 'ModifySubnetAttributeRequest')
+    ModifyTrafficMirrorFilterNetworkServicesRequest = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorFilterNetworkServicesRequest')
+    ModifyTrafficMirrorFilterNetworkServicesResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorFilterNetworkServicesResult')
+    ModifyTrafficMirrorFilterRuleRequest = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorFilterRuleRequest')
+    ModifyTrafficMirrorFilterRuleResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorFilterRuleResult')
+    ModifyTrafficMirrorSessionRequest = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionRequest')
+    ModifyTrafficMirrorSessionResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionResult')
     ModifyTransitGatewayVpcAttachmentRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayVpcAttachmentRequest')
     ModifyTransitGatewayVpcAttachmentRequestOptions = Shapes::StructureShape.new(name: 'ModifyTransitGatewayVpcAttachmentRequestOptions')
     ModifyTransitGatewayVpcAttachmentResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayVpcAttachmentResult')
@@ -1351,6 +1379,26 @@ module Aws::EC2
     TerminateConnectionStatusSet = Shapes::ListShape.new(name: 'TerminateConnectionStatusSet')
     TerminateInstancesRequest = Shapes::StructureShape.new(name: 'TerminateInstancesRequest')
     TerminateInstancesResult = Shapes::StructureShape.new(name: 'TerminateInstancesResult')
+    TrafficDirection = Shapes::StringShape.new(name: 'TrafficDirection')
+    TrafficMirrorFilter = Shapes::StructureShape.new(name: 'TrafficMirrorFilter')
+    TrafficMirrorFilterRule = Shapes::StructureShape.new(name: 'TrafficMirrorFilterRule')
+    TrafficMirrorFilterRuleField = Shapes::StringShape.new(name: 'TrafficMirrorFilterRuleField')
+    TrafficMirrorFilterRuleFieldList = Shapes::ListShape.new(name: 'TrafficMirrorFilterRuleFieldList')
+    TrafficMirrorFilterRuleList = Shapes::ListShape.new(name: 'TrafficMirrorFilterRuleList')
+    TrafficMirrorFilterSet = Shapes::ListShape.new(name: 'TrafficMirrorFilterSet')
+    TrafficMirrorNetworkService = Shapes::StringShape.new(name: 'TrafficMirrorNetworkService')
+    TrafficMirrorNetworkServiceList = Shapes::ListShape.new(name: 'TrafficMirrorNetworkServiceList')
+    TrafficMirrorPortRange = Shapes::StructureShape.new(name: 'TrafficMirrorPortRange')
+    TrafficMirrorPortRangeRequest = Shapes::StructureShape.new(name: 'TrafficMirrorPortRangeRequest')
+    TrafficMirrorRuleAction = Shapes::StringShape.new(name: 'TrafficMirrorRuleAction')
+    TrafficMirrorSession = Shapes::StructureShape.new(name: 'TrafficMirrorSession')
+    TrafficMirrorSessionField = Shapes::StringShape.new(name: 'TrafficMirrorSessionField')
+    TrafficMirrorSessionFieldList = Shapes::ListShape.new(name: 'TrafficMirrorSessionFieldList')
+    TrafficMirrorSessionSet = Shapes::ListShape.new(name: 'TrafficMirrorSessionSet')
+    TrafficMirrorTarget = Shapes::StructureShape.new(name: 'TrafficMirrorTarget')
+    TrafficMirrorTargetSet = Shapes::ListShape.new(name: 'TrafficMirrorTargetSet')
+    TrafficMirrorTargetType = Shapes::StringShape.new(name: 'TrafficMirrorTargetType')
+    TrafficMirroringMaxResults = Shapes::IntegerShape.new(name: 'TrafficMirroringMaxResults')
     TrafficType = Shapes::StringShape.new(name: 'TrafficType')
     TransitGateway = Shapes::StructureShape.new(name: 'TransitGateway')
     TransitGatewayAssociation = Shapes::StructureShape.new(name: 'TransitGatewayAssociation')
@@ -2523,6 +2571,62 @@ module Aws::EC2
     CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tag"))
     CreateTagsRequest.struct_class = Types::CreateTagsRequest
 
+    CreateTrafficMirrorFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateTrafficMirrorFilterRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateTrafficMirrorFilterRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateTrafficMirrorFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTrafficMirrorFilterRequest.struct_class = Types::CreateTrafficMirrorFilterRequest
+
+    CreateTrafficMirrorFilterResult.add_member(:traffic_mirror_filter, Shapes::ShapeRef.new(shape: TrafficMirrorFilter, location_name: "trafficMirrorFilter"))
+    CreateTrafficMirrorFilterResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateTrafficMirrorFilterResult.struct_class = Types::CreateTrafficMirrorFilterResult
+
+    CreateTrafficMirrorFilterRuleRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorFilterId"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:traffic_direction, Shapes::ShapeRef.new(shape: TrafficDirection, required: true, location_name: "TrafficDirection"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "RuleNumber"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:rule_action, Shapes::ShapeRef.new(shape: TrafficMirrorRuleAction, required: true, location_name: "RuleAction"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: TrafficMirrorPortRangeRequest, location_name: "DestinationPortRange"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:source_port_range, Shapes::ShapeRef.new(shape: TrafficMirrorPortRangeRequest, location_name: "SourcePortRange"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Integer, location_name: "Protocol"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:source_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceCidrBlock"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTrafficMirrorFilterRuleRequest.struct_class = Types::CreateTrafficMirrorFilterRuleRequest
+
+    CreateTrafficMirrorFilterRuleResult.add_member(:traffic_mirror_filter_rule, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRule, location_name: "trafficMirrorFilterRule"))
+    CreateTrafficMirrorFilterRuleResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateTrafficMirrorFilterRuleResult.struct_class = Types::CreateTrafficMirrorFilterRuleResult
+
+    CreateTrafficMirrorSessionRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NetworkInterfaceId"))
+    CreateTrafficMirrorSessionRequest.add_member(:traffic_mirror_target_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorTargetId"))
+    CreateTrafficMirrorSessionRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorFilterId"))
+    CreateTrafficMirrorSessionRequest.add_member(:packet_length, Shapes::ShapeRef.new(shape: Integer, location_name: "PacketLength"))
+    CreateTrafficMirrorSessionRequest.add_member(:session_number, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SessionNumber"))
+    CreateTrafficMirrorSessionRequest.add_member(:virtual_network_id, Shapes::ShapeRef.new(shape: Integer, location_name: "VirtualNetworkId"))
+    CreateTrafficMirrorSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateTrafficMirrorSessionRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateTrafficMirrorSessionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateTrafficMirrorSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTrafficMirrorSessionRequest.struct_class = Types::CreateTrafficMirrorSessionRequest
+
+    CreateTrafficMirrorSessionResult.add_member(:traffic_mirror_session, Shapes::ShapeRef.new(shape: TrafficMirrorSession, location_name: "trafficMirrorSession"))
+    CreateTrafficMirrorSessionResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateTrafficMirrorSessionResult.struct_class = Types::CreateTrafficMirrorSessionResult
+
+    CreateTrafficMirrorTargetRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "NetworkInterfaceId"))
+    CreateTrafficMirrorTargetRequest.add_member(:network_load_balancer_arn, Shapes::ShapeRef.new(shape: String, location_name: "NetworkLoadBalancerArn"))
+    CreateTrafficMirrorTargetRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateTrafficMirrorTargetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateTrafficMirrorTargetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateTrafficMirrorTargetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTrafficMirrorTargetRequest.struct_class = Types::CreateTrafficMirrorTargetRequest
+
+    CreateTrafficMirrorTargetResult.add_member(:traffic_mirror_target, Shapes::ShapeRef.new(shape: TrafficMirrorTarget, location_name: "trafficMirrorTarget"))
+    CreateTrafficMirrorTargetResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateTrafficMirrorTargetResult.struct_class = Types::CreateTrafficMirrorTargetResult
+
     CreateTransitGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateTransitGatewayRequest.add_member(:options, Shapes::ShapeRef.new(shape: TransitGatewayRequestOptions, location_name: "Options"))
     CreateTransitGatewayRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -2859,6 +2963,34 @@ module Aws::EC2
     DeleteTagsRequest.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceIdList, required: true, location_name: "resourceId"))
     DeleteTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tag"))
     DeleteTagsRequest.struct_class = Types::DeleteTagsRequest
+
+    DeleteTrafficMirrorFilterRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorFilterId"))
+    DeleteTrafficMirrorFilterRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteTrafficMirrorFilterRequest.struct_class = Types::DeleteTrafficMirrorFilterRequest
+
+    DeleteTrafficMirrorFilterResult.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorFilterId"))
+    DeleteTrafficMirrorFilterResult.struct_class = Types::DeleteTrafficMirrorFilterResult
+
+    DeleteTrafficMirrorFilterRuleRequest.add_member(:traffic_mirror_filter_rule_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorFilterRuleId"))
+    DeleteTrafficMirrorFilterRuleRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteTrafficMirrorFilterRuleRequest.struct_class = Types::DeleteTrafficMirrorFilterRuleRequest
+
+    DeleteTrafficMirrorFilterRuleResult.add_member(:traffic_mirror_filter_rule_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorFilterRuleId"))
+    DeleteTrafficMirrorFilterRuleResult.struct_class = Types::DeleteTrafficMirrorFilterRuleResult
+
+    DeleteTrafficMirrorSessionRequest.add_member(:traffic_mirror_session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorSessionId"))
+    DeleteTrafficMirrorSessionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteTrafficMirrorSessionRequest.struct_class = Types::DeleteTrafficMirrorSessionRequest
+
+    DeleteTrafficMirrorSessionResult.add_member(:traffic_mirror_session_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorSessionId"))
+    DeleteTrafficMirrorSessionResult.struct_class = Types::DeleteTrafficMirrorSessionResult
+
+    DeleteTrafficMirrorTargetRequest.add_member(:traffic_mirror_target_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorTargetId"))
+    DeleteTrafficMirrorTargetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteTrafficMirrorTargetRequest.struct_class = Types::DeleteTrafficMirrorTargetRequest
+
+    DeleteTrafficMirrorTargetResult.add_member(:traffic_mirror_target_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorTargetId"))
+    DeleteTrafficMirrorTargetResult.struct_class = Types::DeleteTrafficMirrorTargetResult
 
     DeleteTransitGatewayRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayId"))
     DeleteTransitGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -3730,6 +3862,39 @@ module Aws::EC2
     DescribeTagsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeTagsResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagDescriptionList, location_name: "tagSet"))
     DescribeTagsResult.struct_class = Types::DescribeTagsResult
+
+    DescribeTrafficMirrorFiltersRequest.add_member(:traffic_mirror_filter_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "TrafficMirrorFilterId"))
+    DescribeTrafficMirrorFiltersRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeTrafficMirrorFiltersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeTrafficMirrorFiltersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TrafficMirroringMaxResults, location_name: "MaxResults"))
+    DescribeTrafficMirrorFiltersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeTrafficMirrorFiltersRequest.struct_class = Types::DescribeTrafficMirrorFiltersRequest
+
+    DescribeTrafficMirrorFiltersResult.add_member(:traffic_mirror_filters, Shapes::ShapeRef.new(shape: TrafficMirrorFilterSet, location_name: "trafficMirrorFilterSet"))
+    DescribeTrafficMirrorFiltersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTrafficMirrorFiltersResult.struct_class = Types::DescribeTrafficMirrorFiltersResult
+
+    DescribeTrafficMirrorSessionsRequest.add_member(:traffic_mirror_session_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "TrafficMirrorSessionId"))
+    DescribeTrafficMirrorSessionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeTrafficMirrorSessionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeTrafficMirrorSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TrafficMirroringMaxResults, location_name: "MaxResults"))
+    DescribeTrafficMirrorSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeTrafficMirrorSessionsRequest.struct_class = Types::DescribeTrafficMirrorSessionsRequest
+
+    DescribeTrafficMirrorSessionsResult.add_member(:traffic_mirror_sessions, Shapes::ShapeRef.new(shape: TrafficMirrorSessionSet, location_name: "trafficMirrorSessionSet"))
+    DescribeTrafficMirrorSessionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTrafficMirrorSessionsResult.struct_class = Types::DescribeTrafficMirrorSessionsResult
+
+    DescribeTrafficMirrorTargetsRequest.add_member(:traffic_mirror_target_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "TrafficMirrorTargetId"))
+    DescribeTrafficMirrorTargetsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeTrafficMirrorTargetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeTrafficMirrorTargetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TrafficMirroringMaxResults, location_name: "MaxResults"))
+    DescribeTrafficMirrorTargetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeTrafficMirrorTargetsRequest.struct_class = Types::DescribeTrafficMirrorTargetsRequest
+
+    DescribeTrafficMirrorTargetsResult.add_member(:traffic_mirror_targets, Shapes::ShapeRef.new(shape: TrafficMirrorTargetSet, location_name: "trafficMirrorTargetSet"))
+    DescribeTrafficMirrorTargetsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTrafficMirrorTargetsResult.struct_class = Types::DescribeTrafficMirrorTargetsResult
 
     DescribeTransitGatewayAttachmentsRequest.add_member(:transit_gateway_attachment_ids, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentIdStringList, location_name: "TransitGatewayAttachmentIds"))
     DescribeTransitGatewayAttachmentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -5590,6 +5755,46 @@ module Aws::EC2
     ModifySubnetAttributeRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subnetId"))
     ModifySubnetAttributeRequest.struct_class = Types::ModifySubnetAttributeRequest
 
+    ModifyTrafficMirrorFilterNetworkServicesRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorFilterId"))
+    ModifyTrafficMirrorFilterNetworkServicesRequest.add_member(:add_network_services, Shapes::ShapeRef.new(shape: TrafficMirrorNetworkServiceList, location_name: "AddNetworkService"))
+    ModifyTrafficMirrorFilterNetworkServicesRequest.add_member(:remove_network_services, Shapes::ShapeRef.new(shape: TrafficMirrorNetworkServiceList, location_name: "RemoveNetworkService"))
+    ModifyTrafficMirrorFilterNetworkServicesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyTrafficMirrorFilterNetworkServicesRequest.struct_class = Types::ModifyTrafficMirrorFilterNetworkServicesRequest
+
+    ModifyTrafficMirrorFilterNetworkServicesResult.add_member(:traffic_mirror_filter, Shapes::ShapeRef.new(shape: TrafficMirrorFilter, location_name: "trafficMirrorFilter"))
+    ModifyTrafficMirrorFilterNetworkServicesResult.struct_class = Types::ModifyTrafficMirrorFilterNetworkServicesResult
+
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:traffic_mirror_filter_rule_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorFilterRuleId"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:traffic_direction, Shapes::ShapeRef.new(shape: TrafficDirection, location_name: "TrafficDirection"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "RuleNumber"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:rule_action, Shapes::ShapeRef.new(shape: TrafficMirrorRuleAction, location_name: "RuleAction"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: TrafficMirrorPortRangeRequest, location_name: "DestinationPortRange"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:source_port_range, Shapes::ShapeRef.new(shape: TrafficMirrorPortRangeRequest, location_name: "SourcePortRange"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Integer, location_name: "Protocol"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "DestinationCidrBlock"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:source_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "SourceCidrBlock"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:remove_fields, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleFieldList, location_name: "RemoveField"))
+    ModifyTrafficMirrorFilterRuleRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyTrafficMirrorFilterRuleRequest.struct_class = Types::ModifyTrafficMirrorFilterRuleRequest
+
+    ModifyTrafficMirrorFilterRuleResult.add_member(:traffic_mirror_filter_rule, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRule, location_name: "trafficMirrorFilterRule"))
+    ModifyTrafficMirrorFilterRuleResult.struct_class = Types::ModifyTrafficMirrorFilterRuleResult
+
+    ModifyTrafficMirrorSessionRequest.add_member(:traffic_mirror_session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrafficMirrorSessionId"))
+    ModifyTrafficMirrorSessionRequest.add_member(:traffic_mirror_target_id, Shapes::ShapeRef.new(shape: String, location_name: "TrafficMirrorTargetId"))
+    ModifyTrafficMirrorSessionRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, location_name: "TrafficMirrorFilterId"))
+    ModifyTrafficMirrorSessionRequest.add_member(:packet_length, Shapes::ShapeRef.new(shape: Integer, location_name: "PacketLength"))
+    ModifyTrafficMirrorSessionRequest.add_member(:session_number, Shapes::ShapeRef.new(shape: Integer, location_name: "SessionNumber"))
+    ModifyTrafficMirrorSessionRequest.add_member(:virtual_network_id, Shapes::ShapeRef.new(shape: Integer, location_name: "VirtualNetworkId"))
+    ModifyTrafficMirrorSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyTrafficMirrorSessionRequest.add_member(:remove_fields, Shapes::ShapeRef.new(shape: TrafficMirrorSessionFieldList, location_name: "RemoveField"))
+    ModifyTrafficMirrorSessionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyTrafficMirrorSessionRequest.struct_class = Types::ModifyTrafficMirrorSessionRequest
+
+    ModifyTrafficMirrorSessionResult.add_member(:traffic_mirror_session, Shapes::ShapeRef.new(shape: TrafficMirrorSession, location_name: "trafficMirrorSession"))
+    ModifyTrafficMirrorSessionResult.struct_class = Types::ModifyTrafficMirrorSessionResult
+
     ModifyTransitGatewayVpcAttachmentRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayAttachmentId"))
     ModifyTransitGatewayVpcAttachmentRequest.add_member(:add_subnet_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddSubnetIds"))
     ModifyTransitGatewayVpcAttachmentRequest.add_member(:remove_subnet_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveSubnetIds"))
@@ -7189,6 +7394,70 @@ module Aws::EC2
     TerminateInstancesResult.add_member(:terminating_instances, Shapes::ShapeRef.new(shape: InstanceStateChangeList, location_name: "instancesSet"))
     TerminateInstancesResult.struct_class = Types::TerminateInstancesResult
 
+    TrafficMirrorFilter.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorFilterId"))
+    TrafficMirrorFilter.add_member(:ingress_filter_rules, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleList, location_name: "ingressFilterRuleSet"))
+    TrafficMirrorFilter.add_member(:egress_filter_rules, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleList, location_name: "egressFilterRuleSet"))
+    TrafficMirrorFilter.add_member(:network_services, Shapes::ShapeRef.new(shape: TrafficMirrorNetworkServiceList, location_name: "networkServiceSet"))
+    TrafficMirrorFilter.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    TrafficMirrorFilter.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TrafficMirrorFilter.struct_class = Types::TrafficMirrorFilter
+
+    TrafficMirrorFilterRule.add_member(:traffic_mirror_filter_rule_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorFilterRuleId"))
+    TrafficMirrorFilterRule.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorFilterId"))
+    TrafficMirrorFilterRule.add_member(:traffic_direction, Shapes::ShapeRef.new(shape: TrafficDirection, location_name: "trafficDirection"))
+    TrafficMirrorFilterRule.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "ruleNumber"))
+    TrafficMirrorFilterRule.add_member(:rule_action, Shapes::ShapeRef.new(shape: TrafficMirrorRuleAction, location_name: "ruleAction"))
+    TrafficMirrorFilterRule.add_member(:protocol, Shapes::ShapeRef.new(shape: Integer, location_name: "protocol"))
+    TrafficMirrorFilterRule.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: TrafficMirrorPortRange, location_name: "destinationPortRange"))
+    TrafficMirrorFilterRule.add_member(:source_port_range, Shapes::ShapeRef.new(shape: TrafficMirrorPortRange, location_name: "sourcePortRange"))
+    TrafficMirrorFilterRule.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
+    TrafficMirrorFilterRule.add_member(:source_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "sourceCidrBlock"))
+    TrafficMirrorFilterRule.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    TrafficMirrorFilterRule.struct_class = Types::TrafficMirrorFilterRule
+
+    TrafficMirrorFilterRuleFieldList.member = Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleField)
+
+    TrafficMirrorFilterRuleList.member = Shapes::ShapeRef.new(shape: TrafficMirrorFilterRule, location_name: "item")
+
+    TrafficMirrorFilterSet.member = Shapes::ShapeRef.new(shape: TrafficMirrorFilter, location_name: "item")
+
+    TrafficMirrorNetworkServiceList.member = Shapes::ShapeRef.new(shape: TrafficMirrorNetworkService, location_name: "item")
+
+    TrafficMirrorPortRange.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "fromPort"))
+    TrafficMirrorPortRange.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "toPort"))
+    TrafficMirrorPortRange.struct_class = Types::TrafficMirrorPortRange
+
+    TrafficMirrorPortRangeRequest.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "FromPort"))
+    TrafficMirrorPortRangeRequest.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "ToPort"))
+    TrafficMirrorPortRangeRequest.struct_class = Types::TrafficMirrorPortRangeRequest
+
+    TrafficMirrorSession.add_member(:traffic_mirror_session_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorSessionId"))
+    TrafficMirrorSession.add_member(:traffic_mirror_target_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorTargetId"))
+    TrafficMirrorSession.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorFilterId"))
+    TrafficMirrorSession.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
+    TrafficMirrorSession.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    TrafficMirrorSession.add_member(:packet_length, Shapes::ShapeRef.new(shape: Integer, location_name: "packetLength"))
+    TrafficMirrorSession.add_member(:session_number, Shapes::ShapeRef.new(shape: Integer, location_name: "sessionNumber"))
+    TrafficMirrorSession.add_member(:virtual_network_id, Shapes::ShapeRef.new(shape: Integer, location_name: "virtualNetworkId"))
+    TrafficMirrorSession.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    TrafficMirrorSession.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TrafficMirrorSession.struct_class = Types::TrafficMirrorSession
+
+    TrafficMirrorSessionFieldList.member = Shapes::ShapeRef.new(shape: TrafficMirrorSessionField)
+
+    TrafficMirrorSessionSet.member = Shapes::ShapeRef.new(shape: TrafficMirrorSession, location_name: "item")
+
+    TrafficMirrorTarget.add_member(:traffic_mirror_target_id, Shapes::ShapeRef.new(shape: String, location_name: "trafficMirrorTargetId"))
+    TrafficMirrorTarget.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
+    TrafficMirrorTarget.add_member(:network_load_balancer_arn, Shapes::ShapeRef.new(shape: String, location_name: "networkLoadBalancerArn"))
+    TrafficMirrorTarget.add_member(:type, Shapes::ShapeRef.new(shape: TrafficMirrorTargetType, location_name: "type"))
+    TrafficMirrorTarget.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    TrafficMirrorTarget.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    TrafficMirrorTarget.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TrafficMirrorTarget.struct_class = Types::TrafficMirrorTarget
+
+    TrafficMirrorTargetSet.member = Shapes::ShapeRef.new(shape: TrafficMirrorTarget, location_name: "item")
+
     TransitGateway.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayId"))
     TransitGateway.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayArn"))
     TransitGateway.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayState, location_name: "state"))
@@ -8261,6 +8530,38 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:create_traffic_mirror_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTrafficMirrorFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTrafficMirrorFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTrafficMirrorFilterResult)
+      end)
+
+      api.add_operation(:create_traffic_mirror_filter_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTrafficMirrorFilterRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTrafficMirrorFilterRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTrafficMirrorFilterRuleResult)
+      end)
+
+      api.add_operation(:create_traffic_mirror_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTrafficMirrorSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTrafficMirrorSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTrafficMirrorSessionResult)
+      end)
+
+      api.add_operation(:create_traffic_mirror_target, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTrafficMirrorTarget"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTrafficMirrorTargetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTrafficMirrorTargetResult)
+      end)
+
       api.add_operation(:create_transit_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTransitGateway"
         o.http_method = "POST"
@@ -8563,6 +8864,38 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_traffic_mirror_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTrafficMirrorFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTrafficMirrorFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTrafficMirrorFilterResult)
+      end)
+
+      api.add_operation(:delete_traffic_mirror_filter_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTrafficMirrorFilterRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTrafficMirrorFilterRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTrafficMirrorFilterRuleResult)
+      end)
+
+      api.add_operation(:delete_traffic_mirror_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTrafficMirrorSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTrafficMirrorSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTrafficMirrorSessionResult)
+      end)
+
+      api.add_operation(:delete_traffic_mirror_target, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTrafficMirrorTarget"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTrafficMirrorTargetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTrafficMirrorTargetResult)
       end)
 
       api.add_operation(:delete_transit_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -9552,6 +9885,48 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_traffic_mirror_filters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTrafficMirrorFilters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTrafficMirrorFiltersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTrafficMirrorFiltersResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_traffic_mirror_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTrafficMirrorSessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTrafficMirrorSessionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTrafficMirrorSessionsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_traffic_mirror_targets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTrafficMirrorTargets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTrafficMirrorTargetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTrafficMirrorTargetsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_transit_gateway_attachments, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTransitGatewayAttachments"
         o.http_method = "POST"
@@ -10330,6 +10705,30 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifySubnetAttributeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:modify_traffic_mirror_filter_network_services, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTrafficMirrorFilterNetworkServices"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTrafficMirrorFilterNetworkServicesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTrafficMirrorFilterNetworkServicesResult)
+      end)
+
+      api.add_operation(:modify_traffic_mirror_filter_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTrafficMirrorFilterRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTrafficMirrorFilterRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTrafficMirrorFilterRuleResult)
+      end)
+
+      api.add_operation(:modify_traffic_mirror_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTrafficMirrorSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTrafficMirrorSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTrafficMirrorSessionResult)
       end)
 
       api.add_operation(:modify_transit_gateway_vpc_attachment, Seahorse::Model::Operation.new.tap do |o|
