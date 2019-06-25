@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.302 (2019-06-25)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::EKS - Updated the API for Amazon Elastic Kubernetes Service.
