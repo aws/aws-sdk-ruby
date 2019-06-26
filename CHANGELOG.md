@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.303 (2019-06-26)
+------------------
+
 * Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
 
 * Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
