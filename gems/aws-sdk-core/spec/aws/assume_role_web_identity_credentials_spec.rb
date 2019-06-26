@@ -48,7 +48,7 @@ module Aws
       allow(client).to receive(:assume_role_with_web_identity).and_return(resp)
     end
 
-    it 'contructs a defalut client when not given' do
+    it 'contructs a default client when not given' do
       creds = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
@@ -136,7 +136,7 @@ module Aws
       )
     end
 
-    it 'extracts credentails from response' do
+    it 'extracts credentials from response' do
       c = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
