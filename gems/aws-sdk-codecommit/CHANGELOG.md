@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-06-26)
+------------------
+
+* Feature - This release supports better exception handling for merges.
+
 1.23.0 (2019-06-17)
 ------------------
 

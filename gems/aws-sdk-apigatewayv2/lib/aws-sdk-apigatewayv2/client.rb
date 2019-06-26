@@ -522,11 +522,16 @@ module Aws::ApiGatewayV2
     # @option params [Array<Types::DomainNameConfiguration>] :domain_name_configurations
     #   The domain name configurations.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A key value pair of string with key length between\[1-128\] and value
+    #   length between\[1-256\]
+    #
     # @return [Types::CreateDomainNameResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::CreateDomainNameResponse#domain_name #domain_name} => String
     #   * {Types::CreateDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
+    #   * {Types::CreateDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -545,6 +550,9 @@ module Aws::ApiGatewayV2
     #         domain_name_status_message: "__string",
     #       },
     #     ],
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600",
+    #     },
     #   })
     #
     # @example Response structure
@@ -561,6 +569,8 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
     #   resp.domain_name_configurations[0].domain_name_status_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -1060,6 +1070,10 @@ module Aws::ApiGatewayV2
     # @option params [Hash<String,String>] :stage_variables
     #   The stage variable map.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A key value pair of string with key length between\[1-128\] and value
+    #   length between\[1-256\]
+    #
     # @return [Types::CreateStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStageResponse#access_log_settings #access_log_settings} => Types::AccessLogSettings
@@ -1072,6 +1086,7 @@ module Aws::ApiGatewayV2
     #   * {Types::CreateStageResponse#route_settings #route_settings} => Hash&lt;String,Types::RouteSettings&gt;
     #   * {Types::CreateStageResponse#stage_name #stage_name} => String
     #   * {Types::CreateStageResponse#stage_variables #stage_variables} => Hash&lt;String,String&gt;
+    #   * {Types::CreateStageResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1104,6 +1119,9 @@ module Aws::ApiGatewayV2
     #     stage_variables: {
     #       "__string" => "StringWithLengthBetween0And2048",
     #     },
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1129,6 +1147,8 @@ module Aws::ApiGatewayV2
     #   resp.stage_name #=> String
     #   resp.stage_variables #=> Hash
     #   resp.stage_variables["__string"] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload create_stage(params = {})
     # @param [Hash] params ({})
@@ -1396,6 +1416,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetApiResponse#route_selection_expression #route_selection_expression} => String
     #   * {Types::GetApiResponse#version #version} => String
     #   * {Types::GetApiResponse#warnings #warnings} => Array&lt;String&gt;
+    #   * {Types::GetApiResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1417,6 +1438,8 @@ module Aws::ApiGatewayV2
     #   resp.version #=> String
     #   resp.warnings #=> Array
     #   resp.warnings[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload get_api(params = {})
     # @param [Hash] params ({})
@@ -1529,6 +1552,8 @@ module Aws::ApiGatewayV2
     #   resp.items[0].version #=> String
     #   resp.items[0].warnings #=> Array
     #   resp.items[0].warnings[0] #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @overload get_apis(params = {})
@@ -1711,6 +1736,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::GetDomainNameResponse#domain_name #domain_name} => String
     #   * {Types::GetDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
+    #   * {Types::GetDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1732,6 +1758,8 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
     #   resp.domain_name_configurations[0].domain_name_status_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -1773,6 +1801,8 @@ module Aws::ApiGatewayV2
     #   resp.items[0].domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.items[0].domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
     #   resp.items[0].domain_name_configurations[0].domain_name_status_message #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @overload get_domain_names(params = {})
@@ -2282,6 +2312,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetStageResponse#route_settings #route_settings} => Hash&lt;String,Types::RouteSettings&gt;
     #   * {Types::GetStageResponse#stage_name #stage_name} => String
     #   * {Types::GetStageResponse#stage_variables #stage_variables} => Hash&lt;String,String&gt;
+    #   * {Types::GetStageResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2313,6 +2344,8 @@ module Aws::ApiGatewayV2
     #   resp.stage_name #=> String
     #   resp.stage_variables #=> Hash
     #   resp.stage_variables["__string"] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload get_stage(params = {})
     # @param [Hash] params ({})
@@ -2366,12 +2399,84 @@ module Aws::ApiGatewayV2
     #   resp.items[0].stage_name #=> String
     #   resp.items[0].stage_variables #=> Hash
     #   resp.items[0].stage_variables["__string"] #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @overload get_stages(params = {})
     # @param [Hash] params ({})
     def get_stages(params = {}, options = {})
       req = build_request(:get_stages, params)
+      req.send_request(options)
+    end
+
+    # Gets the Tags for a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::GetTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTagsResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_tags({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @overload get_tags(params = {})
+    # @param [Hash] params ({})
+    def get_tags(params = {}, options = {})
+      req = build_request(:get_tags, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A key value pair of string with key length between\[1-128\] and value
+    #   length between\[1-256\]
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600",
+    #     },
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -3289,7 +3394,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
