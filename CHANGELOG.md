@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.304 (2019-06-27)
+------------------
+
 * Feature - Aws::DynamoDB - Updated the documentation for Amazon DynamoDB.
 
 2.11.303 (2019-06-26)
