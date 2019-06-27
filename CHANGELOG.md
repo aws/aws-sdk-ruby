@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.305 (2019-06-27)
+------------------
+
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
 
 * Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
