@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.181.0 (2019-06-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EC2InstanceConnect`.
+
 1.180.0 (2019-06-27)
 ------------------
 

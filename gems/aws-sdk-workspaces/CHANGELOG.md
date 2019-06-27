@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-06-27)
+------------------
+
+* Feature - Added support for the WorkSpaces restore feature and copying WorkSpaces Images across AWS Regions.
+
 1.23.0 (2019-06-17)
 ------------------
 

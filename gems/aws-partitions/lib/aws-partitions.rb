@@ -278,6 +278,7 @@ module Aws
             'DynamoDB' => 'dynamodb',
             'DynamoDBStreams' => 'streams.dynamodb',
             'EC2' => 'ec2',
+            'EC2InstanceConnect' => 'ec2-instance-connect',
             'ECR' => 'api.ecr',
             'ECS' => 'ecs',
             'EFS' => 'elasticfilesystem',

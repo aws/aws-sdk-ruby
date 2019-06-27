@@ -71,6 +71,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-dynamodb', '~> 1')
   spec.add_dependency('aws-sdk-dynamodbstreams', '~> 1')
   spec.add_dependency('aws-sdk-ec2', '~> 1')
+  spec.add_dependency('aws-sdk-ec2instanceconnect', '~> 1')
   spec.add_dependency('aws-sdk-ecr', '~> 1')
   spec.add_dependency('aws-sdk-ecs', '~> 1')
   spec.add_dependency('aws-sdk-efs', '~> 1')

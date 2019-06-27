@@ -331,6 +331,7 @@ to be backwards compatible.
 | AWS Device Farm                                       | Aws::DeviceFarm                      | aws-sdk-devicefarm                      | 2015-06-23  |
 | AWS Direct Connect                                    | Aws::DirectConnect                   | aws-sdk-directconnect                   | 2012-10-25  |
 | AWS Directory Service                                 | Aws::DirectoryService                | aws-sdk-directoryservice                | 2015-04-16  |
+| AWS EC2 Instance Connect                              | Aws::EC2InstanceConnect              | aws-sdk-ec2instanceconnect              | 2018-04-02  |
 | AWS Elastic Beanstalk                                 | Aws::ElasticBeanstalk                | aws-sdk-elasticbeanstalk                | 2010-12-01  |
 | AWS Elemental MediaConvert                            | Aws::MediaConvert                    | aws-sdk-mediaconvert                    | 2017-08-29  |
 | AWS Elemental MediaLive                               | Aws::MediaLive                       | aws-sdk-medialive                       | 2017-10-14  |

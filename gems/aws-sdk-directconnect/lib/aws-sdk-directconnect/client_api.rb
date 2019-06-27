@@ -228,6 +228,7 @@ module Aws::DirectConnect
     AllocateHostedConnectionRequest.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "bandwidth"))
     AllocateHostedConnectionRequest.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, required: true, location_name: "connectionName"))
     AllocateHostedConnectionRequest.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
+    AllocateHostedConnectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     AllocateHostedConnectionRequest.struct_class = Types::AllocateHostedConnectionRequest
 
     AllocatePrivateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
@@ -323,6 +324,7 @@ module Aws::DirectConnect
     Connection.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Connection.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     Connection.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
+    Connection.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Connection.struct_class = Types::Connection
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
@@ -341,6 +343,7 @@ module Aws::DirectConnect
     CreateConnectionRequest.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "bandwidth"))
     CreateConnectionRequest.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, required: true, location_name: "connectionName"))
     CreateConnectionRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
+    CreateConnectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateConnectionRequest.struct_class = Types::CreateConnectionRequest
 
     CreateDirectConnectGatewayAssociationProposalRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, required: true, location_name: "directConnectGatewayId"))
@@ -373,6 +376,7 @@ module Aws::DirectConnect
     CreateInterconnectRequest.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "bandwidth"))
     CreateInterconnectRequest.add_member(:location, Shapes::ShapeRef.new(shape: LocationCode, required: true, location_name: "location"))
     CreateInterconnectRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
+    CreateInterconnectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateInterconnectRequest.struct_class = Types::CreateInterconnectRequest
 
     CreateLagRequest.add_member(:number_of_connections, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "numberOfConnections"))
@@ -380,6 +384,8 @@ module Aws::DirectConnect
     CreateLagRequest.add_member(:connections_bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "connectionsBandwidth"))
     CreateLagRequest.add_member(:lag_name, Shapes::ShapeRef.new(shape: LagName, required: true, location_name: "lagName"))
     CreateLagRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
+    CreateLagRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateLagRequest.add_member(:child_connection_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "childConnectionTags"))
     CreateLagRequest.struct_class = Types::CreateLagRequest
 
     CreatePrivateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
@@ -600,6 +606,7 @@ module Aws::DirectConnect
     Interconnect.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Interconnect.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     Interconnect.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
+    Interconnect.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Interconnect.struct_class = Types::Interconnect
 
     InterconnectList.member = Shapes::ShapeRef.new(shape: Interconnect)
@@ -622,6 +629,7 @@ module Aws::DirectConnect
     Lag.add_member(:allows_hosted_connections, Shapes::ShapeRef.new(shape: BooleanFlag, location_name: "allowsHostedConnections"))
     Lag.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Lag.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
+    Lag.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Lag.struct_class = Types::Lag
 
     LagList.member = Shapes::ShapeRef.new(shape: Lag)
@@ -661,6 +669,7 @@ module Aws::DirectConnect
     NewPrivateVirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     NewPrivateVirtualInterface.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, deprecated: true, location_name: "virtualGatewayId"))
     NewPrivateVirtualInterface.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
+    NewPrivateVirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     NewPrivateVirtualInterface.struct_class = Types::NewPrivateVirtualInterface
 
     NewPrivateVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
@@ -671,6 +680,7 @@ module Aws::DirectConnect
     NewPrivateVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
     NewPrivateVirtualInterfaceAllocation.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     NewPrivateVirtualInterfaceAllocation.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+    NewPrivateVirtualInterfaceAllocation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     NewPrivateVirtualInterfaceAllocation.struct_class = Types::NewPrivateVirtualInterfaceAllocation
 
     NewPublicVirtualInterface.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
@@ -681,6 +691,7 @@ module Aws::DirectConnect
     NewPublicVirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
     NewPublicVirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     NewPublicVirtualInterface.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "routeFilterPrefixes"))
+    NewPublicVirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     NewPublicVirtualInterface.struct_class = Types::NewPublicVirtualInterface
 
     NewPublicVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
@@ -691,6 +702,7 @@ module Aws::DirectConnect
     NewPublicVirtualInterfaceAllocation.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
     NewPublicVirtualInterfaceAllocation.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     NewPublicVirtualInterfaceAllocation.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "routeFilterPrefixes"))
+    NewPublicVirtualInterfaceAllocation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     NewPublicVirtualInterfaceAllocation.struct_class = Types::NewPublicVirtualInterfaceAllocation
 
     NewTransitVirtualInterface.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: "virtualInterfaceName"))
@@ -702,6 +714,7 @@ module Aws::DirectConnect
     NewTransitVirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
     NewTransitVirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     NewTransitVirtualInterface.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
+    NewTransitVirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     NewTransitVirtualInterface.struct_class = Types::NewTransitVirtualInterface
 
     NewTransitVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: "virtualInterfaceName"))
@@ -712,6 +725,7 @@ module Aws::DirectConnect
     NewTransitVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
     NewTransitVirtualInterfaceAllocation.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
     NewTransitVirtualInterfaceAllocation.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
+    NewTransitVirtualInterfaceAllocation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     NewTransitVirtualInterfaceAllocation.struct_class = Types::NewTransitVirtualInterfaceAllocation
 
     ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
@@ -796,6 +810,7 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:bgp_peers, Shapes::ShapeRef.new(shape: BGPPeerList, location_name: "bgpPeers"))
     VirtualInterface.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
     VirtualInterface.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
+    VirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     VirtualInterface.struct_class = Types::VirtualInterface
 
     VirtualInterfaceList.member = Shapes::ShapeRef.new(shape: VirtualInterface)
@@ -848,6 +863,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AllocateHostedConnectionRequest)
         o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -858,6 +875,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AllocatePrivateVirtualInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: VirtualInterface)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -868,6 +887,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AllocatePublicVirtualInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: VirtualInterface)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -878,6 +899,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AllocateTransitVirtualInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: AllocateTransitVirtualInterfaceResult)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -968,6 +991,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateConnectionRequest)
         o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -1008,6 +1033,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateInterconnectRequest)
         o.output = Shapes::ShapeRef.new(shape: Interconnect)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -1018,6 +1045,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateLagRequest)
         o.output = Shapes::ShapeRef.new(shape: Lag)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -1028,6 +1057,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreatePrivateVirtualInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: VirtualInterface)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -1038,6 +1069,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreatePublicVirtualInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: VirtualInterface)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -1048,6 +1081,8 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateTransitVirtualInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTransitVirtualInterfaceResult)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-06-27)
+------------------
+
+* Feature - This release includes editorial updates for the Amazon Pinpoint API documentation.
+
 1.23.0 (2019-06-17)
 ------------------
 

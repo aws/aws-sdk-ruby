@@ -199,6 +199,9 @@
       "aws-sigv4": "~> 1.0"
     }
   },
+  "EC2InstanceConnect": {
+    "models": "ec2-instance-connect/2018-04-02"
+  },
   "ECR": {
     "models": "ecr/2015-09-21"
   },

@@ -177,6 +177,64 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyWorkspaceImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "WorkspaceImageName", # required
+    #         description: "WorkspaceImageDescription",
+    #         source_image_id: "WorkspaceImageId", # required
+    #         source_region: "Region", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_image_id
+    #   The identifier of the source image.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The identifier of the source Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the image.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImageRequest AWS API Documentation
+    #
+    class CopyWorkspaceImageRequest < Struct.new(
+      :name,
+      :description,
+      :source_image_id,
+      :source_region,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImageResult AWS API Documentation
+    #
+    class CopyWorkspaceImageResult < Struct.new(
+      :image_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateIpGroupRequest
     #   data as a hash:
     #
@@ -755,6 +813,43 @@ module Aws::WorkSpaces
     class DescribeWorkspaceImagesResult < Struct.new(
       :images,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWorkspaceSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The identifier of the WorkSpace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshotsRequest AWS API Documentation
+    #
+    class DescribeWorkspaceSnapshotsRequest < Struct.new(
+      :workspace_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rebuild_snapshots
+    #   Information about the snapshots that can be used to rebuild a
+    #   WorkSpace. These snapshots include the root volume.
+    #   @return [Array<Types::Snapshot>]
+    #
+    # @!attribute [rw] restore_snapshots
+    #   Information about the snapshots that can be used to restore a
+    #   WorkSpace. These snapshots include both the root volume and the user
+    #   volume.
+    #   @return [Array<Types::Snapshot>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshotsResult AWS API Documentation
+    #
+    class DescribeWorkspaceSnapshotsResult < Struct.new(
+      :rebuild_snapshots,
+      :restore_snapshots)
       include Aws::Structure
     end
 
@@ -1497,6 +1592,35 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RestoreWorkspaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #         snapshot_current_volumes: false,
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The identifier of the WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_current_volumes
+    #   Indicates whether to create snapshots of the root volume and user
+    #   volume before restoring the WorkSpace.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspaceRequest AWS API Documentation
+    #
+    class RestoreWorkspaceRequest < Struct.new(
+      :workspace_id,
+      :snapshot_current_volumes)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspaceResult AWS API Documentation
+    #
+    class RestoreWorkspaceResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass RevokeIpRulesRequest
     #   data as a hash:
     #
@@ -1535,6 +1659,19 @@ module Aws::WorkSpaces
     #
     class RootStorage < Struct.new(
       :capacity)
+      include Aws::Structure
+    end
+
+    # Describes a snapshot.
+    #
+    # @!attribute [rw] snapshot_time
+    #   The time when the snapshot was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Snapshot AWS API Documentation
+    #
+    class Snapshot < Struct.new(
+      :snapshot_time)
       include Aws::Structure
     end
 

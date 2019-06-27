@@ -61,6 +61,7 @@ module Aws
   autoload :DynamoDB, 'aws-sdk-dynamodb'
   autoload :DynamoDBStreams, 'aws-sdk-dynamodbstreams'
   autoload :EC2, 'aws-sdk-ec2'
+  autoload :EC2InstanceConnect, 'aws-sdk-ec2instanceconnect'
   autoload :ECR, 'aws-sdk-ecr'
   autoload :ECS, 'aws-sdk-ecs'
   autoload :EFS, 'aws-sdk-efs'

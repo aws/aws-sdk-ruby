@@ -8,15 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-pinpoint/types'
-require_relative 'aws-sdk-pinpoint/client_api'
-require_relative 'aws-sdk-pinpoint/client'
-require_relative 'aws-sdk-pinpoint/errors'
-require_relative 'aws-sdk-pinpoint/resource'
-require_relative 'aws-sdk-pinpoint/customizations'
+require_relative 'aws-sdk-ec2instanceconnect/types'
+require_relative 'aws-sdk-ec2instanceconnect/client_api'
+require_relative 'aws-sdk-ec2instanceconnect/client'
+require_relative 'aws-sdk-ec2instanceconnect/errors'
+require_relative 'aws-sdk-ec2instanceconnect/resource'
+require_relative 'aws-sdk-ec2instanceconnect/customizations'
 
-# This module provides support for Amazon Pinpoint. This module is available in the
-# `aws-sdk-pinpoint` gem.
+# This module provides support for AWS EC2 Instance Connect. This module is available in the
+# `aws-sdk-ec2instanceconnect` gem.
 #
 # # Client
 #
@@ -28,20 +28,20 @@ require_relative 'aws-sdk-pinpoint/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon Pinpoint all
+# Errors returned from AWS EC2 Instance Connect all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::Pinpoint::Errors::ServiceError
+#     rescue Aws::EC2InstanceConnect::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::Pinpoint
+module Aws::EC2InstanceConnect
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.0.0'
 
 end
