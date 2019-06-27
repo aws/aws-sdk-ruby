@@ -81,6 +81,7 @@ module Aws
     DynamoDB
     DynamoDBStreams
     EC2
+    EC2InstanceConnect
     ECR
     ECS
     EFS

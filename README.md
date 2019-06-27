@@ -286,6 +286,7 @@ to be backwards compatible.
 | AWS Device Farm                                       | DeviceFarm                      | 2015-06-23  |
 | AWS Direct Connect                                    | DirectConnect                   | 2012-10-25  |
 | AWS Directory Service                                 | DirectoryService                | 2015-04-16  |
+| AWS EC2 Instance Connect                              | EC2InstanceConnect              | 2018-04-02  |
 | AWS Elastic Beanstalk                                 | ElasticBeanstalk                | 2010-12-01  |
 | AWS Elemental MediaConvert                            | MediaConvert                    | 2017-08-29  |
 | AWS Elemental MediaLive                               | MediaLive                       | 2017-10-14  |
@@ -386,8 +387,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |

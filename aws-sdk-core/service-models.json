@@ -230,6 +230,10 @@
     "models": "ec2/2016-11-15",
     "endpoint": "ec2"
   },
+  "EC2InstanceConnect": {
+    "models": "ec2-instance-connect/2018-04-02",
+    "endpoint": "ec2-instance-connect"
+  },
   "ECR": {
     "models": "ecr/2015-09-21",
     "endpoint": "ecr"
