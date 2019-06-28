@@ -255,15 +255,16 @@ module Aws::IoTEventsData
     # @!group API Operations
 
     # Sends a set of messages to the AWS IoT Events system. Each message
-    # payload will be transformed into the input you specify (`inputName`)
-    # and ingested into any detectors that monitor that input. If multiple
-    # messages are sent, the order in which the messages are processed is
-    # not guaranteed--you must send messages one at a time and wait for a
-    # successful response to guarantee ordering.
+    # payload is transformed into the input you specify (`"inputName"`) and
+    # ingested into any detectors that monitor that input. If multiple
+    # messages are sent, the order in which the messages are processed
+    # isn't guaranteed. To guarantee ordering, you must send messages one
+    # at a time and wait for a successful response.
     #
     # @option params [required, Array<Types::Message>] :messages
-    #   The list of messages to send. Each message has format: `'\{
-    #   "messageId": "string", "inputName": "string", "payload": "string"\}'`.
+    #   The list of messages to send. Each message has the following format:
+    #   `'\{ "messageId": "string", "inputName": "string", "payload":
+    #   "string"\}'`
     #
     # @return [Types::BatchPutMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -299,8 +300,8 @@ module Aws::IoTEventsData
     # detectors (instances) of a specified detector model.
     #
     # @option params [required, Array<Types::UpdateDetectorRequest>] :detectors
-    #   The list of detectors (instances) to be updated, along with the values
-    #   to be updated.
+    #   The list of detectors (instances) to update, along with the values to
+    #   update.
     #
     # @return [Types::BatchUpdateDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -393,7 +394,7 @@ module Aws::IoTEventsData
     # Lists detectors (the instances of a detector model).
     #
     # @option params [required, String] :detector_model_name
-    #   The name of the detector model whose instances you want to list.
+    #   The name of the detector model whose detectors (instances) are listed.
     #
     # @option params [String] :state_name
     #   A filter that limits results to those detectors (instances) in the
@@ -450,7 +451,7 @@ module Aws::IoTEventsData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ioteventsdata'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

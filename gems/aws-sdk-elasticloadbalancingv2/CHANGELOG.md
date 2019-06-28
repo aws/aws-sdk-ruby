@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-06-24)
+------------------
+
+* Feature - This release adds support for UDP on Network Load Balancers
+
 1.30.0 (2019-06-17)
 ------------------
 

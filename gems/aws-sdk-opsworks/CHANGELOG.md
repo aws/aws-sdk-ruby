@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-06-20)
+------------------
+
+* Feature - Documentation updates for OpsWorks Stacks.
+
 1.17.0 (2019-06-17)
 ------------------
 

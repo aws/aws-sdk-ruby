@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-06-24)
+------------------
+
+* Feature - Customers can pick different security policies (TLS version + cipher suite) for custom domains in API Gateway
+
 1.31.0 (2019-06-17)
 ------------------
 

@@ -32,10 +32,11 @@ module Aws::Glue
     #           "GenericString" => "GenericString",
     #         },
     #         timeout: 1,
+    #         security_configuration: "NameString",
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
-    #         security_configuration: "NameString",
+    #         crawler_name: "NameString",
     #       }
     #
     # @!attribute [rw] job_name
@@ -70,13 +71,17 @@ module Aws::Glue
     #   overrides the timeout value set in the parent job.
     #   @return [Integer]
     #
+    # @!attribute [rw] security_configuration
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this action.
+    #   @return [String]
+    #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job run notification.
     #   @return [Types::NotificationProperty]
     #
-    # @!attribute [rw] security_configuration
-    #   The name of the `SecurityConfiguration` structure to be used with
-    #   this action.
+    # @!attribute [rw] crawler_name
+    #   The name of the crawler to be used with this action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Action AWS API Documentation
@@ -85,8 +90,9 @@ module Aws::Glue
       :job_name,
       :arguments,
       :timeout,
+      :security_configuration,
       :notification_property,
-      :security_configuration)
+      :crawler_name)
       include Aws::Structure
     end
 
@@ -594,6 +600,48 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetWorkflowsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         names: ["NameString"], # required
+    #         include_graph: false,
+    #       }
+    #
+    # @!attribute [rw] names
+    #   A list of workflow names, which may be the names returned from the
+    #   `ListWorkflows` operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_graph
+    #   Specifies whether to include a graph when returning the workflow
+    #   resource metadata.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetWorkflowsRequest AWS API Documentation
+    #
+    class BatchGetWorkflowsRequest < Struct.new(
+      :names,
+      :include_graph)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflows
+    #   A list of workflow resource metadata.
+    #   @return [Array<Types::Workflow>]
+    #
+    # @!attribute [rw] missing_workflows
+    #   A list of names of workflows not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetWorkflowsResponse AWS API Documentation
+    #
+    class BatchGetWorkflowsResponse < Struct.new(
+      :workflows,
+      :missing_workflows)
+      include Aws::Structure
+    end
+
     # Records an error that occurred when attempting to stop a specified job
     # run.
     #
@@ -994,6 +1042,8 @@ module Aws::Glue
     #         logical_operator: "EQUALS", # accepts EQUALS
     #         job_name: "NameString",
     #         state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #         crawler_name: "NameString",
+    #         crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
     #       }
     #
     # @!attribute [rw] logical_operator
@@ -1010,12 +1060,22 @@ module Aws::Glue
     #   `SUCCEEDED`, `STOPPED`, `TIMEOUT`, and `FAILED`.
     #   @return [String]
     #
+    # @!attribute [rw] crawler_name
+    #   The name of the crawler to which this condition applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] crawl_state
+    #   The state of the crawler to which this condition applies.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Condition AWS API Documentation
     #
     class Condition < Struct.new(
       :logical_operator,
       :job_name,
-      :state)
+      :state,
+      :crawler_name,
+      :crawl_state)
       include Aws::Structure
     end
 
@@ -1255,6 +1315,44 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The details of a crawl in the workflow.
+    #
+    # @!attribute [rw] state
+    #   The state of the crawler.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time on which the crawl started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time on which the crawl completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_message
+    #   The error message associated with the crawl.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group
+    #   The log group associated with the crawl.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_stream
+    #   The log stream associated with the crawl.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawl AWS API Documentation
+    #
+    class Crawl < Struct.new(
+      :state,
+      :started_on,
+      :completed_on,
+      :error_message,
+      :log_group,
+      :log_stream)
+      include Aws::Structure
+    end
+
     # Specifies a crawler program that examines a data source and uses
     # classifiers to try to determine its schema. If successful, the crawler
     # records metadata concerning the data source in the AWS Glue Data
@@ -1411,6 +1509,19 @@ module Aws::Glue
       :tables_created,
       :tables_updated,
       :tables_deleted)
+      include Aws::Structure
+    end
+
+    # The details of a Crawler node present in the workflow.
+    #
+    # @!attribute [rw] crawls
+    #   A list of crawls represented by the crawl node.
+    #   @return [Array<Types::Crawl>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerNodeDetails AWS API Documentation
+    #
+    class CrawlerNodeDetails < Struct.new(
+      :crawls)
       include Aws::Structure
     end
 
@@ -2129,15 +2240,15 @@ module Aws::Glue
     #         allocated_capacity: 1,
     #         timeout: 1,
     #         max_capacity: 1.0,
-    #         notification_property: {
-    #           notify_delay_after: 1,
-    #         },
-    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
-    #         number_of_workers: 1,
     #         security_configuration: "NameString",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
+    #         number_of_workers: 1,
+    #         worker_type: "NameString",
     #       }
     #
     # @!attribute [rw] name
@@ -2242,9 +2353,32 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
+    # @!attribute [rw] security_configuration
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this job.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to use with this job. You may use tags to limit access to
+    #   the job. For more information about tags in AWS Glue, see [AWS Tags
+    #   in AWS Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job notification.
     #   @return [Types::NotificationProperty]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   when a job runs.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
+    #   @return [Integer]
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
@@ -2262,29 +2396,6 @@ module Aws::Glue
     #     recommend this worker type for memory-intensive jobs.
     #   @return [String]
     #
-    # @!attribute [rw] number_of_workers
-    #   The number of workers of a defined `workerType` that are allocated
-    #   when a job runs.
-    #
-    #   The maximum number of workers you can define are 299 for `G.1X`, and
-    #   149 for `G.2X`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] security_configuration
-    #   The name of the `SecurityConfiguration` structure to be used with
-    #   this job.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   The tags to use with this job. You may use tags to limit access to
-    #   the job. For more information about tags in AWS Glue, see [AWS Tags
-    #   in AWS Glue][1] in the developer guide.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
-    #   @return [Hash<String,String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -2300,11 +2411,11 @@ module Aws::Glue
       :allocated_capacity,
       :timeout,
       :max_capacity,
-      :notification_property,
-      :worker_type,
-      :number_of_workers,
       :security_configuration,
-      :tags)
+      :tags,
+      :notification_property,
+      :number_of_workers,
+      :worker_type)
       include Aws::Structure
     end
 
@@ -2661,6 +2772,7 @@ module Aws::Glue
     #
     #       {
     #         name: "NameString", # required
+    #         workflow_name: "NameString",
     #         type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND
     #         schedule: "GenericString",
     #         predicate: {
@@ -2670,6 +2782,8 @@ module Aws::Glue
     #               logical_operator: "EQUALS", # accepts EQUALS
     #               job_name: "NameString",
     #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #               crawler_name: "NameString",
+    #               crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
     #             },
     #           ],
     #         },
@@ -2680,10 +2794,11 @@ module Aws::Glue
     #               "GenericString" => "GenericString",
     #             },
     #             timeout: 1,
+    #             security_configuration: "NameString",
     #             notification_property: {
     #               notify_delay_after: 1,
     #             },
-    #             security_configuration: "NameString",
+    #             crawler_name: "NameString",
     #           },
     #         ],
     #         description: "DescriptionString",
@@ -2695,6 +2810,10 @@ module Aws::Glue
     #
     # @!attribute [rw] name
     #   The name of the trigger.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_name
+    #   The name of the workflow associated with the trigger.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2746,6 +2865,7 @@ module Aws::Glue
     #
     class CreateTriggerRequest < Struct.new(
       :name,
+      :workflow_name,
       :type,
       :schedule,
       :predicate,
@@ -2813,6 +2933,59 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUserDefinedFunctionResponse AWS API Documentation
     #
     class CreateUserDefinedFunctionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CreateWorkflowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         description: "GenericString",
+    #         default_run_properties: {
+    #           "IdString" => "GenericString",
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name to be assigned to the workflow. It should be unique within
+    #   your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_run_properties
+    #   A collection of properties to be used as part of each execution of
+    #   the workflow.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be used with this workflow.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateWorkflowRequest AWS API Documentation
+    #
+    class CreateWorkflowRequest < Struct.new(
+      :name,
+      :description,
+      :default_run_properties,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the workflow which was provided as part of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateWorkflowResponse AWS API Documentation
+    #
+    class CreateWorkflowResponse < Struct.new(
+      :name)
+      include Aws::Structure
+    end
 
     # Specifies an XML classifier for `CreateClassifier` to create.
     #
@@ -3412,6 +3585,35 @@ module Aws::Glue
     #
     class DeleteUserDefinedFunctionResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteWorkflowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the workflow to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteWorkflowRequest AWS API Documentation
+    #
+    class DeleteWorkflowRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Name of the workflow specified in input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteWorkflowResponse AWS API Documentation
+    #
+    class DeleteWorkflowResponse < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # A development endpoint where a developer can remotely debug ETL
     # scripts.
     #
@@ -3625,6 +3827,25 @@ module Aws::Glue
     #
     class DynamoDBTarget < Struct.new(
       :path)
+      include Aws::Structure
+    end
+
+    # An edge represents a directed connection between two AWS Glue
+    # components which are part of the workflow the edge belongs to.
+    #
+    # @!attribute [rw] source_id
+    #   The unique of the node within the workflow where the edge starts.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_id
+    #   The unique of the node within the workflow where the edge ends.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Edge AWS API Documentation
+    #
+    class Edge < Struct.new(
+      :source_id,
+      :destination_id)
       include Aws::Structure
     end
 
@@ -5405,6 +5626,171 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetWorkflowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         include_graph: false,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_graph
+    #   Specifies whether to include a graph when returning the workflow
+    #   resource metadata.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRequest AWS API Documentation
+    #
+    class GetWorkflowRequest < Struct.new(
+      :name,
+      :include_graph)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow
+    #   The resource metadata for the workflow.
+    #   @return [Types::Workflow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowResponse AWS API Documentation
+    #
+    class GetWorkflowResponse < Struct.new(
+      :workflow)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetWorkflowRunPropertiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         run_id: "IdString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the workflow which was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The ID of the workflow run whose run properties should be returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRunPropertiesRequest AWS API Documentation
+    #
+    class GetWorkflowRunPropertiesRequest < Struct.new(
+      :name,
+      :run_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_properties
+    #   The workflow run properties which were set during the specified run.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRunPropertiesResponse AWS API Documentation
+    #
+    class GetWorkflowRunPropertiesResponse < Struct.new(
+      :run_properties)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetWorkflowRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         run_id: "IdString", # required
+    #         include_graph: false,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the workflow being run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The ID of the workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_graph
+    #   Specifies whether to include the workflow graph in response or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRunRequest AWS API Documentation
+    #
+    class GetWorkflowRunRequest < Struct.new(
+      :name,
+      :run_id,
+      :include_graph)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run
+    #   The requested workflow run metadata.
+    #   @return [Types::WorkflowRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRunResponse AWS API Documentation
+    #
+    class GetWorkflowRunResponse < Struct.new(
+      :run)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetWorkflowRunsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         include_graph: false,
+    #         next_token: "GenericString",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the workflow whose metadata of runs should be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_graph
+    #   Specifies whether to include the workflow graph in response or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   The maximum size of the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of workflow runs to be included in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRunsRequest AWS API Documentation
+    #
+    class GetWorkflowRunsRequest < Struct.new(
+      :name,
+      :include_graph,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] runs
+    #   A list of workflow run metadata objects.
+    #   @return [Array<Types::WorkflowRun>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all requested workflow runs have been
+    #   returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRunsResponse AWS API Documentation
+    #
+    class GetWorkflowRunsResponse < Struct.new(
+      :runs,
+      :next_token)
+      include Aws::Structure
+    end
+
     # An encryption operation failed.
     #
     # @!attribute [rw] message
@@ -5819,7 +6205,7 @@ module Aws::Glue
     #
     # @!attribute [rw] script_location
     #   Specifies the Amazon Simple Storage Service (Amazon S3) path to a
-    #   script that executes a job (required).
+    #   script that executes a job.
     #   @return [String]
     #
     # @!attribute [rw] python_version
@@ -5833,6 +6219,19 @@ module Aws::Glue
       :name,
       :script_location,
       :python_version)
+      include Aws::Structure
+    end
+
+    # The details of a Job node present in the workflow.
+    #
+    # @!attribute [rw] job_runs
+    #   The information for the job runs represented by the job node.
+    #   @return [Array<Types::JobRun>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobNodeDetails AWS API Documentation
+    #
+    class JobNodeDetails < Struct.new(
+      :job_runs)
       include Aws::Structure
     end
 
@@ -5956,10 +6355,6 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
-    # @!attribute [rw] notification_property
-    #   Specifies configuration properties of a job run notification.
-    #   @return [Types::NotificationProperty]
-    #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
     #   Accepts a value of Standard, G.1X, or G.2X.
@@ -5997,6 +6392,10 @@ module Aws::Glue
     #   that security configuration is used to encrypt the log group.
     #   @return [String]
     #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job run notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -6016,11 +6415,11 @@ module Aws::Glue
       :execution_time,
       :timeout,
       :max_capacity,
-      :notification_property,
       :worker_type,
       :number_of_workers,
       :security_configuration,
-      :log_group_name)
+      :log_group_name,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -6496,6 +6895,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListWorkflowsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "GenericString",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListWorkflowsRequest AWS API Documentation
+    #
+    class ListWorkflowsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflows
+    #   List of names of workflows in the account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all workflow names have been returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListWorkflowsResponse AWS API Documentation
+    #
+    class ListWorkflowsResponse < Struct.new(
+      :workflows,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The location of resources.
     #
     # @note When making an API call, you may pass Location
@@ -6606,6 +7045,45 @@ module Aws::Glue
     #
     class NoScheduleException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # A node represents an AWS Glue component like Trigger, Job etc. which
+    # is part of a workflow.
+    #
+    # @!attribute [rw] type
+    #   The type of AWS Glue component represented by the node.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the AWS Glue component represented by the node.
+    #   @return [String]
+    #
+    # @!attribute [rw] unique_id
+    #   The unique Id assigned to the node within the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_details
+    #   Details of the Trigger when the node represents a Trigger.
+    #   @return [Types::TriggerNodeDetails]
+    #
+    # @!attribute [rw] job_details
+    #   Details of the Job when the node represents a Job.
+    #   @return [Types::JobNodeDetails]
+    #
+    # @!attribute [rw] crawler_details
+    #   Details of the crawler when the node represents a crawler.
+    #   @return [Types::CrawlerNodeDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Node AWS API Documentation
+    #
+    class Node < Struct.new(
+      :type,
+      :name,
+      :unique_id,
+      :trigger_details,
+      :job_details,
+      :crawler_details)
       include Aws::Structure
     end
 
@@ -6912,6 +7390,8 @@ module Aws::Glue
     #             logical_operator: "EQUALS", # accepts EQUALS
     #             job_name: "NameString",
     #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #             crawler_name: "NameString",
+    #             crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
     #           },
     #         ],
     #       }
@@ -7019,6 +7499,43 @@ module Aws::Glue
       :policy_hash)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutWorkflowRunPropertiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         run_id: "IdString", # required
+    #         run_properties: { # required
+    #           "IdString" => "GenericString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the workflow which was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The ID of the workflow run for which the run properties should be
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_properties
+    #   The properties to put for the specified run.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutWorkflowRunPropertiesRequest AWS API Documentation
+    #
+    class PutWorkflowRunPropertiesRequest < Struct.new(
+      :name,
+      :run_id,
+      :run_properties)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutWorkflowRunPropertiesResponse AWS API Documentation
+    #
+    class PutWorkflowRunPropertiesResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ResetJobBookmarkRequest
     #   data as a hash:
@@ -7417,12 +7934,12 @@ module Aws::Glue
     #         allocated_capacity: 1,
     #         timeout: 1,
     #         max_capacity: 1.0,
-    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
-    #         number_of_workers: 1,
     #         security_configuration: "NameString",
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
+    #         worker_type: "NameString",
+    #         number_of_workers: 1,
     #       }
     #
     # @!attribute [rw] job_name
@@ -7502,6 +8019,15 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
+    # @!attribute [rw] security_configuration
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job run notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
     #   Accepts a value of Standard, G.1X, or G.2X.
@@ -7524,15 +8050,6 @@ module Aws::Glue
     #   149 for `G.2X`.
     #   @return [Integer]
     #
-    # @!attribute [rw] security_configuration
-    #   The name of the `SecurityConfiguration` structure to be used with
-    #   this job run.
-    #   @return [String]
-    #
-    # @!attribute [rw] notification_property
-    #   Specifies configuration properties of a job run notification.
-    #   @return [Types::NotificationProperty]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRunRequest AWS API Documentation
     #
     class StartJobRunRequest < Struct.new(
@@ -7542,10 +8059,10 @@ module Aws::Glue
       :allocated_capacity,
       :timeout,
       :max_capacity,
-      :worker_type,
-      :number_of_workers,
       :security_configuration,
-      :notification_property)
+      :notification_property,
+      :worker_type,
+      :number_of_workers)
       include Aws::Structure
     end
 
@@ -7586,6 +8103,35 @@ module Aws::Glue
     #
     class StartTriggerResponse < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartWorkflowRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartWorkflowRunRequest AWS API Documentation
+    #
+    class StartWorkflowRunRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   An Id for the new run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartWorkflowRunResponse AWS API Documentation
+    #
+    class StartWorkflowRunResponse < Struct.new(
+      :run_id)
       include Aws::Structure
     end
 
@@ -8128,6 +8674,10 @@ module Aws::Glue
     #   The name of the trigger.
     #   @return [String]
     #
+    # @!attribute [rw] workflow_name
+    #   The name of the workflow associated with the trigger.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   Reserved for future use.
     #   @return [String]
@@ -8166,6 +8716,7 @@ module Aws::Glue
     #
     class Trigger < Struct.new(
       :name,
+      :workflow_name,
       :id,
       :type,
       :state,
@@ -8173,6 +8724,19 @@ module Aws::Glue
       :schedule,
       :actions,
       :predicate)
+      include Aws::Structure
+    end
+
+    # The details of a Trigger node present in the workflow.
+    #
+    # @!attribute [rw] trigger
+    #   The information of the trigger represented by the trigger node.
+    #   @return [Types::Trigger]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TriggerNodeDetails AWS API Documentation
+    #
+    class TriggerNodeDetails < Struct.new(
+      :trigger)
       include Aws::Structure
     end
 
@@ -8194,10 +8758,11 @@ module Aws::Glue
     #               "GenericString" => "GenericString",
     #             },
     #             timeout: 1,
+    #             security_configuration: "NameString",
     #             notification_property: {
     #               notify_delay_after: 1,
     #             },
-    #             security_configuration: "NameString",
+    #             crawler_name: "NameString",
     #           },
     #         ],
     #         predicate: {
@@ -8207,6 +8772,8 @@ module Aws::Glue
     #               logical_operator: "EQUALS", # accepts EQUALS
     #               job_name: "NameString",
     #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #               crawler_name: "NameString",
+    #               crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
     #             },
     #           ],
     #         },
@@ -9075,10 +9642,11 @@ module Aws::Glue
     #                 "GenericString" => "GenericString",
     #               },
     #               timeout: 1,
+    #               security_configuration: "NameString",
     #               notification_property: {
     #                 notify_delay_after: 1,
     #               },
-    #               security_configuration: "NameString",
+    #               crawler_name: "NameString",
     #             },
     #           ],
     #           predicate: {
@@ -9088,6 +9656,8 @@ module Aws::Glue
     #                 logical_operator: "EQUALS", # accepts EQUALS
     #                 job_name: "NameString",
     #                 state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #                 crawler_name: "NameString",
+    #                 crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
     #               },
     #             ],
     #           },
@@ -9174,6 +9744,50 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUserDefinedFunctionResponse AWS API Documentation
     #
     class UpdateUserDefinedFunctionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateWorkflowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         description: "GenericString",
+    #         default_run_properties: {
+    #           "IdString" => "GenericString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the workflow to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_run_properties
+    #   A collection of properties to be used as part of each execution of
+    #   the workflow.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateWorkflowRequest AWS API Documentation
+    #
+    class UpdateWorkflowRequest < Struct.new(
+      :name,
+      :description,
+      :default_run_properties)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the workflow which was specified in input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateWorkflowResponse AWS API Documentation
+    #
+    class UpdateWorkflowResponse < Struct.new(
+      :name)
+      include Aws::Structure
+    end
 
     # Specifies an XML classifier to be updated.
     #
@@ -9323,6 +9937,164 @@ module Aws::Glue
     #
     class VersionMismatchException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # A workflow represents a flow in which AWS Glue components should be
+    # executed to complete a logical task.
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow representing the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_run_properties
+    #   A collection of properties to be used as part of each execution of
+    #   the workflow.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_on
+    #   The date and time when the workflow was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The date and time when the workflow was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_run
+    #   The information about the last execution of the workflow.
+    #   @return [Types::WorkflowRun]
+    #
+    # @!attribute [rw] graph
+    #   The graph representing all the AWS Glue components that belong to
+    #   the workflow as nodes and directed connections between them as
+    #   edges.
+    #   @return [Types::WorkflowGraph]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Workflow AWS API Documentation
+    #
+    class Workflow < Struct.new(
+      :name,
+      :description,
+      :default_run_properties,
+      :created_on,
+      :last_modified_on,
+      :last_run,
+      :graph)
+      include Aws::Structure
+    end
+
+    # A workflow graph represents the complete workflow containing all the
+    # AWS Glue components present in the workflow and all the directed
+    # connections between them.
+    #
+    # @!attribute [rw] nodes
+    #   A list of the the AWS Glue components belong to the workflow
+    #   represented as nodes.
+    #   @return [Array<Types::Node>]
+    #
+    # @!attribute [rw] edges
+    #   A list of all the directed connections between the nodes belonging
+    #   to the workflow.
+    #   @return [Array<Types::Edge>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowGraph AWS API Documentation
+    #
+    class WorkflowGraph < Struct.new(
+      :nodes,
+      :edges)
+      include Aws::Structure
+    end
+
+    # A workflow run is an execution of a workflow providing all the runtime
+    # information.
+    #
+    # @!attribute [rw] name
+    #   Name of the workflow which was executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_run_id
+    #   The ID of this workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_run_properties
+    #   The workflow run properties which were set during the run.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time when the workflow run was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time when the workflow run completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistics
+    #   The statistics of the run.
+    #   @return [Types::WorkflowRunStatistics]
+    #
+    # @!attribute [rw] graph
+    #   The graph representing all the AWS Glue components that belong to
+    #   the workflow as nodes and directed connections between them as
+    #   edges.
+    #   @return [Types::WorkflowGraph]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowRun AWS API Documentation
+    #
+    class WorkflowRun < Struct.new(
+      :name,
+      :workflow_run_id,
+      :workflow_run_properties,
+      :started_on,
+      :completed_on,
+      :status,
+      :statistics,
+      :graph)
+      include Aws::Structure
+    end
+
+    # Workflow run statistics provides statistics about the workflow run.
+    #
+    # @!attribute [rw] total_actions
+    #   Total number of Actions in the workflow run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout_actions
+    #   Total number of Actions which timed out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_actions
+    #   Total number of Actions which have failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stopped_actions
+    #   Total number of Actions which have stopped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] succeeded_actions
+    #   Total number of Actions which have succeeded.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] running_actions
+    #   Total number Actions in running state.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowRunStatistics AWS API Documentation
+    #
+    class WorkflowRunStatistics < Struct.new(
+      :total_actions,
+      :timeout_actions,
+      :failed_actions,
+      :stopped_actions,
+      :succeeded_actions,
+      :running_actions)
       include Aws::Structure
     end
 

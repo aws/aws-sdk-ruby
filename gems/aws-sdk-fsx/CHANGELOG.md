@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2019-06-24)
+------------------
+
+* Feature - Starting today, you can join your Amazon FSx for Windows File Server file systems to your organization's self-managed Microsoft Active Directory while creating the file system. You can also perform in-place updates of file systems to keep your Active Directory configuration up to date.
+
 1.8.0 (2019-06-17)
 ------------------
 

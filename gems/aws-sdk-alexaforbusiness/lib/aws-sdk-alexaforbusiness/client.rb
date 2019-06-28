@@ -624,7 +624,16 @@ module Aws::AlexaForBusiness
     #   device.
     #
     # @option params [String] :phone_number
-    #   The phone number of the contact in E.164 format.
+    #   The phone number of the contact in E.164 format. The phone number type
+    #   defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We
+    #   recommend that you use PhoneNumbers, which lets you specify the phone
+    #   number type and multiple numbers.
+    #
+    # @option params [Array<Types::PhoneNumber>] :phone_numbers
+    #   The list of phone numbers for the contact.
+    #
+    # @option params [Array<Types::SipAddress>] :sip_addresses
+    #   The list of SIP addresses for the contact.
     #
     # @option params [String] :client_request_token
     #   A unique, user-specified identifier for this request that ensures
@@ -643,7 +652,19 @@ module Aws::AlexaForBusiness
     #     display_name: "ContactName",
     #     first_name: "ContactName", # required
     #     last_name: "ContactName",
-    #     phone_number: "E164PhoneNumber",
+    #     phone_number: "RawPhoneNumber",
+    #     phone_numbers: [
+    #       {
+    #         number: "RawPhoneNumber", # required
+    #         type: "MOBILE", # required, accepts MOBILE, WORK, HOME
+    #       },
+    #     ],
+    #     sip_addresses: [
+    #       {
+    #         uri: "SipUri", # required
+    #         type: "WORK", # required, accepts WORK
+    #       },
+    #     ],
     #     client_request_token: "ClientRequestToken",
     #   })
     #
@@ -1109,6 +1130,11 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # When this action is called for a specified shared device, it allows
+    # authorized users to delete the device's entire previous history of
+    # voice input data and associated response data. This action can be
+    # called once every 24 hours for a specific shared device.
+    #
     # When this action is called for a specified shared device, it allows
     # authorized users to delete the device's entire previous history of
     # voice input data. This action can be called once every 24 hours for a
@@ -1590,6 +1616,12 @@ module Aws::AlexaForBusiness
     #   resp.contact.first_name #=> String
     #   resp.contact.last_name #=> String
     #   resp.contact.phone_number #=> String
+    #   resp.contact.phone_numbers #=> Array
+    #   resp.contact.phone_numbers[0].number #=> String
+    #   resp.contact.phone_numbers[0].type #=> String, one of "MOBILE", "WORK", "HOME"
+    #   resp.contact.sip_addresses #=> Array
+    #   resp.contact.sip_addresses[0].uri #=> String
+    #   resp.contact.sip_addresses[0].type #=> String, one of "WORK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContact AWS API Documentation
     #
@@ -2781,6 +2813,12 @@ module Aws::AlexaForBusiness
     #   resp.contacts[0].first_name #=> String
     #   resp.contacts[0].last_name #=> String
     #   resp.contacts[0].phone_number #=> String
+    #   resp.contacts[0].phone_numbers #=> Array
+    #   resp.contacts[0].phone_numbers[0].number #=> String
+    #   resp.contacts[0].phone_numbers[0].type #=> String, one of "MOBILE", "WORK", "HOME"
+    #   resp.contacts[0].sip_addresses #=> Array
+    #   resp.contacts[0].sip_addresses[0].uri #=> String
+    #   resp.contacts[0].sip_addresses[0].type #=> String, one of "WORK"
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -3298,7 +3336,7 @@ module Aws::AlexaForBusiness
     end
 
     # Sends an enrollment invitation email with a URL to a user. The URL is
-    # valid for 72 hours or until you call this operation again, whichever
+    # valid for 30 days or until you call this operation again, whichever
     # comes first.
     #
     # @option params [String] :user_arn
@@ -3589,7 +3627,16 @@ module Aws::AlexaForBusiness
     #   The updated last name of the contact.
     #
     # @option params [String] :phone_number
-    #   The updated phone number of the contact.
+    #   The updated phone number of the contact. The phone number type
+    #   defaults to WORK. You can either specify PhoneNumber or PhoneNumbers.
+    #   We recommend that you use PhoneNumbers, which lets you specify the
+    #   phone number type and multiple numbers.
+    #
+    # @option params [Array<Types::PhoneNumber>] :phone_numbers
+    #   The list of phone numbers for the contact.
+    #
+    # @option params [Array<Types::SipAddress>] :sip_addresses
+    #   The list of SIP addresses for the contact.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3600,7 +3647,19 @@ module Aws::AlexaForBusiness
     #     display_name: "ContactName",
     #     first_name: "ContactName",
     #     last_name: "ContactName",
-    #     phone_number: "E164PhoneNumber",
+    #     phone_number: "RawPhoneNumber",
+    #     phone_numbers: [
+    #       {
+    #         number: "RawPhoneNumber", # required
+    #         type: "MOBILE", # required, accepts MOBILE, WORK, HOME
+    #       },
+    #     ],
+    #     sip_addresses: [
+    #       {
+    #         uri: "SipUri", # required
+    #         type: "WORK", # required, accepts WORK
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContact AWS API Documentation
@@ -3901,7 +3960,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

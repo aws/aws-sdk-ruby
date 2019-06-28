@@ -435,7 +435,7 @@ module Aws::Health
     #       ],
     #       entity_arns: ["entityArn"],
     #       entity_values: ["entityValue"],
-    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       tags: [
     #         {
     #           "tagKey" => "tagValue",
@@ -501,7 +501,7 @@ module Aws::Health
     #   resp.successful_set[0].event.arn #=> String
     #   resp.successful_set[0].event.service #=> String
     #   resp.successful_set[0].event.event_type_code #=> String
-    #   resp.successful_set[0].event.event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange"
+    #   resp.successful_set[0].event.event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
     #   resp.successful_set[0].event.region #=> String
     #   resp.successful_set[0].event.availability_zone #=> String
     #   resp.successful_set[0].event.start_time #=> Time
@@ -558,7 +558,7 @@ module Aws::Health
     #     filter: {
     #       event_type_codes: ["eventTypeCode"],
     #       services: ["service"],
-    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #     },
     #     locale: "locale",
     #     next_token: "nextToken",
@@ -570,7 +570,7 @@ module Aws::Health
     #   resp.event_types #=> Array
     #   resp.event_types[0].service #=> String
     #   resp.event_types[0].code #=> String
-    #   resp.event_types[0].category #=> String, one of "issue", "accountNotification", "scheduledChange"
+    #   resp.event_types[0].category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypes AWS API Documentation
@@ -643,7 +643,7 @@ module Aws::Health
     #       ],
     #       entity_arns: ["entityArn"],
     #       entity_values: ["entityValue"],
-    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       tags: [
     #         {
     #           "tagKey" => "tagValue",
@@ -662,7 +662,7 @@ module Aws::Health
     #   resp.events[0].arn #=> String
     #   resp.events[0].service #=> String
     #   resp.events[0].event_type_code #=> String
-    #   resp.events[0].event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange"
+    #   resp.events[0].event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
     #   resp.events[0].region #=> String
     #   resp.events[0].availability_zone #=> String
     #   resp.events[0].start_time #=> Time
@@ -693,7 +693,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

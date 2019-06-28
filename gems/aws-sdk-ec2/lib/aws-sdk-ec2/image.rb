@@ -76,7 +76,7 @@ module Aws::EC2
       data[:owner_id]
     end
 
-    # The value is `Windows` for Windows AMIs; otherwise blank.
+    # This value is set for Windows AMIs; otherwise, it is blank.
     # @return [String]
     def platform
       data[:platform]

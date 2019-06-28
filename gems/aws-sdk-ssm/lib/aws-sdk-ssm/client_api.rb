@@ -1526,6 +1526,8 @@ module Aws::SSM
     DeleteAssociationResult.struct_class = Types::DeleteAssociationResult
 
     DeleteDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
+    DeleteDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    DeleteDocumentRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     DeleteDocumentRequest.struct_class = Types::DeleteDocumentRequest
 
     DeleteDocumentResult.struct_class = Types::DeleteDocumentResult

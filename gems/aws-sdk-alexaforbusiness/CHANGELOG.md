@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-06-28)
+------------------
+
+* Feature - This release allows developers and customers to add SIP addresses and international phone numbers to contacts.
+
 1.26.0 (2019-06-17)
 ------------------
 

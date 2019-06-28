@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2019-06-20)
+------------------
+
+* Feature - Starting today, you can now use workflows in AWS Glue to author directed acyclic graphs (DAGs) of Glue triggers, crawlers and jobs. Workflows enable orchestration of your ETL workloads by building dependencies between Glue entities (triggers, crawlers and jobs).  You can visually track status of the different nodes in the workflows on the console making it easier to monitor progress and troubleshoot issues. Also, you can share parameters across entities in the workflow.
+
 1.36.0 (2019-06-17)
 ------------------
 

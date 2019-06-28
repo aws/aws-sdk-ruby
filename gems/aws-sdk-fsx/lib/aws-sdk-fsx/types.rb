@@ -8,6 +8,26 @@
 module Aws::FSx
   module Types
 
+    # The Microsoft AD attributes of the Amazon FSx for Windows File Server
+    # file system.
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name of the self-managed AD directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory_id
+    #   The ID of the AWS Managed Microsoft Active Directory instance to
+    #   which the file system is joined.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ActiveDirectoryBackupAttributes AWS API Documentation
+    #
+    class ActiveDirectoryBackupAttributes < Struct.new(
+      :domain_name,
+      :active_directory_id)
+      include Aws::Structure
+    end
+
     # An Active Directory error.
     #
     # @!attribute [rw] active_directory_id
@@ -76,6 +96,11 @@ module Aws::FSx
     #   metadata is persisted even if the file system is deleted.
     #   @return [Types::FileSystem]
     #
+    # @!attribute [rw] directory_information
+    #   The configuration of the self-managed Microsoft Active Directory
+    #   (AD) to which the Windows File Server instance is joined.
+    #   @return [Types::ActiveDirectoryBackupAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Backup AWS API Documentation
     #
     class Backup < Struct.new(
@@ -88,7 +113,8 @@ module Aws::FSx
       :kms_key_id,
       :resource_arn,
       :tags,
-      :file_system)
+      :file_system,
+      :directory_information)
       include Aws::Structure
     end
 
@@ -240,6 +266,14 @@ module Aws::FSx
     #         ],
     #         windows_configuration: {
     #           active_directory_id: "DirectoryId",
+    #           self_managed_active_directory_configuration: {
+    #             domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #             user_name: "DirectoryUserName", # required
+    #             password: "DirectoryPassword", # required
+    #             dns_ips: ["IpAddress"], # required
+    #           },
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
@@ -249,7 +283,8 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] backup_id
-    #   The ID of the backup.
+    #   The ID of the backup. Specifies the backup to use if you're
+    #   creating a file system from an existing backup.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -310,8 +345,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration object for Lustre file systems used in the
-    # `CreateFileSystem` operation.
+    # The Lustre configuration for the file system being created. This value
+    # is required if `FileSystemType` is set to `LUSTRE`.
     #
     # @note When making an API call, you may pass CreateFileSystemLustreConfiguration
     #   data as a hash:
@@ -382,7 +417,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The request object for the `CreateFileSystem` operation.
+    # The request object used to create a new Amazon FSx file system.
     #
     # @note When making an API call, you may pass CreateFileSystemRequest
     #   data as a hash:
@@ -402,6 +437,14 @@ module Aws::FSx
     #         kms_key_id: "KmsKeyId",
     #         windows_configuration: {
     #           active_directory_id: "DirectoryId",
+    #           self_managed_active_directory_configuration: {
+    #             domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #             user_name: "DirectoryUserName", # required
+    #             password: "DirectoryPassword", # required
+    #             dns_ips: ["IpAddress"], # required
+    #           },
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
@@ -427,11 +470,11 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] file_system_type
-    #   The type of file system.
+    #   The type of Amazon FSx file system to create.
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
-    #   The storage capacity of the file system.
+    #   The storage capacity of the file system being created.
     #
     #   For Windows file systems, the storage capacity has a minimum of 300
     #   GiB, and a maximum of 65,536 GiB.
@@ -441,22 +484,20 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of IDs for the subnets that the file system will be
-    #   accessible from. File systems support only one subnet. The file
-    #   server is also launched in that subnet's Availability Zone.
+    #   The IDs of the subnets that the file system will be accessible from.
+    #   File systems support only one subnet. The file server is also
+    #   launched in that subnet's Availability Zone.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   A list of IDs for the security groups that apply to the specified
-    #   network interfaces created for file system access. These security
-    #   groups will apply to all network interfaces. This list isn't
-    #   returned in later describe requests.
+    #   A list of IDs specifying the security groups to apply to all network
+    #   interfaces created for file system access. This list isn't returned
+    #   in later requests to describe the file system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags to be applied to the file system at file system creation.
-    #   The key value of the `Name` tag appears in the console as the file
-    #   system name.
+    #   The tags to apply to the file system being created. The key value of
+    #   the `Name` tag appears in the console as the file system name.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
@@ -471,12 +512,14 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] windows_configuration
-    #   The configuration for this Microsoft Windows file system.
+    #   The Microsoft Windows configuration for the file system being
+    #   created. This value is required if `FileSystemType` is set to
+    #   `WINDOWS`.
     #   @return [Types::CreateFileSystemWindowsConfiguration]
     #
     # @!attribute [rw] lustre_configuration
-    #   The configuration object for Lustre file systems used in the
-    #   `CreateFileSystem` operation.
+    #   The Lustre configuration for the file system being created. This
+    #   value is required if `FileSystemType` is set to `LUSTRE`.
     #   @return [Types::CreateFileSystemLustreConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest AWS API Documentation
@@ -494,10 +537,10 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The response object for the `CreateFileSystem` operation.
+    # The response object returned after the file system is created.
     #
     # @!attribute [rw] file_system
-    #   A description of the file system.
+    #   The configuration of the file system that was created.
     #   @return [Types::FileSystem]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemResponse AWS API Documentation
@@ -515,6 +558,14 @@ module Aws::FSx
     #
     #       {
     #         active_directory_id: "DirectoryId",
+    #         self_managed_active_directory_configuration: {
+    #           domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #           user_name: "DirectoryUserName", # required
+    #           password: "DirectoryPassword", # required
+    #           dns_ips: ["IpAddress"], # required
+    #         },
     #         throughput_capacity: 1, # required
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         daily_automatic_backup_start_time: "DailyTime",
@@ -523,23 +574,30 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] active_directory_id
-    #   The ID for an existing Microsoft Active Directory instance that the
-    #   file system should join when it's created.
+    #   The ID for an existing AWS Managed Microsoft Active Directory (AD)
+    #   instance that the file system should join when it's created.
     #   @return [String]
+    #
+    # @!attribute [rw] self_managed_active_directory_configuration
+    #   The configuration that Amazon FSx uses to join the Windows File
+    #   Server instance to your self-managed (including on-premises)
+    #   Microsoft Active Directory (AD) directory.
+    #   @return [Types::SelfManagedActiveDirectoryConfiguration]
     #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
-    #   per second.
+    #   per second, in 2 to the *n*th increments, between 2^3 (8) and 2^11
+    #   (2048).
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred start time to perform weekly maintenance, in the UTC
-    #   time zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
-    #   The preferred time to take daily automatic backups, in the UTC time
-    #   zone.
+    #   The preferred time to take daily automatic backups, formatted HH:MM
+    #   in the UTC time zone.
     #   @return [String]
     #
     # @!attribute [rw] automatic_backup_retention_days
@@ -550,18 +608,19 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
-    #   A boolean flag indicating whether tags on the file system should be
+    #   A boolean flag indicating whether tags for the file system should be
     #   copied to backups. This value defaults to false. If it's set to
-    #   true, all tags on the file system are copied to all automatic
-    #   backups and any user-initiated backups where the user doesn't
-    #   specify any tags. If this value is true, and you specify one or more
-    #   tags, only the specified tags are copied to backups.
+    #   true, all tags for the file system are copied to all automatic and
+    #   user-initiated backups where the user doesn't specify tags. If this
+    #   value is true, and you specify one or more tags, only the specified
+    #   tags are copied to backups.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration AWS API Documentation
     #
     class CreateFileSystemWindowsConfiguration < Struct.new(
       :active_directory_id,
+      :self_managed_active_directory_configuration,
       :throughput_capacity,
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
@@ -917,8 +976,8 @@ module Aws::FSx
     #
     # @!attribute [rw] owner_id
     #   The AWS account that created the file system. If the file system was
-    #   created by an IAM user, the AWS account to which the IAM user
-    #   belongs is the owner.
+    #   created by an AWS Identity and Access Management (IAM) user, the AWS
+    #   account to which the IAM user belongs is the owner.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -927,25 +986,42 @@ module Aws::FSx
     #   @return [Time]
     #
     # @!attribute [rw] file_system_id
-    #   The eight-digit ID of the file system that was automatically
-    #   assigned by Amazon FSx.
+    #   The system-generated, unique 17-digit ID of the file system.
     #   @return [String]
     #
     # @!attribute [rw] file_system_type
-    #   Type of file system. Currently the only supported type is WINDOWS.
+    #   The type of Amazon FSx file system, either `LUSTRE` or `WINDOWS`.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle
-    #   The lifecycle status of the file system.
+    #   The lifecycle status of the file system:
+    #
+    #   * `AVAILABLE` indicates that the file system is reachable and
+    #     available for use.
+    #
+    #   * `CREATING` indicates that Amazon FSx is in the process of creating
+    #     the new file system.
+    #
+    #   * `DELETING` indicates that Amazon FSx is in the process of deleting
+    #     the file system.
+    #
+    #   * `FAILED` indicates that Amazon FSx was not able to create the file
+    #     system.
+    #
+    #   * `MISCONFIGURED` indicates that the file system is in a failed but
+    #     recoverable state.
+    #
+    #   * `UPDATING` indicates that the file system is undergoing a customer
+    #     initiated update.
     #   @return [String]
     #
     # @!attribute [rw] failure_details
-    #   Structure providing details of any failures that occur when creating
-    #   the file system has failed.
+    #   A structure providing details of any failures that occur when
+    #   creating the file system has failed.
     #   @return [Types::FileSystemFailureDetails]
     #
     # @!attribute [rw] storage_capacity
-    #   The storage capacity of the file system in gigabytes.
+    #   The storage capacity of the file system in gigabytes (GB).
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_id
@@ -953,7 +1029,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   The IDs of the subnets to contain the endpoint for the file system.
+    #   The ID of the subnet to contain the endpoint for the file system.
     #   One and only one is supported. The file system is launched in the
     #   Availability Zone associated with this subnet.
     #   @return [Array<String>]
@@ -966,7 +1042,7 @@ module Aws::FSx
     #   *Amazon EC2 User Guide.*
     #
     #   For an Amazon FSx for Windows File Server file system, you can have
-    #   one network interface Id. For an Amazon FSx for Lustre file system,
+    #   one network interface ID. For an Amazon FSx for Lustre file system,
     #   you can have more than one.
     #
     #
@@ -985,7 +1061,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The resource ARN of the file system.
+    #   The Amazon Resource Name (ARN) for the file system resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1028,11 +1104,11 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Structure providing details of any failures that occur when creating
+    # A structure providing details of any failures that occur when creating
     # the file system has failed.
     #
     # @!attribute [rw] message
-    #   Message describing the failures that occurred during file system
+    #   A message describing any failures that occurred during file system
     #   creation.
     #   @return [String]
     #
@@ -1334,6 +1410,176 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The configuration of the self-managed Microsoft Active Directory (AD)
+    # directory to which the Windows File Server instance is joined.
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name of the self-managed AD directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_distinguished_name
+    #   The fully qualified distinguished name of the organizational unit
+    #   within the self-managed AD directory to which the Windows File
+    #   Server instance is joined.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_administrators_group
+    #   The name of the domain group whose members have administrative
+    #   privileges for the FSx file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The user name for the service account on your self-managed AD domain
+    #   that FSx uses to join to your AD domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ips
+    #   A list of up to two IP addresses of DNS servers or domain
+    #   controllers in the self-managed AD directory.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryAttributes AWS API Documentation
+    #
+    class SelfManagedActiveDirectoryAttributes < Struct.new(
+      :domain_name,
+      :organizational_unit_distinguished_name,
+      :file_system_administrators_group,
+      :user_name,
+      :dns_ips)
+      include Aws::Structure
+    end
+
+    # The configuration that Amazon FSx uses to join the Windows File Server
+    # instance to your self-managed (including on-premises) Microsoft Active
+    # Directory (AD) directory.
+    #
+    # @note When making an API call, you may pass SelfManagedActiveDirectoryConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #         user_name: "DirectoryUserName", # required
+    #         password: "DirectoryPassword", # required
+    #         dns_ips: ["IpAddress"], # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name of the self-managed AD directory,
+    #   such as `corp.example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_distinguished_name
+    #   (Optional) The fully qualified distinguished name of the
+    #   organizational unit within your self-managed AD directory that the
+    #   Windows File Server instance will join. Amazon FSx only accepts OU
+    #   as the direct parent of the file system. An example is
+    #   `OU=FSx,DC=yourdomain,DC=corp,DC=com`. To learn more, see [RFC
+    #   2253][1]. If none is provided, the FSx file system is created in the
+    #   default location of your self-managed AD directory.
+    #
+    #   Only Organizational Unit (OU) objects can be the direct parent of
+    #   the file system that you're creating.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc2253
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_administrators_group
+    #   (Optional) The name of the domain group whose members are granted
+    #   administrative privileges for the file system. Administrative
+    #   privileges include taking ownership of files and folders, and
+    #   setting audit controls (audit ACLs) on files and folders. The group
+    #   that you specify must already exist in your domain. If you don't
+    #   provide one, your AD domain's Domain Admins group is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The user name for the service account on your self-managed AD domain
+    #   that Amazon FSx will use to join to your AD domain. This account
+    #   must have the permission to join computers to the domain in the
+    #   organizational unit provided in
+    #   `OrganizationalUnitDistinguishedName`, or in the default location of
+    #   your AD domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password for the service account on your self-managed AD domain
+    #   that Amazon FSx will use to join to your AD domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ips
+    #   A list of up to two IP addresses of DNS servers or domain
+    #   controllers in the self-managed AD directory. The IP addresses need
+    #   to be either in the same VPC CIDR range as the one in which your
+    #   Amazon FSx file system is being created, or in the private IP
+    #   version 4 (Iv4) address ranges, as specified in [RFC 1918][1]\:
+    #
+    #   * 10\.0.0.0 - 10.255.255.255 (10/8 prefix)
+    #
+    #   * 172\.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+    #
+    #   * 192\.168.0.0 - 192.168.255.255 (192.168/16 prefix)
+    #
+    #
+    #
+    #   [1]: http://www.faqs.org/rfcs/rfc1918.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfiguration AWS API Documentation
+    #
+    class SelfManagedActiveDirectoryConfiguration < Struct.new(
+      :domain_name,
+      :organizational_unit_distinguished_name,
+      :file_system_administrators_group,
+      :user_name,
+      :password,
+      :dns_ips)
+      include Aws::Structure
+    end
+
+    # The configuration that Amazon FSx uses to join the Windows File Server
+    # instance to the self-managed Microsoft Active Directory (AD)
+    # directory.
+    #
+    # @note When making an API call, you may pass SelfManagedActiveDirectoryConfigurationUpdates
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "DirectoryUserName",
+    #         password: "DirectoryPassword",
+    #         dns_ips: ["IpAddress"],
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The user name for the service account on your self-managed AD domain
+    #   that Amazon FSx will use to join to your AD domain. This account
+    #   must have the permission to join computers to the domain in the
+    #   organizational unit provided in
+    #   `OrganizationalUnitDistinguishedName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password for the service account on your self-managed AD domain
+    #   that Amazon FSx will use to join to your AD domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ips
+    #   A list of up to two IP addresses of DNS servers or domain
+    #   controllers in the self-managed AD directory.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfigurationUpdates AWS API Documentation
+    #
+    class SelfManagedActiveDirectoryConfigurationUpdates < Struct.new(
+      :user_name,
+      :password,
+      :dns_ips)
+      include Aws::Structure
+    end
+
     # An error indicating that a particular service limit was exceeded. You
     # can increase some service limits by contacting AWS Support.
     #
@@ -1423,6 +1669,19 @@ module Aws::FSx
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # An error occured.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UnsupportedOperation AWS API Documentation
+    #
+    class UnsupportedOperation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The request object for `UntagResource` action.
     #
     # @note When making an API call, you may pass UntagResourceRequest
@@ -1490,6 +1749,11 @@ module Aws::FSx
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
+    #           self_managed_active_directory_configuration: {
+    #             user_name: "DirectoryUserName",
+    #             password: "DirectoryPassword",
+    #             dns_ips: ["IpAddress"],
+    #           },
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -1511,8 +1775,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] windows_configuration
-    #   The configuration for this Microsoft Windows file system. The only
-    #   supported options are for backup and maintenance.
+    #   The configuration update for this Microsoft Windows file system. The
+    #   only supported options are for backup and maintenance and for
+    #   self-managed Active Directory configuration.
     #   @return [Types::UpdateFileSystemWindowsConfiguration]
     #
     # @!attribute [rw] lustre_configuration
@@ -1533,7 +1798,7 @@ module Aws::FSx
     # The response object for the `UpdateFileSystem` operation.
     #
     # @!attribute [rw] file_system
-    #   A description of the file system.
+    #   A description of the file system that was updated.
     #   @return [Types::FileSystem]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemResponse AWS API Documentation
@@ -1543,8 +1808,10 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration object for the Microsoft Windows file system used in
-    # the `UpdateFileSystem` operation.
+    # Updates the Microsoft Windows configuration for an existing Amazon FSx
+    # for Windows File Server file system. Amazon FSx overwrites existing
+    # properties with non-null values provided in the request. If you don't
+    # specify a non-null value for a property, that property is not updated.
     #
     # @note When making an API call, you may pass UpdateFileSystemWindowsConfiguration
     #   data as a hash:
@@ -1553,6 +1820,11 @@ module Aws::FSx
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         daily_automatic_backup_start_time: "DailyTime",
     #         automatic_backup_retention_days: 1,
+    #         self_managed_active_directory_configuration: {
+    #           user_name: "DirectoryUserName",
+    #           password: "DirectoryPassword",
+    #           dns_ips: ["IpAddress"],
+    #         },
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -1571,12 +1843,18 @@ module Aws::FSx
     #   maximum of 35 days.
     #   @return [Integer]
     #
+    # @!attribute [rw] self_managed_active_directory_configuration
+    #   The configuration Amazon FSx uses to join the Windows File Server
+    #   instance to the self-managed Microsoft AD directory.
+    #   @return [Types::SelfManagedActiveDirectoryConfigurationUpdates]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemWindowsConfiguration AWS API Documentation
     #
     class UpdateFileSystemWindowsConfiguration < Struct.new(
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
-      :automatic_backup_retention_days)
+      :automatic_backup_retention_days,
+      :self_managed_active_directory_configuration)
       include Aws::Structure
     end
 
@@ -1586,6 +1864,11 @@ module Aws::FSx
     #   The ID for an existing Microsoft Active Directory instance that the
     #   file system should join when it's created.
     #   @return [String]
+    #
+    # @!attribute [rw] self_managed_active_directory_configuration
+    #   The configuration of the self-managed Microsoft Active Directory
+    #   (AD) directory to which the Windows File Server instance is joined.
+    #   @return [Types::SelfManagedActiveDirectoryAttributes]
     #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
@@ -1625,6 +1908,7 @@ module Aws::FSx
     #
     class WindowsFileSystemConfiguration < Struct.new(
       :active_directory_id,
+      :self_managed_active_directory_configuration,
       :throughput_capacity,
       :maintenance_operations_in_progress,
       :weekly_maintenance_start_time,

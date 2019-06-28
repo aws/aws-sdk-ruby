@@ -177,6 +177,64 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyWorkspaceImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "WorkspaceImageName", # required
+    #         description: "WorkspaceImageDescription",
+    #         source_image_id: "WorkspaceImageId", # required
+    #         source_region: "Region", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_image_id
+    #   The identifier of the source image.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The identifier of the source Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the image.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImageRequest AWS API Documentation
+    #
+    class CopyWorkspaceImageRequest < Struct.new(
+      :name,
+      :description,
+      :source_image_id,
+      :source_region,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImageResult AWS API Documentation
+    #
+    class CopyWorkspaceImageResult < Struct.new(
+      :image_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateIpGroupRequest
     #   data as a hash:
     #
@@ -1382,22 +1440,16 @@ module Aws::WorkSpaces
     #             workspace_id: "WorkspaceId", # required
     #           },
     #         ],
-    #         additional_info: "AdditionalInfo",
     #       }
     #
     # @!attribute [rw] rebuild_workspace_requests
     #   The WorkSpace to rebuild. You can specify a single WorkSpace.
     #   @return [Array<Types::RebuildRequest>]
     #
-    # @!attribute [rw] additional_info
-    #   Reserved.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesRequest AWS API Documentation
     #
     class RebuildWorkspacesRequest < Struct.new(
-      :rebuild_workspace_requests,
-      :additional_info)
+      :rebuild_workspace_requests)
       include Aws::Structure
     end
 

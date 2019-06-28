@@ -444,16 +444,23 @@
       },
       "backup" : {
         "endpoints" : {
+          "ap-northeast-1" : { },
+          "ap-northeast-2" : { },
+          "ap-southeast-1" : { },
           "ap-southeast-2" : { },
+          "ca-central-1" : { },
           "eu-central-1" : { },
           "eu-west-1" : { },
+          "eu-west-2" : { },
           "us-east-1" : { },
           "us-east-2" : { },
+          "us-west-1" : { },
           "us-west-2" : { }
         }
       },
       "batch" : {
         "endpoints" : {
+          "ap-east-1" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
           "ap-south-1" : { },
@@ -1077,6 +1084,7 @@
           "ap-southeast-2" : { },
           "ca-central-1" : { },
           "eu-central-1" : { },
+          "eu-north-1" : { },
           "eu-west-1" : { },
           "eu-west-2" : { },
           "sa-east-1" : { },
@@ -1432,7 +1440,9 @@
       "fsx" : {
         "endpoints" : {
           "ap-northeast-1" : { },
+          "ap-southeast-1" : { },
           "ap-southeast-2" : { },
+          "eu-central-1" : { },
           "eu-west-1" : { },
           "us-east-1" : { },
           "us-east-2" : { },
@@ -1491,6 +1501,7 @@
           "ap-southeast-2" : { },
           "ca-central-1" : { },
           "eu-central-1" : { },
+          "eu-north-1" : { },
           "eu-west-1" : { },
           "eu-west-2" : { },
           "eu-west-3" : { },
@@ -1695,12 +1706,6 @@
       },
       "kms" : {
         "endpoints" : {
-          "ProdFips" : {
-            "credentialScope" : {
-              "region" : "ca-central-1"
-            },
-            "hostname" : "kms-fips.ca-central-1.amazonaws.com"
-          },
           "ap-east-1" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
@@ -1855,6 +1860,7 @@
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "eu-central-1" : { },
+          "eu-north-1" : { },
           "eu-west-1" : { },
           "sa-east-1" : { },
           "us-east-1" : { },
@@ -1965,12 +1971,14 @@
         "endpoints" : {
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
+          "ap-south-1" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ca-central-1" : { },
           "eu-central-1" : { },
           "eu-west-1" : { },
           "eu-west-2" : { },
+          "eu-west-3" : { },
           "us-east-1" : { },
           "us-east-2" : { },
           "us-west-1" : { },
@@ -3063,8 +3071,14 @@
       },
       "support" : {
         "endpoints" : {
-          "aws-global" : { }
-        }
+          "aws-global" : {
+            "credentialScope" : {
+              "region" : "us-east-1"
+            },
+            "hostname" : "support.us-east-1.amazonaws.com"
+          }
+        },
+        "partitionEndpoint" : "aws-global"
       },
       "swf" : {
         "endpoints" : {
@@ -3226,6 +3240,7 @@
       },
       "xray" : {
         "endpoints" : {
+          "ap-east-1" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
           "ap-south-1" : { },
@@ -3650,6 +3665,17 @@
           "cn-northwest-1" : { }
         }
       },
+      "support" : {
+        "endpoints" : {
+          "aws-cn-global" : {
+            "credentialScope" : {
+              "region" : "cn-north-1"
+            },
+            "hostname" : "support.cn-north-1.amazonaws.com"
+          }
+        },
+        "partitionEndpoint" : "aws-cn-global"
+      },
       "swf" : {
         "endpoints" : {
           "cn-north-1" : { },
@@ -3831,6 +3857,11 @@
           "us-gov-west-1" : { }
         }
       },
+      "datasync" : {
+        "endpoints" : {
+          "us-gov-west-1" : { }
+        }
+      },
       "directconnect" : {
         "endpoints" : {
           "us-gov-east-1" : { },
@@ -3938,6 +3969,7 @@
       },
       "firehose" : {
         "endpoints" : {
+          "us-gov-east-1" : { },
           "us-gov-west-1" : { }
         }
       },
@@ -3951,6 +3983,7 @@
       },
       "glue" : {
         "endpoints" : {
+          "us-gov-east-1" : { },
           "us-gov-west-1" : { }
         }
       },

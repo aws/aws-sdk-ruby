@@ -427,12 +427,13 @@ module Aws::APIGateway
     #
     # @option params [String] :identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. API Gateway will
-    #   match the `aud` field of the incoming token from the client against
-    #   the specified regular expression. It will invoke the authorizer's
-    #   Lambda function when there is a match. Otherwise, it will return a 401
-    #   Unauthorized response without calling the Lambda function. The
-    #   validation expression does not apply to the `REQUEST` authorizer.
+    #   authorizers, this value is a regular expression. For
+    #   `COGNITO_USER_POOLS` authorizers, API Gateway will match the `aud`
+    #   field of the incoming token from the client against the specified
+    #   regular expression. It will invoke the authorizer's Lambda function
+    #   when there is a match. Otherwise, it will return a 401 Unauthorized
+    #   response without calling the Lambda function. The validation
+    #   expression does not apply to the `REQUEST` authorizer.
     #
     # @option params [Integer] :authorizer_result_ttl_in_seconds
     #   The TTL in seconds of cached authorizer results. If it equals 0,
@@ -498,7 +499,7 @@ module Aws::APIGateway
     # @option params [String] :base_path
     #   The base path name that callers of the API must provide as part of the
     #   URL after the domain name. This value must be unique for all of the
-    #   mappings across a single API. Leave this blank if you do not want
+    #   mappings across a single API. Specify '(none)' if you do not want
     #   callers to specify a base path name after the domain name.
     #
     # @option params [required, String] :rest_api_id
@@ -506,8 +507,8 @@ module Aws::APIGateway
     #
     # @option params [String] :stage
     #   The name of the API's stage that you want to use for this mapping.
-    #   Leave this blank if you do not want callers to explicitly specify the
-    #   stage name after any base path name.
+    #   Specify '(none)' if you do not want callers to explicitly specify
+    #   the stage name after any base path name.
     #
     # @return [Types::BasePathMapping] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -759,6 +760,10 @@ module Aws::APIGateway
     #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
     #   not start with `aws:`. The tag value can be up to 256 characters.
     #
+    # @option params [String] :security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
@@ -772,6 +777,9 @@ module Aws::APIGateway
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
     #   * {Types::DomainName#distribution_hosted_zone_id #distribution_hosted_zone_id} => String
     #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::DomainName#domain_name_status #domain_name_status} => String
+    #   * {Types::DomainName#domain_name_status_message #domain_name_status_message} => String
+    #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -791,6 +799,7 @@ module Aws::APIGateway
     #     tags: {
     #       "String" => "String",
     #     },
+    #     security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #   })
     #
     # @example Response structure
@@ -807,6 +816,9 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.domain_name_status_message #=> String
+    #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #
@@ -1117,7 +1129,9 @@ module Aws::APIGateway
     #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   \[Required\] The name for the Stage resource.
+    #   \[Required\] The name for the Stage resource. Stage names can only
+    #   contain alphanumeric characters, hyphens, and underscores. Maximum
+    #   length is 128 characters.
     #
     # @option params [required, String] :deployment_id
     #   \[Required\] The identifier of the Deployment resource for the Stage
@@ -1500,6 +1514,8 @@ module Aws::APIGateway
     # @option params [required, String] :base_path
     #   \[Required\] The base path name of the BasePathMapping resource to
     #   delete.
+    #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2336,7 +2352,7 @@ module Aws::APIGateway
     # @option params [required, String] :base_path
     #   \[Required\] The base path name that callers of the API must provide
     #   as part of the URL after the domain name. This value must be unique
-    #   for all of the mappings across a single API. Leave this blank if you
+    #   for all of the mappings across a single API. Specify '(none)' if you
     #   do not want callers to specify any base path name after the domain
     #   name.
     #
@@ -2769,6 +2785,9 @@ module Aws::APIGateway
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
     #   * {Types::DomainName#distribution_hosted_zone_id #distribution_hosted_zone_id} => String
     #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::DomainName#domain_name_status #domain_name_status} => String
+    #   * {Types::DomainName#domain_name_status_message #domain_name_status_message} => String
+    #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -2791,6 +2810,9 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.domain_name_status_message #=> String
+    #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #
@@ -2838,6 +2860,9 @@ module Aws::APIGateway
     #   resp.items[0].distribution_hosted_zone_id #=> String
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.items[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.items[0].domain_name_status_message #=> String
+    #   resp.items[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["String"] #=> String
     #
@@ -4023,8 +4048,7 @@ module Aws::APIGateway
     #
     # @option params [required, String] :resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #
     # @option params [String] :position
     #   (Not currently supported) The current pagination position in the paged
@@ -4504,8 +4528,8 @@ module Aws::APIGateway
     #   `endpointConfigurationTypes=PRIVATE`. The default endpoint type is
     #   `EDGE`.
     #
-    #   To handle imported `basePath`, set `parameters` as `basePath=ignore`,
-    #   `basePath=prepend` or `basePath=split`.
+    #   To handle imported `basepath`, set `parameters` as `basepath=ignore`,
+    #   `basepath=prepend` or `basepath=split`.
     #
     #   For example, the AWS CLI command to exclude documentation from the
     #   imported API is:
@@ -4756,10 +4780,10 @@ module Aws::APIGateway
     #     the same 415 response.
     #
     # @option params [String] :cache_namespace
-    #   Specifies a put integration input's cache namespace.
+    #   A list of request parameters whose values are to be cached.
     #
     # @option params [Array<String>] :cache_key_parameters
-    #   Specifies a put integration input's cache key parameters.
+    #   An API-specific tag group of related cached parameters.
     #
     # @option params [String] :content_handling
     #   Specifies how to handle request payload content type conversions.
@@ -4774,8 +4798,8 @@ module Aws::APIGateway
     #
     #   If this property is not defined, the request payload will be passed
     #   through from the method request to integration request without
-    #   modification, provided that the `passthroughBehaviors` is configured
-    #   to support payload pass-through.
+    #   modification, provided that the `passthroughBehavior` is configured to
+    #   support payload pass-through.
     #
     # @option params [Integer] :timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
@@ -4978,11 +5002,7 @@ module Aws::APIGateway
     # @option params [String] :operation_name
     #   A human-friendly operation identifier for the method. For example, you
     #   can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in the `PetStore` example.
     #
     # @option params [Hash<String,Boolean>] :request_parameters
     #   A key-value map defining required or optional method request
@@ -5260,8 +5280,7 @@ module Aws::APIGateway
     #
     # @option params [required, String] :resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #
     # @option params [required, Hash<String,String>] :tags
     #   \[Required\] The key-value map of strings. The valid character set is
@@ -5290,12 +5309,14 @@ module Aws::APIGateway
     # parameters, and an incoming request body.
     #
     # <div class="seeAlso">
-    # [Enable custom authorizers][1]
+    # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
+    # Authorizer][2]
     # </div>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html
     #
     # @option params [required, String] :rest_api_id
     #   \[Required\] The string identifier of the associated RestApi.
@@ -5469,8 +5490,7 @@ module Aws::APIGateway
     #
     # @option params [required, String] :resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #
     # @option params [required, Array<String>] :tag_keys
     #   \[Required\] The Tag keys to delete.
@@ -5668,6 +5688,8 @@ module Aws::APIGateway
     #
     # @option params [required, String] :base_path
     #   \[Required\] The base path of the BasePathMapping resource to change.
+    #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5924,6 +5946,9 @@ module Aws::APIGateway
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
     #   * {Types::DomainName#distribution_hosted_zone_id #distribution_hosted_zone_id} => String
     #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::DomainName#domain_name_status #domain_name_status} => String
+    #   * {Types::DomainName#domain_name_status_message #domain_name_status_message} => String
+    #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -5954,6 +5979,9 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.domain_name_status_message #=> String
+    #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #
@@ -6865,7 +6893,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

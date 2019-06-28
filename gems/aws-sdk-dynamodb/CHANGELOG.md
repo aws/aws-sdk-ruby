@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-06-27)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
 1.31.0 (2019-06-17)
 ------------------
 

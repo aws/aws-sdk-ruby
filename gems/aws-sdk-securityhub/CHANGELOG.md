@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2019-06-24)
+------------------
+
+* Feature - This release includes a new Tags parameter for the EnableSecurityHub operation, and the following new operations: DescribeHub, CreateActionTarget, DeleteActionTarget, DescribeActionTargets, UpdateActionTarget, TagResource, UntagResource, and ListTagsforResource. It removes the operation ListProductSubscribers, and makes Title and Description required attributes of AwsSecurityFinding.
+
 1.9.0 (2019-06-17)
 ------------------
 

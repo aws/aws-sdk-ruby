@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2019-06-20)
+------------------
+
+* Feature - This release adds support for RDS storage autoscaling
+
 1.59.0 (2019-06-17)
 ------------------
 

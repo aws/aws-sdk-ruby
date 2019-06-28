@@ -10,38 +10,6 @@ module Aws::ResourceGroupsTaggingAPI
 
     extend Aws::Errors::DynamicErrors
 
-    class ConcurrentModificationException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::ResourceGroupsTaggingAPI::Types::ConcurrentModificationException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-    end
-
-    class ConstraintViolationException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::ResourceGroupsTaggingAPI::Types::ConstraintViolationException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-    end
-
     class InternalServiceException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

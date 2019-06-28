@@ -527,7 +527,8 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] object_type_conflict
     #   A boolean value (true or false) indicating whether there are
-    #   conflicts in the object type of a file.
+    #   conflicts between the branches in the object type of a file, folder,
+    #   or submodule.
     #   @return [Boolean]
     #
     # @!attribute [rw] merge_operations
@@ -580,7 +581,8 @@ module Aws::CodeCommit
     #       }
     #
     # @!attribute [rw] replace_contents
-    #   Information about how a conflict in a merge will be resolved.
+    #   Files that will have content replaced as part of the merge conflict
+    #   resolution.
     #   @return [Array<Types::ReplaceContentEntry>]
     #
     # @!attribute [rw] delete_files
@@ -2306,7 +2308,8 @@ module Aws::CodeCommit
     #   @return [String]
     #
     # @!attribute [rw] conflict_metadata_list
-    #   A list of metadata for any conflicts found.
+    #   A list of metadata for any conflicting files. If the specified merge
+    #   strategy is FAST\_FORWARD\_MERGE, this list will always be empty.
     #   @return [Array<Types::ConflictMetadata>]
     #
     # @!attribute [rw] next_token
@@ -3098,7 +3101,10 @@ module Aws::CodeCommit
     #   A Boolean value indicating whether a combination of hunks contains a
     #   conflict. Conflicts occur when the same file or the same lines in a
     #   file were modified in both the source and destination of a merge or
-    #   pull request. Valid values include true, false, and null.
+    #   pull request. Valid values include true, false, and null. This will
+    #   be true when the hunk represents a conflict and one or more files
+    #   contains a line conflict. File mode conflicts in a merge will not
+    #   set this to be true.
     #   @return [Boolean]
     #
     # @!attribute [rw] source
@@ -3130,15 +3136,16 @@ module Aws::CodeCommit
     # in a merge or pull request operation.
     #
     # @!attribute [rw] start_line
-    #   The line number where a merge conflict begins.
+    #   The start position of the hunk in the merge result.
     #   @return [Integer]
     #
     # @!attribute [rw] end_line
-    #   The line number where a merge conflict ends.
+    #   The end position of the hunk in the merge result.
     #   @return [Integer]
     #
     # @!attribute [rw] hunk_content
-    #   The base-64 encoded content of the hunk that contains the conflict.
+    #   The base-64 encoded content of the hunk merged region that might or
+    #   might not contain a conflict.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeHunkDetail AWS API Documentation
@@ -3534,6 +3541,11 @@ module Aws::CodeCommit
     # @!attribute [rw] before_commit_id
     #   To establish the directionality of the comparison, the full commit
     #   ID of the 'before' commit.
+    #
+    #   <note markdown="1"> This is required for commenting on any commit unless that commit is
+    #   the initial commit.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] after_commit_id

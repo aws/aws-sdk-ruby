@@ -362,6 +362,22 @@ module Aws::IAM
 
     end
 
+    class ReportGenerationLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IAM::Types::ReportGenerationLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class ServiceFailureException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

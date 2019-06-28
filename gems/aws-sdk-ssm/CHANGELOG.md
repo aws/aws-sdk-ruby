@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2019-06-24)
+------------------
+
+* Feature - AWS Systems Manager now supports deleting a specific version of a SSM Document.
+
 1.50.0 (2019-06-17)
 ------------------
 

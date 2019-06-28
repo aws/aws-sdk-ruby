@@ -15,7 +15,6 @@ module Aws::WorkSpaces
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountModification = Shapes::StructureShape.new(name: 'AccountModification')
     AccountModificationList = Shapes::ListShape.new(name: 'AccountModificationList')
-    AdditionalInfo = Shapes::StringShape.new(name: 'AdditionalInfo')
     Alias = Shapes::StringShape.new(name: 'Alias')
     AssociateIpGroupsRequest = Shapes::StructureShape.new(name: 'AssociateIpGroupsRequest')
     AssociateIpGroupsResult = Shapes::StructureShape.new(name: 'AssociateIpGroupsResult')
@@ -33,6 +32,8 @@ module Aws::WorkSpaces
     ComputeType = Shapes::StructureShape.new(name: 'ComputeType')
     ComputerName = Shapes::StringShape.new(name: 'ComputerName')
     ConnectionState = Shapes::StringShape.new(name: 'ConnectionState')
+    CopyWorkspaceImageRequest = Shapes::StructureShape.new(name: 'CopyWorkspaceImageRequest')
+    CopyWorkspaceImageResult = Shapes::StructureShape.new(name: 'CopyWorkspaceImageResult')
     CreateIpGroupRequest = Shapes::StructureShape.new(name: 'CreateIpGroupRequest')
     CreateIpGroupResult = Shapes::StructureShape.new(name: 'CreateIpGroupResult')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
@@ -137,6 +138,7 @@ module Aws::WorkSpaces
     RebuildWorkspacesRequest = Shapes::StructureShape.new(name: 'RebuildWorkspacesRequest')
     RebuildWorkspacesResult = Shapes::StructureShape.new(name: 'RebuildWorkspacesResult')
     ReconnectEnum = Shapes::StringShape.new(name: 'ReconnectEnum')
+    Region = Shapes::StringShape.new(name: 'Region')
     RegistrationCode = Shapes::StringShape.new(name: 'RegistrationCode')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceAssociatedException = Shapes::StructureShape.new(name: 'ResourceAssociatedException')
@@ -248,6 +250,16 @@ module Aws::WorkSpaces
 
     ComputeType.add_member(:name, Shapes::ShapeRef.new(shape: Compute, location_name: "Name"))
     ComputeType.struct_class = Types::ComputeType
+
+    CopyWorkspaceImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceImageName, required: true, location_name: "Name"))
+    CopyWorkspaceImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, location_name: "Description"))
+    CopyWorkspaceImageRequest.add_member(:source_image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "SourceImageId"))
+    CopyWorkspaceImageRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "SourceRegion"))
+    CopyWorkspaceImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CopyWorkspaceImageRequest.struct_class = Types::CopyWorkspaceImageRequest
+
+    CopyWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
+    CopyWorkspaceImageResult.struct_class = Types::CopyWorkspaceImageResult
 
     CreateIpGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: IpGroupName, required: true, location_name: "GroupName"))
     CreateIpGroupRequest.add_member(:group_desc, Shapes::ShapeRef.new(shape: IpGroupDesc, location_name: "GroupDesc"))
@@ -501,7 +513,6 @@ module Aws::WorkSpaces
     RebuildWorkspaceRequests.member = Shapes::ShapeRef.new(shape: RebuildRequest)
 
     RebuildWorkspacesRequest.add_member(:rebuild_workspace_requests, Shapes::ShapeRef.new(shape: RebuildWorkspaceRequests, required: true, location_name: "RebuildWorkspaceRequests"))
-    RebuildWorkspacesRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfo, location_name: "AdditionalInfo"))
     RebuildWorkspacesRequest.struct_class = Types::RebuildWorkspacesRequest
 
     RebuildWorkspacesResult.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedRebuildWorkspaceRequests, location_name: "FailedRequests"))
@@ -730,6 +741,21 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:copy_workspace_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyWorkspaceImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyWorkspaceImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyWorkspaceImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
       end)
 
       api.add_operation(:create_ip_group, Seahorse::Model::Operation.new.tap do |o|

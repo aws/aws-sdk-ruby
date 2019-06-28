@@ -1139,6 +1139,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -2134,6 +2135,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -3467,6 +3469,7 @@ module Aws::Redshift
     #   resp.clusters[0].cluster_identifier #=> String
     #   resp.clusters[0].node_type #=> String
     #   resp.clusters[0].cluster_status #=> String
+    #   resp.clusters[0].cluster_availability_status #=> String
     #   resp.clusters[0].modify_status #=> String
     #   resp.clusters[0].master_username #=> String
     #   resp.clusters[0].db_name #=> String
@@ -4890,6 +4893,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -5120,6 +5124,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -5734,6 +5739,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -5861,6 +5867,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -5995,6 +6002,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -6139,6 +6147,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -6615,6 +6624,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -6857,6 +6867,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -7073,6 +7084,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -7442,6 +7454,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -7815,6 +7828,7 @@ module Aws::Redshift
     #   resp.cluster.cluster_identifier #=> String
     #   resp.cluster.node_type #=> String
     #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
     #   resp.cluster.modify_status #=> String
     #   resp.cluster.master_username #=> String
     #   resp.cluster.db_name #=> String
@@ -7926,7 +7940,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

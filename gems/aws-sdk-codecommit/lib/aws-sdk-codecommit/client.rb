@@ -728,9 +728,11 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Creates an unerferenced commit that represents the result of merging
+    # Creates an unreferenced commit that represents the result of merging
     # two branches using a specified merge strategy. This can help you
-    # determine the outcome of a potential merge.
+    # determine the outcome of a potential merge. This API cannot be used
+    # with the fast-forward merge strategy, as that strategy does not create
+    # a merge commit.
     #
     # <note markdown="1"> This unreferenced merge commit can only be accessed using the
     # GetCommit API or through git commands such as git fetch. To retrieve
@@ -2479,9 +2481,10 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Closes a pull request and attempts to merge the source commit of a
-    # pull request into the specified destination branch for that pull
-    # request at the specified commit using the fast-forward merge strategy.
+    # Attempts to merge the source commit of a pull request into the
+    # specified destination branch for that pull request at the specified
+    # commit using the fast-forward merge strategy. If the merge is
+    # successful, it closes the pull request.
     #
     # @option params [required, String] :pull_request_id
     #   The system-generated ID of the pull request. To get this ID, use
@@ -2539,9 +2542,10 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Closes a pull request and attempts to merge the source commit of a
-    # pull request into the specified destination branch for that pull
-    # request at the specified commit using the squash merge strategy.
+    # Attempts to merge the source commit of a pull request into the
+    # specified destination branch for that pull request at the specified
+    # commit using the squash merge strategy. If the merge is successful, it
+    # closes the pull request.
     #
     # @option params [required, String] :pull_request_id
     #   The system-generated ID of the pull request. To get this ID, use
@@ -2660,9 +2664,10 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Closes a pull request and attempts to merge the source commit of a
-    # pull request into the specified destination branch for that pull
-    # request at the specified commit using the three-way merge strategy.
+    # Attempts to merge the source commit of a pull request into the
+    # specified destination branch for that pull request at the specified
+    # commit using the three-way merge strategy. If the merge is successful,
+    # it closes the pull request.
     #
     # @option params [required, String] :pull_request_id
     #   The system-generated ID of the pull request. To get this ID, use
@@ -2790,6 +2795,11 @@ module Aws::CodeCommit
     # @option params [String] :before_commit_id
     #   To establish the directionality of the comparison, the full commit ID
     #   of the 'before' commit.
+    #
+    #   <note markdown="1"> This is required for commenting on any commit unless that commit is
+    #   the initial commit.
+    #
+    #    </note>
     #
     # @option params [required, String] :after_commit_id
     #   To establish the directionality of the comparison, the full commit ID
@@ -3568,7 +3578,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

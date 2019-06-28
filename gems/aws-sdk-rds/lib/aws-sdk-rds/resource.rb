@@ -450,6 +450,7 @@ module Aws::RDS
     #       },
     #     ],
     #     deletion_protection: false,
+    #     max_allocated_storage: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1211,6 +1212,9 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    # @option options [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = @client.create_db_instance(options)

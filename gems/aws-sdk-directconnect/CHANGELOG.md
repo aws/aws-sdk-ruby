@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-06-27)
+------------------
+
+* Feature - Tags will now be included in the API responses of all supported resources (Virtual interfaces, Connections, Interconnects and LAGs). You can also add tags while creating these resources.
+
 1.21.0 (2019-06-17)
 ------------------
 

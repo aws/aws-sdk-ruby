@@ -8,11 +8,11 @@
 module Aws::IoTEventsData
   module Types
 
-    # Contains informations about the errors encountered.
+    # Contains information about the errors encountered.
     #
     # @!attribute [rw] message_id
     #   The ID of the message that caused the error. (See the value
-    #   corresponding to the `messageId` key in the `message` object.)
+    #   corresponding to the `"messageId"` key in the `"message"` object.)
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -44,9 +44,9 @@ module Aws::IoTEventsData
     #       }
     #
     # @!attribute [rw] messages
-    #   The list of messages to send. Each message has format: `'\{
-    #   "messageId": "string", "inputName": "string", "payload":
-    #   "string"\}'`.
+    #   The list of messages to send. Each message has the following format:
+    #   `'\{ "messageId": "string", "inputName": "string", "payload":
+    #   "string"\}'`
     #   @return [Array<Types::Message>]
     #
     class BatchPutMessageRequest < Struct.new(
@@ -63,12 +63,13 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # Information about the error which occured when attempting to update a
+    # Information about the error that occured when attempting to update a
     # detector.
     #
     # @!attribute [rw] message_id
-    #   The "messageId" of the update request that caused the error. (The
-    #   value of the `messageId` in the update request `Detector` object.)
+    #   The `"messageId"` of the update request that caused the error. (The
+    #   value of the `"messageId"` in the update request `"Detector"`
+    #   object.)
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -115,8 +116,8 @@ module Aws::IoTEventsData
     #       }
     #
     # @!attribute [rw] detectors
-    #   The list of detectors (instances) to be updated, along with the
-    #   values to be updated.
+    #   The list of detectors (instances) to update, along with the values
+    #   to update.
     #   @return [Array<Types::UpdateDetectorRequest>]
     #
     class BatchUpdateDetectorRequest < Struct.new(
@@ -125,8 +126,8 @@ module Aws::IoTEventsData
     end
 
     # @!attribute [rw] batch_update_detector_error_entries
-    #   A list of those detector updates which resulted in errors. (The
-    #   specific update did not occur if an error is listed here.)
+    #   A list of those detector updates that resulted in errors. (If an
+    #   error is listed here, the specific update did not occur.)
     #   @return [Array<Types::BatchUpdateDetectorErrorEntry>]
     #
     class BatchUpdateDetectorResponse < Struct.new(
@@ -213,7 +214,7 @@ module Aws::IoTEventsData
     #   @return [String]
     #
     # @!attribute [rw] variables
-    #   The current state of the detector's variables.
+    #   The current values of the detector's variables.
     #   @return [Array<Types::Variable>]
     #
     # @!attribute [rw] timers
@@ -227,7 +228,7 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
-    # The new state, variable values and timer settings of the detector
+    # The new state, variable values, and timer settings of the detector
     # (instance).
     #
     # @note When making an API call, you may pass DetectorStateDefinition
@@ -255,12 +256,12 @@ module Aws::IoTEventsData
     #
     # @!attribute [rw] variables
     #   The new values of the detector's variables. Any variable whose
-    #   value is not specified will be cleared.
+    #   value isn't specified is cleared.
     #   @return [Array<Types::VariableDefinition>]
     #
     # @!attribute [rw] timers
-    #   The new values of the detector's timers. Any timer whose value is
-    #   not specified will be cleared and its timeout event will not occur.
+    #   The new values of the detector's timers. Any timer whose value
+    #   isn't specified is cleared, and its timeout event won't occur.
     #   @return [Array<Types::TimerDefinition>]
     #
     class DetectorStateDefinition < Struct.new(
@@ -353,7 +354,8 @@ module Aws::IoTEventsData
     #       }
     #
     # @!attribute [rw] detector_model_name
-    #   The name of the detector model whose instances you want to list.
+    #   The name of the detector model whose detectors (instances) are
+    #   listed.
     #   @return [String]
     #
     # @!attribute [rw] state_name
@@ -404,13 +406,12 @@ module Aws::IoTEventsData
     #       }
     #
     # @!attribute [rw] message_id
-    #   The ID you wish to assign to the message. Each "messageId" must be
-    #   unique within each batch sent.
+    #   The ID to assign to the message. Within each batch sent, each
+    #   `"messageId"` must be unique.
     #   @return [String]
     #
     # @!attribute [rw] input_name
-    #   The name of the input into which the message payload will be
-    #   transformed.
+    #   The name of the input into which the message payload is transformed.
     #   @return [String]
     #
     # @!attribute [rw] payload
@@ -527,8 +528,8 @@ module Aws::IoTEventsData
     #       }
     #
     # @!attribute [rw] message_id
-    #   The ID you wish to assign to the detector update "message". Each
-    #   "messageId" must be unique within each batch sent.
+    #   The ID to assign to the detector update `"message"`. Each
+    #   `"messageId"` must be unique within each batch sent.
     #   @return [String]
     #
     # @!attribute [rw] detector_model_name

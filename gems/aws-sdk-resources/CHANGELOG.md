@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+3.49.0 (2019-06-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ec2instanceconnect` gem.
+
+3.48.0 (2019-06-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-servicequotas` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-applicationinsights` gem.
+
 3.47.0 (2019-06-10)
 ------------------
 

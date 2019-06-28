@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2019-06-20)
+------------------
+
+* Feature - API improvements for the AWS Health service.
+
 1.16.0 (2019-06-17)
 ------------------
 

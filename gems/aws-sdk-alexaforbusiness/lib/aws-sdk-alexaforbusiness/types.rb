@@ -555,8 +555,19 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The phone number of the contact.
+    #   The phone number of the contact. The phone number type defaults to
+    #   WORK. You can either specify PhoneNumber or PhoneNumbers. We
+    #   recommend that you use PhoneNumbers, which lets you specify the
+    #   phone number type and multiple numbers.
     #   @return [String]
+    #
+    # @!attribute [rw] phone_numbers
+    #   The list of phone numbers for the contact.
+    #   @return [Array<Types::PhoneNumber>]
+    #
+    # @!attribute [rw] sip_addresses
+    #   The list of SIP addresses for the contact.
+    #   @return [Array<Types::SipAddress>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Contact AWS API Documentation
     #
@@ -565,7 +576,9 @@ module Aws::AlexaForBusiness
       :display_name,
       :first_name,
       :last_name,
-      :phone_number)
+      :phone_number,
+      :phone_numbers,
+      :sip_addresses)
       include Aws::Structure
     end
 
@@ -590,8 +603,19 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The phone number of the contact.
+    #   The phone number of the contact. The phone number type defaults to
+    #   WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that
+    #   you use PhoneNumbers, which lets you specify the phone number type
+    #   and multiple numbers.
     #   @return [String]
+    #
+    # @!attribute [rw] phone_numbers
+    #   The list of phone numbers for the contact.
+    #   @return [Array<Types::PhoneNumber>]
+    #
+    # @!attribute [rw] sip_addresses
+    #   The list of SIP addresses for the contact.
+    #   @return [Array<Types::SipAddress>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ContactData AWS API Documentation
     #
@@ -600,7 +624,9 @@ module Aws::AlexaForBusiness
       :display_name,
       :first_name,
       :last_name,
-      :phone_number)
+      :phone_number,
+      :phone_numbers,
+      :sip_addresses)
       include Aws::Structure
     end
 
@@ -852,7 +878,19 @@ module Aws::AlexaForBusiness
     #         display_name: "ContactName",
     #         first_name: "ContactName", # required
     #         last_name: "ContactName",
-    #         phone_number: "E164PhoneNumber",
+    #         phone_number: "RawPhoneNumber",
+    #         phone_numbers: [
+    #           {
+    #             number: "RawPhoneNumber", # required
+    #             type: "MOBILE", # required, accepts MOBILE, WORK, HOME
+    #           },
+    #         ],
+    #         sip_addresses: [
+    #           {
+    #             uri: "SipUri", # required
+    #             type: "WORK", # required, accepts WORK
+    #           },
+    #         ],
     #         client_request_token: "ClientRequestToken",
     #       }
     #
@@ -871,8 +909,19 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The phone number of the contact in E.164 format.
+    #   The phone number of the contact in E.164 format. The phone number
+    #   type defaults to WORK. You can specify PhoneNumber or PhoneNumbers.
+    #   We recommend that you use PhoneNumbers, which lets you specify the
+    #   phone number type and multiple numbers.
     #   @return [String]
+    #
+    # @!attribute [rw] phone_numbers
+    #   The list of phone numbers for the contact.
+    #   @return [Array<Types::PhoneNumber>]
+    #
+    # @!attribute [rw] sip_addresses
+    #   The list of SIP addresses for the contact.
+    #   @return [Array<Types::SipAddress>]
     #
     # @!attribute [rw] client_request_token
     #   A unique, user-specified identifier for this request that ensures
@@ -889,6 +938,8 @@ module Aws::AlexaForBusiness
       :first_name,
       :last_name,
       :phone_number,
+      :phone_numbers,
+      :sip_addresses,
       :client_request_token)
       include Aws::Structure
     end
@@ -3376,6 +3427,33 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The phone number for the contact containing the raw number and phone
+    # number type.
+    #
+    # @note When making an API call, you may pass PhoneNumber
+    #   data as a hash:
+    #
+    #       {
+    #         number: "RawPhoneNumber", # required
+    #         type: "MOBILE", # required, accepts MOBILE, WORK, HOME
+    #       }
+    #
+    # @!attribute [rw] number
+    #   The raw value of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the phone number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PhoneNumber AWS API Documentation
+    #
+    class PhoneNumber < Struct.new(
+      :number,
+      :type)
+      include Aws::Structure
+    end
+
     # A room profile with attributes.
     #
     # @!attribute [rw] profile_arn
@@ -4635,6 +4713,33 @@ module Aws::AlexaForBusiness
     #
     class SendInvitationResponse < Aws::EmptyStructure; end
 
+    # The SIP address for the contact containing the URI and SIP address
+    # type.
+    #
+    # @note When making an API call, you may pass SipAddress
+    #   data as a hash:
+    #
+    #       {
+    #         uri: "SipUri", # required
+    #         type: "WORK", # required, accepts WORK
+    #       }
+    #
+    # @!attribute [rw] uri
+    #   The URI for the SIP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the SIP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SipAddress AWS API Documentation
+    #
+    class SipAddress < Struct.new(
+      :uri,
+      :type)
+      include Aws::Structure
+    end
+
     # Granular information about the skill.
     #
     # @!attribute [rw] product_description
@@ -5250,7 +5355,19 @@ module Aws::AlexaForBusiness
     #         display_name: "ContactName",
     #         first_name: "ContactName",
     #         last_name: "ContactName",
-    #         phone_number: "E164PhoneNumber",
+    #         phone_number: "RawPhoneNumber",
+    #         phone_numbers: [
+    #           {
+    #             number: "RawPhoneNumber", # required
+    #             type: "MOBILE", # required, accepts MOBILE, WORK, HOME
+    #           },
+    #         ],
+    #         sip_addresses: [
+    #           {
+    #             uri: "SipUri", # required
+    #             type: "WORK", # required, accepts WORK
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] contact_arn
@@ -5270,8 +5387,19 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The updated phone number of the contact.
+    #   The updated phone number of the contact. The phone number type
+    #   defaults to WORK. You can either specify PhoneNumber or
+    #   PhoneNumbers. We recommend that you use PhoneNumbers, which lets you
+    #   specify the phone number type and multiple numbers.
     #   @return [String]
+    #
+    # @!attribute [rw] phone_numbers
+    #   The list of phone numbers for the contact.
+    #   @return [Array<Types::PhoneNumber>]
+    #
+    # @!attribute [rw] sip_addresses
+    #   The list of SIP addresses for the contact.
+    #   @return [Array<Types::SipAddress>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContactRequest AWS API Documentation
     #
@@ -5280,7 +5408,9 @@ module Aws::AlexaForBusiness
       :display_name,
       :first_name,
       :last_name,
-      :phone_number)
+      :phone_number,
+      :phone_numbers,
+      :sip_addresses)
       include Aws::Structure
     end
 

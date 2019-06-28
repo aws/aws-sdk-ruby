@@ -258,12 +258,14 @@ module Aws::APIGateway
     # method.
     #
     # <div class="seeAlso">
-    # [Enable custom authorization][1]
+    # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
+    # Authorizer][2]
     # </div>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html
     #
     # @!attribute [rw] id
     #   The identifier for the authorizer resource.
@@ -339,12 +341,13 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. API Gateway will
-    #   match the `aud` field of the incoming token from the client against
-    #   the specified regular expression. It will invoke the authorizer's
-    #   Lambda function when there is a match. Otherwise, it will return a
-    #   401 Unauthorized response without calling the Lambda function. The
-    #   validation expression does not apply to the `REQUEST` authorizer.
+    #   authorizers, this value is a regular expression. For
+    #   `COGNITO_USER_POOLS` authorizers, API Gateway will match the `aud`
+    #   field of the incoming token from the client against the specified
+    #   regular expression. It will invoke the authorizer's Lambda function
+    #   when there is a match. Otherwise, it will return a 401 Unauthorized
+    #   response without calling the Lambda function. The validation
+    #   expression does not apply to the `REQUEST` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -371,12 +374,14 @@ module Aws::APIGateway
     # Represents a collection of Authorizer resources.
     #
     # <div class="seeAlso">
-    # [Enable custom authorization][1]
+    # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
+    # Authorizer][2]
     # </div>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -757,12 +762,13 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. API Gateway will
-    #   match the `aud` field of the incoming token from the client against
-    #   the specified regular expression. It will invoke the authorizer's
-    #   Lambda function when there is a match. Otherwise, it will return a
-    #   401 Unauthorized response without calling the Lambda function. The
-    #   validation expression does not apply to the `REQUEST` authorizer.
+    #   authorizers, this value is a regular expression. For
+    #   `COGNITO_USER_POOLS` authorizers, API Gateway will match the `aud`
+    #   field of the incoming token from the client against the specified
+    #   regular expression. It will invoke the authorizer's Lambda function
+    #   when there is a match. Otherwise, it will return a 401 Unauthorized
+    #   response without calling the Lambda function. The validation
+    #   expression does not apply to the `REQUEST` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -806,7 +812,7 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   The base path name that callers of the API must provide as part of
     #   the URL after the domain name. This value must be unique for all of
-    #   the mappings across a single API. Leave this blank if you do not
+    #   the mappings across a single API. Specify '(none)' if you do not
     #   want callers to specify a base path name after the domain name.
     #   @return [String]
     #
@@ -816,7 +822,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] stage
     #   The name of the API's stage that you want to use for this mapping.
-    #   Leave this blank if you do not want callers to explicitly specify
+    #   Specify '(none)' if you do not want callers to explicitly specify
     #   the stage name after any base path name.
     #   @return [String]
     #
@@ -1007,6 +1013,7 @@ module Aws::APIGateway
     #         tags: {
     #           "String" => "String",
     #         },
+    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1068,6 +1075,11 @@ module Aws::APIGateway
     #   not start with `aws:`. The tag value can be up to 256 characters.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #   @return [String]
+    #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :certificate_name,
@@ -1078,7 +1090,8 @@ module Aws::APIGateway
       :regional_certificate_name,
       :regional_certificate_arn,
       :endpoint_configuration,
-      :tags)
+      :tags,
+      :security_policy)
       include Aws::Structure
     end
 
@@ -1324,7 +1337,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   \[Required\] The name for the Stage resource.
+    #   \[Required\] The name for the Stage resource. Stage names can only
+    #   contain alphanumeric characters, hyphens, and underscores. Maximum
+    #   length is 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -1596,6 +1611,8 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   \[Required\] The base path name of the BasePathMapping resource to
     #   delete.
+    #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
     #   @return [String]
     #
     class DeleteBasePathMappingRequest < Struct.new(
@@ -2554,6 +2571,23 @@ module Aws::APIGateway
     #   types of the domain name.
     #   @return [Types::EndpointConfiguration]
     #
+    # @!attribute [rw] domain_name_status
+    #   The status of the DomainName migration. The valid values are
+    #   `AVAILABLE` and `UPDATING`. If the status is `UPDATING`, the domain
+    #   cannot be modified further until the existing operation is complete.
+    #   If it is `AVAILABLE`, the domain can be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_status_message
+    #   An optional text message containing detailed information about
+    #   status of the DomainName migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The collection of tags. Each tag element is associated with a given
     #   resource.
@@ -2571,6 +2605,9 @@ module Aws::APIGateway
       :distribution_domain_name,
       :distribution_hosted_zone_id,
       :endpoint_configuration,
+      :domain_name_status,
+      :domain_name_status_message,
+      :security_policy,
       :tags)
       include Aws::Structure
     end
@@ -3016,9 +3053,9 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   \[Required\] The base path name that callers of the API must provide
     #   as part of the URL after the domain name. This value must be unique
-    #   for all of the mappings across a single API. Leave this blank if you
-    #   do not want callers to specify any base path name after the domain
-    #   name.
+    #   for all of the mappings across a single API. Specify '(none)' if
+    #   you do not want callers to specify any base path name after the
+    #   domain name.
     #   @return [String]
     #
     class GetBasePathMappingRequest < Struct.new(
@@ -4055,8 +4092,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -4406,8 +4442,8 @@ module Aws::APIGateway
     #   `endpointConfigurationTypes=PRIVATE`. The default endpoint type is
     #   `EDGE`.
     #
-    #   To handle imported `basePath`, set `parameters` as
-    #   `basePath=ignore`, `basePath=prepend` or `basePath=split`.
+    #   To handle imported `basepath`, set `parameters` as
+    #   `basepath=ignore`, `basepath=prepend` or `basepath=split`.
     #
     #   For example, the AWS CLI command to exclude documentation from the
     #   imported API is:
@@ -4604,7 +4640,7 @@ module Aws::APIGateway
     #
     #   If this property is not defined, the request payload will be passed
     #   through from the method request to integration request without
-    #   modification, provided that the `passthroughBehaviors` is configured
+    #   modification, provided that the `passthroughBehavior` is configured
     #   to support payload pass-through.
     #   @return [String]
     #
@@ -4614,11 +4650,15 @@ module Aws::APIGateway
     #   @return [Integer]
     #
     # @!attribute [rw] cache_namespace
-    #   Specifies the integration's cache namespace.
+    #   An API-specific tag group of related cached parameters. To be valid
+    #   values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
-    #   Specifies the integration's cache key parameters.
+    #   A list of request parameters whose values API Gateway caches. To be
+    #   valid values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] integration_responses
@@ -4841,11 +4881,7 @@ module Aws::APIGateway
     # @!attribute [rw] operation_name
     #   A human-friendly operation identifier for the method. For example,
     #   you can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in the `PetStore` example.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -5524,11 +5560,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_namespace
-    #   Specifies a put integration input's cache namespace.
+    #   A list of request parameters whose values are to be cached.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
-    #   Specifies a put integration input's cache key parameters.
+    #   An API-specific tag group of related cached parameters.
     #   @return [Array<String>]
     #
     # @!attribute [rw] content_handling
@@ -5544,7 +5580,7 @@ module Aws::APIGateway
     #
     #   If this property is not defined, the request payload will be passed
     #   through from the method request to integration request without
-    #   modification, provided that the `passthroughBehaviors` is configured
+    #   modification, provided that the `passthroughBehavior` is configured
     #   to support payload pass-through.
     #   @return [String]
     #
@@ -5719,11 +5755,7 @@ module Aws::APIGateway
     # @!attribute [rw] operation_name
     #   A human-friendly operation identifier for the method. For example,
     #   you can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in the `PetStore` example.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -6344,7 +6376,9 @@ module Aws::APIGateway
     #
     # @!attribute [rw] stage_name
     #   The name of the stage is the first path segment in the Uniform
-    #   Resource Identifier (URI) of a call to API Gateway.
+    #   Resource Identifier (URI) of a call to API Gateway. Stage names can
+    #   only contain alphanumeric characters, hyphens, and underscores.
+    #   Maximum length is 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6491,8 +6525,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6856,8 +6889,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -6993,6 +7025,8 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   \[Required\] The base path of the BasePathMapping resource to
     #   change.
+    #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations

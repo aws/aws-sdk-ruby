@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2019-06-26)
+------------------
+
+* Feature - You can now perform tag operations on ApiGatewayV2 Resources (typically associated with WebSocket APIs)
+
+1.9.0 (2019-06-24)
+------------------
+
+* Feature - Customers can get information about security policies set on custom domain resources in API Gateway
+
 1.8.0 (2019-06-17)
 ------------------
 

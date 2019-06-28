@@ -1,6 +1,38 @@
 Unreleased Changes
 ------------------
 
+1.182.0 (2019-06-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.181.0 (2019-06-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EC2InstanceConnect`.
+
+1.180.0 (2019-06-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.179.0 (2019-06-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.178.0 (2019-06-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ServiceQuotas`.
+
+* Feature - Added support for enumerating regions for `Aws::ApplicationInsights`.
+
+1.177.0 (2019-06-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.176.0 (2019-06-17)
 ------------------
 

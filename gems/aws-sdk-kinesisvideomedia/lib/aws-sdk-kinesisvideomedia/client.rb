@@ -267,9 +267,9 @@ module Aws::KinesisVideoMedia
     #
     # When you put media data (fragments) on a stream, Kinesis Video Streams
     # stores each incoming fragment and related metadata in what is called a
-    # "chunk." For more information, see . The `GetMedia` API returns a
-    # stream of these chunks starting from the chunk that you specify in the
-    # request.
+    # "chunk." For more information, see [PutMedia][2]. The `GetMedia` API
+    # returns a stream of these chunks starting from the chunk that you
+    # specify in the request.
     #
     # The following limits apply when using the `GetMedia` API:
     #
@@ -279,9 +279,33 @@ module Aws::KinesisVideoMedia
     #   megabytes per second (or 200 megabits per second) during a
     #   `GetMedia` session.
     #
+    # <note markdown="1"> If an error is thrown after invoking a Kinesis Video Streams media
+    # API, in addition to the HTTP status code and the response body, it
+    # includes the following pieces of information:
+    #
+    #  * `x-amz-ErrorType` HTTP header – contains a more specific error type
+    #   in addition to what the HTTP status code provides.
+    #
+    # * `x-amz-RequestId` HTTP header – if you want to report an issue to
+    #   AWS, the support team can better diagnose the problem if given the
+    #   Request Id.
+    #
+    #  Both the HTTP status code and the ErrorType header can be utilized to
+    # make programmatic decisions about whether errors are retry-able and
+    # under what conditions, as well as provide information on what actions
+    # the client programmer might need to take in order to successfully try
+    # again.
+    #
+    #  For more information, see the **Errors** section at the bottom of this
+    # topic, as well as [Common Errors][3].
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/cli/latest/reference/
+    # [2]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html
+    # [3]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html
     #
     # @option params [String] :stream_name
     #   The Kinesis video stream name from where you want to get the media
@@ -340,7 +364,7 @@ module Aws::KinesisVideoMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideomedia'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
