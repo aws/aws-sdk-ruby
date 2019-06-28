@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.306 (2019-06-28)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
