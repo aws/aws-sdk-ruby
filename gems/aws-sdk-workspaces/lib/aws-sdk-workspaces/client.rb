@@ -537,7 +537,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].directory_id #=> String
     #   resp.pending_requests[0].user_name #=> String
     #   resp.pending_requests[0].ip_address #=> String
-    #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
+    #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.pending_requests[0].bundle_id #=> String
     #   resp.pending_requests[0].subnet_id #=> String
     #   resp.pending_requests[0].error_message #=> String
@@ -969,38 +969,6 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the snapshots for the specified WorkSpace.
-    #
-    # @option params [required, String] :workspace_id
-    #   The identifier of the WorkSpace.
-    #
-    # @return [Types::DescribeWorkspaceSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeWorkspaceSnapshotsResult#rebuild_snapshots #rebuild_snapshots} => Array&lt;Types::Snapshot&gt;
-    #   * {Types::DescribeWorkspaceSnapshotsResult#restore_snapshots #restore_snapshots} => Array&lt;Types::Snapshot&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_workspace_snapshots({
-    #     workspace_id: "WorkspaceId", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.rebuild_snapshots #=> Array
-    #   resp.rebuild_snapshots[0].snapshot_time #=> Time
-    #   resp.restore_snapshots #=> Array
-    #   resp.restore_snapshots[0].snapshot_time #=> Time
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshots AWS API Documentation
-    #
-    # @overload describe_workspace_snapshots(params = {})
-    # @param [Hash] params ({})
-    def describe_workspace_snapshots(params = {}, options = {})
-      req = build_request(:describe_workspace_snapshots, params)
-      req.send_request(options)
-    end
-
     # Describes the specified WorkSpaces.
     #
     # You can filter the results by using the bundle identifier, directory
@@ -1058,7 +1026,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].directory_id #=> String
     #   resp.workspaces[0].user_name #=> String
     #   resp.workspaces[0].ip_address #=> String
-    #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
+    #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.workspaces[0].bundle_id #=> String
     #   resp.workspaces[0].subnet_id #=> String
     #   resp.workspaces[0].error_message #=> String
@@ -1438,9 +1406,6 @@ module Aws::WorkSpaces
     # @option params [required, Array<Types::RebuildRequest>] :rebuild_workspace_requests
     #   The WorkSpace to rebuild. You can specify a single WorkSpace.
     #
-    # @option params [String] :additional_info
-    #   Reserved.
-    #
     # @return [Types::RebuildWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RebuildWorkspacesResult#failed_requests #failed_requests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
@@ -1453,7 +1418,6 @@ module Aws::WorkSpaces
     #         workspace_id: "WorkspaceId", # required
     #       },
     #     ],
-    #     additional_info: "AdditionalInfo",
     #   })
     #
     # @example Response structure
@@ -1469,47 +1433,6 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def rebuild_workspaces(params = {}, options = {})
       req = build_request(:rebuild_workspaces, params)
-      req.send_request(options)
-    end
-
-    # Restores the specified WorkSpace to its last known healthy state.
-    #
-    # You cannot restore a WorkSpace unless its state is ` AVAILABLE`,
-    # `ERROR`, or `UNHEALTHY`.
-    #
-    # Restoring a WorkSpace is a potentially destructive action that can
-    # result in the loss of data. For more information, see [Restore a
-    # WorkSpace][1].
-    #
-    # This operation is asynchronous and returns before the WorkSpace is
-    # completely restored.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html
-    #
-    # @option params [required, String] :workspace_id
-    #   The identifier of the WorkSpace.
-    #
-    # @option params [Boolean] :snapshot_current_volumes
-    #   Indicates whether to create snapshots of the root volume and user
-    #   volume before restoring the WorkSpace.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.restore_workspace({
-    #     workspace_id: "WorkspaceId", # required
-    #     snapshot_current_volumes: false,
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspace AWS API Documentation
-    #
-    # @overload restore_workspace(params = {})
-    # @param [Hash] params ({})
-    def restore_workspace(params = {}, options = {})
-      req = build_request(:restore_workspace, params)
       req.send_request(options)
     end
 
@@ -1704,7 +1627,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

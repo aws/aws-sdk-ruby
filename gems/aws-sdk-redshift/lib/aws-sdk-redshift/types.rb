@@ -390,6 +390,23 @@ module Aws::Redshift
     #   * `updating-hsm`
     #   @return [String]
     #
+    # @!attribute [rw] cluster_availability_status
+    #   The availability status of the cluster for queries. Possible values
+    #   are the following:
+    #
+    #   * Available - The cluster is available for queries.
+    #
+    #   * Unavailable - The cluster is not available for queries.
+    #
+    #   * Maintenance - The cluster is intermittently available for queries
+    #     due to maintenance activities.
+    #
+    #   * Modifying - The cluster is intermittently available for queries
+    #     due to changes that modify the cluster.
+    #
+    #   * Failed - The cluster failed and is not available for queries.
+    #   @return [String]
+    #
     # @!attribute [rw] modify_status
     #   The status of a modify operation, if any, initiated for the cluster.
     #   @return [String]
@@ -607,6 +624,7 @@ module Aws::Redshift
       :cluster_identifier,
       :node_type,
       :cluster_status,
+      :cluster_availability_status,
       :modify_status,
       :master_username,
       :db_name,

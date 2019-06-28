@@ -163,7 +163,6 @@ module Aws::AlexaForBusiness
     DisassociateSkillGroupFromRoomRequest = Shapes::StructureShape.new(name: 'DisassociateSkillGroupFromRoomRequest')
     DisassociateSkillGroupFromRoomResponse = Shapes::StructureShape.new(name: 'DisassociateSkillGroupFromRoomResponse')
     DistanceUnit = Shapes::StringShape.new(name: 'DistanceUnit')
-    E164PhoneNumber = Shapes::StringShape.new(name: 'E164PhoneNumber')
     Email = Shapes::StringShape.new(name: 'Email')
     EnablementType = Shapes::StringShape.new(name: 'EnablementType')
     EnablementTypeFilter = Shapes::StringShape.new(name: 'EnablementTypeFilter')
@@ -273,6 +272,9 @@ module Aws::AlexaForBusiness
     OrganizationName = Shapes::StringShape.new(name: 'OrganizationName')
     OutboundPhoneNumber = Shapes::StringShape.new(name: 'OutboundPhoneNumber')
     PSTNDialIn = Shapes::StructureShape.new(name: 'PSTNDialIn')
+    PhoneNumber = Shapes::StructureShape.new(name: 'PhoneNumber')
+    PhoneNumberList = Shapes::ListShape.new(name: 'PhoneNumberList')
+    PhoneNumberType = Shapes::StringShape.new(name: 'PhoneNumberType')
     PrivacyPolicy = Shapes::StringShape.new(name: 'PrivacyPolicy')
     ProductDescription = Shapes::StringShape.new(name: 'ProductDescription')
     ProductId = Shapes::StringShape.new(name: 'ProductId')
@@ -289,6 +291,7 @@ module Aws::AlexaForBusiness
     PutRoomSkillParameterResponse = Shapes::StructureShape.new(name: 'PutRoomSkillParameterResponse')
     PutSkillAuthorizationRequest = Shapes::StructureShape.new(name: 'PutSkillAuthorizationRequest')
     PutSkillAuthorizationResponse = Shapes::StructureShape.new(name: 'PutSkillAuthorizationResponse')
+    RawPhoneNumber = Shapes::StringShape.new(name: 'RawPhoneNumber')
     RegisterAVSDeviceRequest = Shapes::StructureShape.new(name: 'RegisterAVSDeviceRequest')
     RegisterAVSDeviceResponse = Shapes::StructureShape.new(name: 'RegisterAVSDeviceResponse')
     RejectSkillRequest = Shapes::StructureShape.new(name: 'RejectSkillRequest')
@@ -337,6 +340,10 @@ module Aws::AlexaForBusiness
     SendInvitationResponse = Shapes::StructureShape.new(name: 'SendInvitationResponse')
     ShortDescription = Shapes::StringShape.new(name: 'ShortDescription')
     ShortSkillIdList = Shapes::ListShape.new(name: 'ShortSkillIdList')
+    SipAddress = Shapes::StructureShape.new(name: 'SipAddress')
+    SipAddressList = Shapes::ListShape.new(name: 'SipAddressList')
+    SipType = Shapes::StringShape.new(name: 'SipType')
+    SipUri = Shapes::StringShape.new(name: 'SipUri')
     SkillDetails = Shapes::StructureShape.new(name: 'SkillDetails')
     SkillGroup = Shapes::StructureShape.new(name: 'SkillGroup')
     SkillGroupData = Shapes::StructureShape.new(name: 'SkillGroupData')
@@ -544,14 +551,18 @@ module Aws::AlexaForBusiness
     Contact.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
     Contact.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "FirstName"))
     Contact.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
-    Contact.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "PhoneNumber"))
+    Contact.add_member(:phone_number, Shapes::ShapeRef.new(shape: RawPhoneNumber, location_name: "PhoneNumber"))
+    Contact.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: PhoneNumberList, location_name: "PhoneNumbers"))
+    Contact.add_member(:sip_addresses, Shapes::ShapeRef.new(shape: SipAddressList, location_name: "SipAddresses"))
     Contact.struct_class = Types::Contact
 
     ContactData.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ContactArn"))
     ContactData.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
     ContactData.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "FirstName"))
     ContactData.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
-    ContactData.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "PhoneNumber"))
+    ContactData.add_member(:phone_number, Shapes::ShapeRef.new(shape: RawPhoneNumber, location_name: "PhoneNumber"))
+    ContactData.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: PhoneNumberList, location_name: "PhoneNumbers"))
+    ContactData.add_member(:sip_addresses, Shapes::ShapeRef.new(shape: SipAddressList, location_name: "SipAddresses"))
     ContactData.struct_class = Types::ContactData
 
     ContactDataList.member = Shapes::ShapeRef.new(shape: ContactData)
@@ -595,7 +606,9 @@ module Aws::AlexaForBusiness
     CreateContactRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
     CreateContactRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, required: true, location_name: "FirstName"))
     CreateContactRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
-    CreateContactRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "PhoneNumber"))
+    CreateContactRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: RawPhoneNumber, location_name: "PhoneNumber"))
+    CreateContactRequest.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: PhoneNumberList, location_name: "PhoneNumbers"))
+    CreateContactRequest.add_member(:sip_addresses, Shapes::ShapeRef.new(shape: SipAddressList, location_name: "SipAddresses"))
     CreateContactRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateContactRequest.struct_class = Types::CreateContactRequest
 
@@ -1108,6 +1121,12 @@ module Aws::AlexaForBusiness
     PSTNDialIn.add_member(:one_click_pin_delay, Shapes::ShapeRef.new(shape: OneClickPinDelay, required: true, location_name: "OneClickPinDelay"))
     PSTNDialIn.struct_class = Types::PSTNDialIn
 
+    PhoneNumber.add_member(:number, Shapes::ShapeRef.new(shape: RawPhoneNumber, required: true, location_name: "Number"))
+    PhoneNumber.add_member(:type, Shapes::ShapeRef.new(shape: PhoneNumberType, required: true, location_name: "Type"))
+    PhoneNumber.struct_class = Types::PhoneNumber
+
+    PhoneNumberList.member = Shapes::ShapeRef.new(shape: PhoneNumber)
+
     Profile.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     Profile.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "ProfileName"))
     Profile.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
@@ -1329,6 +1348,12 @@ module Aws::AlexaForBusiness
 
     ShortSkillIdList.member = Shapes::ShapeRef.new(shape: SkillId)
 
+    SipAddress.add_member(:uri, Shapes::ShapeRef.new(shape: SipUri, required: true, location_name: "Uri"))
+    SipAddress.add_member(:type, Shapes::ShapeRef.new(shape: SipType, required: true, location_name: "Type"))
+    SipAddress.struct_class = Types::SipAddress
+
+    SipAddressList.member = Shapes::ShapeRef.new(shape: SipAddress)
+
     SkillDetails.add_member(:product_description, Shapes::ShapeRef.new(shape: ProductDescription, location_name: "ProductDescription"))
     SkillDetails.add_member(:invocation_phrase, Shapes::ShapeRef.new(shape: InvocationPhrase, location_name: "InvocationPhrase"))
     SkillDetails.add_member(:release_date, Shapes::ShapeRef.new(shape: ReleaseDate, location_name: "ReleaseDate"))
@@ -1470,7 +1495,9 @@ module Aws::AlexaForBusiness
     UpdateContactRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
     UpdateContactRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "FirstName"))
     UpdateContactRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
-    UpdateContactRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "PhoneNumber"))
+    UpdateContactRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: RawPhoneNumber, location_name: "PhoneNumber"))
+    UpdateContactRequest.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: PhoneNumberList, location_name: "PhoneNumbers"))
+    UpdateContactRequest.add_member(:sip_addresses, Shapes::ShapeRef.new(shape: SipAddressList, location_name: "SipAddresses"))
     UpdateContactRequest.struct_class = Types::UpdateContactRequest
 
     UpdateContactResponse.struct_class = Types::UpdateContactResponse

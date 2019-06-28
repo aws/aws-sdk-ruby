@@ -399,21 +399,28 @@ module Aws::EC2
     DescribeAvailabilityZonesResult = Shapes::StructureShape.new(name: 'DescribeAvailabilityZonesResult')
     DescribeBundleTasksRequest = Shapes::StructureShape.new(name: 'DescribeBundleTasksRequest')
     DescribeBundleTasksResult = Shapes::StructureShape.new(name: 'DescribeBundleTasksResult')
+    DescribeByoipCidrsMaxResults = Shapes::IntegerShape.new(name: 'DescribeByoipCidrsMaxResults')
     DescribeByoipCidrsRequest = Shapes::StructureShape.new(name: 'DescribeByoipCidrsRequest')
     DescribeByoipCidrsResult = Shapes::StructureShape.new(name: 'DescribeByoipCidrsResult')
     DescribeCapacityReservationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationsMaxResults')
     DescribeCapacityReservationsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationsRequest')
     DescribeCapacityReservationsResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationsResult')
+    DescribeClassicLinkInstancesMaxResults = Shapes::IntegerShape.new(name: 'DescribeClassicLinkInstancesMaxResults')
     DescribeClassicLinkInstancesRequest = Shapes::StructureShape.new(name: 'DescribeClassicLinkInstancesRequest')
     DescribeClassicLinkInstancesResult = Shapes::StructureShape.new(name: 'DescribeClassicLinkInstancesResult')
+    DescribeClientVpnAuthorizationRulesMaxResults = Shapes::IntegerShape.new(name: 'DescribeClientVpnAuthorizationRulesMaxResults')
     DescribeClientVpnAuthorizationRulesRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnAuthorizationRulesRequest')
     DescribeClientVpnAuthorizationRulesResult = Shapes::StructureShape.new(name: 'DescribeClientVpnAuthorizationRulesResult')
+    DescribeClientVpnConnectionsMaxResults = Shapes::IntegerShape.new(name: 'DescribeClientVpnConnectionsMaxResults')
     DescribeClientVpnConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnConnectionsRequest')
     DescribeClientVpnConnectionsResult = Shapes::StructureShape.new(name: 'DescribeClientVpnConnectionsResult')
+    DescribeClientVpnEndpointMaxResults = Shapes::IntegerShape.new(name: 'DescribeClientVpnEndpointMaxResults')
     DescribeClientVpnEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnEndpointsRequest')
     DescribeClientVpnEndpointsResult = Shapes::StructureShape.new(name: 'DescribeClientVpnEndpointsResult')
+    DescribeClientVpnRoutesMaxResults = Shapes::IntegerShape.new(name: 'DescribeClientVpnRoutesMaxResults')
     DescribeClientVpnRoutesRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnRoutesRequest')
     DescribeClientVpnRoutesResult = Shapes::StructureShape.new(name: 'DescribeClientVpnRoutesResult')
+    DescribeClientVpnTargetNetworksMaxResults = Shapes::IntegerShape.new(name: 'DescribeClientVpnTargetNetworksMaxResults')
     DescribeClientVpnTargetNetworksRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnTargetNetworksRequest')
     DescribeClientVpnTargetNetworksResult = Shapes::StructureShape.new(name: 'DescribeClientVpnTargetNetworksResult')
     DescribeConversionTaskList = Shapes::ListShape.new(name: 'DescribeConversionTaskList')
@@ -424,6 +431,7 @@ module Aws::EC2
     DescribeDhcpOptionsMaxResults = Shapes::IntegerShape.new(name: 'DescribeDhcpOptionsMaxResults')
     DescribeDhcpOptionsRequest = Shapes::StructureShape.new(name: 'DescribeDhcpOptionsRequest')
     DescribeDhcpOptionsResult = Shapes::StructureShape.new(name: 'DescribeDhcpOptionsResult')
+    DescribeEgressOnlyInternetGatewaysMaxResults = Shapes::IntegerShape.new(name: 'DescribeEgressOnlyInternetGatewaysMaxResults')
     DescribeEgressOnlyInternetGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeEgressOnlyInternetGatewaysRequest')
     DescribeEgressOnlyInternetGatewaysResult = Shapes::StructureShape.new(name: 'DescribeEgressOnlyInternetGatewaysResult')
     DescribeElasticGpusMaxResults = Shapes::IntegerShape.new(name: 'DescribeElasticGpusMaxResults')
@@ -445,6 +453,7 @@ module Aws::EC2
     DescribeFlowLogsResult = Shapes::StructureShape.new(name: 'DescribeFlowLogsResult')
     DescribeFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'DescribeFpgaImageAttributeRequest')
     DescribeFpgaImageAttributeResult = Shapes::StructureShape.new(name: 'DescribeFpgaImageAttributeResult')
+    DescribeFpgaImagesMaxResults = Shapes::IntegerShape.new(name: 'DescribeFpgaImagesMaxResults')
     DescribeFpgaImagesRequest = Shapes::StructureShape.new(name: 'DescribeFpgaImagesRequest')
     DescribeFpgaImagesResult = Shapes::StructureShape.new(name: 'DescribeFpgaImagesResult')
     DescribeHostReservationOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeHostReservationOfferingsRequest')
@@ -454,6 +463,7 @@ module Aws::EC2
     DescribeHostReservationsResult = Shapes::StructureShape.new(name: 'DescribeHostReservationsResult')
     DescribeHostsRequest = Shapes::StructureShape.new(name: 'DescribeHostsRequest')
     DescribeHostsResult = Shapes::StructureShape.new(name: 'DescribeHostsResult')
+    DescribeIamInstanceProfileAssociationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeIamInstanceProfileAssociationsMaxResults')
     DescribeIamInstanceProfileAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeIamInstanceProfileAssociationsRequest')
     DescribeIamInstanceProfileAssociationsResult = Shapes::StructureShape.new(name: 'DescribeIamInstanceProfileAssociationsResult')
     DescribeIdFormatRequest = Shapes::StructureShape.new(name: 'DescribeIdFormatRequest')
@@ -485,8 +495,10 @@ module Aws::EC2
     DescribeLaunchTemplatesMaxResults = Shapes::IntegerShape.new(name: 'DescribeLaunchTemplatesMaxResults')
     DescribeLaunchTemplatesRequest = Shapes::StructureShape.new(name: 'DescribeLaunchTemplatesRequest')
     DescribeLaunchTemplatesResult = Shapes::StructureShape.new(name: 'DescribeLaunchTemplatesResult')
+    DescribeMovingAddressesMaxResults = Shapes::IntegerShape.new(name: 'DescribeMovingAddressesMaxResults')
     DescribeMovingAddressesRequest = Shapes::StructureShape.new(name: 'DescribeMovingAddressesRequest')
     DescribeMovingAddressesResult = Shapes::StructureShape.new(name: 'DescribeMovingAddressesResult')
+    DescribeNatGatewaysMaxResults = Shapes::IntegerShape.new(name: 'DescribeNatGatewaysMaxResults')
     DescribeNatGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeNatGatewaysRequest')
     DescribeNatGatewaysResult = Shapes::StructureShape.new(name: 'DescribeNatGatewaysResult')
     DescribeNetworkAclsMaxResults = Shapes::IntegerShape.new(name: 'DescribeNetworkAclsMaxResults')
@@ -504,6 +516,7 @@ module Aws::EC2
     DescribePlacementGroupsResult = Shapes::StructureShape.new(name: 'DescribePlacementGroupsResult')
     DescribePrefixListsRequest = Shapes::StructureShape.new(name: 'DescribePrefixListsRequest')
     DescribePrefixListsResult = Shapes::StructureShape.new(name: 'DescribePrefixListsResult')
+    DescribePrincipalIdFormatMaxResults = Shapes::IntegerShape.new(name: 'DescribePrincipalIdFormatMaxResults')
     DescribePrincipalIdFormatRequest = Shapes::StructureShape.new(name: 'DescribePrincipalIdFormatRequest')
     DescribePrincipalIdFormatResult = Shapes::StructureShape.new(name: 'DescribePrincipalIdFormatResult')
     DescribePublicIpv4PoolsRequest = Shapes::StructureShape.new(name: 'DescribePublicIpv4PoolsRequest')
@@ -521,6 +534,7 @@ module Aws::EC2
     DescribeRouteTablesMaxResults = Shapes::IntegerShape.new(name: 'DescribeRouteTablesMaxResults')
     DescribeRouteTablesRequest = Shapes::StructureShape.new(name: 'DescribeRouteTablesRequest')
     DescribeRouteTablesResult = Shapes::StructureShape.new(name: 'DescribeRouteTablesResult')
+    DescribeScheduledInstanceAvailabilityMaxResults = Shapes::IntegerShape.new(name: 'DescribeScheduledInstanceAvailabilityMaxResults')
     DescribeScheduledInstanceAvailabilityRequest = Shapes::StructureShape.new(name: 'DescribeScheduledInstanceAvailabilityRequest')
     DescribeScheduledInstanceAvailabilityResult = Shapes::StructureShape.new(name: 'DescribeScheduledInstanceAvailabilityResult')
     DescribeScheduledInstancesRequest = Shapes::StructureShape.new(name: 'DescribeScheduledInstancesRequest')
@@ -536,8 +550,10 @@ module Aws::EC2
     DescribeSnapshotsResult = Shapes::StructureShape.new(name: 'DescribeSnapshotsResult')
     DescribeSpotDatafeedSubscriptionRequest = Shapes::StructureShape.new(name: 'DescribeSpotDatafeedSubscriptionRequest')
     DescribeSpotDatafeedSubscriptionResult = Shapes::StructureShape.new(name: 'DescribeSpotDatafeedSubscriptionResult')
+    DescribeSpotFleetInstancesMaxResults = Shapes::IntegerShape.new(name: 'DescribeSpotFleetInstancesMaxResults')
     DescribeSpotFleetInstancesRequest = Shapes::StructureShape.new(name: 'DescribeSpotFleetInstancesRequest')
     DescribeSpotFleetInstancesResponse = Shapes::StructureShape.new(name: 'DescribeSpotFleetInstancesResponse')
+    DescribeSpotFleetRequestHistoryMaxResults = Shapes::IntegerShape.new(name: 'DescribeSpotFleetRequestHistoryMaxResults')
     DescribeSpotFleetRequestHistoryRequest = Shapes::StructureShape.new(name: 'DescribeSpotFleetRequestHistoryRequest')
     DescribeSpotFleetRequestHistoryResponse = Shapes::StructureShape.new(name: 'DescribeSpotFleetRequestHistoryResponse')
     DescribeSpotFleetRequestsRequest = Shapes::StructureShape.new(name: 'DescribeSpotFleetRequestsRequest')
@@ -579,6 +595,8 @@ module Aws::EC2
     DescribeVolumesResult = Shapes::StructureShape.new(name: 'DescribeVolumesResult')
     DescribeVpcAttributeRequest = Shapes::StructureShape.new(name: 'DescribeVpcAttributeRequest')
     DescribeVpcAttributeResult = Shapes::StructureShape.new(name: 'DescribeVpcAttributeResult')
+    DescribeVpcClassicLinkDnsSupportMaxResults = Shapes::IntegerShape.new(name: 'DescribeVpcClassicLinkDnsSupportMaxResults')
+    DescribeVpcClassicLinkDnsSupportNextToken = Shapes::StringShape.new(name: 'DescribeVpcClassicLinkDnsSupportNextToken')
     DescribeVpcClassicLinkDnsSupportRequest = Shapes::StructureShape.new(name: 'DescribeVpcClassicLinkDnsSupportRequest')
     DescribeVpcClassicLinkDnsSupportResult = Shapes::StructureShape.new(name: 'DescribeVpcClassicLinkDnsSupportResult')
     DescribeVpcClassicLinkRequest = Shapes::StructureShape.new(name: 'DescribeVpcClassicLinkRequest')
@@ -975,7 +993,6 @@ module Aws::EC2
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
-    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MillisecondDateTime = Shapes::TimestampShape.new(name: 'MillisecondDateTime')
     ModifyCapacityReservationRequest = Shapes::StructureShape.new(name: 'ModifyCapacityReservationRequest')
     ModifyCapacityReservationResult = Shapes::StructureShape.new(name: 'ModifyCapacityReservationResult')
@@ -3121,7 +3138,7 @@ module Aws::EC2
     DescribeBundleTasksResult.struct_class = Types::DescribeBundleTasksResult
 
     DescribeByoipCidrsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    DescribeByoipCidrsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, required: true, location_name: "MaxResults"))
+    DescribeByoipCidrsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeByoipCidrsMaxResults, required: true, location_name: "MaxResults"))
     DescribeByoipCidrsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeByoipCidrsRequest.struct_class = Types::DescribeByoipCidrsRequest
 
@@ -3143,7 +3160,7 @@ module Aws::EC2
     DescribeClassicLinkInstancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeClassicLinkInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeClassicLinkInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
-    DescribeClassicLinkInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    DescribeClassicLinkInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeClassicLinkInstancesMaxResults, location_name: "maxResults"))
     DescribeClassicLinkInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeClassicLinkInstancesRequest.struct_class = Types::DescribeClassicLinkInstancesRequest
 
@@ -3155,7 +3172,7 @@ module Aws::EC2
     DescribeClientVpnAuthorizationRulesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeClientVpnAuthorizationRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeClientVpnAuthorizationRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
-    DescribeClientVpnAuthorizationRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnAuthorizationRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeClientVpnAuthorizationRulesMaxResults, location_name: "MaxResults"))
     DescribeClientVpnAuthorizationRulesRequest.struct_class = Types::DescribeClientVpnAuthorizationRulesRequest
 
     DescribeClientVpnAuthorizationRulesResult.add_member(:authorization_rules, Shapes::ShapeRef.new(shape: AuthorizationRuleSet, location_name: "authorizationRule"))
@@ -3165,7 +3182,7 @@ module Aws::EC2
     DescribeClientVpnConnectionsRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
     DescribeClientVpnConnectionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeClientVpnConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeClientVpnConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeClientVpnConnectionsMaxResults, location_name: "MaxResults"))
     DescribeClientVpnConnectionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeClientVpnConnectionsRequest.struct_class = Types::DescribeClientVpnConnectionsRequest
 
@@ -3174,7 +3191,7 @@ module Aws::EC2
     DescribeClientVpnConnectionsResult.struct_class = Types::DescribeClientVpnConnectionsResult
 
     DescribeClientVpnEndpointsRequest.add_member(:client_vpn_endpoint_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "ClientVpnEndpointId"))
-    DescribeClientVpnEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeClientVpnEndpointMaxResults, location_name: "MaxResults"))
     DescribeClientVpnEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeClientVpnEndpointsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeClientVpnEndpointsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -3186,7 +3203,7 @@ module Aws::EC2
 
     DescribeClientVpnRoutesRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
     DescribeClientVpnRoutesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
-    DescribeClientVpnRoutesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnRoutesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeClientVpnRoutesMaxResults, location_name: "MaxResults"))
     DescribeClientVpnRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeClientVpnRoutesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeClientVpnRoutesRequest.struct_class = Types::DescribeClientVpnRoutesRequest
@@ -3197,7 +3214,7 @@ module Aws::EC2
 
     DescribeClientVpnTargetNetworksRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
     DescribeClientVpnTargetNetworksRequest.add_member(:association_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AssociationIds"))
-    DescribeClientVpnTargetNetworksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnTargetNetworksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeClientVpnTargetNetworksMaxResults, location_name: "MaxResults"))
     DescribeClientVpnTargetNetworksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeClientVpnTargetNetworksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeClientVpnTargetNetworksRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -3237,7 +3254,7 @@ module Aws::EC2
 
     DescribeEgressOnlyInternetGatewaysRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeEgressOnlyInternetGatewaysRequest.add_member(:egress_only_internet_gateway_ids, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayIdList, location_name: "EgressOnlyInternetGatewayId"))
-    DescribeEgressOnlyInternetGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeEgressOnlyInternetGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeEgressOnlyInternetGatewaysMaxResults, location_name: "MaxResults"))
     DescribeEgressOnlyInternetGatewaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeEgressOnlyInternetGatewaysRequest.struct_class = Types::DescribeEgressOnlyInternetGatewaysRequest
 
@@ -3342,7 +3359,7 @@ module Aws::EC2
     DescribeFpgaImagesRequest.add_member(:owners, Shapes::ShapeRef.new(shape: OwnerStringList, location_name: "Owner"))
     DescribeFpgaImagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeFpgaImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeFpgaImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeFpgaImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeFpgaImagesMaxResults, location_name: "MaxResults"))
     DescribeFpgaImagesRequest.struct_class = Types::DescribeFpgaImagesRequest
 
     DescribeFpgaImagesResult.add_member(:fpga_images, Shapes::ShapeRef.new(shape: FpgaImageList, location_name: "fpgaImageSet"))
@@ -3383,7 +3400,7 @@ module Aws::EC2
 
     DescribeIamInstanceProfileAssociationsRequest.add_member(:association_ids, Shapes::ShapeRef.new(shape: AssociationIdList, location_name: "AssociationId"))
     DescribeIamInstanceProfileAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
-    DescribeIamInstanceProfileAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeIamInstanceProfileAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeIamInstanceProfileAssociationsMaxResults, location_name: "MaxResults"))
     DescribeIamInstanceProfileAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeIamInstanceProfileAssociationsRequest.struct_class = Types::DescribeIamInstanceProfileAssociationsRequest
 
@@ -3528,7 +3545,7 @@ module Aws::EC2
 
     DescribeMovingAddressesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filter"))
     DescribeMovingAddressesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    DescribeMovingAddressesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    DescribeMovingAddressesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeMovingAddressesMaxResults, location_name: "maxResults"))
     DescribeMovingAddressesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeMovingAddressesRequest.add_member(:public_ips, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "publicIp"))
     DescribeMovingAddressesRequest.struct_class = Types::DescribeMovingAddressesRequest
@@ -3538,7 +3555,7 @@ module Aws::EC2
     DescribeMovingAddressesResult.struct_class = Types::DescribeMovingAddressesResult
 
     DescribeNatGatewaysRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
-    DescribeNatGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeNatGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeNatGatewaysMaxResults, location_name: "MaxResults"))
     DescribeNatGatewaysRequest.add_member(:nat_gateway_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "NatGatewayId"))
     DescribeNatGatewaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeNatGatewaysRequest.struct_class = Types::DescribeNatGatewaysRequest
@@ -3612,7 +3629,7 @@ module Aws::EC2
 
     DescribePrincipalIdFormatRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribePrincipalIdFormatRequest.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "Resource"))
-    DescribePrincipalIdFormatRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribePrincipalIdFormatRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribePrincipalIdFormatMaxResults, location_name: "MaxResults"))
     DescribePrincipalIdFormatRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribePrincipalIdFormatRequest.struct_class = Types::DescribePrincipalIdFormatRequest
 
@@ -3699,7 +3716,7 @@ module Aws::EC2
     DescribeScheduledInstanceAvailabilityRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeScheduledInstanceAvailabilityRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeScheduledInstanceAvailabilityRequest.add_member(:first_slot_start_time_range, Shapes::ShapeRef.new(shape: SlotDateTimeRangeRequest, required: true, location_name: "FirstSlotStartTimeRange"))
-    DescribeScheduledInstanceAvailabilityRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeScheduledInstanceAvailabilityRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeScheduledInstanceAvailabilityMaxResults, location_name: "MaxResults"))
     DescribeScheduledInstanceAvailabilityRequest.add_member(:max_slot_duration_in_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSlotDurationInHours"))
     DescribeScheduledInstanceAvailabilityRequest.add_member(:min_slot_duration_in_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "MinSlotDurationInHours"))
     DescribeScheduledInstanceAvailabilityRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -3771,7 +3788,7 @@ module Aws::EC2
     DescribeSpotDatafeedSubscriptionResult.struct_class = Types::DescribeSpotDatafeedSubscriptionResult
 
     DescribeSpotFleetInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    DescribeSpotFleetInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    DescribeSpotFleetInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeSpotFleetInstancesMaxResults, location_name: "maxResults"))
     DescribeSpotFleetInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeSpotFleetInstancesRequest.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spotFleetRequestId"))
     DescribeSpotFleetInstancesRequest.struct_class = Types::DescribeSpotFleetInstancesRequest
@@ -3783,7 +3800,7 @@ module Aws::EC2
 
     DescribeSpotFleetRequestHistoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeSpotFleetRequestHistoryRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "eventType"))
-    DescribeSpotFleetRequestHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    DescribeSpotFleetRequestHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeSpotFleetRequestHistoryMaxResults, location_name: "maxResults"))
     DescribeSpotFleetRequestHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeSpotFleetRequestHistoryRequest.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spotFleetRequestId"))
     DescribeSpotFleetRequestHistoryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "startTime"))
@@ -3993,12 +4010,12 @@ module Aws::EC2
     DescribeVpcAttributeResult.add_member(:enable_dns_support, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "enableDnsSupport"))
     DescribeVpcAttributeResult.struct_class = Types::DescribeVpcAttributeResult
 
-    DescribeVpcClassicLinkDnsSupportRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
-    DescribeVpcClassicLinkDnsSupportRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeVpcClassicLinkDnsSupportRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeVpcClassicLinkDnsSupportMaxResults, location_name: "maxResults"))
+    DescribeVpcClassicLinkDnsSupportRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: DescribeVpcClassicLinkDnsSupportNextToken, location_name: "nextToken"))
     DescribeVpcClassicLinkDnsSupportRequest.add_member(:vpc_ids, Shapes::ShapeRef.new(shape: VpcClassicLinkIdList, location_name: "VpcIds"))
     DescribeVpcClassicLinkDnsSupportRequest.struct_class = Types::DescribeVpcClassicLinkDnsSupportRequest
 
-    DescribeVpcClassicLinkDnsSupportResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeVpcClassicLinkDnsSupportResult.add_member(:next_token, Shapes::ShapeRef.new(shape: DescribeVpcClassicLinkDnsSupportNextToken, location_name: "nextToken"))
     DescribeVpcClassicLinkDnsSupportResult.add_member(:vpcs, Shapes::ShapeRef.new(shape: ClassicLinkDnsSupportList, location_name: "vpcs"))
     DescribeVpcClassicLinkDnsSupportResult.struct_class = Types::DescribeVpcClassicLinkDnsSupportResult
 

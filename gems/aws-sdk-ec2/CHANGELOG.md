@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2019-06-28)
+------------------
+
+* Feature - You can now launch 8xlarge and 16xlarge instance sizes on the general purpose M5 and memory optimized R5 instance types.
+
 1.96.0 (2019-06-25)
 ------------------
 

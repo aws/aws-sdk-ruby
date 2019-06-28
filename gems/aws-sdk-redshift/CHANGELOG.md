@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-06-28)
+------------------
+
+* Feature - ClusterAvailabilityStatus: The availability status of the cluster for queries. Possible values are the following: Available, Unavailable, Maintenance, Modifying, Failed.
+
 1.27.0 (2019-06-17)
 ------------------
 
