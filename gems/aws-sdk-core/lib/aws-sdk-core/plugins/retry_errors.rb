@@ -94,6 +94,7 @@ A delay randomiser function used by the default backoff function. Some predefine
 
         NETWORKING_ERRORS = Set.new([
           'RequestTimeout', # s3
+          'IDPCommunicationError', # sts
         ])
 
         def initialize(error, http_status_code)

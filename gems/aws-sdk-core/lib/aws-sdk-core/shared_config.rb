@@ -121,6 +121,25 @@ module Aws
       credentials
     end
 
+    def assume_role_web_identity_credentials_from_config(profile)
+      p = profile || @profile_name
+      if @config_enabled && @parsed_config
+        entry = @parsed_config.fetch(p, {})
+        if entry['web_identity_token_file'] &&
+          entry['role_arn']
+          AssumeRoleWebIdentityCredentials.new(
+            role_arn: entry['role_arn'],
+            web_identity_token_file: entry['web_identity_token_file'],
+            role_session_name: entry['role_session_name']
+          )
+        else
+          nil
+        end
+      else
+        nil
+      end
+    end
+
     def region(opts = {})
       p = opts[:profile] || @profile_name
       if @config_enabled
