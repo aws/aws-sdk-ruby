@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.307 (2019-07-01)
+------------------
+
 * Feature - Aws::DocDB - Updated the API, and documentation for Amazon DocumentDB with MongoDB compatibility.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
