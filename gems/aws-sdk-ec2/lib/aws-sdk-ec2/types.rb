@@ -4675,12 +4675,14 @@ module Aws::EC2
     #           single_instance_type: false,
     #           single_availability_zone: false,
     #           min_target_capacity: 1,
+    #           max_total_price: "String",
     #         },
     #         on_demand_options: {
     #           allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
     #           single_instance_type: false,
     #           single_availability_zone: false,
     #           min_target_capacity: 1,
+    #           max_total_price: "String",
     #         },
     #         excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
     #         launch_template_configs: [ # required
@@ -4757,7 +4759,7 @@ module Aws::EC2
     #   @return [Types::SpotOptionsRequest]
     #
     # @!attribute [rw] on_demand_options
-    #   The allocation strategy of On-Demand Instances in an EC2 Fleet.
+    #   Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #   @return [Types::OnDemandOptionsRequest]
     #
     # @!attribute [rw] excess_capacity_termination_policy
@@ -4771,8 +4773,7 @@ module Aws::EC2
     #   @return [Array<Types::FleetLaunchTemplateConfigRequest>]
     #
     # @!attribute [rw] target_capacity_specification
-    #   The `TotalTargetCapacity`, `OnDemandTargetCapacity`,
-    #   `SpotTargetCapacity`, and `DefaultCapacityType` structure.
+    #   The number of units to request.
     #   @return [Types::TargetCapacitySpecificationRequest]
     #
     # @!attribute [rw] terminate_instances_with_expiration
@@ -27623,6 +27624,7 @@ module Aws::EC2
     #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #         spot_fleet_request_id: "String", # required
     #         target_capacity: 1,
+    #         on_demand_target_capacity: 1,
     #       }
     #
     # @!attribute [rw] excess_capacity_termination_policy
@@ -27639,12 +27641,17 @@ module Aws::EC2
     #   The size of the fleet.
     #   @return [Integer]
     #
+    # @!attribute [rw] on_demand_target_capacity
+    #   The number of On-Demand Instances in the fleet.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestRequest AWS API Documentation
     #
     class ModifySpotFleetRequestRequest < Struct.new(
       :excess_capacity_termination_policy,
       :spot_fleet_request_id,
-      :target_capacity)
+      :target_capacity,
+      :on_demand_target_capacity)
       include Aws::Structure
     end
 
@@ -29352,7 +29359,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The allocation strategy of On-Demand Instances in an EC2 Fleet.
+    # Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #
     # @!attribute [rw] allocation_strategy
     #   The order of the launch template overrides to use in fulfilling
@@ -29380,17 +29387,23 @@ module Aws::EC2
     #   instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_total_price
+    #   The maximum amount per hour for On-Demand Instances that you're
+    #   willing to pay.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptions AWS API Documentation
     #
     class OnDemandOptions < Struct.new(
       :allocation_strategy,
       :single_instance_type,
       :single_availability_zone,
-      :min_target_capacity)
+      :min_target_capacity,
+      :max_total_price)
       include Aws::Structure
     end
 
-    # The allocation strategy of On-Demand Instances in an EC2 Fleet.
+    # Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #
     # @note When making an API call, you may pass OnDemandOptionsRequest
     #   data as a hash:
@@ -29400,6 +29413,7 @@ module Aws::EC2
     #         single_instance_type: false,
     #         single_availability_zone: false,
     #         min_target_capacity: 1,
+    #         max_total_price: "String",
     #       }
     #
     # @!attribute [rw] allocation_strategy
@@ -29428,13 +29442,19 @@ module Aws::EC2
     #   instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_total_price
+    #   The maximum amount per hour for On-Demand Instances that you're
+    #   willing to pay.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptionsRequest AWS API Documentation
     #
     class OnDemandOptionsRequest < Struct.new(
       :allocation_strategy,
       :single_instance_type,
       :single_availability_zone,
-      :min_target_capacity)
+      :min_target_capacity,
+      :max_total_price)
       include Aws::Structure
     end
 
@@ -31707,6 +31727,8 @@ module Aws::EC2
     #           spot_price: "String",
     #           target_capacity: 1, # required
     #           on_demand_target_capacity: 1,
+    #           on_demand_max_total_price: "String",
+    #           spot_max_total_price: "String",
     #           terminate_instances_with_expiration: false,
     #           type: "request", # accepts request, maintain, instant
     #           valid_from: Time.now,
@@ -36204,6 +36226,8 @@ module Aws::EC2
     #         spot_price: "String",
     #         target_capacity: 1, # required
     #         on_demand_target_capacity: 1,
+    #         on_demand_max_total_price: "String",
+    #         spot_max_total_price: "String",
     #         terminate_instances_with_expiration: false,
     #         type: "request", # accepts request, maintain, instant
     #         valid_from: Time.now,
@@ -36320,6 +36344,30 @@ module Aws::EC2
     #   specify a target capacity of 0 and add capacity later.
     #   @return [Integer]
     #
+    # @!attribute [rw] on_demand_max_total_price
+    #   The maximum amount per hour for On-Demand Instances that you're
+    #   willing to pay. You can use the `onDemandMaxTotalPrice` parameter,
+    #   the `spotMaxTotalPrice` parameter, or both parameters to ensure that
+    #   your fleet cost does not exceed your budget. If you set a maximum
+    #   price per hour for the On-Demand Instances and Spot Instances in
+    #   your request, Spot Fleet will launch instances until it reaches the
+    #   maximum amount you're willing to pay. When the maximum amount
+    #   you're willing to pay is reached, the fleet stops launching
+    #   instances even if it hasn’t met the target capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_max_total_price
+    #   The maximum amount per hour for Spot Instances that you're willing
+    #   to pay. You can use the `spotdMaxTotalPrice` parameter, the
+    #   `onDemandMaxTotalPrice` parameter, or both parameters to ensure that
+    #   your fleet cost does not exceed your budget. If you set a maximum
+    #   price per hour for the On-Demand Instances and Spot Instances in
+    #   your request, Spot Fleet will launch instances until it reaches the
+    #   maximum amount you're willing to pay. When the maximum amount
+    #   you're willing to pay is reached, the fleet stops launching
+    #   instances even if it hasn’t met the target capacity.
+    #   @return [String]
+    #
     # @!attribute [rw] terminate_instances_with_expiration
     #   Indicates whether running Spot Instances are terminated when the
     #   Spot Fleet request expires.
@@ -36395,6 +36443,8 @@ module Aws::EC2
       :spot_price,
       :target_capacity,
       :on_demand_target_capacity,
+      :on_demand_max_total_price,
+      :spot_max_total_price,
       :terminate_instances_with_expiration,
       :type,
       :valid_from,
@@ -36701,6 +36751,11 @@ module Aws::EC2
     #   instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_total_price
+    #   The maximum amount per hour for Spot Instances that you're willing
+    #   to pay.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptions AWS API Documentation
     #
     class SpotOptions < Struct.new(
@@ -36709,7 +36764,8 @@ module Aws::EC2
       :instance_pools_to_use_count,
       :single_instance_type,
       :single_availability_zone,
-      :min_target_capacity)
+      :min_target_capacity,
+      :max_total_price)
       include Aws::Structure
     end
 
@@ -36725,6 +36781,7 @@ module Aws::EC2
     #         single_instance_type: false,
     #         single_availability_zone: false,
     #         min_target_capacity: 1,
+    #         max_total_price: "String",
     #       }
     #
     # @!attribute [rw] allocation_strategy
@@ -36761,6 +36818,11 @@ module Aws::EC2
     #   instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_total_price
+    #   The maximum amount per hour for Spot Instances that you're willing
+    #   to pay.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptionsRequest AWS API Documentation
     #
     class SpotOptionsRequest < Struct.new(
@@ -36769,7 +36831,8 @@ module Aws::EC2
       :instance_pools_to_use_count,
       :single_instance_type,
       :single_availability_zone,
-      :min_target_capacity)
+      :min_target_capacity,
+      :max_total_price)
       include Aws::Structure
     end
 
@@ -37389,17 +37452,30 @@ module Aws::EC2
     # If the request type is `maintain`, you can specify a target capacity
     # of 0 and add capacity later.
     #
+    # You can use the On-Demand Instance `MaxTotalPrice` parameter, the Spot
+    # Instance `MaxTotalPrice`, or both to ensure your fleet cost does not
+    # exceed your budget. If you set a maximum price per hour for the
+    # On-Demand Instances and Spot Instances in your request, EC2 Fleet will
+    # launch instances until it reaches the maximum amount you're willing
+    # to pay. When the maximum amount you're willing to pay is reached, the
+    # fleet stops launching instances even if it hasn’t met the target
+    # capacity. The `MaxTotalPrice` parameters are located in and
+    #
     # @!attribute [rw] total_target_capacity
     #   The number of units to request, filled using
     #   `DefaultTargetCapacityType`.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
-    #   The number of On-Demand units to request.
+    #   The number of On-Demand units to request. If you specify a target
+    #   capacity for Spot units, you cannot specify a target capacity for
+    #   On-Demand units.
     #   @return [Integer]
     #
     # @!attribute [rw] spot_target_capacity
-    #   The maximum number of Spot units to launch.
+    #   The maximum number of Spot units to launch. If you specify a target
+    #   capacity for On-Demand units, you cannot specify a target capacity
+    #   for Spot units.
     #   @return [Integer]
     #
     # @!attribute [rw] default_target_capacity_type
@@ -37418,10 +37494,21 @@ module Aws::EC2
     end
 
     # The number of units to request. You can choose to set the target
-    # capacity in terms of instances or a performance characteristic that is
-    # important to your application workload, such as vCPUs, memory, or I/O.
-    # If the request type is `maintain`, you can specify a target capacity
-    # of 0 and add capacity later.
+    # capacity as the number of instances. Or you can set the target
+    # capacity to a performance characteristic that is important to your
+    # application workload, such as vCPUs, memory, or I/O. If the request
+    # type is `maintain`, you can specify a target capacity of 0 and add
+    # capacity later.
+    #
+    # You can use the On-Demand Instance `MaxTotalPrice` parameter, the Spot
+    # Instance `MaxTotalPrice` parameter, or both parameters to ensure that
+    # your fleet cost does not exceed your budget. If you set a maximum
+    # price per hour for the On-Demand Instances and Spot Instances in your
+    # request, EC2 Fleet will launch instances until it reaches the maximum
+    # amount you're willing to pay. When the maximum amount you're willing
+    # to pay is reached, the fleet stops launching instances even if it
+    # hasn’t met the target capacity. The `MaxTotalPrice` parameters are
+    # located in and .
     #
     # @note When making an API call, you may pass TargetCapacitySpecificationRequest
     #   data as a hash:

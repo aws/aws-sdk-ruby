@@ -381,8 +381,8 @@ module Aws::DocDB
     #         engine: "String", # required
     #         engine_version: "String",
     #         port: 1,
-    #         master_username: "String",
-    #         master_user_password: "String",
+    #         master_username: "String", # required
+    #         master_user_password: "String", # required
     #         preferred_backup_window: "String",
     #         preferred_maintenance_window: "String",
     #         tags: [
@@ -394,6 +394,7 @@ module Aws::DocDB
     #         storage_encrypted: false,
     #         kms_key_id: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -476,7 +477,8 @@ module Aws::DocDB
     #
     # @!attribute [rw] master_user_password
     #   The password for the master database user. This password can contain
-    #   any printable ASCII character except "/", """, or "@".
+    #   any printable ASCII character except forward slash (/), double quote
+    #   ("), or the "at" symbol (@).
     #
     #   Constraints: Must contain from 8 to 41 characters.
     #   @return [String]
@@ -558,6 +560,14 @@ module Aws::DocDB
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether this cluster can be deleted. If
+    #   `DeletionProtection` is enabled, the cluster cannot be deleted
+    #   unless it is modified and `DeletionProtection` is disabled.
+    #   `DeletionProtection` protects clusters from being accidentally
+    #   deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterMessage AWS API Documentation
     #
     class CreateDBClusterMessage < Struct.new(
@@ -577,7 +587,8 @@ module Aws::DocDB
       :tags,
       :storage_encrypted,
       :kms_key_id,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -763,7 +774,7 @@ module Aws::DocDB
     #
     # @!attribute [rw] db_instance_class
     #   The compute and memory capacity of the DB instance; for example,
-    #   `db.m4.large`.
+    #   `db.r5.large`.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -1061,6 +1072,14 @@ module Aws::DocDB
     #   Amazon CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether this cluster can be deleted. If
+    #   `DeletionProtection` is enabled, the cluster cannot be deleted
+    #   unless it is modified and `DeletionProtection` is disabled.
+    #   `DeletionProtection` protects clusters from being accidentally
+    #   deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -1091,7 +1110,8 @@ module Aws::DocDB
       :db_cluster_arn,
       :associated_roles,
       :cluster_create_time,
-      :enabled_cloudwatch_logs_exports)
+      :enabled_cloudwatch_logs_exports,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -3194,6 +3214,7 @@ module Aws::DocDB
     #           disable_log_types: ["String"],
     #         },
     #         engine_version: "String",
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -3272,9 +3293,9 @@ module Aws::DocDB
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
-    #   The new password for the master database user. This password can
-    #   contain any printable ASCII character except "`/`", "`"`", or
-    #   "`@`".
+    #   The password for the master database user. This password can contain
+    #   any printable ASCII character except forward slash (/), double quote
+    #   ("), or the "at" symbol (@).
     #
     #   Constraints: Must contain from 8 to 41 characters.
     #   @return [String]
@@ -3327,6 +3348,14 @@ module Aws::DocDB
     #   `ApplyImmediately` parameter is set to `true`.
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether this cluster can be deleted. If
+    #   `DeletionProtection` is enabled, the cluster cannot be deleted
+    #   unless it is modified and `DeletionProtection` is disabled.
+    #   `DeletionProtection` protects clusters from being accidentally
+    #   deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -3341,7 +3370,8 @@ module Aws::DocDB
       :preferred_backup_window,
       :preferred_maintenance_window,
       :cloudwatch_logs_export_configuration,
-      :engine_version)
+      :engine_version,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -3494,7 +3524,7 @@ module Aws::DocDB
     #
     # @!attribute [rw] db_instance_class
     #   The new compute and memory capacity of the DB instance; for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all AWS
+    #   `db.r5.large`. Not all DB instance classes are available in all AWS
     #   Regions.
     #
     #   If you modify the DB instance class, an outage occurs during the
@@ -4132,6 +4162,7 @@ module Aws::DocDB
     #         ],
     #         kms_key_id: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -4235,6 +4266,14 @@ module Aws::DocDB
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether this cluster can be deleted. If
+    #   `DeletionProtection` is enabled, the cluster cannot be deleted
+    #   unless it is modified and `DeletionProtection` is disabled.
+    #   `DeletionProtection` protects clusters from being accidentally
+    #   deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -4248,7 +4287,8 @@ module Aws::DocDB
       :vpc_security_group_ids,
       :tags,
       :kms_key_id,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -4284,6 +4324,7 @@ module Aws::DocDB
     #         ],
     #         kms_key_id: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         deletion_protection: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -4398,6 +4439,14 @@ module Aws::DocDB
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether this cluster can be deleted. If
+    #   `DeletionProtection` is enabled, the cluster cannot be deleted
+    #   unless it is modified and `DeletionProtection` is disabled.
+    #   `DeletionProtection` protects clusters from being accidentally
+    #   deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -4410,7 +4459,8 @@ module Aws::DocDB
       :vpc_security_group_ids,
       :tags,
       :kms_key_id,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :deletion_protection)
       include Aws::Structure
     end
 
@@ -4421,6 +4471,66 @@ module Aws::DocDB
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTimeResult AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeResult < Struct.new(
+      :db_cluster)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The identifier of the cluster to restart. Example:
+    #   `docdb-2019-05-28-15-24-52`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBClusterMessage AWS API Documentation
+    #
+    class StartDBClusterMessage < Struct.new(
+      :db_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster
+    #   Detailed information about a DB cluster.
+    #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBClusterResult AWS API Documentation
+    #
+    class StartDBClusterResult < Struct.new(
+      :db_cluster)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The identifier of the cluster to stop. Example:
+    #   `docdb-2019-05-28-15-24-52`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBClusterMessage AWS API Documentation
+    #
+    class StopDBClusterMessage < Struct.new(
+      :db_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster
+    #   Detailed information about a DB cluster.
+    #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBClusterResult AWS API Documentation
+    #
+    class StopDBClusterResult < Struct.new(
       :db_cluster)
       include Aws::Structure
     end

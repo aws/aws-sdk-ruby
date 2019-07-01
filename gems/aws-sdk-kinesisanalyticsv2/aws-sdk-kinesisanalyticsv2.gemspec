@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-kinesisanalyticsv2/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.56.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.58.0')
   spec.add_dependency('aws-sigv4', '~> 1.1')
 
 end

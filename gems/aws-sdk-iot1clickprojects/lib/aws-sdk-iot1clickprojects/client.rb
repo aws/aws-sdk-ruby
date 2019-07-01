@@ -828,7 +828,7 @@ module Aws::IoT1ClickProjects
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot1clickprojects'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

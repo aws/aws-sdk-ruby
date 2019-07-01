@@ -1930,8 +1930,7 @@ module Aws::Organizations
     # * INPUT\_REQUIRED: You must include a value for all required
     #   parameters.
     #
-    # * INVALID\_ENUM: You specified a value that isn't valid for that
-    #   parameter.
+    # * INVALID\_ENUM: You specified an invalid value.
     #
     # * INVALID\_FULL\_NAME\_TARGET: You specified a full name that contains
     #   invalid characters.
@@ -3730,8 +3729,8 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       }
     #
     # @!attribute [rw] key
@@ -3739,7 +3738,9 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The string value that's associated with the key of the tag.
+    #   The string value that's associated with the key of the tag. You can
+    #   set the value of a tag to an empty string, but you can't set the
+    #   value of a tag to null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Tag AWS API Documentation
@@ -3757,8 +3758,8 @@ module Aws::Organizations
     #         resource_id: "TaggableResourceId", # required
     #         tags: [ # required
     #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #       }
@@ -3768,7 +3769,9 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tag to add to the specified resource.
+    #   The tag to add to the specified resource. Specifying the tag key is
+    #   required. You can set the value of a tag to an empty string, but you
+    #   can't set the value of a tag to null.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TagResourceRequest AWS API Documentation

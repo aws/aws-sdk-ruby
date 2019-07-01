@@ -4052,7 +4052,7 @@ module Aws::EC2
     #   Describes the configuration of Spot Instances in an EC2 Fleet.
     #
     # @option params [Types::OnDemandOptionsRequest] :on_demand_options
-    #   The allocation strategy of On-Demand Instances in an EC2 Fleet.
+    #   Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #
     # @option params [String] :excess_capacity_termination_policy
     #   Indicates whether running instances should be terminated if the total
@@ -4063,8 +4063,7 @@ module Aws::EC2
     #   The configuration for the EC2 Fleet.
     #
     # @option params [required, Types::TargetCapacitySpecificationRequest] :target_capacity_specification
-    #   The `TotalTargetCapacity`, `OnDemandTargetCapacity`,
-    #   `SpotTargetCapacity`, and `DefaultCapacityType` structure.
+    #   The number of units to request.
     #
     # @option params [Boolean] :terminate_instances_with_expiration
     #   Indicates whether running instances should be terminated when the EC2
@@ -4129,12 +4128,14 @@ module Aws::EC2
     #       single_instance_type: false,
     #       single_availability_zone: false,
     #       min_target_capacity: 1,
+    #       max_total_price: "String",
     #     },
     #     on_demand_options: {
     #       allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
     #       single_instance_type: false,
     #       single_availability_zone: false,
     #       min_target_capacity: 1,
+    #       max_total_price: "String",
     #     },
     #     excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
     #     launch_template_configs: [ # required
@@ -12462,10 +12463,12 @@ module Aws::EC2
     #   resp.fleets[0].spot_options.single_instance_type #=> Boolean
     #   resp.fleets[0].spot_options.single_availability_zone #=> Boolean
     #   resp.fleets[0].spot_options.min_target_capacity #=> Integer
+    #   resp.fleets[0].spot_options.max_total_price #=> String
     #   resp.fleets[0].on_demand_options.allocation_strategy #=> String, one of "lowest-price", "prioritized"
     #   resp.fleets[0].on_demand_options.single_instance_type #=> Boolean
     #   resp.fleets[0].on_demand_options.single_availability_zone #=> Boolean
     #   resp.fleets[0].on_demand_options.min_target_capacity #=> Integer
+    #   resp.fleets[0].on_demand_options.max_total_price #=> String
     #   resp.fleets[0].tags #=> Array
     #   resp.fleets[0].tags[0].key #=> String
     #   resp.fleets[0].tags[0].value #=> String
@@ -14204,7 +14207,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the specified instances or all of your instances.
+    # Describes the specified instances or all of AWS account's instances.
     #
     # If you specify one or more instance IDs, Amazon EC2 returns
     # information for those instances. If you do not specify instance IDs,
@@ -18625,6 +18628,8 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_target_capacity #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_max_total_price #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_max_total_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.terminate_instances_with_expiration #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.type #=> String, one of "request", "maintain", "instant"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.valid_from #=> Time
@@ -26123,6 +26128,9 @@ module Aws::EC2
     # @option params [Integer] :target_capacity
     #   The size of the fleet.
     #
+    # @option params [Integer] :on_demand_target_capacity
+    #   The number of On-Demand Instances in the fleet.
+    #
     # @return [Types::ModifySpotFleetRequestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifySpotFleetRequestResponse#return #return} => Boolean
@@ -26164,6 +26172,7 @@ module Aws::EC2
     #     excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #     spot_fleet_request_id: "String", # required
     #     target_capacity: 1,
+    #     on_demand_target_capacity: 1,
     #   })
     #
     # @example Response structure
@@ -29076,6 +29085,8 @@ module Aws::EC2
     #       spot_price: "String",
     #       target_capacity: 1, # required
     #       on_demand_target_capacity: 1,
+    #       on_demand_max_total_price: "String",
+    #       spot_max_total_price: "String",
     #       terminate_instances_with_expiration: false,
     #       type: "request", # accepts request, maintain, instant
     #       valid_from: Time.now,
@@ -31863,7 +31874,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

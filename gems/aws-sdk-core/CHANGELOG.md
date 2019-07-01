@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.58.0 (2019-07-01)
+------------------
+
 * Feature - Support `Aws::AssumeRoleWebIdentityCredentials` provider
 
 3.57.0 (2019-06-28)

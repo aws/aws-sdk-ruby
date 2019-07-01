@@ -4383,7 +4383,9 @@ module Aws::Organizations
     #   The ID of the resource to add a tag to.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tag to add to the specified resource.
+    #   The tag to add to the specified resource. Specifying the tag key is
+    #   required. You can set the value of a tag to an empty string, but you
+    #   can't set the value of a tag to null.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4393,8 +4395,8 @@ module Aws::Organizations
     #     resource_id: "TaggableResourceId", # required
     #     tags: [ # required
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -4648,7 +4650,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

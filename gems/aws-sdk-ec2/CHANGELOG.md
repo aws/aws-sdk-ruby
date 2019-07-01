@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2019-07-01)
+------------------
+
+* Feature - This release adds support for specifying a maximum hourly price for all On-Demand and Spot instances in both Spot Fleet and EC2 Fleet.
+
 1.97.0 (2019-06-28)
 ------------------
 

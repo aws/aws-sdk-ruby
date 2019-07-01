@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-07-01)
+------------------
+
+* Feature - Specifying the tag key and tag value is required for tagging requests.
+
 1.29.0 (2019-06-17)
 ------------------
 

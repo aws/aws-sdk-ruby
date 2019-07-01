@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2019-07-01)
+------------------
+
+* Feature - This release adds support for RDS DB Cluster major version upgrade
+
 1.60.0 (2019-06-20)
 ------------------
 

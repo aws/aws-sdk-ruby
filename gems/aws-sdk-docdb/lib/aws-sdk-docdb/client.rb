@@ -637,7 +637,7 @@ module Aws::DocDB
     #   The port number on which the instances in the DB cluster accept
     #   connections.
     #
-    # @option params [String] :master_username
+    # @option params [required, String] :master_username
     #   The name of the master user for the DB cluster.
     #
     #   Constraints:
@@ -648,9 +648,10 @@ module Aws::DocDB
     #
     #   * Cannot be a reserved word for the chosen database engine.
     #
-    # @option params [String] :master_user_password
+    # @option params [required, String] :master_user_password
     #   The password for the master database user. This password can contain
-    #   any printable ASCII character except "/", """, or "@".
+    #   any printable ASCII character except forward slash (/), double quote
+    #   ("), or the "at" symbol (@).
     #
     #   Constraints: Must contain from 8 to 41 characters.
     #
@@ -725,6 +726,12 @@ module Aws::DocDB
     #   A list of log types that need to be enabled for exporting to Amazon
     #   CloudWatch Logs.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Specifies whether this cluster can be deleted. If `DeletionProtection`
+    #   is enabled, the cluster cannot be deleted unless it is modified and
+    #   `DeletionProtection` is disabled. `DeletionProtection` protects
+    #   clusters from being accidentally deleted.
+    #
     # @return [Types::CreateDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -741,8 +748,8 @@ module Aws::DocDB
     #     engine: "String", # required
     #     engine_version: "String",
     #     port: 1,
-    #     master_username: "String",
-    #     master_user_password: "String",
+    #     master_username: "String", # required
+    #     master_user_password: "String", # required
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
     #     tags: [
@@ -754,6 +761,7 @@ module Aws::DocDB
     #     storage_encrypted: false,
     #     kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -796,6 +804,7 @@ module Aws::DocDB
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -982,7 +991,7 @@ module Aws::DocDB
     #
     # @option params [required, String] :db_instance_class
     #   The compute and memory capacity of the DB instance; for example,
-    #   `db.m4.large`.
+    #   `db.r5.large`.
     #
     # @option params [required, String] :engine
     #   The name of the database engine to be used for this instance.
@@ -1286,6 +1295,7 @@ module Aws::DocDB
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -1944,6 +1954,7 @@ module Aws::DocDB
     #   resp.db_clusters[0].cluster_create_time #=> Time
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_clusters[0].deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -2727,6 +2738,7 @@ module Aws::DocDB
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -2849,9 +2861,9 @@ module Aws::DocDB
     #   Default: The same port as the original DB cluster.
     #
     # @option params [String] :master_user_password
-    #   The new password for the master database user. This password can
-    #   contain any printable ASCII character except "`/`", "`"`", or
-    #   "`@`".
+    #   The password for the master database user. This password can contain
+    #   any printable ASCII character except forward slash (/), double quote
+    #   ("), or the "at" symbol (@).
     #
     #   Constraints: Must contain from 8 to 41 characters.
     #
@@ -2899,6 +2911,12 @@ module Aws::DocDB
     #   applied during the next maintenance window unless the
     #   `ApplyImmediately` parameter is set to `true`.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Specifies whether this cluster can be deleted. If `DeletionProtection`
+    #   is enabled, the cluster cannot be deleted unless it is modified and
+    #   `DeletionProtection` is disabled. `DeletionProtection` protects
+    #   clusters from being accidentally deleted.
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -2921,6 +2939,7 @@ module Aws::DocDB
     #       disable_log_types: ["String"],
     #     },
     #     engine_version: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -2963,6 +2982,7 @@ module Aws::DocDB
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -3131,7 +3151,7 @@ module Aws::DocDB
     #
     # @option params [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance; for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all AWS
+    #   `db.r5.large`. Not all DB instance classes are available in all AWS
     #   Regions.
     #
     #   If you modify the DB instance class, an outage occurs during the
@@ -3639,6 +3659,12 @@ module Aws::DocDB
     #   A list of log types that must be enabled for exporting to Amazon
     #   CloudWatch Logs.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Specifies whether this cluster can be deleted. If `DeletionProtection`
+    #   is enabled, the cluster cannot be deleted unless it is modified and
+    #   `DeletionProtection` is disabled. `DeletionProtection` protects
+    #   clusters from being accidentally deleted.
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -3662,6 +3688,7 @@ module Aws::DocDB
     #     ],
     #     kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -3704,6 +3731,7 @@ module Aws::DocDB
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -3823,6 +3851,12 @@ module Aws::DocDB
     #   A list of log types that must be enabled for exporting to Amazon
     #   CloudWatch Logs.
     #
+    # @option params [Boolean] :deletion_protection
+    #   Specifies whether this cluster can be deleted. If `DeletionProtection`
+    #   is enabled, the cluster cannot be deleted unless it is modified and
+    #   `DeletionProtection` is disabled. `DeletionProtection` protects
+    #   clusters from being accidentally deleted.
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -3845,6 +3879,7 @@ module Aws::DocDB
     #     ],
     #     kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -3887,6 +3922,7 @@ module Aws::DocDB
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -3894,6 +3930,152 @@ module Aws::DocDB
     # @param [Hash] params ({})
     def restore_db_cluster_to_point_in_time(params = {}, options = {})
       req = build_request(:restore_db_cluster_to_point_in_time, params)
+      req.send_request(options)
+    end
+
+    # Restarts the stopped cluster that is specified by
+    # `DBClusterIdentifier`. For more information, see [Stopping and
+    # Starting an Amazon DocumentDB Cluster][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The identifier of the cluster to restart. Example:
+    #   `docdb-2019-05-28-15-24-52`
+    #
+    # @return [Types::StartDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster.availability_zones #=> Array
+    #   resp.db_cluster.availability_zones[0] #=> String
+    #   resp.db_cluster.backup_retention_period #=> Integer
+    #   resp.db_cluster.db_cluster_identifier #=> String
+    #   resp.db_cluster.db_cluster_parameter_group #=> String
+    #   resp.db_cluster.db_subnet_group #=> String
+    #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.percent_progress #=> String
+    #   resp.db_cluster.earliest_restorable_time #=> Time
+    #   resp.db_cluster.endpoint #=> String
+    #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.multi_az #=> Boolean
+    #   resp.db_cluster.engine #=> String
+    #   resp.db_cluster.engine_version #=> String
+    #   resp.db_cluster.latest_restorable_time #=> Time
+    #   resp.db_cluster.port #=> Integer
+    #   resp.db_cluster.master_username #=> String
+    #   resp.db_cluster.preferred_backup_window #=> String
+    #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.db_cluster_members #=> Array
+    #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
+    #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
+    #   resp.db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
+    #   resp.db_cluster.db_cluster_members[0].promotion_tier #=> Integer
+    #   resp.db_cluster.vpc_security_groups #=> Array
+    #   resp.db_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_cluster.vpc_security_groups[0].status #=> String
+    #   resp.db_cluster.hosted_zone_id #=> String
+    #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.kms_key_id #=> String
+    #   resp.db_cluster.db_cluster_resource_id #=> String
+    #   resp.db_cluster.db_cluster_arn #=> String
+    #   resp.db_cluster.associated_roles #=> Array
+    #   resp.db_cluster.associated_roles[0].role_arn #=> String
+    #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBCluster AWS API Documentation
+    #
+    # @overload start_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def start_db_cluster(params = {}, options = {})
+      req = build_request(:start_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Stops the running cluster that is specified by `DBClusterIdentifier`.
+    # The cluster must be in the *available* state. For more information,
+    # see [Stopping and Starting an Amazon DocumentDB Cluster][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The identifier of the cluster to stop. Example:
+    #   `docdb-2019-05-28-15-24-52`
+    #
+    # @return [Types::StopDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster.availability_zones #=> Array
+    #   resp.db_cluster.availability_zones[0] #=> String
+    #   resp.db_cluster.backup_retention_period #=> Integer
+    #   resp.db_cluster.db_cluster_identifier #=> String
+    #   resp.db_cluster.db_cluster_parameter_group #=> String
+    #   resp.db_cluster.db_subnet_group #=> String
+    #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.percent_progress #=> String
+    #   resp.db_cluster.earliest_restorable_time #=> Time
+    #   resp.db_cluster.endpoint #=> String
+    #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.multi_az #=> Boolean
+    #   resp.db_cluster.engine #=> String
+    #   resp.db_cluster.engine_version #=> String
+    #   resp.db_cluster.latest_restorable_time #=> Time
+    #   resp.db_cluster.port #=> Integer
+    #   resp.db_cluster.master_username #=> String
+    #   resp.db_cluster.preferred_backup_window #=> String
+    #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.db_cluster_members #=> Array
+    #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
+    #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
+    #   resp.db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
+    #   resp.db_cluster.db_cluster_members[0].promotion_tier #=> Integer
+    #   resp.db_cluster.vpc_security_groups #=> Array
+    #   resp.db_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_cluster.vpc_security_groups[0].status #=> String
+    #   resp.db_cluster.hosted_zone_id #=> String
+    #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.kms_key_id #=> String
+    #   resp.db_cluster.db_cluster_resource_id #=> String
+    #   resp.db_cluster.db_cluster_arn #=> String
+    #   resp.db_cluster.associated_roles #=> Array
+    #   resp.db_cluster.associated_roles[0].role_arn #=> String
+    #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBCluster AWS API Documentation
+    #
+    # @overload stop_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def stop_db_cluster(params = {}, options = {})
+      req = build_request(:stop_db_cluster, params)
       req.send_request(options)
     end
 
@@ -3910,7 +4092,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

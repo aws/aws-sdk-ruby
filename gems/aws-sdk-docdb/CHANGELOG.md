@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2019-07-01)
+------------------
+
+* Feature - This release provides support for cluster delete protection and the ability to stop and start clusters.
+
 1.8.0 (2019-06-17)
 ------------------
 

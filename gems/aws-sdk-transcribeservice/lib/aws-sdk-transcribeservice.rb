@@ -42,6 +42,6 @@ require_relative 'aws-sdk-transcribeservice/customizations'
 # @service
 module Aws::TranscribeService
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
