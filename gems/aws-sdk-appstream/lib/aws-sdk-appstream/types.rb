@@ -558,7 +558,7 @@ module Aws::AppStream
     #
     #   To prevent users from being disconnected due to inactivity, specify
     #   a value of 0. Otherwise, specify a value between 60 and 3600. The
-    #   default value is 900.
+    #   default value is 0.
     #
     #   <note markdown="1"> If you enable this feature, we recommend that you specify a value
     #   that corresponds exactly to a whole number of minutes (for example,
@@ -958,10 +958,15 @@ module Aws::AppStream
     class CreateUsageReportSubscriptionRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] s3_bucket_name
-    #   The Amazon S3 bucket where generated reports are stored. When a
-    #   usage report subscription is enabled for the first time for an
-    #   account in an AWS Region, an S3 bucket is created. The bucket is
-    #   unique to the AWS account and the Region.
+    #   The Amazon S3 bucket where generated reports are stored.
+    #
+    #   If you enabled on-instance session scripts and Amazon S3 logging for
+    #   your session script configuration, AppStream 2.0 created an S3
+    #   bucket to store the script output. The bucket is unique to your
+    #   account and Region. When you enable usage reporting in this case,
+    #   AppStream 2.0 uses the same bucket to store your usage reports. If
+    #   you haven't already enabled on-instance session scripts, when you
+    #   enable usage reports, AppStream 2.0 creates a new S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -1940,7 +1945,7 @@ module Aws::AppStream
     #
     class ExpireSessionResult < Aws::EmptyStructure; end
 
-    # Describes the parameters for a fleet.
+    # Describes a fleet.
     #
     # @!attribute [rw] arn
     #   The ARN for the fleet.
@@ -2053,7 +2058,7 @@ module Aws::AppStream
     #
     #   To prevent users from being disconnected due to inactivity, specify
     #   a value of 0. Otherwise, specify a value between 60 and 3600. The
-    #   default value is 900.
+    #   default value is 0.
     #
     #   <note markdown="1"> If you enable this feature, we recommend that you specify a value
     #   that corresponds exactly to a whole number of minutes (for example,
@@ -2141,6 +2146,11 @@ module Aws::AppStream
     #   Indicates whether an image builder can be launched from this image.
     #   @return [Boolean]
     #
+    # @!attribute [rw] image_builder_name
+    #   The name of the image builder that was used to create the private
+    #   image. If the image is shared, this value is null.
+    #   @return [String]
+    #
     # @!attribute [rw] platform
     #   The operating system platform of the image.
     #   @return [String]
@@ -2187,6 +2197,7 @@ module Aws::AppStream
       :state,
       :visibility,
       :image_builder_supported,
+      :image_builder_name,
       :platform,
       :description,
       :state_change_reason,
@@ -2253,6 +2264,11 @@ module Aws::AppStream
     #   join the image builder to a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
+    # @!attribute [rw] network_access_configuration
+    #   Describes the network details of the fleet or image builder
+    #   instance.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
     # @!attribute [rw] image_builder_errors
     #   The image builder errors.
     #   @return [Array<Types::ResourceError>]
@@ -2278,6 +2294,7 @@ module Aws::AppStream
       :created_time,
       :enable_default_internet_access,
       :domain_join_info,
+      :network_access_configuration,
       :image_builder_errors,
       :appstream_agent_version)
       include Aws::Structure
@@ -2546,8 +2563,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes the network details of the fleet instance for the streaming
-    # session.
+    # Describes the network details of the fleet or image builder instance.
     #
     # @!attribute [rw] eni_private_ip_address
     #   The private IP address of the elastic network interface that is
@@ -3265,7 +3281,7 @@ module Aws::AppStream
     #
     #   To prevent users from being disconnected due to inactivity, specify
     #   a value of 0. Otherwise, specify a value between 60 and 3600. The
-    #   default value is 900.
+    #   default value is 0.
     #
     #   <note markdown="1"> If you enable this feature, we recommend that you specify a value
     #   that corresponds exactly to a whole number of minutes (for example,
@@ -3460,10 +3476,15 @@ module Aws::AppStream
     # Describes information about the usage report subscription.
     #
     # @!attribute [rw] s3_bucket_name
-    #   The Amazon S3 bucket where generated reports are stored. When a
-    #   usage report subscription is enabled for the first time for an
-    #   account in an AWS Region, an S3 bucket is created. The bucket is
-    #   unique to the AWS account and the Region.
+    #   The Amazon S3 bucket where generated reports are stored.
+    #
+    #   If you enabled on-instance session scripts and Amazon S3 logging for
+    #   your session script configuration, AppStream 2.0 created an S3
+    #   bucket to store the script output. The bucket is unique to your
+    #   account and Region. When you enable usage reporting in this case,
+    #   AppStream 2.0 uses the same bucket to store your usage reports. If
+    #   you haven't already enabled on-instance session scripts, when you
+    #   enable usage reports, AppStream 2.0 creates a new S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -3475,7 +3496,8 @@ module Aws::AppStream
     #   @return [Time]
     #
     # @!attribute [rw] subscription_errors
-    #   The errors that are returned when usage reports can't be generated.
+    #   The errors that were returned if usage reports couldn't be
+    #   generated.
     #   @return [Array<Types::LastReportGenerationExecutionError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UsageReportSubscription AWS API Documentation
@@ -3661,7 +3683,7 @@ module Aws::AppStream
     # @!attribute [rw] subnet_ids
     #   The identifiers of the subnets to which a network interface is
     #   attached from the fleet instance or image builder instance. Fleet
-    #   instances use one or two subnets. Image builder instances use one
+    #   instances use one or more subnets. Image builder instances use one
     #   subnet.
     #   @return [Array<String>]
     #

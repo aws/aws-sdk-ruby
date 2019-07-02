@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2019-07-02)
+------------------
+
+* Feature - Adding ImageBuilderName in Fleet API and Documentation updates for AppStream.
+
 1.32.0 (2019-07-01)
 ------------------
 

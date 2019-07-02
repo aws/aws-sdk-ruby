@@ -274,6 +274,19 @@ module Aws::MediaStore
     #   every region, as long as you don’t have an existing container with
     #   that name.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key:value pairs that you define. These values can be
+    #   anything that you want. Typically, the tag key represents a category
+    #   (such as "environment") and the tag value represents a specific
+    #   value within that category (such as "test," "development," or
+    #   "production"). You can add up to 50 tags to each container. For more
+    #   information about tagging, including naming and usage conventions, see
+    #   [Tagging Resources in MediaStore][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/documentation/mediastore/tagging
+    #
     # @return [Types::CreateContainerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContainerOutput#container #container} => Types::Container
@@ -282,6 +295,12 @@ module Aws::MediaStore
     #
     #   resp = client.create_container({
     #     container_name: "ContainerName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -598,6 +617,36 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # Returns a list of the tags assigned to the specified container.
+    #
+    # @option params [required, String] :resource
+    #   The Amazon Resource Name (ARN) for the container.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource: "ContainerARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Creates an access policy for the specified container to restrict the
     # users and clients that can access it. For information about the data
     # that is included in an access policy, see the [AWS Identity and Access
@@ -778,6 +827,85 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # Adds tags to the specified AWS Elemental MediaStore container. Tags
+    # are key:value pairs that you can associate with AWS resources. For
+    # example, the tag key might be "customer" and the tag value might be
+    # "companyA." You can specify one or more tags to add to each
+    # container. You can add up to 50 tags to each container. For more
+    # information about tagging, including naming and usage conventions, see
+    # [Tagging Resources in MediaStore][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/documentation/mediastore/tagging
+    #
+    # @option params [required, String] :resource
+    #   The Amazon Resource Name (ARN) for the container.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   An array of key:value pairs that you want to add to the container. You
+    #   need to specify only the tags that you want to add or update. For
+    #   example, suppose a container already has two tags (customer:CompanyA
+    #   and priority:High). You want to change the priority tag and also add a
+    #   third tag (type:Contract). For TagResource, you specify the following
+    #   tags: priority:Medium, type:Contract. The result is that your
+    #   container has three tags: customer:CompanyA, priority:Medium, and
+    #   type:Contract.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource: "ContainerARN", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from the specified container. You can specify one or more
+    # tags to remove.
+    #
+    # @option params [required, String] :resource
+    #   The Amazon Resource Name (ARN) for the container.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A comma-separated list of keys for tags that you want to remove from
+    #   the container. For example, if your container has two tags
+    #   (customer:CompanyA and priority:High) and you want to remove one of
+    #   the tags (priority:High), you specify the key for the tag that you
+    #   want to remove (priority).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource: "ContainerARN", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -791,7 +919,7 @@ module Aws::MediaStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastore'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

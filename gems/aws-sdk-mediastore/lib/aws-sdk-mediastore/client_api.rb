@@ -54,6 +54,8 @@ module Aws::MediaStore
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListContainersInput = Shapes::StructureShape.new(name: 'ListContainersInput')
     ListContainersOutput = Shapes::StructureShape.new(name: 'ListContainersOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MaxAgeSeconds = Shapes::IntegerShape.new(name: 'MaxAgeSeconds')
     MethodName = Shapes::StringShape.new(name: 'MethodName')
     Origin = Shapes::StringShape.new(name: 'Origin')
@@ -69,7 +71,16 @@ module Aws::MediaStore
     StartAccessLoggingOutput = Shapes::StructureShape.new(name: 'StartAccessLoggingOutput')
     StopAccessLoggingInput = Shapes::StructureShape.new(name: 'StopAccessLoggingInput')
     StopAccessLoggingOutput = Shapes::StructureShape.new(name: 'StopAccessLoggingOutput')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
 
     AllowedHeaders.member = Shapes::ShapeRef.new(shape: Header)
 
@@ -106,6 +117,7 @@ module Aws::MediaStore
     CorsRule.struct_class = Types::CorsRule
 
     CreateContainerInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    CreateContainerInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateContainerInput.struct_class = Types::CreateContainerInput
 
     CreateContainerOutput.add_member(:container, Shapes::ShapeRef.new(shape: Container, required: true, location_name: "Container"))
@@ -171,6 +183,12 @@ module Aws::MediaStore
     ListContainersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListContainersOutput.struct_class = Types::ListContainersOutput
 
+    ListTagsForResourceInput.add_member(:resource, Shapes::ShapeRef.new(shape: ContainerARN, required: true, location_name: "Resource"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     PolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     PolicyNotFoundException.struct_class = Types::PolicyNotFoundException
 
@@ -201,6 +219,26 @@ module Aws::MediaStore
     StopAccessLoggingInput.struct_class = Types::StopAccessLoggingInput
 
     StopAccessLoggingOutput.struct_class = Types::StopAccessLoggingOutput
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceInput.add_member(:resource, Shapes::ShapeRef.new(shape: ContainerARN, required: true, location_name: "Resource"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    UntagResourceInput.add_member(:resource, Shapes::ShapeRef.new(shape: ContainerARN, required: true, location_name: "Resource"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
 
     # @api private
@@ -333,6 +371,23 @@ module Aws::MediaStore
         o.input = Shapes::ShapeRef.new(shape: ListContainersInput)
         o.output = Shapes::ShapeRef.new(shape: ListContainersOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:put_container_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -385,6 +440,28 @@ module Aws::MediaStore
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopAccessLoggingInput)
         o.output = Shapes::ShapeRef.new(shape: StopAccessLoggingOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)

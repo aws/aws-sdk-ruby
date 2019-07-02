@@ -601,6 +601,7 @@ module Aws::AppStream
     Image.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "State"))
     Image.add_member(:visibility, Shapes::ShapeRef.new(shape: VisibilityType, location_name: "Visibility"))
     Image.add_member(:image_builder_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "ImageBuilderSupported"))
+    Image.add_member(:image_builder_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageBuilderName"))
     Image.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformType, location_name: "Platform"))
     Image.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     Image.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: ImageStateChangeReason, location_name: "StateChangeReason"))
@@ -624,6 +625,7 @@ module Aws::AppStream
     ImageBuilder.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     ImageBuilder.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     ImageBuilder.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
+    ImageBuilder.add_member(:network_access_configuration, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "NetworkAccessConfiguration"))
     ImageBuilder.add_member(:image_builder_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "ImageBuilderErrors"))
     ImageBuilder.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     ImageBuilder.struct_class = Types::ImageBuilder

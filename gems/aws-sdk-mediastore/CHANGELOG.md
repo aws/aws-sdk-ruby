@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-07-02)
+------------------
+
+* Feature - This release adds support for tagging, untagging, and listing tags for AWS Elemental MediaStore containers.
+
 1.17.0 (2019-07-01)
 ------------------
 
