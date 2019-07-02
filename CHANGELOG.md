@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.308 (2019-07-02)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::MediaStore - Updated the API, and documentation for AWS Elemental MediaStore.
