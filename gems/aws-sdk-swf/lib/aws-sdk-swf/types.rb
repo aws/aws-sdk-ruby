@@ -213,7 +213,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -396,7 +396,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] default_task_schedule_to_start_timeout
@@ -535,7 +535,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass CancelTimerDecisionAttributes
     #   data as a hash:
@@ -572,7 +572,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -613,7 +613,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass CancelWorkflowExecutionDecisionAttributes
     #   data as a hash:
@@ -646,7 +646,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -923,7 +923,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass CompleteWorkflowExecutionDecisionAttributes
     #   data as a hash:
@@ -957,7 +957,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -1006,7 +1006,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass ContinueAsNewWorkflowExecutionDecisionAttributes
     #   data as a hash:
@@ -1064,7 +1064,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] task_start_to_close_timeout
@@ -1156,7 +1156,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -1578,7 +1578,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass Decision
     #   data as a hash:
@@ -1865,7 +1865,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] start_to_close_timeout
@@ -2114,8 +2114,10 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Returned if the specified domain already exists. You get this fault
-    # even if the existing domain is in deprecated status.
+    # Returned if the domain already exists. You may get this fault if you
+    # are registering a domain that is either already registered or
+    # deprecated, or if you undeprecate a domain that is currently
+    # registered.
     #
     # @!attribute [rw] message
     #   A description that may help with diagnosing the cause of the fault.
@@ -2188,10 +2190,15 @@ module Aws::SWF
     #   The description of the domain provided through RegisterDomain.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The ARN of the domain.
+    #   @return [String]
+    #
     class DomainInfo < Struct.new(
       :name,
       :status,
-      :description)
+      :description,
+      :arn)
       include Aws::Structure
     end
 
@@ -2315,7 +2322,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass FailWorkflowExecutionDecisionAttributes
     #   data as a hash:
@@ -2354,7 +2361,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -2394,23 +2401,21 @@ module Aws::SWF
     #   @return [Types::WorkflowExecution]
     #
     # @!attribute [rw] next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextPageToken`. Keep all
-    #   other arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned
-    #   per call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #   @return [Integer]
     #
     # @!attribute [rw] reverse_order
@@ -3185,23 +3190,21 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextPageToken`. Keep all
-    #   other arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned
-    #   per call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #   @return [Integer]
     #
     # @!attribute [rw] reverse_order
@@ -3325,23 +3328,21 @@ module Aws::SWF
     #   @return [Types::TagFilter]
     #
     # @!attribute [rw] next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextPageToken`. Keep all
-    #   other arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned
-    #   per call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #   @return [Integer]
     #
     # @!attribute [rw] reverse_order
@@ -3375,10 +3376,13 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextPageToken`. Keep all
-    #   other arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
@@ -3389,13 +3393,8 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned
-    #   per call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #   @return [Integer]
     #
     # @!attribute [rw] reverse_order
@@ -3467,23 +3466,21 @@ module Aws::SWF
     #   @return [Types::TagFilter]
     #
     # @!attribute [rw] next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextPageToken`. Keep all
-    #   other arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned
-    #   per call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #   @return [Integer]
     #
     # @!attribute [rw] reverse_order
@@ -3514,6 +3511,31 @@ module Aws::SWF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the Amazon SWF domain.
+    #   @return [String]
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   An array of tags associated with the domain.
+    #   @return [Array<Types::ResourceTag>]
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListWorkflowTypesInput
     #   data as a hash:
     #
@@ -3540,23 +3562,21 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextPageToken`. Keep all
-    #   other arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned
-    #   per call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #   @return [Integer]
     #
     # @!attribute [rw] reverse_order
@@ -3651,7 +3671,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must not *be* the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] identity
@@ -3692,7 +3712,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must not *be* the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] identity
@@ -3703,10 +3723,13 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextPageToken`. Keep all
-    #   other arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
@@ -3721,10 +3744,8 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #
     #   This is an upper limit only; the actual number of results returned
     #   per call may be fewer than the specified maximum.
@@ -3797,7 +3818,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass RecordMarkerDecisionAttributes
     #   data as a hash:
@@ -3840,7 +3861,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -3886,7 +3907,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must not *be* the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -3900,7 +3921,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must not *be* the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3952,7 +3973,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] default_task_schedule_to_start_timeout
@@ -3995,6 +4016,12 @@ module Aws::SWF
     #         name: "DomainName", # required
     #         description: "Description",
     #         workflow_execution_retention_period_in_days: "DurationInDays", # required
+    #         tags: [
+    #           {
+    #             key: "ResourceTagKey", # required
+    #             value: "ResourceTagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -4004,7 +4031,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must not *be* the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4027,13 +4054,21 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be added when registering a domain.
+    #
+    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   symbols: `_ . : / = + - @`.
+    #   @return [Array<Types::ResourceTag>]
     #
     class RegisterDomainInput < Struct.new(
       :name,
       :description,
-      :workflow_execution_retention_period_in_days)
+      :workflow_execution_retention_period_in_days,
+      :tags)
       include Aws::Structure
     end
 
@@ -4065,7 +4100,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must not *be* the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -4081,7 +4116,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must not *be* the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4132,7 +4167,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] default_child_policy
@@ -4163,14 +4198,14 @@ module Aws::SWF
     #   functions. If you don't specify an IAM role when you start this
     #   workflow type, the default Lambda role is attached to the execution.
     #   For more information, see
-    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   [https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
     #   in the *Amazon SWF Developer Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #   @return [String]
     #
     class RegisterWorkflowTypeInput < Struct.new(
@@ -4211,7 +4246,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass RequestCancelActivityTaskDecisionAttributes
     #   data as a hash:
@@ -4249,7 +4284,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -4292,7 +4327,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass RequestCancelExternalWorkflowExecutionDecisionAttributes
     #   data as a hash:
@@ -4348,7 +4383,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] initiated_event_id
@@ -4442,6 +4477,34 @@ module Aws::SWF
       :domain,
       :workflow_id,
       :run_id)
+      include Aws::Structure
+    end
+
+    # Tags are key-value pairs that can be associated with Amazon SWF state
+    # machines and activities.
+    #
+    # Tags may only contain unicode letters, digits, whitespace, or these
+    # symbols: `_ . : / = + - @`.
+    #
+    # @note When making an API call, you may pass ResourceTag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of a tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a tag.
+    #   @return [String]
+    #
+    class ResourceTag < Struct.new(
+      :key,
+      :value)
       include Aws::Structure
     end
 
@@ -4712,7 +4775,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass ScheduleActivityTaskDecisionAttributes
     #   data as a hash:
@@ -4802,7 +4865,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] schedule_to_start_timeout
@@ -4891,7 +4954,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -4984,7 +5047,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -5027,7 +5090,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass SignalExternalWorkflowExecutionDecisionAttributes
     #   data as a hash:
@@ -5098,7 +5161,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] initiated_event_id
@@ -5254,7 +5317,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass StartChildWorkflowExecutionDecisionAttributes
     #   data as a hash:
@@ -5348,7 +5411,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] task_start_to_close_timeout
@@ -5443,7 +5506,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] workflow_id
@@ -5532,7 +5595,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -5617,7 +5680,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -5655,7 +5718,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @note When making an API call, you may pass StartTimerDecisionAttributes
     #   data as a hash:
@@ -5713,7 +5776,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -5763,12 +5826,12 @@ module Aws::SWF
     #   execution. You may specify the same identifier if a workflow
     #   execution is logically a *restart* of a previous execution. You
     #   cannot have two open workflow executions with the same `workflowId`
-    #   at the same time.
+    #   at the same time within the same domain.
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must not *be* the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] workflow_type
@@ -5790,7 +5853,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must not *be* the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
@@ -5806,7 +5869,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] input
@@ -5896,14 +5959,14 @@ module Aws::SWF
     #   a Lambda task fails. This results in a
     #   `ScheduleLambdaFunctionFailed` history event. For more information,
     #   see
-    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   [https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
     #   in the *Amazon SWF Developer Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #   @return [String]
     #
     class StartWorkflowExecutionInput < Struct.new(
@@ -5934,10 +5997,43 @@ module Aws::SWF
     # @!attribute [rw] tag
     #   Specifies the tag that must be associated with the execution for it
     #   to meet the filter criteria.
+    #
+    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   symbols: `_ . : / = + - @`.
     #   @return [String]
     #
     class TagFilter < Struct.new(
       :tag)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "ResourceTagKey", # required
+    #             value: "ResourceTagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the Amazon SWF domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags to add to a domain.
+    #
+    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   symbols: `_ . : / = + - @`.
+    #   @return [Array<Types::ResourceTag>]
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -6105,10 +6201,20 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Returned if the type already exists in the specified domain. You get
-    # this fault even if the existing type is in deprecated status. You can
-    # specify another version if the intent is to create a new distinct
-    # version of the type.
+    # You've exceeded the number of tags allowed for a domain.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TooManyTagsFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if the type already exists in the specified domain. You may
+    # get this fault if you are registering a type that is either already
+    # registered or deprecated, or if you undeprecate a type that is
+    # currently registered.
     #
     # @!attribute [rw] message
     #   A description that may help with diagnosing the cause of the fault.
@@ -6131,6 +6237,72 @@ module Aws::SWF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UndeprecateActivityTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "DomainName", # required
+    #         activity_type: { # required
+    #           name: "Name", # required
+    #           version: "Version", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The name of the domain of the deprecated activity type.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity_type
+    #   The activity type to undeprecate.
+    #   @return [Types::ActivityType]
+    #
+    class UndeprecateActivityTypeInput < Struct.new(
+      :domain,
+      :activity_type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UndeprecateDomainInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the domain of the deprecated workflow type.
+    #   @return [String]
+    #
+    class UndeprecateDomainInput < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UndeprecateWorkflowTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "DomainName", # required
+    #         workflow_type: { # required
+    #           name: "Name", # required
+    #           version: "Version", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The name of the domain of the deprecated workflow type.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_type
+    #   The name of the domain of the deprecated workflow type.
+    #   @return [Types::WorkflowType]
+    #
+    class UndeprecateWorkflowTypeInput < Struct.new(
+      :domain,
+      :workflow_type)
+      include Aws::Structure
+    end
+
     # Returned when the named resource cannot be found with in the scope of
     # this operation (region or domain). This could happen if the named
     # resource was never created or is no longer available for this
@@ -6142,6 +6314,28 @@ module Aws::SWF
     #
     class UnknownResourceFault < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["ResourceTagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the Amazon SWF domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tags to remove from the Amazon SWF domain.
+    #   @return [Array<String>]
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 
@@ -6288,7 +6482,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] child_policy
@@ -6935,7 +7129,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #   @return [String]
     #
     # @!attribute [rw] default_child_policy
@@ -6966,14 +7160,14 @@ module Aws::SWF
     #   functions. If you don't specify an IAM role when starting this
     #   workflow type, the default Lambda role is attached to the execution.
     #   For more information, see
-    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   [https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
     #   in the *Amazon SWF Developer Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #   @return [String]
     #
     class WorkflowTypeConfiguration < Struct.new(

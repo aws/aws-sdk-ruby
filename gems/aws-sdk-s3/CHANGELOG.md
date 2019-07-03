@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2019-07-03)
+------------------
+
+* Feature - Add S3 x-amz-server-side-encryption-context support.
+
 1.44.0 (2019-07-01)
 ------------------
 

@@ -696,6 +696,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] assigned_private_ip_addresses
+    #   The private IP addresses assigned to the network interface.
+    #   @return [Array<Types::AssignedPrivateIpAddress>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesResult AWS API Documentation
+    #
+    class AssignPrivateIpAddressesResult < Struct.new(
+      :network_interface_id,
+      :assigned_private_ip_addresses)
+      include Aws::Structure
+    end
+
+    # Describes the private IP addresses assigned to a network interface.
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IP address assigned to the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignedPrivateIpAddress AWS API Documentation
+    #
+    class AssignedPrivateIpAddress < Struct.new(
+      :private_ip_address)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateAddressRequest
     #   data as a hash:
     #
@@ -3788,9 +3817,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Specifies whether the destination snapshot should be encrypted. You
-    #   can encrypt a copy of an unencrypted snapshot, but you cannot use it
-    #   to create an unencrypted copy of an encrypted snapshot. For more
+    #   To encrypt a copy of an unencrypted snapshot if encryption by
+    #   default is not enabled, enable encryption using this parameter.
+    #   Otherwise, omit this parameter. Encrypted snapshots are encrypted,
+    #   even if you omit this parameter and encryption by default is not
+    #   enabled. You cannot set this parameter to false. For more
     #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
@@ -6018,9 +6049,6 @@ module Aws::EC2
     #   Indicates the type of network interface. To create an Elastic Fabric
     #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
     #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #   If you are not creating an EFA, specify `interface` or omit this
-    #   parameter.
     #
     #
     #

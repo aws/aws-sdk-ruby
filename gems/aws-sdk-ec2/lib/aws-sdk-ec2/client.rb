@@ -881,7 +881,10 @@ module Aws::EC2
     #   interface. You can't specify this parameter when also specifying
     #   private IP addresses.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::AssignPrivateIpAddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssignPrivateIpAddressesResult#network_interface_id #network_interface_id} => String
+    #   * {Types::AssignPrivateIpAddressesResult#assigned_private_ip_addresses #assigned_private_ip_addresses} => Array&lt;Types::AssignedPrivateIpAddress&gt;
     #
     #
     # @example Example: To assign a specific secondary private IP address to an interface
@@ -914,6 +917,12 @@ module Aws::EC2
     #     private_ip_addresses: ["String"],
     #     secondary_private_ip_address_count: 1,
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_interface_id #=> String
+    #   resp.assigned_private_ip_addresses #=> Array
+    #   resp.assigned_private_ip_addresses[0].private_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddresses AWS API Documentation
     #
@@ -3047,11 +3056,12 @@ module Aws::EC2
     #   default Region in your AWS configuration file.
     #
     # @option params [Boolean] :encrypted
-    #   Specifies whether the destination snapshot should be encrypted. You
-    #   can encrypt a copy of an unencrypted snapshot, but you cannot use it
-    #   to create an unencrypted copy of an encrypted snapshot. For more
-    #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   To encrypt a copy of an unencrypted snapshot if encryption by default
+    #   is not enabled, enable encryption using this parameter. Otherwise,
+    #   omit this parameter. Encrypted snapshots are encrypted, even if you
+    #   omit this parameter and encryption by default is not enabled. You
+    #   cannot set this parameter to false. For more information, see [Amazon
+    #   EBS Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -5709,9 +5719,6 @@ module Aws::EC2
     #   Indicates the type of network interface. To create an Elastic Fabric
     #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
     #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #   If you are not creating an EFA, specify `interface` or omit this
-    #   parameter.
     #
     #
     #
@@ -31874,7 +31881,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -738,9 +738,6 @@ module Aws::EC2
     #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
     #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   If you are not creating an EFA, specify `interface` or omit this
-    #   parameter.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html

@@ -413,6 +413,13 @@ module Aws::RDS
       data[:copy_tags_to_snapshot]
     end
 
+    # Specifies whether the DB cluster is a clone of a DB cluster owned by a
+    # different AWS account.
+    # @return [Boolean]
+    def cross_account_clone
+      data[:cross_account_clone]
+    end
+
     # @!endgroup
 
     # @return [Client]

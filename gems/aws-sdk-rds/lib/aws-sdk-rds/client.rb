@@ -2053,6 +2053,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -4829,6 +4830,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -6505,6 +6507,10 @@ module Aws::RDS
     #   response includes only records beyond the marker, up to the value
     #   specified by `MaxRecords`.
     #
+    # @option params [Boolean] :include_shared
+    #   Optional Boolean parameter that specifies whether the output includes
+    #   information about clusters shared from other AWS accounts.
+    #
     # @return [Types::DBClusterMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBClusterMessage#marker #marker} => String
@@ -6535,6 +6541,7 @@ module Aws::RDS
     #     ],
     #     max_records: 1,
     #     marker: "String",
+    #     include_shared: false,
     #   })
     #
     # @example Response structure
@@ -6610,6 +6617,7 @@ module Aws::RDS
     #   resp.db_clusters[0].activity_stream_kms_key_id #=> String
     #   resp.db_clusters[0].activity_stream_kinesis_stream_name #=> String
     #   resp.db_clusters[0].copy_tags_to_snapshot #=> Boolean
+    #   resp.db_clusters[0].cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -9448,6 +9456,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -9989,6 +9998,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -12062,6 +12072,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -13159,6 +13170,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -13470,6 +13482,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -13802,6 +13815,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -15708,6 +15722,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -16022,6 +16037,7 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kms_key_id #=> String
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -16206,7 +16222,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

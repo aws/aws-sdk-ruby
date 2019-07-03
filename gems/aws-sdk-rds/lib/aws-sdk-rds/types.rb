@@ -4179,6 +4179,11 @@ module Aws::RDS
     #   of the DB cluster.
     #   @return [Boolean]
     #
+    # @!attribute [rw] cross_account_clone
+    #   Specifies whether the DB cluster is a clone of a DB cluster owned by
+    #   a different AWS account.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -4231,7 +4236,8 @@ module Aws::RDS
       :activity_stream_status,
       :activity_stream_kms_key_id,
       :activity_stream_kinesis_stream_name,
-      :copy_tags_to_snapshot)
+      :copy_tags_to_snapshot,
+      :cross_account_clone)
       include Aws::Structure
     end
 
@@ -7203,6 +7209,7 @@ module Aws::RDS
     #         ],
     #         max_records: 1,
     #         marker: "String",
+    #         include_shared: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -7247,13 +7254,19 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #   @return [String]
     #
+    # @!attribute [rw] include_shared
+    #   Optional Boolean parameter that specifies whether the output
+    #   includes information about clusters shared from other AWS accounts.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClustersMessage AWS API Documentation
     #
     class DescribeDBClustersMessage < Struct.new(
       :db_cluster_identifier,
       :filters,
       :max_records,
-      :marker)
+      :marker,
+      :include_shared)
       include Aws::Structure
     end
 

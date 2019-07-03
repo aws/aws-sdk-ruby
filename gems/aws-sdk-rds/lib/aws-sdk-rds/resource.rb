@@ -1668,6 +1668,7 @@ module Aws::RDS
     #         values: ["String"], # required
     #       },
     #     ],
+    #     include_shared: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_cluster_identifier
@@ -1690,6 +1691,9 @@ module Aws::RDS
     #     information about the DB clusters identified by these ARNs.
     #
     #   ^
+    # @option options [Boolean] :include_shared
+    #   Optional Boolean parameter that specifies whether the output includes
+    #   information about clusters shared from other AWS accounts.
     # @return [DBCluster::Collection]
     def db_clusters(options = {})
       batches = Enumerator.new do |y|

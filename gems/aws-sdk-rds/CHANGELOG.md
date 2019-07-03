@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2019-07-03)
+------------------
+
+* Feature - This release supports Cross-Account Cloning for Amazon Aurora clusters.
+
 1.61.0 (2019-07-01)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2019-07-03)
+------------------
+
+* Feature - AssignPrivateIpAddresses response includes two new fields: AssignedPrivateIpAddresses, NetworkInterfaceId
+
 1.98.0 (2019-07-01)
 ------------------
 

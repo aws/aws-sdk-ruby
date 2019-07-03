@@ -993,6 +993,13 @@ module Aws::S3
     #   master encryption key that was used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   If present, specifies the AWS KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded
+    #   UTF-8 string holding JSON with the encryption context key-value
+    #   pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -1009,6 +1016,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_charged)
       include Aws::Structure
     end
@@ -1047,6 +1055,7 @@ module Aws::S3
     #         sse_customer_key: "SSECustomerKey",
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
+    #         ssekms_encryption_context: "SSEKMSEncryptionContext",
     #         copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #         copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #         copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -1191,6 +1200,12 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object
+    #   encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object
     #   (e.g., AES256).
@@ -1267,6 +1282,7 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :copy_source_sse_customer_algorithm,
       :copy_source_sse_customer_key,
       :copy_source_sse_customer_key_md5,
@@ -1452,6 +1468,13 @@ module Aws::S3
     #   master encryption key that was used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   If present, specifies the AWS KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded
+    #   UTF-8 string holding JSON with the encryption context key-value
+    #   pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -1469,6 +1492,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_charged)
       include Aws::Structure
     end
@@ -1500,6 +1524,7 @@ module Aws::S3
     #         sse_customer_key: "SSECustomerKey",
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
+    #         ssekms_encryption_context: "SSEKMSEncryptionContext",
     #         request_payer: "requester", # accepts requester
     #         tagging: "TaggingHeader",
     #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -1607,6 +1632,12 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object
+    #   encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -1658,6 +1689,7 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_payer,
       :tagging,
       :object_lock_mode,
@@ -7753,6 +7785,13 @@ module Aws::S3
     #   master encryption key that was used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   If present, specifies the AWS KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded
+    #   UTF-8 string holding JSON with the encryption context key-value
+    #   pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -7768,6 +7807,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_charged)
       include Aws::Structure
     end
@@ -7802,6 +7842,7 @@ module Aws::S3
     #         sse_customer_key: "SSECustomerKey",
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
+    #         ssekms_encryption_context: "SSEKMSEncryptionContext",
     #         request_payer: "requester", # accepts requester
     #         tagging: "TaggingHeader",
     #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -7926,6 +7967,12 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object
+    #   encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -7980,6 +8027,7 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_payer,
       :tagging,
       :object_lock_mode,
@@ -8491,9 +8539,12 @@ module Aws::S3
     #   * Same object qualify tag based filter criteria specified in
     #     multiple rules
     #
-    #   For more information, see [Cross-Region Replication (CRR)](
-    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    #   For more information, see [Cross-Region Replication (CRR)][1] in the
     #   *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
