@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.310 (2019-07-08)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 2.11.309 (2019-07-03)
