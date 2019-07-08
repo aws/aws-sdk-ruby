@@ -774,15 +774,15 @@ module Aws::CostExplorer
     #
     #   Valid values for a `GetCostForecast` call are the following:
     #
-    #   * AmortizedCost
+    #   * AMORTIZED\_COST
     #
-    #   * BlendedCost
+    #   * BLENDED\_COST
     #
-    #   * NetAmortizedCost
+    #   * NET\_AMORTIZED\_COST
     #
-    #   * NetUnblendedCost
+    #   * NET\_UNBLENDED\_COST
     #
-    #   * UnblendedCost
+    #   * UNBLENDED\_COST
     #
     #
     #
@@ -1576,6 +1576,112 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetUsageForecastRequest
+    #   data as a hash:
+    #
+    #       {
+    #         time_period: { # required
+    #           start: "YearMonthDay", # required
+    #           end: "YearMonthDay", # required
+    #         },
+    #         metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT
+    #         granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
+    #         filter: {
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #         prediction_interval_level: 1,
+    #       }
+    #
+    # @!attribute [rw] time_period
+    #   The start and end dates of the period that you want to retrieve
+    #   usage forecast for. The start date is inclusive, but the end date is
+    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
+    #   `2017-05-01`, then the cost and usage data is retrieved from
+    #   `2017-01-01` up to and including `2017-04-30` but not including
+    #   `2017-05-01`.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] metric
+    #   Which metric Cost Explorer uses to create your forecast.
+    #
+    #   Valid values for a `GetUsageForecast` call are the following:
+    #
+    #   * USAGE\_QUANTITY
+    #
+    #   * NORMALIZED\_USAGE\_AMOUNT
+    #   @return [String]
+    #
+    # @!attribute [rw] granularity
+    #   How granular you want the forecast to be. You can get 3 months of
+    #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #
+    #   The `GetUsageForecast` operation supports only `DAILY` and `MONTHLY`
+    #   granularities.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The filters that you want to use to filter your forecast. Cost
+    #   Explorer API supports all of the Cost Explorer filters.
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] prediction_interval_level
+    #   Cost Explorer always returns the mean forecast as a single point.
+    #   You can request a prediction interval around the mean by specifying
+    #   a confidence level. The higher the confidence level, the more
+    #   confident Cost Explorer is about the actual value falling in the
+    #   prediction interval. Higher confidence levels result in wider
+    #   prediction intervals.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetUsageForecastRequest AWS API Documentation
+    #
+    class GetUsageForecastRequest < Struct.new(
+      :time_period,
+      :metric,
+      :granularity,
+      :filter,
+      :prediction_interval_level)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] total
+    #   How much you're forecasted to use over the forecast period.
+    #   @return [Types::MetricValue]
+    #
+    # @!attribute [rw] forecast_results_by_time
+    #   The forecasts for your query, in order. For `DAILY` forecasts, this
+    #   is a list of days. For `MONTHLY` forecasts, this is a list of
+    #   months.
+    #   @return [Array<Types::ForecastResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetUsageForecastResponse AWS API Documentation
+    #
+    class GetUsageForecastResponse < Struct.new(
+      :total,
+      :forecast_results_by_time)
+      include Aws::Structure
+    end
+
     # One level of grouped data in the results.
     #
     # @!attribute [rw] keys
@@ -2229,6 +2335,20 @@ module Aws::CostExplorer
     class TagValues < Struct.new(
       :key,
       :values)
+      include Aws::Structure
+    end
+
+    # Cost Explorer was unable to identify the usage unit. Provide
+    # `UsageType/UsageTypeGroup` filter selections that contain matching
+    # units, for example: `hours`.(
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UnresolvableUsageUnitException AWS API Documentation
+    #
+    class UnresolvableUsageUnitException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

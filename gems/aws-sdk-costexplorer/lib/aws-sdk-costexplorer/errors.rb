@@ -90,5 +90,21 @@ module Aws::CostExplorer
 
     end
 
+    class UnresolvableUsageUnitException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CostExplorer::Types::UnresolvableUsageUnitException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
   end
 end

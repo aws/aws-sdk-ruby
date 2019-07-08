@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-07-08)
+------------------
+
+* Feature - This release introduces a new operation called GetUsageForecast, which allows you to programmatically access AWS Cost Explorer's forecasting engine on usage data (running hours, data transfer, etc).
+
 1.26.0 (2019-07-01)
 ------------------
 

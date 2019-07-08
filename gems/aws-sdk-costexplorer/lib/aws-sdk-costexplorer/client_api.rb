@@ -60,6 +60,8 @@ module Aws::CostExplorer
     GetReservationUtilizationResponse = Shapes::StructureShape.new(name: 'GetReservationUtilizationResponse')
     GetTagsRequest = Shapes::StructureShape.new(name: 'GetTagsRequest')
     GetTagsResponse = Shapes::StructureShape.new(name: 'GetTagsResponse')
+    GetUsageForecastRequest = Shapes::StructureShape.new(name: 'GetUsageForecastRequest')
+    GetUsageForecastResponse = Shapes::StructureShape.new(name: 'GetUsageForecastResponse')
     Granularity = Shapes::StringShape.new(name: 'Granularity')
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupDefinition = Shapes::StructureShape.new(name: 'GroupDefinition')
@@ -125,6 +127,7 @@ module Aws::CostExplorer
     TotalPotentialRISavings = Shapes::StringShape.new(name: 'TotalPotentialRISavings')
     TotalRunningHours = Shapes::StringShape.new(name: 'TotalRunningHours')
     TotalRunningNormalizedUnits = Shapes::StringShape.new(name: 'TotalRunningNormalizedUnits')
+    UnresolvableUsageUnitException = Shapes::StructureShape.new(name: 'UnresolvableUsageUnitException')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
     UnusedUnits = Shapes::StringShape.new(name: 'UnusedUnits')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
@@ -320,6 +323,17 @@ module Aws::CostExplorer
     GetTagsResponse.add_member(:total_size, Shapes::ShapeRef.new(shape: PageSize, required: true, location_name: "TotalSize"))
     GetTagsResponse.struct_class = Types::GetTagsResponse
 
+    GetUsageForecastRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetUsageForecastRequest.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
+    GetUsageForecastRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, required: true, location_name: "Granularity"))
+    GetUsageForecastRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetUsageForecastRequest.add_member(:prediction_interval_level, Shapes::ShapeRef.new(shape: PredictionIntervalLevel, location_name: "PredictionIntervalLevel"))
+    GetUsageForecastRequest.struct_class = Types::GetUsageForecastRequest
+
+    GetUsageForecastResponse.add_member(:total, Shapes::ShapeRef.new(shape: MetricValue, location_name: "Total"))
+    GetUsageForecastResponse.add_member(:forecast_results_by_time, Shapes::ShapeRef.new(shape: ForecastResultsByTime, location_name: "ForecastResultsByTime"))
+    GetUsageForecastResponse.struct_class = Types::GetUsageForecastResponse
+
     Group.add_member(:keys, Shapes::ShapeRef.new(shape: Keys, location_name: "Keys"))
     Group.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     Group.struct_class = Types::Group
@@ -467,6 +481,9 @@ module Aws::CostExplorer
     TagValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
     TagValues.struct_class = Types::TagValues
 
+    UnresolvableUsageUnitException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnresolvableUsageUnitException.struct_class = Types::UnresolvableUsageUnitException
+
     UtilizationByTime.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
     UtilizationByTime.add_member(:groups, Shapes::ShapeRef.new(shape: ReservationUtilizationGroups, location_name: "Groups"))
     UtilizationByTime.add_member(:total, Shapes::ShapeRef.new(shape: ReservationAggregates, location_name: "Total"))
@@ -576,6 +593,17 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
+      end)
+
+      api.add_operation(:get_usage_forecast, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUsageForecast"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetUsageForecastRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUsageForecastResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnresolvableUsageUnitException)
       end)
     end
 
