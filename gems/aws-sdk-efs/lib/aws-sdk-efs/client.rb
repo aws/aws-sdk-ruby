@@ -1068,7 +1068,7 @@ module Aws::EFS
     # @example Response structure
     #
     #   resp.lifecycle_policies #=> Array
-    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_30_DAYS"
+    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_14_DAYS", "AFTER_30_DAYS", "AFTER_60_DAYS", "AFTER_90_DAYS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeLifecycleConfiguration AWS API Documentation
     #
@@ -1368,19 +1368,14 @@ module Aws::EFS
     # `LifecyclePolicies` array in the request body deletes any existing
     # `LifecycleConfiguration` and disables lifecycle management.
     #
-    # <note markdown="1"> You can enable lifecycle management only for EFS file systems created
-    # after the release of EFS infrequent access.
-    #
-    #  </note>
-    #
     # In the request, specify the following:
     #
-    # * The ID for the file system for which you are creating a lifecycle
-    #   management configuration.
+    # * The ID for the file system for which you are enabling, disabling, or
+    #   modifying lifecycle management.
     #
     # * A `LifecyclePolicies` array of `LifecyclePolicy` objects that define
     #   when files are moved to the IA storage class. The array can contain
-    #   only one `"TransitionToIA": "AFTER_30_DAYS"` `LifecyclePolicy` item.
+    #   only one `LifecyclePolicy` item.
     #
     # This operation requires permissions for the
     # `elasticfilesystem:PutLifecycleConfiguration` operation.
@@ -1434,7 +1429,7 @@ module Aws::EFS
     #     file_system_id: "FileSystemId", # required
     #     lifecycle_policies: [ # required
     #       {
-    #         transition_to_ia: "AFTER_30_DAYS", # accepts AFTER_30_DAYS
+    #         transition_to_ia: "AFTER_14_DAYS", # accepts AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
     #       },
     #     ],
     #   })
@@ -1442,7 +1437,7 @@ module Aws::EFS
     # @example Response structure
     #
     #   resp.lifecycle_policies #=> Array
-    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_30_DAYS"
+    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_14_DAYS", "AFTER_30_DAYS", "AFTER_60_DAYS", "AFTER_90_DAYS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutLifecycleConfiguration AWS API Documentation
     #
@@ -1542,7 +1537,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

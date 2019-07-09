@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-07-09)
+------------------
+
+* Feature - EFS customers can now enable Lifecycle Management for all file systems. You can also now select from one of four Lifecycle Management policies (14, 30, 60 and 90 days), to automatically move files that have not been accessed for the period of time defined by the policy, from the EFS Standard storage class to the EFS Infrequent Access (IA) storage class. EFS IA provides price/performance that is cost-optimized for files that are not accessed every day.
+
 1.19.0 (2019-07-01)
 ------------------
 

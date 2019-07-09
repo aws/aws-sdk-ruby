@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2019-07-09)
+------------------
+
+* Feature - Updated SDK APIs to add tags to WAF Resources: WebACL, Rule, Rulegroup and RateBasedRule. Tags can also be added during creation of these resources.
+
 1.22.0 (2019-07-01)
 ------------------
 

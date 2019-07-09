@@ -566,6 +566,25 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # @option params [required, String] :organization_config_rule_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_organization_config_rule({
+    #     organization_config_rule_name: "StringWithCharLimit64", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConfigRule AWS API Documentation
+    #
+    # @overload delete_organization_config_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_organization_config_rule(params = {}, options = {})
+      req = build_request(:delete_organization_config_rule, params)
+      req.send_request(options)
+    end
+
     # Deletes pending authorization requests for a specified aggregator
     # account in a specified region.
     #
@@ -1357,6 +1376,102 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # @option params [Array<String>] :organization_config_rule_names
+    #
+    # @option params [Integer] :limit
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeOrganizationConfigRuleStatusesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOrganizationConfigRuleStatusesResponse#organization_config_rule_statuses #organization_config_rule_statuses} => Array&lt;Types::OrganizationConfigRuleStatus&gt;
+    #   * {Types::DescribeOrganizationConfigRuleStatusesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_organization_config_rule_statuses({
+    #     organization_config_rule_names: ["StringWithCharLimit64"],
+    #     limit: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_config_rule_statuses #=> Array
+    #   resp.organization_config_rule_statuses[0].organization_config_rule_name #=> String
+    #   resp.organization_config_rule_statuses[0].organization_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.organization_config_rule_statuses[0].error_code #=> String
+    #   resp.organization_config_rule_statuses[0].error_message #=> String
+    #   resp.organization_config_rule_statuses[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRuleStatuses AWS API Documentation
+    #
+    # @overload describe_organization_config_rule_statuses(params = {})
+    # @param [Hash] params ({})
+    def describe_organization_config_rule_statuses(params = {}, options = {})
+      req = build_request(:describe_organization_config_rule_statuses, params)
+      req.send_request(options)
+    end
+
+    # @option params [Array<String>] :organization_config_rule_names
+    #
+    # @option params [Integer] :limit
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeOrganizationConfigRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOrganizationConfigRulesResponse#organization_config_rules #organization_config_rules} => Array&lt;Types::OrganizationConfigRule&gt;
+    #   * {Types::DescribeOrganizationConfigRulesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_organization_config_rules({
+    #     organization_config_rule_names: ["StringWithCharLimit64"],
+    #     limit: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_config_rules #=> Array
+    #   resp.organization_config_rules[0].organization_config_rule_name #=> String
+    #   resp.organization_config_rules[0].organization_config_rule_arn #=> String
+    #   resp.organization_config_rules[0].organization_managed_rule_metadata.description #=> String
+    #   resp.organization_config_rules[0].organization_managed_rule_metadata.rule_identifier #=> String
+    #   resp.organization_config_rules[0].organization_managed_rule_metadata.input_parameters #=> String
+    #   resp.organization_config_rules[0].organization_managed_rule_metadata.maximum_execution_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
+    #   resp.organization_config_rules[0].organization_managed_rule_metadata.resource_types_scope #=> Array
+    #   resp.organization_config_rules[0].organization_managed_rule_metadata.resource_types_scope[0] #=> String
+    #   resp.organization_config_rules[0].organization_managed_rule_metadata.resource_id_scope #=> String
+    #   resp.organization_config_rules[0].organization_managed_rule_metadata.tag_key_scope #=> String
+    #   resp.organization_config_rules[0].organization_managed_rule_metadata.tag_value_scope #=> String
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.description #=> String
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.lambda_function_arn #=> String
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.organization_config_rule_trigger_types #=> Array
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.organization_config_rule_trigger_types[0] #=> String, one of "ConfigurationItemChangeNotification", "OversizedConfigurationItemChangeNotification", "ScheduledNotification"
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.input_parameters #=> String
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.maximum_execution_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.resource_types_scope #=> Array
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.resource_types_scope[0] #=> String
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.resource_id_scope #=> String
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.tag_key_scope #=> String
+    #   resp.organization_config_rules[0].organization_custom_rule_metadata.tag_value_scope #=> String
+    #   resp.organization_config_rules[0].excluded_accounts #=> Array
+    #   resp.organization_config_rules[0].excluded_accounts[0] #=> String
+    #   resp.organization_config_rules[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRules AWS API Documentation
+    #
+    # @overload describe_organization_config_rules(params = {})
+    # @param [Hash] params ({})
+    def describe_organization_config_rules(params = {}, options = {})
+      req = build_request(:describe_organization_config_rules, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all pending aggregation requests.
     #
     # @option params [Integer] :limit
@@ -2114,6 +2229,51 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # @option params [required, String] :organization_config_rule_name
+    #
+    # @option params [Types::StatusDetailFilters] :filters
+    #
+    # @option params [Integer] :limit
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::GetOrganizationConfigRuleDetailedStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOrganizationConfigRuleDetailedStatusResponse#organization_config_rule_detailed_status #organization_config_rule_detailed_status} => Array&lt;Types::MemberAccountStatus&gt;
+    #   * {Types::GetOrganizationConfigRuleDetailedStatusResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_organization_config_rule_detailed_status({
+    #     organization_config_rule_name: "StringWithCharLimit64", # required
+    #     filters: {
+    #       account_id: "AccountId",
+    #       member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
+    #     },
+    #     limit: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_config_rule_detailed_status #=> Array
+    #   resp.organization_config_rule_detailed_status[0].account_id #=> String
+    #   resp.organization_config_rule_detailed_status[0].config_rule_name #=> String
+    #   resp.organization_config_rule_detailed_status[0].member_account_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.organization_config_rule_detailed_status[0].error_code #=> String
+    #   resp.organization_config_rule_detailed_status[0].error_message #=> String
+    #   resp.organization_config_rule_detailed_status[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConfigRuleDetailedStatus AWS API Documentation
+    #
+    # @overload get_organization_config_rule_detailed_status(params = {})
+    # @param [Hash] params ({})
+    def get_organization_config_rule_detailed_status(params = {}, options = {})
+      req = build_request(:get_organization_config_rule_detailed_status, params)
+      req.send_request(options)
+    end
+
     # Returns a list of configuration items for the specified resource. The
     # list contains details about each state of the resource during the
     # specified time interval. If you specified a retention period to retain
@@ -2789,6 +2949,59 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # @option params [required, String] :organization_config_rule_name
+    #
+    # @option params [Types::OrganizationManagedRuleMetadata] :organization_managed_rule_metadata
+    #
+    # @option params [Types::OrganizationCustomRuleMetadata] :organization_custom_rule_metadata
+    #
+    # @option params [Array<String>] :excluded_accounts
+    #
+    # @return [Types::PutOrganizationConfigRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutOrganizationConfigRuleResponse#organization_config_rule_arn #organization_config_rule_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_organization_config_rule({
+    #     organization_config_rule_name: "StringWithCharLimit64", # required
+    #     organization_managed_rule_metadata: {
+    #       description: "StringWithCharLimit256Min0",
+    #       rule_identifier: "StringWithCharLimit256", # required
+    #       input_parameters: "StringWithCharLimit2048",
+    #       maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #       resource_types_scope: ["StringWithCharLimit256"],
+    #       resource_id_scope: "StringWithCharLimit768",
+    #       tag_key_scope: "StringWithCharLimit128",
+    #       tag_value_scope: "StringWithCharLimit256",
+    #     },
+    #     organization_custom_rule_metadata: {
+    #       description: "StringWithCharLimit256Min0",
+    #       lambda_function_arn: "StringWithCharLimit256", # required
+    #       organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # required, accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification, ScheduledNotification
+    #       input_parameters: "StringWithCharLimit2048",
+    #       maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #       resource_types_scope: ["StringWithCharLimit256"],
+    #       resource_id_scope: "StringWithCharLimit768",
+    #       tag_key_scope: "StringWithCharLimit128",
+    #       tag_value_scope: "StringWithCharLimit256",
+    #     },
+    #     excluded_accounts: ["AccountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_config_rule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRule AWS API Documentation
+    #
+    # @overload put_organization_config_rule(params = {})
+    # @param [Hash] params ({})
+    def put_organization_config_rule(params = {}, options = {})
+      req = build_request(:put_organization_config_rule, params)
+      req.send_request(options)
+    end
+
     # Adds or updates the remediation configuration with a specific AWS
     # Config rule with the selected target or action. The API creates the
     # `RemediationConfiguration` object for the AWS Config rule. The AWS
@@ -3183,7 +3396,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

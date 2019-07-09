@@ -1409,6 +1409,23 @@ module Aws::ConfigService
     #
     class DeleteEvaluationResultsResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteOrganizationConfigRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_name: "StringWithCharLimit64", # required
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConfigRuleRequest AWS API Documentation
+    #
+    class DeleteOrganizationConfigRuleRequest < Struct.new(
+      :organization_config_rule_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeletePendingAggregationRequestRequest
     #   data as a hash:
     #
@@ -2198,6 +2215,88 @@ module Aws::ConfigService
     #
     class DescribeDeliveryChannelsResponse < Struct.new(
       :delivery_channels)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOrganizationConfigRuleStatusesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_names: ["StringWithCharLimit64"],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRuleStatusesRequest AWS API Documentation
+    #
+    class DescribeOrganizationConfigRuleStatusesRequest < Struct.new(
+      :organization_config_rule_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rule_statuses
+    #   @return [Array<Types::OrganizationConfigRuleStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRuleStatusesResponse AWS API Documentation
+    #
+    class DescribeOrganizationConfigRuleStatusesResponse < Struct.new(
+      :organization_config_rule_statuses,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOrganizationConfigRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_names: ["StringWithCharLimit64"],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRulesRequest AWS API Documentation
+    #
+    class DescribeOrganizationConfigRulesRequest < Struct.new(
+      :organization_config_rule_names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rules
+    #   @return [Array<Types::OrganizationConfigRule>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRulesResponse AWS API Documentation
+    #
+    class DescribeOrganizationConfigRulesResponse < Struct.new(
+      :organization_config_rules,
+      :next_token)
       include Aws::Structure
     end
 
@@ -3104,6 +3203,55 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetOrganizationConfigRuleDetailedStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_name: "StringWithCharLimit64", # required
+    #         filters: {
+    #           account_id: "AccountId",
+    #           member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
+    #         },
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_name
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   @return [Types::StatusDetailFilters]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConfigRuleDetailedStatusRequest AWS API Documentation
+    #
+    class GetOrganizationConfigRuleDetailedStatusRequest < Struct.new(
+      :organization_config_rule_name,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rule_detailed_status
+    #   @return [Array<Types::MemberAccountStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConfigRuleDetailedStatusResponse AWS API Documentation
+    #
+    class GetOrganizationConfigRuleDetailedStatusResponse < Struct.new(
+      :organization_config_rule_detailed_status,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The input for the GetResourceConfigHistory action.
     #
     # @note When making an API call, you may pass GetResourceConfigHistoryRequest
@@ -3405,6 +3553,36 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] config_rule_name
+    #   @return [String]
+    #
+    # @!attribute [rw] member_account_rule_status
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/MemberAccountStatus AWS API Documentation
+    #
+    class MemberAccountStatus < Struct.new(
+      :account_id,
+      :config_rule_name,
+      :member_account_rule_status,
+      :error_code,
+      :error_message,
+      :last_update_time)
+      include Aws::Structure
+    end
+
     # This object contains regions to set up the aggregator and an IAM role
     # to retrieve organization details.
     #
@@ -3436,6 +3614,171 @@ module Aws::ConfigService
       :role_arn,
       :aws_regions,
       :all_aws_regions)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rule_name
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_config_rule_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_managed_rule_metadata
+    #   @return [Types::OrganizationManagedRuleMetadata]
+    #
+    # @!attribute [rw] organization_custom_rule_metadata
+    #   @return [Types::OrganizationCustomRuleMetadata]
+    #
+    # @!attribute [rw] excluded_accounts
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_update_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRule AWS API Documentation
+    #
+    class OrganizationConfigRule < Struct.new(
+      :organization_config_rule_name,
+      :organization_config_rule_arn,
+      :organization_managed_rule_metadata,
+      :organization_custom_rule_metadata,
+      :excluded_accounts,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rule_name
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_rule_status
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRuleStatus AWS API Documentation
+    #
+    class OrganizationConfigRuleStatus < Struct.new(
+      :organization_config_rule_name,
+      :organization_rule_status,
+      :error_code,
+      :error_message,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass OrganizationCustomRuleMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         description: "StringWithCharLimit256Min0",
+    #         lambda_function_arn: "StringWithCharLimit256", # required
+    #         organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # required, accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification, ScheduledNotification
+    #         input_parameters: "StringWithCharLimit2048",
+    #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #         resource_types_scope: ["StringWithCharLimit256"],
+    #         resource_id_scope: "StringWithCharLimit768",
+    #         tag_key_scope: "StringWithCharLimit128",
+    #         tag_value_scope: "StringWithCharLimit256",
+    #       }
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_config_rule_trigger_types
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] input_parameters
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_execution_frequency
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_types_scope
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_id_scope
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key_scope
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value_scope
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationCustomRuleMetadata AWS API Documentation
+    #
+    class OrganizationCustomRuleMetadata < Struct.new(
+      :description,
+      :lambda_function_arn,
+      :organization_config_rule_trigger_types,
+      :input_parameters,
+      :maximum_execution_frequency,
+      :resource_types_scope,
+      :resource_id_scope,
+      :tag_key_scope,
+      :tag_value_scope)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass OrganizationManagedRuleMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         description: "StringWithCharLimit256Min0",
+    #         rule_identifier: "StringWithCharLimit256", # required
+    #         input_parameters: "StringWithCharLimit2048",
+    #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #         resource_types_scope: ["StringWithCharLimit256"],
+    #         resource_id_scope: "StringWithCharLimit768",
+    #         tag_key_scope: "StringWithCharLimit128",
+    #         tag_value_scope: "StringWithCharLimit256",
+    #       }
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] input_parameters
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_execution_frequency
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_types_scope
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_id_scope
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key_scope
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value_scope
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationManagedRuleMetadata AWS API Documentation
+    #
+    class OrganizationManagedRuleMetadata < Struct.new(
+      :description,
+      :rule_identifier,
+      :input_parameters,
+      :maximum_execution_frequency,
+      :resource_types_scope,
+      :resource_id_scope,
+      :tag_key_scope,
+      :tag_value_scope)
       include Aws::Structure
     end
 
@@ -3736,6 +4079,67 @@ module Aws::ConfigService
     #
     class PutEvaluationsResponse < Struct.new(
       :failed_evaluations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutOrganizationConfigRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_config_rule_name: "StringWithCharLimit64", # required
+    #         organization_managed_rule_metadata: {
+    #           description: "StringWithCharLimit256Min0",
+    #           rule_identifier: "StringWithCharLimit256", # required
+    #           input_parameters: "StringWithCharLimit2048",
+    #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #           resource_types_scope: ["StringWithCharLimit256"],
+    #           resource_id_scope: "StringWithCharLimit768",
+    #           tag_key_scope: "StringWithCharLimit128",
+    #           tag_value_scope: "StringWithCharLimit256",
+    #         },
+    #         organization_custom_rule_metadata: {
+    #           description: "StringWithCharLimit256Min0",
+    #           lambda_function_arn: "StringWithCharLimit256", # required
+    #           organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # required, accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification, ScheduledNotification
+    #           input_parameters: "StringWithCharLimit2048",
+    #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
+    #           resource_types_scope: ["StringWithCharLimit256"],
+    #           resource_id_scope: "StringWithCharLimit768",
+    #           tag_key_scope: "StringWithCharLimit128",
+    #           tag_value_scope: "StringWithCharLimit256",
+    #         },
+    #         excluded_accounts: ["AccountId"],
+    #       }
+    #
+    # @!attribute [rw] organization_config_rule_name
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_managed_rule_metadata
+    #   @return [Types::OrganizationManagedRuleMetadata]
+    #
+    # @!attribute [rw] organization_custom_rule_metadata
+    #   @return [Types::OrganizationCustomRuleMetadata]
+    #
+    # @!attribute [rw] excluded_accounts
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleRequest AWS API Documentation
+    #
+    class PutOrganizationConfigRuleRequest < Struct.new(
+      :organization_config_rule_name,
+      :organization_managed_rule_metadata,
+      :organization_custom_rule_metadata,
+      :excluded_accounts)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_config_rule_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleResponse AWS API Documentation
+    #
+    class PutOrganizationConfigRuleResponse < Struct.new(
+      :organization_config_rule_arn)
       include Aws::Structure
     end
 
@@ -4665,6 +5069,28 @@ module Aws::ConfigService
     #
     class StaticValue < Struct.new(
       :values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StatusDetailFilters
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId",
+    #         member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] member_account_rule_status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StatusDetailFilters AWS API Documentation
+    #
+    class StatusDetailFilters < Struct.new(
+      :account_id,
+      :member_account_rule_status)
       include Aws::Structure
     end
 

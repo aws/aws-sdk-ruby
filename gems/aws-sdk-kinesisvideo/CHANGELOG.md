@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-07-09)
+------------------
+
+* Feature - Add "GET_DASH_STREAMING_SESSION_URL" as an API name to the GetDataEndpoint API.
+
 1.17.0 (2019-07-01)
 ------------------
 

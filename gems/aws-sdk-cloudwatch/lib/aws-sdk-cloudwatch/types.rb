@@ -41,6 +41,90 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # An anomaly detection model associated with a particular CloudWatch
+    # metric athresnd statistic. You can use the model to display a band of
+    # expected normal values when the metric is graphed.
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the metric associated with the anomaly detection
+    #   model.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric associated with the anomaly detection model.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   The metric dimensions associated with the anomaly detection model.
+    #   @return [Array<Types::Dimension>]
+    #
+    # @!attribute [rw] stat
+    #   The statistic associated with the anomaly detection model.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration specifies details about how the anomaly detection
+    #   model is to be trained, including time ranges to exclude from use
+    #   for training the model, and the time zone to use for the metric.
+    #   @return [Types::AnomalyDetectorConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetector AWS API Documentation
+    #
+    class AnomalyDetector < Struct.new(
+      :namespace,
+      :metric_name,
+      :dimensions,
+      :stat,
+      :configuration)
+      include Aws::Structure
+    end
+
+    # The configuration specifies details about how the anomaly detection
+    # model is to be trained, including time ranges to exclude from use for
+    # training the model and the time zone to use for the metric.
+    #
+    # @note When making an API call, you may pass AnomalyDetectorConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         excluded_time_ranges: [
+    #           {
+    #             start_time: Time.now, # required
+    #             end_time: Time.now, # required
+    #           },
+    #         ],
+    #         metric_timezone: "AnomalyDetectorMetricTimezone",
+    #       }
+    #
+    # @!attribute [rw] excluded_time_ranges
+    #   An array of time ranges to exclude from use when the anomaly
+    #   detection model is trained. Use this to make sure that events that
+    #   could cause unusual values for the metric, such as deployments,
+    #   aren't used when CloudWatch creates the model.
+    #   @return [Array<Types::Range>]
+    #
+    # @!attribute [rw] metric_timezone
+    #   The time zone to use for the metric. This is useful to enable the
+    #   model to automatically account for daylight savings time changes if
+    #   the metric is sensitive to such time changes.
+    #
+    #   To specify a time zone, use the name of the time zone as specified
+    #   in the standard tz database. For more information, see [tz
+    #   database][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Tz_database
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetectorConfiguration AWS API Documentation
+    #
+    class AnomalyDetectorConfiguration < Struct.new(
+      :excluded_time_ranges,
+      :metric_timezone)
+      include Aws::Structure
+    end
+
     # Represents a specific dashboard.
     #
     # @!attribute [rw] dashboard_name
@@ -184,6 +268,53 @@ module Aws::CloudWatch
       :alarm_names)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteAnomalyDetectorInput
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_name: "MetricName", # required
+    #         dimensions: [
+    #           {
+    #             name: "DimensionName", # required
+    #             value: "DimensionValue", # required
+    #           },
+    #         ],
+    #         stat: "Stat", # required
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespace associated with the anomaly detection model to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The metric name associated with the anomaly detection model to
+    #   delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   The metric dimensions associated with the anomaly detection model to
+    #   delete.
+    #   @return [Array<Types::Dimension>]
+    #
+    # @!attribute [rw] stat
+    #   The statistic associated with the anomaly detection model to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAnomalyDetectorInput AWS API Documentation
+    #
+    class DeleteAnomalyDetectorInput < Struct.new(
+      :namespace,
+      :metric_name,
+      :dimensions,
+      :stat)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAnomalyDetectorOutput AWS API Documentation
+    #
+    class DeleteAnomalyDetectorOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteDashboardsInput
     #   data as a hash:
@@ -410,6 +541,82 @@ module Aws::CloudWatch
     #
     class DescribeAlarmsOutput < Struct.new(
       :metric_alarms,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAnomalyDetectorsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         namespace: "Namespace",
+    #         metric_name: "MetricName",
+    #         dimensions: [
+    #           {
+    #             name: "DimensionName", # required
+    #             value: "DimensionValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Use the token returned by the previous operation to request the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in one operation. The
+    #   maximum value you can specify is 10.
+    #
+    #   To retrieve the remaining results, make another call with the
+    #   returned `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] namespace
+    #   Limits the results to only the anomaly detection models that are
+    #   associated with the specified namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   Limits the results to only the anomaly detection models that are
+    #   associated with the specified metric name. If there are multiple
+    #   metrics with this name in different namespaces that have anomaly
+    #   detection models, they're all returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   Limits the results to only the anomaly detection models that are
+    #   associated with the specified metric dimensions. If there are
+    #   multiple metrics that have these dimensions and have anomaly
+    #   detection models associated, they're all returned.
+    #   @return [Array<Types::Dimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAnomalyDetectorsInput AWS API Documentation
+    #
+    class DescribeAnomalyDetectorsInput < Struct.new(
+      :next_token,
+      :max_results,
+      :namespace,
+      :metric_name,
+      :dimensions)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomaly_detectors
+    #   The list of anomaly detection models returned by the operation.
+    #   @return [Array<Types::AnomalyDetector>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that you can use in a subsequent operation to retrieve the
+    #   next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAnomalyDetectorsOutput AWS API Documentation
+    #
+    class DescribeAnomalyDetectorsOutput < Struct.new(
+      :anomaly_detectors,
       :next_token)
       include Aws::Structure
     end
@@ -1232,7 +1439,8 @@ module Aws::CloudWatch
     #   @return [Time]
     #
     # @!attribute [rw] metric_name
-    #   The name of the metric associated with the alarm.
+    #   The name of the metric associated with the alarm, if this is an
+    #   alarm based on a single metric.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1295,7 +1503,18 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] metrics
+    #   An array of MetricDataQuery structures, used in an alarm based on a
+    #   metric math expression. Each structure either retrieves a metric or
+    #   performs a math expression. One item in the Metrics array is the
+    #   math expression that the alarm watches. This expression by
+    #   designated by having `ReturnValue` set to true.
     #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @!attribute [rw] threshold_metric_id
+    #   In an alarm based on an anomaly detection model, this is the ID of
+    #   the `ANOMALY_DETECTION_BAND` function used as the threshold for the
+    #   alarm.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricAlarm AWS API Documentation
     #
@@ -1325,7 +1544,8 @@ module Aws::CloudWatch
       :comparison_operator,
       :treat_missing_data,
       :evaluate_low_sample_count_percentile,
-      :metrics)
+      :metrics,
+      :threshold_metric_id)
       include Aws::Structure
     end
 
@@ -1588,7 +1808,9 @@ module Aws::CloudWatch
     #   @return [Array<Float>]
     #
     # @!attribute [rw] unit
-    #   The unit of the metric.
+    #   When you are using a `Put` operation, this defines what unit you
+    #   want to use when storing the metric. In a `Get` operation, this
+    #   displays the unit that is used for the metric.
     #   @return [String]
     #
     # @!attribute [rw] storage_resolution
@@ -1661,7 +1883,9 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] unit
-    #   The unit to use for the returned data points.
+    #   When you are using a `Put` operation, this defines what unit you
+    #   want to use when storing the metric. In a `Get` operation, this
+    #   displays the unit that is used for the metric.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStat AWS API Documentation
@@ -1685,6 +1909,74 @@ module Aws::CloudWatch
       :message)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutAnomalyDetectorInput
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_name: "MetricName", # required
+    #         dimensions: [
+    #           {
+    #             name: "DimensionName", # required
+    #             value: "DimensionValue", # required
+    #           },
+    #         ],
+    #         stat: "Stat", # required
+    #         configuration: {
+    #           excluded_time_ranges: [
+    #             {
+    #               start_time: Time.now, # required
+    #               end_time: Time.now, # required
+    #             },
+    #           ],
+    #           metric_timezone: "AnomalyDetectorMetricTimezone",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the metric to create the anomaly detection model
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric to create the anomaly detection model for.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   The metric dimensions to create the anomaly detection model for.
+    #   @return [Array<Types::Dimension>]
+    #
+    # @!attribute [rw] stat
+    #   The statistic to use for the metric and the anomaly detection model.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration specifies details about how the anomaly detection
+    #   model is to be trained, including time ranges to exclude when
+    #   training and updating the model. You can specify as many as 10 time
+    #   ranges.
+    #
+    #   The configuration can also include the time zone to use for the
+    #   metric.
+    #
+    #   You can in
+    #   @return [Types::AnomalyDetectorConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAnomalyDetectorInput AWS API Documentation
+    #
+    class PutAnomalyDetectorInput < Struct.new(
+      :namespace,
+      :metric_name,
+      :dimensions,
+      :stat,
+      :configuration)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAnomalyDetectorOutput AWS API Documentation
+    #
+    class PutAnomalyDetectorOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutDashboardInput
     #   data as a hash:
@@ -1762,8 +2054,8 @@ module Aws::CloudWatch
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #         evaluation_periods: 1, # required
     #         datapoints_to_alarm: 1,
-    #         threshold: 1.0, # required
-    #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #         threshold: 1.0,
+    #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold, LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, GreaterThanUpperThreshold
     #         treat_missing_data: "TreatMissingData",
     #         evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
     #         metrics: [
@@ -1795,6 +2087,7 @@ module Aws::CloudWatch
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         threshold_metric_id: "MetricId",
     #       }
     #
     # @!attribute [rw] alarm_name
@@ -1975,6 +2268,10 @@ module Aws::CloudWatch
     #   The arithmetic operation to use when comparing the specified
     #   statistic and threshold. The specified statistic value is used as
     #   the first operand.
+    #
+    #   The values `LessThanLowerOrGreaterThanUpperThreshold`,
+    #   `LessThanLowerThreshold`, and `GreaterThanUpperThreshold` are used
+    #   only for alarms based on anomaly detection models.
     #   @return [String]
     #
     # @!attribute [rw] treat_missing_data
@@ -2034,6 +2331,17 @@ module Aws::CloudWatch
     #   values.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] threshold_metric_id
+    #   If this is an alarm based on an anomaly detection model, make this
+    #   value match the ID of the `ANOMALY_DETECTION_BAND` function.
+    #
+    #   For an example of how to use this parameter, see the **Anomaly
+    #   Detection Model Alarm** example on this page.
+    #
+    #   If your alarm uses this parameter, it cannot have Auto Scaling
+    #   actions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmInput AWS API Documentation
     #
     class PutMetricAlarmInput < Struct.new(
@@ -2057,7 +2365,8 @@ module Aws::CloudWatch
       :treat_missing_data,
       :evaluate_low_sample_count_percentile,
       :metrics,
-      :tags)
+      :tags,
+      :threshold_metric_id)
       include Aws::Structure
     end
 
@@ -2109,6 +2418,35 @@ module Aws::CloudWatch
     class PutMetricDataInput < Struct.new(
       :namespace,
       :metric_data)
+      include Aws::Structure
+    end
+
+    # Specifies one range of days or times to exclude from use for training
+    # an anomaly detection model.
+    #
+    # @note When making an API call, you may pass Range
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the range to exclude. The format is
+    #   `yyyy-MM-dd'T'HH:mm:ss`. For example, `2019-07-01T23:59:59`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the range to exclude. The format is
+    #   `yyyy-MM-dd'T'HH:mm:ss`. For example, `2019-07-01T23:59:59`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Range AWS API Documentation
+    #
+    class Range < Struct.new(
+      :start_time,
+      :end_time)
       include Aws::Structure
     end
 

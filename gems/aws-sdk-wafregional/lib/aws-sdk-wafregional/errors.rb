@@ -10,6 +10,22 @@ module Aws::WAFRegional
 
     extend Aws::Errors::DynamicErrors
 
+    class WAFBadRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFRegional::Types::WAFBadRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class WAFDisallowedNameException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -233,6 +249,38 @@ module Aws::WAFRegional
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::WAFRegional::Types::WAFSubscriptionNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class WAFTagOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFRegional::Types::WAFTagOperationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class WAFTagOperationInternalErrorException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFRegional::Types::WAFTagOperationInternalErrorException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

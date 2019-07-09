@@ -20,6 +20,7 @@ module Aws::GameLift
     ArnStringModel = Shapes::StringShape.new(name: 'ArnStringModel')
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
     AwsCredentials = Shapes::StructureShape.new(name: 'AwsCredentials')
+    BackfillMode = Shapes::StringShape.new(name: 'BackfillMode')
     BooleanModel = Shapes::BooleanShape.new(name: 'BooleanModel')
     Build = Shapes::StructureShape.new(name: 'Build')
     BuildId = Shapes::StringShape.new(name: 'BuildId')
@@ -434,6 +435,7 @@ module Aws::GameLift
     CreateMatchmakingConfigurationInput.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: CustomEventData, location_name: "CustomEventData"))
     CreateMatchmakingConfigurationInput.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     CreateMatchmakingConfigurationInput.add_member(:game_session_data, Shapes::ShapeRef.new(shape: GameSessionData, location_name: "GameSessionData"))
+    CreateMatchmakingConfigurationInput.add_member(:backfill_mode, Shapes::ShapeRef.new(shape: BackfillMode, location_name: "BackfillMode"))
     CreateMatchmakingConfigurationInput.struct_class = Types::CreateMatchmakingConfigurationInput
 
     CreateMatchmakingConfigurationOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: MatchmakingConfiguration, location_name: "Configuration"))
@@ -984,6 +986,7 @@ module Aws::GameLift
     MatchmakingConfiguration.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     MatchmakingConfiguration.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     MatchmakingConfiguration.add_member(:game_session_data, Shapes::ShapeRef.new(shape: GameSessionData, location_name: "GameSessionData"))
+    MatchmakingConfiguration.add_member(:backfill_mode, Shapes::ShapeRef.new(shape: BackfillMode, location_name: "BackfillMode"))
     MatchmakingConfiguration.struct_class = Types::MatchmakingConfiguration
 
     MatchmakingConfigurationList.member = Shapes::ShapeRef.new(shape: MatchmakingConfiguration)
@@ -1307,6 +1310,7 @@ module Aws::GameLift
     UpdateMatchmakingConfigurationInput.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: CustomEventData, location_name: "CustomEventData"))
     UpdateMatchmakingConfigurationInput.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     UpdateMatchmakingConfigurationInput.add_member(:game_session_data, Shapes::ShapeRef.new(shape: GameSessionData, location_name: "GameSessionData"))
+    UpdateMatchmakingConfigurationInput.add_member(:backfill_mode, Shapes::ShapeRef.new(shape: BackfillMode, location_name: "BackfillMode"))
     UpdateMatchmakingConfigurationInput.struct_class = Types::UpdateMatchmakingConfigurationInput
 
     UpdateMatchmakingConfigurationOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: MatchmakingConfiguration, location_name: "Configuration"))

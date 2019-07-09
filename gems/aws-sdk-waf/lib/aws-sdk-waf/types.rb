@@ -633,6 +633,12 @@ module Aws::WAF
     #         rate_key: "IP", # required, accepts IP
     #         rate_limit: 1, # required
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -671,6 +677,9 @@ module Aws::WAF
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRateBasedRuleRequest AWS API Documentation
     #
     class CreateRateBasedRuleRequest < Struct.new(
@@ -678,7 +687,8 @@ module Aws::WAF
       :metric_name,
       :rate_key,
       :rate_limit,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -795,6 +805,12 @@ module Aws::WAF
     #         name: "ResourceName", # required
     #         metric_name: "MetricName", # required
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -815,12 +831,16 @@ module Aws::WAF
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroupRequest AWS API Documentation
     #
     class CreateRuleGroupRequest < Struct.new(
       :name,
       :metric_name,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -849,6 +869,12 @@ module Aws::WAF
     #         name: "ResourceName", # required
     #         metric_name: "MetricName", # required
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -869,12 +895,16 @@ module Aws::WAF
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleRequest AWS API Documentation
     #
     class CreateRuleRequest < Struct.new(
       :name,
       :metric_name,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -999,6 +1029,12 @@ module Aws::WAF
     #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #         },
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1025,13 +1061,17 @@ module Aws::WAF
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACLRequest AWS API Documentation
     #
     class CreateWebACLRequest < Struct.new(
       :name,
       :metric_name,
       :default_action,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -3466,6 +3506,47 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :next_marker,
+      :limit,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_info_for_resource
+    #   @return [Types::TagInfoForResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :next_marker,
+      :tag_info_for_resource)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListWebACLsRequest
     #   data as a hash:
     #
@@ -4922,6 +5003,73 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_list
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/TagInfoForResource AWS API Documentation
+    #
+    class TagInfoForResource < Struct.new(
+      :resource_arn,
+      :tag_list)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # In a GetSampledRequests request, the `StartTime` and `EndTime` objects
     # specify the time range for which you want AWS WAF to return a sample
     # of web requests.
@@ -4966,6 +5114,32 @@ module Aws::WAF
       :end_time)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateByteMatchSetRequest
     #   data as a hash:
@@ -5763,6 +5937,16 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFBadRequestException AWS API Documentation
+    #
+    class WAFBadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The name specified is invalid.
     #
     # @!attribute [rw] message
@@ -6049,6 +6233,26 @@ module Aws::WAF
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFSubscriptionNotFoundException AWS API Documentation
     #
     class WAFSubscriptionNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFTagOperationException AWS API Documentation
+    #
+    class WAFTagOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFTagOperationInternalErrorException AWS API Documentation
+    #
+    class WAFTagOperationInternalErrorException < Struct.new(
       :message)
       include Aws::Structure
     end

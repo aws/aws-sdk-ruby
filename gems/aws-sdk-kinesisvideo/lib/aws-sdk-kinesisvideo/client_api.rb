@@ -281,6 +281,12 @@ module Aws::KinesisVideo
         o.output = Shapes::ShapeRef.new(shape: ListStreamsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_stream, Seahorse::Model::Operation.new.tap do |o|

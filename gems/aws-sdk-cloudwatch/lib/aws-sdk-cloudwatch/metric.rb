@@ -316,8 +316,8 @@ module Aws::CloudWatch
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #     evaluation_periods: 1, # required
     #     datapoints_to_alarm: 1,
-    #     threshold: 1.0, # required
-    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #     threshold: 1.0,
+    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold, LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, GreaterThanUpperThreshold
     #     treat_missing_data: "TreatMissingData",
     #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
     #     metrics: [
@@ -349,6 +349,7 @@ module Aws::CloudWatch
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     threshold_metric_id: "MetricId",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :alarm_name
@@ -481,12 +482,16 @@ module Aws::CloudWatch
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
-    # @option options [required, Float] :threshold
+    # @option options [Float] :threshold
     #   The value against which the specified statistic is compared.
     # @option options [required, String] :comparison_operator
     #   The arithmetic operation to use when comparing the specified statistic
     #   and threshold. The specified statistic value is used as the first
     #   operand.
+    #
+    #   The values `LessThanLowerOrGreaterThanUpperThreshold`,
+    #   `LessThanLowerThreshold`, and `GreaterThanUpperThreshold` are used
+    #   only for alarms based on anomaly detection models.
     # @option options [String] :treat_missing_data
     #   Sets how this alarm is to handle missing data points. If
     #   `TreatMissingData` is omitted, the default behavior of `missing` is
@@ -535,6 +540,15 @@ module Aws::CloudWatch
     #   Tags can help you organize and categorize your resources. You can also
     #   use them to scope user permissions, by granting a user permission to
     #   access or change only resources with certain tag values.
+    # @option options [String] :threshold_metric_id
+    #   If this is an alarm based on an anomaly detection model, make this
+    #   value match the ID of the `ANOMALY_DETECTION_BAND` function.
+    #
+    #   For an example of how to use this parameter, see the **Anomaly
+    #   Detection Model Alarm** example on this page.
+    #
+    #   If your alarm uses this parameter, it cannot have Auto Scaling
+    #   actions.
     # @return [Alarm]
     def put_alarm(options = {})
       options = options.merge(

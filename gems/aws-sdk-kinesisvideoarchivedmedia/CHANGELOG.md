@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2019-07-09)
+------------------
+
+* Feature - Adds support for the GetDASHStreamingSessionURL API. Also adds support for the Live Replay playback mode of the GetHLSStreamingSessionURL API.
+
 1.16.0 (2019-07-01)
 ------------------
 

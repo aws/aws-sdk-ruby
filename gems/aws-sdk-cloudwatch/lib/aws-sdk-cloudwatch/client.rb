@@ -277,6 +277,46 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Deletes the specified anomaly detection model from your account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace associated with the anomaly detection model to delete.
+    #
+    # @option params [required, String] :metric_name
+    #   The metric name associated with the anomaly detection model to delete.
+    #
+    # @option params [Array<Types::Dimension>] :dimensions
+    #   The metric dimensions associated with the anomaly detection model to
+    #   delete.
+    #
+    # @option params [required, String] :stat
+    #   The statistic associated with the anomaly detection model to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_anomaly_detector({
+    #     namespace: "Namespace", # required
+    #     metric_name: "MetricName", # required
+    #     dimensions: [
+    #       {
+    #         name: "DimensionName", # required
+    #         value: "DimensionValue", # required
+    #       },
+    #     ],
+    #     stat: "Stat", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAnomalyDetector AWS API Documentation
+    #
+    # @overload delete_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def delete_anomaly_detector(params = {}, options = {})
+      req = build_request(:delete_anomaly_detector, params)
+      req.send_request(options)
+    end
+
     # Deletes all dashboards that you specify. You may specify up to 100
     # dashboards to delete. If there is an error during this call, no
     # dashboards are deleted.
@@ -432,7 +472,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].evaluation_periods #=> Integer
     #   resp.metric_alarms[0].datapoints_to_alarm #=> Integer
     #   resp.metric_alarms[0].threshold #=> Float
-    #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+    #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold", "LessThanLowerOrGreaterThanUpperThreshold", "LessThanLowerThreshold", "GreaterThanUpperThreshold"
     #   resp.metric_alarms[0].treat_missing_data #=> String
     #   resp.metric_alarms[0].evaluate_low_sample_count_percentile #=> String
     #   resp.metric_alarms[0].metrics #=> Array
@@ -448,6 +488,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].expression #=> String
     #   resp.metric_alarms[0].metrics[0].label #=> String
     #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
+    #   resp.metric_alarms[0].threshold_metric_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms AWS API Documentation
@@ -538,7 +579,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].evaluation_periods #=> Integer
     #   resp.metric_alarms[0].datapoints_to_alarm #=> Integer
     #   resp.metric_alarms[0].threshold #=> Float
-    #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+    #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold", "LessThanLowerOrGreaterThanUpperThreshold", "LessThanLowerThreshold", "GreaterThanUpperThreshold"
     #   resp.metric_alarms[0].treat_missing_data #=> String
     #   resp.metric_alarms[0].evaluate_low_sample_count_percentile #=> String
     #   resp.metric_alarms[0].metrics #=> Array
@@ -554,6 +595,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].expression #=> String
     #   resp.metric_alarms[0].metrics[0].label #=> String
     #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
+    #   resp.metric_alarms[0].threshold_metric_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
     #
@@ -561,6 +603,82 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def describe_alarms_for_metric(params = {}, options = {})
       req = build_request(:describe_alarms_for_metric, params)
+      req.send_request(options)
+    end
+
+    # Lists the anomaly detection models that you have created in your
+    # account. You can list all models in your account or filter the results
+    # to only the models that are related to a certain namespace, metric
+    # name, or metric dimension.
+    #
+    # @option params [String] :next_token
+    #   Use the token returned by the previous operation to request the next
+    #   page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in one operation. The maximum
+    #   value you can specify is 10.
+    #
+    #   To retrieve the remaining results, make another call with the returned
+    #   `NextToken` value.
+    #
+    # @option params [String] :namespace
+    #   Limits the results to only the anomaly detection models that are
+    #   associated with the specified namespace.
+    #
+    # @option params [String] :metric_name
+    #   Limits the results to only the anomaly detection models that are
+    #   associated with the specified metric name. If there are multiple
+    #   metrics with this name in different namespaces that have anomaly
+    #   detection models, they're all returned.
+    #
+    # @option params [Array<Types::Dimension>] :dimensions
+    #   Limits the results to only the anomaly detection models that are
+    #   associated with the specified metric dimensions. If there are multiple
+    #   metrics that have these dimensions and have anomaly detection models
+    #   associated, they're all returned.
+    #
+    # @return [Types::DescribeAnomalyDetectorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAnomalyDetectorsOutput#anomaly_detectors #anomaly_detectors} => Array&lt;Types::AnomalyDetector&gt;
+    #   * {Types::DescribeAnomalyDetectorsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_anomaly_detectors({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     namespace: "Namespace",
+    #     metric_name: "MetricName",
+    #     dimensions: [
+    #       {
+    #         name: "DimensionName", # required
+    #         value: "DimensionValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_detectors #=> Array
+    #   resp.anomaly_detectors[0].namespace #=> String
+    #   resp.anomaly_detectors[0].metric_name #=> String
+    #   resp.anomaly_detectors[0].dimensions #=> Array
+    #   resp.anomaly_detectors[0].dimensions[0].name #=> String
+    #   resp.anomaly_detectors[0].dimensions[0].value #=> String
+    #   resp.anomaly_detectors[0].stat #=> String
+    #   resp.anomaly_detectors[0].configuration.excluded_time_ranges #=> Array
+    #   resp.anomaly_detectors[0].configuration.excluded_time_ranges[0].start_time #=> Time
+    #   resp.anomaly_detectors[0].configuration.excluded_time_ranges[0].end_time #=> Time
+    #   resp.anomaly_detectors[0].configuration.metric_timezone #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAnomalyDetectors AWS API Documentation
+    #
+    # @overload describe_anomaly_detectors(params = {})
+    # @param [Hash] params ({})
+    def describe_anomaly_detectors(params = {}, options = {})
+      req = build_request(:describe_anomaly_detectors, params)
       req.send_request(options)
     end
 
@@ -1241,12 +1359,77 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Creates an anomaly detection model for a CloudWatch metric. You can
+    # use the model to display a band of expected normal values when the
+    # metric is graphed.
+    #
+    # For more information, see [CloudWatch Anomaly Detection][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html
+    #
+    # @option params [required, String] :namespace
+    #   The namespace of the metric to create the anomaly detection model for.
+    #
+    # @option params [required, String] :metric_name
+    #   The name of the metric to create the anomaly detection model for.
+    #
+    # @option params [Array<Types::Dimension>] :dimensions
+    #   The metric dimensions to create the anomaly detection model for.
+    #
+    # @option params [required, String] :stat
+    #   The statistic to use for the metric and the anomaly detection model.
+    #
+    # @option params [Types::AnomalyDetectorConfiguration] :configuration
+    #   The configuration specifies details about how the anomaly detection
+    #   model is to be trained, including time ranges to exclude when training
+    #   and updating the model. You can specify as many as 10 time ranges.
+    #
+    #   The configuration can also include the time zone to use for the
+    #   metric.
+    #
+    #   You can in
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_anomaly_detector({
+    #     namespace: "Namespace", # required
+    #     metric_name: "MetricName", # required
+    #     dimensions: [
+    #       {
+    #         name: "DimensionName", # required
+    #         value: "DimensionValue", # required
+    #       },
+    #     ],
+    #     stat: "Stat", # required
+    #     configuration: {
+    #       excluded_time_ranges: [
+    #         {
+    #           start_time: Time.now, # required
+    #           end_time: Time.now, # required
+    #         },
+    #       ],
+    #       metric_timezone: "AnomalyDetectorMetricTimezone",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAnomalyDetector AWS API Documentation
+    #
+    # @overload put_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def put_anomaly_detector(params = {}, options = {})
+      req = build_request(:put_anomaly_detector, params)
+      req.send_request(options)
+    end
+
     # Creates a dashboard if it does not already exist, or updates an
     # existing dashboard. If you update a dashboard, the entire contents are
     # replaced with what you specify here.
     #
-    # There is no limit to the number of dashboards in your account. All
-    # dashboards in your account are global, not region-specific.
+    # All dashboards in your account are global, not region-specific.
     #
     # A simple way to create a dashboard using `PutDashboard` is to copy an
     # existing dashboard. To copy an existing dashboard using the console,
@@ -1305,7 +1488,10 @@ module Aws::CloudWatch
     end
 
     # Creates or updates an alarm and associates it with the specified
-    # metric or metric math expression.
+    # metric, metric math expression, or anomaly detection model.
+    #
+    # Alarms based on anomaly detection models cannot have Auto Scaling
+    # actions.
     #
     # When this operation creates an alarm, the alarm state is immediately
     # set to `INSUFFICIENT_DATA`. The alarm is then evaluated and its state
@@ -1508,13 +1694,17 @@ module Aws::CloudWatch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
     #
-    # @option params [required, Float] :threshold
+    # @option params [Float] :threshold
     #   The value against which the specified statistic is compared.
     #
     # @option params [required, String] :comparison_operator
     #   The arithmetic operation to use when comparing the specified statistic
     #   and threshold. The specified statistic value is used as the first
     #   operand.
+    #
+    #   The values `LessThanLowerOrGreaterThanUpperThreshold`,
+    #   `LessThanLowerThreshold`, and `GreaterThanUpperThreshold` are used
+    #   only for alarms based on anomaly detection models.
     #
     # @option params [String] :treat_missing_data
     #   Sets how this alarm is to handle missing data points. If
@@ -1568,6 +1758,16 @@ module Aws::CloudWatch
     #   use them to scope user permissions, by granting a user permission to
     #   access or change only resources with certain tag values.
     #
+    # @option params [String] :threshold_metric_id
+    #   If this is an alarm based on an anomaly detection model, make this
+    #   value match the ID of the `ANOMALY_DETECTION_BAND` function.
+    #
+    #   For an example of how to use this parameter, see the **Anomaly
+    #   Detection Model Alarm** example on this page.
+    #
+    #   If your alarm uses this parameter, it cannot have Auto Scaling
+    #   actions.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1593,8 +1793,8 @@ module Aws::CloudWatch
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #     evaluation_periods: 1, # required
     #     datapoints_to_alarm: 1,
-    #     threshold: 1.0, # required
-    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #     threshold: 1.0,
+    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold, LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, GreaterThanUpperThreshold
     #     treat_missing_data: "TreatMissingData",
     #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
     #     metrics: [
@@ -1626,6 +1826,7 @@ module Aws::CloudWatch
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     threshold_metric_id: "MetricId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm AWS API Documentation
@@ -1879,7 +2080,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

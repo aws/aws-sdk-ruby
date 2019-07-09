@@ -588,6 +588,8 @@ module Aws::WAF
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::CreateRateBasedRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRateBasedRuleResponse#rule #rule} => Types::RateBasedRule
@@ -601,6 +603,12 @@ module Aws::WAF
     #     rate_key: "IP", # required, accepts IP
     #     rate_limit: 1, # required
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -814,6 +822,8 @@ module Aws::WAF
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRuleResponse#rule #rule} => Types::Rule
@@ -853,6 +863,12 @@ module Aws::WAF
     #     name: "ResourceName", # required
     #     metric_name: "MetricName", # required
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -910,6 +926,8 @@ module Aws::WAF
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::CreateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRuleGroupResponse#rule_group #rule_group} => Types::RuleGroup
@@ -921,6 +939,12 @@ module Aws::WAF
     #     name: "ResourceName", # required
     #     metric_name: "MetricName", # required
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1191,6 +1215,8 @@ module Aws::WAF
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWebACLResponse#web_acl #web_acl} => Types::WebACL
@@ -1241,6 +1267,12 @@ module Aws::WAF
     #       type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #     },
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3714,6 +3746,42 @@ module Aws::WAF
       req.send_request(options)
     end
 
+    # @option params [String] :next_marker
+    #
+    # @option params [Integer] :limit
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#next_marker #next_marker} => String
+    #   * {Types::ListTagsForResourceResponse#tag_info_for_resource #tag_info_for_resource} => Types::TagInfoForResource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.tag_info_for_resource.resource_arn #=> String
+    #   resp.tag_info_for_resource.tag_list #=> Array
+    #   resp.tag_info_for_resource.tag_list[0].key #=> String
+    #   resp.tag_info_for_resource.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Returns an array of WebACLSummary objects in the response.
     #
     # @option params [String] :next_marker
@@ -3969,6 +4037,55 @@ module Aws::WAF
     # @param [Hash] params ({})
     def put_permission_policy(params = {}, options = {})
       req = build_request(:put_permission_policy, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -5394,7 +5511,7 @@ module Aws::WAF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-waf'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

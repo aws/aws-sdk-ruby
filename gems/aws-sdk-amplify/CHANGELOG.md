@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2019-07-09)
+------------------
+
+* Feature - This release adds webhook APIs and manual deployment APIs for AWS Amplify Console.
+
 1.8.0 (2019-07-01)
 ------------------
 

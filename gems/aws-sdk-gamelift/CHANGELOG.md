@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-07-09)
+------------------
+
+* Feature - GameLift FlexMatch now supports matchmaking of up to 200 players per game session, and FlexMatch can now automatically backfill your game sessions whenever there is an open slot.
+
 1.21.0 (2019-07-01)
 ------------------
 

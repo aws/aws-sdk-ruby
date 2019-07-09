@@ -224,7 +224,7 @@ module Aws::KinesisVideo
     #       {
     #         stream_name: "StreamName",
     #         stream_arn: "ResourceARN",
-    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL
+    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL
     #       }
     #
     # @!attribute [rw] stream_name

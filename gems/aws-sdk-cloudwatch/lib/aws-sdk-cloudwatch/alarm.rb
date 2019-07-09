@@ -104,7 +104,8 @@ module Aws::CloudWatch
       data[:state_updated_timestamp]
     end
 
-    # The name of the metric associated with the alarm.
+    # The name of the metric associated with the alarm, if this is an alarm
+    # based on a single metric.
     # @return [String]
     def metric_name
       data[:metric_name]
@@ -192,10 +193,21 @@ module Aws::CloudWatch
       data[:evaluate_low_sample_count_percentile]
     end
 
-    
+    # An array of MetricDataQuery structures, used in an alarm based on a
+    # metric math expression. Each structure either retrieves a metric or
+    # performs a math expression. One item in the Metrics array is the math
+    # expression that the alarm watches. This expression by designated by
+    # having `ReturnValue` set to true.
     # @return [Array<Types::MetricDataQuery>]
     def metrics
       data[:metrics]
+    end
+
+    # In an alarm based on an anomaly detection model, this is the ID of the
+    # `ANOMALY_DETECTION_BAND` function used as the threshold for the alarm.
+    # @return [String]
+    def threshold_metric_id
+      data[:threshold_metric_id]
     end
 
     # @!endgroup

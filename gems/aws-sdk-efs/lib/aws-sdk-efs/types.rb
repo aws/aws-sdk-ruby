@@ -863,18 +863,14 @@ module Aws::EFS
     #   data as a hash:
     #
     #       {
-    #         transition_to_ia: "AFTER_30_DAYS", # accepts AFTER_30_DAYS
+    #         transition_to_ia: "AFTER_14_DAYS", # accepts AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
     #       }
     #
     # @!attribute [rw] transition_to_ia
-    #   A value that indicates how long it takes to transition files to the
-    #   IA storage class. Currently, the only valid value is
-    #   `AFTER_30_DAYS`.
-    #
-    #   `AFTER_30_DAYS` indicates files that have not been read from or
-    #   written to for 30 days are transitioned from the Standard storage
-    #   class to the IA storage class. Metadata operations such as listing
-    #   the contents of a directory don't count as a file access event.
+    #   A value that describes the period of time that a file is not
+    #   accessed, after which it transitions to the IA storage class.
+    #   Metadata operations such as listing the contents of a directory
+    #   don't count as file access events.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/LifecyclePolicy AWS API Documentation
@@ -1036,7 +1032,7 @@ module Aws::EFS
     #         file_system_id: "FileSystemId", # required
     #         lifecycle_policies: [ # required
     #           {
-    #             transition_to_ia: "AFTER_30_DAYS", # accepts AFTER_30_DAYS
+    #             transition_to_ia: "AFTER_14_DAYS", # accepts AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
     #           },
     #         ],
     #       }

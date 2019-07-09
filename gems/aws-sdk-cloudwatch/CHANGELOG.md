@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-07-09)
+------------------
+
+* Feature - This release adds three new APIs (PutAnomalyDetector, DeleteAnomalyDetector, and DescribeAnomalyDetectors) to support the new feature, CloudWatch Anomaly Detection. In addition, PutMetricAlarm and DescribeAlarms APIs are updated to support management of Anomaly Detection based alarms.
+
 1.25.0 (2019-07-01)
 ------------------
 

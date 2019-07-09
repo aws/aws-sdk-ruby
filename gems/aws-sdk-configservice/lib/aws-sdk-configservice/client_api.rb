@@ -87,6 +87,7 @@ module Aws::ConfigService
     ConfigurationRecorderStatus = Shapes::StructureShape.new(name: 'ConfigurationRecorderStatus')
     ConfigurationRecorderStatusList = Shapes::ListShape.new(name: 'ConfigurationRecorderStatusList')
     ConfigurationStateId = Shapes::StringShape.new(name: 'ConfigurationStateId')
+    CosmosPageLimit = Shapes::IntegerShape.new(name: 'CosmosPageLimit')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DeleteAggregationAuthorizationRequest = Shapes::StructureShape.new(name: 'DeleteAggregationAuthorizationRequest')
     DeleteConfigRuleRequest = Shapes::StructureShape.new(name: 'DeleteConfigRuleRequest')
@@ -95,6 +96,7 @@ module Aws::ConfigService
     DeleteDeliveryChannelRequest = Shapes::StructureShape.new(name: 'DeleteDeliveryChannelRequest')
     DeleteEvaluationResultsRequest = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsRequest')
     DeleteEvaluationResultsResponse = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsResponse')
+    DeleteOrganizationConfigRuleRequest = Shapes::StructureShape.new(name: 'DeleteOrganizationConfigRuleRequest')
     DeletePendingAggregationRequestRequest = Shapes::StructureShape.new(name: 'DeletePendingAggregationRequestRequest')
     DeleteRemediationConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteRemediationConfigurationRequest')
     DeleteRemediationConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteRemediationConfigurationResponse')
@@ -131,6 +133,10 @@ module Aws::ConfigService
     DescribeDeliveryChannelStatusResponse = Shapes::StructureShape.new(name: 'DescribeDeliveryChannelStatusResponse')
     DescribeDeliveryChannelsRequest = Shapes::StructureShape.new(name: 'DescribeDeliveryChannelsRequest')
     DescribeDeliveryChannelsResponse = Shapes::StructureShape.new(name: 'DescribeDeliveryChannelsResponse')
+    DescribeOrganizationConfigRuleStatusesRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigRuleStatusesRequest')
+    DescribeOrganizationConfigRuleStatusesResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigRuleStatusesResponse')
+    DescribeOrganizationConfigRulesRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigRulesRequest')
+    DescribeOrganizationConfigRulesResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigRulesResponse')
     DescribePendingAggregationRequestsLimit = Shapes::IntegerShape.new(name: 'DescribePendingAggregationRequestsLimit')
     DescribePendingAggregationRequestsRequest = Shapes::StructureShape.new(name: 'DescribePendingAggregationRequestsRequest')
     DescribePendingAggregationRequestsResponse = Shapes::StructureShape.new(name: 'DescribePendingAggregationRequestsResponse')
@@ -150,6 +156,7 @@ module Aws::ConfigService
     EvaluationResults = Shapes::ListShape.new(name: 'EvaluationResults')
     Evaluations = Shapes::ListShape.new(name: 'Evaluations')
     EventSource = Shapes::StringShape.new(name: 'EventSource')
+    ExcludedAccounts = Shapes::ListShape.new(name: 'ExcludedAccounts')
     Expression = Shapes::StringShape.new(name: 'Expression')
     FailedRemediationBatch = Shapes::StructureShape.new(name: 'FailedRemediationBatch')
     FailedRemediationBatches = Shapes::ListShape.new(name: 'FailedRemediationBatches')
@@ -173,6 +180,8 @@ module Aws::ConfigService
     GetComplianceSummaryByResourceTypeResponse = Shapes::StructureShape.new(name: 'GetComplianceSummaryByResourceTypeResponse')
     GetDiscoveredResourceCountsRequest = Shapes::StructureShape.new(name: 'GetDiscoveredResourceCountsRequest')
     GetDiscoveredResourceCountsResponse = Shapes::StructureShape.new(name: 'GetDiscoveredResourceCountsResponse')
+    GetOrganizationConfigRuleDetailedStatusRequest = Shapes::StructureShape.new(name: 'GetOrganizationConfigRuleDetailedStatusRequest')
+    GetOrganizationConfigRuleDetailedStatusResponse = Shapes::StructureShape.new(name: 'GetOrganizationConfigRuleDetailedStatusResponse')
     GetResourceConfigHistoryRequest = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryRequest')
     GetResourceConfigHistoryResponse = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryResponse')
     GroupByAPILimit = Shapes::IntegerShape.new(name: 'GroupByAPILimit')
@@ -208,8 +217,11 @@ module Aws::ConfigService
     MaxNumberOfConfigRulesExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigRulesExceededException')
     MaxNumberOfConfigurationRecordersExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigurationRecordersExceededException')
     MaxNumberOfDeliveryChannelsExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfDeliveryChannelsExceededException')
+    MaxNumberOfOrganizationConfigRulesExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfOrganizationConfigRulesExceededException')
     MaxNumberOfRetentionConfigurationsExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfRetentionConfigurationsExceededException')
     MaximumExecutionFrequency = Shapes::StringShape.new(name: 'MaximumExecutionFrequency')
+    MemberAccountRuleStatus = Shapes::StringShape.new(name: 'MemberAccountRuleStatus')
+    MemberAccountStatus = Shapes::StructureShape.new(name: 'MemberAccountStatus')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -222,12 +234,24 @@ module Aws::ConfigService
     NoSuchConfigurationAggregatorException = Shapes::StructureShape.new(name: 'NoSuchConfigurationAggregatorException')
     NoSuchConfigurationRecorderException = Shapes::StructureShape.new(name: 'NoSuchConfigurationRecorderException')
     NoSuchDeliveryChannelException = Shapes::StructureShape.new(name: 'NoSuchDeliveryChannelException')
+    NoSuchOrganizationConfigRuleException = Shapes::StructureShape.new(name: 'NoSuchOrganizationConfigRuleException')
     NoSuchRemediationConfigurationException = Shapes::StructureShape.new(name: 'NoSuchRemediationConfigurationException')
     NoSuchRetentionConfigurationException = Shapes::StructureShape.new(name: 'NoSuchRetentionConfigurationException')
     OrderingTimestamp = Shapes::TimestampShape.new(name: 'OrderingTimestamp')
     OrganizationAccessDeniedException = Shapes::StructureShape.new(name: 'OrganizationAccessDeniedException')
     OrganizationAggregationSource = Shapes::StructureShape.new(name: 'OrganizationAggregationSource')
     OrganizationAllFeaturesNotEnabledException = Shapes::StructureShape.new(name: 'OrganizationAllFeaturesNotEnabledException')
+    OrganizationConfigRule = Shapes::StructureShape.new(name: 'OrganizationConfigRule')
+    OrganizationConfigRuleDetailedStatus = Shapes::ListShape.new(name: 'OrganizationConfigRuleDetailedStatus')
+    OrganizationConfigRuleNames = Shapes::ListShape.new(name: 'OrganizationConfigRuleNames')
+    OrganizationConfigRuleStatus = Shapes::StructureShape.new(name: 'OrganizationConfigRuleStatus')
+    OrganizationConfigRuleStatuses = Shapes::ListShape.new(name: 'OrganizationConfigRuleStatuses')
+    OrganizationConfigRuleTriggerType = Shapes::StringShape.new(name: 'OrganizationConfigRuleTriggerType')
+    OrganizationConfigRuleTriggerTypes = Shapes::ListShape.new(name: 'OrganizationConfigRuleTriggerTypes')
+    OrganizationConfigRules = Shapes::ListShape.new(name: 'OrganizationConfigRules')
+    OrganizationCustomRuleMetadata = Shapes::StructureShape.new(name: 'OrganizationCustomRuleMetadata')
+    OrganizationManagedRuleMetadata = Shapes::StructureShape.new(name: 'OrganizationManagedRuleMetadata')
+    OrganizationRuleStatus = Shapes::StringShape.new(name: 'OrganizationRuleStatus')
     OversizedConfigurationItemException = Shapes::StructureShape.new(name: 'OversizedConfigurationItemException')
     Owner = Shapes::StringShape.new(name: 'Owner')
     PendingAggregationRequest = Shapes::StructureShape.new(name: 'PendingAggregationRequest')
@@ -241,6 +265,8 @@ module Aws::ConfigService
     PutDeliveryChannelRequest = Shapes::StructureShape.new(name: 'PutDeliveryChannelRequest')
     PutEvaluationsRequest = Shapes::StructureShape.new(name: 'PutEvaluationsRequest')
     PutEvaluationsResponse = Shapes::StructureShape.new(name: 'PutEvaluationsResponse')
+    PutOrganizationConfigRuleRequest = Shapes::StructureShape.new(name: 'PutOrganizationConfigRuleRequest')
+    PutOrganizationConfigRuleResponse = Shapes::StructureShape.new(name: 'PutOrganizationConfigRuleResponse')
     PutRemediationConfigurationsRequest = Shapes::StructureShape.new(name: 'PutRemediationConfigurationsRequest')
     PutRemediationConfigurationsResponse = Shapes::StructureShape.new(name: 'PutRemediationConfigurationsResponse')
     PutRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'PutRetentionConfigurationRequest')
@@ -263,6 +289,7 @@ module Aws::ConfigService
     RemediationExecutionStep = Shapes::StructureShape.new(name: 'RemediationExecutionStep')
     RemediationExecutionStepState = Shapes::StringShape.new(name: 'RemediationExecutionStepState')
     RemediationExecutionSteps = Shapes::ListShape.new(name: 'RemediationExecutionSteps')
+    RemediationInProgressException = Shapes::StructureShape.new(name: 'RemediationInProgressException')
     RemediationParameterValue = Shapes::StructureShape.new(name: 'RemediationParameterValue')
     RemediationParameters = Shapes::MapShape.new(name: 'RemediationParameters')
     RemediationTargetType = Shapes::StringShape.new(name: 'RemediationTargetType')
@@ -287,6 +314,7 @@ module Aws::ConfigService
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
+    ResourceTypesScope = Shapes::ListShape.new(name: 'ResourceTypesScope')
     ResourceValue = Shapes::StructureShape.new(name: 'ResourceValue')
     ResourceValueType = Shapes::StringShape.new(name: 'ResourceValueType')
     Results = Shapes::ListShape.new(name: 'Results')
@@ -309,12 +337,16 @@ module Aws::ConfigService
     StartRemediationExecutionResponse = Shapes::StructureShape.new(name: 'StartRemediationExecutionResponse')
     StaticParameterValues = Shapes::ListShape.new(name: 'StaticParameterValues')
     StaticValue = Shapes::StructureShape.new(name: 'StaticValue')
+    StatusDetailFilters = Shapes::StructureShape.new(name: 'StatusDetailFilters')
     StopConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'StopConfigurationRecorderRequest')
     String = Shapes::StringShape.new(name: 'String')
     StringWithCharLimit1024 = Shapes::StringShape.new(name: 'StringWithCharLimit1024')
     StringWithCharLimit128 = Shapes::StringShape.new(name: 'StringWithCharLimit128')
+    StringWithCharLimit2048 = Shapes::StringShape.new(name: 'StringWithCharLimit2048')
     StringWithCharLimit256 = Shapes::StringShape.new(name: 'StringWithCharLimit256')
+    StringWithCharLimit256Min0 = Shapes::StringShape.new(name: 'StringWithCharLimit256Min0')
     StringWithCharLimit64 = Shapes::StringShape.new(name: 'StringWithCharLimit64')
+    StringWithCharLimit768 = Shapes::StringShape.new(name: 'StringWithCharLimit768')
     SupplementaryConfiguration = Shapes::MapShape.new(name: 'SupplementaryConfiguration')
     SupplementaryConfigurationName = Shapes::StringShape.new(name: 'SupplementaryConfigurationName')
     SupplementaryConfigurationValue = Shapes::StringShape.new(name: 'SupplementaryConfigurationValue')
@@ -600,6 +632,9 @@ module Aws::ConfigService
 
     DeleteEvaluationResultsResponse.struct_class = Types::DeleteEvaluationResultsResponse
 
+    DeleteOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    DeleteOrganizationConfigRuleRequest.struct_class = Types::DeleteOrganizationConfigRuleRequest
+
     DeletePendingAggregationRequestRequest.add_member(:requester_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "RequesterAccountId"))
     DeletePendingAggregationRequestRequest.add_member(:requester_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "RequesterAwsRegion"))
     DeletePendingAggregationRequestRequest.struct_class = Types::DeletePendingAggregationRequestRequest
@@ -736,6 +771,24 @@ module Aws::ConfigService
     DescribeDeliveryChannelsResponse.add_member(:delivery_channels, Shapes::ShapeRef.new(shape: DeliveryChannelList, location_name: "DeliveryChannels"))
     DescribeDeliveryChannelsResponse.struct_class = Types::DescribeDeliveryChannelsResponse
 
+    DescribeOrganizationConfigRuleStatusesRequest.add_member(:organization_config_rule_names, Shapes::ShapeRef.new(shape: OrganizationConfigRuleNames, location_name: "OrganizationConfigRuleNames"))
+    DescribeOrganizationConfigRuleStatusesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit"))
+    DescribeOrganizationConfigRuleStatusesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConfigRuleStatusesRequest.struct_class = Types::DescribeOrganizationConfigRuleStatusesRequest
+
+    DescribeOrganizationConfigRuleStatusesResponse.add_member(:organization_config_rule_statuses, Shapes::ShapeRef.new(shape: OrganizationConfigRuleStatuses, location_name: "OrganizationConfigRuleStatuses"))
+    DescribeOrganizationConfigRuleStatusesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConfigRuleStatusesResponse.struct_class = Types::DescribeOrganizationConfigRuleStatusesResponse
+
+    DescribeOrganizationConfigRulesRequest.add_member(:organization_config_rule_names, Shapes::ShapeRef.new(shape: OrganizationConfigRuleNames, location_name: "OrganizationConfigRuleNames"))
+    DescribeOrganizationConfigRulesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit"))
+    DescribeOrganizationConfigRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConfigRulesRequest.struct_class = Types::DescribeOrganizationConfigRulesRequest
+
+    DescribeOrganizationConfigRulesResponse.add_member(:organization_config_rules, Shapes::ShapeRef.new(shape: OrganizationConfigRules, location_name: "OrganizationConfigRules"))
+    DescribeOrganizationConfigRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeOrganizationConfigRulesResponse.struct_class = Types::DescribeOrganizationConfigRulesResponse
+
     DescribePendingAggregationRequestsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribePendingAggregationRequestsLimit, location_name: "Limit"))
     DescribePendingAggregationRequestsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribePendingAggregationRequestsRequest.struct_class = Types::DescribePendingAggregationRequestsRequest
@@ -797,6 +850,8 @@ module Aws::ConfigService
     EvaluationResults.member = Shapes::ShapeRef.new(shape: EvaluationResult)
 
     Evaluations.member = Shapes::ShapeRef.new(shape: Evaluation)
+
+    ExcludedAccounts.member = Shapes::ShapeRef.new(shape: AccountId)
 
     FailedRemediationBatch.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     FailedRemediationBatch.add_member(:failed_items, Shapes::ShapeRef.new(shape: RemediationConfigurations, location_name: "FailedItems"))
@@ -893,6 +948,16 @@ module Aws::ConfigService
     GetDiscoveredResourceCountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetDiscoveredResourceCountsResponse.struct_class = Types::GetDiscoveredResourceCountsResponse
 
+    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:filters, Shapes::ShapeRef.new(shape: StatusDetailFilters, location_name: "Filters"))
+    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:limit, Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit"))
+    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetOrganizationConfigRuleDetailedStatusRequest.struct_class = Types::GetOrganizationConfigRuleDetailedStatusRequest
+
+    GetOrganizationConfigRuleDetailedStatusResponse.add_member(:organization_config_rule_detailed_status, Shapes::ShapeRef.new(shape: OrganizationConfigRuleDetailedStatus, location_name: "OrganizationConfigRuleDetailedStatus"))
+    GetOrganizationConfigRuleDetailedStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetOrganizationConfigRuleDetailedStatusResponse.struct_class = Types::GetOrganizationConfigRuleDetailedStatusResponse
+
     GetResourceConfigHistoryRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     GetResourceConfigHistoryRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     GetResourceConfigHistoryRequest.add_member(:later_time, Shapes::ShapeRef.new(shape: LaterTime, location_name: "laterTime"))
@@ -944,10 +1009,64 @@ module Aws::ConfigService
     ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MemberAccountStatus.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    MemberAccountStatus.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
+    MemberAccountStatus.add_member(:member_account_rule_status, Shapes::ShapeRef.new(shape: MemberAccountRuleStatus, required: true, location_name: "MemberAccountRuleStatus"))
+    MemberAccountStatus.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    MemberAccountStatus.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    MemberAccountStatus.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
+    MemberAccountStatus.struct_class = Types::MemberAccountStatus
+
     OrganizationAggregationSource.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
     OrganizationAggregationSource.add_member(:aws_regions, Shapes::ShapeRef.new(shape: AggregatorRegionList, location_name: "AwsRegions"))
     OrganizationAggregationSource.add_member(:all_aws_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAwsRegions"))
     OrganizationAggregationSource.struct_class = Types::OrganizationAggregationSource
+
+    OrganizationConfigRule.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    OrganizationConfigRule.add_member(:organization_config_rule_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "OrganizationConfigRuleArn"))
+    OrganizationConfigRule.add_member(:organization_managed_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
+    OrganizationConfigRule.add_member(:organization_custom_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
+    OrganizationConfigRule.add_member(:excluded_accounts, Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
+    OrganizationConfigRule.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
+    OrganizationConfigRule.struct_class = Types::OrganizationConfigRule
+
+    OrganizationConfigRuleDetailedStatus.member = Shapes::ShapeRef.new(shape: MemberAccountStatus)
+
+    OrganizationConfigRuleNames.member = Shapes::ShapeRef.new(shape: StringWithCharLimit64)
+
+    OrganizationConfigRuleStatus.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    OrganizationConfigRuleStatus.add_member(:organization_rule_status, Shapes::ShapeRef.new(shape: OrganizationRuleStatus, required: true, location_name: "OrganizationRuleStatus"))
+    OrganizationConfigRuleStatus.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    OrganizationConfigRuleStatus.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    OrganizationConfigRuleStatus.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
+    OrganizationConfigRuleStatus.struct_class = Types::OrganizationConfigRuleStatus
+
+    OrganizationConfigRuleStatuses.member = Shapes::ShapeRef.new(shape: OrganizationConfigRuleStatus)
+
+    OrganizationConfigRuleTriggerTypes.member = Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerType)
+
+    OrganizationConfigRules.member = Shapes::ShapeRef.new(shape: OrganizationConfigRule)
+
+    OrganizationCustomRuleMetadata.add_member(:description, Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
+    OrganizationCustomRuleMetadata.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "LambdaFunctionArn"))
+    OrganizationCustomRuleMetadata.add_member(:organization_config_rule_trigger_types, Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypes, required: true, location_name: "OrganizationConfigRuleTriggerTypes"))
+    OrganizationCustomRuleMetadata.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationCustomRuleMetadata.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    OrganizationCustomRuleMetadata.add_member(:resource_types_scope, Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
+    OrganizationCustomRuleMetadata.add_member(:resource_id_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
+    OrganizationCustomRuleMetadata.add_member(:tag_key_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKeyScope"))
+    OrganizationCustomRuleMetadata.add_member(:tag_value_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValueScope"))
+    OrganizationCustomRuleMetadata.struct_class = Types::OrganizationCustomRuleMetadata
+
+    OrganizationManagedRuleMetadata.add_member(:description, Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
+    OrganizationManagedRuleMetadata.add_member(:rule_identifier, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "RuleIdentifier"))
+    OrganizationManagedRuleMetadata.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationManagedRuleMetadata.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    OrganizationManagedRuleMetadata.add_member(:resource_types_scope, Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
+    OrganizationManagedRuleMetadata.add_member(:resource_id_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
+    OrganizationManagedRuleMetadata.add_member(:tag_key_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKeyScope"))
+    OrganizationManagedRuleMetadata.add_member(:tag_value_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValueScope"))
+    OrganizationManagedRuleMetadata.struct_class = Types::OrganizationManagedRuleMetadata
 
     PendingAggregationRequest.add_member(:requester_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "RequesterAccountId"))
     PendingAggregationRequest.add_member(:requester_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "RequesterAwsRegion"))
@@ -989,6 +1108,15 @@ module Aws::ConfigService
 
     PutEvaluationsResponse.add_member(:failed_evaluations, Shapes::ShapeRef.new(shape: Evaluations, location_name: "FailedEvaluations"))
     PutEvaluationsResponse.struct_class = Types::PutEvaluationsResponse
+
+    PutOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    PutOrganizationConfigRuleRequest.add_member(:organization_managed_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
+    PutOrganizationConfigRuleRequest.add_member(:organization_custom_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
+    PutOrganizationConfigRuleRequest.add_member(:excluded_accounts, Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
+    PutOrganizationConfigRuleRequest.struct_class = Types::PutOrganizationConfigRuleRequest
+
+    PutOrganizationConfigRuleResponse.add_member(:organization_config_rule_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "OrganizationConfigRuleArn"))
+    PutOrganizationConfigRuleResponse.struct_class = Types::PutOrganizationConfigRuleResponse
 
     PutRemediationConfigurationsRequest.add_member(:remediation_configurations, Shapes::ShapeRef.new(shape: RemediationConfigurations, required: true, location_name: "RemediationConfigurations"))
     PutRemediationConfigurationsRequest.struct_class = Types::PutRemediationConfigurationsRequest
@@ -1096,6 +1224,8 @@ module Aws::ConfigService
 
     ResourceTypes.member = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
 
+    ResourceTypesScope.member = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
+
     ResourceValue.add_member(:value, Shapes::ShapeRef.new(shape: ResourceValueType, location_name: "Value"))
     ResourceValue.struct_class = Types::ResourceValue
 
@@ -1157,6 +1287,10 @@ module Aws::ConfigService
 
     StaticValue.add_member(:values, Shapes::ShapeRef.new(shape: StaticParameterValues, location_name: "Values"))
     StaticValue.struct_class = Types::StaticValue
+
+    StatusDetailFilters.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    StatusDetailFilters.add_member(:member_account_rule_status, Shapes::ShapeRef.new(shape: MemberAccountRuleStatus, location_name: "MemberAccountRuleStatus"))
+    StatusDetailFilters.struct_class = Types::StatusDetailFilters
 
     StopConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
     StopConfigurationRecorderRequest.struct_class = Types::StopConfigurationRecorderRequest
@@ -1283,6 +1417,16 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
+      api.add_operation(:delete_organization_config_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOrganizationConfigRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOrganizationConfigRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:delete_pending_aggregation_request, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePendingAggregationRequest"
         o.http_method = "POST"
@@ -1299,6 +1443,7 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: DeleteRemediationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRemediationConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: RemediationInProgressException)
       end)
 
       api.add_operation(:delete_retention_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1447,6 +1592,28 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDeliveryChannelException)
       end)
 
+      api.add_operation(:describe_organization_config_rule_statuses, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOrganizationConfigRuleStatuses"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigRuleStatusesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigRuleStatusesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:describe_organization_config_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOrganizationConfigRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+      end)
+
       api.add_operation(:describe_pending_aggregation_requests, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribePendingAggregationRequests"
         o.http_method = "POST"
@@ -1588,6 +1755,17 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
+      api.add_operation(:get_organization_config_rule_detailed_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOrganizationConfigRuleDetailedStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetOrganizationConfigRuleDetailedStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetOrganizationConfigRuleDetailedStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
       api.add_operation(:get_resource_config_history, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetResourceConfigHistory"
         o.http_method = "POST"
@@ -1716,6 +1894,22 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResultTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+      end)
+
+      api.add_operation(:put_organization_config_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutOrganizationConfigRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutOrganizationConfigRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutOrganizationConfigRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfOrganizationConfigRulesExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationAllFeaturesNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
       end)
 
       api.add_operation(:put_remediation_configurations, Seahorse::Model::Operation.new.tap do |o|
