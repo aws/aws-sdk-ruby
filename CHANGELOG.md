@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.311 (2019-07-09)
+------------------
+
 * Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
 
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
