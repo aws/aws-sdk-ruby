@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.312 (2019-07-10)
+------------------
+
 * Feature - Aws::Glacier - Updated the documentation for Amazon Glacier.
 
 * Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
