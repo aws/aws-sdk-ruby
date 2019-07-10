@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-07-10)
+------------------
+
+* Feature - Documentation updates for glacier
+
 1.23.0 (2019-07-01)
 ------------------
 

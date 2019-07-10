@@ -485,6 +485,7 @@ module Aws::QuickSight
     #         session_lifetime_in_minutes: 1,
     #         undo_redo_disabled: false,
     #         reset_disabled: false,
+    #         user_arn: "Arn",
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -514,6 +515,22 @@ module Aws::QuickSight
     #   which allows the reset button.
     #   @return [Boolean]
     #
+    # @!attribute [rw] user_arn
+    #   The Amazon QuickSight user's ARN, for use with `QUICKSIGHT`
+    #   identity type. You can use this for any of the following:
+    #
+    #   * Amazon QuickSight users in your account (readers, authors, or
+    #     admins)
+    #
+    #   * AD users
+    #
+    #   * Invited non-federated users
+    #
+    #   * Federated IAM users
+    #
+    #   * Federated IAM role-based sessions
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest AWS API Documentation
     #
     class GetDashboardEmbedUrlRequest < Struct.new(
@@ -522,7 +539,8 @@ module Aws::QuickSight
       :identity_type,
       :session_lifetime_in_minutes,
       :undo_redo_disabled,
-      :reset_disabled)
+      :reset_disabled,
+      :user_arn)
       include Aws::Structure
     end
 
@@ -1043,11 +1061,13 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] session_name
-    #   The name of the session with the assumed IAM role. By using this
-    #   parameter, you can register multiple users with the same IAM role,
-    #   provided that each has a different session name. For more
-    #   information on assuming IAM roles, see [ `assume-role` ][1] in the
-    #   *AWS CLI Reference.*
+    #   You need to use this parameter only when you register one or more
+    #   users using an assumed IAM role. You don't need to provide the
+    #   session name for other scenarios, for example when you are
+    #   registering an IAM user or an Amazon QuickSight user. You can
+    #   register multiple users using the same IAM role if each user has a
+    #   different session name. For more information on assuming IAM roles,
+    #   see [ `assume-role` ][1] in the *AWS CLI Reference.*
     #
     #
     #

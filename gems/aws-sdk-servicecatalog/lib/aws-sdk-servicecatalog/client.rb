@@ -2434,6 +2434,41 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # @option params [required, String] :provisioned_product_id
+    #
+    # @option params [required, String] :service_action_id
+    #
+    # @option params [String] :accept_language
+    #
+    # @return [Types::DescribeServiceActionExecutionParametersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServiceActionExecutionParametersOutput#service_action_parameters #service_action_parameters} => Array&lt;Types::ExecutionParameter&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_service_action_execution_parameters({
+    #     provisioned_product_id: "Id", # required
+    #     service_action_id: "Id", # required
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_action_parameters #=> Array
+    #   resp.service_action_parameters[0].name #=> String
+    #   resp.service_action_parameters[0].type #=> String
+    #   resp.service_action_parameters[0].default_values #=> Array
+    #   resp.service_action_parameters[0].default_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionExecutionParameters AWS API Documentation
+    #
+    # @overload describe_service_action_execution_parameters(params = {})
+    # @param [Hash] params ({})
+    def describe_service_action_execution_parameters(params = {}, options = {})
+      req = build_request(:describe_service_action_execution_parameters, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified TagOption.
     #
     # @option params [required, String] :id
@@ -2759,6 +2794,8 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [Hash<String,Array>] :parameters
+    #
     # @return [Types::ExecuteProvisionedProductServiceActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteProvisionedProductServiceActionOutput#record_detail #record_detail} => Types::RecordDetail
@@ -2770,6 +2807,9 @@ module Aws::ServiceCatalog
     #     service_action_id: "Id", # required
     #     execute_token: "IdempotencyToken", # required
     #     accept_language: "AcceptLanguage",
+    #     parameters: {
+    #       "ExecutionParameterKey" => ["ExecutionParameterValue"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -5069,7 +5109,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

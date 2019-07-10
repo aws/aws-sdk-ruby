@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2019-07-10)
+------------------
+
+* Feature - Amazon QuickSight now supports embedding dashboards for all non-federated QuickSight users. This includes IAM users, AD users and users from the QuickSight user pool. The get-dashboard-embed-url API accepts QUICKSIGHT as identity type with a user ARN to authenticate the embeddable dashboard viewer as a non-federated user.
+
 1.10.0 (2019-07-01)
 ------------------
 

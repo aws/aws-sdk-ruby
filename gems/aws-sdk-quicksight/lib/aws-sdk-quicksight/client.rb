@@ -537,7 +537,17 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Deletes a user after locating the user by its principal ID.
+    # Deletes a user identified by its principal ID.
+    #
+    # The permission resource is
+    # `arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name>
+    # `.
+    #
+    # **CLI Sample:**
+    #
+    # `aws quicksight delete-user-by-principal-id
+    # --aws-account-id=111122223333 --namespace=default
+    # --principal-id=ABCDEFJA26JLI7EUUOEHS `
     #
     # @option params [required, String] :principal_id
     #   The principal ID of the user.
@@ -751,6 +761,21 @@ module Aws::QuickSight
     #   Remove the reset button on embedded dashboard. The default is FALSE,
     #   which allows the reset button.
     #
+    # @option params [String] :user_arn
+    #   The Amazon QuickSight user's ARN, for use with `QUICKSIGHT` identity
+    #   type. You can use this for any of the following:
+    #
+    #   * Amazon QuickSight users in your account (readers, authors, or
+    #     admins)
+    #
+    #   * AD users
+    #
+    #   * Invited non-federated users
+    #
+    #   * Federated IAM users
+    #
+    #   * Federated IAM role-based sessions
+    #
     # @return [Types::GetDashboardEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDashboardEmbedUrlResponse#embed_url #embed_url} => String
@@ -766,6 +791,7 @@ module Aws::QuickSight
     #     session_lifetime_in_minutes: 1,
     #     undo_redo_disabled: false,
     #     reset_disabled: false,
+    #     user_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -1095,11 +1121,13 @@ module Aws::QuickSight
     #   QuickSight.
     #
     # @option params [String] :session_name
-    #   The name of the session with the assumed IAM role. By using this
-    #   parameter, you can register multiple users with the same IAM role,
-    #   provided that each has a different session name. For more information
-    #   on assuming IAM roles, see [ `assume-role` ][1] in the *AWS CLI
-    #   Reference.*
+    #   You need to use this parameter only when you register one or more
+    #   users using an assumed IAM role. You don't need to provide the
+    #   session name for other scenarios, for example when you are registering
+    #   an IAM user or an Amazon QuickSight user. You can register multiple
+    #   users using the same IAM role if each user has a different session
+    #   name. For more information on assuming IAM roles, see [ `assume-role`
+    #   ][1] in the *AWS CLI Reference.*
     #
     #
     #
@@ -1311,7 +1339,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

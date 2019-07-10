@@ -2323,6 +2323,43 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeServiceActionExecutionParametersInput
+    #   data as a hash:
+    #
+    #       {
+    #         provisioned_product_id: "Id", # required
+    #         service_action_id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] service_action_id
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionExecutionParametersInput AWS API Documentation
+    #
+    class DescribeServiceActionExecutionParametersInput < Struct.new(
+      :provisioned_product_id,
+      :service_action_id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_parameters
+    #   @return [Array<Types::ExecutionParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionExecutionParametersOutput AWS API Documentation
+    #
+    class DescribeServiceActionExecutionParametersOutput < Struct.new(
+      :service_action_parameters)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeServiceActionInput
     #   data as a hash:
     #
@@ -2658,6 +2695,9 @@ module Aws::ServiceCatalog
     #         service_action_id: "Id", # required
     #         execute_token: "IdempotencyToken", # required
     #         accept_language: "AcceptLanguage",
+    #         parameters: {
+    #           "ExecutionParameterKey" => ["ExecutionParameterValue"],
+    #         },
     #       }
     #
     # @!attribute [rw] provisioned_product_id
@@ -2686,13 +2726,17 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   @return [Hash<String,Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceActionInput AWS API Documentation
     #
     class ExecuteProvisionedProductServiceActionInput < Struct.new(
       :provisioned_product_id,
       :service_action_id,
       :execute_token,
-      :accept_language)
+      :accept_language,
+      :parameters)
       include Aws::Structure
     end
 
@@ -2705,6 +2749,24 @@ module Aws::ServiceCatalog
     #
     class ExecuteProvisionedProductServiceActionOutput < Struct.new(
       :record_detail)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] default_values
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecutionParameter AWS API Documentation
+    #
+    class ExecutionParameter < Struct.new(
+      :name,
+      :type,
+      :default_values)
       include Aws::Structure
     end
 

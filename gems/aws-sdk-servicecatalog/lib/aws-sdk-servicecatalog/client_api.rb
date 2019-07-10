@@ -118,6 +118,8 @@ module Aws::ServiceCatalog
     DescribeProvisioningParametersOutput = Shapes::StructureShape.new(name: 'DescribeProvisioningParametersOutput')
     DescribeRecordInput = Shapes::StructureShape.new(name: 'DescribeRecordInput')
     DescribeRecordOutput = Shapes::StructureShape.new(name: 'DescribeRecordOutput')
+    DescribeServiceActionExecutionParametersInput = Shapes::StructureShape.new(name: 'DescribeServiceActionExecutionParametersInput')
+    DescribeServiceActionExecutionParametersOutput = Shapes::StructureShape.new(name: 'DescribeServiceActionExecutionParametersOutput')
     DescribeServiceActionInput = Shapes::StructureShape.new(name: 'DescribeServiceActionInput')
     DescribeServiceActionOutput = Shapes::StructureShape.new(name: 'DescribeServiceActionOutput')
     DescribeTagOptionInput = Shapes::StructureShape.new(name: 'DescribeTagOptionInput')
@@ -147,6 +149,13 @@ module Aws::ServiceCatalog
     ExecuteProvisionedProductPlanOutput = Shapes::StructureShape.new(name: 'ExecuteProvisionedProductPlanOutput')
     ExecuteProvisionedProductServiceActionInput = Shapes::StructureShape.new(name: 'ExecuteProvisionedProductServiceActionInput')
     ExecuteProvisionedProductServiceActionOutput = Shapes::StructureShape.new(name: 'ExecuteProvisionedProductServiceActionOutput')
+    ExecutionParameter = Shapes::StructureShape.new(name: 'ExecutionParameter')
+    ExecutionParameterKey = Shapes::StringShape.new(name: 'ExecutionParameterKey')
+    ExecutionParameterMap = Shapes::MapShape.new(name: 'ExecutionParameterMap')
+    ExecutionParameterType = Shapes::StringShape.new(name: 'ExecutionParameterType')
+    ExecutionParameterValue = Shapes::StringShape.new(name: 'ExecutionParameterValue')
+    ExecutionParameterValueList = Shapes::ListShape.new(name: 'ExecutionParameterValueList')
+    ExecutionParameters = Shapes::ListShape.new(name: 'ExecutionParameters')
     FailedServiceActionAssociation = Shapes::StructureShape.new(name: 'FailedServiceActionAssociation')
     FailedServiceActionAssociations = Shapes::ListShape.new(name: 'FailedServiceActionAssociations')
     GetAWSOrganizationsAccessStatusInput = Shapes::StructureShape.new(name: 'GetAWSOrganizationsAccessStatusInput')
@@ -816,6 +825,14 @@ module Aws::ServiceCatalog
     DescribeRecordOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     DescribeRecordOutput.struct_class = Types::DescribeRecordOutput
 
+    DescribeServiceActionExecutionParametersInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisionedProductId"))
+    DescribeServiceActionExecutionParametersInput.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ServiceActionId"))
+    DescribeServiceActionExecutionParametersInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    DescribeServiceActionExecutionParametersInput.struct_class = Types::DescribeServiceActionExecutionParametersInput
+
+    DescribeServiceActionExecutionParametersOutput.add_member(:service_action_parameters, Shapes::ShapeRef.new(shape: ExecutionParameters, location_name: "ServiceActionParameters"))
+    DescribeServiceActionExecutionParametersOutput.struct_class = Types::DescribeServiceActionExecutionParametersOutput
+
     DescribeServiceActionInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     DescribeServiceActionInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DescribeServiceActionInput.struct_class = Types::DescribeServiceActionInput
@@ -883,10 +900,23 @@ module Aws::ServiceCatalog
     ExecuteProvisionedProductServiceActionInput.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ServiceActionId"))
     ExecuteProvisionedProductServiceActionInput.add_member(:execute_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ExecuteToken", metadata: {"idempotencyToken"=>true}))
     ExecuteProvisionedProductServiceActionInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    ExecuteProvisionedProductServiceActionInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ExecutionParameterMap, location_name: "Parameters"))
     ExecuteProvisionedProductServiceActionInput.struct_class = Types::ExecuteProvisionedProductServiceActionInput
 
     ExecuteProvisionedProductServiceActionOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
     ExecuteProvisionedProductServiceActionOutput.struct_class = Types::ExecuteProvisionedProductServiceActionOutput
+
+    ExecutionParameter.add_member(:name, Shapes::ShapeRef.new(shape: ExecutionParameterKey, location_name: "Name"))
+    ExecutionParameter.add_member(:type, Shapes::ShapeRef.new(shape: ExecutionParameterType, location_name: "Type"))
+    ExecutionParameter.add_member(:default_values, Shapes::ShapeRef.new(shape: ExecutionParameterValueList, location_name: "DefaultValues"))
+    ExecutionParameter.struct_class = Types::ExecutionParameter
+
+    ExecutionParameterMap.key = Shapes::ShapeRef.new(shape: ExecutionParameterKey)
+    ExecutionParameterMap.value = Shapes::ShapeRef.new(shape: ExecutionParameterValueList)
+
+    ExecutionParameterValueList.member = Shapes::ShapeRef.new(shape: ExecutionParameterValue)
+
+    ExecutionParameters.member = Shapes::ShapeRef.new(shape: ExecutionParameter)
 
     FailedServiceActionAssociation.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, location_name: "ServiceActionId"))
     FailedServiceActionAssociation.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProductId"))
@@ -2069,6 +2099,16 @@ module Aws::ServiceCatalog
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeServiceActionInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeServiceActionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_service_action_execution_parameters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServiceActionExecutionParameters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServiceActionExecutionParametersInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeServiceActionExecutionParametersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

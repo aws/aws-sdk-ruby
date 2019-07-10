@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-07-10)
+------------------
+
+* Feature - This release adds support for Parameters in ExecuteProvisionedProductServiceAction and adds functionality to get the default parameter values for a Self-Service Action execution against a Provisioned Product via DescribeServiceActionExecutionParameters
+
 1.30.0 (2019-07-01)
 ------------------
 

@@ -176,6 +176,7 @@ module Aws::QuickSight
     GetDashboardEmbedUrlRequest.add_member(:session_lifetime_in_minutes, Shapes::ShapeRef.new(shape: SessionLifetimeInMinutes, location: "querystring", location_name: "session-lifetime"))
     GetDashboardEmbedUrlRequest.add_member(:undo_redo_disabled, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "undo-redo-disabled"))
     GetDashboardEmbedUrlRequest.add_member(:reset_disabled, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "reset-disabled"))
+    GetDashboardEmbedUrlRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "user-arn"))
     GetDashboardEmbedUrlRequest.struct_class = Types::GetDashboardEmbedUrlRequest
 
     GetDashboardEmbedUrlResponse.add_member(:embed_url, Shapes::ShapeRef.new(shape: EmbeddingUrl, location_name: "EmbedUrl"))
