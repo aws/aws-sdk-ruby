@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glacier - Updated the documentation for Amazon Glacier.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
 2.11.311 (2019-07-09)
 ------------------
 
