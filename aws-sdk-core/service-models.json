@@ -278,6 +278,10 @@
     "models": "es/2015-01-01",
     "endpoint": "es"
   },
+  "EventBridge": {
+    "models": "eventbridge/2015-10-07",
+    "endpoint": "events"
+  },
   "FMS": {
     "models": "fms/2018-01-01",
     "endpoint": "fms"

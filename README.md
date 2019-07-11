@@ -311,8 +311,8 @@ to be backwards compatible.
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
@@ -380,6 +380,7 @@ to be backwards compatible.
 | Amazon Elastic MapReduce                              | EMR                             | 2009-03-31  |
 | Amazon Elastic Transcoder                             | ElasticTranscoder               | 2012-09-25  |
 | Amazon Elasticsearch Service                          | ElasticsearchService            | 2015-01-01  |
+| Amazon EventBridge                                    | EventBridge                     | 2015-10-07  |
 | Amazon FSx                                            | FSx                             | 2018-03-01  |
 | Amazon GameLift                                       | GameLift                        | 2015-10-01  |
 | Amazon Glacier                                        | Glacier                         | 2012-06-01  |

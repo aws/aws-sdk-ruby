@@ -93,6 +93,7 @@ module Aws
     ElasticLoadBalancingV2
     ElasticTranscoder
     ElasticsearchService
+    EventBridge
     FMS
     FSx
     Firehose

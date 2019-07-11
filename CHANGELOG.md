@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
+
+* Feature - Aws::EventBridge - Added support for a new service, Amazon EventBridge.
+
 2.11.312 (2019-07-10)
 ------------------
 
