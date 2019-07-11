@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2019-07-11)
+------------------
+
+* Feature - Adds APIs for partner event sources, partner event buses, and custom event buses. These new features are managed in the EventBridge service.
+
 1.22.0 (2019-07-01)
 ------------------
 

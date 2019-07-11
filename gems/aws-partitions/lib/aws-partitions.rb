@@ -290,6 +290,7 @@ module Aws
             'ElasticLoadBalancingV2' => 'elasticloadbalancing',
             'ElasticTranscoder' => 'elastictranscoder',
             'ElasticsearchService' => 'es',
+            'EventBridge' => 'events',
             'FMS' => 'fms',
             'FSx' => 'fsx',
             'Firehose' => 'firehose',

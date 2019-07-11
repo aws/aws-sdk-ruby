@@ -5,7 +5,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::CloudWatchEvents
+module Aws::EventBridge
   # @api private
   module ClientApi
 
@@ -584,11 +584,11 @@ module Aws::CloudWatchEvents
         "endpointPrefix" => "events",
         "jsonVersion" => "1.1",
         "protocol" => "json",
-        "serviceFullName" => "Amazon CloudWatch Events",
-        "serviceId" => "CloudWatch Events",
+        "serviceFullName" => "Amazon EventBridge",
+        "serviceId" => "EventBridge",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSEvents",
-        "uid" => "events-2015-10-07",
+        "uid" => "eventbridge-2015-10-07",
       }
 
       api.add_operation(:activate_event_source, Seahorse::Model::Operation.new.tap do |o|

@@ -27,14 +27,14 @@ require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:cloudwatchevents)
+Aws::Plugins::GlobalConfiguration.add_identifier(:eventbridge)
 
-module Aws::CloudWatchEvents
+module Aws::EventBridge
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
 
-    @identifier = :cloudwatchevents
+    @identifier = :eventbridge
 
     set_api(ClientApi::API)
 
@@ -283,7 +283,7 @@ module Aws::CloudWatchEvents
     #     name: "EventSourceName", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ActivateEventSource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ActivateEventSource AWS API Documentation
     #
     # @overload activate_event_source(params = {})
     # @param [Hash] params ({})
@@ -331,7 +331,7 @@ module Aws::CloudWatchEvents
     #
     #   resp.event_bus_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreateEventBus AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEventBus AWS API Documentation
     #
     # @overload create_event_bus(params = {})
     # @param [Hash] params ({})
@@ -400,7 +400,7 @@ module Aws::CloudWatchEvents
     #
     #   resp.event_source_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreatePartnerEventSource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreatePartnerEventSource AWS API Documentation
     #
     # @overload create_partner_event_source(params = {})
     # @param [Hash] params ({})
@@ -431,7 +431,7 @@ module Aws::CloudWatchEvents
     #     name: "EventSourceName", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeactivateEventSource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeactivateEventSource AWS API Documentation
     #
     # @overload deactivate_event_source(params = {})
     # @param [Hash] params ({})
@@ -459,7 +459,7 @@ module Aws::CloudWatchEvents
     #     name: "EventBusName", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteEventBus AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteEventBus AWS API Documentation
     #
     # @overload delete_event_bus(params = {})
     # @param [Hash] params ({})
@@ -490,7 +490,7 @@ module Aws::CloudWatchEvents
     #     account: "AccountId", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeletePartnerEventSource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeletePartnerEventSource AWS API Documentation
     #
     # @overload delete_partner_event_source(params = {})
     # @param [Hash] params ({})
@@ -537,7 +537,7 @@ module Aws::CloudWatchEvents
     #     force: false,
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteRule AWS API Documentation
     #
     # @overload delete_rule(params = {})
     # @param [Hash] params ({})
@@ -579,7 +579,7 @@ module Aws::CloudWatchEvents
     #   resp.arn #=> String
     #   resp.policy #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBus AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventBus AWS API Documentation
     #
     # @overload describe_event_bus(params = {})
     # @param [Hash] params ({})
@@ -622,7 +622,7 @@ module Aws::CloudWatchEvents
     #   resp.name #=> String
     #   resp.state #=> String, one of "PENDING", "ACTIVE", "DELETED"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventSource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventSource AWS API Documentation
     #
     # @overload describe_event_source(params = {})
     # @param [Hash] params ({})
@@ -659,7 +659,7 @@ module Aws::CloudWatchEvents
     #   resp.arn #=> String
     #   resp.name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribePartnerEventSource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribePartnerEventSource AWS API Documentation
     #
     # @overload describe_partner_event_source(params = {})
     # @param [Hash] params ({})
@@ -711,7 +711,7 @@ module Aws::CloudWatchEvents
     #   resp.managed_by #=> String
     #   resp.event_bus_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeRule AWS API Documentation
     #
     # @overload describe_rule(params = {})
     # @param [Hash] params ({})
@@ -743,7 +743,7 @@ module Aws::CloudWatchEvents
     #     event_bus_name: "EventBusName",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DisableRule AWS API Documentation
     #
     # @overload disable_rule(params = {})
     # @param [Hash] params ({})
@@ -775,7 +775,7 @@ module Aws::CloudWatchEvents
     #     event_bus_name: "EventBusName",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EnableRule AWS API Documentation
     #
     # @overload enable_rule(params = {})
     # @param [Hash] params ({})
@@ -825,7 +825,7 @@ module Aws::CloudWatchEvents
     #   resp.event_buses[0].policy #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventBuses AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEventBuses AWS API Documentation
     #
     # @overload list_event_buses(params = {})
     # @param [Hash] params ({})
@@ -879,7 +879,7 @@ module Aws::CloudWatchEvents
     #   resp.event_sources[0].state #=> String, one of "PENDING", "ACTIVE", "DELETED"
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventSources AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEventSources AWS API Documentation
     #
     # @overload list_event_sources(params = {})
     # @param [Hash] params ({})
@@ -930,7 +930,7 @@ module Aws::CloudWatchEvents
     #   resp.partner_event_source_accounts[0].state #=> String, one of "PENDING", "ACTIVE", "DELETED"
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSourceAccounts AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListPartnerEventSourceAccounts AWS API Documentation
     #
     # @overload list_partner_event_source_accounts(params = {})
     # @param [Hash] params ({})
@@ -979,7 +979,7 @@ module Aws::CloudWatchEvents
     #   resp.partner_event_sources[0].name #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSources AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListPartnerEventSources AWS API Documentation
     #
     # @overload list_partner_event_sources(params = {})
     # @param [Hash] params ({})
@@ -1025,7 +1025,7 @@ module Aws::CloudWatchEvents
     #   resp.rule_names[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTarget AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListRuleNamesByTarget AWS API Documentation
     #
     # @overload list_rule_names_by_target(params = {})
     # @param [Hash] params ({})
@@ -1082,7 +1082,7 @@ module Aws::CloudWatchEvents
     #   resp.rules[0].event_bus_name #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRules AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListRules AWS API Documentation
     #
     # @overload list_rules(params = {})
     # @param [Hash] params ({})
@@ -1113,7 +1113,7 @@ module Aws::CloudWatchEvents
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -1185,7 +1185,7 @@ module Aws::CloudWatchEvents
     #   resp.targets[0].sqs_parameters.message_group_id #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListTargetsByRule AWS API Documentation
     #
     # @overload list_targets_by_rule(params = {})
     # @param [Hash] params ({})
@@ -1230,7 +1230,7 @@ module Aws::CloudWatchEvents
     #   resp.entries[0].error_code #=> String
     #   resp.entries[0].error_message #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEvents AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEvents AWS API Documentation
     #
     # @overload put_events(params = {})
     # @param [Hash] params ({})
@@ -1278,7 +1278,7 @@ module Aws::CloudWatchEvents
     #   resp.entries[0].error_code #=> String
     #   resp.entries[0].error_message #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEvents AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEvents AWS API Documentation
     #
     # @overload put_partner_events(params = {})
     # @param [Hash] params ({})
@@ -1373,7 +1373,7 @@ module Aws::CloudWatchEvents
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermission AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPermission AWS API Documentation
     #
     # @overload put_permission(params = {})
     # @param [Hash] params ({})
@@ -1504,7 +1504,7 @@ module Aws::CloudWatchEvents
     #
     #   resp.rule_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutRule AWS API Documentation
     #
     # @overload put_rule(params = {})
     # @param [Hash] params ({})
@@ -1713,7 +1713,7 @@ module Aws::CloudWatchEvents
     #   resp.failed_entries[0].error_code #=> String
     #   resp.failed_entries[0].error_message #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargets AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutTargets AWS API Documentation
     #
     # @overload put_targets(params = {})
     # @param [Hash] params ({})
@@ -1745,7 +1745,7 @@ module Aws::CloudWatchEvents
     #     event_bus_name: "NonPartnerEventBusName",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermission AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RemovePermission AWS API Documentation
     #
     # @overload remove_permission(params = {})
     # @param [Hash] params ({})
@@ -1804,7 +1804,7 @@ module Aws::CloudWatchEvents
     #   resp.failed_entries[0].error_code #=> String
     #   resp.failed_entries[0].error_message #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargets AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RemoveTargets AWS API Documentation
     #
     # @overload remove_targets(params = {})
     # @param [Hash] params ({})
@@ -1850,7 +1850,7 @@ module Aws::CloudWatchEvents
     #     ],
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/TagResource AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -1893,7 +1893,7 @@ module Aws::CloudWatchEvents
     #
     #   resp.result #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPattern AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/TestEventPattern AWS API Documentation
     #
     # @overload test_event_pattern(params = {})
     # @param [Hash] params ({})
@@ -1920,7 +1920,7 @@ module Aws::CloudWatchEvents
     #     tag_keys: ["TagKey"], # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UntagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UntagResource AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -1941,8 +1941,8 @@ module Aws::CloudWatchEvents
         client: self,
         params: params,
         config: config)
-      context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.23.0'
+      context[:gem_name] = 'aws-sdk-eventbridge'
+      context[:gem_version] = '1.0.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

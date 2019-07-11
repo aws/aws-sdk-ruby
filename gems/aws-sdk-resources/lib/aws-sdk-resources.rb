@@ -73,6 +73,7 @@ module Aws
   autoload :ElasticLoadBalancingV2, 'aws-sdk-elasticloadbalancingv2'
   autoload :ElasticTranscoder, 'aws-sdk-elastictranscoder'
   autoload :ElasticsearchService, 'aws-sdk-elasticsearchservice'
+  autoload :EventBridge, 'aws-sdk-eventbridge'
   autoload :FMS, 'aws-sdk-fms'
   autoload :FSx, 'aws-sdk-fsx'
   autoload :Firehose, 'aws-sdk-firehose'

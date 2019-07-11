@@ -5,7 +5,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::CloudWatchEvents
+module Aws::EventBridge
   module Types
 
     # @note When making an API call, you may pass ActivateEventSourceRequest
@@ -19,7 +19,7 @@ module Aws::CloudWatchEvents
     #   The name of the partner event source to activate.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ActivateEventSourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ActivateEventSourceRequest AWS API Documentation
     #
     class ActivateEventSourceRequest < Struct.new(
       :name)
@@ -57,7 +57,7 @@ module Aws::CloudWatchEvents
     #   in `EcsParameters` is set to `FARGATE`.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/AwsVpcConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/AwsVpcConfiguration AWS API Documentation
     #
     class AwsVpcConfiguration < Struct.new(
       :subnets,
@@ -83,7 +83,7 @@ module Aws::CloudWatchEvents
     #   are integers between 2 and 10,000.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchArrayProperties AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/BatchArrayProperties AWS API Documentation
     #
     class BatchArrayProperties < Struct.new(
       :size)
@@ -131,7 +131,7 @@ module Aws::CloudWatchEvents
     #   job definition.
     #   @return [Types::BatchRetryStrategy]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchParameters AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/BatchParameters AWS API Documentation
     #
     class BatchParameters < Struct.new(
       :job_definition,
@@ -157,7 +157,7 @@ module Aws::CloudWatchEvents
     #   values are 1–10.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchRetryStrategy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/BatchRetryStrategy AWS API Documentation
     #
     class BatchRetryStrategy < Struct.new(
       :attempts)
@@ -198,7 +198,7 @@ module Aws::CloudWatchEvents
     #   organization.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Condition AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Condition AWS API Documentation
     #
     class Condition < Struct.new(
       :type,
@@ -232,7 +232,7 @@ module Aws::CloudWatchEvents
     #   event source that the new event bus will be matched with.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreateEventBusRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEventBusRequest AWS API Documentation
     #
     class CreateEventBusRequest < Struct.new(
       :name,
@@ -244,7 +244,7 @@ module Aws::CloudWatchEvents
     #   The ARN of the new event bus.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreateEventBusResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEventBusResponse AWS API Documentation
     #
     class CreateEventBusResponse < Struct.new(
       :event_bus_arn)
@@ -272,7 +272,7 @@ module Aws::CloudWatchEvents
     #   matching partner event bus for this partner event source.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreatePartnerEventSourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreatePartnerEventSourceRequest AWS API Documentation
     #
     class CreatePartnerEventSourceRequest < Struct.new(
       :name,
@@ -284,7 +284,7 @@ module Aws::CloudWatchEvents
     #   The ARN of the partner event source.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreatePartnerEventSourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreatePartnerEventSourceResponse AWS API Documentation
     #
     class CreatePartnerEventSourceResponse < Struct.new(
       :event_source_arn)
@@ -302,7 +302,7 @@ module Aws::CloudWatchEvents
     #   The name of the partner event source to deactivate.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeactivateEventSourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeactivateEventSourceRequest AWS API Documentation
     #
     class DeactivateEventSourceRequest < Struct.new(
       :name)
@@ -320,7 +320,7 @@ module Aws::CloudWatchEvents
     #   The name of the event bus to delete.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteEventBusRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteEventBusRequest AWS API Documentation
     #
     class DeleteEventBusRequest < Struct.new(
       :name)
@@ -344,7 +344,7 @@ module Aws::CloudWatchEvents
     #   created for.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeletePartnerEventSourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeletePartnerEventSourceRequest AWS API Documentation
     #
     class DeletePartnerEventSourceRequest < Struct.new(
       :name,
@@ -378,7 +378,7 @@ module Aws::CloudWatchEvents
     #   `ListRules` and checking the `ManagedBy` field of the response.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteRuleRequest AWS API Documentation
     #
     class DeleteRuleRequest < Struct.new(
       :name,
@@ -399,7 +399,7 @@ module Aws::CloudWatchEvents
     #   default event bus is displayed.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBusRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventBusRequest AWS API Documentation
     #
     class DescribeEventBusRequest < Struct.new(
       :name)
@@ -420,7 +420,7 @@ module Aws::CloudWatchEvents
     #   account.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBusResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventBusResponse AWS API Documentation
     #
     class DescribeEventBusResponse < Struct.new(
       :name,
@@ -440,7 +440,7 @@ module Aws::CloudWatchEvents
     #   The name of the partner event source to display the details of.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventSourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventSourceRequest AWS API Documentation
     #
     class DescribeEventSourceRequest < Struct.new(
       :name)
@@ -477,7 +477,7 @@ module Aws::CloudWatchEvents
     #   source has since been deleted.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventSourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventSourceResponse AWS API Documentation
     #
     class DescribeEventSourceResponse < Struct.new(
       :arn,
@@ -500,7 +500,7 @@ module Aws::CloudWatchEvents
     #   The name of the event source to display.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribePartnerEventSourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribePartnerEventSourceRequest AWS API Documentation
     #
     class DescribePartnerEventSourceRequest < Struct.new(
       :name)
@@ -515,7 +515,7 @@ module Aws::CloudWatchEvents
     #   The name of the event source.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribePartnerEventSourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribePartnerEventSourceResponse AWS API Documentation
     #
     class DescribePartnerEventSourceResponse < Struct.new(
       :arn,
@@ -540,7 +540,7 @@ module Aws::CloudWatchEvents
     #   default event bus is used.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeRuleRequest AWS API Documentation
     #
     class DescribeRuleRequest < Struct.new(
       :name,
@@ -593,7 +593,7 @@ module Aws::CloudWatchEvents
     #   The event bus associated with the rule.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeRuleResponse AWS API Documentation
     #
     class DescribeRuleResponse < Struct.new(
       :name,
@@ -625,7 +625,7 @@ module Aws::CloudWatchEvents
     #   default event bus is used.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRuleRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DisableRuleRequest AWS API Documentation
     #
     class DisableRuleRequest < Struct.new(
       :name,
@@ -707,7 +707,7 @@ module Aws::CloudWatchEvents
     #   characters.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EcsParameters AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EcsParameters AWS API Documentation
     #
     class EcsParameters < Struct.new(
       :task_definition_arn,
@@ -736,7 +736,7 @@ module Aws::CloudWatchEvents
     #   default event bus is used.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRuleRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EnableRuleRequest AWS API Documentation
     #
     class EnableRuleRequest < Struct.new(
       :name,
@@ -765,7 +765,7 @@ module Aws::CloudWatchEvents
     #   accounts can write events to this event bus.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EventBus AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EventBus AWS API Documentation
     #
     class EventBus < Struct.new(
       :name,
@@ -809,7 +809,7 @@ module Aws::CloudWatchEvents
     #   source has since been deleted.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EventSource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EventSource AWS API Documentation
     #
     class EventSource < Struct.new(
       :arn,
@@ -889,7 +889,7 @@ module Aws::CloudWatchEvents
     #   `\}`
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InputTransformer AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/InputTransformer AWS API Documentation
     #
     class InputTransformer < Struct.new(
       :input_paths_map,
@@ -920,7 +920,7 @@ module Aws::CloudWatchEvents
     #   [1]: https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/KinesisParameters AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/KinesisParameters AWS API Documentation
     #
     class KinesisParameters < Struct.new(
       :partition_key_path)
@@ -952,7 +952,7 @@ module Aws::CloudWatchEvents
     #   in a subsequent operation to retrieve the next set of results.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventBusesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEventBusesRequest AWS API Documentation
     #
     class ListEventBusesRequest < Struct.new(
       :name_prefix,
@@ -970,7 +970,7 @@ module Aws::CloudWatchEvents
     #   set of results.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventBusesResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEventBusesResponse AWS API Documentation
     #
     class ListEventBusesResponse < Struct.new(
       :event_buses,
@@ -1003,7 +1003,7 @@ module Aws::CloudWatchEvents
     #   in a subsequent operation to retrieve the next set of results.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventSourcesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEventSourcesRequest AWS API Documentation
     #
     class ListEventSourcesRequest < Struct.new(
       :name_prefix,
@@ -1021,7 +1021,7 @@ module Aws::CloudWatchEvents
     #   set of results.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventSourcesResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEventSourcesResponse AWS API Documentation
     #
     class ListEventSourcesResponse < Struct.new(
       :event_sources,
@@ -1054,7 +1054,7 @@ module Aws::CloudWatchEvents
     #   in a subsequent operation to retrieve the next set of results.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSourceAccountsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListPartnerEventSourceAccountsRequest AWS API Documentation
     #
     class ListPartnerEventSourceAccountsRequest < Struct.new(
       :event_source_name,
@@ -1072,7 +1072,7 @@ module Aws::CloudWatchEvents
     #   set of results.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSourceAccountsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListPartnerEventSourceAccountsResponse AWS API Documentation
     #
     class ListPartnerEventSourceAccountsResponse < Struct.new(
       :partner_event_source_accounts,
@@ -1105,7 +1105,7 @@ module Aws::CloudWatchEvents
     #   in a subsequent operation to retrieve the next set of results.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSourcesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListPartnerEventSourcesRequest AWS API Documentation
     #
     class ListPartnerEventSourcesRequest < Struct.new(
       :name_prefix,
@@ -1123,7 +1123,7 @@ module Aws::CloudWatchEvents
     #   set of results.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSourcesResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListPartnerEventSourcesResponse AWS API Documentation
     #
     class ListPartnerEventSourcesResponse < Struct.new(
       :partner_event_sources,
@@ -1159,7 +1159,7 @@ module Aws::CloudWatchEvents
     #   The maximum number of results to return.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTargetRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListRuleNamesByTargetRequest AWS API Documentation
     #
     class ListRuleNamesByTargetRequest < Struct.new(
       :target_arn,
@@ -1178,7 +1178,7 @@ module Aws::CloudWatchEvents
     #   are no more results, the value is null.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTargetResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListRuleNamesByTargetResponse AWS API Documentation
     #
     class ListRuleNamesByTargetResponse < Struct.new(
       :rule_names,
@@ -1214,7 +1214,7 @@ module Aws::CloudWatchEvents
     #   The maximum number of results to return.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRulesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListRulesRequest AWS API Documentation
     #
     class ListRulesRequest < Struct.new(
       :name_prefix,
@@ -1233,7 +1233,7 @@ module Aws::CloudWatchEvents
     #   are no more results, the value is null.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRulesResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListRulesResponse AWS API Documentation
     #
     class ListRulesResponse < Struct.new(
       :rules,
@@ -1252,7 +1252,7 @@ module Aws::CloudWatchEvents
     #   The ARN of the rule for which you want to view tags.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListTagsForResourceRequest AWS API Documentation
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
@@ -1264,7 +1264,7 @@ module Aws::CloudWatchEvents
     #   specified.
     #   @return [Array<Types::Tag>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
@@ -1299,7 +1299,7 @@ module Aws::CloudWatchEvents
     #   The maximum number of results to return.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRuleRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListTargetsByRuleRequest AWS API Documentation
     #
     class ListTargetsByRuleRequest < Struct.new(
       :rule,
@@ -1318,7 +1318,7 @@ module Aws::CloudWatchEvents
     #   are no more results, the value is null.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRuleResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListTargetsByRuleResponse AWS API Documentation
     #
     class ListTargetsByRuleResponse < Struct.new(
       :targets,
@@ -1346,7 +1346,7 @@ module Aws::CloudWatchEvents
     #   network mode.
     #   @return [Types::AwsVpcConfiguration]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/NetworkConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/NetworkConfiguration AWS API Documentation
     #
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration)
@@ -1366,7 +1366,7 @@ module Aws::CloudWatchEvents
     #   The name of the partner event source.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PartnerEventSource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PartnerEventSource AWS API Documentation
     #
     class PartnerEventSource < Struct.new(
       :arn,
@@ -1398,7 +1398,7 @@ module Aws::CloudWatchEvents
     #   source has since been deleted.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PartnerEventSourceAccount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PartnerEventSourceAccount AWS API Documentation
     #
     class PartnerEventSourceAccount < Struct.new(
       :account,
@@ -1430,7 +1430,7 @@ module Aws::CloudWatchEvents
     #   event, resources associated with the event, and so on.
     #   @return [Array<Types::PutEventsRequestEntry>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsRequest AWS API Documentation
     #
     class PutEventsRequest < Struct.new(
       :entries)
@@ -1485,7 +1485,7 @@ module Aws::CloudWatchEvents
     #   associated with this event bus can match the event.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequestEntry AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsRequestEntry AWS API Documentation
     #
     class PutEventsRequestEntry < Struct.new(
       :time,
@@ -1508,7 +1508,7 @@ module Aws::CloudWatchEvents
     #   the problem with the entry.
     #   @return [Array<Types::PutEventsResultEntry>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsResponse AWS API Documentation
     #
     class PutEventsResponse < Struct.new(
       :failed_entry_count,
@@ -1530,7 +1530,7 @@ module Aws::CloudWatchEvents
     #   The error message that explains why the event submission failed.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsResultEntry AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsResultEntry AWS API Documentation
     #
     class PutEventsResultEntry < Struct.new(
       :event_id,
@@ -1558,7 +1558,7 @@ module Aws::CloudWatchEvents
     #   The list of events to write to the event bus.
     #   @return [Array<Types::PutPartnerEventsRequestEntry>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEventsRequest AWS API Documentation
     #
     class PutPartnerEventsRequest < Struct.new(
       :entries)
@@ -1602,7 +1602,7 @@ module Aws::CloudWatchEvents
     #   string can contain fields and nested subobjects.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsRequestEntry AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEventsRequestEntry AWS API Documentation
     #
     class PutPartnerEventsRequestEntry < Struct.new(
       :time,
@@ -1623,7 +1623,7 @@ module Aws::CloudWatchEvents
     #   written to the partner event bus.
     #   @return [Array<Types::PutPartnerEventsResultEntry>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEventsResponse AWS API Documentation
     #
     class PutPartnerEventsResponse < Struct.new(
       :failed_entry_count,
@@ -1645,7 +1645,7 @@ module Aws::CloudWatchEvents
     #   The error message that explains why the event submission failed.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsResultEntry AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEventsResultEntry AWS API Documentation
     #
     class PutPartnerEventsResultEntry < Struct.new(
       :event_id,
@@ -1718,7 +1718,7 @@ module Aws::CloudWatchEvents
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #   @return [Types::Condition]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPermissionRequest AWS API Documentation
     #
     class PutPermissionRequest < Struct.new(
       :event_bus_name,
@@ -1788,7 +1788,7 @@ module Aws::CloudWatchEvents
     #   default event bus is used.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutRuleRequest AWS API Documentation
     #
     class PutRuleRequest < Struct.new(
       :name,
@@ -1806,7 +1806,7 @@ module Aws::CloudWatchEvents
     #   The Amazon Resource Name (ARN) of the rule.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutRuleResponse AWS API Documentation
     #
     class PutRuleResponse < Struct.new(
       :rule_arn)
@@ -1887,7 +1887,7 @@ module Aws::CloudWatchEvents
     #   The targets to update or add to the rule.
     #   @return [Array<Types::Target>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutTargetsRequest AWS API Documentation
     #
     class PutTargetsRequest < Struct.new(
       :rule,
@@ -1904,7 +1904,7 @@ module Aws::CloudWatchEvents
     #   The failed target entries.
     #   @return [Array<Types::PutTargetsResultEntry>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutTargetsResponse AWS API Documentation
     #
     class PutTargetsResponse < Struct.new(
       :failed_entry_count,
@@ -1928,7 +1928,7 @@ module Aws::CloudWatchEvents
     #   The error message that explains why the target addition failed.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsResultEntry AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutTargetsResultEntry AWS API Documentation
     #
     class PutTargetsResultEntry < Struct.new(
       :target_id,
@@ -1955,7 +1955,7 @@ module Aws::CloudWatchEvents
     #   this, the default event bus is used.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermissionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RemovePermissionRequest AWS API Documentation
     #
     class RemovePermissionRequest < Struct.new(
       :statement_id,
@@ -1993,7 +1993,7 @@ module Aws::CloudWatchEvents
     #   `ListRules` and checking the `ManagedBy` field of the response.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RemoveTargetsRequest AWS API Documentation
     #
     class RemoveTargetsRequest < Struct.new(
       :rule,
@@ -2011,7 +2011,7 @@ module Aws::CloudWatchEvents
     #   The failed target entries.
     #   @return [Array<Types::RemoveTargetsResultEntry>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RemoveTargetsResponse AWS API Documentation
     #
     class RemoveTargetsResponse < Struct.new(
       :failed_entry_count,
@@ -2035,7 +2035,7 @@ module Aws::CloudWatchEvents
     #   The error message that explains why the target removal failed.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsResultEntry AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RemoveTargetsResultEntry AWS API Documentation
     #
     class RemoveTargetsResultEntry < Struct.new(
       :target_id,
@@ -2091,7 +2091,7 @@ module Aws::CloudWatchEvents
     #   The event bus associated with the rule.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Rule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Rule AWS API Documentation
     #
     class Rule < Struct.new(
       :name,
@@ -2126,7 +2126,7 @@ module Aws::CloudWatchEvents
     #   which specifies either an array of `InstanceIds` or a tag.
     #   @return [Array<Types::RunCommandTarget>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RunCommandParameters AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RunCommandParameters AWS API Documentation
     #
     class RunCommandParameters < Struct.new(
       :run_command_targets)
@@ -2155,7 +2155,7 @@ module Aws::CloudWatchEvents
     #   IDs.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RunCommandTarget AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RunCommandTarget AWS API Documentation
     #
     class RunCommandTarget < Struct.new(
       :key,
@@ -2177,7 +2177,7 @@ module Aws::CloudWatchEvents
     #   The FIFO message group ID to use as the target.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/SqsParameters AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/SqsParameters AWS API Documentation
     #
     class SqsParameters < Struct.new(
       :message_group_id)
@@ -2204,7 +2204,7 @@ module Aws::CloudWatchEvents
     #   The value for the specified tag key.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Tag AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -2233,7 +2233,7 @@ module Aws::CloudWatchEvents
     #   The list of key-value pairs to associate with the rule.
     #   @return [Array<Types::Tag>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/TagResourceRequest AWS API Documentation
     #
     class TagResourceRequest < Struct.new(
       :resource_arn,
@@ -2241,7 +2241,7 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TagResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
@@ -2398,7 +2398,7 @@ module Aws::CloudWatchEvents
     #   content-based deduplication enabled.
     #   @return [Types::SqsParameters]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Target AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Target AWS API Documentation
     #
     class Target < Struct.new(
       :id,
@@ -2436,7 +2436,7 @@ module Aws::CloudWatchEvents
     #   The event, in JSON format, to test against the event pattern.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPatternRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/TestEventPatternRequest AWS API Documentation
     #
     class TestEventPatternRequest < Struct.new(
       :event_pattern,
@@ -2448,7 +2448,7 @@ module Aws::CloudWatchEvents
     #   Indicates whether the event matches the event pattern.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPatternResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/TestEventPatternResponse AWS API Documentation
     #
     class TestEventPatternResponse < Struct.new(
       :result)
@@ -2471,7 +2471,7 @@ module Aws::CloudWatchEvents
     #   The list of tag keys to remove from the resource.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UntagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UntagResourceRequest AWS API Documentation
     #
     class UntagResourceRequest < Struct.new(
       :resource_arn,
@@ -2479,7 +2479,7 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UntagResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 

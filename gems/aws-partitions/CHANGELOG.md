@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.188.0 (2019-07-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EventBridge`.
+
 1.187.0 (2019-07-10)
 ------------------
 

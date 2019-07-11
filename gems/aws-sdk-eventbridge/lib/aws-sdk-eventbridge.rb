@@ -8,15 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudwatchevents/types'
-require_relative 'aws-sdk-cloudwatchevents/client_api'
-require_relative 'aws-sdk-cloudwatchevents/client'
-require_relative 'aws-sdk-cloudwatchevents/errors'
-require_relative 'aws-sdk-cloudwatchevents/resource'
-require_relative 'aws-sdk-cloudwatchevents/customizations'
+require_relative 'aws-sdk-eventbridge/types'
+require_relative 'aws-sdk-eventbridge/client_api'
+require_relative 'aws-sdk-eventbridge/client'
+require_relative 'aws-sdk-eventbridge/errors'
+require_relative 'aws-sdk-eventbridge/resource'
+require_relative 'aws-sdk-eventbridge/customizations'
 
-# This module provides support for Amazon CloudWatch Events. This module is available in the
-# `aws-sdk-cloudwatchevents` gem.
+# This module provides support for Amazon EventBridge. This module is available in the
+# `aws-sdk-eventbridge` gem.
 #
 # # Client
 #
@@ -28,20 +28,20 @@ require_relative 'aws-sdk-cloudwatchevents/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon CloudWatch Events all
+# Errors returned from Amazon EventBridge all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::CloudWatchEvents::Errors::ServiceError
+#     rescue Aws::EventBridge::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::CloudWatchEvents
+module Aws::EventBridge
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.0.0'
 
 end

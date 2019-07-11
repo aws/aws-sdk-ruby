@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.50.0 (2019-07-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-eventbridge` gem.
+
 3.49.0 (2019-06-27)
 ------------------
 
