@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApiGatewayV2 - Updated the API for AmazonApiGatewayV2.
+
+* Feature - Aws::ElasticsearchService - Updated the API for Amazon Elasticsearch Service.
+
+* Feature - Aws::IAM - Updated the API for AWS Identity and Access Management.
+
+* Feature - Aws::RoboMaker - Updated the API, and documentation for AWS RoboMaker.
+
 2.11.313 (2019-07-11)
 ------------------
 
