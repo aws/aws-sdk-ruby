@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.314 (2019-07-12)
+------------------
+
 * Feature - Aws::ApiGatewayV2 - Updated the API for AmazonApiGatewayV2.
 
 * Feature - Aws::ElasticsearchService - Updated the API for Amazon Elasticsearch Service.
