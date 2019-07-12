@@ -610,7 +610,7 @@ module Aws::RoboMaker
     #     ],
     #     robot_software_suite: { # required
     #       name: "ROS", # accepts ROS
-    #       version: "Kinetic", # accepts Kinetic
+    #       version: "Kinetic", # accepts Kinetic, Melodic
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -628,7 +628,7 @@ module Aws::RoboMaker
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
     #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
     #   resp.tags #=> Hash
@@ -681,7 +681,7 @@ module Aws::RoboMaker
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
     #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
     #
@@ -745,7 +745,7 @@ module Aws::RoboMaker
     #     },
     #     robot_software_suite: { # required
     #       name: "ROS", # accepts ROS
-    #       version: "Kinetic", # accepts Kinetic
+    #       version: "Kinetic", # accepts Kinetic, Melodic
     #     },
     #     rendering_engine: { # required
     #       name: "OGRE", # accepts OGRE
@@ -769,7 +769,7 @@ module Aws::RoboMaker
     #   resp.simulation_software_suite.name #=> String, one of "Gazebo"
     #   resp.simulation_software_suite.version #=> String
     #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
     #   resp.last_updated_at #=> Time
@@ -828,7 +828,7 @@ module Aws::RoboMaker
     #   resp.simulation_software_suite.name #=> String, one of "Gazebo"
     #   resp.simulation_software_suite.version #=> String
     #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
     #   resp.last_updated_at #=> Time
@@ -956,8 +956,8 @@ module Aws::RoboMaker
     #       "TagKey" => "TagValue",
     #     },
     #     vpc_config: {
-    #       subnets: ["GenericString"], # required
-    #       security_groups: ["GenericString"],
+    #       subnets: ["NonEmptyString"], # required
+    #       security_groups: ["NonEmptyString"],
     #       assign_public_ip: false,
     #     },
     #   })
@@ -1340,7 +1340,7 @@ module Aws::RoboMaker
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
     #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.revision_id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -1396,7 +1396,7 @@ module Aws::RoboMaker
     #   resp.simulation_software_suite.name #=> String, one of "Gazebo"
     #   resp.simulation_software_suite.version #=> String
     #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
     #   resp.revision_id #=> String
@@ -1713,7 +1713,7 @@ module Aws::RoboMaker
     #   resp.robot_application_summaries[0].version #=> String
     #   resp.robot_application_summaries[0].last_updated_at #=> Time
     #   resp.robot_application_summaries[0].robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.robot_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotApplications AWS API Documentation
@@ -1863,7 +1863,7 @@ module Aws::RoboMaker
     #   resp.simulation_application_summaries[0].version #=> String
     #   resp.simulation_application_summaries[0].last_updated_at #=> Time
     #   resp.simulation_application_summaries[0].robot_software_suite.name #=> String, one of "ROS"
-    #   resp.simulation_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.simulation_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.simulation_application_summaries[0].simulation_software_suite.name #=> String, one of "Gazebo"
     #   resp.simulation_application_summaries[0].simulation_software_suite.version #=> String
     #   resp.next_token #=> String
@@ -2211,7 +2211,7 @@ module Aws::RoboMaker
     #     ],
     #     robot_software_suite: { # required
     #       name: "ROS", # accepts ROS
-    #       version: "Kinetic", # accepts Kinetic
+    #       version: "Kinetic", # accepts Kinetic, Melodic
     #     },
     #     current_revision_id: "RevisionId",
     #   })
@@ -2227,7 +2227,7 @@ module Aws::RoboMaker
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
     #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
     #
@@ -2289,7 +2289,7 @@ module Aws::RoboMaker
     #     },
     #     robot_software_suite: { # required
     #       name: "ROS", # accepts ROS
-    #       version: "Kinetic", # accepts Kinetic
+    #       version: "Kinetic", # accepts Kinetic, Melodic
     #     },
     #     rendering_engine: { # required
     #       name: "OGRE", # accepts OGRE
@@ -2311,7 +2311,7 @@ module Aws::RoboMaker
     #   resp.simulation_software_suite.name #=> String, one of "Gazebo"
     #   resp.simulation_software_suite.version #=> String
     #   resp.robot_software_suite.name #=> String, one of "ROS"
-    #   resp.robot_software_suite.version #=> String, one of "Kinetic"
+    #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
     #   resp.last_updated_at #=> Time
@@ -2339,7 +2339,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

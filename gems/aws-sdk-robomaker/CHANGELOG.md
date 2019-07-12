@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2019-07-12)
+------------------
+
+* Feature - Added Melodic as a supported Robot Software Suite Version
+
 1.11.0 (2019-07-01)
 ------------------
 

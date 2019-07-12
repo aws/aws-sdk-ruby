@@ -1134,6 +1134,7 @@ module Aws::ApiGatewayV2
     UpdateApiResponse.add_member(:route_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "routeSelectionExpression"))
     UpdateApiResponse.add_member(:version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "version"))
     UpdateApiResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "warnings"))
+    UpdateApiResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateApiResponse.struct_class = Types::UpdateApiResponse
 
     UpdateAuthorizerInput.add_member(:authorizer_credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "authorizerCredentialsArn"))
@@ -1194,6 +1195,7 @@ module Aws::ApiGatewayV2
     UpdateDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     UpdateDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
     UpdateDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    UpdateDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateDomainNameResponse.struct_class = Types::UpdateDomainNameResponse
 
     UpdateIntegrationInput.add_member(:connection_id, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And1024, location_name: "connectionId"))
@@ -1385,6 +1387,7 @@ module Aws::ApiGatewayV2
     UpdateStageResponse.add_member(:route_settings, Shapes::ShapeRef.new(shape: RouteSettingsMap, location_name: "routeSettings"))
     UpdateStageResponse.add_member(:stage_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "stageName"))
     UpdateStageResponse.add_member(:stage_variables, Shapes::ShapeRef.new(shape: StageVariablesMap, location_name: "stageVariables"))
+    UpdateStageResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateStageResponse.struct_class = Types::UpdateStageResponse
 
     __listOfApi.member = Shapes::ShapeRef.new(shape: Api)

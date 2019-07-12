@@ -347,7 +347,7 @@ module Aws::RoboMaker
     #         ],
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic
+    #           version: "Kinetic", # accepts Kinetic, Melodic
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -591,7 +591,7 @@ module Aws::RoboMaker
     #         },
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic
+    #           version: "Kinetic", # accepts Kinetic, Melodic
     #         },
     #         rendering_engine: { # required
     #           name: "OGRE", # accepts OGRE
@@ -816,8 +816,8 @@ module Aws::RoboMaker
     #           "TagKey" => "TagValue",
     #         },
     #         vpc_config: {
-    #           subnets: ["GenericString"], # required
-    #           security_groups: ["GenericString"],
+    #           subnets: ["NonEmptyString"], # required
+    #           security_groups: ["NonEmptyString"],
     #           assign_public_ip: false,
     #         },
     #       }
@@ -2928,7 +2928,7 @@ module Aws::RoboMaker
     #
     #       {
     #         name: "ROS", # accepts ROS
-    #         version: "Kinetic", # accepts Kinetic
+    #         version: "Kinetic", # accepts Kinetic, Melodic
     #       }
     #
     # @!attribute [rw] name
@@ -3493,7 +3493,7 @@ module Aws::RoboMaker
     #         ],
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic
+    #           version: "Kinetic", # accepts Kinetic, Melodic
     #         },
     #         current_revision_id: "RevisionId",
     #       }
@@ -3584,7 +3584,7 @@ module Aws::RoboMaker
     #         },
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS
-    #           version: "Kinetic", # accepts Kinetic
+    #           version: "Kinetic", # accepts Kinetic, Melodic
     #         },
     #         rendering_engine: { # required
     #           name: "OGRE", # accepts OGRE
@@ -3691,8 +3691,8 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         subnets: ["GenericString"], # required
-    #         security_groups: ["GenericString"],
+    #         subnets: ["NonEmptyString"], # required
+    #         security_groups: ["NonEmptyString"],
     #         assign_public_ip: false,
     #       }
     #

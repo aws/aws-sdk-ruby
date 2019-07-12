@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-07-12)
+------------------
+
+* Feature - Removed exception that was indicated but never thrown for IAM GetAccessKeyLastUsed API
+
 1.27.0 (2019-07-01)
 ------------------
 

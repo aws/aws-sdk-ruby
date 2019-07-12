@@ -109,6 +109,7 @@ module Aws::RoboMaker
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
+    NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     OutputLocation = Shapes::StructureShape.new(name: 'OutputLocation')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Path = Shapes::StringShape.new(name: 'Path')
@@ -675,7 +676,7 @@ module Aws::RoboMaker
 
     Robots.member = Shapes::ShapeRef.new(shape: Robot)
 
-    SecurityGroups.member = Shapes::ShapeRef.new(shape: GenericString)
+    SecurityGroups.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -749,7 +750,7 @@ module Aws::RoboMaker
 
     Sources.member = Shapes::ShapeRef.new(shape: Source)
 
-    Subnets.member = Shapes::ShapeRef.new(shape: GenericString)
+    Subnets.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     SyncDeploymentJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     SyncDeploymentJobRequest.add_member(:fleet, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "fleet"))

@@ -4858,6 +4858,11 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] warnings
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class UpdateApiResponse < Struct.new(
       :api_endpoint,
       :api_id,
@@ -4869,7 +4874,8 @@ module Aws::ApiGatewayV2
       :protocol_type,
       :route_selection_expression,
       :version,
-      :warnings)
+      :warnings,
+      :tags)
       include Aws::Structure
     end
 
@@ -5227,10 +5233,16 @@ module Aws::ApiGatewayV2
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class UpdateDomainNameResponse < Struct.new(
       :api_mapping_selection_expression,
       :domain_name,
-      :domain_name_configurations)
+      :domain_name_configurations,
+      :tags)
       include Aws::Structure
     end
 
@@ -6468,6 +6480,11 @@ module Aws::ApiGatewayV2
     #   The stage variable map.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   A key value pair of string with key length between\[1-128\] and
+    #   value length between\[1-256\]
+    #   @return [Hash<String,String>]
+    #
     class UpdateStageResponse < Struct.new(
       :access_log_settings,
       :client_certificate_id,
@@ -6478,7 +6495,8 @@ module Aws::ApiGatewayV2
       :last_updated_date,
       :route_settings,
       :stage_name,
-      :stage_variables)
+      :stage_variables,
+      :tags)
       include Aws::Structure
     end
 

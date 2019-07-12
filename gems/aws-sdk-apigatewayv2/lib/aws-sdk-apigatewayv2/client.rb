@@ -2524,6 +2524,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateApiResponse#route_selection_expression #route_selection_expression} => String
     #   * {Types::UpdateApiResponse#version #version} => String
     #   * {Types::UpdateApiResponse#warnings #warnings} => Array&lt;String&gt;
+    #   * {Types::UpdateApiResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2551,6 +2552,8 @@ module Aws::ApiGatewayV2
     #   resp.version #=> String
     #   resp.warnings #=> Array
     #   resp.warnings[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload update_api(params = {})
     # @param [Hash] params ({})
@@ -2757,6 +2760,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::UpdateDomainNameResponse#domain_name #domain_name} => String
     #   * {Types::UpdateDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
+    #   * {Types::UpdateDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2791,6 +2795,8 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
     #   resp.domain_name_configurations[0].domain_name_status_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -3316,6 +3322,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateStageResponse#route_settings #route_settings} => Hash&lt;String,Types::RouteSettings&gt;
     #   * {Types::UpdateStageResponse#stage_name #stage_name} => String
     #   * {Types::UpdateStageResponse#stage_variables #stage_variables} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateStageResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3373,6 +3380,8 @@ module Aws::ApiGatewayV2
     #   resp.stage_name #=> String
     #   resp.stage_variables #=> Hash
     #   resp.stage_variables["__string"] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @overload update_stage(params = {})
     # @param [Hash] params ({})
@@ -3394,7 +3403,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

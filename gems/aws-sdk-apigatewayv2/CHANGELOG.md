@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2019-07-12)
+------------------
+
+* Feature - Bug fix (Add tags field to Update Stage , Api and DomainName Responses )
+
 1.11.0 (2019-07-01)
 ------------------
 

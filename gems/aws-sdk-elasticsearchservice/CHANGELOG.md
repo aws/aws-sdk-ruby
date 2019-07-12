@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-07-12)
+------------------
+
+* Feature - Amazon Elasticsearch Service now supports M5, C5, and R5 instance types.
+
 1.24.0 (2019-07-01)
 ------------------
 
