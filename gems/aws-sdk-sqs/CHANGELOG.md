@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Skip `:message_attributes` validation for empty attributes. (Github Issue #2081)
+
 1.18.0 (2019-07-01)
 ------------------
 
