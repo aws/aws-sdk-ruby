@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.315 (2019-07-17)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
 
 * Feature - Aws::ConfigService - Updated the API for AWS Config.
