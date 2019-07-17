@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-07-17)
+------------------
+
+* Feature - Documentation updates for autoscaling
+
 1.25.0 (2019-07-01)
 ------------------
 

@@ -1399,7 +1399,7 @@ module Aws::ConfigService
     #
     #   resp.organization_config_rule_statuses #=> Array
     #   resp.organization_config_rule_statuses[0].organization_config_rule_name #=> String
-    #   resp.organization_config_rule_statuses[0].organization_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.organization_config_rule_statuses[0].organization_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "UPDATE_IN_PROGRESS", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS"
     #   resp.organization_config_rule_statuses[0].error_code #=> String
     #   resp.organization_config_rule_statuses[0].error_message #=> String
     #   resp.organization_config_rule_statuses[0].last_update_time #=> Time
@@ -2248,7 +2248,7 @@ module Aws::ConfigService
     #     organization_config_rule_name: "StringWithCharLimit64", # required
     #     filters: {
     #       account_id: "AccountId",
-    #       member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
+    #       member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_SUCCESSFUL, UPDATE_FAILED, UPDATE_IN_PROGRESS, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
     #     },
     #     limit: 1,
     #     next_token: "String",
@@ -2259,7 +2259,7 @@ module Aws::ConfigService
     #   resp.organization_config_rule_detailed_status #=> Array
     #   resp.organization_config_rule_detailed_status[0].account_id #=> String
     #   resp.organization_config_rule_detailed_status[0].config_rule_name #=> String
-    #   resp.organization_config_rule_detailed_status[0].member_account_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.organization_config_rule_detailed_status[0].member_account_rule_status #=> String, one of "CREATE_SUCCESSFUL", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "UPDATE_IN_PROGRESS", "DELETE_SUCCESSFUL", "DELETE_FAILED", "DELETE_IN_PROGRESS"
     #   resp.organization_config_rule_detailed_status[0].error_code #=> String
     #   resp.organization_config_rule_detailed_status[0].error_message #=> String
     #   resp.organization_config_rule_detailed_status[0].last_update_time #=> Time
@@ -3396,7 +3396,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

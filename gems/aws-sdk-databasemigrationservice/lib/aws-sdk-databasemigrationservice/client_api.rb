@@ -154,6 +154,7 @@ module Aws::DatabaseMigrationService
     RefreshSchemasResponse = Shapes::StructureShape.new(name: 'RefreshSchemasResponse')
     RefreshSchemasStatus = Shapes::StructureShape.new(name: 'RefreshSchemasStatus')
     RefreshSchemasStatusTypeValue = Shapes::StringShape.new(name: 'RefreshSchemasStatusTypeValue')
+    ReleaseStatusValues = Shapes::StringShape.new(name: 'ReleaseStatusValues')
     ReloadOptionValue = Shapes::StringShape.new(name: 'ReloadOptionValue')
     ReloadTablesMessage = Shapes::StructureShape.new(name: 'ReloadTablesMessage')
     ReloadTablesResponse = Shapes::StructureShape.new(name: 'ReloadTablesResponse')
@@ -390,6 +391,7 @@ module Aws::DatabaseMigrationService
     DescribeAccountAttributesMessage.struct_class = Types::DescribeAccountAttributesMessage
 
     DescribeAccountAttributesResponse.add_member(:account_quotas, Shapes::ShapeRef.new(shape: AccountQuotaList, location_name: "AccountQuotas"))
+    DescribeAccountAttributesResponse.add_member(:unique_account_identifier, Shapes::ShapeRef.new(shape: String, location_name: "UniqueAccountIdentifier"))
     DescribeAccountAttributesResponse.struct_class = Types::DescribeAccountAttributesResponse
 
     DescribeCertificatesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
@@ -778,6 +780,7 @@ module Aws::DatabaseMigrationService
     OrderableReplicationInstance.add_member(:default_allocated_storage, Shapes::ShapeRef.new(shape: Integer, location_name: "DefaultAllocatedStorage"))
     OrderableReplicationInstance.add_member(:included_allocated_storage, Shapes::ShapeRef.new(shape: Integer, location_name: "IncludedAllocatedStorage"))
     OrderableReplicationInstance.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZonesList, location_name: "AvailabilityZones"))
+    OrderableReplicationInstance.add_member(:release_status, Shapes::ShapeRef.new(shape: ReleaseStatusValues, location_name: "ReleaseStatus"))
     OrderableReplicationInstance.struct_class = Types::OrderableReplicationInstance
 
     OrderableReplicationInstanceList.member = Shapes::ShapeRef.new(shape: OrderableReplicationInstance)
@@ -982,7 +985,9 @@ module Aws::DatabaseMigrationService
     S3Settings.add_member(:data_page_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "DataPageSize"))
     S3Settings.add_member(:parquet_version, Shapes::ShapeRef.new(shape: ParquetVersionValue, location_name: "ParquetVersion"))
     S3Settings.add_member(:enable_statistics, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableStatistics"))
+    S3Settings.add_member(:include_op_for_full_load, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeOpForFullLoad"))
     S3Settings.add_member(:cdc_inserts_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CdcInsertsOnly"))
+    S3Settings.add_member(:timestamp_column_name, Shapes::ShapeRef.new(shape: String, location_name: "TimestampColumnName"))
     S3Settings.struct_class = Types::S3Settings
 
     SNSInvalidTopicFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))

@@ -3210,7 +3210,7 @@ module Aws::ConfigService
     #         organization_config_rule_name: "StringWithCharLimit64", # required
     #         filters: {
     #           account_id: "AccountId",
-    #           member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
+    #           member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_SUCCESSFUL, UPDATE_FAILED, UPDATE_IN_PROGRESS, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
     #         },
     #         limit: 1,
     #         next_token: "String",
@@ -5077,7 +5077,7 @@ module Aws::ConfigService
     #
     #       {
     #         account_id: "AccountId",
-    #         member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
+    #         member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_SUCCESSFUL, UPDATE_FAILED, UPDATE_IN_PROGRESS, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
     #       }
     #
     # @!attribute [rw] account_id

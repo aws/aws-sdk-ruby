@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2019-07-17)
+------------------
+
+* Feature - This release adds more granularity to the status of an OrganizationConfigRule by adding a new status. It also adds an exception when organization access is denied.
+
 1.33.0 (2019-07-09)
 ------------------
 

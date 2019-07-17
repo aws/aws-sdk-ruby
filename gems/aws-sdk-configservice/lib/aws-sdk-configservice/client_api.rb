@@ -1425,6 +1425,7 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
       end)
 
       api.add_operation(:delete_pending_aggregation_request, Seahorse::Model::Operation.new.tap do |o|
@@ -1601,6 +1602,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
       end)
 
       api.add_operation(:describe_organization_config_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -1612,6 +1614,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
       end)
 
       api.add_operation(:describe_pending_aggregation_requests, Seahorse::Model::Operation.new.tap do |o|
@@ -1764,6 +1767,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
       end)
 
       api.add_operation(:get_resource_config_history, Seahorse::Model::Operation.new.tap do |o|

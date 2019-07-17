@@ -643,8 +643,9 @@ module Aws::AutoScaling
     # @option options [Time,DateTime,Date,Integer,String] :time
     #   This parameter is deprecated.
     # @option options [Time,DateTime,Date,Integer,String] :start_time
-    #   The time for this action to start, in YYYY-MM-DDThh:mm:ssZ format in
-    #   UTC/GMT only and in quotes (for example, `"2019-06-01T00:00:00Z"`).
+    #   The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ
+    #   format in UTC/GMT only and in quotes (for example,
+    #   `"2019-06-01T00:00:00Z"`).
     #
     #   If you specify `Recurrence` and `StartTime`, Amazon EC2 Auto Scaling
     #   performs the action at this time, and then performs the action based
@@ -653,8 +654,8 @@ module Aws::AutoScaling
     #   If you try to schedule your action in the past, Amazon EC2 Auto
     #   Scaling returns an error message.
     # @option options [Time,DateTime,Date,Integer,String] :end_time
-    #   The time for the recurring schedule to end. Amazon EC2 Auto Scaling
-    #   does not perform the action after this time.
+    #   The date and time for the recurring schedule to end. Amazon EC2 Auto
+    #   Scaling does not perform the action after this time.
     # @option options [String] :recurrence
     #   The recurring schedule for this action, in Unix cron syntax format.
     #   This format consists of five fields separated by white spaces:
@@ -662,15 +663,19 @@ module Aws::AutoScaling
     #   \[Day\_of\_Week\]. The value must be in quotes (for example, `"30 0 1
     #   1,6,12 *"`). For more information about this format, see [Crontab][1].
     #
+    #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
+    #   form the boundaries of when the recurring action starts and stops.
+    #
     #
     #
     #   [1]: http://crontab.org
     # @option options [Integer] :min_size
-    #   The minimum size for the Auto Scaling group.
+    #   The minimum number of instances in the Auto Scaling group.
     # @option options [Integer] :max_size
-    #   The maximum size for the Auto Scaling group.
+    #   The maximum number of instances in the Auto Scaling group.
     # @option options [Integer] :desired_capacity
-    #   The number of EC2 instances that should be running in the group.
+    #   The number of EC2 instances that should be running in the Auto Scaling
+    #   group.
     # @return [ScheduledAction]
     def put_scheduled_update_group_action(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -814,16 +819,27 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
-    #   The name of the launch configuration. If you specify this parameter,
-    #   you can't specify a launch template or a mixed instances policy.
+    #   The name of the launch configuration. If you specify
+    #   `LaunchConfigurationName` in your update request, you can't specify
+    #   `LaunchTemplate` or `MixedInstancesPolicy`.
+    #
+    #   <note markdown="1"> To update an Auto Scaling group with a launch configuration with
+    #   `InstanceMonitoring` set to `false`, you must first disable the
+    #   collection of group metrics. Otherwise, you get an error. If you have
+    #   previously enabled the collection of group metrics, you can disable it
+    #   using DisableMetricsCollection.
+    #
+    #    </note>
     # @option options [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template and version to use to specify the updates. If you
-    #   specify this parameter, you can't specify a launch configuration or a
-    #   mixed instances policy.
+    #   specify `LaunchTemplate` in your update request, you can't specify
+    #   `LaunchConfigurationName` or `MixedInstancesPolicy`.
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
-    #   The mixed instances policy to use to specify the updates. If you
-    #   specify this parameter, you can't specify a launch configuration or a
-    #   launch template.
+    #   An embedded object that specifies a mixed instances policy.
+    #
+    #   In your call to `UpdateAutoScalingGroup`, you can make changes to the
+    #   policy that is specified. All optional parameters are left unchanged
+    #   if not specified.
     #
     #   For more information, see [Auto Scaling Groups with Multiple Instance
     #   Types and Purchase Options][1] in the *Amazon EC2 Auto Scaling User
@@ -843,9 +859,13 @@ module Aws::AutoScaling
     # @option options [Integer] :default_cooldown
     #   The amount of time, in seconds, after a scaling activity completes
     #   before another scaling activity can start. The default value is `300`.
+    #   This cooldown period is not used when a scaling-specific cooldown is
+    #   specified.
     #
-    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   Cooldown periods are not supported for target tracking scaling
+    #   policies, step scaling policies, or scheduled scaling. For more
+    #   information, see [Scaling Cooldowns][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
@@ -882,7 +902,7 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     # @option options [String] :vpc_zone_identifier
-    #   A comma-separated list of subnet IDs, if you are launching into a VPC.
+    #   A comma-separated list of subnet IDs for virtual private cloud (VPC).
     #
     #   If you specify `VPCZoneIdentifier` with `AvailabilityZones`, the
     #   subnets that you specify for this parameter must reside in those

@@ -49,34 +49,36 @@ module Aws::AutoScaling
       data[:time]
     end
 
-    # The date and time that the action is scheduled to begin.
-    #
-    # When `StartTime` and `EndTime` are specified with `Recurrence`, they
-    # form the boundaries of when the recurring action starts and stops.
+    # The date and time in UTC for this action to start. For example,
+    # `"2019-06-01T00:00:00Z"`.
     # @return [Time]
     def start_time
       data[:start_time]
     end
 
-    # The date and time that the action is scheduled to end.
+    # The date and time in UTC for the recurring schedule to end. For
+    # example, `"2019-06-01T00:00:00Z"`.
     # @return [Time]
     def end_time
       data[:end_time]
     end
 
-    # The recurring schedule for the action.
+    # The recurring schedule for the action, in Unix cron syntax format.
+    #
+    # When `StartTime` and `EndTime` are specified with `Recurrence`, they
+    # form the boundaries of when the recurring action starts and stops.
     # @return [String]
     def recurrence
       data[:recurrence]
     end
 
-    # The minimum size of the group.
+    # The minimum number of instances in the Auto Scaling group.
     # @return [Integer]
     def min_size
       data[:min_size]
     end
 
-    # The maximum size of the group.
+    # The maximum number of instances in the Auto Scaling group.
     # @return [Integer]
     def max_size
       data[:max_size]

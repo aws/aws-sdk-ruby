@@ -91,46 +91,60 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
-    #   The name of the Auto Scaling group. This name must be unique within
-    #   the scope of your AWS account.
+    #   The name of the Auto Scaling group. This name must be unique per
+    #   Region per account.
     # @option options [String] :launch_configuration_name
-    #   The name of the launch configuration. This parameter, a launch
-    #   template, a mixed instances policy, or an EC2 instance must be
-    #   specified.
+    #   The name of the launch configuration.
     #
     #   For more information, see [Creating an Auto Scaling Group Using a
     #   Launch Configuration][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   If you do not specify `LaunchConfigurationName`, you must specify one
+    #   of the following parameters: `InstanceId`, `LaunchTemplate`, or
+    #   `MixedInstancesPolicy`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html
     # @option options [Types::LaunchTemplateSpecification] :launch_template
-    #   The launch template to use to launch instances. This parameter, a
-    #   launch configuration, a mixed instances policy, or an EC2 instance
-    #   must be specified.
+    #   The launch template to use to launch instances.
     #
     #   For more information, see [Creating an Auto Scaling Group Using a
     #   Launch Template][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   If you do not specify `LaunchTemplate`, you must specify one of the
+    #   following parameters: `InstanceId`, `LaunchConfigurationName`, or
+    #   `MixedInstancesPolicy`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
-    #   The mixed instances policy to use to launch instances. This parameter,
-    #   a launch template, a launch configuration, or an EC2 instance must be
-    #   specified.
+    #   An embedded object that specifies a mixed instances policy. The
+    #   required parameters must be specified. If optional parameters are
+    #   unspecified, their default values are used.
+    #
+    #   The policy includes parameters that not only define the distribution
+    #   of On-Demand Instances and Spot Instances, the maximum price to pay
+    #   for Spot instances, and how the Auto Scaling group allocates instance
+    #   types to fulfill On-Demand and Spot capacity, but also the parameters
+    #   that specify the instance configuration information—the launch
+    #   template and instance types.
     #
     #   For more information, see [Auto Scaling Groups with Multiple Instance
     #   Types and Purchase Options][1] in the *Amazon EC2 Auto Scaling User
     #   Guide*.
+    #
+    #   You must specify one of the following parameters in your request:
+    #   `LaunchConfigurationName`, `LaunchTemplate`, `InstanceId`, or
+    #   `MixedInstancesPolicy`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
     # @option options [String] :instance_id
     #   The ID of the instance used to create a launch configuration for the
-    #   group. This parameter, a launch configuration, a launch template, or a
-    #   mixed instances policy must be specified.
+    #   group.
     #
     #   When you specify an ID of an instance, Amazon EC2 Auto Scaling creates
     #   a new launch configuration and associates it with the group. This
@@ -140,6 +154,10 @@ module Aws::AutoScaling
     #   For more information, see [Create an Auto Scaling Group Using an EC2
     #   Instance][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
+    #   You must specify one of the following parameters in your request:
+    #   `LaunchConfigurationName`, `LaunchTemplate`, `InstanceId`, or
+    #   `MixedInstancesPolicy`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html
@@ -148,11 +166,11 @@ module Aws::AutoScaling
     # @option options [required, Integer] :max_size
     #   The maximum size of the group.
     # @option options [Integer] :desired_capacity
-    #   The number of EC2 instances that should be running in the group. This
-    #   number must be greater than or equal to the minimum size of the group
-    #   and less than or equal to the maximum size of the group. If you do not
-    #   specify a desired capacity, the default is the minimum size of the
-    #   group.
+    #   The number of Amazon EC2 instances that the Auto Scaling group
+    #   attempts to maintain. This number must be greater than or equal to the
+    #   minimum size of the group and less than or equal to the maximum size
+    #   of the group. If you do not specify a desired capacity, the default is
+    #   the minimum size of the group.
     # @option options [Integer] :default_cooldown
     #   The amount of time, in seconds, after a scaling activity completes
     #   before another scaling activity can start. The default value is `300`.
@@ -170,17 +188,28 @@ module Aws::AutoScaling
     #   Conditional: If your account supports EC2-Classic and VPC, this
     #   parameter is required to launch instances into EC2-Classic.
     # @option options [Array<String>] :load_balancer_names
-    #   One or more Classic Load Balancers. To specify an Application Load
-    #   Balancer or a Network Load Balancer, use `TargetGroupARNs` instead.
+    #   A list of Classic Load Balancers associated with this Auto Scaling
+    #   group. For Application Load Balancers and Network Load Balancers,
+    #   specify a list of target groups using the `TargetGroupARNs` property
+    #   instead.
     #
-    #   For more information, see [Using a Load Balancer With an Auto Scaling
+    #   For more information, see [Using a Load Balancer with an Auto Scaling
     #   Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     # @option options [Array<String>] :target_group_arns
-    #   The Amazon Resource Names (ARN) of the target groups.
+    #   The Amazon Resource Names (ARN) of the target groups to associate with
+    #   the Auto Scaling group. Instances are registered as targets in a
+    #   target group, and traffic is routed to the target group.
+    #
+    #   For more information, see [Using a Load Balancer with an Auto Scaling
+    #   Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     # @option options [String] :health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
     #   and `ELB`. The default value is `EC2`. If you configure an Auto
@@ -323,8 +352,8 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :launch_configuration_name
-    #   The name of the launch configuration. This name must be unique within
-    #   the scope of your AWS account.
+    #   The name of the launch configuration. This name must be unique per
+    #   Region per account.
     # @option options [String] :image_id
     #   The ID of the Amazon Machine Image (AMI) to use to launch your EC2
     #   instances.
@@ -398,9 +427,6 @@ module Aws::AutoScaling
     #   new launch configuration derives attributes from the instance, except
     #   for the block device mapping.
     #
-    #   If you do not specify `InstanceId`, you must specify both `ImageId`
-    #   and `InstanceType`.
-    #
     #   To create a launch configuration with a block device mapping or
     #   override any other instance attributes, specify them as part of the
     #   same request.
@@ -408,16 +434,19 @@ module Aws::AutoScaling
     #   For more information, see [Create a Launch Configuration Using an EC2
     #   Instance][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
+    #   If you do not specify `InstanceId`, you must specify both `ImageId`
+    #   and `InstanceType`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html
     # @option options [String] :instance_type
     #   The instance type of the EC2 instance.
     #
-    #   If you do not specify `InstanceId`, you must specify `InstanceType`.
-    #
     #   For information about available instance types, see [Available
     #   Instance Types][1] in the *Amazon EC2 User Guide for Linux Instances.*
+    #
+    #   If you do not specify `InstanceId`, you must specify `InstanceType`.
     #
     #
     #
@@ -455,8 +484,8 @@ module Aws::AutoScaling
     #   security credentials available. You can use IAM roles with Amazon EC2
     #   Auto Scaling to automatically enable applications running on your EC2
     #   instances to securely access other AWS resources. For more
-    #   information, see [Use an IAM Role for Applications That Run on Amazon
-    #   EC2 Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   information, see [IAM Role for Applications That Run on Amazon EC2
+    #   Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -498,17 +527,17 @@ module Aws::AutoScaling
     #   the instance placement tenancy attribute set to `default`), you must
     #   set the value of this parameter to `dedicated`.
     #
-    #   If you specify this parameter, be sure to specify at least one subnet
-    #   when you create your group.
+    #   If you specify `PlacementTenancy`, be sure to specify at least one
+    #   subnet when you create your group.
     #
-    #   For more information, see [Launching Auto Scaling Instances in a
-    #   VPC][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Instance Placement Tenancy][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Valid values: `default` \| `dedicated`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy
     # @return [LaunchConfiguration]
     def create_launch_configuration(options = {})
       resp = @client.create_launch_configuration(options)
