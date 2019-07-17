@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
+
+* Feature - Aws::ConfigService - Updated the API for AWS Config.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
 * Issue - Skip `:message_attributes` validation for empty attributes. (Github Issue #2081)
 
 2.11.314 (2019-07-12)
