@@ -106,8 +106,10 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -176,8 +178,10 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -251,8 +255,10 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -321,8 +327,10 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -543,8 +551,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -1066,8 +1076,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -1108,8 +1120,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -1150,8 +1164,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -1195,8 +1211,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code of the input documents. You can specify English
-    #   ("en") or Spanish ("es").
+    #   The language code of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSyntaxRequest AWS API Documentation
@@ -2082,7 +2100,9 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] entity_types
-    #   The entity types in the input data for an entity recognizer.
+    #   The entity types in the input data for an entity recognizer. A
+    #   maximum of 12 entity types can be used at one time to train an
+    #   entity recognizer.
     #   @return [Array<Types::EntityTypesListItem>]
     #
     # @!attribute [rw] documents
@@ -2147,10 +2167,22 @@ module Aws::Comprehend
     #   entity recognizer.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_metrics
+    #   Detailed information about the accuracy of the entity recognizer for
+    #   a specific item on the list of entity types.
+    #   @return [Types::EntityTypesEvaluationMetrics]
+    #
+    # @!attribute [rw] number_of_train_mentions
+    #   indicates the number of times the given entity name was seen in the
+    #   training data.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerMetadataEntityTypesListItem AWS API Documentation
     #
     class EntityRecognizerMetadataEntityTypesListItem < Struct.new(
-      :type)
+      :type,
+      :evaluation_metrics,
+      :number_of_train_mentions)
       include Aws::Structure
     end
 
@@ -2245,6 +2277,39 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Detailed information about the accuracy of an entity recognizer for a
+    # specific entity type.
+    #
+    # @!attribute [rw] precision
+    #   A measure of the usefulness of the recognizer results for a specific
+    #   entity type in the test data. High precision means that the
+    #   recognizer returned substantially more relevant results than
+    #   irrelevant ones.
+    #   @return [Float]
+    #
+    # @!attribute [rw] recall
+    #   A measure of how complete the recognizer results are for a specific
+    #   entity type in the test data. High recall means that the recognizer
+    #   returned most of the relevant results.
+    #   @return [Float]
+    #
+    # @!attribute [rw] f1_score
+    #   A measure of how accurate the recognizer results are for for a
+    #   specific entity type in the test data. It is derived from the
+    #   `Precision` and `Recall` values. The `F1Score` is the harmonic
+    #   average of the two scores. The highest score is 1, and the worst
+    #   score is 0.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesEvaluationMetrics AWS API Documentation
+    #
+    class EntityTypesEvaluationMetrics < Struct.new(
+      :precision,
+      :recall,
+      :f1_score)
+      include Aws::Structure
+    end
+
     # Information about an individual item on a list of entity types.
     #
     # @note When making an API call, you may pass EntityTypesListItem
@@ -2319,8 +2384,8 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # The filter specified for the `ListDocumentClassificationJobs`
-    # operation is invalid. Specify a different filter.
+    # The filter specified for the operation is invalid. Specify a different
+    # filter.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3723,8 +3788,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -3847,8 +3914,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -4538,8 +4607,9 @@ module Aws::Comprehend
 
     # Amazon Comprehend can't process the language of the input text. For
     # all custom entity recognition APIs (such as `CreateEntityRecognizer`),
-    # only English is accepted. For most other APIs, Amazon Comprehend
-    # accepts only English or Spanish text.
+    # only English is accepted. For most other APIs, such as those for
+    # Custom Classification, Amazon Comprehend accepts text in all supported
+    # languages. For a list of supported languages, see supported-languages.
     #
     # @!attribute [rw] message
     #   @return [String]

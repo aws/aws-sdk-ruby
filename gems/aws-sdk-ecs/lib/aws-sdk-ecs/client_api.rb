@@ -35,6 +35,9 @@ module Aws::ECS
     ClusterField = Shapes::StringShape.new(name: 'ClusterField')
     ClusterFieldList = Shapes::ListShape.new(name: 'ClusterFieldList')
     ClusterNotFoundException = Shapes::StructureShape.new(name: 'ClusterNotFoundException')
+    ClusterSetting = Shapes::StructureShape.new(name: 'ClusterSetting')
+    ClusterSettingName = Shapes::StringShape.new(name: 'ClusterSettingName')
+    ClusterSettings = Shapes::ListShape.new(name: 'ClusterSettings')
     Clusters = Shapes::ListShape.new(name: 'Clusters')
     Compatibility = Shapes::StringShape.new(name: 'Compatibility')
     CompatibilityList = Shapes::ListShape.new(name: 'CompatibilityList')
@@ -322,9 +325,16 @@ module Aws::ECS
     Cluster.add_member(:active_services_count, Shapes::ShapeRef.new(shape: Integer, location_name: "activeServicesCount"))
     Cluster.add_member(:statistics, Shapes::ShapeRef.new(shape: Statistics, location_name: "statistics"))
     Cluster.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Cluster.add_member(:settings, Shapes::ShapeRef.new(shape: ClusterSettings, location_name: "settings"))
     Cluster.struct_class = Types::Cluster
 
     ClusterFieldList.member = Shapes::ShapeRef.new(shape: ClusterField)
+
+    ClusterSetting.add_member(:name, Shapes::ShapeRef.new(shape: ClusterSettingName, location_name: "name"))
+    ClusterSetting.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    ClusterSetting.struct_class = Types::ClusterSetting
+
+    ClusterSettings.member = Shapes::ShapeRef.new(shape: ClusterSetting)
 
     Clusters.member = Shapes::ShapeRef.new(shape: Cluster)
 
@@ -438,6 +448,7 @@ module Aws::ECS
 
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateClusterRequest.add_member(:settings, Shapes::ShapeRef.new(shape: ClusterSettings, location_name: "settings"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))

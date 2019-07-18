@@ -250,6 +250,11 @@ module Aws::ECS
     #   of 256 characters.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] settings
+    #   The settings for the cluster. This parameter indicates whether
+    #   CloudWatch Container Insights is enabled or disabled for a cluster.
+    #   @return [Array<Types::ClusterSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -261,7 +266,42 @@ module Aws::ECS
       :pending_tasks_count,
       :active_services_count,
       :statistics,
-      :tags)
+      :tags,
+      :settings)
+      include Aws::Structure
+    end
+
+    # The settings to use when creating a cluster. This parameter is used to
+    # enable CloudWatch Container Insights for a cluster.
+    #
+    # @note When making an API call, you may pass ClusterSetting
+    #   data as a hash:
+    #
+    #       {
+    #         name: "containerInsights", # accepts containerInsights
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the cluster setting. The only supported value is
+    #   `containerInsights`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to set for the cluster setting. The supported values are
+    #   `enabled` and `disabled`. If `enabled` is specified, CloudWatch
+    #   Container Insights will be enabled for the cluster, otherwise it
+    #   will be disabled unless the `containerInsights` account setting is
+    #   enabled. If a cluster value is specified, it will override the
+    #   `containerInsights` value set with PutAccountSetting or
+    #   PutAccountSettingDefault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterSetting AWS API Documentation
+    #
+    class ClusterSetting < Struct.new(
+      :name,
+      :value)
       include Aws::Structure
     end
 
@@ -1736,6 +1776,12 @@ module Aws::ECS
     #             value: "TagValue",
     #           },
     #         ],
+    #         settings: [
+    #           {
+    #             name: "containerInsights", # accepts containerInsights
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cluster_name
@@ -1752,11 +1798,19 @@ module Aws::ECS
     #   of 256 characters.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] settings
+    #   The setting to use when creating a cluster. This parameter is used
+    #   to enable CloudWatch Container Insights for a cluster. If this value
+    #   is specified, it will override the `containerInsights` value set
+    #   with PutAccountSetting or PutAccountSettingDefault.
+    #   @return [Array<Types::ClusterSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
       :cluster_name,
-      :tags)
+      :tags,
+      :settings)
       include Aws::Structure
     end
 
@@ -2285,7 +2339,7 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
+    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #         principal_arn: "String",
     #       }
     #
@@ -3698,7 +3752,7 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
+    #         name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #         value: "String",
     #         principal_arn: "String",
     #         effective_settings: false,
@@ -5043,7 +5097,7 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
+    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #         value: "String", # required
     #       }
     #
@@ -5055,7 +5109,9 @@ module Aws::ECS
     #   `containerInstanceLongArnFormat` is specified, the ARN and resource
     #   ID for your Amazon ECS container instances is affected. If
     #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
-    #   container instances is affected.
+    #   container instances is affected. If `containerInsights` is
+    #   specified, the default setting for CloudWatch Container Insights for
+    #   your clusters is affected.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -5086,20 +5142,22 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
+    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #         value: "String", # required
     #         principal_arn: "String",
     #       }
     #
     # @!attribute [rw] name
-    #   The resource name for which to modify the account setting. If
-    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
-    #   services is affected. If `taskLongArnFormat` is specified, the ARN
-    #   and resource ID for your Amazon ECS tasks is affected. If
-    #   `containerInstanceLongArnFormat` is specified, the ARN and resource
-    #   ID for your Amazon ECS container instances is affected. If
-    #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
-    #   container instances is affected.
+    #   The Amazon ECS resource name for which to modify the account
+    #   setting. If `serviceLongArnFormat` is specified, the ARN for your
+    #   Amazon ECS services is affected. If `taskLongArnFormat` is
+    #   specified, the ARN and resource ID for your Amazon ECS tasks is
+    #   affected. If `containerInstanceLongArnFormat` is specified, the ARN
+    #   and resource ID for your Amazon ECS container instances is affected.
+    #   If `awsvpcTrunking` is specified, the elastic network interface
+    #   (ENI) limit for your Amazon ECS container instances is affected. If
+    #   `containerInsights` is specified, the default setting for CloudWatch
+    #   Container Insights for your clusters is affected.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -6566,14 +6624,12 @@ module Aws::ECS
     # The current account setting for a resource.
     #
     # @!attribute [rw] name
-    #   The account resource name.
+    #   The Amazon ECS resource name.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The current account setting for the resource name. If `enabled`, the
-    #   resource receives the new Amazon Resource Name (ARN) and resource
-    #   identifier (ID) format. If `disabled`, the resource receives the old
-    #   Amazon Resource Name (ARN) and resource identifier (ID) format.
+    #   Whether the account setting is enabled or disabled for the specified
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] principal_arn

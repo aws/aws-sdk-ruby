@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-07-18)
+------------------
+
+* Feature - Documentation updates for codedeploy
+
 1.24.0 (2019-07-01)
 ------------------
 

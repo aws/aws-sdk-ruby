@@ -585,7 +585,7 @@ module Aws::ElastiCache
     # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html
     # [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html
     # [3]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket
-    # [4]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access.html
+    # [4]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
     #
     # @option params [required, String] :source_snapshot_name
     #   The name of an existing snapshot from which to make a copy.
@@ -1471,7 +1471,7 @@ module Aws::ElastiCache
     # asynchronously propagated to the replicas.
     #
     # A Redis (cluster mode enabled) replication group is a collection of 1
-    # to 15 node groups (shards). Each node group (shard) has one read/write
+    # to 90 node groups (shards). Each node group (shard) has one read/write
     # primary node and up to 5 read-only replica nodes. Writes to the
     # primary are asynchronously propagated to the replicas. Redis (cluster
     # mode enabled) replication groups partition the data across node groups
@@ -1862,7 +1862,7 @@ module Aws::ElastiCache
     #   `CacheSubnetGroup`.
     #
     #   **Required:** Only available when creating a replication group in an
-    #   Amazon VPC using redis version `3.2.6` or `4.x`.
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #
@@ -1878,7 +1878,7 @@ module Aws::ElastiCache
     #   when you create the replication group.
     #
     #   **Required:** Only available when creating a replication group in an
-    #   Amazon VPC using redis version `3.2.6` or `4.x`.
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #
@@ -6383,7 +6383,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNode.Memcached.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html
     #
     # @option params [Array<String>] :new_availability_zones
     #   The list of Availability Zones where the new Memcached cache nodes are
@@ -6465,7 +6465,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNode.Memcached.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html
     #
     # @option params [Array<String>] :cache_security_group_names
     #   A list of cache security group names to authorize on this cluster.
@@ -7862,7 +7862,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

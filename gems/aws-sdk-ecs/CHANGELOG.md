@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2019-07-18)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for cluster settings. Cluster settings specify whether CloudWatch Container Insights is enabled or disabled for the cluster.
+
 1.43.0 (2019-07-01)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-07-18)
+------------------
+
+* Feature - Amazon Comprehend now supports multiple entities for custom entity recognition
+
 1.23.0 (2019-07-01)
 ------------------
 

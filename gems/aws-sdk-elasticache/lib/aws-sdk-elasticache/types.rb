@@ -411,7 +411,7 @@ module Aws::ElastiCache
     #   cluster.
     #
     #   **Required:** Only available when creating a replication group in an
-    #   Amazon VPC using redis version `3.2.6` or `4.x`.
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -425,7 +425,7 @@ module Aws::ElastiCache
     #   cluster.
     #
     #   **Required:** Only available when creating a replication group in an
-    #   Amazon VPC using redis version `3.2.6` or `4.x`.
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -2118,7 +2118,7 @@ module Aws::ElastiCache
     #   for `CacheSubnetGroup`.
     #
     #   **Required:** Only available when creating a replication group in an
-    #   Amazon VPC using redis version `3.2.6` or `4.x`.
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #
@@ -2135,7 +2135,7 @@ module Aws::ElastiCache
     #   when you create the replication group.
     #
     #   **Required:** Only available when creating a replication group in an
-    #   Amazon VPC using redis version `3.2.6` or `4.x`.
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -3898,7 +3898,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNode.Memcached.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html
     #   @return [String]
     #
     # @!attribute [rw] new_availability_zones
@@ -3982,7 +3982,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNode.Memcached.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] cache_security_group_names
@@ -4567,8 +4567,8 @@ module Aws::ElastiCache
     #   The identifier for the node group (shard). A Redis (cluster mode
     #   disabled) replication group contains only 1 node group; therefore,
     #   the node group ID is 0001. A Redis (cluster mode enabled)
-    #   replication group contains 1 to 15 node groups numbered 0001 to
-    #   0015. Optionally, the user can provide the id for a node group.
+    #   replication group contains 1 to 90 node groups numbered 0001 to
+    #   0090. Optionally, the user can provide the id for a node group.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5247,7 +5247,7 @@ module Aws::ElastiCache
     #   cluster.
     #
     #   **Required:** Only available when creating a replication group in an
-    #   Amazon VPC using redis version `3.2.6` or `4.x`.
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -5261,7 +5261,7 @@ module Aws::ElastiCache
     #   cluster.
     #
     #   **Required:** Only available when creating a replication group in an
-    #   Amazon VPC using redis version `3.2.6` or `4.x`.
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #   @return [Boolean]

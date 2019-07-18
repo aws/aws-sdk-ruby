@@ -295,6 +295,12 @@ module Aws::ECS
     #   128 characters, and tag values can have a maximum length of 256
     #   characters.
     #
+    # @option params [Array<Types::ClusterSetting>] :settings
+    #   The setting to use when creating a cluster. This parameter is used to
+    #   enable CloudWatch Container Insights for a cluster. If this value is
+    #   specified, it will override the `containerInsights` value set with
+    #   PutAccountSetting or PutAccountSettingDefault.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -331,6 +337,12 @@ module Aws::ECS
     #         value: "TagValue",
     #       },
     #     ],
+    #     settings: [
+    #       {
+    #         name: "containerInsights", # accepts containerInsights
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -348,6 +360,9 @@ module Aws::ECS
     #   resp.cluster.tags #=> Array
     #   resp.cluster.tags[0].key #=> String
     #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.settings #=> Array
+    #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
+    #   resp.cluster.settings[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster AWS API Documentation
     #
@@ -1226,13 +1241,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -1349,6 +1364,9 @@ module Aws::ECS
     #   resp.cluster.tags #=> Array
     #   resp.cluster.tags[0].key #=> String
     #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.settings #=> Array
+    #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
+    #   resp.cluster.settings[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster AWS API Documentation
     #
@@ -2005,6 +2023,9 @@ module Aws::ECS
     #   resp.clusters[0].tags #=> Array
     #   resp.clusters[0].tags[0].key #=> String
     #   resp.clusters[0].tags[0].value #=> String
+    #   resp.clusters[0].settings #=> Array
+    #   resp.clusters[0].settings[0].name #=> String, one of "containerInsights"
+    #   resp.clusters[0].settings[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3051,7 +3072,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_settings({
-    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #     value: "String",
     #     principal_arn: "String",
     #     effective_settings: false,
@@ -3062,7 +3083,7 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.settings #=> Array
-    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking"
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
     #   resp.settings[0].value #=> String
     #   resp.settings[0].principal_arn #=> String
     #   resp.next_token #=> String
@@ -3832,21 +3853,21 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Modifies an account setting. For more information, see [Account
-    # Settings][1] in the *Amazon Elastic Container Service Developer
-    # Guide*.
+    # Modifies an account setting. If you change the account setting for the
+    # root user, the default settings for all of the IAM users and roles for
+    # which no individual account setting has been specified are reset. For
+    # more information, see [Account Settings][1] in the *Amazon Elastic
+    # Container Service Developer Guide*.
     #
     # When `serviceLongArnFormat`, `taskLongArnFormat`, or
-    # `containerInstanceLongArnFormat` are specified, the ARN and resource
-    # ID format of the resource type for a specified IAM user, IAM role, or
-    # the root user for an account is changed. If you change the account
-    # setting for the root user, the default settings for all of the IAM
-    # users and roles for which no individual account setting has been
-    # specified are reset. The opt-in and opt-out account setting can be
-    # specified for each Amazon ECS resource separately. The ARN and
-    # resource ID format of a resource will be defined by the opt-in status
-    # of the IAM user or role that created the resource. You must enable
-    # this setting to use Amazon ECS features such as resource tagging.
+    # `containerInstanceLongArnFormat` are specified, the Amazon Resource
+    # Name (ARN) and resource ID format of the resource type for a specified
+    # IAM user, IAM role, or the root user for an account is affected. The
+    # opt-in and opt-out account setting must be set for each Amazon ECS
+    # resource separately. The ARN and resource ID format of a resource will
+    # be defined by the opt-in status of the IAM user or role that created
+    # the resource. You must enable this setting to use Amazon ECS features
+    # such as resource tagging.
     #
     # When `awsvpcTrunking` is specified, the elastic network interface
     # (ENI) limit for any new container instances that support the feature
@@ -3856,20 +3877,31 @@ module Aws::ECS
     # Interface Trunking][2] in the *Amazon Elastic Container Service
     # Developer Guide*.
     #
+    # When `containerInsights` is specified, the default setting indicating
+    # whether CloudWatch Container Insights is enabled for your clusters is
+    # changed. If `containerInsights` is enabled, any new clusters that are
+    # created will have Container Insights enabled unless you disable it
+    # during cluster creation. For more information, see [CloudWatch
+    # Container Insights][3] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
     #
     # @option params [required, String] :name
-    #   The resource name for which to modify the account setting. If
-    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
+    #   The Amazon ECS resource name for which to modify the account setting.
+    #   If `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
     #   services is affected. If `taskLongArnFormat` is specified, the ARN and
     #   resource ID for your Amazon ECS tasks is affected. If
     #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
     #   for your Amazon ECS container instances is affected. If
-    #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
-    #   container instances is affected.
+    #   `awsvpcTrunking` is specified, the elastic network interface (ENI)
+    #   limit for your Amazon ECS container instances is affected. If
+    #   `containerInsights` is specified, the default setting for CloudWatch
+    #   Container Insights for your clusters is affected.
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -3932,14 +3964,14 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #     value: "String", # required
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -3963,7 +3995,9 @@ module Aws::ECS
     #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
     #   for your Amazon ECS container instances is affected. If
     #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
-    #   container instances is affected.
+    #   container instances is affected. If `containerInsights` is specified,
+    #   the default setting for CloudWatch Container Insights for your
+    #   clusters is affected.
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -3997,13 +4031,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting_default({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
     #     value: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -6670,7 +6704,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

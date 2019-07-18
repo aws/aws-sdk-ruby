@@ -618,6 +618,7 @@ module Aws::CodeDeploy
 
     # Information about whether instances in the original environment are
     # terminated when a blue/green deployment is successful.
+    # `BlueInstanceTerminationOption` does not apply to Lambda deployments.
     #
     # @note When making an API call, you may pass BlueInstanceTerminationOption
     #   data as a hash:
@@ -639,9 +640,16 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] termination_wait_time_in_minutes
-    #   The number of minutes to wait after a successful blue/green
-    #   deployment before terminating instances from the original
-    #   environment. The maximum setting is 2880 minutes (2 days).
+    #   For an Amazon EC2 deployment, the number of minutes to wait after a
+    #   successful blue/green deployment before terminating instances from
+    #   the original environment.
+    #
+    #   For an Amazon ECS deployment, the number of minutes before deleting
+    #   the original (blue) task set. During an Amazon ECS deployment,
+    #   CodeDeploy shifts traffic from the original (blue) task set to a
+    #   replacement (green) task set.
+    #
+    #   The maximum setting is 2880 minutes (2 days).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BlueInstanceTerminationOption AWS API Documentation
@@ -3380,7 +3388,14 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] target_filters
-    #   A key used to filter the returned targets.
+    #   A key used to filter the returned targets. The two valid values are:
+    #
+    #   * `TargetStatus` - A `TargetStatus` filter string can be `Failed`,
+    #     `InProgress`, `Pending`, `Ready`, `Skipped`, `Succeeded`, or
+    #     `Unknown`.
+    #
+    #   * `ServerInstanceLabel` - A `ServerInstanceLabel` filter string can
+    #     be `Blue` or `Green`.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargetsInput AWS API Documentation
