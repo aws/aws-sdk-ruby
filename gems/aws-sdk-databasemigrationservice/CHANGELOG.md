@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allow a replication task to be running state while waiting for getting replication task stopped by ReplicationTaskStopped waiter.
+
 1.26.0 (2019-07-17)
 ------------------
 
