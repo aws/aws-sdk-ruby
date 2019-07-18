@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.316 (2019-07-18)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the documentation for AWS CodeDeploy.
 
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
