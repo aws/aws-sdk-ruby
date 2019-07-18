@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Updated the documentation for AWS CodeDeploy.
+
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::ElastiCache - Updated the documentation for Amazon ElastiCache.
+
 2.11.315 (2019-07-17)
 ------------------
 
