@@ -27,6 +27,7 @@ module Aws::IoTEvents
     DeleteDetectorModelResponse = Shapes::StructureShape.new(name: 'DeleteDetectorModelResponse')
     DeleteInputRequest = Shapes::StructureShape.new(name: 'DeleteInputRequest')
     DeleteInputResponse = Shapes::StructureShape.new(name: 'DeleteInputResponse')
+    DeliveryStreamName = Shapes::StringShape.new(name: 'DeliveryStreamName')
     DescribeDetectorModelRequest = Shapes::StructureShape.new(name: 'DescribeDetectorModelRequest')
     DescribeDetectorModelResponse = Shapes::StructureShape.new(name: 'DescribeDetectorModelResponse')
     DescribeInputRequest = Shapes::StructureShape.new(name: 'DescribeInputRequest')
@@ -50,6 +51,8 @@ module Aws::IoTEvents
     Event = Shapes::StructureShape.new(name: 'Event')
     EventName = Shapes::StringShape.new(name: 'EventName')
     Events = Shapes::ListShape.new(name: 'Events')
+    FirehoseAction = Shapes::StructureShape.new(name: 'FirehoseAction')
+    FirehoseSeparator = Shapes::StringShape.new(name: 'FirehoseSeparator')
     Input = Shapes::StructureShape.new(name: 'Input')
     InputArn = Shapes::StringShape.new(name: 'InputArn')
     InputConfiguration = Shapes::StructureShape.new(name: 'InputConfiguration')
@@ -61,8 +64,10 @@ module Aws::IoTEvents
     InputSummary = Shapes::StructureShape.new(name: 'InputSummary')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    IotEventsAction = Shapes::StructureShape.new(name: 'IotEventsAction')
     IotTopicPublishAction = Shapes::StructureShape.new(name: 'IotTopicPublishAction')
     KeyValue = Shapes::StringShape.new(name: 'KeyValue')
+    LambdaAction = Shapes::StructureShape.new(name: 'LambdaAction')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListDetectorModelVersionsRequest = Shapes::StructureShape.new(name: 'ListDetectorModelVersionsRequest')
     ListDetectorModelVersionsResponse = Shapes::StructureShape.new(name: 'ListDetectorModelVersionsResponse')
@@ -82,6 +87,7 @@ module Aws::IoTEvents
     OnExitLifecycle = Shapes::StructureShape.new(name: 'OnExitLifecycle')
     OnInputLifecycle = Shapes::StructureShape.new(name: 'OnInputLifecycle')
     PutLoggingOptionsRequest = Shapes::StructureShape.new(name: 'PutLoggingOptionsRequest')
+    QueueUrl = Shapes::StringShape.new(name: 'QueueUrl')
     ResetTimerAction = Shapes::StructureShape.new(name: 'ResetTimerAction')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
@@ -91,6 +97,7 @@ module Aws::IoTEvents
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SetTimerAction = Shapes::StructureShape.new(name: 'SetTimerAction')
     SetVariableAction = Shapes::StructureShape.new(name: 'SetVariableAction')
+    SqsAction = Shapes::StructureShape.new(name: 'SqsAction')
     State = Shapes::StructureShape.new(name: 'State')
     StateName = Shapes::StringShape.new(name: 'StateName')
     States = Shapes::ListShape.new(name: 'States')
@@ -113,6 +120,7 @@ module Aws::IoTEvents
     UpdateDetectorModelResponse = Shapes::StructureShape.new(name: 'UpdateDetectorModelResponse')
     UpdateInputRequest = Shapes::StructureShape.new(name: 'UpdateInputRequest')
     UpdateInputResponse = Shapes::StructureShape.new(name: 'UpdateInputResponse')
+    UseBase64 = Shapes::BooleanShape.new(name: 'UseBase64')
     VariableName = Shapes::StringShape.new(name: 'VariableName')
     VariableValue = Shapes::StringShape.new(name: 'VariableValue')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
@@ -125,6 +133,10 @@ module Aws::IoTEvents
     Action.add_member(:set_timer, Shapes::ShapeRef.new(shape: SetTimerAction, location_name: "setTimer"))
     Action.add_member(:clear_timer, Shapes::ShapeRef.new(shape: ClearTimerAction, location_name: "clearTimer"))
     Action.add_member(:reset_timer, Shapes::ShapeRef.new(shape: ResetTimerAction, location_name: "resetTimer"))
+    Action.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaAction, location_name: "lambda"))
+    Action.add_member(:iot_events, Shapes::ShapeRef.new(shape: IotEventsAction, location_name: "iotEvents"))
+    Action.add_member(:sqs, Shapes::ShapeRef.new(shape: SqsAction, location_name: "sqs"))
+    Action.add_member(:firehose, Shapes::ShapeRef.new(shape: FirehoseAction, location_name: "firehose"))
     Action.struct_class = Types::Action
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
@@ -235,6 +247,10 @@ module Aws::IoTEvents
 
     Events.member = Shapes::ShapeRef.new(shape: Event)
 
+    FirehoseAction.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "deliveryStreamName"))
+    FirehoseAction.add_member(:separator, Shapes::ShapeRef.new(shape: FirehoseSeparator, location_name: "separator"))
+    FirehoseAction.struct_class = Types::FirehoseAction
+
     Input.add_member(:input_configuration, Shapes::ShapeRef.new(shape: InputConfiguration, location_name: "inputConfiguration"))
     Input.add_member(:input_definition, Shapes::ShapeRef.new(shape: InputDefinition, location_name: "inputDefinition"))
     Input.struct_class = Types::Input
@@ -266,8 +282,14 @@ module Aws::IoTEvents
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
+    IotEventsAction.add_member(:input_name, Shapes::ShapeRef.new(shape: InputName, required: true, location_name: "inputName"))
+    IotEventsAction.struct_class = Types::IotEventsAction
+
     IotTopicPublishAction.add_member(:mqtt_topic, Shapes::ShapeRef.new(shape: MQTTTopic, required: true, location_name: "mqttTopic"))
     IotTopicPublishAction.struct_class = Types::IotTopicPublishAction
+
+    LambdaAction.add_member(:function_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "functionArn"))
+    LambdaAction.struct_class = Types::LambdaAction
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
@@ -349,6 +371,10 @@ module Aws::IoTEvents
     SetVariableAction.add_member(:variable_name, Shapes::ShapeRef.new(shape: VariableName, required: true, location_name: "variableName"))
     SetVariableAction.add_member(:value, Shapes::ShapeRef.new(shape: VariableValue, required: true, location_name: "value"))
     SetVariableAction.struct_class = Types::SetVariableAction
+
+    SqsAction.add_member(:queue_url, Shapes::ShapeRef.new(shape: QueueUrl, required: true, location_name: "queueUrl"))
+    SqsAction.add_member(:use_base_64, Shapes::ShapeRef.new(shape: UseBase64, location_name: "useBase64"))
+    SqsAction.struct_class = Types::SqsAction
 
     State.add_member(:state_name, Shapes::ShapeRef.new(shape: StateName, required: true, location_name: "stateName"))
     State.add_member(:on_input, Shapes::ShapeRef.new(shape: OnInputLifecycle, location_name: "onInput"))

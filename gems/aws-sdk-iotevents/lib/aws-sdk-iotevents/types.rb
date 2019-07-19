@@ -8,7 +8,7 @@
 module Aws::IoTEvents
   module Types
 
-    # An action to be performed when the `condition` is TRUE.
+    # An action to be performed when the `"condition"` is TRUE.
     #
     # @note When making an API call, you may pass Action
     #   data as a hash:
@@ -34,6 +34,20 @@ module Aws::IoTEvents
     #         reset_timer: {
     #           timer_name: "TimerName", # required
     #         },
+    #         lambda: {
+    #           function_arn: "AmazonResourceName", # required
+    #         },
+    #         iot_events: {
+    #           input_name: "InputName", # required
+    #         },
+    #         sqs: {
+    #           queue_url: "QueueUrl", # required
+    #           use_base_64: false,
+    #         },
+    #         firehose: {
+    #           delivery_stream_name: "DeliveryStreamName", # required
+    #           separator: "FirehoseSeparator",
+    #         },
     #       }
     #
     # @!attribute [rw] set_variable
@@ -46,7 +60,7 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] iot_topic_publish
     #   Publishes an MQTT message with the given topic to the AWS IoT
-    #   Message Broker.
+    #   message broker.
     #   @return [Types::IotTopicPublishAction]
     #
     # @!attribute [rw] set_timer
@@ -61,13 +75,37 @@ module Aws::IoTEvents
     #   Information needed to reset the timer.
     #   @return [Types::ResetTimerAction]
     #
+    # @!attribute [rw] lambda
+    #   Calls a Lambda function, passing in information about the detector
+    #   model instance and the event which triggered the action.
+    #   @return [Types::LambdaAction]
+    #
+    # @!attribute [rw] iot_events
+    #   Sends an IoT Events input, passing in information about the detector
+    #   model instance and the event which triggered the action.
+    #   @return [Types::IotEventsAction]
+    #
+    # @!attribute [rw] sqs
+    #   Sends information about the detector model instance and the event
+    #   which triggered the action to an AWS SQS queue.
+    #   @return [Types::SqsAction]
+    #
+    # @!attribute [rw] firehose
+    #   Sends information about the detector model instance and the event
+    #   which triggered the action to a Kinesis Data Firehose stream.
+    #   @return [Types::FirehoseAction]
+    #
     class Action < Struct.new(
       :set_variable,
       :sns,
       :iot_topic_publish,
       :set_timer,
       :clear_timer,
-      :reset_timer)
+      :reset_timer,
+      :lambda,
+      :iot_events,
+      :sqs,
+      :firehose)
       include Aws::Structure
     end
 
@@ -92,7 +130,7 @@ module Aws::IoTEvents
     #   messages sent to the AWS IoT Events system (`BatchPutMessage`). Each
     #   such message contains a JSON payload, and the attribute (and its
     #   paired value) specified here are available for use in the
-    #   `condition` expressions used by detectors.
+    #   `"condition"` expressions used by detectors.
     #
     #   Syntax: `<field-name>.<field-name>...`
     #   @return [String]
@@ -156,6 +194,20 @@ module Aws::IoTEvents
     #                         reset_timer: {
     #                           timer_name: "TimerName", # required
     #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
+    #                         },
     #                       },
     #                     ],
     #                   },
@@ -185,6 +237,20 @@ module Aws::IoTEvents
     #                         },
     #                         reset_timer: {
     #                           timer_name: "TimerName", # required
+    #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
     #                         },
     #                       },
     #                     ],
@@ -219,6 +285,20 @@ module Aws::IoTEvents
     #                         reset_timer: {
     #                           timer_name: "TimerName", # required
     #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
+    #                         },
     #                       },
     #                     ],
     #                   },
@@ -250,6 +330,20 @@ module Aws::IoTEvents
     #                         },
     #                         reset_timer: {
     #                           timer_name: "TimerName", # required
+    #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
     #                         },
     #                       },
     #                     ],
@@ -298,7 +392,7 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Metadata which can be used to manage the detector model.
+    #   Metadata that can be used to manage the detector model.
     #   @return [Array<Types::Tag>]
     #
     class CreateDetectorModelRequest < Struct.new(
@@ -354,7 +448,7 @@ module Aws::IoTEvents
     #   @return [Types::InputDefinition]
     #
     # @!attribute [rw] tags
-    #   Metadata which can be used to manage the input.
+    #   Metadata that can be used to manage the input.
     #   @return [Array<Types::Tag>]
     #
     class CreateInputRequest < Struct.new(
@@ -400,7 +494,7 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] input_name
-    #   The name of the input to be deleted.
+    #   The name of the input to delete.
     #   @return [String]
     #
     class DeleteInputRequest < Struct.new(
@@ -614,6 +708,20 @@ module Aws::IoTEvents
     #                       reset_timer: {
     #                         timer_name: "TimerName", # required
     #                       },
+    #                       lambda: {
+    #                         function_arn: "AmazonResourceName", # required
+    #                       },
+    #                       iot_events: {
+    #                         input_name: "InputName", # required
+    #                       },
+    #                       sqs: {
+    #                         queue_url: "QueueUrl", # required
+    #                         use_base_64: false,
+    #                       },
+    #                       firehose: {
+    #                         delivery_stream_name: "DeliveryStreamName", # required
+    #                         separator: "FirehoseSeparator",
+    #                       },
     #                     },
     #                   ],
     #                 },
@@ -643,6 +751,20 @@ module Aws::IoTEvents
     #                       },
     #                       reset_timer: {
     #                         timer_name: "TimerName", # required
+    #                       },
+    #                       lambda: {
+    #                         function_arn: "AmazonResourceName", # required
+    #                       },
+    #                       iot_events: {
+    #                         input_name: "InputName", # required
+    #                       },
+    #                       sqs: {
+    #                         queue_url: "QueueUrl", # required
+    #                         use_base_64: false,
+    #                       },
+    #                       firehose: {
+    #                         delivery_stream_name: "DeliveryStreamName", # required
+    #                         separator: "FirehoseSeparator",
     #                       },
     #                     },
     #                   ],
@@ -677,6 +799,20 @@ module Aws::IoTEvents
     #                       reset_timer: {
     #                         timer_name: "TimerName", # required
     #                       },
+    #                       lambda: {
+    #                         function_arn: "AmazonResourceName", # required
+    #                       },
+    #                       iot_events: {
+    #                         input_name: "InputName", # required
+    #                       },
+    #                       sqs: {
+    #                         queue_url: "QueueUrl", # required
+    #                         use_base_64: false,
+    #                       },
+    #                       firehose: {
+    #                         delivery_stream_name: "DeliveryStreamName", # required
+    #                         separator: "FirehoseSeparator",
+    #                       },
     #                     },
     #                   ],
     #                 },
@@ -708,6 +844,20 @@ module Aws::IoTEvents
     #                       },
     #                       reset_timer: {
     #                         timer_name: "TimerName", # required
+    #                       },
+    #                       lambda: {
+    #                         function_arn: "AmazonResourceName", # required
+    #                       },
+    #                       iot_events: {
+    #                         input_name: "InputName", # required
+    #                       },
+    #                       sqs: {
+    #                         queue_url: "QueueUrl", # required
+    #                         use_base_64: false,
+    #                       },
+    #                       firehose: {
+    #                         delivery_stream_name: "DeliveryStreamName", # required
+    #                         separator: "FirehoseSeparator",
     #                       },
     #                     },
     #                   ],
@@ -797,8 +947,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Specifies the `actions` to be performed when the `condition` evaluates
-    # to TRUE.
+    # Specifies the `"actions"` to be performed when the `"condition"`
+    # evaluates to TRUE.
     #
     # @note When making an API call, you may pass Event
     #   data as a hash:
@@ -828,6 +978,20 @@ module Aws::IoTEvents
     #             reset_timer: {
     #               timer_name: "TimerName", # required
     #             },
+    #             lambda: {
+    #               function_arn: "AmazonResourceName", # required
+    #             },
+    #             iot_events: {
+    #               input_name: "InputName", # required
+    #             },
+    #             sqs: {
+    #               queue_url: "QueueUrl", # required
+    #               use_base_64: false,
+    #             },
+    #             firehose: {
+    #               delivery_stream_name: "DeliveryStreamName", # required
+    #               separator: "FirehoseSeparator",
+    #             },
     #           },
     #         ],
     #       }
@@ -838,9 +1002,9 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] condition
     #   \[Optional\] The Boolean expression that when TRUE causes the
-    #   `actions` to be performed. If not present, the actions are performed
-    #   (=TRUE); if the expression result is not a Boolean value the actions
-    #   are NOT performed (=FALSE).
+    #   `"actions"` to be performed. If not present, the actions are
+    #   performed (=TRUE); if the expression result is not a Boolean value,
+    #   the actions are NOT performed (=FALSE).
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -851,6 +1015,35 @@ module Aws::IoTEvents
       :event_name,
       :condition,
       :actions)
+      include Aws::Structure
+    end
+
+    # Sends information about the detector model instance and the event
+    # which triggered the action to a Kinesis Data Firehose stream.
+    #
+    # @note When making an API call, you may pass FirehoseAction
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_stream_name: "DeliveryStreamName", # required
+    #         separator: "FirehoseSeparator",
+    #       }
+    #
+    # @!attribute [rw] delivery_stream_name
+    #   The name of the Kinesis Data Firehose stream where the data is
+    #   written.
+    #   @return [String]
+    #
+    # @!attribute [rw] separator
+    #   A character separator that is used to separate records written to
+    #   the Kinesis Data Firehose stream. Valid values are: '\\n'
+    #   (newline), '\\t' (tab), '\\r\\n' (Windows newline), ','
+    #   (comma).
+    #   @return [String]
+    #
+    class FirehoseAction < Struct.new(
+      :delivery_stream_name,
+      :separator)
       include Aws::Structure
     end
 
@@ -924,7 +1117,7 @@ module Aws::IoTEvents
     #   input. Inputs are derived from messages sent to the AWS IoT Events
     #   system using `BatchPutMessage`. Each such message contains a JSON
     #   payload, and those attributes (and their paired values) specified
-    #   here is available for use in the `condition` expressions used by
+    #   here are available for use in the `"condition"` expressions used by
     #   detectors that monitor this input.
     #   @return [Array<Types::Attribute>]
     #
@@ -991,8 +1184,27 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
+    # Sends an IoT Events input, passing in information about the detector
+    # model instance and the event which triggered the action.
+    #
+    # @note When making an API call, you may pass IotEventsAction
+    #   data as a hash:
+    #
+    #       {
+    #         input_name: "InputName", # required
+    #       }
+    #
+    # @!attribute [rw] input_name
+    #   The name of the AWS IoT Events input where the data is sent.
+    #   @return [String]
+    #
+    class IotEventsAction < Struct.new(
+      :input_name)
+      include Aws::Structure
+    end
+
     # Information required to publish the MQTT message via the AWS IoT
-    # Message Broker.
+    # message broker.
     #
     # @note When making an API call, you may pass IotTopicPublishAction
     #   data as a hash:
@@ -1007,6 +1219,25 @@ module Aws::IoTEvents
     #
     class IotTopicPublishAction < Struct.new(
       :mqtt_topic)
+      include Aws::Structure
+    end
+
+    # Calls a Lambda function, passing in information about the detector
+    # model instance and the event which triggered the action.
+    #
+    # @note When making an API call, you may pass LambdaAction
+    #   data as a hash:
+    #
+    #       {
+    #         function_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] function_arn
+    #   The ARN of the Lambda function which is executed.
+    #   @return [String]
+    #
+    class LambdaAction < Struct.new(
+      :function_arn)
       include Aws::Structure
     end
 
@@ -1186,7 +1417,7 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] level
-    #   The logging level. Currently, only "ERROR" is supported.
+    #   The logging level.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -1239,6 +1470,20 @@ module Aws::IoTEvents
     #                 reset_timer: {
     #                   timer_name: "TimerName", # required
     #                 },
+    #                 lambda: {
+    #                   function_arn: "AmazonResourceName", # required
+    #                 },
+    #                 iot_events: {
+    #                   input_name: "InputName", # required
+    #                 },
+    #                 sqs: {
+    #                   queue_url: "QueueUrl", # required
+    #                   use_base_64: false,
+    #                 },
+    #                 firehose: {
+    #                   delivery_stream_name: "DeliveryStreamName", # required
+    #                   separator: "FirehoseSeparator",
+    #                 },
     #               },
     #             ],
     #           },
@@ -1247,7 +1492,7 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] events
     #   Specifies the actions that are performed when the state is entered
-    #   and the `condition` is TRUE.
+    #   and the `"condition"` is TRUE.
     #   @return [Array<Types::Event>]
     #
     class OnEnterLifecycle < Struct.new(
@@ -1255,8 +1500,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # When exiting this state, perform these `actions` if the specified
-    # `condition` is TRUE.
+    # When exiting this state, perform these `"actions"` if the specified
+    # `"condition"` is TRUE.
     #
     # @note When making an API call, you may pass OnExitLifecycle
     #   data as a hash:
@@ -1288,6 +1533,20 @@ module Aws::IoTEvents
     #                 reset_timer: {
     #                   timer_name: "TimerName", # required
     #                 },
+    #                 lambda: {
+    #                   function_arn: "AmazonResourceName", # required
+    #                 },
+    #                 iot_events: {
+    #                   input_name: "InputName", # required
+    #                 },
+    #                 sqs: {
+    #                   queue_url: "QueueUrl", # required
+    #                   use_base_64: false,
+    #                 },
+    #                 firehose: {
+    #                   delivery_stream_name: "DeliveryStreamName", # required
+    #                   separator: "FirehoseSeparator",
+    #                 },
     #               },
     #             ],
     #           },
@@ -1295,8 +1554,8 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] events
-    #   Specifies the actions that are performed when the state is exited
-    #   and the `condition` is TRUE.
+    #   Specifies the `"actions"` that are performed when the state is
+    #   exited and the `"condition"` is TRUE.
     #   @return [Array<Types::Event>]
     #
     class OnExitLifecycle < Struct.new(
@@ -1304,7 +1563,7 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Specifies the actions performed when the `condition` evaluates to
+    # Specifies the actions performed when the `"condition"` evaluates to
     # TRUE.
     #
     # @note When making an API call, you may pass OnInputLifecycle
@@ -1337,6 +1596,20 @@ module Aws::IoTEvents
     #                 reset_timer: {
     #                   timer_name: "TimerName", # required
     #                 },
+    #                 lambda: {
+    #                   function_arn: "AmazonResourceName", # required
+    #                 },
+    #                 iot_events: {
+    #                   input_name: "InputName", # required
+    #                 },
+    #                 sqs: {
+    #                   queue_url: "QueueUrl", # required
+    #                   use_base_64: false,
+    #                 },
+    #                 firehose: {
+    #                   delivery_stream_name: "DeliveryStreamName", # required
+    #                   separator: "FirehoseSeparator",
+    #                 },
     #               },
     #             ],
     #           },
@@ -1367,6 +1640,20 @@ module Aws::IoTEvents
     #                 reset_timer: {
     #                   timer_name: "TimerName", # required
     #                 },
+    #                 lambda: {
+    #                   function_arn: "AmazonResourceName", # required
+    #                 },
+    #                 iot_events: {
+    #                   input_name: "InputName", # required
+    #                 },
+    #                 sqs: {
+    #                   queue_url: "QueueUrl", # required
+    #                   use_base_64: false,
+    #                 },
+    #                 firehose: {
+    #                   delivery_stream_name: "DeliveryStreamName", # required
+    #                   separator: "FirehoseSeparator",
+    #                 },
     #               },
     #             ],
     #             next_state: "StateName", # required
@@ -1375,13 +1662,13 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] events
-    #   Specifies the actions performed when the `condition` evaluates to
+    #   Specifies the actions performed when the `"condition"` evaluates to
     #   TRUE.
     #   @return [Array<Types::Event>]
     #
     # @!attribute [rw] transition_events
-    #   Specifies the actions performed and the next state entered when a
-    #   `condition` evaluates to TRUE.
+    #   Specifies the actions performed, and the next state entered, when a
+    #   `"condition"` evaluates to TRUE.
     #   @return [Array<Types::TransitionEvent>]
     #
     class OnInputLifecycle < Struct.new(
@@ -1487,7 +1774,7 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The ARN of the Amazon SNS target to which the message is sent.
+    #   The ARN of the Amazon SNS target where the message is sent.
     #   @return [String]
     #
     class SNSTopicPublishAction < Struct.new(
@@ -1555,6 +1842,32 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
+    # Sends information about the detector model instance and the event
+    # which triggered the action to an AWS SQS queue.
+    #
+    # @note When making an API call, you may pass SqsAction
+    #   data as a hash:
+    #
+    #       {
+    #         queue_url: "QueueUrl", # required
+    #         use_base_64: false,
+    #       }
+    #
+    # @!attribute [rw] queue_url
+    #   The URL of the SQS queue where the data is written.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_base_64
+    #   Set this to TRUE if you want the data to be Base-64 encoded before
+    #   it is written to the queue. Otherwise, set this to FALSE.
+    #   @return [Boolean]
+    #
+    class SqsAction < Struct.new(
+      :queue_url,
+      :use_base_64)
+      include Aws::Structure
+    end
+
     # Information that defines a state of a detector.
     #
     # @note When making an API call, you may pass State
@@ -1589,6 +1902,20 @@ module Aws::IoTEvents
     #                   reset_timer: {
     #                     timer_name: "TimerName", # required
     #                   },
+    #                   lambda: {
+    #                     function_arn: "AmazonResourceName", # required
+    #                   },
+    #                   iot_events: {
+    #                     input_name: "InputName", # required
+    #                   },
+    #                   sqs: {
+    #                     queue_url: "QueueUrl", # required
+    #                     use_base_64: false,
+    #                   },
+    #                   firehose: {
+    #                     delivery_stream_name: "DeliveryStreamName", # required
+    #                     separator: "FirehoseSeparator",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -1618,6 +1945,20 @@ module Aws::IoTEvents
     #                   },
     #                   reset_timer: {
     #                     timer_name: "TimerName", # required
+    #                   },
+    #                   lambda: {
+    #                     function_arn: "AmazonResourceName", # required
+    #                   },
+    #                   iot_events: {
+    #                     input_name: "InputName", # required
+    #                   },
+    #                   sqs: {
+    #                     queue_url: "QueueUrl", # required
+    #                     use_base_64: false,
+    #                   },
+    #                   firehose: {
+    #                     delivery_stream_name: "DeliveryStreamName", # required
+    #                     separator: "FirehoseSeparator",
     #                   },
     #                 },
     #               ],
@@ -1652,6 +1993,20 @@ module Aws::IoTEvents
     #                   reset_timer: {
     #                     timer_name: "TimerName", # required
     #                   },
+    #                   lambda: {
+    #                     function_arn: "AmazonResourceName", # required
+    #                   },
+    #                   iot_events: {
+    #                     input_name: "InputName", # required
+    #                   },
+    #                   sqs: {
+    #                     queue_url: "QueueUrl", # required
+    #                     use_base_64: false,
+    #                   },
+    #                   firehose: {
+    #                     delivery_stream_name: "DeliveryStreamName", # required
+    #                     separator: "FirehoseSeparator",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -1684,6 +2039,20 @@ module Aws::IoTEvents
     #                   reset_timer: {
     #                     timer_name: "TimerName", # required
     #                   },
+    #                   lambda: {
+    #                     function_arn: "AmazonResourceName", # required
+    #                   },
+    #                   iot_events: {
+    #                     input_name: "InputName", # required
+    #                   },
+    #                   sqs: {
+    #                     queue_url: "QueueUrl", # required
+    #                     use_base_64: false,
+    #                   },
+    #                   firehose: {
+    #                     delivery_stream_name: "DeliveryStreamName", # required
+    #                     separator: "FirehoseSeparator",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -1696,18 +2065,18 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] on_input
-    #   When an input is received and the `condition` is TRUE, perform the
-    #   specified `actions`.
+    #   When an input is received and the `"condition"` is TRUE, perform the
+    #   specified `"actions"`.
     #   @return [Types::OnInputLifecycle]
     #
     # @!attribute [rw] on_enter
-    #   When entering this state, perform these `actions` if the `condition`
-    #   is TRUE.
+    #   When entering this state, perform these `"actions"` if the
+    #   `"condition"` is TRUE.
     #   @return [Types::OnEnterLifecycle]
     #
     # @!attribute [rw] on_exit
-    #   When exiting this state, perform these `actions` if the specified
-    #   `condition` is TRUE.
+    #   When exiting this state, perform these `"actions"` if the specified
+    #   `"condition"` is TRUE.
     #   @return [Types::OnExitLifecycle]
     #
     class State < Struct.new(
@@ -1718,7 +2087,7 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Metadata which can be used to manage the resource.
+    # Metadata that can be used to manage the resource.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -1783,7 +2152,7 @@ module Aws::IoTEvents
     end
 
     # Specifies the actions performed and the next state entered when a
-    # `condition` evaluates to TRUE.
+    # `"condition"` evaluates to TRUE.
     #
     # @note When making an API call, you may pass TransitionEvent
     #   data as a hash:
@@ -1813,6 +2182,20 @@ module Aws::IoTEvents
     #             reset_timer: {
     #               timer_name: "TimerName", # required
     #             },
+    #             lambda: {
+    #               function_arn: "AmazonResourceName", # required
+    #             },
+    #             iot_events: {
+    #               input_name: "InputName", # required
+    #             },
+    #             sqs: {
+    #               queue_url: "QueueUrl", # required
+    #               use_base_64: false,
+    #             },
+    #             firehose: {
+    #               delivery_stream_name: "DeliveryStreamName", # required
+    #               separator: "FirehoseSeparator",
+    #             },
     #           },
     #         ],
     #         next_state: "StateName", # required
@@ -1824,7 +2207,7 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] condition
     #   \[Required\] A Boolean expression that when TRUE causes the actions
-    #   to be performed and the `nextState` to be entered.
+    #   to be performed and the `"nextState"` to be entered.
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -1914,6 +2297,20 @@ module Aws::IoTEvents
     #                         reset_timer: {
     #                           timer_name: "TimerName", # required
     #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
+    #                         },
     #                       },
     #                     ],
     #                   },
@@ -1943,6 +2340,20 @@ module Aws::IoTEvents
     #                         },
     #                         reset_timer: {
     #                           timer_name: "TimerName", # required
+    #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
     #                         },
     #                       },
     #                     ],
@@ -1977,6 +2388,20 @@ module Aws::IoTEvents
     #                         reset_timer: {
     #                           timer_name: "TimerName", # required
     #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
+    #                         },
     #                       },
     #                     ],
     #                   },
@@ -2009,6 +2434,20 @@ module Aws::IoTEvents
     #                         reset_timer: {
     #                           timer_name: "TimerName", # required
     #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
+    #                         },
     #                       },
     #                     ],
     #                   },
@@ -2023,7 +2462,7 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] detector_model_name
-    #   The name of the detector model to be updated.
+    #   The name of the detector model that is updated.
     #   @return [String]
     #
     # @!attribute [rw] detector_model_definition

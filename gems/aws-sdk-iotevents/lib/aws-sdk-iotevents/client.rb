@@ -278,7 +278,7 @@ module Aws::IoTEvents
     #   perform its operations.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Metadata which can be used to manage the detector model.
+    #   Metadata that can be used to manage the detector model.
     #
     # @return [Types::CreateDetectorModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -319,6 +319,20 @@ module Aws::IoTEvents
     #                     reset_timer: {
     #                       timer_name: "TimerName", # required
     #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -348,6 +362,20 @@ module Aws::IoTEvents
     #                     },
     #                     reset_timer: {
     #                       timer_name: "TimerName", # required
+    #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
     #                     },
     #                   },
     #                 ],
@@ -382,6 +410,20 @@ module Aws::IoTEvents
     #                     reset_timer: {
     #                       timer_name: "TimerName", # required
     #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -413,6 +455,20 @@ module Aws::IoTEvents
     #                     },
     #                     reset_timer: {
     #                       timer_name: "TimerName", # required
+    #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
     #                     },
     #                   },
     #                 ],
@@ -465,7 +521,7 @@ module Aws::IoTEvents
     #   The definition of the input.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Metadata which can be used to manage the input.
+    #   Metadata that can be used to manage the input.
     #
     # @return [Types::CreateInputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -531,7 +587,7 @@ module Aws::IoTEvents
     # Deletes an input.
     #
     # @option params [required, String] :input_name
-    #   The name of the input to be deleted.
+    #   The name of the input to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -548,7 +604,7 @@ module Aws::IoTEvents
       req.send_request(options)
     end
 
-    # Describes a detector model. If the `version` parameter is not
+    # Describes a detector model. If the `"version"` parameter is not
     # specified, information about the latest version is returned.
     #
     # @option params [required, String] :detector_model_name
@@ -584,6 +640,12 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].set_timer.seconds #=> Integer
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].reset_timer.timer_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].lambda.function_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_events.input_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].sqs.queue_url #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].sqs.use_base_64 #=> Boolean
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].firehose.delivery_stream_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].firehose.separator #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events #=> Array
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].event_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].condition #=> String
@@ -596,6 +658,12 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].set_timer.seconds #=> Integer
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].reset_timer.timer_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].lambda.function_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_events.input_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].sqs.queue_url #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].sqs.use_base_64 #=> Boolean
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].firehose.delivery_stream_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].firehose.separator #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].next_state #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events #=> Array
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].event_name #=> String
@@ -609,6 +677,12 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].set_timer.seconds #=> Integer
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].reset_timer.timer_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].lambda.function_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_events.input_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].sqs.queue_url #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].sqs.use_base_64 #=> Boolean
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].firehose.delivery_stream_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].firehose.separator #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events #=> Array
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].event_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].condition #=> String
@@ -621,6 +695,12 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].set_timer.seconds #=> Integer
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].reset_timer.timer_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].lambda.function_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_events.input_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].sqs.queue_url #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].sqs.use_base_64 #=> Boolean
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].firehose.delivery_stream_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].firehose.separator #=> String
     #   resp.detector_model.detector_model_definition.initial_state_name #=> String
     #   resp.detector_model.detector_model_configuration.detector_model_name #=> String
     #   resp.detector_model.detector_model_configuration.detector_model_version #=> String
@@ -842,10 +922,10 @@ module Aws::IoTEvents
 
     # Sets or updates the AWS IoT Events logging options.
     #
-    # Note that if you update the value of any `loggingOptions` field, it
-    # takes up to one minute for the change to take effect. Also, if you
-    # change the policy attached to the role you specified in the roleArn
-    # field (for example, to correct an invalid policy) it takes up to five
+    # If you update the value of any `"loggingOptions"` field, it takes up
+    # to one minute for the change to take effect. Also, if you change the
+    # policy attached to the role you specified in the `"roleArn"` field
+    # (for example, to correct an invalid policy) it takes up to five
     # minutes for that change to take effect.
     #
     # @option params [required, Types::LoggingOptions] :logging_options
@@ -876,8 +956,8 @@ module Aws::IoTEvents
       req.send_request(options)
     end
 
-    # Add to or modifies the tags of the given resource. Tags are metadata
-    # which can be used to manage a resource.
+    # Adds to or modifies the tags of the given resource. Tags are metadata
+    # that can be used to manage a resource.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource.
@@ -931,10 +1011,10 @@ module Aws::IoTEvents
     end
 
     # Updates a detector model. Detectors (instances) spawned by the
-    # previous version will be deleted and re-created as new inputs arrive.
+    # previous version are deleted and then re-created as new inputs arrive.
     #
     # @option params [required, String] :detector_model_name
-    #   The name of the detector model to be updated.
+    #   The name of the detector model that is updated.
     #
     # @option params [required, Types::DetectorModelDefinition] :detector_model_definition
     #   Information that defines how a detector operates.
@@ -985,6 +1065,20 @@ module Aws::IoTEvents
     #                     reset_timer: {
     #                       timer_name: "TimerName", # required
     #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -1014,6 +1108,20 @@ module Aws::IoTEvents
     #                     },
     #                     reset_timer: {
     #                       timer_name: "TimerName", # required
+    #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
     #                     },
     #                   },
     #                 ],
@@ -1048,6 +1156,20 @@ module Aws::IoTEvents
     #                     reset_timer: {
     #                       timer_name: "TimerName", # required
     #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -1079,6 +1201,20 @@ module Aws::IoTEvents
     #                     },
     #                     reset_timer: {
     #                       timer_name: "TimerName", # required
+    #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
     #                     },
     #                   },
     #                 ],
@@ -1170,7 +1306,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

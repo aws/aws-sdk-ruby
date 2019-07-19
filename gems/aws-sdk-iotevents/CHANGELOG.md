@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2019-07-19)
+------------------
+
+* Feature - Adds support for IoT Events, Lambda, SQS and Kinesis Firehose actions.
+
 1.2.0 (2019-07-01)
 ------------------
 

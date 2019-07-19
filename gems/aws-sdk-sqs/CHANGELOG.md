@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-07-19)
+------------------
+
+* Feature - This release updates the information about the availability of FIFO queues and includes miscellaneous fixes.
+
 1.18.1 (2019-07-17)
 ------------------
 
