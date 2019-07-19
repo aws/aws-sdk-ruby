@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.317 (2019-07-19)
+------------------
+
 * Feature - Aws::IoTEvents - Updated the API, and documentation for AWS IoT Events.
 
 * Feature - Aws::SQS - Updated the documentation for Amazon Simple Queue Service.
