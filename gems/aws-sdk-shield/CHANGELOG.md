@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-07-22)
+------------------
+
+* Feature - Adding new VectorType (HTTP_Reflection) and related top contributor types to describe WordPress Pingback DDoS attacks.
+
 1.18.0 (2019-07-01)
 ------------------
 

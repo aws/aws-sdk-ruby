@@ -265,8 +265,8 @@ module Aws::Shield
     # @!group API Operations
 
     # Authorizes the DDoS Response team (DRT) to access the specified Amazon
-    # S3 bucket containing your flow logs. You can associate up to 10 Amazon
-    # S3 buckets with your subscription.
+    # S3 bucket containing your AWS WAF logs. You can associate up to 10
+    # Amazon S3 buckets with your subscription.
     #
     # To use the services of the DRT and make an `AssociateDRTLogBucket`
     # request, you must be subscribed to the [Business Support plan][1] or
@@ -278,7 +278,7 @@ module Aws::Shield
     # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :log_bucket
-    #   The Amazon S3 bucket that contains your flow logs.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -444,6 +444,9 @@ module Aws::Shield
     # [Authorize the DDoS Response Team to Create Rules and Web ACLs on Your
     # Behalf][1].
     #
+    # To use the services of the DRT, you must be subscribed to the
+    # [Business Support plan][2] or the [Enterprise Support plan][3].
+    #
     # When you initally create a subscription, your subscription is set to
     # be automatically renewed at the end of the existing subscription
     # period. You can change this by submitting an `UpdateSubscription`
@@ -452,6 +455,8 @@ module Aws::Shield
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/authorize-DRT.html
+    # [2]: https://aws.amazon.com/premiumsupport/business-support/
+    # [3]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -550,7 +555,7 @@ module Aws::Shield
     #   resp.attack.attack_counters[0].unit #=> String
     #   resp.attack.attack_properties #=> Array
     #   resp.attack.attack_properties[0].attack_layer #=> String, one of "NETWORK", "APPLICATION"
-    #   resp.attack.attack_properties[0].attack_property_identifier #=> String, one of "DESTINATION_URL", "REFERRER", "SOURCE_ASN", "SOURCE_COUNTRY", "SOURCE_IP_ADDRESS", "SOURCE_USER_AGENT"
+    #   resp.attack.attack_properties[0].attack_property_identifier #=> String, one of "DESTINATION_URL", "REFERRER", "SOURCE_ASN", "SOURCE_COUNTRY", "SOURCE_IP_ADDRESS", "SOURCE_USER_AGENT", "WORDPRESS_PINGBACK_REFLECTOR", "WORDPRESS_PINGBACK_SOURCE"
     #   resp.attack.attack_properties[0].top_contributors #=> Array
     #   resp.attack.attack_properties[0].top_contributors[0].name #=> String
     #   resp.attack.attack_properties[0].top_contributors[0].value #=> Integer
@@ -679,7 +684,7 @@ module Aws::Shield
     end
 
     # Removes the DDoS Response team's (DRT) access to the specified Amazon
-    # S3 bucket containing your flow logs.
+    # S3 bucket containing your AWS WAF logs.
     #
     # To make a `DisassociateDRTLogBucket` request, you must be subscribed
     # to the [Business Support plan][1] or the [Enterprise Support plan][2].
@@ -694,7 +699,7 @@ module Aws::Shield
     # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :log_bucket
-    #   The Amazon S3 bucket that contains your flow logs.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -954,7 +959,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

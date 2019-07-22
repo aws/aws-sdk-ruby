@@ -50,7 +50,7 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] log_bucket
-    #   The Amazon S3 bucket that contains your flow logs.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucketRequest AWS API Documentation
@@ -159,12 +159,16 @@ module Aws::Shield
     # Details of the described attack.
     #
     # @!attribute [rw] attack_layer
-    #   The type of DDoS event that was observed. `NETWORK` indicates layer
-    #   3 and layer 4 events and `APPLICATION` indicates layer 7 events.
+    #   The type of distributed denial of service (DDoS) event that was
+    #   observed. `NETWORK` indicates layer 3 and layer 4 events and
+    #   `APPLICATION` indicates layer 7 events.
     #   @return [String]
     #
     # @!attribute [rw] attack_property_identifier
-    #   Defines the DDoS attack property information that is provided.
+    #   Defines the DDoS attack property information that is provided. The
+    #   `WORDPRESS_PINGBACK_REFLECTOR` and `WORDPRESS_PINGBACK_SOURCE`
+    #   values are valid only for WordPress reflective pingback DDoS
+    #   attacks.
     #   @return [String]
     #
     # @!attribute [rw] top_contributors
@@ -269,6 +273,12 @@ module Aws::Shield
     #   * ACK\_FLOOD
     #
     #   * REQUEST\_FLOOD
+    #
+    #   * HTTP\_REFLECTION
+    #
+    #   * UDS\_REFLECTION
+    #
+    #   * MEMCACHED\_REFLECTION
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackVectorDescription AWS API Documentation
@@ -537,7 +547,7 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] log_bucket
-    #   The Amazon S3 bucket that contains your flow logs.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucketRequest AWS API Documentation
