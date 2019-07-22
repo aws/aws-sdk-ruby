@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.318 (2019-07-22)
+------------------
+
 * Feature - Aws::MQ - Updated the API, and documentation for AmazonMQ.
 
 * Feature - Aws::Shield - Updated the API, and documentation for AWS Shield.
