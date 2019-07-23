@@ -558,6 +558,9 @@
   },
   "STS": {
     "models": "sts/2011-06-15",
+    "addPlugins": [
+      "Aws::STS::Plugins::STSRegionalEndpoints"
+    ],
     "gemName": "aws-sdk-core"
   },
   "SWF": {

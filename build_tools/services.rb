@@ -109,7 +109,9 @@ module BuildTools
       end
 
       gems_dir = File.expand_path('../../gems', __FILE__)
-      (["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"] + parts).join('/') + '.rb'
+      prefix = gem == 'sts' ? ["#{gems_dir}/aws-sdk-core/lib/aws-sdk-#{gem}"] :
+        ["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"]
+      (prefix + parts).join('/') + '.rb'
     end
 
     def gem_version(gem_name)

@@ -155,6 +155,21 @@ module Aws
       end
     end
 
+    def sts_regional_endpoints(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          mode = @parsed_credentials.fetch(p, {})["sts_regional_endpoints"]
+        end
+        if @parsed_config
+          mode ||= @parsed_config.fetch(p, {})["sts_regional_endpoints"]
+        end
+        mode
+      else
+        nil
+      end
+    end
+
     def endpoint_discovery(opts = {})
       p = opts[:profile] || @profile_name
       if @config_enabled && @parsed_config
