@@ -41,17 +41,6 @@ module Aws
             'https://sts.us-west-2.amazonaws.com')
         end
 
-        it 'can be set per operation' do
-          client = Client.new(
-            stub_responses: true,
-            region: 'us-west-2'
-          )
-          expect(client.config.sts_regional_endpoints).to eq('legacy')
-          resp = client.get_caller_identity(sts_regional_endpoints: 'regional')
-          expect(resp.context.http_request.endpoint.to_s).to eq(
-            'https://sts.us-west-2.amazonaws.com')
-        end
-
         it 'has no effect on fips endpoint' do
           client = Client.new(
             stub_responses: true,
@@ -62,7 +51,12 @@ module Aws
           expect(resp.context.http_request.endpoint.to_s).to eq(
             'https://sts-fips.us-west-2.amazonaws.com')
 
-          resp = client.get_caller_identity(sts_regional_endpoints: 'regional')
+          client = Client.new(
+            stub_responses: true,
+            sts_regional_endpoints: 'regional',
+            region: 'us-west-2-fips'
+          )
+          resp = client.get_caller_identity
           expect(resp.context.http_request.endpoint.to_s).to eq(
             'https://sts-fips.us-west-2.amazonaws.com')
         end
@@ -120,6 +114,29 @@ module Aws
           expect(resp.context.http_request.endpoint.to_s).to eq(
             'https://sts.cn-north-1.amazonaws.com.cn')
         end
+
+        it 'configures properly at config' do
+          client = Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect(client.config.sts_regional_endpoints).to eq('legacy')
+          expect(client.config.region).to eq('us-west-2')
+          expect(client.config.sigv4_region).to eq('us-east-1')
+          expect(client.config.endpoint.to_s).to eq('https://sts.amazonaws.com')
+
+          client = Client.new(
+            stub_responses: true,
+            sts_regional_endpoints: 'regional',
+            region: 'us-west-2'
+          )
+          expect(client.config.sts_regional_endpoints).to eq('regional')
+          expect(client.config.region).to eq('us-west-2')
+          expect(client.config.sigv4_region).to eq('us-west-2')
+          expect(client.config.endpoint.to_s).to eq(
+            'https://sts.us-west-2.amazonaws.com')
+        end
+
       end
 
     end

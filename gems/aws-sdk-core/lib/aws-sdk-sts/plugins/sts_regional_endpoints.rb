@@ -15,30 +15,6 @@ for legacy regions.
           resolve_sts_regional_endpoints(cfg)
         end
 
-        def add_handlers(handlers, config)
-          handlers.add(OptionHandler, step: :initialize)
-          handlers.add(EndpointResolverHandler, step: :build, priority: 0)
-        end
-
-        # @api private
-        class OptionHandler < Seahorse::Client::Handler
-          def call(context)
-            mode = context.params.delete(:sts_regional_endpoints)
-            mode = context.config.sts_regional_endpoints if mode.nil?
-            context[:sts_regional_endpoints] = mode
-            @handler.call(context)
-          end
-        end
-
-        # @api private
-        class EndpointResolverHandler < Seahorse::Client::Handler
-          def call(context)
-            context.http_request.endpoint = Aws::Partitions::EndpointProvider.resolve(
-              context.config.region, 'sts', context[:sts_regional_endpoints])
-            @handler.call(context)
-          end
-        end
-
         private
         
         def self.resolve_sts_regional_endpoints(cfg)
