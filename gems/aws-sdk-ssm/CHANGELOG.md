@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2019-07-23)
+------------------
+
+* Feature - You can now use Maintenance Windows to select a resource group as the target. By selecting a resource group as the target of a Maintenance Window, customers can perform routine tasks across different resources such as Amazon Elastic Compute Cloud (AmazonEC2) instances, Amazon Elastic Block Store (Amazon EBS) volumes, and Amazon Simple Storage Service(Amazon S3) buckets within the same recurring time window.
+
 1.52.0 (2019-07-01)
 ------------------
 

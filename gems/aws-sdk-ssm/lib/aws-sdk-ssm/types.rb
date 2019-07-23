@@ -3274,13 +3274,13 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   (Optional) The version of the document that you want to delete. If
-    #   not provided, all versions of the document are deleted.
+    #   The version of the document that you want to delete. If not
+    #   provided, all versions of the document are deleted.
     #   @return [String]
     #
     # @!attribute [rw] version_name
-    #   (Optional) The version name of the document that you want to delete.
-    #   If not provided, all versions of the document are deleted.
+    #   The version name of the document that you want to delete. If not
+    #   provided, all versions of the document are deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocumentRequest AWS API Documentation
@@ -4893,7 +4893,7 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
-    #         resource_type: "INSTANCE", # accepts INSTANCE
+    #         resource_type: "INSTANCE", # accepts INSTANCE, RESOURCE_GROUP
     #         filters: [
     #           {
     #             key: "PatchOrchestratorFilterKey",
@@ -5100,7 +5100,7 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
-    #         resource_type: "INSTANCE", # required, accepts INSTANCE
+    #         resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -6033,7 +6033,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # You can have at most 200 active Systems Manager documents.
+    # You can have at most 500 active Systems Manager documents.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6281,7 +6281,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # You attempted to register a LAMBDA or STEP\_FUNCTION task in a region
+    # You attempted to register a LAMBDA or STEP\_FUNCTIONS task in a region
     # where the corresponding service is not available.
     #
     # @!attribute [rw] message
@@ -7023,7 +7023,7 @@ module Aws::SSM
     #
     # @!attribute [rw] task_type
     #   Retrieves the task type for a maintenance window. Task types include
-    #   the following: LAMBDA, STEP\_FUNCTION, AUTOMATION, RUN\_COMMAND.
+    #   the following: LAMBDA, STEP\_FUNCTIONS, AUTOMATION, RUN\_COMMAND.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -7341,7 +7341,7 @@ module Aws::SSM
     #   The resource that the task used during execution. For RUN\_COMMAND
     #   and AUTOMATION task types, the TaskArn is the Systems Manager
     #   Document name/ARN. For LAMBDA tasks, the value is the function
-    #   name/ARN. For STEP\_FUNCTION tasks, the value is the state machine
+    #   name/ARN. For STEP\_FUNCTIONS tasks, the value is the state machine
     #   ARN.
     #   @return [String]
     #
@@ -8787,12 +8787,10 @@ module Aws::SSM
     #
     # You do not have permission to access the instance.
     #
-    # SSM Agent is not running. On managed instances and Linux instances,
-    # verify that the SSM Agent is running. On EC2 Windows instances, verify
-    # that the EC2Config service is running.
+    # SSM Agent is not running. Verify that SSM Agent is running.
     #
-    # SSM Agent or EC2Config service is not registered to the SSM endpoint.
-    # Try reinstalling SSM Agent or EC2Config service.
+    # SSM Agent is not registered with the SSM endpoint. Try reinstalling
+    # SSM Agent.
     #
     # The instance is not in valid state. Valid states are: Running,
     # Pending, Stopped, Stopping. Invalid states are: Shutting-down and
@@ -10819,7 +10817,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The parameters for a STEP\_FUNCTION task.
+    # The parameters for a STEP\_FUNCTIONS task.
     #
     # For information about specifying and updating task parameters, see
     # RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
@@ -10851,11 +10849,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] input
-    #   The inputs for the STEP\_FUNCTION task.
+    #   The inputs for the STEP\_FUNCTIONS task.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the STEP\_FUNCTION task.
+    #   The name of the STEP\_FUNCTIONS task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowStepFunctionsParameters AWS API Documentation
@@ -10934,12 +10932,12 @@ module Aws::SSM
     #   The resource that the task uses during execution. For RUN\_COMMAND
     #   and AUTOMATION task types, `TaskArn` is the Systems Manager document
     #   name or ARN. For LAMBDA tasks, it's the function name or ARN. For
-    #   STEP\_FUNCTION tasks, it's the state machine ARN.
+    #   STEP\_FUNCTIONS tasks, it's the state machine ARN.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of task. The type can be one of the following:
-    #   RUN\_COMMAND, AUTOMATION, LAMBDA, or STEP\_FUNCTION.
+    #   RUN\_COMMAND, AUTOMATION, LAMBDA, or STEP\_FUNCTIONS.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -11071,7 +11069,7 @@ module Aws::SSM
     #   @return [Types::MaintenanceWindowAutomationParameters]
     #
     # @!attribute [rw] step_functions
-    #   The parameters for a STEP\_FUNCTION task type.
+    #   The parameters for a STEP\_FUNCTIONS task type.
     #   @return [Types::MaintenanceWindowStepFunctionsParameters]
     #
     # @!attribute [rw] lambda
@@ -13048,7 +13046,7 @@ module Aws::SSM
     #
     #       {
     #         window_id: "MaintenanceWindowId", # required
-    #         resource_type: "INSTANCE", # required, accepts INSTANCE
+    #         resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
     #         targets: [ # required
     #           {
     #             key: "TargetKey",
@@ -13074,8 +13072,8 @@ module Aws::SSM
     #   The targets to register with the maintenance window. In other words,
     #   the instances to run commands on when the maintenance window runs.
     #
-    #   You can specify targets using either instance IDs or tags that have
-    #   been applied to instances.
+    #   You can specify targets using instance IDs, resource group names, or
+    #   tags that have been applied to instances.
     #
     #   **Example 1**\: Specify instance IDs
     #
@@ -13088,6 +13086,23 @@ module Aws::SSM
     #   **Example 3**\: Use tag-keys applied to instances
     #
     #   `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
+    #
+    #   **Example 4**\: Use resource group names
+    #
+    #   `Key=resource-groups:Name,Values=resource-group-name `
+    #
+    #   **Example 5**\: Use filters for resource group types
+    #
+    #   `Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
+    #   `
+    #
+    #   <note markdown="1"> For `Key=resource-groups:ResourceTypeFilters`, specify resource
+    #   types in the following format
+    #
+    #    `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
+    #   `
+    #
+    #    </note>
     #
     #   For more information about these examples formats, including the
     #   best use case for each one, see [Examples: Register Targets with a
@@ -13222,7 +13237,7 @@ module Aws::SSM
     #
     #   Specify maintenance window targets using the following format:
     #
-    #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
+    #   `Key=WindowTargetIds;,Values=<window-target-id-1>,<window-target-id-2>`
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
@@ -13381,19 +13396,18 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The type of resource of which you want to remove a tag.
+    #   The type of resource from which you want to remove a tag.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the name of the managed instance
-    #   in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. Specify the name of the managed instance in the
+    #   following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The resource ID for which you want to remove tags. Use the ID of the
-    #   resource. Here are some examples:
+    #   The ID of the resource from which you want to remove tags. For
+    #   example:
     #
     #   ManagedInstance: mi-012345abcde
     #
@@ -13404,9 +13418,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the name of the managed instance
-    #   in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. Specify the name of the managed instance in the
+    #   following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #   @return [String]
@@ -13760,7 +13773,7 @@ module Aws::SSM
     #   A URL back to SSM Agent on the instance that the Session Manager
     #   client uses to send commands and receive output from the instance.
     #   Format:
-    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`.
+    #   `wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`.
     #
     #   **region** represents the Region identifier for an AWS Region
     #   supported by AWS Systems Manager, such as `us-east-2` for the US
@@ -14586,7 +14599,7 @@ module Aws::SSM
     #   A URL back to SSM Agent on the instance that the Session Manager
     #   client uses to send commands and receive output from the instance.
     #   Format:
-    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`
+    #   `wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`
     #
     #   **region** represents the Region identifier for an AWS Region
     #   supported by AWS Systems Manager, such as `us-east-2` for the US
@@ -14845,8 +14858,45 @@ module Aws::SSM
     end
 
     # An array of search criteria that targets instances using a Key,Value
-    # combination that you specify. `Targets` is required if you don't
-    # provide one or more instance IDs in the call.
+    # combination that you specify.
+    #
+    # Supported formats include the following.
+    #
+    # * `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3 `
+    #
+    # * `Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2 `
+    #
+    # * `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
+    #
+    # * (Maintenance window targets only)
+    #   `Key=resource-groups:Name,Values=resource-group-name `
+    #
+    # * (Maintenance window targets only)
+    #   `Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
+    #   `
+    #
+    # For example:
+    #
+    # * `Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE`
+    #
+    # * `Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3`
+    #
+    # * `Key=tag-key,Values=Name,Instance-Type,CostCenter`
+    #
+    # * (Maintenance window targets only)
+    #   `Key=resource-groups:Name,Values=ProductionResourceGroup`
+    #
+    # * (Maintenance window targets only)
+    #   `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
+    #   `
+    #
+    # For information about how to send commands that target instances using
+    # `Key,Value` parameters, see [Using Targets and Rate Controls to Send
+    # Commands to a Fleet][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -14858,29 +14908,14 @@ module Aws::SSM
     #
     # @!attribute [rw] key
     #   User-defined criteria for sending commands that target instances
-    #   that meet the criteria. `Key` can be `tag:<Amazon EC2 tag>` or
-    #   `InstanceIds`. For more information about how to send commands that
-    #   target instances using `Key,Value` parameters, see [Using Targets
-    #   and Rate Controls to Send Commands to a Fleet][1] in the *AWS
-    #   Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
+    #   that meet the criteria.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   User-defined criteria that maps to `Key`. For example, if you
     #   specified `tag:ServerRole`, you could specify `value:WebServer` to
     #   run a command on instances that include Amazon EC2 tags of
-    #   `ServerRole,WebServer`. For more information about how to send
-    #   commands that target instances using `Key,Value` parameters, see
-    #   [Using Targets and Rate Controls to Send Commands to a Fleet][1] in
-    #   the *AWS Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
+    #   `ServerRole,WebServer`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Target AWS API Documentation

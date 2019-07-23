@@ -1478,12 +1478,12 @@ module Aws::SSM
     #   The name of the document.
     #
     # @option params [String] :document_version
-    #   (Optional) The version of the document that you want to delete. If not
-    #   provided, all versions of the document are deleted.
+    #   The version of the document that you want to delete. If not provided,
+    #   all versions of the document are deleted.
     #
     # @option params [String] :version_name
-    #   (Optional) The version name of the document that you want to delete.
-    #   If not provided, all versions of the document are deleted.
+    #   The version name of the document that you want to delete. If not
+    #   provided, all versions of the document are deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1624,8 +1624,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Delete a list of parameters. This API is used to delete parameters by
-    # using the Amazon EC2 console.
+    # Delete a list of parameters.
     #
     # @option params [required, Array<String>] :names
     #   The names of the parameters to delete.
@@ -1845,10 +1844,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Details about the activation, including: the date and time the
-    # activation was created, the expiration date, the IAM role assigned to
-    # the instances in the activation, and the number of instances activated
-    # by this registration.
+    # Describes details about the activation, such as the date and time the
+    # activation was created, its expiration date, the IAM role assigned to
+    # the instances in the activation, and the number of instances
+    # registered by using this activation.
     #
     # @option params [Array<Types::DescribeActivationsFilter>] :filters
     #   A filter to view information about your activations.
@@ -2306,7 +2305,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists all patches that could possibly be included in a patch baseline.
+    # Lists all patches eligible to be included in a patch baseline.
     #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
     #   Filters used to scope down the returned patches.
@@ -3203,7 +3202,7 @@ module Aws::SSM
     #         values: ["TargetValue"],
     #       },
     #     ],
-    #     resource_type: "INSTANCE", # accepts INSTANCE
+    #     resource_type: "INSTANCE", # accepts INSTANCE, RESOURCE_GROUP
     #     filters: [
     #       {
     #         key: "PatchOrchestratorFilterKey",
@@ -3274,7 +3273,7 @@ module Aws::SSM
     #   resp.targets #=> Array
     #   resp.targets[0].window_id #=> String
     #   resp.targets[0].window_target_id #=> String
-    #   resp.targets[0].resource_type #=> String, one of "INSTANCE"
+    #   resp.targets[0].resource_type #=> String, one of "INSTANCE", "RESOURCE_GROUP"
     #   resp.targets[0].targets #=> Array
     #   resp.targets[0].targets[0].key #=> String
     #   resp.targets[0].targets[0].values #=> Array
@@ -3457,7 +3456,7 @@ module Aws::SSM
     #         values: ["TargetValue"],
     #       },
     #     ],
-    #     resource_type: "INSTANCE", # required, accepts INSTANCE
+    #     resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -4556,8 +4555,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves details about a specific task run as part of a maintenance
-    # window execution.
+    # Retrieves details about a specific a maintenance window execution.
     #
     # @option params [required, String] :window_execution_id
     #   The ID of the maintenance window execution that includes the task.
@@ -4657,9 +4655,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves a task invocation. A task invocation is a specific task
-    # running on a specific target. maintenance windows report status for
-    # all invocations.
+    # Retrieves information about a specific task running on a specific
+    # target.
     #
     # @option params [required, String] :window_execution_id
     #   The ID of the maintenance window execution for which the task is a
@@ -6631,7 +6628,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Defines the default patch baseline.
+    # Defines the default patch baseline for the relevant operating system.
+    #
+    # To reset the AWS predefined patch baseline as the default, specify the
+    # full patch baseline ARN as the baseline ID value. For example, for
+    # CentOS, specify
+    # `arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed`
+    # instead of `pb-0574b43a65ea646ed`.
     #
     # @option params [required, String] :baseline_id
     #   The ID of the patch baseline that should be the default patch
@@ -6707,8 +6710,8 @@ module Aws::SSM
     #   The targets to register with the maintenance window. In other words,
     #   the instances to run commands on when the maintenance window runs.
     #
-    #   You can specify targets using either instance IDs or tags that have
-    #   been applied to instances.
+    #   You can specify targets using instance IDs, resource group names, or
+    #   tags that have been applied to instances.
     #
     #   **Example 1**\: Specify instance IDs
     #
@@ -6721,6 +6724,23 @@ module Aws::SSM
     #   **Example 3**\: Use tag-keys applied to instances
     #
     #   `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
+    #
+    #   **Example 4**\: Use resource group names
+    #
+    #   `Key=resource-groups:Name,Values=resource-group-name `
+    #
+    #   **Example 5**\: Use filters for resource group types
+    #
+    #   `Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
+    #   `
+    #
+    #   <note markdown="1"> For `Key=resource-groups:ResourceTypeFilters`, specify resource types
+    #   in the following format
+    #
+    #    `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
+    #   `
+    #
+    #    </note>
     #
     #   For more information about these examples formats, including the best
     #   use case for each one, see [Examples: Register Targets with a
@@ -6755,7 +6775,7 @@ module Aws::SSM
     #
     #   resp = client.register_target_with_maintenance_window({
     #     window_id: "MaintenanceWindowId", # required
-    #     resource_type: "INSTANCE", # required, accepts INSTANCE
+    #     resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
     #     targets: [ # required
     #       {
     #         key: "TargetKey",
@@ -6795,7 +6815,7 @@ module Aws::SSM
     #
     #   Specify maintenance window targets using the following format:
     #
-    #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
+    #   `Key=WindowTargetIds;,Values=<window-target-id-1>,<window-target-id-2>`
     #
     # @option params [required, String] :task_arn
     #   The ARN of the task to run.
@@ -6959,20 +6979,20 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Removes all tags from the specified resource.
+    # Removes tag keys from the specified resource.
     #
     # @option params [required, String] :resource_type
-    #   The type of resource of which you want to remove a tag.
+    #   The type of resource from which you want to remove a tag.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the name of the managed instance
-    #   in the following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
+    #   managed instances. Specify the name of the managed instance in the
+    #   following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
     # @option params [required, String] :resource_id
-    #   The resource ID for which you want to remove tags. Use the ID of the
-    #   resource. Here are some examples:
+    #   The ID of the resource from which you want to remove tags. For
+    #   example:
     #
     #   ManagedInstance: mi-012345abcde
     #
@@ -6983,8 +7003,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the name of the managed instance
-    #   in the following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
+    #   managed instances. Specify the name of the managed instance in the
+    #   following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
@@ -7859,7 +7879,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # The document you want to update.
+    # Updates one or more values for an SSM document.
     #
     # @option params [required, String] :content
     #   A valid JSON or YAML string.
@@ -8100,23 +8120,26 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Modifies the target of an existing maintenance window. You can't
-    # change the target type, but you can change the following:
+    # Modifies the target of an existing maintenance window. You can change
+    # the following:
     #
-    # The target from being an ID target to a Tag target, or a Tag target to
-    # an ID target.
+    # * Name
     #
-    # IDs for an ID target.
+    # * Description
     #
-    # Tags for a Tag target.
+    # * Owner
     #
-    # Owner.
+    # * IDs for an ID target
     #
-    # Name.
+    # * Tags for a Tag target
     #
-    # Description.
+    # * From any supported tag type to another. The three supported tag
+    #   types are ID target, Tag target, and resource group. For more
+    #   information, see Target.
     #
-    # If a parameter is null, then the corresponding field is not modified.
+    # <note markdown="1"> If a parameter is null, then the corresponding field is not modified.
+    #
+    #  </note>
     #
     # @option params [required, String] :window_id
     #   The maintenance window ID with which to modify the target.
@@ -8441,7 +8464,7 @@ module Aws::SSM
     end
 
     # Assigns or changes an Amazon Identity and Access Management (IAM) role
-    # to the managed instance.
+    # for the managed instance.
     #
     # @option params [required, String] :instance_id
     #   The ID of the managed instance where you want to update the role.
@@ -8833,7 +8856,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
