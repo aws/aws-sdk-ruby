@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Handle `EncodingError` when using Oj gem [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1831)
+
 3.59.0 (2019-07-03)
 ------------------
 
