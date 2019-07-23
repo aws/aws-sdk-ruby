@@ -70,7 +70,7 @@ module Aws
         # Check for service-level default endpoint.
         endpoint = service_cfg.fetch("defaults", {}).fetch("hostname", endpoint)
 
-        # Check for sts legact behavior
+        # Check for sts legacy behavior
         sts_legacy = service == 'sts' &&
           sts_regional_endpoints == 'legacy' &&
           STS_LEGACY_REGIONS.include?(region)
