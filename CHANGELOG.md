@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.319 (2019-07-23)
+------------------
+
 * Feature - Aws::SecretsManager - Updated the API, and documentation for AWS Secrets Manager.
 
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
