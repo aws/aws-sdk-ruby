@@ -3239,7 +3239,16 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] split_tunnel
-    #   Indicates whether VPN split tunneling is supported.
+    #   Indicates whether split-tunnel is enabled in the AWS Client VPN
+    #   endpoint endpoint.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
     #   @return [Boolean]
     #
     # @!attribute [rw] vpn_protocol
@@ -4168,6 +4177,7 @@ module Aws::EC2
     #         dns_servers: ["String"],
     #         transport_protocol: "tcp", # accepts tcp, udp
     #         description: "String",
+    #         split_tunnel: false,
     #         dry_run: false,
     #         client_token: "String",
     #         tag_specifications: [
@@ -4239,6 +4249,21 @@ module Aws::EC2
     #   A brief description of the Client VPN endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] split_tunnel
+    #   Indicates whether split-tunnel is enabled on the AWS Client VPN
+    #   endpoint endpoint.
+    #
+    #   By default, split-tunnel on a VPN endpoint is disabled.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -4273,6 +4298,7 @@ module Aws::EC2
       :dns_servers,
       :transport_protocol,
       :description,
+      :split_tunnel,
       :dry_run,
       :client_token,
       :tag_specifications)
@@ -5447,6 +5473,17 @@ module Aws::EC2
     #             configured: false,
     #           },
     #         },
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -5480,6 +5517,10 @@ module Aws::EC2
     #   The information for the launch template.
     #   @return [Types::RequestLaunchTemplateData]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the launch template during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateRequest AWS API Documentation
     #
     class CreateLaunchTemplateRequest < Struct.new(
@@ -5487,7 +5528,8 @@ module Aws::EC2
       :client_token,
       :launch_template_name,
       :version_description,
-      :launch_template_data)
+      :launch_template_data,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -6496,7 +6538,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] copy_tags_from_source
-    #   Copies the tags from the specified instance to all snapshots.
+    #   Copies the tags from the specified volume to corresponding snapshot.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshotsRequest AWS API Documentation
@@ -13933,7 +13975,7 @@ module Aws::EC2
     #
     #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
-    #   * `attachment.attach.time` - The time that the network interface was
+    #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the
@@ -14328,6 +14370,7 @@ module Aws::EC2
     #         ],
     #         region_names: ["String"],
     #         dry_run: false,
+    #         all_regions: false,
     #       }
     #
     # @!attribute [rw] filters
@@ -14340,7 +14383,8 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] region_names
-    #   The names of the Regions.
+    #   The names of the Regions. You can specify any Regions, whether they
+    #   are enabled and disabled for your account.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -14350,12 +14394,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] all_regions
+    #   Indicates whether to display all Regions, including Regions that are
+    #   disabled for your account.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegionsRequest AWS API Documentation
     #
     class DescribeRegionsRequest < Struct.new(
       :filters,
       :region_names,
-      :dry_run)
+      :dry_run,
+      :all_regions)
       include Aws::Structure
     end
 
@@ -22212,7 +22262,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   This value is set for Windows AMIs; otherwise, it is blank.
+    #   This value is set to `windows` for Windows AMIs; otherwise, it is
+    #   blank.
     #   @return [String]
     #
     # @!attribute [rw] product_codes
@@ -26435,6 +26486,7 @@ module Aws::EC2
     #           enabled: false,
     #         },
     #         description: "String",
+    #         split_tunnel: false,
     #         dry_run: false,
     #       }
     #
@@ -26472,6 +26524,18 @@ module Aws::EC2
     #   A brief description of the Client VPN endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] split_tunnel
+    #   Indicates whether the VPN is split-tunnel.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -26487,6 +26551,7 @@ module Aws::EC2
       :connection_log_options,
       :dns_servers,
       :description,
+      :split_tunnel,
       :dry_run)
       include Aws::Structure
     end
@@ -30472,11 +30537,17 @@ module Aws::EC2
     #   The name of the Region.
     #   @return [String]
     #
+    # @!attribute [rw] opt_in_status
+    #   The Region opt-in status. The possible values are
+    #   `opt-in-not-required`, `opted-in`, and `not-opted-in`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Region AWS API Documentation
     #
     class Region < Struct.new(
       :endpoint,
-      :region_name)
+      :region_name,
+      :opt_in_status)
       include Aws::Structure
     end
 
@@ -37457,9 +37528,13 @@ module Aws::EC2
     #
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
-    #   support tagging on creation are `fleet`, `dedicated-host`,
-    #   `instance`, `snapshot`, and `volume`. To tag a resource after it has
-    #   been created, see CreateTags.
+    #   support tagging on creation are: `capacity-reservation` \|
+    #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `instance`
+    #   \| `launch-template` \| `snapshot` \| `transit-gateway` \|
+    #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
+    #   `volume`.
+    #
+    #   To tag a resource after it has been created, see CreateTags.
     #   @return [String]
     #
     # @!attribute [rw] tags

@@ -57,8 +57,7 @@ module Aws::STS
     #   ARNs. However, the plain text that you use for both inline and
     #   managed session policies shouldn't exceed 2048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html)
-    #   in the AWS General Reference.
+    #   Service Namespaces][1] in the AWS General Reference.
     #
     #   <note markdown="1"> The characters in this parameter count towards the 2048 character
     #   session policy guideline. However, an AWS conversion compresses the
@@ -77,11 +76,12 @@ module Aws::STS
     #   owns the role. You cannot use session policies to grant more
     #   permissions than those allowed by the identity-based policy of the
     #   role that is being assumed. For more information, see [Session
-    #   Policies][1] in the *IAM User Guide*.
+    #   Policies][2] in the *IAM User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [Array<Types::PolicyDescriptorType>]
     #
     # @!attribute [rw] policy
@@ -297,8 +297,7 @@ module Aws::STS
     #   ARNs. However, the plain text that you use for both inline and
     #   managed session policies shouldn't exceed 2048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html)
-    #   in the AWS General Reference.
+    #   Service Namespaces][1] in the AWS General Reference.
     #
     #   <note markdown="1"> The characters in this parameter count towards the 2048 character
     #   session policy guideline. However, an AWS conversion compresses the
@@ -317,11 +316,12 @@ module Aws::STS
     #   owns the role. You cannot use session policies to grant more
     #   permissions than those allowed by the identity-based policy of the
     #   role that is being assumed. For more information, see [Session
-    #   Policies][1] in the *IAM User Guide*.
+    #   Policies][2] in the *IAM User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [Array<Types::PolicyDescriptorType>]
     #
     # @!attribute [rw] policy
@@ -548,8 +548,7 @@ module Aws::STS
     #   ARNs. However, the plain text that you use for both inline and
     #   managed session policies shouldn't exceed 2048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html)
-    #   in the AWS General Reference.
+    #   Service Namespaces][1] in the AWS General Reference.
     #
     #   <note markdown="1"> The characters in this parameter count towards the 2048 character
     #   session policy guideline. However, an AWS conversion compresses the
@@ -568,11 +567,12 @@ module Aws::STS
     #   owns the role. You cannot use session policies to grant more
     #   permissions than those allowed by the identity-based policy of the
     #   role that is being assumed. For more information, see [Session
-    #   Policies][1] in the *IAM User Guide*.
+    #   Policies][2] in the *IAM User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [Array<Types::PolicyDescriptorType>]
     #
     # @!attribute [rw] policy
@@ -845,6 +845,39 @@ module Aws::STS
     class FederatedUser < Struct.new(
       :federated_user_id,
       :arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessKeyInfoRequest
+    #   data as a hash:
+    #
+    #       {
+    #         access_key_id: "accessKeyIdType", # required
+    #       }
+    #
+    # @!attribute [rw] access_key_id
+    #   The identifier of an access key.
+    #
+    #   This parameter allows (through its regex pattern) a string of
+    #   characters that can consist of any upper- or lowercased letter or
+    #   digit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetAccessKeyInfoRequest AWS API Documentation
+    #
+    class GetAccessKeyInfoRequest < Struct.new(
+      :access_key_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account
+    #   The number used to identify the AWS account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetAccessKeyInfoResponse AWS API Documentation
+    #
+    class GetAccessKeyInfoResponse < Struct.new(
+      :account)
       include Aws::Structure
     end
 
@@ -1241,9 +1274,12 @@ module Aws::STS
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the IAM managed policy to use as a
     #   session policy for the role. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces](general/latest/gr/aws-arns-and-namespaces.html) in the
+    #   [Amazon Resource Names (ARNs) and AWS Service Namespaces][1] in the
     #   *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/PolicyDescriptorType AWS API Documentation

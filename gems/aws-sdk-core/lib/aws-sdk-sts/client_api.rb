@@ -24,6 +24,8 @@ module Aws::STS
     DecodeAuthorizationMessageResponse = Shapes::StructureShape.new(name: 'DecodeAuthorizationMessageResponse')
     ExpiredTokenException = Shapes::StructureShape.new(name: 'ExpiredTokenException')
     FederatedUser = Shapes::StructureShape.new(name: 'FederatedUser')
+    GetAccessKeyInfoRequest = Shapes::StructureShape.new(name: 'GetAccessKeyInfoRequest')
+    GetAccessKeyInfoResponse = Shapes::StructureShape.new(name: 'GetAccessKeyInfoResponse')
     GetCallerIdentityRequest = Shapes::StructureShape.new(name: 'GetCallerIdentityRequest')
     GetCallerIdentityResponse = Shapes::StructureShape.new(name: 'GetCallerIdentityResponse')
     GetFederationTokenRequest = Shapes::StructureShape.new(name: 'GetFederationTokenRequest')
@@ -149,6 +151,12 @@ module Aws::STS
     FederatedUser.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "Arn"))
     FederatedUser.struct_class = Types::FederatedUser
 
+    GetAccessKeyInfoRequest.add_member(:access_key_id, Shapes::ShapeRef.new(shape: accessKeyIdType, required: true, location_name: "AccessKeyId"))
+    GetAccessKeyInfoRequest.struct_class = Types::GetAccessKeyInfoRequest
+
+    GetAccessKeyInfoResponse.add_member(:account, Shapes::ShapeRef.new(shape: accountType, location_name: "Account"))
+    GetAccessKeyInfoResponse.struct_class = Types::GetAccessKeyInfoResponse
+
     GetCallerIdentityRequest.struct_class = Types::GetCallerIdentityRequest
 
     GetCallerIdentityResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: userIdType, location_name: "UserId"))
@@ -269,6 +277,14 @@ module Aws::STS
         o.input = Shapes::ShapeRef.new(shape: DecodeAuthorizationMessageRequest)
         o.output = Shapes::ShapeRef.new(shape: DecodeAuthorizationMessageResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAuthorizationMessageException)
+      end)
+
+      api.add_operation(:get_access_key_info, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessKeyInfo"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAccessKeyInfoRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessKeyInfoResponse)
       end)
 
       api.add_operation(:get_caller_identity, Seahorse::Model::Operation.new.tap do |o|

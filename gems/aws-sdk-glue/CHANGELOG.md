@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2019-07-24)
+------------------
+
+* Feature - This release provides GlueVersion option for Job APIs and WorkerType option for DevEndpoint APIs. Job APIs enable users to pick specific GlueVersion for a specific job and pin the job to a specific runtime environment. DevEndpoint APIs enable users to pick different WorkerType for memory intensive workload.
+
 1.38.0 (2019-07-01)
 ------------------
 

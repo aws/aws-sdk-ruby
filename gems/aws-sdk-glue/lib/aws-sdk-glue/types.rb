@@ -445,8 +445,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] dev_endpoint_names
-    #   The list of DevEndpoint names, which may be the names returned from
-    #   the `ListDevEndpoint` operation.
+    #   The list of `DevEndpoint` names, which might be the names returned
+    #   from the `ListDevEndpoint` operation.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDevEndpointsRequest AWS API Documentation
@@ -457,11 +457,11 @@ module Aws::Glue
     end
 
     # @!attribute [rw] dev_endpoints
-    #   A list of DevEndpoint definitions.
+    #   A list of `DevEndpoint` definitions.
     #   @return [Array<Types::DevEndpoint>]
     #
     # @!attribute [rw] dev_endpoints_not_found
-    #   A list of DevEndpoints not found.
+    #   A list of `DevEndpoints` not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDevEndpointsResponse AWS API Documentation
@@ -841,7 +841,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies how CloudWatch data should be encrypted.
+    # Specifies how Amazon CloudWatch data should be encrypted.
     #
     # @note When making an API call, you may pass CloudWatchEncryption
     #   data as a hash:
@@ -856,7 +856,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The AWS ARN of the KMS key to be used to encrypt the data.
+    #   The Amazon Resource Name (ARN) of the KMS key to be used to encrypt
+    #   the data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CloudWatchEncryption AWS API Documentation
@@ -1975,6 +1976,8 @@ module Aws::Glue
     #         public_key: "GenericString",
     #         public_keys: ["GenericString"],
     #         number_of_nodes: 1,
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         number_of_workers: 1,
     #         extra_python_libs_s3_path: "GenericString",
     #         extra_jars_s3_path: "GenericString",
     #         security_configuration: "NameString",
@@ -1987,36 +1990,36 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] endpoint_name
-    #   The name to be assigned to the new DevEndpoint.
+    #   The name to be assigned to the new `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The IAM role for the DevEndpoint.
+    #   The IAM role for the `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
     #   Security group IDs for the security groups to be used by the new
-    #   DevEndpoint.
+    #   `DevEndpoint`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   The subnet ID for the new DevEndpoint to use.
+    #   The subnet ID for the new `DevEndpoint` to use.
     #   @return [String]
     #
     # @!attribute [rw] public_key
-    #   The public key to be used by this DevEndpoint for authentication.
-    #   This attribute is provided for backward compatibility, as the
+    #   The public key to be used by this `DevEndpoint` for authentication.
+    #   This attribute is provided for backward compatibility because the
     #   recommended attribute to use is public keys.
     #   @return [String]
     #
     # @!attribute [rw] public_keys
-    #   A list of public keys to be used by the DevEndpoints for
+    #   A list of public keys to be used by the development endpoints for
     #   authentication. The use of this attribute is preferred over a single
     #   public key because the public keys allow you to have a different
     #   private key per client.
     #
     #   <note markdown="1"> If you previously created an endpoint with a public key, you must
-    #   remove that key to be able to set a list of public keys: call the
+    #   remove that key to be able to set a list of public keys. Call the
     #   `UpdateDevEndpoint` API with the public key content in the
     #   `deletePublicKeys` attribute, and the list of new keys in the
     #   `addPublicKeys` attribute.
@@ -2026,17 +2029,43 @@ module Aws::Glue
     #
     # @!attribute [rw] number_of_nodes
     #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
-    #   this DevEndpoint.
+    #   this `DevEndpoint`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] worker_type
+    #   The type of predefined worker that is allocated to the development
+    #   endpoint. Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16
+    #     GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
+    #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   to the development endpoint.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
     #   @return [Integer]
     #
     # @!attribute [rw] extra_python_libs_s3_path
-    #   Path(s) to one or more Python libraries in an S3 bucket that should
-    #   be loaded in your DevEndpoint. Multiple values must be complete
-    #   paths separated by a comma.
+    #   The paths to one or more Python libraries in an Amazon S3 bucket
+    #   that should be loaded in your `DevEndpoint`. Multiple values must be
+    #   complete paths separated by a comma.
     #
-    #   Please note that only pure Python libraries can currently be used on
-    #   a DevEndpoint. Libraries that rely on C extensions, such as the
-    #   [pandas][1] Python data analysis library, are not yet supported.
+    #   <note markdown="1"> You can only use pure Python libraries with a `DevEndpoint`.
+    #   Libraries that rely on C extensions, such as the [pandas][1] Python
+    #   data analysis library, are not yet supported.
+    #
+    #    </note>
     #
     #
     #
@@ -2044,13 +2073,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] extra_jars_s3_path
-    #   Path to one or more Java Jars in an S3 bucket that should be loaded
-    #   in your DevEndpoint.
+    #   The path to one or more Java `.jar` files in an S3 bucket that
+    #   should be loaded in your `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
-    #   DevEndpoint.
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2060,11 +2089,11 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] arguments
-    #   A map of arguments used to configure the DevEndpoint.
+    #   A map of arguments used to configure the `DevEndpoint`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpointRequest AWS API Documentation
@@ -2077,6 +2106,8 @@ module Aws::Glue
       :public_key,
       :public_keys,
       :number_of_nodes,
+      :worker_type,
+      :number_of_workers,
       :extra_python_libs_s3_path,
       :extra_jars_s3_path,
       :security_configuration,
@@ -2086,27 +2117,28 @@ module Aws::Glue
     end
 
     # @!attribute [rw] endpoint_name
-    #   The name assigned to the new DevEndpoint.
+    #   The name assigned to the new `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the new DevEndpoint.
+    #   The current status of the new `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   The security groups assigned to the new DevEndpoint.
+    #   The security groups assigned to the new `DevEndpoint`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   The subnet ID assigned to the new DevEndpoint.
+    #   The subnet ID assigned to the new `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The AWS ARN of the role assigned to the new DevEndpoint.
+    #   The Amazon Resource Name (ARN) of the role assigned to the new
+    #   `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] yarn_endpoint_address
-    #   The address of the YARN endpoint used by this DevEndpoint.
+    #   The address of the YARN endpoint used by this `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] zeppelin_remote_spark_interpreter_port
@@ -2118,39 +2150,50 @@ module Aws::Glue
     #   this DevEndpoint.
     #   @return [Integer]
     #
+    # @!attribute [rw] worker_type
+    #   The type of predefined worker that is allocated to the development
+    #   endpoint. May be a value of Standard, G.1X, or G.2X.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   to the development endpoint.
+    #   @return [Integer]
+    #
     # @!attribute [rw] availability_zone
-    #   The AWS availability zone where this DevEndpoint is located.
+    #   The AWS Availability Zone where this `DevEndpoint` is located.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the VPC used by this DevEndpoint.
+    #   The ID of the virtual private cloud (VPC) used by this
+    #   `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] extra_python_libs_s3_path
-    #   Path(s) to one or more Python libraries in an S3 bucket that will be
-    #   loaded in your DevEndpoint.
+    #   The paths to one or more Python libraries in an S3 bucket that will
+    #   be loaded in your `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] extra_jars_s3_path
-    #   Path to one or more Java Jars in an S3 bucket that will be loaded in
-    #   your DevEndpoint.
+    #   Path to one or more Java `.jar` files in an S3 bucket that will be
+    #   loaded in your `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   The reason for a current failure in this DevEndpoint.
+    #   The reason for a current failure in this `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] security_configuration
-    #   The name of the SecurityConfiguration structure being used with this
-    #   DevEndpoint.
+    #   The name of the `SecurityConfiguration` structure being used with
+    #   this `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] created_timestamp
-    #   The point in time at which this DevEndpoint was created.
+    #   The point in time at which this `DevEndpoint` was created.
     #   @return [Time]
     #
     # @!attribute [rw] arguments
-    #   The map of arguments used to configure this DevEndpoint.
+    #   The map of arguments used to configure this `DevEndpoint`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpointResponse AWS API Documentation
@@ -2164,6 +2207,8 @@ module Aws::Glue
       :yarn_endpoint_address,
       :zeppelin_remote_spark_interpreter_port,
       :number_of_nodes,
+      :worker_type,
+      :number_of_workers,
       :availability_zone,
       :vpc_id,
       :extra_python_libs_s3_path,
@@ -2247,8 +2292,9 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
+    #         glue_version: "GlueVersionString",
     #         number_of_workers: 1,
-    #         worker_type: "NameString",
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
     #       }
     #
     # @!attribute [rw] name
@@ -2372,6 +2418,23 @@ module Aws::Glue
     #   Specifies configuration properties of a job notification.
     #   @return [Types::NotificationProperty]
     #
+    # @!attribute [rw] glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version
+    #   supported for jobs of type Spark.
+    #
+    #   For more information about the available AWS Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in
+    #   the developer guide.
+    #
+    #   Jobs that are created without specifying a Glue version default to
+    #   Glue 0.9.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   @return [String]
+    #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
@@ -2414,6 +2477,7 @@ module Aws::Glue
       :security_configuration,
       :tags,
       :notification_property,
+      :glue_version,
       :number_of_workers,
       :worker_type)
       include Aws::Structure
@@ -3311,7 +3375,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] endpoint_name
-    #   The name of the DevEndpoint.
+    #   The name of the `DevEndpoint`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDevEndpointRequest AWS API Documentation
@@ -3614,34 +3678,34 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A development endpoint where a developer can remotely debug ETL
-    # scripts.
+    # A development endpoint where a developer can remotely debug extract,
+    # transform, and load (ETL) scripts.
     #
     # @!attribute [rw] endpoint_name
-    #   The name of the DevEndpoint.
+    #   The name of the `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The AWS ARN of the IAM role used in this DevEndpoint.
+    #   The Amazon Resource Name (ARN) of the IAM role used in this
+    #   `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   A list of security group identifiers used in this DevEndpoint.
+    #   A list of security group identifiers used in this `DevEndpoint`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   The subnet ID for this DevEndpoint.
+    #   The subnet ID for this `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] yarn_endpoint_address
-    #   The YARN endpoint address used by this DevEndpoint.
+    #   The YARN endpoint address used by this `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] private_address
-    #   A private IP address to access the DevEndpoint within a VPC, if the
-    #   DevEndpoint is created within one. The PrivateAddress field is
-    #   present only when you create the DevEndpoint within your virtual
-    #   private cloud (VPC).
+    #   A private IP address to access the `DevEndpoint` within a VPC if the
+    #   `DevEndpoint` is created within one. The `PrivateAddress` field is
+    #   present only when you create the `DevEndpoint` within your VPC.
     #   @return [String]
     #
     # @!attribute [rw] zeppelin_remote_spark_interpreter_port
@@ -3649,36 +3713,63 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] public_address
-    #   The public IP address used by this DevEndpoint. The PublicAddress
-    #   field is present only when you create a non-VPC (virtual private
-    #   cloud) DevEndpoint.
+    #   The public IP address used by this `DevEndpoint`. The
+    #   `PublicAddress` field is present only when you create a non-virtual
+    #   private cloud (VPC) `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of this DevEndpoint.
+    #   The current status of this `DevEndpoint`.
     #   @return [String]
+    #
+    # @!attribute [rw] worker_type
+    #   The type of predefined worker that is allocated to the development
+    #   endpoint. Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16
+    #     GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
+    #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   to the development endpoint.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
+    #   @return [Integer]
     #
     # @!attribute [rw] number_of_nodes
     #   The number of AWS Glue Data Processing Units (DPUs) allocated to
-    #   this DevEndpoint.
+    #   this `DevEndpoint`.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
-    #   The AWS availability zone where this DevEndpoint is located.
+    #   The AWS Availability Zone where this `DevEndpoint` is located.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the virtual private cloud (VPC) used by this DevEndpoint.
+    #   The ID of the virtual private cloud (VPC) used by this
+    #   `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] extra_python_libs_s3_path
-    #   Path(s) to one or more Python libraries in an S3 bucket that should
-    #   be loaded in your DevEndpoint. Multiple values must be complete
-    #   paths separated by a comma.
+    #   The paths to one or more Python libraries in an Amazon S3 bucket
+    #   that should be loaded in your `DevEndpoint`. Multiple values must be
+    #   complete paths separated by a comma.
     #
-    #   Please note that only pure Python libraries can currently be used on
-    #   a DevEndpoint. Libraries that rely on C extensions, such as the
-    #   [pandas][1] Python data analysis library, are not yet supported.
+    #   <note markdown="1"> You can only use pure Python libraries with a `DevEndpoint`.
+    #   Libraries that rely on C extensions, such as the [pandas][1] Python
+    #   data analysis library, are not currently supported.
+    #
+    #    </note>
     #
     #
     #
@@ -3686,15 +3777,16 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] extra_jars_s3_path
-    #   Path to one or more Java Jars in an S3 bucket that should be loaded
-    #   in your DevEndpoint.
+    #   The path to one or more Java `.jar` files in an S3 bucket that
+    #   should be loaded in your `DevEndpoint`.
     #
-    #   Please note that only pure Java/Scala libraries can currently be
-    #   used on a DevEndpoint.
+    #   <note markdown="1"> You can only use pure Java/Scala libraries with a `DevEndpoint`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   The reason for a current failure in this DevEndpoint.
+    #   The reason for a current failure in this `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] last_update_status
@@ -3706,24 +3798,24 @@ module Aws::Glue
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_timestamp
-    #   The point in time at which this DevEndpoint was last modified.
+    #   The point in time at which this `DevEndpoint` was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] public_key
-    #   The public key to be used by this DevEndpoint for authentication.
-    #   This attribute is provided for backward compatibility, as the
+    #   The public key to be used by this `DevEndpoint` for authentication.
+    #   This attribute is provided for backward compatibility because the
     #   recommended attribute to use is public keys.
     #   @return [String]
     #
     # @!attribute [rw] public_keys
-    #   A list of public keys to be used by the DevEndpoints for
-    #   authentication. The use of this attribute is preferred over a single
+    #   A list of public keys to be used by the `DevEndpoints` for
+    #   authentication. Using this attribute is preferred over a single
     #   public key because the public keys allow you to have a different
     #   private key per client.
     #
     #   <note markdown="1"> If you previously created an endpoint with a public key, you must
-    #   remove that key to be able to set a list of public keys: call the
-    #   `UpdateDevEndpoint` API with the public key content in the
+    #   remove that key to be able to set a list of public keys. Call the
+    #   `UpdateDevEndpoint` API operation with the public key content in the
     #   `deletePublicKeys` attribute, and the list of new keys in the
     #   `addPublicKeys` attribute.
     #
@@ -3731,15 +3823,15 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
-    #   DevEndpoint.
+    #   The name of the `SecurityConfiguration` structure to be used with
+    #   this `DevEndpoint`.
     #   @return [String]
     #
     # @!attribute [rw] arguments
-    #   A map of arguments used to configure the DevEndpoint.
+    #   A map of arguments used to configure the `DevEndpoint`.
     #
-    #   Note that currently, we only support "--enable-glue-datacatalog":
-    #   "" as a valid argument.
+    #   Currently, only `"--enable-glue-datacatalog": ""` is supported as a
+    #   valid argument.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpoint AWS API Documentation
@@ -3754,6 +3846,8 @@ module Aws::Glue
       :zeppelin_remote_spark_interpreter_port,
       :public_address,
       :status,
+      :worker_type,
+      :number_of_workers,
       :number_of_nodes,
       :availability_zone,
       :vpc_id,
@@ -3770,7 +3864,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Custom libraries to be loaded into a DevEndpoint.
+    # Custom libraries to be loaded into a development endpoint.
     #
     # @note When making an API call, you may pass DevEndpointCustomLibraries
     #   data as a hash:
@@ -3781,13 +3875,16 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] extra_python_libs_s3_path
-    #   Path(s) to one or more Python libraries in an S3 bucket that should
-    #   be loaded in your DevEndpoint. Multiple values must be complete
-    #   paths separated by a comma.
+    #   The paths to one or more Python libraries in an Amazon Simple
+    #   Storage Service (Amazon S3) bucket that should be loaded in your
+    #   `DevEndpoint`. Multiple values must be complete paths separated by a
+    #   comma.
     #
-    #   Please note that only pure Python libraries can currently be used on
-    #   a DevEndpoint. Libraries that rely on C extensions, such as the
-    #   [pandas][1] Python data analysis library, are not yet supported.
+    #   <note markdown="1"> You can only use pure Python libraries with a `DevEndpoint`.
+    #   Libraries that rely on C extensions, such as the [pandas][1] Python
+    #   data analysis library, are not currently supported.
+    #
+    #    </note>
     #
     #
     #
@@ -3795,11 +3892,12 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] extra_jars_s3_path
-    #   Path to one or more Java Jars in an S3 bucket that should be loaded
-    #   in your DevEndpoint.
+    #   The path to one or more Java `.jar` files in an S3 bucket that
+    #   should be loaded in your `DevEndpoint`.
     #
-    #   Please note that only pure Java/Scala libraries can currently be
-    #   used on a DevEndpoint.
+    #   <note markdown="1"> You can only use pure Java/Scala libraries with a `DevEndpoint`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpointCustomLibraries AWS API Documentation
@@ -3898,15 +3996,16 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] s3_encryption
-    #   The encryption configuration for S3 data.
+    #   The encryption configuration for Amazon Simple Storage Service
+    #   (Amazon S3) data.
     #   @return [Array<Types::S3Encryption>]
     #
     # @!attribute [rw] cloud_watch_encryption
-    #   The encryption configuration for CloudWatch.
+    #   The encryption configuration for Amazon CloudWatch.
     #   @return [Types::CloudWatchEncryption]
     #
     # @!attribute [rw] job_bookmarks_encryption
-    #   The encryption configuration for Job Bookmarks.
+    #   The encryption configuration for job bookmarks.
     #   @return [Types::JobBookmarksEncryption]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EncryptionConfiguration AWS API Documentation
@@ -4489,7 +4588,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] endpoint_name
-    #   Name of the DevEndpoint for which to retrieve information.
+    #   Name of the `DevEndpoint` to retrieve information for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpointRequest AWS API Documentation
@@ -4500,7 +4599,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] dev_endpoint
-    #   A DevEndpoint definition.
+    #   A `DevEndpoint` definition.
     #   @return [Types::DevEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpointResponse AWS API Documentation
@@ -4535,11 +4634,11 @@ module Aws::Glue
     end
 
     # @!attribute [rw] dev_endpoints
-    #   A list of DevEndpoint definitions.
+    #   A list of `DevEndpoint` definitions.
     #   @return [Array<Types::DevEndpoint>]
     #
     # @!attribute [rw] next_token
-    #   A continuation token, if not all DevEndpoint definitions have yet
+    #   A continuation token, if not all `DevEndpoint` definitions have yet
     #   been returned.
     #   @return [String]
     #
@@ -5143,7 +5242,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] security_configuration
-    #   The requested security configuration
+    #   The requested security configuration.
     #   @return [Types::SecurityConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfigurationResponse AWS API Documentation
@@ -6104,6 +6203,23 @@ module Aws::Glue
     #   Specifies configuration properties of a job notification.
     #   @return [Types::NotificationProperty]
     #
+    # @!attribute [rw] glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version
+    #   supported for jobs of type Spark.
+    #
+    #   For more information about the available AWS Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in
+    #   the developer guide.
+    #
+    #   Jobs that are created without specifying a Glue version default to
+    #   Glue 0.9.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -6124,18 +6240,19 @@ module Aws::Glue
       :worker_type,
       :number_of_workers,
       :security_configuration,
-      :notification_property)
+      :notification_property,
+      :glue_version)
       include Aws::Structure
     end
 
-    # Defines a point which a job can resume processing.
+    # Defines a point that a job can resume processing.
     #
     # @!attribute [rw] job_name
-    #   Name of the job in question.
+    #   The name of the job in question.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version of the job.
+    #   The version of the job.
     #   @return [Integer]
     #
     # @!attribute [rw] run
@@ -6161,7 +6278,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies how Job bookmark data should be encrypted.
+    # Specifies how job bookmark data should be encrypted.
     #
     # @note When making an API call, you may pass JobBookmarksEncryption
     #   data as a hash:
@@ -6172,11 +6289,12 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_bookmarks_encryption_mode
-    #   The encryption mode to use for Job bookmarks data.
+    #   The encryption mode to use for job bookmarks data.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The AWS ARN of the KMS key to be used to encrypt the data.
+    #   The Amazon Resource Name (ARN) of the KMS key to be used to encrypt
+    #   the data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobBookmarksEncryption AWS API Documentation
@@ -6396,6 +6514,23 @@ module Aws::Glue
     #   Specifies configuration properties of a job run notification.
     #   @return [Types::NotificationProperty]
     #
+    # @!attribute [rw] glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version
+    #   supported for jobs of type Spark.
+    #
+    #   For more information about the available AWS Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in
+    #   the developer guide.
+    #
+    #   Jobs that are created without specifying a Glue version default to
+    #   Glue 0.9.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -6419,7 +6554,8 @@ module Aws::Glue
       :number_of_workers,
       :security_configuration,
       :log_group_name,
-      :notification_property)
+      :notification_property,
+      :glue_version)
       include Aws::Structure
     end
 
@@ -6457,6 +6593,7 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
+    #         glue_version: "GlueVersionString",
     #       }
     #
     # @!attribute [rw] description
@@ -6589,6 +6726,20 @@ module Aws::Glue
     #   Specifies the configuration properties of a job notification.
     #   @return [Types::NotificationProperty]
     #
+    # @!attribute [rw] glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version
+    #   supported for jobs of type Spark.
+    #
+    #   For more information about the available AWS Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in
+    #   the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
     class JobUpdate < Struct.new(
@@ -6606,7 +6757,8 @@ module Aws::Glue
       :worker_type,
       :number_of_workers,
       :security_configuration,
-      :notification_property)
+      :notification_property,
+      :glue_version)
       include Aws::Structure
     end
 
@@ -7605,7 +7757,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies how S3 data should be encrypted.
+    # Specifies how Amazon Simple Storage Service (Amazon S3) data should be
+    # encrypted.
     #
     # @note When making an API call, you may pass S3Encryption
     #   data as a hash:
@@ -7616,11 +7769,12 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] s3_encryption_mode
-    #   The encryption mode to use for S3 data.
+    #   The encryption mode to use for Amazon S3 data.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The AWS ARN of the KMS key to be used to encrypt the data.
+    #   The Amazon Resource Name (ARN) of the KMS key to be used to encrypt
+    #   the data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Encryption AWS API Documentation
@@ -7938,7 +8092,7 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
-    #         worker_type: "NameString",
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
     #         number_of_workers: 1,
     #       }
     #
@@ -9241,38 +9395,38 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] endpoint_name
-    #   The name of the DevEndpoint to be updated.
+    #   The name of the `DevEndpoint` to be updated.
     #   @return [String]
     #
     # @!attribute [rw] public_key
-    #   The public key for the DevEndpoint to use.
+    #   The public key for the `DevEndpoint` to use.
     #   @return [String]
     #
     # @!attribute [rw] add_public_keys
-    #   The list of public keys for the DevEndpoint to use.
+    #   The list of public keys for the `DevEndpoint` to use.
     #   @return [Array<String>]
     #
     # @!attribute [rw] delete_public_keys
-    #   The list of public keys to be deleted from the DevEndpoint.
+    #   The list of public keys to be deleted from the `DevEndpoint`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] custom_libraries
-    #   Custom Python or Java libraries to be loaded in the DevEndpoint.
+    #   Custom Python or Java libraries to be loaded in the `DevEndpoint`.
     #   @return [Types::DevEndpointCustomLibraries]
     #
     # @!attribute [rw] update_etl_libraries
-    #   True if the list of custom libraries to be loaded in the development
-    #   endpoint needs to be updated, or False otherwise.
+    #   `True` if the list of custom libraries to be loaded in the
+    #   development endpoint needs to be updated, or `False` if otherwise.
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_arguments
     #   The list of argument keys to be deleted from the map of arguments
-    #   used to configure the DevEndpoint.
+    #   used to configure the `DevEndpoint`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] add_arguments
     #   The map of arguments to add the map of arguments used to configure
-    #   the DevEndpoint.
+    #   the `DevEndpoint`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpointRequest AWS API Documentation
@@ -9366,6 +9520,7 @@ module Aws::Glue
     #           notification_property: {
     #             notify_delay_after: 1,
     #           },
+    #           glue_version: "GlueVersionString",
     #         },
     #       }
     #

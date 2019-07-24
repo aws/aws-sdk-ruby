@@ -626,15 +626,15 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Returns a list of resource metadata for a given list of DevEndpoint
-    # names. After calling the `ListDevEndpoints` operation, you can call
-    # this operation to access the data to which you have been granted
-    # permissions. This operation supports all IAM permissions, including
-    # permission conditions that uses tags.
+    # Returns a list of resource metadata for a given list of development
+    # endpoint names. After calling the `ListDevEndpoints` operation, you
+    # can call this operation to access the data to which you have been
+    # granted permissions. This operation supports all IAM permissions,
+    # including permission conditions that uses tags.
     #
     # @option params [required, Array<String>] :dev_endpoint_names
-    #   The list of DevEndpoint names, which may be the names returned from
-    #   the `ListDevEndpoint` operation.
+    #   The list of `DevEndpoint` names, which might be the names returned
+    #   from the `ListDevEndpoint` operation.
     #
     # @return [Types::BatchGetDevEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -660,6 +660,8 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
     #   resp.dev_endpoints[0].availability_zone #=> String
     #   resp.dev_endpoints[0].vpc_id #=> String
@@ -733,6 +735,7 @@ module Aws::Glue
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.jobs[0].glue_version #=> String
     #   resp.jobs_not_found #=> Array
     #   resp.jobs_not_found[0] #=> String
     #
@@ -987,6 +990,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -1048,6 +1052,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -1366,34 +1371,34 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Creates a new DevEndpoint.
+    # Creates a new development endpoint.
     #
     # @option params [required, String] :endpoint_name
-    #   The name to be assigned to the new DevEndpoint.
+    #   The name to be assigned to the new `DevEndpoint`.
     #
     # @option params [required, String] :role_arn
-    #   The IAM role for the DevEndpoint.
+    #   The IAM role for the `DevEndpoint`.
     #
     # @option params [Array<String>] :security_group_ids
     #   Security group IDs for the security groups to be used by the new
-    #   DevEndpoint.
+    #   `DevEndpoint`.
     #
     # @option params [String] :subnet_id
-    #   The subnet ID for the new DevEndpoint to use.
+    #   The subnet ID for the new `DevEndpoint` to use.
     #
     # @option params [String] :public_key
-    #   The public key to be used by this DevEndpoint for authentication. This
-    #   attribute is provided for backward compatibility, as the recommended
-    #   attribute to use is public keys.
+    #   The public key to be used by this `DevEndpoint` for authentication.
+    #   This attribute is provided for backward compatibility because the
+    #   recommended attribute to use is public keys.
     #
     # @option params [Array<String>] :public_keys
-    #   A list of public keys to be used by the DevEndpoints for
+    #   A list of public keys to be used by the development endpoints for
     #   authentication. The use of this attribute is preferred over a single
     #   public key because the public keys allow you to have a different
     #   private key per client.
     #
     #   <note markdown="1"> If you previously created an endpoint with a public key, you must
-    #   remove that key to be able to set a list of public keys: call the
+    #   remove that key to be able to set a list of public keys. Call the
     #   `UpdateDevEndpoint` API with the public key content in the
     #   `deletePublicKeys` attribute, and the list of new keys in the
     #   `addPublicKeys` attribute.
@@ -1402,28 +1407,52 @@ module Aws::Glue
     #
     # @option params [Integer] :number_of_nodes
     #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
-    #   this DevEndpoint.
+    #   this `DevEndpoint`.
+    #
+    # @option params [String] :worker_type
+    #   The type of predefined worker that is allocated to the development
+    #   endpoint. Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16 GB
+    #     of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
+    #     of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated to
+    #   the development endpoint.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
     #
     # @option params [String] :extra_python_libs_s3_path
-    #   Path(s) to one or more Python libraries in an S3 bucket that should be
-    #   loaded in your DevEndpoint. Multiple values must be complete paths
-    #   separated by a comma.
+    #   The paths to one or more Python libraries in an Amazon S3 bucket that
+    #   should be loaded in your `DevEndpoint`. Multiple values must be
+    #   complete paths separated by a comma.
     #
-    #   Please note that only pure Python libraries can currently be used on a
-    #   DevEndpoint. Libraries that rely on C extensions, such as the
-    #   [pandas][1] Python data analysis library, are not yet supported.
+    #   <note markdown="1"> You can only use pure Python libraries with a `DevEndpoint`. Libraries
+    #   that rely on C extensions, such as the [pandas][1] Python data
+    #   analysis library, are not yet supported.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: http://pandas.pydata.org/
     #
     # @option params [String] :extra_jars_s3_path
-    #   Path to one or more Java Jars in an S3 bucket that should be loaded in
-    #   your DevEndpoint.
+    #   The path to one or more Java `.jar` files in an S3 bucket that should
+    #   be loaded in your `DevEndpoint`.
     #
     # @option params [String] :security_configuration
-    #   The name of the SecurityConfiguration structure to be used with this
-    #   DevEndpoint.
+    #   The name of the `SecurityConfiguration` structure to be used with this
+    #   `DevEndpoint`.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this DevEndpoint. You may use tags to limit
@@ -1432,10 +1461,10 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
     # @option params [Hash<String,String>] :arguments
-    #   A map of arguments used to configure the DevEndpoint.
+    #   A map of arguments used to configure the `DevEndpoint`.
     #
     # @return [Types::CreateDevEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1447,6 +1476,8 @@ module Aws::Glue
     #   * {Types::CreateDevEndpointResponse#yarn_endpoint_address #yarn_endpoint_address} => String
     #   * {Types::CreateDevEndpointResponse#zeppelin_remote_spark_interpreter_port #zeppelin_remote_spark_interpreter_port} => Integer
     #   * {Types::CreateDevEndpointResponse#number_of_nodes #number_of_nodes} => Integer
+    #   * {Types::CreateDevEndpointResponse#worker_type #worker_type} => String
+    #   * {Types::CreateDevEndpointResponse#number_of_workers #number_of_workers} => Integer
     #   * {Types::CreateDevEndpointResponse#availability_zone #availability_zone} => String
     #   * {Types::CreateDevEndpointResponse#vpc_id #vpc_id} => String
     #   * {Types::CreateDevEndpointResponse#extra_python_libs_s3_path #extra_python_libs_s3_path} => String
@@ -1466,6 +1497,8 @@ module Aws::Glue
     #     public_key: "GenericString",
     #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     number_of_workers: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
     #     security_configuration: "NameString",
@@ -1488,6 +1521,8 @@ module Aws::Glue
     #   resp.yarn_endpoint_address #=> String
     #   resp.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.number_of_nodes #=> Integer
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.number_of_workers #=> Integer
     #   resp.availability_zone #=> String
     #   resp.vpc_id #=> String
     #   resp.extra_python_libs_s3_path #=> String
@@ -1614,6 +1649,22 @@ module Aws::Glue
     # @option params [Types::NotificationProperty] :notification_property
     #   Specifies configuration properties of a job notification.
     #
+    # @option params [String] :glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version supported
+    #   for jobs of type Spark.
+    #
+    #   For more information about the available AWS Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in the
+    #   developer guide.
+    #
+    #   Jobs that are created without specifying a Glue version default to
+    #   Glue 0.9.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   when a job runs.
@@ -1672,8 +1723,9 @@ module Aws::Glue
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
+    #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
-    #     worker_type: "NameString",
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
     #   })
     #
     # @example Response structure
@@ -1829,7 +1881,15 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Creates a new security configuration.
+    # Creates a new security configuration. A security configuration is a
+    # set of security properties that can be used by AWS Glue. You can use a
+    # security configuration to encrypt data at rest. For information about
+    # using security configurations in AWS Glue, see [Encrypting Data
+    # Written by Crawlers, Jobs, and Development Endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/encryption-security-configuration.html
     #
     # @option params [required, String] :name
     #   The name for the new security configuration.
@@ -2277,10 +2337,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Deletes a specified DevEndpoint.
+    # Deletes a specified development endpoint.
     #
     # @option params [required, String] :endpoint_name
-    #   The name of the DevEndpoint.
+    #   The name of the `DevEndpoint`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3195,7 +3255,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves information about a specified DevEndpoint.
+    # Retrieves information about a specified development endpoint.
     #
     # <note markdown="1"> When you create a development endpoint in a virtual private cloud
     # (VPC), AWS Glue returns only a private IP address, and the public IP
@@ -3205,7 +3265,7 @@ module Aws::Glue
     #  </note>
     #
     # @option params [required, String] :endpoint_name
-    #   Name of the DevEndpoint for which to retrieve information.
+    #   Name of the `DevEndpoint` to retrieve information for.
     #
     # @return [Types::GetDevEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3229,6 +3289,8 @@ module Aws::Glue
     #   resp.dev_endpoint.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
+    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoint.number_of_workers #=> Integer
     #   resp.dev_endpoint.number_of_nodes #=> Integer
     #   resp.dev_endpoint.availability_zone #=> String
     #   resp.dev_endpoint.vpc_id #=> String
@@ -3254,7 +3316,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves all the DevEndpoints in this AWS account.
+    # Retrieves all the development endpoints in this AWS account.
     #
     # <note markdown="1"> When you create a development endpoint in a virtual private cloud
     # (VPC), AWS Glue returns only a private IP address and the public IP
@@ -3294,6 +3356,8 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
     #   resp.dev_endpoints[0].availability_zone #=> String
     #   resp.dev_endpoints[0].vpc_id #=> String
@@ -3359,6 +3423,7 @@ module Aws::Glue
     #   resp.job.number_of_workers #=> Integer
     #   resp.job.security_configuration #=> String
     #   resp.job.notification_property.notify_delay_after #=> Integer
+    #   resp.job.glue_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -3418,6 +3483,7 @@ module Aws::Glue
     #   resp.job_run.security_configuration #=> String
     #   resp.job_run.log_group_name #=> String
     #   resp.job_run.notification_property.notify_delay_after #=> Integer
+    #   resp.job_run.glue_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -3479,6 +3545,7 @@ module Aws::Glue
     #   resp.job_runs[0].security_configuration #=> String
     #   resp.job_runs[0].log_group_name #=> String
     #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.job_runs[0].glue_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -3535,6 +3602,7 @@ module Aws::Glue
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.jobs[0].glue_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -4768,6 +4836,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -4829,6 +4898,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflow.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -4938,6 +5008,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -5086,6 +5157,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "SUCCEEDED", "CANCELLED", "FAILED"
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -5682,7 +5754,7 @@ module Aws::Glue
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
-    #     worker_type: "NameString",
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
     #     number_of_workers: 1,
     #   })
     #
@@ -6184,34 +6256,34 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Updates a specified DevEndpoint.
+    # Updates a specified development endpoint.
     #
     # @option params [required, String] :endpoint_name
-    #   The name of the DevEndpoint to be updated.
+    #   The name of the `DevEndpoint` to be updated.
     #
     # @option params [String] :public_key
-    #   The public key for the DevEndpoint to use.
+    #   The public key for the `DevEndpoint` to use.
     #
     # @option params [Array<String>] :add_public_keys
-    #   The list of public keys for the DevEndpoint to use.
+    #   The list of public keys for the `DevEndpoint` to use.
     #
     # @option params [Array<String>] :delete_public_keys
-    #   The list of public keys to be deleted from the DevEndpoint.
+    #   The list of public keys to be deleted from the `DevEndpoint`.
     #
     # @option params [Types::DevEndpointCustomLibraries] :custom_libraries
-    #   Custom Python or Java libraries to be loaded in the DevEndpoint.
+    #   Custom Python or Java libraries to be loaded in the `DevEndpoint`.
     #
     # @option params [Boolean] :update_etl_libraries
-    #   True if the list of custom libraries to be loaded in the development
-    #   endpoint needs to be updated, or False otherwise.
+    #   `True` if the list of custom libraries to be loaded in the development
+    #   endpoint needs to be updated, or `False` if otherwise.
     #
     # @option params [Array<String>] :delete_arguments
     #   The list of argument keys to be deleted from the map of arguments used
-    #   to configure the DevEndpoint.
+    #   to configure the `DevEndpoint`.
     #
     # @option params [Hash<String,String>] :add_arguments
     #   The map of arguments to add the map of arguments used to configure the
-    #   DevEndpoint.
+    #   `DevEndpoint`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6286,6 +6358,7 @@ module Aws::Glue
     #       notification_property: {
     #         notify_delay_after: 1,
     #       },
+    #       glue_version: "GlueVersionString",
     #     },
     #   })
     #
@@ -6669,7 +6742,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
