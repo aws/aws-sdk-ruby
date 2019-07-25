@@ -6,6 +6,27 @@ module Aws
 
       describe ':sts_regional_endpoints' do
 
+        let(:mock_config_file) {
+          File.expand_path(File.join(File.dirname(__FILE__),
+            '..', 'fixtures', 'credentials', 'mock_shared_config'))
+        }
+
+        it 'uses ENV before shared config' do
+          ENV['AWS_STS_REGIONAL_ENDPOINTS'] = 'regional'
+          config = SharedConfig.new(
+            config_path: mock_config_file,
+            config_enabled: true,
+            profile_name: "sts_legacy"
+          )
+
+          allow(Aws).to receive(:shared_config).and_return(config)
+          client = Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect(client.config.sts_regional_endpoints).to eq('regional')
+        end
+
         it 'defaults to `legacy`' do
           client = Client.new(
             stub_responses: true,
