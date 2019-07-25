@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.321 (2019-07-25)
+------------------
+
 * Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
 
 * Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
