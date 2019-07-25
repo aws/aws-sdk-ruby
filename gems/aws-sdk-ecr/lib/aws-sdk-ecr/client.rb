@@ -572,6 +572,18 @@ module Aws::ECR
     #   `project-a/nginx-web-app`).
     #
     # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the repository to help you categorize
+    #   and organize them. Each tag consists of a key and an optional value,
+    #   both of which you define. Tag keys can have a maximum character length
+    #   of 128 characters, and tag values can have a maximum length of 256
+    #   characters.
+    #
+    # @option params [String] :image_tag_mutability
+    #   The tag mutability setting for the repository. If this parameter is
+    #   omitted, the default setting of `MUTABLE` will be used which will
+    #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
+    #   image tags within the repository will be immutable which will prevent
+    #   them from being overwritten.
     #
     # @return [Types::CreateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -606,6 +618,7 @@ module Aws::ECR
     #         value: "TagValue",
     #       },
     #     ],
+    #     image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
     #   })
     #
     # @example Response structure
@@ -615,6 +628,7 @@ module Aws::ECR
     #   resp.repository.repository_name #=> String
     #   resp.repository.repository_uri #=> String
     #   resp.repository.created_at #=> Time
+    #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepository AWS API Documentation
     #
@@ -718,6 +732,7 @@ module Aws::ECR
     #   resp.repository.repository_name #=> String
     #   resp.repository.repository_uri #=> String
     #   resp.repository.created_at #=> Time
+    #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepository AWS API Documentation
     #
@@ -800,7 +815,7 @@ module Aws::ECR
     #   registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   A list of repositories to describe.
+    #   The repository that contains the images to describe.
     #
     # @option params [Array<Types::ImageIdentifier>] :image_ids
     #   The list of image IDs for the requested repository.
@@ -957,6 +972,7 @@ module Aws::ECR
     #   resp.repositories[0].repository_name #=> String
     #   resp.repositories[0].repository_uri #=> String
     #   resp.repositories[0].created_at #=> Time
+    #   resp.repositories[0].image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositories AWS API Documentation
@@ -1488,12 +1504,58 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Updates the image tag mutability settings for a repository.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to update the image tag mutability settings. If
+    #   you do not specify a registry, the default registry is assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository in which to update the image tag mutability
+    #   settings.
+    #
+    # @option params [required, String] :image_tag_mutability
+    #   The tag mutability setting for the repository. If `MUTABLE` is
+    #   specified, image tags can be overwritten. If `IMMUTABLE` is specified,
+    #   all image tags within the repository will be immutable which will
+    #   prevent them from being overwritten.
+    #
+    # @return [Types::PutImageTagMutabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutImageTagMutabilityResponse#registry_id #registry_id} => String
+    #   * {Types::PutImageTagMutabilityResponse#repository_name #repository_name} => String
+    #   * {Types::PutImageTagMutabilityResponse#image_tag_mutability #image_tag_mutability} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_image_tag_mutability({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_tag_mutability: "MUTABLE", # required, accepts MUTABLE, IMMUTABLE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutability AWS API Documentation
+    #
+    # @overload put_image_tag_mutability(params = {})
+    # @param [Hash] params ({})
+    def put_image_tag_mutability(params = {}, options = {})
+      req = build_request(:put_image_tag_mutability, params)
+      req.send_request(options)
+    end
+
     # Creates or updates a lifecycle policy. For information about lifecycle
     # policy syntax, see [Lifecycle Policy Template][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1536,7 +1598,12 @@ module Aws::ECR
     end
 
     # Applies a repository policy on a specified repository to control
-    # access permissions.
+    # access permissions. For more information, see [Amazon ECR Repository
+    # Policies][1] in the *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicies.html
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1547,7 +1614,13 @@ module Aws::ECR
     #   The name of the repository to receive the policy.
     #
     # @option params [required, String] :policy_text
-    #   The JSON repository policy text to apply to the repository.
+    #   The JSON repository policy text to apply to the repository. For more
+    #   information, see [Amazon ECR Repository Policy Examples][1] in the
+    #   *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html
     #
     # @option params [Boolean] :force
     #   If the policy you are attempting to set on a repository policy would
@@ -1772,7 +1845,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

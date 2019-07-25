@@ -73,7 +73,9 @@ module Aws::ECR
     ImageNotFoundException = Shapes::StructureShape.new(name: 'ImageNotFoundException')
     ImageSizeInBytes = Shapes::IntegerShape.new(name: 'ImageSizeInBytes')
     ImageTag = Shapes::StringShape.new(name: 'ImageTag')
+    ImageTagAlreadyExistsException = Shapes::StructureShape.new(name: 'ImageTagAlreadyExistsException')
     ImageTagList = Shapes::ListShape.new(name: 'ImageTagList')
+    ImageTagMutability = Shapes::StringShape.new(name: 'ImageTagMutability')
     InitiateLayerUploadRequest = Shapes::StructureShape.new(name: 'InitiateLayerUploadRequest')
     InitiateLayerUploadResponse = Shapes::StructureShape.new(name: 'InitiateLayerUploadResponse')
     InvalidLayerException = Shapes::StructureShape.new(name: 'InvalidLayerException')
@@ -122,6 +124,8 @@ module Aws::ECR
     PushTimestamp = Shapes::TimestampShape.new(name: 'PushTimestamp')
     PutImageRequest = Shapes::StructureShape.new(name: 'PutImageRequest')
     PutImageResponse = Shapes::StructureShape.new(name: 'PutImageResponse')
+    PutImageTagMutabilityRequest = Shapes::StructureShape.new(name: 'PutImageTagMutabilityRequest')
+    PutImageTagMutabilityResponse = Shapes::StructureShape.new(name: 'PutImageTagMutabilityResponse')
     PutLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'PutLifecyclePolicyRequest')
     PutLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'PutLifecyclePolicyResponse')
     RegistryId = Shapes::StringShape.new(name: 'RegistryId')
@@ -207,6 +211,7 @@ module Aws::ECR
 
     CreateRepositoryRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     CreateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateRepositoryRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
     CreateRepositoryRequest.struct_class = Types::CreateRepositoryRequest
 
     CreateRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
@@ -357,6 +362,9 @@ module Aws::ECR
     ImageNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ImageNotFoundException.struct_class = Types::ImageNotFoundException
 
+    ImageTagAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageTagAlreadyExistsException.struct_class = Types::ImageTagAlreadyExistsException
+
     ImageTagList.member = Shapes::ShapeRef.new(shape: ImageTag)
 
     InitiateLayerUploadRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -473,6 +481,16 @@ module Aws::ECR
     PutImageResponse.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "image"))
     PutImageResponse.struct_class = Types::PutImageResponse
 
+    PutImageTagMutabilityRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    PutImageTagMutabilityRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    PutImageTagMutabilityRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, required: true, location_name: "imageTagMutability"))
+    PutImageTagMutabilityRequest.struct_class = Types::PutImageTagMutabilityRequest
+
+    PutImageTagMutabilityResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    PutImageTagMutabilityResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    PutImageTagMutabilityResponse.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
+    PutImageTagMutabilityResponse.struct_class = Types::PutImageTagMutabilityResponse
+
     PutLifecyclePolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     PutLifecyclePolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     PutLifecyclePolicyRequest.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, required: true, location_name: "lifecyclePolicyText"))
@@ -488,6 +506,7 @@ module Aws::ECR
     Repository.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     Repository.add_member(:repository_uri, Shapes::ShapeRef.new(shape: Url, location_name: "repositoryUri"))
     Repository.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
+    Repository.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
     Repository.struct_class = Types::Repository
 
     RepositoryAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -835,6 +854,18 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ImageAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LayersNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageTagAlreadyExistsException)
+      end)
+
+      api.add_operation(:put_image_tag_mutability, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutImageTagMutability"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutImageTagMutabilityRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutImageTagMutabilityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
       end)
 
       api.add_operation(:put_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|

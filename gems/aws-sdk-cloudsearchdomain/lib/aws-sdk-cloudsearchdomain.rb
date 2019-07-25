@@ -42,6 +42,6 @@ require_relative 'aws-sdk-cloudsearchdomain/customizations'
 # @service
 module Aws::CloudSearchDomain
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end

@@ -288,6 +288,7 @@ module Aws::ECR
     #             value: "TagValue",
     #           },
     #         ],
+    #         image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
     #       }
     #
     # @!attribute [rw] repository_name
@@ -298,13 +299,27 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The metadata that you apply to the repository to help you categorize
+    #   and organize them. Each tag consists of a key and an optional value,
+    #   both of which you define. Tag keys can have a maximum character
+    #   length of 128 characters, and tag values can have a maximum length
+    #   of 256 characters.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository. If this parameter is
+    #   omitted, the default setting of `MUTABLE` will be used which will
+    #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
+    #   image tags within the repository will be immutable which will
+    #   prevent them from being overwritten.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryRequest AWS API Documentation
     #
     class CreateRepositoryRequest < Struct.new(
       :repository_name,
-      :tags)
+      :tags,
+      :image_tag_mutability)
       include Aws::Structure
     end
 
@@ -509,7 +524,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   A list of repositories to describe.
+    #   The repository that contains the images to describe.
     #   @return [String]
     #
     # @!attribute [rw] image_ids
@@ -1121,6 +1136,19 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The specified image is tagged with a tag that already exists. The
+    # repository is configured for tag immutability.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageTagAlreadyExistsException AWS API Documentation
+    #
+    class ImageTagAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass InitiateLayerUploadRequest
     #   data as a hash:
     #
@@ -1474,7 +1502,7 @@ module Aws::ECR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html
     #
     # @!attribute [rw] message
     #   The error message associated with the exception.
@@ -1673,6 +1701,63 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutImageTagMutabilityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_tag_mutability: "MUTABLE", # required, accepts MUTABLE, IMMUTABLE
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to update the image tag mutability settings. If
+    #   you do not specify a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository in which to update the image tag
+    #   mutability settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository. If `MUTABLE` is
+    #   specified, image tags can be overwritten. If `IMMUTABLE` is
+    #   specified, all image tags within the repository will be immutable
+    #   which will prevent them from being overwritten.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutabilityRequest AWS API Documentation
+    #
+    class PutImageTagMutabilityRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_tag_mutability)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The image tag mutability setting for the repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutabilityResponse AWS API Documentation
+    #
+    class PutImageTagMutabilityResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_tag_mutability)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutLifecyclePolicyRequest
     #   data as a hash:
     #
@@ -1755,6 +1840,10 @@ module Aws::ECR
     #   was created.
     #   @return [Time]
     #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Repository AWS API Documentation
     #
     class Repository < Struct.new(
@@ -1762,7 +1851,8 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :repository_uri,
-      :created_at)
+      :created_at,
+      :image_tag_mutability)
       include Aws::Structure
     end
 
@@ -1857,7 +1947,13 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] policy_text
-    #   The JSON repository policy text to apply to the repository.
+    #   The JSON repository policy text to apply to the repository. For more
+    #   information, see [Amazon ECR Repository Policy Examples][1] in the
+    #   *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html
     #   @return [String]
     #
     # @!attribute [rw] force

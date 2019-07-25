@@ -1006,6 +1006,17 @@ module Aws::MediaLive
     #               },
     #               input_switch_settings: {
     #                 input_attachment_name_reference: "__string", # required
+    #                 input_clipping_settings: {
+    #                   input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #                   start_timecode: {
+    #                     timecode: "__string",
+    #                   },
+    #                   stop_timecode: {
+    #                     last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                     timecode: "__string",
+    #                   },
+    #                 },
+    #                 url_path: ["__string"],
     #               },
     #               pause_state_settings: {
     #                 pipelines: [
@@ -1075,6 +1086,8 @@ module Aws::MediaLive
     #               follow_mode_schedule_action_start_settings: {
     #                 follow_point: "END", # required, accepts END, START
     #                 reference_action_name: "__string", # required
+    #               },
+    #               immediate_mode_schedule_action_start_settings: {
     #               },
     #             },
     #           },
@@ -1157,6 +1170,17 @@ module Aws::MediaLive
     #                 },
     #                 input_switch_settings: {
     #                   input_attachment_name_reference: "__string", # required
+    #                   input_clipping_settings: {
+    #                     input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #                     start_timecode: {
+    #                       timecode: "__string",
+    #                     },
+    #                     stop_timecode: {
+    #                       last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                       timecode: "__string",
+    #                     },
+    #                   },
+    #                   url_path: ["__string"],
     #                 },
     #                 pause_state_settings: {
     #                   pipelines: [
@@ -1226,6 +1250,8 @@ module Aws::MediaLive
     #                 follow_mode_schedule_action_start_settings: {
     #                   follow_point: "END", # required, accepts END, START
     #                   reference_action_name: "__string", # required
+    #                 },
+    #                 immediate_mode_schedule_action_start_settings: {
     #                 },
     #               },
     #             },
@@ -1983,6 +2009,10 @@ module Aws::MediaLive
     #   The name of the channel. (user-mutable)
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_details
+    #   Runtime details for the pipelines of a running channel.
+    #   @return [Array<Types::PipelineDetail>]
+    #
     # @!attribute [rw] pipelines_running_count
     #   The number of currently healthy pipelines.
     #   @return [Integer]
@@ -2012,6 +2042,7 @@ module Aws::MediaLive
       :input_specification,
       :log_level,
       :name,
+      :pipeline_details,
       :pipelines_running_count,
       :role_arn,
       :state,
@@ -3301,6 +3332,9 @@ module Aws::MediaLive
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_details
+    #   @return [Array<Types::PipelineDetail>]
+    #
     # @!attribute [rw] pipelines_running_count
     #   @return [Integer]
     #
@@ -3326,6 +3360,7 @@ module Aws::MediaLive
       :input_specification,
       :log_level,
       :name,
+      :pipeline_details,
       :pipelines_running_count,
       :role_arn,
       :state,
@@ -3568,6 +3603,9 @@ module Aws::MediaLive
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_details
+    #   @return [Array<Types::PipelineDetail>]
+    #
     # @!attribute [rw] pipelines_running_count
     #   @return [Integer]
     #
@@ -3593,6 +3631,7 @@ module Aws::MediaLive
       :input_specification,
       :log_level,
       :name,
+      :pipeline_details,
       :pipelines_running_count,
       :role_arn,
       :state,
@@ -3634,6 +3673,14 @@ module Aws::MediaLive
     #   has one.
     #   @return [String]
     #
+    # @!attribute [rw] input_source_type
+    #   There are two types of input sources, static and dynamic. If an
+    #   input source is dynamic you can change the source url of the input
+    #   dynamically using an input switch action. However, the only input
+    #   type to support a dynamic url at this time is MP4\_FILE. By default
+    #   all input sources are static.
+    #   @return [String]
+    #
     # @!attribute [rw] media_connect_flows
     #   @return [Array<Types::MediaConnectFlow>]
     #
@@ -3666,6 +3713,7 @@ module Aws::MediaLive
       :destinations,
       :id,
       :input_class,
+      :input_source_type,
       :media_connect_flows,
       :name,
       :role_arn,
@@ -6503,6 +6551,15 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Settings to configure an action so that it occurs immediately. This is
+    # only supported for input switch actions currently.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ImmediateModeScheduleActionStartSettings AWS API Documentation
+    #
+    class ImmediateModeScheduleActionStartSettings < Aws::EmptyStructure; end
+
     # @!attribute [rw] arn
     #   The Unique ARN of the input (generated, immutable).
     #   @return [String]
@@ -6529,6 +6586,12 @@ module Aws::MediaLive
     #   source to this input. If the ChannelClass is also SINGLE\_PIPELINE,
     #   this value is valid. If the ChannelClass is STANDARD, this value is
     #   not valid because the channel requires two sources in the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_source_type
+    #   Certain pull input sources can be dynamic, meaning that they can
+    #   have their URL's dynamically changes during input switch actions.
+    #   Presently, this functionality only works with MP4\_FILE inputs.
     #   @return [String]
     #
     # @!attribute [rw] media_connect_flows
@@ -6571,6 +6634,7 @@ module Aws::MediaLive
       :destinations,
       :id,
       :input_class,
+      :input_source_type,
       :media_connect_flows,
       :name,
       :role_arn,
@@ -6707,6 +6771,44 @@ module Aws::MediaLive
     class InputChannelLevel < Struct.new(
       :gain,
       :input_channel)
+      include Aws::Structure
+    end
+
+    # Settings to let you create a clip of the file input, in order to set
+    # up the input to ingest only a portion of the file.
+    #
+    # @note When making an API call, you may pass InputClippingSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #         start_timecode: {
+    #           timecode: "__string",
+    #         },
+    #         stop_timecode: {
+    #           last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #           timecode: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] input_timecode_source
+    #   The source of the timecodes in the source being clipped.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timecode
+    #   Settings to identify the start of the clip.
+    #   @return [Types::StartTimecode]
+    #
+    # @!attribute [rw] stop_timecode
+    #   Settings to identify the end of the clip.
+    #   @return [Types::StopTimecode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputClippingSettings AWS API Documentation
+    #
+    class InputClippingSettings < Struct.new(
+      :input_timecode_source,
+      :start_timecode,
+      :stop_timecode)
       include Aws::Structure
     end
 
@@ -7156,24 +7258,50 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Settings for the action to switch an input.
+    # Settings for the "switch input" action: to switch from ingesting one
+    # input to ingesting another input.
     #
     # @note When making an API call, you may pass InputSwitchScheduleActionSettings
     #   data as a hash:
     #
     #       {
     #         input_attachment_name_reference: "__string", # required
+    #         input_clipping_settings: {
+    #           input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #           start_timecode: {
+    #             timecode: "__string",
+    #           },
+    #           stop_timecode: {
+    #             last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #             timecode: "__string",
+    #           },
+    #         },
+    #         url_path: ["__string"],
     #       }
     #
     # @!attribute [rw] input_attachment_name_reference
-    #   The name of the input attachment that should be switched to by this
-    #   action.
+    #   The name of the input attachment (not the name of the input!) to
+    #   switch to. The name is specified in the channel configuration.
     #   @return [String]
+    #
+    # @!attribute [rw] input_clipping_settings
+    #   Settings to let you create a clip of the file input, in order to set
+    #   up the input to ingest only a portion of the file.
+    #   @return [Types::InputClippingSettings]
+    #
+    # @!attribute [rw] url_path
+    #   The value for the variable portion of the URL for the dynamic input,
+    #   for this instance of the input. Each time you use the same dynamic
+    #   input in an input switch action, you can provide a different value,
+    #   in order to connect the input to a different content source.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSwitchScheduleActionSettings AWS API Documentation
     #
     class InputSwitchScheduleActionSettings < Struct.new(
-      :input_attachment_name_reference)
+      :input_attachment_name_reference,
+      :input_clipping_settings,
+      :url_path)
       include Aws::Structure
     end
 
@@ -8272,7 +8400,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Media Package Output Destination Settings
+    # MediaPackage Output Destination Settings
     #
     # @note When making an API call, you may pass MediaPackageOutputDestinationSettings
     #   data as a hash:
@@ -9791,6 +9919,32 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Runtime details of a pipeline when a channel is running.
+    #
+    # @!attribute [rw] active_input_attachment_name
+    #   The name of the active input attachment currently being ingested by
+    #   this pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_input_switch_action_name
+    #   The name of the input switch schedule action that occurred most
+    #   recently and that resulted in the switch to the current input
+    #   attachment for this pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_id
+    #   Pipeline ID
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelineDetail AWS API Documentation
+    #
+    class PipelineDetail < Struct.new(
+      :active_input_attachment_name,
+      :active_input_switch_action_name,
+      :pipeline_id)
+      include Aws::Structure
+    end
+
     # Settings for pausing a pipeline.
     #
     # @note When making an API call, you may pass PipelinePauseStateSettings
@@ -10266,6 +10420,17 @@ module Aws::MediaLive
     #           },
     #           input_switch_settings: {
     #             input_attachment_name_reference: "__string", # required
+    #             input_clipping_settings: {
+    #               input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #               start_timecode: {
+    #                 timecode: "__string",
+    #               },
+    #               stop_timecode: {
+    #                 last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                 timecode: "__string",
+    #               },
+    #             },
+    #             url_path: ["__string"],
     #           },
     #           pause_state_settings: {
     #             pipelines: [
@@ -10336,6 +10501,8 @@ module Aws::MediaLive
     #             follow_point: "END", # required, accepts END, START
     #             reference_action_name: "__string", # required
     #           },
+    #           immediate_mode_schedule_action_start_settings: {
+    #           },
     #         },
     #       }
     #
@@ -10376,6 +10543,17 @@ module Aws::MediaLive
     #         },
     #         input_switch_settings: {
     #           input_attachment_name_reference: "__string", # required
+    #           input_clipping_settings: {
+    #             input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #             start_timecode: {
+    #               timecode: "__string",
+    #             },
+    #             stop_timecode: {
+    #               last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #               timecode: "__string",
+    #             },
+    #           },
+    #           url_path: ["__string"],
     #         },
     #         pause_state_settings: {
     #           pipelines: [
@@ -10485,7 +10663,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Settings to specify the start time for an action.
+    # Settings to specify when an action should occur. Only one of the
+    # options must be selected.
     #
     # @note When making an API call, you may pass ScheduleActionStartSettings
     #   data as a hash:
@@ -10498,21 +10677,28 @@ module Aws::MediaLive
     #           follow_point: "END", # required, accepts END, START
     #           reference_action_name: "__string", # required
     #         },
+    #         immediate_mode_schedule_action_start_settings: {
+    #         },
     #       }
     #
     # @!attribute [rw] fixed_mode_schedule_action_start_settings
-    #   Holds the start time for the action.
+    #   Option for specifying the start time for an action.
     #   @return [Types::FixedModeScheduleActionStartSettings]
     #
     # @!attribute [rw] follow_mode_schedule_action_start_settings
-    #   Specifies an action to follow for scheduling this action.
+    #   Option for specifying an action as relative to another action.
     #   @return [Types::FollowModeScheduleActionStartSettings]
+    #
+    # @!attribute [rw] immediate_mode_schedule_action_start_settings
+    #   Option for specifying an action that should be applied immediately.
+    #   @return [Types::ImmediateModeScheduleActionStartSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionStartSettings AWS API Documentation
     #
     class ScheduleActionStartSettings < Struct.new(
       :fixed_mode_schedule_action_start_settings,
-      :follow_mode_schedule_action_start_settings)
+      :follow_mode_schedule_action_start_settings,
+      :immediate_mode_schedule_action_start_settings)
       include Aws::Structure
     end
 
@@ -11008,6 +11194,22 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] provider_name
+    #   Name of provider
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   Name of service
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ServiceDescriptor AWS API Documentation
+    #
+    class ServiceDescriptor < Struct.new(
+      :provider_name,
+      :service_name)
+      include Aws::Structure
+    end
+
     # Smpte Tt Destination Settings
     #
     # @api private
@@ -11112,6 +11314,9 @@ module Aws::MediaLive
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_details
+    #   @return [Array<Types::PipelineDetail>]
+    #
     # @!attribute [rw] pipelines_running_count
     #   @return [Integer]
     #
@@ -11137,10 +11342,33 @@ module Aws::MediaLive
       :input_specification,
       :log_level,
       :name,
+      :pipeline_details,
       :pipelines_running_count,
       :role_arn,
       :state,
       :tags)
+      include Aws::Structure
+    end
+
+    # Settings to identify the start of the clip.
+    #
+    # @note When making an API call, you may pass StartTimecode
+    #   data as a hash:
+    #
+    #       {
+    #         timecode: "__string",
+    #       }
+    #
+    # @!attribute [rw] timecode
+    #   The timecode for the frame where you want to start the clip.
+    #   Optional; if not specified, the clip starts at first frame in the
+    #   file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartTimecode AWS API Documentation
+    #
+    class StartTimecode < Struct.new(
+      :timecode)
       include Aws::Structure
     end
 
@@ -11355,6 +11583,9 @@ module Aws::MediaLive
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_details
+    #   @return [Array<Types::PipelineDetail>]
+    #
     # @!attribute [rw] pipelines_running_count
     #   @return [Integer]
     #
@@ -11380,10 +11611,41 @@ module Aws::MediaLive
       :input_specification,
       :log_level,
       :name,
+      :pipeline_details,
       :pipelines_running_count,
       :role_arn,
       :state,
       :tags)
+      include Aws::Structure
+    end
+
+    # Settings to identify the end of the clip.
+    #
+    # @note When making an API call, you may pass StopTimecode
+    #   data as a hash:
+    #
+    #       {
+    #         last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #         timecode: "__string",
+    #       }
+    #
+    # @!attribute [rw] last_frame_clipping_behavior
+    #   If you specify a StopTimecode in an input (in order to clip the
+    #   file), you can specify if you want the clip to exclude (the default)
+    #   or include the frame specified by the timecode.
+    #   @return [String]
+    #
+    # @!attribute [rw] timecode
+    #   The timecode for the frame where you want to stop the clip.
+    #   Optional; if not specified, the clip continues to the end of the
+    #   file. Enter the timecode as HH:MM:SS:FF or HH:MM:SS;FF.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopTimecode AWS API Documentation
+    #
+    class StopTimecode < Struct.new(
+      :last_frame_clipping_behavior,
+      :timecode)
       include Aws::Structure
     end
 

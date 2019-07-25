@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.61.1 (2019-07-25)
+------------------
+
 * Issue - Fix default STS Client credential sourcing in Aws::AssumeRoleWebIdentityCredentialsProvider
 
 3.61.0 (2019-07-24)

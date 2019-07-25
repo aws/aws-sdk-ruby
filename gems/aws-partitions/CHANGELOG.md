@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.193.0 (2019-07-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.192.0 (2019-07-24)
 ------------------
 
