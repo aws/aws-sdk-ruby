@@ -107,16 +107,17 @@ module Aws
     end
 
     it 'accepts client options' do
-      client = STS::Client.new(stub_responses: true)
+      expected_client = STS::Client.new(
+        credentials: false, stub_responses: true)
       expect(STS::Client).to receive(:new).
-        with(region: 'region-name').
-        and_return(client)
+        with(region: 'region-name', credentials: false).
+        and_return(expected_client)
       creds = AssumeRoleWebIdentityCredentials.new(
         region: 'region-name',
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
       )
-      expect(creds.client).to be(client)
+      expect(creds.client).to be(expected_client)
     end
 
     it 'assumes role with web identity using the client' do

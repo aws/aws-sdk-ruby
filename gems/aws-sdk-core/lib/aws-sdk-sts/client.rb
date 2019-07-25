@@ -402,8 +402,7 @@ module Aws::STS
     #   ARNs. However, the plain text that you use for both inline and managed
     #   session policies shouldn't exceed 2048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html) in
-    #   the AWS General Reference.
+    #   Service Namespaces][1] in the AWS General Reference.
     #
     #   <note markdown="1"> The characters in this parameter count towards the 2048 character
     #   session policy guideline. However, an AWS conversion compresses the
@@ -421,11 +420,12 @@ module Aws::STS
     #   access resources in the account that owns the role. You cannot use
     #   session policies to grant more permissions than those allowed by the
     #   identity-based policy of the role that is being assumed. For more
-    #   information, see [Session Policies][1] in the *IAM User Guide*.
+    #   information, see [Session Policies][2] in the *IAM User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [String] :policy
     #   An IAM policy in JSON format that you want to use as an inline session
@@ -722,8 +722,7 @@ module Aws::STS
     #   ARNs. However, the plain text that you use for both inline and managed
     #   session policies shouldn't exceed 2048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html) in
-    #   the AWS General Reference.
+    #   Service Namespaces][1] in the AWS General Reference.
     #
     #   <note markdown="1"> The characters in this parameter count towards the 2048 character
     #   session policy guideline. However, an AWS conversion compresses the
@@ -741,11 +740,12 @@ module Aws::STS
     #   access resources in the account that owns the role. You cannot use
     #   session policies to grant more permissions than those allowed by the
     #   identity-based policy of the role that is being assumed. For more
-    #   information, see [Session Policies][1] in the *IAM User Guide*.
+    #   information, see [Session Policies][2] in the *IAM User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [String] :policy
     #   An IAM policy in JSON format that you want to use as an inline session
@@ -1026,8 +1026,7 @@ module Aws::STS
     #   ARNs. However, the plain text that you use for both inline and managed
     #   session policies shouldn't exceed 2048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html) in
-    #   the AWS General Reference.
+    #   Service Namespaces][1] in the AWS General Reference.
     #
     #   <note markdown="1"> The characters in this parameter count towards the 2048 character
     #   session policy guideline. However, an AWS conversion compresses the
@@ -1045,11 +1044,12 @@ module Aws::STS
     #   access resources in the account that owns the role. You cannot use
     #   session policies to grant more permissions than those allowed by the
     #   identity-based policy of the role that is being assumed. For more
-    #   information, see [Session Policies][1] in the *IAM User Guide*.
+    #   information, see [Session Policies][2] in the *IAM User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     #
     # @option params [String] :policy
     #   An IAM policy in JSON format that you want to use as an inline session
@@ -1267,6 +1267,66 @@ module Aws::STS
     # @param [Hash] params ({})
     def decode_authorization_message(params = {}, options = {})
       req = build_request(:decode_authorization_message, params)
+      req.send_request(options)
+    end
+
+    # Returns the account identifier for the specified access key ID.
+    #
+    # Access keys consist of two parts: an access key ID (for example,
+    # `AKIAIOSFODNN7EXAMPLE`) and a secret access key (for example,
+    # `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`). For more information
+    # about access keys, see [Managing Access Keys for IAM Users][1] in the
+    # *IAM User Guide*.
+    #
+    # When you pass an access key ID to this operation, it returns the ID of
+    # the AWS account to which the keys belong. Access key IDs beginning
+    # with `AKIA` are long-term credentials for an IAM user or the AWS
+    # account root user. Access key IDs beginning with `ASIA` are temporary
+    # credentials that are created using STS operations. If the account in
+    # the response belongs to you, you can sign in as the root user and
+    # review your root user access keys. Then, you can pull a [credentials
+    # report][2] to learn which IAM user owns the keys. To learn who
+    # requested the temporary credentials for an `ASIA` access key, view the
+    # STS events in your [CloudTrail logs][3].
+    #
+    # This operation does not indicate the state of the access key. The key
+    # might be active, inactive, or deleted. Active keys might not have
+    # permissions to perform an operation. Providing a deleted keys might
+    # return an error that the key doesn't exist.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration
+    #
+    # @option params [required, String] :access_key_id
+    #   The identifier of an access key.
+    #
+    #   This parameter allows (through its regex pattern) a string of
+    #   characters that can consist of any upper- or lowercased letter or
+    #   digit.
+    #
+    # @return [Types::GetAccessKeyInfoResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessKeyInfoResponse#account #account} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_key_info({
+    #     access_key_id: "accessKeyIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetAccessKeyInfo AWS API Documentation
+    #
+    # @overload get_access_key_info(params = {})
+    # @param [Hash] params ({})
+    def get_access_key_info(params = {}, options = {})
+      req = build_request(:get_access_key_info, params)
       req.send_request(options)
     end
 
@@ -1741,7 +1801,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.59.0'
+      context[:gem_version] = '3.61.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2019-07-24)
+------------------
+
+* Feature - This release introduces support for split tunnel with AWS Client VPN, and also adds support for opt-in Regions in DescribeRegions API. In addition, customers can now also tag Launch Templates on creation.
+
 1.99.0 (2019-07-03)
 ------------------
 

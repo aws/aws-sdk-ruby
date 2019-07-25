@@ -1209,6 +1209,61 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Provides the results of a query that retrieved the data for a standard
+    # metric that applies to an application, and provides information about
+    # that query.
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier for the application that the metric applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The last date or date and time of the date range that was used to
+    #   filter the query results, in ISO 8601 format. The date range is
+    #   inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kpi_name
+    #   The name of the metric, also referred to as a *key performance
+    #   indicator (KPI)*, that the data was retrieved for. This value
+    #   describes the associated metric and consists of two or more terms,
+    #   which are comprised of lowercase alphanumeric characters, separated
+    #   by a hyphen. For a list of valid values, see the [Amazon Pinpoint
+    #   Developer Guide](developerguide.html).
+    #   @return [String]
+    #
+    # @!attribute [rw] kpi_result
+    #   An array of objects that contains the results of the query. Each
+    #   object contains the value for the metric and metadata about that
+    #   value.
+    #   @return [Types::BaseKpiResult]
+    #
+    # @!attribute [rw] next_token
+    #   The string to use in a subsequent request to get the next page of
+    #   results in a paginated response. This value is null for the App
+    #   Metrics resource. The App Metrics resource returns all results in a
+    #   single page.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The first date or date and time of the date range that was used to
+    #   filter the query results, in ISO 8601 format. The date range is
+    #   inclusive.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationDateRangeKpiResponse AWS API Documentation
+    #
+    class ApplicationDateRangeKpiResponse < Struct.new(
+      :application_id,
+      :end_time,
+      :kpi_name,
+      :kpi_result,
+      :next_token,
+      :start_time)
+      include Aws::Structure
+    end
+
     # Provides information about an application.
     #
     # @!attribute [rw] arn
@@ -1634,6 +1689,82 @@ module Aws::Pinpoint
       :time_to_live,
       :title,
       :url)
+      include Aws::Structure
+    end
+
+    # Provides the results of a query that retrieved the data for a standard
+    # metric that applies to an application or campaign.
+    #
+    # @!attribute [rw] rows
+    #   An array of objects that provides the results of a query that
+    #   retrieved the data for a standard metric that applies to an
+    #   application or campaign.
+    #   @return [Array<Types::ResultRow>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaseKpiResult AWS API Documentation
+    #
+    class BaseKpiResult < Struct.new(
+      :rows)
+      include Aws::Structure
+    end
+
+    # Provides the results of a query that retrieved the data for a standard
+    # metric that applies to a campaign, and provides information about that
+    # query.
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier for the application that the metric applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] campaign_id
+    #   The unique identifier for the campaign that the metric applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The last date or date and time of the date range that was used to
+    #   filter the query results, in ISO 8601 format. The date range is
+    #   inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kpi_name
+    #   The name of the metric, also referred to as a *key performance
+    #   indicator (KPI)*, that the data was retrieved for. This value
+    #   describes the associated metric and consists of two or more terms,
+    #   which are comprised of lowercase alphanumeric characters, separated
+    #   by a hyphen. For a list of valid values, see the [Amazon Pinpoint
+    #   Developer Guide](developerguide.html).
+    #   @return [String]
+    #
+    # @!attribute [rw] kpi_result
+    #   An array of objects that contains the results of the query. Each
+    #   object contains the value for the metric and metadata about that
+    #   value.
+    #   @return [Types::BaseKpiResult]
+    #
+    # @!attribute [rw] next_token
+    #   The string to use in a subsequent request to get the next page of
+    #   results in a paginated response. This value is null for the Campaign
+    #   Metrics resource. The Campaign Metrics resource returns all results
+    #   in a single page.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The first date or date and time of the date range that was used to
+    #   filter the query results, in ISO 8601 format. The date range is
+    #   inclusive.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignDateRangeKpiResponse AWS API Documentation
+    #
+    class CampaignDateRangeKpiResponse < Struct.new(
+      :application_id,
+      :campaign_id,
+      :end_time,
+      :kpi_name,
+      :kpi_result,
+      :next_token,
+      :start_time)
       include Aws::Structure
     end
 
@@ -5704,6 +5835,61 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetApplicationDateRangeKpiRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         end_time: Time.now,
+    #         kpi_name: "__string", # required
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #         start_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] kpi_name
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationDateRangeKpiRequest AWS API Documentation
+    #
+    class GetApplicationDateRangeKpiRequest < Struct.new(
+      :application_id,
+      :end_time,
+      :kpi_name,
+      :next_token,
+      :page_size,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_date_range_kpi_response
+    #   Provides the results of a query that retrieved the data for a
+    #   standard metric that applies to an application, and provides
+    #   information about that query.
+    #   @return [Types::ApplicationDateRangeKpiResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationDateRangeKpiResponse AWS API Documentation
+    #
+    class GetApplicationDateRangeKpiResponse < Struct.new(
+      :application_date_range_kpi_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetApplicationSettingsRequest
     #   data as a hash:
     #
@@ -5836,6 +6022,66 @@ module Aws::Pinpoint
     #
     class GetCampaignActivitiesResponse < Struct.new(
       :activities_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCampaignDateRangeKpiRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         campaign_id: "__string", # required
+    #         end_time: Time.now,
+    #         kpi_name: "__string", # required
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #         start_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] campaign_id
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] kpi_name
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignDateRangeKpiRequest AWS API Documentation
+    #
+    class GetCampaignDateRangeKpiRequest < Struct.new(
+      :application_id,
+      :campaign_id,
+      :end_time,
+      :kpi_name,
+      :next_token,
+      :page_size,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] campaign_date_range_kpi_response
+    #   Provides the results of a query that retrieved the data for a
+    #   standard metric that applies to a campaign, and provides information
+    #   about that query.
+    #   @return [Types::CampaignDateRangeKpiResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignDateRangeKpiResponse AWS API Documentation
+    #
+    class GetCampaignDateRangeKpiResponse < Struct.new(
+      :campaign_date_range_kpi_response)
       include Aws::Structure
     end
 
@@ -7700,6 +7946,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] carrier
     #   The carrier or service provider that the phone number is currently
+    #   registered with. In some countries and regions, this value may be
+    #   the carrier or service provider that the phone number was originally
     #   registered with.
     #   @return [String]
     #
@@ -8211,6 +8459,58 @@ module Aws::Pinpoint
     #
     class RemoveAttributesResponse < Struct.new(
       :attributes_resource)
+      include Aws::Structure
+    end
+
+    # Provides the results of a query that retrieved the data for a standard
+    # metric that applies to an application or campaign.
+    #
+    # @!attribute [rw] grouped_bys
+    #   An array of objects that defines the field and field values that
+    #   were used to group data in a result set that contains multiple
+    #   results. This value is null if the data in a result set isn’t
+    #   grouped.
+    #   @return [Array<Types::ResultRowValue>]
+    #
+    # @!attribute [rw] values
+    #   An array of objects that provides pre-aggregated values for a
+    #   standard metric that applies to an application or campaign.
+    #   @return [Array<Types::ResultRowValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ResultRow AWS API Documentation
+    #
+    class ResultRow < Struct.new(
+      :grouped_bys,
+      :values)
+      include Aws::Structure
+    end
+
+    # Provides a single value and metadata about that value as part of an
+    # array of query results for a standard metric that applies to an
+    # application or campaign.
+    #
+    # @!attribute [rw] key
+    #   The name of the field that Amazon Pinpoint uses to store the value
+    #   specified by the Value property.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the value specified by the Value property.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   In a Values object, the value for the metric that the query
+    #   retrieved data for. In a GroupedBys object, the value for the field
+    #   that was used to group data in a result set that contains multiple
+    #   results (Values objects).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ResultRowValue AWS API Documentation
+    #
+    class ResultRowValue < Struct.new(
+      :key,
+      :type,
+      :value)
       include Aws::Structure
     end
 
@@ -11333,6 +11633,9 @@ module Aws::Pinpoint
     #   last modified.
     #   @return [String]
     #
+    # @!attribute [rw] origination_number
+    #   @return [String]
+    #
     # @!attribute [rw] platform
     #   The type of messaging or notification platform for the channel. For
     #   the voice channel, this value is VOICE.
@@ -11353,6 +11656,7 @@ module Aws::Pinpoint
       :is_archived,
       :last_modified_by,
       :last_modified_date,
+      :origination_number,
       :platform,
       :version)
       include Aws::Structure

@@ -1,6 +1,23 @@
 Unreleased Changes
 ------------------
 
+3.61.1 (2019-07-25)
+------------------
+
+* Issue - Fix default STS Client credential sourcing in Aws::AssumeRoleWebIdentityCredentialsProvider
+
+3.61.0 (2019-07-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.60.0 (2019-07-23)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Issue - Handle `EncodingError` when using Oj gem [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1831)
+
 3.59.0 (2019-07-03)
 ------------------
 

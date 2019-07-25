@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2019-07-22)
+------------------
+
+* Feature - Adding new VectorType (HTTP_Reflection) and related top contributor types to describe WordPress Pingback DDoS attacks.
+
 1.18.0 (2019-07-01)
 ------------------
 

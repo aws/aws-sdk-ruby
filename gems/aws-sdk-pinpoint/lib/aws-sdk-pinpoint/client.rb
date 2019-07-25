@@ -2106,6 +2106,7 @@ module Aws::Pinpoint
     #   resp.voice_channel_response.is_archived #=> Boolean
     #   resp.voice_channel_response.last_modified_by #=> String
     #   resp.voice_channel_response.last_modified_date #=> String
+    #   resp.voice_channel_response.origination_number #=> String
     #   resp.voice_channel_response.platform #=> String
     #   resp.voice_channel_response.version #=> Integer
     #
@@ -2339,6 +2340,62 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_app(params = {}, options = {})
       req = build_request(:get_app, params)
+      req.send_request(options)
+    end
+
+    # Retrieves (queries) pre-aggregated data for a standard metric that
+    # applies to an application.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #
+    # @option params [required, String] :kpi_name
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #
+    # @return [Types::GetApplicationDateRangeKpiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApplicationDateRangeKpiResponse#application_date_range_kpi_response #application_date_range_kpi_response} => Types::ApplicationDateRangeKpiResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_application_date_range_kpi({
+    #     application_id: "__string", # required
+    #     end_time: Time.now,
+    #     kpi_name: "__string", # required
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     start_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_date_range_kpi_response.application_id #=> String
+    #   resp.application_date_range_kpi_response.end_time #=> Time
+    #   resp.application_date_range_kpi_response.kpi_name #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows #=> Array
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].grouped_bys #=> Array
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].key #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].type #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].value #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].values #=> Array
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].values[0].key #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].values[0].type #=> String
+    #   resp.application_date_range_kpi_response.kpi_result.rows[0].values[0].value #=> String
+    #   resp.application_date_range_kpi_response.next_token #=> String
+    #   resp.application_date_range_kpi_response.start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationDateRangeKpi AWS API Documentation
+    #
+    # @overload get_application_date_range_kpi(params = {})
+    # @param [Hash] params ({})
+    def get_application_date_range_kpi(params = {}, options = {})
+      req = build_request(:get_application_date_range_kpi, params)
       req.send_request(options)
     end
 
@@ -2731,6 +2788,66 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_campaign_activities(params = {}, options = {})
       req = build_request(:get_campaign_activities, params)
+      req.send_request(options)
+    end
+
+    # Retrieves (queries) pre-aggregated data for a standard metric that
+    # applies to a campaign.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :campaign_id
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #
+    # @option params [required, String] :kpi_name
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #
+    # @return [Types::GetCampaignDateRangeKpiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCampaignDateRangeKpiResponse#campaign_date_range_kpi_response #campaign_date_range_kpi_response} => Types::CampaignDateRangeKpiResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_campaign_date_range_kpi({
+    #     application_id: "__string", # required
+    #     campaign_id: "__string", # required
+    #     end_time: Time.now,
+    #     kpi_name: "__string", # required
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     start_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.campaign_date_range_kpi_response.application_id #=> String
+    #   resp.campaign_date_range_kpi_response.campaign_id #=> String
+    #   resp.campaign_date_range_kpi_response.end_time #=> Time
+    #   resp.campaign_date_range_kpi_response.kpi_name #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows #=> Array
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].grouped_bys #=> Array
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].key #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].type #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].grouped_bys[0].value #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].values #=> Array
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].values[0].key #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].values[0].type #=> String
+    #   resp.campaign_date_range_kpi_response.kpi_result.rows[0].values[0].value #=> String
+    #   resp.campaign_date_range_kpi_response.next_token #=> String
+    #   resp.campaign_date_range_kpi_response.start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignDateRangeKpi AWS API Documentation
+    #
+    # @overload get_campaign_date_range_kpi(params = {})
+    # @param [Hash] params ({})
+    def get_campaign_date_range_kpi(params = {}, options = {})
+      req = build_request(:get_campaign_date_range_kpi, params)
       req.send_request(options)
     end
 
@@ -4642,6 +4759,7 @@ module Aws::Pinpoint
     #   resp.voice_channel_response.is_archived #=> Boolean
     #   resp.voice_channel_response.last_modified_by #=> String
     #   resp.voice_channel_response.last_modified_date #=> String
+    #   resp.voice_channel_response.origination_number #=> String
     #   resp.voice_channel_response.platform #=> String
     #   resp.voice_channel_response.version #=> Integer
     #
@@ -6889,6 +7007,7 @@ module Aws::Pinpoint
     #   resp.voice_channel_response.is_archived #=> Boolean
     #   resp.voice_channel_response.last_modified_by #=> String
     #   resp.voice_channel_response.last_modified_date #=> String
+    #   resp.voice_channel_response.origination_number #=> String
     #   resp.voice_channel_response.platform #=> String
     #   resp.voice_channel_response.version #=> Integer
     #
@@ -6914,7 +7033,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

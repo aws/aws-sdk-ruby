@@ -592,6 +592,9 @@ module Aws::SecretsManager
     #    </note>
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] owning_service
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecretResponse AWS API Documentation
     #
     class DescribeSecretResponse < Struct.new(
@@ -607,7 +610,8 @@ module Aws::SecretsManager
       :last_accessed_date,
       :deleted_date,
       :tags,
-      :version_ids_to_stages)
+      :version_ids_to_stages,
+      :owning_service)
       include Aws::Structure
     end
 
@@ -1746,6 +1750,9 @@ module Aws::SecretsManager
     #    </note>
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] owning_service
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretListEntry AWS API Documentation
     #
     class SecretListEntry < Struct.new(
@@ -1761,7 +1768,8 @@ module Aws::SecretsManager
       :last_accessed_date,
       :deleted_date,
       :tags,
-      :secret_versions_to_stages)
+      :secret_versions_to_stages,
+      :owning_service)
       include Aws::Structure
     end
 

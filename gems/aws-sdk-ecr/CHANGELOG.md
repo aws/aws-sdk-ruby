@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-07-25)
+------------------
+
+* Feature - This release adds support for immutable image tags.
+
 1.19.0 (2019-07-01)
 ------------------
 

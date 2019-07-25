@@ -61,6 +61,7 @@ module Aws::SecretsManager
     NameType = Shapes::StringShape.new(name: 'NameType')
     NextTokenType = Shapes::StringShape.new(name: 'NextTokenType')
     NonEmptyResourcePolicyType = Shapes::StringShape.new(name: 'NonEmptyResourcePolicyType')
+    OwningServiceType = Shapes::StringShape.new(name: 'OwningServiceType')
     PasswordLengthType = Shapes::IntegerShape.new(name: 'PasswordLengthType')
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
@@ -162,6 +163,7 @@ module Aws::SecretsManager
     DescribeSecretResponse.add_member(:deleted_date, Shapes::ShapeRef.new(shape: DeletedDateType, location_name: "DeletedDate", metadata: {"box"=>true}))
     DescribeSecretResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
     DescribeSecretResponse.add_member(:version_ids_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "VersionIdsToStages"))
+    DescribeSecretResponse.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
     DescribeSecretResponse.struct_class = Types::DescribeSecretResponse
 
     EncryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -304,6 +306,7 @@ module Aws::SecretsManager
     SecretListEntry.add_member(:deleted_date, Shapes::ShapeRef.new(shape: DeletedDateType, location_name: "DeletedDate"))
     SecretListEntry.add_member(:tags, Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
     SecretListEntry.add_member(:secret_versions_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "SecretVersionsToStages"))
+    SecretListEntry.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
     SecretListEntry.struct_class = Types::SecretListEntry
 
     SecretListType.member = Shapes::ShapeRef.new(shape: SecretListEntry)

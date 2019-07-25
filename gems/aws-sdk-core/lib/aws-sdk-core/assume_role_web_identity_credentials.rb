@@ -52,7 +52,7 @@ module Aws
         # not provided, generate encoded UUID as session name
         @assume_role_web_identity_params[:role_session_name] = _session_name
       end
-      @client = client_opts[:client] || STS::Client.new(client_opts)
+      @client = client_opts[:client] || STS::Client.new(client_opts.merge(credentials: false))
       super
     end
 

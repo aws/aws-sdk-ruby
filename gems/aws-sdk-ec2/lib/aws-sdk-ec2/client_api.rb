@@ -2284,6 +2284,7 @@ module Aws::EC2
     CreateClientVpnEndpointRequest.add_member(:dns_servers, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "DnsServers"))
     CreateClientVpnEndpointRequest.add_member(:transport_protocol, Shapes::ShapeRef.new(shape: TransportProtocol, location_name: "TransportProtocol"))
     CreateClientVpnEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateClientVpnEndpointRequest.add_member(:split_tunnel, Shapes::ShapeRef.new(shape: Boolean, location_name: "SplitTunnel"))
     CreateClientVpnEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateClientVpnEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateClientVpnEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -2443,6 +2444,7 @@ module Aws::EC2
     CreateLaunchTemplateRequest.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: LaunchTemplateName, required: true, location_name: "LaunchTemplateName"))
     CreateLaunchTemplateRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
     CreateLaunchTemplateRequest.add_member(:launch_template_data, Shapes::ShapeRef.new(shape: RequestLaunchTemplateData, required: true, location_name: "LaunchTemplateData"))
+    CreateLaunchTemplateRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateLaunchTemplateRequest.struct_class = Types::CreateLaunchTemplateRequest
 
     CreateLaunchTemplateResult.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "launchTemplate"))
@@ -3661,6 +3663,7 @@ module Aws::EC2
     DescribeRegionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeRegionsRequest.add_member(:region_names, Shapes::ShapeRef.new(shape: RegionNameStringList, location_name: "RegionName"))
     DescribeRegionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    DescribeRegionsRequest.add_member(:all_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllRegions"))
     DescribeRegionsRequest.struct_class = Types::DescribeRegionsRequest
 
     DescribeRegionsResult.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regionInfo"))
@@ -5614,6 +5617,7 @@ module Aws::EC2
     ModifyClientVpnEndpointRequest.add_member(:connection_log_options, Shapes::ShapeRef.new(shape: ConnectionLogOptions, location_name: "ConnectionLogOptions"))
     ModifyClientVpnEndpointRequest.add_member(:dns_servers, Shapes::ShapeRef.new(shape: DnsServersOptionsModifyStructure, location_name: "DnsServers"))
     ModifyClientVpnEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyClientVpnEndpointRequest.add_member(:split_tunnel, Shapes::ShapeRef.new(shape: Boolean, location_name: "SplitTunnel"))
     ModifyClientVpnEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyClientVpnEndpointRequest.struct_class = Types::ModifyClientVpnEndpointRequest
 
@@ -6317,6 +6321,7 @@ module Aws::EC2
 
     Region.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "regionEndpoint"))
     Region.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "regionName"))
+    Region.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: String, location_name: "optInStatus"))
     Region.struct_class = Types::Region
 
     RegionList.member = Shapes::ShapeRef.new(shape: Region, location_name: "item")

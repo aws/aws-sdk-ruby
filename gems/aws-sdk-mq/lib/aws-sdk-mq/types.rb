@@ -383,6 +383,10 @@ module Aws::MQ
     #   Required. The deployment mode of the broker.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker.
+    #   @return [Types::EncryptionOptions]
+    #
     # @!attribute [rw] engine_type
     #   Required. The type of broker engine. Note: Currently, Amazon MQ
     #   supports only ACTIVEMQ.
@@ -443,6 +447,7 @@ module Aws::MQ
       :configuration,
       :creator_request_id,
       :deployment_mode,
+      :encryption_options,
       :engine_type,
       :engine_version,
       :host_instance_type,
@@ -486,6 +491,10 @@ module Aws::MQ
     #         },
     #         creator_request_id: "__string",
     #         deployment_mode: "SINGLE_INSTANCE", # accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ
+    #         encryption_options: {
+    #           kms_key_id: "__string",
+    #           use_aws_owned_key: false, # required
+    #         },
     #         engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #         engine_version: "__string",
     #         host_instance_type: "__string",
@@ -533,6 +542,10 @@ module Aws::MQ
     #   The deployment mode of the broker.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker.
+    #   @return [Types::EncryptionOptions]
+    #
     # @!attribute [rw] engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
     #   ActiveMQ.
@@ -577,6 +590,7 @@ module Aws::MQ
       :configuration,
       :creator_request_id,
       :deployment_mode,
+      :encryption_options,
       :engine_type,
       :engine_version,
       :host_instance_type,
@@ -1061,6 +1075,10 @@ module Aws::MQ
     #   Required. The deployment mode of the broker.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker.
+    #   @return [Types::EncryptionOptions]
+    #
     # @!attribute [rw] engine_type
     #   Required. The type of broker engine. Note: Currently, Amazon MQ
     #   supports only ACTIVEMQ.
@@ -1129,6 +1147,7 @@ module Aws::MQ
       :configurations,
       :created,
       :deployment_mode,
+      :encryption_options,
       :engine_type,
       :engine_version,
       :host_instance_type,
@@ -1190,6 +1209,10 @@ module Aws::MQ
     #   The deployment mode of the broker.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker.
+    #   @return [Types::EncryptionOptions]
+    #
     # @!attribute [rw] engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
     #   ActiveMQ.
@@ -1241,6 +1264,7 @@ module Aws::MQ
       :configurations,
       :created,
       :deployment_mode,
+      :encryption_options,
       :engine_type,
       :engine_version,
       :host_instance_type,
@@ -1477,6 +1501,35 @@ module Aws::MQ
       :groups,
       :pending,
       :username)
+      include Aws::Structure
+    end
+
+    # Encryption options for the broker.
+    #
+    # @note When making an API call, you may pass EncryptionOptions
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "__string",
+    #         use_aws_owned_key: false, # required
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   The customer master key (CMK) to use for the AWS Key Management
+    #   Service (KMS). This key is used to encrypt your data at rest. If not
+    #   provided, Amazon MQ will use a default CMK to encrypt your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_aws_owned_key
+    #   Enables the use of an AWS owned CMK using AWS Key Management Service
+    #   (KMS).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EncryptionOptions AWS API Documentation
+    #
+    class EncryptionOptions < Struct.new(
+      :kms_key_id,
+      :use_aws_owned_key)
       include Aws::Structure
     end
 

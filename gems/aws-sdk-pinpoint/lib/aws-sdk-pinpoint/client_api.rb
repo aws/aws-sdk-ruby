@@ -27,6 +27,7 @@ module Aws::Pinpoint
     ActivitiesResponse = Shapes::StructureShape.new(name: 'ActivitiesResponse')
     ActivityResponse = Shapes::StructureShape.new(name: 'ActivityResponse')
     AddressConfiguration = Shapes::StructureShape.new(name: 'AddressConfiguration')
+    ApplicationDateRangeKpiResponse = Shapes::StructureShape.new(name: 'ApplicationDateRangeKpiResponse')
     ApplicationResponse = Shapes::StructureShape.new(name: 'ApplicationResponse')
     ApplicationSettingsResource = Shapes::StructureShape.new(name: 'ApplicationSettingsResource')
     ApplicationsResponse = Shapes::StructureShape.new(name: 'ApplicationsResponse')
@@ -37,6 +38,8 @@ module Aws::Pinpoint
     BaiduChannelRequest = Shapes::StructureShape.new(name: 'BaiduChannelRequest')
     BaiduChannelResponse = Shapes::StructureShape.new(name: 'BaiduChannelResponse')
     BaiduMessage = Shapes::StructureShape.new(name: 'BaiduMessage')
+    BaseKpiResult = Shapes::StructureShape.new(name: 'BaseKpiResult')
+    CampaignDateRangeKpiResponse = Shapes::StructureShape.new(name: 'CampaignDateRangeKpiResponse')
     CampaignEmailMessage = Shapes::StructureShape.new(name: 'CampaignEmailMessage')
     CampaignEventFilter = Shapes::StructureShape.new(name: 'CampaignEventFilter')
     CampaignHook = Shapes::StructureShape.new(name: 'CampaignHook')
@@ -144,6 +147,8 @@ module Aws::Pinpoint
     GetApnsVoipSandboxChannelResponse = Shapes::StructureShape.new(name: 'GetApnsVoipSandboxChannelResponse')
     GetAppRequest = Shapes::StructureShape.new(name: 'GetAppRequest')
     GetAppResponse = Shapes::StructureShape.new(name: 'GetAppResponse')
+    GetApplicationDateRangeKpiRequest = Shapes::StructureShape.new(name: 'GetApplicationDateRangeKpiRequest')
+    GetApplicationDateRangeKpiResponse = Shapes::StructureShape.new(name: 'GetApplicationDateRangeKpiResponse')
     GetApplicationSettingsRequest = Shapes::StructureShape.new(name: 'GetApplicationSettingsRequest')
     GetApplicationSettingsResponse = Shapes::StructureShape.new(name: 'GetApplicationSettingsResponse')
     GetAppsRequest = Shapes::StructureShape.new(name: 'GetAppsRequest')
@@ -152,6 +157,8 @@ module Aws::Pinpoint
     GetBaiduChannelResponse = Shapes::StructureShape.new(name: 'GetBaiduChannelResponse')
     GetCampaignActivitiesRequest = Shapes::StructureShape.new(name: 'GetCampaignActivitiesRequest')
     GetCampaignActivitiesResponse = Shapes::StructureShape.new(name: 'GetCampaignActivitiesResponse')
+    GetCampaignDateRangeKpiRequest = Shapes::StructureShape.new(name: 'GetCampaignDateRangeKpiRequest')
+    GetCampaignDateRangeKpiResponse = Shapes::StructureShape.new(name: 'GetCampaignDateRangeKpiResponse')
     GetCampaignRequest = Shapes::StructureShape.new(name: 'GetCampaignRequest')
     GetCampaignResponse = Shapes::StructureShape.new(name: 'GetCampaignResponse')
     GetCampaignVersionRequest = Shapes::StructureShape.new(name: 'GetCampaignVersionRequest')
@@ -211,6 +218,8 @@ module Aws::Pinpoint
     ListOfEndpointResponse = Shapes::ListShape.new(name: 'ListOfEndpointResponse')
     ListOfExportJobResponse = Shapes::ListShape.new(name: 'ListOfExportJobResponse')
     ListOfImportJobResponse = Shapes::ListShape.new(name: 'ListOfImportJobResponse')
+    ListOfResultRow = Shapes::ListShape.new(name: 'ListOfResultRow')
+    ListOfResultRowValue = Shapes::ListShape.new(name: 'ListOfResultRowValue')
     ListOfSegmentDimensions = Shapes::ListShape.new(name: 'ListOfSegmentDimensions')
     ListOfSegmentGroup = Shapes::ListShape.new(name: 'ListOfSegmentGroup')
     ListOfSegmentReference = Shapes::ListShape.new(name: 'ListOfSegmentReference')
@@ -262,6 +271,8 @@ module Aws::Pinpoint
     RecencyType = Shapes::StringShape.new(name: 'RecencyType')
     RemoveAttributesRequest = Shapes::StructureShape.new(name: 'RemoveAttributesRequest')
     RemoveAttributesResponse = Shapes::StructureShape.new(name: 'RemoveAttributesResponse')
+    ResultRow = Shapes::StructureShape.new(name: 'ResultRow')
+    ResultRowValue = Shapes::StructureShape.new(name: 'ResultRowValue')
     SMSChannelRequest = Shapes::StructureShape.new(name: 'SMSChannelRequest')
     SMSChannelResponse = Shapes::StructureShape.new(name: 'SMSChannelResponse')
     SMSMessage = Shapes::StructureShape.new(name: 'SMSMessage')
@@ -519,6 +530,14 @@ module Aws::Pinpoint
     AddressConfiguration.add_member(:title_override, Shapes::ShapeRef.new(shape: __string, location_name: "TitleOverride"))
     AddressConfiguration.struct_class = Types::AddressConfiguration
 
+    ApplicationDateRangeKpiResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
+    ApplicationDateRangeKpiResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "EndTime"))
+    ApplicationDateRangeKpiResponse.add_member(:kpi_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "KpiName"))
+    ApplicationDateRangeKpiResponse.add_member(:kpi_result, Shapes::ShapeRef.new(shape: BaseKpiResult, required: true, location_name: "KpiResult"))
+    ApplicationDateRangeKpiResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ApplicationDateRangeKpiResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "StartTime"))
+    ApplicationDateRangeKpiResponse.struct_class = Types::ApplicationDateRangeKpiResponse
+
     ApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
     ApplicationResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Id"))
     ApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Name"))
@@ -582,6 +601,18 @@ module Aws::Pinpoint
     BaiduMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     BaiduMessage.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "Url"))
     BaiduMessage.struct_class = Types::BaiduMessage
+
+    BaseKpiResult.add_member(:rows, Shapes::ShapeRef.new(shape: ListOfResultRow, required: true, location_name: "Rows"))
+    BaseKpiResult.struct_class = Types::BaseKpiResult
+
+    CampaignDateRangeKpiResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
+    CampaignDateRangeKpiResponse.add_member(:campaign_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CampaignId"))
+    CampaignDateRangeKpiResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "EndTime"))
+    CampaignDateRangeKpiResponse.add_member(:kpi_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "KpiName"))
+    CampaignDateRangeKpiResponse.add_member(:kpi_result, Shapes::ShapeRef.new(shape: BaseKpiResult, required: true, location_name: "KpiResult"))
+    CampaignDateRangeKpiResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    CampaignDateRangeKpiResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "StartTime"))
+    CampaignDateRangeKpiResponse.struct_class = Types::CampaignDateRangeKpiResponse
 
     CampaignEmailMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     CampaignEmailMessage.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
@@ -1158,6 +1189,19 @@ module Aws::Pinpoint
     GetAppResponse[:payload] = :application_response
     GetAppResponse[:payload_member] = GetAppResponse.member(:application_response)
 
+    GetApplicationDateRangeKpiRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetApplicationDateRangeKpiRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location: "querystring", location_name: "end-time"))
+    GetApplicationDateRangeKpiRequest.add_member(:kpi_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "kpi-name"))
+    GetApplicationDateRangeKpiRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "next-token"))
+    GetApplicationDateRangeKpiRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
+    GetApplicationDateRangeKpiRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location: "querystring", location_name: "start-time"))
+    GetApplicationDateRangeKpiRequest.struct_class = Types::GetApplicationDateRangeKpiRequest
+
+    GetApplicationDateRangeKpiResponse.add_member(:application_date_range_kpi_response, Shapes::ShapeRef.new(shape: ApplicationDateRangeKpiResponse, required: true, location_name: "ApplicationDateRangeKpiResponse"))
+    GetApplicationDateRangeKpiResponse.struct_class = Types::GetApplicationDateRangeKpiResponse
+    GetApplicationDateRangeKpiResponse[:payload] = :application_date_range_kpi_response
+    GetApplicationDateRangeKpiResponse[:payload_member] = GetApplicationDateRangeKpiResponse.member(:application_date_range_kpi_response)
+
     GetApplicationSettingsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetApplicationSettingsRequest.struct_class = Types::GetApplicationSettingsRequest
 
@@ -1193,6 +1237,20 @@ module Aws::Pinpoint
     GetCampaignActivitiesResponse.struct_class = Types::GetCampaignActivitiesResponse
     GetCampaignActivitiesResponse[:payload] = :activities_response
     GetCampaignActivitiesResponse[:payload_member] = GetCampaignActivitiesResponse.member(:activities_response)
+
+    GetCampaignDateRangeKpiRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetCampaignDateRangeKpiRequest.add_member(:campaign_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "campaign-id"))
+    GetCampaignDateRangeKpiRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location: "querystring", location_name: "end-time"))
+    GetCampaignDateRangeKpiRequest.add_member(:kpi_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "kpi-name"))
+    GetCampaignDateRangeKpiRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "next-token"))
+    GetCampaignDateRangeKpiRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
+    GetCampaignDateRangeKpiRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location: "querystring", location_name: "start-time"))
+    GetCampaignDateRangeKpiRequest.struct_class = Types::GetCampaignDateRangeKpiRequest
+
+    GetCampaignDateRangeKpiResponse.add_member(:campaign_date_range_kpi_response, Shapes::ShapeRef.new(shape: CampaignDateRangeKpiResponse, required: true, location_name: "CampaignDateRangeKpiResponse"))
+    GetCampaignDateRangeKpiResponse.struct_class = Types::GetCampaignDateRangeKpiResponse
+    GetCampaignDateRangeKpiResponse[:payload] = :campaign_date_range_kpi_response
+    GetCampaignDateRangeKpiResponse[:payload_member] = GetCampaignDateRangeKpiResponse.member(:campaign_date_range_kpi_response)
 
     GetCampaignRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetCampaignRequest.add_member(:campaign_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "campaign-id"))
@@ -1461,6 +1519,10 @@ module Aws::Pinpoint
 
     ListOfImportJobResponse.member = Shapes::ShapeRef.new(shape: ImportJobResponse)
 
+    ListOfResultRow.member = Shapes::ShapeRef.new(shape: ResultRow)
+
+    ListOfResultRowValue.member = Shapes::ShapeRef.new(shape: ResultRowValue)
+
     ListOfSegmentDimensions.member = Shapes::ShapeRef.new(shape: SegmentDimensions)
 
     ListOfSegmentGroup.member = Shapes::ShapeRef.new(shape: SegmentGroup)
@@ -1677,6 +1739,15 @@ module Aws::Pinpoint
     RemoveAttributesResponse.struct_class = Types::RemoveAttributesResponse
     RemoveAttributesResponse[:payload] = :attributes_resource
     RemoveAttributesResponse[:payload_member] = RemoveAttributesResponse.member(:attributes_resource)
+
+    ResultRow.add_member(:grouped_bys, Shapes::ShapeRef.new(shape: ListOfResultRowValue, required: true, location_name: "GroupedBys"))
+    ResultRow.add_member(:values, Shapes::ShapeRef.new(shape: ListOfResultRowValue, required: true, location_name: "Values"))
+    ResultRow.struct_class = Types::ResultRow
+
+    ResultRowValue.add_member(:key, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Key"))
+    ResultRowValue.add_member(:type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Type"))
+    ResultRowValue.add_member(:value, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Value"))
+    ResultRowValue.struct_class = Types::ResultRowValue
 
     SMSChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     SMSChannelRequest.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
@@ -2039,6 +2110,7 @@ module Aws::Pinpoint
     VoiceChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
     VoiceChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
     VoiceChannelResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedDate"))
+    VoiceChannelResponse.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     VoiceChannelResponse.add_member(:platform, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Platform"))
     VoiceChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
     VoiceChannelResponse.struct_class = Types::VoiceChannelResponse
@@ -2485,6 +2557,20 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_application_date_range_kpi, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApplicationDateRangeKpi"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/kpis/daterange/{kpi-name}"
+        o.input = Shapes::ShapeRef.new(shape: GetApplicationDateRangeKpiRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetApplicationDateRangeKpiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_application_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetApplicationSettings"
         o.http_method = "GET"
@@ -2547,6 +2633,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/campaigns/{campaign-id}/activities"
         o.input = Shapes::ShapeRef.new(shape: GetCampaignActivitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCampaignActivitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_campaign_date_range_kpi, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCampaignDateRangeKpi"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/campaigns/{campaign-id}/kpis/daterange/{kpi-name}"
+        o.input = Shapes::ShapeRef.new(shape: GetCampaignDateRangeKpiRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCampaignDateRangeKpiResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

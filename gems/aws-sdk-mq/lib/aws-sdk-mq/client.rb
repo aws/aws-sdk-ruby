@@ -270,6 +270,9 @@ module Aws::MQ
     # @option params [String] :deployment_mode
     #   The deployment mode of the broker.
     #
+    # @option params [Types::EncryptionOptions] :encryption_options
+    #   Encryption options for the broker.
+    #
     # @option params [String] :engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
     #   ActiveMQ.
@@ -312,6 +315,10 @@ module Aws::MQ
     #     },
     #     creator_request_id: "__string",
     #     deployment_mode: "SINGLE_INSTANCE", # accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ
+    #     encryption_options: {
+    #       kms_key_id: "__string",
+    #       use_aws_owned_key: false, # required
+    #     },
     #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #     engine_version: "__string",
     #     host_instance_type: "__string",
@@ -555,6 +562,7 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#configurations #configurations} => Types::Configurations
     #   * {Types::DescribeBrokerResponse#created #created} => Time
     #   * {Types::DescribeBrokerResponse#deployment_mode #deployment_mode} => String
+    #   * {Types::DescribeBrokerResponse#encryption_options #encryption_options} => Types::EncryptionOptions
     #   * {Types::DescribeBrokerResponse#engine_type #engine_type} => String
     #   * {Types::DescribeBrokerResponse#engine_version #engine_version} => String
     #   * {Types::DescribeBrokerResponse#host_instance_type #host_instance_type} => String
@@ -594,6 +602,8 @@ module Aws::MQ
     #   resp.configurations.pending.revision #=> Integer
     #   resp.created #=> Time
     #   resp.deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ"
+    #   resp.encryption_options.kms_key_id #=> String
+    #   resp.encryption_options.use_aws_owned_key #=> Boolean
     #   resp.engine_type #=> String, one of "ACTIVEMQ"
     #   resp.engine_version #=> String
     #   resp.host_instance_type #=> String
@@ -1207,7 +1217,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

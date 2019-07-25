@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2019-07-25)
+------------------
+
+* Feature - AWS Elemental MediaLive is adding Input Clipping, Immediate Mode Input Switching, and Dynamic Inputs.
+
 1.35.0 (2019-07-01)
 ------------------
 

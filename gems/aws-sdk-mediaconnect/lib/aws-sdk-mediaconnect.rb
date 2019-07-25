@@ -42,6 +42,6 @@ require_relative 'aws-sdk-mediaconnect/customizations'
 # @service
 module Aws::MediaConnect
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

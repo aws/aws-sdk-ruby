@@ -3445,6 +3445,20 @@ module Aws::EC2
     # @option params [String] :description
     #   A brief description of the Client VPN endpoint.
     #
+    # @option params [Boolean] :split_tunnel
+    #   Indicates whether split-tunnel is enabled on the AWS Client VPN
+    #   endpoint endpoint.
+    #
+    #   By default, split-tunnel on a VPN endpoint is disabled.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -3496,6 +3510,7 @@ module Aws::EC2
     #     dns_servers: ["String"],
     #     transport_protocol: "tcp", # accepts tcp, udp
     #     description: "String",
+    #     split_tunnel: false,
     #     dry_run: false,
     #     client_token: "String",
     #     tag_specifications: [
@@ -3852,8 +3867,8 @@ module Aws::EC2
     #   servers, or AmazonProvidedDNS. The default DHCP option set specifies
     #   AmazonProvidedDNS. If specifying more than one domain name server,
     #   specify the IP addresses in a single parameter, separated by commas.
-    #   ITo have your instance to receive a custom DNS hostname as specified
-    #   in `domain-name`, you must set `domain-name-servers` to a custom DNS
+    #   To have your instance receive a custom DNS hostname as specified in
+    #   `domain-name`, you must set `domain-name-servers` to a custom DNS
     #   server.
     #
     # * `domain-name` - If you're using AmazonProvidedDNS in `us-east-1`,
@@ -4803,6 +4818,9 @@ module Aws::EC2
     # @option params [required, Types::RequestLaunchTemplateData] :launch_template_data
     #   The information for the launch template.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the launch template during creation.
+    #
     # @return [Types::CreateLaunchTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLaunchTemplateResult#launch_template #launch_template} => Types::LaunchTemplate
@@ -4982,6 +5000,17 @@ module Aws::EC2
     #         configured: false,
     #       },
     #     },
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6570,7 +6599,7 @@ module Aws::EC2
     #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
     #
     # @option params [String] :copy_tags_from_source
-    #   Copies the tags from the specified instance to all snapshots.
+    #   Copies the tags from the specified volume to corresponding snapshot.
     #
     # @return [Types::CreateSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -15909,7 +15938,7 @@ module Aws::EC2
     #
     #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
-    #   * `attachment.attach.time` - The time that the network interface was
+    #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the
@@ -16414,19 +16443,19 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the Regions that are currently available to you. The API
-    # returns a list of all the Regions, including Regions that are disabled
-    # for your account. For information about enabling Regions for your
-    # account, see [Enabling and Disabling Regions][1] in the *AWS Billing
-    # and Cost Management User Guide*.
+    # Describes the Regions that are enabled for your account, or all
+    # Regions.
     #
     # For a list of the Regions supported by Amazon EC2, see [ Regions and
-    # Endpoints][2].
+    # Endpoints][1].
+    #
+    # For information about enabling and disabling Regions for your account,
+    # see [Managing AWS Regions][2] in the *AWS General Reference*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-account-payment.html#manage-account-payment-enable-disable-regions
-    # [2]: https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -16437,13 +16466,18 @@ module Aws::EC2
     #   * `region-name` - The name of the Region (for example, `us-east-1`).
     #
     # @option params [Array<String>] :region_names
-    #   The names of the Regions.
+    #   The names of the Regions. You can specify any Regions, whether they
+    #   are enabled and disabled for your account.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Boolean] :all_regions
+    #   Indicates whether to display all Regions, including Regions that are
+    #   disabled for your account.
     #
     # @return [Types::DescribeRegionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -16518,6 +16552,7 @@ module Aws::EC2
     #     ],
     #     region_names: ["String"],
     #     dry_run: false,
+    #     all_regions: false,
     #   })
     #
     # @example Response structure
@@ -16525,6 +16560,7 @@ module Aws::EC2
     #   resp.regions #=> Array
     #   resp.regions[0].endpoint #=> String
     #   resp.regions[0].region_name #=> String
+    #   resp.regions[0].opt_in_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegions AWS API Documentation
     #
@@ -24676,6 +24712,17 @@ module Aws::EC2
     # @option params [String] :description
     #   A brief description of the Client VPN endpoint.
     #
+    # @option params [Boolean] :split_tunnel
+    #   Indicates whether the VPN is split-tunnel.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -24701,6 +24748,7 @@ module Aws::EC2
     #       enabled: false,
     #     },
     #     description: "String",
+    #     split_tunnel: false,
     #     dry_run: false,
     #   })
     #
@@ -31881,7 +31929,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
