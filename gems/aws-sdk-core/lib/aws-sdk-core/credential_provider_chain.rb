@@ -100,8 +100,8 @@ module Aws
     end
 
     def assume_role_web_identity_credentials(options)
-      if role_arn = ENV['AWS_ROLE_ARN'] &&
-        token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE']
+      if (role_arn = ENV['AWS_ROLE_ARN']) &&
+        (token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE'])
         AssumeRoleWebIdentityCredentials.new(
           role_arn: role_arn,
           web_identity_token_file: token_file,
