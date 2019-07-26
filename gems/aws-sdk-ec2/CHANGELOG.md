@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2019-07-26)
+------------------
+
+* Feature - You can now create EC2 Capacity Reservations using Availability Zone ID or Availability Zone name. You can view usage of Amazon EC2 Capacity Reservations per AWS account.
+
 1.101.0 (2019-07-25)
 ------------------
 

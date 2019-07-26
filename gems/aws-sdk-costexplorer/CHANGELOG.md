@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-07-26)
+------------------
+
+* Feature - Adds support for resource optimization recommendations.
+
 1.28.0 (2019-07-25)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2019-07-26)
+------------------
+
+* Feature - This release provides GetJobBookmark and GetJobBookmarks APIs. These APIs enable users to look at specific versions or all versions of the JobBookmark for a specific job. This release also enables resetting the job bookmark to a specific run via an enhancement of the ResetJobBookmark API.
+
 1.40.0 (2019-07-25)
 ------------------
 

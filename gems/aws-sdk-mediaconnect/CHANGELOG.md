@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2019-07-26)
+------------------
+
+* Feature - This release adds support for the Zixi pull protocol on outputs.
+
 1.12.0 (2019-07-25)
 ------------------
 

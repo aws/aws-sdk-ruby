@@ -2530,6 +2530,15 @@ module Aws::EC2
     #   The ID of the Capacity Reservation.
     #   @return [String]
     #
+    # @!attribute [rw] owner_id
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   @return [String]
+    #
     # @!attribute [rw] instance_type
     #   The type of instance for which the Capacity Reservation reserves
     #   capacity.
@@ -2650,6 +2659,9 @@ module Aws::EC2
     #
     class CapacityReservation < Struct.new(
       :capacity_reservation_id,
+      :owner_id,
+      :capacity_reservation_arn,
+      :availability_zone_id,
       :instance_type,
       :instance_platform,
       :availability_zone,
@@ -3982,7 +3994,8 @@ module Aws::EC2
     #         client_token: "String",
     #         instance_type: "String", # required
     #         instance_platform: "Linux/UNIX", # required, accepts Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard, Windows with SQL Server Web, Linux with SQL Server Standard, Linux with SQL Server Web, Linux with SQL Server Enterprise
-    #         availability_zone: "String", # required
+    #         availability_zone: "String",
+    #         availability_zone_id: "String",
     #         tenancy: "default", # accepts default, dedicated
     #         instance_count: 1, # required
     #         ebs_optimized: false,
@@ -4032,6 +4045,9 @@ module Aws::EC2
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which to create the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
     #   @return [String]
     #
     # @!attribute [rw] tenancy
@@ -4129,6 +4145,7 @@ module Aws::EC2
       :instance_type,
       :instance_platform,
       :availability_zone,
+      :availability_zone_id,
       :tenancy,
       :instance_count,
       :ebs_optimized,
@@ -21062,6 +21079,72 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCapacityReservationUsageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_reservation_id: "String", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityReservationUsageRequest AWS API Documentation
+    #
+    class GetCapacityReservationUsageRequest < Struct.new(
+      :capacity_reservation_id,
+      :next_token,
+      :max_results,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   @return [String]
+    #
+    # @!attribute [rw] total_instance_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_instance_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_usages
+    #   @return [Array<Types::InstanceUsage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityReservationUsageResult AWS API Documentation
+    #
+    class GetCapacityReservationUsageResult < Struct.new(
+      :next_token,
+      :capacity_reservation_id,
+      :instance_type,
+      :total_instance_count,
+      :available_instance_count,
+      :state,
+      :instance_usages)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetConsoleOutputRequest
     #   data as a hash:
     #
@@ -24570,6 +24653,20 @@ module Aws::EC2
     class InstanceStatusSummary < Struct.new(
       :details,
       :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] used_instance_count
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceUsage AWS API Documentation
+    #
+    class InstanceUsage < Struct.new(
+      :account_id,
+      :used_instance_count)
       include Aws::Structure
     end
 

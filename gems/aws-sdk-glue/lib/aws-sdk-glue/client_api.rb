@@ -239,6 +239,10 @@ module Aws::Glue
     GetDevEndpointResponse = Shapes::StructureShape.new(name: 'GetDevEndpointResponse')
     GetDevEndpointsRequest = Shapes::StructureShape.new(name: 'GetDevEndpointsRequest')
     GetDevEndpointsResponse = Shapes::StructureShape.new(name: 'GetDevEndpointsResponse')
+    GetJobBookmarkRequest = Shapes::StructureShape.new(name: 'GetJobBookmarkRequest')
+    GetJobBookmarkResponse = Shapes::StructureShape.new(name: 'GetJobBookmarkResponse')
+    GetJobBookmarksRequest = Shapes::StructureShape.new(name: 'GetJobBookmarksRequest')
+    GetJobBookmarksResponse = Shapes::StructureShape.new(name: 'GetJobBookmarksResponse')
     GetJobRequest = Shapes::StructureShape.new(name: 'GetJobRequest')
     GetJobResponse = Shapes::StructureShape.new(name: 'GetJobResponse')
     GetJobRunRequest = Shapes::StructureShape.new(name: 'GetJobRunRequest')
@@ -307,6 +311,7 @@ module Aws::Glue
     JdbcTargetList = Shapes::ListShape.new(name: 'JdbcTargetList')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobBookmarkEntry = Shapes::StructureShape.new(name: 'JobBookmarkEntry')
+    JobBookmarkEntryList = Shapes::ListShape.new(name: 'JobBookmarkEntryList')
     JobBookmarksEncryption = Shapes::StructureShape.new(name: 'JobBookmarksEncryption')
     JobBookmarksEncryptionMode = Shapes::StringShape.new(name: 'JobBookmarksEncryptionMode')
     JobCommand = Shapes::StructureShape.new(name: 'JobCommand')
@@ -407,6 +412,7 @@ module Aws::Glue
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleString = Shapes::StringShape.new(name: 'RoleString')
     RowTag = Shapes::StringShape.new(name: 'RowTag')
+    RunId = Shapes::StringShape.new(name: 'RunId')
     S3Encryption = Shapes::StructureShape.new(name: 'S3Encryption')
     S3EncryptionList = Shapes::ListShape.new(name: 'S3EncryptionList')
     S3EncryptionMode = Shapes::StringShape.new(name: 'S3EncryptionMode')
@@ -1325,6 +1331,22 @@ module Aws::Glue
     GetDevEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     GetDevEndpointsResponse.struct_class = Types::GetDevEndpointsResponse
 
+    GetJobBookmarkRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
+    GetJobBookmarkRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "RunId"))
+    GetJobBookmarkRequest.struct_class = Types::GetJobBookmarkRequest
+
+    GetJobBookmarkResponse.add_member(:job_bookmark_entry, Shapes::ShapeRef.new(shape: JobBookmarkEntry, location_name: "JobBookmarkEntry"))
+    GetJobBookmarkResponse.struct_class = Types::GetJobBookmarkResponse
+
+    GetJobBookmarksRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
+    GetJobBookmarksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "MaxResults"))
+    GetJobBookmarksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NextToken"))
+    GetJobBookmarksRequest.struct_class = Types::GetJobBookmarksRequest
+
+    GetJobBookmarksResponse.add_member(:job_bookmark_entries, Shapes::ShapeRef.new(shape: JobBookmarkEntryList, location_name: "JobBookmarkEntries"))
+    GetJobBookmarksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NextToken"))
+    GetJobBookmarksResponse.struct_class = Types::GetJobBookmarksResponse
+
     GetJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "JobName"))
     GetJobRequest.struct_class = Types::GetJobRequest
 
@@ -1590,8 +1612,12 @@ module Aws::Glue
     JobBookmarkEntry.add_member(:version, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Version"))
     JobBookmarkEntry.add_member(:run, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Run"))
     JobBookmarkEntry.add_member(:attempt, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Attempt"))
+    JobBookmarkEntry.add_member(:previous_run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "PreviousRunId"))
+    JobBookmarkEntry.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "RunId"))
     JobBookmarkEntry.add_member(:job_bookmark, Shapes::ShapeRef.new(shape: JsonValue, location_name: "JobBookmark"))
     JobBookmarkEntry.struct_class = Types::JobBookmarkEntry
+
+    JobBookmarkEntryList.member = Shapes::ShapeRef.new(shape: JobBookmarkEntry)
 
     JobBookmarksEncryption.add_member(:job_bookmarks_encryption_mode, Shapes::ShapeRef.new(shape: JobBookmarksEncryptionMode, location_name: "JobBookmarksEncryptionMode"))
     JobBookmarksEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
@@ -1839,6 +1865,7 @@ module Aws::Glue
     PutWorkflowRunPropertiesResponse.struct_class = Types::PutWorkflowRunPropertiesResponse
 
     ResetJobBookmarkRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
+    ResetJobBookmarkRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "RunId"))
     ResetJobBookmarkRequest.struct_class = Types::ResetJobBookmarkRequest
 
     ResetJobBookmarkResponse.add_member(:job_bookmark_entry, Shapes::ShapeRef.new(shape: JobBookmarkEntry, location_name: "JobBookmarkEntry"))
@@ -2966,6 +2993,37 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:get_job_bookmark, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetJobBookmark"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetJobBookmarkRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetJobBookmarkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_job_bookmarks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetJobBookmarks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetJobBookmarksRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetJobBookmarksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_job_run, Seahorse::Model::Operation.new.tap do |o|

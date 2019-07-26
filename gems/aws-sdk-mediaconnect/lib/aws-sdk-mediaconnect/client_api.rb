@@ -99,13 +99,15 @@ module Aws::MediaConnect
     AddFlowOutputsResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: __listOfOutput, location_name: "outputs"))
     AddFlowOutputsResponse.struct_class = Types::AddFlowOutputsResponse
 
+    AddOutputRequest.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     AddOutputRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    AddOutputRequest.add_member(:destination, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "destination"))
+    AddOutputRequest.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     AddOutputRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
     AddOutputRequest.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))
     AddOutputRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    AddOutputRequest.add_member(:port, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "port"))
+    AddOutputRequest.add_member(:port, Shapes::ShapeRef.new(shape: __integer, location_name: "port"))
     AddOutputRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    AddOutputRequest.add_member(:remote_id, Shapes::ShapeRef.new(shape: __string, location_name: "remoteId"))
     AddOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     AddOutputRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     AddOutputRequest.struct_class = Types::AddOutputRequest
@@ -309,9 +311,11 @@ module Aws::MediaConnect
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
+    Transport.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     Transport.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
     Transport.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))
     Transport.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    Transport.add_member(:remote_id, Shapes::ShapeRef.new(shape: __string, location_name: "remoteId"))
     Transport.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     Transport.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     Transport.struct_class = Types::Transport
@@ -342,6 +346,7 @@ module Aws::MediaConnect
     UpdateFlowEntitlementResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     UpdateFlowEntitlementResponse.struct_class = Types::UpdateFlowEntitlementResponse
 
+    UpdateFlowOutputRequest.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     UpdateFlowOutputRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateFlowOutputRequest.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     UpdateFlowOutputRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: UpdateEncryption, location_name: "encryption"))
@@ -350,6 +355,7 @@ module Aws::MediaConnect
     UpdateFlowOutputRequest.add_member(:output_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "outputArn"))
     UpdateFlowOutputRequest.add_member(:port, Shapes::ShapeRef.new(shape: __integer, location_name: "port"))
     UpdateFlowOutputRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
+    UpdateFlowOutputRequest.add_member(:remote_id, Shapes::ShapeRef.new(shape: __string, location_name: "remoteId"))
     UpdateFlowOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     UpdateFlowOutputRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     UpdateFlowOutputRequest.struct_class = Types::UpdateFlowOutputRequest

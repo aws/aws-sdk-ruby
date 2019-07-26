@@ -273,8 +273,9 @@ module Aws::MediaConnect
     #     flow_arn: "__string", # required
     #     outputs: [ # required
     #       {
+    #         cidr_allow_list: ["__string"],
     #         description: "__string",
-    #         destination: "__string", # required
+    #         destination: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
@@ -288,8 +289,9 @@ module Aws::MediaConnect
     #         },
     #         max_latency: 1,
     #         name: "__string",
-    #         port: 1, # required
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #         port: 1,
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
     #       },
@@ -316,9 +318,12 @@ module Aws::MediaConnect
     #   resp.outputs[0].name #=> String
     #   resp.outputs[0].output_arn #=> String
     #   resp.outputs[0].port #=> Integer
+    #   resp.outputs[0].transport.cidr_allow_list #=> Array
+    #   resp.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.outputs[0].transport.max_bitrate #=> Integer
     #   resp.outputs[0].transport.max_latency #=> Integer
-    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.outputs[0].transport.remote_id #=> String
     #   resp.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.outputs[0].transport.stream_id #=> String
     #
@@ -380,8 +385,9 @@ module Aws::MediaConnect
     #     name: "__string", # required
     #     outputs: [
     #       {
+    #         cidr_allow_list: ["__string"],
     #         description: "__string",
-    #         destination: "__string", # required
+    #         destination: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
@@ -395,8 +401,9 @@ module Aws::MediaConnect
     #         },
     #         max_latency: 1,
     #         name: "__string",
-    #         port: 1, # required
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #         port: 1,
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
     #       },
@@ -419,7 +426,7 @@ module Aws::MediaConnect
     #       max_bitrate: 1,
     #       max_latency: 1,
     #       name: "__string",
-    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
     #       stream_id: "__string",
     #       whitelist_cidr: "__string",
     #     },
@@ -464,9 +471,12 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].name #=> String
     #   resp.flow.outputs[0].output_arn #=> String
     #   resp.flow.outputs[0].port #=> Integer
+    #   resp.flow.outputs[0].transport.cidr_allow_list #=> Array
+    #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
@@ -484,9 +494,12 @@ module Aws::MediaConnect
     #   resp.flow.source.ingest_port #=> Integer
     #   resp.flow.source.name #=> String
     #   resp.flow.source.source_arn #=> String
+    #   resp.flow.source.transport.cidr_allow_list #=> Array
+    #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.whitelist_cidr #=> String
@@ -586,9 +599,12 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].name #=> String
     #   resp.flow.outputs[0].output_arn #=> String
     #   resp.flow.outputs[0].port #=> Integer
+    #   resp.flow.outputs[0].transport.cidr_allow_list #=> Array
+    #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
@@ -606,9 +622,12 @@ module Aws::MediaConnect
     #   resp.flow.source.ingest_port #=> Integer
     #   resp.flow.source.name #=> String
     #   resp.flow.source.source_arn #=> String
+    #   resp.flow.source.transport.cidr_allow_list #=> Array
+    #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.whitelist_cidr #=> String
@@ -1051,6 +1070,11 @@ module Aws::MediaConnect
 
     # Updates an existing flow output.
     #
+    # @option params [Array<String>] :cidr_allow_list
+    #   The range of IP addresses that should be allowed to initiate output
+    #   requests to this flow. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+    #
     # @option params [String] :description
     #   A description of the output. This description appears only on the AWS
     #   Elemental MediaConnect console and will not be seen by the end user.
@@ -1075,6 +1099,9 @@ module Aws::MediaConnect
     # @option params [String] :protocol
     #   The protocol to use for the output.
     #
+    # @option params [String] :remote_id
+    #   The remote ID for the Zixi-pull stream.
+    #
     # @option params [Integer] :smoothing_latency
     #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
     #
@@ -1090,6 +1117,7 @@ module Aws::MediaConnect
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_flow_output({
+    #     cidr_allow_list: ["__string"],
     #     description: "__string",
     #     destination: "__string",
     #     encryption: {
@@ -1107,7 +1135,8 @@ module Aws::MediaConnect
     #     max_latency: 1,
     #     output_arn: "__string", # required
     #     port: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #     remote_id: "__string",
     #     smoothing_latency: 1,
     #     stream_id: "__string",
     #   })
@@ -1131,9 +1160,12 @@ module Aws::MediaConnect
     #   resp.output.name #=> String
     #   resp.output.output_arn #=> String
     #   resp.output.port #=> Integer
+    #   resp.output.transport.cidr_allow_list #=> Array
+    #   resp.output.transport.cidr_allow_list[0] #=> String
     #   resp.output.transport.max_bitrate #=> Integer
     #   resp.output.transport.max_latency #=> Integer
-    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.output.transport.remote_id #=> String
     #   resp.output.transport.smoothing_latency #=> Integer
     #   resp.output.transport.stream_id #=> String
     #
@@ -1182,8 +1214,8 @@ module Aws::MediaConnect
     #
     # @option params [String] :whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute content
-    #   to your source. These IP addresses should in the form of a Classless
-    #   Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+    #   to your source. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
     #
     # @return [Types::UpdateFlowSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1210,7 +1242,7 @@ module Aws::MediaConnect
     #     ingest_port: 1,
     #     max_bitrate: 1,
     #     max_latency: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
     #     source_arn: "__string", # required
     #     stream_id: "__string",
     #     whitelist_cidr: "__string",
@@ -1234,9 +1266,12 @@ module Aws::MediaConnect
     #   resp.source.ingest_port #=> Integer
     #   resp.source.name #=> String
     #   resp.source.source_arn #=> String
+    #   resp.source.transport.cidr_allow_list #=> Array
+    #   resp.source.transport.cidr_allow_list[0] #=> String
     #   resp.source.transport.max_bitrate #=> Integer
     #   resp.source.transport.max_latency #=> Integer
-    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp"
+    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.source.transport.remote_id #=> String
     #   resp.source.transport.smoothing_latency #=> Integer
     #   resp.source.transport.stream_id #=> String
     #   resp.source.whitelist_cidr #=> String
@@ -1263,7 +1298,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

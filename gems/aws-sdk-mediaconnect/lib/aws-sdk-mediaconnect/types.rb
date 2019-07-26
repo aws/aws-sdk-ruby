@@ -32,8 +32,9 @@ module Aws::MediaConnect
     #         flow_arn: "__string", # required
     #         outputs: [ # required
     #           {
+    #             cidr_allow_list: ["__string"],
     #             description: "__string",
-    #             destination: "__string", # required
+    #             destination: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
     #               constant_initialization_vector: "__string",
@@ -47,8 +48,9 @@ module Aws::MediaConnect
     #             },
     #             max_latency: 1,
     #             name: "__string",
-    #             port: 1, # required
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #             port: 1,
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
     #           },
@@ -95,8 +97,9 @@ module Aws::MediaConnect
     #   data as a hash:
     #
     #       {
+    #         cidr_allow_list: ["__string"],
     #         description: "__string",
-    #         destination: "__string", # required
+    #         destination: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
@@ -110,11 +113,19 @@ module Aws::MediaConnect
     #         },
     #         max_latency: 1,
     #         name: "__string",
-    #         port: 1, # required
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #         port: 1,
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
     #       }
+    #
+    # @!attribute [rw] cidr_allow_list
+    #   The range of IP addresses that should be allowed to initiate output
+    #   requests to this flow. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   10.0.0.0/16.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] description
     #   A description of the output. This description appears only on the
@@ -148,6 +159,10 @@ module Aws::MediaConnect
     #   The protocol to use for the output.
     #   @return [String]
     #
+    # @!attribute [rw] remote_id
+    #   The remote ID for the Zixi-pull output stream.
+    #   @return [String]
+    #
     # @!attribute [rw] smoothing_latency
     #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
     #   @return [Integer]
@@ -160,6 +175,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest AWS API Documentation
     #
     class AddOutputRequest < Struct.new(
+      :cidr_allow_list,
       :description,
       :destination,
       :encryption,
@@ -167,6 +183,7 @@ module Aws::MediaConnect
       :name,
       :port,
       :protocol,
+      :remote_id,
       :smoothing_latency,
       :stream_id)
       include Aws::Structure
@@ -229,8 +246,9 @@ module Aws::MediaConnect
     #         name: "__string", # required
     #         outputs: [
     #           {
+    #             cidr_allow_list: ["__string"],
     #             description: "__string",
-    #             destination: "__string", # required
+    #             destination: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
     #               constant_initialization_vector: "__string",
@@ -244,8 +262,9 @@ module Aws::MediaConnect
     #             },
     #             max_latency: 1,
     #             name: "__string",
-    #             port: 1, # required
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #             port: 1,
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
     #           },
@@ -268,7 +287,7 @@ module Aws::MediaConnect
     #           max_bitrate: 1,
     #           max_latency: 1,
     #           name: "__string",
-    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
     #           stream_id: "__string",
     #           whitelist_cidr: "__string",
     #         },
@@ -1135,7 +1154,7 @@ module Aws::MediaConnect
     #         max_bitrate: 1,
     #         max_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
     #         stream_id: "__string",
     #         whitelist_cidr: "__string",
     #       }
@@ -1183,8 +1202,8 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute
-    #   content to your source. These IP addresses should in the form of a
-    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   content to your source. These IP addresses should be in the form of
+    #   a Classless Inter-Domain Routing (CIDR) block; for example,
     #   10.0.0.0/16.
     #   @return [String]
     #
@@ -1247,8 +1266,8 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute
-    #   content to your source. These IP addresses should in the form of a
-    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   content to your source. These IP addresses should be in the form of
+    #   a Classless Inter-Domain Routing (CIDR) block; for example,
     #   10.0.0.0/16.
     #   @return [String]
     #
@@ -1385,6 +1404,13 @@ module Aws::MediaConnect
     # Attributes related to the transport stream that are used in a source
     # or output.
     #
+    # @!attribute [rw] cidr_allow_list
+    #   The range of IP addresses that should be allowed to initiate output
+    #   requests to this flow. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   10.0.0.0/16.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] max_bitrate
     #   The smoothing max bitrate for RTP and RTP-FEC streams.
     #   @return [Integer]
@@ -1395,6 +1421,10 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The protocol that is used by the source or output.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_id
+    #   The remote ID for the Zixi-pull stream.
     #   @return [String]
     #
     # @!attribute [rw] smoothing_latency
@@ -1409,9 +1439,11 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Transport AWS API Documentation
     #
     class Transport < Struct.new(
+      :cidr_allow_list,
       :max_bitrate,
       :max_latency,
       :protocol,
+      :remote_id,
       :smoothing_latency,
       :stream_id)
       include Aws::Structure
@@ -1608,6 +1640,7 @@ module Aws::MediaConnect
     #   data as a hash:
     #
     #       {
+    #         cidr_allow_list: ["__string"],
     #         description: "__string",
     #         destination: "__string",
     #         encryption: {
@@ -1625,10 +1658,18 @@ module Aws::MediaConnect
     #         max_latency: 1,
     #         output_arn: "__string", # required
     #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
     #       }
+    #
+    # @!attribute [rw] cidr_allow_list
+    #   The range of IP addresses that should be allowed to initiate output
+    #   requests to this flow. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   10.0.0.0/16.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] description
     #   A description of the output. This description appears only on the
@@ -1663,6 +1704,10 @@ module Aws::MediaConnect
     #   The protocol to use for the output.
     #   @return [String]
     #
+    # @!attribute [rw] remote_id
+    #   The remote ID for the Zixi-pull stream.
+    #   @return [String]
+    #
     # @!attribute [rw] smoothing_latency
     #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
     #   @return [Integer]
@@ -1675,6 +1720,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputRequest AWS API Documentation
     #
     class UpdateFlowOutputRequest < Struct.new(
+      :cidr_allow_list,
       :description,
       :destination,
       :encryption,
@@ -1683,6 +1729,7 @@ module Aws::MediaConnect
       :output_arn,
       :port,
       :protocol,
+      :remote_id,
       :smoothing_latency,
       :stream_id)
       include Aws::Structure
@@ -1730,7 +1777,7 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
     #         source_arn: "__string", # required
     #         stream_id: "__string",
     #         whitelist_cidr: "__string",
@@ -1781,8 +1828,8 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute
-    #   content to your source. These IP addresses should in the form of a
-    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   content to your source. These IP addresses should be in the form of
+    #   a Classless Inter-Domain Routing (CIDR) block; for example,
     #   10.0.0.0/16.
     #   @return [String]
     #

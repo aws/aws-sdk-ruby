@@ -762,6 +762,9 @@ module Aws::EC2
     FpgaImageState = Shapes::StructureShape.new(name: 'FpgaImageState')
     FpgaImageStateCode = Shapes::StringShape.new(name: 'FpgaImageStateCode')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
+    GetCapacityReservationUsageRequest = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageRequest')
+    GetCapacityReservationUsageRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityReservationUsageRequestMaxResults')
+    GetCapacityReservationUsageResult = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageResult')
     GetConsoleOutputRequest = Shapes::StructureShape.new(name: 'GetConsoleOutputRequest')
     GetConsoleOutputResult = Shapes::StructureShape.new(name: 'GetConsoleOutputResult')
     GetConsoleScreenshotRequest = Shapes::StructureShape.new(name: 'GetConsoleScreenshotRequest')
@@ -903,6 +906,8 @@ module Aws::EC2
     InstanceStatusSummary = Shapes::StructureShape.new(name: 'InstanceStatusSummary')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstanceTypeList = Shapes::ListShape.new(name: 'InstanceTypeList')
+    InstanceUsage = Shapes::StructureShape.new(name: 'InstanceUsage')
+    InstanceUsageSet = Shapes::ListShape.new(name: 'InstanceUsageSet')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InterfacePermissionType = Shapes::StringShape.new(name: 'InterfacePermissionType')
     InternetGateway = Shapes::StructureShape.new(name: 'InternetGateway')
@@ -2014,6 +2019,9 @@ module Aws::EC2
     CancelledSpotInstanceRequestList.member = Shapes::ShapeRef.new(shape: CancelledSpotInstanceRequest, location_name: "item")
 
     CapacityReservation.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
+    CapacityReservation.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    CapacityReservation.add_member(:capacity_reservation_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationArn"))
+    CapacityReservation.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     CapacityReservation.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     CapacityReservation.add_member(:instance_platform, Shapes::ShapeRef.new(shape: CapacityReservationInstancePlatform, location_name: "instancePlatform"))
     CapacityReservation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -2262,7 +2270,8 @@ module Aws::EC2
     CreateCapacityReservationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateCapacityReservationRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
     CreateCapacityReservationRequest.add_member(:instance_platform, Shapes::ShapeRef.new(shape: CapacityReservationInstancePlatform, required: true, location_name: "InstancePlatform"))
-    CreateCapacityReservationRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AvailabilityZone"))
+    CreateCapacityReservationRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    CreateCapacityReservationRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
     CreateCapacityReservationRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: CapacityReservationTenancy, location_name: "Tenancy"))
     CreateCapacityReservationRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
     CreateCapacityReservationRequest.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "EbsOptimized"))
@@ -4600,6 +4609,21 @@ module Aws::EC2
     FpgaImageState.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     FpgaImageState.struct_class = Types::FpgaImageState
 
+    GetCapacityReservationUsageRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CapacityReservationId"))
+    GetCapacityReservationUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetCapacityReservationUsageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetCapacityReservationUsageRequestMaxResults, location_name: "MaxResults"))
+    GetCapacityReservationUsageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetCapacityReservationUsageRequest.struct_class = Types::GetCapacityReservationUsageRequest
+
+    GetCapacityReservationUsageResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetCapacityReservationUsageResult.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
+    GetCapacityReservationUsageResult.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    GetCapacityReservationUsageResult.add_member(:total_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalInstanceCount"))
+    GetCapacityReservationUsageResult.add_member(:available_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "availableInstanceCount"))
+    GetCapacityReservationUsageResult.add_member(:state, Shapes::ShapeRef.new(shape: CapacityReservationState, location_name: "state"))
+    GetCapacityReservationUsageResult.add_member(:instance_usages, Shapes::ShapeRef.new(shape: InstanceUsageSet, location_name: "instanceUsageSet"))
+    GetCapacityReservationUsageResult.struct_class = Types::GetCapacityReservationUsageResult
+
     GetConsoleOutputRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
     GetConsoleOutputRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     GetConsoleOutputRequest.add_member(:latest, Shapes::ShapeRef.new(shape: Boolean, location_name: "Latest"))
@@ -5259,6 +5283,12 @@ module Aws::EC2
     InstanceStatusSummary.struct_class = Types::InstanceStatusSummary
 
     InstanceTypeList.member = Shapes::ShapeRef.new(shape: InstanceType)
+
+    InstanceUsage.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    InstanceUsage.add_member(:used_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "usedInstanceCount"))
+    InstanceUsage.struct_class = Types::InstanceUsage
+
+    InstanceUsageSet.member = Shapes::ShapeRef.new(shape: InstanceUsage, location_name: "item")
 
     InternetGateway.add_member(:attachments, Shapes::ShapeRef.new(shape: InternetGatewayAttachmentList, location_name: "attachmentSet"))
     InternetGateway.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "internetGatewayId"))
@@ -10432,6 +10462,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ExportTransitGatewayRoutesRequest)
         o.output = Shapes::ShapeRef.new(shape: ExportTransitGatewayRoutesResult)
+      end)
+
+      api.add_operation(:get_capacity_reservation_usage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityReservationUsage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityReservationUsageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityReservationUsageResult)
       end)
 
       api.add_operation(:get_console_output, Seahorse::Model::Operation.new.tap do |o|

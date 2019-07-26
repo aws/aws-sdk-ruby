@@ -3249,8 +3249,10 @@ module Aws::EC2
     # @option params [required, String] :instance_platform
     #   The type of operating system for which to reserve capacity.
     #
-    # @option params [required, String] :availability_zone
+    # @option params [String] :availability_zone
     #   The Availability Zone in which to create the Capacity Reservation.
+    #
+    # @option params [String] :availability_zone_id
     #
     # @option params [String] :tenancy
     #   Indicates the tenancy of the Capacity Reservation. A Capacity
@@ -3340,7 +3342,8 @@ module Aws::EC2
     #     client_token: "String",
     #     instance_type: "String", # required
     #     instance_platform: "Linux/UNIX", # required, accepts Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard, Windows with SQL Server Web, Linux with SQL Server Standard, Linux with SQL Server Web, Linux with SQL Server Enterprise
-    #     availability_zone: "String", # required
+    #     availability_zone: "String",
+    #     availability_zone_id: "String",
     #     tenancy: "default", # accepts default, dedicated
     #     instance_count: 1, # required
     #     ebs_optimized: false,
@@ -3365,6 +3368,9 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.capacity_reservation.capacity_reservation_id #=> String
+    #   resp.capacity_reservation.owner_id #=> String
+    #   resp.capacity_reservation.capacity_reservation_arn #=> String
+    #   resp.capacity_reservation.availability_zone_id #=> String
     #   resp.capacity_reservation.instance_type #=> String
     #   resp.capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise"
     #   resp.capacity_reservation.availability_zone #=> String
@@ -11314,6 +11320,9 @@ module Aws::EC2
     #   resp.next_token #=> String
     #   resp.capacity_reservations #=> Array
     #   resp.capacity_reservations[0].capacity_reservation_id #=> String
+    #   resp.capacity_reservations[0].owner_id #=> String
+    #   resp.capacity_reservations[0].capacity_reservation_arn #=> String
+    #   resp.capacity_reservations[0].availability_zone_id #=> String
     #   resp.capacity_reservations[0].instance_type #=> String
     #   resp.capacity_reservations[0].instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise"
     #   resp.capacity_reservations[0].availability_zone #=> String
@@ -23192,6 +23201,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # @option params [required, String] :capacity_reservation_id
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [Boolean] :dry_run
+    #
+    # @return [Types::GetCapacityReservationUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCapacityReservationUsageResult#next_token #next_token} => String
+    #   * {Types::GetCapacityReservationUsageResult#capacity_reservation_id #capacity_reservation_id} => String
+    #   * {Types::GetCapacityReservationUsageResult#instance_type #instance_type} => String
+    #   * {Types::GetCapacityReservationUsageResult#total_instance_count #total_instance_count} => Integer
+    #   * {Types::GetCapacityReservationUsageResult#available_instance_count #available_instance_count} => Integer
+    #   * {Types::GetCapacityReservationUsageResult#state #state} => String
+    #   * {Types::GetCapacityReservationUsageResult#instance_usages #instance_usages} => Array&lt;Types::InstanceUsage&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_capacity_reservation_usage({
+    #     capacity_reservation_id: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.capacity_reservation_id #=> String
+    #   resp.instance_type #=> String
+    #   resp.total_instance_count #=> Integer
+    #   resp.available_instance_count #=> Integer
+    #   resp.state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.instance_usages #=> Array
+    #   resp.instance_usages[0].account_id #=> String
+    #   resp.instance_usages[0].used_instance_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityReservationUsage AWS API Documentation
+    #
+    # @overload get_capacity_reservation_usage(params = {})
+    # @param [Hash] params ({})
+    def get_capacity_reservation_usage(params = {}, options = {})
+      req = build_request(:get_capacity_reservation_usage, params)
+      req.send_request(options)
+    end
+
     # Gets the console output for the specified instance. For Linux
     # instances, the instance console output displays the exact console
     # output that would normally be displayed on a physical monitor attached
@@ -31929,7 +31986,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

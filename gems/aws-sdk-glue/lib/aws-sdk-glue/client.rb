@@ -3434,6 +3434,90 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Returns information on a job bookmark entry.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job in question.
+    #
+    # @option params [String] :run_id
+    #   The unique run identifier associated with this job run.
+    #
+    # @return [Types::GetJobBookmarkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJobBookmarkResponse#job_bookmark_entry #job_bookmark_entry} => Types::JobBookmarkEntry
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_job_bookmark({
+    #     job_name: "JobName", # required
+    #     run_id: "RunId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_bookmark_entry.job_name #=> String
+    #   resp.job_bookmark_entry.version #=> Integer
+    #   resp.job_bookmark_entry.run #=> Integer
+    #   resp.job_bookmark_entry.attempt #=> Integer
+    #   resp.job_bookmark_entry.previous_run_id #=> String
+    #   resp.job_bookmark_entry.run_id #=> String
+    #   resp.job_bookmark_entry.job_bookmark #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobBookmark AWS API Documentation
+    #
+    # @overload get_job_bookmark(params = {})
+    # @param [Hash] params ({})
+    def get_job_bookmark(params = {}, options = {})
+      req = build_request(:get_job_bookmark, params)
+      req.send_request(options)
+    end
+
+    # Returns information on the job bookmark entries. The list is ordered
+    # on decreasing version numbers.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job in question.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the response.
+    #
+    # @option params [Integer] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::GetJobBookmarksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJobBookmarksResponse#job_bookmark_entries #job_bookmark_entries} => Array&lt;Types::JobBookmarkEntry&gt;
+    #   * {Types::GetJobBookmarksResponse#next_token #next_token} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_job_bookmarks({
+    #     job_name: "JobName", # required
+    #     max_results: 1,
+    #     next_token: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_bookmark_entries #=> Array
+    #   resp.job_bookmark_entries[0].job_name #=> String
+    #   resp.job_bookmark_entries[0].version #=> Integer
+    #   resp.job_bookmark_entries[0].run #=> Integer
+    #   resp.job_bookmark_entries[0].attempt #=> Integer
+    #   resp.job_bookmark_entries[0].previous_run_id #=> String
+    #   resp.job_bookmark_entries[0].run_id #=> String
+    #   resp.job_bookmark_entries[0].job_bookmark #=> String
+    #   resp.next_token #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobBookmarks AWS API Documentation
+    #
+    # @overload get_job_bookmarks(params = {})
+    # @param [Hash] params ({})
+    def get_job_bookmarks(params = {}, options = {})
+      req = build_request(:get_job_bookmarks, params)
+      req.send_request(options)
+    end
+
     # Retrieves the metadata for a given job run.
     #
     # @option params [required, String] :job_name
@@ -5557,6 +5641,9 @@ module Aws::Glue
     # @option params [required, String] :job_name
     #   The name of the job in question.
     #
+    # @option params [String] :run_id
+    #   The unique run identifier associated with this job run.
+    #
     # @return [Types::ResetJobBookmarkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ResetJobBookmarkResponse#job_bookmark_entry #job_bookmark_entry} => Types::JobBookmarkEntry
@@ -5565,6 +5652,7 @@ module Aws::Glue
     #
     #   resp = client.reset_job_bookmark({
     #     job_name: "JobName", # required
+    #     run_id: "RunId",
     #   })
     #
     # @example Response structure
@@ -5573,6 +5661,8 @@ module Aws::Glue
     #   resp.job_bookmark_entry.version #=> Integer
     #   resp.job_bookmark_entry.run #=> Integer
     #   resp.job_bookmark_entry.attempt #=> Integer
+    #   resp.job_bookmark_entry.previous_run_id #=> String
+    #   resp.job_bookmark_entry.run_id #=> String
     #   resp.job_bookmark_entry.job_bookmark #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResetJobBookmark AWS API Documentation
@@ -6742,7 +6832,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
