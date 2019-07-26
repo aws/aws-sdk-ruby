@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.322 (2019-07-26)
+------------------
+
 * Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
 
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
