@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
+
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
+
+* Feature - Aws::MediaConnect - Updated the API, and documentation for AWS MediaConnect.
+
 2.11.321 (2019-07-25)
 ------------------
 
