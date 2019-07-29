@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Add `Aws::STS::InvalidIdentityToken` error for retry
+* Issue - Add `Aws::STS::InvalidIdentityToken` and `Aws::Errors::NoSuchEndpointError` error for retry
 
 3.61.1 (2019-07-25)
 ------------------

@@ -193,6 +193,13 @@ module Aws
             expect(inspector(error, 200).networking?).to be(true)
           end
 
+          it 'returns true if the error is wrapped in a NoSuchEndpointError' do
+            req = double('request', endpoint: 'https://example.com')
+            context = double('ctx', http_request: req)
+            error = Errors::NoSuchEndpointError.new(context: context)
+            expect(inspector(error).networking?).to be(true)
+          end
+
         end
 
       end
