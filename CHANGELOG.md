@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.323 (2019-07-29)
+------------------
+
 * Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
 
 2.11.322 (2019-07-26)
