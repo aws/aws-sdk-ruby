@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add `Aws::STS::InvalidIdentityToken` error for retry
+
 3.61.1 (2019-07-25)
 ------------------
 

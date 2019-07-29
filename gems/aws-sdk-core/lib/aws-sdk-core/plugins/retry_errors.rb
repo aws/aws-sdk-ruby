@@ -72,6 +72,7 @@ A delay randomiser function used by the default backoff function. Some predefine
           'UnrecognizedClientException', # json services
           'InvalidAccessKeyId',          # s3
           'AuthFailure',                 # ec2
+          'InvalidIdentityToken',        # sts
         ])
 
         THROTTLING_ERRORS = Set.new([
