@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.61.2 (2019-07-29)
+------------------
+
 * Issue - Add `Aws::STS::InvalidIdentityToken` and `Aws::Errors::NoSuchEndpointError` error for retry
 
 3.61.1 (2019-07-25)

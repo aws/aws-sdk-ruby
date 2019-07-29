@@ -4416,8 +4416,7 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] destination_arn
     #   The ARN of the resource that is the target for a trigger. For
-    #   example, the ARN of a topic in Amazon Simple Notification Service
-    #   (SNS).
+    #   example, the ARN of a topic in Amazon SNS.
     #   @return [String]
     #
     # @!attribute [rw] custom_data
@@ -4429,7 +4428,7 @@ module Aws::CodeCommit
     #   The branches that will be included in the trigger configuration. If
     #   you specify an empty array, the trigger will apply to all branches.
     #
-    #   <note markdown="1"> While no content is required in the array, you must include the
+    #   <note markdown="1"> Although no content is required in the array, you must include the
     #   array itself.
     #
     #    </note>
@@ -4437,8 +4436,7 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] events
     #   The repository events that will cause the trigger to run actions in
-    #   another service, such as sending a notification through Amazon
-    #   Simple Notification Service (SNS).
+    #   another service, such as sending a notification through Amazon SNS.
     #
     #   <note markdown="1"> The valid value "all" cannot be used with any other values.
     #
