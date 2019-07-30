@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.324 (2019-07-30)
+------------------
+
 * Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
 
 * Feature - Aws::Polly - Updated the API, and documentation for Amazon Polly.
