@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-07-30)
+------------------
+
+* Feature - Amazon Polly adds support for Neural text-to-speech engine.
+
 1.25.0 (2019-07-25)
 ------------------
 

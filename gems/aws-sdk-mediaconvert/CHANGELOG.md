@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2019-07-30)
+------------------
+
+* Feature - MediaConvert adds support for specifying priority (-50 to 50) on jobs submitted to on demand or reserved queues
+
 1.32.0 (2019-07-25)
 ------------------
 

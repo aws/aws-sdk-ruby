@@ -327,6 +327,13 @@ module Aws::MediaConvert
     #   When you create a job, you can either specify a job template or
     #   specify the transcoding settings individually
     #
+    # @option params [Integer] :priority
+    #   Specify the relative priority for this job. In any given queue, the
+    #   service begins processing the job with the highest value first. When
+    #   more than one job has the same priority, the service begins processing
+    #   the job that you submitted first. If you don't specify a priority,
+    #   the service uses the default value 0.
+    #
     # @option params [String] :queue
     #   Optional. When you create a job, you can specify a queue to send it
     #   to. If you don't specify, the job will go to the default queue. For
@@ -365,6 +372,7 @@ module Aws::MediaConvert
     #     billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE
     #     client_request_token: "__string",
     #     job_template: "__string",
+    #     priority: 1,
     #     queue: "__string",
     #     role: "__string", # required
     #     settings: { # required
@@ -1241,6 +1249,7 @@ module Aws::MediaConvert
     #   resp.job.output_group_details[0].output_details[0].duration_in_ms #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.height_in_px #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
+    #   resp.job.priority #=> Integer
     #   resp.job.queue #=> String
     #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
@@ -1887,6 +1896,13 @@ module Aws::MediaConvert
     # @option params [required, String] :name
     #   The name of the job template you are creating.
     #
+    # @option params [Integer] :priority
+    #   Specify the relative priority for this job. In any given queue, the
+    #   service begins processing the job with the highest value first. When
+    #   more than one job has the same priority, the service begins processing
+    #   the job that you submitted first. If you don't specify a priority,
+    #   the service uses the default value 0.
+    #
     # @option params [String] :queue
     #   Optional. The queue that jobs created from this template are assigned
     #   to. If you don't specify this, jobs will go to the default queue.
@@ -1919,6 +1935,7 @@ module Aws::MediaConvert
     #     category: "__string",
     #     description: "__string",
     #     name: "__string", # required
+    #     priority: 1,
     #     queue: "__string",
     #     settings: { # required
     #       ad_avail_offset: 1,
@@ -2778,6 +2795,7 @@ module Aws::MediaConvert
     #   resp.job_template.description #=> String
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
+    #   resp.job_template.priority #=> Integer
     #   resp.job_template.queue #=> String
     #   resp.job_template.settings.ad_avail_offset #=> Integer
     #   resp.job_template.settings.avail_blanking.avail_blanking_image #=> String
@@ -4562,6 +4580,7 @@ module Aws::MediaConvert
     #   resp.job.output_group_details[0].output_details[0].duration_in_ms #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.height_in_px #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
+    #   resp.job.priority #=> Integer
     #   resp.job.queue #=> String
     #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
@@ -5213,6 +5232,7 @@ module Aws::MediaConvert
     #   resp.job_template.description #=> String
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
+    #   resp.job_template.priority #=> Integer
     #   resp.job_template.queue #=> String
     #   resp.job_template.settings.ad_avail_offset #=> Integer
     #   resp.job_template.settings.avail_blanking.avail_blanking_image #=> String
@@ -6339,6 +6359,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].description #=> String
     #   resp.job_templates[0].last_updated #=> Time
     #   resp.job_templates[0].name #=> String
+    #   resp.job_templates[0].priority #=> Integer
     #   resp.job_templates[0].queue #=> String
     #   resp.job_templates[0].settings.ad_avail_offset #=> Integer
     #   resp.job_templates[0].settings.avail_blanking.avail_blanking_image #=> String
@@ -7012,6 +7033,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].output_group_details[0].output_details[0].duration_in_ms #=> Integer
     #   resp.jobs[0].output_group_details[0].output_details[0].video_details.height_in_px #=> Integer
     #   resp.jobs[0].output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
+    #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].queue #=> String
     #   resp.jobs[0].retry_count #=> Integer
     #   resp.jobs[0].role #=> String
@@ -8262,6 +8284,13 @@ module Aws::MediaConvert
     # @option params [required, String] :name
     #   The name of the job template you are modifying
     #
+    # @option params [Integer] :priority
+    #   Specify the relative priority for this job. In any given queue, the
+    #   service begins processing the job with the highest value first. When
+    #   more than one job has the same priority, the service begins processing
+    #   the job that you submitted first. If you don't specify a priority,
+    #   the service uses the default value 0.
+    #
     # @option params [String] :queue
     #   The new queue for the job template, if you are changing it.
     #
@@ -8289,6 +8318,7 @@ module Aws::MediaConvert
     #     category: "__string",
     #     description: "__string",
     #     name: "__string", # required
+    #     priority: 1,
     #     queue: "__string",
     #     settings: {
     #       ad_avail_offset: 1,
@@ -9145,6 +9175,7 @@ module Aws::MediaConvert
     #   resp.job_template.description #=> String
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
+    #   resp.job_template.priority #=> Integer
     #   resp.job_template.queue #=> String
     #   resp.job_template.settings.ad_avail_offset #=> Integer
     #   resp.job_template.settings.avail_blanking.avail_blanking_image #=> String
@@ -10757,7 +10788,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

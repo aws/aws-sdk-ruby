@@ -2057,6 +2057,7 @@ module Aws::MediaConvert
     #         billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE
     #         client_request_token: "__string",
     #         job_template: "__string",
+    #         priority: 1,
     #         queue: "__string",
     #         role: "__string", # required
     #         settings: { # required
@@ -2942,6 +2943,14 @@ module Aws::MediaConvert
     #   specify the transcoding settings individually
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   Specify the relative priority for this job. In any given queue, the
+    #   service begins processing the job with the highest value first. When
+    #   more than one job has the same priority, the service begins
+    #   processing the job that you submitted first. If you don't specify a
+    #   priority, the service uses the default value 0.
+    #   @return [Integer]
+    #
     # @!attribute [rw] queue
     #   Optional. When you create a job, you can specify a queue to send it
     #   to. If you don't specify, the job will go to the default queue. For
@@ -2979,6 +2988,7 @@ module Aws::MediaConvert
       :billing_tags_source,
       :client_request_token,
       :job_template,
+      :priority,
       :queue,
       :role,
       :settings,
@@ -3017,6 +3027,7 @@ module Aws::MediaConvert
     #         category: "__string",
     #         description: "__string",
     #         name: "__string", # required
+    #         priority: 1,
     #         queue: "__string",
     #         settings: { # required
     #           ad_avail_offset: 1,
@@ -3886,6 +3897,14 @@ module Aws::MediaConvert
     #   The name of the job template you are creating.
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   Specify the relative priority for this job. In any given queue, the
+    #   service begins processing the job with the highest value first. When
+    #   more than one job has the same priority, the service begins
+    #   processing the job that you submitted first. If you don't specify a
+    #   priority, the service uses the default value 0.
+    #   @return [Integer]
+    #
     # @!attribute [rw] queue
     #   Optional. The queue that jobs created from this template are
     #   assigned to. If you don't specify this, jobs will go to the default
@@ -3917,6 +3936,7 @@ module Aws::MediaConvert
       :category,
       :description,
       :name,
+      :priority,
       :queue,
       :settings,
       :status_update_interval,
@@ -8351,6 +8371,10 @@ module Aws::MediaConvert
     #   List of output group details
     #   @return [Array<Types::OutputGroupDetail>]
     #
+    # @!attribute [rw] priority
+    #   Relative priority on the job.
+    #   @return [Integer]
+    #
     # @!attribute [rw] queue
     #   Optional. When you create a job, you can specify a queue to send it
     #   to. If you don't specify, the job will go to the default queue. For
@@ -8410,6 +8434,7 @@ module Aws::MediaConvert
       :job_percent_complete,
       :job_template,
       :output_group_details,
+      :priority,
       :queue,
       :retry_count,
       :role,
@@ -9390,6 +9415,10 @@ module Aws::MediaConvert
     #   within your account.
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   Relative priority on the job.
+    #   @return [Integer]
+    #
     # @!attribute [rw] queue
     #   Optional. The queue that jobs created from this template are
     #   assigned to. If you don't specify this, jobs will go to the default
@@ -9424,6 +9453,7 @@ module Aws::MediaConvert
       :description,
       :last_updated,
       :name,
+      :priority,
       :queue,
       :settings,
       :status_update_interval,
@@ -15093,6 +15123,7 @@ module Aws::MediaConvert
     #         category: "__string",
     #         description: "__string",
     #         name: "__string", # required
+    #         priority: 1,
     #         queue: "__string",
     #         settings: {
     #           ad_avail_offset: 1,
@@ -15959,6 +15990,14 @@ module Aws::MediaConvert
     #   The name of the job template you are modifying
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   Specify the relative priority for this job. In any given queue, the
+    #   service begins processing the job with the highest value first. When
+    #   more than one job has the same priority, the service begins
+    #   processing the job that you submitted first. If you don't specify a
+    #   priority, the service uses the default value 0.
+    #   @return [Integer]
+    #
     # @!attribute [rw] queue
     #   The new queue for the job template, if you are changing it.
     #   @return [String]
@@ -15983,6 +16022,7 @@ module Aws::MediaConvert
       :category,
       :description,
       :name,
+      :priority,
       :queue,
       :settings,
       :status_update_interval)

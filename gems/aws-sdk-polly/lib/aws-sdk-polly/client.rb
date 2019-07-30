@@ -263,7 +263,7 @@ module Aws::Polly
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
+    # [1]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
     #
     # @option params [required, String] :name
     #   The name of the lexicon to delete. Must be an existing lexicon in the
@@ -319,6 +319,10 @@ module Aws::Polly
     #
     # This operation requires permissions to perform the
     # `polly:DescribeVoices` action.
+    #
+    # @option params [String] :engine
+    #   Specifies the engine (`standard` or `neural`) used by Amazon Polly
+    #   when processing input text for speech synthesis.
     #
     # @option params [String] :language_code
     #   The language identification tag (ISO 639 code for the language
@@ -383,6 +387,7 @@ module Aws::Polly
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_voices({
+    #     engine: "standard", # accepts standard, neural
     #     language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #     include_additional_language_codes: false,
     #     next_token: "NextToken",
@@ -398,6 +403,8 @@ module Aws::Polly
     #   resp.voices[0].name #=> String
     #   resp.voices[0].additional_language_codes #=> Array
     #   resp.voices[0].additional_language_codes[0] #=> String, one of "arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR"
+    #   resp.voices[0].supported_engines #=> Array
+    #   resp.voices[0].supported_engines[0] #=> String, one of "standard", "neural"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoices AWS API Documentation
@@ -414,7 +421,7 @@ module Aws::Polly
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
+    # [1]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
     #
     # @option params [required, String] :name
     #   Name of the lexicon.
@@ -495,6 +502,7 @@ module Aws::Polly
     #
     # @example Response structure
     #
+    #   resp.synthesis_task.engine #=> String, one of "standard", "neural"
     #   resp.synthesis_task.task_id #=> String
     #   resp.synthesis_task.task_status #=> String, one of "scheduled", "inProgress", "completed", "failed"
     #   resp.synthesis_task.task_status_reason #=> String
@@ -526,7 +534,7 @@ module Aws::Polly
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
+    # [1]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
     #
     # @option params [String] :next_token
     #   An opaque pagination token returned from previous `ListLexicons`
@@ -621,6 +629,7 @@ module Aws::Polly
     #
     #   resp.next_token #=> String
     #   resp.synthesis_tasks #=> Array
+    #   resp.synthesis_tasks[0].engine #=> String, one of "standard", "neural"
     #   resp.synthesis_tasks[0].task_id #=> String
     #   resp.synthesis_tasks[0].task_status #=> String, one of "scheduled", "inProgress", "completed", "failed"
     #   resp.synthesis_tasks[0].task_status_reason #=> String
@@ -657,7 +666,7 @@ module Aws::Polly
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
+    # [1]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
     #
     # @option params [required, String] :name
     #   Name of the lexicon. The name must follow the regular express format
@@ -708,6 +717,27 @@ module Aws::Polly
     # SpeechSynthesisTask object, which will include an identifier of this
     # task as well as the current status.
     #
+    # @option params [String] :engine
+    #   Specifies the engine (`standard` or `neural`) for Amazon Polly to use
+    #   when processing input text for speech synthesis. Using a voice that is
+    #   not supported for the engine selected will result in an error.
+    #
+    # @option params [String] :language_code
+    #   Optional language code for the Speech Synthesis request. This is only
+    #   necessary if using a bilingual voice, such as Aditi, which can be used
+    #   for either Indian English (en-IN) or Hindi (hi-IN).
+    #
+    #   If a bilingual voice is used and no language code is specified, Amazon
+    #   Polly will use the default language of the bilingual voice. The
+    #   default language for any voice is the one returned by the
+    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
+    #   example, if no language code is specified, Aditi will use Indian
+    #   English rather than Hindi.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+    #
     # @option params [Array<String>] :lexicon_names
     #   List of one or more pronunciation lexicon names you want the service
     #   to apply during synthesis. Lexicons are applied only if the language
@@ -727,8 +757,9 @@ module Aws::Polly
     # @option params [String] :sample_rate
     #   The audio frequency specified in Hz.
     #
-    #   The valid values for mp3 and ogg\_vorbis are "8000", "16000", and
-    #   "22050". The default value is "22050".
+    #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
+    #   "22050", and "24000". The default value for standard voices is
+    #   "22050". The default value for neural voices is "24000".
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
@@ -751,22 +782,6 @@ module Aws::Polly
     # @option params [required, String] :voice_id
     #   Voice ID to use for the synthesis.
     #
-    # @option params [String] :language_code
-    #   Optional language code for the Speech Synthesis request. This is only
-    #   necessary if using a bilingual voice, such as Aditi, which can be used
-    #   for either Indian English (en-IN) or Hindi (hi-IN).
-    #
-    #   If a bilingual voice is used and no language code is specified, Amazon
-    #   Polly will use the default language of the bilingual voice. The
-    #   default language for any voice is the one returned by the
-    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
-    #   example, if no language code is specified, Aditi will use Indian
-    #   English rather than Hindi.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
-    #
     # @return [Types::StartSpeechSynthesisTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartSpeechSynthesisTaskOutput#synthesis_task #synthesis_task} => Types::SynthesisTask
@@ -774,6 +789,8 @@ module Aws::Polly
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_speech_synthesis_task({
+    #     engine: "standard", # accepts standard, neural
+    #     language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #     lexicon_names: ["LexiconName"],
     #     output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
     #     output_s3_bucket_name: "OutputS3BucketName", # required
@@ -784,11 +801,11 @@ module Aws::Polly
     #     text: "Text", # required
     #     text_type: "ssml", # accepts ssml, text
     #     voice_id: "Aditi", # required, accepts Aditi, Amy, Astrid, Bianca, Brian, Carla, Carmen, Celine, Chantal, Conchita, Cristiano, Dora, Emma, Enrique, Ewa, Filiz, Geraint, Giorgio, Gwyneth, Hans, Ines, Ivy, Jacek, Jan, Joanna, Joey, Justin, Karl, Kendra, Kimberly, Lea, Liv, Lotte, Lucia, Mads, Maja, Marlene, Mathieu, Matthew, Maxim, Mia, Miguel, Mizuki, Naja, Nicole, Penelope, Raveena, Ricardo, Ruben, Russell, Salli, Seoyeon, Takumi, Tatyana, Vicki, Vitoria, Zeina, Zhiyu
-    #     language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #   })
     #
     # @example Response structure
     #
+    #   resp.synthesis_task.engine #=> String, one of "standard", "neural"
     #   resp.synthesis_task.task_id #=> String
     #   resp.synthesis_task.task_status #=> String, one of "scheduled", "inProgress", "completed", "failed"
     #   resp.synthesis_task.task_status_reason #=> String
@@ -823,7 +840,28 @@ module Aws::Polly
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html
+    # [1]: https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html
+    #
+    # @option params [String] :engine
+    #   Specifies the engine (`standard` or `neural`) for Amazon Polly to use
+    #   when processing input text for speech synthesis. Using a voice that is
+    #   not supported for the engine selected will result in an error.
+    #
+    # @option params [String] :language_code
+    #   Optional language code for the Synthesize Speech request. This is only
+    #   necessary if using a bilingual voice, such as Aditi, which can be used
+    #   for either Indian English (en-IN) or Hindi (hi-IN).
+    #
+    #   If a bilingual voice is used and no language code is specified, Amazon
+    #   Polly will use the default language of the bilingual voice. The
+    #   default language for any voice is the one returned by the
+    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
+    #   example, if no language code is specified, Aditi will use Indian
+    #   English rather than Hindi.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
     #
     # @option params [Array<String>] :lexicon_names
     #   List of one or more pronunciation lexicon names you want the service
@@ -833,7 +871,7 @@ module Aws::Polly
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html
     #
     # @option params [required, String] :output_format
     #   The format in which the returned output will be encoded. For audio
@@ -846,10 +884,11 @@ module Aws::Polly
     # @option params [String] :sample_rate
     #   The audio frequency specified in Hz.
     #
-    #   The valid values for `mp3` and `ogg_vorbis` are "8000", "16000",
-    #   and "22050". The default value is "22050".
+    #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
+    #   "22050", and "24000". The default value for standard voices is
+    #   "22050". The default value for neural voices is "24000".
     #
-    #   Valid values for `pcm` are "8000" and "16000" The default value is
+    #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
     #
     # @option params [Array<String>] :speech_mark_types
@@ -865,27 +904,11 @@ module Aws::Polly
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/ssml.html
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/ssml.html
     #
     # @option params [required, String] :voice_id
     #   Voice ID to use for the synthesis. You can get a list of available
     #   voice IDs by calling the [DescribeVoices][1] operation.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
-    #
-    # @option params [String] :language_code
-    #   Optional language code for the Synthesize Speech request. This is only
-    #   necessary if using a bilingual voice, such as Aditi, which can be used
-    #   for either Indian English (en-IN) or Hindi (hi-IN).
-    #
-    #   If a bilingual voice is used and no language code is specified, Amazon
-    #   Polly will use the default language of the bilingual voice. The
-    #   default language for any voice is the one returned by the
-    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
-    #   example, if no language code is specified, Aditi will use Indian
-    #   English rather than Hindi.
     #
     #
     #
@@ -923,6 +946,8 @@ module Aws::Polly
     # @example Request syntax with placeholder values
     #
     #   resp = client.synthesize_speech({
+    #     engine: "standard", # accepts standard, neural
+    #     language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #     lexicon_names: ["LexiconName"],
     #     output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
     #     sample_rate: "SampleRate",
@@ -930,7 +955,6 @@ module Aws::Polly
     #     text: "Text", # required
     #     text_type: "ssml", # accepts ssml, text
     #     voice_id: "Aditi", # required, accepts Aditi, Amy, Astrid, Bianca, Brian, Carla, Carmen, Celine, Chantal, Conchita, Cristiano, Dora, Emma, Enrique, Ewa, Filiz, Geraint, Giorgio, Gwyneth, Hans, Ines, Ivy, Jacek, Jan, Joanna, Joey, Justin, Karl, Kendra, Kimberly, Lea, Liv, Lotte, Lucia, Mads, Maja, Marlene, Mathieu, Matthew, Maxim, Mia, Miguel, Mizuki, Naja, Nicole, Penelope, Raveena, Ricardo, Ruben, Russell, Salli, Seoyeon, Takumi, Tatyana, Vicki, Vitoria, Zeina, Zhiyu
-    #     language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #   })
     #
     # @example Response structure
@@ -961,7 +985,7 @@ module Aws::Polly
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
