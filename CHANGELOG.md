@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::STS - Updated the documentation for AWS Security Token Service.
+
 2.11.324 (2019-07-30)
 ------------------
 
