@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
 2.11.325 (2019-08-02)
 ------------------
 
