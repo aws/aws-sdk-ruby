@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2019-08-05)
+------------------
+
+* Feature - Amazon EC2 now supports a new Spot allocation strategy "Capacity-optimized" that fulfills your request using Spot Instance pools that are optimally chosen based on the available Spot capacity.
+
 1.102.0 (2019-07-26)
 ------------------
 

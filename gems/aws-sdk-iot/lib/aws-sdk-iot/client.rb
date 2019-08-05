@@ -459,8 +459,8 @@ module Aws::IoT
     end
 
     # Associates a Device Defender security profile with a thing group or
-    # with this account. Each thing group or account can have up to five
-    # security profiles associated with it.
+    # this account. Each thing group or account can have up to five security
+    # profiles associated with it.
     #
     # @option params [required, String] :security_profile_name
     #   The security profile that is attached.
@@ -508,6 +508,27 @@ module Aws::IoT
     # @param [Hash] params ({})
     def attach_thing_principal(params = {}, options = {})
       req = build_request(:attach_thing_principal, params)
+      req.send_request(options)
+    end
+
+    # Cancels a mitigation action task that is in progress. If the task is
+    # not in progress, an InvalidRequestException occurs.
+    #
+    # @option params [required, String] :task_id
+    #   The unique identifier for the task that you want to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_audit_mitigation_actions_task({
+    #     task_id: "AuditMitigationActionsTaskId", # required
+    #   })
+    #
+    # @overload cancel_audit_mitigation_actions_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_audit_mitigation_actions_task(params = {}, options = {})
+      req = build_request(:cancel_audit_mitigation_actions_task, params)
       req.send_request(options)
     end
 
@@ -1097,6 +1118,75 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Defines an action that can be applied to audit findings by using
+    # StartAuditMitigationActionsTask. Each mitigation action can apply only
+    # one type of change.
+    #
+    # @option params [required, String] :action_name
+    #   A friendly name for the action. Choose a friendly name that accurately
+    #   describes the action (for example, `EnableLoggingAction`).
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the IAM role that is used to apply the mitigation action.
+    #
+    # @option params [required, Types::MitigationActionParams] :action_params
+    #   Defines the type of action and the parameters for that action.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata that can be used to manage the mitigation action.
+    #
+    # @return [Types::CreateMitigationActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMitigationActionResponse#action_arn #action_arn} => String
+    #   * {Types::CreateMitigationActionResponse#action_id #action_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_mitigation_action({
+    #     action_name: "MitigationActionName", # required
+    #     role_arn: "RoleArn", # required
+    #     action_params: { # required
+    #       update_device_certificate_params: {
+    #         action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #       },
+    #       update_ca_certificate_params: {
+    #         action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #       },
+    #       add_things_to_thing_group_params: {
+    #         thing_group_names: ["ThingGroupName"], # required
+    #         override_dynamic_groups: false,
+    #       },
+    #       replace_default_policy_version_params: {
+    #         template_name: "BLANK_POLICY", # required, accepts BLANK_POLICY
+    #       },
+    #       enable_io_t_logging_params: {
+    #         role_arn_for_logging: "RoleArn", # required
+    #         log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #       },
+    #       publish_finding_to_sns_params: {
+    #         topic_arn: "SnsTopicArn", # required
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_arn #=> String
+    #   resp.action_id #=> String
+    #
+    # @overload create_mitigation_action(params = {})
+    # @param [Hash] params ({})
+    def create_mitigation_action(params = {}, options = {})
+      req = build_request(:create_mitigation_action, params)
+      req.send_request(options)
+    end
+
     # Creates an AWS IoT OTAUpdate on a target group of things or groups.
     #
     # @option params [required, String] :ota_update_id
@@ -1361,8 +1451,8 @@ module Aws::IoT
     #
     # @option params [required, String] :frequency
     #   How often the scheduled audit takes place. Can be one of "DAILY",
-    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each
-    #   audit is determined by the system.
+    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each audit
+    #   is determined by the system.
     #
     # @option params [String] :day_of_month
     #   The day of the month on which the scheduled audit takes place. Can be
@@ -1373,21 +1463,21 @@ module Aws::IoT
     #
     # @option params [String] :day_of_week
     #   The day of the week on which the scheduled audit takes place. Can be
-    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or
+    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or
     #   "SAT". This field is required if the "frequency" parameter is set
     #   to "WEEKLY" or "BIWEEKLY".
     #
     # @option params [required, Array<String>] :target_check_names
     #   Which checks are performed during the scheduled audit. Checks must be
     #   enabled for your account. (Use `DescribeAccountAuditConfiguration` to
-    #   see the list of all checks including those that are enabled or
+    #   see the list of all checks, including those that are enabled or use
     #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   Metadata which can be used to manage the scheduled audit.
     #
     # @option params [required, String] :scheduled_audit_name
     #   The name you want to give to the scheduled audit. (Max. 128 chars)
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata that can be used to manage the scheduled audit.
     #
     # @return [Types::CreateScheduledAuditResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1400,13 +1490,13 @@ module Aws::IoT
     #     day_of_month: "DayOfMonth",
     #     day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
     #     target_check_names: ["AuditCheckName"], # required
+    #     scheduled_audit_name: "ScheduledAuditName", # required
     #     tags: [
     #       {
     #         key: "TagKey",
     #         value: "TagValue",
     #       },
     #     ],
-    #     scheduled_audit_name: "ScheduledAuditName", # required
     #   })
     #
     # @example Response structure
@@ -1439,11 +1529,11 @@ module Aws::IoT
     #
     # @option params [Array<String>] :additional_metrics_to_retain
     #   A list of metrics whose data is retained (stored). By default, data is
-    #   retained for any metric used in the profile's `behaviors` but it is
+    #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Metadata which can be used to manage the security profile.
+    #   Metadata that can be used to manage the security profile.
     #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2072,17 +2162,19 @@ module Aws::IoT
 
     # Deletes the specified certificate.
     #
-    # A certificate cannot be deleted if it has a policy attached to it or
-    # if its status is set to ACTIVE. To delete a certificate, first use the
-    # DetachPrincipalPolicy API to detach all policies. Next, use the
-    # UpdateCertificate API to set the certificate to the INACTIVE status.
+    # A certificate cannot be deleted if it has a policy or IoT thing
+    # attached to it or if its status is set to ACTIVE. To delete a
+    # certificate, first use the DetachPrincipalPolicy API to detach all
+    # policies. Next, use the UpdateCertificate API to set the certificate
+    # to the INACTIVE status.
     #
     # @option params [required, String] :certificate_id
     #   The ID of the certificate. (The last part of the certificate ARN
     #   contains the certificate ID.)
     #
     # @option params [Boolean] :force_delete
-    #   Forces a certificate request to be deleted.
+    #   Forces the deletion of a certificate if it is inactive and is not
+    #   attached to an IoT thing.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2217,6 +2309,26 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_job_execution(params = {}, options = {})
       req = build_request(:delete_job_execution, params)
+      req.send_request(options)
+    end
+
+    # Deletes a defined mitigation action from your AWS account.
+    #
+    # @option params [required, String] :action_name
+    #   The name of the mitigation action that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_mitigation_action({
+    #     action_name: "MitigationActionName", # required
+    #   })
+    #
+    # @overload delete_mitigation_action(params = {})
+    # @param [Hash] params ({})
+    def delete_mitigation_action(params = {}, options = {})
+      req = build_request(:delete_mitigation_action, params)
       req.send_request(options)
     end
 
@@ -2368,7 +2480,7 @@ module Aws::IoT
     # @option params [Integer] :expected_version
     #   The expected version of the security profile. A new version is
     #   generated whenever the security profile is updated. If you specify a
-    #   value that is different than the actual version, a
+    #   value that is different from the actual version, a
     #   `VersionConflictException` is thrown.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2580,6 +2692,128 @@ module Aws::IoT
     # @param [Hash] params ({})
     def describe_account_audit_configuration(params = {}, options = {})
       req = build_request(:describe_account_audit_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a single audit finding. Properties include the
+    # reason for noncompliance, the severity of the issue, and when the
+    # audit that returned the finding was started.
+    #
+    # @option params [required, String] :finding_id
+    #   A unique identifier for a single audit finding. You can use this
+    #   identifier to apply mitigation actions to the finding.
+    #
+    # @return [Types::DescribeAuditFindingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAuditFindingResponse#finding #finding} => Types::AuditFinding
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_audit_finding({
+    #     finding_id: "FindingId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.finding.finding_id #=> String
+    #   resp.finding.task_id #=> String
+    #   resp.finding.check_name #=> String
+    #   resp.finding.task_start_time #=> Time
+    #   resp.finding.finding_time #=> Time
+    #   resp.finding.severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
+    #   resp.finding.non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS"
+    #   resp.finding.non_compliant_resource.resource_identifier.device_certificate_id #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.ca_certificate_id #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.cognito_identity_pool_id #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.client_id #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.policy_version_identifier.policy_name #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.policy_version_identifier.policy_version_id #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.account #=> String
+    #   resp.finding.non_compliant_resource.additional_info #=> Hash
+    #   resp.finding.non_compliant_resource.additional_info["String"] #=> String
+    #   resp.finding.related_resources #=> Array
+    #   resp.finding.related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS"
+    #   resp.finding.related_resources[0].resource_identifier.device_certificate_id #=> String
+    #   resp.finding.related_resources[0].resource_identifier.ca_certificate_id #=> String
+    #   resp.finding.related_resources[0].resource_identifier.cognito_identity_pool_id #=> String
+    #   resp.finding.related_resources[0].resource_identifier.client_id #=> String
+    #   resp.finding.related_resources[0].resource_identifier.policy_version_identifier.policy_name #=> String
+    #   resp.finding.related_resources[0].resource_identifier.policy_version_identifier.policy_version_id #=> String
+    #   resp.finding.related_resources[0].resource_identifier.account #=> String
+    #   resp.finding.related_resources[0].additional_info #=> Hash
+    #   resp.finding.related_resources[0].additional_info["String"] #=> String
+    #   resp.finding.reason_for_non_compliance #=> String
+    #   resp.finding.reason_for_non_compliance_code #=> String
+    #
+    # @overload describe_audit_finding(params = {})
+    # @param [Hash] params ({})
+    def describe_audit_finding(params = {}, options = {})
+      req = build_request(:describe_audit_finding, params)
+      req.send_request(options)
+    end
+
+    # Gets information about an audit mitigation task that is used to apply
+    # mitigation actions to a set of audit findings. Properties include the
+    # actions being applied, the audit checks to which they're being
+    # applied, the task status, and aggregated task statistics.
+    #
+    # @option params [required, String] :task_id
+    #   The unique identifier for the audit mitigation task.
+    #
+    # @return [Types::DescribeAuditMitigationActionsTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAuditMitigationActionsTaskResponse#task_status #task_status} => String
+    #   * {Types::DescribeAuditMitigationActionsTaskResponse#start_time #start_time} => Time
+    #   * {Types::DescribeAuditMitigationActionsTaskResponse#end_time #end_time} => Time
+    #   * {Types::DescribeAuditMitigationActionsTaskResponse#task_statistics #task_statistics} => Hash&lt;String,Types::TaskStatisticsForAuditCheck&gt;
+    #   * {Types::DescribeAuditMitigationActionsTaskResponse#target #target} => Types::AuditMitigationActionsTaskTarget
+    #   * {Types::DescribeAuditMitigationActionsTaskResponse#audit_check_to_actions_mapping #audit_check_to_actions_mapping} => Hash&lt;String,Array&lt;String&gt;&gt;
+    #   * {Types::DescribeAuditMitigationActionsTaskResponse#actions_definition #actions_definition} => Array&lt;Types::MitigationAction&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_audit_mitigation_actions_task({
+    #     task_id: "AuditMitigationActionsTaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELED"
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.task_statistics #=> Hash
+    #   resp.task_statistics["AuditCheckName"].total_findings_count #=> Integer
+    #   resp.task_statistics["AuditCheckName"].failed_findings_count #=> Integer
+    #   resp.task_statistics["AuditCheckName"].succeeded_findings_count #=> Integer
+    #   resp.task_statistics["AuditCheckName"].skipped_findings_count #=> Integer
+    #   resp.task_statistics["AuditCheckName"].canceled_findings_count #=> Integer
+    #   resp.target.audit_task_id #=> String
+    #   resp.target.finding_ids #=> Array
+    #   resp.target.finding_ids[0] #=> String
+    #   resp.target.audit_check_to_reason_code_filter #=> Hash
+    #   resp.target.audit_check_to_reason_code_filter["AuditCheckName"] #=> Array
+    #   resp.target.audit_check_to_reason_code_filter["AuditCheckName"][0] #=> String
+    #   resp.audit_check_to_actions_mapping #=> Hash
+    #   resp.audit_check_to_actions_mapping["AuditCheckName"] #=> Array
+    #   resp.audit_check_to_actions_mapping["AuditCheckName"][0] #=> String
+    #   resp.actions_definition #=> Array
+    #   resp.actions_definition[0].name #=> String
+    #   resp.actions_definition[0].id #=> String
+    #   resp.actions_definition[0].role_arn #=> String
+    #   resp.actions_definition[0].action_params.update_device_certificate_params.action #=> String, one of "DEACTIVATE"
+    #   resp.actions_definition[0].action_params.update_ca_certificate_params.action #=> String, one of "DEACTIVATE"
+    #   resp.actions_definition[0].action_params.add_things_to_thing_group_params.thing_group_names #=> Array
+    #   resp.actions_definition[0].action_params.add_things_to_thing_group_params.thing_group_names[0] #=> String
+    #   resp.actions_definition[0].action_params.add_things_to_thing_group_params.override_dynamic_groups #=> Boolean
+    #   resp.actions_definition[0].action_params.replace_default_policy_version_params.template_name #=> String, one of "BLANK_POLICY"
+    #   resp.actions_definition[0].action_params.enable_io_t_logging_params.role_arn_for_logging #=> String
+    #   resp.actions_definition[0].action_params.enable_io_t_logging_params.log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
+    #   resp.actions_definition[0].action_params.publish_finding_to_sns_params.topic_arn #=> String
+    #
+    # @overload describe_audit_mitigation_actions_task(params = {})
+    # @param [Hash] params ({})
+    def describe_audit_mitigation_actions_task(params = {}, options = {})
+      req = build_request(:describe_audit_mitigation_actions_task, params)
       req.send_request(options)
     end
 
@@ -3014,6 +3248,54 @@ module Aws::IoT
     # @param [Hash] params ({})
     def describe_job_execution(params = {}, options = {})
       req = build_request(:describe_job_execution, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a mitigation action.
+    #
+    # @option params [required, String] :action_name
+    #   The friendly name that uniquely identifies the mitigation action.
+    #
+    # @return [Types::DescribeMitigationActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMitigationActionResponse#action_name #action_name} => String
+    #   * {Types::DescribeMitigationActionResponse#action_type #action_type} => String
+    #   * {Types::DescribeMitigationActionResponse#action_arn #action_arn} => String
+    #   * {Types::DescribeMitigationActionResponse#action_id #action_id} => String
+    #   * {Types::DescribeMitigationActionResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeMitigationActionResponse#action_params #action_params} => Types::MitigationActionParams
+    #   * {Types::DescribeMitigationActionResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeMitigationActionResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_mitigation_action({
+    #     action_name: "MitigationActionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_name #=> String
+    #   resp.action_type #=> String, one of "UPDATE_DEVICE_CERTIFICATE", "UPDATE_CA_CERTIFICATE", "ADD_THINGS_TO_THING_GROUP", "REPLACE_DEFAULT_POLICY_VERSION", "ENABLE_IOT_LOGGING", "PUBLISH_FINDING_TO_SNS"
+    #   resp.action_arn #=> String
+    #   resp.action_id #=> String
+    #   resp.role_arn #=> String
+    #   resp.action_params.update_device_certificate_params.action #=> String, one of "DEACTIVATE"
+    #   resp.action_params.update_ca_certificate_params.action #=> String, one of "DEACTIVATE"
+    #   resp.action_params.add_things_to_thing_group_params.thing_group_names #=> Array
+    #   resp.action_params.add_things_to_thing_group_params.thing_group_names[0] #=> String
+    #   resp.action_params.add_things_to_thing_group_params.override_dynamic_groups #=> Boolean
+    #   resp.action_params.replace_default_policy_version_params.template_name #=> String, one of "BLANK_POLICY"
+    #   resp.action_params.enable_io_t_logging_params.role_arn_for_logging #=> String
+    #   resp.action_params.enable_io_t_logging_params.log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
+    #   resp.action_params.publish_finding_to_sns_params.topic_arn #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload describe_mitigation_action(params = {})
+    # @param [Hash] params ({})
+    def describe_mitigation_action(params = {}, options = {})
+      req = build_request(:describe_mitigation_action, params)
       req.send_request(options)
     end
 
@@ -4013,7 +4295,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_active_violations({
-    #     thing_name: "ThingName",
+    #     thing_name: "DeviceDefenderThingName",
     #     security_profile_name: "SecurityProfileName",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -4108,7 +4390,7 @@ module Aws::IoT
     #   check.
     #
     # @option params [Types::ResourceIdentifier] :resource_identifier
-    #   Information identifying the non-compliant resource.
+    #   Information identifying the noncompliant resource.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time. The default is
@@ -4157,6 +4439,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.findings #=> Array
+    #   resp.findings[0].finding_id #=> String
     #   resp.findings[0].task_id #=> String
     #   resp.findings[0].check_name #=> String
     #   resp.findings[0].task_start_time #=> Time
@@ -4194,13 +4477,131 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Gets the status of audit mitigation action tasks that were executed.
+    #
+    # @option params [required, String] :task_id
+    #   Specify this filter to limit results to actions for a specific audit
+    #   mitigation actions task.
+    #
+    # @option params [String] :action_status
+    #   Specify this filter to limit results to those with a specific status.
+    #
+    # @option params [required, String] :finding_id
+    #   Specify this filter to limit results to those that were applied to a
+    #   specific audit finding.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::ListAuditMitigationActionsExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAuditMitigationActionsExecutionsResponse#actions_executions #actions_executions} => Array&lt;Types::AuditMitigationActionExecutionMetadata&gt;
+    #   * {Types::ListAuditMitigationActionsExecutionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_audit_mitigation_actions_executions({
+    #     task_id: "AuditMitigationActionsTaskId", # required
+    #     action_status: "IN_PROGRESS", # accepts IN_PROGRESS, COMPLETED, FAILED, CANCELED, SKIPPED, PENDING
+    #     finding_id: "FindingId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.actions_executions #=> Array
+    #   resp.actions_executions[0].task_id #=> String
+    #   resp.actions_executions[0].finding_id #=> String
+    #   resp.actions_executions[0].action_name #=> String
+    #   resp.actions_executions[0].action_id #=> String
+    #   resp.actions_executions[0].status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELED", "SKIPPED", "PENDING"
+    #   resp.actions_executions[0].start_time #=> Time
+    #   resp.actions_executions[0].end_time #=> Time
+    #   resp.actions_executions[0].error_code #=> String
+    #   resp.actions_executions[0].message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_audit_mitigation_actions_executions(params = {})
+    # @param [Hash] params ({})
+    def list_audit_mitigation_actions_executions(params = {}, options = {})
+      req = build_request(:list_audit_mitigation_actions_executions, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of audit mitigation action tasks that match the specified
+    # filters.
+    #
+    # @option params [String] :audit_task_id
+    #   Specify this filter to limit results to tasks that were applied to
+    #   results for a specific audit.
+    #
+    # @option params [String] :finding_id
+    #   Specify this filter to limit results to tasks that were applied to a
+    #   specific audit finding.
+    #
+    # @option params [String] :task_status
+    #   Specify this filter to limit results to tasks that are in a specific
+    #   state.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   Specify this filter to limit results to tasks that began on or after a
+    #   specific date and time.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   Specify this filter to limit results to tasks that were completed or
+    #   canceled on or before a specific date and time.
+    #
+    # @return [Types::ListAuditMitigationActionsTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAuditMitigationActionsTasksResponse#tasks #tasks} => Array&lt;Types::AuditMitigationActionsTaskMetadata&gt;
+    #   * {Types::ListAuditMitigationActionsTasksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_audit_mitigation_actions_tasks({
+    #     audit_task_id: "AuditTaskId",
+    #     finding_id: "FindingId",
+    #     task_status: "IN_PROGRESS", # accepts IN_PROGRESS, COMPLETED, FAILED, CANCELED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tasks #=> Array
+    #   resp.tasks[0].task_id #=> String
+    #   resp.tasks[0].start_time #=> Time
+    #   resp.tasks[0].task_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELED"
+    #   resp.next_token #=> String
+    #
+    # @overload list_audit_mitigation_actions_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_audit_mitigation_actions_tasks(params = {}, options = {})
+      req = build_request(:list_audit_mitigation_actions_tasks, params)
+      req.send_request(options)
+    end
+
     # Lists the Device Defender audits that have been performed during a
     # given time period.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The beginning of the time period. Note that audit information is
-    #   retained for a limited time (180 days). Requesting a start time prior
-    #   to what is retained results in an "InvalidRequestException".
+    #   The beginning of the time period. Audit information is retained for a
+    #   limited time (180 days). Requesting a start time prior to what is
+    #   retained results in an "InvalidRequestException".
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The end of the time period.
@@ -4211,7 +4612,7 @@ module Aws::IoT
     #
     # @option params [String] :task_status
     #   A filter to limit the output to audits with the specified completion
-    #   status: can be one of "IN\_PROGRESS", "COMPLETED", "FAILED" or
+    #   status: can be one of "IN\_PROGRESS", "COMPLETED", "FAILED", or
     #   "CANCELED".
     #
     # @option params [String] :next_token
@@ -4656,6 +5057,48 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Gets a list of all mitigation actions that match the specified filter
+    # criteria.
+    #
+    # @option params [String] :action_type
+    #   Specify a value to limit the result to mitigation actions with a
+    #   specific action type.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::ListMitigationActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMitigationActionsResponse#action_identifiers #action_identifiers} => Array&lt;Types::MitigationActionIdentifier&gt;
+    #   * {Types::ListMitigationActionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mitigation_actions({
+    #     action_type: "UPDATE_DEVICE_CERTIFICATE", # accepts UPDATE_DEVICE_CERTIFICATE, UPDATE_CA_CERTIFICATE, ADD_THINGS_TO_THING_GROUP, REPLACE_DEFAULT_POLICY_VERSION, ENABLE_IOT_LOGGING, PUBLISH_FINDING_TO_SNS
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_identifiers #=> Array
+    #   resp.action_identifiers[0].action_name #=> String
+    #   resp.action_identifiers[0].action_arn #=> String
+    #   resp.action_identifiers[0].creation_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_mitigation_actions(params = {})
+    # @param [Hash] params ({})
+    def list_mitigation_actions(params = {}, options = {})
+      req = build_request(:list_mitigation_actions, params)
+      req.send_request(options)
+    end
+
     # Lists OTA updates.
     #
     # @option params [Integer] :max_results
@@ -5064,7 +5507,7 @@ module Aws::IoT
     #   The maximum number of results to return at one time.
     #
     # @option params [Boolean] :recursive
-    #   If true, return child groups as well.
+    #   If true, return child groups too.
     #
     # @option params [required, String] :security_profile_target_arn
     #   The ARN of the target (thing group) whose attached security profiles
@@ -5708,7 +6151,7 @@ module Aws::IoT
 
     # Lists the Device Defender security profile violations discovered
     # during the given time period. You can use filters to limit the results
-    # to those alerts issued for a particular security profile, behavior or
+    # to those alerts issued for a particular security profile, behavior, or
     # thing (device).
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
@@ -5741,7 +6184,7 @@ module Aws::IoT
     #   resp = client.list_violation_events({
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
-    #     thing_name: "ThingName",
+    #     thing_name: "DeviceDefenderThingName",
     #     security_profile_name: "SecurityProfileName",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -6444,12 +6887,69 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Starts a task that applies a set of mitigation actions to the
+    # specified target.
+    #
+    # @option params [required, String] :task_id
+    #   A unique identifier for the task. You can use this identifier to check
+    #   the status of the task or to cancel it.
+    #
+    # @option params [required, Types::AuditMitigationActionsTaskTarget] :target
+    #   Specifies the audit findings to which the mitigation actions are
+    #   applied. You can apply them to a type of audit check, to all findings
+    #   from an audit, or to a speecific set of findings.
+    #
+    # @option params [required, Hash<String,Array>] :audit_check_to_actions_mapping
+    #   For an audit check, specifies which mitigation actions to apply. Those
+    #   actions must be defined in your AWS account.
+    #
+    # @option params [required, String] :client_request_token
+    #   Each audit mitigation task must have a unique client request token. If
+    #   you try to start a new task with the same token as a task that already
+    #   exists, an exception occurs. If you omit this value, a unique client
+    #   request token is generated automatically.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartAuditMitigationActionsTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAuditMitigationActionsTaskResponse#task_id #task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_audit_mitigation_actions_task({
+    #     task_id: "AuditMitigationActionsTaskId", # required
+    #     target: { # required
+    #       audit_task_id: "AuditTaskId",
+    #       finding_ids: ["FindingId"],
+    #       audit_check_to_reason_code_filter: {
+    #         "AuditCheckName" => ["ReasonForNonComplianceCode"],
+    #       },
+    #     },
+    #     audit_check_to_actions_mapping: { # required
+    #       "AuditCheckName" => ["MitigationActionName"],
+    #     },
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_id #=> String
+    #
+    # @overload start_audit_mitigation_actions_task(params = {})
+    # @param [Hash] params ({})
+    def start_audit_mitigation_actions_task(params = {}, options = {})
+      req = build_request(:start_audit_mitigation_actions_task, params)
+      req.send_request(options)
+    end
+
     # Starts an on-demand Device Defender audit.
     #
     # @option params [required, Array<String>] :target_check_names
     #   Which checks are performed during the audit. The checks you specify
     #   must be enabled for your account or an exception occurs. Use
-    #   `DescribeAccountAuditConfiguration` to see the list of all checks
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
     #   including those that are enabled or `UpdateAccountAuditConfiguration`
     #   to select which checks are enabled.
     #
@@ -6759,7 +7259,7 @@ module Aws::IoT
     # @option params [String] :role_arn
     #   The ARN of the role that grants permission to AWS IoT to access
     #   information about your devices, policies, certificates and other items
-    #   as necessary when performing an audit.
+    #   as required when performing an audit.
     #
     # @option params [Hash<String,Types::AuditNotificationTarget>] :audit_notification_target_configurations
     #   Information about the targets to which audit notifications are sent.
@@ -6767,17 +7267,17 @@ module Aws::IoT
     # @option params [Hash<String,Types::AuditCheckConfiguration>] :audit_check_configurations
     #   Specifies which audit checks are enabled and disabled for this
     #   account. Use `DescribeAccountAuditConfiguration` to see the list of
-    #   all checks including those that are currently enabled.
+    #   all checks, including those that are currently enabled.
     #
-    #   Note that some data collection may begin immediately when certain
-    #   checks are enabled. When a check is disabled, any data collected so
-    #   far in relation to the check is deleted.
+    #   Some data collection might start immediately when certain checks are
+    #   enabled. When a check is disabled, any data collected so far in
+    #   relation to the check is deleted.
     #
     #   You cannot disable a check if it is used by any scheduled audit. You
     #   must first delete the check from the scheduled audit or delete the
     #   scheduled audit itself.
     #
-    #   On the first call to `UpdateAccountAuditConfiguration` this parameter
+    #   On the first call to `UpdateAccountAuditConfiguration`, this parameter
     #   is required and must specify at least one enabled check.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -6911,7 +7411,7 @@ module Aws::IoT
     #   Information about the registration configuration.
     #
     # @option params [Boolean] :remove_auto_registration
-    #   If true, remove auto registration.
+    #   If true, removes auto registration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7159,6 +7659,65 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates the definition for the specified mitigation action.
+    #
+    # @option params [required, String] :action_name
+    #   The friendly name for the mitigation action. You can't change the
+    #   name by using `UpdateMitigationAction`. Instead, you must delete and
+    #   re-create the mitigation action with the new name.
+    #
+    # @option params [String] :role_arn
+    #   The ARN of the IAM role that is used to apply the mitigation action.
+    #
+    # @option params [Types::MitigationActionParams] :action_params
+    #   Defines the type of action and the parameters for that action.
+    #
+    # @return [Types::UpdateMitigationActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMitigationActionResponse#action_arn #action_arn} => String
+    #   * {Types::UpdateMitigationActionResponse#action_id #action_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_mitigation_action({
+    #     action_name: "MitigationActionName", # required
+    #     role_arn: "RoleArn",
+    #     action_params: {
+    #       update_device_certificate_params: {
+    #         action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #       },
+    #       update_ca_certificate_params: {
+    #         action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #       },
+    #       add_things_to_thing_group_params: {
+    #         thing_group_names: ["ThingGroupName"], # required
+    #         override_dynamic_groups: false,
+    #       },
+    #       replace_default_policy_version_params: {
+    #         template_name: "BLANK_POLICY", # required, accepts BLANK_POLICY
+    #       },
+    #       enable_io_t_logging_params: {
+    #         role_arn_for_logging: "RoleArn", # required
+    #         log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #       },
+    #       publish_finding_to_sns_params: {
+    #         topic_arn: "SnsTopicArn", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_arn #=> String
+    #   resp.action_id #=> String
+    #
+    # @overload update_mitigation_action(params = {})
+    # @param [Hash] params ({})
+    def update_mitigation_action(params = {}, options = {})
+      req = build_request(:update_mitigation_action, params)
+      req.send_request(options)
+    end
+
     # Updates a role alias.
     #
     # @option params [required, String] :role_alias
@@ -7195,13 +7754,13 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Updates a scheduled audit, including what checks are performed and how
-    # often the audit takes place.
+    # Updates a scheduled audit, including which checks are performed and
+    # how often the audit takes place.
     #
     # @option params [String] :frequency
     #   How often the scheduled audit takes place. Can be one of "DAILY",
-    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each
-    #   audit is determined by the system.
+    #   "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit
+    #   is determined by the system.
     #
     # @option params [String] :day_of_month
     #   The day of the month on which the scheduled audit takes place. Can be
@@ -7212,14 +7771,14 @@ module Aws::IoT
     #
     # @option params [String] :day_of_week
     #   The day of the week on which the scheduled audit takes place. Can be
-    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or
+    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or
     #   "SAT". This field is required if the "frequency" parameter is set
     #   to "WEEKLY" or "BIWEEKLY".
     #
     # @option params [Array<String>] :target_check_names
     #   Which checks are performed during the scheduled audit. Checks must be
     #   enabled for your account. (Use `DescribeAccountAuditConfiguration` to
-    #   see the list of all checks including those that are enabled or
+    #   see the list of all checks, including those that are enabled or use
     #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
     #
     # @option params [required, String] :scheduled_audit_name
@@ -7267,28 +7826,28 @@ module Aws::IoT
     #
     # @option params [Array<String>] :additional_metrics_to_retain
     #   A list of metrics whose data is retained (stored). By default, data is
-    #   retained for any metric used in the profile's `behaviors` but it is
+    #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
     #
     # @option params [Boolean] :delete_behaviors
     #   If true, delete all `behaviors` defined for this security profile. If
-    #   any `behaviors` are defined in the current invocation an exception
+    #   any `behaviors` are defined in the current invocation, an exception
     #   occurs.
     #
     # @option params [Boolean] :delete_alert_targets
     #   If true, delete all `alertTargets` defined for this security profile.
-    #   If any `alertTargets` are defined in the current invocation an
+    #   If any `alertTargets` are defined in the current invocation, an
     #   exception occurs.
     #
     # @option params [Boolean] :delete_additional_metrics_to_retain
     #   If true, delete all `additionalMetricsToRetain` defined for this
     #   security profile. If any `additionalMetricsToRetain` are defined in
-    #   the current invocation an exception occurs.
+    #   the current invocation, an exception occurs.
     #
     # @option params [Integer] :expected_version
     #   The expected version of the security profile. A new version is
     #   generated whenever the security profile is updated. If you specify a
-    #   value that is different than the actual version, a
+    #   value that is different from the actual version, a
     #   `VersionConflictException` is thrown.
     #
     # @return [Types::UpdateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -7620,7 +8179,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2019-08-05)
+------------------
+
+* Feature - In this release, AWS IoT Device Defender introduces audit mitigation actions that can be applied to audit findings to help mitigate security issues.
+
 1.35.0 (2019-07-25)
 ------------------
 

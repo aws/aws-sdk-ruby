@@ -4743,7 +4743,7 @@ module Aws::EC2
     #         dry_run: false,
     #         client_token: "String",
     #         spot_options: {
-    #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
     #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #           instance_pools_to_use_count: 1,
     #           single_instance_type: false,
@@ -31808,7 +31808,7 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         spot_fleet_request_config: { # required
-    #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
+    #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #           on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #           client_token: "String",
     #           excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
@@ -36307,7 +36307,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
+    #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #         on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #         client_token: "String",
     #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
@@ -36971,7 +36971,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
     #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #         instance_pools_to_use_count: 1,
     #         single_instance_type: false,

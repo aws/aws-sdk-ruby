@@ -303,14 +303,14 @@ module Aws::DataSync
     # AWS Region where your target locations (in Amazon S3 or Amazon EFS)
     # reside. Your tasks are created in this AWS Region.
     #
+    # You can activate the agent in a VPC (Virtual private Cloud) or provide
+    # the agent access to a VPC endpoint so you can run tasks without going
+    # over the public Internet.
+    #
     # You can use an agent for more than one location. If a task uses
     # multiple agents, all of them need to have status AVAILABLE for the
     # task to run. If you use multiple agents for a source location, the
     # status of all the agents must be AVAILABLE for the task to run.
-    #
-    # For more information, see
-    # "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-agents.html#activating-agent"
-    # (Activating an Agent) in the *AWS DataSync User Guide.*
     #
     # Agents are automatically updated by AWS on a regular basis, using a
     # mechanism that ensures minimal interruption to your tasks.
@@ -327,9 +327,8 @@ module Aws::DataSync
     #   are merely defaults. The arguments you pass to this API call determine
     #   the actual configuration of your agent.
     #
-    #   For more information, see
-    #   "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-agents.html#activating-agent"
-    #   (Activating a Agent) in the *AWS DataSync User Guide.*
+    #   For more information, see Activating an Agent in the *AWS DataSync
+    #   User Guide.*
     #
     # @option params [String] :agent_name
     #   The name you configured for your agent. This value is a text reference
@@ -346,6 +345,33 @@ module Aws::DataSync
     #
     #    </note>
     #
+    # @option params [String] :vpc_endpoint_id
+    #   The ID of the VPC (Virtual Private Cloud) endpoint that the agent has
+    #   access to. This is the client-side VPC endpoint, also called a
+    #   PrivateLink. If you don't have a PrivateLink VPC endpoint, see
+    #   [Creating a VPC Endpoint Service Configuration][1] in the AWS VPC User
+    #   Guide.
+    #
+    #   VPC endpoint ID looks like this: `vpce-01234d5aff67890e1`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service
+    #
+    # @option params [Array<String>] :subnet_arns
+    #   The Amazon Resource Names (ARNs) of the subnets in which DataSync will
+    #   create Elastic Network Interfaces (ENIs) for each data transfer task.
+    #   The agent that runs a task must be private. When you start a task that
+    #   is associated with an agent created in a VPC, or one that has access
+    #   to an IP address in a VPC, then the task is also private. In this
+    #   case, DataSync creates four ENIs for each task in your subnet. For a
+    #   data transfer to work, the agent must be able to route to all these
+    #   four ENIs.
+    #
+    # @option params [Array<String>] :security_group_arns
+    #   The ARNs of the security groups used to protect your data transfer
+    #   task subnets. See CreateAgentRequest$SubnetArns.
+    #
     # @return [Types::CreateAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAgentResponse#agent_arn #agent_arn} => String
@@ -361,6 +387,9 @@ module Aws::DataSync
     #         value: "TagValue",
     #       },
     #     ],
+    #     vpc_endpoint_id: "VpcEndpointId",
+    #     subnet_arns: ["Ec2SubnetArn"],
+    #     security_group_arns: ["Ec2SecurityGroupArn"],
     #   })
     #
     # @example Response structure
@@ -407,9 +436,8 @@ module Aws::DataSync
     #     either by IP address (CIDR range) or security group.
     #
     #     For information about security groups and mount targets, see
-    #     "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access"
-    #     (Security Groups for Amazon EC2 Instances and Mount Targets) in the
-    #     *Amazon EFS User Guide*.
+    #     Security Groups for Amazon EC2 Instances and Mount Targets in the
+    #     *Amazon EFS User Guide.*
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents a tag that you want to add to the
@@ -474,9 +502,9 @@ module Aws::DataSync
     #   files. For the agent to access directories, you must additionally
     #   enable all execute access.
     #
-    #   For information about NFS export configuration, see
-    #   "http://web.mit.edu/rhel-doc/5/RHEL-5-manual/Deployment\_Guide-en-US/s1-nfs-server-config-exports.html"
-    #   (18.7. The /etc/exports Configuration File).
+    #   For information about NFS export configuration, see 18.7. The
+    #   /etc/exports Configuration File in the Red Hat Enterprise Linux
+    #   documentation.
     #
     # @option params [required, String] :server_hostname
     #   The name of the NFS server. This value is the IP address or Domain
@@ -545,10 +573,8 @@ module Aws::DataSync
     # policy to the role. An example of such a policy is shown in the
     # examples section.
     #
-    # For more information, see
-    # "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
-    # (Configuring Amazon S3 Location Settings) in the *AWS DataSync User
-    # Guide*.
+    # For more information, see Configuring Amazon S3 Location Settings in
+    # the *AWS DataSync User Guide.*
     #
     # @option params [String] :subdirectory
     #   A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3
@@ -562,9 +588,8 @@ module Aws::DataSync
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
     #   Management (IAM) role that is used to access an Amazon S3 bucket.
     #
-    #   For detailed information about using such a role, see
-    #   "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
-    #   (Creating a Location for Amazon S3) in the *AWS DataSync User Guide*.
+    #   For detailed information about using such a role, see Creating a
+    #   Location for Amazon S3 in the *AWS DataSync User Guide*.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
@@ -633,14 +658,11 @@ module Aws::DataSync
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that
     #   is used to monitor and log events in the task.
     #
-    #   For more information on these groups, see
-    #   "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html"
-    #   (Working with Log Groups and Log Streams) in the *Amazon CloudWatch
-    #   User Guide*.
+    #   For more information on these groups, see Working with Log Groups and
+    #   Log Streams in the *Amazon CloudWatch User Guide.*
     #
-    #   For more information about how to useCloudWatchLogs with DataSync, see
-    #   "https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html"
-    #   (Monitoring Your Task)
+    #   For more information about how to use CloudWatch Logs with DataSync,
+    #   see Monitoring Your Task in the *AWS DataSync User Guide.*
     #
     # @option params [String] :name
     #   The name of a task. This value is a text reference that is used to
@@ -658,9 +680,10 @@ module Aws::DataSync
     #   For more information, see the operation.
     #
     # @option params [Array<Types::FilterRule>] :excludes
-    #   A filter that determines which files to exclude from a task based on
-    #   the specified pattern. Transfers all files in the task’s subdirectory,
-    #   except files that match the filter that is set.
+    #   A list of filter rules that determines which files to exclude from a
+    #   task. The list should contain a single filter string that consists of
+    #   the patterns to exclude. The patterns are delimited by "\|" (that
+    #   is, a pipe), for example, `"/folder1|/folder2"`
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
@@ -802,7 +825,7 @@ module Aws::DataSync
     #   * {Types::DescribeAgentResponse#status #status} => String
     #   * {Types::DescribeAgentResponse#last_connection_time #last_connection_time} => Time
     #   * {Types::DescribeAgentResponse#creation_time #creation_time} => Time
-    #   * {Types::DescribeAgentResponse#endpoint_options #endpoint_options} => Types::EndpointOptions
+    #   * {Types::DescribeAgentResponse#endpoint_type #endpoint_type} => String
     #   * {Types::DescribeAgentResponse#private_link_config #private_link_config} => Types::PrivateLinkConfig
     #
     # @example Request syntax with placeholder values
@@ -818,8 +841,8 @@ module Aws::DataSync
     #   resp.status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.last_connection_time #=> Time
     #   resp.creation_time #=> Time
-    #   resp.endpoint_options.fips #=> Boolean
-    #   resp.endpoint_options.private_link #=> Boolean
+    #   resp.endpoint_type #=> String, one of "PUBLIC", "PRIVATE_LINK"
+    #   resp.private_link_config.vpc_endpoint_id #=> String
     #   resp.private_link_config.private_link_endpoint #=> String
     #   resp.private_link_config.subnet_arns #=> Array
     #   resp.private_link_config.subnet_arns[0] #=> String
@@ -959,6 +982,8 @@ module Aws::DataSync
     #   * {Types::DescribeTaskResponse#source_location_arn #source_location_arn} => String
     #   * {Types::DescribeTaskResponse#destination_location_arn #destination_location_arn} => String
     #   * {Types::DescribeTaskResponse#cloud_watch_log_group_arn #cloud_watch_log_group_arn} => String
+    #   * {Types::DescribeTaskResponse#source_network_interface_arns #source_network_interface_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeTaskResponse#destination_network_interface_arns #destination_network_interface_arns} => Array&lt;String&gt;
     #   * {Types::DescribeTaskResponse#options #options} => Types::Options
     #   * {Types::DescribeTaskResponse#excludes #excludes} => Array&lt;Types::FilterRule&gt;
     #   * {Types::DescribeTaskResponse#error_code #error_code} => String
@@ -980,6 +1005,10 @@ module Aws::DataSync
     #   resp.source_location_arn #=> String
     #   resp.destination_location_arn #=> String
     #   resp.cloud_watch_log_group_arn #=> String
+    #   resp.source_network_interface_arns #=> Array
+    #   resp.source_network_interface_arns[0] #=> String
+    #   resp.destination_network_interface_arns #=> Array
+    #   resp.destination_network_interface_arns[0] #=> String
     #   resp.options.verify_mode #=> String, one of "POINT_IN_TIME_CONSISTENT", "NONE"
     #   resp.options.atime #=> String, one of "NONE", "BEST_EFFORT"
     #   resp.options.mtime #=> String, one of "NONE", "PRESERVE"
@@ -1293,9 +1322,8 @@ module Aws::DataSync
     # `TaskExecution` has the following transition phases: INITIALIZING \|
     # PREPARING \| TRANSFERRING \| VERIFYING \| SUCCESS/FAILURE.
     #
-    # For detailed information, see *Task Execution* in
-    # "https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-works.html#terminology"
-    # (Components and Terminology) in the *AWS DataSync User Guide*.
+    # For detailed information, see the Task Execution section in the
+    # Components and Terminology topic in the *AWS DataSync User Guide*.
     #
     # @option params [required, String] :task_arn
     #   The Amazon Resource Name (ARN) of the task to start.
@@ -1313,9 +1341,10 @@ module Aws::DataSync
     #   specifying an overriding `Options` value to StartTaskExecution.
     #
     # @option params [Array<Types::FilterRule>] :includes
-    #   A filter that determines which files to include in the transfer during
-    #   a task execution based on the specified pattern in the filter. When
-    #   multiple include filters are set, they are interpreted as an OR.
+    #   A list of filter rules that determines which files to include when
+    #   running a task. The pattern should contain a single filter string that
+    #   consists of the patterns to include. The patterns are delimited by
+    #   "\|" (that is, a pipe). For example: `"/folder1|/folder2"`
     #
     # @return [Types::StartTaskExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1459,9 +1488,10 @@ module Aws::DataSync
     #   specifying an overriding `Options` value to StartTaskExecution.
     #
     # @option params [Array<Types::FilterRule>] :excludes
-    #   A filter that determines which files to exclude from a task based on
-    #   the specified pattern in the filter. Transfers all files in the task’s
-    #   subdirectory, except files that match the filter that is set.
+    #   A list of filter rules that determines which files to exclude from a
+    #   task. The list should contain a single filter string that consists of
+    #   the patterns to exclude. The patterns are delimited by "\|" (that
+    #   is, a pipe), for example: `"/folder1|/folder2"`
     #
     # @option params [String] :name
     #   The name of the task to update.
@@ -1519,7 +1549,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
