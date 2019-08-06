@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Batch - Updated the documentation for AWS Batch.
+
 2.11.326 (2019-08-05)
 ------------------
 
