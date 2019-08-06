@@ -610,7 +610,7 @@ module Aws::Batch
     #
     # @!attribute [rw] linux_parameters
     #   Linux-specific modifications that are applied to the container, such
-    #   as Linux kernel capabilities.
+    #   as details for device mappings.
     #   @return [Types::LinuxParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
@@ -963,7 +963,7 @@ module Aws::Batch
     #
     # @!attribute [rw] linux_parameters
     #   Linux-specific modifications that are applied to the container, such
-    #   as Linux kernel capabilities.
+    #   as details for device mappings.
     #   @return [Types::LinuxParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
@@ -1519,7 +1519,8 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] container_path
-    #   The path inside the container at which to expose the host device.
+    #   The path inside the container at which to expose the host device. By
+    #   default the `hostPath` value is used.
     #   @return [String]
     #
     # @!attribute [rw] permissions
@@ -1988,7 +1989,7 @@ module Aws::Batch
     end
 
     # Linux-specific modifications that are applied to the container, such
-    # as Linux kernel capabilities.
+    # as details for device mappings.
     #
     # @note When making an API call, you may pass LinuxParameters
     #   data as a hash:
