@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.328 (2019-08-07)
+------------------
+
 * Feature - Aws::ApplicationInsights - Updated the API, and documentation for Amazon CloudWatch Application Insights.
 
 2.11.327 (2019-08-06)
