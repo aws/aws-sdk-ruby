@@ -125,6 +125,7 @@ module Aws
     KinesisVideo
     KinesisVideoArchivedMedia
     KinesisVideoMedia
+    LakeFormation
     Lambda
     LambdaPreview
     Lex

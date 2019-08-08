@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::OpsWorksCM - Updated the API for AWS OpsWorks CM.
+
+* Feature - Aws::LakeFormation - Added support for a new service, AWS Lake Formation.
+
 2.11.328 (2019-08-07)
 ------------------
 

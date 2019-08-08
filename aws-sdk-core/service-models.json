@@ -406,6 +406,10 @@
     "models": "kinesis-video-media/2017-09-30",
     "endpoint": "kinesisvideo"
   },
+  "LakeFormation": {
+    "models": "lakeformation/2017-03-31",
+    "endpoint": "lakeformation"
+  },
   "Lambda": {
     "models": "lambda/2015-03-31",
     "endpoint": "lambda"

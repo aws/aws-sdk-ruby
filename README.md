@@ -311,6 +311,7 @@ to be backwards compatible.
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
+| AWS Lake Formation                                    | LakeFormation                   | 2017-03-31  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
@@ -321,7 +322,7 @@ to be backwards compatible.
 | AWS Migration Hub                                     | MigrationHub                    | 2017-05-31  |
 | AWS Mobile                                            | Mobile                          | 2017-07-01  |
 | AWS OpsWorks                                          | OpsWorks                        | 2013-02-18  |
-| AWS OpsWorks for Chef Automate                        | OpsWorksCM                      | 2016-11-01  |
+| AWS OpsWorks CM                                       | OpsWorksCM                      | 2016-11-01  |
 | AWS Organizations                                     | Organizations                   | 2016-11-28  |
 | AWS Performance Insights                              | PI                              | 2018-02-27  |
 | AWS Price List Service                                | Pricing                         | 2017-10-15  |
