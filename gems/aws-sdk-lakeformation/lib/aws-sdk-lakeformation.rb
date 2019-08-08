@@ -8,16 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-opsworkscm/types'
-require_relative 'aws-sdk-opsworkscm/client_api'
-require_relative 'aws-sdk-opsworkscm/client'
-require_relative 'aws-sdk-opsworkscm/errors'
-require_relative 'aws-sdk-opsworkscm/waiters'
-require_relative 'aws-sdk-opsworkscm/resource'
-require_relative 'aws-sdk-opsworkscm/customizations'
+require_relative 'aws-sdk-lakeformation/types'
+require_relative 'aws-sdk-lakeformation/client_api'
+require_relative 'aws-sdk-lakeformation/client'
+require_relative 'aws-sdk-lakeformation/errors'
+require_relative 'aws-sdk-lakeformation/resource'
+require_relative 'aws-sdk-lakeformation/customizations'
 
-# This module provides support for AWS OpsWorks CM. This module is available in the
-# `aws-sdk-opsworkscm` gem.
+# This module provides support for AWS Lake Formation. This module is available in the
+# `aws-sdk-lakeformation` gem.
 #
 # # Client
 #
@@ -29,20 +28,20 @@ require_relative 'aws-sdk-opsworkscm/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS OpsWorks CM all
+# Errors returned from AWS Lake Formation all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::OpsWorksCM::Errors::ServiceError
+#     rescue Aws::LakeFormation::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::OpsWorksCM
+module Aws::LakeFormation
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.0.0'
 
 end

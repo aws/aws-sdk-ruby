@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-08-08)
+------------------
+
+* Feature - This release adds support for Chef Automate 2 specific engine attributes.
+
 1.23.0 (2019-07-25)
 ------------------
 

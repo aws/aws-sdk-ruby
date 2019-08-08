@@ -1098,6 +1098,7 @@ module Aws::CodeBuild
     #         token: "SensitiveNonEmptyString", # required
     #         server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE
     #         auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN
+    #         should_overwrite: false,
     #       }
     #
     # @!attribute [rw] username
@@ -1122,13 +1123,20 @@ module Aws::CodeBuild
     #   console.
     #   @return [String]
     #
+    # @!attribute [rw] should_overwrite
+    #   Set to `false` to prevent overwriting the repository source
+    #   credentials. Set to `true` to overwrite the repository source
+    #   credentials. The default value is `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentialsInput AWS API Documentation
     #
     class ImportSourceCredentialsInput < Struct.new(
       :username,
       :token,
       :server_type,
-      :auth_type)
+      :auth_type,
+      :should_overwrite)
       include Aws::Structure
     end
 
@@ -2019,15 +2027,13 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] privileged_mode
     #   Enables running the Docker daemon inside a Docker container. Set to
-    #   true only if the build project is be used to build Docker images,
-    #   and the specified build environment image is not provided by AWS
-    #   CodeBuild with Docker support. Otherwise, all associated builds that
-    #   attempt to interact with the Docker daemon fail. You must also start
-    #   the Docker daemon so that builds can interact with it. One way to do
-    #   this is to initialize the Docker daemon during the install phase of
-    #   your build spec by running the following build commands. (Do not run
-    #   these commands if the specified build environment image is provided
-    #   by AWS CodeBuild with Docker support.)
+    #   true only if the build project is used to build Docker images.
+    #   Otherwise, a build that attempts to interact with the Docker daemon
+    #   fails.
+    #
+    #   You can initialize the Docker daemon during the install phase of
+    #   your build by adding one of the following sets of commands to the
+    #   install phase of your buildspec file:
     #
     #   If the operating system's base image is Ubuntu Linux:
     #

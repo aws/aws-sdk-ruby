@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.51.0 (2019-08-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lakeformation` gem.
+
 3.50.0 (2019-07-11)
 ------------------
 

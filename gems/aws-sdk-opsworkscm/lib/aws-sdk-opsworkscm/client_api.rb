@@ -331,7 +331,7 @@ module Aws::OpsWorksCM
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceAbbreviation" => "OpsWorksCM",
-        "serviceFullName" => "AWS OpsWorks for Chef Automate",
+        "serviceFullName" => "AWS OpsWorks CM",
         "serviceId" => "OpsWorksCM",
         "signatureVersion" => "v4",
         "signingName" => "opsworks-cm",

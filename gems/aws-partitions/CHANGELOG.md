@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.198.0 (2019-08-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LakeFormation`.
+
 1.197.0 (2019-08-07)
 ------------------
 

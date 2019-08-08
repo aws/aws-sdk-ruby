@@ -321,6 +321,7 @@ module Aws
             'KinesisVideo' => 'kinesisvideo',
             'KinesisVideoArchivedMedia' => 'kinesisvideo',
             'KinesisVideoMedia' => 'kinesisvideo',
+            'LakeFormation' => 'lakeformation',
             'Lambda' => 'lambda',
             'LambdaPreview' => 'lambda',
             'Lex' => 'runtime.lex',

@@ -7,10 +7,10 @@
 
 Gem::Specification.new do |spec|
 
-  spec.name          = 'aws-sdk-opsworkscm'
+  spec.name          = 'aws-sdk-lakeformation'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
-  spec.summary       = 'AWS SDK for Ruby - OpsWorksCM'
-  spec.description   = 'Official AWS Ruby gem for AWS OpsWorks CM (OpsWorksCM). This gem is part of the AWS SDK for Ruby.'
+  spec.summary       = 'AWS SDK for Ruby - AWS Lake Formation'
+  spec.description   = 'Official AWS Ruby gem for AWS Lake Formation. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['lib/**/*.rb']
 
   spec.metadata = {
-    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-opsworkscm',
-    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-opsworkscm/CHANGELOG.md'
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-lakeformation',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-lakeformation/CHANGELOG.md'
   }
 
   spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.61.1')

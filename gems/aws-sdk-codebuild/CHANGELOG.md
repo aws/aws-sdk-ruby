@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2019-08-08)
+------------------
+
+* Feature - CodeBuild adds CloudFormation support for SourceCredential
+
 1.39.0 (2019-07-25)
 ------------------
 
