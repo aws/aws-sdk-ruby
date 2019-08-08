@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.329 (2019-08-08)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
 
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
