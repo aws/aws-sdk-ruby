@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.330 (2019-08-09)
+------------------
+
 * Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
 
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
