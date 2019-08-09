@@ -623,6 +623,7 @@ module Aws::IoT
     PublicKeyMap = Shapes::MapShape.new(name: 'PublicKeyMap')
     PublishFindingToSnsParams = Shapes::StructureShape.new(name: 'PublishFindingToSnsParams')
     PutItemInput = Shapes::StructureShape.new(name: 'PutItemInput')
+    Qos = Shapes::IntegerShape.new(name: 'Qos')
     QueryMaxResults = Shapes::IntegerShape.new(name: 'QueryMaxResults')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
     QueryVersion = Shapes::StringShape.new(name: 'QueryVersion')
@@ -2787,6 +2788,7 @@ module Aws::IoT
 
     RepublishAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     RepublishAction.add_member(:topic, Shapes::ShapeRef.new(shape: TopicPattern, required: true, location_name: "topic"))
+    RepublishAction.add_member(:qos, Shapes::ShapeRef.new(shape: Qos, location_name: "qos"))
     RepublishAction.struct_class = Types::RepublishAction
 
     ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))

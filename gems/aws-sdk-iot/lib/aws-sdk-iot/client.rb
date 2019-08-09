@@ -1910,6 +1910,7 @@ module Aws::IoT
     #           republish: {
     #             role_arn: "AwsArn", # required
     #             topic: "TopicPattern", # required
+    #             qos: 1,
     #           },
     #           s3: {
     #             role_arn: "AwsArn", # required
@@ -2006,6 +2007,7 @@ module Aws::IoT
     #         republish: {
     #           role_arn: "AwsArn", # required
     #           topic: "TopicPattern", # required
+    #           qos: 1,
     #         },
     #         s3: {
     #           role_arn: "AwsArn", # required
@@ -4150,6 +4152,7 @@ module Aws::IoT
     #   resp.rule.actions[0].kinesis.partition_key #=> String
     #   resp.rule.actions[0].republish.role_arn #=> String
     #   resp.rule.actions[0].republish.topic #=> String
+    #   resp.rule.actions[0].republish.qos #=> Integer
     #   resp.rule.actions[0].s3.role_arn #=> String
     #   resp.rule.actions[0].s3.bucket_name #=> String
     #   resp.rule.actions[0].s3.key #=> String
@@ -4209,6 +4212,7 @@ module Aws::IoT
     #   resp.rule.error_action.kinesis.partition_key #=> String
     #   resp.rule.error_action.republish.role_arn #=> String
     #   resp.rule.error_action.republish.topic #=> String
+    #   resp.rule.error_action.republish.qos #=> Integer
     #   resp.rule.error_action.s3.role_arn #=> String
     #   resp.rule.error_action.s3.bucket_name #=> String
     #   resp.rule.error_action.s3.key #=> String
@@ -4338,7 +4342,7 @@ module Aws::IoT
     # Lists the policies attached to the specified thing group.
     #
     # @option params [required, String] :target
-    #   The group for which the policies will be listed.
+    #   The group or principal for which the policies will be listed.
     #
     # @option params [Boolean] :recursive
     #   When true, recursively list attached policies.
@@ -6527,6 +6531,7 @@ module Aws::IoT
     #           republish: {
     #             role_arn: "AwsArn", # required
     #             topic: "TopicPattern", # required
+    #             qos: 1,
     #           },
     #           s3: {
     #             role_arn: "AwsArn", # required
@@ -6623,6 +6628,7 @@ module Aws::IoT
     #         republish: {
     #           role_arn: "AwsArn", # required
     #           topic: "TopicPattern", # required
+    #           qos: 1,
     #         },
     #         s3: {
     #           role_arn: "AwsArn", # required
@@ -8179,7 +8185,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

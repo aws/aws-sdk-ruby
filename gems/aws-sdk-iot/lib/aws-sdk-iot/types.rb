@@ -144,6 +144,7 @@ module Aws::IoT
     #         republish: {
     #           role_arn: "AwsArn", # required
     #           topic: "TopicPattern", # required
+    #           qos: 1,
     #         },
     #         s3: {
     #           role_arn: "AwsArn", # required
@@ -653,7 +654,8 @@ module Aws::IoT
     #   To remove an attribute, call `UpdateThing` with an empty attribute
     #   value.
     #
-    #   <note markdown="1"> The `merge` attribute is only valid when calling `UpdateThing`.
+    #   <note markdown="1"> The `merge` attribute is only valid when calling `UpdateThing` or
+    #   `UpdateThingGroup`.
     #
     #    </note>
     #   @return [Boolean]
@@ -3220,6 +3222,7 @@ module Aws::IoT
     #               republish: {
     #                 role_arn: "AwsArn", # required
     #                 topic: "TopicPattern", # required
+    #                 qos: 1,
     #               },
     #               s3: {
     #                 role_arn: "AwsArn", # required
@@ -3316,6 +3319,7 @@ module Aws::IoT
     #             republish: {
     #               role_arn: "AwsArn", # required
     #               topic: "TopicPattern", # required
+    #               qos: 1,
     #             },
     #             s3: {
     #               role_arn: "AwsArn", # required
@@ -6664,7 +6668,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] target
-    #   The group for which the policies will be listed.
+    #   The group or principal for which the policies will be listed.
     #   @return [String]
     #
     # @!attribute [rw] recursive
@@ -9745,6 +9749,7 @@ module Aws::IoT
     #               republish: {
     #                 role_arn: "AwsArn", # required
     #                 topic: "TopicPattern", # required
+    #                 qos: 1,
     #               },
     #               s3: {
     #                 role_arn: "AwsArn", # required
@@ -9841,6 +9846,7 @@ module Aws::IoT
     #             republish: {
     #               role_arn: "AwsArn", # required
     #               topic: "TopicPattern", # required
+    #               qos: 1,
     #             },
     #             s3: {
     #               role_arn: "AwsArn", # required
@@ -9919,6 +9925,7 @@ module Aws::IoT
     #       {
     #         role_arn: "AwsArn", # required
     #         topic: "TopicPattern", # required
+    #         qos: 1,
     #       }
     #
     # @!attribute [rw] role_arn
@@ -9929,9 +9936,15 @@ module Aws::IoT
     #   The name of the MQTT topic.
     #   @return [String]
     #
+    # @!attribute [rw] qos
+    #   The Quality of Service (QoS) level to use when republishing
+    #   messages.
+    #   @return [Integer]
+    #
     class RepublishAction < Struct.new(
       :role_arn,
-      :topic)
+      :topic,
+      :qos)
       include Aws::Structure
     end
 
@@ -11727,6 +11740,7 @@ module Aws::IoT
     #             republish: {
     #               role_arn: "AwsArn", # required
     #               topic: "TopicPattern", # required
+    #               qos: 1,
     #             },
     #             s3: {
     #               role_arn: "AwsArn", # required
@@ -11823,6 +11837,7 @@ module Aws::IoT
     #           republish: {
     #             role_arn: "AwsArn", # required
     #             topic: "TopicPattern", # required
+    #             qos: 1,
     #           },
     #           s3: {
     #             role_arn: "AwsArn", # required

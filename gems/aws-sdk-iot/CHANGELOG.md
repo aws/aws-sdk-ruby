@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2019-08-09)
+------------------
+
+* Feature - This release adds Quality of Service (QoS) support for AWS IoT rules engine republish action.
+
 1.36.0 (2019-08-05)
 ------------------
 
