@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
+
+* Feature - Aws::CloudWatch - Updated the documentation for Amazon CloudWatch.
+
+* Feature - Aws::Rekognition - Updated the API for Amazon Rekognition.
+
 2.11.330 (2019-08-09)
 ------------------
 
