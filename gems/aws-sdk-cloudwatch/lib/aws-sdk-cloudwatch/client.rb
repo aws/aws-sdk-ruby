@@ -254,8 +254,8 @@ module Aws::CloudWatch
 
     # @!group API Operations
 
-    # Deletes the specified alarms. In the event of an error, no alarms are
-    # deleted.
+    # Deletes the specified alarms. You can delete up to 50 alarms in one
+    # operation. In the event of an error, no alarms are deleted.
     #
     # @option params [required, Array<String>] :alarm_names
     #   The alarms to be deleted.
@@ -802,6 +802,14 @@ module Aws::CloudWatch
     # 5 minutes. After 63 days, the data is further aggregated and is
     # available with a resolution of 1 hour.
     #
+    # If you omit `Unit` in your request, all data that was collected with
+    # any unit is returned, along with the corresponding units that were
+    # specified when the data was reported to CloudWatch. If you specify a
+    # unit, the operation returns only data data that was collected with
+    # that unit specified. If you specify a unit that does not match the
+    # data collected, the results of the operation are null. CloudWatch does
+    # not perform unit conversions.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
@@ -816,6 +824,31 @@ module Aws::CloudWatch
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The time stamp indicating the earliest data to be returned.
     #
+    #   The value specified is inclusive; results include data points with the
+    #   specified time stamp.
+    #
+    #   CloudWatch rounds the specified time stamp as follows:
+    #
+    #   * Start time less than 15 days ago - Round down to the nearest whole
+    #     minute. For example, 12:32:34 is rounded down to 12:32:00.
+    #
+    #   * Start time between 15 and 63 days ago - Round down to the nearest
+    #     5-minute clock interval. For example, 12:32:34 is rounded down to
+    #     12:30:00.
+    #
+    #   * Start time greater than 63 days ago - Round down to the nearest
+    #     1-hour clock interval. For example, 12:32:34 is rounded down to
+    #     12:00:00.
+    #
+    #   If you set `Period` to 5, 10, or 30, the start time of your request is
+    #   rounded down to the nearest time that corresponds to even 5-, 10-, or
+    #   30-second divisions of a minute. For example, if you make a query at
+    #   (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time
+    #   of your request is rounded down and you receive data from 01:05:10 to
+    #   01:05:20. If you make a query at 15:07:17 for the previous 5 minutes
+    #   of data, using a period of 5 seconds, you receive data timestamped
+    #   between 15:02:15 and 15:07:15.
+    #
     #   For better performance, specify `StartTime` and `EndTime` values that
     #   align with the value of the metric's `Period` and sync up with the
     #   beginning and end of an hour. For example, if the `Period` of a metric
@@ -825,6 +858,9 @@ module Aws::CloudWatch
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The time stamp indicating the latest data to be returned.
+    #
+    #   The value specified is exclusive; results include data points up to
+    #   the specified time stamp.
     #
     #   For better performance, specify `StartTime` and `EndTime` values that
     #   align with the value of the metric's `Period` and sync up with the
@@ -1072,10 +1108,13 @@ module Aws::CloudWatch
     #   numbers.
     #
     # @option params [String] :unit
-    #   The unit for a given metric. Metrics may be reported in multiple
-    #   units. Not supplying a unit results in all units being returned. If
-    #   you specify only a unit that the metric does not report, the results
-    #   of the call are null.
+    #   The unit for a given metric. If you omit `Unit`, all data that was
+    #   collected with any unit is returned, along with the corresponding
+    #   units that were specified when the data was reported to CloudWatch. If
+    #   you specify a unit, the operation returns only data data that was
+    #   collected with that unit specified. If you specify a unit that does
+    #   not match the data collected, the results of the operation are null.
+    #   CloudWatch does not perform unit conversions.
     #
     # @return [Types::GetMetricStatisticsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1549,7 +1588,7 @@ module Aws::CloudWatch
     #
     # @option params [Boolean] :actions_enabled
     #   Indicates whether actions should be executed during any changes to the
-    #   alarm state. The default is TRUE.
+    #   alarm state. The default is `TRUE`.
     #
     # @option params [Array<String>] :ok_actions
     #   The actions to execute when this alarm transitions to an `OK` state
@@ -1612,7 +1651,9 @@ module Aws::CloudWatch
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #
     # @option params [String] :metric_name
-    #   The name for the metric associated with the alarm.
+    #   The name for the metric associated with the alarm. For each
+    #   `PutMetricAlarm` operation, you must specify either `MetricName` or a
+    #   `Metrics` array.
     #
     #   If you are creating an alarm based on a math expression, you cannot
     #   specify this parameter, or any of the `Dimensions`, `Period`,
@@ -1642,6 +1683,10 @@ module Aws::CloudWatch
     #   `MetricName` is evaluated. Valid values are 10, 30, and any multiple
     #   of 60.
     #
+    #   `Period` is required for alarms based on static thresholds. If you are
+    #   creating an alarm based on a metric math expression, you specify the
+    #   period for each metric within the objects in the `Metrics` array.
+    #
     #   Be sure to specify 10 or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
     #   period of 10 or 30 for a metric that does not have sub-minute
@@ -1669,9 +1714,18 @@ module Aws::CloudWatch
     #   help provide conceptual meaning to your data. Metric data points that
     #   specify a unit of measure, such as Percent, are aggregated separately.
     #
-    #   If you specify a unit, you must use a unit that is appropriate for the
-    #   metric. Otherwise, the CloudWatch alarm can get stuck in the
-    #   `INSUFFICIENT DATA` state.
+    #   If you don't specify `Unit`, CloudWatch retrieves all unit types that
+    #   have been published for the metric and attempts to evaluate the alarm.
+    #   Usually metrics are published with only one unit, so the alarm will
+    #   work as intended.
+    #
+    #   However, if the metric is published with multiple types of units and
+    #   you don't specify a unit, the alarm's behavior is not defined and
+    #   will behave un-predictably.
+    #
+    #   We recommend omitting `Unit` so that you don't inadvertently specify
+    #   an incorrect unit that is not published for this metric. Doing so
+    #   causes the alarm to be stuck in the `INSUFFICIENT DATA` state.
     #
     # @option params [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
@@ -1696,6 +1750,9 @@ module Aws::CloudWatch
     #
     # @option params [Float] :threshold
     #   The value against which the specified statistic is compared.
+    #
+    #   This parameter is required for alarms based on static thresholds, but
+    #   should not be used for alarms based on anomaly detection models.
     #
     # @option params [required, String] :comparison_operator
     #   The arithmetic operation to use when comparing the specified statistic
@@ -1735,9 +1792,12 @@ module Aws::CloudWatch
     #
     # @option params [Array<Types::MetricDataQuery>] :metrics
     #   An array of `MetricDataQuery` structures that enable you to create an
-    #   alarm based on the result of a metric math expression. Each item in
-    #   the `Metrics` array either retrieves a metric or performs a math
-    #   expression.
+    #   alarm based on the result of a metric math expression. For each
+    #   `PutMetricAlarm` operation, you must specify either `MetricName` or a
+    #   `Metrics` array.
+    #
+    #   Each item in the `Metrics` array either retrieves a metric or performs
+    #   a math expression.
     #
     #   One item in the `Metrics` array is the expression that the alarm
     #   watches. You designate this expression by setting `ReturnValue` to
@@ -1889,9 +1949,8 @@ module Aws::CloudWatch
     # @option params [required, String] :namespace
     #   The namespace for the metric data.
     #
-    #   You cannot specify a namespace that begins with "AWS/". Namespaces
-    #   that begin with "AWS/" are reserved for use by Amazon Web Services
-    #   products.
+    #   To avoid conflicts with AWS service namespaces, you should not specify
+    #   a namespace that begins with `AWS/`
     #
     # @option params [required, Array<Types::MetricDatum>] :metric_data
     #   The data for the metric. The array can include no more than 20 metrics
@@ -2080,7 +2139,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

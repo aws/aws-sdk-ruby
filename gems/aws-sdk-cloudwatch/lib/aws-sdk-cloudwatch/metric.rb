@@ -281,10 +281,13 @@ module Aws::CloudWatch
     #   available for metrics when any of the metric values are negative
     #   numbers.
     # @option options [String] :unit
-    #   The unit for a given metric. Metrics may be reported in multiple
-    #   units. Not supplying a unit results in all units being returned. If
-    #   you specify only a unit that the metric does not report, the results
-    #   of the call are null.
+    #   The unit for a given metric. If you omit `Unit`, all data that was
+    #   collected with any unit is returned, along with the corresponding
+    #   units that were specified when the data was reported to CloudWatch. If
+    #   you specify a unit, the operation returns only data data that was
+    #   collected with that unit specified. If you specify a unit that does
+    #   not match the data collected, the results of the operation are null.
+    #   CloudWatch does not perform unit conversions.
     # @return [Types::GetMetricStatisticsOutput]
     def get_statistics(options = {})
       options = options.merge(
@@ -359,7 +362,7 @@ module Aws::CloudWatch
     #   The description for the alarm.
     # @option options [Boolean] :actions_enabled
     #   Indicates whether actions should be executed during any changes to the
-    #   alarm state. The default is TRUE.
+    #   alarm state. The default is `TRUE`.
     # @option options [Array<String>] :ok_actions
     #   The actions to execute when this alarm transitions to an `OK` state
     #   from any other state. Each action is specified as an Amazon Resource
@@ -434,6 +437,10 @@ module Aws::CloudWatch
     #   `MetricName` is evaluated. Valid values are 10, 30, and any multiple
     #   of 60.
     #
+    #   `Period` is required for alarms based on static thresholds. If you are
+    #   creating an alarm based on a metric math expression, you specify the
+    #   period for each metric within the objects in the `Metrics` array.
+    #
     #   Be sure to specify 10 or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
     #   period of 10 or 30 for a metric that does not have sub-minute
@@ -460,9 +467,18 @@ module Aws::CloudWatch
     #   help provide conceptual meaning to your data. Metric data points that
     #   specify a unit of measure, such as Percent, are aggregated separately.
     #
-    #   If you specify a unit, you must use a unit that is appropriate for the
-    #   metric. Otherwise, the CloudWatch alarm can get stuck in the
-    #   `INSUFFICIENT DATA` state.
+    #   If you don't specify `Unit`, CloudWatch retrieves all unit types that
+    #   have been published for the metric and attempts to evaluate the alarm.
+    #   Usually metrics are published with only one unit, so the alarm will
+    #   work as intended.
+    #
+    #   However, if the metric is published with multiple types of units and
+    #   you don't specify a unit, the alarm's behavior is not defined and
+    #   will behave un-predictably.
+    #
+    #   We recommend omitting `Unit` so that you don't inadvertently specify
+    #   an incorrect unit that is not published for this metric. Doing so
+    #   causes the alarm to be stuck in the `INSUFFICIENT DATA` state.
     # @option options [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
     #   threshold. If you are setting an alarm that requires that a number of
@@ -484,6 +500,9 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
     # @option options [Float] :threshold
     #   The value against which the specified statistic is compared.
+    #
+    #   This parameter is required for alarms based on static thresholds, but
+    #   should not be used for alarms based on anomaly detection models.
     # @option options [required, String] :comparison_operator
     #   The arithmetic operation to use when comparing the specified statistic
     #   and threshold. The specified statistic value is used as the first
@@ -519,9 +538,12 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
     # @option options [Array<Types::MetricDataQuery>] :metrics
     #   An array of `MetricDataQuery` structures that enable you to create an
-    #   alarm based on the result of a metric math expression. Each item in
-    #   the `Metrics` array either retrieves a metric or performs a math
-    #   expression.
+    #   alarm based on the result of a metric math expression. For each
+    #   `PutMetricAlarm` operation, you must specify either `MetricName` or a
+    #   `Metrics` array.
+    #
+    #   Each item in the `Metrics` array either retrieves a metric or performs
+    #   a math expression.
     #
     #   One item in the `Metrics` array is the expression that the alarm
     #   watches. You designate this expression by setting `ReturnValue` to

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-08-12)
+------------------
+
+* Feature - Documentation updates for Application Auto Scaling
+
 1.28.0 (2019-07-25)
 ------------------
 

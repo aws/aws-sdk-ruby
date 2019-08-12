@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-08-12)
+------------------
+
+* Feature - Documentation updates for monitoring
+
 1.27.0 (2019-07-25)
 ------------------
 
