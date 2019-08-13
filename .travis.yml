@@ -12,7 +12,7 @@ rvm:
   - 2.4
   - 2.5
   - 2.6
-  - jruby-9.1.16.0
+  - jruby
 
 sudo: false
 
@@ -35,6 +35,8 @@ matrix:
       env: OLD_OX=1
     - rvm: 2.5
       env: NO_H2=1
+  allow_failures:
+    - rvm: jruby
 
 notifications:
   webhooks:
