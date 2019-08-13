@@ -511,6 +511,7 @@ module Aws::AppSync
     #         log_config: {
     #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #           cloud_watch_logs_role_arn: "String", # required
+    #           exclude_verbose_content: false,
     #         },
     #         authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #         user_pool_config: {
@@ -1898,6 +1899,7 @@ module Aws::AppSync
     #       {
     #         field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #         cloud_watch_logs_role_arn: "String", # required
+    #         exclude_verbose_content: false,
     #       }
     #
     # @!attribute [rw] field_log_level
@@ -1929,11 +1931,18 @@ module Aws::AppSync
     #   CloudWatch logs in your account.
     #   @return [String]
     #
+    # @!attribute [rw] exclude_verbose_content
+    #   Set to TRUE to exclude sections that contain information such as
+    #   headers, context, and evaluated mapping templates, regardless of
+    #   logging level.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LogConfig AWS API Documentation
     #
     class LogConfig < Struct.new(
       :field_log_level,
-      :cloud_watch_logs_role_arn)
+      :cloud_watch_logs_role_arn,
+      :exclude_verbose_content)
       include Aws::Structure
     end
 
@@ -2534,6 +2543,7 @@ module Aws::AppSync
     #         log_config: {
     #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #           cloud_watch_logs_role_arn: "String", # required
+    #           exclude_verbose_content: false,
     #         },
     #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #         user_pool_config: {

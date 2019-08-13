@@ -508,6 +508,7 @@ module Aws::AppSync
     #     log_config: {
     #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #       cloud_watch_logs_role_arn: "String", # required
+    #       exclude_verbose_content: false,
     #     },
     #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #     user_pool_config: {
@@ -550,6 +551,7 @@ module Aws::AppSync
     #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
     #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
+    #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
@@ -980,6 +982,7 @@ module Aws::AppSync
     #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
     #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
+    #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
@@ -1352,6 +1355,7 @@ module Aws::AppSync
     #   resp.graphql_apis[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
     #   resp.graphql_apis[0].log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_apis[0].log_config.cloud_watch_logs_role_arn #=> String
+    #   resp.graphql_apis[0].log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_apis[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_apis[0].user_pool_config.aws_region #=> String
     #   resp.graphql_apis[0].user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
@@ -1914,6 +1918,7 @@ module Aws::AppSync
     #     log_config: {
     #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #       cloud_watch_logs_role_arn: "String", # required
+    #       exclude_verbose_content: false,
     #     },
     #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #     user_pool_config: {
@@ -1953,6 +1958,7 @@ module Aws::AppSync
     #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
     #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
+    #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
@@ -2117,7 +2123,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

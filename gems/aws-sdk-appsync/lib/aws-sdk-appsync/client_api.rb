@@ -491,6 +491,7 @@ module Aws::AppSync
 
     LogConfig.add_member(:field_log_level, Shapes::ShapeRef.new(shape: FieldLogLevel, required: true, location_name: "fieldLogLevel"))
     LogConfig.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudWatchLogsRoleArn"))
+    LogConfig.add_member(:exclude_verbose_content, Shapes::ShapeRef.new(shape: Boolean, location_name: "excludeVerboseContent"))
     LogConfig.struct_class = Types::LogConfig
 
     MapOfStringToString.key = Shapes::ShapeRef.new(shape: String)
