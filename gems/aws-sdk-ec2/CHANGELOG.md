@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2019-08-14)
+------------------
+
+* Feature - This release adds a new API called SendDiagnosticInterrupt, which allows you to send diagnostic interrupts to your EC2 instance.
+
 1.103.0 (2019-08-05)
 ------------------
 

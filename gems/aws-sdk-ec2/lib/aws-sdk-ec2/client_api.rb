@@ -1306,6 +1306,7 @@ module Aws::EC2
     SecurityGroupReference = Shapes::StructureShape.new(name: 'SecurityGroupReference')
     SecurityGroupReferences = Shapes::ListShape.new(name: 'SecurityGroupReferences')
     SecurityGroupStringList = Shapes::ListShape.new(name: 'SecurityGroupStringList')
+    SendDiagnosticInterruptRequest = Shapes::StructureShape.new(name: 'SendDiagnosticInterruptRequest')
     ServiceConfiguration = Shapes::StructureShape.new(name: 'ServiceConfiguration')
     ServiceConfigurationSet = Shapes::ListShape.new(name: 'ServiceConfigurationSet')
     ServiceDetail = Shapes::StructureShape.new(name: 'ServiceDetail')
@@ -7038,6 +7039,10 @@ module Aws::EC2
 
     SecurityGroupStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "SecurityGroup")
 
+    SendDiagnosticInterruptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
+    SendDiagnosticInterruptRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    SendDiagnosticInterruptRequest.struct_class = Types::SendDiagnosticInterruptRequest
+
     ServiceConfiguration.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceTypeDetailSet, location_name: "serviceType"))
     ServiceConfiguration.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
     ServiceConfiguration.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
@@ -11176,6 +11181,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SearchTransitGatewayRoutesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchTransitGatewayRoutesResult)
+      end)
+
+      api.add_operation(:send_diagnostic_interrupt, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendDiagnosticInterrupt"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendDiagnosticInterruptRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:start_instances, Seahorse::Model::Operation.new.tap do |o|
