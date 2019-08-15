@@ -250,6 +250,7 @@ module Aws
             opts[:role_session_name] ||= prof_cfg["role_session_name"]
             opts[:role_session_name] ||= "default_session"
             opts[:role_arn] ||= prof_cfg["role_arn"]
+            opts[:duration_seconds] ||= prof_cfg["duration_seconds"]
             opts[:external_id] ||= prof_cfg["external_id"]
             opts[:serial_number] ||= prof_cfg["mfa_serial"]
             opts[:profile] = opts.delete(:source_profile)
@@ -269,6 +270,7 @@ module Aws
             opts[:role_session_name] ||= prof_cfg["role_session_name"]
             opts[:role_session_name] ||= "default_session"
             opts[:role_arn] ||= prof_cfg["role_arn"]
+            opts[:duration_seconds] ||= prof_cfg["duration_seconds"]
             opts[:external_id] ||= prof_cfg["external_id"]
             opts[:serial_number] ||= prof_cfg["mfa_serial"]
             opts.delete(:source_profile) # Cleanup
