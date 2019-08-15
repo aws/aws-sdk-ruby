@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.334 (2019-08-15)
+------------------
+
 * Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
 
 * Feature - Aws::Athena - Updated the API, and documentation for Amazon Athena.
