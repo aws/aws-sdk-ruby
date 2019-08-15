@@ -1098,10 +1098,13 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
-    #   A list of users or groups in the Active Directory that have
-    #   administrator rights to the file share. A group must be prefixed
-    #   with the @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   A list of users in the Active Directory that will be granted
+    #   administrator privileges on the file share. These users can do all
+    #   file operations as the super-user.
+    #
+    #   Use this option very carefully, because any user in this list can do
+    #   anything they like on the file share, regardless of file
+    #   permissions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] valid_user_list
@@ -1179,6 +1182,12 @@ module Aws::StorageGateway
     #       {
     #         volume_arn: "VolumeARN", # required
     #         snapshot_description: "SnapshotDescription", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] volume_arn
@@ -1194,11 +1203,24 @@ module Aws::StorageGateway
     #   **Description** field
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPointInput AWS API Documentation
     #
     class CreateSnapshotFromVolumeRecoveryPointInput < Struct.new(
       :volume_arn,
-      :snapshot_description)
+      :snapshot_description,
+      :tags)
       include Aws::Structure
     end
 
@@ -2498,14 +2520,21 @@ module Aws::StorageGateway
     # @!attribute [rw] smb_security_strategy
     #   The type of security strategy that was specified for file gateway.
     #
-    #   ClientSpecified: SMBv1 is enabled, SMB signing is offered but not
-    #   required, SMB encryption is offered but not required.
+    #   ClientSpecified: if you use this option, requests are established
+    #   based on what is negotiated by the client. This option is
+    #   recommended when you want to maximize compatibility across different
+    #   clients in your environment.
     #
-    #   MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB
-    #   encryption is offered but not required.
+    #   MandatorySigning: if you use this option, file gateway only allows
+    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
+    #   This option works with SMB clients on Microsoft Windows Vista,
+    #   Windows Server 2008 or newer.
     #
-    #   MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but
-    #   not required, SMB encryption is required.
+    #   MandatoryEncryption: if you use this option, file gateway only
+    #   allows connections from SMBv3 clients that have encryption enabled.
+    #   This option is highly recommended for environments that handle
+    #   sensitive data. This option works with SMB clients on Microsoft
+    #   Windows 8, Windows Server 2012 or newer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsOutput AWS API Documentation
@@ -2563,6 +2592,13 @@ module Aws::StorageGateway
     #   A value that indicates the time zone of the gateway.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags assigned to the snapshot schedule, sorted
+    #   alphabetically by key name. Each tag is a key-value pair. For a
+    #   gateway with more than 10 tags assigned, you can view all tags using
+    #   the `ListTagsForResource` API operation.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotScheduleOutput AWS API Documentation
     #
     class DescribeSnapshotScheduleOutput < Struct.new(
@@ -2570,7 +2606,8 @@ module Aws::StorageGateway
       :start_at,
       :recurrence_in_hours,
       :description,
-      :timezone)
+      :timezone,
+      :tags)
       include Aws::Structure
     end
 
@@ -3353,7 +3390,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit
-    #   The organizational unit (OU) is a container with an Active Directory
+    #   The organizational unit (OU) is a container in an Active Directory
     #   that can hold users, groups, computers, and other OUs and this
     #   parameter specifies the OU that the gateway will join within the AD
     #   domain.
@@ -5537,10 +5574,10 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
-    #   A list of users or groups in the Active Directory that have
-    #   administrator rights to the file share. A group must be prefixed
-    #   with the @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   A list of users in the Active Directory that have administrator
+    #   rights to the file share. A group must be prefixed with the @
+    #   character. For example `@group1`. Can only be set if Authentication
+    #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] valid_user_list
@@ -5604,14 +5641,21 @@ module Aws::StorageGateway
     # @!attribute [rw] smb_security_strategy
     #   Specifies the type of security strategy.
     #
-    #   ClientSpecified: SMBv1 is enabled, SMB signing is offered but not
-    #   required, SMB encryption is offered but not required.
+    #   ClientSpecified: if you use this option, requests are established
+    #   based on what is negotiated by the client. This option is
+    #   recommended when you want to maximize compatibility across different
+    #   clients in your environment.
     #
-    #   MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB
-    #   encryption is offered but not required.
+    #   MandatorySigning: if you use this option, file gateway only allows
+    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
+    #   This option works with SMB clients on Microsoft Windows Vista,
+    #   Windows Server 2008 or newer.
     #
-    #   MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but
-    #   not required, SMB encryption is required.
+    #   MandatoryEncryption: if you use this option, file gateway only
+    #   allows connections from SMBv3 clients that have encryption enabled.
+    #   This option is highly recommended for environments that handle
+    #   sensitive data. This option works with SMB clients on Microsoft
+    #   Windows 8, Windows Server 2012 or newer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBSecurityStrategyInput AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2019-08-15)
+------------------
+
+* Feature - GetJobBookmarks API is withdrawn.
+
 1.42.0 (2019-08-08)
 ------------------
 

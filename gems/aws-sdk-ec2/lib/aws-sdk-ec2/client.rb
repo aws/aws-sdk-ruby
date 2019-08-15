@@ -3666,9 +3666,12 @@ module Aws::EC2
     #
     #   Default: 65000
     #
-    # @option params [required, String] :public_ip
+    # @option params [String] :public_ip
     #   The Internet-routable IP address for the customer gateway's outside
     #   interface. The address must be static.
+    #
+    # @option params [String] :certificate_arn
+    #   The Amazon Resource Name (ARN) for the customer gateway certificate.
     #
     # @option params [required, String] :type
     #   The type of VPN connection that this customer gateway supports
@@ -3710,7 +3713,8 @@ module Aws::EC2
     #
     #   resp = client.create_customer_gateway({
     #     bgp_asn: 1, # required
-    #     public_ip: "String", # required
+    #     public_ip: "String",
+    #     certificate_arn: "String",
     #     type: "ipsec.1", # required, accepts ipsec.1
     #     dry_run: false,
     #   })
@@ -3720,6 +3724,7 @@ module Aws::EC2
     #   resp.customer_gateway.bgp_asn #=> String
     #   resp.customer_gateway.customer_gateway_id #=> String
     #   resp.customer_gateway.ip_address #=> String
+    #   resp.customer_gateway.certificate_arn #=> String
     #   resp.customer_gateway.state #=> String
     #   resp.customer_gateway.type #=> String
     #   resp.customer_gateway.tags #=> Array
@@ -8548,6 +8553,7 @@ module Aws::EC2
     #   resp.vpn_connection.vgw_telemetry[0].outside_ip_address #=> String
     #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnection AWS API Documentation
     #
@@ -11959,6 +11965,7 @@ module Aws::EC2
     #   resp.customer_gateways[0].bgp_asn #=> String
     #   resp.customer_gateways[0].customer_gateway_id #=> String
     #   resp.customer_gateways[0].ip_address #=> String
+    #   resp.customer_gateways[0].certificate_arn #=> String
     #   resp.customer_gateways[0].state #=> String
     #   resp.customer_gateways[0].type #=> String
     #   resp.customer_gateways[0].tags #=> Array
@@ -21870,6 +21877,7 @@ module Aws::EC2
     #   resp.vpn_connections[0].vgw_telemetry[0].outside_ip_address #=> String
     #   resp.vpn_connections[0].vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connections[0].vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connections[0].vgw_telemetry[0].certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnections AWS API Documentation
     #
@@ -27062,9 +27070,7 @@ module Aws::EC2
     #
     # @option params [String] :policy_document
     #   A policy to attach to the endpoint that controls access to the
-    #   service. The policy must be in valid JSON format. If this parameter is
-    #   not specified, we attach a default policy that allows full access to
-    #   the service.
+    #   service. The policy must be in valid JSON format.
     #
     # @option params [Array<String>] :add_route_table_ids
     #   (Gateway endpoint) One or more route tables IDs to associate with the
@@ -27470,6 +27476,9 @@ module Aws::EC2
     # @option params [String] :transit_gateway_id
     #   The ID of the transit gateway.
     #
+    # @option params [String] :customer_gateway_id
+    #   The ID of the customer gateway at your end of the VPN connection.
+    #
     # @option params [String] :vpn_gateway_id
     #   The ID of the virtual private gateway at the AWS side of the VPN
     #   connection.
@@ -27489,6 +27498,7 @@ module Aws::EC2
     #   resp = client.modify_vpn_connection({
     #     vpn_connection_id: "String", # required
     #     transit_gateway_id: "String",
+    #     customer_gateway_id: "String",
     #     vpn_gateway_id: "String",
     #     dry_run: false,
     #   })
@@ -27517,6 +27527,7 @@ module Aws::EC2
     #   resp.vpn_connection.vgw_telemetry[0].outside_ip_address #=> String
     #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnection AWS API Documentation
     #
@@ -27524,6 +27535,67 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_vpn_connection(params = {}, options = {})
       req = build_request(:modify_vpn_connection, params)
+      req.send_request(options)
+    end
+
+    # Modifies the VPN tunnel endpoint certificate.
+    #
+    # @option params [required, String] :vpn_connection_id
+    #   The ID of the AWS Site-to-Site VPN connection.
+    #
+    # @option params [required, String] :vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyVpnTunnelCertificateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpnTunnelCertificateResult#vpn_connection #vpn_connection} => Types::VpnConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpn_tunnel_certificate({
+    #     vpn_connection_id: "String", # required
+    #     vpn_tunnel_outside_ip_address: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.category #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
+    #   resp.vpn_connection.transit_gateway_id #=> String
+    #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.routes #=> Array
+    #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
+    #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
+    #   resp.vpn_connection.routes[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.tags #=> Array
+    #   resp.vpn_connection.tags[0].key #=> String
+    #   resp.vpn_connection.tags[0].value #=> String
+    #   resp.vpn_connection.vgw_telemetry #=> Array
+    #   resp.vpn_connection.vgw_telemetry[0].accepted_route_count #=> Integer
+    #   resp.vpn_connection.vgw_telemetry[0].last_status_change #=> Time
+    #   resp.vpn_connection.vgw_telemetry[0].outside_ip_address #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
+    #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelCertificate AWS API Documentation
+    #
+    # @overload modify_vpn_tunnel_certificate(params = {})
+    # @param [Hash] params ({})
+    def modify_vpn_tunnel_certificate(params = {}, options = {})
+      req = build_request(:modify_vpn_tunnel_certificate, params)
       req.send_request(options)
     end
 
@@ -32115,7 +32187,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-08-15)
+------------------
+
+* Feature - CreateSnapshotFromVolumeRecoveryPoint API supports new parameter: Tags (to be attached to the created resource)
+
 1.30.0 (2019-07-25)
 ------------------
 

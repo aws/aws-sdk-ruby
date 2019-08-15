@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2019-08-15)
+------------------
+
+* Feature - This release adds support for http header based routing and route prioritization.
+
 1.13.0 (2019-07-25)
 ------------------
 

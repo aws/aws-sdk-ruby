@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2019-08-15)
+------------------
+
+* Feature - This release adds an option to use private certificates from AWS Certificate Manager (ACM) to authenticate a Site-to-Site VPN connection's tunnel endpoints and customer gateway device.
+
 1.104.0 (2019-08-14)
 ------------------
 

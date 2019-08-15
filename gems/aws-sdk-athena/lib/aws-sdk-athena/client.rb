@@ -473,6 +473,7 @@ module Aws::Athena
     #       enforce_work_group_configuration: false,
     #       publish_cloud_watch_metrics_enabled: false,
     #       bytes_scanned_cutoff_per_query: 1,
+    #       requester_pays_enabled: false,
     #     },
     #     description: "WorkGroupDescriptionString",
     #     tags: [
@@ -713,6 +714,7 @@ module Aws::Athena
     #   resp.work_group.configuration.enforce_work_group_configuration #=> Boolean
     #   resp.work_group.configuration.publish_cloud_watch_metrics_enabled #=> Boolean
     #   resp.work_group.configuration.bytes_scanned_cutoff_per_query #=> Integer
+    #   resp.work_group.configuration.requester_pays_enabled #=> Boolean
     #   resp.work_group.description #=> String
     #   resp.work_group.creation_time #=> Time
     #
@@ -1131,6 +1133,7 @@ module Aws::Athena
     #       publish_cloud_watch_metrics_enabled: false,
     #       bytes_scanned_cutoff_per_query: 1,
     #       remove_bytes_scanned_cutoff_per_query: false,
+    #       requester_pays_enabled: false,
     #     },
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #   })
@@ -1157,7 +1160,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

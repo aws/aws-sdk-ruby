@@ -223,6 +223,7 @@ module Aws::Athena
     #           enforce_work_group_configuration: false,
     #           publish_cloud_watch_metrics_enabled: false,
     #           bytes_scanned_cutoff_per_query: 1,
+    #           requester_pays_enabled: false,
     #         },
     #         description: "WorkGroupDescriptionString",
     #         tags: [
@@ -924,8 +925,7 @@ module Aws::Athena
     # The location in Amazon S3 where query results are stored and the
     # encryption option, if any, used for query results. These are known as
     # "client-side settings". If workgroup settings override client-side
-    # settings, then the query uses the location for the query results and
-    # the encryption configuration that are specified for the workgroup.
+    # settings, then the query uses the workgroup settings.
     #
     # @note When making an API call, you may pass ResultConfiguration
     #   data as a hash:
@@ -940,13 +940,14 @@ module Aws::Athena
     #
     # @!attribute [rw] output_location
     #   The location in Amazon S3 where your query results are stored, such
-    #   as `s3://path/to/query/bucket/`. For more information, see [Queries
-    #   and Query Result Files.][1] If workgroup settings override
-    #   client-side settings, then the query uses the location for the query
-    #   results and the encryption configuration that are specified for the
-    #   workgroup. The "workgroup settings override" is specified in
-    #   EnforceWorkGroupConfiguration (true/false) in the
-    #   WorkGroupConfiguration. See
+    #   as `s3://path/to/query/bucket/`. To run the query, you must specify
+    #   the query results location using one of the ways: either for
+    #   individual queries using either this setting (client-side), or in
+    #   the workgroup, using WorkGroupConfiguration. If none of them is set,
+    #   Athena issues an error that no output location is provided. For more
+    #   information, see [Query Results][1]. If workgroup settings override
+    #   client-side settings, then the query uses the settings specified for
+    #   the workgroup. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
     #
@@ -995,11 +996,11 @@ module Aws::Athena
     #
     # @!attribute [rw] output_location
     #   The location in Amazon S3 where your query results are stored, such
-    #   as `s3://path/to/query/bucket/`. For more information, see [Queries
-    #   and Query Result Files.][1] If workgroup settings override
-    #   client-side settings, then the query uses the location for the query
-    #   results and the encryption configuration that are specified for the
-    #   workgroup. The "workgroup settings override" is specified in
+    #   as `s3://path/to/query/bucket/`. For more information, see [Query
+    #   Results][1] If workgroup settings override client-side settings,
+    #   then the query uses the location for the query results and the
+    #   encryption configuration that are specified for the workgroup. The
+    #   "workgroup settings override" is specified in
     #   EnforceWorkGroupConfiguration (true/false) in the
     #   WorkGroupConfiguration. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
@@ -1400,6 +1401,7 @@ module Aws::Athena
     #           publish_cloud_watch_metrics_enabled: false,
     #           bytes_scanned_cutoff_per_query: 1,
     #           remove_bytes_scanned_cutoff_per_query: false,
+    #           requester_pays_enabled: false,
     #         },
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #       }
@@ -1460,8 +1462,8 @@ module Aws::Athena
     #   Amazon S3 where query results are stored, the encryption
     #   configuration, if any, used for query results; whether the Amazon
     #   CloudWatch Metrics are enabled for the workgroup; whether workgroup
-    #   settings override client-side settings; and the data usage limit for
-    #   the amount of data scanned per query, if it is specified. The
+    #   settings override client-side settings; and the data usage limits
+    #   for the amount of data scanned per query or per workgroup. The
     #   workgroup settings override is specified in
     #   EnforceWorkGroupConfiguration (true/false) in the
     #   WorkGroupConfiguration. See
@@ -1491,9 +1493,9 @@ module Aws::Athena
     # Amazon S3 where query results are stored, the encryption option, if
     # any, used for query results, whether the Amazon CloudWatch Metrics are
     # enabled for the workgroup and whether workgroup settings override
-    # query settings, and the data usage limit for the amount of data
-    # scanned per query, if it is specified. The workgroup settings override
-    # is specified in EnforceWorkGroupConfiguration (true/false) in the
+    # query settings, and the data usage limits for the amount of data
+    # scanned per query or per workgroup. The workgroup settings override is
+    # specified in EnforceWorkGroupConfiguration (true/false) in the
     # WorkGroupConfiguration. See
     # WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
@@ -1511,12 +1513,22 @@ module Aws::Athena
     #         enforce_work_group_configuration: false,
     #         publish_cloud_watch_metrics_enabled: false,
     #         bytes_scanned_cutoff_per_query: 1,
+    #         requester_pays_enabled: false,
     #       }
     #
     # @!attribute [rw] result_configuration
     #   The configuration for the workgroup, which includes the location in
     #   Amazon S3 where query results are stored and the encryption option,
-    #   if any, used for query results.
+    #   if any, used for query results. To run the query, you must specify
+    #   the query results location using one of the ways: either in the
+    #   workgroup using this setting, or for individual queries
+    #   (client-side), using ResultConfiguration$OutputLocation. If none of
+    #   them is set, Athena issues an error that no output location is
+    #   provided. For more information, see [Query Results][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
     #   @return [Types::ResultConfiguration]
     #
     # @!attribute [rw] enforce_work_group_configuration
@@ -1540,13 +1552,28 @@ module Aws::Athena
     #   query in a workgroup is allowed to scan.
     #   @return [Integer]
     #
+    # @!attribute [rw] requester_pays_enabled
+    #   If set to `true`, allows members assigned to a workgroup to
+    #   reference Amazon S3 Requester Pays buckets in queries. If set to
+    #   `false`, workgroup members cannot query data from Requester Pays
+    #   buckets, and queries that retrieve data from Requester Pays buckets
+    #   cause an error. The default is `false`. For more information about
+    #   Requester Pays buckets, see [Requester Pays Buckets][1] in the
+    #   *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfiguration AWS API Documentation
     #
     class WorkGroupConfiguration < Struct.new(
       :result_configuration,
       :enforce_work_group_configuration,
       :publish_cloud_watch_metrics_enabled,
-      :bytes_scanned_cutoff_per_query)
+      :bytes_scanned_cutoff_per_query,
+      :requester_pays_enabled)
       include Aws::Structure
     end
 
@@ -1575,6 +1602,7 @@ module Aws::Athena
     #         publish_cloud_watch_metrics_enabled: false,
     #         bytes_scanned_cutoff_per_query: 1,
     #         remove_bytes_scanned_cutoff_per_query: false,
+    #         requester_pays_enabled: false,
     #       }
     #
     # @!attribute [rw] enforce_work_group_configuration
@@ -1609,6 +1637,20 @@ module Aws::Athena
     #   WorkGroupConfiguration$BytesScannedCutoffPerQuery
     #   @return [Boolean]
     #
+    # @!attribute [rw] requester_pays_enabled
+    #   If set to `true`, allows members assigned to a workgroup to specify
+    #   Amazon S3 Requester Pays buckets in queries. If set to `false`,
+    #   workgroup members cannot query data from Requester Pays buckets, and
+    #   queries that retrieve data from Requester Pays buckets cause an
+    #   error. The default is `false`. For more information about Requester
+    #   Pays buckets, see [Requester Pays Buckets][1] in the *Amazon Simple
+    #   Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfigurationUpdates AWS API Documentation
     #
     class WorkGroupConfigurationUpdates < Struct.new(
@@ -1616,7 +1658,8 @@ module Aws::Athena
       :result_configuration_updates,
       :publish_cloud_watch_metrics_enabled,
       :bytes_scanned_cutoff_per_query,
-      :remove_bytes_scanned_cutoff_per_query)
+      :remove_bytes_scanned_cutoff_per_query,
+      :requester_pays_enabled)
       include Aws::Structure
     end
 

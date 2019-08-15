@@ -5211,55 +5211,6 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetJobBookmarksRequest
-    #   data as a hash:
-    #
-    #       {
-    #         job_name: "JobName", # required
-    #         max_results: 1,
-    #         next_token: 1,
-    #       }
-    #
-    # @!attribute [rw] job_name
-    #   The name of the job in question.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum size of the response.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   A continuation token, if this is a continuation call.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobBookmarksRequest AWS API Documentation
-    #
-    class GetJobBookmarksRequest < Struct.new(
-      :job_name,
-      :max_results,
-      :next_token)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] job_bookmark_entries
-    #   A list of job bookmark entries that defines a point that a job can
-    #   resume processing.
-    #   @return [Array<Types::JobBookmarkEntry>]
-    #
-    # @!attribute [rw] next_token
-    #   A continuation token, which has a value of 1 if all the entries are
-    #   returned, or &gt; 1 if not all requested job runs have been
-    #   returned.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobBookmarksResponse AWS API Documentation
-    #
-    class GetJobBookmarksResponse < Struct.new(
-      :job_bookmark_entries,
-      :next_token)
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass GetJobRequest
     #   data as a hash:
     #

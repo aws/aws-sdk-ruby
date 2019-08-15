@@ -382,9 +382,28 @@ module Aws::AppMesh
     #           ],
     #         },
     #         match: { # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
     #           prefix: "String", # required
+    #           scheme: "http", # accepts http, https
     #         },
     #       },
+    #       priority: 1,
     #       tcp_route: {
     #         action: { # required
     #           weighted_targets: [ # required
@@ -417,7 +436,19 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http_route.match.headers #=> Array
+    #   resp.route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http_route.match.headers[0].name #=> String
+    #   resp.route.spec.http_route.match.method #=> String, one of "connect", "delete", "get", "head", "options", "patch", "post", "put", "trace"
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
@@ -831,7 +862,19 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http_route.match.headers #=> Array
+    #   resp.route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http_route.match.headers[0].name #=> String
+    #   resp.route.spec.http_route.match.method #=> String, one of "connect", "delete", "get", "head", "options", "patch", "post", "put", "trace"
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
@@ -1064,7 +1107,19 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http_route.match.headers #=> Array
+    #   resp.route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http_route.match.headers[0].name #=> String
+    #   resp.route.spec.http_route.match.method #=> String, one of "connect", "delete", "get", "head", "options", "patch", "post", "put", "trace"
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
@@ -1692,9 +1747,28 @@ module Aws::AppMesh
     #           ],
     #         },
     #         match: { # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
     #           prefix: "String", # required
+    #           scheme: "http", # accepts http, https
     #         },
     #       },
+    #       priority: 1,
     #       tcp_route: {
     #         action: { # required
     #           weighted_targets: [ # required
@@ -1721,7 +1795,19 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http_route.match.headers #=> Array
+    #   resp.route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http_route.match.headers[0].name #=> String
+    #   resp.route.spec.http_route.match.method #=> String, one of "connect", "delete", "get", "head", "options", "patch", "post", "put", "trace"
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
@@ -1998,7 +2084,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

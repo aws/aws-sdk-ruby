@@ -20,6 +20,10 @@ module Aws::CodeCommit
     BatchDescribeMergeConflictsErrors = Shapes::ListShape.new(name: 'BatchDescribeMergeConflictsErrors')
     BatchDescribeMergeConflictsInput = Shapes::StructureShape.new(name: 'BatchDescribeMergeConflictsInput')
     BatchDescribeMergeConflictsOutput = Shapes::StructureShape.new(name: 'BatchDescribeMergeConflictsOutput')
+    BatchGetCommitsError = Shapes::StructureShape.new(name: 'BatchGetCommitsError')
+    BatchGetCommitsErrorsList = Shapes::ListShape.new(name: 'BatchGetCommitsErrorsList')
+    BatchGetCommitsInput = Shapes::StructureShape.new(name: 'BatchGetCommitsInput')
+    BatchGetCommitsOutput = Shapes::StructureShape.new(name: 'BatchGetCommitsOutput')
     BatchGetRepositoriesInput = Shapes::StructureShape.new(name: 'BatchGetRepositoriesInput')
     BatchGetRepositoriesOutput = Shapes::StructureShape.new(name: 'BatchGetRepositoriesOutput')
     BeforeCommitIdAndAfterCommitIdAreSameException = Shapes::StructureShape.new(name: 'BeforeCommitIdAndAfterCommitIdAreSameException')
@@ -57,8 +61,12 @@ module Aws::CodeCommit
     CommitId = Shapes::StringShape.new(name: 'CommitId')
     CommitIdDoesNotExistException = Shapes::StructureShape.new(name: 'CommitIdDoesNotExistException')
     CommitIdRequiredException = Shapes::StructureShape.new(name: 'CommitIdRequiredException')
+    CommitIdsInputList = Shapes::ListShape.new(name: 'CommitIdsInputList')
+    CommitIdsLimitExceededException = Shapes::StructureShape.new(name: 'CommitIdsLimitExceededException')
+    CommitIdsListRequiredException = Shapes::StructureShape.new(name: 'CommitIdsListRequiredException')
     CommitMessageLengthExceededException = Shapes::StructureShape.new(name: 'CommitMessageLengthExceededException')
     CommitName = Shapes::StringShape.new(name: 'CommitName')
+    CommitObjectsList = Shapes::ListShape.new(name: 'CommitObjectsList')
     CommitRequiredException = Shapes::StructureShape.new(name: 'CommitRequiredException')
     ConcurrentReferenceUpdateException = Shapes::StructureShape.new(name: 'ConcurrentReferenceUpdateException')
     Conflict = Shapes::StructureShape.new(name: 'Conflict')
@@ -105,6 +113,8 @@ module Aws::CodeCommit
     EncryptionKeyDisabledException = Shapes::StructureShape.new(name: 'EncryptionKeyDisabledException')
     EncryptionKeyNotFoundException = Shapes::StructureShape.new(name: 'EncryptionKeyNotFoundException')
     EncryptionKeyUnavailableException = Shapes::StructureShape.new(name: 'EncryptionKeyUnavailableException')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventDate = Shapes::TimestampShape.new(name: 'EventDate')
     ExceptionName = Shapes::StringShape.new(name: 'ExceptionName')
     File = Shapes::StructureShape.new(name: 'File')
@@ -435,6 +445,21 @@ module Aws::CodeCommit
     BatchDescribeMergeConflictsOutput.add_member(:base_commit_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "baseCommitId"))
     BatchDescribeMergeConflictsOutput.struct_class = Types::BatchDescribeMergeConflictsOutput
 
+    BatchGetCommitsError.add_member(:commit_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
+    BatchGetCommitsError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    BatchGetCommitsError.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchGetCommitsError.struct_class = Types::BatchGetCommitsError
+
+    BatchGetCommitsErrorsList.member = Shapes::ShapeRef.new(shape: BatchGetCommitsError)
+
+    BatchGetCommitsInput.add_member(:commit_ids, Shapes::ShapeRef.new(shape: CommitIdsInputList, required: true, location_name: "commitIds"))
+    BatchGetCommitsInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    BatchGetCommitsInput.struct_class = Types::BatchGetCommitsInput
+
+    BatchGetCommitsOutput.add_member(:commits, Shapes::ShapeRef.new(shape: CommitObjectsList, location_name: "commits"))
+    BatchGetCommitsOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetCommitsErrorsList, location_name: "errors"))
+    BatchGetCommitsOutput.struct_class = Types::BatchGetCommitsOutput
+
     BatchGetRepositoriesInput.add_member(:repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, required: true, location_name: "repositoryNames"))
     BatchGetRepositoriesInput.struct_class = Types::BatchGetRepositoriesInput
 
@@ -496,6 +521,10 @@ module Aws::CodeCommit
     Commit.add_member(:committer, Shapes::ShapeRef.new(shape: UserInfo, location_name: "committer"))
     Commit.add_member(:additional_data, Shapes::ShapeRef.new(shape: AdditionalData, location_name: "additionalData"))
     Commit.struct_class = Types::Commit
+
+    CommitIdsInputList.member = Shapes::ShapeRef.new(shape: ObjectId)
+
+    CommitObjectsList.member = Shapes::ShapeRef.new(shape: Commit)
 
     Conflict.add_member(:conflict_metadata, Shapes::ShapeRef.new(shape: ConflictMetadata, location_name: "conflictMetadata"))
     Conflict.add_member(:merge_hunks, Shapes::ShapeRef.new(shape: MergeHunks, location_name: "mergeHunks"))
@@ -1325,6 +1354,24 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidConflictResolutionStrategyException)
         o.errors << Shapes::ShapeRef.new(shape: MaximumFileContentToLoadExceededException)
         o.errors << Shapes::ShapeRef.new(shape: MaximumItemsToCompareExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:batch_get_commits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetCommits"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetCommitsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetCommitsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: CommitIdsListRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: CommitIdsLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)

@@ -385,6 +385,61 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Returns information about the contents of one or more commits in a
+    # repository.
+    #
+    # @option params [required, Array<String>] :commit_ids
+    #   The full commit IDs of the commits to get information about.
+    #
+    #   <note markdown="1"> You must supply the full SHAs of each commit. You cannot use shortened
+    #   SHAs.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the commits.
+    #
+    # @return [Types::BatchGetCommitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCommitsOutput#commits #commits} => Array&lt;Types::Commit&gt;
+    #   * {Types::BatchGetCommitsOutput#errors #errors} => Array&lt;Types::BatchGetCommitsError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_commits({
+    #     commit_ids: ["ObjectId"], # required
+    #     repository_name: "RepositoryName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commits #=> Array
+    #   resp.commits[0].commit_id #=> String
+    #   resp.commits[0].tree_id #=> String
+    #   resp.commits[0].parents #=> Array
+    #   resp.commits[0].parents[0] #=> String
+    #   resp.commits[0].message #=> String
+    #   resp.commits[0].author.name #=> String
+    #   resp.commits[0].author.email #=> String
+    #   resp.commits[0].author.date #=> String
+    #   resp.commits[0].committer.name #=> String
+    #   resp.commits[0].committer.email #=> String
+    #   resp.commits[0].committer.date #=> String
+    #   resp.commits[0].additional_data #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].commit_id #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommits AWS API Documentation
+    #
+    # @overload batch_get_commits(params = {})
+    # @param [Hash] params ({})
+    def batch_get_commits(params = {}, options = {})
+      req = build_request(:batch_get_commits, params)
+      req.send_request(options)
+    end
+
     # Returns information about one or more repositories.
     #
     # <note markdown="1"> The description field for a repository accepts all HTML characters and
@@ -3578,7 +3633,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

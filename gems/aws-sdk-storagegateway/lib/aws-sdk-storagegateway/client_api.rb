@@ -468,6 +468,7 @@ module Aws::StorageGateway
 
     CreateSnapshotFromVolumeRecoveryPointInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     CreateSnapshotFromVolumeRecoveryPointInput.add_member(:snapshot_description, Shapes::ShapeRef.new(shape: SnapshotDescription, required: true, location_name: "SnapshotDescription"))
+    CreateSnapshotFromVolumeRecoveryPointInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSnapshotFromVolumeRecoveryPointInput.struct_class = Types::CreateSnapshotFromVolumeRecoveryPointInput
 
     CreateSnapshotFromVolumeRecoveryPointOutput.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
@@ -669,6 +670,7 @@ module Aws::StorageGateway
     DescribeSnapshotScheduleOutput.add_member(:recurrence_in_hours, Shapes::ShapeRef.new(shape: RecurrenceInHours, location_name: "RecurrenceInHours"))
     DescribeSnapshotScheduleOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DescribeSnapshotScheduleOutput.add_member(:timezone, Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "Timezone"))
+    DescribeSnapshotScheduleOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeSnapshotScheduleOutput.struct_class = Types::DescribeSnapshotScheduleOutput
 
     DescribeStorediSCSIVolumesInput.add_member(:volume_arns, Shapes::ShapeRef.new(shape: VolumeARNs, required: true, location_name: "VolumeARNs"))

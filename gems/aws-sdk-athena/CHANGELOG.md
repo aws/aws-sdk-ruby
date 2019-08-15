@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-08-15)
+------------------
+
+* Feature - This release adds support for querying S3 Requester Pays buckets. Users can enable this feature through their Workgroup settings.
+
 1.18.0 (2019-07-25)
 ------------------
 

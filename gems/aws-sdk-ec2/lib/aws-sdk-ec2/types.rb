@@ -4441,7 +4441,8 @@ module Aws::EC2
     #
     #       {
     #         bgp_asn: 1, # required
-    #         public_ip: "String", # required
+    #         public_ip: "String",
+    #         certificate_arn: "String",
     #         type: "ipsec.1", # required, accepts ipsec.1
     #         dry_run: false,
     #       }
@@ -4455,6 +4456,10 @@ module Aws::EC2
     # @!attribute [rw] public_ip
     #   The Internet-routable IP address for the customer gateway's outside
     #   interface. The address must be static.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) for the customer gateway certificate.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4474,6 +4479,7 @@ module Aws::EC2
     class CreateCustomerGatewayRequest < Struct.new(
       :bgp_asn,
       :public_ip,
+      :certificate_arn,
       :type,
       :dry_run)
       include Aws::Structure
@@ -8283,6 +8289,10 @@ module Aws::EC2
     #   interface.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) for the customer gateway certificate.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The current state of the customer gateway (`pending | available |
     #   deleting | deleted`).
@@ -8303,6 +8313,7 @@ module Aws::EC2
       :bgp_asn,
       :customer_gateway_id,
       :ip_address,
+      :certificate_arn,
       :state,
       :type,
       :tags)
@@ -28571,9 +28582,7 @@ module Aws::EC2
     #
     # @!attribute [rw] policy_document
     #   A policy to attach to the endpoint that controls access to the
-    #   service. The policy must be in valid JSON format. If this parameter
-    #   is not specified, we attach a default policy that allows full access
-    #   to the service.
+    #   service. The policy must be in valid JSON format.
     #   @return [String]
     #
     # @!attribute [rw] add_route_table_ids
@@ -28869,6 +28878,7 @@ module Aws::EC2
     #       {
     #         vpn_connection_id: "String", # required
     #         transit_gateway_id: "String",
+    #         customer_gateway_id: "String",
     #         vpn_gateway_id: "String",
     #         dry_run: false,
     #       }
@@ -28879,6 +28889,10 @@ module Aws::EC2
     #
     # @!attribute [rw] transit_gateway_id
     #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_gateway_id
+    #   The ID of the customer gateway at your end of the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] vpn_gateway_id
@@ -28898,6 +28912,7 @@ module Aws::EC2
     class ModifyVpnConnectionRequest < Struct.new(
       :vpn_connection_id,
       :transit_gateway_id,
+      :customer_gateway_id,
       :vpn_gateway_id,
       :dry_run)
       include Aws::Structure
@@ -28910,6 +28925,50 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionResult AWS API Documentation
     #
     class ModifyVpnConnectionResult < Struct.new(
+      :vpn_connection)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyVpnTunnelCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpn_connection_id: "String", # required
+    #         vpn_tunnel_outside_ip_address: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the AWS Site-to-Site VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelCertificateRequest AWS API Documentation
+    #
+    class ModifyVpnTunnelCertificateRequest < Struct.new(
+      :vpn_connection_id,
+      :vpn_tunnel_outside_ip_address,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection
+    #   Describes a VPN connection.
+    #   @return [Types::VpnConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelCertificateResult AWS API Documentation
+    #
+    class ModifyVpnTunnelCertificateResult < Struct.new(
       :vpn_connection)
       include Aws::Structure
     end
@@ -39495,6 +39554,11 @@ module Aws::EC2
     #   If an error occurs, a description of the error.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the VPN tunnel endpoint
+    #   certificate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VgwTelemetry AWS API Documentation
     #
     class VgwTelemetry < Struct.new(
@@ -39502,7 +39566,8 @@ module Aws::EC2
       :last_status_change,
       :outside_ip_address,
       :status,
-      :status_message)
+      :status_message,
+      :certificate_arn)
       include Aws::Structure
     end
 

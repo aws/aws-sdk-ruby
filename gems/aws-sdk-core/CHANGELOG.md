@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.63.0 (2019-08-15)
+------------------
+
 * Feature - Support passing AssumeRole `duration_seconds` from shared credentials/config file.
 
 3.62.0 (2019-08-02)

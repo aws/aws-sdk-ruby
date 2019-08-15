@@ -22,6 +22,7 @@ module Aws::AppMesh
     Backend = Shapes::StructureShape.new(name: 'Backend')
     Backends = Shapes::ListShape.new(name: 'Backends')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateMeshInput = Shapes::StructureShape.new(name: 'CreateMeshInput')
     CreateMeshOutput = Shapes::StructureShape.new(name: 'CreateMeshOutput')
@@ -59,14 +60,21 @@ module Aws::AppMesh
     FileAccessLog = Shapes::StructureShape.new(name: 'FileAccessLog')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    HeaderMatch = Shapes::StringShape.new(name: 'HeaderMatch')
+    HeaderMatchMethod = Shapes::StructureShape.new(name: 'HeaderMatchMethod')
+    HeaderName = Shapes::StringShape.new(name: 'HeaderName')
     HealthCheckIntervalMillis = Shapes::IntegerShape.new(name: 'HealthCheckIntervalMillis')
     HealthCheckPolicy = Shapes::StructureShape.new(name: 'HealthCheckPolicy')
     HealthCheckThreshold = Shapes::IntegerShape.new(name: 'HealthCheckThreshold')
     HealthCheckTimeoutMillis = Shapes::IntegerShape.new(name: 'HealthCheckTimeoutMillis')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
+    HttpMethod = Shapes::StringShape.new(name: 'HttpMethod')
     HttpRoute = Shapes::StructureShape.new(name: 'HttpRoute')
     HttpRouteAction = Shapes::StructureShape.new(name: 'HttpRouteAction')
+    HttpRouteHeader = Shapes::StructureShape.new(name: 'HttpRouteHeader')
+    HttpRouteHeaders = Shapes::ListShape.new(name: 'HttpRouteHeaders')
     HttpRouteMatch = Shapes::StructureShape.new(name: 'HttpRouteMatch')
+    HttpScheme = Shapes::StringShape.new(name: 'HttpScheme')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListMeshesInput = Shapes::StructureShape.new(name: 'ListMeshesInput')
@@ -90,6 +98,7 @@ module Aws::AppMesh
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     Logging = Shapes::StructureShape.new(name: 'Logging')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MatchRange = Shapes::StructureShape.new(name: 'MatchRange')
     MeshData = Shapes::StructureShape.new(name: 'MeshData')
     MeshList = Shapes::ListShape.new(name: 'MeshList')
     MeshRef = Shapes::StructureShape.new(name: 'MeshRef')
@@ -106,6 +115,7 @@ module Aws::AppMesh
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     RouteData = Shapes::StructureShape.new(name: 'RouteData')
     RouteList = Shapes::ListShape.new(name: 'RouteList')
+    RoutePriority = Shapes::IntegerShape.new(name: 'RoutePriority')
     RouteRef = Shapes::StructureShape.new(name: 'RouteRef')
     RouteSpec = Shapes::StructureShape.new(name: 'RouteSpec')
     RouteStatus = Shapes::StructureShape.new(name: 'RouteStatus')
@@ -353,6 +363,13 @@ module Aws::AppMesh
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
+    HeaderMatchMethod.add_member(:exact, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "exact"))
+    HeaderMatchMethod.add_member(:prefix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "prefix"))
+    HeaderMatchMethod.add_member(:range, Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
+    HeaderMatchMethod.add_member(:regex, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
+    HeaderMatchMethod.add_member(:suffix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
+    HeaderMatchMethod.struct_class = Types::HeaderMatchMethod
+
     HealthCheckPolicy.add_member(:healthy_threshold, Shapes::ShapeRef.new(shape: HealthCheckThreshold, required: true, location_name: "healthyThreshold"))
     HealthCheckPolicy.add_member(:interval_millis, Shapes::ShapeRef.new(shape: HealthCheckIntervalMillis, required: true, location_name: "intervalMillis"))
     HealthCheckPolicy.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
@@ -369,7 +386,17 @@ module Aws::AppMesh
     HttpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
     HttpRouteAction.struct_class = Types::HttpRouteAction
 
+    HttpRouteHeader.add_member(:invert, Shapes::ShapeRef.new(shape: Boolean, location_name: "invert"))
+    HttpRouteHeader.add_member(:match, Shapes::ShapeRef.new(shape: HeaderMatchMethod, location_name: "match"))
+    HttpRouteHeader.add_member(:name, Shapes::ShapeRef.new(shape: HeaderName, required: true, location_name: "name"))
+    HttpRouteHeader.struct_class = Types::HttpRouteHeader
+
+    HttpRouteHeaders.member = Shapes::ShapeRef.new(shape: HttpRouteHeader)
+
+    HttpRouteMatch.add_member(:headers, Shapes::ShapeRef.new(shape: HttpRouteHeaders, location_name: "headers"))
+    HttpRouteMatch.add_member(:method, Shapes::ShapeRef.new(shape: HttpMethod, location_name: "method"))
     HttpRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "prefix"))
+    HttpRouteMatch.add_member(:scheme, Shapes::ShapeRef.new(shape: HttpScheme, location_name: "scheme"))
     HttpRouteMatch.struct_class = Types::HttpRouteMatch
 
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -441,6 +468,10 @@ module Aws::AppMesh
     Logging.add_member(:access_log, Shapes::ShapeRef.new(shape: AccessLog, location_name: "accessLog"))
     Logging.struct_class = Types::Logging
 
+    MatchRange.add_member(:end, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "end"))
+    MatchRange.add_member(:start, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "start"))
+    MatchRange.struct_class = Types::MatchRange
+
     MeshData.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     MeshData.add_member(:metadata, Shapes::ShapeRef.new(shape: ResourceMetadata, required: true, location_name: "metadata"))
     MeshData.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, required: true, location_name: "spec"))
@@ -493,6 +524,7 @@ module Aws::AppMesh
     RouteRef.struct_class = Types::RouteRef
 
     RouteSpec.add_member(:http_route, Shapes::ShapeRef.new(shape: HttpRoute, location_name: "httpRoute"))
+    RouteSpec.add_member(:priority, Shapes::ShapeRef.new(shape: RoutePriority, location_name: "priority"))
     RouteSpec.add_member(:tcp_route, Shapes::ShapeRef.new(shape: TcpRoute, location_name: "tcpRoute"))
     RouteSpec.struct_class = Types::RouteSpec
 
@@ -969,9 +1001,11 @@ module Aws::AppMesh
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1047,9 +1081,11 @@ module Aws::AppMesh
         o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
@@ -1060,9 +1096,11 @@ module Aws::AppMesh
         o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_mesh, Seahorse::Model::Operation.new.tap do |o|

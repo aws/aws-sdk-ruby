@@ -258,8 +258,6 @@ module Aws::Glue
     GetDevEndpointsResponse = Shapes::StructureShape.new(name: 'GetDevEndpointsResponse')
     GetJobBookmarkRequest = Shapes::StructureShape.new(name: 'GetJobBookmarkRequest')
     GetJobBookmarkResponse = Shapes::StructureShape.new(name: 'GetJobBookmarkResponse')
-    GetJobBookmarksRequest = Shapes::StructureShape.new(name: 'GetJobBookmarksRequest')
-    GetJobBookmarksResponse = Shapes::StructureShape.new(name: 'GetJobBookmarksResponse')
     GetJobRequest = Shapes::StructureShape.new(name: 'GetJobRequest')
     GetJobResponse = Shapes::StructureShape.new(name: 'GetJobResponse')
     GetJobRunRequest = Shapes::StructureShape.new(name: 'GetJobRunRequest')
@@ -339,7 +337,6 @@ module Aws::Glue
     JdbcTargetList = Shapes::ListShape.new(name: 'JdbcTargetList')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobBookmarkEntry = Shapes::StructureShape.new(name: 'JobBookmarkEntry')
-    JobBookmarkEntryList = Shapes::ListShape.new(name: 'JobBookmarkEntryList')
     JobBookmarksEncryption = Shapes::StructureShape.new(name: 'JobBookmarksEncryption')
     JobBookmarksEncryptionMode = Shapes::StringShape.new(name: 'JobBookmarksEncryptionMode')
     JobCommand = Shapes::StructureShape.new(name: 'JobCommand')
@@ -1479,15 +1476,6 @@ module Aws::Glue
     GetJobBookmarkResponse.add_member(:job_bookmark_entry, Shapes::ShapeRef.new(shape: JobBookmarkEntry, location_name: "JobBookmarkEntry"))
     GetJobBookmarkResponse.struct_class = Types::GetJobBookmarkResponse
 
-    GetJobBookmarksRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
-    GetJobBookmarksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "MaxResults"))
-    GetJobBookmarksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NextToken"))
-    GetJobBookmarksRequest.struct_class = Types::GetJobBookmarksRequest
-
-    GetJobBookmarksResponse.add_member(:job_bookmark_entries, Shapes::ShapeRef.new(shape: JobBookmarkEntryList, location_name: "JobBookmarkEntries"))
-    GetJobBookmarksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NextToken"))
-    GetJobBookmarksResponse.struct_class = Types::GetJobBookmarksResponse
-
     GetJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "JobName"))
     GetJobRequest.struct_class = Types::GetJobRequest
 
@@ -1828,8 +1816,6 @@ module Aws::Glue
     JobBookmarkEntry.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "RunId"))
     JobBookmarkEntry.add_member(:job_bookmark, Shapes::ShapeRef.new(shape: JsonValue, location_name: "JobBookmark"))
     JobBookmarkEntry.struct_class = Types::JobBookmarkEntry
-
-    JobBookmarkEntryList.member = Shapes::ShapeRef.new(shape: JobBookmarkEntry)
 
     JobBookmarksEncryption.add_member(:job_bookmarks_encryption_mode, Shapes::ShapeRef.new(shape: JobBookmarksEncryptionMode, location_name: "JobBookmarksEncryptionMode"))
     JobBookmarksEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
@@ -3416,24 +3402,6 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-      end)
-
-      api.add_operation(:get_job_bookmarks, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetJobBookmarks"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetJobBookmarksRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetJobBookmarksResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
       end)
 
       api.add_operation(:get_job_run, Seahorse::Model::Operation.new.tap do |o|

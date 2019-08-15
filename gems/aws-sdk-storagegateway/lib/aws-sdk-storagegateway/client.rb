@@ -1272,10 +1272,12 @@ module Aws::StorageGateway
     #   in the Storage Gateway User Guide.
     #
     # @option params [Array<String>] :admin_user_list
-    #   A list of users or groups in the Active Directory that have
-    #   administrator rights to the file share. A group must be prefixed with
-    #   the @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   A list of users in the Active Directory that will be granted
+    #   administrator privileges on the file share. These users can do all
+    #   file operations as the super-user.
+    #
+    #   Use this option very carefully, because any user in this list can do
+    #   anything they like on the file share, regardless of file permissions.
     #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
@@ -1487,6 +1489,17 @@ module Aws::StorageGateway
     #   field, and in the AWS Storage Gateway snapshot **Details** pane,
     #   **Description** field
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters: +
+    #   - = . \_ : / @. The maximum length of a tag's key is 128 characters,
+    #   and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #
     # @return [Types::CreateSnapshotFromVolumeRecoveryPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSnapshotFromVolumeRecoveryPointOutput#snapshot_id #snapshot_id} => String
@@ -1515,6 +1528,12 @@ module Aws::StorageGateway
     #   resp = client.create_snapshot_from_volume_recovery_point({
     #     volume_arn: "VolumeARN", # required
     #     snapshot_description: "SnapshotDescription", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2925,6 +2944,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeSnapshotScheduleOutput#recurrence_in_hours #recurrence_in_hours} => Integer
     #   * {Types::DescribeSnapshotScheduleOutput#description #description} => String
     #   * {Types::DescribeSnapshotScheduleOutput#timezone #timezone} => String
+    #   * {Types::DescribeSnapshotScheduleOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To describe snapshot schedule for gateway volume
@@ -2958,6 +2978,9 @@ module Aws::StorageGateway
     #   resp.recurrence_in_hours #=> Integer
     #   resp.description #=> String
     #   resp.timezone #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotSchedule AWS API Documentation
     #
@@ -3707,7 +3730,7 @@ module Aws::StorageGateway
     #   The name of the domain that you want the gateway to join.
     #
     # @option params [String] :organizational_unit
-    #   The organizational unit (OU) is a container with an Active Directory
+    #   The organizational unit (OU) is a container in an Active Directory
     #   that can hold users, groups, computers, and other OUs and this
     #   parameter specifies the OU that the gateway will join within the AD
     #   domain.
@@ -4293,13 +4316,13 @@ module Aws::StorageGateway
     end
 
     # Sends you notification through CloudWatch Events when all files
-    # written to your NFS file share have been uploaded to Amazon S3.
+    # written to your file share have been uploaded to Amazon S3.
     #
     # AWS Storage Gateway can send a notification through Amazon CloudWatch
     # Events when all files written to your file share up to that point in
     # time have been uploaded to Amazon S3. These files include files
-    # written to the NFS file share up to the time that you make a request
-    # for notification. When the upload is done, Storage Gateway sends you
+    # written to the file share up to the time that you make a request for
+    # notification. When the upload is done, Storage Gateway sends you
     # notification through an Amazon CloudWatch Event. You can configure
     # CloudWatch Events to send the notification through event targets such
     # as Amazon SNS or AWS Lambda function. This operation is only supported
@@ -5405,10 +5428,10 @@ module Aws::StorageGateway
     #   the Storage Gateway User Guide.
     #
     # @option params [Array<String>] :admin_user_list
-    #   A list of users or groups in the Active Directory that have
-    #   administrator rights to the file share. A group must be prefixed with
-    #   the @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   A list of users in the Active Directory that have administrator rights
+    #   to the file share. A group must be prefixed with the @ character. For
+    #   example `@group1`. Can only be set if Authentication is set to
+    #   `ActiveDirectory`.
     #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
@@ -5459,6 +5482,12 @@ module Aws::StorageGateway
     # Updates the SMB security strategy on a file gateway. This action is
     # only supported in file gateways.
     #
+    # <note markdown="1"> This API is called Security level in the User Guide.
+    #
+    #  A higher security level can affect performance of the gateway.
+    #
+    #  </note>
+    #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
@@ -5466,14 +5495,21 @@ module Aws::StorageGateway
     # @option params [required, String] :smb_security_strategy
     #   Specifies the type of security strategy.
     #
-    #   ClientSpecified: SMBv1 is enabled, SMB signing is offered but not
-    #   required, SMB encryption is offered but not required.
+    #   ClientSpecified: if you use this option, requests are established
+    #   based on what is negotiated by the client. This option is recommended
+    #   when you want to maximize compatibility across different clients in
+    #   your environment.
     #
-    #   MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB
-    #   encryption is offered but not required.
+    #   MandatorySigning: if you use this option, file gateway only allows
+    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
+    #   This option works with SMB clients on Microsoft Windows Vista, Windows
+    #   Server 2008 or newer.
     #
-    #   MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not
-    #   required, SMB encryption is required.
+    #   MandatoryEncryption: if you use this option, file gateway only allows
+    #   connections from SMBv3 clients that have encryption enabled. This
+    #   option is highly recommended for environments that handle sensitive
+    #   data. This option works with SMB clients on Microsoft Windows 8,
+    #   Windows Server 2012 or newer.
     #
     # @return [Types::UpdateSMBSecurityStrategyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5655,7 +5691,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

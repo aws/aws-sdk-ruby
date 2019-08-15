@@ -881,6 +881,49 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object representing the HTTP header in the request.
+    #
+    # @note When making an API call, you may pass HttpRouteHeader
+    #   data as a hash:
+    #
+    #       {
+    #         invert: false,
+    #         match: {
+    #           exact: "HeaderMatch",
+    #           prefix: "HeaderMatch",
+    #           range: {
+    #             end: 1, # required
+    #             start: 1, # required
+    #           },
+    #           regex: "HeaderMatch",
+    #           suffix: "HeaderMatch",
+    #         },
+    #         name: "HeaderName", # required
+    #       }
+    #
+    # @!attribute [rw] invert
+    #   Specify `True` to match the opposite of the `HeaderMatchMethod`
+    #   method and value. The default value is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] match
+    #   The `HeaderMatchMethod` object.
+    #   @return [Types::HeaderMatchMethod]
+    #
+    # @!attribute [rw] name
+    #   A name for the HTTP header in the client request that will be
+    #   matched on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteHeader AWS API Documentation
+    #
+    class HttpRouteHeader < Struct.new(
+      :invert,
+      :match,
+      :name)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_service
     #   The full description of your virtual service.
     #   @return [Types::VirtualServiceData]
@@ -1212,6 +1255,34 @@ module Aws::AppMesh
     #
     class Backend < Struct.new(
       :virtual_service)
+      include Aws::Structure
+    end
+
+    # The range of values to match on. The first character of the range is
+    # included in the range, though the last character is not. For example,
+    # if the range specified were 1-100, only values 1-99 would be matched.
+    #
+    # @note When making an API call, you may pass MatchRange
+    #   data as a hash:
+    #
+    #       {
+    #         end: 1, # required
+    #         start: 1, # required
+    #       }
+    #
+    # @!attribute [rw] end
+    #   End of the range value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start
+    #   Start of the range value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MatchRange AWS API Documentation
+    #
+    class MatchRange < Struct.new(
+      :end,
+      :start)
       include Aws::Structure
     end
 
@@ -1790,8 +1861,34 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         headers: [
+    #           {
+    #             invert: false,
+    #             match: {
+    #               exact: "HeaderMatch",
+    #               prefix: "HeaderMatch",
+    #               range: {
+    #                 end: 1, # required
+    #                 start: 1, # required
+    #               },
+    #               regex: "HeaderMatch",
+    #               suffix: "HeaderMatch",
+    #             },
+    #             name: "HeaderName", # required
+    #           },
+    #         ],
+    #         method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
     #         prefix: "String", # required
+    #         scheme: "http", # accepts http, https
     #       }
+    #
+    # @!attribute [rw] headers
+    #   The client request headers to match on.
+    #   @return [Array<Types::HttpRouteHeader>]
+    #
+    # @!attribute [rw] method
+    #   The client request header method to match on.
+    #   @return [String]
     #
     # @!attribute [rw] prefix
     #   Specifies the path to match requests with. This parameter must
@@ -1802,10 +1899,17 @@ module Aws::AppMesh
     #   `my-service.local/metrics`, your prefix should be `/metrics`.
     #   @return [String]
     #
+    # @!attribute [rw] scheme
+    #   The client request scheme to match on.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch AWS API Documentation
     #
     class HttpRouteMatch < Struct.new(
-      :prefix)
+      :headers,
+      :method,
+      :prefix,
+      :scheme)
       include Aws::Structure
     end
 
@@ -2270,6 +2374,59 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object representing the method and value to match the header value
+    # sent with a request. Specify one match method.
+    #
+    # @note When making an API call, you may pass HeaderMatchMethod
+    #   data as a hash:
+    #
+    #       {
+    #         exact: "HeaderMatch",
+    #         prefix: "HeaderMatch",
+    #         range: {
+    #           end: 1, # required
+    #           start: 1, # required
+    #         },
+    #         regex: "HeaderMatch",
+    #         suffix: "HeaderMatch",
+    #       }
+    #
+    # @!attribute [rw] exact
+    #   The header value sent by the client must match the specified value
+    #   exactly.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The header value sent by the client must begin with the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] range
+    #   The object that specifies the range of numbers within which the
+    #   header value sent by the client must be included.
+    #   @return [Types::MatchRange]
+    #
+    # @!attribute [rw] regex
+    #   The header value sent by the client must include the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] suffix
+    #   The header value sent by the client must end with the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HeaderMatchMethod AWS API Documentation
+    #
+    class HeaderMatchMethod < Struct.new(
+      :exact,
+      :prefix,
+      :range,
+      :regex,
+      :suffix)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] mesh
     #   The service mesh that was deleted.
     #   @return [Types::MeshData]
@@ -2331,9 +2488,28 @@ module Aws::AppMesh
     #               ],
     #             },
     #             match: { # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
     #               prefix: "String", # required
+    #               scheme: "http", # accepts http, https
     #             },
     #           },
+    #           priority: 1,
     #           tcp_route: {
     #             action: { # required
     #               weighted_targets: [ # required
@@ -2499,9 +2675,28 @@ module Aws::AppMesh
     #               ],
     #             },
     #             match: { # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
     #               prefix: "String", # required
+    #               scheme: "http", # accepts http, https
     #             },
     #           },
+    #           priority: 1,
     #           tcp_route: {
     #             action: { # required
     #               weighted_targets: [ # required
@@ -2698,9 +2893,28 @@ module Aws::AppMesh
     #             ],
     #           },
     #           match: { # required
+    #             headers: [
+    #               {
+    #                 invert: false,
+    #                 match: {
+    #                   exact: "HeaderMatch",
+    #                   prefix: "HeaderMatch",
+    #                   range: {
+    #                     end: 1, # required
+    #                     start: 1, # required
+    #                   },
+    #                   regex: "HeaderMatch",
+    #                   suffix: "HeaderMatch",
+    #                 },
+    #                 name: "HeaderName", # required
+    #               },
+    #             ],
+    #             method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
     #             prefix: "String", # required
+    #             scheme: "http", # accepts http, https
     #           },
     #         },
+    #         priority: 1,
     #         tcp_route: {
     #           action: { # required
     #             weighted_targets: [ # required
@@ -2717,6 +2931,11 @@ module Aws::AppMesh
     #   The HTTP routing information for the route.
     #   @return [Types::HttpRoute]
     #
+    # @!attribute [rw] priority
+    #   The priority for the route. Routes are matched based on the
+    #   specified value, where 0 is the highest priority.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tcp_route
     #   The TCP routing information for the route.
     #   @return [Types::TcpRoute]
@@ -2725,6 +2944,7 @@ module Aws::AppMesh
     #
     class RouteSpec < Struct.new(
       :http_route,
+      :priority,
       :tcp_route)
       include Aws::Structure
     end
@@ -2744,7 +2964,25 @@ module Aws::AppMesh
     #           ],
     #         },
     #         match: { # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
     #           prefix: "String", # required
+    #           scheme: "http", # accepts http, https
     #         },
     #       }
     #
