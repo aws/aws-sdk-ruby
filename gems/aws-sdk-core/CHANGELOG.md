@@ -1,11 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support passing AssumeRole `duration_seconds` from shared credentials/config file.
+
 3.62.0 (2019-08-02)
 ------------------
 
 * Feature - Updated Aws::STS::Client with the latest API changes.
-* Feature - Support passing AssumeRole duration_seconds from shared credentials/config file.
 
 3.61.2 (2019-07-29)
 ------------------
