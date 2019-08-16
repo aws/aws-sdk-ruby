@@ -245,9 +245,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the cluster to help you categorize
     #   and organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] settings
@@ -449,6 +472,8 @@ module Aws::ECS
     #               mount_options: ["String"],
     #             },
     #           ],
+    #           max_swap: 1,
+    #           swappiness: 1,
     #         },
     #         secrets: [
     #           {
@@ -1268,13 +1293,6 @@ module Aws::ECS
     # @!attribute [rw] log_configuration
     #   The log configuration specification for the container.
     #
-    #   For tasks using the Fargate launch type, the supported log drivers
-    #   are `awslogs` and `splunk`.
-    #
-    #   For tasks using the EC2 launch type, the supported log drivers are
-    #   `awslogs`, `syslog`, `gelf`, `fluentd`, `splunk`, `journald`, and
-    #   `json-file`.
-    #
     #   This parameter maps to `LogConfig` in the [Create a container][1]
     #   section of the [Docker Remote API][2] and the `--log-driver` option
     #   to [docker run][3]. By default, containers use the same logging
@@ -1601,9 +1619,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a
-    #   maximum character length of 128 characters, and tag values can have
-    #   a maximum length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance AWS API Documentation
@@ -1793,9 +1834,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the cluster to help you categorize
     #   and organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] settings
@@ -2125,9 +2189,32 @@ module Aws::ECS
     #   The metadata that you apply to the service to help you categorize
     #   and organize them. Each tag consists of a key and an optional value,
     #   both of which you define. When a service is deleted, the tags are
-    #   deleted as well. Tag keys can have a maximum character length of 128
-    #   characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   deleted as well.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_ecs_managed_tags
@@ -3073,9 +3160,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that is applied to the task definition to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a
-    #   maximum character length of 128 characters, and tag values can have
-    #   a maximum length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinitionResponse AWS API Documentation
@@ -3664,6 +3774,8 @@ module Aws::ECS
     #             mount_options: ["String"],
     #           },
     #         ],
+    #         max_swap: 1,
+    #         swappiness: 1,
     #       }
     #
     # @!attribute [rw] capabilities
@@ -3737,6 +3849,50 @@ module Aws::ECS
     #   [1]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Tmpfs>]
     #
+    # @!attribute [rw] max_swap
+    #   The total amount of swap memory (in MiB) a container can use. This
+    #   parameter will be translated to the `--memory-swap` option to
+    #   [docker run][1] where the value would be the sum of the container
+    #   memory plus the `maxSwap` value.
+    #
+    #   If a `maxSwap` value of `0` is specified, the container will not use
+    #   swap. Accepted values are `0` or any positive integer. If the
+    #   `maxSwap` parameter is omitted, the container will use the swap
+    #   configuration for the container instance it is running on. A
+    #   `maxSwap` value must be set for the `swappiness` parameter to be
+    #   used.
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the
+    #   `maxSwap` parameter is not supported.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Integer]
+    #
+    # @!attribute [rw] swappiness
+    #   This allows you to tune a container's memory swappiness behavior. A
+    #   `swappiness` value of `0` will cause swapping to not happen unless
+    #   absolutely necessary. A `swappiness` value of `100` will cause pages
+    #   to be swapped very aggressively. Accepted values are whole numbers
+    #   between `0` and `100`. If the `swappiness` parameter is not
+    #   specified, a default value of `60` is used. If a value is not
+    #   specified for `maxSwap` then this parameter is ignored. This
+    #   parameter maps to the `--memory-swappiness` option to [docker
+    #   run][1].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the
+    #   `swappiness` parameter is not supported.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LinuxParameters AWS API Documentation
     #
     class LinuxParameters < Struct.new(
@@ -3744,7 +3900,9 @@ module Aws::ECS
       :devices,
       :init_process_enabled,
       :shared_memory_size,
-      :tmpfs)
+      :tmpfs,
+      :max_swap,
+      :swappiness)
       include Aws::Structure
     end
 
@@ -4613,8 +4771,8 @@ module Aws::ECS
     #   are `awslogs` and `splunk`.
     #
     #   For tasks using the EC2 launch type, the supported log drivers are
-    #   `awslogs`, `syslog`, `gelf`, `fluentd`, `splunk`, `journald`, and
-    #   `json-file`.
+    #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `logentries`,
+    #   `syslog`, `splunk`, and `syslog`.
     #
     #   For more information about using the `awslogs` log driver, see
     #   [Using the awslogs Log Driver][1] in the *Amazon Elastic Container
@@ -5331,9 +5489,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a
-    #   maximum character length of 128 characters, and tag values can have
-    #   a maximum length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstanceRequest AWS API Documentation
@@ -5431,6 +5612,8 @@ module Aws::ECS
     #                   mount_options: ["String"],
     #                 },
     #               ],
+    #               max_swap: 1,
+    #               swappiness: 1,
     #             },
     #             secrets: [
     #               {
@@ -5726,9 +5909,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the task definition to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a
-    #   maximum character length of 128 characters, and tag values can have
-    #   a maximum length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] pid_mode
@@ -6141,9 +6347,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_ecs_managed_tags
@@ -6471,15 +6700,40 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] deployment_controller
-    #   The deployment controller type the service is using.
+    #   The deployment controller type the service is using. When using the
+    #   DescribeServices API, this field is omitted if the service is using
+    #   the `ECS` deployment controller type.
     #   @return [Types::DeploymentController]
     #
     # @!attribute [rw] tags
     #   The metadata that you apply to the service to help you categorize
     #   and organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] created_by
@@ -6760,9 +7014,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_ecs_managed_tags
@@ -7127,9 +7404,32 @@ module Aws::ECS
 
     # The metadata that you apply to a resource to help you categorize and
     # organize them. Each tag consists of a key and an optional value, both
-    # of which you define. Tag keys can have a maximum character length of
-    # 128 characters, and tag values can have a maximum length of 256
-    # characters.
+    # of which you define.
+    #
+    # The following basic restrictions apply to tags:
+    #
+    # * Maximum number of tags per resource - 50
+    #
+    # * For each resource, each tag key must be unique, and each tag key can
+    #   have only one value.
+    #
+    # * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    # * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    # * If your tagging schema is used across multiple services and
+    #   resources, remember that other services may have restrictions on
+    #   allowed characters. Generally allowed characters are: letters,
+    #   numbers, and spaces representable in UTF-8, and the following
+    #   characters: + - = . \_ : / @.
+    #
+    # * Tag keys and values are case-sensitive.
+    #
+    # * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #   such as a prefix for either keys or values as it is reserved for AWS
+    #   use. You cannot edit or delete tag keys or values with this prefix.
+    #   Tags with this prefix do not count against your tags per resource
+    #   limit.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -7179,9 +7479,32 @@ module Aws::ECS
     #
     # @!attribute [rw] tags
     #   The tags to add to the resource. A tag is an array of key-value
-    #   pairs. Tag keys can have a maximum character length of 128
-    #   characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   pairs.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TagResourceRequest AWS API Documentation
@@ -7421,9 +7744,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
@@ -7492,11 +7838,11 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] task_role_arn
-    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
-    #   Management (IAM) role that grants containers in the task permission
-    #   to call AWS APIs on your behalf. For more information, see [Amazon
-    #   ECS Task Role][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   The short name or full Amazon Resource Name (ARN) of the AWS
+    #   Identity and Access Management (IAM) role that grants containers in
+    #   the task permission to call AWS APIs on your behalf. For more
+    #   information, see [Amazon ECS Task Role][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   IAM roles for tasks on Windows require that the `-EnableTaskIAMRole`
     #   option is set when you launch the Amazon ECS-optimized Windows AMI.
@@ -8029,13 +8375,6 @@ module Aws::ECS
     #
     #   * All tasks are reporting a healthy status from the load balancers,
     #     service discovery, and container health checks.
-    #
-    #     <note markdown="1"> If a `healthCheckGracePeriodSeconds` value was set when the
-    #     service was created, you may see a `STEADY_STATE` reached since
-    #     unhealthy Elastic Load Balancing target health checks will be
-    #     ignored until it expires.
-    #
-    #      </note>
     #
     #   If any of those conditions are not met, the stability status returns
     #   `STABILIZING`.

@@ -686,6 +686,8 @@ module Aws::ECS
     LinuxParameters.add_member(:init_process_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "initProcessEnabled"))
     LinuxParameters.add_member(:shared_memory_size, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "sharedMemorySize"))
     LinuxParameters.add_member(:tmpfs, Shapes::ShapeRef.new(shape: TmpfsList, location_name: "tmpfs"))
+    LinuxParameters.add_member(:max_swap, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxSwap"))
+    LinuxParameters.add_member(:swappiness, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "swappiness"))
     LinuxParameters.struct_class = Types::LinuxParameters
 
     ListAccountSettingsRequest.add_member(:name, Shapes::ShapeRef.new(shape: SettingName, location_name: "name"))

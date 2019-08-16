@@ -279,11 +279,12 @@ module Aws::RoboMaker
     #   resp.jobs[0].last_started_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.jobs[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.jobs[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
     #   resp.jobs[0].failure_reason #=> String
     #   resp.jobs[0].client_request_token #=> String
     #   resp.jobs[0].output_location.s3_bucket #=> String
     #   resp.jobs[0].output_location.s3_prefix #=> String
+    #   resp.jobs[0].logging_config.record_all_ros_topics #=> Boolean
     #   resp.jobs[0].max_job_duration_in_seconds #=> Integer
     #   resp.jobs[0].simulation_time_millis #=> Integer
     #   resp.jobs[0].iam_role #=> String
@@ -301,6 +302,12 @@ module Aws::RoboMaker
     #   resp.jobs[0].simulation_applications[0].launch_config.launch_file #=> String
     #   resp.jobs[0].simulation_applications[0].launch_config.environment_variables #=> Hash
     #   resp.jobs[0].simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.jobs[0].data_sources #=> Array
+    #   resp.jobs[0].data_sources[0].name #=> String
+    #   resp.jobs[0].data_sources[0].s3_bucket #=> String
+    #   resp.jobs[0].data_sources[0].s3_keys #=> Array
+    #   resp.jobs[0].data_sources[0].s3_keys[0].s3_key #=> String
+    #   resp.jobs[0].data_sources[0].s3_keys[0].etag #=> String
     #   resp.jobs[0].tags #=> Hash
     #   resp.jobs[0].tags["TagKey"] #=> String
     #   resp.jobs[0].vpc_config.subnets #=> Array
@@ -420,6 +427,7 @@ module Aws::RoboMaker
     #     deployment_config: {
     #       concurrent_deployment_percentage: 1,
     #       failure_threshold_percentage: 1,
+    #       robot_deployment_timeout_in_seconds: 1,
     #     },
     #     client_request_token: "ClientRequestToken", # required
     #     fleet: "Arn", # required
@@ -462,6 +470,7 @@ module Aws::RoboMaker
     #   resp.created_at #=> Time
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
+    #   resp.deployment_config.robot_deployment_timeout_in_seconds #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -708,7 +717,7 @@ module Aws::RoboMaker
     # @option params [required, Types::RobotSoftwareSuite] :robot_software_suite
     #   The robot software suite of the simulation application.
     #
-    # @option params [required, Types::RenderingEngine] :rendering_engine
+    # @option params [Types::RenderingEngine] :rendering_engine
     #   The rendering engine for the simulation application.
     #
     # @option params [Hash<String,String>] :tags
@@ -740,14 +749,14 @@ module Aws::RoboMaker
     #       },
     #     ],
     #     simulation_software_suite: { # required
-    #       name: "Gazebo", # accepts Gazebo
+    #       name: "Gazebo", # accepts Gazebo, RosbagPlay
     #       version: "SimulationSoftwareSuiteVersionType",
     #     },
     #     robot_software_suite: { # required
     #       name: "ROS", # accepts ROS
     #       version: "Kinetic", # accepts Kinetic, Melodic
     #     },
-    #     rendering_engine: { # required
+    #     rendering_engine: {
     #       name: "OGRE", # accepts OGRE
     #       version: "RenderingEngineVersionType",
     #     },
@@ -766,7 +775,7 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.simulation_software_suite.name #=> String, one of "Gazebo"
+    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_software_suite.version #=> String
     #   resp.robot_software_suite.name #=> String, one of "ROS"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
@@ -825,7 +834,7 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.simulation_software_suite.name #=> String, one of "Gazebo"
+    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_software_suite.version #=> String
     #   resp.robot_software_suite.name #=> String, one of "ROS"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
@@ -860,6 +869,9 @@ module Aws::RoboMaker
     # @option params [Types::OutputLocation] :output_location
     #   Location for output files generated by the simulation job.
     #
+    # @option params [Types::LoggingConfig] :logging_config
+    #   The logging configuration.
+    #
     # @option params [required, Integer] :max_job_duration_in_seconds
     #   The maximum simulation job duration in seconds (up to 14 days or
     #   1,209,600 seconds. When `maxJobDurationInSeconds` is reached, the
@@ -887,6 +899,14 @@ module Aws::RoboMaker
     # @option params [Array<Types::SimulationApplicationConfig>] :simulation_applications
     #   The simulation application to use in the simulation job.
     #
+    # @option params [Array<Types::DataSourceConfig>] :data_sources
+    #   The data sources for the simulation job.
+    #
+    #   <note markdown="1"> There is a limit of 100 files and a combined size of 25GB for all
+    #   `DataSourceConfig` objects.
+    #
+    #    </note>
+    #
     # @option params [Hash<String,String>] :tags
     #   A map that contains tag keys and tag values that are attached to the
     #   simulation job.
@@ -907,11 +927,13 @@ module Aws::RoboMaker
     #   * {Types::CreateSimulationJobResponse#failure_code #failure_code} => String
     #   * {Types::CreateSimulationJobResponse#client_request_token #client_request_token} => String
     #   * {Types::CreateSimulationJobResponse#output_location #output_location} => Types::OutputLocation
+    #   * {Types::CreateSimulationJobResponse#logging_config #logging_config} => Types::LoggingConfig
     #   * {Types::CreateSimulationJobResponse#max_job_duration_in_seconds #max_job_duration_in_seconds} => Integer
     #   * {Types::CreateSimulationJobResponse#simulation_time_millis #simulation_time_millis} => Integer
     #   * {Types::CreateSimulationJobResponse#iam_role #iam_role} => String
     #   * {Types::CreateSimulationJobResponse#robot_applications #robot_applications} => Array&lt;Types::RobotApplicationConfig&gt;
     #   * {Types::CreateSimulationJobResponse#simulation_applications #simulation_applications} => Array&lt;Types::SimulationApplicationConfig&gt;
+    #   * {Types::CreateSimulationJobResponse#data_sources #data_sources} => Array&lt;Types::DataSource&gt;
     #   * {Types::CreateSimulationJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateSimulationJobResponse#vpc_config #vpc_config} => Types::VPCConfigResponse
     #
@@ -922,6 +944,9 @@ module Aws::RoboMaker
     #     output_location: {
     #       s3_bucket: "S3Bucket",
     #       s3_prefix: "S3Key",
+    #     },
+    #     logging_config: {
+    #       record_all_ros_topics: false, # required
     #     },
     #     max_job_duration_in_seconds: 1, # required
     #     iam_role: "IamRole", # required
@@ -952,6 +977,13 @@ module Aws::RoboMaker
     #         },
     #       },
     #     ],
+    #     data_sources: [
+    #       {
+    #         name: "Name", # required
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_keys: ["S3Key"], # required
+    #       },
+    #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -969,10 +1001,11 @@ module Aws::RoboMaker
     #   resp.last_started_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
     #   resp.client_request_token #=> String
     #   resp.output_location.s3_bucket #=> String
     #   resp.output_location.s3_prefix #=> String
+    #   resp.logging_config.record_all_ros_topics #=> Boolean
     #   resp.max_job_duration_in_seconds #=> Integer
     #   resp.simulation_time_millis #=> Integer
     #   resp.iam_role #=> String
@@ -990,6 +1023,12 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.launch_file #=> String
     #   resp.simulation_applications[0].launch_config.environment_variables #=> Hash
     #   resp.simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.data_sources #=> Array
+    #   resp.data_sources[0].name #=> String
+    #   resp.data_sources[0].s3_bucket #=> String
+    #   resp.data_sources[0].s3_keys #=> Array
+    #   resp.data_sources[0].s3_keys[0].s3_key #=> String
+    #   resp.data_sources[0].s3_keys[0].etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.vpc_config.subnets #=> Array
@@ -1169,6 +1208,7 @@ module Aws::RoboMaker
     #   resp.status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded", "Canceled"
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
+    #   resp.deployment_config.robot_deployment_timeout_in_seconds #=> Integer
     #   resp.deployment_application_configs #=> Array
     #   resp.deployment_application_configs[0].application #=> String
     #   resp.deployment_application_configs[0].application_version #=> String
@@ -1393,7 +1433,7 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.simulation_software_suite.name #=> String, one of "Gazebo"
+    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_software_suite.version #=> String
     #   resp.robot_software_suite.name #=> String, one of "ROS"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
@@ -1430,11 +1470,13 @@ module Aws::RoboMaker
     #   * {Types::DescribeSimulationJobResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeSimulationJobResponse#client_request_token #client_request_token} => String
     #   * {Types::DescribeSimulationJobResponse#output_location #output_location} => Types::OutputLocation
+    #   * {Types::DescribeSimulationJobResponse#logging_config #logging_config} => Types::LoggingConfig
     #   * {Types::DescribeSimulationJobResponse#max_job_duration_in_seconds #max_job_duration_in_seconds} => Integer
     #   * {Types::DescribeSimulationJobResponse#simulation_time_millis #simulation_time_millis} => Integer
     #   * {Types::DescribeSimulationJobResponse#iam_role #iam_role} => String
     #   * {Types::DescribeSimulationJobResponse#robot_applications #robot_applications} => Array&lt;Types::RobotApplicationConfig&gt;
     #   * {Types::DescribeSimulationJobResponse#simulation_applications #simulation_applications} => Array&lt;Types::SimulationApplicationConfig&gt;
+    #   * {Types::DescribeSimulationJobResponse#data_sources #data_sources} => Array&lt;Types::DataSource&gt;
     #   * {Types::DescribeSimulationJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeSimulationJobResponse#vpc_config #vpc_config} => Types::VPCConfigResponse
     #
@@ -1452,11 +1494,12 @@ module Aws::RoboMaker
     #   resp.last_started_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
     #   resp.failure_reason #=> String
     #   resp.client_request_token #=> String
     #   resp.output_location.s3_bucket #=> String
     #   resp.output_location.s3_prefix #=> String
+    #   resp.logging_config.record_all_ros_topics #=> Boolean
     #   resp.max_job_duration_in_seconds #=> Integer
     #   resp.simulation_time_millis #=> Integer
     #   resp.iam_role #=> String
@@ -1474,6 +1517,12 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.launch_file #=> String
     #   resp.simulation_applications[0].launch_config.environment_variables #=> Hash
     #   resp.simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.data_sources #=> Array
+    #   resp.data_sources[0].name #=> String
+    #   resp.data_sources[0].s3_bucket #=> String
+    #   resp.data_sources[0].s3_keys #=> Array
+    #   resp.data_sources[0].s3_keys[0].s3_key #=> String
+    #   resp.data_sources[0].s3_keys[0].etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.vpc_config.subnets #=> Array
@@ -1494,10 +1543,6 @@ module Aws::RoboMaker
 
     # Returns a list of deployment jobs for a fleet. You can optionally
     # provide filters to retrieve specific deployment jobs.
-    #
-    # <note markdown="1">
-    #
-    #  </note>
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
@@ -1567,6 +1612,7 @@ module Aws::RoboMaker
     #   resp.deployment_jobs[0].deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.deployment_jobs[0].deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_jobs[0].deployment_config.failure_threshold_percentage #=> Integer
+    #   resp.deployment_jobs[0].deployment_config.robot_deployment_timeout_in_seconds #=> Integer
     #   resp.deployment_jobs[0].failure_reason #=> String
     #   resp.deployment_jobs[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
     #   resp.deployment_jobs[0].created_at #=> Time
@@ -1864,7 +1910,7 @@ module Aws::RoboMaker
     #   resp.simulation_application_summaries[0].last_updated_at #=> Time
     #   resp.simulation_application_summaries[0].robot_software_suite.name #=> String, one of "ROS"
     #   resp.simulation_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
-    #   resp.simulation_application_summaries[0].simulation_software_suite.name #=> String, one of "Gazebo"
+    #   resp.simulation_application_summaries[0].simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_application_summaries[0].simulation_software_suite.version #=> String
     #   resp.next_token #=> String
     #
@@ -1942,6 +1988,8 @@ module Aws::RoboMaker
     #   resp.simulation_job_summaries[0].simulation_application_names[0] #=> String
     #   resp.simulation_job_summaries[0].robot_application_names #=> Array
     #   resp.simulation_job_summaries[0].robot_application_names[0] #=> String
+    #   resp.simulation_job_summaries[0].data_source_names #=> Array
+    #   resp.simulation_job_summaries[0].data_source_names[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationJobs AWS API Documentation
@@ -2076,6 +2124,7 @@ module Aws::RoboMaker
     #   resp.status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded", "Canceled"
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
+    #   resp.deployment_config.robot_deployment_timeout_in_seconds #=> Integer
     #   resp.deployment_application_configs #=> Array
     #   resp.deployment_application_configs[0].application #=> String
     #   resp.deployment_application_configs[0].application_version #=> String
@@ -2254,7 +2303,7 @@ module Aws::RoboMaker
     # @option params [required, Types::RobotSoftwareSuite] :robot_software_suite
     #   Information about the robot software suite.
     #
-    # @option params [required, Types::RenderingEngine] :rendering_engine
+    # @option params [Types::RenderingEngine] :rendering_engine
     #   The rendering engine for the simulation application.
     #
     # @option params [String] :current_revision_id
@@ -2284,14 +2333,14 @@ module Aws::RoboMaker
     #       },
     #     ],
     #     simulation_software_suite: { # required
-    #       name: "Gazebo", # accepts Gazebo
+    #       name: "Gazebo", # accepts Gazebo, RosbagPlay
     #       version: "SimulationSoftwareSuiteVersionType",
     #     },
     #     robot_software_suite: { # required
     #       name: "ROS", # accepts ROS
     #       version: "Kinetic", # accepts Kinetic, Melodic
     #     },
-    #     rendering_engine: { # required
+    #     rendering_engine: {
     #       name: "OGRE", # accepts OGRE
     #       version: "RenderingEngineVersionType",
     #     },
@@ -2308,7 +2357,7 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.simulation_software_suite.name #=> String, one of "Gazebo"
+    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
     #   resp.simulation_software_suite.version #=> String
     #   resp.robot_software_suite.name #=> String, one of "ROS"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic"
@@ -2339,7 +2388,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

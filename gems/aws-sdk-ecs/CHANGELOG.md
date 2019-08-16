@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2019-08-16)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for controlling the usage of swap space on a per-container basis for Linux containers.
+
 1.45.0 (2019-07-25)
 ------------------
 
