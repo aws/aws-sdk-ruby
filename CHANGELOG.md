@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.335 (2019-08-16)
+------------------
+
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
 
 * Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
