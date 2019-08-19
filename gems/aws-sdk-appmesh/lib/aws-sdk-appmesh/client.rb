@@ -398,7 +398,7 @@ module Aws::AppMesh
     #               name: "HeaderName", # required
     #             },
     #           ],
-    #           method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
+    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #           prefix: "String", # required
     #           scheme: "http", # accepts http, https
     #         },
@@ -445,7 +445,7 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
-    #   resp.route.spec.http_route.match.method #=> String, one of "connect", "delete", "get", "head", "options", "patch", "post", "put", "trace"
+    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.priority #=> Integer
@@ -871,7 +871,7 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
-    #   resp.route.spec.http_route.match.method #=> String, one of "connect", "delete", "get", "head", "options", "patch", "post", "put", "trace"
+    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.priority #=> Integer
@@ -1116,7 +1116,7 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
-    #   resp.route.spec.http_route.match.method #=> String, one of "connect", "delete", "get", "head", "options", "patch", "post", "put", "trace"
+    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.priority #=> Integer
@@ -1763,7 +1763,7 @@ module Aws::AppMesh
     #               name: "HeaderName", # required
     #             },
     #           ],
-    #           method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
+    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #           prefix: "String", # required
     #           scheme: "http", # accepts http, https
     #         },
@@ -1804,7 +1804,7 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
     #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
     #   resp.route.spec.http_route.match.headers[0].name #=> String
-    #   resp.route.spec.http_route.match.method #=> String, one of "connect", "delete", "get", "head", "options", "patch", "post", "put", "trace"
+    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
     #   resp.route.spec.priority #=> Integer
@@ -2084,7 +2084,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

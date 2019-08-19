@@ -1271,11 +1271,11 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] end
-    #   End of the range value.
+    #   The end of the range.
     #   @return [Integer]
     #
     # @!attribute [rw] start
-    #   Start of the range value.
+    #   The start of the range.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MatchRange AWS API Documentation
@@ -1877,7 +1877,7 @@ module Aws::AppMesh
     #             name: "HeaderName", # required
     #           },
     #         ],
-    #         method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
+    #         method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #         prefix: "String", # required
     #         scheme: "http", # accepts http, https
     #       }
@@ -1900,7 +1900,7 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] scheme
-    #   The client request scheme to match on.
+    #   The client request header scheme to match on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch AWS API Documentation
@@ -2402,8 +2402,8 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] range
-    #   The object that specifies the range of numbers within which the
-    #   header value sent by the client must be included.
+    #   The object that specifies the range of numbers that the header value
+    #   sent by the client must be included in.
     #   @return [Types::MatchRange]
     #
     # @!attribute [rw] regex
@@ -2504,7 +2504,7 @@ module Aws::AppMesh
     #                   name: "HeaderName", # required
     #                 },
     #               ],
-    #               method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
+    #               method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #               prefix: "String", # required
     #               scheme: "http", # accepts http, https
     #             },
@@ -2691,7 +2691,7 @@ module Aws::AppMesh
     #                   name: "HeaderName", # required
     #                 },
     #               ],
-    #               method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
+    #               method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #               prefix: "String", # required
     #               scheme: "http", # accepts http, https
     #             },
@@ -2909,7 +2909,7 @@ module Aws::AppMesh
     #                 name: "HeaderName", # required
     #               },
     #             ],
-    #             method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
+    #             method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #             prefix: "String", # required
     #             scheme: "http", # accepts http, https
     #           },
@@ -2980,7 +2980,7 @@ module Aws::AppMesh
     #               name: "HeaderName", # required
     #             },
     #           ],
-    #           method: "connect", # accepts connect, delete, get, head, options, patch, post, put, trace
+    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #           prefix: "String", # required
     #           scheme: "http", # accepts http, https
     #         },
