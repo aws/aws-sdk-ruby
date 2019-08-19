@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
+
+* Feature - Aws::CostandUsageReportService - Updated the API, and documentation for AWS Cost and Usage Report Service.
+
 2.11.335 (2019-08-16)
 ------------------
 
