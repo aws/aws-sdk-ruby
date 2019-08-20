@@ -142,89 +142,79 @@ module Aws
 
     def region(opts = {})
       p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          region = @parsed_credentials.fetch(p, {})["region"]
-        end
-        if @parsed_config
-          region ||= @parsed_config.fetch(p, {})["region"]
-        end
-        region
-      else
-        nil
+      if @parsed_credentials
+        region = @parsed_credentials.fetch(p, {})["region"]
       end
+      if @config_enabled && @parsed_config
+        region ||= @parsed_config.fetch(p, {})["region"]
+      end
+      region || nil
     end
 
     def endpoint_discovery(opts = {})
       p = opts[:profile] || @profile_name
-      if @config_enabled && @parsed_config
-        @parsed_config.fetch(p, {})["endpoint_discovery_enabled"]
+      if @parsed_credentials
+        value = @parsed_credentials.fetch(p, {})["endpoint_discovery_enabled"]
       end
+      if @config_enabled && @parsed_config
+        value ||= @parsed_config.fetch(p, {})["endpoint_discovery_enabled"]
+      end
+      value || nil
     end
 
     def credentials_process(profile)
       validate_profile_exists(profile)
-      @parsed_config[profile]['credential_process']
+      if @parsed_credentials
+        process = @parsed_credentials.fetch(profile, {})['credential_process']
+      end
+      if @config_enabled && @parsed_config
+        process ||= @parsed_config.fetch(profile, {})['credential_process']
+      end
+      process || nil
     end
 
     def csm_enabled(opts = {})
       p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_enabled"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_enabled"]
-        end
-        value
-      else
-        nil
+      if @parsed_credentials
+        value = @parsed_credentials.fetch(p, {})["csm_enabled"]
       end
+      if @config_enabled && @parsed_config
+        value ||= @parsed_config.fetch(p, {})["csm_enabled"]
+      end
+      value || nil
     end
 
     def csm_client_id(opts = {})
       p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_client_id"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_client_id"]
-        end
-        value
-      else
-        nil
+      if @parsed_credentials
+        value = @parsed_credentials.fetch(p, {})["csm_client_id"]
       end
+      if @config_enabled && @parsed_config
+        value ||= @parsed_config.fetch(p, {})["csm_client_id"]
+      end
+      value || nil
     end
 
     def csm_port(opts = {})
       p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_port"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_port"]
-        end
-        value
-      else
-        nil
+      if @parsed_credentials
+        value = @parsed_credentials.fetch(p, {})["csm_port"]
       end
+      if @config_enabled && @parsed_config
+        value ||= @parsed_config.fetch(p, {})["csm_port"]
+      end
+      value || nil
     end
 
     def csm_host(opts = {})
       p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_host"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_host"]
-        end
-        value
-      else
-        nil
+      if @parsed_credentials
+        value = @parsed_credentials.fetch(p, {})["csm_host"]
       end
+      if @config_enabled && @parsed_config
+        value ||= @parsed_config.fetch(p, {})["csm_host"]
+      end
+      value || nil
     end
 
     private

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Parse all values from shared credentials file when using Aws.shared_config
+
 3.63.0 (2019-08-15)
 ------------------
 
