@@ -1105,6 +1105,7 @@ module Aws::AlexaForBusiness
     #         distance_unit: "METRIC", # required, accepts METRIC, IMPERIAL
     #         temperature_unit: "FAHRENHEIT", # required, accepts FAHRENHEIT, CELSIUS
     #         wake_word: "ALEXA", # required, accepts ALEXA, AMAZON, ECHO, COMPUTER
+    #         locale: "DeviceLocale",
     #         client_request_token: "ClientRequestToken",
     #         setup_mode_disabled: false,
     #         max_volume_limit: 1,
@@ -1133,6 +1134,10 @@ module Aws::AlexaForBusiness
     #
     # @!attribute [rw] wake_word
     #   A wake word for Alexa, Echo, Amazon, or a computer.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   The locale of the room profile.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1164,6 +1169,7 @@ module Aws::AlexaForBusiness
       :distance_unit,
       :temperature_unit,
       :wake_word,
+      :locale,
       :client_request_token,
       :setup_mode_disabled,
       :max_volume_limit,
@@ -3488,6 +3494,10 @@ module Aws::AlexaForBusiness
     #   The wake word of a room profile.
     #   @return [String]
     #
+    # @!attribute [rw] locale
+    #   The locale of a room profile.
+    #   @return [String]
+    #
     # @!attribute [rw] setup_mode_disabled
     #   The setup mode of a room profile.
     #   @return [Boolean]
@@ -3515,6 +3525,7 @@ module Aws::AlexaForBusiness
       :distance_unit,
       :temperature_unit,
       :wake_word,
+      :locale,
       :setup_mode_disabled,
       :max_volume_limit,
       :pstn_enabled,
@@ -3556,6 +3567,10 @@ module Aws::AlexaForBusiness
     #   The wake word of a room profile.
     #   @return [String]
     #
+    # @!attribute [rw] locale
+    #   The locale of a room profile.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ProfileData AWS API Documentation
     #
     class ProfileData < Struct.new(
@@ -3566,7 +3581,8 @@ module Aws::AlexaForBusiness
       :timezone,
       :distance_unit,
       :temperature_unit,
-      :wake_word)
+      :wake_word,
+      :locale)
       include Aws::Structure
     end
 
@@ -5597,6 +5613,7 @@ module Aws::AlexaForBusiness
     #         distance_unit: "METRIC", # accepts METRIC, IMPERIAL
     #         temperature_unit: "FAHRENHEIT", # accepts FAHRENHEIT, CELSIUS
     #         wake_word: "ALEXA", # accepts ALEXA, AMAZON, ECHO, COMPUTER
+    #         locale: "DeviceLocale",
     #         setup_mode_disabled: false,
     #         max_volume_limit: 1,
     #         pstn_enabled: false,
@@ -5635,6 +5652,10 @@ module Aws::AlexaForBusiness
     #   The updated wake word for the room profile.
     #   @return [String]
     #
+    # @!attribute [rw] locale
+    #   The updated locale for the room profile.
+    #   @return [String]
+    #
     # @!attribute [rw] setup_mode_disabled
     #   Whether the setup mode of the profile is enabled.
     #   @return [Boolean]
@@ -5658,6 +5679,7 @@ module Aws::AlexaForBusiness
       :distance_unit,
       :temperature_unit,
       :wake_word,
+      :locale,
       :setup_mode_disabled,
       :max_volume_limit,
       :pstn_enabled)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2019-08-20)
+------------------
+
+* Feature - Amazon SageMaker introduces Managed Spot Training. Increases the maximum number of metric definitions to 40 for SageMaker Training and Hyperparameter Tuning Jobs. SageMaker Neo adds support for Acer aiSage and Qualcomm QCS605 and QCS603.
+
 1.41.0 (2019-07-25)
 ------------------
 

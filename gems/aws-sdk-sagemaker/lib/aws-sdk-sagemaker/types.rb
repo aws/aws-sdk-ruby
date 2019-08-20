@@ -267,6 +267,7 @@ module Aws::SageMaker
     #           },
     #           stopping_condition: { # required
     #             max_runtime_in_seconds: 1,
+    #             max_wait_time_in_seconds: 1,
     #           },
     #         },
     #         transform_job_definition: {
@@ -373,6 +374,7 @@ module Aws::SageMaker
     #               },
     #               stopping_condition: { # required
     #                 max_runtime_in_seconds: 1,
+    #                 max_wait_time_in_seconds: 1,
     #               },
     #             },
     #             transform_job_definition: {
@@ -506,6 +508,21 @@ module Aws::SageMaker
     #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass`
     #
     #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass`
+    #
+    #   * *Named entity eecognition* - Groups similar selections and
+    #     calculates aggregate boundaries, resolving to most-assigned label.
+    #
+    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition`
     #
     #   For more information, see [Annotation Consolidation][1].
     #
@@ -728,6 +745,35 @@ module Aws::SageMaker
       :supported_content_types,
       :supported_compression_types,
       :supported_input_modes)
+      include Aws::Structure
+    end
+
+    # Contains information about the output location for managed spot
+    # training checkpoint data.
+    #
+    # @note When making an API call, you may pass CheckpointConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri", # required
+    #         local_path: "DirectoryPath",
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   Identifies the S3 path where you want Amazon SageMaker to store
+    #   checkpoints. For example, `s3://bucket-name/key-name-prefix`.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_path
+    #   (Optional) The local directory where checkpoints are written. The
+    #   default directory is `/opt/ml/checkpoints/`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CheckpointConfig AWS API Documentation
+    #
+    class CheckpointConfig < Struct.new(
+      :s3_uri,
+      :local_path)
       include Aws::Structure
     end
 
@@ -1162,6 +1208,7 @@ module Aws::SageMaker
     #                 },
     #                 stopping_condition: { # required
     #                   max_runtime_in_seconds: 1,
+    #                   max_wait_time_in_seconds: 1,
     #                 },
     #               },
     #               transform_job_definition: {
@@ -1335,10 +1382,11 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, sbe_c
+    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
+    #           max_wait_time_in_seconds: 1,
     #         },
     #       }
     #
@@ -1643,9 +1691,15 @@ module Aws::SageMaker
     #           },
     #           stopping_condition: { # required
     #             max_runtime_in_seconds: 1,
+    #             max_wait_time_in_seconds: 1,
     #           },
     #           enable_network_isolation: false,
     #           enable_inter_container_traffic_encryption: false,
+    #           enable_managed_spot_training: false,
+    #           checkpoint_config: {
+    #             s3_uri: "S3Uri", # required
+    #             local_path: "DirectoryPath",
+    #           },
     #         },
     #         warm_start_config: {
     #           parent_hyper_parameter_tuning_jobs: [ # required
@@ -2530,6 +2584,7 @@ module Aws::SageMaker
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
+    #           max_wait_time_in_seconds: 1,
     #         },
     #         tags: [
     #           {
@@ -2539,6 +2594,11 @@ module Aws::SageMaker
     #         ],
     #         enable_network_isolation: false,
     #         enable_inter_container_traffic_encryption: false,
+    #         enable_managed_spot_training: false,
+    #         checkpoint_config: {
+    #           s3_uri: "S3Uri", # required
+    #           local_path: "DirectoryPath",
+    #         },
     #       }
     #
     # @!attribute [rw] training_job_name
@@ -2693,6 +2753,25 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_managed_spot_training
+    #   To train models using managed spot training, choose `True`. Managed
+    #   spot training provides a fully managed and scalable infrastructure
+    #   for training machine learning models. this option is useful when
+    #   training jobs can be interrupted and when there is flexibility when
+    #   the training job is run.
+    #
+    #   The complete and intermediate results of jobs are stored in an
+    #   Amazon S3 bucket, and can be used as a starting point to train
+    #   models incrementally. Amazon SageMaker provides metrics and logs in
+    #   CloudWatch. They can be used to see when managed spot training jobs
+    #   are running, interrupted, resumed, or completed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] checkpoint_config
+    #   Contains information about the output location for managed spot
+    #   training checkpoint data.
+    #   @return [Types::CheckpointConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
     #
     class CreateTrainingJobRequest < Struct.new(
@@ -2707,7 +2786,9 @@ module Aws::SageMaker
       :stopping_condition,
       :tags,
       :enable_network_isolation,
-      :enable_inter_container_traffic_encryption)
+      :enable_inter_container_traffic_encryption,
+      :enable_managed_spot_training,
+      :checkpoint_config)
       include Aws::Structure
     end
 
@@ -2849,13 +2930,18 @@ module Aws::SageMaker
     #   @return [Types::TransformResources]
     #
     # @!attribute [rw] data_processing
-    #   The data structure used for combining the input data and inference
-    #   in the output file. For more information, see [Batch Transform I/O
-    #   Join][1].
+    #   The data structure used to specify the data to be used for inference
+    #   in a batch transform job and to associate the data that is relevant
+    #   to the prediction results in the output. The input filter provided
+    #   allows you to exclude input data that is not needed for inference in
+    #   a batch transform job. The output filter provided allows you to
+    #   include input data relevant to interpreting the predictions in the
+    #   output from the job. For more information, see [Associate Prediction
+    #   Results with their Corresponding Input Records][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
     #   @return [Types::DataProcessing]
     #
     # @!attribute [rw] tags
@@ -2974,15 +3060,18 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The data structure used to combine the input data and transformed data
-    # from the batch transform output into a joined dataset and to store it
-    # in an output file. It also contains information on how to filter the
-    # input data and the joined dataset. For more information, see [Batch
-    # Transform I/O Join][1].
+    # The data structure used to specify the data to be used for inference
+    # in a batch transform job and to associate the data that is relevant to
+    # the prediction results in the output. The input filter provided allows
+    # you to exclude input data that is not needed for inference in a batch
+    # transform job. The output filter provided allows you to include input
+    # data relevant to interpreting the predictions in the output from the
+    # job. For more information, see [Associate Prediction Results with
+    # their Corresponding Input Records][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
     #
     # @note When making an API call, you may pass DataProcessing
     #   data as a hash:
@@ -2994,24 +3083,32 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] input_filter
-    #   A JSONPath expression used to select a portion of the input data to
-    #   pass to the algorithm. Use the `InputFilter` parameter to exclude
-    #   fields, such as an ID column, from the input. If you want Amazon
-    #   SageMaker to pass the entire input dataset to the algorithm, accept
-    #   the default value `$`.
+    #   A [JSONPath][1] expression used to select a portion of the input
+    #   data to pass to the algorithm. Use the `InputFilter` parameter to
+    #   exclude fields, such as an ID column, from the input. If you want
+    #   Amazon SageMaker to pass the entire input dataset to the algorithm,
+    #   accept the default value `$`.
     #
     #   Examples: `"$"`, `"$[1:]"`, `"$.features"`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators
     #   @return [String]
     #
     # @!attribute [rw] output_filter
-    #   A JSONPath expression used to select a portion of the joined dataset
-    #   to save in the output file for a batch transform job. If you want
-    #   Amazon SageMaker to store the entire input dataset in the output
-    #   file, leave the default value, `$`. If you specify indexes that
-    #   aren't within the dimension size of the joined dataset, you get an
-    #   error.
+    #   A [JSONPath][1] expression used to select a portion of the joined
+    #   dataset to save in the output file for a batch transform job. If you
+    #   want Amazon SageMaker to store the entire input dataset in the
+    #   output file, leave the default value, `$`. If you specify indexes
+    #   that aren't within the dimension size of the joined dataset, you
+    #   get an error.
     #
-    #   Examples: `"$"`, `"$[0,5:]"`, `"$.['id','SageMakerOutput']"`
+    #   Examples: `"$"`, `"$[0,5:]"`, `"$['id','SageMakerOutput']"`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators
     #   @return [String]
     #
     # @!attribute [rw] join_source
@@ -3019,9 +3116,7 @@ module Aws::SageMaker
     #   The valid values are `None` and `Input` The default value is `None`
     #   which specifies not to join the input with the transformed data. If
     #   you want the batch transform job to join the original input data
-    #   with the transformed data, set `JoinSource` to `Input`. To join
-    #   input and output, the batch transform job must satisfy the
-    #   [Requirements for Using Batch Transform I/O Join][1].
+    #   with the transformed data, set `JoinSource` to `Input`.
     #
     #   For JSON or JSONLines objects, such as a JSON array, Amazon
     #   SageMaker adds the transformed data to the input JSON object in an
@@ -3035,10 +3130,6 @@ module Aws::SageMaker
     #   the input data at the end of the input data and stores it in the
     #   output file. The joined data has the joined input data followed by
     #   the transformed data and the output is a CSV file.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataProcessing AWS API Documentation
@@ -4505,6 +4596,12 @@ module Aws::SageMaker
     #   : * `MaxRuntimeExceeded` - The job stopped because it exceeded the
     #       maximum allowed runtime.
     #
+    #     * `MaxWaitTmeExceeded` - The job stopped because it exceeded the
+    #       maximum allowed wait time.
+    #
+    #     * `Interrupted` - The job stopped because the managed spot
+    #       training instances were interrupted.
+    #
     #     * `Stopped` - The training job has stopped.
     #
     #   Stopping
@@ -4568,9 +4665,10 @@ module Aws::SageMaker
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   Specifies a limit to how long a model training job can run. When the
-    #   job reaches the time limit, Amazon SageMaker ends the training job.
-    #   Use this API to cap model training costs.
+    #   Specifies a limit to how long a model training job can run. It also
+    #   specifies the maximum time to wait for a spot instance. When the job
+    #   reaches the time limit, Amazon SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
     #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
     #   signal, which delays job termination for 120 seconds. Algorithms can
@@ -4640,6 +4738,29 @@ module Aws::SageMaker
     #   in distributed training.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_managed_spot_training
+    #   A Boolean indicating whether managed spot training is enabled
+    #   (`True`) or not (`False`).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] checkpoint_config
+    #   Contains information about the output location for managed spot
+    #   training checkpoint data.
+    #   @return [Types::CheckpointConfig]
+    #
+    # @!attribute [rw] training_time_in_seconds
+    #   The training time in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] billable_time_in_seconds
+    #   The billable time in seconds.
+    #
+    #   You can calculate the savings from using managed spot training using
+    #   the formula `(1 - BillableTimeInSeconds / TrainingTimeInSeconds) *
+    #   100`. For example, if `BillableTimeInSeconds` is 100 and
+    #   `TrainingTimeInSeconds` is 500, the savings is 80%.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
     #
     class DescribeTrainingJobResponse < Struct.new(
@@ -4666,7 +4787,11 @@ module Aws::SageMaker
       :secondary_status_transitions,
       :final_metric_data_list,
       :enable_network_isolation,
-      :enable_inter_container_traffic_encryption)
+      :enable_inter_container_traffic_encryption,
+      :enable_managed_spot_training,
+      :checkpoint_config,
+      :training_time_in_seconds,
+      :billable_time_in_seconds)
       include Aws::Structure
     end
 
@@ -4778,15 +4903,18 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] data_processing
-    #   The data structure used to combine the input data and transformed
-    #   data from the batch transform output into a joined dataset and to
-    #   store it in an output file. It also contains information on how to
-    #   filter the input data and the joined dataset. For more information,
-    #   see [Batch Transform I/O Join][1].
+    #   The data structure used to specify the data to be used for inference
+    #   in a batch transform job and to associate the data that is relevant
+    #   to the prediction results in the output. The input filter provided
+    #   allows you to exclude input data that is not needed for inference in
+    #   a batch transform job. The output filter provided allows you to
+    #   include input data relevant to interpreting the predictions in the
+    #   output from the job. For more information, see [Associate Prediction
+    #   Results with their Corresponding Input Records][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
     #   @return [Types::DataProcessing]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJobResponse AWS API Documentation
@@ -5283,6 +5411,8 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass`
     #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition`
+    #
     #   **US East (Ohio) (us-east-2):**
     #
     #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox`
@@ -5292,6 +5422,8 @@ module Aws::SageMaker
     #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition`
     #
     #   **US West (Oregon) (us-west-2):**
     #
@@ -5303,6 +5435,8 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass`
     #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition`
+    #
     #   **EU (Ireland) (eu-west-1):**
     #
     #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox`
@@ -5312,6 +5446,8 @@ module Aws::SageMaker
     #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition`
     #
     #   **Asia Pacific (Tokyo) (ap-northeast-1):**
     #
@@ -5323,7 +5459,9 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass`
     #
-    #   **Asia Pacific (Sydney) (ap-southeast-1):**
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition`
+    #
+    #   **Asia Pacific (Sydney) (ap-southeast-2):**
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox`
     #
@@ -5332,6 +5470,8 @@ module Aws::SageMaker
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition`
     #   @return [String]
     #
     # @!attribute [rw] task_keywords
@@ -5356,8 +5496,10 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] task_availability_lifetime_in_seconds
-    #   The length of time that a task remains available for labelling by
-    #   human workers.
+    #   The length of time that a task remains available for labeling by
+    #   human workers. **If you choose the Amazon Mechanical Turk workforce,
+    #   the maximum is 12 hours (43200)**. For private and vendor
+    #   workforces, the maximum is as listed.
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrent_task_count
@@ -5371,7 +5513,8 @@ module Aws::SageMaker
     #   @return [Types::AnnotationConsolidationConfig]
     #
     # @!attribute [rw] public_workforce_task_price
-    #   The price that you pay for each task performed by a public worker.
+    #   The price that you pay for each task performed by an Amazon
+    #   Mechanical Turk worker.
     #   @return [Types::PublicWorkforceTaskPrice]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HumanTaskConfig AWS API Documentation
@@ -5596,9 +5739,15 @@ module Aws::SageMaker
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
+    #           max_wait_time_in_seconds: 1,
     #         },
     #         enable_network_isolation: false,
     #         enable_inter_container_traffic_encryption: false,
+    #         enable_managed_spot_training: false,
+    #         checkpoint_config: {
+    #           s3_uri: "S3Uri", # required
+    #           local_path: "DirectoryPath",
+    #         },
     #       }
     #
     # @!attribute [rw] static_hyper_parameters
@@ -5653,8 +5802,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model hyperparameter training job
-    #   can run. When the job reaches the time limit, Amazon SageMaker ends
-    #   the training job. Use this API to cap model training costs.
+    #   can run. It also specifies how long you are willing to wait for a
+    #   managed spot training job to complete. When the job reaches the a
+    #   limit, Amazon SageMaker ends the training job. Use this API to cap
+    #   model training costs.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] enable_network_isolation
@@ -5681,6 +5832,16 @@ module Aws::SageMaker
     #   in distributed training.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_managed_spot_training
+    #   A Boolean indicating whether managed spot training is enabled
+    #   (`True`) or not (`False`).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] checkpoint_config
+    #   Contains information about the output location for managed spot
+    #   training checkpoint data.
+    #   @return [Types::CheckpointConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition AWS API Documentation
     #
     class HyperParameterTrainingJobDefinition < Struct.new(
@@ -5693,7 +5854,9 @@ module Aws::SageMaker
       :resource_config,
       :stopping_condition,
       :enable_network_isolation,
-      :enable_inter_container_traffic_encryption)
+      :enable_inter_container_traffic_encryption,
+      :enable_managed_spot_training,
+      :checkpoint_config)
       include Aws::Structure
     end
 
@@ -6624,8 +6787,18 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The AWS Key Management Service key ID for the key used to encrypt
-    #   the output data, if any.
+    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
+    #   uses to encrypt data on the storage volume attached to the ML
+    #   compute instance(s) that run the training job. The `VolumeKmsKeyId`
+    #   can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobResourceConfig AWS API Documentation
@@ -8375,7 +8548,7 @@ module Aws::SageMaker
     end
 
     # Specifies a metric that the training algorithm writes to `stderr` or
-    # `stdout`. Amazon SageMakerhyperparameter tuning captures all defined
+    # `stdout` . Amazon SageMakerhyperparameter tuning captures all defined
     # metrics. You specify one metric that a hyperparameter tuning job uses
     # as its objective metric to choose the best training job.
     #
@@ -8741,7 +8914,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] nested_property_name
     #   The name of the property to use in the nested filters. The value
-    #   must match a listed property name, such as `InputDataConfig`.
+    #   must match a listed property name, such as `InputDataConfig` .
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -8984,7 +9157,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, sbe_c
+    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603
     #       }
     #
     # @!attribute [rw] s3_output_location
@@ -9361,7 +9534,8 @@ module Aws::SageMaker
     # for each task performed.
     #
     # Use one of the following prices for bounding box tasks. Prices are in
-    # US dollars.
+    # US dollars and should be based on the complexity of the task; the
+    # longer it takes in your initial testing, the more you should offer.
     #
     # * 0\.036
     #
@@ -9449,8 +9623,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] amount_in_usd
-    #   Defines the amount of money paid to a worker in United States
-    #   dollars.
+    #   Defines the amount of money paid to an Amazon Mechanical Turk worker
+    #   in United States dollars.
     #   @return [Types::USD]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PublicWorkforceTaskPrice AWS API Documentation
@@ -10356,8 +10530,10 @@ module Aws::SageMaker
     end
 
     # Specifies a limit to how long a model training or compilation job can
-    # run. When the job reaches the time limit, Amazon SageMaker ends the
-    # training or compilation job. Use this API to cap model training costs.
+    # run. It also specifies how long you are willing to wait for a managed
+    # spot training job to complete. When the job reaches the time limit,
+    # Amazon SageMaker ends the training or compilation job. Use this API to
+    # cap model training costs.
     #
     # To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
     # signal, which delays job termination for 120 seconds. Algorithms can
@@ -10383,6 +10559,7 @@ module Aws::SageMaker
     #
     #       {
     #         max_runtime_in_seconds: 1,
+    #         max_wait_time_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] max_runtime_in_seconds
@@ -10392,10 +10569,19 @@ module Aws::SageMaker
     #   value is 1 day. The maximum value is 28 days.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_wait_time_in_seconds
+    #   The maximum length of time, in seconds, how long you are willing to
+    #   wait for a managed spot training job to complete. It is the amount
+    #   of time spent waiting for Spot capacity plus the amount of time the
+    #   training job runs. It must be equal to or greater than
+    #   `MaxRuntimeInSeconds`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation
     #
     class StoppingCondition < Struct.new(
-      :max_runtime_in_seconds)
+      :max_runtime_in_seconds,
+      :max_wait_time_in_seconds)
       include Aws::Structure
     end
 
@@ -10773,6 +10959,7 @@ module Aws::SageMaker
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
+    #           max_wait_time_in_seconds: 1,
     #         },
     #       }
     #
@@ -11380,7 +11567,7 @@ module Aws::SageMaker
     # @!attribute [rw] instance_type
     #   The ML compute instance type for the transform job. If you are using
     #   built-in algorithms to transform moderately sized datasets, we
-    #   recommend using ml.m4.xlarge or `ml.m5.large`instance types.
+    #   recommend using ml.m4.xlarge or `ml.m5.large` instance types.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -11869,12 +12056,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] on_create
     #   The shell script that runs only once, when you create a notebook
-    #   instance
+    #   instance. The shell script must be a base64-encoded string.
     #   @return [Array<Types::NotebookInstanceLifecycleHook>]
     #
     # @!attribute [rw] on_start
     #   The shell script that runs every time you start a notebook instance,
-    #   including when you create the notebook instance.
+    #   including when you create the notebook instance. The shell script
+    #   must be a base64-encoded string.
     #   @return [Array<Types::NotebookInstanceLifecycleHook>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceLifecycleConfigInput AWS API Documentation

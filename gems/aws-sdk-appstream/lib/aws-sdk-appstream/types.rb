@@ -8,6 +8,38 @@
 module Aws::AppStream
   module Types
 
+    # Describes a virtual private cloud (VPC) interface endpoint that lets
+    # you create a private connection between the VPC that you specify and
+    # AppStream 2.0. When you specify a VPC interface endpoint for a stack,
+    # users of the stack can connect to AppStream 2.0 only through that
+    # endpoint. When you specify a VPC interface endpoint for an image
+    # builder, administrators can connect to the image builder only through
+    # that endpoint.
+    #
+    # @note When making an API call, you may pass AccessEndpoint
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_type: "STREAMING", # required, accepts STREAMING
+    #         vpce_id: "String",
+    #       }
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of VPC interface endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpce_id
+    #   The identifier (ID) of the VPC in which the endpoint is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AccessEndpoint AWS API Documentation
+    #
+    class AccessEndpoint < Struct.new(
+      :endpoint_type,
+      :vpce_id)
+      include Aws::Structure
+    end
+
     # Describes an application in the application catalog.
     #
     # @!attribute [rw] name
@@ -535,7 +567,7 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information, see [Tagging Your Resources][1] in the *Amazon
-    #   AppStream 2.0 Developer Guide*.
+    #   AppStream 2.0 Administration Guide*.
     #
     #
     #
@@ -627,6 +659,12 @@ module Aws::AppStream
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         access_endpoints: [
+    #           {
+    #             endpoint_type: "STREAMING", # required, accepts STREAMING
+    #             vpce_id: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -686,12 +724,18 @@ module Aws::AppStream
     #   If you do not specify a value, the value is set to an empty string.
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #   the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] access_endpoints
+    #   The list of virtual private cloud (VPC) interface endpoint objects.
+    #   Administrators can connect to the image builder only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
     #
@@ -706,7 +750,8 @@ module Aws::AppStream
       :enable_default_internet_access,
       :domain_join_info,
       :appstream_agent_version,
-      :tags)
+      :tags,
+      :access_endpoints)
       include Aws::Structure
     end
 
@@ -792,6 +837,12 @@ module Aws::AppStream
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         access_endpoints: [
+    #           {
+    #             endpoint_type: "STREAMING", # required, accepts STREAMING
+    #             vpce_id: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -846,12 +897,18 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #   the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] access_endpoints
+    #   The list of virtual private cloud (VPC) interface endpoint objects.
+    #   Users of the stack can connect to AppStream 2.0 only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
@@ -864,7 +921,8 @@ module Aws::AppStream
       :feedback_url,
       :user_settings,
       :application_settings,
-      :tags)
+      :tags,
+      :access_endpoints)
       include Aws::Structure
     end
 
@@ -915,7 +973,7 @@ module Aws::AppStream
     #
     # @!attribute [rw] session_context
     #   The session context. For more information, see [Session Context][1]
-    #   in the *Amazon AppStream 2.0 Developer Guide*.
+    #   in the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
@@ -2278,6 +2336,12 @@ module Aws::AppStream
     #   by the image builder.
     #   @return [String]
     #
+    # @!attribute [rw] access_endpoints
+    #   The list of virtual private cloud (VPC) interface endpoint objects.
+    #   Administrators can connect to the image builder only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
     #
     class ImageBuilder < Struct.new(
@@ -2296,7 +2360,8 @@ module Aws::AppStream
       :domain_join_info,
       :network_access_configuration,
       :image_builder_errors,
-      :appstream_agent_version)
+      :appstream_agent_version,
+      :access_endpoints)
       include Aws::Structure
     end
 
@@ -2839,6 +2904,12 @@ module Aws::AppStream
     #   The persistent application settings for users of the stack.
     #   @return [Types::ApplicationSettingsResponse]
     #
+    # @!attribute [rw] access_endpoints
+    #   The list of virtual private cloud (VPC) interface endpoint objects.
+    #   Users of the stack can connect to AppStream 2.0 only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -2852,7 +2923,8 @@ module Aws::AppStream
       :feedback_url,
       :stack_errors,
       :user_settings,
-      :application_settings)
+      :application_settings,
+      :access_endpoints)
       include Aws::Structure
     end
 
@@ -3386,7 +3458,7 @@ module Aws::AppStream
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, ACCESS_ENDPOINTS
     #         user_settings: [
     #           {
     #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
@@ -3397,6 +3469,12 @@ module Aws::AppStream
     #           enabled: false, # required
     #           settings_group: "SettingsGroup",
     #         },
+    #         access_endpoints: [
+    #           {
+    #             endpoint_type: "STREAMING", # required, accepts STREAMING
+    #             vpce_id: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] display_name
@@ -3446,6 +3524,12 @@ module Aws::AppStream
     #   applied to the next session.
     #   @return [Types::ApplicationSettings]
     #
+    # @!attribute [rw] access_endpoints
+    #   The list of virtual private cloud (VPC) interface endpoint objects.
+    #   Users of the stack can connect to AppStream 2.0 only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -3458,7 +3542,8 @@ module Aws::AppStream
       :feedback_url,
       :attributes_to_delete,
       :user_settings,
-      :application_settings)
+      :application_settings,
+      :access_endpoints)
       include Aws::Structure
     end
 

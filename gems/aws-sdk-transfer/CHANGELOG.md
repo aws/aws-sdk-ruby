@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2019-08-20)
+------------------
+
+* Feature - New field in response of TestIdentityProvider
+
 1.12.0 (2019-07-25)
 ------------------
 
