@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.338 (2019-08-21)
+------------------
+
 * Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
 
 * Feature - Aws::PersonalizeRuntime - Updated the API for Amazon Personalize Runtime.
