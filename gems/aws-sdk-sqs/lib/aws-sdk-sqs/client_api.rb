@@ -146,6 +146,7 @@ module Aws::SQS
 
     CreateQueueRequest.add_member(:queue_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueName"))
     CreateQueueRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: QueueAttributeMap, location_name: "Attribute"))
+    CreateQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tag"))
     CreateQueueRequest.struct_class = Types::CreateQueueRequest
 
     CreateQueueResult.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, location_name: "QueueUrl"))

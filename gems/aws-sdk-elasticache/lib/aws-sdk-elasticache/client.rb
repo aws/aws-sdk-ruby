@@ -6165,6 +6165,7 @@ module Aws::ElastiCache
     # @return [Types::AllowedNodeTypeModificationsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AllowedNodeTypeModificationsMessage#scale_up_modifications #scale_up_modifications} => Array&lt;String&gt;
+    #   * {Types::AllowedNodeTypeModificationsMessage#scale_down_modifications #scale_down_modifications} => Array&lt;String&gt;
     #
     #
     # @example Example: ListAllowedNodeTypeModifications
@@ -6214,6 +6215,8 @@ module Aws::ElastiCache
     #
     #   resp.scale_up_modifications #=> Array
     #   resp.scale_up_modifications[0] #=> String
+    #   resp.scale_down_modifications #=> Array
+    #   resp.scale_down_modifications[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModifications AWS API Documentation
     #
@@ -7862,7 +7865,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -77,6 +77,8 @@ module Aws
   autoload :FMS, 'aws-sdk-fms'
   autoload :FSx, 'aws-sdk-fsx'
   autoload :Firehose, 'aws-sdk-firehose'
+  autoload :ForecastQueryService, 'aws-sdk-forecastqueryservice'
+  autoload :ForecastService, 'aws-sdk-forecastservice'
   autoload :GameLift, 'aws-sdk-gamelift'
   autoload :Glacier, 'aws-sdk-glacier'
   autoload :GlobalAccelerator, 'aws-sdk-globalaccelerator'

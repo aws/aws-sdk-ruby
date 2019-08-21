@@ -28,6 +28,9 @@ module Aws::SQS
     #     attributes: {
     #       "All" => "String",
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :queue_name
@@ -173,6 +176,40 @@ module Aws::SQS
     #   [9]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
     #   [10]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
     #   [11]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+    # @option options [Hash<String,String>] :tags
+    #   Add cost allocation tags to the specified Amazon SQS queue. For an
+    #   overview, see [Tagging Your Amazon SQS Queues][1] in the *Amazon
+    #   Simple Queue Service Developer Guide*.
+    #
+    #   When you use queue tags, keep the following guidelines in mind:
+    #
+    #   * Adding more than 50 tags to a queue isn't recommended.
+    #
+    #   * Tags don't have any semantic meaning. Amazon SQS interprets tags as
+    #     character strings.
+    #
+    #   * Tags are case-sensitive.
+    #
+    #   * A new tag with a key identical to that of an existing tag overwrites
+    #     the existing tag.
+    #
+    #   For a full list of tag restrictions, see [Limits Related to Queues][2]
+    #   in the *Amazon Simple Queue Service Developer Guide*.
+    #
+    #   <note markdown="1"> To be able to tag a queue on creation, you must have the
+    #   `sqs:CreateQueue` and `sqs:TagQueue` permissions.
+    #
+    #    Cross-account permissions don't apply to this action. For more
+    #   information, see [Grant Cross-Account Permissions to a Role and a User
+    #   Name][3] in the *Amazon Simple Queue Service Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name
     # @return [Queue]
     def create_queue(options = {})
       resp = @client.create_queue(options)

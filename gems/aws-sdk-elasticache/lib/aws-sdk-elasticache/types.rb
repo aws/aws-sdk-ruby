@@ -63,10 +63,20 @@ module Aws::ElastiCache
     #   this list for the `CacheNodeType` parameter.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scale_down_modifications
+    #   A string list, each element of which specifies a cache node type
+    #   which you can use to scale your cluster or replication group.
+    #
+    #   When scaling down on a Redis cluster or replication group using
+    #   `ModifyCacheCluster` or `ModifyReplicationGroup`, use a value from
+    #   this list for the `CacheNodeType` parameter.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AllowedNodeTypeModificationsMessage AWS API Documentation
     #
     class AllowedNodeTypeModificationsMessage < Struct.new(
-      :scale_up_modifications)
+      :scale_up_modifications,
+      :scale_down_modifications)
       include Aws::Structure
     end
 

@@ -357,8 +357,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
-| AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
+| AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
@@ -428,6 +428,8 @@ to be backwards compatible.
 | Amazon Elasticsearch Service                          | Aws::ElasticsearchService            | aws-sdk-elasticsearchservice            | 2015-01-01  |
 | Amazon EventBridge                                    | Aws::EventBridge                     | aws-sdk-eventbridge                     | 2015-10-07  |
 | Amazon FSx                                            | Aws::FSx                             | aws-sdk-fsx                             | 2018-03-01  |
+| Amazon Forecast Query Service                         | Aws::ForecastQueryService            | aws-sdk-forecastqueryservice            | 2018-06-26  |
+| Amazon Forecast Service                               | Aws::ForecastService                 | aws-sdk-forecastservice                 | 2018-06-26  |
 | Amazon GameLift                                       | Aws::GameLift                        | aws-sdk-gamelift                        | 2015-10-01  |
 | Amazon Glacier                                        | Aws::Glacier                         | aws-sdk-glacier                         | 2012-06-01  |
 | Amazon GuardDuty                                      | Aws::GuardDuty                       | aws-sdk-guardduty                       | 2017-11-28  |

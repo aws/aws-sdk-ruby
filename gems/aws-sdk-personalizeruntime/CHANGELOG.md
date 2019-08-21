@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2019-08-21)
+------------------
+
+* Feature - Increased limits on number of items recommended and reranked: The maximum number of results returned from getRecommendations API has been increased to 200. The maximum number of items which can be reranked via getPersonalizedRanking API has been increased to 200.
+
 1.3.0 (2019-07-25)
 ------------------
 

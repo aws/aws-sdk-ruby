@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2019-08-21)
+------------------
+
+* Feature - Amazon SageMaker now supports Amazon EFS and Amazon FSx for Lustre file systems as data sources for training machine learning models. Amazon SageMaker now supports running training jobs on ml.p3dn.24xlarge instance type. This instance type is offered as a limited private preview for certain SageMaker customers. If you are interested in joining the private preview, please reach out to the SageMaker Product Management team via AWS Support."
+
 1.42.0 (2019-08-20)
 ------------------
 

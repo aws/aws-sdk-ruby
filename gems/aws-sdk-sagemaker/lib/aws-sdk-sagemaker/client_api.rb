@@ -185,6 +185,10 @@ module Aws::SageMaker
     EnvironmentMap = Shapes::MapShape.new(name: 'EnvironmentMap')
     EnvironmentValue = Shapes::StringShape.new(name: 'EnvironmentValue')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
+    FileSystemAccessMode = Shapes::StringShape.new(name: 'FileSystemAccessMode')
+    FileSystemDataSource = Shapes::StructureShape.new(name: 'FileSystemDataSource')
+    FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
+    FileSystemType = Shapes::StringShape.new(name: 'FileSystemType')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
@@ -848,6 +852,7 @@ module Aws::SageMaker
     DataProcessing.struct_class = Types::DataProcessing
 
     DataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataSource, location_name: "S3DataSource"))
+    DataSource.add_member(:file_system_data_source, Shapes::ShapeRef.new(shape: FileSystemDataSource, location_name: "FileSystemDataSource"))
     DataSource.struct_class = Types::DataSource
 
     DeleteAlgorithmInput.add_member(:algorithm_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "AlgorithmName"))
@@ -1158,6 +1163,12 @@ module Aws::SageMaker
 
     EnvironmentMap.key = Shapes::ShapeRef.new(shape: EnvironmentKey)
     EnvironmentMap.value = Shapes::ShapeRef.new(shape: EnvironmentValue)
+
+    FileSystemDataSource.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    FileSystemDataSource.add_member(:file_system_access_mode, Shapes::ShapeRef.new(shape: FileSystemAccessMode, required: true, location_name: "FileSystemAccessMode"))
+    FileSystemDataSource.add_member(:file_system_type, Shapes::ShapeRef.new(shape: FileSystemType, required: true, location_name: "FileSystemType"))
+    FileSystemDataSource.add_member(:directory_path, Shapes::ShapeRef.new(shape: DirectoryPath, required: true, location_name: "DirectoryPath"))
+    FileSystemDataSource.struct_class = Types::FileSystemDataSource
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: ResourcePropertyName, required: true, location_name: "Name"))
     Filter.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, location_name: "Operator"))

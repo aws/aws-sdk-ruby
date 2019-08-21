@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-08-21)
+------------------
+
+* Feature - ElastiCache extends support for Scale down for Redis Cluster-mode enabled and disabled replication groups
+
 1.23.0 (2019-07-25)
 ------------------
 

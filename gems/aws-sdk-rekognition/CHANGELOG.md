@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-08-21)
+------------------
+
+* Feature - Documentation updates for Amazon Rekognition.
+
 1.29.0 (2019-08-12)
 ------------------
 

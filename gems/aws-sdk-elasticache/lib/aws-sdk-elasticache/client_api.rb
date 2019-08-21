@@ -264,6 +264,7 @@ module Aws::ElastiCache
     AddTagsToResourceMessage.struct_class = Types::AddTagsToResourceMessage
 
     AllowedNodeTypeModificationsMessage.add_member(:scale_up_modifications, Shapes::ShapeRef.new(shape: NodeTypeList, location_name: "ScaleUpModifications"))
+    AllowedNodeTypeModificationsMessage.add_member(:scale_down_modifications, Shapes::ShapeRef.new(shape: NodeTypeList, location_name: "ScaleDownModifications"))
     AllowedNodeTypeModificationsMessage.struct_class = Types::AllowedNodeTypeModificationsMessage
 
     AuthorizeCacheSecurityGroupIngressMessage.add_member(:cache_security_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheSecurityGroupName"))

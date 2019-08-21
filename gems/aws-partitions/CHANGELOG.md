@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.204.0 (2019-08-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ForecastService`.
+
+* Feature - Added support for enumerating regions for `Aws::ForecastQueryService`.
+
 1.203.0 (2019-08-16)
 ------------------
 

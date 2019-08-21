@@ -247,6 +247,12 @@
   "Firehose": {
     "models": "firehose/2015-08-04"
   },
+  "ForecastQueryService": {
+    "models": "forecastquery/2018-06-26"
+  },
+  "ForecastService": {
+    "models": "forecast/2018-06-26"
+  },
   "GameLift": {
     "models": "gamelift/2015-10-01"
   },

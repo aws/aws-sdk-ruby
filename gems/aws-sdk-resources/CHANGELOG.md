@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.52.0 (2019-08-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-forecastservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-forecastqueryservice` gem.
+
 3.51.0 (2019-08-08)
 ------------------
 

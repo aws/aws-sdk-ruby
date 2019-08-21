@@ -294,6 +294,8 @@ module Aws
             'FMS' => 'fms',
             'FSx' => 'fsx',
             'Firehose' => 'firehose',
+            'ForecastQueryService' => 'forecastquery',
+            'ForecastService' => 'forecast',
             'GameLift' => 'gamelift',
             'Glacier' => 'glacier',
             'GlobalAccelerator' => 'globalaccelerator',

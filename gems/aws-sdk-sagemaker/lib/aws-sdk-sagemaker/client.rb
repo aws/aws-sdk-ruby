@@ -417,7 +417,7 @@ module Aws::SageMaker
     #           default_value: "ParameterValue",
     #         },
     #       ],
-    #       supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #       supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.p3dn.24xlarge
     #       supports_distributed_training: false,
     #       metric_definitions: [
     #         {
@@ -477,6 +477,12 @@ module Aws::SageMaker
     #                     s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                     attribute_names: ["AttributeName"],
     #                   },
+    #                   file_system_data_source: {
+    #                     file_system_id: "FileSystemId", # required
+    #                     file_system_access_mode: "rw", # required, accepts rw, ro
+    #                     file_system_type: "EFS", # required, accepts EFS, FSxLustre
+    #                     directory_path: "DirectoryPath", # required
+    #                   },
     #                 },
     #                 content_type: "ContentType",
     #                 compression_type: "None", # accepts None, Gzip
@@ -492,7 +498,7 @@ module Aws::SageMaker
     #               s3_output_path: "S3Uri", # required
     #             },
     #             resource_config: { # required
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.p3dn.24xlarge
     #               instance_count: 1, # required
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
@@ -564,7 +570,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
     #
     # @option params [required, String] :code_repository_name
     #   The name of the Git repository. The name must have 1 to 63 characters.
@@ -748,15 +754,15 @@ module Aws::SageMaker
     # activated in your IAM user account by default. If you previously
     # deactivated AWS STS for a region, you need to reactivate AWS STS for
     # that region. For more information, see [Activating and Deactivating
-    # AWS STS i an AWS Region][4] in the *AWS Identity and Access Management
-    # User Guide*.
+    # AWS STS i an AWS
+    # Region](IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+    # in the *AWS Identity and Access Management User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
     # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
     # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html
-    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint. The name must be unique within an AWS Region
@@ -960,7 +966,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/answers/account-management/aws-tagging-strategies/
     #
     # @return [Types::CreateHyperParameterTuningJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1032,6 +1038,12 @@ module Aws::SageMaker
     #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #               attribute_names: ["AttributeName"],
     #             },
+    #             file_system_data_source: {
+    #               file_system_id: "FileSystemId", # required
+    #               file_system_access_mode: "rw", # required, accepts rw, ro
+    #               file_system_type: "EFS", # required, accepts EFS, FSxLustre
+    #               directory_path: "DirectoryPath", # required
+    #             },
     #           },
     #           content_type: "ContentType",
     #           compression_type: "None", # accepts None, Gzip
@@ -1051,7 +1063,7 @@ module Aws::SageMaker
     #         s3_output_path: "S3Uri", # required
     #       },
     #       resource_config: { # required
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.p3dn.24xlarge
     #         instance_count: 1, # required
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
@@ -1130,8 +1142,8 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-automated-labeling.html
-    # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-data.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-automated-labeling.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-data.html
     #
     # @option params [required, String] :labeling_job_name
     #   The name of the labeling job. This name is used to identify the job in
@@ -1216,7 +1228,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @return [Types::CreateLabelingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1635,7 +1647,7 @@ module Aws::SageMaker
     #   instance, Amazon SageMaker assumes this role to perform tasks on your
     #   behalf. You must grant this role necessary permissions so Amazon
     #   SageMaker can perform these tasks. The policy must allow the Amazon
-    #   SageMaker service principal (sagemaker.amazonaws.com) permissions to
+    #   SageMaker service principal (sagemaker.amazonaws.com) permissionsto to
     #   assume this role. For more information, see [Amazon SageMaker
     #   Roles][1].
     #
@@ -1657,7 +1669,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with the notebook instance. You can add
@@ -1699,7 +1711,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
     #
     # @option params [String] :default_code_repository
     #   A Git repository to associate with the notebook instance as its
@@ -1712,22 +1724,22 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #
     # @option params [Array<String>] :additional_code_repositories
     #   An array of up to three Git repositories to associate with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories in
-    #   [AWS CodeCommit][1] or in any other Git repository. These repositories
-    #   are cloned at the same level as the default repository of your
-    #   notebook instance. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   [AWS CodeCommit](codecommit/latest/userguide/welcome.html) or in any
+    #   other Git repository. These repositories are cloned at the same level
+    #   as the default repository of your notebook instance. For more
+    #   information, see [Associating Git Repositories with Amazon SageMaker
+    #   Notebook Instances][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #
     # @option params [String] :root_access
     #   Whether root access is enabled or disabled for users of the notebook
@@ -1925,11 +1937,11 @@ module Aws::SageMaker
     #   a list of hyperparameters for each training algorithm provided by
     #   Amazon SageMaker, see [Algorithms][1].
     #
-    # * `InputDataConfig` - Describes the training dataset and the Amazon S3
-    #   location where it is stored.
+    # * `InputDataConfig` - Describes the training dataset and the Amazon
+    #   S3, EFS, or FSx location where it is stored.
     #
-    # * `OutputDataConfig` - Identifies the Amazon S3 location where you
-    #   want Amazon SageMaker to save the results of model training.
+    # * `OutputDataConfig` - Identifies the Amazon S3 bucket where you want
+    #   Amazon SageMaker to save the results of model training.
     #
     #
     #
@@ -2016,18 +2028,20 @@ module Aws::SageMaker
     #   Algorithms can accept input data from one or more channels. For
     #   example, an algorithm might have two channels of input data,
     #   `training_data` and `validation_data`. The configuration for each
-    #   channel provides the S3 location where the input data is stored. It
-    #   also provides information about the stored data: the MIME type,
-    #   compression method, and whether the data is wrapped in RecordIO
+    #   channel provides the S3, EFS, or FSx location where the input data is
+    #   stored. It also provides information about the stored data: the MIME
+    #   type, compression method, and whether the data is wrapped in RecordIO
     #   format.
     #
     #   Depending on the input mode that the algorithm supports, Amazon
     #   SageMaker either copies input data files from an S3 bucket to a local
     #   directory in the Docker container, or makes it available as input
-    #   streams.
+    #   streams. For example, if you specify an EFS location, input data files
+    #   will be made available as input streams. They do not need to be
+    #   downloaded.
     #
     # @option params [required, Types::OutputDataConfig] :output_data_config
-    #   Specifies the path to the S3 bucket where you want to store model
+    #   Specifies the path to the S3 location where you want to store model
     #   artifacts. Amazon SageMaker creates subfolders for the artifacts.
     #
     # @option params [required, Types::ResourceConfig] :resource_config
@@ -2147,6 +2161,12 @@ module Aws::SageMaker
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #             attribute_names: ["AttributeName"],
     #           },
+    #           file_system_data_source: {
+    #             file_system_id: "FileSystemId", # required
+    #             file_system_access_mode: "rw", # required, accepts rw, ro
+    #             file_system_type: "EFS", # required, accepts EFS, FSxLustre
+    #             directory_path: "DirectoryPath", # required
+    #           },
     #         },
     #         content_type: "ContentType",
     #         compression_type: "None", # accepts None, Gzip
@@ -2162,7 +2182,7 @@ module Aws::SageMaker
     #       s3_output_path: "S3Uri", # required
     #     },
     #     resource_config: { # required
-    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.p3dn.24xlarge
     #       instance_count: 1, # required
     #       volume_size_in_gb: 1, # required
     #       volume_kms_key_id: "KmsKeyId",
@@ -2257,7 +2277,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests
     #
     # @option params [Integer] :max_payload_in_mb
     #   The maximum allowed size of the payload, in MB. A *payload* is the
@@ -2316,7 +2336,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) An array of key-value pairs. For more information, see
@@ -2409,7 +2429,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
     #
     # @option params [required, String] :description
     #   A description of the work team.
@@ -2419,6 +2439,15 @@ module Aws::SageMaker
     #   work items.
     #
     # @option params [Array<Types::Tag>] :tags
+    #   An array of key-value pairs.
+    #
+    #   For more information, see [Resource Tag][1] and [Using Cost Allocation
+    #   Tags][2] in the <i> AWS Billing and Cost Management User Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html
+    #   [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @return [Types::CreateWorkteamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2778,7 +2807,7 @@ module Aws::SageMaker
     #   resp.training_specification.supported_hyper_parameters[0].is_required #=> Boolean
     #   resp.training_specification.supported_hyper_parameters[0].default_value #=> String
     #   resp.training_specification.supported_training_instance_types #=> Array
-    #   resp.training_specification.supported_training_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.training_specification.supported_training_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.p3dn.24xlarge"
     #   resp.training_specification.supports_distributed_training #=> Boolean
     #   resp.training_specification.metric_definitions #=> Array
     #   resp.training_specification.metric_definitions[0].name #=> String
@@ -2823,6 +2852,10 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.directory_path #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].content_type #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
@@ -2830,7 +2863,7 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.kms_key_id #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.s3_output_path #=> String
-    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.p3dn.24xlarge"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_count #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_kms_key_id #=> String
@@ -3134,6 +3167,10 @@ module Aws::SageMaker
     #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
+    #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
+    #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
+    #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.directory_path #=> String
     #   resp.training_job_definition.input_data_config[0].content_type #=> String
     #   resp.training_job_definition.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.training_job_definition.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
@@ -3145,7 +3182,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.vpc_config.subnets[0] #=> String
     #   resp.training_job_definition.output_data_config.kms_key_id #=> String
     #   resp.training_job_definition.output_data_config.s3_output_path #=> String
-    #   resp.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.p3dn.24xlarge"
     #   resp.training_job_definition.resource_config.instance_count #=> Integer
     #   resp.training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definition.resource_config.volume_kms_key_id #=> String
@@ -3664,6 +3701,10 @@ module Aws::SageMaker
     #   resp.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
+    #   resp.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
+    #   resp.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
+    #   resp.input_data_config[0].data_source.file_system_data_source.directory_path #=> String
     #   resp.input_data_config[0].content_type #=> String
     #   resp.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
@@ -3671,7 +3712,7 @@ module Aws::SageMaker
     #   resp.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
-    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.p3dn.24xlarge"
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.volume_size_in_gb #=> Integer
     #   resp.resource_config.volume_kms_key_id #=> String
@@ -5350,6 +5391,10 @@ module Aws::SageMaker
     #   resp.results[0].training_job.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #   resp.results[0].training_job.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
     #   resp.results[0].training_job.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.results[0].training_job.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
+    #   resp.results[0].training_job.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
+    #   resp.results[0].training_job.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
+    #   resp.results[0].training_job.input_data_config[0].data_source.file_system_data_source.directory_path #=> String
     #   resp.results[0].training_job.input_data_config[0].content_type #=> String
     #   resp.results[0].training_job.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.results[0].training_job.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
@@ -5357,7 +5402,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.results[0].training_job.output_data_config.kms_key_id #=> String
     #   resp.results[0].training_job.output_data_config.s3_output_path #=> String
-    #   resp.results[0].training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.results[0].training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.p3dn.24xlarge"
     #   resp.results[0].training_job.resource_config.instance_count #=> Integer
     #   resp.results[0].training_job.resource_config.volume_size_in_gb #=> Integer
     #   resp.results[0].training_job.resource_config.volume_kms_key_id #=> String
@@ -5794,8 +5839,8 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #
     # @option params [Array<String>] :additional_code_repositories
     #   An array of up to three Git repositories to associate with the
@@ -5808,18 +5853,14 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #
     # @option params [Array<String>] :accelerator_types
     #   A list of the Elastic Inference (EI) instance types to associate with
     #   this notebook instance. Currently only one EI instance type can be
     #   associated with a notebook instance. For more information, see [Using
-    #   Elastic Inference in Amazon SageMaker][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   Elastic Inference in Amazon SageMaker](sagemaker/latest/dg/ei.html).
     #
     # @option params [Boolean] :disassociate_accelerator_types
     #   A list of the Elastic Inference (EI) instance types to remove from
@@ -5998,7 +6039,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
