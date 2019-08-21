@@ -294,6 +294,14 @@
     "models": "firehose/2015-08-04",
     "endpoint": "firehose"
   },
+  "ForecastQueryService": {
+    "models": "forecastquery/2018-06-26",
+    "endpoint": "forecastquery"
+  },
+  "ForecastService": {
+    "models": "forecast/2018-06-26",
+    "endpoint": "forecast"
+  },
   "GameLift": {
     "models": "gamelift/2015-10-01",
     "endpoint": "gamelift"

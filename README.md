@@ -383,14 +383,16 @@ to be backwards compatible.
 | Amazon Elasticsearch Service                          | ElasticsearchService            | 2015-01-01  |
 | Amazon EventBridge                                    | EventBridge                     | 2015-10-07  |
 | Amazon FSx                                            | FSx                             | 2018-03-01  |
+| Amazon Forecast Query Service                         | ForecastQueryService            | 2018-06-26  |
+| Amazon Forecast Service                               | ForecastService                 | 2018-06-26  |
 | Amazon GameLift                                       | GameLift                        | 2015-10-01  |
 | Amazon Glacier                                        | Glacier                         | 2012-06-01  |
 | Amazon GuardDuty                                      | GuardDuty                       | 2017-11-28  |
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |

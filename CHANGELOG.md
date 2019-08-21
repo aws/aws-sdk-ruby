@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+* Feature - Aws::PersonalizeRuntime - Updated the API for Amazon Personalize Runtime.
+
+* Feature - Aws::Rekognition - Updated the documentation for Amazon Rekognition.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::SQS - Updated the API, and documentation for Amazon Simple Queue Service.
+
+* Feature - Aws::ForecastService - Added support for a new service, Amazon Forecast Service.
+
+* Feature - Aws::ForecastQueryService - Added support for a new service, Amazon Forecast Query Service.
+
 2.11.337 (2019-08-20)
 ------------------
 

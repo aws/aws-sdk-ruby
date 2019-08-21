@@ -97,6 +97,8 @@ module Aws
     FMS
     FSx
     Firehose
+    ForecastQueryService
+    ForecastService
     GameLift
     Glacier
     GlobalAccelerator
