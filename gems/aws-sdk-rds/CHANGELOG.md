@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2019-08-22)
+------------------
+
+* Feature - This release allows users to enable RDS Data API while creating Aurora Serverless databases.
+
 1.63.0 (2019-07-25)
 ------------------
 

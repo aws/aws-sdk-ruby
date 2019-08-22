@@ -629,6 +629,95 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Creates an endpoint for a Server Message Block (SMB) file system.
+    #
+    # @option params [required, String] :subdirectory
+    #   The subdirectory in the SMB file system that is used to read data from
+    #   the SMB source location or write data to the SMB destination. The SMB
+    #   path should be a path that's exported by the SMB server, or a
+    #   subdirectory of that path. The path should be such that it can be
+    #   mounted by other SMB clients in your network.
+    #
+    #   To transfer all the data in the folder you specified, DataSync needs
+    #   to have permissions to mount the SMB share, as well as to access all
+    #   the data in that share. To ensure this, either ensure that the
+    #   user/password specified belongs to the user who can mount the share,
+    #   and who has the appropriate permissions for all of the files and
+    #   directories that you want DataSync to access, or use credentials of a
+    #   member of the Backup Operators group to mount the share. Doing either
+    #   enables the agent to access the data. For the agent to access
+    #   directories, you must additionally enable all execute access.
+    #
+    # @option params [required, String] :server_hostname
+    #   The name of the SMB server. This value is the IP address or Domain
+    #   Name Service (DNS) name of the SMB server. An agent that is installed
+    #   on-premises uses this host name to mount the SMB server in a network.
+    #
+    #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
+    #   (IPv4) address.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :user
+    #   The user who can mount the share, has the permissions to access files
+    #   and directories in the SMB share.
+    #
+    # @option params [String] :domain
+    #   The name of the domain that the SMB server belongs to.
+    #
+    # @option params [required, String] :password
+    #   The password of the user who has permission to access the SMB server.
+    #
+    # @option params [required, Array<String>] :agent_arns
+    #   The Amazon Resource Names (ARNs) of agents to use for a Simple Message
+    #   Block (SMB) location.
+    #
+    # @option params [Types::SmbMountOptions] :mount_options
+    #   The mount options that are available for DataSync to use to access an
+    #   SMB location.
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   The key-value pair that represents the tag that you want to add to the
+    #   location. The value can be an empty string. We recommend using tags to
+    #   name your resources.
+    #
+    # @return [Types::CreateLocationSmbResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLocationSmbResponse#location_arn #location_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_location_smb({
+    #     subdirectory: "NonEmptySubdirectory", # required
+    #     server_hostname: "ServerHostname", # required
+    #     user: "SmbUser", # required
+    #     domain: "SmbDomain",
+    #     password: "SmbPassword", # required
+    #     agent_arns: ["AgentArn"], # required
+    #     mount_options: {
+    #       version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationSmb AWS API Documentation
+    #
+    # @overload create_location_smb(params = {})
+    # @param [Hash] params ({})
+    def create_location_smb(params = {}, options = {})
+      req = build_request(:create_location_smb, params)
+      req.send_request(options)
+    end
+
     # Creates a task. A task is a set of two locations (source and
     # destination) and a set of Options that you use to control the behavior
     # of a task. If you don't specify Options when you create a task, AWS
@@ -965,6 +1054,48 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def describe_location_s3(params = {}, options = {})
       req = build_request(:describe_location_s3, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata, such as the path and user information about a SMB
+    # location.
+    #
+    # @option params [required, String] :location_arn
+    #   The Amazon resource Name (ARN) of the SMB location to describe.
+    #
+    # @return [Types::DescribeLocationSmbResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLocationSmbResponse#location_arn #location_arn} => String
+    #   * {Types::DescribeLocationSmbResponse#location_uri #location_uri} => String
+    #   * {Types::DescribeLocationSmbResponse#agent_arns #agent_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeLocationSmbResponse#user #user} => String
+    #   * {Types::DescribeLocationSmbResponse#domain #domain} => String
+    #   * {Types::DescribeLocationSmbResponse#mount_options #mount_options} => Types::SmbMountOptions
+    #   * {Types::DescribeLocationSmbResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_location_smb({
+    #     location_arn: "LocationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #   resp.location_uri #=> String
+    #   resp.agent_arns #=> Array
+    #   resp.agent_arns[0] #=> String
+    #   resp.user #=> String
+    #   resp.domain #=> String
+    #   resp.mount_options.version #=> String, one of "AUTOMATIC", "SMB2", "SMB3"
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmb AWS API Documentation
+    #
+    # @overload describe_location_smb(params = {})
+    # @param [Hash] params ({})
+    def describe_location_smb(params = {}, options = {})
+      req = build_request(:describe_location_smb, params)
       req.send_request(options)
     end
 
@@ -1549,7 +1680,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

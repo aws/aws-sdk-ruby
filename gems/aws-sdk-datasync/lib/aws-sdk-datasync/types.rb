@@ -421,6 +421,117 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # CreateLocationSmbRequest
+    #
+    # @note When making an API call, you may pass CreateLocationSmbRequest
+    #   data as a hash:
+    #
+    #       {
+    #         subdirectory: "NonEmptySubdirectory", # required
+    #         server_hostname: "ServerHostname", # required
+    #         user: "SmbUser", # required
+    #         domain: "SmbDomain",
+    #         password: "SmbPassword", # required
+    #         agent_arns: ["AgentArn"], # required
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] subdirectory
+    #   The subdirectory in the SMB file system that is used to read data
+    #   from the SMB source location or write data to the SMB destination.
+    #   The SMB path should be a path that's exported by the SMB server, or
+    #   a subdirectory of that path. The path should be such that it can be
+    #   mounted by other SMB clients in your network.
+    #
+    #   To transfer all the data in the folder you specified, DataSync needs
+    #   to have permissions to mount the SMB share, as well as to access all
+    #   the data in that share. To ensure this, either ensure that the
+    #   user/password specified belongs to the user who can mount the share,
+    #   and who has the appropriate permissions for all of the files and
+    #   directories that you want DataSync to access, or use credentials of
+    #   a member of the Backup Operators group to mount the share. Doing
+    #   either enables the agent to access the data. For the agent to access
+    #   directories, you must additionally enable all execute access.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_hostname
+    #   The name of the SMB server. This value is the IP address or Domain
+    #   Name Service (DNS) name of the SMB server. An agent that is
+    #   installed on-premises uses this host name to mount the SMB server in
+    #   a network.
+    #
+    #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
+    #   (IPv4) address.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] user
+    #   The user who can mount the share, has the permissions to access
+    #   files and directories in the SMB share.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The name of the domain that the SMB server belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password of the user who has permission to access the SMB
+    #   server.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_arns
+    #   The Amazon Resource Names (ARNs) of agents to use for a Simple
+    #   Message Block (SMB) location.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mount_options
+    #   The mount options that are available for DataSync to use to access
+    #   an SMB location.
+    #   @return [Types::SmbMountOptions]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair that represents the tag that you want to add to
+    #   the location. The value can be an empty string. We recommend using
+    #   tags to name your resources.
+    #   @return [Array<Types::TagListEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationSmbRequest AWS API Documentation
+    #
+    class CreateLocationSmbRequest < Struct.new(
+      :subdirectory,
+      :server_hostname,
+      :user,
+      :domain,
+      :password,
+      :agent_arns,
+      :mount_options,
+      :tags)
+      include Aws::Structure
+    end
+
+    # CreateLocationSmbResponse
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the source SMB file system
+    #   location that is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationSmbResponse AWS API Documentation
+    #
+    class CreateLocationSmbResponse < Struct.new(
+      :location_arn)
+      include Aws::Structure
+    end
+
     # CreateTaskRequest
     #
     # @note When making an API call, you may pass CreateTaskRequest
@@ -660,8 +771,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] private_link_config
-    #   The subnet and the security group that DataSync used to access a VPC
-    #   endpoint.
+    #   The VPC endpoint, subnet and security group that an agent uses to
+    #   access IP addresses in a VPC (Virtual Private Cloud).
     #   @return [Types::PrivateLinkConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgentResponse AWS API Documentation
@@ -834,6 +945,72 @@ module Aws::DataSync
       :location_arn,
       :location_uri,
       :s3_config,
+      :creation_time)
+      include Aws::Structure
+    end
+
+    # DescribeLocationSmbRequest
+    #
+    # @note When making an API call, you may pass DescribeLocationSmbRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon resource Name (ARN) of the SMB location to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmbRequest AWS API Documentation
+    #
+    class DescribeLocationSmbRequest < Struct.new(
+      :location_arn)
+      include Aws::Structure
+    end
+
+    # DescribeLocationSmbResponse
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon resource Name (ARN) of the SMB location that was
+    #   described.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_uri
+    #   The URL of the source SBM location that was described.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_arns
+    #   The Amazon Resource Name (ARN) of the source SMB file system
+    #   location that is created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user
+    #   The user who is logged on the SMB server.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The name of the domain that the SMB server belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_options
+    #   The mount options that are available for DataSync to use to access
+    #   an SMB location.
+    #   @return [Types::SmbMountOptions]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the SMB location was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmbResponse AWS API Documentation
+    #
+    class DescribeLocationSmbResponse < Struct.new(
+      :location_arn,
+      :location_uri,
+      :agent_arns,
+      :user,
+      :domain,
+      :mount_options,
       :creation_time)
       include Aws::Structure
     end
@@ -1748,6 +1925,30 @@ module Aws::DataSync
     #
     class S3Config < Struct.new(
       :bucket_access_role_arn)
+      include Aws::Structure
+    end
+
+    # Represents the mount options that are available for DataSync to access
+    # an SMB location.
+    #
+    # @note When making an API call, you may pass SmbMountOptions
+    #   data as a hash:
+    #
+    #       {
+    #         version: "AUTOMATIC", # accepts AUTOMATIC, SMB2, SMB3
+    #       }
+    #
+    # @!attribute [rw] version
+    #   The specific SMB version that you want DataSync to use to mount your
+    #   SMB share. If you don't specify a version, DataSync defaults to
+    #   `AUTOMATIC`. That is, DataSync automatically selects a version based
+    #   on negotiation with the SMB Server server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/SmbMountOptions AWS API Documentation
+    #
+    class SmbMountOptions < Struct.new(
+      :version)
       include Aws::Structure
     end
 
