@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.339 (2019-08-22)
+------------------
+
 * Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
