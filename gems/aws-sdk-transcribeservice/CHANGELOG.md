@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-08-23)
+------------------
+
+* Feature - Amazon Transcribe - support transcriptions from audio sources in Russian (ru-RU) and Chinese (zh-CN).
+
 1.26.0 (2019-07-25)
 ------------------
 

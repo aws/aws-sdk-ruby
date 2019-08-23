@@ -45,7 +45,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }
@@ -541,7 +541,7 @@ module Aws::TranscribeService
     #
     #       {
     #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # required, accepts mp3, mp4, wav, flac
     #         media: { # required
@@ -569,6 +569,12 @@ module Aws::TranscribeService
     # @!attribute [rw] media_sample_rate_hertz
     #   The sample rate, in Hertz, of the audio track in the input media
     #   file.
+    #
+    #   If you do not specify the media sample rate, Amazon Transcribe
+    #   determines the sample rate. If you specify the sample rate, it must
+    #   match the sample rate detected by Amazon Transcribe. In most cases,
+    #   you should leave the `MediaSampleRateHertz` field blank and let
+    #   Amazon Transcribe determine the sample rate.
     #   @return [Integer]
     #
     # @!attribute [rw] media_format
@@ -602,7 +608,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -818,7 +824,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }

@@ -12243,7 +12243,72 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the specified export tasks or all your export tasks.
+    # Describes the specified export image tasks or all your export image
+    # tasks.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filter tasks using the `task-state` filter and one of the following
+    #   values: `active`, `completed`, `deleting`, or `deleted`.
+    #
+    # @option params [Array<String>] :export_image_task_ids
+    #   The IDs of the export image tasks.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates the next page of results.
+    #
+    # @return [Types::DescribeExportImageTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExportImageTasksResult#export_image_tasks #export_image_tasks} => Array&lt;Types::ExportImageTask&gt;
+    #   * {Types::DescribeExportImageTasksResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_export_image_tasks({
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     export_image_task_ids: ["String"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_image_tasks #=> Array
+    #   resp.export_image_tasks[0].description #=> String
+    #   resp.export_image_tasks[0].export_image_task_id #=> String
+    #   resp.export_image_tasks[0].image_id #=> String
+    #   resp.export_image_tasks[0].progress #=> String
+    #   resp.export_image_tasks[0].s3_export_location.s3_bucket #=> String
+    #   resp.export_image_tasks[0].s3_export_location.s3_prefix #=> String
+    #   resp.export_image_tasks[0].status #=> String
+    #   resp.export_image_tasks[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportImageTasks AWS API Documentation
+    #
+    # @overload describe_export_image_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_export_image_tasks(params = {}, options = {})
+      req = build_request(:describe_export_image_tasks, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified export instance tasks or all your export
+    # instance tasks.
     #
     # @option params [Array<String>] :export_task_ids
     #   The export task IDs.
@@ -13665,15 +13730,13 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filter tasks using the `task-state` filter and one of the following
-    #   values: active, completed, deleting, deleted.
+    #   values: `active`, `completed`, `deleting`, or `deleted`.
     #
     # @option params [Array<String>] :import_task_ids
-    #   A list of import image task IDs.
+    #   The IDs of the import image tasks.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   The maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
     #   A token that indicates the next page of results.
@@ -23153,6 +23216,95 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Exports an Amazon Machine Image (AMI) to a VM file. For more
+    # information, see [Exporting a VM Directory from an Amazon Machine
+    # Image (AMI)][1] in the *VM Import/Export User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport_image.html
+    #
+    # @option params [String] :client_token
+    #   Token to enable idempotency for export image requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   A description of the image being exported. The maximum length is 255
+    #   bytes.
+    #
+    # @option params [required, String] :disk_image_format
+    #   The disk image format.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the image.
+    #
+    # @option params [required, Types::ExportTaskS3LocationRequest] :s3_export_location
+    #   Information about the destination S3 bucket. The bucket must exist and
+    #   grant WRITE and READ\_ACP permissions to the AWS account
+    #   vm-import-export@amazon.com.
+    #
+    # @option params [String] :role_name
+    #   The name of the role that grants VM Import/Export permission to export
+    #   images to your S3 bucket. If this parameter is not specified, the
+    #   default role is named 'vmimport'.
+    #
+    # @return [Types::ExportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportImageResult#description #description} => String
+    #   * {Types::ExportImageResult#disk_image_format #disk_image_format} => String
+    #   * {Types::ExportImageResult#export_image_task_id #export_image_task_id} => String
+    #   * {Types::ExportImageResult#image_id #image_id} => String
+    #   * {Types::ExportImageResult#role_name #role_name} => String
+    #   * {Types::ExportImageResult#progress #progress} => String
+    #   * {Types::ExportImageResult#s3_export_location #s3_export_location} => Types::ExportTaskS3Location
+    #   * {Types::ExportImageResult#status #status} => String
+    #   * {Types::ExportImageResult#status_message #status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_image({
+    #     client_token: "String",
+    #     description: "String",
+    #     disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #     dry_run: false,
+    #     image_id: "String", # required
+    #     s3_export_location: { # required
+    #       s3_bucket: "String", # required
+    #       s3_prefix: "String",
+    #     },
+    #     role_name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.disk_image_format #=> String, one of "VMDK", "RAW", "VHD"
+    #   resp.export_image_task_id #=> String
+    #   resp.image_id #=> String
+    #   resp.role_name #=> String
+    #   resp.progress #=> String
+    #   resp.s3_export_location.s3_bucket #=> String
+    #   resp.s3_export_location.s3_prefix #=> String
+    #   resp.status #=> String
+    #   resp.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImage AWS API Documentation
+    #
+    # @overload export_image(params = {})
+    # @param [Hash] params ({})
+    def export_image(params = {}, options = {})
+      req = build_request(:export_image, params)
+      req.send_request(options)
+    end
+
     # Exports routes from the specified transit gateway route table to the
     # specified S3 bucket. By default, all routes are exported.
     # Alternatively, you can filter by CIDR range.
@@ -24956,8 +25108,8 @@ module Aws::EC2
     # is `diversified`, the EC2 Fleet distributes the instances across the
     # Spot Instance pools. If the allocation strategy is
     # `capacityOptimized`, EC2 Fleet launches instances from Spot Instance
-    # pools that are optimally chosen based on the available Spot Instance
-    # capacity.
+    # pools with optimal capacity for the number of instances that are
+    # launching.
     #
     # To scale down your EC2 Fleet, decrease its target capacity. First, the
     # EC2 Fleet cancels any open requests that exceed the new target
@@ -26294,8 +26446,8 @@ module Aws::EC2
     # is `diversified`, the Spot Fleet distributes the instances across the
     # Spot Instance pools. If the allocation strategy is
     # `capacityOptimized`, Spot Fleet launches instances from Spot Instance
-    # pools that are optimally chosen based on the available Spot Instance
-    # capacity.
+    # pools with optimal capacity for the number of instances that are
+    # launching.
     #
     # To scale down your Spot Fleet, decrease its target capacity. First,
     # the Spot Fleet cancels any open requests that exceed the new target
@@ -31350,8 +31502,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#diagnostic-interrupt
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/unreachable-instance.html#diagnostic-interrupt
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -32187,7 +32339,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

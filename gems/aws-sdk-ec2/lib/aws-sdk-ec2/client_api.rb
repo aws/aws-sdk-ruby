@@ -440,6 +440,9 @@ module Aws::EC2
     DescribeElasticGpusMaxResults = Shapes::IntegerShape.new(name: 'DescribeElasticGpusMaxResults')
     DescribeElasticGpusRequest = Shapes::StructureShape.new(name: 'DescribeElasticGpusRequest')
     DescribeElasticGpusResult = Shapes::StructureShape.new(name: 'DescribeElasticGpusResult')
+    DescribeExportImageTasksMaxResults = Shapes::IntegerShape.new(name: 'DescribeExportImageTasksMaxResults')
+    DescribeExportImageTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportImageTasksRequest')
+    DescribeExportImageTasksResult = Shapes::StructureShape.new(name: 'DescribeExportImageTasksResult')
     DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
     DescribeExportTasksResult = Shapes::StructureShape.new(name: 'DescribeExportTasksResult')
     DescribeFleetError = Shapes::StructureShape.new(name: 'DescribeFleetError')
@@ -720,9 +723,16 @@ module Aws::EC2
     ExportClientVpnClientConfigurationRequest = Shapes::StructureShape.new(name: 'ExportClientVpnClientConfigurationRequest')
     ExportClientVpnClientConfigurationResult = Shapes::StructureShape.new(name: 'ExportClientVpnClientConfigurationResult')
     ExportEnvironment = Shapes::StringShape.new(name: 'ExportEnvironment')
+    ExportImageRequest = Shapes::StructureShape.new(name: 'ExportImageRequest')
+    ExportImageResult = Shapes::StructureShape.new(name: 'ExportImageResult')
+    ExportImageTask = Shapes::StructureShape.new(name: 'ExportImageTask')
+    ExportImageTaskIdList = Shapes::ListShape.new(name: 'ExportImageTaskIdList')
+    ExportImageTaskList = Shapes::ListShape.new(name: 'ExportImageTaskList')
     ExportTask = Shapes::StructureShape.new(name: 'ExportTask')
     ExportTaskIdStringList = Shapes::ListShape.new(name: 'ExportTaskIdStringList')
     ExportTaskList = Shapes::ListShape.new(name: 'ExportTaskList')
+    ExportTaskS3Location = Shapes::StructureShape.new(name: 'ExportTaskS3Location')
+    ExportTaskS3LocationRequest = Shapes::StructureShape.new(name: 'ExportTaskS3LocationRequest')
     ExportTaskState = Shapes::StringShape.new(name: 'ExportTaskState')
     ExportToS3Task = Shapes::StructureShape.new(name: 'ExportToS3Task')
     ExportToS3TaskSpecification = Shapes::StructureShape.new(name: 'ExportToS3TaskSpecification')
@@ -3302,6 +3312,17 @@ module Aws::EC2
     DescribeElasticGpusResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeElasticGpusResult.struct_class = Types::DescribeElasticGpusResult
 
+    DescribeExportImageTasksRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeExportImageTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeExportImageTasksRequest.add_member(:export_image_task_ids, Shapes::ShapeRef.new(shape: ExportImageTaskIdList, location_name: "ExportImageTaskId"))
+    DescribeExportImageTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeExportImageTasksMaxResults, location_name: "MaxResults"))
+    DescribeExportImageTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeExportImageTasksRequest.struct_class = Types::DescribeExportImageTasksRequest
+
+    DescribeExportImageTasksResult.add_member(:export_image_tasks, Shapes::ShapeRef.new(shape: ExportImageTaskList, location_name: "exportImageTaskSet"))
+    DescribeExportImageTasksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeExportImageTasksResult.struct_class = Types::DescribeExportImageTasksResult
+
     DescribeExportTasksRequest.add_member(:export_task_ids, Shapes::ShapeRef.new(shape: ExportTaskIdStringList, location_name: "exportTaskId"))
     DescribeExportTasksRequest.struct_class = Types::DescribeExportTasksRequest
 
@@ -4458,6 +4479,39 @@ module Aws::EC2
     ExportClientVpnClientConfigurationResult.add_member(:client_configuration, Shapes::ShapeRef.new(shape: String, location_name: "clientConfiguration"))
     ExportClientVpnClientConfigurationResult.struct_class = Types::ExportClientVpnClientConfigurationResult
 
+    ExportImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ExportImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ExportImageRequest.add_member(:disk_image_format, Shapes::ShapeRef.new(shape: DiskImageFormat, required: true, location_name: "DiskImageFormat"))
+    ExportImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ExportImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
+    ExportImageRequest.add_member(:s3_export_location, Shapes::ShapeRef.new(shape: ExportTaskS3LocationRequest, required: true, location_name: "S3ExportLocation"))
+    ExportImageRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "RoleName"))
+    ExportImageRequest.struct_class = Types::ExportImageRequest
+
+    ExportImageResult.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ExportImageResult.add_member(:disk_image_format, Shapes::ShapeRef.new(shape: DiskImageFormat, location_name: "diskImageFormat"))
+    ExportImageResult.add_member(:export_image_task_id, Shapes::ShapeRef.new(shape: String, location_name: "exportImageTaskId"))
+    ExportImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
+    ExportImageResult.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "roleName"))
+    ExportImageResult.add_member(:progress, Shapes::ShapeRef.new(shape: String, location_name: "progress"))
+    ExportImageResult.add_member(:s3_export_location, Shapes::ShapeRef.new(shape: ExportTaskS3Location, location_name: "s3ExportLocation"))
+    ExportImageResult.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    ExportImageResult.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ExportImageResult.struct_class = Types::ExportImageResult
+
+    ExportImageTask.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ExportImageTask.add_member(:export_image_task_id, Shapes::ShapeRef.new(shape: String, location_name: "exportImageTaskId"))
+    ExportImageTask.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
+    ExportImageTask.add_member(:progress, Shapes::ShapeRef.new(shape: String, location_name: "progress"))
+    ExportImageTask.add_member(:s3_export_location, Shapes::ShapeRef.new(shape: ExportTaskS3Location, location_name: "s3ExportLocation"))
+    ExportImageTask.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    ExportImageTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ExportImageTask.struct_class = Types::ExportImageTask
+
+    ExportImageTaskIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "ExportImageTaskId")
+
+    ExportImageTaskList.member = Shapes::ShapeRef.new(shape: ExportImageTask, location_name: "item")
+
     ExportTask.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ExportTask.add_member(:export_task_id, Shapes::ShapeRef.new(shape: String, location_name: "exportTaskId"))
     ExportTask.add_member(:export_to_s3_task, Shapes::ShapeRef.new(shape: ExportToS3Task, location_name: "exportToS3"))
@@ -4469,6 +4523,14 @@ module Aws::EC2
     ExportTaskIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "ExportTaskId")
 
     ExportTaskList.member = Shapes::ShapeRef.new(shape: ExportTask, location_name: "item")
+
+    ExportTaskS3Location.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: String, location_name: "s3Bucket"))
+    ExportTaskS3Location.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: String, location_name: "s3Prefix"))
+    ExportTaskS3Location.struct_class = Types::ExportTaskS3Location
+
+    ExportTaskS3LocationRequest.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3Bucket"))
+    ExportTaskS3LocationRequest.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: String, location_name: "S3Prefix"))
+    ExportTaskS3LocationRequest.struct_class = Types::ExportTaskS3LocationRequest
 
     ExportToS3Task.add_member(:container_format, Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
     ExportToS3Task.add_member(:disk_image_format, Shapes::ShapeRef.new(shape: DiskImageFormat, location_name: "diskImageFormat"))
@@ -9312,6 +9374,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeElasticGpusResult)
       end)
 
+      api.add_operation(:describe_export_image_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeExportImageTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeExportImageTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeExportImageTasksResult)
+      end)
+
       api.add_operation(:describe_export_tasks, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeExportTasks"
         o.http_method = "POST"
@@ -10473,6 +10543,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ExportClientVpnClientConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: ExportClientVpnClientConfigurationResult)
+      end)
+
+      api.add_operation(:export_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportImageResult)
       end)
 
       api.add_operation(:export_transit_gateway_routes, Seahorse::Model::Operation.new.tap do |o|

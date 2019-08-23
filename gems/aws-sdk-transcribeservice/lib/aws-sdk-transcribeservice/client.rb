@@ -313,7 +313,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #   })
@@ -321,7 +321,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -402,7 +402,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA"
+    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -448,7 +448,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -507,7 +507,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].transcription_job_name #=> String
     #   resp.transcription_job_summaries[0].creation_time #=> Time
     #   resp.transcription_job_summaries[0].completion_time #=> Time
-    #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA"
+    #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -564,7 +564,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA"
+    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -589,6 +589,12 @@ module Aws::TranscribeService
     #
     # @option params [Integer] :media_sample_rate_hertz
     #   The sample rate, in Hertz, of the audio track in the input media file.
+    #
+    #   If you do not specify the media sample rate, Amazon Transcribe
+    #   determines the sample rate. If you specify the sample rate, it must
+    #   match the sample rate detected by Amazon Transcribe. In most cases,
+    #   you should leave the `MediaSampleRateHertz` field blank and let Amazon
+    #   Transcribe determine the sample rate.
     #
     # @option params [required, String] :media_format
     #   The format of the input media file.
@@ -617,7 +623,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #
     # @option params [Types::Settings] :settings
     #   A `Settings` object that provides optional settings for a
@@ -631,7 +637,7 @@ module Aws::TranscribeService
     #
     #   resp = client.start_transcription_job({
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # required, accepts mp3, mp4, wav, flac
     #     media: { # required
@@ -650,7 +656,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA"
+    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -720,7 +726,7 @@ module Aws::TranscribeService
     #
     #   resp = client.update_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #   })
@@ -728,7 +734,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -754,7 +760,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

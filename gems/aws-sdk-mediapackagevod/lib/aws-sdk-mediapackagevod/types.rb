@@ -342,6 +342,7 @@ module Aws::MediaPackageVod
     #         },
     #         hls_package: {
     #           encryption: {
+    #             constant_initialization_vector: "__string",
     #             encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
     #             speke_key_provider: { # required
     #               role_arn: "__string", # required
@@ -853,6 +854,7 @@ module Aws::MediaPackageVod
     #   data as a hash:
     #
     #       {
+    #         constant_initialization_vector: "__string",
     #         encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
     #         speke_key_provider: { # required
     #           role_arn: "__string", # required
@@ -860,6 +862,11 @@ module Aws::MediaPackageVod
     #           url: "__string", # required
     #         },
     #       }
+    #
+    # @!attribute [rw] constant_initialization_vector
+    #   A constant initialization vector for encryption (optional). When not
+    #   specified the initialization vector will be periodically rotated.
+    #   @return [String]
     #
     # @!attribute [rw] encryption_method
     #   The encryption method to use.
@@ -874,6 +881,7 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/HlsEncryption AWS API Documentation
     #
     class HlsEncryption < Struct.new(
+      :constant_initialization_vector,
       :encryption_method,
       :speke_key_provider)
       include Aws::Structure
@@ -955,6 +963,7 @@ module Aws::MediaPackageVod
     #
     #       {
     #         encryption: {
+    #           constant_initialization_vector: "__string",
     #           encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
     #           speke_key_provider: { # required
     #             role_arn: "__string", # required

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2019-08-23)
+------------------
+
+* Feature - This release of EC2 VM Import Export adds support for exporting Amazon Machine Image(AMI)s to a VM file
+
 1.105.0 (2019-08-15)
 ------------------
 

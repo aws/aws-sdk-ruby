@@ -386,6 +386,7 @@ module Aws::MediaPackageVod
     #     },
     #     hls_package: {
     #       encryption: {
+    #         constant_initialization_vector: "__string",
     #         encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
     #         speke_key_provider: { # required
     #           role_arn: "__string", # required
@@ -463,6 +464,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
     #   resp.dash_package.segment_duration_seconds #=> Integer
+    #   resp.hls_package.encryption.constant_initialization_vector #=> String
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -684,6 +686,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
     #   resp.dash_package.segment_duration_seconds #=> Integer
+    #   resp.hls_package.encryption.constant_initialization_vector #=> String
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -845,6 +848,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.url #=> String
     #   resp.packaging_configurations[0].dash_package.segment_duration_seconds #=> Integer
+    #   resp.packaging_configurations[0].hls_package.encryption.constant_initialization_vector #=> String
     #   resp.packaging_configurations[0].hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.packaging_configurations[0].hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.packaging_configurations[0].hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -930,7 +934,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

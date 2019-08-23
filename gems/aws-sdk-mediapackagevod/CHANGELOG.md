@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2019-08-23)
+------------------
+
+* Feature - Adds optional Constant Initialization Vector (IV) to HLS Encryption for MediaPackage VOD.
+
 1.4.0 (2019-07-25)
 ------------------
 
