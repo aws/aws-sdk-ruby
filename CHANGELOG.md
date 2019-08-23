@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::MediaPackageVod - Updated the API, and documentation for AWS Elemental MediaPackage VOD.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
 2.11.339 (2019-08-22)
 ------------------
 
