@@ -259,11 +259,11 @@ module Aws::SecurityHub
     # the member account accepts the invitation, permission is granted to
     # the master account to view findings generated in the member account.
     #
-    # @option params [String] :master_id
+    # @option params [required, String] :master_id
     #   The account ID of the Security Hub master account that sent the
     #   invitation.
     #
-    # @option params [String] :invitation_id
+    # @option params [required, String] :invitation_id
     #   The ID of the invitation sent from the Security Hub master account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -271,8 +271,8 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_invitation({
-    #     master_id: "NonEmptyString",
-    #     invitation_id: "NonEmptyString",
+    #     master_id: "NonEmptyString", # required
+    #     invitation_id: "NonEmptyString", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptInvitation AWS API Documentation
@@ -1235,7 +1235,7 @@ module Aws::SecurityHub
 
     # Declines invitations to become a member account.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account IDs that specify the accounts that invitations to
     #   Security Hub are declined from.
     #
@@ -1246,7 +1246,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.decline_invitations({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -1325,7 +1325,7 @@ module Aws::SecurityHub
     # Deletes invitations received by the AWS account to become a member
     # account.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of the account IDs that sent the invitations to delete.
     #
     # @return [Types::DeleteInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1335,7 +1335,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_invitations({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -4290,7 +4290,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

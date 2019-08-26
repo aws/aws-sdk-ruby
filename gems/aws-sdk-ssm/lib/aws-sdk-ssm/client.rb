@@ -547,11 +547,22 @@ module Aws::SSM
     # @option params [String] :instance_id
     #   The instance ID.
     #
+    #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
+    #   association, use the `Targets` parameter. If you use the parameter
+    #   `InstanceId`, you cannot use the parameters `AssociationName`,
+    #   `DocumentVersion`, `MaxErrors`, `MaxConcurrency`, `OutputLocation`, or
+    #   `ScheduleExpression`. To use these parameters, you must use the
+    #   `Targets` parameter.
+    #
+    #    </note>
+    #
     # @option params [Hash<String,Array>] :parameters
     #   The parameters for the runtime configuration of the document.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The targets (either instances or tags) for the association.
+    #   The targets (either instances or tags) for the association. You must
+    #   specify a value for `Targets` if you don't specify a value for
+    #   `InstanceId`.
     #
     # @option params [String] :schedule_expression
     #   A cron expression when the association will be applied to the
@@ -2856,11 +2867,9 @@ module Aws::SSM
     #   retrieved.
     #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
-    #   Each entry in the array is a structure containing:
-    #
-    #   Key (string, between 1 and 128 characters)
-    #
-    #   Values (array of strings, each string between 1 and 256 characters)
+    #   An array of structures. Each entry in the array is a structure
+    #   containing a Key, Value combination. Valid values for Key are
+    #   `Classification` \| `KBId` \| `Severity` \| `State`.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -3669,7 +3678,7 @@ module Aws::SSM
     #   resp.parameters[0].description #=> String
     #   resp.parameters[0].allowed_pattern #=> String
     #   resp.parameters[0].version #=> Integer
-    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced"
+    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced", "Intelligent-Tiering"
     #   resp.parameters[0].policies #=> Array
     #   resp.parameters[0].policies[0].policy_text #=> String
     #   resp.parameters[0].policies[0].policy_type #=> String
@@ -5025,7 +5034,7 @@ module Aws::SSM
     #   resp.parameters[0].version #=> Integer
     #   resp.parameters[0].labels #=> Array
     #   resp.parameters[0].labels[0] #=> String
-    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced"
+    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced", "Intelligent-Tiering"
     #   resp.parameters[0].policies #=> Array
     #   resp.parameters[0].policies[0].policy_text #=> String
     #   resp.parameters[0].policies[0].policy_type #=> String
@@ -6532,21 +6541,22 @@ module Aws::SSM
     #    </note>
     #
     # @option params [String] :tier
+    #   The parameter tier to assign to a parameter.
+    #
     #   Parameter Store offers a standard tier and an advanced tier for
-    #   parameters. Standard parameters have a value limit of 4 KB and can't
-    #   be configured to use parameter policies. You can create a maximum of
-    #   10,000 standard parameters per account and per Region. Standard
-    #   parameters are offered at no additional cost.
+    #   parameters. Standard parameters have a content size limit of 4 KB and
+    #   can't be configured to use parameter policies. You can create a
+    #   maximum of 10,000 standard parameters for each Region in an AWS
+    #   account. Standard parameters are offered at no additional cost.
     #
-    #   Advanced parameters have a value limit of 8 KB and can be configured
-    #   to use parameter policies. You can create a maximum of 100,000
-    #   advanced parameters per account and per Region. Advanced parameters
-    #   incur a charge.
+    #   Advanced parameters have a content size limit of 8 KB and can be
+    #   configured to use parameter policies. You can create a maximum of
+    #   100,000 advanced parameters for each Region in an AWS account.
+    #   Advanced parameters incur a charge. For more information, see [About
+    #   Advanced Parameters][1] in the *AWS Systems Manager User Guide*.
     #
-    #   If you don't specify a parameter tier when you create a new
-    #   parameter, the parameter defaults to using the standard tier. You can
-    #   change a standard parameter to an advanced parameter at any time. But
-    #   you can't revert an advanced parameter to a standard parameter.
+    #   You can change a standard parameter to an advanced parameter any time.
+    #   But you can't revert an advanced parameter to a standard parameter.
     #   Reverting an advanced parameter to a standard parameter would result
     #   in data loss because the system would truncate the size of the
     #   parameter from 8 KB to 4 KB. Reverting would also remove any policies
@@ -6555,13 +6565,55 @@ module Aws::SSM
     #
     #   If you no longer need an advanced parameter, or if you no longer want
     #   to incur charges for an advanced parameter, you must delete it and
-    #   recreate it as a new standard parameter. For more information, see
-    #   [About Advanced Parameters][1] in the *AWS Systems Manager User
-    #   Guide*.
+    #   recreate it as a new standard parameter.
+    #
+    #   **Using the Default Tier Configuration**
+    #
+    #   In `PutParameter` requests, you can specify the tier to create the
+    #   parameter in. Whenever you specify a tier in the request, Parameter
+    #   Store creates or updates the parameter according to that request.
+    #   However, if you do not specify a tier in a request, Parameter Store
+    #   assigns the tier based on the current Parameter Store default tier
+    #   configuration.
+    #
+    #   The default tier when you begin using Parameter Store is the
+    #   standard-parameter tier. If you use the advanced-parameter tier, you
+    #   can specify one of the following as the default:
+    #
+    #   * **Advanced**\: With this option, Parameter Store evaluates all
+    #     requests as advanced parameters.
+    #
+    #   * **Intelligent-Tiering**\: With this option, Parameter Store
+    #     evaluates each request to determine if the parameter is standard or
+    #     advanced.
+    #
+    #     If the request doesn't include any options that require an advanced
+    #     parameter, the parameter is created in the standard-parameter tier.
+    #     If one or more options requiring an advanced parameter are included
+    #     in the request, Parameter Store create a parameter in the
+    #     advanced-parameter tier.
+    #
+    #     This approach helps control your parameter-related costs by always
+    #     creating standard parameters unless an advanced parameter is
+    #     necessary.
+    #
+    #   Options that require an advanced parameter include the following:
+    #
+    #   * The content size of the parameter is more than 4 KB.
+    #
+    #   * The parameter uses a parameter policy.
+    #
+    #   * More than 10,000 parameters already exist in your AWS account in the
+    #     current Region.
+    #
+    #   For more information about configuring the default tier option, see
+    #   [Specifying a Default Parameter Tier][2] in the AWS Systems Manager
+    #   User Guide.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html
     #
     # @option params [String] :policies
     #   One or more policies to apply to a parameter. This action takes a JSON
@@ -6611,7 +6663,7 @@ module Aws::SSM
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     tier: "Standard", # accepts Standard, Advanced
+    #     tier: "Standard", # accepts Standard, Advanced, Intelligent-Tiering
     #     policies: "ParameterPolicies",
     #   })
     #
@@ -7898,7 +7950,7 @@ module Aws::SSM
     #   changed.
     #
     # @option params [String] :document_version
-    #   The version of the document that you want to update.
+    #   (Required) The version of the document that you want to update.
     #
     # @option params [String] :document_format
     #   Specify the document format for the new document version. Systems
@@ -8856,7 +8908,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
