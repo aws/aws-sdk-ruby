@@ -96,6 +96,29 @@ module Aws
           expect(actual_url).to eq(expected_url)
         end
 
+        it 'can override the signer time' do
+          bucket = "examplebucket"
+          key = "test.txt"
+          expected_url = "https://examplebucket.s3.amazonaws.com/test.txt"\
+            "?X-Amz-Algorithm=AWS4-HMAC-SHA256"\
+            "&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F19690420%2F"\
+            "us-east-1%2Fs3%2Faws4_request"\
+            "&X-Amz-Date=19690420T000000Z&X-Amz-Expires=86400"\
+            "&X-Amz-SignedHeaders=host"\
+            "&X-Amz-Signature=3d169a351decd049b5fba4e7a8c7aa52c5cc80c496e164df"\
+            "81fda3836b01ff04"
+
+          pre = Presigner.new(client: client)
+          params = {
+            bucket: bucket,
+            key: key,
+            expires_in: 86400,
+            time: Time.utc(1969, 4, 20)
+          }
+          actual_url = pre.presigned_url(:get_object, params)
+          expect(actual_url).to eq(expected_url)
+        end
+
         it 'raises when expires_in length is over 1 week' do
           bucket = "examplebucket"
           key = "test.txt"

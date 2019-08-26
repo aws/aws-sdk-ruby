@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `:time` option to S3 presigner
+
 1.46.0 (2019-07-25)
 ------------------
 
@@ -379,4 +381,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-s3` gem.
-
