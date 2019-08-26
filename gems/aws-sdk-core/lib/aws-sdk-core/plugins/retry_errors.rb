@@ -6,7 +6,7 @@ module Aws
     class RetryErrors < Seahorse::Client::Plugin
 
       EQUAL_JITTER = lambda { |delay| (delay / 2) + Kernel.rand(0..(delay/2))}
-      FULL_JITTER= lambda { |delay| Kernel.rand(0..delay) }
+      FULL_JITTER = lambda { |delay| Kernel.rand(0..delay) }
       NO_JITTER = lambda { |delay| delay }
 
       JITTERS = {
@@ -73,6 +73,7 @@ A delay randomiser function used by the default backoff function. Some predefine
           'InvalidAccessKeyId',          # s3
           'AuthFailure',                 # ec2
           'InvalidIdentityToken',        # sts
+          'ExpiredToken',                # route53
         ])
 
         THROTTLING_ERRORS = Set.new([
@@ -94,8 +95,8 @@ A delay randomiser function used by the default backoff function. Some predefine
         ])
 
         NETWORKING_ERRORS = Set.new([
-          'RequestTimeout', # s3
-          'IDPCommunicationError', # sts
+          'RequestTimeout',         # s3
+          'IDPCommunicationError',  # sts
         ])
 
         def initialize(error, http_status_code)
@@ -144,7 +145,7 @@ A delay randomiser function used by the default backoff function. Some predefine
             false
           end
         end
-          
+
         def retryable?(context)
           (expired_credentials? and refreshable_credentials?(context)) or
             throttling_error? or

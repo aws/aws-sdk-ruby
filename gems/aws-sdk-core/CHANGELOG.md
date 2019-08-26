@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Auto refresh credentials for Route53 `ExpiredToken` errors
+
 3.65.0 (2019-08-27)
 ------------------
 
@@ -78,7 +80,7 @@ Unreleased Changes
 3.54.1 (2019-05-30)
 ------------------
 
-* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information. 
+* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information.
 
 3.54.0 (2019-05-28)
 ------------------
@@ -133,7 +135,7 @@ Unreleased Changes
 3.48.6 (2019-04-26)
 ------------------
 
-* Issue - Call RefreshingCredentials initialize method in ProcessCredentials to set mutex. 
+* Issue - Call RefreshingCredentials initialize method in ProcessCredentials to set mutex.
 
 3.48.5 (2019-04-24)
 ------------------
