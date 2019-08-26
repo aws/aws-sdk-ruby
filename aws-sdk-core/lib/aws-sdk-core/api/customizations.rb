@@ -274,6 +274,10 @@ module Aws
         Aws::Plugins::S3RequestSigner
       ))
 
+      plugins('AWS Security Token Service', add: %w(
+        Aws::Plugins::STSRegionalEndpoints
+      ))
+
       plugins('AWS S3 Control', add: %w(
         Aws::Plugins::S3HostId
         Aws::Plugins::S3ControlDns
