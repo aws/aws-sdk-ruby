@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.341 (2019-08-26)
+------------------
+
 * Feature - Aws::SecurityHub - Updated the API for AWS SecurityHub.
 
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
