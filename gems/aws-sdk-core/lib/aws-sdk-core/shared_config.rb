@@ -293,7 +293,7 @@ module Aws
       end
     end
 
-    def  resolve_source_profile(src)
+    def resolve_source_profile(src)
       if creds = credentials(profile: src)
         creds # static credentials
       elsif provider = assume_role_web_identity_credentials_from_config(src)
