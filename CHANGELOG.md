@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.342 (2019-08-27)
+------------------
+
 * Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
 
 2.11.341 (2019-08-26)
