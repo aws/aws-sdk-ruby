@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support assuming an role `:source_from` profile with `AssumeRoleWebIdentityCredentials`
+
 3.64.0 (2019-08-20)
 ------------------
 
