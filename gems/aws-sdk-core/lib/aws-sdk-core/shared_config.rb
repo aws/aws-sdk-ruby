@@ -245,7 +245,7 @@ module Aws
               "provide only source_profile or credential_source, not both."
           )
         elsif opts[:source_profile]
-          opts[:credentials] = credentials(profile: opts[:source_profile])
+          opts[:credentials] = resolve_source_profile(opts[:source_profile])
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg["role_session_name"]
             opts[:role_session_name] ||= "default_session"
@@ -285,6 +285,20 @@ module Aws
           raise Errors::NoSourceProfileError.new(
             "Profile #{profile} has a role_arn, but no source_profile."
           )
+        else
+          nil
+        end
+      else
+        nil
+      end
+    end
+
+    def  resolve_source_profile(src)
+      if creds = credentials(profile: src)
+        return creds # static credentials
+      elsif provider = assume_role_web_identity_credentials_from_config(src)
+        if provider.credentials.set?
+          provider.credentials
         else
           nil
         end

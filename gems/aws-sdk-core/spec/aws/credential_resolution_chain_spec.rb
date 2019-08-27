@@ -133,6 +133,26 @@ JSON
           }.to raise_error(Errors::NoSourceProfileError)
         end
 
+        it 'supports :source_profile from assume_role_web_identity' do
+          allow(File).to receive(:exist?).and_return(true)
+          allow(File).to receive(:read).and_return('token')
+          assume_role_web_identity_stub(
+            "arn:aws:iam:123456789012:role/foo",
+            "AR_AKID_WEB",
+            "AR_SECRET",
+            "AR_TOKEN"
+          )
+          assume_role_stub(
+            "arn:aws:iam:123456789012:role/bar",
+            "AR_AKID_WEB", # from web_only
+            "AR_AKID",
+            "AR_SECRET",
+            "AR_TOKEN"
+          )
+          client = ApiHelper.sample_rest_xml::Client.new(profile: "ar_web_src", region: "us-east-1")
+          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+        end
+
         it 'will explicitly raise if credential_source is present but invalid' do
           expect {
             ApiHelper.sample_rest_xml::Client.new(profile: "ar_bad_csrc", region: "us-east-1")
