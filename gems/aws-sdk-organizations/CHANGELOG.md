@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-08-27)
+------------------
+
+* Feature - Documentation updates for organizations
+
 1.31.0 (2019-07-25)
 ------------------
 

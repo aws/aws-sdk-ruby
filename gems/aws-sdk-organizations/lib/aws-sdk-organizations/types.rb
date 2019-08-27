@@ -245,12 +245,12 @@ module Aws::Organizations
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lower-case letters or digits.
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
     #     the root that the OU is in) followed by a second "-" dash and
     #     from 8 to 32 additional lower-case letters or digits.
@@ -812,9 +812,9 @@ module Aws::Organizations
     #
     #   * `ALL`\: In addition to all the features supported by the
     #     consolidated billing feature set, the master account can also
-    #     apply any type of policy to any member account in the
-    #     organization. For more information, see [All features][2] in the
-    #     *AWS Organizations User Guide.*
+    #     apply any policy type to any member account in the organization.
+    #     For more information, see [All features][2] in the *AWS
+    #     Organizations User Guide.*
     #
     #
     #
@@ -856,10 +856,10 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
     #     the root that the OU is in) followed by a second "-" dash and
     #     from 8 to 32 additional lower-case letters or digits.
@@ -1106,7 +1106,7 @@ module Aws::Organizations
     #   You can get the ID from the response to an earlier CreateAccount
     #   request, or from the ListCreateAccountStatus operation.
     #
-    #   The [regex pattern][1] for an create account request ID string
+    #   The [regex pattern][1] for a create account request ID string
     #   requires "car-" followed by from 8 to 32 lower-case letters or
     #   digits.
     #
@@ -1304,12 +1304,12 @@ module Aws::Organizations
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lower-case letters or digits.
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
     #     the root that the OU is in) followed by a second "-" dash and
     #     from 8 to 32 additional lower-case letters or digits.
@@ -2245,10 +2245,10 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
     #     the root that the OU is in) followed by a second "-" dash and
     #     from 8 to 32 additional lower-case letters or digits.
@@ -2540,10 +2540,10 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
     #     the root that the OU is in) followed by a second "-" dash and
     #     from 8 to 32 additional lower-case letters or digits.
@@ -2618,9 +2618,9 @@ module Aws::Organizations
     #   The [regex pattern][1] for a child ID string requires one of the
     #   following:
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
     #     the root that contains the OU) followed by a second "-" dash and
     #     from 8 to 32 additional lower-case letters or digits.
@@ -2696,12 +2696,12 @@ module Aws::Organizations
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lower-case letters or digits.
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
     #     the root that the OU is in) followed by a second "-" dash and
     #     from 8 to 32 additional lower-case letters or digits.
@@ -3064,10 +3064,10 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
     #     the root that the OU is in) followed by a second "-" dash and
     #     from 8 to 32 additional lower-case letters or digits.
@@ -3084,10 +3084,10 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #   * **Root** - A string that begins with "r-" followed by from 4 to
+    #     32 lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
     #     the root that the OU is in) followed by a second "-" dash and
     #     from 8 to 32 additional lower-case letters or digits.
