@@ -31,6 +31,9 @@ module Aws
       #   attempts to set this value to greater than one week (604800) will
       #   raise an exception.
       #
+      # @option params [Time] :time (Time.now) The starting time before the
+      #   presigned url becomes active. Defaults to Time.now.
+      #
       # @option params [Boolean] :secure (true) When `false`, a HTTP URL
       #   is returned instead of the default HTTPS URL.
       #
@@ -49,11 +52,12 @@ module Aws
           raise ArgumentError, ":key must not be blank"
         end
         virtual_host = !!params.delete(:virtual_host)
+        time = params.delete(:time)
         scheme = http_scheme(params, virtual_host)
 
         req = @client.build_request(method, params)
         use_bucket_as_hostname(req) if virtual_host
-        sign_but_dont_send(req, expires_in(params), scheme)
+        sign_but_dont_send(req, expires_in(params), scheme, time)
         req.send_request.data
       end
 
@@ -92,7 +96,7 @@ module Aws
       end
 
       # @param [Seahorse::Client::Request] req
-      def sign_but_dont_send(req, expires_in, scheme)
+      def sign_but_dont_send(req, expires_in, scheme, time)
 
         http_req = req.context.http_request
 
@@ -128,7 +132,8 @@ module Aws
             url: http_req.endpoint,
             headers: http_req.headers,
             body_digest: 'UNSIGNED-PAYLOAD',
-            expires_in: expires_in
+            expires_in: expires_in,
+            time: time
           ).to_s
 
           Seahorse::Client::Response.new(context: context, data: url)
