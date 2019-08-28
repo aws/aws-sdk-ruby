@@ -42,6 +42,22 @@ module Aws::GlobalAccelerator
 
     end
 
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GlobalAccelerator::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class AssociatedEndpointGroupFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

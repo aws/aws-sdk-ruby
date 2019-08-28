@@ -390,6 +390,7 @@ module Aws::MediaConvert
     ScalingBehavior = Shapes::StringShape.new(name: 'ScalingBehavior')
     SccDestinationFramerate = Shapes::StringShape.new(name: 'SccDestinationFramerate')
     SccDestinationSettings = Shapes::StructureShape.new(name: 'SccDestinationSettings')
+    SimulateReservedQueue = Shapes::StringShape.new(name: 'SimulateReservedQueue')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     SpekeKeyProviderCmaf = Shapes::StructureShape.new(name: 'SpekeKeyProviderCmaf')
     StaticKeyProvider = Shapes::StructureShape.new(name: 'StaticKeyProvider')
@@ -786,6 +787,7 @@ module Aws::MediaConvert
     CreateJobRequest.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
     CreateJobRequest.add_member(:role, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "role"))
     CreateJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: JobSettings, required: true, location_name: "settings"))
+    CreateJobRequest.add_member(:simulate_reserved_queue, Shapes::ShapeRef.new(shape: SimulateReservedQueue, location_name: "simulateReservedQueue"))
     CreateJobRequest.add_member(:status_update_interval, Shapes::ShapeRef.new(shape: StatusUpdateInterval, location_name: "statusUpdateInterval"))
     CreateJobRequest.add_member(:user_metadata, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "userMetadata"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
@@ -1267,6 +1269,7 @@ module Aws::MediaConvert
     Job.add_member(:retry_count, Shapes::ShapeRef.new(shape: __integer, location_name: "retryCount"))
     Job.add_member(:role, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "role"))
     Job.add_member(:settings, Shapes::ShapeRef.new(shape: JobSettings, required: true, location_name: "settings"))
+    Job.add_member(:simulate_reserved_queue, Shapes::ShapeRef.new(shape: SimulateReservedQueue, location_name: "simulateReservedQueue"))
     Job.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
     Job.add_member(:status_update_interval, Shapes::ShapeRef.new(shape: StatusUpdateInterval, location_name: "statusUpdateInterval"))
     Job.add_member(:timing, Shapes::ShapeRef.new(shape: Timing, location_name: "timing"))

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.65.1 (2019-08-28)
+------------------
+
 * Issue - Auto refresh credentials for Route53 `ExpiredToken` errors
 
 3.65.0 (2019-08-27)

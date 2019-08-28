@@ -2966,6 +2966,7 @@ module Aws::MediaConvert
     #             ],
     #           },
     #         },
+    #         simulate_reserved_queue: "DISABLED", # accepts DISABLED, ENABLED
     #         status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #         user_metadata: {
     #           "__string" => "__string",
@@ -3023,6 +3024,14 @@ module Aws::MediaConvert
     #   JobSettings contains all the transcode settings for a job.
     #   @return [Types::JobSettings]
     #
+    # @!attribute [rw] simulate_reserved_queue
+    #   Enable this setting when you run a test job to estimate how many
+    #   reserved transcoding slots (RTS) you need. When this is enabled,
+    #   MediaConvert runs your job from an on-demand queue with similar
+    #   performance to what you will see with one RTS in a reserved queue.
+    #   This setting is disabled by default.
+    #   @return [String]
+    #
     # @!attribute [rw] status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
@@ -3047,6 +3056,7 @@ module Aws::MediaConvert
       :queue,
       :role,
       :settings,
+      :simulate_reserved_queue,
       :status_update_interval,
       :user_metadata)
       include Aws::Structure
@@ -8497,6 +8507,14 @@ module Aws::MediaConvert
     #   JobSettings contains all the transcode settings for a job.
     #   @return [Types::JobSettings]
     #
+    # @!attribute [rw] simulate_reserved_queue
+    #   Enable this setting when you run a test job to estimate how many
+    #   reserved transcoding slots (RTS) you need. When this is enabled,
+    #   MediaConvert runs your job from an on-demand queue with similar
+    #   performance to what you will see with one RTS in a reserved queue.
+    #   This setting is disabled by default.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED,
     #   or ERROR.
@@ -8539,6 +8557,7 @@ module Aws::MediaConvert
       :retry_count,
       :role,
       :settings,
+      :simulate_reserved_queue,
       :status,
       :status_update_interval,
       :timing,

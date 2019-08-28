@@ -1397,6 +1397,8 @@ module Aws::SQS
     #   * `ApproximateReceiveCount` - Returns the number of times a message
     #     has been received from the queue but not deleted.
     #
+    #   * `AWSTraceHeader` - Returns the AWS X-Ray trace header string.
+    #
     #   * `SenderId`
     #
     #     * For an IAM user, returns the IAM user ID, for example
@@ -1672,6 +1674,17 @@ module Aws::SQS
     #
     #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
     #
+    # @option params [Hash<String,Types::MessageSystemAttributeValue>] :message_system_attributes
+    #   The message system attribute to send. Each message system attribute
+    #   consists of a `Name`, `Type`, and `Value`.
+    #
+    #   * Currently, the only supported message system attribute is
+    #     `AWSTraceHeader`. Its type must be `String` and its value must be a
+    #     correctly formatted AWS X-Ray trace string.
+    #
+    #   * The size of a message system attribute doesn't count towards the
+    #     total size of a message.
+    #
     # @option params [String] :message_deduplication_id
     #   This parameter applies only to FIFO (first-in-first-out) queues.
     #
@@ -1772,6 +1785,7 @@ module Aws::SQS
     #
     #   * {Types::SendMessageResult#md5_of_message_body #md5_of_message_body} => String
     #   * {Types::SendMessageResult#md5_of_message_attributes #md5_of_message_attributes} => String
+    #   * {Types::SendMessageResult#md5_of_message_system_attributes #md5_of_message_system_attributes} => String
     #   * {Types::SendMessageResult#message_id #message_id} => String
     #   * {Types::SendMessageResult#sequence_number #sequence_number} => String
     #
@@ -1790,6 +1804,15 @@ module Aws::SQS
     #         data_type: "String", # required
     #       },
     #     },
+    #     message_system_attributes: {
+    #       "AWSTraceHeader" => {
+    #         string_value: "String",
+    #         binary_value: "data",
+    #         string_list_values: ["String"],
+    #         binary_list_values: ["data"],
+    #         data_type: "String", # required
+    #       },
+    #     },
     #     message_deduplication_id: "String",
     #     message_group_id: "String",
     #   })
@@ -1798,6 +1821,7 @@ module Aws::SQS
     #
     #   resp.md5_of_message_body #=> String
     #   resp.md5_of_message_attributes #=> String
+    #   resp.md5_of_message_system_attributes #=> String
     #   resp.message_id #=> String
     #   resp.sequence_number #=> String
     #
@@ -1878,6 +1902,15 @@ module Aws::SQS
     #             data_type: "String", # required
     #           },
     #         },
+    #         message_system_attributes: {
+    #           "AWSTraceHeader" => {
+    #             string_value: "String",
+    #             binary_value: "data",
+    #             string_list_values: ["String"],
+    #             binary_list_values: ["data"],
+    #             data_type: "String", # required
+    #           },
+    #         },
     #         message_deduplication_id: "String",
     #         message_group_id: "String",
     #       },
@@ -1891,6 +1924,7 @@ module Aws::SQS
     #   resp.successful[0].message_id #=> String
     #   resp.successful[0].md5_of_message_body #=> String
     #   resp.successful[0].md5_of_message_attributes #=> String
+    #   resp.successful[0].md5_of_message_system_attributes #=> String
     #   resp.successful[0].sequence_number #=> String
     #   resp.failed #=> Array
     #   resp.failed[0].id #=> String
@@ -2186,7 +2220,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

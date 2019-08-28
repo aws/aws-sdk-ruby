@@ -17,6 +17,7 @@ module Aws::GlobalAccelerator
     AcceleratorNotFoundException = Shapes::StructureShape.new(name: 'AcceleratorNotFoundException')
     AcceleratorStatus = Shapes::StringShape.new(name: 'AcceleratorStatus')
     Accelerators = Shapes::ListShape.new(name: 'Accelerators')
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AssociatedEndpointGroupFoundException = Shapes::StructureShape.new(name: 'AssociatedEndpointGroupFoundException')
     AssociatedListenerFoundException = Shapes::StructureShape.new(name: 'AssociatedListenerFoundException')
     ClientAffinity = Shapes::StringShape.new(name: 'ClientAffinity')
@@ -113,6 +114,9 @@ module Aws::GlobalAccelerator
 
     Accelerators.member = Shapes::ShapeRef.new(shape: Accelerator)
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AssociatedEndpointGroupFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AssociatedEndpointGroupFoundException.struct_class = Types::AssociatedEndpointGroupFoundException
 
@@ -162,7 +166,7 @@ module Aws::GlobalAccelerator
     DeleteListenerRequest.add_member(:listener_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "ListenerArn"))
     DeleteListenerRequest.struct_class = Types::DeleteListenerRequest
 
-    DescribeAcceleratorAttributesRequest.add_member(:accelerator_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "AcceleratorArn"))
+    DescribeAcceleratorAttributesRequest.add_member(:accelerator_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AcceleratorArn"))
     DescribeAcceleratorAttributesRequest.struct_class = Types::DescribeAcceleratorAttributesRequest
 
     DescribeAcceleratorAttributesResponse.add_member(:accelerator_attributes, Shapes::ShapeRef.new(shape: AcceleratorAttributes, location_name: "AcceleratorAttributes"))
@@ -188,6 +192,7 @@ module Aws::GlobalAccelerator
 
     EndpointConfiguration.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "EndpointId"))
     EndpointConfiguration.add_member(:weight, Shapes::ShapeRef.new(shape: EndpointWeight, location_name: "Weight"))
+    EndpointConfiguration.add_member(:client_ip_preservation_enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "ClientIPPreservationEnabled"))
     EndpointConfiguration.struct_class = Types::EndpointConfiguration
 
     EndpointConfigurations.member = Shapes::ShapeRef.new(shape: EndpointConfiguration)
@@ -196,6 +201,7 @@ module Aws::GlobalAccelerator
     EndpointDescription.add_member(:weight, Shapes::ShapeRef.new(shape: EndpointWeight, location_name: "Weight"))
     EndpointDescription.add_member(:health_state, Shapes::ShapeRef.new(shape: HealthState, location_name: "HealthState"))
     EndpointDescription.add_member(:health_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "HealthReason"))
+    EndpointDescription.add_member(:client_ip_preservation_enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "ClientIPPreservationEnabled"))
     EndpointDescription.struct_class = Types::EndpointDescription
 
     EndpointDescriptions.member = Shapes::ShapeRef.new(shape: EndpointDescription)
@@ -285,7 +291,7 @@ module Aws::GlobalAccelerator
 
     PortRanges.member = Shapes::ShapeRef.new(shape: PortRange)
 
-    UpdateAcceleratorAttributesRequest.add_member(:accelerator_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "AcceleratorArn"))
+    UpdateAcceleratorAttributesRequest.add_member(:accelerator_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AcceleratorArn"))
     UpdateAcceleratorAttributesRequest.add_member(:flow_logs_enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "FlowLogsEnabled"))
     UpdateAcceleratorAttributesRequest.add_member(:flow_logs_s3_bucket, Shapes::ShapeRef.new(shape: GenericString, location_name: "FlowLogsS3Bucket"))
     UpdateAcceleratorAttributesRequest.add_member(:flow_logs_s3_prefix, Shapes::ShapeRef.new(shape: GenericString, location_name: "FlowLogsS3Prefix"))
@@ -367,6 +373,7 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_listener, Seahorse::Model::Operation.new.tap do |o|
@@ -401,6 +408,7 @@ module Aws::GlobalAccelerator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteEndpointGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: EndpointGroupNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
@@ -411,6 +419,7 @@ module Aws::GlobalAccelerator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteListenerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AssociatedEndpointGroupFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
@@ -444,6 +453,7 @@ module Aws::GlobalAccelerator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeEndpointGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeEndpointGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: EndpointGroupNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
@@ -465,6 +475,7 @@ module Aws::GlobalAccelerator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAcceleratorsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAcceleratorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
@@ -487,6 +498,7 @@ module Aws::GlobalAccelerator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListListenersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListListenersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AcceleratorNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
@@ -512,6 +524,7 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: AcceleratorNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_endpoint_group, Seahorse::Model::Operation.new.tap do |o|
@@ -524,6 +537,7 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: EndpointGroupNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_listener, Seahorse::Model::Operation.new.tap do |o|

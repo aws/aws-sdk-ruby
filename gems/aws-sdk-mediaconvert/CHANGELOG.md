@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2019-08-28)
+------------------
+
+* Feature - This release adds the ability to send a job to an on-demand queue while simulating the performance of a job sent to a reserved queue. Use this setting to estimate the number of reserved transcoding slots (RTS) you need for a reserved queue.
+
 1.34.0 (2019-08-09)
 ------------------
 

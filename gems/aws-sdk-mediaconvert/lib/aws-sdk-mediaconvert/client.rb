@@ -348,6 +348,13 @@ module Aws::MediaConvert
     # @option params [required, Types::JobSettings] :settings
     #   JobSettings contains all the transcode settings for a job.
     #
+    # @option params [String] :simulate_reserved_queue
+    #   Enable this setting when you run a test job to estimate how many
+    #   reserved transcoding slots (RTS) you need. When this is enabled,
+    #   MediaConvert runs your job from an on-demand queue with similar
+    #   performance to what you will see with one RTS in a reserved queue.
+    #   This setting is disabled by default.
+    #
     # @option params [String] :status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
@@ -1239,6 +1246,7 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
+    #     simulate_reserved_queue: "DISABLED", # accepts DISABLED, ENABLED
     #     status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #     user_metadata: {
     #       "__string" => "__string",
@@ -1885,6 +1893,7 @@ module Aws::MediaConvert
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job.simulate_reserved_queue #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
     #   resp.job.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job.timing.finish_time #=> Time
@@ -5269,6 +5278,7 @@ module Aws::MediaConvert
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job.simulate_reserved_queue #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
     #   resp.job.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job.timing.finish_time #=> Time
@@ -7763,6 +7773,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.jobs[0].simulate_reserved_queue #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
     #   resp.jobs[0].status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.jobs[0].timing.finish_time #=> Time
@@ -10948,7 +10959,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

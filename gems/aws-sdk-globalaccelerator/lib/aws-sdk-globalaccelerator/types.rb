@@ -18,9 +18,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the accelerator. The name can have a maximum of 32
-    #   characters, must contain only alphanumeric characters or hyphens
-    #   (-), and must not begin or end with a hyphen.
+    #   The name of the accelerator. The name must contain only alphanumeric
+    #   characters or hyphens (-), and must not begin or end with a hyphen.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
@@ -28,7 +27,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Indicates whether theaccelerator is enabled. The value is true or
+    #   Indicates whether the accelerator is enabled. The value is true or
     #   false. The default value is true.
     #
     #   If the value is set to true, the accelerator cannot be deleted. If
@@ -36,7 +35,8 @@ module Aws::GlobalAccelerator
     #   @return [Boolean]
     #
     # @!attribute [rw] ip_sets
-    #   IP address set associated with the accelerator.
+    #   The static IP addresses that Global Accelerator associates with the
+    #   accelerator.
     #   @return [Array<Types::IpSet>]
     #
     # @!attribute [rw] status
@@ -123,6 +123,18 @@ module Aws::GlobalAccelerator
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorNotFoundException AWS API Documentation
     #
     class AcceleratorNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You don't have access permission.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -220,6 +232,7 @@ module Aws::GlobalAccelerator
     #           {
     #             endpoint_id: "GenericString",
     #             weight: 1,
+    #             client_ip_preservation_enabled: false,
     #           },
     #         ],
     #         traffic_dial_percentage: 1.0,
@@ -459,12 +472,12 @@ module Aws::GlobalAccelerator
     #   data as a hash:
     #
     #       {
-    #         accelerator_arn: "GenericString",
+    #         accelerator_arn: "GenericString", # required
     #       }
     #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator with the
-    #   attributes that you want to describe. Value is required.
+    #   attributes that you want to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeAcceleratorAttributesRequest AWS API Documentation
@@ -580,6 +593,7 @@ module Aws::GlobalAccelerator
     #       {
     #         endpoint_id: "GenericString",
     #         weight: 1,
+    #         client_ip_preservation_enabled: false,
     #       }
     #
     # @!attribute [rw] endpoint_id
@@ -605,11 +619,31 @@ module Aws::GlobalAccelerator
     #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
     #   @return [Integer]
     #
+    # @!attribute [rw] client_ip_preservation_enabled
+    #   Indicates whether client IP address preservation is enabled for an
+    #   Application Load Balancer endpoint. The value is true or false. The
+    #   default value is true for new accelerators.
+    #
+    #   If the value is set to true, the client's IP address is preserved
+    #   in the `X-Forwarded-For` request header as traffic travels to
+    #   applications on the Application Load Balancer endpoint fronted by
+    #   the accelerator.
+    #
+    #   For more information, see [ Viewing Client IP Addresses in AWS
+    #   Global Accelerator][1] in the *AWS Global Accelerator Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration AWS API Documentation
     #
     class EndpointConfiguration < Struct.new(
       :endpoint_id,
-      :weight)
+      :weight,
+      :client_ip_preservation_enabled)
       include Aws::Structure
     end
 
@@ -620,7 +654,8 @@ module Aws::GlobalAccelerator
     #   An ID for the endpoint. If the endpoint is a Network Load Balancer
     #   or Application Load Balancer, this is the Amazon Resource Name (ARN)
     #   of the resource. If the endpoint is an Elastic IP address, this is
-    #   the Elastic IP address allocation ID.
+    #   the Elastic IP address allocation ID. An Application Load Balancer
+    #   can be either internal or internet-facing.
     #   @return [String]
     #
     # @!attribute [rw] weight
@@ -667,13 +702,33 @@ module Aws::GlobalAccelerator
     #     required to determine its health status.
     #   @return [String]
     #
+    # @!attribute [rw] client_ip_preservation_enabled
+    #   Indicates whether client IP address preservation is enabled for an
+    #   Application Load Balancer endpoint. The value is true or false. The
+    #   default value is true for new accelerators.
+    #
+    #   If the value is set to true, the client's IP address is preserved
+    #   in the `X-Forwarded-For` request header as traffic travels to
+    #   applications on the Application Load Balancer endpoint fronted by
+    #   the accelerator.
+    #
+    #   For more information, see [ Viewing Client IP Addresses in AWS
+    #   Global Accelerator][1] in the *AWS Global Accelerator Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointDescription AWS API Documentation
     #
     class EndpointDescription < Struct.new(
       :endpoint_id,
       :weight,
       :health_state,
-      :health_reason)
+      :health_reason,
+      :client_ip_preservation_enabled)
       include Aws::Structure
     end
 
@@ -1091,7 +1146,7 @@ module Aws::GlobalAccelerator
     #   data as a hash:
     #
     #       {
-    #         accelerator_arn: "GenericString",
+    #         accelerator_arn: "GenericString", # required
     #         flow_logs_enabled: false,
     #         flow_logs_s3_bucket: "GenericString",
     #         flow_logs_s3_prefix: "GenericString",
@@ -1099,7 +1154,7 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator that you want to
-    #   update. Attribute is required.
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] flow_logs_enabled
@@ -1212,6 +1267,7 @@ module Aws::GlobalAccelerator
     #           {
     #             endpoint_id: "GenericString",
     #             weight: 1,
+    #             client_ip_preservation_enabled: false,
     #           },
     #         ],
     #         traffic_dial_percentage: 1.0,
