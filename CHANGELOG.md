@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.343 (2019-08-28)
+------------------
+
 * Feature - Aws::GlobalAccelerator - Updated the API, and documentation for AWS Global Accelerator.
 
 * Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
