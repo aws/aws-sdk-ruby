@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.344 (2019-08-29)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
