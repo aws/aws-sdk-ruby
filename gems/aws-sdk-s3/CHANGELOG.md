@@ -1,10 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Added a `:whitelist_headers` option to S3 presigner.
+
 1.47.0 (2019-08-28)
 ------------------
 
-* Feature - Add `:time` option to S3 presigner
+* Feature - Added a `:time` option to S3 presigner.
 
 1.46.0 (2019-07-25)
 ------------------
