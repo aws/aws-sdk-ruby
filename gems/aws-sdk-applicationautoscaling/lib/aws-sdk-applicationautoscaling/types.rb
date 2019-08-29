@@ -1630,6 +1630,11 @@ module Aws::ApplicationAutoScaling
     #         min_capacity: 1,
     #         max_capacity: 1,
     #         role_arn: "ResourceIdMaxLen1600",
+    #         suspended_state: {
+    #           dynamic_scaling_in_suspended: false,
+    #           dynamic_scaling_out_suspended: false,
+    #           scheduled_scaling_suspended: false,
+    #         },
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -1754,6 +1759,35 @@ module Aws::ApplicationAutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html
     #   @return [String]
     #
+    # @!attribute [rw] suspended_state
+    #   An embedded object that contains attributes and attribute values
+    #   that are used to suspend and resume automatic scaling. Setting the
+    #   value of an attribute to `true` suspends the specified scaling
+    #   activities. Setting it to `false` (default) resumes the specified
+    #   scaling activities.
+    #
+    #   **Suspension Outcomes**
+    #
+    #   * For `DynamicScalingInSuspended`, while a suspension is in effect,
+    #     all scale-in activities that are triggered by a scaling policy are
+    #     suspended.
+    #
+    #   * For `DynamicScalingOutSuspended`, while a suspension is in effect,
+    #     all scale-out activities that are triggered by a scaling policy
+    #     are suspended.
+    #
+    #   * For `ScheduledScalingSuspended`, while a suspension is in effect,
+    #     all scaling activities that involve scheduled actions are
+    #     suspended.
+    #
+    #   For more information, see [Suspend and Resume Application Auto
+    #   Scaling][1] in the *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html
+    #   @return [Types::SuspendedState]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetRequest AWS API Documentation
     #
     class RegisterScalableTargetRequest < Struct.new(
@@ -1762,7 +1796,8 @@ module Aws::ApplicationAutoScaling
       :scalable_dimension,
       :min_capacity,
       :max_capacity,
-      :role_arn)
+      :role_arn,
+      :suspended_state)
       include Aws::Structure
     end
 
@@ -1884,6 +1919,11 @@ module Aws::ApplicationAutoScaling
     #   The Unix timestamp for when the scalable target was created.
     #   @return [Time]
     #
+    # @!attribute [rw] suspended_state
+    #   Specifies whether the scaling activities for a scalable target are
+    #   in a suspended state.
+    #   @return [Types::SuspendedState]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalableTarget AWS API Documentation
     #
     class ScalableTarget < Struct.new(
@@ -1893,7 +1933,8 @@ module Aws::ApplicationAutoScaling
       :min_capacity,
       :max_capacity,
       :role_arn,
-      :creation_time)
+      :creation_time,
+      :suspended_state)
       include Aws::Structure
     end
 
@@ -2532,6 +2573,47 @@ module Aws::ApplicationAutoScaling
       :min_adjustment_magnitude,
       :cooldown,
       :metric_aggregation_type)
+      include Aws::Structure
+    end
+
+    # Specifies whether the scaling activities for a scalable target are in
+    # a suspended state.
+    #
+    # @note When making an API call, you may pass SuspendedState
+    #   data as a hash:
+    #
+    #       {
+    #         dynamic_scaling_in_suspended: false,
+    #         dynamic_scaling_out_suspended: false,
+    #         scheduled_scaling_suspended: false,
+    #       }
+    #
+    # @!attribute [rw] dynamic_scaling_in_suspended
+    #   Whether scale in by a target tracking scaling policy or a step
+    #   scaling policy is suspended. Set the value to `true` if you don't
+    #   want Application Auto Scaling to remove capacity when a scaling
+    #   policy is triggered. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dynamic_scaling_out_suspended
+    #   Whether scale out by a target tracking scaling policy or a step
+    #   scaling policy is suspended. Set the value to `true` if you don't
+    #   want Application Auto Scaling to add capacity when a scaling policy
+    #   is triggered. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] scheduled_scaling_suspended
+    #   Whether scheduled scaling is suspended. Set the value to `true` if
+    #   you don't want Application Auto Scaling to add or remove capacity
+    #   by initiating scheduled actions. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/SuspendedState AWS API Documentation
+    #
+    class SuspendedState < Struct.new(
+      :dynamic_scaling_in_suspended,
+      :dynamic_scaling_out_suspended,
+      :scheduled_scaling_suspended)
       include Aws::Structure
     end
 

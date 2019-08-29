@@ -398,14 +398,15 @@ module Aws::ECS
 
     # Runs and maintains a desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
-    # the `desiredCount`, Amazon ECS spawns another copy of the task in the
+    # the `desiredCount`, Amazon ECS runs another copy of the task in the
     # specified cluster. To update an existing service, see UpdateService.
     #
     # In addition to maintaining the desired count of tasks in your service,
-    # you can optionally run your service behind a load balancer. The load
-    # balancer distributes traffic across the tasks that are associated with
-    # the service. For more information, see [Service Load Balancing][1] in
-    # the *Amazon Elastic Container Service Developer Guide*.
+    # you can optionally run your service behind one or more load balancers.
+    # The load balancers distribute traffic across the tasks that are
+    # associated with the service. For more information, see [Service Load
+    # Balancing][1] in the *Amazon Elastic Container Service Developer
+    # Guide*.
     #
     # Tasks for services that *do not* use a load balancer are considered
     # healthy if they're in the `RUNNING` state. Tasks for services that
@@ -534,11 +535,14 @@ module Aws::ECS
     #   deployment controller.
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
-    #   A load balancer object representing the load balancer to use with your
-    #   service.
+    #   A load balancer object representing the load balancers to use with
+    #   your service. For more information, see [Service Load Balancing][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
-    #   If the service is using the `ECS` deployment controller, you are
-    #   limited to one load balancer or target group.
+    #   If the service is using the rolling update (`ECS`) deployment
+    #   controller and using either an Application Load Balancer or Network
+    #   Load Balancer, you can specify multiple target groups to attach to the
+    #   service.
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -558,18 +562,18 @@ module Aws::ECS
     #   using the `CODE_DEPLOY` deployment controller, these values can be
     #   changed when updating the service.
     #
-    #   For Classic Load Balancers, this object must contain the load balancer
-    #   name, the container name (as it appears in a container definition),
-    #   and the container port to access from the load balancer. When a task
-    #   from this service is placed on a container instance, the container
-    #   instance is registered with the load balancer specified here.
-    #
     #   For Application Load Balancers and Network Load Balancers, this object
     #   must contain the load balancer target group ARN, the container name
     #   (as it appears in a container definition), and the container port to
     #   access from the load balancer. When a task from this service is placed
     #   on a container instance, the container instance and port combination
     #   is registered as a target in the target group specified here.
+    #
+    #   For Classic Load Balancers, this object must contain the load balancer
+    #   name, the container name (as it appears in a container definition),
+    #   and the container port to access from the load balancer. When a task
+    #   from this service is placed on a container instance, the container
+    #   instance is registered with the load balancer specified here.
     #
     #   Services with tasks that use the `awsvpc` network mode (for example,
     #   those with the Fargate launch type) only support Application Load
@@ -578,6 +582,10 @@ module Aws::ECS
     #   you must choose `ip` as the target type, not `instance`, because tasks
     #   that use the `awsvpc` network mode are associated with an elastic
     #   network interface, not an Amazon EC2 instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
     #   The details of the service discovery registries to assign to this
@@ -2906,6 +2914,7 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
     #   resp.tasks[0].containers[0].reason #=> String
@@ -5349,6 +5358,7 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
     #   resp.tasks[0].containers[0].reason #=> String
@@ -5599,6 +5609,7 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
     #   resp.tasks[0].containers[0].reason #=> String
@@ -5734,6 +5745,7 @@ module Aws::ECS
     #   resp.task.containers[0].container_arn #=> String
     #   resp.task.containers[0].task_arn #=> String
     #   resp.task.containers[0].name #=> String
+    #   resp.task.containers[0].runtime_id #=> String
     #   resp.task.containers[0].last_status #=> String
     #   resp.task.containers[0].exit_code #=> Integer
     #   resp.task.containers[0].reason #=> String
@@ -5849,6 +5861,9 @@ module Aws::ECS
     # @option params [String] :container_name
     #   The name of the container.
     #
+    # @option params [String] :runtime_id
+    #   The ID of the Docker container.
+    #
     # @option params [String] :status
     #   The status of the state change request.
     #
@@ -5871,6 +5886,7 @@ module Aws::ECS
     #     cluster: "String",
     #     task: "String",
     #     container_name: "String",
+    #     runtime_id: "String",
     #     status: "String",
     #     exit_code: 1,
     #     reason: "String",
@@ -5946,6 +5962,7 @@ module Aws::ECS
     #     containers: [
     #       {
     #         container_name: "String",
+    #         runtime_id: "String",
     #         exit_code: 1,
     #         network_bindings: [
     #           {
@@ -6877,7 +6894,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

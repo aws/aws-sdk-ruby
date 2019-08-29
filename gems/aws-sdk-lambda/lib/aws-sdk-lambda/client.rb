@@ -593,6 +593,8 @@ module Aws::Lambda
     #
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
+    # @option params [Integer] :maximum_batching_window_in_seconds
+    #
     # @option params [String] :starting_position
     #   The position in a stream from which to start reading. Required for
     #   Amazon Kinesis and Amazon DynamoDB Streams sources. `AT_TIMESTAMP` is
@@ -606,6 +608,7 @@ module Aws::Lambda
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
+    #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
@@ -620,6 +623,7 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #     enabled: false,
     #     batch_size: 1,
+    #     maximum_batching_window_in_seconds: 1,
     #     starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
     #     starting_position_timestamp: Time.now,
     #   })
@@ -628,6 +632,7 @@ module Aws::Lambda
     #
     #   resp.uuid #=> String
     #   resp.batch_size #=> Integer
+    #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.event_source_arn #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
@@ -990,6 +995,7 @@ module Aws::Lambda
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
+    #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
@@ -1028,6 +1034,7 @@ module Aws::Lambda
     #
     #   resp.uuid #=> String
     #   resp.batch_size #=> Integer
+    #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.event_source_arn #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
@@ -1302,6 +1309,7 @@ module Aws::Lambda
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
+    #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
@@ -1340,6 +1348,7 @@ module Aws::Lambda
     #
     #   resp.uuid #=> String
     #   resp.batch_size #=> Integer
+    #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.event_source_arn #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
@@ -2177,6 +2186,7 @@ module Aws::Lambda
     #   resp.event_source_mappings #=> Array
     #   resp.event_source_mappings[0].uuid #=> String
     #   resp.event_source_mappings[0].batch_size #=> Integer
+    #   resp.event_source_mappings[0].maximum_batching_window_in_seconds #=> Integer
     #   resp.event_source_mappings[0].event_source_arn #=> String
     #   resp.event_source_mappings[0].function_arn #=> String
     #   resp.event_source_mappings[0].last_modified #=> Time
@@ -3150,10 +3160,13 @@ module Aws::Lambda
     #
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
+    # @option params [Integer] :maximum_batching_window_in_seconds
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
+    #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
@@ -3192,12 +3205,14 @@ module Aws::Lambda
     #     function_name: "FunctionName",
     #     enabled: false,
     #     batch_size: 1,
+    #     maximum_batching_window_in_seconds: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.uuid #=> String
     #   resp.batch_size #=> Integer
+    #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.event_source_arn #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
@@ -3617,7 +3632,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

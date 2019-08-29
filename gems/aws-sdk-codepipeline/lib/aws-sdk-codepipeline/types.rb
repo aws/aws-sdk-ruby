@@ -270,7 +270,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] action_type_id
-    #   The configuration information for the action type.
+    #   Specifies the action type and the provider of the action.
     #   @return [Types::ActionTypeId]
     #
     # @!attribute [rw] run_order
@@ -278,7 +278,27 @@ module Aws::CodePipeline
     #   @return [Integer]
     #
     # @!attribute [rw] configuration
-    #   The action declaration's configuration.
+    #   The action's configuration. These are key-value pairs that specify
+    #   input values for an action. For more information, see [Action
+    #   Structure Requirements in CodePipeline][1]. For the list of
+    #   configuration properties for the AWS CloudFormation action type in
+    #   CodePipeline, see [Configuration Properties Reference][2] in the
+    #   *AWS CloudFormation User Guide*. For template snippets with
+    #   examples, see [Using Parameter Override Functions with CodePipeline
+    #   Pipelines][3] in the *AWS CloudFormation User Guide*.
+    #
+    #   The values can be represented in either JSON or YAML format. For
+    #   example, the JSON configuration item format is as follows:
+    #
+    #   *JSON:*
+    #
+    #   `"Configuration" : \{ Key : Value \},`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] output_artifacts
@@ -903,6 +923,12 @@ module Aws::CodePipeline
 
     # The Amazon S3 bucket where artifacts are stored for the pipeline.
     #
+    # <note markdown="1"> You must include either `artifactStore` or `artifactStores` in your
+    # pipeline, but you cannot use both. If you create a cross-region action
+    # in your pipeline, you must use `artifactStores`.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass ArtifactStore
     #   data as a hash:
     #
@@ -1453,8 +1479,14 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] id
-    #   The ID used to identify the key. For an AWS KMS key, this is the key
-    #   ID or key ARN.
+    #   The ID used to identify the key. For an AWS KMS key, you can use the
+    #   key ID, the key ARN, or the alias ARN.
+    #
+    #   <note markdown="1"> Aliases are recognized only in the account that created the customer
+    #   master key (CMK). For cross-account actions, you can only use the
+    #   key ID or key ARN to identify the key.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1521,6 +1553,28 @@ module Aws::CodePipeline
       :summary,
       :external_execution_id,
       :percent_complete)
+      include Aws::Structure
+    end
+
+    # The interaction or event that started a pipeline execution.
+    #
+    # @!attribute [rw] trigger_type
+    #   The type of change-detection method, command, or user interaction
+    #   that started a pipeline execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_detail
+    #   Detail related to the event that started a pipeline execution, such
+    #   as the webhook ARN of the webhook that triggered the pipeline
+    #   execution or the user ARN for a user-initiated
+    #   `start-pipeline-execution` CLI command.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ExecutionTrigger AWS API Documentation
+    #
+    class ExecutionTrigger < Struct.new(
+      :trigger_type,
+      :trigger_detail)
       include Aws::Structure
     end
 
@@ -2472,16 +2526,24 @@ module Aws::CodePipeline
     # @!attribute [rw] artifact_store
     #   Represents information about the Amazon S3 bucket where artifacts
     #   are stored for the pipeline.
+    #
+    #   <note markdown="1"> You must include either `artifactStore` or `artifactStores` in your
+    #   pipeline, but you cannot use both. If you create a cross-region
+    #   action in your pipeline, you must use `artifactStores`.
+    #
+    #    </note>
     #   @return [Types::ArtifactStore]
     #
     # @!attribute [rw] artifact_stores
     #   A mapping of `artifactStore` objects and their corresponding
     #   regions. There must be an artifact store for the pipeline region and
-    #   for each cross-region action within the pipeline. You can only use
-    #   either `artifactStore` or `artifactStores`, not both.
+    #   for each cross-region action within the pipeline.
     #
-    #   If you create a cross-region action in your pipeline, you must use
-    #   `artifactStores`.
+    #   <note markdown="1"> You must include either `artifactStore` or `artifactStores` in your
+    #   pipeline, but you cannot use both. If you create a cross-region
+    #   action in your pipeline, you must use `artifactStores`.
+    #
+    #    </note>
     #   @return [Hash<String,Types::ArtifactStore>]
     #
     # @!attribute [rw] stages
@@ -2585,6 +2647,11 @@ module Aws::CodePipeline
     #   execution.
     #   @return [Array<Types::SourceRevision>]
     #
+    # @!attribute [rw] trigger
+    #   The interaction or event that started a pipeline execution, such as
+    #   automated change detection or a `StartPipelineExecution` API call.
+    #   @return [Types::ExecutionTrigger]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionSummary AWS API Documentation
     #
     class PipelineExecutionSummary < Struct.new(
@@ -2592,7 +2659,8 @@ module Aws::CodePipeline
       :status,
       :start_time,
       :last_update_time,
-      :source_revisions)
+      :source_revisions,
+      :trigger)
       include Aws::Structure
     end
 

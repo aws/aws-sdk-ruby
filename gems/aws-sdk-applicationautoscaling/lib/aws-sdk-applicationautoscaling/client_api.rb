@@ -75,6 +75,7 @@ module Aws::ApplicationAutoScaling
     ScalingAdjustment = Shapes::IntegerShape.new(name: 'ScalingAdjustment')
     ScalingPolicies = Shapes::ListShape.new(name: 'ScalingPolicies')
     ScalingPolicy = Shapes::StructureShape.new(name: 'ScalingPolicy')
+    ScalingSuspended = Shapes::BooleanShape.new(name: 'ScalingSuspended')
     ScheduledAction = Shapes::StructureShape.new(name: 'ScheduledAction')
     ScheduledActionName = Shapes::StringShape.new(name: 'ScheduledActionName')
     ScheduledActions = Shapes::ListShape.new(name: 'ScheduledActions')
@@ -82,6 +83,7 @@ module Aws::ApplicationAutoScaling
     StepAdjustment = Shapes::StructureShape.new(name: 'StepAdjustment')
     StepAdjustments = Shapes::ListShape.new(name: 'StepAdjustments')
     StepScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'StepScalingPolicyConfiguration')
+    SuspendedState = Shapes::StructureShape.new(name: 'SuspendedState')
     TargetTrackingScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingScalingPolicyConfiguration')
     TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -228,6 +230,7 @@ module Aws::ApplicationAutoScaling
     RegisterScalableTargetRequest.add_member(:min_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MinCapacity"))
     RegisterScalableTargetRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MaxCapacity"))
     RegisterScalableTargetRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "RoleARN"))
+    RegisterScalableTargetRequest.add_member(:suspended_state, Shapes::ShapeRef.new(shape: SuspendedState, location_name: "SuspendedState"))
     RegisterScalableTargetRequest.struct_class = Types::RegisterScalableTargetRequest
 
     RegisterScalableTargetResponse.struct_class = Types::RegisterScalableTargetResponse
@@ -241,6 +244,7 @@ module Aws::ApplicationAutoScaling
     ScalableTarget.add_member(:max_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, required: true, location_name: "MaxCapacity"))
     ScalableTarget.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "RoleARN"))
     ScalableTarget.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "CreationTime"))
+    ScalableTarget.add_member(:suspended_state, Shapes::ShapeRef.new(shape: SuspendedState, location_name: "SuspendedState"))
     ScalableTarget.struct_class = Types::ScalableTarget
 
     ScalableTargetAction.add_member(:min_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MinCapacity"))
@@ -305,6 +309,11 @@ module Aws::ApplicationAutoScaling
     StepScalingPolicyConfiguration.add_member(:cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "Cooldown"))
     StepScalingPolicyConfiguration.add_member(:metric_aggregation_type, Shapes::ShapeRef.new(shape: MetricAggregationType, location_name: "MetricAggregationType"))
     StepScalingPolicyConfiguration.struct_class = Types::StepScalingPolicyConfiguration
+
+    SuspendedState.add_member(:dynamic_scaling_in_suspended, Shapes::ShapeRef.new(shape: ScalingSuspended, location_name: "DynamicScalingInSuspended"))
+    SuspendedState.add_member(:dynamic_scaling_out_suspended, Shapes::ShapeRef.new(shape: ScalingSuspended, location_name: "DynamicScalingOutSuspended"))
+    SuspendedState.add_member(:scheduled_scaling_suspended, Shapes::ShapeRef.new(shape: ScalingSuspended, location_name: "ScheduledScalingSuspended"))
+    SuspendedState.struct_class = Types::SuspendedState
 
     TargetTrackingScalingPolicyConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: MetricScale, required: true, location_name: "TargetValue"))
     TargetTrackingScalingPolicyConfiguration.add_member(:predefined_metric_specification, Shapes::ShapeRef.new(shape: PredefinedMetricSpecification, location_name: "PredefinedMetricSpecification"))
@@ -437,6 +446,12 @@ module Aws::ApplicationAutoScaling
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_scaling_policy, Seahorse::Model::Operation.new.tap do |o|

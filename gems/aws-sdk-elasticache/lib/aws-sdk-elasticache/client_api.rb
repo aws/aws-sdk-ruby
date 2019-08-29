@@ -131,6 +131,7 @@ module Aws::ElastiCache
     InvalidCacheClusterStateFault = Shapes::StructureShape.new(name: 'InvalidCacheClusterStateFault')
     InvalidCacheParameterGroupStateFault = Shapes::StructureShape.new(name: 'InvalidCacheParameterGroupStateFault')
     InvalidCacheSecurityGroupStateFault = Shapes::StructureShape.new(name: 'InvalidCacheSecurityGroupStateFault')
+    InvalidKMSKeyFault = Shapes::StructureShape.new(name: 'InvalidKMSKeyFault')
     InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidReplicationGroupStateFault = Shapes::StructureShape.new(name: 'InvalidReplicationGroupStateFault')
@@ -432,6 +433,7 @@ module Aws::ElastiCache
     CopySnapshotMessage.add_member(:source_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceSnapshotName"))
     CopySnapshotMessage.add_member(:target_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetSnapshotName"))
     CopySnapshotMessage.add_member(:target_bucket, Shapes::ShapeRef.new(shape: String, location_name: "TargetBucket"))
+    CopySnapshotMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CopySnapshotMessage.struct_class = Types::CopySnapshotMessage
 
     CopySnapshotResult.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
@@ -516,6 +518,7 @@ module Aws::ElastiCache
     CreateReplicationGroupMessage.add_member(:auth_token, Shapes::ShapeRef.new(shape: String, location_name: "AuthToken"))
     CreateReplicationGroupMessage.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     CreateReplicationGroupMessage.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
+    CreateReplicationGroupMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CreateReplicationGroupMessage.struct_class = Types::CreateReplicationGroupMessage
 
     CreateReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -524,6 +527,7 @@ module Aws::ElastiCache
     CreateSnapshotMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
     CreateSnapshotMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     CreateSnapshotMessage.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnapshotName"))
+    CreateSnapshotMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CreateSnapshotMessage.struct_class = Types::CreateSnapshotMessage
 
     CreateSnapshotResult.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
@@ -943,6 +947,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:auth_token_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AuthTokenEnabled"))
     ReplicationGroup.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     ReplicationGroup.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
+    ReplicationGroup.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupIdList.member = Shapes::ShapeRef.new(shape: String)
@@ -1074,6 +1079,7 @@ module Aws::ElastiCache
     Snapshot.add_member(:num_node_groups, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumNodeGroups"))
     Snapshot.add_member(:automatic_failover, Shapes::ShapeRef.new(shape: AutomaticFailoverStatus, location_name: "AutomaticFailover"))
     Snapshot.add_member(:node_snapshots, Shapes::ShapeRef.new(shape: NodeSnapshotList, location_name: "NodeSnapshots"))
+    Snapshot.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotArnsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SnapshotArn")
@@ -1661,6 +1667,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: NodeGroupsPerReplicationGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: NodeQuotaForCustomerExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: NoOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -1748,6 +1755,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: CacheSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CacheParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -1765,6 +1773,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCacheClusterCapacityFault)
         o.errors << Shapes::ShapeRef.new(shape: NodeGroupsPerReplicationGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: NodeQuotaForCustomerExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -1841,6 +1850,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: NodeGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TestFailoverNotAvailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)

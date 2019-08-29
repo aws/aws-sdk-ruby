@@ -343,6 +343,7 @@ module Aws::ECS
     Container.add_member(:container_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerArn"))
     Container.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
     Container.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    Container.add_member(:runtime_id, Shapes::ShapeRef.new(shape: String, location_name: "runtimeId"))
     Container.add_member(:last_status, Shapes::ShapeRef.new(shape: String, location_name: "lastStatus"))
     Container.add_member(:exit_code, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "exitCode"))
     Container.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
@@ -436,6 +437,7 @@ module Aws::ECS
     ContainerOverrides.member = Shapes::ShapeRef.new(shape: ContainerOverride)
 
     ContainerStateChange.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
+    ContainerStateChange.add_member(:runtime_id, Shapes::ShapeRef.new(shape: String, location_name: "runtimeId"))
     ContainerStateChange.add_member(:exit_code, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "exitCode"))
     ContainerStateChange.add_member(:network_bindings, Shapes::ShapeRef.new(shape: NetworkBindings, location_name: "networkBindings"))
     ContainerStateChange.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
@@ -1066,6 +1068,7 @@ module Aws::ECS
     SubmitContainerStateChangeRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     SubmitContainerStateChangeRequest.add_member(:task, Shapes::ShapeRef.new(shape: String, location_name: "task"))
     SubmitContainerStateChangeRequest.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
+    SubmitContainerStateChangeRequest.add_member(:runtime_id, Shapes::ShapeRef.new(shape: String, location_name: "runtimeId"))
     SubmitContainerStateChangeRequest.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     SubmitContainerStateChangeRequest.add_member(:exit_code, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "exitCode"))
     SubmitContainerStateChangeRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))

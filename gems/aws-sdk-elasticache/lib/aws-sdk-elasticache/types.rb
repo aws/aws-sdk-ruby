@@ -1057,6 +1057,7 @@ module Aws::ElastiCache
     #         source_snapshot_name: "String", # required
     #         target_snapshot_name: "String", # required
     #         target_bucket: "String",
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] source_snapshot_name
@@ -1088,12 +1089,17 @@ module Aws::ElastiCache
     #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the target snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshotMessage AWS API Documentation
     #
     class CopySnapshotMessage < Struct.new(
       :source_snapshot_name,
       :target_snapshot_name,
-      :target_bucket)
+      :target_bucket,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -1151,7 +1157,7 @@ module Aws::ElastiCache
     #
     #   **Constraints:**
     #
-    #   * A name must contain from 1 to 20 alphanumeric characters or
+    #   * A name must contain from 1 to 50 alphanumeric characters or
     #     hyphens.
     #
     #   * The first character must be a letter.
@@ -1729,6 +1735,7 @@ module Aws::ElastiCache
     #         auth_token: "String",
     #         transit_encryption_enabled: false,
     #         at_rest_encryption_enabled: false,
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -1737,7 +1744,7 @@ module Aws::ElastiCache
     #
     #   Constraints:
     #
-    #   * A name must contain from 1 to 20 alphanumeric characters or
+    #   * A name must contain from 1 to 40 alphanumeric characters or
     #     hyphens.
     #
     #   * The first character must be a letter.
@@ -2121,8 +2128,8 @@ module Aws::ElastiCache
     #   cluster.
     #
     #   This parameter is valid only if the `Engine` parameter is `redis`,
-    #   the `EngineVersion` parameter is `3.2.6` or `4.x`, and the cluster
-    #   is being created in an Amazon VPC.
+    #   the `EngineVersion` parameter is `3.2.6`, `4.x` or later, and the
+    #   cluster is being created in an Amazon VPC.
     #
     #   If you enable in-transit encryption, you must also specify a value
     #   for `CacheSubnetGroup`.
@@ -2149,6 +2156,10 @@ module Aws::ElastiCache
     #
     #   Default: `false`
     #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the disk on the cluster.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
     #
@@ -2180,7 +2191,8 @@ module Aws::ElastiCache
       :snapshot_window,
       :auth_token,
       :transit_encryption_enabled,
-      :at_rest_encryption_enabled)
+      :at_rest_encryption_enabled,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -2205,6 +2217,7 @@ module Aws::ElastiCache
     #         replication_group_id: "String",
     #         cache_cluster_id: "String",
     #         snapshot_name: "String", # required
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -2221,12 +2234,17 @@ module Aws::ElastiCache
     #   A name for the snapshot being created.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshotMessage AWS API Documentation
     #
     class CreateSnapshotMessage < Struct.new(
       :replication_group_id,
       :cache_cluster_id,
-      :snapshot_name)
+      :snapshot_name,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -5276,6 +5294,10 @@ module Aws::ElastiCache
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the disk in the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
     class ReplicationGroup < Struct.new(
@@ -5294,7 +5316,8 @@ module Aws::ElastiCache
       :cache_node_type,
       :auth_token_enabled,
       :transit_encryption_enabled,
-      :at_rest_encryption_enabled)
+      :at_rest_encryption_enabled,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -6146,6 +6169,10 @@ module Aws::ElastiCache
     #   A list of the cache nodes in the source cluster.
     #   @return [Array<Types::NodeSnapshot>]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -6172,7 +6199,8 @@ module Aws::ElastiCache
       :snapshot_window,
       :num_node_groups,
       :automatic_failover,
-      :node_snapshots)
+      :node_snapshots,
+      :kms_key_id)
       include Aws::Structure
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2019-08-29)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for including Docker container IDs in the API response when describing and stopping tasks. This enables customers to easily map containers to the tasks they are associated with.
+
 1.46.0 (2019-08-16)
 ------------------
 

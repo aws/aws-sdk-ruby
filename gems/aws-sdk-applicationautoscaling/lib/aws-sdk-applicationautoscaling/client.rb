@@ -839,6 +839,9 @@ module Aws::ApplicationAutoScaling
     #   resp.scalable_targets[0].max_capacity #=> Integer
     #   resp.scalable_targets[0].role_arn #=> String
     #   resp.scalable_targets[0].creation_time #=> Time
+    #   resp.scalable_targets[0].suspended_state.dynamic_scaling_in_suspended #=> Boolean
+    #   resp.scalable_targets[0].suspended_state.dynamic_scaling_out_suspended #=> Boolean
+    #   resp.scalable_targets[0].suspended_state.scheduled_scaling_suspended #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargets AWS API Documentation
@@ -2022,6 +2025,33 @@ module Aws::ApplicationAutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html
     #
+    # @option params [Types::SuspendedState] :suspended_state
+    #   An embedded object that contains attributes and attribute values that
+    #   are used to suspend and resume automatic scaling. Setting the value of
+    #   an attribute to `true` suspends the specified scaling activities.
+    #   Setting it to `false` (default) resumes the specified scaling
+    #   activities.
+    #
+    #   **Suspension Outcomes**
+    #
+    #   * For `DynamicScalingInSuspended`, while a suspension is in effect,
+    #     all scale-in activities that are triggered by a scaling policy are
+    #     suspended.
+    #
+    #   * For `DynamicScalingOutSuspended`, while a suspension is in effect,
+    #     all scale-out activities that are triggered by a scaling policy are
+    #     suspended.
+    #
+    #   * For `ScheduledScalingSuspended`, while a suspension is in effect,
+    #     all scaling activities that involve scheduled actions are suspended.
+    #
+    #   For more information, see [Suspend and Resume Application Auto
+    #   Scaling][1] in the *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -2066,6 +2096,11 @@ module Aws::ApplicationAutoScaling
     #     min_capacity: 1,
     #     max_capacity: 1,
     #     role_arn: "ResourceIdMaxLen1600",
+    #     suspended_state: {
+    #       dynamic_scaling_in_suspended: false,
+    #       dynamic_scaling_out_suspended: false,
+    #       scheduled_scaling_suspended: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTarget AWS API Documentation
@@ -2090,7 +2125,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -428,6 +428,7 @@ module Aws::Lambda
     #         function_name: "FunctionName", # required
     #         enabled: false,
     #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
     #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
     #         starting_position_timestamp: Time.now,
     #       }
@@ -476,6 +477,9 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #   @return [Integer]
     #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   @return [Integer]
+    #
     # @!attribute [rw] starting_position
     #   The position in a stream from which to start reading. Required for
     #   Amazon Kinesis and Amazon DynamoDB Streams sources. `AT_TIMESTAMP`
@@ -494,6 +498,7 @@ module Aws::Lambda
       :function_name,
       :enabled,
       :batch_size,
+      :maximum_batching_window_in_seconds,
       :starting_position,
       :starting_position_timestamp)
       include Aws::Structure
@@ -994,6 +999,9 @@ module Aws::Lambda
     #   The maximum number of items to retrieve in a single batch.
     #   @return [Integer]
     #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   @return [Integer]
+    #
     # @!attribute [rw] event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
     #   @return [String]
@@ -1027,6 +1035,7 @@ module Aws::Lambda
     class EventSourceMappingConfiguration < Struct.new(
       :uuid,
       :batch_size,
+      :maximum_batching_window_in_seconds,
       :event_source_arn,
       :function_arn,
       :last_modified,
@@ -3135,6 +3144,7 @@ module Aws::Lambda
     #         function_name: "FunctionName",
     #         enabled: false,
     #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] uuid
@@ -3174,13 +3184,17 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #   @return [Integer]
     #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
     #
     class UpdateEventSourceMappingRequest < Struct.new(
       :uuid,
       :function_name,
       :enabled,
-      :batch_size)
+      :batch_size,
+      :maximum_batching_window_in_seconds)
       include Aws::Structure
     end
 

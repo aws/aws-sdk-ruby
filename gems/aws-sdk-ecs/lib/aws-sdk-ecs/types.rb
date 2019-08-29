@@ -342,6 +342,10 @@ module Aws::ECS
     #   The name of the container.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_id
+    #   The ID of the Docker container.
+    #   @return [String]
+    #
     # @!attribute [rw] last_status
     #   The last known status of the container.
     #   @return [String]
@@ -393,6 +397,7 @@ module Aws::ECS
       :container_arn,
       :task_arn,
       :name,
+      :runtime_id,
       :last_status,
       :exit_code,
       :reason,
@@ -968,13 +973,13 @@ module Aws::ECS
     #   @return [Array<Types::ContainerDependency>]
     #
     # @!attribute [rw] start_timeout
-    #   Time duration to wait before giving up on resolving dependencies for
-    #   a container. For example, you specify two containers in a task
-    #   definition with containerA having a dependency on containerB
-    #   reaching a `COMPLETE`, `SUCCESS`, or `HEALTHY` status. If a
-    #   `startTimeout` value is specified for containerB and it does not
-    #   reach the desired status within that time then containerA will give
-    #   up and not start. This results in the task transitioning to a
+    #   Time duration (in seconds) to wait before giving up on resolving
+    #   dependencies for a container. For example, you specify two
+    #   containers in a task definition with containerA having a dependency
+    #   on containerB reaching a `COMPLETE`, `SUCCESS`, or `HEALTHY` status.
+    #   If a `startTimeout` value is specified for containerB and it does
+    #   not reach the desired status within that time then containerA will
+    #   give up and not start. This results in the task transitioning to a
     #   `STOPPED` state.
     #
     #   For tasks using the EC2 launch type, the container instances require
@@ -1002,12 +1007,12 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] stop_timeout
-    #   Time duration to wait before the container is forcefully killed if
-    #   it doesn't exit normally on its own. For tasks using the Fargate
-    #   launch type, the max `stopTimeout` value is 2 minutes. This
-    #   parameter is available for tasks using the Fargate launch type in
-    #   the Ohio (us-east-2) region only and the task or service requires
-    #   platform version 1.3.0 or later.
+    #   Time duration (in seconds) to wait before the container is
+    #   forcefully killed if it doesn't exit normally on its own. For tasks
+    #   using the Fargate launch type, the max `stopTimeout` value is 2
+    #   minutes. This parameter is available for tasks using the Fargate
+    #   launch type in the Ohio (us-east-2) region only and the task or
+    #   service requires platform version 1.3.0 or later.
     #
     #   For tasks using the EC2 launch type, the stop timeout value for the
     #   container takes precedence over the `ECS_CONTAINER_STOP_TIMEOUT`
@@ -1761,6 +1766,7 @@ module Aws::ECS
     #
     #       {
     #         container_name: "String",
+    #         runtime_id: "String",
     #         exit_code: 1,
     #         network_bindings: [
     #           {
@@ -1776,6 +1782,10 @@ module Aws::ECS
     #
     # @!attribute [rw] container_name
     #   The name of the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_id
+    #   The ID of the Docker container.
     #   @return [String]
     #
     # @!attribute [rw] exit_code
@@ -1799,6 +1809,7 @@ module Aws::ECS
     #
     class ContainerStateChange < Struct.new(
       :container_name,
+      :runtime_id,
       :exit_code,
       :network_bindings,
       :reason,
@@ -1978,11 +1989,14 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] load_balancers
-    #   A load balancer object representing the load balancer to use with
-    #   your service.
+    #   A load balancer object representing the load balancers to use with
+    #   your service. For more information, see [Service Load Balancing][1]
+    #   in the *Amazon Elastic Container Service Developer Guide*.
     #
-    #   If the service is using the `ECS` deployment controller, you are
-    #   limited to one load balancer or target group.
+    #   If the service is using the rolling update (`ECS`) deployment
+    #   controller and using either an Application Load Balancer or Network
+    #   Load Balancer, you can specify multiple target groups to attach to
+    #   the service.
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -2002,13 +2016,6 @@ module Aws::ECS
     #   you are using the `CODE_DEPLOY` deployment controller, these values
     #   can be changed when updating the service.
     #
-    #   For Classic Load Balancers, this object must contain the load
-    #   balancer name, the container name (as it appears in a container
-    #   definition), and the container port to access from the load
-    #   balancer. When a task from this service is placed on a container
-    #   instance, the container instance is registered with the load
-    #   balancer specified here.
-    #
     #   For Application Load Balancers and Network Load Balancers, this
     #   object must contain the load balancer target group ARN, the
     #   container name (as it appears in a container definition), and the
@@ -2017,6 +2024,13 @@ module Aws::ECS
     #   instance and port combination is registered as a target in the
     #   target group specified here.
     #
+    #   For Classic Load Balancers, this object must contain the load
+    #   balancer name, the container name (as it appears in a container
+    #   definition), and the container port to access from the load
+    #   balancer. When a task from this service is placed on a container
+    #   instance, the container instance is registered with the load
+    #   balancer specified here.
+    #
     #   Services with tasks that use the `awsvpc` network mode (for example,
     #   those with the Fargate launch type) only support Application Load
     #   Balancers and Network Load Balancers. Classic Load Balancers are not
@@ -2024,6 +2038,10 @@ module Aws::ECS
     #   services, you must choose `ip` as the target type, not `instance`,
     #   because tasks that use the `awsvpc` network mode are associated with
     #   an elastic network interface, not an Amazon EC2 instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
@@ -4659,28 +4677,8 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Details on a load balancer to be used with a service or task set.
-    #
-    # If the service is using the `ECS` deployment controller, you are
-    # limited to one load balancer or target group.
-    #
-    # If the service is using the `CODE_DEPLOY` deployment controller, the
-    # service is required to use either an Application Load Balancer or
-    # Network Load Balancer. When you are creating an AWS CodeDeploy
-    # deployment group, you specify two target groups (referred to as a
-    # `targetGroupPair`). Each target group binds to a separate task set in
-    # the deployment. The load balancer can also have up to two listeners, a
-    # required listener for production traffic and an optional listener that
-    # allows you to test new revisions of the service before routing
-    # production traffic to it.
-    #
-    # Services with tasks that use the `awsvpc` network mode (for example,
-    # those with the Fargate launch type) only support Application Load
-    # Balancers and Network Load Balancers. Classic Load Balancers are not
-    # supported. Also, when you create any target groups for these services,
-    # you must choose `ip` as the target type, not `instance`. Tasks that
-    # use the `awsvpc` network mode are associated with an elastic network
-    # interface, not an Amazon EC2 instance.
+    # Details on the load balancer or load balancers to use with a service
+    # or task set.
     #
     # @note When making an API call, you may pass LoadBalancer
     #   data as a hash:
@@ -4696,29 +4694,40 @@ module Aws::ECS
     #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
     #   target group or groups associated with a service or task set.
     #
-    #   A target group ARN is only specified when using an application load
-    #   balancer or a network load balancer. If you are using a classic load
-    #   balancer this should be omitted.
+    #   A target group ARN is only specified when using an Application Load
+    #   Balancer or Network Load Balancer. If you are using a Classic Load
+    #   Balancer this should be omitted.
     #
-    #   For services using the `ECS` deployment controller, you are limited
-    #   to one target group. For services using the `CODE_DEPLOY` deployment
-    #   controller, you are required to define two target groups for the
-    #   load balancer.
+    #   For services using the `ECS` deployment controller, you can specify
+    #   one or multiple target groups. For more information, see
+    #   [Registering Multiple Target Groups with a Service][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #   For services using the `CODE_DEPLOY` deployment controller, you are
+    #   required to define two target groups for the load balancer. For more
+    #   information, see [Blue/Green Deployment with CodeDeploy][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If your service's task definition uses the `awsvpc` network mode
     #   (which is required for the Fargate launch type), you must choose
-    #   `ip` as the target type, not `instance`, because tasks that use the
-    #   `awsvpc` network mode are associated with an elastic network
-    #   interface, not an Amazon EC2 instance.
+    #   `ip` as the target type, not `instance`, when creating your target
+    #   groups because tasks that use the `awsvpc` network mode are
+    #   associated with an elastic network interface, not an Amazon EC2
+    #   instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer to associate with the Amazon ECS
     #   service or task set.
     #
-    #   A load balancer name is only specified when using a classic load
-    #   balancer. If you are using an application load balancer or a network
-    #   load balancer this should be omitted.
+    #   A load balancer name is only specified when using a Classic Load
+    #   Balancer. If you are using an Application Load Balancer or a Network
+    #   Load Balancer this should be omitted.
     #   @return [String]
     #
     # @!attribute [rw] container_name
@@ -4728,9 +4737,10 @@ module Aws::ECS
     #
     # @!attribute [rw] container_port
     #   The port on the container to associate with the load balancer. This
-    #   port must correspond to a `containerPort` in the service's task
-    #   definition. Your container instances must allow ingress traffic on
-    #   the `hostPort` of the port mapping.
+    #   port must correspond to a `containerPort` in the task definition the
+    #   tasks in the service are using. For tasks that use the EC2 launch
+    #   type, the container instance they are launched on must allow ingress
+    #   traffic on the `hostPort` of the port mapping.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LoadBalancer AWS API Documentation
@@ -6551,14 +6561,6 @@ module Aws::ECS
     #   the load balancer name, the container name (as it appears in a
     #   container definition), and the container port to access from the
     #   load balancer.
-    #
-    #   Services with tasks that use the `awsvpc` network mode (for example,
-    #   those with the Fargate launch type) only support Application Load
-    #   Balancers and Network Load Balancers. Classic Load Balancers are not
-    #   supported. Also, when you create any target groups for these
-    #   services, you must choose `ip` as the target type, not `instance`.
-    #   Tasks that use the `awsvpc` network mode are associated with an
-    #   elastic network interface, not an Amazon EC2 instance.
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
@@ -7186,6 +7188,7 @@ module Aws::ECS
     #         cluster: "String",
     #         task: "String",
     #         container_name: "String",
+    #         runtime_id: "String",
     #         status: "String",
     #         exit_code: 1,
     #         reason: "String",
@@ -7212,6 +7215,10 @@ module Aws::ECS
     #   The name of the container.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_id
+    #   The ID of the Docker container.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the state change request.
     #   @return [String]
@@ -7234,6 +7241,7 @@ module Aws::ECS
       :cluster,
       :task,
       :container_name,
+      :runtime_id,
       :status,
       :exit_code,
       :reason,
@@ -7263,6 +7271,7 @@ module Aws::ECS
     #         containers: [
     #           {
     #             container_name: "String",
+    #             runtime_id: "String",
     #             exit_code: 1,
     #             network_bindings: [
     #               {

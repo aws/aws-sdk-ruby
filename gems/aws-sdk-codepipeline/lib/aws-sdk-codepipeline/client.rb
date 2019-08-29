@@ -471,6 +471,13 @@ module Aws::CodePipeline
 
     # Creates a pipeline.
     #
+    # <note markdown="1"> In the pipeline structure, you must include either `artifactStore` or
+    # `artifactStores` in your pipeline, but you cannot use both. If you
+    # create a cross-region action in your pipeline, you must use
+    # `artifactStores`.
+    #
+    #  </note>
+    #
     # @option params [required, Types::PipelineDeclaration] :pipeline
     #   Represents the structure of actions and stages to be performed in the
     #   pipeline.
@@ -1299,6 +1306,8 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_id #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_summary #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_url #=> String
+    #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision"
+    #   resp.pipeline_execution_summaries[0].trigger.trigger_detail #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions AWS API Documentation
@@ -2240,7 +2249,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
