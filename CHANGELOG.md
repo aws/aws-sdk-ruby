@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
 2.11.343 (2019-08-28)
 ------------------
 
