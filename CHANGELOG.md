@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApiGatewayManagementApi - Updated the API, and documentation for AmazonApiGatewayManagementApi.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::MQ - Updated the API, and documentation for AmazonMQ.
+
 2.11.344 (2019-08-29)
 ------------------
 
