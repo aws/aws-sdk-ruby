@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-08-30)
+------------------
+
+* Feature - Adds support for updating security groups selection of an Amazon MQ broker.
+
 1.20.0 (2019-07-25)
 ------------------
 

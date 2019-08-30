@@ -108,6 +108,9 @@ module Aws::ECS
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     Failure = Shapes::StructureShape.new(name: 'Failure')
     Failures = Shapes::ListShape.new(name: 'Failures')
+    FirelensConfiguration = Shapes::StructureShape.new(name: 'FirelensConfiguration')
+    FirelensConfigurationOptionsMap = Shapes::MapShape.new(name: 'FirelensConfigurationOptionsMap')
+    FirelensConfigurationType = Shapes::StringShape.new(name: 'FirelensConfigurationType')
     GpuIds = Shapes::ListShape.new(name: 'GpuIds')
     HealthCheck = Shapes::StructureShape.new(name: 'HealthCheck')
     HealthStatus = Shapes::StringShape.new(name: 'HealthStatus')
@@ -267,6 +270,8 @@ module Aws::ECS
     UnsupportedFeatureException = Shapes::StructureShape.new(name: 'UnsupportedFeatureException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateClusterSettingsRequest = Shapes::StructureShape.new(name: 'UpdateClusterSettingsRequest')
+    UpdateClusterSettingsResponse = Shapes::StructureShape.new(name: 'UpdateClusterSettingsResponse')
     UpdateContainerAgentRequest = Shapes::StructureShape.new(name: 'UpdateContainerAgentRequest')
     UpdateContainerAgentResponse = Shapes::StructureShape.new(name: 'UpdateContainerAgentResponse')
     UpdateContainerInstancesStateRequest = Shapes::StructureShape.new(name: 'UpdateContainerInstancesStateRequest')
@@ -354,6 +359,7 @@ module Aws::ECS
     Container.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
     Container.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: String, location_name: "memoryReservation"))
     Container.add_member(:gpu_ids, Shapes::ShapeRef.new(shape: GpuIds, location_name: "gpuIds"))
+    Container.add_member(:firelens_configuration, Shapes::ShapeRef.new(shape: FirelensConfiguration, location_name: "firelensConfiguration"))
     Container.struct_class = Types::Container
 
     ContainerDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -393,6 +399,7 @@ module Aws::ECS
     ContainerDefinition.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheck, location_name: "healthCheck"))
     ContainerDefinition.add_member(:system_controls, Shapes::ShapeRef.new(shape: SystemControls, location_name: "systemControls"))
     ContainerDefinition.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
+    ContainerDefinition.add_member(:firelens_configuration, Shapes::ShapeRef.new(shape: FirelensConfiguration, location_name: "firelensConfiguration"))
     ContainerDefinition.struct_class = Types::ContainerDefinition
 
     ContainerDefinitions.member = Shapes::ShapeRef.new(shape: ContainerDefinition)
@@ -656,6 +663,13 @@ module Aws::ECS
     Failure.struct_class = Types::Failure
 
     Failures.member = Shapes::ShapeRef.new(shape: Failure)
+
+    FirelensConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: FirelensConfigurationType, required: true, location_name: "type"))
+    FirelensConfiguration.add_member(:options, Shapes::ShapeRef.new(shape: FirelensConfigurationOptionsMap, location_name: "options"))
+    FirelensConfiguration.struct_class = Types::FirelensConfiguration
+
+    FirelensConfigurationOptionsMap.key = Shapes::ShapeRef.new(shape: String)
+    FirelensConfigurationOptionsMap.value = Shapes::ShapeRef.new(shape: String)
 
     GpuIds.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1224,6 +1238,13 @@ module Aws::ECS
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateClusterSettingsRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    UpdateClusterSettingsRequest.add_member(:settings, Shapes::ShapeRef.new(shape: ClusterSettings, required: true, location_name: "settings"))
+    UpdateClusterSettingsRequest.struct_class = Types::UpdateClusterSettingsRequest
+
+    UpdateClusterSettingsResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
+    UpdateClusterSettingsResponse.struct_class = Types::UpdateClusterSettingsResponse
 
     UpdateContainerAgentRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     UpdateContainerAgentRequest.add_member(:container_instance, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerInstance"))
@@ -1821,6 +1842,18 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:update_cluster_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClusterSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClusterSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClusterSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 

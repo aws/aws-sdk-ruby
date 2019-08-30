@@ -569,6 +569,7 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#logs #logs} => Types::LogsSummary
     #   * {Types::DescribeBrokerResponse#maintenance_window_start_time #maintenance_window_start_time} => Types::WeeklyStartTime
     #   * {Types::DescribeBrokerResponse#pending_engine_version #pending_engine_version} => String
+    #   * {Types::DescribeBrokerResponse#pending_security_groups #pending_security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DescribeBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
@@ -617,6 +618,8 @@ module Aws::MQ
     #   resp.maintenance_window_start_time.time_of_day #=> String
     #   resp.maintenance_window_start_time.time_zone #=> String
     #   resp.pending_engine_version #=> String
+    #   resp.pending_security_groups #=> Array
+    #   resp.pending_security_groups[0] #=> String
     #   resp.publicly_accessible #=> Boolean
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
@@ -1080,6 +1083,8 @@ module Aws::MQ
     #   The list of information about logs to be enabled for the specified
     #   broker.
     #
+    # @option params [Array<String>] :security_groups
+    #
     # @return [Types::UpdateBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBrokerResponse#auto_minor_version_upgrade #auto_minor_version_upgrade} => Boolean
@@ -1087,6 +1092,7 @@ module Aws::MQ
     #   * {Types::UpdateBrokerResponse#configuration #configuration} => Types::ConfigurationId
     #   * {Types::UpdateBrokerResponse#engine_version #engine_version} => String
     #   * {Types::UpdateBrokerResponse#logs #logs} => Types::Logs
+    #   * {Types::UpdateBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1102,6 +1108,7 @@ module Aws::MQ
     #       audit: false,
     #       general: false,
     #     },
+    #     security_groups: ["__string"],
     #   })
     #
     # @example Response structure
@@ -1113,6 +1120,8 @@ module Aws::MQ
     #   resp.engine_version #=> String
     #   resp.logs.audit #=> Boolean
     #   resp.logs.general #=> Boolean
+    #   resp.security_groups #=> Array
+    #   resp.security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBroker AWS API Documentation
     #
@@ -1217,7 +1226,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

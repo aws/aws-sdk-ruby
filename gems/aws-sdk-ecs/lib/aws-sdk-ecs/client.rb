@@ -1935,7 +1935,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
     #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
     #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
     #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
@@ -1953,6 +1953,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -2653,7 +2656,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
     #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
     #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
     #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
@@ -2671,6 +2674,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -2933,6 +2939,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
+    #   resp.tasks[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.tasks[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.tasks[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -4821,7 +4830,7 @@ module Aws::ECS
     #           },
     #         ],
     #         log_configuration: {
-    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #           options: {
     #             "String" => "String",
     #           },
@@ -4851,6 +4860,12 @@ module Aws::ECS
     #             type: "GPU", # required, accepts GPU
     #           },
     #         ],
+    #         firelens_configuration: {
+    #           type: "fluentd", # required, accepts fluentd, fluentbit
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #         },
     #       },
     #     ],
     #     volumes: [
@@ -4981,7 +4996,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
     #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
     #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
     #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
@@ -4999,6 +5014,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -5377,6 +5395,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
+    #   resp.tasks[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.tasks[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.tasks[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -5628,6 +5649,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
+    #   resp.tasks[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.tasks[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.tasks[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -5764,6 +5788,9 @@ module Aws::ECS
     #   resp.task.containers[0].memory_reservation #=> String
     #   resp.task.containers[0].gpu_ids #=> Array
     #   resp.task.containers[0].gpu_ids[0] #=> String
+    #   resp.task.containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task.containers[0].firelens_configuration.options #=> Hash
+    #   resp.task.containers[0].firelens_configuration.options["String"] #=> String
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
@@ -6121,6 +6148,61 @@ module Aws::ECS
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Modifies the settings to use for a cluster.
+    #
+    # @option params [required, String] :cluster
+    #   The name of the cluster to modify the settings for.
+    #
+    # @option params [required, Array<Types::ClusterSetting>] :settings
+    #   The setting to use by default for a cluster. This parameter is used to
+    #   enable CloudWatch Container Insights for a cluster. If this value is
+    #   specified, it will override the `containerInsights` value set with
+    #   PutAccountSetting or PutAccountSettingDefault.
+    #
+    # @return [Types::UpdateClusterSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterSettingsResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_settings({
+    #     cluster: "String", # required
+    #     settings: [ # required
+    #       {
+    #         name: "containerInsights", # accepts containerInsights
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_arn #=> String
+    #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.status #=> String
+    #   resp.cluster.registered_container_instances_count #=> Integer
+    #   resp.cluster.running_tasks_count #=> Integer
+    #   resp.cluster.pending_tasks_count #=> Integer
+    #   resp.cluster.active_services_count #=> Integer
+    #   resp.cluster.statistics #=> Array
+    #   resp.cluster.statistics[0].name #=> String
+    #   resp.cluster.statistics[0].value #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.settings #=> Array
+    #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
+    #   resp.cluster.settings[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettings AWS API Documentation
+    #
+    # @overload update_cluster_settings(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_settings(params = {}, options = {})
+      req = build_request(:update_cluster_settings, params)
       req.send_request(options)
     end
 
@@ -6894,7 +6976,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

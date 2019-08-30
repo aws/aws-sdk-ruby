@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2019-08-30)
+------------------
+
 * Feature - Added a `:whitelist_headers` option to S3 presigner.
 
 1.47.0 (2019-08-28)

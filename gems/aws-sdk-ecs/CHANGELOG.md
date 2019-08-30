@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2019-08-30)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for modifying the cluster settings for existing clusters, which enables you to toggle whether Container Insights is enabled or not. Support is also introduced for custom log routing using the ECS FireLens integration.
+
 1.47.0 (2019-08-29)
 ------------------
 

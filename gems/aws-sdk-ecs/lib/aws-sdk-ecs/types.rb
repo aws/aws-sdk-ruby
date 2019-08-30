@@ -391,6 +391,10 @@ module Aws::ECS
     #   The IDs of each GPU assigned to the container.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] firelens_configuration
+    #   The FireLens configuration for the container.
+    #   @return [Types::FirelensConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container AWS API Documentation
     #
     class Container < Struct.new(
@@ -407,7 +411,8 @@ module Aws::ECS
       :cpu,
       :memory,
       :memory_reservation,
-      :gpu_ids)
+      :gpu_ids,
+      :firelens_configuration)
       include Aws::Structure
     end
 
@@ -522,7 +527,7 @@ module Aws::ECS
     #           },
     #         ],
     #         log_configuration: {
-    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #           options: {
     #             "String" => "String",
     #           },
@@ -552,6 +557,12 @@ module Aws::ECS
     #             type: "GPU", # required, accepts GPU
     #           },
     #         ],
+    #         firelens_configuration: {
+    #           type: "fluentd", # required, accepts fluentd, fluentbit
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1384,6 +1395,11 @@ module Aws::ECS
     #   supported resource is a GPU.
     #   @return [Array<Types::ResourceRequirement>]
     #
+    # @!attribute [rw] firelens_configuration
+    #   The FireLens configuration for the container. This is used to
+    #   specify and configure a log router for container logs.
+    #   @return [Types::FirelensConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
@@ -1423,7 +1439,8 @@ module Aws::ECS
       :log_configuration,
       :health_check,
       :system_controls,
-      :resource_requirements)
+      :resource_requirements,
+      :firelens_configuration)
       include Aws::Structure
     end
 
@@ -3505,6 +3522,40 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The FireLens configuration for the container. This is used to specify
+    # and configure a log router for container logs.
+    #
+    # @note When making an API call, you may pass FirelensConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         type: "fluentd", # required, accepts fluentd, fluentbit
+    #         options: {
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The log router to use. The valid values are `fluentd` or
+    #   `fluentbit`.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The options to use when configuring the log router. This field is
+    #   optional and can be used to add additional metadata, such as the
+    #   task, task definition, cluster, and container instance details to
+    #   the log event. If specified, the syntax to use is
+    #   `"options":\{"enable-ecs-log-metadata":"true|false"\}`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/FirelensConfiguration AWS API Documentation
+    #
+    class FirelensConfiguration < Struct.new(
+      :type,
+      :options)
+      include Aws::Structure
+    end
+
     # An object representing a container health check. Health check
     # parameters that are specified in a container definition override any
     # Docker health checks that exist in the container image (such as those
@@ -4760,7 +4811,7 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #         options: {
     #           "String" => "String",
     #         },
@@ -5667,7 +5718,7 @@ module Aws::ECS
     #               },
     #             ],
     #             log_configuration: {
-    #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #               options: {
     #                 "String" => "String",
     #               },
@@ -5697,6 +5748,12 @@ module Aws::ECS
     #                 type: "GPU", # required, accepts GPU
     #               },
     #             ],
+    #             firelens_configuration: {
+    #               type: "fluentd", # required, accepts fluentd, fluentbit
+    #               options: {
+    #                 "String" => "String",
+    #               },
+    #             },
     #           },
     #         ],
     #         volumes: [
@@ -8522,6 +8579,53 @@ module Aws::ECS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateClusterSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String", # required
+    #         settings: [ # required
+    #           {
+    #             name: "containerInsights", # accepts containerInsights
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The name of the cluster to modify the settings for.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   The setting to use by default for a cluster. This parameter is used
+    #   to enable CloudWatch Container Insights for a cluster. If this value
+    #   is specified, it will override the `containerInsights` value set
+    #   with PutAccountSetting or PutAccountSettingDefault.
+    #   @return [Array<Types::ClusterSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettingsRequest AWS API Documentation
+    #
+    class UpdateClusterSettingsRequest < Struct.new(
+      :cluster,
+      :settings)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   A regional grouping of one or more container instances on which you
+    #   can run task requests. Each account receives a default cluster the
+    #   first time you use the Amazon ECS service, but you may also create
+    #   other clusters. Clusters may contain more than one instance type
+    #   simultaneously.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettingsResponse AWS API Documentation
+    #
+    class UpdateClusterSettingsResponse < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateContainerAgentRequest
     #   data as a hash:
