@@ -8,12 +8,44 @@
 module Aws::TranscribeService
   module Types
 
+    # Your request didn't pass one or more validation tests. For example,
+    # if the transcription you're trying to delete doesn't exist or if it
+    # is in a non-terminal state (for example, it's "in progress"). See
+    # the exception `Message` field for more information.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # When you are using the `StartTranscriptionJob` operation, the
+    # `JobName` field is a duplicate of a previously entered job name.
+    # Resend your request with a different name.
+    #
+    # When you are using the `UpdateVocabulary` operation, there are two
+    # jobs running at the same time. Resend the second request later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateVocabularyRequest
     #   data as a hash:
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }
@@ -223,6 +255,33 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # There was an internal error. Check the error message and try your
+    # request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Either you have sent too many requests or your input file is too long.
+    # Wait before you resend your request, or use a smaller file and resend
+    # the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTranscriptionJobsRequest
     #   data as a hash:
     #
@@ -402,6 +461,19 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # We can't find the requested resource. Check the name and try your
+    # request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides optional settings for the `StartTranscriptionJob` operation.
     #
     # @note When making an API call, you may pass Settings
@@ -469,7 +541,7 @@ module Aws::TranscribeService
     #
     #       {
     #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # required, accepts mp3, mp4, wav, flac
     #         media: { # required
@@ -497,6 +569,12 @@ module Aws::TranscribeService
     # @!attribute [rw] media_sample_rate_hertz
     #   The sample rate, in Hertz, of the audio track in the input media
     #   file.
+    #
+    #   If you do not specify the media sample rate, Amazon Transcribe
+    #   determines the sample rate. If you specify the sample rate, it must
+    #   match the sample rate detected by Amazon Transcribe. In most cases,
+    #   you should leave the `MediaSampleRateHertz` field blank and let
+    #   Amazon Transcribe determine the sample rate.
     #   @return [Integer]
     #
     # @!attribute [rw] media_format
@@ -530,7 +608,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -746,7 +824,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }

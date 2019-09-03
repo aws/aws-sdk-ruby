@@ -1389,6 +1389,7 @@ module Aws::RDS
     #         },
     #         deletion_protection: false,
     #         global_cluster_identifier: "String",
+    #         enable_http_endpoint: false,
     #         copy_tags_to_snapshot: false,
     #         source_region: "String",
     #       }
@@ -1478,13 +1479,32 @@ module Aws::RDS
     # @!attribute [rw] engine_version
     #   The version number of the database engine to use.
     #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for
+    #   `aurora-postgresql`, use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
     #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`, `5.7.12`
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
     #
     #   **Aurora PostgreSQL**
     #
-    #   Example: `9.6.3`
+    #   Example: `9.6.3`, `10.7`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -1657,6 +1677,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] backtrack_window
@@ -1705,6 +1732,24 @@ module Aws::RDS
     #   cluster in the new global database cluster.
     #   @return [String]
     #
+    # @!attribute [rw] enable_http_endpoint
+    #   A value that indicates whether to enable the HTTP endpoint for an
+    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   disabled.
+    #
+    #   When enabled, the HTTP endpoint provides a connectionless web
+    #   service API for running SQL queries on the Aurora Serverless DB
+    #   cluster. You can also query your database from inside the RDS
+    #   console with the query editor.
+    #
+    #   For more information, see [Using the Data API for Aurora
+    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster
     #   to snapshots of the DB cluster. The default is not to copy them.
@@ -1749,6 +1794,7 @@ module Aws::RDS
       :scaling_configuration,
       :deletion_protection,
       :global_cluster_identifier,
+      :enable_http_endpoint,
       :copy_tags_to_snapshot,
       :destination_region,
       :source_region)
@@ -1974,6 +2020,7 @@ module Aws::RDS
     #           },
     #         ],
     #         deletion_protection: false,
+    #         max_allocated_storage: 1,
     #       }
     #
     # @!attribute [rw] db_name
@@ -2083,10 +2130,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -2096,10 +2143,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -2109,10 +2156,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -2122,10 +2169,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -2550,7 +2597,7 @@ module Aws::RDS
     # @!attribute [rw] iops
     #   The amount of Provisioned IOPS (input/output operations per second)
     #   to be initially allocated for the DB instance. For information about
-    #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
+    #   valid Iops values, see [Amazon RDS Provisioned IOPS Storage to
     #   Improve Performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between 1 and 50 of the storage
@@ -2769,6 +2816,23 @@ module Aws::RDS
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   * For MySQL 8.0, minor version 8.0.16 or higher
+    #
+    #   **PostgreSQL**
+    #
+    #   * For PostgreSQL 9.5, minor version 9.5.15 or higher
+    #
+    #   * For PostgreSQL 9.6, minor version 9.6.11 or higher
+    #
+    #   * PostgreSQL 10.6, 10.7, and 10.9
+    #
+    #   For more information, see [ IAM Database Authentication for MySQL
+    #   and PostgreSQL][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_insights
@@ -2827,6 +2891,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -2874,7 +2943,8 @@ module Aws::RDS
       :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
       :processor_features,
-      :deletion_protection)
+      :deletion_protection,
+      :max_allocated_storage)
       include Aws::Structure
     end
 
@@ -3199,16 +3269,16 @@ module Aws::RDS
     # @!attribute [rw] enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following
-    #   database engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora MySQL 5.6 or higher
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_insights
@@ -4130,11 +4200,6 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] http_endpoint_enabled
-    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
-    #   subject to change.
-    #
-    #    </note>
-    #
     #   A value that indicates whether the HTTP endpoint for an Aurora
     #   Serverless DB cluster is enabled.
     #
@@ -4143,17 +4208,43 @@ module Aws::RDS
     #   cluster. You can also query your database from inside the RDS
     #   console with the query editor.
     #
-    #   For more information about Aurora Serverless, see [Using Amazon
-    #   Aurora Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora
+    #   Serverless][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     #   @return [Boolean]
+    #
+    # @!attribute [rw] activity_stream_mode
+    #   The mode of the database activity stream. Database events such as a
+    #   change or access generate an activity stream event. The database
+    #   session can handle these events either synchronously or
+    #   asynchronously.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity_stream_status
+    #   The status of the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity_stream_kms_key_id
+    #   The AWS KMS key identifier used for encrypting messages in the
+    #   database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity_stream_kinesis_stream_name
+    #   The name of the Amazon Kinesis data stream used for the database
+    #   activity stream.
+    #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
     #   Specifies whether tags are copied from the DB cluster to snapshots
     #   of the DB cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cross_account_clone
+    #   Specifies whether the DB cluster is a clone of a DB cluster owned by
+    #   a different AWS account.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
@@ -4204,7 +4295,12 @@ module Aws::RDS
       :scaling_configuration_info,
       :deletion_protection,
       :http_endpoint_enabled,
-      :copy_tags_to_snapshot)
+      :activity_stream_mode,
+      :activity_stream_status,
+      :activity_stream_kms_key_id,
+      :activity_stream_kinesis_stream_name,
+      :copy_tags_to_snapshot,
+      :cross_account_clone)
       include Aws::Structure
     end
 
@@ -4900,6 +4996,11 @@ module Aws::RDS
     #   ^
     #   @return [Array<String>]
     #
+    # @!attribute [rw] status
+    #   The status of the DB engine version, either `available` or
+    #   `deprecated`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -4916,7 +5017,8 @@ module Aws::RDS
       :supports_log_exports_to_cloudwatch_logs,
       :supports_read_replica,
       :supported_engine_modes,
-      :supported_feature_names)
+      :supported_feature_names,
+      :status)
       include Aws::Structure
     end
 
@@ -5285,6 +5387,11 @@ module Aws::RDS
     #   Specifies the listener connection endpoint for SQL Server Always On.
     #   @return [Types::Endpoint]
     #
+    # @!attribute [rw] max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -5344,7 +5451,8 @@ module Aws::RDS
       :processor_features,
       :deletion_protection,
       :associated_roles,
-      :listener_endpoint)
+      :listener_endpoint,
+      :max_allocated_storage)
       include Aws::Structure
     end
 
@@ -7096,7 +7204,20 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   This parameter is not currently supported.
+    #   A filter that specifies one or more DB cluster snapshots to
+    #   describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-cluster-snapshot-id` - Accepts DB cluster snapshot
+    #     identifiers.
+    #
+    #   * `snapshot-type` - Accepts types of DB cluster snapshots.
+    #
+    #   * `engine` - Accepts names of database engines.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -7164,6 +7285,7 @@ module Aws::RDS
     #         ],
     #         max_records: 1,
     #         marker: "String",
+    #         include_shared: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -7208,13 +7330,19 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #   @return [String]
     #
+    # @!attribute [rw] include_shared
+    #   Optional Boolean parameter that specifies whether the output
+    #   includes information about clusters shared from other AWS accounts.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClustersMessage AWS API Documentation
     #
     class DescribeDBClustersMessage < Struct.new(
       :db_cluster_identifier,
       :filters,
       :max_records,
-      :marker)
+      :marker,
+      :include_shared)
       include Aws::Structure
     end
 
@@ -7236,6 +7364,7 @@ module Aws::RDS
     #         default_only: false,
     #         list_supported_character_sets: false,
     #         list_supported_timezones: false,
+    #         include_all: false,
     #       }
     #
     # @!attribute [rw] engine
@@ -7304,6 +7433,12 @@ module Aws::RDS
     #   list of supported time zones for each engine version.
     #   @return [Boolean]
     #
+    # @!attribute [rw] include_all
+    #   A value that indicates whether to include engine versions that
+    #   aren't available in the list. The default is to list only available
+    #   engine versions.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersionsMessage AWS API Documentation
     #
     class DescribeDBEngineVersionsMessage < Struct.new(
@@ -7315,7 +7450,8 @@ module Aws::RDS
       :marker,
       :default_only,
       :list_supported_character_sets,
-      :list_supported_timezones)
+      :list_supported_timezones,
+      :include_all)
       include Aws::Structure
     end
 
@@ -7441,6 +7577,10 @@ module Aws::RDS
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB instances identified by these ARNs.
+    #
+    #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
+    #     results list will only include information about the DB instances
+    #     identified by these resource identifiers.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -7885,7 +8025,20 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   This parameter is not currently supported.
+    #   A filter that specifies one or more DB snapshots to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-snapshot-id` - Accepts DB snapshot identifiers.
+    #
+    #   * `dbi-resource-id` - Accepts identifiers of source DB instances.
+    #
+    #   * `snapshot-type` - Accepts types of DB snapshots.
+    #
+    #   * `engine` - Accepts names of database engines.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -9783,6 +9936,8 @@ module Aws::RDS
     #           disable_log_types: ["String"],
     #         },
     #         engine_version: "String",
+    #         allow_major_version_upgrade: false,
+    #         db_instance_parameter_group_name: "String",
     #         scaling_configuration: {
     #           min_capacity: 1,
     #           max_capacity: 1,
@@ -9799,11 +9954,8 @@ module Aws::RDS
     #   The DB cluster identifier for the cluster being modified. This
     #   parameter is not case-sensitive.
     #
-    #   Constraints:
-    #
-    #   * Must match the identifier of an existing DBCluster.
-    #
-    #   ^
+    #   Constraints: This identifier must match the identifier of an
+    #   existing DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] new_db_cluster_identifier
@@ -9943,6 +10095,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] backtrack_window
@@ -9970,7 +10129,54 @@ module Aws::RDS
     #   applied during the next maintenance window unless `ApplyImmediately`
     #   is enabled.
     #
-    #   For a list of valid engine versions, use DescribeDBEngineVersions.
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for
+    #   `aurora-postgresql`, use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades when specifying a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] db_instance_parameter_group_name
+    #   The name of the DB parameter group to apply to all instances of the
+    #   DB cluster.
+    #
+    #   <note markdown="1"> When you apply a parameter group using the
+    #   `DBInstanceParameterGroupName` parameter, the DB cluster isn't
+    #   rebooted automatically. Also, parameter changes aren't applied
+    #   during the next maintenance window but instead are applied
+    #   immediately.
+    #
+    #    </note>
+    #
+    #   Default: The existing name setting
+    #
+    #   Constraints:
+    #
+    #   * The DB parameter group must be in the same DB parameter group
+    #     family as this DB cluster.
+    #
+    #   * The `DBInstanceParameterGroupName` parameter is only valid in
+    #     combination with the `AllowMajorVersionUpgrade` parameter.
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -9985,11 +10191,6 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_http_endpoint
-    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
-    #   subject to change.
-    #
-    #    </note>
-    #
     #   A value that indicates whether to enable the HTTP endpoint for an
     #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
     #   disabled.
@@ -9999,12 +10200,12 @@ module Aws::RDS
     #   cluster. You can also query your database from inside the RDS
     #   console with the query editor.
     #
-    #   For more information about Aurora Serverless, see [Using Amazon
-    #   Aurora Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora
+    #   Serverless][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     #   @return [Boolean]
     #
     # @!attribute [rw] copy_tags_to_snapshot
@@ -10030,6 +10231,8 @@ module Aws::RDS
       :backtrack_window,
       :cloudwatch_logs_export_configuration,
       :engine_version,
+      :allow_major_version_upgrade,
+      :db_instance_parameter_group_name,
       :scaling_configuration,
       :deletion_protection,
       :enable_http_endpoint,
@@ -10215,6 +10418,7 @@ module Aws::RDS
     #         ],
     #         use_default_processor_features: false,
     #         deletion_protection: false,
+    #         max_allocated_storage: 1,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -10379,9 +10583,9 @@ module Aws::RDS
     #   Changing this setting doesn't result in an outage. The parameter
     #   group name itself is changed immediately, but the actual parameter
     #   changes are not applied until you reboot the instance without
-    #   failover. The DB instance will NOT be rebooted automatically and the
-    #   parameter changes will NOT be applied during the next maintenance
-    #   window.
+    #   failover. In this case, the DB instance isn't rebooted
+    #   automatically and the parameter changes isn't applied during the
+    #   next maintenance window.
     #
     #   Default: Uses existing setting
     #
@@ -10762,22 +10966,16 @@ module Aws::RDS
     # @!attribute [rw] enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following
-    #   database engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   **Amazon Aurora**
     #
-    #   Not applicable. Mapping AWS IAM accounts to database accounts is
-    #   managed by the DB cluster. For more information, see
-    #   `ModifyDBCluster`.
     #
-    #   **MySQL**
-    #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
-    #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_insights
@@ -10838,6 +11036,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -10880,7 +11083,8 @@ module Aws::RDS
       :cloudwatch_logs_export_configuration,
       :processor_features,
       :use_default_processor_features,
-      :deletion_protection)
+      :deletion_protection,
+      :max_allocated_storage)
       include Aws::Structure
     end
 
@@ -11931,6 +12135,11 @@ module Aws::RDS
     #   A list of the supported DB engine modes.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supports_storage_autoscaling
+    #   Whether or not Amazon RDS can automatically scale storage for DB
+    #   instances that use the specified instance class.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -11955,7 +12164,8 @@ module Aws::RDS
       :min_iops_per_gib,
       :max_iops_per_gib,
       :available_processor_features,
-      :supported_engine_modes)
+      :supported_engine_modes,
+      :supports_storage_autoscaling)
       include Aws::Structure
     end
 
@@ -12103,15 +12313,13 @@ module Aws::RDS
     # @!attribute [rw] auto_applied_after_date
     #   The date of the maintenance window when the action is applied. The
     #   maintenance action is applied to the resource during its first
-    #   maintenance window after this date. If this date is specified, any
-    #   `next-maintenance` opt-in requests are ignored.
+    #   maintenance window after this date.
     #   @return [Time]
     #
     # @!attribute [rw] forced_apply_date
     #   The date when the maintenance action is automatically applied. The
     #   maintenance action is applied to the resource on this date
-    #   regardless of the maintenance window for the resource. If this date
-    #   is specified, any `immediate` opt-in requests are ignored.
+    #   regardless of the maintenance window for the resource.
     #   @return [Time]
     #
     # @!attribute [rw] opt_in_status
@@ -13236,13 +13444,32 @@ module Aws::RDS
     # @!attribute [rw] engine_version
     #   The version number of the database engine to use.
     #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for
+    #   `aurora-postgresql`, use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
     #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
     #
     #   **Aurora PostgreSQL**
     #
-    #   Example: `9.6.3`
+    #   Example: `9.6.3`, `10.7`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -13358,6 +13585,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] source_engine
@@ -13561,6 +13795,33 @@ module Aws::RDS
     #
     # @!attribute [rw] engine_version
     #   The version of the database engine to use for the new DB cluster.
+    #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for
+    #   `aurora-postgresql`, use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`, `10.7`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -13623,6 +13884,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] backtrack_window
@@ -13894,6 +14162,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] backtrack_window
@@ -14260,14 +14535,16 @@ module Aws::RDS
     # @!attribute [rw] enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following
-    #   database engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
@@ -14621,7 +14898,7 @@ module Aws::RDS
     # @!attribute [rw] iops
     #   The amount of Provisioned IOPS (input/output operations per second)
     #   to allocate initially for the DB instance. For information about
-    #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
+    #   valid Iops values, see [Amazon RDS Provisioned IOPS Storage to
     #   Improve Performance][1] in the *Amazon RDS User Guide.*
     #
     #
@@ -14723,7 +15000,16 @@ module Aws::RDS
     # @!attribute [rw] enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
+    #
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] source_engine
@@ -15161,14 +15447,16 @@ module Aws::RDS
     # @!attribute [rw] enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following
-    #   database engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
@@ -15549,6 +15837,85 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartActivityStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         mode: "sync", # required, accepts sync, async
+    #         kms_key_id: "String", # required
+    #         apply_immediately: false,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster, for example
+    #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   Specifies the mode of the database activity stream. Database events
+    #   such as a change or access generate an activity stream event. The
+    #   database session can handle these events either synchronously or
+    #   asynchronously.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key identifier for encrypting messages in the database
+    #   activity stream. The key identifier can be either a key ID, a key
+    #   ARN, or a key alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_immediately
+    #   Specifies whether or not the database activity stream is to start as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartActivityStreamRequest AWS API Documentation
+    #
+    class StartActivityStreamRequest < Struct.new(
+      :resource_arn,
+      :mode,
+      :kms_key_id,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key identifier for encryption of messages in the
+    #   database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_stream_name
+    #   The name of the Amazon Kinesis data stream to be used for the
+    #   database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_immediately
+    #   Indicates whether or not the database activity stream will start as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartActivityStreamResponse AWS API Documentation
+    #
+    class StartActivityStreamResponse < Struct.new(
+      :kms_key_id,
+      :kinesis_stream_name,
+      :status,
+      :mode,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartDBClusterMessage
     #   data as a hash:
     #
@@ -15611,6 +15978,57 @@ module Aws::RDS
     #
     class StartDBInstanceResult < Struct.new(
       :db_instance)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopActivityStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         apply_immediately: false,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster for the database
+    #   activity stream. For example,
+    #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_immediately
+    #   Specifies whether or not the database activity stream is to stop as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopActivityStreamRequest AWS API Documentation
+    #
+    class StopActivityStreamRequest < Struct.new(
+      :resource_arn,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key identifier used for encrypting messages in the
+    #   database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_stream_name
+    #   The name of the Amazon Kinesis data stream used for the database
+    #   activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the database activity stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopActivityStreamResponse AWS API Documentation
+    #
+    class StopActivityStreamResponse < Struct.new(
+      :kms_key_id,
+      :kinesis_stream_name,
+      :status)
       include Aws::Structure
     end
 
@@ -15856,13 +16274,19 @@ module Aws::RDS
     #   be between 3 and 10 times storage.
     #   @return [Array<Types::DoubleRange>]
     #
+    # @!attribute [rw] supports_storage_autoscaling
+    #   Whether or not Amazon RDS can automatically scale storage for DB
+    #   instances that use the new instance class.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidStorageOptions AWS API Documentation
     #
     class ValidStorageOptions < Struct.new(
       :storage_type,
       :storage_size,
       :provisioned_iops,
-      :iops_to_storage_ratio)
+      :iops_to_storage_ratio,
+      :supports_storage_autoscaling)
       include Aws::Structure
     end
 

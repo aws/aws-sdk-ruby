@@ -602,6 +602,10 @@
     "AddOutputRequest": {
       "type": "structure",
       "members": {
+        "CidrAllowList": {
+          "shape": "__listOf__string",
+          "locationName": "cidrAllowList"
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description"
@@ -630,6 +634,10 @@
           "shape": "Protocol",
           "locationName": "protocol"
         },
+        "RemoteId": {
+          "shape": "__string",
+          "locationName": "remoteId"
+        },
         "SmoothingLatency": {
           "shape": "__integer",
           "locationName": "smoothingLatency"
@@ -640,8 +648,6 @@
         }
       },
       "required": [
-        "Destination",
-        "Port",
         "Protocol"
       ]
     },
@@ -782,9 +788,25 @@
           "shape": "Algorithm",
           "locationName": "algorithm"
         },
+        "ConstantInitializationVector": {
+          "shape": "__string",
+          "locationName": "constantInitializationVector"
+        },
+        "DeviceId": {
+          "shape": "__string",
+          "locationName": "deviceId"
+        },
         "KeyType": {
           "shape": "KeyType",
           "locationName": "keyType"
+        },
+        "Region": {
+          "shape": "__string",
+          "locationName": "region"
+        },
+        "ResourceId": {
+          "shape": "__string",
+          "locationName": "resourceId"
         },
         "RoleArn": {
           "shape": "__string",
@@ -793,10 +815,13 @@
         "SecretArn": {
           "shape": "__string",
           "locationName": "secretArn"
+        },
+        "Url": {
+          "shape": "__string",
+          "locationName": "url"
         }
       },
       "required": [
-        "SecretArn",
         "Algorithm",
         "RoleArn"
       ]
@@ -987,6 +1012,7 @@
     "KeyType": {
       "type": "string",
       "enum": [
+        "speke",
         "static-key"
       ]
     },
@@ -1205,7 +1231,8 @@
       "enum": [
         "zixi-push",
         "rtp-fec",
-        "rtp"
+        "rtp",
+        "zixi-pull"
       ]
     },
     "RemoveFlowOutputRequest": {
@@ -1498,6 +1525,10 @@
     "Transport": {
       "type": "structure",
       "members": {
+        "CidrAllowList": {
+          "shape": "__listOf__string",
+          "locationName": "cidrAllowList"
+        },
         "MaxBitrate": {
           "shape": "__integer",
           "locationName": "maxBitrate"
@@ -1509,6 +1540,10 @@
         "Protocol": {
           "shape": "Protocol",
           "locationName": "protocol"
+        },
+        "RemoteId": {
+          "shape": "__string",
+          "locationName": "remoteId"
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -1549,9 +1584,25 @@
           "shape": "Algorithm",
           "locationName": "algorithm"
         },
+        "ConstantInitializationVector": {
+          "shape": "__string",
+          "locationName": "constantInitializationVector"
+        },
+        "DeviceId": {
+          "shape": "__string",
+          "locationName": "deviceId"
+        },
         "KeyType": {
           "shape": "KeyType",
           "locationName": "keyType"
+        },
+        "Region": {
+          "shape": "__string",
+          "locationName": "region"
+        },
+        "ResourceId": {
+          "shape": "__string",
+          "locationName": "resourceId"
         },
         "RoleArn": {
           "shape": "__string",
@@ -1560,6 +1611,10 @@
         "SecretArn": {
           "shape": "__string",
           "locationName": "secretArn"
+        },
+        "Url": {
+          "shape": "__string",
+          "locationName": "url"
         }
       }
     },
@@ -1610,6 +1665,10 @@
     "UpdateFlowOutputRequest": {
       "type": "structure",
       "members": {
+        "CidrAllowList": {
+          "shape": "__listOf__string",
+          "locationName": "cidrAllowList"
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description"
@@ -1643,6 +1702,10 @@
         "Protocol": {
           "shape": "Protocol",
           "locationName": "protocol"
+        },
+        "RemoteId": {
+          "shape": "__string",
+          "locationName": "remoteId"
         },
         "SmoothingLatency": {
           "shape": "__integer",

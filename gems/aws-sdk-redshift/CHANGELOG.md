@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-08-09)
+------------------
+
+* Feature - Add expectedNextSnapshotScheduleTime and expectedNextSnapshotScheduleTimeStatus to redshift cluster object.
+
+1.30.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2019-06-28)
+------------------
+
+* Feature - ClusterAvailabilityStatus: The availability status of the cluster for queries. Possible values are the following: Available, Unavailable, Maintenance, Modifying, Failed.
+
+1.27.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.25.0 (2019-05-15)
 ------------------
 

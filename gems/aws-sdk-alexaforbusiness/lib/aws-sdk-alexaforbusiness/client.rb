@@ -116,6 +116,10 @@ module Aws::AlexaForBusiness
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -307,6 +311,32 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def associate_contact_with_address_book(params = {}, options = {})
       req = build_request(:associate_contact_with_address_book, params)
+      req.send_request(options)
+    end
+
+    # Associates a device with the specified network profile.
+    #
+    # @option params [required, String] :device_arn
+    #   The device ARN.
+    #
+    # @option params [required, String] :network_profile_arn
+    #   The ARN of the network profile to associate with a device.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_device_with_network_profile({
+    #     device_arn: "Arn", # required
+    #     network_profile_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithNetworkProfile AWS API Documentation
+    #
+    # @overload associate_device_with_network_profile(params = {})
+    # @param [Hash] params ({})
+    def associate_device_with_network_profile(params = {}, options = {})
+      req = build_request(:associate_device_with_network_profile, params)
       req.send_request(options)
     end
 
@@ -594,7 +624,16 @@ module Aws::AlexaForBusiness
     #   device.
     #
     # @option params [String] :phone_number
-    #   The phone number of the contact in E.164 format.
+    #   The phone number of the contact in E.164 format. The phone number type
+    #   defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We
+    #   recommend that you use PhoneNumbers, which lets you specify the phone
+    #   number type and multiple numbers.
+    #
+    # @option params [Array<Types::PhoneNumber>] :phone_numbers
+    #   The list of phone numbers for the contact.
+    #
+    # @option params [Array<Types::SipAddress>] :sip_addresses
+    #   The list of SIP addresses for the contact.
     #
     # @option params [String] :client_request_token
     #   A unique, user-specified identifier for this request that ensures
@@ -613,7 +652,19 @@ module Aws::AlexaForBusiness
     #     display_name: "ContactName",
     #     first_name: "ContactName", # required
     #     last_name: "ContactName",
-    #     phone_number: "E164PhoneNumber",
+    #     phone_number: "RawPhoneNumber",
+    #     phone_numbers: [
+    #       {
+    #         number: "RawPhoneNumber", # required
+    #         type: "MOBILE", # required, accepts MOBILE, WORK, HOME
+    #       },
+    #     ],
+    #     sip_addresses: [
+    #       {
+    #         uri: "SipUri", # required
+    #         type: "WORK", # required, accepts WORK
+    #       },
+    #     ],
     #     client_request_token: "ClientRequestToken",
     #   })
     #
@@ -670,6 +721,82 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Creates a network profile with the specified details.
+    #
+    # @option params [required, String] :network_profile_name
+    #   The name of the network profile associated with a device.
+    #
+    # @option params [String] :description
+    #   Detailed information about a device's network profile.
+    #
+    # @option params [required, String] :ssid
+    #   The SSID of the Wi-Fi network.
+    #
+    # @option params [required, String] :security_type
+    #   The security type of the Wi-Fi network. This can be WPA2\_ENTERPRISE,
+    #   WPA2\_PSK, WPA\_PSK, WEP, or OPEN.
+    #
+    # @option params [String] :eap_method
+    #   The authentication standard that is used in the EAP framework.
+    #   Currently, EAP\_TLS is supported.
+    #
+    # @option params [String] :current_password
+    #   The current password of the Wi-Fi network.
+    #
+    # @option params [String] :next_password
+    #   The next, or subsequent, password of the Wi-Fi network. This password
+    #   is asynchronously transmitted to the device and is used when the
+    #   password of the network changes to NextPassword.
+    #
+    # @option params [String] :certificate_authority_arn
+    #   The ARN of the Private Certificate Authority (PCA) created in AWS
+    #   Certificate Manager (ACM). This is used to issue certificates to the
+    #   devices.
+    #
+    # @option params [Array<String>] :trust_anchors
+    #   The root certificates of your authentication server that is installed
+    #   on your devices and used to trust your authentication server during
+    #   EAP negotiation.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateNetworkProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNetworkProfileResponse#network_profile_arn #network_profile_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_network_profile({
+    #     network_profile_name: "NetworkProfileName", # required
+    #     description: "NetworkProfileDescription",
+    #     ssid: "NetworkSsid", # required
+    #     security_type: "OPEN", # required, accepts OPEN, WEP, WPA_PSK, WPA2_PSK, WPA2_ENTERPRISE
+    #     eap_method: "EAP_TLS", # accepts EAP_TLS
+    #     current_password: "CurrentWiFiPassword",
+    #     next_password: "NextWiFiPassword",
+    #     certificate_authority_arn: "Arn",
+    #     trust_anchors: ["TrustAnchor"],
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profile_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateNetworkProfile AWS API Documentation
+    #
+    # @overload create_network_profile(params = {})
+    # @param [Hash] params ({})
+    def create_network_profile(params = {}, options = {})
+      req = build_request(:create_network_profile, params)
+      req.send_request(options)
+    end
+
     # Creates a new room profile with the specified details.
     #
     # @option params [required, String] :profile_name
@@ -689,6 +816,9 @@ module Aws::AlexaForBusiness
     #
     # @option params [required, String] :wake_word
     #   A wake word for Alexa, Echo, Amazon, or a computer.
+    #
+    # @option params [String] :locale
+    #   The locale of the room profile.
     #
     # @option params [String] :client_request_token
     #   The user-specified token that is used during the creation of a
@@ -719,6 +849,7 @@ module Aws::AlexaForBusiness
     #     distance_unit: "METRIC", # required, accepts METRIC, IMPERIAL
     #     temperature_unit: "FAHRENHEIT", # required, accepts FAHRENHEIT, CELSIUS
     #     wake_word: "ALEXA", # required, accepts ALEXA, AMAZON, ECHO, COMPUTER
+    #     locale: "DeviceLocale",
     #     client_request_token: "ClientRequestToken",
     #     setup_mode_disabled: false,
     #     max_volume_limit: 1,
@@ -1051,6 +1182,28 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def delete_gateway_group(params = {}, options = {})
       req = build_request(:delete_gateway_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a network profile by the network profile ARN.
+    #
+    # @option params [required, String] :network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_network_profile({
+    #     network_profile_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteNetworkProfile AWS API Documentation
+    #
+    # @overload delete_network_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_network_profile(params = {}, options = {})
+      req = build_request(:delete_network_profile, params)
       req.send_request(options)
     end
 
@@ -1462,6 +1615,12 @@ module Aws::AlexaForBusiness
     #   resp.contact.first_name #=> String
     #   resp.contact.last_name #=> String
     #   resp.contact.phone_number #=> String
+    #   resp.contact.phone_numbers #=> Array
+    #   resp.contact.phone_numbers[0].number #=> String
+    #   resp.contact.phone_numbers[0].type #=> String, one of "MOBILE", "WORK", "HOME"
+    #   resp.contact.sip_addresses #=> Array
+    #   resp.contact.sip_addresses[0].uri #=> String
+    #   resp.contact.sip_addresses[0].type #=> String, one of "WORK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContact AWS API Documentation
     #
@@ -1496,10 +1655,14 @@ module Aws::AlexaForBusiness
     #   resp.device.software_version #=> String
     #   resp.device.mac_address #=> String
     #   resp.device.room_arn #=> String
-    #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED"
+    #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED", "FAILED"
     #   resp.device.device_status_info.device_status_details #=> Array
+    #   resp.device.device_status_info.device_status_details[0].feature #=> String, one of "BLUETOOTH", "VOLUME", "NOTIFICATIONS", "LISTS", "SKILLS", "NETWORK_PROFILE", "SETTINGS", "ALL"
     #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
     #   resp.device.device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
+    #   resp.device.network_profile_info.network_profile_arn #=> String
+    #   resp.device.network_profile_info.certificate_arn #=> String
+    #   resp.device.network_profile_info.certificate_expiration_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDevice AWS API Documentation
     #
@@ -1597,6 +1760,44 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Gets the network profile details by the network profile ARN.
+    #
+    # @option params [required, String] :network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #
+    # @return [Types::GetNetworkProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkProfileResponse#network_profile #network_profile} => Types::NetworkProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_profile({
+    #     network_profile_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profile.network_profile_arn #=> String
+    #   resp.network_profile.network_profile_name #=> String
+    #   resp.network_profile.description #=> String
+    #   resp.network_profile.ssid #=> String
+    #   resp.network_profile.security_type #=> String, one of "OPEN", "WEP", "WPA_PSK", "WPA2_PSK", "WPA2_ENTERPRISE"
+    #   resp.network_profile.eap_method #=> String, one of "EAP_TLS"
+    #   resp.network_profile.current_password #=> String
+    #   resp.network_profile.next_password #=> String
+    #   resp.network_profile.certificate_authority_arn #=> String
+    #   resp.network_profile.trust_anchors #=> Array
+    #   resp.network_profile.trust_anchors[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetNetworkProfile AWS API Documentation
+    #
+    # @overload get_network_profile(params = {})
+    # @param [Hash] params ({})
+    def get_network_profile(params = {}, options = {})
+      req = build_request(:get_network_profile, params)
+      req.send_request(options)
+    end
+
     # Gets the details of a room profile by profile ARN.
     #
     # @option params [String] :profile_arn
@@ -1622,6 +1823,7 @@ module Aws::AlexaForBusiness
     #   resp.profile.distance_unit #=> String, one of "METRIC", "IMPERIAL"
     #   resp.profile.temperature_unit #=> String, one of "FAHRENHEIT", "CELSIUS"
     #   resp.profile.wake_word #=> String, one of "ALEXA", "AMAZON", "ECHO", "COMPUTER"
+    #   resp.profile.locale #=> String
     #   resp.profile.setup_mode_disabled #=> Boolean
     #   resp.profile.max_volume_limit #=> Integer
     #   resp.profile.pstn_enabled #=> Boolean
@@ -2611,6 +2813,12 @@ module Aws::AlexaForBusiness
     #   resp.contacts[0].first_name #=> String
     #   resp.contacts[0].last_name #=> String
     #   resp.contacts[0].phone_number #=> String
+    #   resp.contacts[0].phone_numbers #=> Array
+    #   resp.contacts[0].phone_numbers[0].number #=> String
+    #   resp.contacts[0].phone_numbers[0].type #=> String, one of "MOBILE", "WORK", "HOME"
+    #   resp.contacts[0].sip_addresses #=> Array
+    #   resp.contacts[0].sip_addresses[0].uri #=> String
+    #   resp.contacts[0].sip_addresses[0].type #=> String, one of "WORK"
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -2641,13 +2849,15 @@ module Aws::AlexaForBusiness
     # @option params [Array<Types::Filter>] :filters
     #   The filters to use to list a specified set of devices. Supported
     #   filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode,
-    #   RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and
-    #   ConnectionStatus (ONLINE and OFFLINE).
+    #   RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly,
+    #   ConnectionStatus (ONLINE and OFFLINE), NetworkProfileName,
+    #   NetworkProfileArn, Feature, and FailureCode.
     #
     # @option params [Array<Types::Sort>] :sort_criteria
     #   The sort order to use in listing the specified set of devices.
     #   Supported sort keys are DeviceName, DeviceStatus, RoomName,
-    #   DeviceType, DeviceSerialNumber, and ConnectionStatus.
+    #   DeviceType, DeviceSerialNumber, ConnectionStatus, NetworkProfileName,
+    #   NetworkProfileArn, Feature, and FailureCode.
     #
     # @return [Types::SearchDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2683,10 +2893,13 @@ module Aws::AlexaForBusiness
     #   resp.devices[0].device_name #=> String
     #   resp.devices[0].software_version #=> String
     #   resp.devices[0].mac_address #=> String
-    #   resp.devices[0].device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED"
+    #   resp.devices[0].device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED", "FAILED"
+    #   resp.devices[0].network_profile_arn #=> String
+    #   resp.devices[0].network_profile_name #=> String
     #   resp.devices[0].room_arn #=> String
     #   resp.devices[0].room_name #=> String
     #   resp.devices[0].device_status_info.device_status_details #=> Array
+    #   resp.devices[0].device_status_info.device_status_details[0].feature #=> String, one of "BLUETOOTH", "VOLUME", "NOTIFICATIONS", "LISTS", "SKILLS", "NETWORK_PROFILE", "SETTINGS", "ALL"
     #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
     #   resp.devices[0].device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.next_token #=> String
@@ -2698,6 +2911,76 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def search_devices(params = {}, options = {})
       req = build_request(:search_devices, params)
+      req.send_request(options)
+    end
+
+    # Searches network profiles and lists the ones that meet a set of filter
+    # and sort criteria.
+    #
+    # @option params [String] :next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response includes only results beyond the token, up to
+    #   the value specified by MaxResults.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response. If more
+    #   results exist than the specified MaxResults value, a token is included
+    #   in the response so that the remaining results can be retrieved.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters to use to list a specified set of network profiles. Valid
+    #   filters are NetworkProfileName, Ssid, and SecurityType.
+    #
+    # @option params [Array<Types::Sort>] :sort_criteria
+    #   The sort order to use to list the specified set of network profiles.
+    #   Valid sort criteria includes NetworkProfileName, Ssid, and
+    #   SecurityType.
+    #
+    # @return [Types::SearchNetworkProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchNetworkProfilesResponse#network_profiles #network_profiles} => Array&lt;Types::NetworkProfileData&gt;
+    #   * {Types::SearchNetworkProfilesResponse#next_token #next_token} => String
+    #   * {Types::SearchNetworkProfilesResponse#total_count #total_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_network_profiles({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         key: "FilterKey", # required
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     sort_criteria: [
+    #       {
+    #         key: "SortKey", # required
+    #         value: "ASC", # required, accepts ASC, DESC
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profiles #=> Array
+    #   resp.network_profiles[0].network_profile_arn #=> String
+    #   resp.network_profiles[0].network_profile_name #=> String
+    #   resp.network_profiles[0].description #=> String
+    #   resp.network_profiles[0].ssid #=> String
+    #   resp.network_profiles[0].security_type #=> String, one of "OPEN", "WEP", "WPA_PSK", "WPA2_PSK", "WPA2_ENTERPRISE"
+    #   resp.network_profiles[0].eap_method #=> String, one of "EAP_TLS"
+    #   resp.network_profiles[0].certificate_authority_arn #=> String
+    #   resp.next_token #=> String
+    #   resp.total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchNetworkProfiles AWS API Documentation
+    #
+    # @overload search_network_profiles(params = {})
+    # @param [Hash] params ({})
+    def search_network_profiles(params = {}, options = {})
+      req = build_request(:search_network_profiles, params)
       req.send_request(options)
     end
 
@@ -2760,6 +3043,7 @@ module Aws::AlexaForBusiness
     #   resp.profiles[0].distance_unit #=> String, one of "METRIC", "IMPERIAL"
     #   resp.profiles[0].temperature_unit #=> String, one of "FAHRENHEIT", "CELSIUS"
     #   resp.profiles[0].wake_word #=> String, one of "ALEXA", "AMAZON", "ECHO", "COMPUTER"
+    #   resp.profiles[0].locale #=> String
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -3053,7 +3337,7 @@ module Aws::AlexaForBusiness
     end
 
     # Sends an enrollment invitation email with a URL to a user. The URL is
-    # valid for 72 hours or until you call this operation again, whichever
+    # valid for 30 days or until you call this operation again, whichever
     # comes first.
     #
     # @option params [String] :user_arn
@@ -3076,8 +3360,23 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Resets a device and its account to the known default settings, by
-    # clearing all information and settings set by previous users.
+    # Resets a device and its account to the known default settings. This
+    # clears all information and settings set by previous users in the
+    # following ways:
+    #
+    # * Bluetooth - This unpairs all bluetooth devices paired with your echo
+    #   device.
+    #
+    # * Volume - This resets the echo device's volume to the default value.
+    #
+    # * Notifications - This clears all notifications from your echo device.
+    #
+    # * Lists - This clears all to-do items from your echo device.
+    #
+    # * Settings - This internally syncs the room's profile (if the device
+    #   is assigned to a room), contacts, address books, delegation access
+    #   for account linking, and communications (if enabled on the room
+    #   profile).
     #
     # @option params [String] :room_arn
     #   The ARN of the room with which the device to sync is associated.
@@ -3096,7 +3395,7 @@ module Aws::AlexaForBusiness
     #   resp = client.start_device_sync({
     #     room_arn: "Arn",
     #     device_arn: "Arn",
-    #     features: ["BLUETOOTH"], # required, accepts BLUETOOTH, VOLUME, NOTIFICATIONS, LISTS, SKILLS, ALL
+    #     features: ["BLUETOOTH"], # required, accepts BLUETOOTH, VOLUME, NOTIFICATIONS, LISTS, SKILLS, NETWORK_PROFILE, SETTINGS, ALL
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartDeviceSync AWS API Documentation
@@ -3329,7 +3628,16 @@ module Aws::AlexaForBusiness
     #   The updated last name of the contact.
     #
     # @option params [String] :phone_number
-    #   The updated phone number of the contact.
+    #   The updated phone number of the contact. The phone number type
+    #   defaults to WORK. You can either specify PhoneNumber or PhoneNumbers.
+    #   We recommend that you use PhoneNumbers, which lets you specify the
+    #   phone number type and multiple numbers.
+    #
+    # @option params [Array<Types::PhoneNumber>] :phone_numbers
+    #   The list of phone numbers for the contact.
+    #
+    # @option params [Array<Types::SipAddress>] :sip_addresses
+    #   The list of SIP addresses for the contact.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3340,7 +3648,19 @@ module Aws::AlexaForBusiness
     #     display_name: "ContactName",
     #     first_name: "ContactName",
     #     last_name: "ContactName",
-    #     phone_number: "E164PhoneNumber",
+    #     phone_number: "RawPhoneNumber",
+    #     phone_numbers: [
+    #       {
+    #         number: "RawPhoneNumber", # required
+    #         type: "MOBILE", # required, accepts MOBILE, WORK, HOME
+    #       },
+    #     ],
+    #     sip_addresses: [
+    #       {
+    #         uri: "SipUri", # required
+    #         type: "WORK", # required, accepts WORK
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContact AWS API Documentation
@@ -3445,6 +3765,58 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Updates a network profile by the network profile ARN.
+    #
+    # @option params [required, String] :network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #
+    # @option params [String] :network_profile_name
+    #   The name of the network profile associated with a device.
+    #
+    # @option params [String] :description
+    #   Detailed information about a device's network profile.
+    #
+    # @option params [String] :current_password
+    #   The current password of the Wi-Fi network.
+    #
+    # @option params [String] :next_password
+    #   The next, or subsequent, password of the Wi-Fi network. This password
+    #   is asynchronously transmitted to the device and is used when the
+    #   password of the network changes to NextPassword.
+    #
+    # @option params [String] :certificate_authority_arn
+    #   The ARN of the Private Certificate Authority (PCA) created in AWS
+    #   Certificate Manager (ACM). This is used to issue certificates to the
+    #   devices.
+    #
+    # @option params [Array<String>] :trust_anchors
+    #   The root certificate(s) of your authentication server that will be
+    #   installed on your devices and used to trust your authentication server
+    #   during EAP negotiation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_network_profile({
+    #     network_profile_arn: "Arn", # required
+    #     network_profile_name: "NetworkProfileName",
+    #     description: "NetworkProfileDescription",
+    #     current_password: "CurrentWiFiPassword",
+    #     next_password: "NextWiFiPassword",
+    #     certificate_authority_arn: "Arn",
+    #     trust_anchors: ["TrustAnchor"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateNetworkProfile AWS API Documentation
+    #
+    # @overload update_network_profile(params = {})
+    # @param [Hash] params ({})
+    def update_network_profile(params = {}, options = {})
+      req = build_request(:update_network_profile, params)
+      req.send_request(options)
+    end
+
     # Updates an existing room profile by room profile ARN.
     #
     # @option params [String] :profile_arn
@@ -3472,6 +3844,9 @@ module Aws::AlexaForBusiness
     # @option params [String] :wake_word
     #   The updated wake word for the room profile.
     #
+    # @option params [String] :locale
+    #   The updated locale for the room profile.
+    #
     # @option params [Boolean] :setup_mode_disabled
     #   Whether the setup mode of the profile is enabled.
     #
@@ -3494,6 +3869,7 @@ module Aws::AlexaForBusiness
     #     distance_unit: "METRIC", # accepts METRIC, IMPERIAL
     #     temperature_unit: "FAHRENHEIT", # accepts FAHRENHEIT, CELSIUS
     #     wake_word: "ALEXA", # accepts ALEXA, AMAZON, ECHO, COMPUTER
+    #     locale: "DeviceLocale",
     #     setup_mode_disabled: false,
     #     max_volume_limit: 1,
     #     pstn_enabled: false,
@@ -3589,7 +3965,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

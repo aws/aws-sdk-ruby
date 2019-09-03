@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-07-18)
+------------------
+
+* Feature - Documentation updates for codedeploy
+
+1.24.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-05-24)
+------------------
+
+* Feature - AWS CodeDeploy now supports tagging for the application and deployment group resources.
+
+1.21.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.20.0 (2019-05-15)
 ------------------
 

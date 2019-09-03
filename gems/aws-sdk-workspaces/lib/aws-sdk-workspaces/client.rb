@@ -116,6 +116,10 @@ module Aws::WorkSpaces
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -318,6 +322,56 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def authorize_ip_rules(params = {}, options = {})
       req = build_request(:authorize_ip_rules, params)
+      req.send_request(options)
+    end
+
+    # Copies the specified image from the specified Region to the current
+    # Region.
+    #
+    # @option params [required, String] :name
+    #   The name of the image.
+    #
+    # @option params [String] :description
+    #   A description of the image.
+    #
+    # @option params [required, String] :source_image_id
+    #   The identifier of the source image.
+    #
+    # @option params [required, String] :source_region
+    #   The identifier of the source Region.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the image.
+    #
+    # @return [Types::CopyWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyWorkspaceImageResult#image_id #image_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_workspace_image({
+    #     name: "WorkspaceImageName", # required
+    #     description: "WorkspaceImageDescription",
+    #     source_image_id: "WorkspaceImageId", # required
+    #     source_region: "Region", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImage AWS API Documentation
+    #
+    # @overload copy_workspace_image(params = {})
+    # @param [Hash] params ({})
+    def copy_workspace_image(params = {}, options = {})
+      req = build_request(:copy_workspace_image, params)
       req.send_request(options)
     end
 
@@ -564,7 +618,8 @@ module Aws::WorkSpaces
     end
 
     # Deletes the specified image from your account. To delete an image, you
-    # must first delete any bundles that are associated with the image.
+    # must first delete any bundles that are associated with the image and
+    # un-share the image if it is shared with other accounts.
     #
     # @option params [required, String] :image_id
     #   The identifier of the image.
@@ -1263,9 +1318,9 @@ module Aws::WorkSpaces
     #
     # To maintain a WorkSpace without being interrupted, set the WorkSpace
     # state to `ADMIN_MAINTENANCE`. WorkSpaces in this state do not respond
-    # to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace
-    # in this state is not stopped. Users can log into a WorkSpace in the
-    # `ADMIN_MAINTENANCE` state.
+    # to requests to reboot, stop, start, rebuild, or restore. An AutoStop
+    # WorkSpace in this state is not stopped. Users cannot log into a
+    # WorkSpace in the `ADMIN_MAINTENANCE` state.
     #
     # @option params [required, String] :workspace_id
     #   The identifier of the WorkSpace.
@@ -1351,9 +1406,6 @@ module Aws::WorkSpaces
     # @option params [required, Array<Types::RebuildRequest>] :rebuild_workspace_requests
     #   The WorkSpace to rebuild. You can specify a single WorkSpace.
     #
-    # @option params [String] :additional_info
-    #   Reserved.
-    #
     # @return [Types::RebuildWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RebuildWorkspacesResult#failed_requests #failed_requests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
@@ -1366,7 +1418,6 @@ module Aws::WorkSpaces
     #         workspace_id: "WorkspaceId", # required
     #       },
     #     ],
-    #     additional_info: "AdditionalInfo",
     #   })
     #
     # @example Response structure
@@ -1576,7 +1627,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

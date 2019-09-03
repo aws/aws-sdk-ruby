@@ -116,6 +116,10 @@ module Aws::Greengrass
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -256,8 +260,9 @@ module Aws::Greengrass
     #
     # @option params [required, String] :group_id
     #
-    # @option params [String] :role_arn
-    #   The ARN of the role you wish to associate with this group.
+    # @option params [required, String] :role_arn
+    #   The ARN of the role you wish to associate with this group. The
+    #   existence of the role is not validated.
     #
     # @return [Types::AssociateRoleToGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -267,7 +272,7 @@ module Aws::Greengrass
     #
     #   resp = client.associate_role_to_group({
     #     group_id: "__string", # required
-    #     role_arn: "__string",
+    #     role_arn: "__string", # required
     #   })
     #
     # @example Response structure
@@ -289,7 +294,7 @@ module Aws::Greengrass
     # minimum permissions in the policy
     # ''AWSGreengrassResourceAccessRolePolicy''.
     #
-    # @option params [String] :role_arn
+    # @option params [required, String] :role_arn
     #   The ARN of the service role you wish to associate with your account.
     #
     # @return [Types::AssociateServiceRoleToAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -299,7 +304,7 @@ module Aws::Greengrass
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_service_role_to_account({
-    #     role_arn: "__string",
+    #     role_arn: "__string", # required
     #   })
     #
     # @example Response structure
@@ -328,6 +333,7 @@ module Aws::Greengrass
     # @option params [String] :name
     #
     # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
     #
     # @return [Types::CreateConnectorDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -346,8 +352,8 @@ module Aws::Greengrass
     #     initial_version: {
     #       connectors: [
     #         {
-    #           connector_arn: "__string",
-    #           id: "__string",
+    #           connector_arn: "__string", # required
+    #           id: "__string", # required
     #           parameters: {
     #             "__string" => "__string",
     #           },
@@ -402,8 +408,8 @@ module Aws::Greengrass
     #     connector_definition_id: "__string", # required
     #     connectors: [
     #       {
-    #         connector_arn: "__string",
-    #         id: "__string",
+    #         connector_arn: "__string", # required
+    #         id: "__string", # required
     #         parameters: {
     #           "__string" => "__string",
     #         },
@@ -440,6 +446,7 @@ module Aws::Greengrass
     # @option params [String] :name
     #
     # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
     #
     # @return [Types::CreateCoreDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -458,10 +465,10 @@ module Aws::Greengrass
     #     initial_version: {
     #       cores: [
     #         {
-    #           certificate_arn: "__string",
-    #           id: "__string",
+    #           certificate_arn: "__string", # required
+    #           id: "__string", # required
     #           sync_shadow: false,
-    #           thing_arn: "__string",
+    #           thing_arn: "__string", # required
     #         },
     #       ],
     #     },
@@ -513,10 +520,10 @@ module Aws::Greengrass
     #     core_definition_id: "__string", # required
     #     cores: [
     #       {
-    #         certificate_arn: "__string",
-    #         id: "__string",
+    #         certificate_arn: "__string", # required
+    #         id: "__string", # required
     #         sync_shadow: false,
-    #         thing_arn: "__string",
+    #         thing_arn: "__string", # required
     #       },
     #     ],
     #   })
@@ -547,7 +554,7 @@ module Aws::Greengrass
     #   The ID of the deployment if you wish to redeploy a previous
     #   deployment.
     #
-    # @option params [String] :deployment_type
+    # @option params [required, String] :deployment_type
     #   The type of deployment. When used for ''CreateDeployment'', only
     #   ''NewDeployment'' and ''Redeployment'' are valid.
     #
@@ -566,7 +573,7 @@ module Aws::Greengrass
     #   resp = client.create_deployment({
     #     amzn_client_token: "__string",
     #     deployment_id: "__string",
-    #     deployment_type: "NewDeployment", # accepts NewDeployment, Redeployment, ResetDeployment, ForceResetDeployment
+    #     deployment_type: "NewDeployment", # required, accepts NewDeployment, Redeployment, ResetDeployment, ForceResetDeployment
     #     group_id: "__string", # required
     #     group_version_id: "__string",
     #   })
@@ -597,6 +604,7 @@ module Aws::Greengrass
     # @option params [String] :name
     #
     # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
     #
     # @return [Types::CreateDeviceDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -615,10 +623,10 @@ module Aws::Greengrass
     #     initial_version: {
     #       devices: [
     #         {
-    #           certificate_arn: "__string",
-    #           id: "__string",
+    #           certificate_arn: "__string", # required
+    #           id: "__string", # required
     #           sync_shadow: false,
-    #           thing_arn: "__string",
+    #           thing_arn: "__string", # required
     #         },
     #       ],
     #     },
@@ -670,10 +678,10 @@ module Aws::Greengrass
     #     device_definition_id: "__string", # required
     #     devices: [
     #       {
-    #         certificate_arn: "__string",
-    #         id: "__string",
+    #         certificate_arn: "__string", # required
+    #         id: "__string", # required
     #         sync_shadow: false,
-    #         thing_arn: "__string",
+    #         thing_arn: "__string", # required
     #       },
     #     ],
     #   })
@@ -708,6 +716,7 @@ module Aws::Greengrass
     # @option params [String] :name
     #
     # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
     #
     # @return [Types::CreateFunctionDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -750,7 +759,7 @@ module Aws::Greengrass
     #               resource_access_policies: [
     #                 {
     #                   permission: "ro", # accepts ro, rw
-    #                   resource_id: "__string",
+    #                   resource_id: "__string", # required
     #                 },
     #               ],
     #               variables: {
@@ -763,7 +772,7 @@ module Aws::Greengrass
     #             pinned: false,
     #             timeout: 1,
     #           },
-    #           id: "__string",
+    #           id: "__string", # required
     #         },
     #       ],
     #     },
@@ -843,7 +852,7 @@ module Aws::Greengrass
     #             resource_access_policies: [
     #               {
     #                 permission: "ro", # accepts ro, rw
-    #                 resource_id: "__string",
+    #                 resource_id: "__string", # required
     #               },
     #             ],
     #             variables: {
@@ -856,7 +865,7 @@ module Aws::Greengrass
     #           pinned: false,
     #           timeout: 1,
     #         },
-    #         id: "__string",
+    #         id: "__string", # required
     #       },
     #     ],
     #   })
@@ -891,6 +900,7 @@ module Aws::Greengrass
     # @option params [String] :name
     #
     # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
     #
     # @return [Types::CreateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1040,6 +1050,7 @@ module Aws::Greengrass
     # @option params [String] :name
     #
     # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
     #
     # @return [Types::CreateLoggerDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1058,11 +1069,11 @@ module Aws::Greengrass
     #     initial_version: {
     #       loggers: [
     #         {
-    #           component: "GreengrassSystem", # accepts GreengrassSystem, Lambda
-    #           id: "__string",
-    #           level: "DEBUG", # accepts DEBUG, INFO, WARN, ERROR, FATAL
+    #           component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
+    #           id: "__string", # required
+    #           level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
     #           space: 1,
-    #           type: "FileSystem", # accepts FileSystem, AWSCloudWatch
+    #           type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
     #         },
     #       ],
     #     },
@@ -1114,11 +1125,11 @@ module Aws::Greengrass
     #     logger_definition_id: "__string", # required
     #     loggers: [
     #       {
-    #         component: "GreengrassSystem", # accepts GreengrassSystem, Lambda
-    #         id: "__string",
-    #         level: "DEBUG", # accepts DEBUG, INFO, WARN, ERROR, FATAL
+    #         component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
+    #         id: "__string", # required
+    #         level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
     #         space: 1,
-    #         type: "FileSystem", # accepts FileSystem, AWSCloudWatch
+    #         type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
     #       },
     #     ],
     #   })
@@ -1152,6 +1163,7 @@ module Aws::Greengrass
     # @option params [String] :name
     #
     # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
     #
     # @return [Types::CreateResourceDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1170,9 +1182,9 @@ module Aws::Greengrass
     #     initial_version: {
     #       resources: [
     #         {
-    #           id: "__string",
-    #           name: "__string",
-    #           resource_data_container: {
+    #           id: "__string", # required
+    #           name: "__string", # required
+    #           resource_data_container: { # required
     #             local_device_resource_data: {
     #               group_owner_setting: {
     #                 auto_add_group_owner: false,
@@ -1252,9 +1264,9 @@ module Aws::Greengrass
     #     resource_definition_id: "__string", # required
     #     resources: [
     #       {
-    #         id: "__string",
-    #         name: "__string",
-    #         resource_data_container: {
+    #         id: "__string", # required
+    #         name: "__string", # required
+    #         resource_data_container: { # required
     #           local_device_resource_data: {
     #             group_owner_setting: {
     #               auto_add_group_owner: false,
@@ -1311,25 +1323,25 @@ module Aws::Greengrass
     #
     # @option params [String] :amzn_client_token
     #
-    # @option params [String] :s3_url_signer_role
+    # @option params [required, String] :s3_url_signer_role
     #   The IAM Role that Greengrass will use to create pre-signed URLs
     #   pointing towards the update artifact.
     #
-    # @option params [String] :software_to_update
+    # @option params [required, String] :software_to_update
     #   The piece of software on the Greengrass core that will be updated.
     #
     # @option params [String] :update_agent_log_level
     #   The minimum level of log statements that should be logged by the OTA
     #   Agent during an update.
     #
-    # @option params [Array<String>] :update_targets
+    # @option params [required, Array<String>] :update_targets
     #   The ARNs of the targets (IoT things or IoT thing groups) that this
     #   update will be applied to.
     #
-    # @option params [String] :update_targets_architecture
+    # @option params [required, String] :update_targets_architecture
     #   The architecture of the cores which are the targets of an update.
     #
-    # @option params [String] :update_targets_operating_system
+    # @option params [required, String] :update_targets_operating_system
     #   The operating system of the cores which are the targets of an update.
     #
     # @return [Types::CreateSoftwareUpdateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1341,12 +1353,12 @@ module Aws::Greengrass
     #
     #   resp = client.create_software_update_job({
     #     amzn_client_token: "__string",
-    #     s3_url_signer_role: "S3UrlSignerRole",
-    #     software_to_update: "core", # accepts core, ota_agent
+    #     s3_url_signer_role: "S3UrlSignerRole", # required
+    #     software_to_update: "core", # required, accepts core, ota_agent
     #     update_agent_log_level: "NONE", # accepts NONE, TRACE, DEBUG, VERBOSE, INFO, WARN, ERROR, FATAL
-    #     update_targets: ["__string"],
-    #     update_targets_architecture: "armv7l", # accepts armv7l, x86_64, aarch64
-    #     update_targets_operating_system: "ubuntu", # accepts ubuntu, raspbian, amazon_linux
+    #     update_targets: ["__string"], # required
+    #     update_targets_architecture: "armv7l", # required, accepts armv7l, x86_64, aarch64, openwrt
+    #     update_targets_operating_system: "ubuntu", # required, accepts ubuntu, raspbian, amazon_linux
     #   })
     #
     # @example Response structure
@@ -1375,6 +1387,7 @@ module Aws::Greengrass
     # @option params [String] :name
     #
     # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
     #
     # @return [Types::CreateSubscriptionDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1393,10 +1406,10 @@ module Aws::Greengrass
     #     initial_version: {
     #       subscriptions: [
     #         {
-    #           id: "__string",
-    #           source: "__string",
-    #           subject: "__string",
-    #           target: "__string",
+    #           id: "__string", # required
+    #           source: "__string", # required
+    #           subject: "__string", # required
+    #           target: "__string", # required
     #         },
     #       ],
     #     },
@@ -1448,10 +1461,10 @@ module Aws::Greengrass
     #     subscription_definition_id: "__string", # required
     #     subscriptions: [
     #       {
-    #         id: "__string",
-    #         source: "__string",
-    #         subject: "__string",
-    #         target: "__string",
+    #         id: "__string", # required
+    #         source: "__string", # required
+    #         subject: "__string", # required
+    #         target: "__string", # required
     #       },
     #     ],
     #   })
@@ -1469,34 +1482,6 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def create_subscription_definition_version(params = {}, options = {})
       req = build_request(:create_subscription_definition_version, params)
-      req.send_request(options)
-    end
-
-    # Add resource tags to a Greengrass Resource. Valid resources are Group,
-    # Connector, Core, Device, Function, Logger, Subscription, and Resource
-    # Defintions, and also BulkDeploymentIds.
-    #
-    # @option params [required, String] :resource_arn
-    #
-    # @option params [required, Hash<String,String>] :tags
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.tag_resource({
-    #     resource_arn: "__string", # required
-    #     tags: { # required
-    #       "__string" => "__string",
-    #     },
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/TagResource AWS API Documentation
-    #
-    # @overload tag_resource(params = {})
-    # @param [Hash] params ({})
-    def tag_resource(params = {}, options = {})
-      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -1665,30 +1650,6 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def delete_subscription_definition(params = {}, options = {})
       req = build_request(:delete_subscription_definition, params)
-      req.send_request(options)
-    end
-
-    # Remove resource tags from a Greengrass Resource.
-    #
-    # @option params [required, String] :resource_arn
-    #
-    # @option params [required, Array<String>] :tag_keys
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.untag_resource({
-    #     resource_arn: "__string", # required
-    #     tag_keys: ["__string"], # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UntagResource AWS API Documentation
-    #
-    # @overload untag_resource(params = {})
-    # @param [Hash] params ({})
-    def untag_resource(params = {}, options = {})
-      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -3571,14 +3532,14 @@ module Aws::Greengrass
     #
     # @option params [String] :amzn_client_token
     #
-    # @option params [String] :execution_role_arn
+    # @option params [required, String] :execution_role_arn
     #   The ARN of the execution role to associate with the bulk deployment
     #   operation. This IAM role must allow the
     #   ''greengrass:CreateDeployment'' action for all group versions that
     #   are listed in the input file. This IAM role must have access to the S3
     #   bucket containing the input file.
     #
-    # @option params [String] :input_file_uri
+    # @option params [required, String] :input_file_uri
     #   The URI of the input file contained in the S3 bucket. The execution
     #   role must have ''getObject'' permissions on this bucket to access
     #   the input file. The input file is a JSON-serialized, line delimited
@@ -3588,6 +3549,7 @@ module Aws::Greengrass
     #   deployment types.
     #
     # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
     #
     # @return [Types::StartBulkDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3598,8 +3560,8 @@ module Aws::Greengrass
     #
     #   resp = client.start_bulk_deployment({
     #     amzn_client_token: "__string",
-    #     execution_role_arn: "__string",
-    #     input_file_uri: "__string",
+    #     execution_role_arn: "__string", # required
+    #     input_file_uri: "__string", # required
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -3641,6 +3603,59 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def stop_bulk_deployment(params = {}, options = {})
       req = build_request(:stop_bulk_deployment, params)
+      req.send_request(options)
+    end
+
+    # Add resource tags to a Greengrass Resource. Valid resources are Group,
+    # Connector, Core, Device, Function, Logger, Subscription, and Resource
+    # Defintions, and also BulkDeploymentIds.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value pair for the resource tag.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove resource tags from a Greengrass Resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -3927,7 +3942,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

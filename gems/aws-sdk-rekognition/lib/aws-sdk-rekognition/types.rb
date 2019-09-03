@@ -380,15 +380,15 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about a moderation label detection in a stored video.
+    # Information about an unsafe content label detection in a stored video.
     #
     # @!attribute [rw] timestamp
     #   Time, in milliseconds from the beginning of the video, that the
-    #   moderation label was detected.
+    #   unsafe content label was detected.
     #   @return [Integer]
     #
     # @!attribute [rw] moderation_label
-    #   The moderation label detected by in the stored video.
+    #   The unsafe content label detected by in the stored video.
     #   @return [Types::ModerationLabel]
     #
     class ContentModerationDetection < Struct.new(
@@ -899,7 +899,7 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] moderation_labels
-    #   Array of detected Moderation labels and the time, in millseconds
+    #   Array of detected Moderation labels and the time, in milliseconds
     #   from the start of the video, they were detected.
     #   @return [Array<Types::ModerationLabel>]
     #
@@ -953,8 +953,12 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # The emotions detected on the face, and the confidence level in the
-    # determination. For example, HAPPY, SAD, and ANGRY.
+    # The emotions that appear to be expressed on the face, and the
+    # confidence level in the determination. The API is only making a
+    # determination of the physical appearance of a person's face. It is
+    # not a determination of the person’s internal emotional state and
+    # should not be used in such a way. For example, a person pretending to
+    # have a sad face might not be sad emotionally.
     #
     # @!attribute [rw] type
     #   Type of emotion detected.
@@ -1113,8 +1117,12 @@ module Aws::Rekognition
     #   @return [Types::MouthOpen]
     #
     # @!attribute [rw] emotions
-    #   The emotions detected on the face, and the confidence level in the
-    #   determination. For example, HAPPY, SAD, and ANGRY.
+    #   The emotions that appear to be expressed on the face, and the
+    #   confidence level in the determination. The API is only making a
+    #   determination of the physical appearance of a person's face. It is
+    #   not a determination of the person’s internal emotional state and
+    #   should not be used in such a way. For example, a person pretending
+    #   to have a sad face might not be sad emotionally.
     #   @return [Array<Types::Emotion>]
     #
     # @!attribute [rw] landmarks
@@ -1397,8 +1405,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] job_id
-    #   The identifier for the content moderation job. Use `JobId` to
-    #   identify the job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the unsafe content job. Use `JobId` to identify
+    #   the job in a subsequent call to `GetContentModeration`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1412,7 +1420,7 @@ module Aws::Rekognition
     #   If the previous response was incomplete (because there is more data
     #   to retrieve), Amazon Rekognition returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
-    #   of content moderation labels.
+    #   of unsafe content labels.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -1432,7 +1440,7 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] job_status
-    #   The current status of the content moderation job.
+    #   The current status of the unsafe content analysis job.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -1447,13 +1455,14 @@ module Aws::Rekognition
     #   @return [Types::VideoMetadata]
     #
     # @!attribute [rw] moderation_labels
-    #   The detected moderation labels and the time(s) they were detected.
+    #   The detected unsafe content labels and the time(s) they were
+    #   detected.
     #   @return [Array<Types::ContentModerationDetection>]
     #
     # @!attribute [rw] next_token
     #   If the response is truncated, Amazon Rekognition Video returns this
     #   token that you can use in the subsequent request to retrieve the
-    #   next set of moderation labels.
+    #   next set of unsafe content labels.
     #   @return [String]
     #
     # @!attribute [rw] moderation_model_version
@@ -2302,8 +2311,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provides information about a single type of moderated content found in
-    # an image or video. Each type of moderated content has a label within a
+    # Provides information about a single type of unsafe content found in an
+    # image or video. Each type of moderated content has a label within a
     # hierarchical taxonomy. For more information, see Detecting Unsafe
     # Content in the Amazon Rekognition Developer Guide.
     #
@@ -2317,7 +2326,7 @@ module Aws::Rekognition
     #   @return [Float]
     #
     # @!attribute [rw] name
-    #   The label name for the type of content detected in the image.
+    #   The label name for the type of unsafe content detected in the image.
     #   @return [String]
     #
     # @!attribute [rw] parent_name
@@ -2669,7 +2678,7 @@ module Aws::Rekognition
     # @!attribute [rw] face_match_threshold
     #   (Optional) Specifies the minimum confidence in the face match to
     #   return. For example, don't return any matches where confidence in
-    #   matches is less than 70%.
+    #   matches is less than 70%. The default value is 80%.
     #   @return [Float]
     #
     class SearchFacesByImageRequest < Struct.new(
@@ -2734,7 +2743,7 @@ module Aws::Rekognition
     # @!attribute [rw] face_match_threshold
     #   Optional value specifying the minimum confidence in the face match
     #   to return. For example, don't return any matches where confidence
-    #   in matches is less than 70%.
+    #   in matches is less than 70%. The default value is 80%.
     #   @return [Float]
     #
     class SearchFacesRequest < Struct.new(
@@ -2821,8 +2830,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartCelebrityRecognitionRequest < Struct.new(
@@ -2865,8 +2876,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] video
-    #   The video in which you want to moderate content. The video must be
-    #   stored in an Amazon S3 bucket.
+    #   The video in which you want to detect unsafe content. The video must
+    #   be stored in an Amazon S3 bucket.
     #   @return [Types::Video]
     #
     # @!attribute [rw] min_confidence
@@ -2889,12 +2900,14 @@ module Aws::Rekognition
     #
     # @!attribute [rw] notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
-    #   publish the completion status of the content moderation analysis to.
+    #   publish the completion status of the unsafe content analysis to.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartContentModerationRequest < Struct.new(
@@ -2907,8 +2920,8 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] job_id
-    #   The identifier for the content moderation analysis job. Use `JobId`
-    #   to identify the job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the unsafe content analysis job. Use `JobId` to
+    #   identify the job in a subsequent call to `GetContentModeration`.
     #   @return [String]
     #
     class StartContentModerationResponse < Struct.new(
@@ -2964,8 +2977,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartFaceDetectionRequest < Struct.new(
@@ -3023,7 +3038,7 @@ module Aws::Rekognition
     # @!attribute [rw] face_match_threshold
     #   The minimum confidence in the person match to return. For example,
     #   don't return any matches where confidence in matches is less than
-    #   70%.
+    #   70%. The default value is 80%.
     #   @return [Float]
     #
     # @!attribute [rw] collection_id
@@ -3036,8 +3051,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartFaceSearchRequest < Struct.new(
@@ -3110,8 +3127,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartLabelDetectionRequest < Struct.new(
@@ -3170,8 +3189,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartPersonTrackingRequest < Struct.new(

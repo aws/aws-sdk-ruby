@@ -18,6 +18,8 @@ module Aws::SecurityHub
     AccountDetailsList = Shapes::ListShape.new(name: 'AccountDetailsList')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
+    ActionTarget = Shapes::StructureShape.new(name: 'ActionTarget')
+    ActionTargetList = Shapes::ListShape.new(name: 'ActionTargetList')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AwsEc2InstanceDetails = Shapes::StructureShape.new(name: 'AwsEc2InstanceDetails')
     AwsIamAccessKeyDetails = Shapes::StructureShape.new(name: 'AwsIamAccessKeyDetails')
@@ -33,9 +35,12 @@ module Aws::SecurityHub
     BatchImportFindingsRequest = Shapes::StructureShape.new(name: 'BatchImportFindingsRequest')
     BatchImportFindingsResponse = Shapes::StructureShape.new(name: 'BatchImportFindingsResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     Compliance = Shapes::StructureShape.new(name: 'Compliance')
     ComplianceStatus = Shapes::StringShape.new(name: 'ComplianceStatus')
     ContainerDetails = Shapes::StructureShape.new(name: 'ContainerDetails')
+    CreateActionTargetRequest = Shapes::StructureShape.new(name: 'CreateActionTargetRequest')
+    CreateActionTargetResponse = Shapes::StructureShape.new(name: 'CreateActionTargetResponse')
     CreateInsightRequest = Shapes::StructureShape.new(name: 'CreateInsightRequest')
     CreateInsightResponse = Shapes::StructureShape.new(name: 'CreateInsightResponse')
     CreateMembersRequest = Shapes::StructureShape.new(name: 'CreateMembersRequest')
@@ -46,12 +51,20 @@ module Aws::SecurityHub
     DateRangeUnit = Shapes::StringShape.new(name: 'DateRangeUnit')
     DeclineInvitationsRequest = Shapes::StructureShape.new(name: 'DeclineInvitationsRequest')
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
+    DeleteActionTargetRequest = Shapes::StructureShape.new(name: 'DeleteActionTargetRequest')
+    DeleteActionTargetResponse = Shapes::StructureShape.new(name: 'DeleteActionTargetResponse')
     DeleteInsightRequest = Shapes::StructureShape.new(name: 'DeleteInsightRequest')
     DeleteInsightResponse = Shapes::StructureShape.new(name: 'DeleteInsightResponse')
     DeleteInvitationsRequest = Shapes::StructureShape.new(name: 'DeleteInvitationsRequest')
     DeleteInvitationsResponse = Shapes::StructureShape.new(name: 'DeleteInvitationsResponse')
     DeleteMembersRequest = Shapes::StructureShape.new(name: 'DeleteMembersRequest')
     DeleteMembersResponse = Shapes::StructureShape.new(name: 'DeleteMembersResponse')
+    DescribeActionTargetsRequest = Shapes::StructureShape.new(name: 'DescribeActionTargetsRequest')
+    DescribeActionTargetsResponse = Shapes::StructureShape.new(name: 'DescribeActionTargetsResponse')
+    DescribeHubRequest = Shapes::StructureShape.new(name: 'DescribeHubRequest')
+    DescribeHubResponse = Shapes::StructureShape.new(name: 'DescribeHubResponse')
+    DescribeProductsRequest = Shapes::StructureShape.new(name: 'DescribeProductsRequest')
+    DescribeProductsResponse = Shapes::StructureShape.new(name: 'DescribeProductsResponse')
     DisableImportFindingsForProductRequest = Shapes::StructureShape.new(name: 'DisableImportFindingsForProductRequest')
     DisableImportFindingsForProductResponse = Shapes::StructureShape.new(name: 'DisableImportFindingsForProductResponse')
     DisableSecurityHubRequest = Shapes::StructureShape.new(name: 'DisableSecurityHubRequest')
@@ -106,6 +119,8 @@ module Aws::SecurityHub
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Malware = Shapes::StructureShape.new(name: 'Malware')
     MalwareList = Shapes::ListShape.new(name: 'MalwareList')
     MalwareState = Shapes::StringShape.new(name: 'MalwareState')
@@ -126,13 +141,16 @@ module Aws::SecurityHub
     NumberFilterList = Shapes::ListShape.new(name: 'NumberFilterList')
     Partition = Shapes::StringShape.new(name: 'Partition')
     ProcessDetails = Shapes::StructureShape.new(name: 'ProcessDetails')
+    Product = Shapes::StructureShape.new(name: 'Product')
     ProductSubscriptionArnList = Shapes::ListShape.new(name: 'ProductSubscriptionArnList')
+    ProductsList = Shapes::ListShape.new(name: 'ProductsList')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     RecordState = Shapes::StringShape.new(name: 'RecordState')
     RelatedFinding = Shapes::StructureShape.new(name: 'RelatedFinding')
     RelatedFindingList = Shapes::ListShape.new(name: 'RelatedFindingList')
     Remediation = Shapes::StructureShape.new(name: 'Remediation')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
@@ -154,12 +172,22 @@ module Aws::SecurityHub
     StringFilterComparison = Shapes::StringShape.new(name: 'StringFilterComparison')
     StringFilterList = Shapes::ListShape.new(name: 'StringFilterList')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThreatIntelIndicator = Shapes::StructureShape.new(name: 'ThreatIntelIndicator')
     ThreatIntelIndicatorCategory = Shapes::StringShape.new(name: 'ThreatIntelIndicatorCategory')
     ThreatIntelIndicatorList = Shapes::ListShape.new(name: 'ThreatIntelIndicatorList')
     ThreatIntelIndicatorType = Shapes::StringShape.new(name: 'ThreatIntelIndicatorType')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     TypeList = Shapes::ListShape.new(name: 'TypeList')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateActionTargetRequest = Shapes::StructureShape.new(name: 'UpdateActionTargetRequest')
+    UpdateActionTargetResponse = Shapes::StructureShape.new(name: 'UpdateActionTargetResponse')
     UpdateFindingsRequest = Shapes::StructureShape.new(name: 'UpdateFindingsRequest')
     UpdateFindingsResponse = Shapes::StructureShape.new(name: 'UpdateFindingsResponse')
     UpdateInsightRequest = Shapes::StructureShape.new(name: 'UpdateInsightRequest')
@@ -167,11 +195,15 @@ module Aws::SecurityHub
     VerificationState = Shapes::StringShape.new(name: 'VerificationState')
     WorkflowState = Shapes::StringShape.new(name: 'WorkflowState')
 
-    AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MasterId"))
-    AcceptInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InvitationId"))
+    AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "MasterId"))
+    AcceptInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "InvitationId"))
     AcceptInvitationRequest.struct_class = Types::AcceptInvitationRequest
 
     AcceptInvitationResponse.struct_class = Types::AcceptInvitationResponse
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccountDetails.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     AccountDetails.add_member(:email, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Email"))
@@ -180,6 +212,13 @@ module Aws::SecurityHub
     AccountDetailsList.member = Shapes::ShapeRef.new(shape: AccountDetails)
 
     AccountIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    ActionTarget.add_member(:action_target_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ActionTargetArn"))
+    ActionTarget.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
+    ActionTarget.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Description"))
+    ActionTarget.struct_class = Types::ActionTarget
+
+    ActionTargetList.member = Shapes::ShapeRef.new(shape: ActionTarget)
 
     ArnList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -216,8 +255,8 @@ module Aws::SecurityHub
     AwsSecurityFinding.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, required: true, location_name: "Severity"))
     AwsSecurityFinding.add_member(:confidence, Shapes::ShapeRef.new(shape: Integer, location_name: "Confidence"))
     AwsSecurityFinding.add_member(:criticality, Shapes::ShapeRef.new(shape: Integer, location_name: "Criticality"))
-    AwsSecurityFinding.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Title"))
-    AwsSecurityFinding.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsSecurityFinding.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Title"))
+    AwsSecurityFinding.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Description"))
     AwsSecurityFinding.add_member(:remediation, Shapes::ShapeRef.new(shape: Remediation, location_name: "Remediation"))
     AwsSecurityFinding.add_member(:source_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourceUrl"))
     AwsSecurityFinding.add_member(:product_fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "ProductFields"))
@@ -342,6 +381,8 @@ module Aws::SecurityHub
     BatchImportFindingsResponse.add_member(:failed_findings, Shapes::ShapeRef.new(shape: ImportFindingsErrorList, location_name: "FailedFindings"))
     BatchImportFindingsResponse.struct_class = Types::BatchImportFindingsResponse
 
+    CategoryList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     Compliance.add_member(:status, Shapes::ShapeRef.new(shape: ComplianceStatus, location_name: "Status"))
     Compliance.struct_class = Types::Compliance
 
@@ -350,6 +391,14 @@ module Aws::SecurityHub
     ContainerDetails.add_member(:image_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ImageName"))
     ContainerDetails.add_member(:launched_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchedAt"))
     ContainerDetails.struct_class = Types::ContainerDetails
+
+    CreateActionTargetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
+    CreateActionTargetRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Description"))
+    CreateActionTargetRequest.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
+    CreateActionTargetRequest.struct_class = Types::CreateActionTargetRequest
+
+    CreateActionTargetResponse.add_member(:action_target_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ActionTargetArn"))
+    CreateActionTargetResponse.struct_class = Types::CreateActionTargetResponse
 
     CreateInsightRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
     CreateInsightRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AwsSecurityFindingFilters, required: true, location_name: "Filters"))
@@ -376,11 +425,17 @@ module Aws::SecurityHub
     DateRange.add_member(:unit, Shapes::ShapeRef.new(shape: DateRangeUnit, location_name: "Unit"))
     DateRange.struct_class = Types::DateRange
 
-    DeclineInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
+    DeclineInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "AccountIds"))
     DeclineInvitationsRequest.struct_class = Types::DeclineInvitationsRequest
 
     DeclineInvitationsResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
     DeclineInvitationsResponse.struct_class = Types::DeclineInvitationsResponse
+
+    DeleteActionTargetRequest.add_member(:action_target_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "ActionTargetArn"))
+    DeleteActionTargetRequest.struct_class = Types::DeleteActionTargetRequest
+
+    DeleteActionTargetResponse.add_member(:action_target_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ActionTargetArn"))
+    DeleteActionTargetResponse.struct_class = Types::DeleteActionTargetResponse
 
     DeleteInsightRequest.add_member(:insight_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "InsightArn"))
     DeleteInsightRequest.struct_class = Types::DeleteInsightRequest
@@ -388,7 +443,7 @@ module Aws::SecurityHub
     DeleteInsightResponse.add_member(:insight_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "InsightArn"))
     DeleteInsightResponse.struct_class = Types::DeleteInsightResponse
 
-    DeleteInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
+    DeleteInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "AccountIds"))
     DeleteInvitationsRequest.struct_class = Types::DeleteInvitationsRequest
 
     DeleteInvitationsResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
@@ -399,6 +454,30 @@ module Aws::SecurityHub
 
     DeleteMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
     DeleteMembersResponse.struct_class = Types::DeleteMembersResponse
+
+    DescribeActionTargetsRequest.add_member(:action_target_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "ActionTargetArns"))
+    DescribeActionTargetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeActionTargetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeActionTargetsRequest.struct_class = Types::DescribeActionTargetsRequest
+
+    DescribeActionTargetsResponse.add_member(:action_targets, Shapes::ShapeRef.new(shape: ActionTargetList, required: true, location_name: "ActionTargets"))
+    DescribeActionTargetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeActionTargetsResponse.struct_class = Types::DescribeActionTargetsResponse
+
+    DescribeHubRequest.add_member(:hub_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location: "querystring", location_name: "HubArn"))
+    DescribeHubRequest.struct_class = Types::DescribeHubRequest
+
+    DescribeHubResponse.add_member(:hub_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HubArn"))
+    DescribeHubResponse.add_member(:subscribed_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubscribedAt"))
+    DescribeHubResponse.struct_class = Types::DescribeHubResponse
+
+    DescribeProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    DescribeProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    DescribeProductsRequest.struct_class = Types::DescribeProductsRequest
+
+    DescribeProductsResponse.add_member(:products, Shapes::ShapeRef.new(shape: ProductsList, required: true, location_name: "Products"))
+    DescribeProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeProductsResponse.struct_class = Types::DescribeProductsResponse
 
     DisableImportFindingsForProductRequest.add_member(:product_subscription_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "ProductSubscriptionArn"))
     DisableImportFindingsForProductRequest.struct_class = Types::DisableImportFindingsForProductRequest
@@ -424,6 +503,7 @@ module Aws::SecurityHub
     EnableImportFindingsForProductResponse.add_member(:product_subscription_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProductSubscriptionArn"))
     EnableImportFindingsForProductResponse.struct_class = Types::EnableImportFindingsForProductResponse
 
+    EnableSecurityHubRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     EnableSecurityHubRequest.struct_class = Types::EnableSecurityHubRequest
 
     EnableSecurityHubResponse.struct_class = Types::EnableSecurityHubResponse
@@ -508,6 +588,18 @@ module Aws::SecurityHub
     InsightResults.add_member(:result_values, Shapes::ShapeRef.new(shape: InsightResultValueList, required: true, location_name: "ResultValues"))
     InsightResults.struct_class = Types::InsightResults
 
+    InternalException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InternalException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    InternalException.struct_class = Types::InternalException
+
+    InvalidAccessException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InvalidAccessException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    InvalidAccessException.struct_class = Types::InvalidAccessException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    InvalidInputException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
     Invitation.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Invitation.add_member(:invitation_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InvitationId"))
     Invitation.add_member(:invited_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InvitedAt"))
@@ -531,6 +623,10 @@ module Aws::SecurityHub
     KeywordFilter.struct_class = Types::KeywordFilter
 
     KeywordFilterList.member = Shapes::ShapeRef.new(shape: KeywordFilter)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    LimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListEnabledProductsForImportRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListEnabledProductsForImportRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
@@ -556,6 +652,12 @@ module Aws::SecurityHub
     ListMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: MemberList, location_name: "Members"))
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     Malware.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
     Malware.add_member(:type, Shapes::ShapeRef.new(shape: MalwareType, location_name: "Type"))
@@ -619,7 +721,19 @@ module Aws::SecurityHub
     ProcessDetails.add_member(:terminated_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TerminatedAt"))
     ProcessDetails.struct_class = Types::ProcessDetails
 
+    Product.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProductArn"))
+    Product.add_member(:product_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProductName"))
+    Product.add_member(:company_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CompanyName"))
+    Product.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    Product.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryList, location_name: "Categories"))
+    Product.add_member(:marketplace_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MarketplaceUrl"))
+    Product.add_member(:activation_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ActivationUrl"))
+    Product.add_member(:product_subscription_resource_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProductSubscriptionResourcePolicy"))
+    Product.struct_class = Types::Product
+
     ProductSubscriptionArnList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    ProductsList.member = Shapes::ShapeRef.new(shape: Product)
 
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Text"))
     Recommendation.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Url"))
@@ -642,6 +756,10 @@ module Aws::SecurityHub
     Resource.add_member(:details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "Details"))
     Resource.struct_class = Types::Resource
 
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ResourceConflictException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
     ResourceDetails.add_member(:aws_ec2_instance, Shapes::ShapeRef.new(shape: AwsEc2InstanceDetails, location_name: "AwsEc2Instance"))
     ResourceDetails.add_member(:aws_s3_bucket, Shapes::ShapeRef.new(shape: AwsS3BucketDetails, location_name: "AwsS3Bucket"))
     ResourceDetails.add_member(:aws_iam_access_key, Shapes::ShapeRef.new(shape: AwsIamAccessKeyDetails, location_name: "AwsIamAccessKey"))
@@ -650,6 +768,10 @@ module Aws::SecurityHub
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     Result.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Result.add_member(:processing_result, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProcessingResult"))
@@ -694,6 +816,17 @@ module Aws::SecurityHub
 
     StringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     ThreatIntelIndicator.add_member(:type, Shapes::ShapeRef.new(shape: ThreatIntelIndicatorType, location_name: "Type"))
     ThreatIntelIndicator.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
     ThreatIntelIndicator.add_member(:category, Shapes::ShapeRef.new(shape: ThreatIntelIndicatorCategory, location_name: "Category"))
@@ -705,6 +838,19 @@ module Aws::SecurityHub
     ThreatIntelIndicatorList.member = Shapes::ShapeRef.new(shape: ThreatIntelIndicator)
 
     TypeList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateActionTargetRequest.add_member(:action_target_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "ActionTargetArn"))
+    UpdateActionTargetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    UpdateActionTargetRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    UpdateActionTargetRequest.struct_class = Types::UpdateActionTargetRequest
+
+    UpdateActionTargetResponse.struct_class = Types::UpdateActionTargetResponse
 
     UpdateFindingsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AwsSecurityFindingFilters, required: true, location_name: "Filters"))
     UpdateFindingsRequest.add_member(:note, Shapes::ShapeRef.new(shape: NoteUpdate, location_name: "Note"))
@@ -788,6 +934,19 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
       end)
 
+      api.add_operation(:create_action_target, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateActionTarget"
+        o.http_method = "POST"
+        o.http_request_uri = "/actionTargets"
+        o.input = Shapes::ShapeRef.new(shape: CreateActionTargetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateActionTargetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+      end)
+
       api.add_operation(:create_insight, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateInsight"
         o.http_method = "POST"
@@ -820,6 +979,18 @@ module Aws::SecurityHub
         o.http_request_uri = "/invitations/decline"
         o.input = Shapes::ShapeRef.new(shape: DeclineInvitationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DeclineInvitationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_action_target, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteActionTarget"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/actionTargets/{ActionTargetArn+}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteActionTargetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteActionTargetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
@@ -863,6 +1034,55 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_action_targets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeActionTargets"
+        o.http_method = "POST"
+        o.http_request_uri = "/actionTargets/get"
+        o.input = Shapes::ShapeRef.new(shape: DescribeActionTargetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeActionTargetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_hub, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeHub"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts"
+        o.input = Shapes::ShapeRef.new(shape: DescribeHubRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeHubResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_products, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProducts"
+        o.http_method = "GET"
+        o.http_request_uri = "/products"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProductsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProductsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:disable_import_findings_for_product, Seahorse::Model::Operation.new.tap do |o|
@@ -1094,6 +1314,52 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_action_target, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateActionTarget"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/actionTargets/{ActionTargetArn+}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateActionTargetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateActionTargetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_findings, Seahorse::Model::Operation.new.tap do |o|

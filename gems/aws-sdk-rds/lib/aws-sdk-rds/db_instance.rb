@@ -473,6 +473,13 @@ module Aws::RDS
       data[:listener_endpoint]
     end
 
+    # The upper limit to which Amazon RDS can automatically scale the
+    # storage of the DB instance.
+    # @return [Integer]
+    def max_allocated_storage
+      data[:max_allocated_storage]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -662,6 +669,7 @@ module Aws::RDS
     #       },
     #     ],
     #     deletion_protection: false,
+    #     max_allocated_storage: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -753,10 +761,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -766,10 +774,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -779,10 +787,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -792,10 +800,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -1183,8 +1191,8 @@ module Aws::RDS
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
-    #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
-    #   Improve Performance][1] in the *Amazon RDS User Guide*.
+    #   valid Iops values, see [Amazon RDS Provisioned IOPS Storage to Improve
+    #   Performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between 1 and 50 of the storage amount
     #   for the DB instance.
@@ -1366,6 +1374,23 @@ module Aws::RDS
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   * For MySQL 8.0, minor version 8.0.16 or higher
+    #
+    #   **PostgreSQL**
+    #
+    #   * For PostgreSQL 9.5, minor version 9.5.15 or higher
+    #
+    #   * For PostgreSQL 9.6, minor version 9.6.11 or higher
+    #
+    #   * PostgreSQL 10.6, 10.7, and 10.9
+    #
+    #   For more information, see [ IAM Database Authentication for MySQL and
+    #   PostgreSQL][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   DB instance.
@@ -1410,6 +1435,9 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    # @option options [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1663,16 +1691,16 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora MySQL 5.6 or higher
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   Read Replica.
@@ -1888,6 +1916,7 @@ module Aws::RDS
     #     ],
     #     use_default_processor_features: false,
     #     deletion_protection: false,
+    #     max_allocated_storage: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -2026,8 +2055,8 @@ module Aws::RDS
     #   Changing this setting doesn't result in an outage. The parameter
     #   group name itself is changed immediately, but the actual parameter
     #   changes are not applied until you reboot the instance without
-    #   failover. The DB instance will NOT be rebooted automatically and the
-    #   parameter changes will NOT be applied during the next maintenance
+    #   failover. In this case, the DB instance isn't rebooted automatically
+    #   and the parameter changes isn't applied during the next maintenance
     #   window.
     #
     #   Default: Uses existing setting
@@ -2355,22 +2384,16 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   **Amazon Aurora**
     #
-    #   Not applicable. Mapping AWS IAM accounts to database accounts is
-    #   managed by the DB cluster. For more information, see
-    #   `ModifyDBCluster`.
     #
-    #   **MySQL**
-    #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
-    #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   DB instance.
@@ -2415,6 +2438,9 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    # @option options [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2727,14 +2753,16 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
@@ -3147,7 +3175,20 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   A filter that specifies one or more DB snapshots to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-snapshot-id` - Accepts DB snapshot identifiers.
+    #
+    #   * `dbi-resource-id` - Accepts identifiers of source DB instances.
+    #
+    #   * `snapshot-type` - Accepts types of DB snapshots.
+    #
+    #   * `engine` - Accepts names of database engines.
     # @option options [Boolean] :include_shared
     #   A value that indicates whether to include shared manual DB cluster
     #   snapshots from other AWS accounts that this AWS account has been given

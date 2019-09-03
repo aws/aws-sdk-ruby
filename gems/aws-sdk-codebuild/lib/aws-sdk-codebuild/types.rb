@@ -151,7 +151,15 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] source_version
     #   Any version identifier for the version of the source code to be
-    #   built.
+    #   built. If `sourceVersion` is specified at the project level, then
+    #   this `sourceVersion` (at the build level) takes precedence.
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1]
+    #   in the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
     #   @return [String]
     #
     # @!attribute [rw] resolved_source_version
@@ -568,6 +576,13 @@ module Aws::CodeBuild
     #             source_identifier: "String",
     #           },
     #         ],
+    #         source_version: "String",
+    #         secondary_source_versions: [
+    #           {
+    #             source_identifier: "String", # required
+    #             source_version: "String", # required
+    #           },
+    #         ],
     #         artifacts: { # required
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #           location: "String",
@@ -662,6 +677,48 @@ module Aws::CodeBuild
     #   An array of `ProjectSource` objects.
     #   @return [Array<Types::ProjectSource>]
     #
+    # @!attribute [rw] source_version
+    #   A version of the build input to be built for this project. If not
+    #   specified, the latest version is used. If specified, it must be one
+    #   of:
+    #
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
+    #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
+    #     name is specified, the branch's HEAD commit ID is used. If not
+    #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a branch name is specified, the branch's HEAD commit ID is
+    #     used. If not specified, the default branch's HEAD commit ID is
+    #     used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
+    #     the object that represents the build input ZIP file to use.
+    #
+    #   If `sourceVersion` is specified at the build level, then that
+    #   version takes precedence over this `sourceVersion` (at the project
+    #   level).
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1]
+    #   in the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_source_versions
+    #   An array of `ProjectSourceVersion` objects. If
+    #   `secondarySourceVersions` is specified at the build level, then they
+    #   take precedence over these `secondarySourceVersions` (at the project
+    #   level).
+    #   @return [Array<Types::ProjectSourceVersion>]
+    #
     # @!attribute [rw] artifacts
     #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
@@ -740,6 +797,8 @@ module Aws::CodeBuild
       :description,
       :source,
       :secondary_sources,
+      :source_version,
+      :secondary_source_versions,
       :artifacts,
       :secondary_artifacts,
       :cache,
@@ -1039,6 +1098,7 @@ module Aws::CodeBuild
     #         token: "SensitiveNonEmptyString", # required
     #         server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE
     #         auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN
+    #         should_overwrite: false,
     #       }
     #
     # @!attribute [rw] username
@@ -1063,13 +1123,20 @@ module Aws::CodeBuild
     #   console.
     #   @return [String]
     #
+    # @!attribute [rw] should_overwrite
+    #   Set to `false` to prevent overwriting the repository source
+    #   credentials. Set to `true` to overwrite the repository source
+    #   credentials. The default value is `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentialsInput AWS API Documentation
     #
     class ImportSourceCredentialsInput < Struct.new(
       :username,
       :token,
       :server_type,
-      :auth_type)
+      :auth_type,
+      :should_overwrite)
       include Aws::Structure
     end
 
@@ -1468,6 +1535,47 @@ module Aws::CodeBuild
     #   An array of `ProjectSource` objects.
     #   @return [Array<Types::ProjectSource>]
     #
+    # @!attribute [rw] source_version
+    #   A version of the build input to be built for this project. If not
+    #   specified, the latest version is used. If specified, it must be one
+    #   of:
+    #
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
+    #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
+    #     name is specified, the branch's HEAD commit ID is used. If not
+    #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a branch name is specified, the branch's HEAD commit ID is
+    #     used. If not specified, the default branch's HEAD commit ID is
+    #     used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
+    #     the object that represents the build input ZIP file to use.
+    #
+    #   If `sourceVersion` is specified at the build level, then that
+    #   version takes precedence over this `sourceVersion` (at the project
+    #   level).
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1]
+    #   in the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_source_versions
+    #   An array of `ProjectSourceVersion` objects. If
+    #   `secondarySourceVersions` is specified at the build level, then they
+    #   take over these `secondarySourceVersions` (at the project level).
+    #   @return [Array<Types::ProjectSourceVersion>]
+    #
     # @!attribute [rw] artifacts
     #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
@@ -1557,6 +1665,8 @@ module Aws::CodeBuild
       :description,
       :source,
       :secondary_sources,
+      :source_version,
+      :secondary_source_versions,
       :artifacts,
       :secondary_artifacts,
       :cache,
@@ -1816,7 +1926,7 @@ module Aws::CodeBuild
     #     Docker images. It can prevent the performance issues caused by
     #     pulling large Docker images down from the network.
     #
-    #     <note markdown="1"> * You can use a Docker layer cache in the Linux enviornment only.
+    #     <note markdown="1"> * You can use a Docker layer cache in the Linux environment only.
     #
     #     * The `privileged` flag must be set so that your project has the
     #       required Docker permissions.
@@ -1917,28 +2027,29 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] privileged_mode
     #   Enables running the Docker daemon inside a Docker container. Set to
-    #   true only if the build project is be used to build Docker images,
-    #   and the specified build environment image is not provided by AWS
-    #   CodeBuild with Docker support. Otherwise, all associated builds that
-    #   attempt to interact with the Docker daemon fail. You must also start
-    #   the Docker daemon so that builds can interact with it. One way to do
-    #   this is to initialize the Docker daemon during the install phase of
-    #   your build spec by running the following build commands. (Do not run
-    #   these commands if the specified build environment image is provided
-    #   by AWS CodeBuild with Docker support.)
+    #   true only if the build project is used to build Docker images.
+    #   Otherwise, a build that attempts to interact with the Docker daemon
+    #   fails.
+    #
+    #   You can initialize the Docker daemon during the install phase of
+    #   your build by adding one of the following sets of commands to the
+    #   install phase of your buildspec file:
     #
     #   If the operating system's base image is Ubuntu Linux:
     #
     #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
-    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout 15 sh
-    #   -c "until docker info; do echo .; sleep 1; done"`
+    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay&`
     #
-    #   If the operating system's base image is Alpine Linux, add the `-t`
-    #   argument to `timeout`\:
+    #   `- timeout 15 sh -c "until docker info; do echo .; sleep 1; done"`
+    #
+    #   If the operating system's base image is Alpine Linux and the
+    #   previous command does not work, add the `-t` argument to `timeout`\:
     #
     #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
-    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout 15 -t
-    #   sh -c "until docker info; do echo .; sleep 1; done"`
+    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay&`
+    #
+    #   `- timeout -t 15 sh -c "until docker info; do echo .; sleep 1;
+    #   done"`
     #   @return [Boolean]
     #
     # @!attribute [rw] certificate
@@ -2164,6 +2275,13 @@ module Aws::CodeBuild
     #
     #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
     #     the object that represents the build input ZIP file to use.
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1]
+    #   in the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSourceVersion AWS API Documentation
@@ -2465,6 +2583,16 @@ module Aws::CodeBuild
     #
     #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
     #     the object that represents the build input ZIP file to use.
+    #
+    #   If `sourceVersion` is specified at the project level, then this
+    #   `sourceVersion` (at the build level) takes precedence.
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1]
+    #   in the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
     #   @return [String]
     #
     # @!attribute [rw] artifacts_override
@@ -2749,6 +2877,13 @@ module Aws::CodeBuild
     #             source_identifier: "String",
     #           },
     #         ],
+    #         source_version: "String",
+    #         secondary_source_versions: [
+    #           {
+    #             source_identifier: "String", # required
+    #             source_version: "String", # required
+    #           },
+    #         ],
     #         artifacts: {
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
     #           location: "String",
@@ -2848,6 +2983,47 @@ module Aws::CodeBuild
     #   An array of `ProjectSource` objects.
     #   @return [Array<Types::ProjectSource>]
     #
+    # @!attribute [rw] source_version
+    #   A version of the build input to be built for this project. If not
+    #   specified, the latest version is used. If specified, it must be one
+    #   of:
+    #
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
+    #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
+    #     name is specified, the branch's HEAD commit ID is used. If not
+    #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a branch name is specified, the branch's HEAD commit ID is
+    #     used. If not specified, the default branch's HEAD commit ID is
+    #     used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
+    #     the object that represents the build input ZIP file to use.
+    #
+    #   If `sourceVersion` is specified at the build level, then that
+    #   version takes precedence over this `sourceVersion` (at the project
+    #   level).
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1]
+    #   in the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_source_versions
+    #   An array of `ProjectSourceVersion` objects. If
+    #   `secondarySourceVersions` is specified at the build level, then they
+    #   take over these `secondarySourceVersions` (at the project level).
+    #   @return [Array<Types::ProjectSourceVersion>]
+    #
     # @!attribute [rw] artifacts
     #   Information to be changed about the build output artifacts for the
     #   build project.
@@ -2927,6 +3103,8 @@ module Aws::CodeBuild
       :description,
       :source,
       :secondary_sources,
+      :source_version,
+      :secondary_source_versions,
       :artifacts,
       :secondary_artifacts,
       :cache,

@@ -116,6 +116,10 @@ module Aws::DLM
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -280,7 +284,8 @@ module Aws::DLM
     #     description: "PolicyDescription", # required
     #     state: "ENABLED", # required, accepts ENABLED, DISABLED
     #     policy_details: { # required
-    #       resource_types: ["VOLUME"], # accepts VOLUME
+    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #       resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #       target_tags: [
     #         {
     #           key: "String", # required
@@ -297,6 +302,12 @@ module Aws::DLM
     #               value: "String", # required
     #             },
     #           ],
+    #           variable_tags: [
+    #             {
+    #               key: "String", # required
+    #               value: "String", # required
+    #             },
+    #           ],
     #           create_rule: {
     #             interval: 1, # required
     #             interval_unit: "HOURS", # required, accepts HOURS
@@ -307,6 +318,9 @@ module Aws::DLM
     #           },
     #         },
     #       ],
+    #       parameters: {
+    #         exclude_boot_volume: false,
+    #       },
     #     },
     #   })
     #
@@ -382,7 +396,7 @@ module Aws::DLM
     #   resp = client.get_lifecycle_policies({
     #     policy_ids: ["PolicyId"],
     #     state: "ENABLED", # accepts ENABLED, DISABLED, ERROR
-    #     resource_types: ["VOLUME"], # accepts VOLUME
+    #     resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #     target_tags: ["TagFilter"],
     #     tags_to_add: ["TagFilter"],
     #   })
@@ -426,8 +440,9 @@ module Aws::DLM
     #   resp.policy.execution_role_arn #=> String
     #   resp.policy.date_created #=> Time
     #   resp.policy.date_modified #=> Time
+    #   resp.policy.policy_details.policy_type #=> String, one of "EBS_SNAPSHOT_MANAGEMENT"
     #   resp.policy.policy_details.resource_types #=> Array
-    #   resp.policy.policy_details.resource_types[0] #=> String, one of "VOLUME"
+    #   resp.policy.policy_details.resource_types[0] #=> String, one of "VOLUME", "INSTANCE"
     #   resp.policy.policy_details.target_tags #=> Array
     #   resp.policy.policy_details.target_tags[0].key #=> String
     #   resp.policy.policy_details.target_tags[0].value #=> String
@@ -437,11 +452,15 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].tags_to_add #=> Array
     #   resp.policy.policy_details.schedules[0].tags_to_add[0].key #=> String
     #   resp.policy.policy_details.schedules[0].tags_to_add[0].value #=> String
+    #   resp.policy.policy_details.schedules[0].variable_tags #=> Array
+    #   resp.policy.policy_details.schedules[0].variable_tags[0].key #=> String
+    #   resp.policy.policy_details.schedules[0].variable_tags[0].value #=> String
     #   resp.policy.policy_details.schedules[0].create_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].create_rule.interval_unit #=> String, one of "HOURS"
     #   resp.policy.policy_details.schedules[0].create_rule.times #=> Array
     #   resp.policy.policy_details.schedules[0].create_rule.times[0] #=> String
     #   resp.policy.policy_details.schedules[0].retain_rule.count #=> Integer
+    #   resp.policy.policy_details.parameters.exclude_boot_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/GetLifecyclePolicy AWS API Documentation
     #
@@ -482,7 +501,8 @@ module Aws::DLM
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #     description: "PolicyDescription",
     #     policy_details: {
-    #       resource_types: ["VOLUME"], # accepts VOLUME
+    #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #       resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #       target_tags: [
     #         {
     #           key: "String", # required
@@ -499,6 +519,12 @@ module Aws::DLM
     #               value: "String", # required
     #             },
     #           ],
+    #           variable_tags: [
+    #             {
+    #               key: "String", # required
+    #               value: "String", # required
+    #             },
+    #           ],
     #           create_rule: {
     #             interval: 1, # required
     #             interval_unit: "HOURS", # required, accepts HOURS
@@ -509,6 +535,9 @@ module Aws::DLM
     #           },
     #         },
     #       ],
+    #       parameters: {
+    #         exclude_boot_volume: false,
+    #       },
     #     },
     #   })
     #
@@ -534,7 +563,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

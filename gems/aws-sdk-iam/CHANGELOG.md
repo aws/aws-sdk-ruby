@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2019-07-12)
+------------------
+
+* Feature - Removed exception that was indicated but never thrown for IAM GetAccessKeyLastUsed API
+
+1.27.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-06-21)
+------------------
+
+* Feature - We are making it easier for you to manage your permission guardrails i.e. service control policies by enabling you to retrieve the last timestamp when an AWS service was accessed within an account or AWS Organizations entity.
+
+1.25.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2019-06-04)
+------------------
+
+* Feature - This release adds validation for policy path field. This field is now restricted to be max 512 characters.
+
+1.23.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.22.0 (2019-05-15)
 ------------------
 

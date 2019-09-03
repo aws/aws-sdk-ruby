@@ -472,6 +472,7 @@ module Aws::Redshift
     Cluster.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
     Cluster.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     Cluster.add_member(:cluster_status, Shapes::ShapeRef.new(shape: String, location_name: "ClusterStatus"))
+    Cluster.add_member(:cluster_availability_status, Shapes::ShapeRef.new(shape: String, location_name: "ClusterAvailabilityStatus"))
     Cluster.add_member(:modify_status, Shapes::ShapeRef.new(shape: String, location_name: "ModifyStatus"))
     Cluster.add_member(:master_username, Shapes::ShapeRef.new(shape: String, location_name: "MasterUsername"))
     Cluster.add_member(:db_name, Shapes::ShapeRef.new(shape: String, location_name: "DBName"))
@@ -510,6 +511,8 @@ module Aws::Redshift
     Cluster.add_member(:deferred_maintenance_windows, Shapes::ShapeRef.new(shape: DeferredMaintenanceWindowsList, location_name: "DeferredMaintenanceWindows"))
     Cluster.add_member(:snapshot_schedule_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotScheduleIdentifier"))
     Cluster.add_member(:snapshot_schedule_state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "SnapshotScheduleState"))
+    Cluster.add_member(:expected_next_snapshot_schedule_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ExpectedNextSnapshotScheduleTime"))
+    Cluster.add_member(:expected_next_snapshot_schedule_time_status, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedNextSnapshotScheduleTimeStatus"))
     Cluster.add_member(:resize_info, Shapes::ShapeRef.new(shape: ResizeInfo, location_name: "ResizeInfo"))
     Cluster.struct_class = Types::Cluster
 
@@ -2672,6 +2675,8 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterTrackFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
       api.add_operation(:restore_table_from_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|

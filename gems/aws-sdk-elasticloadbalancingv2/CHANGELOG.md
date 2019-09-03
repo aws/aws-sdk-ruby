@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2019-06-24)
+------------------
+
+* Feature - This release adds support for UDP on Network Load Balancers
+
+1.30.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.28.0 (2019-05-15)
 ------------------
 

@@ -30,9 +30,7 @@ module Aws::S3
       @bucket_name
     end
 
-    # Container for logging information. Presence of this element indicates
-    # that logging is enabled. Parameters TargetBucket and TargetPrefix are
-    # required in this case.
+    
     # @return [Types::LoggingEnabled]
     def logging_enabled
       data[:logging_enabled]

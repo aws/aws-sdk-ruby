@@ -116,6 +116,10 @@ module Aws::CodeCommit
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -260,6 +264,182 @@ module Aws::CodeCommit
 
     # @!group API Operations
 
+    # Returns information about one or more merge conflicts in the attempted
+    # merge of two commit specifiers using the squash or three-way merge
+    # strategy.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the merge conflicts you want
+    #   to review.
+    #
+    # @option params [required, String] :destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :merge_option
+    #   The merge option or strategy you want to use to merge the code.
+    #
+    # @option params [Integer] :max_merge_hunks
+    #   The maximum number of merge hunks to include in the output.
+    #
+    # @option params [Integer] :max_conflict_files
+    #   The maximum number of files to include in the output.
+    #
+    # @option params [Array<String>] :file_paths
+    #   The path of the target files used to describe the conflicts. If not
+    #   specified, the default is all conflict files.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
+    #
+    # @return [Types::BatchDescribeMergeConflictsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDescribeMergeConflictsOutput#conflicts #conflicts} => Array&lt;Types::Conflict&gt;
+    #   * {Types::BatchDescribeMergeConflictsOutput#next_token #next_token} => String
+    #   * {Types::BatchDescribeMergeConflictsOutput#errors #errors} => Array&lt;Types::BatchDescribeMergeConflictsError&gt;
+    #   * {Types::BatchDescribeMergeConflictsOutput#destination_commit_id #destination_commit_id} => String
+    #   * {Types::BatchDescribeMergeConflictsOutput#source_commit_id #source_commit_id} => String
+    #   * {Types::BatchDescribeMergeConflictsOutput#base_commit_id #base_commit_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_describe_merge_conflicts({
+    #     repository_name: "RepositoryName", # required
+    #     destination_commit_specifier: "CommitName", # required
+    #     source_commit_specifier: "CommitName", # required
+    #     merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE, SQUASH_MERGE, THREE_WAY_MERGE
+    #     max_merge_hunks: 1,
+    #     max_conflict_files: 1,
+    #     file_paths: ["Path"],
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conflicts #=> Array
+    #   resp.conflicts[0].conflict_metadata.file_path #=> String
+    #   resp.conflicts[0].conflict_metadata.file_sizes.source #=> Integer
+    #   resp.conflicts[0].conflict_metadata.file_sizes.destination #=> Integer
+    #   resp.conflicts[0].conflict_metadata.file_sizes.base #=> Integer
+    #   resp.conflicts[0].conflict_metadata.file_modes.source #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.conflicts[0].conflict_metadata.file_modes.destination #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.conflicts[0].conflict_metadata.file_modes.base #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.conflicts[0].conflict_metadata.object_types.source #=> String, one of "FILE", "DIRECTORY", "GIT_LINK", "SYMBOLIC_LINK"
+    #   resp.conflicts[0].conflict_metadata.object_types.destination #=> String, one of "FILE", "DIRECTORY", "GIT_LINK", "SYMBOLIC_LINK"
+    #   resp.conflicts[0].conflict_metadata.object_types.base #=> String, one of "FILE", "DIRECTORY", "GIT_LINK", "SYMBOLIC_LINK"
+    #   resp.conflicts[0].conflict_metadata.number_of_conflicts #=> Integer
+    #   resp.conflicts[0].conflict_metadata.is_binary_file.source #=> Boolean
+    #   resp.conflicts[0].conflict_metadata.is_binary_file.destination #=> Boolean
+    #   resp.conflicts[0].conflict_metadata.is_binary_file.base #=> Boolean
+    #   resp.conflicts[0].conflict_metadata.content_conflict #=> Boolean
+    #   resp.conflicts[0].conflict_metadata.file_mode_conflict #=> Boolean
+    #   resp.conflicts[0].conflict_metadata.object_type_conflict #=> Boolean
+    #   resp.conflicts[0].conflict_metadata.merge_operations.source #=> String, one of "A", "M", "D"
+    #   resp.conflicts[0].conflict_metadata.merge_operations.destination #=> String, one of "A", "M", "D"
+    #   resp.conflicts[0].merge_hunks #=> Array
+    #   resp.conflicts[0].merge_hunks[0].is_conflict #=> Boolean
+    #   resp.conflicts[0].merge_hunks[0].source.start_line #=> Integer
+    #   resp.conflicts[0].merge_hunks[0].source.end_line #=> Integer
+    #   resp.conflicts[0].merge_hunks[0].source.hunk_content #=> String
+    #   resp.conflicts[0].merge_hunks[0].destination.start_line #=> Integer
+    #   resp.conflicts[0].merge_hunks[0].destination.end_line #=> Integer
+    #   resp.conflicts[0].merge_hunks[0].destination.hunk_content #=> String
+    #   resp.conflicts[0].merge_hunks[0].base.start_line #=> Integer
+    #   resp.conflicts[0].merge_hunks[0].base.end_line #=> Integer
+    #   resp.conflicts[0].merge_hunks[0].base.hunk_content #=> String
+    #   resp.next_token #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].file_path #=> String
+    #   resp.errors[0].exception_name #=> String
+    #   resp.errors[0].message #=> String
+    #   resp.destination_commit_id #=> String
+    #   resp.source_commit_id #=> String
+    #   resp.base_commit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchDescribeMergeConflicts AWS API Documentation
+    #
+    # @overload batch_describe_merge_conflicts(params = {})
+    # @param [Hash] params ({})
+    def batch_describe_merge_conflicts(params = {}, options = {})
+      req = build_request(:batch_describe_merge_conflicts, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the contents of one or more commits in a
+    # repository.
+    #
+    # @option params [required, Array<String>] :commit_ids
+    #   The full commit IDs of the commits to get information about.
+    #
+    #   <note markdown="1"> You must supply the full SHAs of each commit. You cannot use shortened
+    #   SHAs.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the commits.
+    #
+    # @return [Types::BatchGetCommitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCommitsOutput#commits #commits} => Array&lt;Types::Commit&gt;
+    #   * {Types::BatchGetCommitsOutput#errors #errors} => Array&lt;Types::BatchGetCommitsError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_commits({
+    #     commit_ids: ["ObjectId"], # required
+    #     repository_name: "RepositoryName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commits #=> Array
+    #   resp.commits[0].commit_id #=> String
+    #   resp.commits[0].tree_id #=> String
+    #   resp.commits[0].parents #=> Array
+    #   resp.commits[0].parents[0] #=> String
+    #   resp.commits[0].message #=> String
+    #   resp.commits[0].author.name #=> String
+    #   resp.commits[0].author.email #=> String
+    #   resp.commits[0].author.date #=> String
+    #   resp.commits[0].committer.name #=> String
+    #   resp.commits[0].committer.email #=> String
+    #   resp.commits[0].committer.date #=> String
+    #   resp.commits[0].additional_data #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].commit_id #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommits AWS API Documentation
+    #
+    # @overload batch_get_commits(params = {})
+    # @param [Hash] params ({})
+    def batch_get_commits(params = {}, options = {})
+      req = build_request(:batch_get_commits, params)
+      req.send_request(options)
+    end
+
     # Returns information about one or more repositories.
     #
     # <note markdown="1"> The description field for a repository accepts all HTML characters and
@@ -373,7 +553,8 @@ module Aws::CodeCommit
     # @option params [Boolean] :keep_empty_folders
     #   If the commit contains deletions, whether to keep a folder or folder
     #   structure if the changes leave the folders empty. If this is specified
-    #   as true, a .gitkeep file will be created for empty folders.
+    #   as true, a .gitkeep file will be created for empty folders. The
+    #   default is false.
     #
     # @option params [Array<Types::PutFileEntry>] :put_files
     #   The files to add or update in this commit.
@@ -521,6 +702,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequest AWS API Documentation
@@ -547,7 +730,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
     #
     # @option params [String] :repository_description
     #   A comment or description about the new repository.
@@ -561,6 +744,9 @@ module Aws::CodeCommit
     #
     #    </note>
     #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tag key-value pairs to use when tagging this repository.
+    #
     # @return [Types::CreateRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRepositoryOutput#repository_metadata #repository_metadata} => Types::RepositoryMetadata
@@ -570,6 +756,9 @@ module Aws::CodeCommit
     #   resp = client.create_repository({
     #     repository_name: "RepositoryName", # required
     #     repository_description: "RepositoryDescription",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -591,6 +780,122 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def create_repository(params = {}, options = {})
       req = build_request(:create_repository, params)
+      req.send_request(options)
+    end
+
+    # Creates an unreferenced commit that represents the result of merging
+    # two branches using a specified merge strategy. This can help you
+    # determine the outcome of a potential merge. This API cannot be used
+    # with the fast-forward merge strategy, as that strategy does not create
+    # a merge commit.
+    #
+    # <note markdown="1"> This unreferenced merge commit can only be accessed using the
+    # GetCommit API or through git commands such as git fetch. To retrieve
+    # this commit, you must specify its commit ID or otherwise reference it.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to create the unreferenced
+    #   merge commit.
+    #
+    # @option params [required, String] :source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :merge_option
+    #   The merge option or strategy you want to use to merge the code.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @option params [String] :author_name
+    #   The name of the author who created the unreferenced commit. This
+    #   information will be used as both the author and committer for the
+    #   commit.
+    #
+    # @option params [String] :email
+    #   The email address for the person who created the unreferenced commit.
+    #
+    # @option params [String] :commit_message
+    #   The commit message for the unreferenced commit.
+    #
+    # @option params [Boolean] :keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is specified
+    #   as true, a .gitkeep file will be created for empty folders. The
+    #   default is false.
+    #
+    # @option params [Types::ConflictResolution] :conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #
+    # @return [Types::CreateUnreferencedMergeCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUnreferencedMergeCommitOutput#commit_id #commit_id} => String
+    #   * {Types::CreateUnreferencedMergeCommitOutput#tree_id #tree_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_unreferenced_merge_commit({
+    #     repository_name: "RepositoryName", # required
+    #     source_commit_specifier: "CommitName", # required
+    #     destination_commit_specifier: "CommitName", # required
+    #     merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE, SQUASH_MERGE, THREE_WAY_MERGE
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #     author_name: "Name",
+    #     email: "Email",
+    #     commit_message: "Message",
+    #     keep_empty_folders: false,
+    #     conflict_resolution: {
+    #       replace_contents: [
+    #         {
+    #           file_path: "Path", # required
+    #           replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #           content: "data",
+    #           file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #       delete_files: [
+    #         {
+    #           file_path: "Path", # required
+    #         },
+    #       ],
+    #       set_file_modes: [
+    #         {
+    #           file_path: "Path", # required
+    #           file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commit_id #=> String
+    #   resp.tree_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateUnreferencedMergeCommit AWS API Documentation
+    #
+    # @overload create_unreferenced_merge_commit(params = {})
+    # @param [Hash] params ({})
+    def create_unreferenced_merge_commit(params = {}, options = {})
+      req = build_request(:create_unreferenced_merge_commit, params)
       req.send_request(options)
     end
 
@@ -780,6 +1085,118 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Returns information about one or more merge conflicts in the attempted
+    # merge of two commit specifiers using the squash or three-way merge
+    # strategy. If the merge option for the attempted merge is specified as
+    # FAST\_FORWARD\_MERGE, an exception will be thrown.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to get information about a
+    #   merge conflict.
+    #
+    # @option params [required, String] :destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :merge_option
+    #   The merge option or strategy you want to use to merge the code.
+    #
+    # @option params [Integer] :max_merge_hunks
+    #   The maximum number of merge hunks to include in the output.
+    #
+    # @option params [required, String] :file_path
+    #   The path of the target files used to describe the conflicts.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
+    #
+    # @return [Types::DescribeMergeConflictsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMergeConflictsOutput#conflict_metadata #conflict_metadata} => Types::ConflictMetadata
+    #   * {Types::DescribeMergeConflictsOutput#merge_hunks #merge_hunks} => Array&lt;Types::MergeHunk&gt;
+    #   * {Types::DescribeMergeConflictsOutput#next_token #next_token} => String
+    #   * {Types::DescribeMergeConflictsOutput#destination_commit_id #destination_commit_id} => String
+    #   * {Types::DescribeMergeConflictsOutput#source_commit_id #source_commit_id} => String
+    #   * {Types::DescribeMergeConflictsOutput#base_commit_id #base_commit_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_merge_conflicts({
+    #     repository_name: "RepositoryName", # required
+    #     destination_commit_specifier: "CommitName", # required
+    #     source_commit_specifier: "CommitName", # required
+    #     merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE, SQUASH_MERGE, THREE_WAY_MERGE
+    #     max_merge_hunks: 1,
+    #     file_path: "Path", # required
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conflict_metadata.file_path #=> String
+    #   resp.conflict_metadata.file_sizes.source #=> Integer
+    #   resp.conflict_metadata.file_sizes.destination #=> Integer
+    #   resp.conflict_metadata.file_sizes.base #=> Integer
+    #   resp.conflict_metadata.file_modes.source #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.conflict_metadata.file_modes.destination #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.conflict_metadata.file_modes.base #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.conflict_metadata.object_types.source #=> String, one of "FILE", "DIRECTORY", "GIT_LINK", "SYMBOLIC_LINK"
+    #   resp.conflict_metadata.object_types.destination #=> String, one of "FILE", "DIRECTORY", "GIT_LINK", "SYMBOLIC_LINK"
+    #   resp.conflict_metadata.object_types.base #=> String, one of "FILE", "DIRECTORY", "GIT_LINK", "SYMBOLIC_LINK"
+    #   resp.conflict_metadata.number_of_conflicts #=> Integer
+    #   resp.conflict_metadata.is_binary_file.source #=> Boolean
+    #   resp.conflict_metadata.is_binary_file.destination #=> Boolean
+    #   resp.conflict_metadata.is_binary_file.base #=> Boolean
+    #   resp.conflict_metadata.content_conflict #=> Boolean
+    #   resp.conflict_metadata.file_mode_conflict #=> Boolean
+    #   resp.conflict_metadata.object_type_conflict #=> Boolean
+    #   resp.conflict_metadata.merge_operations.source #=> String, one of "A", "M", "D"
+    #   resp.conflict_metadata.merge_operations.destination #=> String, one of "A", "M", "D"
+    #   resp.merge_hunks #=> Array
+    #   resp.merge_hunks[0].is_conflict #=> Boolean
+    #   resp.merge_hunks[0].source.start_line #=> Integer
+    #   resp.merge_hunks[0].source.end_line #=> Integer
+    #   resp.merge_hunks[0].source.hunk_content #=> String
+    #   resp.merge_hunks[0].destination.start_line #=> Integer
+    #   resp.merge_hunks[0].destination.end_line #=> Integer
+    #   resp.merge_hunks[0].destination.hunk_content #=> String
+    #   resp.merge_hunks[0].base.start_line #=> Integer
+    #   resp.merge_hunks[0].base.end_line #=> Integer
+    #   resp.merge_hunks[0].base.hunk_content #=> String
+    #   resp.next_token #=> String
+    #   resp.destination_commit_id #=> String
+    #   resp.source_commit_id #=> String
+    #   resp.base_commit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribeMergeConflicts AWS API Documentation
+    #
+    # @overload describe_merge_conflicts(params = {})
+    # @param [Hash] params ({})
+    def describe_merge_conflicts(params = {}, options = {})
+      req = build_request(:describe_merge_conflicts, params)
+      req.send_request(options)
+    end
+
     # Returns information about one or more pull request events.
     #
     # @option params [required, String] :pull_request_id
@@ -839,6 +1256,8 @@ module Aws::CodeCommit
     #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.destination_reference #=> String
     #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.is_merged #=> Boolean
     #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.merged_by #=> String
+    #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.merge_commit_id #=> String
+    #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribePullRequestEvents AWS API Documentation
@@ -1338,6 +1757,66 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Returns information about a specified merge commit.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the merge commit about which
+    #   you want to get information.
+    #
+    # @option params [required, String] :source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @return [Types::GetMergeCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMergeCommitOutput#source_commit_id #source_commit_id} => String
+    #   * {Types::GetMergeCommitOutput#destination_commit_id #destination_commit_id} => String
+    #   * {Types::GetMergeCommitOutput#base_commit_id #base_commit_id} => String
+    #   * {Types::GetMergeCommitOutput#merged_commit_id #merged_commit_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_merge_commit({
+    #     repository_name: "RepositoryName", # required
+    #     source_commit_specifier: "CommitName", # required
+    #     destination_commit_specifier: "CommitName", # required
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_commit_id #=> String
+    #   resp.destination_commit_id #=> String
+    #   resp.base_commit_id #=> String
+    #   resp.merged_commit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeCommit AWS API Documentation
+    #
+    # @overload get_merge_commit(params = {})
+    # @param [Hash] params ({})
+    def get_merge_commit(params = {}, options = {})
+      req = build_request(:get_merge_commit, params)
+      req.send_request(options)
+    end
+
     # Returns information about merge conflicts between the before and after
     # commit IDs for a pull request in a repository.
     #
@@ -1353,14 +1832,36 @@ module Aws::CodeCommit
     #   identify a commit. For example, a branch name or a full commit ID.
     #
     # @option params [required, String] :merge_option
-    #   The merge option or strategy you want to use to merge the code. The
-    #   only valid value is FAST\_FORWARD\_MERGE.
+    #   The merge option or strategy you want to use to merge the code.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [Integer] :max_conflict_files
+    #   The maximum number of files to include in the output.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
     #
     # @return [Types::GetMergeConflictsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMergeConflictsOutput#mergeable #mergeable} => Boolean
     #   * {Types::GetMergeConflictsOutput#destination_commit_id #destination_commit_id} => String
     #   * {Types::GetMergeConflictsOutput#source_commit_id #source_commit_id} => String
+    #   * {Types::GetMergeConflictsOutput#base_commit_id #base_commit_id} => String
+    #   * {Types::GetMergeConflictsOutput#conflict_metadata_list #conflict_metadata_list} => Array&lt;Types::ConflictMetadata&gt;
+    #   * {Types::GetMergeConflictsOutput#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1368,7 +1869,11 @@ module Aws::CodeCommit
     #     repository_name: "RepositoryName", # required
     #     destination_commit_specifier: "CommitName", # required
     #     source_commit_specifier: "CommitName", # required
-    #     merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE
+    #     merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE, SQUASH_MERGE, THREE_WAY_MERGE
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     max_conflict_files: 1,
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1376,6 +1881,28 @@ module Aws::CodeCommit
     #   resp.mergeable #=> Boolean
     #   resp.destination_commit_id #=> String
     #   resp.source_commit_id #=> String
+    #   resp.base_commit_id #=> String
+    #   resp.conflict_metadata_list #=> Array
+    #   resp.conflict_metadata_list[0].file_path #=> String
+    #   resp.conflict_metadata_list[0].file_sizes.source #=> Integer
+    #   resp.conflict_metadata_list[0].file_sizes.destination #=> Integer
+    #   resp.conflict_metadata_list[0].file_sizes.base #=> Integer
+    #   resp.conflict_metadata_list[0].file_modes.source #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.conflict_metadata_list[0].file_modes.destination #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.conflict_metadata_list[0].file_modes.base #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.conflict_metadata_list[0].object_types.source #=> String, one of "FILE", "DIRECTORY", "GIT_LINK", "SYMBOLIC_LINK"
+    #   resp.conflict_metadata_list[0].object_types.destination #=> String, one of "FILE", "DIRECTORY", "GIT_LINK", "SYMBOLIC_LINK"
+    #   resp.conflict_metadata_list[0].object_types.base #=> String, one of "FILE", "DIRECTORY", "GIT_LINK", "SYMBOLIC_LINK"
+    #   resp.conflict_metadata_list[0].number_of_conflicts #=> Integer
+    #   resp.conflict_metadata_list[0].is_binary_file.source #=> Boolean
+    #   resp.conflict_metadata_list[0].is_binary_file.destination #=> Boolean
+    #   resp.conflict_metadata_list[0].is_binary_file.base #=> Boolean
+    #   resp.conflict_metadata_list[0].content_conflict #=> Boolean
+    #   resp.conflict_metadata_list[0].file_mode_conflict #=> Boolean
+    #   resp.conflict_metadata_list[0].object_type_conflict #=> Boolean
+    #   resp.conflict_metadata_list[0].merge_operations.source #=> String, one of "A", "M", "D"
+    #   resp.conflict_metadata_list[0].merge_operations.destination #=> String, one of "A", "M", "D"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeConflicts AWS API Documentation
     #
@@ -1383,6 +1910,69 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def get_merge_conflicts(params = {}, options = {})
       req = build_request(:get_merge_conflicts, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the merge options available for merging two
+    # specified branches. For details about why a particular merge option is
+    # not available, use GetMergeConflicts or DescribeMergeConflicts.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the commits about which you
+    #   want to get merge options.
+    #
+    # @option params [required, String] :source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @return [Types::GetMergeOptionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMergeOptionsOutput#merge_options #merge_options} => Array&lt;String&gt;
+    #   * {Types::GetMergeOptionsOutput#source_commit_id #source_commit_id} => String
+    #   * {Types::GetMergeOptionsOutput#destination_commit_id #destination_commit_id} => String
+    #   * {Types::GetMergeOptionsOutput#base_commit_id #base_commit_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_merge_options({
+    #     repository_name: "RepositoryName", # required
+    #     source_commit_specifier: "CommitName", # required
+    #     destination_commit_specifier: "CommitName", # required
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.merge_options #=> Array
+    #   resp.merge_options[0] #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
+    #   resp.source_commit_id #=> String
+    #   resp.destination_commit_id #=> String
+    #   resp.base_commit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeOptions AWS API Documentation
+    #
+    # @overload get_merge_options(params = {})
+    # @param [Hash] params ({})
+    def get_merge_options(params = {}, options = {})
+      req = build_request(:get_merge_options, params)
       req.send_request(options)
     end
 
@@ -1420,6 +2010,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequest AWS API Documentation
@@ -1646,9 +2238,308 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Closes a pull request and attempts to merge the source commit of a
-    # pull request into the specified destination branch for that pull
-    # request at the specified commit using the fast-forward merge option.
+    # Gets information about AWS tags for a specified Amazon Resource Name
+    # (ARN) in AWS CodeCommit. For a list of valid resources in AWS
+    # CodeCommit, see [CodeCommit Resources and Operations][1] in the AWS
+    # CodeCommit User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   get information about tags, if any.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Merges two branches using the fast-forward merge strategy.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to merge two branches.
+    #
+    # @option params [required, String] :source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [String] :target_branch
+    #   The branch where the merge will be applied.
+    #
+    # @return [Types::MergeBranchesByFastForwardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MergeBranchesByFastForwardOutput#commit_id #commit_id} => String
+    #   * {Types::MergeBranchesByFastForwardOutput#tree_id #tree_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.merge_branches_by_fast_forward({
+    #     repository_name: "RepositoryName", # required
+    #     source_commit_specifier: "CommitName", # required
+    #     destination_commit_specifier: "CommitName", # required
+    #     target_branch: "BranchName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commit_id #=> String
+    #   resp.tree_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesByFastForward AWS API Documentation
+    #
+    # @overload merge_branches_by_fast_forward(params = {})
+    # @param [Hash] params ({})
+    def merge_branches_by_fast_forward(params = {}, options = {})
+      req = build_request(:merge_branches_by_fast_forward, params)
+      req.send_request(options)
+    end
+
+    # Merges two branches using the squash merge strategy.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to merge two branches.
+    #
+    # @option params [required, String] :source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [String] :target_branch
+    #   The branch where the merge will be applied.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @option params [String] :author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #
+    # @option params [String] :email
+    #   The email address of the person merging the branches. This information
+    #   will be used in the commit information for the merge.
+    #
+    # @option params [String] :commit_message
+    #   The commit message for the merge.
+    #
+    # @option params [Boolean] :keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is specified
+    #   as true, a .gitkeep file will be created for empty folders. The
+    #   default is false.
+    #
+    # @option params [Types::ConflictResolution] :conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #
+    # @return [Types::MergeBranchesBySquashOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MergeBranchesBySquashOutput#commit_id #commit_id} => String
+    #   * {Types::MergeBranchesBySquashOutput#tree_id #tree_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.merge_branches_by_squash({
+    #     repository_name: "RepositoryName", # required
+    #     source_commit_specifier: "CommitName", # required
+    #     destination_commit_specifier: "CommitName", # required
+    #     target_branch: "BranchName",
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #     author_name: "Name",
+    #     email: "Email",
+    #     commit_message: "Message",
+    #     keep_empty_folders: false,
+    #     conflict_resolution: {
+    #       replace_contents: [
+    #         {
+    #           file_path: "Path", # required
+    #           replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #           content: "data",
+    #           file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #       delete_files: [
+    #         {
+    #           file_path: "Path", # required
+    #         },
+    #       ],
+    #       set_file_modes: [
+    #         {
+    #           file_path: "Path", # required
+    #           file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commit_id #=> String
+    #   resp.tree_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesBySquash AWS API Documentation
+    #
+    # @overload merge_branches_by_squash(params = {})
+    # @param [Hash] params ({})
+    def merge_branches_by_squash(params = {}, options = {})
+      req = build_request(:merge_branches_by_squash, params)
+      req.send_request(options)
+    end
+
+    # Merges two specified branches using the three-way merge strategy.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to merge two branches.
+    #
+    # @option params [required, String] :source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [String] :target_branch
+    #   The branch where the merge will be applied.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @option params [String] :author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #
+    # @option params [String] :email
+    #   The email address of the person merging the branches. This information
+    #   will be used in the commit information for the merge.
+    #
+    # @option params [String] :commit_message
+    #   The commit message to include in the commit information for the merge.
+    #
+    # @option params [Boolean] :keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is specified
+    #   as true, a .gitkeep file will be created for empty folders. The
+    #   default is false.
+    #
+    # @option params [Types::ConflictResolution] :conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #
+    # @return [Types::MergeBranchesByThreeWayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MergeBranchesByThreeWayOutput#commit_id #commit_id} => String
+    #   * {Types::MergeBranchesByThreeWayOutput#tree_id #tree_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.merge_branches_by_three_way({
+    #     repository_name: "RepositoryName", # required
+    #     source_commit_specifier: "CommitName", # required
+    #     destination_commit_specifier: "CommitName", # required
+    #     target_branch: "BranchName",
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #     author_name: "Name",
+    #     email: "Email",
+    #     commit_message: "Message",
+    #     keep_empty_folders: false,
+    #     conflict_resolution: {
+    #       replace_contents: [
+    #         {
+    #           file_path: "Path", # required
+    #           replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #           content: "data",
+    #           file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #       delete_files: [
+    #         {
+    #           file_path: "Path", # required
+    #         },
+    #       ],
+    #       set_file_modes: [
+    #         {
+    #           file_path: "Path", # required
+    #           file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commit_id #=> String
+    #   resp.tree_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesByThreeWay AWS API Documentation
+    #
+    # @overload merge_branches_by_three_way(params = {})
+    # @param [Hash] params ({})
+    def merge_branches_by_three_way(params = {}, options = {})
+      req = build_request(:merge_branches_by_three_way, params)
+      req.send_request(options)
+    end
+
+    # Attempts to merge the source commit of a pull request into the
+    # specified destination branch for that pull request at the specified
+    # commit using the fast-forward merge strategy. If the merge is
+    # successful, it closes the pull request.
     #
     # @option params [required, String] :pull_request_id
     #   The system-generated ID of the pull request. To get this ID, use
@@ -1672,7 +2563,7 @@ module Aws::CodeCommit
     #   resp = client.merge_pull_request_by_fast_forward({
     #     pull_request_id: "PullRequestId", # required
     #     repository_name: "RepositoryName", # required
-    #     source_commit_id: "CommitId",
+    #     source_commit_id: "ObjectId",
     #   })
     #
     # @example Response structure
@@ -1693,6 +2584,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByFastForward AWS API Documentation
@@ -1701,6 +2594,250 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def merge_pull_request_by_fast_forward(params = {}, options = {})
       req = build_request(:merge_pull_request_by_fast_forward, params)
+      req.send_request(options)
+    end
+
+    # Attempts to merge the source commit of a pull request into the
+    # specified destination branch for that pull request at the specified
+    # commit using the squash merge strategy. If the merge is successful, it
+    # closes the pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where the pull request was created.
+    #
+    # @option params [String] :source_commit_id
+    #   The full commit ID of the original or updated commit in the pull
+    #   request source branch. Pass this value if you want an exception thrown
+    #   if the current commit ID of the tip of the source branch does not
+    #   match this commit ID.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @option params [String] :commit_message
+    #   The commit message to include in the commit information for the merge.
+    #
+    # @option params [String] :author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #
+    # @option params [String] :email
+    #   The email address of the person merging the branches. This information
+    #   will be used in the commit information for the merge.
+    #
+    # @option params [Boolean] :keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is specified
+    #   as true, a .gitkeep file will be created for empty folders. The
+    #   default is false.
+    #
+    # @option params [Types::ConflictResolution] :conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #
+    # @return [Types::MergePullRequestBySquashOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MergePullRequestBySquashOutput#pull_request #pull_request} => Types::PullRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.merge_pull_request_by_squash({
+    #     pull_request_id: "PullRequestId", # required
+    #     repository_name: "RepositoryName", # required
+    #     source_commit_id: "ObjectId",
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #     commit_message: "Message",
+    #     author_name: "Name",
+    #     email: "Email",
+    #     keep_empty_folders: false,
+    #     conflict_resolution: {
+    #       replace_contents: [
+    #         {
+    #           file_path: "Path", # required
+    #           replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #           content: "data",
+    #           file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #       delete_files: [
+    #         {
+    #           file_path: "Path", # required
+    #         },
+    #       ],
+    #       set_file_modes: [
+    #         {
+    #           file_path: "Path", # required
+    #           file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request.pull_request_id #=> String
+    #   resp.pull_request.title #=> String
+    #   resp.pull_request.description #=> String
+    #   resp.pull_request.last_activity_date #=> Time
+    #   resp.pull_request.creation_date #=> Time
+    #   resp.pull_request.pull_request_status #=> String, one of "OPEN", "CLOSED"
+    #   resp.pull_request.author_arn #=> String
+    #   resp.pull_request.pull_request_targets #=> Array
+    #   resp.pull_request.pull_request_targets[0].repository_name #=> String
+    #   resp.pull_request.pull_request_targets[0].source_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
+    #   resp.pull_request.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestBySquash AWS API Documentation
+    #
+    # @overload merge_pull_request_by_squash(params = {})
+    # @param [Hash] params ({})
+    def merge_pull_request_by_squash(params = {}, options = {})
+      req = build_request(:merge_pull_request_by_squash, params)
+      req.send_request(options)
+    end
+
+    # Attempts to merge the source commit of a pull request into the
+    # specified destination branch for that pull request at the specified
+    # commit using the three-way merge strategy. If the merge is successful,
+    # it closes the pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where the pull request was created.
+    #
+    # @option params [String] :source_commit_id
+    #   The full commit ID of the original or updated commit in the pull
+    #   request source branch. Pass this value if you want an exception thrown
+    #   if the current commit ID of the tip of the source branch does not
+    #   match this commit ID.
+    #
+    # @option params [String] :conflict_detail_level
+    #   The level of conflict detail to use. If unspecified, the default
+    #   FILE\_LEVEL is used, which will return a not mergeable result if the
+    #   same file has differences in both branches. If LINE\_LEVEL is
+    #   specified, a conflict will be considered not mergeable if the same
+    #   file in both branches has differences on the same line.
+    #
+    # @option params [String] :conflict_resolution_strategy
+    #   Specifies which branch to use when resolving conflicts, or whether to
+    #   attempt automatically merging two versions of a file. The default is
+    #   NONE, which requires any conflicts to be resolved manually before the
+    #   merge operation will be successful.
+    #
+    # @option params [String] :commit_message
+    #   The commit message to include in the commit information for the merge.
+    #
+    # @option params [String] :author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #
+    # @option params [String] :email
+    #   The email address of the person merging the branches. This information
+    #   will be used in the commit information for the merge.
+    #
+    # @option params [Boolean] :keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is specified
+    #   as true, a .gitkeep file will be created for empty folders. The
+    #   default is false.
+    #
+    # @option params [Types::ConflictResolution] :conflict_resolution
+    #   A list of inputs to use when resolving conflicts during a merge if
+    #   AUTOMERGE is chosen as the conflict resolution strategy.
+    #
+    # @return [Types::MergePullRequestByThreeWayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MergePullRequestByThreeWayOutput#pull_request #pull_request} => Types::PullRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.merge_pull_request_by_three_way({
+    #     pull_request_id: "PullRequestId", # required
+    #     repository_name: "RepositoryName", # required
+    #     source_commit_id: "ObjectId",
+    #     conflict_detail_level: "FILE_LEVEL", # accepts FILE_LEVEL, LINE_LEVEL
+    #     conflict_resolution_strategy: "NONE", # accepts NONE, ACCEPT_SOURCE, ACCEPT_DESTINATION, AUTOMERGE
+    #     commit_message: "Message",
+    #     author_name: "Name",
+    #     email: "Email",
+    #     keep_empty_folders: false,
+    #     conflict_resolution: {
+    #       replace_contents: [
+    #         {
+    #           file_path: "Path", # required
+    #           replacement_type: "KEEP_BASE", # required, accepts KEEP_BASE, KEEP_SOURCE, KEEP_DESTINATION, USE_NEW_CONTENT
+    #           content: "data",
+    #           file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #       delete_files: [
+    #         {
+    #           file_path: "Path", # required
+    #         },
+    #       ],
+    #       set_file_modes: [
+    #         {
+    #           file_path: "Path", # required
+    #           file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request.pull_request_id #=> String
+    #   resp.pull_request.title #=> String
+    #   resp.pull_request.description #=> String
+    #   resp.pull_request.last_activity_date #=> Time
+    #   resp.pull_request.creation_date #=> Time
+    #   resp.pull_request.pull_request_status #=> String, one of "OPEN", "CLOSED"
+    #   resp.pull_request.author_arn #=> String
+    #   resp.pull_request.pull_request_targets #=> Array
+    #   resp.pull_request.pull_request_targets[0].repository_name #=> String
+    #   resp.pull_request.pull_request_targets[0].source_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_base #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
+    #   resp.pull_request.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByThreeWay AWS API Documentation
+    #
+    # @overload merge_pull_request_by_three_way(params = {})
+    # @param [Hash] params ({})
+    def merge_pull_request_by_three_way(params = {}, options = {})
+      req = build_request(:merge_pull_request_by_three_way, params)
       req.send_request(options)
     end
 
@@ -1713,6 +2850,11 @@ module Aws::CodeCommit
     # @option params [String] :before_commit_id
     #   To establish the directionality of the comparison, the full commit ID
     #   of the 'before' commit.
+    #
+    #   <note markdown="1"> This is required for commenting on any commit unless that commit is
+    #   the initial commit.
+    #
+    #    </note>
     #
     # @option params [required, String] :after_commit_id
     #   To establish the directionality of the comparison, the full commit ID
@@ -2060,6 +3202,41 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Adds or updates tags for a resource in AWS CodeCommit. For a list of
+    # valid resources in AWS CodeCommit, see [CodeCommit Resources and
+    # Operations][1] in the AWS CodeCommit User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add or update tags.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The key-value pair to use when tagging this repository.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
     # Tests the functionality of repository triggers by sending information
     # to the trigger target. If real data is available in the repository,
     # the test will send data from the last commit. If no data is available,
@@ -2105,6 +3282,39 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def test_repository_triggers(params = {}, options = {})
       req = build_request(:test_repository_triggers, params)
+      req.send_request(options)
+    end
+
+    # Removes tags for a resource in AWS CodeCommit. For a list of valid
+    # resources in AWS CodeCommit, see [CodeCommit Resources and
+    # Operations][1] in the AWS CodeCommit User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   remove tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2220,6 +3430,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestDescription AWS API Documentation
@@ -2271,6 +3483,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestStatus AWS API Documentation
@@ -2321,6 +3535,8 @@ module Aws::CodeCommit
     #   resp.pull_request.pull_request_targets[0].merge_base #=> String
     #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
     #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_commit_id #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merge_option #=> String, one of "FAST_FORWARD_MERGE", "SQUASH_MERGE", "THREE_WAY_MERGE"
     #   resp.pull_request.client_request_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestTitle AWS API Documentation
@@ -2378,7 +3594,7 @@ module Aws::CodeCommit
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
     #
     # @option params [required, String] :old_name
     #   The existing name of the repository.
@@ -2417,7 +3633,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

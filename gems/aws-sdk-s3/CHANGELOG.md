@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2019-08-30)
+------------------
+
+* Feature - Added a `:whitelist_headers` option to S3 presigner.
+
+1.47.0 (2019-08-28)
+------------------
+
+* Feature - Added a `:time` option to S3 presigner.
+
+1.46.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2019-07-03)
+------------------
+
+* Feature - Add S3 x-amz-server-side-encryption-context support.
+
+1.44.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2019-06-04)
+------------------
+
+* Feature - Documentation updates for s3
+
+1.41.0 (2019-05-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.39.0 (2019-05-16)
 ------------------
 
@@ -344,4 +389,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-s3` gem.
-

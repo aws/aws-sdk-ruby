@@ -229,10 +229,10 @@ module Aws::AutoScaling
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [AutoScalingGroup]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       AutoScalingGroup.new({
         name: @name,
@@ -246,10 +246,10 @@ module Aws::AutoScaling
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [AutoScalingGroup]
-    def wait_until_in_service(options = {})
+    def wait_until_in_service(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupInService.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       AutoScalingGroup.new({
         name: @name,
@@ -263,10 +263,10 @@ module Aws::AutoScaling
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [AutoScalingGroup]
-    def wait_until_not_exists(options = {})
+    def wait_until_not_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupNotExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       AutoScalingGroup.new({
         name: @name,
@@ -547,18 +547,17 @@ module Aws::AutoScaling
     #   and `TargetTrackingScaling`. If the policy type is null, the value is
     #   treated as `SimpleScaling`.
     # @option options [String] :adjustment_type
-    #   The adjustment type. The valid values are `ChangeInCapacity`,
-    #   `ExactCapacity`, and `PercentChangeInCapacity`.
+    #   Specifies whether the `ScalingAdjustment` parameter is an absolute
+    #   number or a percentage of the current capacity. The valid values are
+    #   `ChangeInCapacity`, `ExactCapacity`, and `PercentChangeInCapacity`.
     #
-    #   This parameter is supported if the policy type is `SimpleScaling` or
-    #   `StepScaling`.
-    #
-    #   For more information, see [Dynamic Scaling][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
-    #
+    #   Valid only if the policy type is `StepScaling` or `SimpleScaling`. For
+    #   more information, see [Scaling Adjustment Types][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-adjustment
     # @option options [Integer] :min_adjustment_step
     #   Available for backward compatibility. Use `MinAdjustmentMagnitude`
     #   instead.
@@ -568,24 +567,34 @@ module Aws::AutoScaling
     #   changes the `DesiredCapacity` of the Auto Scaling group by at least
     #   this many instances. Otherwise, the error is `ValidationError`.
     #
-    #   This parameter is supported if the policy type is `SimpleScaling` or
-    #   `StepScaling`.
+    #   This property replaces the `MinAdjustmentStep` property. For example,
+    #   suppose that you create a step scaling policy to scale out an Auto
+    #   Scaling group by 25 percent and you specify a `MinAdjustmentMagnitude`
+    #   of 2. If the group has 4 instances and the scaling policy is
+    #   performed, 25 percent of 4 is 1. However, because you specified a
+    #   `MinAdjustmentMagnitude` of 2, Amazon EC2 Auto Scaling scales out the
+    #   group by 2 instances.
+    #
+    #   Valid only if the policy type is `SimpleScaling` or `StepScaling`.
     # @option options [Integer] :scaling_adjustment
-    #   The amount by which to scale, based on the specified adjustment type.
-    #   A positive value adds to the current capacity while a negative number
-    #   removes from the current capacity.
+    #   The amount by which a simple scaling policy scales the Auto Scaling
+    #   group in response to an alarm breach. The adjustment is based on the
+    #   value that you specified in the `AdjustmentType` parameter (either an
+    #   absolute number or a percentage). A positive value adds to the current
+    #   capacity and a negative value subtracts from the current capacity. For
+    #   exact capacity, you must specify a positive value.
     #
-    #   Conditional: This parameter is required if the policy type is
-    #   `SimpleScaling` and not supported otherwise.
+    #   Conditional: If you specify `SimpleScaling` for the policy type, you
+    #   must specify this parameter. (Not used with any other policy type.)
     # @option options [Integer] :cooldown
-    #   The amount of time, in seconds, after a scaling activity completes and
-    #   before the next scaling activity can start. If this parameter is not
-    #   specified, the default cooldown period for the group applies.
+    #   The amount of time, in seconds, after a scaling activity completes
+    #   before any further dynamic scaling activities can start. If this
+    #   parameter is not specified, the default cooldown period for the group
+    #   applies.
     #
-    #   This parameter is supported if the policy type is `SimpleScaling`.
-    #
-    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   Valid only if the policy type is `SimpleScaling`. For more
+    #   information, see [Scaling Cooldowns][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
@@ -595,26 +604,34 @@ module Aws::AutoScaling
     #   `Minimum`, `Maximum`, and `Average`. If the aggregation type is null,
     #   the value is treated as `Average`.
     #
-    #   This parameter is supported if the policy type is `StepScaling`.
+    #   Valid only if the policy type is `StepScaling`.
     # @option options [Array<Types::StepAdjustment>] :step_adjustments
     #   A set of adjustments that enable you to scale based on the size of the
     #   alarm breach.
     #
-    #   Conditional: This parameter is required if the policy type is
-    #   `StepScaling` and not supported otherwise.
+    #   Conditional: If you specify `StepScaling` for the policy type, you
+    #   must specify this parameter. (Not used with any other policy type.)
     # @option options [Integer] :estimated_instance_warmup
     #   The estimated time, in seconds, until a newly launched instance can
     #   contribute to the CloudWatch metrics. The default is to use the value
     #   specified for the default cooldown period for the group.
     #
-    #   This parameter is supported if the policy type is `StepScaling` or
+    #   Valid only if the policy type is `StepScaling` or
     #   `TargetTrackingScaling`.
     # @option options [Types::TargetTrackingConfiguration] :target_tracking_configuration
     #   A target tracking scaling policy. Includes support for predefined or
     #   customized metrics.
     #
-    #   Conditional: This parameter is required if the policy type is
-    #   `TargetTrackingScaling` and not supported otherwise.
+    #   For more information, see [TargetTrackingConfiguration][1] in the
+    #   *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #   Conditional: If you specify `TargetTrackingScaling` for the policy
+    #   type, you must specify this parameter. (Not used with any other policy
+    #   type.)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -641,10 +658,11 @@ module Aws::AutoScaling
     # @option options [required, String] :scheduled_action_name
     #   The name of this scaling action.
     # @option options [Time,DateTime,Date,Integer,String] :time
-    #   This parameter is deprecated.
+    #   This parameter is no longer used.
     # @option options [Time,DateTime,Date,Integer,String] :start_time
-    #   The time for this action to start, in YYYY-MM-DDThh:mm:ssZ format in
-    #   UTC/GMT only and in quotes (for example, `"2019-06-01T00:00:00Z"`).
+    #   The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ
+    #   format in UTC/GMT only and in quotes (for example,
+    #   `"2019-06-01T00:00:00Z"`).
     #
     #   If you specify `Recurrence` and `StartTime`, Amazon EC2 Auto Scaling
     #   performs the action at this time, and then performs the action based
@@ -653,8 +671,8 @@ module Aws::AutoScaling
     #   If you try to schedule your action in the past, Amazon EC2 Auto
     #   Scaling returns an error message.
     # @option options [Time,DateTime,Date,Integer,String] :end_time
-    #   The time for the recurring schedule to end. Amazon EC2 Auto Scaling
-    #   does not perform the action after this time.
+    #   The date and time for the recurring schedule to end. Amazon EC2 Auto
+    #   Scaling does not perform the action after this time.
     # @option options [String] :recurrence
     #   The recurring schedule for this action, in Unix cron syntax format.
     #   This format consists of five fields separated by white spaces:
@@ -662,15 +680,19 @@ module Aws::AutoScaling
     #   \[Day\_of\_Week\]. The value must be in quotes (for example, `"30 0 1
     #   1,6,12 *"`). For more information about this format, see [Crontab][1].
     #
+    #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
+    #   form the boundaries of when the recurring action starts and stops.
+    #
     #
     #
     #   [1]: http://crontab.org
     # @option options [Integer] :min_size
-    #   The minimum size for the Auto Scaling group.
+    #   The minimum number of instances in the Auto Scaling group.
     # @option options [Integer] :max_size
-    #   The maximum size for the Auto Scaling group.
+    #   The maximum number of instances in the Auto Scaling group.
     # @option options [Integer] :desired_capacity
-    #   The number of EC2 instances that should be running in the group.
+    #   The number of EC2 instances that should be running in the Auto Scaling
+    #   group.
     # @return [ScheduledAction]
     def put_scheduled_update_group_action(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -814,24 +836,42 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
-    #   The name of the launch configuration. If you specify this parameter,
-    #   you can't specify a launch template or a mixed instances policy.
+    #   The name of the launch configuration. If you specify
+    #   `LaunchConfigurationName` in your update request, you can't specify
+    #   `LaunchTemplate` or `MixedInstancesPolicy`.
+    #
+    #   To update an Auto Scaling group with a launch configuration with
+    #   `InstanceMonitoring` set to `false`, you must first disable the
+    #   collection of group metrics. Otherwise, you get an error. If you have
+    #   previously enabled the collection of group metrics, you can disable it
+    #   using DisableMetricsCollection.
     # @option options [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template and version to use to specify the updates. If you
-    #   specify this parameter, you can't specify a launch configuration or a
-    #   mixed instances policy.
+    #   specify `LaunchTemplate` in your update request, you can't specify
+    #   `LaunchConfigurationName` or `MixedInstancesPolicy`.
+    #
+    #   For more information, see [LaunchTemplateSpecification][1] in the
+    #   *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
-    #   The mixed instances policy to use to specify the updates. If you
-    #   specify this parameter, you can't specify a launch configuration or a
-    #   launch template.
+    #   An embedded object that specifies a mixed instances policy.
     #
-    #   For more information, see [Auto Scaling Groups with Multiple Instance
-    #   Types and Purchase Options][1] in the *Amazon EC2 Auto Scaling User
-    #   Guide*.
+    #   In your call to `UpdateAutoScalingGroup`, you can make changes to the
+    #   policy that is specified. All optional parameters are left unchanged
+    #   if not specified.
+    #
+    #   For more information, see [MixedInstancesPolicy][1] in the *Amazon EC2
+    #   Auto Scaling API Reference* and [Auto Scaling Groups with Multiple
+    #   Instance Types and Purchase Options][2] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
     # @option options [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
     # @option options [Integer] :max_size
@@ -843,9 +883,13 @@ module Aws::AutoScaling
     # @option options [Integer] :default_cooldown
     #   The amount of time, in seconds, after a scaling activity completes
     #   before another scaling activity can start. The default value is `300`.
+    #   This cooldown period is not used when a scaling-specific cooldown is
+    #   specified.
     #
-    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   Cooldown periods are not supported for target tracking scaling
+    #   policies, step scaling policies, or scheduled scaling. For more
+    #   information, see [Scaling Cooldowns][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
@@ -862,15 +906,15 @@ module Aws::AutoScaling
     #   before checking the health status of an EC2 instance that has come
     #   into service. The default value is `0`.
     #
-    #   For more information, see [Health Checks for Auto Scaling
-    #   Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Health Check Grace Period][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Conditional: This parameter is required if you are adding an `ELB`
     #   health check.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period
     # @option options [String] :placement_group
     #   The name of the placement group into which to launch your instances,
     #   if any. A placement group is a logical grouping of instances within a
@@ -882,7 +926,7 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     # @option options [String] :vpc_zone_identifier
-    #   A comma-separated list of subnet IDs, if you are launching into a VPC.
+    #   A comma-separated list of subnet IDs for virtual private cloud (VPC).
     #
     #   If you specify `VPCZoneIdentifier` with `AvailabilityZones`, the
     #   subnets that you specify for this parameter must reside in those

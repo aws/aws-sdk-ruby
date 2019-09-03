@@ -338,6 +338,49 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssignTapePoolInput
+    #   data as a hash:
+    #
+    #       {
+    #         tape_arn: "TapeARN", # required
+    #         pool_id: "PoolId", # required
+    #       }
+    #
+    # @!attribute [rw] tape_arn
+    #   The unique Amazon Resource Name (ARN) of the virtual tape that you
+    #   want to add to the tape pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_id
+    #   The ID of the pool that you want to add your tape to for archiving.
+    #   The tape in this pool is archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssignTapePoolInput AWS API Documentation
+    #
+    class AssignTapePoolInput < Struct.new(
+      :tape_arn,
+      :pool_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tape_arn
+    #   The unique Amazon Resource Names (ARN) of the virtual tape that was
+    #   added to the tape pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssignTapePoolOutput AWS API Documentation
+    #
+    class AssignTapePoolOutput < Struct.new(
+      :tape_arn)
+      include Aws::Structure
+    end
+
     # AttachVolumeInput
     #
     # @note When making an API call, you may pass AttachVolumeInput
@@ -1055,10 +1098,13 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
-    #   A list of users or groups in the Active Directory that have
-    #   administrator rights to the file share. A group must be prefixed
-    #   with the @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   A list of users in the Active Directory that will be granted
+    #   administrator privileges on the file share. These users can do all
+    #   file operations as the super-user.
+    #
+    #   Use this option very carefully, because any user in this list can do
+    #   anything they like on the file share, regardless of file
+    #   permissions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] valid_user_list
@@ -1136,6 +1182,12 @@ module Aws::StorageGateway
     #       {
     #         volume_arn: "VolumeARN", # required
     #         snapshot_description: "SnapshotDescription", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] volume_arn
@@ -1151,11 +1203,24 @@ module Aws::StorageGateway
     #   **Description** field
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPointInput AWS API Documentation
     #
     class CreateSnapshotFromVolumeRecoveryPointInput < Struct.new(
       :volume_arn,
-      :snapshot_description)
+      :snapshot_description,
+      :tags)
       include Aws::Structure
     end
 
@@ -2242,6 +2307,11 @@ module Aws::StorageGateway
     #   the `ListTagsForResource` API operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] vpc_endpoint
+    #   The configuration settings for the virtual private cloud (VPC)
+    #   endpoint for your gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
     #
     class DescribeGatewayInformationOutput < Struct.new(
@@ -2256,7 +2326,8 @@ module Aws::StorageGateway
       :last_software_update,
       :ec2_instance_id,
       :ec2_instance_region,
-      :tags)
+      :tags,
+      :vpc_endpoint)
       include Aws::Structure
     end
 
@@ -2446,12 +2517,33 @@ module Aws::StorageGateway
     #   set, and otherwise false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] smb_security_strategy
+    #   The type of security strategy that was specified for file gateway.
+    #
+    #   ClientSpecified: if you use this option, requests are established
+    #   based on what is negotiated by the client. This option is
+    #   recommended when you want to maximize compatibility across different
+    #   clients in your environment.
+    #
+    #   MandatorySigning: if you use this option, file gateway only allows
+    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
+    #   This option works with SMB clients on Microsoft Windows Vista,
+    #   Windows Server 2008 or newer.
+    #
+    #   MandatoryEncryption: if you use this option, file gateway only
+    #   allows connections from SMBv3 clients that have encryption enabled.
+    #   This option is highly recommended for environments that handle
+    #   sensitive data. This option works with SMB clients on Microsoft
+    #   Windows 8, Windows Server 2012 or newer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsOutput AWS API Documentation
     #
     class DescribeSMBSettingsOutput < Struct.new(
       :gateway_arn,
       :domain_name,
-      :smb_guest_password_set)
+      :smb_guest_password_set,
+      :smb_security_strategy)
       include Aws::Structure
     end
 
@@ -2500,6 +2592,13 @@ module Aws::StorageGateway
     #   A value that indicates the time zone of the gateway.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags assigned to the snapshot schedule, sorted
+    #   alphabetically by key name. Each tag is a key-value pair. For a
+    #   gateway with more than 10 tags assigned, you can view all tags using
+    #   the `ListTagsForResource` API operation.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotScheduleOutput AWS API Documentation
     #
     class DescribeSnapshotScheduleOutput < Struct.new(
@@ -2507,7 +2606,8 @@ module Aws::StorageGateway
       :start_at,
       :recurrence_in_hours,
       :description,
-      :timezone)
+      :timezone,
+      :tags)
       include Aws::Structure
     end
 
@@ -3225,6 +3325,46 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # An internal server error has occurred during the request. For more
+    # information, see the error and message fields.
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   A StorageGatewayError that provides more information about the cause
+    #   of the error.
+    #   @return [Types::StorageGatewayError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message,
+      :error)
+      include Aws::Structure
+    end
+
+    # An exception occurred because an invalid gateway request was issued to
+    # the service. For more information, see the error and message fields.
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   A StorageGatewayError that provides more detail about the cause of
+    #   the error.
+    #   @return [Types::StorageGatewayError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/InvalidGatewayRequestException AWS API Documentation
+    #
+    class InvalidGatewayRequestException < Struct.new(
+      :message,
+      :error)
+      include Aws::Structure
+    end
+
     # JoinDomainInput
     #
     # @note When making an API call, you may pass JoinDomainInput
@@ -3250,7 +3390,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit
-    #   The organizational unit (OU) is a container with an Active Directory
+    #   The organizational unit (OU) is a container in an Active Directory
     #   that can hold users, groups, computers, and other OUs and this
     #   parameter specifies the OU that the gateway will join within the AD
     #   domain.
@@ -4357,6 +4497,26 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # An internal server error has occurred because the service is
+    # unavailable. For more information, see the error and message fields.
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   A StorageGatewayError that provides more information about the cause
+    #   of the error.
+    #   @return [Types::StorageGatewayError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ServiceUnavailableError AWS API Documentation
+    #
+    class ServiceUnavailableError < Struct.new(
+      :message,
+      :error)
+      include Aws::Structure
+    end
+
     # SetLocalConsolePasswordInput
     #
     # @note When making an API call, you may pass SetLocalConsolePasswordInput
@@ -5414,10 +5574,10 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
-    #   A list of users or groups in the Active Directory that have
-    #   administrator rights to the file share. A group must be prefixed
-    #   with the @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   A list of users in the Active Directory that have administrator
+    #   rights to the file share. A group must be prefixed with the @
+    #   character. For example `@group1`. Can only be set if Authentication
+    #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] valid_user_list
@@ -5462,6 +5622,59 @@ module Aws::StorageGateway
     #
     class UpdateSMBFileShareOutput < Struct.new(
       :file_share_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSMBSecurityStrategyInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #         smb_security_strategy: "ClientSpecified", # required, accepts ClientSpecified, MandatorySigning, MandatoryEncryption
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] smb_security_strategy
+    #   Specifies the type of security strategy.
+    #
+    #   ClientSpecified: if you use this option, requests are established
+    #   based on what is negotiated by the client. This option is
+    #   recommended when you want to maximize compatibility across different
+    #   clients in your environment.
+    #
+    #   MandatorySigning: if you use this option, file gateway only allows
+    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
+    #   This option works with SMB clients on Microsoft Windows Vista,
+    #   Windows Server 2008 or newer.
+    #
+    #   MandatoryEncryption: if you use this option, file gateway only
+    #   allows connections from SMBv3 clients that have encryption enabled.
+    #   This option is highly recommended for environments that handle
+    #   sensitive data. This option works with SMB clients on Microsoft
+    #   Windows 8, Windows Server 2012 or newer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBSecurityStrategyInput AWS API Documentation
+    #
+    class UpdateSMBSecurityStrategyInput < Struct.new(
+      :gateway_arn,
+      :smb_security_strategy)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBSecurityStrategyOutput AWS API Documentation
+    #
+    class UpdateSMBSecurityStrategyOutput < Struct.new(
+      :gateway_arn)
       include Aws::Structure
     end
 

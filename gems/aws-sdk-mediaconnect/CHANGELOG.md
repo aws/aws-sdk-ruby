@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2019-07-26)
+------------------
+
+* Feature - This release adds support for the Zixi pull protocol on outputs.
+
+1.12.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2019-06-06)
+------------------
+
+* Feature - This release adds support for encrypting entitlements using Secure Packager and Encoder Key Exchange (SPEKE).
+
+1.8.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.7.0 (2019-05-15)
 ------------------
 

@@ -170,6 +170,22 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The input parameters don't match the service's restrictions.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchDeletePhoneNumberRequest
     #   data as a hash:
     #
@@ -428,6 +444,23 @@ module Aws::Chime
     #
     class BusinessCallingSettings < Struct.new(
       :cdr_bucket)
+      include Aws::Structure
+    end
+
+    # The request could not be processed because of conflict in the current
+    # state of the resource.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -830,6 +863,24 @@ module Aws::Chime
       :bot_id,
       :outbound_events_https_endpoint,
       :lambda_function_arn)
+      include Aws::Structure
+    end
+
+    # The client is permanently forbidden from making the request. For
+    # example, when a user tries to create an account from an unsupported
+    # Region.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -1639,6 +1690,23 @@ module Aws::Chime
     #
     class LogoutUserResponse < Aws::EmptyStructure; end
 
+    # One or more of the resources in the request does not exist in the
+    # system.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # A phone number for which an order has been placed.
     #
     # @!attribute [rw] e164_phone_number
@@ -1755,6 +1823,10 @@ module Aws::Chime
     #   The phone number, in E.164 format.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The phone number type.
+    #   @return [String]
+    #
     # @!attribute [rw] product_type
     #   The phone number product type.
     #   @return [String]
@@ -1788,6 +1860,7 @@ module Aws::Chime
     class PhoneNumber < Struct.new(
       :phone_number_id,
       :e164_phone_number,
+      :type,
       :product_type,
       :status,
       :capabilities,
@@ -2165,6 +2238,22 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The request exceeds the resource limit.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RestorePhoneNumberRequest
     #   data as a hash:
     #
@@ -2202,6 +2291,7 @@ module Aws::Chime
     #         city: "String",
     #         country: "String",
     #         state: "String",
+    #         toll_free_prefix: "TollFreePrefix",
     #         max_results: 1,
     #         next_token: "String",
     #       }
@@ -2222,6 +2312,10 @@ module Aws::Chime
     #   The state used to filter results.
     #   @return [String]
     #
+    # @!attribute [rw] toll_free_prefix
+    #   The toll-free prefix that you use to filter results.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call.
     #   @return [Integer]
@@ -2237,6 +2331,7 @@ module Aws::Chime
       :city,
       :country,
       :state,
+      :toll_free_prefix,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -2250,6 +2345,38 @@ module Aws::Chime
     #
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :e164_phone_numbers)
+      include Aws::Structure
+    end
+
+    # The service encountered an unexpected error.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ServiceFailureException AWS API Documentation
+    #
+    class ServiceFailureException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The service is currently unavailable.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -2350,6 +2477,55 @@ module Aws::Chime
     class TerminationHealth < Struct.new(
       :timestamp,
       :source)
+      include Aws::Structure
+    end
+
+    # The client exceeded its request rate limit.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ThrottledClientException AWS API Documentation
+    #
+    class ThrottledClientException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The client is not currently authorized to make the request.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UnauthorizedClientException AWS API Documentation
+    #
+    class UnauthorizedClientException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was well-formed but was unable to be followed due to
+    # semantic errors.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UnprocessableEntityException AWS API Documentation
+    #
+    class UnprocessableEntityException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 

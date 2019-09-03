@@ -1069,6 +1069,11 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] tags
     #   One or more tags.
+    #
+    #   If the plan is for an existing provisioned product, the product must
+    #   have a `RESOURCE_UPDATE` constraint with
+    #   `TagUpdatesOnProvisionedProduct` set to `ALLOWED` to allow tag
+    #   updates.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisionedProductPlanInput AWS API Documentation
@@ -2318,6 +2323,43 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeServiceActionExecutionParametersInput
+    #   data as a hash:
+    #
+    #       {
+    #         provisioned_product_id: "Id", # required
+    #         service_action_id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] service_action_id
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionExecutionParametersInput AWS API Documentation
+    #
+    class DescribeServiceActionExecutionParametersInput < Struct.new(
+      :provisioned_product_id,
+      :service_action_id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_parameters
+    #   @return [Array<Types::ExecutionParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionExecutionParametersOutput AWS API Documentation
+    #
+    class DescribeServiceActionExecutionParametersOutput < Struct.new(
+      :service_action_parameters)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeServiceActionInput
     #   data as a hash:
     #
@@ -2653,6 +2695,9 @@ module Aws::ServiceCatalog
     #         service_action_id: "Id", # required
     #         execute_token: "IdempotencyToken", # required
     #         accept_language: "AcceptLanguage",
+    #         parameters: {
+    #           "ExecutionParameterKey" => ["ExecutionParameterValue"],
+    #         },
     #       }
     #
     # @!attribute [rw] provisioned_product_id
@@ -2681,13 +2726,17 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   @return [Hash<String,Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceActionInput AWS API Documentation
     #
     class ExecuteProvisionedProductServiceActionInput < Struct.new(
       :provisioned_product_id,
       :service_action_id,
       :execute_token,
-      :accept_language)
+      :accept_language,
+      :parameters)
       include Aws::Structure
     end
 
@@ -2700,6 +2749,24 @@ module Aws::ServiceCatalog
     #
     class ExecuteProvisionedProductServiceActionOutput < Struct.new(
       :record_detail)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] default_values
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecutionParameter AWS API Documentation
+    #
+    class ExecutionParameter < Struct.new(
+      :name,
+      :type,
+      :default_values)
       include Aws::Structure
     end
 
@@ -3797,6 +3864,66 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListStackInstancesForProvisionedProductInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         provisioned_product_id: "Id", # required
+    #         page_token: "PageToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   The identifier of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListStackInstancesForProvisionedProductInput AWS API Documentation
+    #
+    class ListStackInstancesForProvisionedProductInput < Struct.new(
+      :accept_language,
+      :provisioned_product_id,
+      :page_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_instances
+    #   List of stack instances.
+    #   @return [Array<Types::StackInstance>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListStackInstancesForProvisionedProductOutput AWS API Documentation
+    #
+    class ListStackInstancesForProvisionedProductOutput < Struct.new(
+      :stack_instances,
+      :next_page_token)
+      include Aws::Structure
+    end
+
     # Filters to use when listing TagOptions.
     #
     # @note When making an API call, you may pass ListTagOptionsFilters
@@ -4566,13 +4693,19 @@ module Aws::ServiceCatalog
     #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
+    # @!attribute [rw] guidance
+    #   Information set by the administrator to provide guidance to end
+    #   users about which provisioning artifacts to use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifact AWS API Documentation
     #
     class ProvisioningArtifact < Struct.new(
       :id,
       :name,
       :description,
-      :created_time)
+      :created_time,
+      :guidance)
       include Aws::Structure
     end
 
@@ -4609,6 +4742,11 @@ module Aws::ServiceCatalog
     #   Indicates whether the product version is active.
     #   @return [Boolean]
     #
+    # @!attribute [rw] guidance
+    #   Information set by the administrator to provide guidance to end
+    #   users about which provisioning artifacts to use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactDetail AWS API Documentation
     #
     class ProvisioningArtifactDetail < Struct.new(
@@ -4617,7 +4755,8 @@ module Aws::ServiceCatalog
       :description,
       :type,
       :created_time,
-      :active)
+      :active,
+      :guidance)
       include Aws::Structure
     end
 
@@ -5758,6 +5897,54 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # An AWS CloudFormation stack, in a specific account and region, that's
+    # part of a stack set operation. A stack instance is a reference to an
+    # attempted or actual stack in a given account within a given region. A
+    # stack instance can exist without a stack—for example, if the stack
+    # couldn't be created for some reason. A stack instance is associated
+    # with only one stack set. Each stack instance contains the ID of its
+    # associated stack set, as well as the ID of the actual stack and the
+    # stack status.
+    #
+    # @!attribute [rw] account
+    #   The name of the AWS account that the stack instance is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The name of the AWS region that the stack instance is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_instance_status
+    #   The status of the stack instance, in terms of its synchronization
+    #   with its associated stack set.
+    #
+    #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
+    #     left the stack in an unstable state. Stacks in this state are
+    #     excluded from further `UpdateStackSet` operations. You might need
+    #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
+    #     set to true, to delete the stack instance, and then delete the
+    #     stack manually.
+    #
+    #   * `OUTDATED`\: The stack isn't currently up to date with the stack
+    #     set because either the associated stack failed during a
+    #     `CreateStackSet` or `UpdateStackSet` operation, or the stack was
+    #     part of a `CreateStackSet` or `UpdateStackSet` operation that
+    #     failed or was stopped before the stack was created or updated.
+    #
+    #   * `CURRENT`\: The stack is currently up to date with the stack set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/StackInstance AWS API Documentation
+    #
+    class StackInstance < Struct.new(
+      :account,
+      :region,
+      :stack_instance_status)
+      include Aws::Structure
+    end
+
     # Information about a tag. A tag is a key-value pair. Tags are
     # propagated to the resources created when provisioning a product.
     #
@@ -6249,7 +6436,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_name
-    #   The updated name of the provisioned product. You cannot specify both
+    #   The name of the provisioned product. You cannot specify both
     #   `ProvisionedProductName` and `ProvisionedProductId`.
     #   @return [String]
     #
@@ -6321,6 +6508,102 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateProvisionedProductPropertiesInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         provisioned_product_id: "Id", # required
+    #         provisioned_product_properties: { # required
+    #           "OWNER" => "PropertyValue",
+    #         },
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   The identifier of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_properties
+    #   A map that contains the provisioned product properties to be
+    #   updated.
+    #
+    #   The `OWNER` key only accepts user ARNs. The owner is the user that
+    #   is allowed to see, update, terminate, and execute service actions in
+    #   the provisioned product.
+    #
+    #   The administrator can change the owner of a provisioned product to
+    #   another IAM user within the same account. Both end user owners and
+    #   administrators can see ownership history of the provisioned product
+    #   using the `ListRecordHistory` API. The new owner can describe all
+    #   past records for the provisioned product using the `DescribeRecord`
+    #   API. The previous owner can no longer use `DescribeRecord`, but can
+    #   still see the product's history from when he was an owner using
+    #   `ListRecordHistory`.
+    #
+    #   If a provisioned product ownership is assigned to an end user, they
+    #   can see and perform any action through the API or Service Catalog
+    #   console such as update, terminate, and execute service actions. If
+    #   an end user provisions a product and the owner is updated to someone
+    #   else, they will no longer be able to see or perform any actions
+    #   through API or the Service Catalog console on that provisioned
+    #   product.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   The idempotency token that uniquely identifies the provisioning
+    #   product update request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductPropertiesInput AWS API Documentation
+    #
+    class UpdateProvisionedProductPropertiesInput < Struct.new(
+      :accept_language,
+      :provisioned_product_id,
+      :provisioned_product_properties,
+      :idempotency_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioned_product_id
+    #   The provisioned product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_properties
+    #   A map that contains the properties updated.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] record_id
+    #   The identifier of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductPropertiesOutput AWS API Documentation
+    #
+    class UpdateProvisionedProductPropertiesOutput < Struct.new(
+      :provisioned_product_id,
+      :provisioned_product_properties,
+      :record_id,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateProvisioningArtifactInput
     #   data as a hash:
     #
@@ -6331,6 +6614,7 @@ module Aws::ServiceCatalog
     #         name: "ProvisioningArtifactName",
     #         description: "ProvisioningArtifactDescription",
     #         active: false,
+    #         guidance: "DEFAULT", # accepts DEFAULT, DEPRECATED
     #       }
     #
     # @!attribute [rw] accept_language
@@ -6363,6 +6647,18 @@ module Aws::ServiceCatalog
     #   Indicates whether the product version is active.
     #   @return [Boolean]
     #
+    # @!attribute [rw] guidance
+    #   Information set by the administrator to provide guidance to end
+    #   users about which provisioning artifacts to use.
+    #
+    #   The `DEFAULT` value indicates that the product version is active.
+    #
+    #   The administrator can set the guidance to `DEPRECATED` to inform
+    #   users that the product version is deprecated. Users are able to make
+    #   updates to a provisioned product of a deprecated version but cannot
+    #   launch new provisioned products using a deprecated version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactInput AWS API Documentation
     #
     class UpdateProvisioningArtifactInput < Struct.new(
@@ -6371,7 +6667,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :name,
       :description,
-      :active)
+      :active,
+      :guidance)
       include Aws::Structure
     end
 

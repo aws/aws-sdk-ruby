@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-08-28)
+------------------
+
+* Feature - Added support for message system attributes, which currently lets you send AWS X-Ray trace IDs through Amazon SQS.
+
+1.21.0 (2019-08-21)
+------------------
+
+* Feature - This release provides a way to add metadata tags to a queue when it is created. You can use tags to organize and identify your Amazon SQS queues for cost allocation.
+
+1.20.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2019-07-19)
+------------------
+
+* Feature - This release updates the information about the availability of FIFO queues and includes miscellaneous fixes.
+
+1.18.1 (2019-07-17)
+------------------
+
+* Issue - Skip `:message_attributes` validation for empty attributes. (Github Issue #2081)
+
+1.18.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.15.0 (2019-05-15)
 ------------------
 

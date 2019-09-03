@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-08-19)
+------------------
+
+* Feature - Fix for HttpMethod enum
+
+1.14.0 (2019-08-15)
+------------------
+
+* Feature - This release adds support for http header based routing and route prioritization.
+
+1.13.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2019-06-13)
+------------------
+
+* Feature - This release adds support for AWS Cloud Map as a service discovery method for virtual nodes.
+
+1.9.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.8.0 (2019-05-15)
 ------------------
 

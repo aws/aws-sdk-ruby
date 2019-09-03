@@ -138,6 +138,17 @@ module Aws::ApplicationDiscoveryService
 
     class AssociateConfigurationItemsToApplicationResponse < Aws::EmptyStructure; end
 
+    # The AWS user account does not have permission to perform the action.
+    # Check the IAM policy associated with this account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class AuthorizationErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Error messages returned for each import task that you deleted as a
     # response for this command.
     #
@@ -219,6 +230,14 @@ module Aws::ApplicationDiscoveryService
       :key,
       :value,
       :time_of_creation)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ConflictErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1251,6 +1270,28 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # One or more parameters are not valid. Verify the parameters and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value of one or more parameters are either invalid or out of
+    # range. Verify the parameter values and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListConfigurationsRequest
     #   data as a hash:
     #
@@ -1444,6 +1485,16 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # This operation is not permitted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class OperationNotPermittedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A field and direction for ordered output.
     #
     # @note When making an API call, you may pass OrderByElement
@@ -1465,6 +1516,41 @@ module Aws::ApplicationDiscoveryService
     class OrderByElement < Struct.new(
       :field_name,
       :sort_order)
+      include Aws::Structure
+    end
+
+    # This issue occurs when the same `clientRequestToken` is used with the
+    # `StartImportTask` action, but with different parameters. For example,
+    # you use the same request token but have two different import URLs, you
+    # can encounter this issue. If the import tasks are meant to be
+    # different, use a different `clientRequestToken`, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified configuration ID was not located. Verify the
+    # configuration ID and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The server experienced an internal error. Try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ServerInternalErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

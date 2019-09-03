@@ -24,6 +24,26 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # These errors are usually caused by a client action. Actions can
+    # include using an action or resource on behalf of a user that doesn't
+    # have permissions to use the action or resource or specifying an
+    # identifier that is not valid.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ClientException AWS API Documentation
+    #
+    class ClientException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing an Amazon EKS cluster.
     #
     # @!attribute [rw] name
@@ -360,6 +380,42 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The specified parameter is invalid. Review the available parameters
+    # for the API request.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is invalid given the state of the cluster. Check the state
+    # of the cluster and the associated operations.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListClustersRequest
     #   data as a hash:
     #
@@ -532,6 +588,113 @@ module Aws::EKS
     #
     class Logging < Struct.new(
       :cluster_logging)
+      include Aws::Structure
+    end
+
+    # The specified resource is in use.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # You have encountered a service limit on the specified resource.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource could not be found. You can view your available
+    # clusters with ListClusters. Amazon EKS clusters are Region-specific.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # These errors are usually caused by a server-side issue.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ServerException AWS API Documentation
+    #
+    class ServerException < Struct.new(
+      :cluster_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # The service is unavailable. Back off and retry the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # At least one of your specified cluster subnets is in an Availability
+    # Zone that does not support Amazon EKS. The exception output specifies
+    # the supported Availability Zones for your account, from which you can
+    # choose subnets for your cluster.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_zones
+    #   The supported Availability Zones for your account. Choose subnets in
+    #   these Availability Zones for your cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UnsupportedAvailabilityZoneException AWS API Documentation
+    #
+    class UnsupportedAvailabilityZoneException < Struct.new(
+      :message,
+      :cluster_name,
+      :valid_zones)
       include Aws::Structure
     end
 

@@ -86,10 +86,10 @@ module Aws::S3
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Bucket]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::BucketExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(bucket: @name))
       Bucket.new({
         name: @name,
@@ -103,10 +103,10 @@ module Aws::S3
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Bucket]
-    def wait_until_not_exists(options = {})
+    def wait_until_not_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::BucketNotExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(bucket: @name))
       Bucket.new({
         name: @name,
@@ -242,8 +242,8 @@ module Aws::S3
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
     # @option options [Boolean] :object_lock_enabled_for_bucket
-    #   Specifies whether you want S3 Object Lock to be enabled for the new
-    #   bucket.
+    #   Specifies whether you want Amazon S3 object lock to be enabled for the
+    #   new bucket.
     # @return [Types::CreateBucketOutput]
     def create(options = {})
       options = options.merge(bucket: @name)
@@ -291,7 +291,7 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Specifies whether you want to delete this object even if it has a
-    #   Governance-type Object Lock in place. You must have sufficient
+    #   Governance-type object lock in place. You must have sufficient
     #   permissions to perform this operation.
     # @return [Types::DeleteObjectsOutput]
     def delete_objects(options = {})
@@ -328,6 +328,7 @@ module Aws::S3
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -354,7 +355,8 @@ module Aws::S3
     #   the body cannot be determined automatically.
     # @option options [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
-    #   is auto-populated when using the command from the CLI
+    #   is auto-populated when using the command from the CLI. This parameted
+    #   is required if object lock parameters are specified.
     # @option options [String] :content_type
     #   A standard MIME type describing the format of the object data.
     # @option options [Time,DateTime,Date,Integer,String] :expires
@@ -400,6 +402,10 @@ module Aws::S3
     #   via SSL or using SigV4. Documentation on configuring any of the
     #   officially supported AWS SDKs and CLI can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    # @option options [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -410,9 +416,9 @@ module Aws::S3
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
     # @option options [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to this object.
+    #   The object lock mode that you want to apply to this object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want this object's Object Lock to expire.
+    #   The date and time when you want this object's object lock to expire.
     # @option options [String] :object_lock_legal_hold_status
     #   The Legal Hold status that you want to apply to the specified object.
     # @return [Object]

@@ -116,6 +116,10 @@ module Aws::AppMesh
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -378,9 +382,28 @@ module Aws::AppMesh
     #           ],
     #         },
     #         match: { # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #           prefix: "String", # required
+    #           scheme: "http", # accepts http, https
     #         },
     #       },
+    #       priority: 1,
     #       tcp_route: {
     #         action: { # required
     #           weighted_targets: [ # required
@@ -413,7 +436,19 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http_route.match.headers #=> Array
+    #   resp.route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http_route.match.headers[0].name #=> String
+    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
@@ -433,8 +468,8 @@ module Aws::AppMesh
     #
     # A virtual node acts as a logical pointer to a particular task group,
     # such as an Amazon ECS service or a Kubernetes deployment. When you
-    # create a virtual node, you must specify the DNS service discovery
-    # hostname for your task group.
+    # create a virtual node, you can specify the service discovery
+    # information for your task group.
     #
     # Any inbound traffic that your virtual node expects should be specified
     # as a `listener`. Any outbound traffic that your virtual node expects
@@ -522,6 +557,16 @@ module Aws::AppMesh
     #         },
     #       },
     #       service_discovery: {
+    #         aws_cloud_map: {
+    #           attributes: [
+    #             {
+    #               key: "AwsCloudMapInstanceAttributeKey", # required
+    #               value: "AwsCloudMapInstanceAttributeValue", # required
+    #             },
+    #           ],
+    #           namespace_name: "AwsCloudMapName", # required
+    #           service_name: "AwsCloudMapName", # required
+    #         },
     #         dns: {
     #           hostname: "Hostname", # required
     #         },
@@ -557,6 +602,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -614,7 +664,7 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
-    #       listeners: [ # required
+    #       listeners: [
     #         {
     #           port_mapping: { # required
     #             port: 1, # required
@@ -812,7 +862,19 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http_route.match.headers #=> Array
+    #   resp.route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http_route.match.headers[0].name #=> String
+    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
@@ -871,6 +933,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -1040,7 +1107,19 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http_route.match.headers #=> Array
+    #   resp.route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http_route.match.headers[0].name #=> String
+    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
@@ -1096,6 +1175,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -1663,9 +1747,28 @@ module Aws::AppMesh
     #           ],
     #         },
     #         match: { # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #           prefix: "String", # required
+    #           scheme: "http", # accepts http, https
     #         },
     #       },
+    #       priority: 1,
     #       tcp_route: {
     #         action: { # required
     #           weighted_targets: [ # required
@@ -1692,7 +1795,19 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.http_route.match.headers #=> Array
+    #   resp.route.spec.http_route.match.headers[0].invert #=> Boolean
+    #   resp.route.spec.http_route.match.headers[0].match.exact #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.prefix #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.range.end #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.range.start #=> Integer
+    #   resp.route.spec.http_route.match.headers[0].match.regex #=> String
+    #   resp.route.spec.http_route.match.headers[0].match.suffix #=> String
+    #   resp.route.spec.http_route.match.headers[0].name #=> String
+    #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
@@ -1770,6 +1885,16 @@ module Aws::AppMesh
     #         },
     #       },
     #       service_discovery: {
+    #         aws_cloud_map: {
+    #           attributes: [
+    #             {
+    #               key: "AwsCloudMapInstanceAttributeKey", # required
+    #               value: "AwsCloudMapInstanceAttributeValue", # required
+    #             },
+    #           ],
+    #           namespace_name: "AwsCloudMapName", # required
+    #           service_name: "AwsCloudMapName", # required
+    #         },
     #         dns: {
     #           hostname: "Hostname", # required
     #         },
@@ -1799,6 +1924,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].value #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.namespace_name #=> String
+    #   resp.virtual_node.spec.service_discovery.aws_cloud_map.service_name #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -1842,7 +1972,7 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
-    #       listeners: [ # required
+    #       listeners: [
     #         {
     #           port_mapping: { # required
     #             port: 1, # required
@@ -1954,7 +2084,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

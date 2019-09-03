@@ -43,8 +43,8 @@ module Aws::AutoScaling
       data[:policy_arn]
     end
 
-    # The policy type. The valid values are `SimpleScaling` and
-    # `StepScaling`.
+    # The policy type. The valid values are `SimpleScaling`, `StepScaling`,
+    # and `TargetTrackingScaling`.
     # @return [String]
     def policy_type
       data[:policy_type]
@@ -284,7 +284,8 @@ module Aws::AutoScaling
     #   Indicates whether Amazon EC2 Auto Scaling waits for the cooldown
     #   period to complete before executing the policy.
     #
-    #   This parameter is not supported if the policy type is `StepScaling`.
+    #   This parameter is not supported if the policy type is `StepScaling` or
+    #   `TargetTrackingScaling`.
     #
     #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
     #   Auto Scaling User Guide*.

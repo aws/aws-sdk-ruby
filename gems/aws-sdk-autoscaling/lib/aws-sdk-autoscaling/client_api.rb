@@ -285,6 +285,9 @@ module Aws::AutoScaling
 
     Alarms.member = Shapes::ShapeRef.new(shape: Alarm)
 
+    AlreadyExistsFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
+    AlreadyExistsFault.struct_class = Types::AlreadyExistsFault
+
     AttachInstancesQuery.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIds, location_name: "InstanceIds"))
     AttachInstancesQuery.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
     AttachInstancesQuery.struct_class = Types::AttachInstancesQuery
@@ -661,6 +664,9 @@ module Aws::AutoScaling
     InstancesDistribution.add_member(:spot_max_price, Shapes::ShapeRef.new(shape: MixedInstanceSpotPrice, location_name: "SpotMaxPrice"))
     InstancesDistribution.struct_class = Types::InstancesDistribution
 
+    InvalidNextToken.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
+    InvalidNextToken.struct_class = Types::InvalidNextToken
+
     LaunchConfiguration.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
     LaunchConfiguration.add_member(:launch_configuration_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "LaunchConfigurationARN"))
     LaunchConfiguration.add_member(:image_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "ImageId"))
@@ -735,6 +741,9 @@ module Aws::AutoScaling
     LifecycleHookSpecifications.member = Shapes::ShapeRef.new(shape: LifecycleHookSpecification)
 
     LifecycleHooks.member = Shapes::ShapeRef.new(shape: LifecycleHook)
+
+    LimitExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
+    LimitExceededFault.struct_class = Types::LimitExceededFault
 
     LoadBalancerNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
@@ -857,6 +866,15 @@ module Aws::AutoScaling
     RecordLifecycleActionHeartbeatType.add_member(:instance_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen19, location_name: "InstanceId"))
     RecordLifecycleActionHeartbeatType.struct_class = Types::RecordLifecycleActionHeartbeatType
 
+    ResourceContentionFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
+    ResourceContentionFault.struct_class = Types::ResourceContentionFault
+
+    ResourceInUseFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
+    ResourceInUseFault.struct_class = Types::ResourceInUseFault
+
+    ScalingActivityInProgressFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
+    ScalingActivityInProgressFault.struct_class = Types::ScalingActivityInProgressFault
+
     ScalingPolicies.member = Shapes::ShapeRef.new(shape: ScalingPolicy)
 
     ScalingPolicy.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AutoScalingGroupName"))
@@ -911,6 +929,9 @@ module Aws::AutoScaling
     ScheduledUpdateGroupActions.member = Shapes::ShapeRef.new(shape: ScheduledUpdateGroupAction)
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: XmlString)
+
+    ServiceLinkedRoleFailure.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
+    ServiceLinkedRoleFailure.struct_class = Types::ServiceLinkedRoleFailure
 
     SetDesiredCapacityType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
     SetDesiredCapacityType.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, required: true, location_name: "DesiredCapacity"))

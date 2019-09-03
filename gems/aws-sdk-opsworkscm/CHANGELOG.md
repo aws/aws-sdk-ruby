@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-08-08)
+------------------
+
+* Feature - This release adds support for Chef Automate 2 specific engine attributes.
+
+1.23.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2019-05-24)
+------------------
+
+* Feature - Documentation updates for OpsWorks for Chef Automate; attribute values updated for Chef Automate 2.0 release.
+
+1.19.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.18.0 (2019-05-15)
 ------------------
 

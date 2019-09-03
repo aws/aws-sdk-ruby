@@ -149,6 +149,9 @@ module Aws::AppSync
     UpdateTypeResponse = Shapes::StructureShape.new(name: 'UpdateTypeResponse')
     UserPoolConfig = Shapes::StructureShape.new(name: 'UserPoolConfig')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AdditionalAuthenticationProvider.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     AdditionalAuthenticationProvider.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
     AdditionalAuthenticationProvider.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: CognitoUserPoolConfig, location_name: "userPoolConfig"))
@@ -161,7 +164,16 @@ module Aws::AppSync
     ApiKey.add_member(:expires, Shapes::ShapeRef.new(shape: Long, location_name: "expires"))
     ApiKey.struct_class = Types::ApiKey
 
+    ApiKeyLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ApiKeyLimitExceededException.struct_class = Types::ApiKeyLimitExceededException
+
+    ApiKeyValidityOutOfBoundsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ApiKeyValidityOutOfBoundsException.struct_class = Types::ApiKeyValidityOutOfBoundsException
+
     ApiKeys.member = Shapes::ShapeRef.new(shape: ApiKey)
+
+    ApiLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ApiLimitExceededException.struct_class = Types::ApiLimitExceededException
 
     AuthorizationConfig.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "authorizationType"))
     AuthorizationConfig.add_member(:aws_iam_config, Shapes::ShapeRef.new(shape: AwsIamConfig, location_name: "awsIamConfig"))
@@ -171,10 +183,16 @@ module Aws::AppSync
     AwsIamConfig.add_member(:signing_service_name, Shapes::ShapeRef.new(shape: String, location_name: "signingServiceName"))
     AwsIamConfig.struct_class = Types::AwsIamConfig
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     CognitoUserPoolConfig.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userPoolId"))
     CognitoUserPoolConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
     CognitoUserPoolConfig.add_member(:app_id_client_regex, Shapes::ShapeRef.new(shape: String, location_name: "appIdClientRegex"))
     CognitoUserPoolConfig.struct_class = Types::CognitoUserPoolConfig
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
     CreateApiKeyRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     CreateApiKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -370,6 +388,9 @@ module Aws::AppSync
     GetTypeResponse.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
     GetTypeResponse.struct_class = Types::GetTypeResponse
 
+    GraphQLSchemaException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    GraphQLSchemaException.struct_class = Types::GraphQLSchemaException
+
     GraphqlApi.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     GraphqlApi.add_member(:api_id, Shapes::ShapeRef.new(shape: String, location_name: "apiId"))
     GraphqlApi.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
@@ -388,8 +409,14 @@ module Aws::AppSync
     HttpDataSourceConfig.add_member(:authorization_config, Shapes::ShapeRef.new(shape: AuthorizationConfig, location_name: "authorizationConfig"))
     HttpDataSourceConfig.struct_class = Types::HttpDataSourceConfig
 
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
     LambdaDataSourceConfig.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "lambdaFunctionArn"))
     LambdaDataSourceConfig.struct_class = Types::LambdaDataSourceConfig
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListApiKeysRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     ListApiKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -464,10 +491,14 @@ module Aws::AppSync
 
     LogConfig.add_member(:field_log_level, Shapes::ShapeRef.new(shape: FieldLogLevel, required: true, location_name: "fieldLogLevel"))
     LogConfig.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudWatchLogsRoleArn"))
+    LogConfig.add_member(:exclude_verbose_content, Shapes::ShapeRef.new(shape: Boolean, location_name: "excludeVerboseContent"))
     LogConfig.struct_class = Types::LogConfig
 
     MapOfStringToString.key = Shapes::ShapeRef.new(shape: String)
     MapOfStringToString.value = Shapes::ShapeRef.new(shape: String)
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     OpenIDConnectConfig.add_member(:issuer, Shapes::ShapeRef.new(shape: String, required: true, location_name: "issuer"))
     OpenIDConnectConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: String, location_name: "clientId"))
@@ -527,6 +558,9 @@ module Aws::AppSync
     Type.struct_class = Types::Type
 
     TypeList.member = Shapes::ShapeRef.new(shape: Type)
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))

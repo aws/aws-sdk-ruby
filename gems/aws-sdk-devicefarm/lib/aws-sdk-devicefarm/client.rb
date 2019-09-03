@@ -116,6 +116,10 @@ module Aws::DeviceFarm
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -794,9 +798,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -827,7 +831,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #
     #   **Note** If you call `CreateUpload` with `WEB_APP` specified, AWS
     #   Device Farm throws an `ArgumentException` error.
@@ -1068,7 +1072,7 @@ module Aws::DeviceFarm
     # Deletes a completed remote access session and its results.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the sesssion for which you want to
+    #   The Amazon Resource Name (ARN) of the session for which you want to
     #   delete remote access.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1486,9 +1490,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #
     # @option params [Types::ScheduleRunTest] :test
     #   Information about the uploaded test to be run against the device pool.
@@ -2706,7 +2710,7 @@ module Aws::DeviceFarm
     #   an operator, and one or more values.
     #
     #   * Attribute: The aspect of a device such as platform or model used as
-    #     the selction criteria in a device filter.
+    #     the selection criteria in a device filter.
     #
     #     Allowed values include:
     #
@@ -3810,6 +3814,40 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # List the tags for an AWS Device Farm resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) for which to list
+    #   tags. You can associate tags with the following Device Farm resources:
+    #   `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Gets information about tests in a given test suite.
     #
     # @option params [required, String] :arn
@@ -3998,7 +4036,7 @@ module Aws::DeviceFarm
     #
     #   * IOS\_APP: An iOS upload.
     #
-    #   * WEB\_APP: A web appliction upload.
+    #   * WEB\_APP: A web application upload.
     #
     #   * EXTERNAL\_DATA: An external data upload.
     #
@@ -4037,9 +4075,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -4070,7 +4108,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -4835,6 +4873,76 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Associates the specified tags to a resource with the specified
+    # `resourceArn`. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are deleted as well.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) to which to add
+    #   tags. You can associate tags with the following Device Farm resources:
+    #   `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to add to the resource. A tag is an array of key-value pairs.
+    #   Tag keys can have a maximum character length of 128 characters, and
+    #   tag values can have a maximum length of 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) from which to delete
+    #   tags. You can associate tags with the following Device Farm resources:
+    #   `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates information about an existing private device instance.
     #
     # @option params [required, String] :arn
@@ -4890,7 +4998,7 @@ module Aws::DeviceFarm
     # they can only be updated as a whole (or not at all).
     #
     # @option params [required, String] :arn
-    #   The Amazon Resourc Name (ARN) of the Device Farm device pool you wish
+    #   The Amazon Resource Name (ARN) of the Device Farm device pool you wish
     #   to update.
     #
     # @option params [String] :name
@@ -5066,7 +5174,7 @@ module Aws::DeviceFarm
     #   information.
     #
     # @option params [String] :description
-    #   The descriptoin of the network profile about which you are returning
+    #   The description of the network profile about which you are returning
     #   information.
     #
     # @option params [String] :type
@@ -5331,7 +5439,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

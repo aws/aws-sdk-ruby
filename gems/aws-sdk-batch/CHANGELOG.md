@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-08-06)
+------------------
+
+* Feature - Documentation updates for AWS Batch
+
+1.24.0 (2019-07-26)
+------------------
+
+* Feature - AWS Batch now supports SDK auto-pagination and Job-level docker devices.
+
+1.23.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.19.0 (2019-05-15)
 ------------------
 

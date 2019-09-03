@@ -37,7 +37,7 @@ module Aws::EC2
     # encryption keys are inherited by volumes created from snapshots, and
     # vice versa, if snapshots share the same data encryption key
     # identifier, then they belong to the same volume/snapshot lineage. This
-    # parameter is only returned by the DescribeSnapshots API operation.
+    # parameter is only returned by DescribeSnapshots.
     # @return [String]
     def data_encryption_key_id
       data[:data_encryption_key_id]
@@ -55,9 +55,9 @@ module Aws::EC2
       data[:encrypted]
     end
 
-    # The full ARN of the AWS Key Management Service (AWS KMS) customer
-    # master key (CMK) that was used to protect the volume encryption key
-    # for the parent volume.
+    # The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS
+    # KMS) customer master key (CMK) that was used to protect the volume
+    # encryption key for the parent volume.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -91,8 +91,7 @@ module Aws::EC2
     # snapshot copy operation fails (for example, if the proper AWS Key
     # Management Service (AWS KMS) permissions are not obtained) this field
     # displays error state details to help you diagnose why the error
-    # occurred. This parameter is only returned by the DescribeSnapshots API
-    # operation.
+    # occurred. This parameter is only returned by DescribeSnapshots.
     # @return [String]
     def state_message
       data[:state_message]
@@ -168,10 +167,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Snapshot]
-    def wait_until_completed(options = {})
+    def wait_until_completed(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::SnapshotCompleted.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(snapshot_ids: [@id]))
       Snapshot.new({
         id: @id,
@@ -302,47 +301,37 @@ module Aws::EC2
     #   AWS CLI, this is specified using the `--region` parameter or the
     #   default Region in your AWS configuration file.
     # @option options [Boolean] :encrypted
-    #   Specifies whether the destination snapshot should be encrypted. You
-    #   can encrypt a copy of an unencrypted snapshot, but you cannot use it
-    #   to create an unencrypted copy of an encrypted snapshot. Your default
-    #   CMK for EBS is used unless you specify a non-default AWS Key
-    #   Management Service (AWS KMS) CMK using `KmsKeyId`. For more
-    #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   To encrypt a copy of an unencrypted snapshot if encryption by default
+    #   is not enabled, enable encryption using this parameter. Otherwise,
+    #   omit this parameter. Encrypted snapshots are encrypted, even if you
+    #   omit this parameter and encryption by default is not enabled. You
+    #   cannot set this parameter to false. For more information, see [Amazon
+    #   EBS Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     # @option options [String] :kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If a
-    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
+    #   is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     # @option options [String] :presigned_url
     #   When you copy an encrypted source snapshot using the Amazon EC2 Query
     #   API, you must supply a pre-signed URL. This parameter is optional for

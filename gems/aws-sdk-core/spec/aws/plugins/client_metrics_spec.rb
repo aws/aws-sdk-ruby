@@ -86,13 +86,14 @@ module Aws
           )
         end
 
-        it 'does include the plugins when using the default port' do
+        it 'does include the plugins when using the default port and host' do
           client = ClientMetricsSvc::Client.new(
             credentials: Aws::Credentials.new('stub_akid', 'stub_secret'),
             region: "us-stubbed-1",
             client_side_monitoring: true
           )
           expect(client.config.client_side_monitoring_port).to eq(31000)
+          expect(client.config.client_side_monitoring_host).to eq("127.0.0.1")
           expect(client.handlers.to_a).to include(
             Aws::Plugins::ClientMetricsPlugin::Handler
           )
@@ -435,6 +436,7 @@ module Aws
     class StubPublisher
       attr_accessor :metrics
       attr_accessor :agent_port
+      attr_accessor :agent_host
       
       def initialize
         @metrics = []

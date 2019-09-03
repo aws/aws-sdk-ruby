@@ -35,6 +35,7 @@ module Aws::SageMaker
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeNames = Shapes::ListShape.new(name: 'AttributeNames')
     BatchStrategy = Shapes::StringShape.new(name: 'BatchStrategy')
+    BillableTimeInSeconds = Shapes::IntegerShape.new(name: 'BillableTimeInSeconds')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOperator = Shapes::StringShape.new(name: 'BooleanOperator')
     Branch = Shapes::StringShape.new(name: 'Branch')
@@ -47,6 +48,7 @@ module Aws::SageMaker
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     ChannelSpecification = Shapes::StructureShape.new(name: 'ChannelSpecification')
     ChannelSpecifications = Shapes::ListShape.new(name: 'ChannelSpecifications')
+    CheckpointConfig = Shapes::StructureShape.new(name: 'CheckpointConfig')
     CodeRepositoryArn = Shapes::StringShape.new(name: 'CodeRepositoryArn')
     CodeRepositoryContains = Shapes::StringShape.new(name: 'CodeRepositoryContains')
     CodeRepositoryNameContains = Shapes::StringShape.new(name: 'CodeRepositoryNameContains')
@@ -107,6 +109,7 @@ module Aws::SageMaker
     CreateWorkteamResponse = Shapes::StructureShape.new(name: 'CreateWorkteamResponse')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
     DataInputConfig = Shapes::StringShape.new(name: 'DataInputConfig')
+    DataProcessing = Shapes::StructureShape.new(name: 'DataProcessing')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DeleteAlgorithmInput = Shapes::StructureShape.new(name: 'DeleteAlgorithmInput')
     DeleteCodeRepositoryInput = Shapes::StructureShape.new(name: 'DeleteCodeRepositoryInput')
@@ -157,6 +160,7 @@ module Aws::SageMaker
     DetailedAlgorithmStatus = Shapes::StringShape.new(name: 'DetailedAlgorithmStatus')
     DetailedModelPackageStatus = Shapes::StringShape.new(name: 'DetailedModelPackageStatus')
     DirectInternetAccess = Shapes::StringShape.new(name: 'DirectInternetAccess')
+    DirectoryPath = Shapes::StringShape.new(name: 'DirectoryPath')
     DisassociateAdditionalCodeRepositories = Shapes::BooleanShape.new(name: 'DisassociateAdditionalCodeRepositories')
     DisassociateDefaultCodeRepository = Shapes::BooleanShape.new(name: 'DisassociateDefaultCodeRepository')
     DisassociateNotebookInstanceAcceleratorTypes = Shapes::BooleanShape.new(name: 'DisassociateNotebookInstanceAcceleratorTypes')
@@ -181,6 +185,10 @@ module Aws::SageMaker
     EnvironmentMap = Shapes::MapShape.new(name: 'EnvironmentMap')
     EnvironmentValue = Shapes::StringShape.new(name: 'EnvironmentValue')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
+    FileSystemAccessMode = Shapes::StringShape.new(name: 'FileSystemAccessMode')
+    FileSystemDataSource = Shapes::StructureShape.new(name: 'FileSystemDataSource')
+    FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
+    FileSystemType = Shapes::StringShape.new(name: 'FileSystemType')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
@@ -227,6 +235,8 @@ module Aws::SageMaker
     IntegerParameterRanges = Shapes::ListShape.new(name: 'IntegerParameterRanges')
     JobReferenceCode = Shapes::StringShape.new(name: 'JobReferenceCode')
     JobReferenceCodeContains = Shapes::StringShape.new(name: 'JobReferenceCodeContains')
+    JoinSource = Shapes::StringShape.new(name: 'JoinSource')
+    JsonPath = Shapes::StringShape.new(name: 'JsonPath')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LabelAttributeName = Shapes::StringShape.new(name: 'LabelAttributeName')
     LabelCounter = Shapes::IntegerShape.new(name: 'LabelCounter')
@@ -300,6 +310,7 @@ module Aws::SageMaker
     MaxPercentageOfInputDatasetLabeled = Shapes::IntegerShape.new(name: 'MaxPercentageOfInputDatasetLabeled')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxRuntimeInSeconds = Shapes::IntegerShape.new(name: 'MaxRuntimeInSeconds')
+    MaxWaitTimeInSeconds = Shapes::IntegerShape.new(name: 'MaxWaitTimeInSeconds')
     MemberDefinition = Shapes::StructureShape.new(name: 'MemberDefinition')
     MemberDefinitions = Shapes::ListShape.new(name: 'MemberDefinitions')
     MetricData = Shapes::StructureShape.new(name: 'MetricData')
@@ -483,6 +494,7 @@ module Aws::SageMaker
     TrainingJobSummaries = Shapes::ListShape.new(name: 'TrainingJobSummaries')
     TrainingJobSummary = Shapes::StructureShape.new(name: 'TrainingJobSummary')
     TrainingSpecification = Shapes::StructureShape.new(name: 'TrainingSpecification')
+    TrainingTimeInSeconds = Shapes::IntegerShape.new(name: 'TrainingTimeInSeconds')
     TransformDataSource = Shapes::StructureShape.new(name: 'TransformDataSource')
     TransformEnvironmentKey = Shapes::StringShape.new(name: 'TransformEnvironmentKey')
     TransformEnvironmentMap = Shapes::MapShape.new(name: 'TransformEnvironmentMap')
@@ -604,6 +616,10 @@ module Aws::SageMaker
     ChannelSpecification.struct_class = Types::ChannelSpecification
 
     ChannelSpecifications.member = Shapes::ShapeRef.new(shape: ChannelSpecification)
+
+    CheckpointConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    CheckpointConfig.add_member(:local_path, Shapes::ShapeRef.new(shape: DirectoryPath, location_name: "LocalPath"))
+    CheckpointConfig.struct_class = Types::CheckpointConfig
 
     CodeRepositorySummary.add_member(:code_repository_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CodeRepositoryName"))
     CodeRepositorySummary.add_member(:code_repository_arn, Shapes::ShapeRef.new(shape: CodeRepositoryArn, required: true, location_name: "CodeRepositoryArn"))
@@ -797,6 +813,8 @@ module Aws::SageMaker
     CreateTrainingJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTrainingJobRequest.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
     CreateTrainingJobRequest.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
+    CreateTrainingJobRequest.add_member(:enable_managed_spot_training, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableManagedSpotTraining"))
+    CreateTrainingJobRequest.add_member(:checkpoint_config, Shapes::ShapeRef.new(shape: CheckpointConfig, location_name: "CheckpointConfig"))
     CreateTrainingJobRequest.struct_class = Types::CreateTrainingJobRequest
 
     CreateTrainingJobResponse.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, required: true, location_name: "TrainingJobArn"))
@@ -811,6 +829,7 @@ module Aws::SageMaker
     CreateTransformJobRequest.add_member(:transform_input, Shapes::ShapeRef.new(shape: TransformInput, required: true, location_name: "TransformInput"))
     CreateTransformJobRequest.add_member(:transform_output, Shapes::ShapeRef.new(shape: TransformOutput, required: true, location_name: "TransformOutput"))
     CreateTransformJobRequest.add_member(:transform_resources, Shapes::ShapeRef.new(shape: TransformResources, required: true, location_name: "TransformResources"))
+    CreateTransformJobRequest.add_member(:data_processing, Shapes::ShapeRef.new(shape: DataProcessing, location_name: "DataProcessing"))
     CreateTransformJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTransformJobRequest.struct_class = Types::CreateTransformJobRequest
 
@@ -827,7 +846,13 @@ module Aws::SageMaker
     CreateWorkteamResponse.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, location_name: "WorkteamArn"))
     CreateWorkteamResponse.struct_class = Types::CreateWorkteamResponse
 
+    DataProcessing.add_member(:input_filter, Shapes::ShapeRef.new(shape: JsonPath, location_name: "InputFilter"))
+    DataProcessing.add_member(:output_filter, Shapes::ShapeRef.new(shape: JsonPath, location_name: "OutputFilter"))
+    DataProcessing.add_member(:join_source, Shapes::ShapeRef.new(shape: JoinSource, location_name: "JoinSource"))
+    DataProcessing.struct_class = Types::DataProcessing
+
     DataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataSource, location_name: "S3DataSource"))
+    DataSource.add_member(:file_system_data_source, Shapes::ShapeRef.new(shape: FileSystemDataSource, location_name: "FileSystemDataSource"))
     DataSource.struct_class = Types::DataSource
 
     DeleteAlgorithmInput.add_member(:algorithm_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "AlgorithmName"))
@@ -1079,6 +1104,10 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:final_metric_data_list, Shapes::ShapeRef.new(shape: FinalMetricDataList, location_name: "FinalMetricDataList"))
     DescribeTrainingJobResponse.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
     DescribeTrainingJobResponse.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
+    DescribeTrainingJobResponse.add_member(:enable_managed_spot_training, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableManagedSpotTraining"))
+    DescribeTrainingJobResponse.add_member(:checkpoint_config, Shapes::ShapeRef.new(shape: CheckpointConfig, location_name: "CheckpointConfig"))
+    DescribeTrainingJobResponse.add_member(:training_time_in_seconds, Shapes::ShapeRef.new(shape: TrainingTimeInSeconds, location_name: "TrainingTimeInSeconds"))
+    DescribeTrainingJobResponse.add_member(:billable_time_in_seconds, Shapes::ShapeRef.new(shape: BillableTimeInSeconds, location_name: "BillableTimeInSeconds"))
     DescribeTrainingJobResponse.struct_class = Types::DescribeTrainingJobResponse
 
     DescribeTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
@@ -1100,6 +1129,7 @@ module Aws::SageMaker
     DescribeTransformJobResponse.add_member(:transform_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformStartTime"))
     DescribeTransformJobResponse.add_member(:transform_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformEndTime"))
     DescribeTransformJobResponse.add_member(:labeling_job_arn, Shapes::ShapeRef.new(shape: LabelingJobArn, location_name: "LabelingJobArn"))
+    DescribeTransformJobResponse.add_member(:data_processing, Shapes::ShapeRef.new(shape: DataProcessing, location_name: "DataProcessing"))
     DescribeTransformJobResponse.struct_class = Types::DescribeTransformJobResponse
 
     DescribeWorkteamRequest.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
@@ -1133,6 +1163,12 @@ module Aws::SageMaker
 
     EnvironmentMap.key = Shapes::ShapeRef.new(shape: EnvironmentKey)
     EnvironmentMap.value = Shapes::ShapeRef.new(shape: EnvironmentValue)
+
+    FileSystemDataSource.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    FileSystemDataSource.add_member(:file_system_access_mode, Shapes::ShapeRef.new(shape: FileSystemAccessMode, required: true, location_name: "FileSystemAccessMode"))
+    FileSystemDataSource.add_member(:file_system_type, Shapes::ShapeRef.new(shape: FileSystemType, required: true, location_name: "FileSystemType"))
+    FileSystemDataSource.add_member(:directory_path, Shapes::ShapeRef.new(shape: DirectoryPath, required: true, location_name: "DirectoryPath"))
+    FileSystemDataSource.struct_class = Types::FileSystemDataSource
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: ResourcePropertyName, required: true, location_name: "Name"))
     Filter.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, location_name: "Operator"))
@@ -1204,6 +1240,8 @@ module Aws::SageMaker
     HyperParameterTrainingJobDefinition.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     HyperParameterTrainingJobDefinition.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
     HyperParameterTrainingJobDefinition.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
+    HyperParameterTrainingJobDefinition.add_member(:enable_managed_spot_training, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableManagedSpotTraining"))
+    HyperParameterTrainingJobDefinition.add_member(:checkpoint_config, Shapes::ShapeRef.new(shape: CheckpointConfig, location_name: "CheckpointConfig"))
     HyperParameterTrainingJobDefinition.struct_class = Types::HyperParameterTrainingJobDefinition
 
     HyperParameterTrainingJobSummaries.member = Shapes::ShapeRef.new(shape: HyperParameterTrainingJobSummary)
@@ -1798,9 +1836,18 @@ module Aws::SageMaker
     ResourceConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     ResourceConfig.struct_class = Types::ResourceConfig
 
+    ResourceInUse.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    ResourceInUse.struct_class = Types::ResourceInUse
+
+    ResourceLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    ResourceLimitExceeded.struct_class = Types::ResourceLimitExceeded
+
     ResourceLimits.add_member(:max_number_of_training_jobs, Shapes::ShapeRef.new(shape: MaxNumberOfTrainingJobs, required: true, location_name: "MaxNumberOfTrainingJobs"))
     ResourceLimits.add_member(:max_parallel_training_jobs, Shapes::ShapeRef.new(shape: MaxParallelTrainingJobs, required: true, location_name: "MaxParallelTrainingJobs"))
     ResourceLimits.struct_class = Types::ResourceLimits
+
+    ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    ResourceNotFound.struct_class = Types::ResourceNotFound
 
     ResponseMIMETypes.member = Shapes::ShapeRef.new(shape: ResponseMIMEType)
 
@@ -1879,6 +1926,7 @@ module Aws::SageMaker
     StopTransformJobRequest.struct_class = Types::StopTransformJobRequest
 
     StoppingCondition.add_member(:max_runtime_in_seconds, Shapes::ShapeRef.new(shape: MaxRuntimeInSeconds, location_name: "MaxRuntimeInSeconds"))
+    StoppingCondition.add_member(:max_wait_time_in_seconds, Shapes::ShapeRef.new(shape: MaxWaitTimeInSeconds, location_name: "MaxWaitTimeInSeconds"))
     StoppingCondition.struct_class = Types::StoppingCondition
 
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)

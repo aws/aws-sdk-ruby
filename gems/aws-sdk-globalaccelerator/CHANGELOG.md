@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2019-08-28)
+------------------
+
+* Feature - API Update for AWS Global Accelerator Client IP Preservation
+
+1.10.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.7.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.6.0 (2019-05-15)
 ------------------
 

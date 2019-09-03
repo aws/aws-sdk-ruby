@@ -279,6 +279,12 @@ module Aws::WorkMail
     DescribeUserResponse.add_member(:disabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
+    DirectoryServiceAuthenticationFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DirectoryServiceAuthenticationFailedException.struct_class = Types::DirectoryServiceAuthenticationFailedException
+
+    DirectoryUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DirectoryUnavailableException.struct_class = Types::DirectoryUnavailableException
+
     DisassociateDelegateFromResourceRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DisassociateDelegateFromResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
     DisassociateDelegateFromResourceRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
@@ -292,6 +298,18 @@ module Aws::WorkMail
     DisassociateMemberFromGroupRequest.struct_class = Types::DisassociateMemberFromGroupRequest
 
     DisassociateMemberFromGroupResponse.struct_class = Types::DisassociateMemberFromGroupResponse
+
+    EmailAddressInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EmailAddressInUseException.struct_class = Types::EmailAddressInUseException
+
+    EntityAlreadyRegisteredException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EntityAlreadyRegisteredException.struct_class = Types::EntityAlreadyRegisteredException
+
+    EntityNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EntityNotFoundException.struct_class = Types::EntityNotFoundException
+
+    EntityStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EntityStateException.struct_class = Types::EntityStateException
 
     GetMailboxDetailsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     GetMailboxDetailsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
@@ -310,6 +328,15 @@ module Aws::WorkMail
     Group.struct_class = Types::Group
 
     Groups.member = Shapes::ShapeRef.new(shape: Group)
+
+    InvalidConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidConfigurationException.struct_class = Types::InvalidConfigurationException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidPasswordException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidPasswordException.struct_class = Types::InvalidPasswordException
 
     ListAliasesRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     ListAliasesRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
@@ -386,6 +413,12 @@ module Aws::WorkMail
     ListUsersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
+    MailDomainNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    MailDomainNotFoundException.struct_class = Types::MailDomainNotFoundException
+
+    MailDomainStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    MailDomainStateException.struct_class = Types::MailDomainStateException
+
     Member.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     Member.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Member.add_member(:type, Shapes::ShapeRef.new(shape: MemberType, location_name: "Type"))
@@ -395,6 +428,15 @@ module Aws::WorkMail
     Member.struct_class = Types::Member
 
     Members.member = Shapes::ShapeRef.new(shape: Member)
+
+    NameAvailabilityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NameAvailabilityException.struct_class = Types::NameAvailabilityException
+
+    OrganizationNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    OrganizationNotFoundException.struct_class = Types::OrganizationNotFoundException
+
+    OrganizationStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    OrganizationStateException.struct_class = Types::OrganizationStateException
 
     OrganizationSummaries.member = Shapes::ShapeRef.new(shape: OrganizationSummary)
 
@@ -428,6 +470,9 @@ module Aws::WorkMail
 
     RegisterToWorkMailResponse.struct_class = Types::RegisterToWorkMailResponse
 
+    ReservedNameException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ReservedNameException.struct_class = Types::ReservedNameException
+
     ResetPasswordRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     ResetPasswordRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
     ResetPasswordRequest.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
@@ -447,6 +492,9 @@ module Aws::WorkMail
     ResourceDelegates.member = Shapes::ShapeRef.new(shape: Delegate)
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
+
+    UnsupportedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
 
     UpdateMailboxQuotaRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     UpdateMailboxQuotaRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))

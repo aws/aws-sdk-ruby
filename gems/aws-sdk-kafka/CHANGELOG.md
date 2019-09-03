@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2019-05-30)
+------------------
+
+* Feature - Updated APIs for Amazon MSK to enable new features such as encryption in transit, client authentication, and scaling storage.
+
+1.8.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.7.0 (2019-05-20)
+------------------
+
+* Feature - API update.
+
 1.6.0 (2019-05-15)
 ------------------
 

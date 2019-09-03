@@ -40,7 +40,11 @@ module Aws
       end
 
       if process_status.success?
-        creds_json = JSON.parse(raw_out)
+        begin
+          creds_json = JSON.parse(raw_out)
+        rescue JSON::ParserError
+          raise Errors::InvalidProcessCredentialsPayload.new("Invalid JSON response")
+        end
         payload_version = creds_json['Version']
         if payload_version == 1
           _parse_payload_format_v1(creds_json)

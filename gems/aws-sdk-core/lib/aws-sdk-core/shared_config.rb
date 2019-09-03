@@ -121,6 +121,25 @@ module Aws
       credentials
     end
 
+    def assume_role_web_identity_credentials_from_config(profile)
+      p = profile || @profile_name
+      if @config_enabled && @parsed_config
+        entry = @parsed_config.fetch(p, {})
+        if entry['web_identity_token_file'] &&
+          entry['role_arn']
+          AssumeRoleWebIdentityCredentials.new(
+            role_arn: entry['role_arn'],
+            web_identity_token_file: entry['web_identity_token_file'],
+            role_session_name: entry['role_session_name']
+          )
+        else
+          nil
+        end
+      else
+        nil
+      end
+    end
+
     def region(opts = {})
       p = opts[:profile] || @profile_name
       if @config_enabled
@@ -193,6 +212,21 @@ module Aws
       end
     end
 
+    def csm_host(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["csm_host"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["csm_host"]
+        end
+        value
+      else
+        nil
+      end
+    end
+
     private
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||
@@ -211,11 +245,12 @@ module Aws
               "provide only source_profile or credential_source, not both."
           )
         elsif opts[:source_profile]
-          opts[:credentials] = credentials(profile: opts[:source_profile])
+          opts[:credentials] = resolve_source_profile(opts[:source_profile])
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg["role_session_name"]
             opts[:role_session_name] ||= "default_session"
             opts[:role_arn] ||= prof_cfg["role_arn"]
+            opts[:duration_seconds] ||= prof_cfg["duration_seconds"]
             opts[:external_id] ||= prof_cfg["external_id"]
             opts[:serial_number] ||= prof_cfg["mfa_serial"]
             opts[:profile] = opts.delete(:source_profile)
@@ -235,6 +270,7 @@ module Aws
             opts[:role_session_name] ||= prof_cfg["role_session_name"]
             opts[:role_session_name] ||= "default_session"
             opts[:role_arn] ||= prof_cfg["role_arn"]
+            opts[:duration_seconds] ||= prof_cfg["duration_seconds"]
             opts[:external_id] ||= prof_cfg["external_id"]
             opts[:serial_number] ||= prof_cfg["mfa_serial"]
             opts.delete(:source_profile) # Cleanup
@@ -249,6 +285,20 @@ module Aws
           raise Errors::NoSourceProfileError.new(
             "Profile #{profile} has a role_arn, but no source_profile."
           )
+        else
+          nil
+        end
+      else
+        nil
+      end
+    end
+
+    def resolve_source_profile(src)
+      if (creds = credentials(profile: src))
+        creds # static credentials
+      elsif (provider = assume_role_web_identity_credentials_from_config(src))
+        if provider.credentials.set?
+          provider.credentials
         else
           nil
         end

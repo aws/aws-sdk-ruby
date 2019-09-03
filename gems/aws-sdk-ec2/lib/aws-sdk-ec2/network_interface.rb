@@ -295,7 +295,7 @@ module Aws::EC2
     #   The number of secondary IP addresses to assign to the network
     #   interface. You can't specify this parameter when also specifying
     #   private IP addresses.
-    # @return [EmptyStructure]
+    # @return [Types::AssignPrivateIpAddressesResult]
     def assign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)
       resp = @client.assign_private_ip_addresses(options)
@@ -416,6 +416,26 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Boolean] :force
     #   Specifies whether to force a detachment.
+    #
+    #   <note markdown="1"> * Use the `Force` parameter only as a last resort to detach a network
+    #     interface from a failed instance.
+    #
+    #   * If you use the `Force` parameter to detach a network interface, you
+    #     might not be able to attach a different network interface to the
+    #     same index on the instance without first stopping and starting the
+    #     instance.
+    #
+    #   * If you force the detachment of a network interface, the [instance
+    #     metadata][1] might not get updated. This means that the attributes
+    #     associated with the detached network interface might still be
+    #     visible. The instance metadata will get updated when you stop and
+    #     start the instance.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     # @return [EmptyStructure]
     def detach(options = {})
       options = options.merge(attachment_id: data[:attachment][:attachment_id])

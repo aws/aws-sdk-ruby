@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2019-06-24)
+------------------
+
+* Feature - Customers can pick different security policies (TLS version + cipher suite) for custom domains in API Gateway
+
+1.31.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-05-22)
+------------------
+
+* Feature - This release adds support for tagging of Amazon API Gateway resources.
+
+1.29.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.28.0 (2019-05-15)
 ------------------
 

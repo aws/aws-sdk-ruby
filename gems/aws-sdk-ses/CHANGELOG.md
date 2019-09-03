@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-06-06)
+------------------
+
+* Feature - You can now specify whether the Amazon Simple Email Service must deliver email over a connection that is encrypted using Transport Layer Security (TLS).
+
+1.21.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.20.0 (2019-05-15)
 ------------------
 

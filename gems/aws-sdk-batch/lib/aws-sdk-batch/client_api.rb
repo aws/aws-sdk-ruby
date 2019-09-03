@@ -55,6 +55,10 @@ module Aws::Batch
     DescribeJobQueuesResponse = Shapes::StructureShape.new(name: 'DescribeJobQueuesResponse')
     DescribeJobsRequest = Shapes::StructureShape.new(name: 'DescribeJobsRequest')
     DescribeJobsResponse = Shapes::StructureShape.new(name: 'DescribeJobsResponse')
+    Device = Shapes::StructureShape.new(name: 'Device')
+    DeviceCgroupPermission = Shapes::StringShape.new(name: 'DeviceCgroupPermission')
+    DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
+    DevicesList = Shapes::ListShape.new(name: 'DevicesList')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     Host = Shapes::StructureShape.new(name: 'Host')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -75,6 +79,7 @@ module Aws::Batch
     JobTimeout = Shapes::StructureShape.new(name: 'JobTimeout')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
+    LinuxParameters = Shapes::StructureShape.new(name: 'LinuxParameters')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -151,6 +156,9 @@ module Aws::Batch
 
     CancelJobResponse.struct_class = Types::CancelJobResponse
 
+    ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientException.struct_class = Types::ClientException
+
     ComputeEnvironmentDetail.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironmentName"))
     ComputeEnvironmentDetail.add_member(:compute_environment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironmentArn"))
     ComputeEnvironmentDetail.add_member(:ecs_cluster_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ecsClusterArn"))
@@ -212,6 +220,7 @@ module Aws::Batch
     ContainerDetail.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ContainerDetail.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaceList, location_name: "networkInterfaces"))
     ContainerDetail.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
+    ContainerDetail.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
     ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, location_name: "vcpus"))
@@ -236,6 +245,7 @@ module Aws::Batch
     ContainerProperties.add_member(:user, Shapes::ShapeRef.new(shape: String, location_name: "user"))
     ContainerProperties.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ContainerProperties.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
+    ContainerProperties.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
     ContainerProperties.struct_class = Types::ContainerProperties
 
     ContainerSummary.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
@@ -312,6 +322,15 @@ module Aws::Batch
 
     DescribeJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: JobDetailList, location_name: "jobs"))
     DescribeJobsResponse.struct_class = Types::DescribeJobsResponse
+
+    Device.add_member(:host_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "hostPath"))
+    Device.add_member(:container_path, Shapes::ShapeRef.new(shape: String, location_name: "containerPath"))
+    Device.add_member(:permissions, Shapes::ShapeRef.new(shape: DeviceCgroupPermissions, location_name: "permissions"))
+    Device.struct_class = Types::Device
+
+    DeviceCgroupPermissions.member = Shapes::ShapeRef.new(shape: DeviceCgroupPermission)
+
+    DevicesList.member = Shapes::ShapeRef.new(shape: Device)
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
@@ -397,6 +416,9 @@ module Aws::Batch
     LaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     LaunchTemplateSpecification.struct_class = Types::LaunchTemplateSpecification
 
+    LinuxParameters.add_member(:devices, Shapes::ShapeRef.new(shape: DevicesList, location_name: "devices"))
+    LinuxParameters.struct_class = Types::LinuxParameters
+
     ListJobsRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, location_name: "jobQueue"))
     ListJobsRequest.add_member(:array_job_id, Shapes::ShapeRef.new(shape: String, location_name: "arrayJobId"))
     ListJobsRequest.add_member(:multi_node_job_id, Shapes::ShapeRef.new(shape: String, location_name: "multiNodeJobId"))
@@ -478,6 +500,9 @@ module Aws::Batch
 
     RetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "attempts"))
     RetryStrategy.struct_class = Types::RetryStrategy
+
+    ServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServerException.struct_class = Types::ServerException
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -625,6 +650,12 @@ module Aws::Batch
         o.output = Shapes::ShapeRef.new(shape: DescribeComputeEnvironmentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_job_definitions, Seahorse::Model::Operation.new.tap do |o|
@@ -635,6 +666,12 @@ module Aws::Batch
         o.output = Shapes::ShapeRef.new(shape: DescribeJobDefinitionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_job_queues, Seahorse::Model::Operation.new.tap do |o|
@@ -645,6 +682,12 @@ module Aws::Batch
         o.output = Shapes::ShapeRef.new(shape: DescribeJobQueuesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -665,6 +708,12 @@ module Aws::Batch
         o.output = Shapes::ShapeRef.new(shape: ListJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:register_job_definition, Seahorse::Model::Operation.new.tap do |o|

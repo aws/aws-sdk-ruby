@@ -358,11 +358,6 @@ module Aws::RDS
       data[:deletion_protection]
     end
 
-    # <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
-    # subject to change.
-    #
-    #  </note>
-    #
     # A value that indicates whether the HTTP endpoint for an Aurora
     # Serverless DB cluster is enabled.
     #
@@ -371,15 +366,44 @@ module Aws::RDS
     # can also query your database from inside the RDS console with the
     # query editor.
     #
-    # For more information about Aurora Serverless, see [Using Amazon Aurora
+    # For more information, see [Using the Data API for Aurora
     # Serverless][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     # @return [Boolean]
     def http_endpoint_enabled
       data[:http_endpoint_enabled]
+    end
+
+    # The mode of the database activity stream. Database events such as a
+    # change or access generate an activity stream event. The database
+    # session can handle these events either synchronously or
+    # asynchronously.
+    # @return [String]
+    def activity_stream_mode
+      data[:activity_stream_mode]
+    end
+
+    # The status of the database activity stream.
+    # @return [String]
+    def activity_stream_status
+      data[:activity_stream_status]
+    end
+
+    # The AWS KMS key identifier used for encrypting messages in the
+    # database activity stream.
+    # @return [String]
+    def activity_stream_kms_key_id
+      data[:activity_stream_kms_key_id]
+    end
+
+    # The name of the Amazon Kinesis data stream used for the database
+    # activity stream.
+    # @return [String]
+    def activity_stream_kinesis_stream_name
+      data[:activity_stream_kinesis_stream_name]
     end
 
     # Specifies whether tags are copied from the DB cluster to snapshots of
@@ -387,6 +411,13 @@ module Aws::RDS
     # @return [Boolean]
     def copy_tags_to_snapshot
       data[:copy_tags_to_snapshot]
+    end
+
+    # Specifies whether the DB cluster is a clone of a DB cluster owned by a
+    # different AWS account.
+    # @return [Boolean]
+    def cross_account_clone
+      data[:cross_account_clone]
     end
 
     # @!endgroup
@@ -562,6 +593,7 @@ module Aws::RDS
     #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
+    #     enable_http_endpoint: false,
     #     copy_tags_to_snapshot: false,
     #     source_region: "String",
     #   })
@@ -620,13 +652,32 @@ module Aws::RDS
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
     #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`, `5.7.12`
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
     #
     #   **Aurora PostgreSQL**
     #
-    #   Example: `9.6.3`
+    #   Example: `9.6.3`, `10.7`
     # @option options [Integer] :port
     #   The port number on which the instances in the DB cluster accept
     #   connections.
@@ -773,6 +824,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
@@ -807,6 +865,22 @@ module Aws::RDS
     # @option options [String] :global_cluster_identifier
     #   The global cluster ID of an Aurora cluster that becomes the primary
     #   cluster in the new global database cluster.
+    # @option options [Boolean] :enable_http_endpoint
+    #   A value that indicates whether to enable the HTTP endpoint for an
+    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   disabled.
+    #
+    #   When enabled, the HTTP endpoint provides a connectionless web service
+    #   API for running SQL queries on the Aurora Serverless DB cluster. You
+    #   can also query your database from inside the RDS console with the
+    #   query editor.
+    #
+    #   For more information, see [Using the Data API for Aurora
+    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
@@ -953,6 +1027,8 @@ module Aws::RDS
     #       disable_log_types: ["String"],
     #     },
     #     engine_version: "String",
+    #     allow_major_version_upgrade: false,
+    #     db_instance_parameter_group_name: "String",
     #     scaling_configuration: {
     #       min_capacity: 1,
     #       max_capacity: 1,
@@ -1079,6 +1155,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
@@ -1100,7 +1183,49 @@ module Aws::RDS
     #   applied during the next maintenance window unless `ApplyImmediately`
     #   is enabled.
     #
-    #   For a list of valid engine versions, use DescribeDBEngineVersions.
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    # @option options [Boolean] :allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades when specifying a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    # @option options [String] :db_instance_parameter_group_name
+    #   The name of the DB parameter group to apply to all instances of the DB
+    #   cluster.
+    #
+    #   <note markdown="1"> When you apply a parameter group using the
+    #   `DBInstanceParameterGroupName` parameter, the DB cluster isn't
+    #   rebooted automatically. Also, parameter changes aren't applied during
+    #   the next maintenance window but instead are applied immediately.
+    #
+    #    </note>
+    #
+    #   Default: The existing name setting
+    #
+    #   Constraints:
+    #
+    #   * The DB parameter group must be in the same DB parameter group family
+    #     as this DB cluster.
+    #
+    #   * The `DBInstanceParameterGroupName` parameter is only valid in
+    #     combination with the `AllowMajorVersionUpgrade` parameter.
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   The scaling properties of the DB cluster. You can only modify scaling
     #   properties for DB clusters in `serverless` DB engine mode.
@@ -1109,11 +1234,6 @@ module Aws::RDS
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled. By default, deletion protection is disabled.
     # @option options [Boolean] :enable_http_endpoint
-    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
-    #   subject to change.
-    #
-    #    </note>
-    #
     #   A value that indicates whether to enable the HTTP endpoint for an
     #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
     #   disabled.
@@ -1123,12 +1243,12 @@ module Aws::RDS
     #   can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information about Aurora Serverless, see [Using Amazon Aurora
+    #   For more information, see [Using the Data API for Aurora
     #   Serverless][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
@@ -1276,6 +1396,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
@@ -1496,7 +1623,18 @@ module Aws::RDS
     #   `IncludeShared` parameter doesn't apply when `SnapshotType` is set to
     #   `public`.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   A filter that specifies one or more DB cluster snapshots to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-cluster-snapshot-id` - Accepts DB cluster snapshot identifiers.
+    #
+    #   * `snapshot-type` - Accepts types of DB cluster snapshots.
+    #
+    #   * `engine` - Accepts names of database engines.
     # @option options [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination

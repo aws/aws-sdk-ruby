@@ -42,6 +42,6 @@ require_relative 'aws-sdk-datasync/customizations'
 # @service
 module Aws::DataSync
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.12.0'
 
 end

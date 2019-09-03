@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2019-07-09)
+------------------
+
+* Feature - Add "GET_DASH_STREAMING_SESSION_URL" as an API name to the GetDataEndpoint API.
+
+1.17.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.14.0 (2019-05-15)
 ------------------
 

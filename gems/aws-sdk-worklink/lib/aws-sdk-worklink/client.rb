@@ -116,6 +116,10 @@ module Aws::WorkLink
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -258,12 +262,12 @@ module Aws::WorkLink
     # @option params [required, String] :domain_name
     #   The fully qualified domain name (FQDN).
     #
+    # @option params [String] :display_name
+    #   The name to display.
+    #
     # @option params [required, String] :acm_certificate_arn
     #   The ARN of an issued ACM certificate that is valid for the domain
     #   being associated.
-    #
-    # @option params [String] :display_name
-    #   The name to display.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -272,8 +276,8 @@ module Aws::WorkLink
     #   resp = client.associate_domain({
     #     fleet_arn: "FleetArn", # required
     #     domain_name: "DomainName", # required
-    #     acm_certificate_arn: "AcmCertificateArn", # required
     #     display_name: "DisplayName",
+    #     acm_certificate_arn: "AcmCertificateArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateDomain AWS API Documentation
@@ -282,6 +286,45 @@ module Aws::WorkLink
     # @param [Hash] params ({})
     def associate_domain(params = {}, options = {})
       req = build_request(:associate_domain, params)
+      req.send_request(options)
+    end
+
+    # Associates a website authorization provider with a specified fleet.
+    # This is used to authorize users against associated websites in the
+    # company network.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The ARN of the fleet.
+    #
+    # @option params [required, String] :authorization_provider_type
+    #   The authorization provider type.
+    #
+    # @option params [String] :domain_name
+    #   The domain name of the authorization provider. This applies only to
+    #   SAML-based authorization providers.
+    #
+    # @return [Types::AssociateWebsiteAuthorizationProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateWebsiteAuthorizationProviderResponse#authorization_provider_id #authorization_provider_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_website_authorization_provider({
+    #     fleet_arn: "FleetArn", # required
+    #     authorization_provider_type: "SAML", # required, accepts SAML
+    #     domain_name: "DomainName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorization_provider_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateWebsiteAuthorizationProvider AWS API Documentation
+    #
+    # @overload associate_website_authorization_provider(params = {})
+    # @param [Hash] params ({})
+    def associate_website_authorization_provider(params = {}, options = {})
+      req = build_request(:associate_website_authorization_provider, params)
       req.send_request(options)
     end
 
@@ -536,9 +579,11 @@ module Aws::WorkLink
     #
     # @return [Types::DescribeDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeDomainResponse#domain_name #domain_name} => String
     #   * {Types::DescribeDomainResponse#display_name #display_name} => String
     #   * {Types::DescribeDomainResponse#created_time #created_time} => Time
     #   * {Types::DescribeDomainResponse#domain_status #domain_status} => String
+    #   * {Types::DescribeDomainResponse#acm_certificate_arn #acm_certificate_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -549,9 +594,11 @@ module Aws::WorkLink
     #
     # @example Response structure
     #
+    #   resp.domain_name #=> String
     #   resp.display_name #=> String
     #   resp.created_time #=> Time
     #   resp.domain_status #=> String, one of "PENDING_VALIDATION", "ASSOCIATING", "ACTIVE", "INACTIVE", "DISASSOCIATING", "DISASSOCIATED", "FAILED_TO_ASSOCIATE", "FAILED_TO_DISASSOCIATE"
+    #   resp.acm_certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeDomain AWS API Documentation
     #
@@ -698,6 +745,34 @@ module Aws::WorkLink
       req.send_request(options)
     end
 
+    # Disassociates a website authorization provider from a specified fleet.
+    # After the disassociation, users can't load any associated websites
+    # that require this authorization provider.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The ARN of the fleet.
+    #
+    # @option params [required, String] :authorization_provider_id
+    #   A unique identifier for the authorization provider.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_website_authorization_provider({
+    #     fleet_arn: "FleetArn", # required
+    #     authorization_provider_id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateWebsiteAuthorizationProvider AWS API Documentation
+    #
+    # @overload disassociate_website_authorization_provider(params = {})
+    # @param [Hash] params ({})
+    def disassociate_website_authorization_provider(params = {}, options = {})
+      req = build_request(:disassociate_website_authorization_provider, params)
+      req.send_request(options)
+    end
+
     # Removes a certificate authority (CA).
     #
     # @option params [required, String] :fleet_arn
@@ -794,9 +869,9 @@ module Aws::WorkLink
     #
     #   resp.domains #=> Array
     #   resp.domains[0].domain_name #=> String
+    #   resp.domains[0].display_name #=> String
     #   resp.domains[0].created_time #=> Time
     #   resp.domains[0].domain_status #=> String, one of "PENDING_VALIDATION", "ASSOCIATING", "ACTIVE", "INACTIVE", "DISASSOCIATING", "DISASSOCIATED", "FAILED_TO_ASSOCIATE", "FAILED_TO_DISASSOCIATE"
-    #   resp.domains[0].display_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListDomains AWS API Documentation
@@ -847,6 +922,50 @@ module Aws::WorkLink
     # @param [Hash] params ({})
     def list_fleets(params = {}, options = {})
       req = build_request(:list_fleets, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of website authorization providers associated with a
+    # specified fleet.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The ARN of the fleet.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
+    # @return [Types::ListWebsiteAuthorizationProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWebsiteAuthorizationProvidersResponse#website_authorization_providers #website_authorization_providers} => Array&lt;Types::WebsiteAuthorizationProviderSummary&gt;
+    #   * {Types::ListWebsiteAuthorizationProvidersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_website_authorization_providers({
+    #     fleet_arn: "FleetArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.website_authorization_providers #=> Array
+    #   resp.website_authorization_providers[0].authorization_provider_id #=> String
+    #   resp.website_authorization_providers[0].authorization_provider_type #=> String, one of "SAML"
+    #   resp.website_authorization_providers[0].domain_name #=> String
+    #   resp.website_authorization_providers[0].created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListWebsiteAuthorizationProviders AWS API Documentation
+    #
+    # @overload list_website_authorization_providers(params = {})
+    # @param [Hash] params ({})
+    def list_website_authorization_providers(params = {}, options = {})
+      req = build_request(:list_website_authorization_providers, params)
       req.send_request(options)
     end
 
@@ -1170,7 +1289,7 @@ module Aws::WorkLink
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-worklink'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

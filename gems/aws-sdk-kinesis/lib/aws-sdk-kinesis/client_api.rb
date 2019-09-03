@@ -213,6 +213,12 @@ module Aws::Kinesis
     EnhancedMonitoringOutput.add_member(:desired_shard_level_metrics, Shapes::ShapeRef.new(shape: MetricsNameList, location_name: "DesiredShardLevelMetrics"))
     EnhancedMonitoringOutput.struct_class = Types::EnhancedMonitoringOutput
 
+    ExpiredIteratorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExpiredIteratorException.struct_class = Types::ExpiredIteratorException
+
+    ExpiredNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExpiredNextTokenException.struct_class = Types::ExpiredNextTokenException
+
     GetRecordsInput.add_member(:shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, required: true, location_name: "ShardIterator"))
     GetRecordsInput.add_member(:limit, Shapes::ShapeRef.new(shape: GetRecordsInputLimit, location_name: "Limit"))
     GetRecordsInput.struct_class = Types::GetRecordsInput
@@ -243,6 +249,9 @@ module Aws::Kinesis
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InternalFailureException.struct_class = Types::InternalFailureException
 
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
     KMSAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     KMSAccessDeniedException.struct_class = Types::KMSAccessDeniedException
 
@@ -260,6 +269,9 @@ module Aws::Kinesis
 
     KMSThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     KMSThrottlingException.struct_class = Types::KMSThrottlingException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListShardsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     ListShardsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -305,6 +317,9 @@ module Aws::Kinesis
     MergeShardsInput.struct_class = Types::MergeShardsInput
 
     MetricsNameList.member = Shapes::ShapeRef.new(shape: MetricsName)
+
+    ProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
     PutRecordInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     PutRecordInput.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))

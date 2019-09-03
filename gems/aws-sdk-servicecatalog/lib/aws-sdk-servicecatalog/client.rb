@@ -116,6 +116,10 @@ module Aws::ServiceCatalog
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -1032,6 +1036,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
+    #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1106,6 +1111,11 @@ module Aws::ServiceCatalog
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags.
+    #
+    #   If the plan is for an existing provisioned product, the product must
+    #   have a `RESOURCE_UPDATE` constraint with
+    #   `TagUpdatesOnProvisionedProduct` set to `ALLOWED` to allow tag
+    #   updates.
     #
     # @return [Types::CreateProvisionedProductPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1219,6 +1229,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
+    #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
@@ -1880,6 +1891,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifacts[0].name #=> String
     #   resp.provisioning_artifacts[0].description #=> String
     #   resp.provisioning_artifacts[0].created_time #=> Time
+    #   resp.provisioning_artifacts[0].guidance #=> String, one of "DEFAULT", "DEPRECATED"
     #   resp.budgets #=> Array
     #   resp.budgets[0].budget_name #=> String
     #
@@ -2009,6 +2021,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifacts[0].name #=> String
     #   resp.provisioning_artifacts[0].description #=> String
     #   resp.provisioning_artifacts[0].created_time #=> Time
+    #   resp.provisioning_artifacts[0].guidance #=> String, one of "DEFAULT", "DEPRECATED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductView AWS API Documentation
     #
@@ -2198,6 +2211,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
+    #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
@@ -2298,6 +2312,15 @@ module Aws::ServiceCatalog
     # Use this operation after calling a request operation (for example,
     # ProvisionProduct, TerminateProvisionedProduct, or
     # UpdateProvisionedProduct).
+    #
+    # <note markdown="1"> If a provisioned product was transferred to a new owner using
+    # UpdateProvisionedProductProperties, the new owner will be able to
+    # describe all past records for that product. The previous owner will no
+    # longer be able to describe the records, but will be able to use
+    # ListRecordHistory to see the product's history from when he was the
+    # owner.
+    #
+    #  </note>
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2408,6 +2431,41 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def describe_service_action(params = {}, options = {})
       req = build_request(:describe_service_action, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :provisioned_product_id
+    #
+    # @option params [required, String] :service_action_id
+    #
+    # @option params [String] :accept_language
+    #
+    # @return [Types::DescribeServiceActionExecutionParametersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServiceActionExecutionParametersOutput#service_action_parameters #service_action_parameters} => Array&lt;Types::ExecutionParameter&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_service_action_execution_parameters({
+    #     provisioned_product_id: "Id", # required
+    #     service_action_id: "Id", # required
+    #     accept_language: "AcceptLanguage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_action_parameters #=> Array
+    #   resp.service_action_parameters[0].name #=> String
+    #   resp.service_action_parameters[0].type #=> String
+    #   resp.service_action_parameters[0].default_values #=> Array
+    #   resp.service_action_parameters[0].default_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionExecutionParameters AWS API Documentation
+    #
+    # @overload describe_service_action_execution_parameters(params = {})
+    # @param [Hash] params ({})
+    def describe_service_action_execution_parameters(params = {}, options = {})
+      req = build_request(:describe_service_action_execution_parameters, params)
       req.send_request(options)
     end
 
@@ -2736,6 +2794,8 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [Hash<String,Array>] :parameters
+    #
     # @return [Types::ExecuteProvisionedProductServiceActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteProvisionedProductServiceActionOutput#record_detail #record_detail} => Types::RecordDetail
@@ -2747,6 +2807,9 @@ module Aws::ServiceCatalog
     #     service_action_id: "Id", # required
     #     execute_token: "IdempotencyToken", # required
     #     accept_language: "AcceptLanguage",
+    #     parameters: {
+    #       "ExecutionParameterKey" => ["ExecutionParameterValue"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -3389,6 +3452,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_details[0].created_time #=> Time
     #   resp.provisioning_artifact_details[0].active #=> Boolean
+    #   resp.provisioning_artifact_details[0].guidance #=> String, one of "DEFAULT", "DEPRECATED"
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifacts AWS API Documentation
@@ -3454,6 +3518,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_views[0].provisioning_artifact.name #=> String
     #   resp.provisioning_artifact_views[0].provisioning_artifact.description #=> String
     #   resp.provisioning_artifact_views[0].provisioning_artifact.created_time #=> Time
+    #   resp.provisioning_artifact_views[0].provisioning_artifact.guidance #=> String, one of "DEFAULT", "DEPRECATED"
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsForServiceAction AWS API Documentation
@@ -3698,6 +3763,61 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def list_service_actions_for_provisioning_artifact(params = {}, options = {})
       req = build_request(:list_service_actions_for_provisioning_artifact, params)
+      req.send_request(options)
+    end
+
+    # Returns summary information about stack instances that are associated
+    # with the specified `CFN_STACKSET` type provisioned product. You can
+    # filter for stack instances that are associated with a specific AWS
+    # account name or region.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :provisioned_product_id
+    #   The identifier of the provisioned product.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @return [Types::ListStackInstancesForProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStackInstancesForProvisionedProductOutput#stack_instances #stack_instances} => Array&lt;Types::StackInstance&gt;
+    #   * {Types::ListStackInstancesForProvisionedProductOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_stack_instances_for_provisioned_product({
+    #     accept_language: "AcceptLanguage",
+    #     provisioned_product_id: "Id", # required
+    #     page_token: "PageToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stack_instances #=> Array
+    #   resp.stack_instances[0].account #=> String
+    #   resp.stack_instances[0].region #=> String
+    #   resp.stack_instances[0].stack_instance_status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListStackInstancesForProvisionedProduct AWS API Documentation
+    #
+    # @overload list_stack_instances_for_provisioned_product(params = {})
+    # @param [Hash] params ({})
+    def list_stack_instances_for_provisioned_product(params = {}, options = {})
+      req = build_request(:list_stack_instances_for_provisioned_product, params)
       req.send_request(options)
     end
 
@@ -4615,7 +4735,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [String] :provisioned_product_name
-    #   The updated name of the provisioned product. You cannot specify both
+    #   The name of the provisioned product. You cannot specify both
     #   `ProvisionedProductName` and `ProvisionedProductId`.
     #
     # @option params [String] :provisioned_product_id
@@ -4718,6 +4838,87 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Requests updates to the properties of the specified provisioned
+    # product.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :provisioned_product_id
+    #   The identifier of the provisioned product.
+    #
+    # @option params [required, Hash<String,String>] :provisioned_product_properties
+    #   A map that contains the provisioned product properties to be updated.
+    #
+    #   The `OWNER` key only accepts user ARNs. The owner is the user that is
+    #   allowed to see, update, terminate, and execute service actions in the
+    #   provisioned product.
+    #
+    #   The administrator can change the owner of a provisioned product to
+    #   another IAM user within the same account. Both end user owners and
+    #   administrators can see ownership history of the provisioned product
+    #   using the `ListRecordHistory` API. The new owner can describe all past
+    #   records for the provisioned product using the `DescribeRecord` API.
+    #   The previous owner can no longer use `DescribeRecord`, but can still
+    #   see the product's history from when he was an owner using
+    #   `ListRecordHistory`.
+    #
+    #   If a provisioned product ownership is assigned to an end user, they
+    #   can see and perform any action through the API or Service Catalog
+    #   console such as update, terminate, and execute service actions. If an
+    #   end user provisions a product and the owner is updated to someone
+    #   else, they will no longer be able to see or perform any actions
+    #   through API or the Service Catalog console on that provisioned
+    #   product.
+    #
+    # @option params [required, String] :idempotency_token
+    #   The idempotency token that uniquely identifies the provisioning
+    #   product update request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateProvisionedProductPropertiesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProvisionedProductPropertiesOutput#provisioned_product_id #provisioned_product_id} => String
+    #   * {Types::UpdateProvisionedProductPropertiesOutput#provisioned_product_properties #provisioned_product_properties} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateProvisionedProductPropertiesOutput#record_id #record_id} => String
+    #   * {Types::UpdateProvisionedProductPropertiesOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_provisioned_product_properties({
+    #     accept_language: "AcceptLanguage",
+    #     provisioned_product_id: "Id", # required
+    #     provisioned_product_properties: { # required
+    #       "OWNER" => "PropertyValue",
+    #     },
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.provisioned_product_id #=> String
+    #   resp.provisioned_product_properties #=> Hash
+    #   resp.provisioned_product_properties["PropertyKey"] #=> String
+    #   resp.record_id #=> String
+    #   resp.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductProperties AWS API Documentation
+    #
+    # @overload update_provisioned_product_properties(params = {})
+    # @param [Hash] params ({})
+    def update_provisioned_product_properties(params = {}, options = {})
+      req = build_request(:update_provisioned_product_properties, params)
+      req.send_request(options)
+    end
+
     # Updates the specified provisioning artifact (also known as a version)
     # for the specified product.
     #
@@ -4748,6 +4949,17 @@ module Aws::ServiceCatalog
     # @option params [Boolean] :active
     #   Indicates whether the product version is active.
     #
+    # @option params [String] :guidance
+    #   Information set by the administrator to provide guidance to end users
+    #   about which provisioning artifacts to use.
+    #
+    #   The `DEFAULT` value indicates that the product version is active.
+    #
+    #   The administrator can set the guidance to `DEPRECATED` to inform users
+    #   that the product version is deprecated. Users are able to make updates
+    #   to a provisioned product of a deprecated version but cannot launch new
+    #   provisioned products using a deprecated version.
+    #
     # @return [Types::UpdateProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProvisioningArtifactOutput#provisioning_artifact_detail #provisioning_artifact_detail} => Types::ProvisioningArtifactDetail
@@ -4763,6 +4975,7 @@ module Aws::ServiceCatalog
     #     name: "ProvisioningArtifactName",
     #     description: "ProvisioningArtifactDescription",
     #     active: false,
+    #     guidance: "DEFAULT", # accepts DEFAULT, DEPRECATED
     #   })
     #
     # @example Response structure
@@ -4773,6 +4986,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
+    #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
@@ -4895,7 +5109,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

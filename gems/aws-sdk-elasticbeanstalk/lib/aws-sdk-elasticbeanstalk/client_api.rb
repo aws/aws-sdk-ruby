@@ -675,6 +675,9 @@ module Aws::ElasticBeanstalk
     DescribePlatformVersionResult.add_member(:platform_description, Shapes::ShapeRef.new(shape: PlatformDescription, location_name: "PlatformDescription"))
     DescribePlatformVersionResult.struct_class = Types::DescribePlatformVersionResult
 
+    ElasticBeanstalkServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ElasticBeanstalkServiceException.struct_class = Types::ElasticBeanstalkServiceException
+
     EnvironmentDescription.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
     EnvironmentDescription.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
     EnvironmentDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))

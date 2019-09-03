@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-08-12)
+------------------
+
+* Feature - Documentation updates for monitoring
+
+1.27.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-07-09)
+------------------
+
+* Feature - This release adds three new APIs (PutAnomalyDetector, DeleteAnomalyDetector, and DescribeAnomalyDetectors) to support the new feature, CloudWatch Anomaly Detection. In addition, PutMetricAlarm and DescribeAlarms APIs are updated to support management of Anomaly Detection based alarms.
+
+1.25.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.22.0 (2019-05-15)
 ------------------
 

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-08-29)
+------------------
+
+* Feature - With the current release, you can suspend and later resume any of the following scaling actions in Application Auto Scaling: scheduled scaling actions, dynamic scaling in actions, dynamic scaling out actions.
+
+1.29.0 (2019-08-12)
+------------------
+
+* Feature - Documentation updates for Application Auto Scaling
+
+1.28.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.24.0 (2019-05-15)
 ------------------
 

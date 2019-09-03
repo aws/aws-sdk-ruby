@@ -116,6 +116,10 @@ module Aws::Amplify
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -258,19 +262,24 @@ module Aws::Amplify
     # @option params [String] :description
     #   Description for an Amplify App
     #
-    # @option params [required, String] :repository
+    # @option params [String] :repository
     #   Repository for an Amplify App
     #
-    # @option params [required, String] :platform
+    # @option params [String] :platform
     #   Platform / framework for an Amplify App
     #
     # @option params [String] :iam_service_role_arn
     #   AWS IAM service role for an Amplify App
     #
-    # @option params [required, String] :oauth_token
+    # @option params [String] :oauth_token
     #   OAuth token for 3rd party source control system for an Amplify App,
     #   used to create webhook and read-only deploy key. OAuth token is not
     #   stored.
+    #
+    # @option params [String] :access_token
+    #   Personal Access token for 3rd party source control system for an
+    #   Amplify App, used to create webhook and read-only deploy key. Token is
+    #   not stored.
     #
     # @option params [Hash<String,String>] :environment_variables
     #   Environment variables map for an Amplify App.
@@ -294,6 +303,15 @@ module Aws::Amplify
     # @option params [String] :build_spec
     #   BuildSpec for an Amplify App
     #
+    # @option params [Boolean] :enable_auto_branch_creation
+    #   Enables automated branch creation for the Amplify App.
+    #
+    # @option params [Array<String>] :auto_branch_creation_patterns
+    #   Automated branch creation glob patterns for the Amplify App.
+    #
+    # @option params [Types::AutoBranchCreationConfig] :auto_branch_creation_config
+    #   Automated branch creation config for the Amplify App.
+    #
     # @return [Types::CreateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAppResult#app #app} => Types::App
@@ -303,10 +321,11 @@ module Aws::Amplify
     #   resp = client.create_app({
     #     name: "Name", # required
     #     description: "Description",
-    #     repository: "Repository", # required
-    #     platform: "IOS", # required, accepts IOS, ANDROID, WEB, REACT_NATIVE
+    #     repository: "Repository",
+    #     platform: "WEB", # accepts WEB
     #     iam_service_role_arn: "ServiceRoleArn",
-    #     oauth_token: "OauthToken", # required
+    #     oauth_token: "OauthToken",
+    #     access_token: "AccessToken",
     #     environment_variables: {
     #       "EnvKey" => "EnvValue",
     #     },
@@ -325,6 +344,19 @@ module Aws::Amplify
     #       "TagKey" => "TagValue",
     #     },
     #     build_spec: "BuildSpec",
+    #     enable_auto_branch_creation: false,
+    #     auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
+    #     auto_branch_creation_config: {
+    #       stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #       framework: "Framework",
+    #       enable_auto_build: false,
+    #       environment_variables: {
+    #         "EnvKey" => "EnvValue",
+    #       },
+    #       basic_auth_credentials: "BasicAuthCredentials",
+    #       enable_basic_auth: false,
+    #       build_spec: "BuildSpec",
+    #     },
     #   })
     #
     # @example Response structure
@@ -336,7 +368,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "IOS", "ANDROID", "WEB", "REACT_NATIVE"
+    #   resp.app.platform #=> String, one of "WEB"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -356,6 +388,17 @@ module Aws::Amplify
     #   resp.app.production_branch.thumbnail_url #=> String
     #   resp.app.production_branch.branch_name #=> String
     #   resp.app.build_spec #=> String
+    #   resp.app.enable_auto_branch_creation #=> Boolean
+    #   resp.app.auto_branch_creation_patterns #=> Array
+    #   resp.app.auto_branch_creation_patterns[0] #=> String
+    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.app.auto_branch_creation_config.framework #=> String
+    #   resp.app.auto_branch_creation_config.enable_auto_build #=> Boolean
+    #   resp.app.auto_branch_creation_config.environment_variables #=> Hash
+    #   resp.app.auto_branch_creation_config.environment_variables["EnvKey"] #=> String
+    #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
+    #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.app.auto_branch_creation_config.build_spec #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateApp AWS API Documentation
     #
@@ -407,6 +450,9 @@ module Aws::Amplify
     # @option params [String] :ttl
     #   The content TTL for the website in seconds.
     #
+    # @option params [String] :display_name
+    #   Display name for a branch, will use as the default domain prefix.
+    #
     # @return [Types::CreateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBranchResult#branch #branch} => Types::Branch
@@ -431,6 +477,7 @@ module Aws::Amplify
     #     },
     #     build_spec: "BuildSpec",
     #     ttl: "TTL",
+    #     display_name: "DisplayName",
     #   })
     #
     # @example Response structure
@@ -458,6 +505,8 @@ module Aws::Amplify
     #   resp.branch.basic_auth_credentials #=> String
     #   resp.branch.build_spec #=> String
     #   resp.branch.ttl #=> String
+    #   resp.branch.associated_resources #=> Array
+    #   resp.branch.associated_resources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranch AWS API Documentation
     #
@@ -465,6 +514,53 @@ module Aws::Amplify
     # @param [Hash] params ({})
     def create_branch(params = {}, options = {})
       req = build_request(:create_branch, params)
+      req.send_request(options)
+    end
+
+    # Create a deployment for manual deploy apps. (Apps are not connected to
+    # repository)
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id for an Amplify App.
+    #
+    # @option params [required, String] :branch_name
+    #   Name for the branch, for the Job.
+    #
+    # @option params [Hash<String,String>] :file_map
+    #   Optional file map that contains file name as the key and file content
+    #   md5 hash as the value. If this argument is provided, the service will
+    #   generate different upload url per file. Otherwise, the service will
+    #   only generate a single upload url for the zipped files.
+    #
+    # @return [Types::CreateDeploymentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDeploymentResult#job_id #job_id} => String
+    #   * {Types::CreateDeploymentResult#file_upload_urls #file_upload_urls} => Hash&lt;String,String&gt;
+    #   * {Types::CreateDeploymentResult#zip_upload_url #zip_upload_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_deployment({
+    #     app_id: "AppId", # required
+    #     branch_name: "BranchName", # required
+    #     file_map: {
+    #       "FileName" => "MD5Hash",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.file_upload_urls #=> Hash
+    #   resp.file_upload_urls["FileName"] #=> String
+    #   resp.zip_upload_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDeployment AWS API Documentation
+    #
+    # @overload create_deployment(params = {})
+    # @param [Hash] params ({})
+    def create_deployment(params = {}, options = {})
+      req = build_request(:create_deployment, params)
       req.send_request(options)
     end
 
@@ -505,7 +601,7 @@ module Aws::Amplify
     #   resp.domain_association.domain_association_arn #=> String
     #   resp.domain_association.domain_name #=> String
     #   resp.domain_association.enable_auto_sub_domain #=> Boolean
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -520,6 +616,48 @@ module Aws::Amplify
     # @param [Hash] params ({})
     def create_domain_association(params = {}, options = {})
       req = build_request(:create_domain_association, params)
+      req.send_request(options)
+    end
+
+    # Create a new webhook on an App.
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id for an Amplify App.
+    #
+    # @option params [required, String] :branch_name
+    #   Name for a branch, part of an Amplify App.
+    #
+    # @option params [String] :description
+    #   Description for a webhook.
+    #
+    # @return [Types::CreateWebhookResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWebhookResult#webhook #webhook} => Types::Webhook
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_webhook({
+    #     app_id: "AppId", # required
+    #     branch_name: "BranchName", # required
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.webhook.webhook_arn #=> String
+    #   resp.webhook.webhook_id #=> String
+    #   resp.webhook.webhook_url #=> String
+    #   resp.webhook.branch_name #=> String
+    #   resp.webhook.description #=> String
+    #   resp.webhook.create_time #=> Time
+    #   resp.webhook.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateWebhook AWS API Documentation
+    #
+    # @overload create_webhook(params = {})
+    # @param [Hash] params ({})
+    def create_webhook(params = {}, options = {})
+      req = build_request(:create_webhook, params)
       req.send_request(options)
     end
 
@@ -547,7 +685,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "IOS", "ANDROID", "WEB", "REACT_NATIVE"
+    #   resp.app.platform #=> String, one of "WEB"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -567,6 +705,17 @@ module Aws::Amplify
     #   resp.app.production_branch.thumbnail_url #=> String
     #   resp.app.production_branch.branch_name #=> String
     #   resp.app.build_spec #=> String
+    #   resp.app.enable_auto_branch_creation #=> Boolean
+    #   resp.app.auto_branch_creation_patterns #=> Array
+    #   resp.app.auto_branch_creation_patterns[0] #=> String
+    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.app.auto_branch_creation_config.framework #=> String
+    #   resp.app.auto_branch_creation_config.enable_auto_build #=> Boolean
+    #   resp.app.auto_branch_creation_config.environment_variables #=> Hash
+    #   resp.app.auto_branch_creation_config.environment_variables["EnvKey"] #=> String
+    #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
+    #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.app.auto_branch_creation_config.build_spec #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteApp AWS API Documentation
     #
@@ -621,6 +770,8 @@ module Aws::Amplify
     #   resp.branch.basic_auth_credentials #=> String
     #   resp.branch.build_spec #=> String
     #   resp.branch.ttl #=> String
+    #   resp.branch.associated_resources #=> Array
+    #   resp.branch.associated_resources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranch AWS API Documentation
     #
@@ -655,7 +806,7 @@ module Aws::Amplify
     #   resp.domain_association.domain_association_arn #=> String
     #   resp.domain_association.domain_name #=> String
     #   resp.domain_association.enable_auto_sub_domain #=> Boolean
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -706,7 +857,7 @@ module Aws::Amplify
     #   resp.job_summary.start_time #=> Time
     #   resp.job_summary.status #=> String, one of "PENDING", "PROVISIONING", "RUNNING", "FAILED", "SUCCEED", "CANCELLING", "CANCELLED"
     #   resp.job_summary.end_time #=> Time
-    #   resp.job_summary.job_type #=> String, one of "RELEASE", "RETRY", "WEB_HOOK"
+    #   resp.job_summary.job_type #=> String, one of "RELEASE", "RETRY", "MANUAL", "WEB_HOOK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteJob AWS API Documentation
     #
@@ -714,6 +865,40 @@ module Aws::Amplify
     # @param [Hash] params ({})
     def delete_job(params = {}, options = {})
       req = build_request(:delete_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes a webhook.
+    #
+    # @option params [required, String] :webhook_id
+    #   Unique Id for a webhook.
+    #
+    # @return [Types::DeleteWebhookResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteWebhookResult#webhook #webhook} => Types::Webhook
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_webhook({
+    #     webhook_id: "WebhookId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.webhook.webhook_arn #=> String
+    #   resp.webhook.webhook_id #=> String
+    #   resp.webhook.webhook_url #=> String
+    #   resp.webhook.branch_name #=> String
+    #   resp.webhook.description #=> String
+    #   resp.webhook.create_time #=> Time
+    #   resp.webhook.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteWebhook AWS API Documentation
+    #
+    # @overload delete_webhook(params = {})
+    # @param [Hash] params ({})
+    def delete_webhook(params = {}, options = {})
+      req = build_request(:delete_webhook, params)
       req.send_request(options)
     end
 
@@ -741,7 +926,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "IOS", "ANDROID", "WEB", "REACT_NATIVE"
+    #   resp.app.platform #=> String, one of "WEB"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -761,6 +946,17 @@ module Aws::Amplify
     #   resp.app.production_branch.thumbnail_url #=> String
     #   resp.app.production_branch.branch_name #=> String
     #   resp.app.build_spec #=> String
+    #   resp.app.enable_auto_branch_creation #=> Boolean
+    #   resp.app.auto_branch_creation_patterns #=> Array
+    #   resp.app.auto_branch_creation_patterns[0] #=> String
+    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.app.auto_branch_creation_config.framework #=> String
+    #   resp.app.auto_branch_creation_config.enable_auto_build #=> Boolean
+    #   resp.app.auto_branch_creation_config.environment_variables #=> Hash
+    #   resp.app.auto_branch_creation_config.environment_variables["EnvKey"] #=> String
+    #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
+    #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.app.auto_branch_creation_config.build_spec #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetApp AWS API Documentation
     #
@@ -815,6 +1011,8 @@ module Aws::Amplify
     #   resp.branch.basic_auth_credentials #=> String
     #   resp.branch.build_spec #=> String
     #   resp.branch.ttl #=> String
+    #   resp.branch.associated_resources #=> Array
+    #   resp.branch.associated_resources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranch AWS API Documentation
     #
@@ -849,7 +1047,7 @@ module Aws::Amplify
     #   resp.domain_association.domain_association_arn #=> String
     #   resp.domain_association.domain_name #=> String
     #   resp.domain_association.enable_auto_sub_domain #=> Boolean
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -900,7 +1098,7 @@ module Aws::Amplify
     #   resp.job.summary.start_time #=> Time
     #   resp.job.summary.status #=> String, one of "PENDING", "PROVISIONING", "RUNNING", "FAILED", "SUCCEED", "CANCELLING", "CANCELLED"
     #   resp.job.summary.end_time #=> Time
-    #   resp.job.summary.job_type #=> String, one of "RELEASE", "RETRY", "WEB_HOOK"
+    #   resp.job.summary.job_type #=> String, one of "RELEASE", "RETRY", "MANUAL", "WEB_HOOK"
     #   resp.job.steps #=> Array
     #   resp.job.steps[0].step_name #=> String
     #   resp.job.steps[0].start_time #=> Time
@@ -910,6 +1108,8 @@ module Aws::Amplify
     #   resp.job.steps[0].artifacts_url #=> String
     #   resp.job.steps[0].screenshots #=> Hash
     #   resp.job.steps[0].screenshots["ThumbnailName"] #=> String
+    #   resp.job.steps[0].status_reason #=> String
+    #   resp.job.steps[0].context #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetJob AWS API Documentation
     #
@@ -917,6 +1117,40 @@ module Aws::Amplify
     # @param [Hash] params ({})
     def get_job(params = {}, options = {})
       req = build_request(:get_job, params)
+      req.send_request(options)
+    end
+
+    # Retrieves webhook info that corresponds to a webhookId.
+    #
+    # @option params [required, String] :webhook_id
+    #   Unique Id for a webhook.
+    #
+    # @return [Types::GetWebhookResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWebhookResult#webhook #webhook} => Types::Webhook
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_webhook({
+    #     webhook_id: "WebhookId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.webhook.webhook_arn #=> String
+    #   resp.webhook.webhook_id #=> String
+    #   resp.webhook.webhook_url #=> String
+    #   resp.webhook.branch_name #=> String
+    #   resp.webhook.description #=> String
+    #   resp.webhook.create_time #=> Time
+    #   resp.webhook.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetWebhook AWS API Documentation
+    #
+    # @overload get_webhook(params = {})
+    # @param [Hash] params ({})
+    def get_webhook(params = {}, options = {})
+      req = build_request(:get_webhook, params)
       req.send_request(options)
     end
 
@@ -951,7 +1185,7 @@ module Aws::Amplify
     #   resp.apps[0].tags["TagKey"] #=> String
     #   resp.apps[0].description #=> String
     #   resp.apps[0].repository #=> String
-    #   resp.apps[0].platform #=> String, one of "IOS", "ANDROID", "WEB", "REACT_NATIVE"
+    #   resp.apps[0].platform #=> String, one of "WEB"
     #   resp.apps[0].create_time #=> Time
     #   resp.apps[0].update_time #=> Time
     #   resp.apps[0].iam_service_role_arn #=> String
@@ -971,6 +1205,17 @@ module Aws::Amplify
     #   resp.apps[0].production_branch.thumbnail_url #=> String
     #   resp.apps[0].production_branch.branch_name #=> String
     #   resp.apps[0].build_spec #=> String
+    #   resp.apps[0].enable_auto_branch_creation #=> Boolean
+    #   resp.apps[0].auto_branch_creation_patterns #=> Array
+    #   resp.apps[0].auto_branch_creation_patterns[0] #=> String
+    #   resp.apps[0].auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.apps[0].auto_branch_creation_config.framework #=> String
+    #   resp.apps[0].auto_branch_creation_config.enable_auto_build #=> Boolean
+    #   resp.apps[0].auto_branch_creation_config.environment_variables #=> Hash
+    #   resp.apps[0].auto_branch_creation_config.environment_variables["EnvKey"] #=> String
+    #   resp.apps[0].auto_branch_creation_config.basic_auth_credentials #=> String
+    #   resp.apps[0].auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.apps[0].auto_branch_creation_config.build_spec #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListApps AWS API Documentation
@@ -1034,6 +1279,8 @@ module Aws::Amplify
     #   resp.branches[0].basic_auth_credentials #=> String
     #   resp.branches[0].build_spec #=> String
     #   resp.branches[0].ttl #=> String
+    #   resp.branches[0].associated_resources #=> Array
+    #   resp.branches[0].associated_resources[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBranches AWS API Documentation
@@ -1077,7 +1324,7 @@ module Aws::Amplify
     #   resp.domain_associations[0].domain_association_arn #=> String
     #   resp.domain_associations[0].domain_name #=> String
     #   resp.domain_associations[0].enable_auto_sub_domain #=> Boolean
-    #   resp.domain_associations[0].domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED"
+    #   resp.domain_associations[0].domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_associations[0].status_reason #=> String
     #   resp.domain_associations[0].certificate_verification_dns_record #=> String
     #   resp.domain_associations[0].sub_domains #=> Array
@@ -1137,7 +1384,7 @@ module Aws::Amplify
     #   resp.job_summaries[0].start_time #=> Time
     #   resp.job_summaries[0].status #=> String, one of "PENDING", "PROVISIONING", "RUNNING", "FAILED", "SUCCEED", "CANCELLING", "CANCELLED"
     #   resp.job_summaries[0].end_time #=> Time
-    #   resp.job_summaries[0].job_type #=> String, one of "RELEASE", "RETRY", "WEB_HOOK"
+    #   resp.job_summaries[0].job_type #=> String, one of "RELEASE", "RETRY", "MANUAL", "WEB_HOOK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListJobs AWS API Documentation
@@ -1146,6 +1393,134 @@ module Aws::Amplify
     # @param [Hash] params ({})
     def list_jobs(params = {}, options = {})
       req = build_request(:list_jobs, params)
+      req.send_request(options)
+    end
+
+    # List tags for resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   Resource arn used to list tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # List webhooks with an app.
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id for an Amplify App.
+    #
+    # @option params [String] :next_token
+    #   Pagination token. Set to null to start listing webhooks from start. If
+    #   non-null pagination token is returned in a result, then pass its value
+    #   in here to list more webhooks.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of records to list in a single response.
+    #
+    # @return [Types::ListWebhooksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWebhooksResult#webhooks #webhooks} => Array&lt;Types::Webhook&gt;
+    #   * {Types::ListWebhooksResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_webhooks({
+    #     app_id: "AppId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.webhooks #=> Array
+    #   resp.webhooks[0].webhook_arn #=> String
+    #   resp.webhooks[0].webhook_id #=> String
+    #   resp.webhooks[0].webhook_url #=> String
+    #   resp.webhooks[0].branch_name #=> String
+    #   resp.webhooks[0].description #=> String
+    #   resp.webhooks[0].create_time #=> Time
+    #   resp.webhooks[0].update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListWebhooks AWS API Documentation
+    #
+    # @overload list_webhooks(params = {})
+    # @param [Hash] params ({})
+    def list_webhooks(params = {}, options = {})
+      req = build_request(:list_webhooks, params)
+      req.send_request(options)
+    end
+
+    # Start a deployment for manual deploy apps. (Apps are not connected to
+    # repository)
+    #
+    # @option params [required, String] :app_id
+    #   Unique Id for an Amplify App.
+    #
+    # @option params [required, String] :branch_name
+    #   Name for the branch, for the Job.
+    #
+    # @option params [String] :job_id
+    #   The job id for this deployment, generated by create deployment
+    #   request.
+    #
+    # @option params [String] :source_url
+    #   The sourceUrl for this deployment, used when calling start deployment
+    #   without create deployment. SourceUrl can be any HTTP GET url that is
+    #   public accessible and downloads a single zip.
+    #
+    # @return [Types::StartDeploymentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDeploymentResult#job_summary #job_summary} => Types::JobSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_deployment({
+    #     app_id: "AppId", # required
+    #     branch_name: "BranchName", # required
+    #     job_id: "JobId",
+    #     source_url: "SourceUrl",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_summary.job_arn #=> String
+    #   resp.job_summary.job_id #=> String
+    #   resp.job_summary.commit_id #=> String
+    #   resp.job_summary.commit_message #=> String
+    #   resp.job_summary.commit_time #=> Time
+    #   resp.job_summary.start_time #=> Time
+    #   resp.job_summary.status #=> String, one of "PENDING", "PROVISIONING", "RUNNING", "FAILED", "SUCCEED", "CANCELLING", "CANCELLED"
+    #   resp.job_summary.end_time #=> Time
+    #   resp.job_summary.job_type #=> String, one of "RELEASE", "RETRY", "MANUAL", "WEB_HOOK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartDeployment AWS API Documentation
+    #
+    # @overload start_deployment(params = {})
+    # @param [Hash] params ({})
+    def start_deployment(params = {}, options = {})
+      req = build_request(:start_deployment, params)
       req.send_request(options)
     end
 
@@ -1158,13 +1533,16 @@ module Aws::Amplify
     #   Name for the branch, for the Job.
     #
     # @option params [String] :job_id
-    #   Unique Id for the Job.
+    #   Unique Id for an existing job. Required for "RETRY" JobType.
     #
     # @option params [required, String] :job_type
-    #   Type for the Job.
+    #   Type for the Job. Available JobTypes are: \\n "RELEASE": Start a new
+    #   job with the latest change from the specified branch. Only available
+    #   for apps that have connected to a repository. "RETRY": Retry an
+    #   existing job. JobId is required for this type of job.
     #
     # @option params [String] :job_reason
-    #   Reason for the Job.
+    #   Descriptive reason for starting this job.
     #
     # @option params [String] :commit_id
     #   Commit Id from 3rd party repository provider for the Job.
@@ -1185,7 +1563,7 @@ module Aws::Amplify
     #     app_id: "AppId", # required
     #     branch_name: "BranchName", # required
     #     job_id: "JobId",
-    #     job_type: "RELEASE", # required, accepts RELEASE, RETRY, WEB_HOOK
+    #     job_type: "RELEASE", # required, accepts RELEASE, RETRY, MANUAL, WEB_HOOK
     #     job_reason: "JobReason",
     #     commit_id: "CommitId",
     #     commit_message: "CommitMessage",
@@ -1202,7 +1580,7 @@ module Aws::Amplify
     #   resp.job_summary.start_time #=> Time
     #   resp.job_summary.status #=> String, one of "PENDING", "PROVISIONING", "RUNNING", "FAILED", "SUCCEED", "CANCELLING", "CANCELLED"
     #   resp.job_summary.end_time #=> Time
-    #   resp.job_summary.job_type #=> String, one of "RELEASE", "RETRY", "WEB_HOOK"
+    #   resp.job_summary.job_type #=> String, one of "RELEASE", "RETRY", "MANUAL", "WEB_HOOK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartJob AWS API Documentation
     #
@@ -1247,7 +1625,7 @@ module Aws::Amplify
     #   resp.job_summary.start_time #=> Time
     #   resp.job_summary.status #=> String, one of "PENDING", "PROVISIONING", "RUNNING", "FAILED", "SUCCEED", "CANCELLING", "CANCELLED"
     #   resp.job_summary.end_time #=> Time
-    #   resp.job_summary.job_type #=> String, one of "RELEASE", "RETRY", "WEB_HOOK"
+    #   resp.job_summary.job_type #=> String, one of "RELEASE", "RETRY", "MANUAL", "WEB_HOOK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StopJob AWS API Documentation
     #
@@ -1255,6 +1633,60 @@ module Aws::Amplify
     # @param [Hash] params ({})
     def stop_job(params = {}, options = {})
       req = build_request(:stop_job, params)
+      req.send_request(options)
+    end
+
+    # Tag resource with tag key and value.
+    #
+    # @option params [required, String] :resource_arn
+    #   Resource arn used to tag resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   Tags used to tag resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Untag resource with resourceArn.
+    #
+    # @option params [required, String] :resource_arn
+    #   Resource arn used to untag resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   Tag keys used to untag resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1293,6 +1725,15 @@ module Aws::Amplify
     # @option params [String] :build_spec
     #   BuildSpec for an Amplify App.
     #
+    # @option params [Boolean] :enable_auto_branch_creation
+    #   Enables automated branch creation for the Amplify App.
+    #
+    # @option params [Array<String>] :auto_branch_creation_patterns
+    #   Automated branch creation glob patterns for the Amplify App.
+    #
+    # @option params [Types::AutoBranchCreationConfig] :auto_branch_creation_config
+    #   Automated branch creation config for the Amplify App.
+    #
     # @return [Types::UpdateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAppResult#app #app} => Types::App
@@ -1303,7 +1744,7 @@ module Aws::Amplify
     #     app_id: "AppId", # required
     #     name: "Name",
     #     description: "Description",
-    #     platform: "IOS", # accepts IOS, ANDROID, WEB, REACT_NATIVE
+    #     platform: "WEB", # accepts WEB
     #     iam_service_role_arn: "ServiceRoleArn",
     #     environment_variables: {
     #       "EnvKey" => "EnvValue",
@@ -1320,6 +1761,19 @@ module Aws::Amplify
     #       },
     #     ],
     #     build_spec: "BuildSpec",
+    #     enable_auto_branch_creation: false,
+    #     auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
+    #     auto_branch_creation_config: {
+    #       stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #       framework: "Framework",
+    #       enable_auto_build: false,
+    #       environment_variables: {
+    #         "EnvKey" => "EnvValue",
+    #       },
+    #       basic_auth_credentials: "BasicAuthCredentials",
+    #       enable_basic_auth: false,
+    #       build_spec: "BuildSpec",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1331,7 +1785,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "IOS", "ANDROID", "WEB", "REACT_NATIVE"
+    #   resp.app.platform #=> String, one of "WEB"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -1351,6 +1805,17 @@ module Aws::Amplify
     #   resp.app.production_branch.thumbnail_url #=> String
     #   resp.app.production_branch.branch_name #=> String
     #   resp.app.build_spec #=> String
+    #   resp.app.enable_auto_branch_creation #=> Boolean
+    #   resp.app.auto_branch_creation_patterns #=> Array
+    #   resp.app.auto_branch_creation_patterns[0] #=> String
+    #   resp.app.auto_branch_creation_config.stage #=> String, one of "PRODUCTION", "BETA", "DEVELOPMENT", "EXPERIMENTAL"
+    #   resp.app.auto_branch_creation_config.framework #=> String
+    #   resp.app.auto_branch_creation_config.enable_auto_build #=> Boolean
+    #   resp.app.auto_branch_creation_config.environment_variables #=> Hash
+    #   resp.app.auto_branch_creation_config.environment_variables["EnvKey"] #=> String
+    #   resp.app.auto_branch_creation_config.basic_auth_credentials #=> String
+    #   resp.app.auto_branch_creation_config.enable_basic_auth #=> Boolean
+    #   resp.app.auto_branch_creation_config.build_spec #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateApp AWS API Documentation
     #
@@ -1399,6 +1864,9 @@ module Aws::Amplify
     # @option params [String] :ttl
     #   The content TTL for the website in seconds.
     #
+    # @option params [String] :display_name
+    #   Display name for a branch, will use as the default domain prefix.
+    #
     # @return [Types::UpdateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBranchResult#branch #branch} => Types::Branch
@@ -1420,6 +1888,7 @@ module Aws::Amplify
     #     enable_basic_auth: false,
     #     build_spec: "BuildSpec",
     #     ttl: "TTL",
+    #     display_name: "DisplayName",
     #   })
     #
     # @example Response structure
@@ -1447,6 +1916,8 @@ module Aws::Amplify
     #   resp.branch.basic_auth_credentials #=> String
     #   resp.branch.build_spec #=> String
     #   resp.branch.ttl #=> String
+    #   resp.branch.associated_resources #=> Array
+    #   resp.branch.associated_resources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranch AWS API Documentation
     #
@@ -1494,7 +1965,7 @@ module Aws::Amplify
     #   resp.domain_association.domain_association_arn #=> String
     #   resp.domain_association.domain_name #=> String
     #   resp.domain_association.enable_auto_sub_domain #=> Boolean
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -1512,6 +1983,48 @@ module Aws::Amplify
       req.send_request(options)
     end
 
+    # Update a webhook.
+    #
+    # @option params [required, String] :webhook_id
+    #   Unique Id for a webhook.
+    #
+    # @option params [String] :branch_name
+    #   Name for a branch, part of an Amplify App.
+    #
+    # @option params [String] :description
+    #   Description for a webhook.
+    #
+    # @return [Types::UpdateWebhookResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateWebhookResult#webhook #webhook} => Types::Webhook
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_webhook({
+    #     webhook_id: "WebhookId", # required
+    #     branch_name: "BranchName",
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.webhook.webhook_arn #=> String
+    #   resp.webhook.webhook_id #=> String
+    #   resp.webhook.webhook_url #=> String
+    #   resp.webhook.branch_name #=> String
+    #   resp.webhook.description #=> String
+    #   resp.webhook.create_time #=> Time
+    #   resp.webhook.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateWebhook AWS API Documentation
+    #
+    # @overload update_webhook(params = {})
+    # @param [Hash] params ({})
+    def update_webhook(params = {}, options = {})
+      req = build_request(:update_webhook, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1525,7 +2038,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

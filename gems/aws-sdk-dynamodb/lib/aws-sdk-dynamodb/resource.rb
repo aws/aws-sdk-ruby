@@ -96,8 +96,9 @@ module Aws::DynamoDB
     #
     #      </note>
     #
-    #     For more information on expression attribute names, see [Accessing
-    #     Item Attributes][2] in the *Amazon DynamoDB Developer Guide*.
+    #     For more information about expression attribute names, see
+    #     [Accessing Item Attributes][2] in the *Amazon DynamoDB Developer
+    #     Guide*.
     #
     #   * `Keys` - An array of primary key attribute values that define
     #     specific items in the table. For each primary key, you must provide
@@ -111,9 +112,9 @@ module Aws::DynamoDB
     #     scalars, sets, or elements of a JSON document. The attributes in the
     #     expression must be separated by commas.
     #
-    #     If no attribute names are specified, then all attributes will be
-    #     returned. If any of the requested attributes are not found, they
-    #     will not appear in the result.
+    #     If no attribute names are specified, then all attributes are
+    #     returned. If any of the requested attributes are not found, they do
+    #     not appear in the result.
     #
     #     For more information, see [Accessing Item Attributes][2] in the
     #     *Amazon DynamoDB Developer Guide*.
@@ -198,7 +199,7 @@ module Aws::DynamoDB
     #       Attribute values must not be null; string and binary type
     #       attributes must have lengths greater than zero; and set type
     #       attributes must not be empty. Requests that contain empty values
-    #       will be rejected with a `ValidationException` exception.
+    #       are rejected with a `ValidationException` exception.
     #
     #       If you specify any attributes that are part of an index key, then
     #       the data types for those attributes must match those of the schema
@@ -324,7 +325,7 @@ module Aws::DynamoDB
     #     * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from the DynamoDB usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -343,8 +344,8 @@ module Aws::DynamoDB
     #   have a `KeyType` of `HASH`, and the second element must have a
     #   `KeyType` of `RANGE`.
     #
-    #   For more information, see [Specifying the Primary Key][2] in the
-    #   *Amazon DynamoDB Developer Guide*.
+    #   For more information, see [Working with Tables][2] in the *Amazon
+    #   DynamoDB Developer Guide*.
     #
     #
     #
@@ -378,7 +379,7 @@ module Aws::DynamoDB
     #         the index.
     #
     #       * `INCLUDE` - Only the specified table attributes are projected
-    #         into the index. The list of projected attributes are in
+    #         into the index. The list of projected attributes is in
     #         `NonKeyAttributes`.
     #
     #       * `ALL` - All of the table attributes are projected into the
@@ -414,7 +415,7 @@ module Aws::DynamoDB
     #         the index.
     #
     #       * `INCLUDE` - Only the specified table attributes are projected
-    #         into the index. The list of projected attributes are in
+    #         into the index. The list of projected attributes is in
     #         `NonKeyAttributes`.
     #
     #       * `ALL` - All of the table attributes are projected into the
@@ -458,8 +459,8 @@ module Aws::DynamoDB
     #   The settings for DynamoDB Streams on the table. These settings consist
     #   of:
     #
-    #   * `StreamEnabled` - Indicates whether Streams is to be enabled (true)
-    #     or disabled (false).
+    #   * `StreamEnabled` - Indicates whether DynamoDB Streams is to be
+    #     enabled (true) or disabled (false).
     #
     #   * `StreamViewType` - When an item in the table is modified,
     #     `StreamViewType` determines what information is written to the

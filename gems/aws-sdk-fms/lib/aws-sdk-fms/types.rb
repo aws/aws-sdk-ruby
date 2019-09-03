@@ -381,6 +381,77 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # The operation failed because of a system problem, even though the
+    # request was valid. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The parameters of the request were invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because there was nothing to do. For example, you
+    # might have submitted an `AssociateAdminAccount` request, but the
+    # account ID that you submitted was already set as the AWS Firewall
+    # Manager administrator.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value of the `Type` parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/InvalidTypeException AWS API Documentation
+    #
+    class InvalidTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation exceeds a resource limit, for example, the maximum
+    # number of `policy` objects that you can create for an AWS account. For
+    # more information, see [Firewall Manager Limits][1] in the *AWS WAF
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/fms-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListComplianceStatusRequest
     #   data as a hash:
     #
@@ -903,6 +974,18 @@ module Aws::FMS
     class PutPolicyResponse < Struct.new(
       :policy,
       :policy_arn)
+      include Aws::Structure
+    end
+
+    # The specified resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

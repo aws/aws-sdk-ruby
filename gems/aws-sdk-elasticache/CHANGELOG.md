@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-08-29)
+------------------
+
+* Feature - Amazon ElastiCache for Redis now supports encryption at rest using customer managed customer master keys (CMKs) in AWS Key Management Service (KMS). Amazon ElastiCache now supports cluster names upto 40 characters for replicationGoups and upto 50 characters for cacheClusters.
+
+1.24.0 (2019-08-21)
+------------------
+
+* Feature - ElastiCache extends support for Scale down for Redis Cluster-mode enabled and disabled replication groups
+
+1.23.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-07-18)
+------------------
+
+* Feature - Updates for Elasticache
+
+1.21.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2019-06-13)
+------------------
+
+* Feature - This release is to add support for reader endpoint for cluster-mode disabled Amazon ElastiCache for Redis clusters.
+
+1.18.0 (2019-06-04)
+------------------
+
+* Feature - Amazon ElastiCache now allows you to apply available service updates on demand. Features included: (1) Access to the list of applicable service updates and their priorities. (2) Service update monitoring and regular status updates. (3) Recommended apply-by-dates for scheduling the service updates, which is critical if your cluster is in ElastiCache-supported compliance programs. (4) Ability to stop and later re-apply updates. For more information, see https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Self-Service-Updates.html
+
+1.17.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.16.0 (2019-05-15)
 ------------------
 

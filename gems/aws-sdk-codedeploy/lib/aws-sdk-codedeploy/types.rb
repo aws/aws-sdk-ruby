@@ -277,8 +277,10 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] revisions
-    #   Information to get about the application revisions, including type
-    #   and location.
+    #   An array of `RevisionLocation` objects that specify information to
+    #   get about the application revisions, including type and location.
+    #   The maximum number of `RevisionLocation` objects you can specify is
+    #   25.
     #   @return [Array<Types::RevisionLocation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisionsInput AWS API Documentation
@@ -324,7 +326,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_names
-    #   A list of application names separated by spaces.
+    #   A list of application names separated by spaces. The maximum number
+    #   of application names you can specify is 25.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationsInput AWS API Documentation
@@ -408,7 +411,8 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] instance_ids
-    #   The unique IDs of instances used in the deployment.
+    #   The unique IDs of instances used in the deployment. The maximum
+    #   number of instance IDs you can specify is 25.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstancesInput AWS API Documentation
@@ -453,6 +457,7 @@ module Aws::CodeDeploy
     # @!attribute [rw] target_ids
     #   The unique IDs of the deployment targets. The compute platform of
     #   the deployment determines the type of the targets and their formats.
+    #   The maximum number of deployment target IDs you can specify is 25.
     #
     #   * For deployments that use the EC2/On-premises compute platform, the
     #     target IDs are EC2 or on-premises instances IDs, and their target
@@ -508,7 +513,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] deployment_ids
-    #   A list of deployment IDs, separated by spaces.
+    #   A list of deployment IDs, separated by spaces. The maximum number of
+    #   deployment IDs you can specify is 25.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentsInput AWS API Documentation
@@ -542,7 +548,8 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] instance_names
     #   The names of the on-premises instances about which to get
-    #   information.
+    #   information. The maximum number of instance names you can specify is
+    #   25.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstancesInput AWS API Documentation
@@ -611,6 +618,7 @@ module Aws::CodeDeploy
 
     # Information about whether instances in the original environment are
     # terminated when a blue/green deployment is successful.
+    # `BlueInstanceTerminationOption` does not apply to Lambda deployments.
     #
     # @note When making an API call, you may pass BlueInstanceTerminationOption
     #   data as a hash:
@@ -632,9 +640,16 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] termination_wait_time_in_minutes
-    #   The number of minutes to wait after a successful blue/green
-    #   deployment before terminating instances from the original
-    #   environment. The maximum setting is 2880 minutes (2 days).
+    #   For an Amazon EC2 deployment, the number of minutes to wait after a
+    #   successful blue/green deployment before terminating instances from
+    #   the original environment.
+    #
+    #   For an Amazon ECS deployment, the number of minutes before deleting
+    #   the original (blue) task set. During an Amazon ECS deployment,
+    #   CodeDeploy shifts traffic from the original (blue) task set to a
+    #   replacement (green) task set.
+    #
+    #   The maximum setting is 2880 minutes (2 days).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BlueInstanceTerminationOption AWS API Documentation
@@ -681,6 +696,12 @@ module Aws::CodeDeploy
     #       {
     #         application_name: "ApplicationName", # required
     #         compute_platform: "Server", # accepts Server, Lambda, ECS
+    #         tags: [
+    #           {
+    #             key: "Key",
+    #             value: "Value",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] application_name
@@ -689,15 +710,22 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] compute_platform
-    #   The destination platform type for the deployment (`Lambda` or
-    #   `Server`).
+    #   The destination platform type for the deployment (`Lambda`,
+    #   `Server`, or `ECS`).
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to CodeDeploy applications to help you
+    #   organize and categorize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplicationInput AWS API Documentation
     #
     class CreateApplicationInput < Struct.new(
       :application_name,
-      :compute_platform)
+      :compute_platform,
+      :tags)
       include Aws::Structure
     end
 
@@ -772,8 +800,8 @@ module Aws::CodeDeploy
     #   @return [Types::TrafficRoutingConfig]
     #
     # @!attribute [rw] compute_platform
-    #   The destination platform type for the deployment (`Lambda` or
-    #   `Server`&gt;).
+    #   The destination platform type for the deployment (`Lambda`,
+    #   `Server`, or `ECS`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfigInput AWS API Documentation
@@ -916,6 +944,12 @@ module Aws::CodeDeploy
     #             ],
     #           ],
     #         },
+    #         tags: [
+    #           {
+    #             key: "Key",
+    #             value: "Value",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] application_name
@@ -1023,6 +1057,12 @@ module Aws::CodeDeploy
     #   onPremisesInstanceTagFilters.
     #   @return [Types::OnPremisesTagSet]
     #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to CodeDeploy deployment groups to help
+    #   you organize and categorize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupInput AWS API Documentation
     #
     class CreateDeploymentGroupInput < Struct.new(
@@ -1041,7 +1081,8 @@ module Aws::CodeDeploy
       :load_balancer_info,
       :ec2_tag_set,
       :ecs_services,
-      :on_premises_tag_set)
+      :on_premises_tag_set,
+      :tags)
       include Aws::Structure
     end
 
@@ -1379,8 +1420,8 @@ module Aws::CodeDeploy
     #   @return [Time]
     #
     # @!attribute [rw] compute_platform
-    #   The destination platform type for the deployment (`Lambda` or
-    #   `Server`).
+    #   The destination platform type for the deployment (`Lambda`,
+    #   `Server`, or `ECS`).
     #   @return [String]
     #
     # @!attribute [rw] traffic_routing_config
@@ -1434,7 +1475,14 @@ module Aws::CodeDeploy
     #   @return [Array<Types::AutoScalingGroup>]
     #
     # @!attribute [rw] service_role_arn
-    #   A service role ARN.
+    #   A service role Amazon Resource Name (ARN) that grants CodeDeploy
+    #   permission to make calls to AWS services on your behalf. For more
+    #   information, see [Create a Service Role for AWS CodeDeploy][1] in
+    #   the *AWS CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html
     #   @return [String]
     #
     # @!attribute [rw] target_revision
@@ -1494,8 +1542,8 @@ module Aws::CodeDeploy
     #   @return [Types::OnPremisesTagSet]
     #
     # @!attribute [rw] compute_platform
-    #   The destination platform type for the deployment group (`Lambda` or
-    #   `Server`).
+    #   The destination platform type for the deployment (`Lambda`,
+    #   `Server`, or `ECS`).
     #   @return [String]
     #
     # @!attribute [rw] ecs_services
@@ -1607,13 +1655,13 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] ignore_application_stop_failures
-    #   If true, then if an ApplicationStop, BeforeBlockTraffic, or
-    #   AfterBlockTraffic deployment lifecycle event to an instance fails,
+    #   If true, then if an `ApplicationStop`, `BeforeBlockTraffic`, or
+    #   `AfterBlockTraffic` deployment lifecycle event to an instance fails,
     #   then the deployment continues to the next deployment lifecycle
-    #   event. For example, if ApplicationStop fails, the deployment
-    #   continues with DownloadBundle. If BeforeBlockTraffic fails, the
-    #   deployment continues with BlockTraffic. If AfterBlockTraffic fails,
-    #   the deployment continues with ApplicationStop.
+    #   event. For example, if `ApplicationStop` fails, the deployment
+    #   continues with DownloadBundle. If `BeforeBlockTraffic` fails, the
+    #   deployment continues with `BlockTraffic`. If `AfterBlockTraffic`
+    #   fails, the deployment continues with `ApplicationStop`.
     #
     #   If false or not specified, then if a lifecycle event fails during a
     #   deployment to an instance, that deployment fails. If deployment to
@@ -1622,8 +1670,8 @@ module Aws::CodeDeploy
     #   then a deployment to the next instance is attempted.
     #
     #   During a deployment, the AWS CodeDeploy agent runs the scripts
-    #   specified for ApplicationStop, BeforeBlockTraffic, and
-    #   AfterBlockTraffic in the AppSpec file from the previous successful
+    #   specified for `ApplicationStop`, `BeforeBlockTraffic`, and
+    #   `AfterBlockTraffic` in the AppSpec file from the previous successful
     #   deployment. (All other scripts are run from the AppSpec file in the
     #   current deployment.) If one of these scripts contains an error and
     #   does not run successfully, the deployment can fail.
@@ -1631,8 +1679,8 @@ module Aws::CodeDeploy
     #   If the cause of the failure is a script from the last successful
     #   deployment that will never run successfully, create a new deployment
     #   and use `ignoreApplicationStopFailures` to specify that the
-    #   ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures
-    #   should be ignored.
+    #   `ApplicationStop`, `BeforeBlockTraffic`, and `AfterBlockTraffic`
+    #   failures should be ignored.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_rollback_configuration
@@ -1702,8 +1750,8 @@ module Aws::CodeDeploy
     #   @return [Array<String>]
     #
     # @!attribute [rw] compute_platform
-    #   The destination platform type for the deployment (`Lambda` or
-    #   `Server`).
+    #   The destination platform type for the deployment (`Lambda`,
+    #   `Server`, or `ECS`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo AWS API Documentation
@@ -2824,6 +2872,46 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # Information about a Lambda function specified in a deployment.
+    #
+    # @!attribute [rw] function_name
+    #   The name of a Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_alias
+    #   The alias of a Lambda function. For more information, see
+    #   [Introduction to AWS Lambda Aliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The version of a Lambda function that production traffic points to.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   The version of a Lambda function that production traffic points to
+    #   after the Lambda function is deployed.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version_weight
+    #   The percentage of production traffic that the target version of a
+    #   Lambda function receives.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LambdaFunctionInfo AWS API Documentation
+    #
+    class LambdaFunctionInfo < Struct.new(
+      :function_name,
+      :function_alias,
+      :current_version,
+      :target_version,
+      :target_version_weight)
+      include Aws::Structure
+    end
+
     # Information about the target AWS Lambda function during an AWS Lambda
     # deployment.
     #
@@ -2854,6 +2942,11 @@ module Aws::CodeDeploy
     #   function.
     #   @return [Array<Types::LifecycleEvent>]
     #
+    # @!attribute [rw] lambda_function_info
+    #   A `LambdaFunctionInfo` object that describes a target Lambda
+    #   function.
+    #   @return [Types::LambdaFunctionInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LambdaTarget AWS API Documentation
     #
     class LambdaTarget < Struct.new(
@@ -2862,7 +2955,8 @@ module Aws::CodeDeploy
       :target_arn,
       :status,
       :last_updated_at,
-      :lifecycle_events)
+      :lifecycle_events,
+      :lambda_function_info)
       include Aws::Structure
     end
 
@@ -3294,7 +3388,14 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] target_filters
-    #   A key used to filter the returned targets.
+    #   A key used to filter the returned targets. The two valid values are:
+    #
+    #   * `TargetStatus` - A `TargetStatus` filter string can be `Failed`,
+    #     `InProgress`, `Pending`, `Ready`, `Skipped`, `Succeeded`, or
+    #     `Unknown`.
+    #
+    #   * `ServerInstanceLabel` - A `ServerInstanceLabel` filter string can
+    #     be `Blue` or `Green`.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargetsInput AWS API Documentation
@@ -3344,10 +3445,22 @@ module Aws::CodeDeploy
     # @!attribute [rw] application_name
     #   The name of an AWS CodeDeploy application associated with the IAM
     #   user or AWS account.
+    #
+    #   <note markdown="1"> If `applicationName` is specified, then `deploymentGroupName` must
+    #   be specified. If it is not specified, then `deploymentGroupName`
+    #   must not be specified.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
     #   The name of a deployment group for the specified application.
+    #
+    #   <note markdown="1"> If `deploymentGroupName` is specified, then `applicationName` must
+    #   be specified. If it is not specified, then `applicationName` must
+    #   not be specified.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] include_only_statuses
@@ -3516,6 +3629,53 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of a CodeDeploy resource. `ListTagsForResource` returns all
+    #   the tags associated with the resource that is identified by the
+    #   `ResourceArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier returned from the previous `ListTagsForResource` call.
+    #   It can be used to return the next set of applications in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tags returned by `ListTagsForResource`. The tags are
+    #   associated with the resource identified by the input `ResourceArn`
+    #   parameter.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_token
+    #   If a large amount of information is returned, an identifier is also
+    #   returned. It can be used in a subsequent list application revisions
+    #   call to return the next set of application revisions in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Information about the Elastic Load Balancing load balancer or target
     # group used in a deployment.
     #
@@ -3615,17 +3775,16 @@ module Aws::CodeDeploy
     #   is successful if four or more instance are deployed to successfully.
     #   Otherwise, the deployment fails.
     #
-    #   <note markdown="1"> In a call to the get deployment configuration operation,
-    #   CodeDeployDefault.OneAtATime returns a minimum healthy instance type
-    #   of MOST\_CONCURRENCY and a value of 1. This means a deployment to
-    #   only one instance at a time. (You cannot set the type to
-    #   MOST\_CONCURRENCY, only to HOST\_COUNT or FLEET\_PERCENT.) In
-    #   addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts
-    #   to ensure that all instances but one are kept in a healthy state
-    #   during the deployment. Although this allows one instance at a time
-    #   to be taken offline for a new deployment, it also means that if the
-    #   deployment to the last instance fails, the overall deployment is
-    #   still successful.
+    #   <note markdown="1"> In a call to the `GetDeploymentConfig`, CodeDeployDefault.OneAtATime
+    #   returns a minimum healthy instance type of MOST\_CONCURRENCY and a
+    #   value of 1. This means a deployment to only one instance at a time.
+    #   (You cannot set the type to MOST\_CONCURRENCY, only to HOST\_COUNT
+    #   or FLEET\_PERCENT.) In addition, with CodeDeployDefault.OneAtATime,
+    #   AWS CodeDeploy attempts to ensure that all instances but one are
+    #   kept in a healthy state during the deployment. Although this allows
+    #   one instance at a time to be taken offline for a new deployment, it
+    #   also means that if the deployment to the last instance fails, the
+    #   overall deployment is still successful.
     #
     #    </note>
     #
@@ -4181,6 +4340,41 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "Key",
+    #             value: "Value",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of a resource, such as a CodeDeploy application or
+    #   deployment group.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags that `TagResource` associates with a resource. The
+    #   resource is identified by the `ResourceArn` input parameter.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # Information about a target group in Elastic Load Balancing to use in a
     # deployment. Instances are registered as targets in a target group, and
     # traffic is routed to the target group.
@@ -4509,6 +4703,37 @@ module Aws::CodeDeploy
       :trigger_events)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["Key"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN that specifies from which resource to disassociate the tags
+    #   with the keys in the `TagKeys` input paramter.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of keys of `Tag` objects. The `Tag` objects identified by the
+    #   keys are disassociated from the resource specified by the
+    #   `ResourceArn` input parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # Represents the input of an UpdateApplication operation.
     #

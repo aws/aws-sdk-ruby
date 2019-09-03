@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2019-06-21)
+------------------
+
+* Feature - Added two new origin endpoint fields for configuring which SCTE-35 messages are treated as advertisements.
+
+1.19.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.17.0 (2019-05-15)
 ------------------
 

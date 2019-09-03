@@ -213,6 +213,13 @@ module Aws::Athena
     GetWorkGroupOutput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     GetWorkGroupOutput.struct_class = Types::GetWorkGroupOutput
 
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidRequestException.add_member(:athena_error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "AthenaErrorCode"))
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     ListNamedQueriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListNamedQueriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxNamedQueriesCount, location_name: "MaxResults"))
     ListNamedQueriesInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
@@ -287,6 +294,10 @@ module Aws::Athena
     QueryExecutionStatus.add_member(:completion_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CompletionDateTime"))
     QueryExecutionStatus.struct_class = Types::QueryExecutionStatus
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResultConfiguration.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
     ResultConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     ResultConfiguration.struct_class = Types::ResultConfiguration
@@ -338,6 +349,10 @@ module Aws::Athena
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
 
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyRequestsException.add_member(:reason, Shapes::ShapeRef.new(shape: ThrottleReason, location_name: "Reason"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
     UnprocessedNamedQueryId.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, location_name: "NamedQueryId"))
     UnprocessedNamedQueryId.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     UnprocessedNamedQueryId.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
@@ -377,6 +392,7 @@ module Aws::Athena
     WorkGroupConfiguration.add_member(:enforce_work_group_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnforceWorkGroupConfiguration"))
     WorkGroupConfiguration.add_member(:publish_cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "PublishCloudWatchMetricsEnabled"))
     WorkGroupConfiguration.add_member(:bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BytesScannedCutoffValue, location_name: "BytesScannedCutoffPerQuery"))
+    WorkGroupConfiguration.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RequesterPaysEnabled"))
     WorkGroupConfiguration.struct_class = Types::WorkGroupConfiguration
 
     WorkGroupConfigurationUpdates.add_member(:enforce_work_group_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnforceWorkGroupConfiguration"))
@@ -384,6 +400,7 @@ module Aws::Athena
     WorkGroupConfigurationUpdates.add_member(:publish_cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "PublishCloudWatchMetricsEnabled"))
     WorkGroupConfigurationUpdates.add_member(:bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BytesScannedCutoffValue, location_name: "BytesScannedCutoffPerQuery"))
     WorkGroupConfigurationUpdates.add_member(:remove_bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveBytesScannedCutoffPerQuery"))
+    WorkGroupConfigurationUpdates.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RequesterPaysEnabled"))
     WorkGroupConfigurationUpdates.struct_class = Types::WorkGroupConfigurationUpdates
 
     WorkGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "Name"))

@@ -324,7 +324,7 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine
     #   The configuration management engine to use. Valid values include
-    #   `Chef` and `Puppet`.
+    #   `ChefAutomate` and `Puppet`.
     #   @return [String]
     #
     # @!attribute [rw] engine_model
@@ -343,19 +343,19 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a Chef createServer request:**
     #
-    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
+    #   * `CHEF_AUTOMATE_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
     #     corresponding private key is required to access the Chef API. When
-    #     no CHEF\_PIVOTAL\_KEY is set, a private key is generated and
-    #     returned in the response.
+    #     no CHEF\_AUTOMATE\_PIVOTAL\_KEY is set, a private key is generated
+    #     and returned in the response.
     #
-    #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the
-    #     administrative user in the Chef Automate GUI. The password length
-    #     is a minimum of eight characters, and a maximum of 32. The
-    #     password can contain letters, numbers, and special characters
-    #     (!/@#$%^&amp;+=\_). The password must contain at least one lower
-    #     case letter, one upper case letter, one number, and one special
-    #     character. When no CHEF\_DELIVERY\_ADMIN\_PASSWORD is set, one is
-    #     generated and returned in the response.
+    #   * `CHEF_AUTOMATE_ADMIN_PASSWORD`\: The password for the
+    #     administrative user in the Chef Automate web-based dashboard. The
+    #     password length is a minimum of eight characters, and a maximum of
+    #     32. The password can contain letters, numbers, and special
+    #     characters (!/@#$%^&amp;+=\_). The password must contain at least
+    #     one lower case letter, one upper case letter, one number, and one
+    #     special character. When no CHEF\_AUTOMATE\_ADMIN\_PASSWORD is set,
+    #     one is generated and returned in the response.
     #
     #   **Attributes accepted in a Puppet createServer request:**
     #
@@ -368,8 +368,8 @@ module Aws::OpsWorksCM
     #     r10k remote opens TCP port 8170.
     #
     #   * `PUPPET_R10K_PRIVATE_KEY`\: If you are using a private Git
-    #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify an SSH URL
-    #     and a PEM-encoded private SSH key.
+    #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify a
+    #     PEM-encoded private SSH key.
     #   @return [Array<Types::EngineAttribute>]
     #
     # @!attribute [rw] backup_retention_count
@@ -396,9 +396,7 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The Amazon EC2 instance type to use. For example, `m4.large`.
-    #   Recommended instance types include `t2.medium` and greater, `m4.*`,
-    #   or `c4.xlarge` and greater.
+    #   The Amazon EC2 instance type to use. For example, `m5.large`.
     #   @return [String]
     #
     # @!attribute [rw] key_pair
@@ -960,6 +958,78 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
+    # This occurs when the provided nextToken is not valid.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that can contain more detail about a
+    #   nextToken failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource is in a state that does not allow you to perform a
+    # specified action.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that provides more detail if a
+    #   resource is in a state that is not valid for performing a specified
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The limit of servers or backups has been reached.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that the maximum allowed number of
+    #   servers or backups has been exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource cannot be created because it already exists.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message in response to a CreateServer request
+    #   that a resource cannot be created because it already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource does not exist, or access was denied.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that can contain more detail about
+    #   problems locating or accessing a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RestoreServerRequest
     #   data as a hash:
     #
@@ -980,8 +1050,8 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] instance_type
     #   The type of the instance to create. Valid values must be specified
-    #   in the following format: `^([cm][34]|t2).*` For example, `m4.large`.
-    #   Valid values are `t2.medium`, `m4.large`, and `m4.2xlarge`. If you
+    #   in the following format: `^([cm][34]|t2).*` For example, `m5.large`.
+    #   Valid values are `m5.large`, `r5.xlarge`, and `r5.2xlarge`. If you
     #   do not specify this parameter, RestoreServer uses the instance type
     #   from the specified backup.
     #   @return [String]
@@ -1040,7 +1110,7 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine
     #   The engine type of the server. Valid values in this release include
-    #   `Chef` and `Puppet`.
+    #   `ChefAutomate` and `Puppet`.
     #   @return [String]
     #
     # @!attribute [rw] engine_model
@@ -1056,9 +1126,9 @@ module Aws::OpsWorksCM
     #
     #   **Attributes returned in a createServer response for Chef**
     #
-    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is
-    #     generated by AWS OpsWorks for Chef Automate. This private key is
-    #     required to access the Chef API.
+    #   * `CHEF_AUTOMATE_PIVOTAL_KEY`\: A base64-encoded RSA private key
+    #     that is generated by AWS OpsWorks for Chef Automate. This private
+    #     key is required to access the Chef API.
     #
     #   * `CHEF_STARTER_KIT`\: A base64-encoded ZIP file. The ZIP file
     #     contains a Chef starter kit, which includes a README, a
@@ -1341,6 +1411,20 @@ module Aws::OpsWorksCM
     #
     class UpdateServerResponse < Struct.new(
       :server)
+      include Aws::Structure
+    end
+
+    # One or more of the provided request parameters are not valid.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that can contain more detail about a
+    #   validation failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

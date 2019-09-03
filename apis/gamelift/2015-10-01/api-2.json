@@ -1197,6 +1197,13 @@
       },
       "sensitive":true
     },
+    "BackfillMode":{
+      "type":"string",
+      "enum":[
+        "AUTOMATIC",
+        "MANUAL"
+      ]
+    },
     "BooleanModel":{"type":"boolean"},
     "Build":{
       "type":"structure",
@@ -1224,6 +1231,20 @@
         "INITIALIZED",
         "READY",
         "FAILED"
+      ]
+    },
+    "CertificateConfiguration":{
+      "type":"structure",
+      "required":["CertificateType"],
+      "members":{
+        "CertificateType":{"shape":"CertificateType"}
+      }
+    },
+    "CertificateType":{
+      "type":"string",
+      "enum":[
+        "DISABLED",
+        "GENERATED"
       ]
     },
     "ComparisonOperatorType":{
@@ -1300,7 +1321,8 @@
         "PeerVpcAwsAccountId":{"shape":"NonZeroAndMaxString"},
         "PeerVpcId":{"shape":"NonZeroAndMaxString"},
         "FleetType":{"shape":"FleetType"},
-        "InstanceRoleArn":{"shape":"NonEmptyString"}
+        "InstanceRoleArn":{"shape":"NonEmptyString"},
+        "CertificateConfiguration":{"shape":"CertificateConfiguration"}
       }
     },
     "CreateFleetOutput":{
@@ -1367,7 +1389,8 @@
         "AdditionalPlayerCount":{"shape":"WholeNumber"},
         "CustomEventData":{"shape":"CustomEventData"},
         "GameProperties":{"shape":"GamePropertyList"},
-        "GameSessionData":{"shape":"GameSessionData"}
+        "GameSessionData":{"shape":"GameSessionData"},
+        "BackfillMode":{"shape":"BackfillMode"}
       }
     },
     "CreateMatchmakingConfigurationOutput":{
@@ -1927,6 +1950,7 @@
       "type":"list",
       "member":{"shape":"DesiredPlayerSession"}
     },
+    "DnsName":{"type":"string"},
     "Double":{"type":"double"},
     "DoubleObject":{"type":"double"},
     "EC2InstanceCounts":{
@@ -2077,7 +2101,8 @@
         "ResourceCreationLimitPolicy":{"shape":"ResourceCreationLimitPolicy"},
         "MetricGroups":{"shape":"MetricGroupList"},
         "StoppedActions":{"shape":"FleetActionList"},
-        "InstanceRoleArn":{"shape":"NonEmptyString"}
+        "InstanceRoleArn":{"shape":"NonEmptyString"},
+        "CertificateConfiguration":{"shape":"CertificateConfiguration"}
       }
     },
     "FleetAttributesList":{
@@ -2187,6 +2212,7 @@
         "StatusReason":{"shape":"GameSessionStatusReason"},
         "GameProperties":{"shape":"GamePropertyList"},
         "IpAddress":{"shape":"IpAddress"},
+        "DnsName":{"shape":"DnsName"},
         "Port":{"shape":"PortNumber"},
         "PlayerSessionCreationPolicy":{"shape":"PlayerSessionCreationPolicy"},
         "CreatorId":{"shape":"NonZeroAndMaxString"},
@@ -2204,6 +2230,7 @@
       "members":{
         "GameSessionArn":{"shape":"ArnStringModel"},
         "IpAddress":{"shape":"StringModel"},
+        "DnsName":{"shape":"DnsName"},
         "Port":{"shape":"PositiveInteger"},
         "MatchedPlayerSessions":{"shape":"MatchedPlayerSessionList"}
       }
@@ -2251,6 +2278,7 @@
         "StartTime":{"shape":"Timestamp"},
         "EndTime":{"shape":"Timestamp"},
         "IpAddress":{"shape":"IpAddress"},
+        "DnsName":{"shape":"DnsName"},
         "Port":{"shape":"PortNumber"},
         "PlacedPlayerSessions":{"shape":"PlacedPlayerSessionList"},
         "GameSessionData":{"shape":"GameSessionData"},
@@ -2263,7 +2291,8 @@
         "PENDING",
         "FULFILLED",
         "CANCELLED",
-        "TIMED_OUT"
+        "TIMED_OUT",
+        "FAILED"
       ]
     },
     "GameSessionQueue":{
@@ -2363,6 +2392,7 @@
         "FleetId":{"shape":"FleetId"},
         "InstanceId":{"shape":"InstanceId"},
         "IpAddress":{"shape":"IpAddress"},
+        "DnsName":{"shape":"DnsName"},
         "OperatingSystem":{"shape":"OperatingSystem"},
         "Type":{"shape":"EC2InstanceType"},
         "Status":{"shape":"InstanceStatus"},
@@ -2570,7 +2600,8 @@
         "CustomEventData":{"shape":"CustomEventData"},
         "CreationTime":{"shape":"Timestamp"},
         "GameProperties":{"shape":"GamePropertyList"},
-        "GameSessionData":{"shape":"GameSessionData"}
+        "GameSessionData":{"shape":"GameSessionData"},
+        "BackfillMode":{"shape":"BackfillMode"}
       }
     },
     "MatchmakingConfigurationList":{
@@ -2597,8 +2628,7 @@
     "MatchmakingIdStringModel":{
       "type":"string",
       "max":128,
-      "min":1,
-      "pattern":"[a-zA-Z0-9-\\.]+"
+      "pattern":"[a-zA-Z0-9-\\.]*"
     },
     "MatchmakingRequestTimeoutInteger":{
       "type":"integer",
@@ -2786,6 +2816,7 @@
         "TerminationTime":{"shape":"Timestamp"},
         "Status":{"shape":"PlayerSessionStatus"},
         "IpAddress":{"shape":"IpAddress"},
+        "DnsName":{"shape":"DnsName"},
         "Port":{"shape":"PortNumber"},
         "PlayerData":{"shape":"PlayerData"}
       }
@@ -3334,7 +3365,8 @@
         "AdditionalPlayerCount":{"shape":"WholeNumber"},
         "CustomEventData":{"shape":"CustomEventData"},
         "GameProperties":{"shape":"GamePropertyList"},
-        "GameSessionData":{"shape":"GameSessionData"}
+        "GameSessionData":{"shape":"GameSessionData"},
+        "BackfillMode":{"shape":"BackfillMode"}
       }
     },
     "UpdateMatchmakingConfigurationOutput":{

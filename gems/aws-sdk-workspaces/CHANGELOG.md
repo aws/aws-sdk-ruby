@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-06-28)
+------------------
+
+* Feature - Minor API fixes for WorkSpaces.
+
+1.24.0 (2019-06-27)
+------------------
+
+* Feature - Added support for the WorkSpaces restore feature and copying WorkSpaces Images across AWS Regions.
+
+1.23.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.21.0 (2019-05-15)
 ------------------
 

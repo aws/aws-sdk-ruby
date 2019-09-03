@@ -288,6 +288,7 @@ module Aws::ECR
     #             value: "TagValue",
     #           },
     #         ],
+    #         image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
     #       }
     #
     # @!attribute [rw] repository_name
@@ -298,13 +299,27 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The metadata that you apply to the repository to help you categorize
+    #   and organize them. Each tag consists of a key and an optional value,
+    #   both of which you define. Tag keys can have a maximum character
+    #   length of 128 characters, and tag values can have a maximum length
+    #   of 256 characters.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository. If this parameter is
+    #   omitted, the default setting of `MUTABLE` will be used which will
+    #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
+    #   image tags within the repository will be immutable which will
+    #   prevent them from being overwritten.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryRequest AWS API Documentation
     #
     class CreateRepositoryRequest < Struct.new(
       :repository_name,
-      :tags)
+      :tags,
+      :image_tag_mutability)
       include Aws::Structure
     end
 
@@ -509,7 +524,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   A list of repositories to describe.
+    #   The repository that contains the images to describe.
     #   @return [String]
     #
     # @!attribute [rw] image_ids
@@ -652,6 +667,19 @@ module Aws::ECR
     class DescribeRepositoriesResponse < Struct.new(
       :repositories,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The specified layer upload does not contain any layer parts.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/EmptyUploadException AWS API Documentation
+    #
+    class EmptyUploadException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -984,6 +1012,20 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The specified image has already been pushed, and there were no changes
+    # to the manifest or image tag after the last push.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageAlreadyExistsException AWS API Documentation
+    #
+    class ImageAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object that describes an image returned by a DescribeImages
     # operation.
     #
@@ -1082,6 +1124,31 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The image requested does not exist in the specified repository.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageNotFoundException AWS API Documentation
+    #
+    class ImageNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified image is tagged with a tag that already exists. The
+    # repository is configured for tag immutability.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageTagAlreadyExistsException AWS API Documentation
+    #
+    class ImageTagAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass InitiateLayerUploadRequest
     #   data as a hash:
     #
@@ -1126,6 +1193,83 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The layer digest calculation performed by Amazon ECR upon receipt of
+    # the image layer does not match the digest specified.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InvalidLayerException AWS API Documentation
+    #
+    class InvalidLayerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The layer part size is not valid, or the first byte specified is not
+    # consecutive to the last byte of a previous layer part upload.
+    #
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_id
+    #   The upload ID associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_valid_byte_received
+    #   The last valid byte received from the layer part upload that is
+    #   associated with the exception.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InvalidLayerPartException AWS API Documentation
+    #
+    class InvalidLayerPartException < Struct.new(
+      :registry_id,
+      :repository_name,
+      :upload_id,
+      :last_valid_byte_received,
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified parameter is invalid. Review the available parameters
+    # for the API request.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An invalid parameter has been specified. Tag keys can have a maximum
+    # character length of 128 characters, and tag values can have a maximum
+    # length of 256 characters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InvalidTagParameterException AWS API Documentation
+    #
+    class InvalidTagParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing an Amazon ECR image layer.
     #
     # @!attribute [rw] layer_digest
@@ -1156,6 +1300,19 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The image layer already exists in the associated repository.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayerAlreadyExistsException AWS API Documentation
+    #
+    class LayerAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing an Amazon ECR image layer failure.
     #
     # @!attribute [rw] layer_digest
@@ -1179,6 +1336,60 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The specified layer is not available because it is not associated with
+    # an image. Unassociated image layers may be cleaned up at any time.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayerInaccessibleException AWS API Documentation
+    #
+    class LayerInaccessibleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Layer parts must be at least 5 MiB in size.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayerPartTooSmallException AWS API Documentation
+    #
+    class LayerPartTooSmallException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified layers could not be found, or the specified layer is not
+    # valid for this repository.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayersNotFoundException AWS API Documentation
+    #
+    class LayersNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The lifecycle policy could not be found, and no policy is set to the
+    # repository.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyNotFoundException AWS API Documentation
+    #
+    class LifecyclePolicyNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The filter for the lifecycle policy preview.
     #
     # @note When making an API call, you may pass LifecyclePolicyPreviewFilter
@@ -1196,6 +1407,31 @@ module Aws::ECR
     #
     class LifecyclePolicyPreviewFilter < Struct.new(
       :tag_status)
+      include Aws::Structure
+    end
+
+    # The previous lifecycle policy preview request has not completed.
+    # Please try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewInProgressException AWS API Documentation
+    #
+    class LifecyclePolicyPreviewInProgressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There is no dry run for this repository.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewNotFoundException AWS API Documentation
+    #
+    class LifecyclePolicyPreviewNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1256,6 +1492,26 @@ module Aws::ECR
     #
     class LifecyclePolicyRuleAction < Struct.new(
       :type)
+      include Aws::Structure
+    end
+
+    # The operation did not succeed because it would have exceeded a service
+    # limit for your account. For more information, see [Amazon ECR Default
+    # Service Limits][1] in the Amazon Elastic Container Registry User
+    # Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1445,6 +1701,63 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutImageTagMutabilityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_tag_mutability: "MUTABLE", # required, accepts MUTABLE, IMMUTABLE
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to update the image tag mutability settings. If
+    #   you do not specify a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository in which to update the image tag
+    #   mutability settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository. If `MUTABLE` is
+    #   specified, image tags can be overwritten. If `IMMUTABLE` is
+    #   specified, all image tags within the repository will be immutable
+    #   which will prevent them from being overwritten.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutabilityRequest AWS API Documentation
+    #
+    class PutImageTagMutabilityRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_tag_mutability)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The image tag mutability setting for the repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutabilityResponse AWS API Documentation
+    #
+    class PutImageTagMutabilityResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_tag_mutability)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutLifecyclePolicyRequest
     #   data as a hash:
     #
@@ -1527,6 +1840,10 @@ module Aws::ECR
     #   was created.
     #   @return [Time]
     #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Repository AWS API Documentation
     #
     class Repository < Struct.new(
@@ -1534,7 +1851,78 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :repository_uri,
-      :created_at)
+      :created_at,
+      :image_tag_mutability)
+      include Aws::Structure
+    end
+
+    # The specified repository already exists in the specified registry.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryAlreadyExistsException AWS API Documentation
+    #
+    class RepositoryAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified repository contains images. To delete a repository that
+    # contains images, you must force the deletion with the `force`
+    # parameter.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryNotEmptyException AWS API Documentation
+    #
+    class RepositoryNotEmptyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified repository could not be found. Check the spelling of the
+    # specified repository and ensure that you are performing operations on
+    # the correct registry.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryNotFoundException AWS API Documentation
+    #
+    class RepositoryNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified repository and registry combination does not have an
+    # associated repository policy.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryPolicyNotFoundException AWS API Documentation
+    #
+    class RepositoryPolicyNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # These errors are usually caused by a server-side issue.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ServerException AWS API Documentation
+    #
+    class ServerException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1559,7 +1947,13 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] policy_text
-    #   The JSON repository policy text to apply to the repository.
+    #   The JSON repository policy text to apply to the repository. For more
+    #   information, see [Amazon ECR Repository Policy Examples][1] in the
+    #   *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html
     #   @return [String]
     #
     # @!attribute [rw] force
@@ -1730,6 +2124,19 @@ module Aws::ECR
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The list of tags on the repository is over the limit. The maximum
+    # number of tags that can be applied to a repository is 50.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -1834,6 +2241,20 @@ module Aws::ECR
       :repository_name,
       :upload_id,
       :last_byte_received)
+      include Aws::Structure
+    end
+
+    # The upload could not be found, or the specified upload id is not valid
+    # for this repository.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadNotFoundException AWS API Documentation
+    #
+    class UploadNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -116,6 +116,10 @@ module Aws::Neptune
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -913,6 +917,10 @@ module Aws::Neptune
     #
     #   Default: `false`
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
+    #
     # @return [Types::CreateDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -947,6 +955,7 @@ module Aws::Neptune
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -998,6 +1007,8 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -2006,6 +2017,8 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -2121,12 +2134,8 @@ module Aws::Neptune
     # only delete it when the `SkipFinalSnapshot` parameter is set to
     # `true`.
     #
-    # If the specified DB instance is part of a DB cluster, you can't
-    # delete the DB instance if both of the following conditions are true:
-    #
-    # * The DB instance is the only instance in the DB cluster.
-    #
-    # ^
+    # You can't delete a DB instance if it is the only instance in the DB
+    # cluster.
     #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier for the DB instance to be deleted. This
@@ -2864,6 +2873,8 @@ module Aws::Neptune
     #   resp.db_clusters[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].clone_group_id #=> String
     #   resp.db_clusters[0].cluster_create_time #=> Time
+    #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -4075,6 +4086,8 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -4258,6 +4271,10 @@ module Aws::Neptune
     #
     #   Default: `false`
     #
+    # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB cluster.
+    #
     # @option params [String] :engine_version
     #   The version number of the database engine to which you want to
     #   upgrade. Changing this parameter results in an outage. The change is
@@ -4286,6 +4303,10 @@ module Aws::Neptune
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
     #     enable_iam_database_authentication: false,
+    #     cloudwatch_logs_export_configuration: {
+    #       enable_log_types: ["String"],
+    #       disable_log_types: ["String"],
+    #     },
     #     engine_version: "String",
     #   })
     #
@@ -4338,6 +4359,8 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -5236,6 +5259,8 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -5740,6 +5765,10 @@ module Aws::Neptune
     #
     #   Default: `false`
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to Amazon
+    #   CloudWatch Logs.
+    #
     # @option params [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with the new
     #   DB cluster.
@@ -5776,6 +5805,7 @@ module Aws::Neptune
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #     db_cluster_parameter_group_name: "String",
     #   })
     #
@@ -5828,6 +5858,8 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -5866,8 +5898,17 @@ module Aws::Neptune
     #   * Cannot end with a hyphen or contain two consecutive hyphens
     #
     # @option params [String] :restore_type
-    #   The type of restore to be performed. The only type of restore
-    #   currently supported is `full-copy` (the default).
+    #   The type of restore to be performed. You can specify one of the
+    #   following values:
+    #
+    #   * `full-copy` - The new DB cluster is restored as a full copy of the
+    #     source DB cluster.
+    #
+    #   * `copy-on-write` - The new DB cluster is restored as a clone of the
+    #     source DB cluster.
+    #
+    #   If you don't specify a `RestoreType` value, then the new DB cluster
+    #   is restored as a full copy of the source DB cluster.
     #
     # @option params [required, String] :source_db_cluster_identifier
     #   The identifier of the source DB cluster from which to restore.
@@ -5964,6 +6005,10 @@ module Aws::Neptune
     #
     #   Default: `false`
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #
     # @option params [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with the new
     #   DB cluster.
@@ -5999,6 +6044,7 @@ module Aws::Neptune
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #     db_cluster_parameter_group_name: "String",
     #   })
     #
@@ -6051,6 +6097,8 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -6074,7 +6122,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

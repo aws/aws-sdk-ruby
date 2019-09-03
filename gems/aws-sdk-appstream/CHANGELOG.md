@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2019-08-20)
+------------------
+
+* Feature - Includes API updates to support streaming through VPC endpoints for image builders and stacks.
+
+1.34.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-07-02)
+------------------
+
+* Feature - Adding ImageBuilderName in Fleet API and Documentation updates for AppStream.
+
+1.32.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-06-14)
+------------------
+
+* Feature - Added 2 new values(WINDOWS_SERVER_2016, WINDOWS_SERVER_2019) for PlatformType enum.
+
+1.29.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2019-05-17)
+------------------
+
+* Feature - API update.
+
 1.27.0 (2019-05-15)
 ------------------
 

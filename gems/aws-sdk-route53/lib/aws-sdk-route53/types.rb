@@ -57,7 +57,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
+    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
     #         name: "AlarmName", # required
     #       }
     #
@@ -508,7 +508,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #         comment: "AssociateVPCComment",
@@ -566,7 +566,7 @@ module Aws::Route53
     #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #           set_identifier: "ResourceRecordSetIdentifier",
     #           weight: 1,
-    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, ap-south-1
+    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1
     #           geo_location: {
     #             continent_code: "GeoLocationContinentCode",
     #             country_code: "GeoLocationCountryCode",
@@ -643,7 +643,7 @@ module Aws::Route53
     #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #               set_identifier: "ResourceRecordSetIdentifier",
     #               weight: 1,
-    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, ap-south-1
+    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1
     #               geo_location: {
     #                 continent_code: "GeoLocationContinentCode",
     #                 country_code: "GeoLocationCountryCode",
@@ -749,7 +749,7 @@ module Aws::Route53
     #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #                 set_identifier: "ResourceRecordSetIdentifier",
     #                 weight: 1,
-    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, ap-south-1
+    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1
     #                 geo_location: {
     #                   continent_code: "GeoLocationContinentCode",
     #                   country_code: "GeoLocationCountryCode",
@@ -944,6 +944,69 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # Another user submitted a request to create, update, or delete the
+    # object at the same time that you did. Retry the request.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ConcurrentModification AWS API Documentation
+    #
+    class ConcurrentModification < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The cause of this error depends on whether you're trying to create a
+    # public or a private hosted zone:
+    #
+    # * **Public hosted zone:** Two hosted zones that have the same name or
+    #   that have a parent/child relationship (example.com and
+    #   test.example.com) can't have any common name servers. You tried to
+    #   create a hosted zone that has the same name as an existing hosted
+    #   zone or that's the parent or child of an existing hosted zone, and
+    #   you specified a delegation set that shares one or more name servers
+    #   with the existing hosted zone. For more information, see
+    #   [CreateReusableDelegationSet][1].
+    #
+    # * **Private hosted zone:** You specified an Amazon VPC that you're
+    #   already using for another hosted zone, and the domain that you
+    #   specified for one of the hosted zones is a subdomain of the domain
+    #   that you specified for the other hosted zone. For example, you
+    #   can't use the same Amazon VPC for the hosted zones for example.com
+    #   and test.example.com.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ConflictingDomainExists AWS API Documentation
+    #
+    class ConflictingDomainExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You tried to update a traffic policy instance by using a traffic
+    # policy version that has a different DNS type than the current type for
+    # the instance. You specified the type in the JSON document in the
+    # `CreateTrafficPolicy` or `CreateTrafficPolicyVersion`request.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ConflictingTypes AWS API Documentation
+    #
+    class ConflictingTypes < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains the health check request information.
     #
     # @note When making an API call, you may pass CreateHealthCheckRequest
@@ -968,7 +1031,7 @@ module Aws::Route53
     #           enable_sni: false,
     #           regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #           alarm_identifier: {
-    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
+    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
     #             name: "AlarmName", # required
     #           },
     #           insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -1040,7 +1103,7 @@ module Aws::Route53
     #       {
     #         name: "DNSName", # required
     #         vpc: {
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #         caller_reference: "Nonce", # required
@@ -1466,7 +1529,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -1532,6 +1595,77 @@ module Aws::Route53
       :id,
       :caller_reference,
       :name_servers)
+      include Aws::Structure
+    end
+
+    # A delegation set with the same owner and caller reference combination
+    # has already been created.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetAlreadyCreated AWS API Documentation
+    #
+    class DelegationSetAlreadyCreated < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified delegation set has already been marked as reusable.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetAlreadyReusable AWS API Documentation
+    #
+    class DelegationSetAlreadyReusable < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified delegation contains associated hosted zones which must
+    # be deleted before the reusable delegation set can be deleted.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetInUse AWS API Documentation
+    #
+    class DelegationSetInUse < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You can create a hosted zone that has the same name as an existing
+    # hosted zone (example.com is common), but there is a limit to the
+    # number of hosted zones that have the same name. If you get this error,
+    # Amazon Route 53 has reached that limit. If you own the domain name and
+    # Route 53 generates this error, contact Customer Support.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetNotAvailable AWS API Documentation
+    #
+    class DelegationSetNotAvailable < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A reusable delegation set with the specified ID does not exist.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSetNotReusable AWS API Documentation
+    #
+    class DelegationSetNotReusable < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1716,7 +1850,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -1778,7 +1912,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #         comment: "DisassociateVPCComment",
@@ -2649,6 +2783,29 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # The health check you're attempting to create already exists. Amazon
+    # Route 53 returns this error when you submit a request that has the
+    # following values:
+    #
+    # * The same value for `CallerReference` as an existing health check,
+    #   and one or more values that differ from the existing health check
+    #   that has the same caller reference.
+    #
+    # * The same value for `CallerReference` as a health check that you
+    #   created and later deleted, regardless of the other settings in the
+    #   request.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckAlreadyExists AWS API Documentation
+    #
+    class HealthCheckAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains information about the health check.
     #
     # @note When making an API call, you may pass HealthCheckConfig
@@ -2671,7 +2828,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -3057,6 +3214,19 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # This error code is not in use.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckInUse AWS API Documentation
+    #
+    class HealthCheckInUse < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains the last failure reason as reported by
     # one Amazon Route 53 health checker.
     #
@@ -3082,6 +3252,19 @@ module Aws::Route53
       :region,
       :ip_address,
       :status_report)
+      include Aws::Structure
+    end
+
+    # The value of `HealthCheckVersion` in the request doesn't match the
+    # value of `HealthCheckVersion` in the health check.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckVersionMismatch AWS API Documentation
+    #
+    class HealthCheckVersionMismatch < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3140,6 +3323,21 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # The hosted zone you're trying to create already exists. Amazon Route
+    # 53 returns this error when a hosted zone has already been created with
+    # the specified `CallerReference`.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneAlreadyExists AWS API Documentation
+    #
+    class HostedZoneAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains an optional comment about your hosted
     # zone. If you don't want to specify a comment, omit both the
     # `HostedZoneConfig` and `Comment` elements.
@@ -3191,6 +3389,224 @@ module Aws::Route53
     class HostedZoneLimit < Struct.new(
       :type,
       :value)
+      include Aws::Structure
+    end
+
+    # The hosted zone contains resource records that are not SOA or NS
+    # records.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneNotEmpty AWS API Documentation
+    #
+    class HostedZoneNotEmpty < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified HostedZone can't be found.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneNotFound AWS API Documentation
+    #
+    class HostedZoneNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified hosted zone is a public hosted zone, not a private
+    # hosted zone.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneNotPrivate AWS API Documentation
+    #
+    class HostedZoneNotPrivate < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource you're trying to access is unsupported on this Amazon
+    # Route 53 endpoint.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/IncompatibleVersion AWS API Documentation
+    #
+    class IncompatibleVersion < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Amazon Route 53 doesn't have the permissions required to create log
+    # streams and send query logs to log streams. Possible causes include
+    # the following:
+    #
+    # * There is no resource policy that specifies the log group ARN in the
+    #   value for `Resource`.
+    #
+    # * The resource policy that includes the log group ARN in the value for
+    #   `Resource` doesn't have the necessary permissions.
+    #
+    # * The resource policy hasn't finished propagating yet.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InsufficientCloudWatchLogsResourcePolicy AWS API Documentation
+    #
+    class InsufficientCloudWatchLogsResourcePolicy < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Parameter name is invalid.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidArgument AWS API Documentation
+    #
+    class InvalidArgument < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception contains a list of messages that might contain one or
+    # more error messages. Each error message indicates one error in the
+    # change batch.
+    #
+    # @!attribute [rw] messages
+    #   Descriptive message for the error response.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidChangeBatch AWS API Documentation
+    #
+    class InvalidChangeBatch < Struct.new(
+      :messages,
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified domain name is not valid.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidDomainName AWS API Documentation
+    #
+    class InvalidDomainName < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The input is not valid.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidInput AWS API Documentation
+    #
+    class InvalidInput < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value that you specified to get the second or subsequent page of
+    # results is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidPaginationToken AWS API Documentation
+    #
+    class InvalidPaginationToken < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The format of the traffic policy document that you specified in the
+    # `Document` element is invalid.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidTrafficPolicyDocument AWS API Documentation
+    #
+    class InvalidTrafficPolicyDocument < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The VPC ID that you specified either isn't a valid ID or the current
+    # account is not authorized to access this VPC.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidVPCId AWS API Documentation
+    #
+    class InvalidVPCId < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The VPC that you're trying to disassociate from the private hosted
+    # zone is the last VPC that is associated with the hosted zone. Amazon
+    # Route 53 doesn't support disassociating the last VPC from a hosted
+    # zone.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/LastVPCAssociation AWS API Documentation
+    #
+    class LastVPCAssociation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This operation can't be completed either because the current account
+    # has reached the limit on reusable delegation sets that it can create
+    # or because you've reached the limit on the number of Amazon VPCs that
+    # you can associate with a private hosted zone. To get the current limit
+    # on the number of reusable delegation sets, see [GetAccountLimit][1].
+    # To get the current limit on the number of Amazon VPCs that you can
+    # associate with a private hosted zone, see [GetHostedZoneLimit][2]. To
+    # request a higher limit, [create a case][3] with the AWS Support
+    # Center.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetHostedZoneLimit.html
+    # [3]: http://aws.amazon.com/route53-request
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/LimitsExceeded AWS API Documentation
+    #
+    class LimitsExceeded < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3782,10 +4198,10 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] start_record_identifier
-    #   *Weighted resource record sets only:* If results were truncated for
-    #   a given DNS name and type, specify the value of
-    #   `NextRecordIdentifier` from the previous response to get the next
-    #   resource record set that has the current DNS name and type.
+    #   *Resource record sets that have a routing policy other than simple:*
+    #   If results were truncated for a given DNS name and type, specify the
+    #   value of `NextRecordIdentifier` from the previous response to get
+    #   the next resource record set that has the current DNS name and type.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -4663,6 +5079,165 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A change with the specified change ID does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchChange AWS API Documentation
+    #
+    class NoSuchChange < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There is no CloudWatch Logs log group with the specified ARN.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchCloudWatchLogsLogGroup AWS API Documentation
+    #
+    class NoSuchCloudWatchLogsLogGroup < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A reusable delegation set with the specified ID does not exist.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchDelegationSet AWS API Documentation
+    #
+    class NoSuchDelegationSet < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Amazon Route 53 doesn't support the specified geographic location.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchGeoLocation AWS API Documentation
+    #
+    class NoSuchGeoLocation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # No health check exists with the specified ID.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchHealthCheck AWS API Documentation
+    #
+    class NoSuchHealthCheck < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # No hosted zone exists with the ID that you specified.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchHostedZone AWS API Documentation
+    #
+    class NoSuchHostedZone < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There is no DNS query logging configuration with the specified ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchQueryLoggingConfig AWS API Documentation
+    #
+    class NoSuchQueryLoggingConfig < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # No traffic policy exists with the specified ID.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchTrafficPolicy AWS API Documentation
+    #
+    class NoSuchTrafficPolicy < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # No traffic policy instance exists with the specified ID.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchTrafficPolicyInstance AWS API Documentation
+    #
+    class NoSuchTrafficPolicyInstance < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Associating the specified VPC with the specified hosted zone has not
+    # been authorized.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # If Amazon Route 53 can't process a request before the next request
+    # arrives, it will reject subsequent requests for the same hosted zone
+    # and return an `HTTP 400 error` (`Bad request`). If Route 53 returns
+    # this error repeatedly for the same request, we recommend that you
+    # wait, in intervals of increasing duration, before you try the request
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/PriorRequestNotComplete AWS API Documentation
+    #
+    class PriorRequestNotComplete < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You're trying to associate a VPC with a public hosted zone. Amazon
+    # Route 53 doesn't support associating a VPC with a public hosted zone.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/PublicZoneVPCAssociation AWS API Documentation
+    #
+    class PublicZoneVPCAssociation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains information about a configuration for DNS
     # query logging.
     #
@@ -4686,6 +5261,19 @@ module Aws::Route53
       :id,
       :hosted_zone_id,
       :cloud_watch_logs_log_group_arn)
+      include Aws::Structure
+    end
+
+    # You can create only one query logging configuration for a hosted zone,
+    # and a query logging configuration already exists for this hosted zone.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/QueryLoggingConfigAlreadyExists AWS API Documentation
+    #
+    class QueryLoggingConfigAlreadyExists < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4739,7 +5327,7 @@ module Aws::Route53
     #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #         set_identifier: "ResourceRecordSetIdentifier",
     #         weight: 1,
-    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, ap-south-1
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1
     #         geo_location: {
     #           continent_code: "GeoLocationContinentCode",
     #           country_code: "GeoLocationCountryCode",
@@ -5574,6 +6162,185 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # The limit on the number of requests per second was exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This health check can't be created because the current account has
+    # reached the limit on the number of active health checks.
+    #
+    # For information about default limits, see [Limits][1] in the *Amazon
+    # Route 53 Developer Guide*.
+    #
+    # For information about how to get the current limit for an account, see
+    # [GetAccountLimit][2]. To request a higher limit, [create a case][3]
+    # with the AWS Support Center.
+    #
+    # You have reached the maximum number of active health checks for an AWS
+    # account. To request a higher limit, [create a case][3] with the AWS
+    # Support Center.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html
+    # [3]: http://aws.amazon.com/route53-request
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyHealthChecks AWS API Documentation
+    #
+    class TooManyHealthChecks < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This operation can't be completed either because the current account
+    # has reached the limit on the number of hosted zones or because you've
+    # reached the limit on the number of hosted zones that can be associated
+    # with a reusable delegation set.
+    #
+    # For information about default limits, see [Limits][1] in the *Amazon
+    # Route 53 Developer Guide*.
+    #
+    # To get the current limit on hosted zones that can be created by an
+    # account, see [GetAccountLimit][2].
+    #
+    # To get the current limit on hosted zones that can be associated with a
+    # reusable delegation set, see [GetReusableDelegationSetLimit][3].
+    #
+    # To request a higher limit, [create a case][4] with the AWS Support
+    # Center.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html
+    # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetReusableDelegationSetLimit.html
+    # [4]: http://aws.amazon.com/route53-request
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyHostedZones AWS API Documentation
+    #
+    class TooManyHostedZones < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This traffic policy can't be created because the current account has
+    # reached the limit on the number of traffic policies.
+    #
+    # For information about default limits, see [Limits][1] in the *Amazon
+    # Route 53 Developer Guide*.
+    #
+    # To get the current limit for an account, see [GetAccountLimit][2].
+    #
+    # To request a higher limit, [create a case][3] with the AWS Support
+    # Center.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html
+    # [3]: http://aws.amazon.com/route53-request
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyTrafficPolicies AWS API Documentation
+    #
+    class TooManyTrafficPolicies < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This traffic policy instance can't be created because the current
+    # account has reached the limit on the number of traffic policy
+    # instances.
+    #
+    # For information about default limits, see [Limits][1] in the *Amazon
+    # Route 53 Developer Guide*.
+    #
+    # For information about how to get the current limit for an account, see
+    # [GetAccountLimit][2].
+    #
+    # To request a higher limit, [create a case][3] with the AWS Support
+    # Center.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html
+    # [3]: http://aws.amazon.com/route53-request
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyTrafficPolicyInstances AWS API Documentation
+    #
+    class TooManyTrafficPolicyInstances < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This traffic policy version can't be created because you've reached
+    # the limit of 1000 on the number of versions that you can create for
+    # the current traffic policy.
+    #
+    # To create more traffic policy versions, you can use
+    # [GetTrafficPolicy][1] to get the traffic policy document for a
+    # specified traffic policy version, and then use
+    # [CreateTrafficPolicy][2] to create a new traffic policy using the
+    # traffic policy document.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateTrafficPolicy.html
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyTrafficPolicyVersionsForCurrentPolicy AWS API Documentation
+    #
+    class TooManyTrafficPolicyVersionsForCurrentPolicy < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You've created the maximum number of authorizations that can be
+    # created for the specified hosted zone. To authorize another VPC to be
+    # associated with the hosted zone, submit a
+    # `DeleteVPCAssociationAuthorization` request to remove an existing
+    # authorization. To get a list of existing authorizations, submit a
+    # `ListVPCAssociationAuthorizations` request.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyVPCAssociationAuthorizations AWS API Documentation
+    #
+    class TooManyVPCAssociationAuthorizations < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains settings for a traffic policy.
     #
     # @!attribute [rw] id
@@ -5621,6 +6388,33 @@ module Aws::Route53
       :type,
       :document,
       :comment)
+      include Aws::Structure
+    end
+
+    # A traffic policy that has the same value for `Name` already exists.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicyAlreadyExists AWS API Documentation
+    #
+    class TrafficPolicyAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more traffic policy instances were created by using the
+    # specified traffic policy.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicyInUse AWS API Documentation
+    #
+    class TrafficPolicyInUse < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5704,6 +6498,19 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # There is already a traffic policy instance with the specified ID.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicyInstanceAlreadyExists AWS API Documentation
+    #
+    class TrafficPolicyInstanceAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type that contains information about the latest version of
     # one traffic policy that is associated with the current AWS account.
     #
@@ -5765,7 +6572,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -6307,7 +7114,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #         vpc_id: "VPCId",
     #       }
     #
@@ -6325,6 +7132,33 @@ module Aws::Route53
     class VPC < Struct.new(
       :vpc_region,
       :vpc_id)
+      include Aws::Structure
+    end
+
+    # The VPC that you specified is not authorized to be associated with the
+    # hosted zone.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/VPCAssociationAuthorizationNotFound AWS API Documentation
+    #
+    class VPCAssociationAuthorizationNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified VPC and hosted zone are not currently associated.
+    #
+    # @!attribute [rw] message
+    #   Descriptive message for the error response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/VPCAssociationNotFound AWS API Documentation
+    #
+    class VPCAssociationNotFound < Struct.new(
+      :message)
       include Aws::Structure
     end
 

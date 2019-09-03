@@ -141,10 +141,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Vpc]
-    def wait_until_available(options = {})
+    def wait_until_available(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcAvailable.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(vpc_ids: [@id]))
       Vpc.new({
         id: @id,
@@ -158,10 +158,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Vpc]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(vpc_ids: [@id]))
       Vpc.new({
         id: @id,
@@ -805,7 +805,8 @@ module Aws::EC2
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -1307,7 +1308,7 @@ module Aws::EC2
     #
     #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
-    #   * `attachment.attach.time` - The time that the network interface was
+    #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the

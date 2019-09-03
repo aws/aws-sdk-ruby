@@ -116,6 +116,10 @@ module Aws::Comprehend
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -316,8 +320,10 @@ module Aws::Comprehend
     #   than 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -363,8 +369,10 @@ module Aws::Comprehend
     #   that 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectKeyPhrasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -411,8 +419,10 @@ module Aws::Comprehend
     #   that 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -459,8 +469,10 @@ module Aws::Comprehend
     #   that 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectSyntaxResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -535,8 +547,10 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @option params [String] :volume_kms_key_id
     #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
@@ -1004,6 +1018,10 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.recognizer_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.entity_recognizer_properties.recognizer_metadata.entity_types #=> Array
     #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].type #=> String
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].evaluation_metrics.precision #=> Float
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].evaluation_metrics.recall #=> Float
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].evaluation_metrics.f1_score #=> Float
+    #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].number_of_train_mentions #=> Integer
     #   resp.entity_recognizer_properties.data_access_role_arn #=> String
     #   resp.entity_recognizer_properties.volume_kms_key_id #=> String
     #   resp.entity_recognizer_properties.vpc_config.security_group_ids #=> Array
@@ -1202,8 +1220,10 @@ module Aws::Comprehend
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::DetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1241,8 +1261,10 @@ module Aws::Comprehend
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::DetectKeyPhrasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1280,8 +1302,10 @@ module Aws::Comprehend
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @return [Types::DetectSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1320,8 +1344,10 @@ module Aws::Comprehend
     #   encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language code of the input documents. You can specify English
-    #   ("en") or Spanish ("es").
+    #   The language code of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt").
     #
     # @return [Types::DetectSyntaxResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1674,6 +1700,10 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types #=> Array
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].type #=> String
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].evaluation_metrics.precision #=> Float
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].evaluation_metrics.recall #=> Float
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].evaluation_metrics.f1_score #=> Float
+    #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].number_of_train_mentions #=> Integer
     #   resp.entity_recognizer_properties_list[0].data_access_role_arn #=> String
     #   resp.entity_recognizer_properties_list[0].volume_kms_key_id #=> String
     #   resp.entity_recognizer_properties_list[0].vpc_config.security_group_ids #=> Array
@@ -2224,8 +2254,10 @@ module Aws::Comprehend
     #   The identifier of the job.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -2318,8 +2350,10 @@ module Aws::Comprehend
     #   The identifier of the job.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify English ("en")
-    #   or Spanish ("es"). All documents must be in the same language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
+    #   or Portuguese ("pt"). All documents must be in the same language.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -2794,7 +2828,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

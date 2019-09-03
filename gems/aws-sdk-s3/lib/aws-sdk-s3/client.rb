@@ -144,6 +144,10 @@ module Aws::S3
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -322,10 +326,13 @@ module Aws::S3
     # ensure the parts list is empty.
     #
     # @option params [required, String] :bucket
+    #   Name of the bucket to which the multipart upload was initiated.
     #
     # @option params [required, String] :key
+    #   Key of the object for which the multipart upload was initiated.
     #
     # @option params [required, String] :upload_id
+    #   Upload ID that identifies the multipart upload.
     #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
@@ -579,6 +586,11 @@ module Aws::S3
     #   officially supported AWS SDKs and CLI can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #
+    # @option params [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
+    #
     # @option params [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object
     #   (e.g., AES256).
@@ -606,10 +618,10 @@ module Aws::S3
     #   as URL Query parameters
     #
     # @option params [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to the copied object.
+    #   The object lock mode that you want to apply to the copied object.
     #
     # @option params [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want the copied object's Object Lock to
+    #   The date and time when you want the copied object's object lock to
     #   expire.
     #
     # @option params [String] :object_lock_legal_hold_status
@@ -625,6 +637,7 @@ module Aws::S3
     #   * {Types::CopyObjectOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::CopyObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::CopyObjectOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::CopyObjectOutput#ssekms_encryption_context #ssekms_encryption_context} => String
     #   * {Types::CopyObjectOutput#request_charged #request_charged} => String
     #
     #
@@ -679,6 +692,7 @@ module Aws::S3
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -700,6 +714,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.ssekms_encryption_context #=> String
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObject AWS API Documentation
@@ -738,26 +753,13 @@ module Aws::S3
     #   Allows grantee to write the ACL for the applicable bucket.
     #
     # @option params [Boolean] :object_lock_enabled_for_bucket
-    #   Specifies whether you want S3 Object Lock to be enabled for the new
-    #   bucket.
+    #   Specifies whether you want Amazon S3 object lock to be enabled for the
+    #   new bucket.
     #
     # @return [Types::CreateBucketOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBucketOutput#location #location} => String
     #
-    #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
-    #   }
     #
     # @example Example: To create a bucket in a specific region
     #
@@ -773,6 +775,19 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     location: "http://examplebucket.s3.amazonaws.com/", 
+    #   }
+    #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -890,6 +905,11 @@ module Aws::S3
     #   officially supported AWS SDKs and CLI can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #
+    # @option params [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
+    #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -902,11 +922,11 @@ module Aws::S3
     #   parameters
     #
     # @option params [String] :object_lock_mode
-    #   Specifies the Object Lock mode that you want to apply to the uploaded
+    #   Specifies the object lock mode that you want to apply to the uploaded
     #   object.
     #
     # @option params [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   Specifies the date and time when you want the Object Lock to expire.
+    #   Specifies the date and time when you want the object lock to expire.
     #
     # @option params [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the uploaded
@@ -923,6 +943,7 @@ module Aws::S3
     #   * {Types::CreateMultipartUploadOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::CreateMultipartUploadOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::CreateMultipartUploadOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::CreateMultipartUploadOutput#ssekms_encryption_context #ssekms_encryption_context} => String
     #   * {Types::CreateMultipartUploadOutput#request_charged #request_charged} => String
     #
     #
@@ -968,6 +989,7 @@ module Aws::S3
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -986,6 +1008,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.ssekms_encryption_context #=> String
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload AWS API Documentation
@@ -1032,12 +1055,17 @@ module Aws::S3
     # Deletes an analytics configuration for the bucket (specified by the
     # analytics configuration ID).
     #
+    # To use this operation, you must have permissions to perform the
+    # s3:PutAnalyticsConfiguration action. The bucket owner has this
+    # permission by default. The bucket owner can grant this permission to
+    # others.
+    #
     # @option params [required, String] :bucket
     #   The name of the bucket from which an analytics configuration is
     #   deleted.
     #
     # @option params [required, String] :id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1226,9 +1254,12 @@ module Aws::S3
     end
 
     # Deletes the replication configuration from the bucket. For information
-    # about replication configuration, see [Cross-Region Replication (CRR)](
-    # https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
-    # *Amazon S3 Developer Guide*.
+    # about replication configuration, see [Cross-Region Replication
+    # (CRR)][1] in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -1347,7 +1378,7 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [Boolean] :bypass_governance_retention
-    #   Indicates whether S3 Object Lock should bypass Governance-mode
+    #   Indicates whether Amazon S3 object lock should bypass governance-mode
     #   restrictions to process this operation.
     #
     # @return [Types::DeleteObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1356,6 +1387,15 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#version_id #version_id} => String
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
     #
     # @example Example: To delete an object
     #
@@ -1369,15 +1409,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
-    #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1491,7 +1522,7 @@ module Aws::S3
     #
     # @option params [Boolean] :bypass_governance_retention
     #   Specifies whether you want to delete this object even if it has a
-    #   Governance-type Object Lock in place. You must have sufficient
+    #   Governance-type object lock in place. You must have sufficient
     #   permissions to perform this operation.
     #
     # @return [Types::DeleteObjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1500,42 +1531,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#request_charged #request_charged} => String
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
-    #
-    # @example Example: To delete multiple objects from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
-    #   # object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "objectkey1", 
-    #         }, 
-    #         {
-    #           key: "objectkey2", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         delete_marker: true, 
-    #         delete_marker_version_id: "A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F", 
-    #         key: "objectkey1", 
-    #       }, 
-    #       {
-    #         delete_marker: true, 
-    #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
-    #         key: "objectkey2", 
-    #       }, 
-    #     ], 
-    #   }
     #
     # @example Example: To delete multiple object versions from a versioned bucket
     #
@@ -1569,6 +1564,42 @@ module Aws::S3
     #       {
     #         key: "HappyFace.jpg", 
     #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple objects from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
+    #   # object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "objectkey1", 
+    #         }, 
+    #         {
+    #           key: "objectkey2", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         delete_marker: true, 
+    #         delete_marker_version_id: "A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F", 
+    #         key: "objectkey1", 
+    #       }, 
+    #       {
+    #         delete_marker: true, 
+    #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
+    #         key: "objectkey2", 
     #       }, 
     #     ], 
     #   }
@@ -1711,7 +1742,7 @@ module Aws::S3
     #   retrieved.
     #
     # @option params [required, String] :id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #
     # @return [Types::GetBucketAnalyticsConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2762,6 +2793,28 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -2783,28 +2836,6 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
-    #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -3056,12 +3087,12 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Gets the Object Lock configuration for a bucket. The rule specified in
-    # the Object Lock configuration will be applied by default to every new
+    # Gets the object lock configuration for a bucket. The rule specified in
+    # the object lock configuration will be applied by default to every new
     # object placed in the specified bucket.
     #
     # @option params [required, String] :bucket
-    #   The bucket whose Object Lock configuration you want to retrieve.
+    #   The bucket whose object lock configuration you want to retrieve.
     #
     # @return [Types::GetObjectLockConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3151,6 +3182,27 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
     #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
+    #
     # @example Example: To retrieve tag set of an object
     #
     #   # The following example retrieves tag set of an object.
@@ -3173,27 +3225,6 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -4484,6 +4515,8 @@ module Aws::S3
     #   The canned ACL to apply to the bucket.
     #
     # @option params [Types::AccessControlPolicy] :access_control_policy
+    #   Contains the elements that set the ACL permissions for an object per
+    #   grantee.
     #
     # @option params [required, String] :bucket
     #
@@ -4568,7 +4601,7 @@ module Aws::S3
     #   The name of the bucket to which an analytics configuration is stored.
     #
     # @option params [required, String] :id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #
     # @option params [required, Types::AnalyticsConfiguration] :analytics_configuration
     #   The configuration and any analyses for the analytics filter.
@@ -4708,17 +4741,22 @@ module Aws::S3
     # existing one, if present).
     #
     # @option params [required, String] :bucket
-    #   The name of the bucket for which the server-side encryption
-    #   configuration is set.
+    #   Specifies default encryption for a bucket using server-side encryption
+    #   with Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys
+    #   (SSE-KMS). For information about the Amazon S3 default encryption
+    #   feature, see [Amazon S3 Default Bucket Encryption][1] in the *Amazon
+    #   Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
     #
     # @option params [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the server-side encryption
     #   configuration. This parameter is auto-populated when using the command
-    #   from the CLI
+    #   from the CLI.
     #
     # @option params [required, Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   Container for server-side encryption configuration rules. Currently S3
-    #   supports one rule only.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5135,9 +5173,6 @@ module Aws::S3
     # @option params [required, String] :bucket
     #
     # @option params [required, Types::NotificationConfiguration] :notification_configuration
-    #   A container for specifying the notification configuration of the
-    #   bucket. If this element is empty, notifications are turned off for the
-    #   bucket.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5228,8 +5263,7 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Replaces a policy on a bucket. If the bucket already has a policy, the
-    # one in this request completely replaces it.
+    # Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
     #
     # @option params [required, String] :bucket
     #
@@ -5273,19 +5307,25 @@ module Aws::S3
     end
 
     # Creates a replication configuration or replaces an existing one. For
-    # more information, see [Cross-Region Replication (CRR)](
-    # https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    # more information, see [Cross-Region Replication (CRR)][1] in the
     # *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html
     #
     # @option params [required, String] :bucket
     #
     # @option params [String] :content_md5
+    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   header as a message integrity check to verify that the request body
+    #   was not corrupted in transit.
     #
     # @option params [required, Types::ReplicationConfiguration] :replication_configuration
-    #   A container for replication rules. You can add up to 1,000 rules. The
-    #   maximum size of a replication configuration is 2 MB.
     #
     # @option params [String] :token
+    #   A token that allows Amazon S3 object lock to be enabled for an
+    #   existing bucket.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5626,7 +5666,8 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
-    #   is auto-populated when using the command from the CLI
+    #   is auto-populated when using the command from the CLI. This parameted
+    #   is required if object lock parameters are specified.
     #
     # @option params [String] :content_type
     #   A standard MIME type describing the format of the object data.
@@ -5688,6 +5729,11 @@ module Aws::S3
     #   officially supported AWS SDKs and CLI can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #
+    # @option params [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
+    #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -5700,10 +5746,10 @@ module Aws::S3
     #   parameters. (For example, "Key1=Value1")
     #
     # @option params [String] :object_lock_mode
-    #   The Object Lock mode that you want to apply to this object.
+    #   The object lock mode that you want to apply to this object.
     #
     # @option params [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
-    #   The date and time when you want this object's Object Lock to expire.
+    #   The date and time when you want this object's object lock to expire.
     #
     # @option params [String] :object_lock_legal_hold_status
     #   The Legal Hold status that you want to apply to the specified object.
@@ -5717,8 +5763,66 @@ module Aws::S3
     #   * {Types::PutObjectOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::PutObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::PutObjectOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::PutObjectOutput#ssekms_encryption_context #ssekms_encryption_context} => String
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #   }
+    #
+    # @example Example: To upload an object and specify optional tags
+    #
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "c:\\HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload object and specify user-defined metadata
+    #
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
     #
@@ -5756,24 +5860,6 @@ module Aws::S3
     #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
-    # @example Example: To upload an object and specify canned ACL.
-    #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
     # @example Example: To upload an object
     #
     #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
@@ -5789,27 +5875,6 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
-    # @example Example: To upload object and specify user-defined metadata
-    #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
     # @example Example: To upload an object (specify optional headers)
@@ -5830,24 +5895,6 @@ module Aws::S3
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
-    # @example Example: To upload an object and specify optional tags
-    #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
     #   }
     #
     # @example Streaming a file from disk
@@ -5885,6 +5932,7 @@ module Aws::S3
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -5901,6 +5949,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.ssekms_encryption_context #=> String
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObject AWS API Documentation
@@ -5919,6 +5968,8 @@ module Aws::S3
     #   The canned ACL to apply to the object.
     #
     # @option params [Types::AccessControlPolicy] :access_control_policy
+    #   Contains the elements that set the ACL permissions for an object per
+    #   grantee.
     #
     # @option params [required, String] :bucket
     #
@@ -6079,16 +6130,16 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Places an Object Lock configuration on the specified bucket. The rule
-    # specified in the Object Lock configuration will be applied by default
+    # Places an object lock configuration on the specified bucket. The rule
+    # specified in the object lock configuration will be applied by default
     # to every new object placed in the specified bucket.
     #
     # @option params [required, String] :bucket
-    #   The bucket whose Object Lock configuration you want to create or
+    #   The bucket whose object lock configuration you want to create or
     #   replace.
     #
     # @option params [Types::ObjectLockConfiguration] :object_lock_configuration
-    #   The Object Lock configuration that you want to apply to the specified
+    #   The object lock configuration that you want to apply to the specified
     #   bucket.
     #
     # @option params [String] :request_payer
@@ -6099,7 +6150,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [String] :token
-    #   A token to allow Object Lock to be enabled for an existing bucket.
+    #   A token to allow Amazon S3 object lock to be enabled for an existing
+    #   bucket.
     #
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
@@ -6330,7 +6382,6 @@ module Aws::S3
     # @option params [String] :version_id
     #
     # @option params [Types::RestoreRequest] :restore_request
-    #   Container for restore job parameters.
     #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
@@ -6761,7 +6812,9 @@ module Aws::S3
     #   the body cannot be determined automatically.
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
+    #   is auto-populated when using the command from the CLI. This parameted
+    #   is required if object lock parameters are specified.
     #
     # @option params [required, String] :key
     #   Object key for which the multipart upload was initiated.
@@ -7046,7 +7099,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8,9 +8,15 @@
 module Aws::S3
   module Types
 
-    # Specifies the days since the initiation of an Incomplete Multipart
-    # Upload that Lifecycle will wait before permanently removing all parts
-    # of the upload.
+    # Specifies the days since the initiation of an incomplete multipart
+    # upload that Amazon S3 will wait before permanently removing all parts
+    # of the upload. For more information, see [ Aborting Incomplete
+    # Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config
     #
     # @note When making an API call, you may pass AbortIncompleteMultipartUpload
     #   data as a hash:
@@ -20,8 +26,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] days_after_initiation
-    #   Indicates the number of days that must pass since initiation for
-    #   Lifecycle to abort an Incomplete Multipart Upload.
+    #   Specifies the number of days after which Amazon S3 aborts an
+    #   incomplete multipart upload.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortIncompleteMultipartUpload AWS API Documentation
@@ -54,12 +60,15 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
+    #   Name of the bucket to which the multipart upload was initiated.
     #   @return [String]
     #
     # @!attribute [rw] key
+    #   Key of the object for which the multipart upload was initiated.
     #   @return [String]
     #
     # @!attribute [rw] upload_id
+    #   Upload ID that identifies the multipart upload.
     #   @return [String]
     #
     # @!attribute [rw] request_payer
@@ -80,6 +89,14 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Configures the transfer acceleration state for an Amazon S3 bucket.
+    # For more information, see [Amazon S3 Transfer Acceleration][1] in the
+    # *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
+    #
     # @note When making an API call, you may pass AccelerateConfiguration
     #   data as a hash:
     #
@@ -88,7 +105,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] status
-    #   The accelerate configuration of the bucket.
+    #   Specifies the transfer acceleration status of the bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccelerateConfiguration AWS API Documentation
@@ -98,6 +115,9 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Contains the elements that set the ACL permissions for an object per
+    # grantee.
+    #
     # @note When making an API call, you may pass AccessControlPolicy
     #   data as a hash:
     #
@@ -125,6 +145,7 @@ module Aws::S3
     #   @return [Array<Types::Grant>]
     #
     # @!attribute [rw] owner
+    #   Container for the bucket owner's display name and ID.
     #   @return [Types::Owner]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlPolicy AWS API Documentation
@@ -145,7 +166,13 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] owner
-    #   The override value for the owner of the replica object.
+    #   Specifies the replica ownership. For default and valid values, see
+    #   [PUT bucket replication][1] in the *Amazon Simple Storage Service
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlTranslation AWS API Documentation
@@ -155,6 +182,11 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # A conjunction (logical AND) of predicates, which is used in evaluating
+    # a metrics filter. The operator must have at least two predicates in
+    # any combination, and an object must match all of the predicates for
+    # the filter to apply.
+    #
     # @note When making an API call, you may pass AnalyticsAndOperator
     #   data as a hash:
     #
@@ -169,7 +201,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] prefix
-    #   The prefix to use when evaluating an AND predicate.
+    #   The prefix to use when evaluating an AND predicate: The prefix that
+    #   an object must have to be included in the metrics results.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -184,6 +217,16 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies the configuration and any analyses for the analytics filter
+    # of an Amazon S3 bucket.
+    #
+    # For more information, see [GET Bucket analytics][1] in the *Amazon
+    # Simple Storage Service API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETAnalyticsConfig.html
+    #
     # @note When making an API call, you may pass AnalyticsConfiguration
     #   data as a hash:
     #
@@ -221,7 +264,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -232,9 +275,9 @@ module Aws::S3
     #   @return [Types::AnalyticsFilter]
     #
     # @!attribute [rw] storage_class_analysis
-    #   If present, it indicates that data related to access patterns will
-    #   be collected and made available to analyze the tradeoffs between
-    #   different storage classes.
+    #   Contains data related to access patterns to be collected and made
+    #   available to analyze the tradeoffs between different storage
+    #   classes.
     #   @return [Types::StorageClassAnalysis]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsConfiguration AWS API Documentation
@@ -246,6 +289,8 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Where to publish the analytics results.
+    #
     # @note When making an API call, you may pass AnalyticsExportDestination
     #   data as a hash:
     #
@@ -323,7 +368,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] format
-    #   The file format used when exporting data to Amazon S3.
+    #   Specifies the file format used when exporting data to Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] bucket_account_id
@@ -332,13 +377,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The Amazon resource name (ARN) of the bucket to which data is
+    #   The Amazon Resource Name (ARN) of the bucket to which data is
     #   exported.
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   The prefix to use when exporting data. The exported data begins with
-    #   this prefix.
+    #   The prefix to use when exporting data. The prefix is prepended to
+    #   all results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsS3BucketDestination AWS API Documentation
@@ -367,6 +412,14 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies the lifecycle configuration for objects in an Amazon S3
+    # bucket. For more information, see [Object Lifecycle Management][1] in
+    # the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+    #
     # @note When making an API call, you may pass BucketLifecycleConfiguration
     #   data as a hash:
     #
@@ -421,6 +474,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] rules
+    #   A lifecycle rule for individual objects in an Amazon S3 bucket.
     #   @return [Array<Types::LifecycleRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLifecycleConfiguration AWS API Documentation
@@ -453,9 +507,6 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] logging_enabled
-    #   Container for logging information. Presence of this element
-    #   indicates that logging is enabled. Parameters TargetBucket and
-    #   TargetPrefix are required in this case.
     #   @return [Types::LoggingEnabled]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLoggingStatus AWS API Documentation
@@ -465,6 +516,15 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Describes the cross-origin access configuration for objects in an
+    # Amazon S3 bucket. For more information, see [Enabling Cross-Origin
+    # Resource Sharing][1] in the *Amazon Simple Storage Service Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
+    #
     # @note When making an API call, you may pass CORSConfiguration
     #   data as a hash:
     #
@@ -481,6 +541,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] cors_rules
+    #   A set of allowed origins and methods.
     #   @return [Array<Types::CORSRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSConfiguration AWS API Documentation
@@ -490,6 +551,8 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies a cross-origin access rule for an Amazon S3 bucket.
+    #
     # @note When making an API call, you may pass CORSRule
     #   data as a hash:
     #
@@ -502,12 +565,15 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] allowed_headers
-    #   Specifies which headers are allowed in a pre-flight OPTIONS request.
+    #   Headers that are specified in the `Access-Control-Request-Headers`
+    #   header. These headers are allowed in a preflight OPTIONS request. In
+    #   response to any preflight OPTIONS request, Amazon S3 returns any
+    #   requested headers that are allowed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_methods
-    #   Identifies HTTP methods that the domain/origin specified in the rule
-    #   is allowed to execute.
+    #   An HTTP method that you allow the origin to execute. Valid values
+    #   are `GET`, `PUT`, `HEAD`, `POST`, and `DELETE`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_origins
@@ -518,7 +584,7 @@ module Aws::S3
     # @!attribute [rw] expose_headers
     #   One or more headers in the response that you want customers to be
     #   able to access from their applications (for example, from a
-    #   JavaScript XMLHttpRequest object).
+    #   JavaScript `XMLHttpRequest` object).
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_age_seconds
@@ -844,6 +910,8 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies a condition that must be met for a redirect to apply.
+    #
     # @note When making an API call, you may pass Condition
     #   data as a hash:
     #
@@ -855,20 +923,21 @@ module Aws::S3
     # @!attribute [rw] http_error_code_returned_equals
     #   The HTTP error code when the redirect is applied. In the event of an
     #   error, if the error code equals this value, then the specified
-    #   redirect is applied. Required when parent element Condition is
-    #   specified and sibling KeyPrefixEquals is not specified. If both are
-    #   specified, then both must be true for the redirect to be applied.
+    #   redirect is applied. Required when parent element `Condition` is
+    #   specified and sibling `KeyPrefixEquals` is not specified. If both
+    #   are specified, then both must be true for the redirect to be
+    #   applied.
     #   @return [String]
     #
     # @!attribute [rw] key_prefix_equals
     #   The object key name prefix when the redirect is applied. For
-    #   example, to redirect requests for ExamplePage.html, the key prefix
-    #   will be ExamplePage.html. To redirect request for all pages with the
-    #   prefix docs/, the key prefix will be /docs, which identifies all
-    #   objects in the docs/ folder. Required when the parent element
-    #   Condition is specified and sibling HttpErrorCodeReturnedEquals is
-    #   not specified. If both conditions are specified, both must be true
-    #   for the redirect to be applied.
+    #   example, to redirect requests for `ExamplePage.html`, the key prefix
+    #   will be `ExamplePage.html`. To redirect request for all pages with
+    #   the prefix `docs/`, the key prefix will be `/docs`, which identifies
+    #   all objects in the docs/ folder. Required when the parent element
+    #   `Condition` is specified and sibling `HttpErrorCodeReturnedEquals`
+    #   is not specified. If both conditions are specified, both must be
+    #   true for the redirect to be applied.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Condition AWS API Documentation
@@ -924,6 +993,13 @@ module Aws::S3
     #   master encryption key that was used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   If present, specifies the AWS KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded
+    #   UTF-8 string holding JSON with the encryption context key-value
+    #   pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -940,6 +1016,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_charged)
       include Aws::Structure
     end
@@ -978,6 +1055,7 @@ module Aws::S3
     #         sse_customer_key: "SSECustomerKey",
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
+    #         ssekms_encryption_context: "SSEKMSEncryptionContext",
     #         copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #         copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #         copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -1122,6 +1200,12 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object
+    #   encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object
     #   (e.g., AES256).
@@ -1154,11 +1238,11 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] object_lock_mode
-    #   The Object Lock mode that you want to apply to the copied object.
+    #   The object lock mode that you want to apply to the copied object.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_retain_until_date
-    #   The date and time when you want the copied object's Object Lock to
+    #   The date and time when you want the copied object's object lock to
     #   expire.
     #   @return [Time]
     #
@@ -1198,6 +1282,7 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :copy_source_sse_customer_algorithm,
       :copy_source_sse_customer_key,
       :copy_source_sse_customer_key_md5,
@@ -1319,8 +1404,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] object_lock_enabled_for_bucket
-    #   Specifies whether you want S3 Object Lock to be enabled for the new
-    #   bucket.
+    #   Specifies whether you want Amazon S3 object lock to be enabled for
+    #   the new bucket.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketRequest AWS API Documentation
@@ -1383,6 +1468,13 @@ module Aws::S3
     #   master encryption key that was used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   If present, specifies the AWS KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded
+    #   UTF-8 string holding JSON with the encryption context key-value
+    #   pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -1400,6 +1492,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_charged)
       include Aws::Structure
     end
@@ -1431,6 +1524,7 @@ module Aws::S3
     #         sse_customer_key: "SSECustomerKey",
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
+    #         ssekms_encryption_context: "SSEKMSEncryptionContext",
     #         request_payer: "requester", # accepts requester
     #         tagging: "TaggingHeader",
     #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -1538,6 +1632,12 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object
+    #   encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -1552,12 +1652,12 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] object_lock_mode
-    #   Specifies the Object Lock mode that you want to apply to the
+    #   Specifies the object lock mode that you want to apply to the
     #   uploaded object.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_retain_until_date
-    #   Specifies the date and time when you want the Object Lock to expire.
+    #   Specifies the date and time when you want the object lock to expire.
     #   @return [Time]
     #
     # @!attribute [rw] object_lock_legal_hold_status
@@ -1589,6 +1689,7 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_payer,
       :tagging,
       :object_lock_mode,
@@ -1597,7 +1698,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The container element for specifying the default Object Lock retention
+    # The container element for specifying the default object lock retention
     # settings for new objects placed in the specified bucket.
     #
     # @note When making an API call, you may pass DefaultRetention
@@ -1610,7 +1711,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] mode
-    #   The default Object Lock retention mode you want to apply to new
+    #   The default object lock retention mode you want to apply to new
     #   objects placed in the specified bucket.
     #   @return [String]
     #
@@ -1676,7 +1777,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfigurationRequest AWS API Documentation
@@ -1998,8 +2099,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] bypass_governance_retention
-    #   Indicates whether S3 Object Lock should bypass Governance-mode
-    #   restrictions to process this operation.
+    #   Indicates whether Amazon S3 object lock should bypass
+    #   governance-mode restrictions to process this operation.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectRequest AWS API Documentation
@@ -2114,7 +2215,7 @@ module Aws::S3
     #
     # @!attribute [rw] bypass_governance_retention
     #   Specifies whether you want to delete this object even if it has a
-    #   Governance-type Object Lock in place. You must have sufficient
+    #   Governance-type object lock in place. You must have sufficient
     #   permissions to perform this operation.
     #   @return [Boolean]
     #
@@ -2170,7 +2271,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container for information about the replication destination.
+    # Specifies information about where to publish analysis or configuration
+    # results for an Amazon S3 bucket.
     #
     # @note When making an API call, you may pass Destination
     #   data as a hash:
@@ -2191,34 +2293,46 @@ module Aws::S3
     #   The Amazon Resource Name (ARN) of the bucket where you want Amazon
     #   S3 to store replicas of the object identified by the rule.
     #
-    #   If there are multiple rules in your replication configuration, all
-    #   rules must specify the same bucket as the destination. A replication
-    #   configuration can replicate objects to only one destination bucket.
+    #   A replication configuration can replicate objects to only one
+    #   destination bucket. If there are multiple rules in your replication
+    #   configuration, all rules must specify the same destination bucket.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The account ID of the destination bucket. Currently, Amazon S3
-    #   verifies this value only if Access Control Translation is enabled.
+    #   Destination bucket owner account ID. In a cross-account scenario, if
+    #   you direct Amazon S3 to change replica ownership to the AWS account
+    #   that owns the destination bucket by specifying the
+    #   `AccessControlTranslation` property, this is the account ID of the
+    #   destination bucket owner. For more information, see [Cross-Region
+    #   Replication Additional Configuration: Change Replica Owner][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   In a cross-account scenario, if you change replica ownership to the
-    #   AWS account that owns the destination bucket by adding the
-    #   `AccessControlTranslation` element, this is the account ID of the
-    #   owner of the destination bucket.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/crr-change-owner.html
     #   @return [String]
     #
     # @!attribute [rw] storage_class
-    #   The class of storage used to store the object. By default Amazon S3
-    #   uses storage class of the source object when creating a replica.
+    #   The storage class to use when replicating objects, such as standard
+    #   or reduced redundancy. By default, Amazon S3 uses the storage class
+    #   of the source object to create the object replica.
+    #
+    #   For valid values, see the `StorageClass` element of the [PUT Bucket
+    #   replication][1] action in the *Amazon Simple Storage Service API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html
     #   @return [String]
     #
     # @!attribute [rw] access_control_translation
-    #   A container for information about access control for replicas.
-    #
-    #   Use this element only in a cross-account scenario where source and
-    #   destination bucket owners are not the same to change replica
-    #   ownership to the AWS account that owns the destination bucket. If
-    #   you don't add this element to the replication configuration, the
-    #   replicas are owned by same AWS account that owns the source object.
+    #   Specify this only in a cross-account scenario (where source and
+    #   destination bucket owners are not the same), and you want to change
+    #   replica ownership to the AWS account that owns the destination
+    #   bucket. If this is not specified in the replication configuration,
+    #   the replicas are owned by same AWS account that owns the source
+    #   object.
     #   @return [Types::AccessControlTranslation]
     #
     # @!attribute [rw] encryption_configuration
@@ -2274,8 +2388,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container for information about the encryption-based configuration
-    # for replicas.
+    # Specifies encryption-related information for an Amazon S3 bucket that
+    # is a destination for replicated objects.
     #
     # @note When making an API call, you may pass EncryptionConfiguration
     #   data as a hash:
@@ -2285,9 +2399,9 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] replica_kms_key_id
-    #   The ID of the AWS KMS key for the AWS Region where the destination
-    #   bucket resides. Amazon S3 uses this key to encrypt the replica
-    #   object.
+    #   Specifies the AWS KMS Key ID (Key ARN or Alias ARN) for the
+    #   destination bucket. Amazon S3 uses this key to encrypt replica
+    #   objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration AWS API Documentation
@@ -2344,8 +2458,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container for a key value pair that defines the criteria for the
-    # filter rule.
+    # Specifies the Amazon S3 object key name to filter on and whether to
+    # filter on the suffix or prefix of the key name.
     #
     # @note When making an API call, you may pass FilterRule
     #   data as a hash:
@@ -2357,11 +2471,10 @@ module Aws::S3
     #
     # @!attribute [rw] name
     #   The object key name prefix or suffix identifying one or more objects
-    #   to which the filtering rule applies. The maximum prefix length is
-    #   1,024 characters. Overlapping prefixes and suffixes are not
-    #   supported. For more information, see [Configuring Event
-    #   Notifications][1] in the *Amazon Simple Storage Service Developer
-    #   Guide*.
+    #   to which the filtering rule applies. The maximum length is 1,024
+    #   characters. Overlapping prefixes and suffixes are not supported. For
+    #   more information, see [Configuring Event Notifications][1] in the
+    #   *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
@@ -2369,6 +2482,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   The value that the filter searches for in object key names.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/FilterRule AWS API Documentation
@@ -2466,7 +2580,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfigurationRequest AWS API Documentation
@@ -2505,8 +2619,6 @@ module Aws::S3
     end
 
     # @!attribute [rw] server_side_encryption_configuration
-    #   Container for server-side encryption configuration rules. Currently
-    #   S3 supports one rule only.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryptionOutput AWS API Documentation
@@ -2653,9 +2765,6 @@ module Aws::S3
     end
 
     # @!attribute [rw] logging_enabled
-    #   Container for logging information. Presence of this element
-    #   indicates that logging is enabled. Parameters TargetBucket and
-    #   TargetPrefix are required in this case.
     #   @return [Types::LoggingEnabled]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLoggingOutput AWS API Documentation
@@ -2795,8 +2904,6 @@ module Aws::S3
     end
 
     # @!attribute [rw] replication_configuration
-    #   A container for replication rules. You can add up to 1,000 rules.
-    #   The maximum size of a replication configuration is 2 MB.
     #   @return [Types::ReplicationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplicationOutput AWS API Documentation
@@ -3067,7 +3174,7 @@ module Aws::S3
     end
 
     # @!attribute [rw] object_lock_configuration
-    #   The specified bucket's Object Lock configuration.
+    #   The specified bucket's object lock configuration.
     #   @return [Types::ObjectLockConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectLockConfigurationOutput AWS API Documentation
@@ -3085,7 +3192,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket whose Object Lock configuration you want to retrieve.
+    #   The bucket whose object lock configuration you want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectLockConfigurationRequest AWS API Documentation
@@ -3232,11 +3339,11 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] object_lock_mode
-    #   The Object Lock mode currently in place for this object.
+    #   The object lock mode currently in place for this object.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_retain_until_date
-    #   The date and time when this object's Object Lock will expire.
+    #   The date and time when this object's object lock will expire.
     #   @return [Time]
     #
     # @!attribute [rw] object_lock_legal_hold_status
@@ -3832,11 +3939,11 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] object_lock_mode
-    #   The Object Lock mode currently in place for this object.
+    #   The object lock mode currently in place for this object.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_retain_until_date
-    #   The date and time when this object's Object Lock will expire.
+    #   The date and time when this object's object lock expires.
     #   @return [Time]
     #
     # @!attribute [rw] object_lock_legal_hold_status
@@ -4075,6 +4182,14 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies the inventory configuration for an Amazon S3 bucket. For
+    # more information, see [GET Bucket inventory][1] in the *Amazon Simple
+    # Storage Service API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html
+    #
     # @note When making an API call, you may pass InventoryConfiguration
     #   data as a hash:
     #
@@ -4111,7 +4226,9 @@ module Aws::S3
     #   @return [Types::InventoryDestination]
     #
     # @!attribute [rw] is_enabled
-    #   Specifies whether the inventory is enabled or disabled.
+    #   Specifies whether the inventory is enabled or disabled. If set to
+    #   `True`, an inventory list is generated. If set to `False`, no
+    #   inventory list is generated.
     #   @return [Boolean]
     #
     # @!attribute [rw] filter
@@ -4124,8 +4241,11 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] included_object_versions
-    #   Specifies which object version(s) to included in the inventory
-    #   results.
+    #   Object versions to include in the inventory list. If set to `All`,
+    #   the list includes all the object versions, which adds the
+    #   version-related fields `VersionId`, `IsLatest`, and `DeleteMarker`
+    #   to the list. If set to `Current`, the list does not contain these
+    #   version-related fields.
     #   @return [String]
     #
     # @!attribute [rw] optional_fields
@@ -4363,21 +4483,21 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] lambda_function_arn
-    #   The Amazon Resource Name (ARN) of the Lambda cloud function that
-    #   Amazon S3 can invoke when it detects events of the specified type.
+    #   The Amazon Resource Name (ARN) of the AWS Lambda function that
+    #   Amazon S3 invokes when the specified event type occurs.
     #   @return [String]
     #
     # @!attribute [rw] events
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] filter
-    #   A container for object key name filtering rules. For information
-    #   about key name filtering, see [Configuring Event Notifications][1]
-    #   in the *Amazon Simple Storage Service Developer Guide*.
+    #   The Amazon S3 bucket event for which to invoke the AWS Lambda
+    #   function. For more information, see [Supported Event Types][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filter
     #   @return [Types::NotificationConfigurationFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LambdaFunctionConfiguration AWS API Documentation
@@ -4531,8 +4651,6 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   The Filter is used to identify objects that a Lifecycle Rule applies
-    #   to. A Filter must have exactly one of Prefix, Tag, or And specified.
     #   @return [Types::LifecycleRuleFilter]
     #
     # @!attribute [rw] status
@@ -4547,18 +4665,9 @@ module Aws::S3
     #   @return [Array<Types::NoncurrentVersionTransition>]
     #
     # @!attribute [rw] noncurrent_version_expiration
-    #   Specifies when noncurrent object versions expire. Upon expiration,
-    #   Amazon S3 permanently deletes the noncurrent object versions. You
-    #   set this lifecycle configuration action on a bucket that has
-    #   versioning enabled (or suspended) to request that Amazon S3 delete
-    #   noncurrent object versions at a specific period in the object's
-    #   lifetime.
     #   @return [Types::NoncurrentVersionExpiration]
     #
     # @!attribute [rw] abort_incomplete_multipart_upload
-    #   Specifies the days since the initiation of an Incomplete Multipart
-    #   Upload that Lifecycle will wait before permanently removing all
-    #   parts of the upload.
     #   @return [Types::AbortIncompleteMultipartUpload]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRule AWS API Documentation
@@ -4642,9 +4751,6 @@ module Aws::S3
     #   @return [Types::Tag]
     #
     # @!attribute [rw] and
-    #   This is used in a Lifecycle Rule Filter to apply a logical AND to
-    #   two or more predicates. The Lifecycle Rule will apply to any object
-    #   matching all of the predicates configured inside the And operator.
     #   @return [Types::LifecycleRuleAndOperator]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRuleFilter AWS API Documentation
@@ -5524,9 +5630,14 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for logging information. Presence of this element indicates
-    # that logging is enabled. Parameters TargetBucket and TargetPrefix are
-    # required in this case.
+    # Describes where logs are stored and the prefix that Amazon S3 assigns
+    # to all log object keys for a bucket. For more information, see [PUT
+    # Bucket logging][1] in the *Amazon Simple Storage Service API
+    # Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html
     #
     # @note When making an API call, you may pass LoggingEnabled
     #   data as a hash:
@@ -5562,8 +5673,9 @@ module Aws::S3
     #   @return [Array<Types::TargetGrant>]
     #
     # @!attribute [rw] target_prefix
-    #   This element lets you specify a prefix for the keys that the log
-    #   files will be stored under.
+    #   A prefix for all log object keys. If you store log files from
+    #   multiple Amazon S3 buckets in a single bucket, you can use a prefix
+    #   to distinguish which log files came from which bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LoggingEnabled AWS API Documentation
@@ -5628,6 +5740,18 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies a metrics configuration for the CloudWatch request metrics
+    # (specified by the metrics configuration ID) from an Amazon S3 bucket.
+    # If you're updating an existing metrics configuration, note that this
+    # is a full replacement of the existing metrics configuration. If you
+    # don't include the elements you want to keep, they are erased. For
+    # more information, see [ PUT Bucket metrics][1] in the *Amazon Simple
+    # Storage Service API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html
+    #
     # @note When making an API call, you may pass MetricsConfiguration
     #   data as a hash:
     #
@@ -5781,13 +5905,13 @@ module Aws::S3
     end
 
     # Container for the transition rule that describes when noncurrent
-    # objects transition to the STANDARD\_IA, ONEZONE\_IA,
-    # INTELLIGENT\_TIERING, GLACIER or DEEP\_ARCHIVE storage class. If your
-    # bucket is versioning-enabled (or versioning is suspended), you can set
-    # this action to request that Amazon S3 transition noncurrent object
-    # versions to the STANDARD\_IA, ONEZONE\_IA, INTELLIGENT\_TIERING,
-    # GLACIER or DEEP\_ARCHIVE storage class at a specific period in the
-    # object's lifetime.
+    # objects transition to the `STANDARD_IA`, `ONEZONE_IA`,
+    # `INTELLIGENT_TIERING`, `GLACIER`, or `DEEP_ARCHIVE` storage class. If
+    # your bucket is versioning-enabled (or versioning is suspended), you
+    # can set this action to request that Amazon S3 transition noncurrent
+    # object versions to the `STANDARD_IA`, `ONEZONE_IA`,
+    # `INTELLIGENT_TIERING`, `GLACIER`, or `DEEP_ARCHIVE` storage class at a
+    # specific period in the object's lifetime.
     #
     # @note When making an API call, you may pass NoncurrentVersionTransition
     #   data as a hash:
@@ -5801,8 +5925,8 @@ module Aws::S3
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
     #   noncurrent days calculations, see [How Amazon S3 Calculates When an
-    #   Object Became Noncurrent][1] in the Amazon Simple Storage Service
-    #   Developer Guide.
+    #   Object Became Noncurrent][1] in the *Amazon Simple Storage Service
+    #   Developer Guide*.
     #
     #
     #
@@ -5883,12 +6007,18 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] topic_configurations
+    #   The topic to which notifications are sent and the events for which
+    #   notifications are generated.
     #   @return [Array<Types::TopicConfiguration>]
     #
     # @!attribute [rw] queue_configurations
+    #   The Amazon Simple Queue Service queues to publish messages to and
+    #   the events for which to publish messages.
     #   @return [Array<Types::QueueConfiguration>]
     #
     # @!attribute [rw] lambda_function_configurations
+    #   Describes the AWS Lambda functions to invoke and the events for
+    #   which to invoke them.
     #   @return [Array<Types::LambdaFunctionConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfiguration AWS API Documentation
@@ -5943,8 +6073,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container for object key name filtering rules. For information about
-    # key name filtering, see [Configuring Event Notifications][1] in the
+    # Specifies object key name filtering rules. For information about key
+    # name filtering, see [Configuring Event Notifications][1] in the
     # *Amazon Simple Storage Service Developer Guide*.
     #
     #
@@ -5966,7 +6096,6 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] key
-    #   A container for object key name prefix and suffix filtering rules.
     #   @return [Types::S3KeyFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationFilter AWS API Documentation
@@ -6031,7 +6160,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The container element for Object Lock configuration parameters.
+    # The container element for object lock configuration parameters.
     #
     # @note When making an API call, you may pass ObjectLockConfiguration
     #   data as a hash:
@@ -6048,12 +6177,12 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] object_lock_enabled
-    #   Indicates whether this bucket has an Object Lock configuration
+    #   Indicates whether this bucket has an object lock configuration
     #   enabled.
     #   @return [String]
     #
     # @!attribute [rw] rule
-    #   The Object Lock rule in place for the specified object.
+    #   The object lock rule in place for the specified object.
     #   @return [Types::ObjectLockRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockConfiguration AWS API Documentation
@@ -6099,7 +6228,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] retain_until_date
-    #   The date on which this Object Lock Retention will expire.
+    #   The date on which this object lock retention expires.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockRetention AWS API Documentation
@@ -6110,7 +6239,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The container element for an Object Lock rule.
+    # The container element for an object lock rule.
     #
     # @note When making an API call, you may pass ObjectLockRule
     #   data as a hash:
@@ -6373,6 +6502,9 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies the Block Public Access configuration for an Amazon S3
+    # bucket.
+    #
     # @note When making an API call, you may pass PublicAccessBlockConfiguration
     #   data as a hash:
     #
@@ -6501,6 +6633,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] access_control_policy
+    #   Contains the elements that set the ACL permissions for an object per
+    #   grantee.
     #   @return [Types::AccessControlPolicy]
     #
     # @!attribute [rw] bucket
@@ -6592,7 +6726,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier used to represent an analytics configuration.
+    #   The ID that identifies the analytics configuration.
     #   @return [String]
     #
     # @!attribute [rw] analytics_configuration
@@ -6664,19 +6798,24 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The name of the bucket for which the server-side encryption
-    #   configuration is set.
+    #   Specifies default encryption for a bucket using server-side
+    #   encryption with Amazon S3-managed keys (SSE-S3) or AWS KMS-managed
+    #   keys (SSE-KMS). For information about the Amazon S3 default
+    #   encryption feature, see [Amazon S3 Default Bucket Encryption][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
     #   @return [String]
     #
     # @!attribute [rw] content_md5
     #   The base64-encoded 128-bit MD5 digest of the server-side encryption
     #   configuration. This parameter is auto-populated when using the
-    #   command from the CLI
+    #   command from the CLI.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   Container for server-side encryption configuration rules. Currently
-    #   S3 supports one rule only.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketEncryptionRequest AWS API Documentation
@@ -7026,9 +7165,6 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] notification_configuration
-    #   A container for specifying the notification configuration of the
-    #   bucket. If this element is empty, notifications are turned off for
-    #   the bucket.
     #   @return [Types::NotificationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfigurationRequest AWS API Documentation
@@ -7180,14 +7316,17 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] content_md5
+    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   header as a message integrity check to verify that the request body
+    #   was not corrupted in transit.
     #   @return [String]
     #
     # @!attribute [rw] replication_configuration
-    #   A container for replication rules. You can add up to 1,000 rules.
-    #   The maximum size of a replication configuration is 2 MB.
     #   @return [Types::ReplicationConfiguration]
     #
     # @!attribute [rw] token
+    #   A token that allows Amazon S3 object lock to be enabled for an
+    #   existing bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplicationRequest AWS API Documentation
@@ -7406,6 +7545,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] access_control_policy
+    #   Contains the elements that set the ACL permissions for an object per
+    #   grantee.
     #   @return [Types::AccessControlPolicy]
     #
     # @!attribute [rw] bucket
@@ -7570,12 +7711,12 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket whose Object Lock configuration you want to create or
+    #   The bucket whose object lock configuration you want to create or
     #   replace.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_configuration
-    #   The Object Lock configuration that you want to apply to the
+    #   The object lock configuration that you want to apply to the
     #   specified bucket.
     #   @return [Types::ObjectLockConfiguration]
     #
@@ -7588,7 +7729,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] token
-    #   A token to allow Object Lock to be enabled for an existing bucket.
+    #   A token to allow Amazon S3 object lock to be enabled for an existing
+    #   bucket.
     #   @return [String]
     #
     # @!attribute [rw] content_md5
@@ -7643,6 +7785,13 @@ module Aws::S3
     #   master encryption key that was used for the object.
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   If present, specifies the AWS KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded
+    #   UTF-8 string holding JSON with the encryption context key-value
+    #   pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -7658,6 +7807,7 @@ module Aws::S3
       :sse_customer_algorithm,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_charged)
       include Aws::Structure
     end
@@ -7692,6 +7842,7 @@ module Aws::S3
     #         sse_customer_key: "SSECustomerKey",
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
+    #         ssekms_encryption_context: "SSEKMSEncryptionContext",
     #         request_payer: "requester", # accepts requester
     #         tagging: "TaggingHeader",
     #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -7736,7 +7887,8 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The base64-encoded 128-bit MD5 digest of the part data. This
-    #   parameter is auto-populated when using the command from the CLI
+    #   parameter is auto-populated when using the command from the CLI.
+    #   This parameted is required if object lock parameters are specified.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -7815,6 +7967,12 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
+    # @!attribute [rw] ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object
+    #   encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
+    #   @return [String]
+    #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
@@ -7829,11 +7987,11 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] object_lock_mode
-    #   The Object Lock mode that you want to apply to this object.
+    #   The object lock mode that you want to apply to this object.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_retain_until_date
-    #   The date and time when you want this object's Object Lock to
+    #   The date and time when you want this object's object lock to
     #   expire.
     #   @return [Time]
     #
@@ -7869,6 +8027,7 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :ssekms_key_id,
+      :ssekms_encryption_context,
       :request_payer,
       :tagging,
       :object_lock_mode,
@@ -8052,9 +8211,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container for specifying the configuration for publication of
-    # messages to an Amazon Simple Queue Service (Amazon SQS) queue.when
-    # Amazon S3 detects specified events.
+    # Specifies the configuration for publishing messages to an Amazon
+    # Simple Queue Service (Amazon SQS) queue when Amazon S3 detects
+    # specified events.
     #
     # @note When making an API call, you may pass QueueConfiguration
     #   data as a hash:
@@ -8083,7 +8242,7 @@ module Aws::S3
     #
     # @!attribute [rw] queue_arn
     #   The Amazon Resource Name (ARN) of the Amazon SQS queue to which
-    #   Amazon S3 will publish a message when it detects events of the
+    #   Amazon S3 publishes a message when it detects events of the
     #   specified type.
     #   @return [String]
     #
@@ -8091,13 +8250,6 @@ module Aws::S3
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter
-    #   A container for object key name filtering rules. For information
-    #   about key name filtering, see [Configuring Event Notifications][1]
-    #   in the *Amazon Simple Storage Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     #   @return [Types::NotificationConfigurationFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/QueueConfiguration AWS API Documentation
@@ -8158,6 +8310,9 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies how requests are redirected. In the event of an error, you
+    # can specify a different error code to return.
+    #
     # @note When making an API call, you may pass Redirect
     #   data as a hash:
     #
@@ -8179,25 +8334,25 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] protocol
-    #   Protocol to use (http, https) when redirecting requests. The default
-    #   is the protocol that is used in the original request.
+    #   Protocol to use when redirecting requests. The default is the
+    #   protocol that is used in the original request.
     #   @return [String]
     #
     # @!attribute [rw] replace_key_prefix_with
     #   The object key prefix to use in the redirect request. For example,
-    #   to redirect requests for all pages with prefix docs/ (objects in the
-    #   docs/ folder) to documents/, you can set a condition block with
-    #   KeyPrefixEquals set to docs/ and in the Redirect set
-    #   ReplaceKeyPrefixWith to /documents. Not required if one of the
-    #   siblings is present. Can be present only if ReplaceKeyWith is not
+    #   to redirect requests for all pages with prefix `docs/` (objects in
+    #   the `docs/` folder) to `documents/`, you can set a condition block
+    #   with `KeyPrefixEquals` set to `docs/` and in the Redirect set
+    #   `ReplaceKeyPrefixWith` to `/documents`. Not required if one of the
+    #   siblings is present. Can be present only if `ReplaceKeyWith` is not
     #   provided.
     #   @return [String]
     #
     # @!attribute [rw] replace_key_with
     #   The specific object key to use in the redirect request. For example,
-    #   redirect request to error.html. Not required if one of the sibling
-    #   is present. Can be present only if ReplaceKeyPrefixWith is not
-    #   provided.
+    #   redirect request to `error.html`. Not required if one of the
+    #   siblings is present. Can be present only if `ReplaceKeyPrefixWith`
+    #   is not provided.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Redirect AWS API Documentation
@@ -8211,6 +8366,9 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies the redirect behavior of all requests to a website endpoint
+    # of an Amazon S3 bucket.
+    #
     # @note When making an API call, you may pass RedirectAllRequestsTo
     #   data as a hash:
     #
@@ -8220,12 +8378,12 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] host_name
-    #   Name of the host where requests will be redirected.
+    #   Name of the host where requests are redirected.
     #   @return [String]
     #
     # @!attribute [rw] protocol
-    #   Protocol to use (http, https) when redirecting requests. The default
-    #   is the protocol that is used in the original request.
+    #   Protocol to use when redirecting requests. The default is the
+    #   protocol that is used in the original request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RedirectAllRequestsTo AWS API Documentation
@@ -8291,8 +8449,14 @@ module Aws::S3
     #
     # @!attribute [rw] role
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that Amazon S3 can assume when replicating the
-    #   objects.
+    #   Management (IAM) role that Amazon S3 assumes when replicating
+    #   objects. For more information, see [How to Set Up Cross-Region
+    #   Replication][1] in the *Amazon Simple Storage Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/crr-how-setup.html
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -8309,7 +8473,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container for information about a specific replication rule.
+    # Specifies which Amazon S3 objects to replicate and where to store the
+    # replicas.
     #
     # @note When making an API call, you may pass ReplicationRule
     #   data as a hash:
@@ -8374,25 +8539,26 @@ module Aws::S3
     #   * Same object qualify tag based filter criteria specified in
     #     multiple rules
     #
-    #   For more information, see [Cross-Region Replication (CRR)](
-    #   https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the
+    #   For more information, see [Cross-Region Replication (CRR)][1] in the
     #   *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
     #   An object keyname prefix that identifies the object or objects to
     #   which the rule applies. The maximum prefix length is 1,024
-    #   characters.
+    #   characters. To include all objects in a bucket, specify an empty
+    #   string.
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   A filter that identifies the subset of objects to which the
-    #   replication rule applies. A `Filter` must specify exactly one
-    #   `Prefix`, `Tag`, or an `And` child element.
     #   @return [Types::ReplicationRuleFilter]
     #
     # @!attribute [rw] status
-    #   If status isn't enabled, the rule is ignored.
+    #   Specifies whether the rule is enabled.
     #   @return [String]
     #
     # @!attribute [rw] source_selection_criteria
@@ -8401,9 +8567,6 @@ module Aws::S3
     #   or disable the replication of these objects. Currently, Amazon S3
     #   supports only the filter that you can specify for objects created
     #   with server-side encryption using an AWS KMS-Managed Key (SSE-KMS).
-    #
-    #   If you want Amazon S3 to replicate objects created with server-side
-    #   encryption using AWS KMS-Managed Keys.
     #   @return [Types::SourceSelectionCriteria]
     #
     # @!attribute [rw] destination
@@ -8411,7 +8574,6 @@ module Aws::S3
     #   @return [Types::Destination]
     #
     # @!attribute [rw] delete_marker_replication
-    #   Specifies whether Amazon S3 should replicate delete makers.
     #   @return [Types::DeleteMarkerReplication]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRule AWS API Documentation
@@ -8667,7 +8829,6 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] restore_request
-    #   Container for restore job parameters.
     #   @return [Types::RestoreRequest]
     #
     # @!attribute [rw] request_payer
@@ -8819,6 +8980,8 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies the redirect behavior and when a redirect is applied.
+    #
     # @note When making an API call, you may pass RoutingRule
     #   data as a hash:
     #
@@ -8839,7 +9002,7 @@ module Aws::S3
     # @!attribute [rw] condition
     #   A container for describing a condition that must be met for the
     #   specified redirect to apply. For example, 1. If request is for pages
-    #   in the /docs folder, redirect to the /documents folder. 2. If
+    #   in the `/docs` folder, redirect to the `/documents` folder. 2. If
     #   request results in HTTP error 4xx, redirect request to another host
     #   where you might process the error.
     #   @return [Types::Condition]
@@ -8858,6 +9021,14 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies lifecycle rules for an Amazon S3 bucket. For more
+    # information, see [PUT Bucket lifecycle][1] in the *Amazon Simple
+    # Storage Service API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html
+    #
     # @note When making an API call, you may pass Rule
     #   data as a hash:
     #
@@ -8891,46 +9062,30 @@ module Aws::S3
     #   @return [Types::LifecycleExpiration]
     #
     # @!attribute [rw] id
-    #   Unique identifier for the rule. The value cannot be longer than 255
+    #   Unique identifier for the rule. The value can't be longer than 255
     #   characters.
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   Prefix identifying one or more objects to which the rule applies.
+    #   Object key prefix that identifies one or more objects to which this
+    #   rule applies.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   If 'Enabled', the rule is currently being applied. If
-    #   'Disabled', the rule is not currently being applied.
+    #   If `Enabled`, the rule is currently being applied. If `Disabled`,
+    #   the rule is not currently being applied.
     #   @return [String]
     #
     # @!attribute [rw] transition
     #   @return [Types::Transition]
     #
     # @!attribute [rw] noncurrent_version_transition
-    #   Container for the transition rule that describes when noncurrent
-    #   objects transition to the STANDARD\_IA, ONEZONE\_IA,
-    #   INTELLIGENT\_TIERING, GLACIER or DEEP\_ARCHIVE storage class. If
-    #   your bucket is versioning-enabled (or versioning is suspended), you
-    #   can set this action to request that Amazon S3 transition noncurrent
-    #   object versions to the STANDARD\_IA, ONEZONE\_IA,
-    #   INTELLIGENT\_TIERING, GLACIER or DEEP\_ARCHIVE storage class at a
-    #   specific period in the object's lifetime.
     #   @return [Types::NoncurrentVersionTransition]
     #
     # @!attribute [rw] noncurrent_version_expiration
-    #   Specifies when noncurrent object versions expire. Upon expiration,
-    #   Amazon S3 permanently deletes the noncurrent object versions. You
-    #   set this lifecycle configuration action on a bucket that has
-    #   versioning enabled (or suspended) to request that Amazon S3 delete
-    #   noncurrent object versions at a specific period in the object's
-    #   lifetime.
     #   @return [Types::NoncurrentVersionExpiration]
     #
     # @!attribute [rw] abort_incomplete_multipart_upload
-    #   Specifies the days since the initiation of an Incomplete Multipart
-    #   Upload that Lifecycle will wait before permanently removing all
-    #   parts of the upload.
     #   @return [Types::AbortIncompleteMultipartUpload]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Rule AWS API Documentation
@@ -8962,8 +9117,6 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] filter_rules
-    #   A list of containers for the key value pair that defines the
-    #   criteria for the filter rule.
     #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/S3KeyFilter AWS API Documentation
@@ -9027,8 +9180,6 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] encryption
-    #   Describes the server-side encryption that will be applied to the
-    #   restore results.
     #   @return [Types::Encryption]
     #
     # @!attribute [rw] canned_acl
@@ -9303,8 +9454,14 @@ module Aws::S3
     end
 
     # Describes the default server-side encryption to apply to new objects
-    # in the bucket. If Put Object request does not specify any server-side
-    # encryption, this default encryption will be applied.
+    # in the bucket. If a PUT Object request doesn't specify any
+    # server-side encryption, this default encryption will be applied. For
+    # more information, see [PUT Bucket encryption][1] in the *Amazon Simple
+    # Storage Service API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html
     #
     # @note When making an API call, you may pass ServerSideEncryptionByDefault
     #   data as a hash:
@@ -9320,7 +9477,7 @@ module Aws::S3
     #
     # @!attribute [rw] kms_master_key_id
     #   KMS master key ID to use for the default encryption. This parameter
-    #   is allowed if SSEAlgorithm is aws:kms.
+    #   is allowed if and only if `SSEAlgorithm` is set to `aws:kms`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionByDefault AWS API Documentation
@@ -9331,8 +9488,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for server-side encryption configuration rules. Currently S3
-    # supports one rule only.
+    # Specifies the default server-side-encryption configuration.
     #
     # @note When making an API call, you may pass ServerSideEncryptionConfiguration
     #   data as a hash:
@@ -9360,8 +9516,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for information about a particular server-side encryption
-    # configuration rule.
+    # Specifies the default server-side encryption configuration.
     #
     # @note When making an API call, you may pass ServerSideEncryptionRule
     #   data as a hash:
@@ -9374,8 +9529,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] apply_server_side_encryption_by_default
-    #   Describes the default server-side encryption to apply to new objects
-    #   in the bucket. If Put Object request does not specify any
+    #   Specifies the default server-side encryption to apply to new objects
+    #   in the bucket. If a PUT Object request doesn't specify any
     #   server-side encryption, this default encryption will be applied.
     #   @return [Types::ServerSideEncryptionByDefault]
     #
@@ -9386,8 +9541,11 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container for filters that define which source objects should be
-    # replicated.
+    # A container that describes additional filters for identifying the
+    # source objects that you want to replicate. You can choose to enable or
+    # disable the replication of these objects. Currently, Amazon S3
+    # supports only the filter that you can specify for objects created with
+    # server-side encryption using an AWS KMS-Managed Key (SSE-KMS).
     #
     # @note When making an API call, you may pass SourceSelectionCriteria
     #   data as a hash:
@@ -9399,9 +9557,10 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] sse_kms_encrypted_objects
-    #   A container for filter information for the selection of S3 objects
-    #   encrypted with AWS KMS. If you include `SourceSelectionCriteria` in
-    #   the replication configuration, this element is required.
+    #   A container for filter information for the selection of Amazon S3
+    #   objects encrypted with AWS KMS. If you include
+    #   `SourceSelectionCriteria` in the replication configuration, this
+    #   element is required.
     #   @return [Types::SseKmsEncryptedObjects]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria AWS API Documentation
@@ -9422,8 +9581,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] status
-    #   If the status is not `Enabled`, replication for S3 objects encrypted
-    #   with AWS KMS is disabled.
+    #   Specifies whether Amazon S3 replicates objects created with
+    #   server-side encryption using an AWS KMS-managed key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SseKmsEncryptedObjects AWS API Documentation
@@ -9466,6 +9625,10 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies data related to access patterns to be collected and made
+    # available to analyze the tradeoffs between different storage classes
+    # for an Amazon S3 bucket.
+    #
     # @note When making an API call, you may pass StorageClassAnalysis
     #   data as a hash:
     #
@@ -9484,8 +9647,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] data_export
-    #   A container used to describe how data related to the storage class
-    #   analysis should be exported.
+    #   Specifies how data related to the storage class analysis for an
+    #   Amazon S3 bucket should be exported.
     #   @return [Types::StorageClassAnalysisDataExport]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StorageClassAnalysis AWS API Documentation
@@ -9512,7 +9675,7 @@ module Aws::S3
     #
     # @!attribute [rw] output_schema_version
     #   The version of the output schema to use when exporting data. Must be
-    #   V\_1.
+    #   `V_1`.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -9603,8 +9766,8 @@ module Aws::S3
     end
 
     # A container for specifying the configuration for publication of
-    # messages to an Amazon Simple Notification Service (Amazon SNS)
-    # topic.when Amazon S3 detects specified events.
+    # messages to an Amazon Simple Notification Service (Amazon SNS) topic
+    # when Amazon S3 detects specified events.
     #
     # @note When making an API call, you may pass TopicConfiguration
     #   data as a hash:
@@ -9633,21 +9796,21 @@ module Aws::S3
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to which
-    #   Amazon S3 will publish a message when it detects events of the
+    #   Amazon S3 publishes a message when it detects events of the
     #   specified type.
     #   @return [String]
     #
     # @!attribute [rw] events
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] filter
-    #   A container for object key name filtering rules. For information
-    #   about key name filtering, see [Configuring Event Notifications][1]
-    #   in the *Amazon Simple Storage Service Developer Guide*.
+    #   The Amazon S3 bucket event about which to send notifications. For
+    #   more information, see [Supported Event Types][1] in the *Amazon
+    #   Simple Storage Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filter
     #   @return [Types::NotificationConfigurationFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TopicConfiguration AWS API Documentation
@@ -9698,6 +9861,8 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies when an object transitions to a specified storage class.
+    #
     # @note When making an API call, you may pass Transition
     #   data as a hash:
     #
@@ -9708,17 +9873,19 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] date
-    #   Indicates at what date the object is to be moved or deleted. Should
-    #   be in GMT ISO 8601 Format.
+    #   Indicates when objects are transitioned to the specified storage
+    #   class. The date value must be in ISO 8601 format. The time is always
+    #   midnight UTC.
     #   @return [Time]
     #
     # @!attribute [rw] days
-    #   Indicates the lifetime, in days, of the objects that are subject to
-    #   the rule. The value must be a non-zero positive integer.
+    #   Indicates the number of days after creation when objects are
+    #   transitioned to the specified storage class. The value must be a
+    #   positive integer.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_class
-    #   The class of storage used to store the object.
+    #   The storage class to which you want the object to transition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Transition AWS API Documentation
@@ -9994,7 +10161,9 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the part data. This
+    #   parameter is auto-populated when using the command from the CLI.
+    #   This parameted is required if object lock parameters are specified.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -10057,6 +10226,14 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Describes the versioning state of an Amazon S3 bucket. For more
+    # information, see [PUT Bucket versioning][1] in the *Amazon Simple
+    # Storage Service API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html
+    #
     # @note When making an API call, you may pass VersioningConfiguration
     #   data as a hash:
     #
@@ -10084,6 +10261,8 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Specifies website configuration parameters for an Amazon S3 bucket.
+    #
     # @note When making an API call, you may pass WebsiteConfiguration
     #   data as a hash:
     #
@@ -10116,15 +10295,23 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] error_document
+    #   The name of the error document for the website.
     #   @return [Types::ErrorDocument]
     #
     # @!attribute [rw] index_document
+    #   The name of the index document for the website.
     #   @return [Types::IndexDocument]
     #
     # @!attribute [rw] redirect_all_requests_to
+    #   The redirect behavior for every request to this bucket's website
+    #   endpoint.
+    #
+    #   If you specify this property, you can't specify any other property.
     #   @return [Types::RedirectAllRequestsTo]
     #
     # @!attribute [rw] routing_rules
+    #   Rules that define when a redirect is applied and the redirect
+    #   behavior.
     #   @return [Array<Types::RoutingRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/WebsiteConfiguration AWS API Documentation

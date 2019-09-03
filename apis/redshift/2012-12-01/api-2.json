@@ -1319,7 +1319,9 @@
         {"shape":"LimitExceededFault"},
         {"shape":"DependentServiceRequestThrottlingFault"},
         {"shape":"InvalidClusterTrackFault"},
-        {"shape":"SnapshotScheduleNotFoundFault"}
+        {"shape":"SnapshotScheduleNotFoundFault"},
+        {"shape":"TagLimitExceededFault"},
+        {"shape":"InvalidTagFault"}
       ]
     },
     "RestoreTableFromClusterSnapshot":{
@@ -1659,6 +1661,7 @@
         "ClusterIdentifier":{"shape":"String"},
         "NodeType":{"shape":"String"},
         "ClusterStatus":{"shape":"String"},
+        "ClusterAvailabilityStatus":{"shape":"String"},
         "ModifyStatus":{"shape":"String"},
         "MasterUsername":{"shape":"String"},
         "DBName":{"shape":"String"},
@@ -1697,6 +1700,8 @@
         "DeferredMaintenanceWindows":{"shape":"DeferredMaintenanceWindowsList"},
         "SnapshotScheduleIdentifier":{"shape":"String"},
         "SnapshotScheduleState":{"shape":"ScheduleState"},
+        "ExpectedNextSnapshotScheduleTime":{"shape":"TStamp"},
+        "ExpectedNextSnapshotScheduleTimeStatus":{"shape":"String"},
         "ResizeInfo":{"shape":"ResizeInfo"}
       },
       "wrapper":true

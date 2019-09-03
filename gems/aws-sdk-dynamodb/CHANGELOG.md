@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2019-06-27)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
+1.31.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-06-06)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
+1.29.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.28.0 (2019-05-15)
 ------------------
 

@@ -116,6 +116,10 @@ module Aws::MediaLive
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -279,6 +283,17 @@ module Aws::MediaLive
     #             },
     #             input_switch_settings: {
     #               input_attachment_name_reference: "__string", # required
+    #               input_clipping_settings: {
+    #                 input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #                 start_timecode: {
+    #                   timecode: "__string",
+    #                 },
+    #                 stop_timecode: {
+    #                   last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                   timecode: "__string",
+    #                 },
+    #               },
+    #               url_path: ["__string"],
     #             },
     #             pause_state_settings: {
     #               pipelines: [
@@ -349,6 +364,8 @@ module Aws::MediaLive
     #               follow_point: "END", # required, accepts END, START
     #               reference_action_name: "__string", # required
     #             },
+    #             immediate_mode_schedule_action_start_settings: {
+    #             },
     #           },
     #         },
     #       ],
@@ -364,6 +381,12 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].action_name #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.start_timecode.timecode #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.stop_timecode.last_frame_clipping_behavior #=> String, one of "EXCLUDE_LAST_FRAME", "INCLUDE_LAST_FRAME"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.stop_timecode.timecode #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path #=> Array
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path[0] #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
     #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
@@ -405,6 +428,12 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions[0].action_name #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.start_timecode.timecode #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.stop_timecode.last_frame_clipping_behavior #=> String, one of "EXCLUDE_LAST_FRAME", "INCLUDE_LAST_FRAME"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.stop_timecode.timecode #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path #=> Array
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path[0] #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
     #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
@@ -1696,6 +1725,10 @@ module Aws::MediaLive
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.channel.name #=> String
+    #   resp.channel.pipeline_details #=> Array
+    #   resp.channel.pipeline_details[0].active_input_attachment_name #=> String
+    #   resp.channel.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.channel.pipeline_details[0].pipeline_id #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -1791,6 +1824,7 @@ module Aws::MediaLive
     #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
     #   resp.input.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.input.input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
     #   resp.input.name #=> String
@@ -1901,6 +1935,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#input_specification #input_specification} => Types::InputSpecification
     #   * {Types::DeleteChannelResponse#log_level #log_level} => String
     #   * {Types::DeleteChannelResponse#name #name} => String
+    #   * {Types::DeleteChannelResponse#pipeline_details #pipeline_details} => Array&lt;Types::PipelineDetail&gt;
     #   * {Types::DeleteChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DeleteChannelResponse#role_arn #role_arn} => String
     #   * {Types::DeleteChannelResponse#state #state} => String
@@ -2390,6 +2425,10 @@ module Aws::MediaLive
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
+    #   resp.pipeline_details #=> Array
+    #   resp.pipeline_details[0].active_input_attachment_name #=> String
+    #   resp.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -2577,6 +2616,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#input_specification #input_specification} => Types::InputSpecification
     #   * {Types::DescribeChannelResponse#log_level #log_level} => String
     #   * {Types::DescribeChannelResponse#name #name} => String
+    #   * {Types::DescribeChannelResponse#pipeline_details #pipeline_details} => Array&lt;Types::PipelineDetail&gt;
     #   * {Types::DescribeChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DescribeChannelResponse#role_arn #role_arn} => String
     #   * {Types::DescribeChannelResponse#state #state} => String
@@ -3066,6 +3106,10 @@ module Aws::MediaLive
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
+    #   resp.pipeline_details #=> Array
+    #   resp.pipeline_details[0].active_input_attachment_name #=> String
+    #   resp.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -3092,6 +3136,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#destinations #destinations} => Array&lt;Types::InputDestination&gt;
     #   * {Types::DescribeInputResponse#id #id} => String
     #   * {Types::DescribeInputResponse#input_class #input_class} => String
+    #   * {Types::DescribeInputResponse#input_source_type #input_source_type} => String
     #   * {Types::DescribeInputResponse#media_connect_flows #media_connect_flows} => Array&lt;Types::MediaConnectFlow&gt;
     #   * {Types::DescribeInputResponse#name #name} => String
     #   * {Types::DescribeInputResponse#role_arn #role_arn} => String
@@ -3120,6 +3165,7 @@ module Aws::MediaLive
     #   resp.destinations[0].vpc.network_interface_id #=> String
     #   resp.id #=> String
     #   resp.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.media_connect_flows #=> Array
     #   resp.media_connect_flows[0].flow_arn #=> String
     #   resp.name #=> String
@@ -3335,6 +3381,12 @@ module Aws::MediaLive
     #   resp.schedule_actions[0].action_name #=> String
     #   resp.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
+    #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.start_timecode.timecode #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.stop_timecode.last_frame_clipping_behavior #=> String, one of "EXCLUDE_LAST_FRAME", "INCLUDE_LAST_FRAME"
+    #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.stop_timecode.timecode #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path #=> Array
+    #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path[0] #=> String
     #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
     #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
@@ -3545,6 +3597,7 @@ module Aws::MediaLive
     #   resp.inputs[0].destinations[0].vpc.network_interface_id #=> String
     #   resp.inputs[0].id #=> String
     #   resp.inputs[0].input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.inputs[0].input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.inputs[0].media_connect_flows #=> Array
     #   resp.inputs[0].media_connect_flows[0].flow_arn #=> String
     #   resp.inputs[0].name #=> String
@@ -3844,6 +3897,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#input_specification #input_specification} => Types::InputSpecification
     #   * {Types::StartChannelResponse#log_level #log_level} => String
     #   * {Types::StartChannelResponse#name #name} => String
+    #   * {Types::StartChannelResponse#pipeline_details #pipeline_details} => Array&lt;Types::PipelineDetail&gt;
     #   * {Types::StartChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StartChannelResponse#role_arn #role_arn} => String
     #   * {Types::StartChannelResponse#state #state} => String
@@ -4333,6 +4387,10 @@ module Aws::MediaLive
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
+    #   resp.pipeline_details #=> Array
+    #   resp.pipeline_details[0].active_input_attachment_name #=> String
+    #   resp.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -4364,6 +4422,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#input_specification #input_specification} => Types::InputSpecification
     #   * {Types::StopChannelResponse#log_level #log_level} => String
     #   * {Types::StopChannelResponse#name #name} => String
+    #   * {Types::StopChannelResponse#pipeline_details #pipeline_details} => Array&lt;Types::PipelineDetail&gt;
     #   * {Types::StopChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StopChannelResponse#role_arn #role_arn} => String
     #   * {Types::StopChannelResponse#state #state} => String
@@ -4853,6 +4912,10 @@ module Aws::MediaLive
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
+    #   resp.pipeline_details #=> Array
+    #   resp.pipeline_details[0].active_input_attachment_name #=> String
+    #   resp.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -6097,6 +6160,10 @@ module Aws::MediaLive
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.channel.name #=> String
+    #   resp.channel.pipeline_details #=> Array
+    #   resp.channel.pipeline_details[0].active_input_attachment_name #=> String
+    #   resp.channel.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.channel.pipeline_details[0].pipeline_id #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -6629,6 +6696,10 @@ module Aws::MediaLive
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.channel.name #=> String
+    #   resp.channel.pipeline_details #=> Array
+    #   resp.channel.pipeline_details[0].active_input_attachment_name #=> String
+    #   resp.channel.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.channel.pipeline_details[0].pipeline_id #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -6703,6 +6774,7 @@ module Aws::MediaLive
     #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
     #   resp.input.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.input.input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
     #   resp.input.name #=> String
@@ -6842,7 +6914,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

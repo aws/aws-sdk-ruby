@@ -116,6 +116,10 @@ module Aws::GameLift
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -280,11 +284,19 @@ module Aws::GameLift
     # If any player rejects the match, or if acceptances are not received
     # before a specified timeout, the proposed match is dropped. The
     # matchmaking tickets are then handled in one of two ways: For tickets
-    # where all players accepted the match, the ticket status is returned to
-    # `SEARCHING` to find a new match. For tickets where one or more players
-    # failed to accept the match, the ticket status is set to `FAILED`, and
-    # processing is terminated. A new matchmaking request for these players
-    # can be submitted as needed.
+    # where one or more players rejected the match, the ticket status is
+    # returned to `SEARCHING` to find a new match. For tickets where one or
+    # more players failed to respond, the ticket status is set to
+    # `CANCELLED`, and processing is terminated. A new matchmaking request
+    # for these players can be submitted as needed.
+    #
+    # **Learn more**
+    #
+    # [ Add FlexMatch to a Game Client][1]
+    #
+    # [ FlexMatch Events Reference][2]
+    #
+    # **Related operations**
     #
     # * StartMatchmaking
     #
@@ -295,6 +307,11 @@ module Aws::GameLift
     # * AcceptMatch
     #
     # * StartMatchBackfill
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-events.html
     #
     # @option params [required, String] :ticket_id
     #   Unique identifier for a matchmaking ticket. The ticket must be in
@@ -775,6 +792,8 @@ module Aws::GameLift
     #   [1]: https://console.aws.amazon.com/iam/
     #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #
+    # @option params [Types::CertificateConfiguration] :certificate_configuration
+    #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetOutput#fleet_attributes #fleet_attributes} => Types::FleetAttributes
@@ -819,6 +838,9 @@ module Aws::GameLift
     #     peer_vpc_id: "NonZeroAndMaxString",
     #     fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #     instance_role_arn: "NonEmptyString",
+    #     certificate_configuration: {
+    #       certificate_type: "DISABLED", # required, accepts DISABLED, GENERATED
+    #     },
     #   })
     #
     # @example Response structure
@@ -847,6 +869,7 @@ module Aws::GameLift
     #   resp.fleet_attributes.stopped_actions #=> Array
     #   resp.fleet_attributes.stopped_actions[0] #=> String, one of "AUTO_SCALING"
     #   resp.fleet_attributes.instance_role_arn #=> String
+    #   resp.fleet_attributes.certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet AWS API Documentation
     #
@@ -1011,6 +1034,7 @@ module Aws::GameLift
     #   resp.game_session.game_properties[0].key #=> String
     #   resp.game_session.game_properties[0].value #=> String
     #   resp.game_session.ip_address #=> String
+    #   resp.game_session.dns_name #=> String
     #   resp.game_session.port #=> Integer
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
@@ -1153,22 +1177,22 @@ module Aws::GameLift
     # use when placing a new game session for the match; and the maximum
     # time allowed for a matchmaking attempt.
     #
-    # **Player acceptance** -- In each configuration, you have the option to
-    # require that all players accept participation in a proposed match. To
-    # enable this feature, set *AcceptanceRequired* to true and specify a
-    # time limit for player acceptance. Players have the option to accept or
-    # reject a proposed match, and a match does not move ahead to game
-    # session placement unless all matched players accept.
+    # There are two ways to track the progress of matchmaking tickets: (1)
+    # polling ticket status with DescribeMatchmaking; or (2) receiving
+    # notifications with Amazon Simple Notification Service (SNS). To use
+    # notifications, you first need to set up an SNS topic to receive the
+    # notifications, and provide the topic ARN in the matchmaking
+    # configuration. Since notifications promise only "best effort"
+    # delivery, we recommend calling `DescribeMatchmaking` if no
+    # notifications are received within 30 seconds.
     #
-    # **Matchmaking status notification** -- There are two ways to track the
-    # progress of matchmaking tickets: (1) polling ticket status with
-    # DescribeMatchmaking; or (2) receiving notifications with Amazon Simple
-    # Notification Service (SNS). To use notifications, you first need to
-    # set up an SNS topic to receive the notifications, and provide the
-    # topic ARN in the matchmaking configuration (see [ Setting up
-    # Notifications for Matchmaking][1]). Since notifications promise only
-    # "best effort" delivery, we recommend calling `DescribeMatchmaking`
-    # if no notifications are received within 30 seconds.
+    # **Learn more**
+    #
+    # [ Design a FlexMatch Matchmaker][1]
+    #
+    # [ Setting up Notifications for Matchmaking][2]
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -1188,7 +1212,8 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
     #
     # @option params [required, String] :name
     #   Unique identifier for a matchmaking configuration. This name is used
@@ -1201,10 +1226,10 @@ module Aws::GameLift
     # @option params [required, Array<String>] :game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
     #   queue and uniquely identifies it. Format is
-    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    #   These queues are used when placing game sessions for matches that are
-    #   created with this matchmaking configuration. Queues can be located in
-    #   any region.
+    #   `arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue
+    #   name>`. These queues are used when placing game sessions for matches
+    #   that are created with this matchmaking configuration. Queues can be
+    #   located in any region.
     #
     #
     #
@@ -1212,8 +1237,8 @@ module Aws::GameLift
     #
     # @option params [required, Integer] :request_timeout_seconds
     #   Maximum duration, in seconds, that a matchmaking ticket can remain in
-    #   process before timing out. Requests that time out can be resubmitted
-    #   as needed.
+    #   process before timing out. Requests that fail due to timing out can be
+    #   resubmitted as needed.
     #
     # @option params [Integer] :acceptance_timeout_seconds
     #   Length of time (in seconds) to wait for players to accept a proposed
@@ -1221,7 +1246,7 @@ module Aws::GameLift
     #   timeout, the ticket continues to look for an acceptable match.
     #
     # @option params [required, Boolean] :acceptance_required
-    #   Flag that determines whether or not a match that was created with this
+    #   Flag that determines whether a match that was created with this
     #   configuration must be accepted by the matched players. To require
     #   acceptance, set to TRUE.
     #
@@ -1240,7 +1265,7 @@ module Aws::GameLift
     #   only 10 players are selected for the match.
     #
     # @option params [String] :custom_event_data
-    #   Information to attached to all events related to the matchmaking
+    #   Information to be added to all events related to this matchmaking
     #   configuration.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
@@ -1264,6 +1289,18 @@ module Aws::GameLift
     #
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #
+    # @option params [String] :backfill_mode
+    #   Method used to backfill game sessions created with this matchmaking
+    #   configuration. Specify MANUAL when your game manages backfill requests
+    #   manually or does not use the match backfill feature. Specify AUTOMATIC
+    #   to have GameLift create a StartMatchBackfill request whenever a game
+    #   session has one or more open slots. Learn more about manual and
+    #   automatic backfill in [ Backfill Existing Games with FlexMatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
     #
     # @return [Types::CreateMatchmakingConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1289,6 +1326,7 @@ module Aws::GameLift
     #       },
     #     ],
     #     game_session_data: "GameSessionData",
+    #     backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #   })
     #
     # @example Response structure
@@ -1309,6 +1347,7 @@ module Aws::GameLift
     #   resp.configuration.game_properties[0].key #=> String
     #   resp.configuration.game_properties[0].value #=> String
     #   resp.configuration.game_session_data #=> String
+    #   resp.configuration.backfill_mode #=> String, one of "AUTOMATIC", "MANUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfiguration AWS API Documentation
     #
@@ -1327,7 +1366,7 @@ module Aws::GameLift
     #
     # To create a matchmaking rule set, provide unique rule set name and the
     # rule set body in JSON format. Rule sets must be defined in the same
-    # region as the matchmaking configuration they will be used with.
+    # region as the matchmaking configuration they are used with.
     #
     # Since matchmaking rule sets cannot be edited, it is a good idea to
     # check the rule set syntax using ValidateMatchmakingRuleSet before
@@ -1372,9 +1411,9 @@ module Aws::GameLift
     #   in the rule set body.)
     #
     # @option params [required, String] :rule_set_body
-    #   Collection of matchmaking rules, formatted as a JSON string. Note that
-    #   comments are not allowed in JSON, but most elements support a
-    #   description field.
+    #   Collection of matchmaking rules, formatted as a JSON string. Comments
+    #   are not allowed in JSON, but most elements support a description
+    #   field.
     #
     # @return [Types::CreateMatchmakingRuleSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1464,6 +1503,7 @@ module Aws::GameLift
     #   resp.player_session.termination_time #=> Time
     #   resp.player_session.status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_session.ip_address #=> String
+    #   resp.player_session.dns_name #=> String
     #   resp.player_session.port #=> Integer
     #   resp.player_session.player_data #=> String
     #
@@ -1543,6 +1583,7 @@ module Aws::GameLift
     #   resp.player_sessions[0].termination_time #=> Time
     #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_sessions[0].ip_address #=> String
+    #   resp.player_sessions[0].dns_name #=> String
     #   resp.player_sessions[0].port #=> Integer
     #   resp.player_sessions[0].player_data #=> String
     #
@@ -1938,6 +1979,12 @@ module Aws::GameLift
     # must set the fleet's desired capacity to zero. See
     # UpdateFleetCapacity.
     #
+    # If the fleet being deleted has a VPC peering connection, you first
+    # need to get a valid authorization (good for 24 hours) by calling
+    # CreateVpcPeeringAuthorization. You do not need to explicitly delete
+    # the VPC peering connection--this is done as part of the delete fleet
+    # process.
+    #
     # This action removes the fleet's resources and the fleet record. Once
     # a fleet is deleted, you can no longer use that fleet.
     #
@@ -2045,6 +2092,8 @@ module Aws::GameLift
     # Permanently removes a FlexMatch matchmaking configuration. To delete,
     # specify the configuration name. A matchmaking configuration cannot be
     # deleted if it is being used in any active matchmaking tickets.
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -2240,8 +2289,8 @@ module Aws::GameLift
     end
 
     # Cancels a pending VPC peering authorization for the specified VPC. If
-    # the authorization has already been used to create a peering
-    # connection, call DeleteVpcPeeringConnection to remove the connection.
+    # you need to delete an existing VPC peering connection, call
+    # DeleteVpcPeeringConnection.
     #
     # * CreateVpcPeeringAuthorization
     #
@@ -2667,6 +2716,7 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].stopped_actions #=> Array
     #   resp.fleet_attributes[0].stopped_actions[0] #=> String, one of "AUTO_SCALING"
     #   resp.fleet_attributes[0].instance_role_arn #=> String
+    #   resp.fleet_attributes[0].certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes AWS API Documentation
@@ -3196,6 +3246,7 @@ module Aws::GameLift
     #   resp.game_session_details[0].game_session.game_properties[0].key #=> String
     #   resp.game_session_details[0].game_session.game_properties[0].value #=> String
     #   resp.game_session_details[0].game_session.ip_address #=> String
+    #   resp.game_session_details[0].game_session.dns_name #=> String
     #   resp.game_session_details[0].game_session.port #=> Integer
     #   resp.game_session_details[0].game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session_details[0].game_session.creator_id #=> String
@@ -3254,7 +3305,7 @@ module Aws::GameLift
     #
     #   resp.game_session_placement.placement_id #=> String
     #   resp.game_session_placement.game_session_queue_name #=> String
-    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT"
+    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT", "FAILED"
     #   resp.game_session_placement.game_properties #=> Array
     #   resp.game_session_placement.game_properties[0].key #=> String
     #   resp.game_session_placement.game_properties[0].value #=> String
@@ -3270,6 +3321,7 @@ module Aws::GameLift
     #   resp.game_session_placement.start_time #=> Time
     #   resp.game_session_placement.end_time #=> Time
     #   resp.game_session_placement.ip_address #=> String
+    #   resp.game_session_placement.dns_name #=> String
     #   resp.game_session_placement.port #=> Integer
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
@@ -3440,6 +3492,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].game_properties[0].key #=> String
     #   resp.game_sessions[0].game_properties[0].value #=> String
     #   resp.game_sessions[0].ip_address #=> String
+    #   resp.game_sessions[0].dns_name #=> String
     #   resp.game_sessions[0].port #=> Integer
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
@@ -3501,6 +3554,7 @@ module Aws::GameLift
     #   resp.instances[0].fleet_id #=> String
     #   resp.instances[0].instance_id #=> String
     #   resp.instances[0].ip_address #=> String
+    #   resp.instances[0].dns_name #=> String
     #   resp.instances[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
     #   resp.instances[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
     #   resp.instances[0].status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
@@ -3530,6 +3584,14 @@ module Aws::GameLift
     # If the request is successful, a ticket object is returned for each
     # requested ID that currently exists.
     #
+    # **Learn more**
+    #
+    # [ Add FlexMatch to a Game Client][1]
+    #
+    # [ Set Up FlexMatch Event Notification][2]
+    #
+    # **Related operations**
+    #
     # * StartMatchmaking
     #
     # * DescribeMatchmaking
@@ -3539,6 +3601,11 @@ module Aws::GameLift
     # * AcceptMatch
     #
     # * StartMatchBackfill
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguidematch-notification.html
     #
     # @option params [required, Array<String>] :ticket_ids
     #   Unique identifier for a matchmaking ticket. You can include up to 10
@@ -3573,6 +3640,7 @@ module Aws::GameLift
     #   resp.ticket_list[0].players[0].latency_in_ms["NonEmptyString"] #=> Integer
     #   resp.ticket_list[0].game_session_connection_info.game_session_arn #=> String
     #   resp.ticket_list[0].game_session_connection_info.ip_address #=> String
+    #   resp.ticket_list[0].game_session_connection_info.dns_name #=> String
     #   resp.ticket_list[0].game_session_connection_info.port #=> Integer
     #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions #=> Array
     #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions[0].player_id #=> String
@@ -3588,7 +3656,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves the details of FlexMatch matchmaking configurations. with
+    # Retrieves the details of FlexMatch matchmaking configurations. With
     # this operation, you have the following options: (1) retrieve all
     # existing configurations, (2) provide the names of one or more
     # configurations to retrieve, or (3) retrieve all configurations that
@@ -3597,6 +3665,12 @@ module Aws::GameLift
     # pages. If successful, a configuration is returned for each requested
     # name. When specifying a list of names, only configurations that
     # currently exist are returned.
+    #
+    # **Learn more**
+    #
+    # [ Setting Up FlexMatch Matchmakers][1]
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -3613,6 +3687,10 @@ module Aws::GameLift
     # * ValidateMatchmakingRuleSet
     #
     # * DeleteMatchmakingRuleSet
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/matchmaker-build.html
     #
     # @option params [Array<String>] :names
     #   Unique identifier for a matchmaking configuration(s) to retrieve. To
@@ -3665,6 +3743,7 @@ module Aws::GameLift
     #   resp.configurations[0].game_properties[0].key #=> String
     #   resp.configurations[0].game_properties[0].value #=> String
     #   resp.configurations[0].game_session_data #=> String
+    #   resp.configurations[0].backfill_mode #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurations AWS API Documentation
@@ -3850,6 +3929,7 @@ module Aws::GameLift
     #   resp.player_sessions[0].termination_time #=> Time
     #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_sessions[0].ip_address #=> String
+    #   resp.player_sessions[0].dns_name #=> String
     #   resp.player_sessions[0].port #=> Integer
     #   resp.player_sessions[0].player_data #=> String
     #   resp.next_token #=> String
@@ -5208,6 +5288,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].game_properties[0].key #=> String
     #   resp.game_sessions[0].game_properties[0].value #=> String
     #   resp.game_sessions[0].ip_address #=> String
+    #   resp.game_sessions[0].dns_name #=> String
     #   resp.game_sessions[0].port #=> Integer
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
@@ -5456,7 +5537,7 @@ module Aws::GameLift
     #
     #   resp.game_session_placement.placement_id #=> String
     #   resp.game_session_placement.game_session_queue_name #=> String
-    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT"
+    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT", "FAILED"
     #   resp.game_session_placement.game_properties #=> Array
     #   resp.game_session_placement.game_properties[0].key #=> String
     #   resp.game_session_placement.game_properties[0].value #=> String
@@ -5472,6 +5553,7 @@ module Aws::GameLift
     #   resp.game_session_placement.start_time #=> Time
     #   resp.game_session_placement.end_time #=> Time
     #   resp.game_session_placement.ip_address #=> String
+    #   resp.game_session_placement.dns_name #=> String
     #   resp.game_session_placement.port #=> Integer
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
@@ -5502,9 +5584,7 @@ module Aws::GameLift
     # that describes all current players in the game session. If successful,
     # a match backfill ticket is created and returned with status set to
     # QUEUED. The ticket is placed in the matchmaker's ticket pool and
-    # processed. Track the status of the ticket to respond as needed. For
-    # more detail how to set up backfilling, see [ Backfill Existing Games
-    # with FlexMatch][1].
+    # processed. Track the status of the ticket to respond as needed.
     #
     # The process of finding backfill matches is essentially identical to
     # the initial matchmaking process. The matchmaker searches the pool and
@@ -5514,7 +5594,15 @@ module Aws::GameLift
     # the match are updated with the game session's connection information,
     # and the GameSession object is updated to include matchmaker data on
     # the new players. For more detail on how match backfill requests are
-    # processed, see [ How Amazon GameLift FlexMatch Works][2].
+    # processed, see [ How Amazon GameLift FlexMatch Works][1].
+    #
+    # **Learn more**
+    #
+    # [ Backfill Existing Games with FlexMatch][2]
+    #
+    # [ How GameLift FlexMatch Works][1]
+    #
+    # **Related operations**
     #
     # * StartMatchmaking
     #
@@ -5528,8 +5616,8 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
     #
     # @option params [String] :ticket_id
     #   Unique identifier for a matchmaking ticket. If no ticket ID is
@@ -5616,6 +5704,7 @@ module Aws::GameLift
     #   resp.matchmaking_ticket.players[0].latency_in_ms["NonEmptyString"] #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.game_session_arn #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.ip_address #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.dns_name #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.port #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
@@ -5640,9 +5729,7 @@ module Aws::GameLift
     # start with a single player or a group of players who want to play
     # together. FlexMatch finds additional players as needed to fill the
     # match. Match type, rules, and the queue used to place a new game
-    # session are defined in a `MatchmakingConfiguration`. For complete
-    # information on setting up and using FlexMatch, see the topic [ Adding
-    # FlexMatch to Your Game][1].
+    # session are defined in a `MatchmakingConfiguration`.
     #
     # To start matchmaking, provide a unique ticket ID, specify a
     # matchmaking configuration, and include the players to be matched. You
@@ -5700,6 +5787,18 @@ module Aws::GameLift
     #     matchmaking tickets. Matched players can use the connection
     #     information to join the game.
     #
+    # **Learn more**
+    #
+    # [ Add FlexMatch to a Game Client][1]
+    #
+    # [ Set Up FlexMatch Event Notification][2]
+    #
+    # [ FlexMatch Integration Roadmap][3]
+    #
+    # [ How GameLift FlexMatch Works][4]
+    #
+    # **Related operations**
+    #
     # * StartMatchmaking
     #
     # * DescribeMatchmaking
@@ -5712,7 +5811,10 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-tasks.html
+    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html
     #
     # @option params [String] :ticket_id
     #   Unique identifier for a matchmaking ticket. If no ticket ID is
@@ -5773,6 +5875,7 @@ module Aws::GameLift
     #   resp.matchmaking_ticket.players[0].latency_in_ms["NonEmptyString"] #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.game_session_arn #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.ip_address #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.dns_name #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.port #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
@@ -5914,7 +6017,7 @@ module Aws::GameLift
     #
     #   resp.game_session_placement.placement_id #=> String
     #   resp.game_session_placement.game_session_queue_name #=> String
-    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT"
+    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT", "FAILED"
     #   resp.game_session_placement.game_properties #=> Array
     #   resp.game_session_placement.game_properties[0].key #=> String
     #   resp.game_session_placement.game_properties[0].value #=> String
@@ -5930,6 +6033,7 @@ module Aws::GameLift
     #   resp.game_session_placement.start_time #=> Time
     #   resp.game_session_placement.end_time #=> Time
     #   resp.game_session_placement.ip_address #=> String
+    #   resp.game_session_placement.dns_name #=> String
     #   resp.game_session_placement.port #=> Integer
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
@@ -5946,10 +6050,27 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Cancels a matchmaking ticket that is currently being processed. To
-    # stop the matchmaking operation, specify the ticket ID. If successful,
-    # work on the ticket is stopped, and the ticket status is changed to
-    # `CANCELLED`.
+    # Cancels a matchmaking ticket or match backfill ticket that is
+    # currently being processed. To stop the matchmaking operation, specify
+    # the ticket ID. If successful, work on the ticket is stopped, and the
+    # ticket status is changed to `CANCELLED`.
+    #
+    # This call is also used to turn off automatic backfill for an
+    # individual game session. This is for game sessions that are created
+    # with a matchmaking configuration that has automatic backfill enabled.
+    # The ticket ID is included in the `MatchmakerData` of an updated game
+    # session object, which is provided to the game server.
+    #
+    # <note markdown="1"> If the action is successful, the service sends back an empty JSON
+    # struct with the HTTP 200 response (not an empty HTTP body).
+    #
+    #  </note>
+    #
+    # **Learn more**
+    #
+    # [ Add FlexMatch to a Game Client][1]
+    #
+    # **Related operations**
     #
     # * StartMatchmaking
     #
@@ -5960,6 +6081,10 @@ module Aws::GameLift
     # * AcceptMatch
     #
     # * StartMatchBackfill
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html
     #
     # @option params [required, String] :ticket_id
     #   Unique identifier for a matchmaking ticket.
@@ -6526,6 +6651,7 @@ module Aws::GameLift
     #   resp.game_session.game_properties[0].key #=> String
     #   resp.game_session.game_properties[0].value #=> String
     #   resp.game_session.ip_address #=> String
+    #   resp.game_session.dns_name #=> String
     #   resp.game_session.port #=> Integer
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
@@ -6624,9 +6750,16 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Updates settings for a FlexMatch matchmaking configuration. To update
-    # settings, specify the configuration name to be updated and provide the
-    # new settings.
+    # Updates settings for a FlexMatch matchmaking configuration. These
+    # changes affect all matches and game sessions that are created after
+    # the update. To update settings, specify the configuration name to be
+    # updated and provide the new settings.
+    #
+    # **Learn more**
+    #
+    # [ Design a FlexMatch Matchmaker][1]
+    #
+    # **Related operations**
     #
     # * CreateMatchmakingConfiguration
     #
@@ -6644,6 +6777,10 @@ module Aws::GameLift
     #
     # * DeleteMatchmakingRuleSet
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html
+    #
     # @option params [required, String] :name
     #   Unique identifier for a matchmaking configuration to update.
     #
@@ -6653,10 +6790,10 @@ module Aws::GameLift
     # @option params [Array<String>] :game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
     #   queue and uniquely identifies it. Format is
-    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    #   These queues are used when placing game sessions for matches that are
-    #   created with this matchmaking configuration. Queues can be located in
-    #   any region.
+    #   `arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue
+    #   name>`. These queues are used when placing game sessions for matches
+    #   that are created with this matchmaking configuration. Queues can be
+    #   located in any region.
     #
     #
     #
@@ -6664,8 +6801,8 @@ module Aws::GameLift
     #
     # @option params [Integer] :request_timeout_seconds
     #   Maximum duration, in seconds, that a matchmaking ticket can remain in
-    #   process before timing out. Requests that time out can be resubmitted
-    #   as needed.
+    #   process before timing out. Requests that fail due to timing out can be
+    #   resubmitted as needed.
     #
     # @option params [Integer] :acceptance_timeout_seconds
     #   Length of time (in seconds) to wait for players to accept a proposed
@@ -6673,7 +6810,7 @@ module Aws::GameLift
     #   timeout, the ticket continues to look for an acceptable match.
     #
     # @option params [Boolean] :acceptance_required
-    #   Flag that determines whether or not a match that was created with this
+    #   Flag that determines whether a match that was created with this
     #   configuration must be accepted by the matched players. To require
     #   acceptance, set to TRUE.
     #
@@ -6697,7 +6834,7 @@ module Aws::GameLift
     #   only 10 players are selected for the match.
     #
     # @option params [String] :custom_event_data
-    #   Information to attached to all events related to the matchmaking
+    #   Information to add to all events related to the matchmaking
     #   configuration.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
@@ -6721,6 +6858,18 @@ module Aws::GameLift
     #
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #
+    # @option params [String] :backfill_mode
+    #   Method used to backfill game sessions created with this matchmaking
+    #   configuration. Specify MANUAL when your game manages backfill requests
+    #   manually or does not use the match backfill feature. Specify AUTOMATIC
+    #   to have GameLift create a StartMatchBackfill request whenever a game
+    #   session has one or more open slots. Learn more about manual and
+    #   automatic backfill in [Backfill Existing Games with FlexMatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
     #
     # @return [Types::UpdateMatchmakingConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6746,6 +6895,7 @@ module Aws::GameLift
     #       },
     #     ],
     #     game_session_data: "GameSessionData",
+    #     backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #   })
     #
     # @example Response structure
@@ -6766,6 +6916,7 @@ module Aws::GameLift
     #   resp.configuration.game_properties[0].key #=> String
     #   resp.configuration.game_properties[0].value #=> String
     #   resp.configuration.game_session_data #=> String
+    #   resp.configuration.backfill_mode #=> String, one of "AUTOMATIC", "MANUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfiguration AWS API Documentation
     #
@@ -7073,7 +7224,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

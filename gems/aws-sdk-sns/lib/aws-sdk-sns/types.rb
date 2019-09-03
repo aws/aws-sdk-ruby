@@ -48,6 +48,19 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Indicates that the user has been denied access to the requested
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AuthorizationErrorException AWS API Documentation
+    #
+    class AuthorizationErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The input for the `CheckIfPhoneNumberIsOptedOut` action.
     #
     # @note When making an API call, you may pass CheckIfPhoneNumberIsOptedOutInput
@@ -84,6 +97,19 @@ module Aws::SNS
     #
     class CheckIfPhoneNumberIsOptedOutResponse < Struct.new(
       :is_opted_out)
+      include Aws::Structure
+    end
+
+    # Can't perform multiple operations on a tag simultaneously. Perform
+    # the operations sequentially.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConcurrentAccessException AWS API Documentation
+    #
+    class ConcurrentAccessException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -417,6 +443,33 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Exception error indicating endpoint disabled.
+    #
+    # @!attribute [rw] message
+    #   Message for endpoint disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/EndpointDisabledException AWS API Documentation
+    #
+    class EndpointDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the number of filter polices in your AWS account
+    # exceeds the limit. To add more filter polices, submit an SNS Limit
+    # Increase case in the AWS Support Center.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/FilterPolicyLimitExceededException AWS API Documentation
+    #
+    class FilterPolicyLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Input for GetEndpointAttributes action.
     #
     # @note When making an API call, you may pass GetEndpointAttributesInput
@@ -671,6 +724,146 @@ module Aws::SNS
     #
     class GetTopicAttributesResponse < Struct.new(
       :attributes)
+      include Aws::Structure
+    end
+
+    # Indicates an internal service error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that a request parameter does not comply with the associated
+    # constraints.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that a request parameter does not comply with the associated
+    # constraints.
+    #
+    # @!attribute [rw] message
+    #   The parameter value is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The credential signature isn't valid. You must use an HTTPS endpoint
+    # and sign your request using Signature Version 4.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidSecurityException AWS API Documentation
+    #
+    class InvalidSecurityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The ciphertext references a key that doesn't exist or that you don't
+    # have access to.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSAccessDeniedException AWS API Documentation
+    #
+    class KMSAccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified customer master key
+    # (CMK) isn't enabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSDisabledException AWS API Documentation
+    #
+    class KMSDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the state of the specified resource
+    # isn't valid for this request. For more information, see [How Key
+    # State Affects Use of a Customer Master Key][1] in the *AWS Key
+    # Management Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSInvalidStateException AWS API Documentation
+    #
+    class KMSInvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified entity or resource
+    # can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSNotFoundException AWS API Documentation
+    #
+    class KMSNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The AWS access key ID needs a subscription for the service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSOptInRequired AWS API Documentation
+    #
+    class KMSOptInRequired < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was denied due to request throttling. For more information
+    # about throttling, see [Limits][1] in the *AWS Key Management Service
+    # Developer Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSThrottlingException AWS API Documentation
+    #
+    class KMSThrottlingException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1018,6 +1211,18 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Indicates that the requested resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Input for the OptInPhoneNumber action.
     #
     # @note When making an API call, you may pass OptInPhoneNumberInput
@@ -1059,6 +1264,19 @@ module Aws::SNS
     class PlatformApplication < Struct.new(
       :platform_application_arn,
       :attributes)
+      include Aws::Structure
+    end
+
+    # Exception error indicating platform application disabled.
+    #
+    # @!attribute [rw] message
+    #   Message for platform application disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PlatformApplicationDisabledException AWS API Documentation
+    #
+    class PlatformApplicationDisabledException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1259,6 +1477,18 @@ module Aws::SNS
     class RemovePermissionInput < Struct.new(
       :topic_arn,
       :label)
+      include Aws::Structure
+    end
+
+    # Can't tag resource. Verify that the topic exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1585,6 +1815,19 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # A tag has been added to a resource with the same ARN as a deleted
+    # resource. Wait a short while and then retry the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/StaleTagException AWS API Documentation
+    #
+    class StaleTagException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Input for Subscribe action.
     #
     # @note When making an API call, you may pass SubscribeInput
@@ -1750,6 +1993,19 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Indicates that the customer already owns the maximum allowed number of
+    # subscriptions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscriptionLimitExceededException AWS API Documentation
+    #
+    class SubscriptionLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The list of tags to be added to the specified topic.
     #
     # @note When making an API call, you may pass Tag
@@ -1773,6 +2029,31 @@ module Aws::SNS
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # Can't add more than 50 tags to a topic.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagLimitExceededException AWS API Documentation
+    #
+    class TagLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request doesn't comply with the IAM tag policy. Correct your
+    # request and then retry it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagPolicyException AWS API Documentation
+    #
+    class TagPolicyException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1810,6 +2091,20 @@ module Aws::SNS
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Indicates that the rate at which requests have been submitted for this
+    # action exceeds the limit for your account.
+    #
+    # @!attribute [rw] message
+    #   Throttled request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ThrottledException AWS API Documentation
+    #
+    class ThrottledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A wrapper type for the topic's Amazon Resource Name (ARN). To
     # retrieve a topic's attributes, use `GetTopicAttributes`.
     #
@@ -1821,6 +2116,19 @@ module Aws::SNS
     #
     class Topic < Struct.new(
       :topic_arn)
+      include Aws::Structure
+    end
+
+    # Indicates that the customer already owns the maximum allowed number of
+    # topics.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TopicLimitExceededException AWS API Documentation
+    #
+    class TopicLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

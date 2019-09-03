@@ -102,6 +102,7 @@ module Aws::Comprehend
     EntityRecognizerPropertiesList = Shapes::ListShape.new(name: 'EntityRecognizerPropertiesList')
     EntityType = Shapes::StringShape.new(name: 'EntityType')
     EntityTypeName = Shapes::StringShape.new(name: 'EntityTypeName')
+    EntityTypesEvaluationMetrics = Shapes::StructureShape.new(name: 'EntityTypesEvaluationMetrics')
     EntityTypesList = Shapes::ListShape.new(name: 'EntityTypesList')
     EntityTypesListItem = Shapes::StructureShape.new(name: 'EntityTypesListItem')
     Float = Shapes::FloatShape.new(name: 'Float')
@@ -285,6 +286,9 @@ module Aws::Comprehend
 
     BatchItemErrorList.member = Shapes::ShapeRef.new(shape: BatchItemError)
 
+    BatchSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BatchSizeLimitExceededException.struct_class = Types::BatchSizeLimitExceededException
+
     ClassifierEvaluationMetrics.add_member(:accuracy, Shapes::ShapeRef.new(shape: Double, location_name: "Accuracy"))
     ClassifierEvaluationMetrics.add_member(:precision, Shapes::ShapeRef.new(shape: Double, location_name: "Precision"))
     ClassifierEvaluationMetrics.add_member(:recall, Shapes::ShapeRef.new(shape: Double, location_name: "Recall"))
@@ -296,6 +300,9 @@ module Aws::Comprehend
     ClassifierMetadata.add_member(:number_of_test_documents, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTestDocuments"))
     ClassifierMetadata.add_member(:evaluation_metrics, Shapes::ShapeRef.new(shape: ClassifierEvaluationMetrics, location_name: "EvaluationMetrics"))
     ClassifierMetadata.struct_class = Types::ClassifierMetadata
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
     CreateDocumentClassifierRequest.add_member(:document_classifier_name, Shapes::ShapeRef.new(shape: ComprehendArnName, required: true, location_name: "DocumentClassifierName"))
     CreateDocumentClassifierRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
@@ -558,6 +565,8 @@ module Aws::Comprehend
     EntityRecognizerMetadataEntityTypesList.member = Shapes::ShapeRef.new(shape: EntityRecognizerMetadataEntityTypesListItem)
 
     EntityRecognizerMetadataEntityTypesListItem.add_member(:type, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Type"))
+    EntityRecognizerMetadataEntityTypesListItem.add_member(:evaluation_metrics, Shapes::ShapeRef.new(shape: EntityTypesEvaluationMetrics, location_name: "EvaluationMetrics"))
+    EntityRecognizerMetadataEntityTypesListItem.add_member(:number_of_train_mentions, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfTrainMentions"))
     EntityRecognizerMetadataEntityTypesListItem.struct_class = Types::EntityRecognizerMetadataEntityTypesListItem
 
     EntityRecognizerProperties.add_member(:entity_recognizer_arn, Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
@@ -577,6 +586,11 @@ module Aws::Comprehend
 
     EntityRecognizerPropertiesList.member = Shapes::ShapeRef.new(shape: EntityRecognizerProperties)
 
+    EntityTypesEvaluationMetrics.add_member(:precision, Shapes::ShapeRef.new(shape: Double, location_name: "Precision"))
+    EntityTypesEvaluationMetrics.add_member(:recall, Shapes::ShapeRef.new(shape: Double, location_name: "Recall"))
+    EntityTypesEvaluationMetrics.add_member(:f1_score, Shapes::ShapeRef.new(shape: Double, location_name: "F1Score"))
+    EntityTypesEvaluationMetrics.struct_class = Types::EntityTypesEvaluationMetrics
+
     EntityTypesList.member = Shapes::ShapeRef.new(shape: EntityTypesListItem)
 
     EntityTypesListItem.add_member(:type, Shapes::ShapeRef.new(shape: EntityTypeName, required: true, location_name: "Type"))
@@ -585,6 +599,18 @@ module Aws::Comprehend
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     InputDataConfig.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
     InputDataConfig.struct_class = Types::InputDataConfig
+
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidFilterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidFilterException.struct_class = Types::InvalidFilterException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    JobNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    JobNotFoundException.struct_class = Types::JobNotFoundException
 
     KeyPhrase.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
     KeyPhrase.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
@@ -613,6 +639,9 @@ module Aws::Comprehend
     KeyPhrasesDetectionJobProperties.struct_class = Types::KeyPhrasesDetectionJobProperties
 
     KeyPhrasesDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: KeyPhrasesDetectionJobProperties)
+
+    KmsKeyValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    KmsKeyValidationException.struct_class = Types::KmsKeyValidationException
 
     ListDocumentClassificationJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DocumentClassificationJobFilter, location_name: "Filter"))
     ListDocumentClassificationJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -718,6 +747,18 @@ module Aws::Comprehend
     PartOfSpeechTag.add_member(:tag, Shapes::ShapeRef.new(shape: PartOfSpeechTagType, location_name: "Tag"))
     PartOfSpeechTag.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
     PartOfSpeechTag.struct_class = Types::PartOfSpeechTag
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceUnavailableException.struct_class = Types::ResourceUnavailableException
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -896,6 +937,18 @@ module Aws::Comprehend
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TextSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TextSizeLimitExceededException.struct_class = Types::TextSizeLimitExceededException
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    TooManyTagKeysException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyTagKeysException.struct_class = Types::TooManyTagKeysException
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
     TopicsDetectionJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     TopicsDetectionJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     TopicsDetectionJobFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
@@ -917,6 +970,9 @@ module Aws::Comprehend
     TopicsDetectionJobProperties.struct_class = Types::TopicsDetectionJobProperties
 
     TopicsDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: TopicsDetectionJobProperties)
+
+    UnsupportedLanguageException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedLanguageException.struct_class = Types::UnsupportedLanguageException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ComprehendArn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))

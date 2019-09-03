@@ -126,7 +126,8 @@
       "output":{"shape":"ImportSourceCredentialsOutput"},
       "errors":[
         {"shape":"InvalidInputException"},
-        {"shape":"AccountLimitExceededException"}
+        {"shape":"AccountLimitExceededException"},
+        {"shape":"ResourceAlreadyExistsException"}
       ]
     },
     "InvalidateProjectCache":{
@@ -479,6 +480,8 @@
         "description":{"shape":"ProjectDescription"},
         "source":{"shape":"ProjectSource"},
         "secondarySources":{"shape":"ProjectSources"},
+        "sourceVersion":{"shape":"String"},
+        "secondarySourceVersions":{"shape":"ProjectSecondarySourceVersions"},
         "artifacts":{"shape":"ProjectArtifacts"},
         "secondaryArtifacts":{"shape":"ProjectArtifactsList"},
         "cache":{"shape":"ProjectCache"},
@@ -660,7 +663,8 @@
         "username":{"shape":"NonEmptyString"},
         "token":{"shape":"SensitiveNonEmptyString"},
         "serverType":{"shape":"ServerType"},
-        "authType":{"shape":"AuthType"}
+        "authType":{"shape":"AuthType"},
+        "shouldOverwrite":{"shape":"WrapperBoolean"}
       }
     },
     "ImportSourceCredentialsOutput":{
@@ -845,6 +849,8 @@
         "description":{"shape":"ProjectDescription"},
         "source":{"shape":"ProjectSource"},
         "secondarySources":{"shape":"ProjectSources"},
+        "sourceVersion":{"shape":"String"},
+        "secondarySourceVersions":{"shape":"ProjectSecondarySourceVersions"},
         "artifacts":{"shape":"ProjectArtifacts"},
         "secondaryArtifacts":{"shape":"ProjectArtifactsList"},
         "cache":{"shape":"ProjectCache"},
@@ -1178,6 +1184,8 @@
         "description":{"shape":"ProjectDescription"},
         "source":{"shape":"ProjectSource"},
         "secondarySources":{"shape":"ProjectSources"},
+        "sourceVersion":{"shape":"String"},
+        "secondarySourceVersions":{"shape":"ProjectSecondarySourceVersions"},
         "artifacts":{"shape":"ProjectArtifacts"},
         "secondaryArtifacts":{"shape":"ProjectArtifactsList"},
         "cache":{"shape":"ProjectCache"},

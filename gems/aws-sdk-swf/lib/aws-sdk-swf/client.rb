@@ -118,6 +118,10 @@ module Aws::SWF
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -302,7 +306,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain containing the workflow executions to count.
@@ -450,7 +454,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain containing the workflow executions to count.
@@ -551,7 +555,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the task list.
@@ -614,7 +618,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the task list.
@@ -687,7 +691,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain in which the activity type is registered.
@@ -748,7 +752,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :name
     #   The name of the domain to deprecate.
@@ -808,7 +812,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain in which the workflow type is registered.
@@ -868,7 +872,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain in which the activity type is registered.
@@ -940,7 +944,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :name
     #   The name of the domain to describe.
@@ -961,6 +965,7 @@ module Aws::SWF
     #   resp.domain_info.name #=> String
     #   resp.domain_info.status #=> String, one of "REGISTERED", "DEPRECATED"
     #   resp.domain_info.description #=> String
+    #   resp.domain_info.arn #=> String
     #   resp.configuration.workflow_execution_retention_period_in_days #=> String
     #
     # @overload describe_domain(params = {})
@@ -1000,7 +1005,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain containing the workflow execution.
@@ -1095,7 +1100,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain in which this workflow type is registered.
@@ -1171,7 +1176,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain containing the workflow execution.
@@ -1180,22 +1185,20 @@ module Aws::SWF
     #   Specifies the workflow execution for which to return the history.
     #
     # @option params [String] :next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextPageToken`. Keep all other
-    #   arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #
     # @option params [Boolean] :reverse_order
     #   When set to `true`, returns the events in reverse order. By default
@@ -1506,7 +1509,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain in which the activity types have been
@@ -1519,22 +1522,20 @@ module Aws::SWF
     #   Specifies the registration status of the activity types to list.
     #
     # @option params [String] :next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextPageToken`. Keep all other
-    #   arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #
     # @option params [Boolean] :reverse_order
     #   When set to `true`, returns the results in reverse order. By default,
@@ -1617,7 +1618,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the workflow executions to list.
@@ -1685,22 +1686,20 @@ module Aws::SWF
     #    </note>
     #
     # @option params [String] :next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextPageToken`. Keep all other
-    #   arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #
     # @option params [Boolean] :reverse_order
     #   When set to `true`, returns the results in reverse order. By default
@@ -1800,13 +1799,16 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [String] :next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextPageToken`. Keep all other
-    #   arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
@@ -1815,13 +1817,8 @@ module Aws::SWF
     #   Specifies the registration status of the domains to list.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #
     # @option params [Boolean] :reverse_order
     #   When set to `true`, returns the results in reverse order. By default,
@@ -1848,6 +1845,7 @@ module Aws::SWF
     #   resp.domain_infos[0].name #=> String
     #   resp.domain_infos[0].status #=> String, one of "REGISTERED", "DEPRECATED"
     #   resp.domain_infos[0].description #=> String
+    #   resp.domain_infos[0].arn #=> String
     #   resp.next_page_token #=> String
     #
     # @overload list_domains(params = {})
@@ -1899,7 +1897,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the workflow executions to list.
@@ -1927,22 +1925,20 @@ module Aws::SWF
     #    </note>
     #
     # @option params [String] :next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextPageToken`. Keep all other
-    #   arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #
     # @option params [Boolean] :reverse_order
     #   When set to `true`, returns the results in reverse order. By default
@@ -2011,6 +2007,34 @@ module Aws::SWF
       req.send_request(options)
     end
 
+    # List tags for a given domain.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Amazon SWF domain.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::ResourceTag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Returns information about workflow types in the specified domain. The
     # results may be split into multiple pages that can be retrieved by
     # making the call repeatedly.
@@ -2037,7 +2061,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain in which the workflow types have been
@@ -2050,22 +2074,20 @@ module Aws::SWF
     #   Specifies the registration status of the workflow types to list.
     #
     # @option params [String] :next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextPageToken`. Keep all other
-    #   arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
-    #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #
     # @option params [Boolean] :reverse_order
     #   When set to `true`, returns the results in reverse order. By default
@@ -2144,7 +2166,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the task lists being polled.
@@ -2155,7 +2177,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not contain the literal string `arn`.
+    #   not *be* the literal string `arn`.
     #
     # @option params [String] :identity
     #   Identity of the worker making the request, recorded in the
@@ -2249,7 +2271,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain containing the task lists to poll.
@@ -2260,7 +2282,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not contain the literal string `arn`.
+    #   not *be* the literal string `arn`.
     #
     # @option params [String] :identity
     #   Identity of the decider making the request, which is recorded in the
@@ -2269,10 +2291,13 @@ module Aws::SWF
     #   user defined.
     #
     # @option params [String] :next_page_token
-    #   If a `NextPageToken` was returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextPageToken`. Keep all other
-    #   arguments unchanged.
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
@@ -2286,10 +2311,8 @@ module Aws::SWF
     #    </note>
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that are returned per call.
-    #   `nextPageToken` can be used to obtain futher pages of results. The
-    #   default is 1000, which is the maximum allowed page size. You can,
-    #   however, specify a page size *smaller* than the maximum.
+    #   The maximum number of results that are returned per call. Use
+    #   `nextPageToken` to obtain further pages of results.
     #
     #   This is an upper limit only; the actual number of results returned per
     #   call may be fewer than the specified maximum.
@@ -2644,7 +2667,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :task_token
     #   The `taskToken` of the ActivityTask.
@@ -2716,7 +2739,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain in which this activity is to be registered.
@@ -2727,7 +2750,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not contain the literal string `arn`.
+    #   not *be* the literal string `arn`.
     #
     # @option params [required, String] :version
     #   The version of the activity type.
@@ -2740,7 +2763,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not contain the literal string `arn`.
+    #   not *be* the literal string `arn`.
     #
     # @option params [String] :description
     #   A textual description of the activity type.
@@ -2785,7 +2808,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #
     # @option params [String] :default_task_schedule_to_start_timeout
     #   If set, specifies the default maximum duration that a task of this
@@ -2855,7 +2878,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :name
     #   Name of the domain to register. The name must be unique in the region
@@ -2864,7 +2887,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not contain the literal string `arn`.
+    #   not *be* the literal string `arn`.
     #
     # @option params [String] :description
     #   A text description of the domain.
@@ -2885,7 +2908,13 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html
+    #
+    # @option params [Array<Types::ResourceTag>] :tags
+    #   Tags to be added when registering a domain.
+    #
+    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   symbols: `_ . : / = + - @`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2895,6 +2924,12 @@ module Aws::SWF
     #     name: "DomainName", # required
     #     description: "Description",
     #     workflow_execution_retention_period_in_days: "DurationInDays", # required
+    #     tags: [
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue",
+    #       },
+    #     ],
     #   })
     #
     # @overload register_domain(params = {})
@@ -2944,7 +2979,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain in which to register the workflow type.
@@ -2955,7 +2990,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not contain the literal string `arn`.
+    #   not *be* the literal string `arn`.
     #
     # @option params [required, String] :version
     #   The version of the workflow type.
@@ -2969,7 +3004,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not contain the literal string `arn`.
+    #   not *be* the literal string `arn`.
     #
     # @option params [String] :description
     #   Textual description of the workflow type.
@@ -3014,7 +3049,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #
     # @option params [String] :default_child_policy
     #   If set, specifies the default policy to use for the child workflow
@@ -3043,14 +3078,14 @@ module Aws::SWF
     #   functions. If you don't specify an IAM role when you start this
     #   workflow type, the default Lambda role is attached to the execution.
     #   For more information, see
-    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   [https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
     #   in the *Amazon SWF Developer Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3118,7 +3153,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain containing the workflow execution to cancel.
@@ -3185,8 +3220,8 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types
-    # [2]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types
+    # [2]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :task_token
     #   The `taskToken` of the ActivityTask.
@@ -3254,8 +3289,8 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types
-    # [2]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types
+    # [2]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :task_token
     #   The `taskToken` of the ActivityTask.
@@ -3318,8 +3353,8 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types
-    # [2]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types
+    # [2]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :task_token
     #   The `taskToken` of the ActivityTask.
@@ -3375,7 +3410,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :task_token
     #   The `taskToken` from the DecisionTask.
@@ -3545,7 +3580,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain containing the workflow execution to signal.
@@ -3629,7 +3664,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The name of the domain in which the workflow execution is created.
@@ -3639,12 +3674,13 @@ module Aws::SWF
     #   You can use this to associate a custom identifier with the workflow
     #   execution. You may specify the same identifier if a workflow execution
     #   is logically a *restart* of a previous execution. You cannot have two
-    #   open workflow executions with the same `workflowId` at the same time.
+    #   open workflow executions with the same `workflowId` at the same time
+    #   within the same domain.
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not contain the literal string `arn`.
+    #   not *be* the literal string `arn`.
     #
     # @option params [required, Types::WorkflowType] :workflow_type
     #   The type of the workflow to start.
@@ -3664,7 +3700,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not contain the literal string `arn`.
+    #   not *be* the literal string `arn`.
     #
     # @option params [String] :task_priority
     #   The task priority to use for this workflow execution. This overrides
@@ -3679,7 +3715,7 @@ module Aws::SWF
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
     #
     # @option params [String] :input
     #   The input for the workflow execution. This is a free form string which
@@ -3761,14 +3797,14 @@ module Aws::SWF
     #   functions. If you don't attach an IAM role, any attempt to schedule a
     #   Lambda task fails. This results in a `ScheduleLambdaFunctionFailed`
     #   history event. For more information, see
-    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   [https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
     #   in the *Amazon SWF Developer Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+    #   [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #
     # @return [Types::Run] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3803,6 +3839,42 @@ module Aws::SWF
     # @param [Hash] params ({})
     def start_workflow_execution(params = {}, options = {})
       req = build_request(:start_workflow_execution, params)
+      req.send_request(options)
+    end
+
+    # Add a tag to a Amazon SWF domain.
+    #
+    # <note markdown="1"> Amazon SWF supports a maximum of 50 tags per resource.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Amazon SWF domain.
+    #
+    # @option params [required, Array<Types::ResourceTag>] :tags
+    #   The list of tags to add to a domain.
+    #
+    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -3849,7 +3921,7 @@ module Aws::SWF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
     #
     # @option params [required, String] :domain
     #   The domain of the workflow execution to terminate.
@@ -3911,6 +3983,211 @@ module Aws::SWF
       req.send_request(options)
     end
 
+    # Undeprecates a previously deprecated *activity type*. After an
+    # activity type has been undeprecated, you can create new tasks of that
+    # activity type.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
+    #
+    # **Access Control**
+    #
+    # You can use IAM policies to control this action's access to Amazon
+    # SWF resources as follows:
+    #
+    # * Use a `Resource` element with the domain name to limit the action to
+    #   only specified domains.
+    #
+    # * Use an `Action` element to allow or deny permission to call this
+    #   action.
+    #
+    # * Constrain the following parameters by using a `Condition` element
+    #   with the appropriate keys.
+    #
+    #   * `activityType.name`\: String constraint. The key is
+    #     `swf:activityType.name`.
+    #
+    #   * `activityType.version`\: String constraint. The key is
+    #     `swf:activityType.version`.
+    #
+    # If the caller doesn't have sufficient permissions to invoke the
+    # action, or the parameter values fall outside the specified
+    # constraints, the action fails. The associated event attribute's
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain of the deprecated activity type.
+    #
+    # @option params [required, Types::ActivityType] :activity_type
+    #   The activity type to undeprecate.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.undeprecate_activity_type({
+    #     domain: "DomainName", # required
+    #     activity_type: { # required
+    #       name: "Name", # required
+    #       version: "Version", # required
+    #     },
+    #   })
+    #
+    # @overload undeprecate_activity_type(params = {})
+    # @param [Hash] params ({})
+    def undeprecate_activity_type(params = {}, options = {})
+      req = build_request(:undeprecate_activity_type, params)
+      req.send_request(options)
+    end
+
+    # Undeprecates a previously deprecated domain. After a domain has been
+    # undeprecated it can be used to create new workflow executions or
+    # register new types.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
+    #
+    # **Access Control**
+    #
+    # You can use IAM policies to control this action's access to Amazon
+    # SWF resources as follows:
+    #
+    # * Use a `Resource` element with the domain name to limit the action to
+    #   only specified domains.
+    #
+    # * Use an `Action` element to allow or deny permission to call this
+    #   action.
+    #
+    # * You cannot use an IAM policy to constrain this action's parameters.
+    #
+    # If the caller doesn't have sufficient permissions to invoke the
+    # action, or the parameter values fall outside the specified
+    # constraints, the action fails. The associated event attribute's
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #
+    # @option params [required, String] :name
+    #   The name of the domain of the deprecated workflow type.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.undeprecate_domain({
+    #     name: "DomainName", # required
+    #   })
+    #
+    # @overload undeprecate_domain(params = {})
+    # @param [Hash] params ({})
+    def undeprecate_domain(params = {}, options = {})
+      req = build_request(:undeprecate_domain, params)
+      req.send_request(options)
+    end
+
+    # Undeprecates a previously deprecated *workflow type*. After a workflow
+    # type has been undeprecated, you can create new executions of that
+    # type.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
+    #
+    # **Access Control**
+    #
+    # You can use IAM policies to control this action's access to Amazon
+    # SWF resources as follows:
+    #
+    # * Use a `Resource` element with the domain name to limit the action to
+    #   only specified domains.
+    #
+    # * Use an `Action` element to allow or deny permission to call this
+    #   action.
+    #
+    # * Constrain the following parameters by using a `Condition` element
+    #   with the appropriate keys.
+    #
+    #   * `workflowType.name`\: String constraint. The key is
+    #     `swf:workflowType.name`.
+    #
+    #   * `workflowType.version`\: String constraint. The key is
+    #     `swf:workflowType.version`.
+    #
+    # If the caller doesn't have sufficient permissions to invoke the
+    # action, or the parameter values fall outside the specified
+    # constraints, the action fails. The associated event attribute's
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain of the deprecated workflow type.
+    #
+    # @option params [required, Types::WorkflowType] :workflow_type
+    #   The name of the domain of the deprecated workflow type.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.undeprecate_workflow_type({
+    #     domain: "DomainName", # required
+    #     workflow_type: { # required
+    #       name: "Name", # required
+    #       version: "Version", # required
+    #     },
+    #   })
+    #
+    # @overload undeprecate_workflow_type(params = {})
+    # @param [Hash] params ({})
+    def undeprecate_workflow_type(params = {}, options = {})
+      req = build_request(:undeprecate_workflow_type, params)
+      req.send_request(options)
+    end
+
+    # Remove a tag from a Amazon SWF domain.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Amazon SWF domain.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tags to remove from the Amazon SWF domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["ResourceTagKey"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3924,7 +4201,7 @@ module Aws::SWF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-swf'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

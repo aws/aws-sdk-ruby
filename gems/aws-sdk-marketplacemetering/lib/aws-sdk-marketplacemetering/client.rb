@@ -116,6 +116,10 @@ module Aws::MarketplaceMetering
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -336,8 +340,9 @@ module Aws::MarketplaceMetering
     #   during the publishing of a new product.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :timestamp
-    #   Timestamp of the hour, recorded in UTC. The seconds and milliseconds
-    #   portions of the timestamp will be ignored.
+    #   Timestamp, in UTC, for which the usage is being reported. Your
+    #   application can meter usage for up to one hour in the past. Make sure
+    #   the timestamp value is not before the start of the software usage.
     #
     # @option params [required, String] :usage_dimension
     #   It will be one of the fcp dimension name provided during the
@@ -504,7 +509,7 @@ module Aws::MarketplaceMetering
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -116,6 +116,10 @@ module Aws::SecretsManager
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -965,6 +969,7 @@ module Aws::SecretsManager
     #   * {Types::DescribeSecretResponse#deleted_date #deleted_date} => Time
     #   * {Types::DescribeSecretResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeSecretResponse#version_ids_to_stages #version_ids_to_stages} => Hash&lt;String,Array&lt;String&gt;&gt;
+    #   * {Types::DescribeSecretResponse#owning_service #owning_service} => String
     #
     #
     # @example Example: To retrieve the details of a secret
@@ -1034,6 +1039,7 @@ module Aws::SecretsManager
     #   resp.version_ids_to_stages #=> Hash
     #   resp.version_ids_to_stages["SecretVersionIdType"] #=> Array
     #   resp.version_ids_to_stages["SecretVersionIdType"][0] #=> String
+    #   resp.owning_service #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecret AWS API Documentation
     #
@@ -1629,6 +1635,7 @@ module Aws::SecretsManager
     #   resp.secret_list[0].secret_versions_to_stages #=> Hash
     #   resp.secret_list[0].secret_versions_to_stages["SecretVersionIdType"] #=> Array
     #   resp.secret_list[0].secret_versions_to_stages["SecretVersionIdType"][0] #=> String
+    #   resp.secret_list[0].owning_service #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecrets AWS API Documentation
@@ -2910,7 +2917,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

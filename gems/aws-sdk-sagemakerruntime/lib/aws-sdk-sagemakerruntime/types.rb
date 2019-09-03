@@ -8,6 +8,18 @@
 module Aws::SageMakerRuntime
   module Types
 
+    # An internal failure occurred.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InternalFailure AWS API Documentation
+    #
+    class InternalFailure < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass InvokeEndpointInput
     #   data as a hash:
     #
@@ -92,6 +104,57 @@ module Aws::SageMakerRuntime
       :content_type,
       :invoked_production_variant,
       :custom_attributes)
+      include Aws::Structure
+    end
+
+    # Model (owned by the customer in the container) returned an error 500.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] original_status_code
+    #   Original status code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] original_message
+    #   Original message.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_stream_arn
+    #   The Amazon Resource Name (ARN) of the log stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/ModelError AWS API Documentation
+    #
+    class ModelError < Struct.new(
+      :message,
+      :original_status_code,
+      :original_message,
+      :log_stream_arn)
+      include Aws::Structure
+    end
+
+    # The service is unavailable. Try your call again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/ServiceUnavailable AWS API Documentation
+    #
+    class ServiceUnavailable < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Inspect your request and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/ValidationError AWS API Documentation
+    #
+    class ValidationError < Struct.new(
+      :message)
       include Aws::Structure
     end
 

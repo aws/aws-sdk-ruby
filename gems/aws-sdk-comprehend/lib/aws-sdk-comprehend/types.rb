@@ -106,8 +106,10 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -176,8 +178,10 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -251,8 +255,10 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -321,8 +327,10 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -378,6 +386,19 @@ module Aws::Comprehend
       :index,
       :error_code,
       :error_message)
+      include Aws::Structure
+    end
+
+    # The number of documents in the request exceeds the limit of 25. Try
+    # your request again with fewer documents.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchSizeLimitExceededException AWS API Documentation
+    #
+    class BatchSizeLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -453,6 +474,19 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Concurrent modification of the tags associated with an Amazon
+    # Comprehend resource is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDocumentClassifierRequest
     #   data as a hash:
     #
@@ -517,8 +551,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -1040,8 +1076,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -1082,8 +1120,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -1124,8 +1164,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -1169,8 +1211,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code of the input documents. You can specify English
-    #   ("en") or Spanish ("es").
+    #   The language code of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSyntaxRequest AWS API Documentation
@@ -2056,7 +2100,9 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] entity_types
-    #   The entity types in the input data for an entity recognizer.
+    #   The entity types in the input data for an entity recognizer. A
+    #   maximum of 12 entity types can be used at one time to train an
+    #   entity recognizer.
     #   @return [Array<Types::EntityTypesListItem>]
     #
     # @!attribute [rw] documents
@@ -2121,10 +2167,22 @@ module Aws::Comprehend
     #   entity recognizer.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_metrics
+    #   Detailed information about the accuracy of the entity recognizer for
+    #   a specific item on the list of entity types.
+    #   @return [Types::EntityTypesEvaluationMetrics]
+    #
+    # @!attribute [rw] number_of_train_mentions
+    #   indicates the number of times the given entity name was seen in the
+    #   training data.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerMetadataEntityTypesListItem AWS API Documentation
     #
     class EntityRecognizerMetadataEntityTypesListItem < Struct.new(
-      :type)
+      :type,
+      :evaluation_metrics,
+      :number_of_train_mentions)
       include Aws::Structure
     end
 
@@ -2219,6 +2277,39 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Detailed information about the accuracy of an entity recognizer for a
+    # specific entity type.
+    #
+    # @!attribute [rw] precision
+    #   A measure of the usefulness of the recognizer results for a specific
+    #   entity type in the test data. High precision means that the
+    #   recognizer returned substantially more relevant results than
+    #   irrelevant ones.
+    #   @return [Float]
+    #
+    # @!attribute [rw] recall
+    #   A measure of how complete the recognizer results are for a specific
+    #   entity type in the test data. High recall means that the recognizer
+    #   returned most of the relevant results.
+    #   @return [Float]
+    #
+    # @!attribute [rw] f1_score
+    #   A measure of how accurate the recognizer results are for for a
+    #   specific entity type in the test data. It is derived from the
+    #   `Precision` and `Recall` values. The `F1Score` is the harmonic
+    #   average of the two scores. The highest score is 1, and the worst
+    #   score is 0.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesEvaluationMetrics AWS API Documentation
+    #
+    class EntityTypesEvaluationMetrics < Struct.new(
+      :precision,
+      :recall,
+      :f1_score)
+      include Aws::Structure
+    end
+
     # Information about an individual item on a list of entity types.
     #
     # @note When making an API call, you may pass EntityTypesListItem
@@ -2278,6 +2369,55 @@ module Aws::Comprehend
     class InputDataConfig < Struct.new(
       :s3_uri,
       :input_format)
+      include Aws::Structure
+    end
+
+    # An internal server error occurred. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The filter specified for the operation is invalid. Specify a different
+    # filter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidFilterException AWS API Documentation
+    #
+    class InvalidFilterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified job was not found. Check the job ID and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/JobNotFoundException AWS API Documentation
+    #
+    class JobNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2449,6 +2589,19 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      include Aws::Structure
+    end
+
+    # The KMS customer managed key (CMK) entered cannot be validated. Verify
+    # the key and re-enter it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KmsKeyValidationException AWS API Documentation
+    #
+    class KmsKeyValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2989,6 +3142,59 @@ module Aws::Comprehend
     class PartOfSpeechTag < Struct.new(
       :tag,
       :score)
+      include Aws::Structure
+    end
+
+    # The specified name is already in use. Use a different name and try
+    # your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of recognizers per account has been exceeded.
+    # Review the recognizers, perform cleanup, and then try your request
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource ARN was not found. Check the ARN and try your
+    # request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource is not available. Check to see if the resource
+    # is in the `TRAINED` state and try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceUnavailableException AWS API Documentation
+    #
+    class ResourceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3582,8 +3788,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -3706,8 +3914,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -4210,6 +4420,57 @@ module Aws::Comprehend
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The size of the input text exceeds the limit. Use a smaller document.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TextSizeLimitExceededException AWS API Documentation
+    #
+    class TextSizeLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The number of requests exceeds the limit. Resubmit your request later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request contains more tag keys than can be associated with a
+    # resource (50 tag keys per resource).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TooManyTagKeysException AWS API Documentation
+    #
+    class TooManyTagKeysException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request contains more tags than can be associated with a resource
+    # (50 tags per resource). The maximum number of tags includes both
+    # existing tags and those included in your current request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides information for filtering topic detection jobs. For more
     # information, see .
     #
@@ -4341,6 +4602,22 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      include Aws::Structure
+    end
+
+    # Amazon Comprehend can't process the language of the input text. For
+    # all custom entity recognition APIs (such as `CreateEntityRecognizer`),
+    # only English is accepted. For most other APIs, such as those for
+    # Custom Classification, Amazon Comprehend accepts text in all supported
+    # languages. For a list of supported languages, see supported-languages.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UnsupportedLanguageException AWS API Documentation
+    #
+    class UnsupportedLanguageException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

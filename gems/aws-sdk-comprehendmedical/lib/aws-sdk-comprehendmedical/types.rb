@@ -217,6 +217,85 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
+    # An internal server error occurred. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The input text was not in valid UTF-8 character encoding. Check your
+    # text then retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InvalidEncodingException AWS API Documentation
+    #
+    class InvalidEncodingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request that you made is invalid. Check your request to determine
+    # why it's invalid and then retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The Comprehend Medical service is temporarily unavailable. Please wait
+    # and then retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The size of the text you submitted exceeds the size limit. Reduce the
+    # size of the text or use a smaller document and then retry your
+    # request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/TextSizeLimitExceededException AWS API Documentation
+    #
+    class TextSizeLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You have made too many requests within a short period of time. Wait
+    # for a short time and then try your request again. Contact customer
+    # support for more information about a service limit increase.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides contextual information about the extracted entity.
     #
     # @!attribute [rw] name

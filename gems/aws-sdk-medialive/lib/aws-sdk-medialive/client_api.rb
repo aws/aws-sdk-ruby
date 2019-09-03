@@ -221,10 +221,12 @@ module Aws::MediaLive
     HlsWebdavHttpTransferMode = Shapes::StringShape.new(name: 'HlsWebdavHttpTransferMode')
     HlsWebdavSettings = Shapes::StructureShape.new(name: 'HlsWebdavSettings')
     IFrameOnlyPlaylistType = Shapes::StringShape.new(name: 'IFrameOnlyPlaylistType')
+    ImmediateModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'ImmediateModeScheduleActionStartSettings')
     Input = Shapes::StructureShape.new(name: 'Input')
     InputAttachment = Shapes::StructureShape.new(name: 'InputAttachment')
     InputChannelLevel = Shapes::StructureShape.new(name: 'InputChannelLevel')
     InputClass = Shapes::StringShape.new(name: 'InputClass')
+    InputClippingSettings = Shapes::StructureShape.new(name: 'InputClippingSettings')
     InputCodec = Shapes::StringShape.new(name: 'InputCodec')
     InputDeblockFilter = Shapes::StringShape.new(name: 'InputDeblockFilter')
     InputDenoiseFilter = Shapes::StringShape.new(name: 'InputDenoiseFilter')
@@ -248,9 +250,11 @@ module Aws::MediaLive
     InputSource = Shapes::StructureShape.new(name: 'InputSource')
     InputSourceEndBehavior = Shapes::StringShape.new(name: 'InputSourceEndBehavior')
     InputSourceRequest = Shapes::StructureShape.new(name: 'InputSourceRequest')
+    InputSourceType = Shapes::StringShape.new(name: 'InputSourceType')
     InputSpecification = Shapes::StructureShape.new(name: 'InputSpecification')
     InputState = Shapes::StringShape.new(name: 'InputState')
     InputSwitchScheduleActionSettings = Shapes::StructureShape.new(name: 'InputSwitchScheduleActionSettings')
+    InputTimecodeSource = Shapes::StringShape.new(name: 'InputTimecodeSource')
     InputType = Shapes::StringShape.new(name: 'InputType')
     InputVpcRequest = Shapes::StructureShape.new(name: 'InputVpcRequest')
     InputWhitelistRule = Shapes::StructureShape.new(name: 'InputWhitelistRule')
@@ -259,6 +263,7 @@ module Aws::MediaLive
     InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidRequest = Shapes::StructureShape.new(name: 'InvalidRequest')
     KeyProviderSettings = Shapes::StructureShape.new(name: 'KeyProviderSettings')
+    LastFrameClippingBehavior = Shapes::StringShape.new(name: 'LastFrameClippingBehavior')
     LimitExceeded = Shapes::StructureShape.new(name: 'LimitExceeded')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
@@ -326,6 +331,7 @@ module Aws::MediaLive
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
     PassThroughSettings = Shapes::StructureShape.new(name: 'PassThroughSettings')
     PauseStateScheduleActionSettings = Shapes::StructureShape.new(name: 'PauseStateScheduleActionSettings')
+    PipelineDetail = Shapes::StructureShape.new(name: 'PipelineDetail')
     PipelineId = Shapes::StringShape.new(name: 'PipelineId')
     PipelinePauseStateSettings = Shapes::StructureShape.new(name: 'PipelinePauseStateSettings')
     PurchaseOffering = Shapes::StructureShape.new(name: 'PurchaseOffering')
@@ -379,6 +385,7 @@ module Aws::MediaLive
     Scte35TimeSignalApos = Shapes::StructureShape.new(name: 'Scte35TimeSignalApos')
     Scte35TimeSignalScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35TimeSignalScheduleActionSettings')
     Scte35WebDeliveryAllowedFlag = Shapes::StringShape.new(name: 'Scte35WebDeliveryAllowedFlag')
+    ServiceDescriptor = Shapes::StructureShape.new(name: 'ServiceDescriptor')
     SmoothGroupAudioOnlyTimecodeControl = Shapes::StringShape.new(name: 'SmoothGroupAudioOnlyTimecodeControl')
     SmoothGroupCertificateMode = Shapes::StringShape.new(name: 'SmoothGroupCertificateMode')
     SmoothGroupEventIdMode = Shapes::StringShape.new(name: 'SmoothGroupEventIdMode')
@@ -391,11 +398,13 @@ module Aws::MediaLive
     StandardHlsSettings = Shapes::StructureShape.new(name: 'StandardHlsSettings')
     StartChannelRequest = Shapes::StructureShape.new(name: 'StartChannelRequest')
     StartChannelResponse = Shapes::StructureShape.new(name: 'StartChannelResponse')
+    StartTimecode = Shapes::StructureShape.new(name: 'StartTimecode')
     StaticImageActivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageActivateScheduleActionSettings')
     StaticImageDeactivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageDeactivateScheduleActionSettings')
     StaticKeySettings = Shapes::StructureShape.new(name: 'StaticKeySettings')
     StopChannelRequest = Shapes::StructureShape.new(name: 'StopChannelRequest')
     StopChannelResponse = Shapes::StructureShape.new(name: 'StopChannelResponse')
+    StopTimecode = Shapes::StructureShape.new(name: 'StopTimecode')
     Tags = Shapes::MapShape.new(name: 'Tags')
     TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
     TeletextDestinationSettings = Shapes::StructureShape.new(name: 'TeletextDestinationSettings')
@@ -443,7 +452,10 @@ module Aws::MediaLive
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
+    __doubleMin0Max1000000000 = Shapes::FloatShape.new(name: '__doubleMin0Max1000000000')
+    __doubleMin0Max65535 = Shapes::FloatShape.new(name: '__doubleMin0Max65535')
     __doubleMin1 = Shapes::FloatShape.new(name: '__doubleMin1')
+    __doubleMin10000Max1000000000 = Shapes::FloatShape.new(name: '__doubleMin10000Max1000000000')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin0 = Shapes::IntegerShape.new(name: '__integerMin0')
@@ -452,22 +464,20 @@ module Aws::MediaLive
     __integerMin0Max1000 = Shapes::IntegerShape.new(name: '__integerMin0Max1000')
     __integerMin0Max10000 = Shapes::IntegerShape.new(name: '__integerMin0Max10000')
     __integerMin0Max1000000 = Shapes::IntegerShape.new(name: '__integerMin0Max1000000')
-    __integerMin0Max1099511627775 = Shapes::IntegerShape.new(name: '__integerMin0Max1099511627775')
     __integerMin0Max128 = Shapes::IntegerShape.new(name: '__integerMin0Max128')
     __integerMin0Max15 = Shapes::IntegerShape.new(name: '__integerMin0Max15')
     __integerMin0Max255 = Shapes::IntegerShape.new(name: '__integerMin0Max255')
     __integerMin0Max30 = Shapes::IntegerShape.new(name: '__integerMin0Max30')
     __integerMin0Max3600 = Shapes::IntegerShape.new(name: '__integerMin0Max3600')
-    __integerMin0Max4294967295 = Shapes::IntegerShape.new(name: '__integerMin0Max4294967295')
     __integerMin0Max500 = Shapes::IntegerShape.new(name: '__integerMin0Max500')
     __integerMin0Max600 = Shapes::IntegerShape.new(name: '__integerMin0Max600')
     __integerMin0Max65535 = Shapes::IntegerShape.new(name: '__integerMin0Max65535')
     __integerMin0Max65536 = Shapes::IntegerShape.new(name: '__integerMin0Max65536')
     __integerMin0Max7 = Shapes::IntegerShape.new(name: '__integerMin0Max7')
     __integerMin0Max8191 = Shapes::IntegerShape.new(name: '__integerMin0Max8191')
-    __integerMin0Max8589934591 = Shapes::IntegerShape.new(name: '__integerMin0Max8589934591')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
     __integerMin1000 = Shapes::IntegerShape.new(name: '__integerMin1000')
+    __integerMin100000Max100000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max100000000')
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
     __integerMin1Max10 = Shapes::IntegerShape.new(name: '__integerMin1Max10')
     __integerMin1Max1000000 = Shapes::IntegerShape.new(name: '__integerMin1Max1000000')
@@ -516,6 +526,7 @@ module Aws::MediaLive
     __listOfOutputDestination = Shapes::ListShape.new(name: '__listOfOutputDestination')
     __listOfOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfOutputDestinationSettings')
     __listOfOutputGroup = Shapes::ListShape.new(name: '__listOfOutputGroup')
+    __listOfPipelineDetail = Shapes::ListShape.new(name: '__listOfPipelineDetail')
     __listOfPipelinePauseStateSettings = Shapes::ListShape.new(name: '__listOfPipelinePauseStateSettings')
     __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
     __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
@@ -524,7 +535,11 @@ module Aws::MediaLive
     __listOfVideoDescription = Shapes::ListShape.new(name: '__listOfVideoDescription')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __longMin0Max1099511627775 = Shapes::IntegerShape.new(name: '__longMin0Max1099511627775')
+    __longMin0Max4294967295 = Shapes::IntegerShape.new(name: '__longMin0Max4294967295')
+    __longMin0Max8589934591 = Shapes::IntegerShape.new(name: '__longMin0Max8589934591')
     __string = Shapes::StringShape.new(name: '__string')
+    __stringMax256 = Shapes::StringShape.new(name: '__stringMax256')
     __stringMax32 = Shapes::StringShape.new(name: '__stringMax32')
     __stringMin1 = Shapes::StringShape.new(name: '__stringMin1')
     __stringMin1Max255 = Shapes::StringShape.new(name: '__stringMin1Max255')
@@ -634,6 +649,12 @@ module Aws::MediaLive
     AvailSettings.add_member(:scte_35_time_signal_apos, Shapes::ShapeRef.new(shape: Scte35TimeSignalApos, location_name: "scte35TimeSignalApos"))
     AvailSettings.struct_class = Types::AvailSettings
 
+    BadGatewayException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadGatewayException.struct_class = Types::BadGatewayException
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BatchScheduleActionCreateRequest.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, required: true, location_name: "scheduleActions"))
     BatchScheduleActionCreateRequest.struct_class = Types::BatchScheduleActionCreateRequest
 
@@ -734,6 +755,7 @@ module Aws::MediaLive
     Channel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     Channel.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     Channel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    Channel.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     Channel.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     Channel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     Channel.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
@@ -761,6 +783,9 @@ module Aws::MediaLive
     ChannelSummary.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ChannelSummary.struct_class = Types::ChannelSummary
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateChannel.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     CreateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
@@ -851,6 +876,7 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     DeleteChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     DeleteChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DeleteChannelResponse.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     DeleteChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     DeleteChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     DeleteChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
@@ -912,6 +938,7 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     DescribeChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     DescribeChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeChannelResponse.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     DescribeChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     DescribeChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     DescribeChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
@@ -926,6 +953,7 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestination, location_name: "destinations"))
     DescribeInputResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribeInputResponse.add_member(:input_class, Shapes::ShapeRef.new(shape: InputClass, location_name: "inputClass"))
+    DescribeInputResponse.add_member(:input_source_type, Shapes::ShapeRef.new(shape: InputSourceType, location_name: "inputSourceType"))
     DescribeInputResponse.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     DescribeInputResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     DescribeInputResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -1088,6 +1116,9 @@ module Aws::MediaLive
     FollowModeScheduleActionStartSettings.add_member(:reference_action_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "referenceActionName"))
     FollowModeScheduleActionStartSettings.struct_class = Types::FollowModeScheduleActionStartSettings
 
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     FrameCaptureGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     FrameCaptureGroupSettings.struct_class = Types::FrameCaptureGroupSettings
 
@@ -1096,6 +1127,9 @@ module Aws::MediaLive
 
     FrameCaptureSettings.add_member(:capture_interval, Shapes::ShapeRef.new(shape: __integerMin1Max3600, required: true, location_name: "captureInterval"))
     FrameCaptureSettings.struct_class = Types::FrameCaptureSettings
+
+    GatewayTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    GatewayTimeoutException.struct_class = Types::GatewayTimeoutException
 
     GlobalConfiguration.add_member(:initial_audio_gain, Shapes::ShapeRef.new(shape: __integerMinNegative60Max60, location_name: "initialAudioGain"))
     GlobalConfiguration.add_member(:input_end_action, Shapes::ShapeRef.new(shape: GlobalConfigurationInputEndAction, location_name: "inputEndAction"))
@@ -1236,11 +1270,14 @@ module Aws::MediaLive
     HlsWebdavSettings.add_member(:restart_delay, Shapes::ShapeRef.new(shape: __integerMin0Max15, location_name: "restartDelay"))
     HlsWebdavSettings.struct_class = Types::HlsWebdavSettings
 
+    ImmediateModeScheduleActionStartSettings.struct_class = Types::ImmediateModeScheduleActionStartSettings
+
     Input.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Input.add_member(:attached_channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "attachedChannels"))
     Input.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestination, location_name: "destinations"))
     Input.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     Input.add_member(:input_class, Shapes::ShapeRef.new(shape: InputClass, location_name: "inputClass"))
+    Input.add_member(:input_source_type, Shapes::ShapeRef.new(shape: InputSourceType, location_name: "inputSourceType"))
     Input.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     Input.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     Input.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -1259,6 +1296,11 @@ module Aws::MediaLive
     InputChannelLevel.add_member(:gain, Shapes::ShapeRef.new(shape: __integerMinNegative60Max6, required: true, location_name: "gain"))
     InputChannelLevel.add_member(:input_channel, Shapes::ShapeRef.new(shape: __integerMin0Max15, required: true, location_name: "inputChannel"))
     InputChannelLevel.struct_class = Types::InputChannelLevel
+
+    InputClippingSettings.add_member(:input_timecode_source, Shapes::ShapeRef.new(shape: InputTimecodeSource, required: true, location_name: "inputTimecodeSource"))
+    InputClippingSettings.add_member(:start_timecode, Shapes::ShapeRef.new(shape: StartTimecode, location_name: "startTimecode"))
+    InputClippingSettings.add_member(:stop_timecode, Shapes::ShapeRef.new(shape: StopTimecode, location_name: "stopTimecode"))
+    InputClippingSettings.struct_class = Types::InputClippingSettings
 
     InputDestination.add_member(:ip, Shapes::ShapeRef.new(shape: __string, location_name: "ip"))
     InputDestination.add_member(:port, Shapes::ShapeRef.new(shape: __string, location_name: "port"))
@@ -1324,6 +1366,8 @@ module Aws::MediaLive
     InputSpecification.struct_class = Types::InputSpecification
 
     InputSwitchScheduleActionSettings.add_member(:input_attachment_name_reference, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "inputAttachmentNameReference"))
+    InputSwitchScheduleActionSettings.add_member(:input_clipping_settings, Shapes::ShapeRef.new(shape: InputClippingSettings, location_name: "inputClippingSettings"))
+    InputSwitchScheduleActionSettings.add_member(:url_path, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "urlPath"))
     InputSwitchScheduleActionSettings.struct_class = Types::InputSwitchScheduleActionSettings
 
     InputVpcRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroupIds"))
@@ -1335,6 +1379,9 @@ module Aws::MediaLive
 
     InputWhitelistRuleCidr.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
     InputWhitelistRuleCidr.struct_class = Types::InputWhitelistRuleCidr
+
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
     InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServiceError.struct_class = Types::InternalServiceError
@@ -1544,6 +1591,9 @@ module Aws::MediaLive
     NetworkInputSettings.add_member(:server_validation, Shapes::ShapeRef.new(shape: NetworkInputServerValidation, location_name: "serverValidation"))
     NetworkInputSettings.struct_class = Types::NetworkInputSettings
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     Offering.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Offering.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
     Offering.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
@@ -1605,6 +1655,11 @@ module Aws::MediaLive
 
     PauseStateScheduleActionSettings.add_member(:pipelines, Shapes::ShapeRef.new(shape: __listOfPipelinePauseStateSettings, location_name: "pipelines"))
     PauseStateScheduleActionSettings.struct_class = Types::PauseStateScheduleActionSettings
+
+    PipelineDetail.add_member(:active_input_attachment_name, Shapes::ShapeRef.new(shape: __string, location_name: "activeInputAttachmentName"))
+    PipelineDetail.add_member(:active_input_switch_action_name, Shapes::ShapeRef.new(shape: __string, location_name: "activeInputSwitchActionName"))
+    PipelineDetail.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: __string, location_name: "pipelineId"))
+    PipelineDetail.struct_class = Types::PipelineDetail
 
     PipelinePauseStateSettings.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: PipelineId, required: true, location_name: "pipelineId"))
     PipelinePauseStateSettings.struct_class = Types::PipelinePauseStateSettings
@@ -1704,6 +1759,7 @@ module Aws::MediaLive
 
     ScheduleActionStartSettings.add_member(:fixed_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: FixedModeScheduleActionStartSettings, location_name: "fixedModeScheduleActionStartSettings"))
     ScheduleActionStartSettings.add_member(:follow_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: FollowModeScheduleActionStartSettings, location_name: "followModeScheduleActionStartSettings"))
+    ScheduleActionStartSettings.add_member(:immediate_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: ImmediateModeScheduleActionStartSettings, location_name: "immediateModeScheduleActionStartSettings"))
     ScheduleActionStartSettings.struct_class = Types::ScheduleActionStartSettings
 
     ScheduleDeleteResultModel.struct_class = Types::ScheduleDeleteResultModel
@@ -1735,14 +1791,14 @@ module Aws::MediaLive
     Scte35DescriptorSettings.add_member(:segmentation_descriptor_scte_35_descriptor_settings, Shapes::ShapeRef.new(shape: Scte35SegmentationDescriptor, required: true, location_name: "segmentationDescriptorScte35DescriptorSettings"))
     Scte35DescriptorSettings.struct_class = Types::Scte35DescriptorSettings
 
-    Scte35ReturnToNetworkScheduleActionSettings.add_member(:splice_event_id, Shapes::ShapeRef.new(shape: __integerMin0Max4294967295, required: true, location_name: "spliceEventId"))
+    Scte35ReturnToNetworkScheduleActionSettings.add_member(:splice_event_id, Shapes::ShapeRef.new(shape: __longMin0Max4294967295, required: true, location_name: "spliceEventId"))
     Scte35ReturnToNetworkScheduleActionSettings.struct_class = Types::Scte35ReturnToNetworkScheduleActionSettings
 
     Scte35SegmentationDescriptor.add_member(:delivery_restrictions, Shapes::ShapeRef.new(shape: Scte35DeliveryRestrictions, location_name: "deliveryRestrictions"))
     Scte35SegmentationDescriptor.add_member(:segment_num, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "segmentNum"))
     Scte35SegmentationDescriptor.add_member(:segmentation_cancel_indicator, Shapes::ShapeRef.new(shape: Scte35SegmentationCancelIndicator, required: true, location_name: "segmentationCancelIndicator"))
-    Scte35SegmentationDescriptor.add_member(:segmentation_duration, Shapes::ShapeRef.new(shape: __integerMin0Max1099511627775, location_name: "segmentationDuration"))
-    Scte35SegmentationDescriptor.add_member(:segmentation_event_id, Shapes::ShapeRef.new(shape: __integerMin0Max4294967295, required: true, location_name: "segmentationEventId"))
+    Scte35SegmentationDescriptor.add_member(:segmentation_duration, Shapes::ShapeRef.new(shape: __longMin0Max1099511627775, location_name: "segmentationDuration"))
+    Scte35SegmentationDescriptor.add_member(:segmentation_event_id, Shapes::ShapeRef.new(shape: __longMin0Max4294967295, required: true, location_name: "segmentationEventId"))
     Scte35SegmentationDescriptor.add_member(:segmentation_type_id, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "segmentationTypeId"))
     Scte35SegmentationDescriptor.add_member(:segmentation_upid, Shapes::ShapeRef.new(shape: __string, location_name: "segmentationUpid"))
     Scte35SegmentationDescriptor.add_member(:segmentation_upid_type, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "segmentationUpidType"))
@@ -1756,8 +1812,8 @@ module Aws::MediaLive
     Scte35SpliceInsert.add_member(:web_delivery_allowed_flag, Shapes::ShapeRef.new(shape: Scte35SpliceInsertWebDeliveryAllowedBehavior, location_name: "webDeliveryAllowedFlag"))
     Scte35SpliceInsert.struct_class = Types::Scte35SpliceInsert
 
-    Scte35SpliceInsertScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0Max8589934591, location_name: "duration"))
-    Scte35SpliceInsertScheduleActionSettings.add_member(:splice_event_id, Shapes::ShapeRef.new(shape: __integerMin0Max4294967295, required: true, location_name: "spliceEventId"))
+    Scte35SpliceInsertScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __longMin0Max8589934591, location_name: "duration"))
+    Scte35SpliceInsertScheduleActionSettings.add_member(:splice_event_id, Shapes::ShapeRef.new(shape: __longMin0Max4294967295, required: true, location_name: "spliceEventId"))
     Scte35SpliceInsertScheduleActionSettings.struct_class = Types::Scte35SpliceInsertScheduleActionSettings
 
     Scte35TimeSignalApos.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
@@ -1767,6 +1823,10 @@ module Aws::MediaLive
 
     Scte35TimeSignalScheduleActionSettings.add_member(:scte_35_descriptors, Shapes::ShapeRef.new(shape: __listOfScte35Descriptor, required: true, location_name: "scte35Descriptors"))
     Scte35TimeSignalScheduleActionSettings.struct_class = Types::Scte35TimeSignalScheduleActionSettings
+
+    ServiceDescriptor.add_member(:provider_name, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "providerName"))
+    ServiceDescriptor.add_member(:service_name, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "serviceName"))
+    ServiceDescriptor.struct_class = Types::ServiceDescriptor
 
     SmpteTtDestinationSettings.struct_class = Types::SmpteTtDestinationSettings
 
@@ -1787,11 +1847,15 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     StartChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     StartChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    StartChannelResponse.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     StartChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     StartChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     StartChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     StartChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
+
+    StartTimecode.add_member(:timecode, Shapes::ShapeRef.new(shape: __string, location_name: "timecode"))
+    StartTimecode.struct_class = Types::StartTimecode
 
     StaticImageActivateScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "duration"))
     StaticImageActivateScheduleActionSettings.add_member(:fade_in, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "fadeIn"))
@@ -1826,11 +1890,16 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     StopChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     StopChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    StopChannelResponse.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     StopChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     StopChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     StopChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     StopChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StopChannelResponse.struct_class = Types::StopChannelResponse
+
+    StopTimecode.add_member(:last_frame_clipping_behavior, Shapes::ShapeRef.new(shape: LastFrameClippingBehavior, location_name: "lastFrameClippingBehavior"))
+    StopTimecode.add_member(:timecode, Shapes::ShapeRef.new(shape: __string, location_name: "timecode"))
+    StopTimecode.struct_class = Types::StopTimecode
 
     Tags.key = Shapes::ShapeRef.new(shape: __string)
     Tags.value = Shapes::ShapeRef.new(shape: __string)
@@ -1846,6 +1915,9 @@ module Aws::MediaLive
     TimecodeConfig.add_member(:source, Shapes::ShapeRef.new(shape: TimecodeConfigSource, required: true, location_name: "source"))
     TimecodeConfig.add_member(:sync_threshold, Shapes::ShapeRef.new(shape: __integerMin1Max1000000, location_name: "syncThreshold"))
     TimecodeConfig.struct_class = Types::TimecodeConfig
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     TtmlDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: TtmlDestinationStyleControl, location_name: "styleControl"))
     TtmlDestinationSettings.struct_class = Types::TtmlDestinationSettings
@@ -1863,6 +1935,10 @@ module Aws::MediaLive
     UdpOutputSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     UdpOutputSettings.add_member(:fec_output_settings, Shapes::ShapeRef.new(shape: FecOutputSettings, location_name: "fecOutputSettings"))
     UdpOutputSettings.struct_class = Types::UdpOutputSettings
+
+    UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    UnprocessableEntityException.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
+    UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
 
     UpdateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     UpdateChannel.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
@@ -2035,6 +2111,8 @@ module Aws::MediaLive
     __listOfOutputDestinationSettings.member = Shapes::ShapeRef.new(shape: OutputDestinationSettings)
 
     __listOfOutputGroup.member = Shapes::ShapeRef.new(shape: OutputGroup)
+
+    __listOfPipelineDetail.member = Shapes::ShapeRef.new(shape: PipelineDetail)
 
     __listOfPipelinePauseStateSettings.member = Shapes::ShapeRef.new(shape: PipelinePauseStateSettings)
 

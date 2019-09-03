@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-08-15)
+------------------
+
+* Feature - CreateSnapshotFromVolumeRecoveryPoint API supports new parameter: Tags (to be attached to the created resource)
+
+1.30.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2019-06-04)
+------------------
+
+* Feature - AWS Storage Gateway now supports AWS PrivateLink, enabling you to administer and use gateways without needing to use public IP addresses or a NAT/Internet Gateway, while avoiding traffic from going over the internet.
+
+1.26.0 (2019-05-28)
+------------------
+
+* Feature - Introduce AssignTapePool operation to allow customers to migrate tapes between pools.
+
+1.25.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.24.0 (2019-05-15)
 ------------------
 

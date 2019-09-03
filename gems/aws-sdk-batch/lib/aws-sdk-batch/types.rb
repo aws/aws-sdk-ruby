@@ -186,6 +186,21 @@ module Aws::Batch
     #
     class CancelJobResponse < Aws::EmptyStructure; end
 
+    # These errors are usually caused by a client action, such as using an
+    # action or resource on behalf of a user that doesn't have permissions
+    # to use the action or resource, or specifying an identifier that is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ClientException AWS API Documentation
+    #
+    class ClientException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing an AWS Batch compute environment.
     #
     # @!attribute [rw] compute_environment_name
@@ -347,7 +362,13 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The VPC subnets into which the compute resources are launched.
+    #   The VPC subnets into which the compute resources are launched. For
+    #   more information, see [VPCs and Subnets][1] in the *Amazon VPC User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
@@ -587,6 +608,11 @@ module Aws::Batch
     #   Currently, the only supported resource is `GPU`.
     #   @return [Array<Types::ResourceRequirement>]
     #
+    # @!attribute [rw] linux_parameters
+    #   Linux-specific modifications that are applied to the container, such
+    #   as details for device mappings.
+    #   @return [Types::LinuxParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -609,7 +635,8 @@ module Aws::Batch
       :log_stream_name,
       :instance_type,
       :network_interfaces,
-      :resource_requirements)
+      :resource_requirements,
+      :linux_parameters)
       include Aws::Structure
     end
 
@@ -738,6 +765,15 @@ module Aws::Batch
     #             type: "GPU", # required, accepts GPU
     #           },
     #         ],
+    #         linux_parameters: {
+    #           devices: [
+    #             {
+    #               host_path: "String", # required
+    #               container_path: "String",
+    #               permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] image
@@ -925,6 +961,11 @@ module Aws::Batch
     #   Currently, the only supported resource is `GPU`.
     #   @return [Array<Types::ResourceRequirement>]
     #
+    # @!attribute [rw] linux_parameters
+    #   Linux-specific modifications that are applied to the container, such
+    #   as details for device mappings.
+    #   @return [Types::LinuxParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
     #
     class ContainerProperties < Struct.new(
@@ -941,7 +982,8 @@ module Aws::Batch
       :ulimits,
       :user,
       :instance_type,
-      :resource_requirements)
+      :resource_requirements,
+      :linux_parameters)
       include Aws::Structure
     end
 
@@ -1461,6 +1503,41 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # An object representing a container instance host device.
+    #
+    # @note When making an API call, you may pass Device
+    #   data as a hash:
+    #
+    #       {
+    #         host_path: "String", # required
+    #         container_path: "String",
+    #         permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #       }
+    #
+    # @!attribute [rw] host_path
+    #   The path for the device on the host container instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_path
+    #   The path inside the container at which to expose the host device. By
+    #   default the `hostPath` value is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The explicit permissions to provide to the container for the device.
+    #   By default, the container has permissions for `read`, `write`, and
+    #   `mknod` for the device.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Device AWS API Documentation
+    #
+    class Device < Struct.new(
+      :host_path,
+      :container_path,
+      :permissions)
+      include Aws::Structure
+    end
+
     # Determine whether your data volume persists on the host container
     # instance and where it is stored. If this parameter is empty, then the
     # Docker daemon assigns a host path for your data volume, but the data
@@ -1608,8 +1685,8 @@ module Aws::Batch
     #   The current status for the job.
     #
     #   <note markdown="1"> If your jobs do not progress to `STARTING`, see [Jobs Stuck in
-    #   `RUNNABLE` Status][1] in the troubleshooting section of the *AWS
-    #   Batch User Guide*.
+    #   RUNNABLE Status][1] in the troubleshooting section of the *AWS Batch
+    #   User Guide*.
     #
     #    </note>
     #
@@ -1911,6 +1988,41 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Linux-specific modifications that are applied to the container, such
+    # as details for device mappings.
+    #
+    # @note When making an API call, you may pass LinuxParameters
+    #   data as a hash:
+    #
+    #       {
+    #         devices: [
+    #           {
+    #             host_path: "String", # required
+    #             container_path: "String",
+    #             permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] devices
+    #   Any host devices to expose to the container. This parameter maps to
+    #   `Devices` in the [Create a container][1] section of the [Docker
+    #   Remote API][2] and the `--device` option to [docker run][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Array<Types::Device>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LinuxParameters AWS API Documentation
+    #
+    class LinuxParameters < Struct.new(
+      :devices)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListJobsRequest
     #   data as a hash:
     #
@@ -2203,6 +2315,15 @@ module Aws::Batch
     #                   type: "GPU", # required, accepts GPU
     #                 },
     #               ],
+    #               linux_parameters: {
+    #                 devices: [
+    #                   {
+    #                     host_path: "String", # required
+    #                     container_path: "String",
+    #                     permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #                   },
+    #                 ],
+    #               },
     #             },
     #           },
     #         ],
@@ -2358,6 +2479,15 @@ module Aws::Batch
     #               type: "GPU", # required, accepts GPU
     #             },
     #           ],
+    #           linux_parameters: {
+    #             devices: [
+    #               {
+    #                 host_path: "String", # required
+    #                 container_path: "String",
+    #                 permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -2437,6 +2567,15 @@ module Aws::Batch
     #               type: "GPU", # required, accepts GPU
     #             },
     #           ],
+    #           linux_parameters: {
+    #             devices: [
+    #               {
+    #                 host_path: "String", # required
+    #                 container_path: "String",
+    #                 permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #               },
+    #             ],
+    #           },
     #         },
     #         node_properties: {
     #           num_nodes: 1, # required
@@ -2488,6 +2627,15 @@ module Aws::Batch
     #                     type: "GPU", # required, accepts GPU
     #                   },
     #                 ],
+    #                 linux_parameters: {
+    #                   devices: [
+    #                     {
+    #                       host_path: "String", # required
+    #                       container_path: "String",
+    #                       permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             },
     #           ],
@@ -2644,6 +2792,18 @@ module Aws::Batch
     #
     class RetryStrategy < Struct.new(
       :attempts)
+      include Aws::Structure
+    end
+
+    # These errors are usually caused by a server issue.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServerException AWS API Documentation
+    #
+    class ServerException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

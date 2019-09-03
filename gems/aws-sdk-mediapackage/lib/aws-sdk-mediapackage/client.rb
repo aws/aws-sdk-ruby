@@ -116,6 +116,10 @@ module Aws::MediaPackage
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -365,6 +369,8 @@ module Aws::MediaPackage
     #       hls_manifests: [
     #         {
     #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           id: "__string", # required
     #           include_iframe_only_stream: false,
     #           manifest_name: "__string",
@@ -382,6 +388,8 @@ module Aws::MediaPackage
     #       },
     #     },
     #     dash_package: {
+    #       ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #       ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #       encryption: {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
@@ -410,6 +418,8 @@ module Aws::MediaPackage
     #     description: "__string",
     #     hls_package: {
     #       ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #       ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #       ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #       encryption: {
     #         constant_initialization_vector: "__string",
     #         encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
@@ -488,6 +498,9 @@ module Aws::MediaPackage
     #   resp.cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.dash_package.ad_triggers #=> Array
+    #   resp.dash_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+    #   resp.dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.dash_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
@@ -510,6 +523,9 @@ module Aws::MediaPackage
     #   resp.dash_package.suggested_presentation_delay_seconds #=> Integer
     #   resp.description #=> String
     #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.hls_package.ad_triggers #=> Array
+    #   resp.hls_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+    #   resp.hls_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.hls_package.encryption.constant_initialization_vector #=> String
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.key_rotation_interval_seconds #=> Integer
@@ -693,6 +709,9 @@ module Aws::MediaPackage
     #   resp.cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.dash_package.ad_triggers #=> Array
+    #   resp.dash_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+    #   resp.dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.dash_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
@@ -715,6 +734,9 @@ module Aws::MediaPackage
     #   resp.dash_package.suggested_presentation_delay_seconds #=> Integer
     #   resp.description #=> String
     #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.hls_package.ad_triggers #=> Array
+    #   resp.hls_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+    #   resp.hls_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.hls_package.encryption.constant_initialization_vector #=> String
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.key_rotation_interval_seconds #=> Integer
@@ -854,6 +876,9 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.origin_endpoints[0].dash_package.ad_triggers #=> Array
+    #   resp.origin_endpoints[0].dash_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+    #   resp.origin_endpoints[0].dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.origin_endpoints[0].dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.resource_id #=> String
@@ -876,6 +901,9 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.suggested_presentation_delay_seconds #=> Integer
     #   resp.origin_endpoints[0].description #=> String
     #   resp.origin_endpoints[0].hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.origin_endpoints[0].hls_package.ad_triggers #=> Array
+    #   resp.origin_endpoints[0].hls_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+    #   resp.origin_endpoints[0].hls_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.origin_endpoints[0].hls_package.encryption.constant_initialization_vector #=> String
     #   resp.origin_endpoints[0].hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.origin_endpoints[0].hls_package.encryption.key_rotation_interval_seconds #=> Integer
@@ -1186,6 +1214,8 @@ module Aws::MediaPackage
     #       hls_manifests: [
     #         {
     #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           id: "__string", # required
     #           include_iframe_only_stream: false,
     #           manifest_name: "__string",
@@ -1203,6 +1233,8 @@ module Aws::MediaPackage
     #       },
     #     },
     #     dash_package: {
+    #       ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #       ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #       encryption: {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
@@ -1231,6 +1263,8 @@ module Aws::MediaPackage
     #     description: "__string",
     #     hls_package: {
     #       ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #       ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+    #       ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #       encryption: {
     #         constant_initialization_vector: "__string",
     #         encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
@@ -1306,6 +1340,9 @@ module Aws::MediaPackage
     #   resp.cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.dash_package.ad_triggers #=> Array
+    #   resp.dash_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+    #   resp.dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.dash_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
@@ -1328,6 +1365,9 @@ module Aws::MediaPackage
     #   resp.dash_package.suggested_presentation_delay_seconds #=> Integer
     #   resp.description #=> String
     #   resp.hls_package.ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.hls_package.ad_triggers #=> Array
+    #   resp.hls_package.ad_triggers[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+    #   resp.hls_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.hls_package.encryption.constant_initialization_vector #=> String
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.key_rotation_interval_seconds #=> Integer
@@ -1390,7 +1430,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

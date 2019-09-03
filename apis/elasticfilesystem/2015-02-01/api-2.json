@@ -750,7 +750,7 @@
     },
     "ProvisionedThroughputInMibps":{
       "type":"double",
-      "min":0.0
+      "min":1.0
     },
     "PutLifecycleConfigurationRequest":{
       "type":"structure",
@@ -862,7 +862,12 @@
     },
     "TransitionToIARules":{
       "type":"string",
-      "enum":["AFTER_30_DAYS"]
+      "enum":[
+        "AFTER_14_DAYS",
+        "AFTER_30_DAYS",
+        "AFTER_60_DAYS",
+        "AFTER_90_DAYS"
+      ]
     },
     "UnsupportedAvailabilityZone":{
       "type":"structure",

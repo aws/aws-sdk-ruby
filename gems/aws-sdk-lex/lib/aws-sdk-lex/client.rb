@@ -116,6 +116,10 @@ module Aws::Lex
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -250,6 +254,106 @@ module Aws::Lex
 
     # @!group API Operations
 
+    # Removes session information for a specified bot, alias, and user ID.
+    #
+    # @option params [required, String] :bot_name
+    #   The name of the bot that contains the session data.
+    #
+    # @option params [required, String] :bot_alias
+    #   The alias in use for the bot that contains the session data.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user associated with the session data.
+    #
+    # @return [Types::DeleteSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSessionResponse#bot_name #bot_name} => String
+    #   * {Types::DeleteSessionResponse#bot_alias #bot_alias} => String
+    #   * {Types::DeleteSessionResponse#user_id #user_id} => String
+    #   * {Types::DeleteSessionResponse#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_session({
+    #     bot_name: "BotName", # required
+    #     bot_alias: "BotAlias", # required
+    #     user_id: "UserId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_name #=> String
+    #   resp.bot_alias #=> String
+    #   resp.user_id #=> String
+    #   resp.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DeleteSession AWS API Documentation
+    #
+    # @overload delete_session(params = {})
+    # @param [Hash] params ({})
+    def delete_session(params = {}, options = {})
+      req = build_request(:delete_session, params)
+      req.send_request(options)
+    end
+
+    # Returns session information for a specified bot, alias, and user ID.
+    #
+    # @option params [required, String] :bot_name
+    #   The name of the bot that contains the session data.
+    #
+    # @option params [required, String] :bot_alias
+    #   The alias in use for the bot that contains the session data.
+    #
+    # @option params [required, String] :user_id
+    #   The ID of the client application user. Amazon Lex uses this to
+    #   identify a user's conversation with your bot.
+    #
+    # @return [Types::GetSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionResponse#recent_intent_summary_view #recent_intent_summary_view} => Array&lt;Types::IntentSummary&gt;
+    #   * {Types::GetSessionResponse#session_attributes #session_attributes} => Hash&lt;String,String&gt;
+    #   * {Types::GetSessionResponse#session_id #session_id} => String
+    #   * {Types::GetSessionResponse#dialog_action #dialog_action} => Types::DialogAction
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session({
+    #     bot_name: "BotName", # required
+    #     bot_alias: "BotAlias", # required
+    #     user_id: "UserId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recent_intent_summary_view #=> Array
+    #   resp.recent_intent_summary_view[0].intent_name #=> String
+    #   resp.recent_intent_summary_view[0].slots #=> Hash
+    #   resp.recent_intent_summary_view[0].slots["String"] #=> String
+    #   resp.recent_intent_summary_view[0].confirmation_status #=> String, one of "None", "Confirmed", "Denied"
+    #   resp.recent_intent_summary_view[0].dialog_action_type #=> String, one of "ElicitIntent", "ConfirmIntent", "ElicitSlot", "Close", "Delegate"
+    #   resp.recent_intent_summary_view[0].fulfillment_state #=> String, one of "Fulfilled", "Failed", "ReadyForFulfillment"
+    #   resp.recent_intent_summary_view[0].slot_to_elicit #=> String
+    #   resp.session_attributes #=> Hash
+    #   resp.session_attributes["String"] #=> String
+    #   resp.session_id #=> String
+    #   resp.dialog_action.type #=> String, one of "ElicitIntent", "ConfirmIntent", "ElicitSlot", "Close", "Delegate"
+    #   resp.dialog_action.intent_name #=> String
+    #   resp.dialog_action.slots #=> Hash
+    #   resp.dialog_action.slots["String"] #=> String
+    #   resp.dialog_action.slot_to_elicit #=> String
+    #   resp.dialog_action.fulfillment_state #=> String, one of "Fulfilled", "Failed", "ReadyForFulfillment"
+    #   resp.dialog_action.message #=> String
+    #   resp.dialog_action.message_format #=> String, one of "PlainText", "CustomPayload", "SSML", "Composite"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSession AWS API Documentation
+    #
+    # @overload get_session(params = {})
+    # @param [Hash] params ({})
+    def get_session(params = {}, options = {})
+      req = build_request(:get_session, params)
+      req.send_request(options)
+    end
+
     # Sends user input (text or speech) to Amazon Lex. Clients use this API
     # to send text and audio requests to Amazon Lex at runtime. Amazon Lex
     # interprets the user input using the machine learning model that it
@@ -311,7 +415,7 @@ module Aws::Lex
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html
+    # [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html
     #
     # @option params [required, String] :bot_name
     #   Name of the Amazon Lex bot.
@@ -362,7 +466,7 @@ module Aws::Lex
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
     #
     # @option params [String] :request_attributes
     #   You pass this value as the `x-amz-lex-request-attributes` HTTP header.
@@ -384,7 +488,7 @@ module Aws::Lex
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
     #
     # @option params [required, String] :content_type
     #   You pass this value as the `Content-Type` HTTP header.
@@ -429,7 +533,10 @@ module Aws::Lex
     #     example, if you specify `audio/mpeg` as the value, Amazon Lex
     #     returns speech in the MPEG format.
     #
-    #     The following are the accepted values:
+    #   * If the value is `audio/pcm`, the speech returned is `audio/pcm` in
+    #     16-bit, little endian format.
+    #
+    #   * The following are the accepted values:
     #
     #     * audio/mpeg
     #
@@ -498,7 +605,7 @@ module Aws::Lex
       req.send_request(options, &block)
     end
 
-    # Sends user input (text-only) to Amazon Lex. Client applications can
+    # Sends user input (text or SSML) to Amazon Lex. Client applications can
     # use this API to send requests to Amazon Lex at runtime. Amazon Lex
     # then interprets the user input using the machine learning model it
     # built for the bot.
@@ -554,7 +661,7 @@ module Aws::Lex
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html
+    # [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html
     #
     # @option params [required, String] :bot_name
     #   The name of the Amazon Lex bot.
@@ -596,7 +703,7 @@ module Aws::Lex
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
     #
     # @option params [Hash<String,String>] :request_attributes
     #   Request-specific information passed between Amazon Lex and a client
@@ -609,7 +716,7 @@ module Aws::Lex
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
     #
     # @option params [required, String] :input_text
     #   The text that the user entered (Amazon Lex interprets this text).
@@ -671,6 +778,121 @@ module Aws::Lex
       req.send_request(options)
     end
 
+    # Creates a new session or modifies an existing session with an Amazon
+    # Lex bot. Use this operation to enable your application to set the
+    # state of the bot.
+    #
+    # For more information, see [Managing Sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lex/latest/dg/how-session-api.html
+    #
+    # @option params [required, String] :bot_name
+    #   The name of the bot that contains the session data.
+    #
+    # @option params [required, String] :bot_alias
+    #   The alias in use for the bot that contains the session data.
+    #
+    # @option params [required, String] :user_id
+    #   The ID of the client application user. Amazon Lex uses this to
+    #   identify a user's conversation with your bot.
+    #
+    # @option params [Hash<String,String>] :session_attributes
+    #   Map of key/value pairs representing the session-specific context
+    #   information. It contains application information passed between Amazon
+    #   Lex and a client application.
+    #
+    # @option params [Types::DialogAction] :dialog_action
+    #   Sets the next action that the bot should take to fulfill the
+    #   conversation.
+    #
+    # @option params [String] :accept
+    #   The message that Amazon Lex returns in the response can be either text
+    #   or speech based depending on the value of this field.
+    #
+    #   * If the value is `text/plain; charset=utf-8`, Amazon Lex returns text
+    #     in the response.
+    #
+    #   * If the value begins with `audio/`, Amazon Lex returns speech in the
+    #     response. Amazon Lex uses Amazon Polly to generate the speech in the
+    #     configuration that you specify. For example, if you specify
+    #     `audio/mpeg` as the value, Amazon Lex returns speech in the MPEG
+    #     format.
+    #
+    #   * If the value is `audio/pcm`, the speech is returned as `audio/pcm`
+    #     in 16-bit, little endian format.
+    #
+    #   * The following are the accepted values:
+    #
+    #     * `audio/mpeg`
+    #
+    #     * `audio/ogg`
+    #
+    #     * `audio/pcm`
+    #
+    #     * `audio/*` (defaults to mpeg)
+    #
+    #     * `text/plain; charset=utf-8`
+    #
+    # @return [Types::PutSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutSessionResponse#content_type #content_type} => String
+    #   * {Types::PutSessionResponse#intent_name #intent_name} => String
+    #   * {Types::PutSessionResponse#slots #slots} => String
+    #   * {Types::PutSessionResponse#session_attributes #session_attributes} => String
+    #   * {Types::PutSessionResponse#message #message} => String
+    #   * {Types::PutSessionResponse#message_format #message_format} => String
+    #   * {Types::PutSessionResponse#dialog_state #dialog_state} => String
+    #   * {Types::PutSessionResponse#slot_to_elicit #slot_to_elicit} => String
+    #   * {Types::PutSessionResponse#audio_stream #audio_stream} => IO
+    #   * {Types::PutSessionResponse#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_session({
+    #     bot_name: "BotName", # required
+    #     bot_alias: "BotAlias", # required
+    #     user_id: "UserId", # required
+    #     session_attributes: {
+    #       "String" => "String",
+    #     },
+    #     dialog_action: {
+    #       type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
+    #       intent_name: "IntentName",
+    #       slots: {
+    #         "String" => "String",
+    #       },
+    #       slot_to_elicit: "String",
+    #       fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
+    #       message: "Text",
+    #       message_format: "PlainText", # accepts PlainText, CustomPayload, SSML, Composite
+    #     },
+    #     accept: "Accept",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content_type #=> String
+    #   resp.intent_name #=> String
+    #   resp.slots #=> String
+    #   resp.session_attributes #=> String
+    #   resp.message #=> String
+    #   resp.message_format #=> String, one of "PlainText", "CustomPayload", "SSML", "Composite"
+    #   resp.dialog_state #=> String, one of "ElicitIntent", "ConfirmIntent", "ElicitSlot", "Fulfilled", "ReadyForFulfillment", "Failed"
+    #   resp.slot_to_elicit #=> String
+    #   resp.audio_stream #=> IO
+    #   resp.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PutSession AWS API Documentation
+    #
+    # @overload put_session(params = {})
+    # @param [Hash] params ({})
+    def put_session(params = {}, options = {}, &block)
+      req = build_request(:put_session, params)
+      req.send_request(options, &block)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -684,7 +906,7 @@ module Aws::Lex
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lex'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -289,6 +289,12 @@ module Aws::DAX
     IncreaseReplicationFactorResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     IncreaseReplicationFactorResponse.struct_class = Types::IncreaseReplicationFactorResponse
 
+    InvalidParameterCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
     ListTagsRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))

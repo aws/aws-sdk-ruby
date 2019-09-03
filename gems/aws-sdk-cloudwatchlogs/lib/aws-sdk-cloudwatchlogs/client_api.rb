@@ -101,6 +101,7 @@ module Aws::CloudWatchLogs
     LogGroupField = Shapes::StructureShape.new(name: 'LogGroupField')
     LogGroupFieldList = Shapes::ListShape.new(name: 'LogGroupFieldList')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    LogGroupNames = Shapes::ListShape.new(name: 'LogGroupNames')
     LogGroups = Shapes::ListShape.new(name: 'LogGroups')
     LogRecord = Shapes::MapShape.new(name: 'LogRecord')
     LogRecordPointer = Shapes::StringShape.new(name: 'LogRecordPointer')
@@ -211,6 +212,9 @@ module Aws::CloudWatchLogs
     CreateLogStreamRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     CreateLogStreamRequest.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, required: true, location_name: "logStreamName"))
     CreateLogStreamRequest.struct_class = Types::CreateLogStreamRequest
+
+    DataAlreadyAcceptedException.add_member(:expected_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "expectedSequenceToken"))
+    DataAlreadyAcceptedException.struct_class = Types::DataAlreadyAcceptedException
 
     DeleteDestinationRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "destinationName"))
     DeleteDestinationRequest.struct_class = Types::DeleteDestinationRequest
@@ -361,7 +365,7 @@ module Aws::CloudWatchLogs
     FilterLogEventsRequest.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "filterPattern"))
     FilterLogEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     FilterLogEventsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: EventsLimit, location_name: "limit"))
-    FilterLogEventsRequest.add_member(:interleaved, Shapes::ShapeRef.new(shape: Interleaved, location_name: "interleaved"))
+    FilterLogEventsRequest.add_member(:interleaved, Shapes::ShapeRef.new(shape: Interleaved, deprecated: true, location_name: "interleaved", metadata: {"deprecatedMessage"=>"Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group."}))
     FilterLogEventsRequest.struct_class = Types::FilterLogEventsRequest
 
     FilterLogEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: FilteredLogEvents, location_name: "events"))
@@ -421,6 +425,9 @@ module Aws::CloudWatchLogs
 
     InputLogStreamNames.member = Shapes::ShapeRef.new(shape: LogStreamName)
 
+    InvalidSequenceTokenException.add_member(:expected_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "expectedSequenceToken"))
+    InvalidSequenceTokenException.struct_class = Types::InvalidSequenceTokenException
+
     ListTagsLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     ListTagsLogGroupRequest.struct_class = Types::ListTagsLogGroupRequest
 
@@ -442,6 +449,8 @@ module Aws::CloudWatchLogs
 
     LogGroupFieldList.member = Shapes::ShapeRef.new(shape: LogGroupField)
 
+    LogGroupNames.member = Shapes::ShapeRef.new(shape: LogGroupName)
+
     LogGroups.member = Shapes::ShapeRef.new(shape: LogGroup)
 
     LogRecord.key = Shapes::ShapeRef.new(shape: Field)
@@ -454,10 +463,13 @@ module Aws::CloudWatchLogs
     LogStream.add_member(:last_ingestion_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastIngestionTime"))
     LogStream.add_member(:upload_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "uploadSequenceToken"))
     LogStream.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
-    LogStream.add_member(:stored_bytes, Shapes::ShapeRef.new(shape: StoredBytes, location_name: "storedBytes"))
+    LogStream.add_member(:stored_bytes, Shapes::ShapeRef.new(shape: StoredBytes, deprecated: true, location_name: "storedBytes", metadata: {"deprecatedMessage"=>"Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The storedBytes parameter for log groups is not affected."}))
     LogStream.struct_class = Types::LogStream
 
     LogStreams.member = Shapes::ShapeRef.new(shape: LogStream)
+
+    MalformedQueryException.add_member(:query_compile_error, Shapes::ShapeRef.new(shape: QueryCompileError, location_name: "queryCompileError"))
+    MalformedQueryException.struct_class = Types::MalformedQueryException
 
     MetricFilter.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, location_name: "filterName"))
     MetricFilter.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "filterPattern"))
@@ -585,7 +597,8 @@ module Aws::CloudWatchLogs
 
     SearchedLogStreams.member = Shapes::ShapeRef.new(shape: SearchedLogStream)
 
-    StartQueryRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    StartQueryRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
+    StartQueryRequest.add_member(:log_group_names, Shapes::ShapeRef.new(shape: LogGroupNames, location_name: "logGroupNames"))
     StartQueryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     StartQueryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
     StartQueryRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))

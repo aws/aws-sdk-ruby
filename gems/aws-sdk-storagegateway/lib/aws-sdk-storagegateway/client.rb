@@ -116,6 +116,10 @@ module Aws::StorageGateway
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -665,6 +669,51 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def add_working_storage(params = {}, options = {})
       req = build_request(:add_working_storage, params)
+      req.send_request(options)
+    end
+
+    # Assigns a tape to a tape pool for archiving. The tape assigned to a
+    # pool is archived in the S3 storage class that is associated with the
+    # pool. When you use your backup application to eject the tape, the tape
+    # is archived directly into the S3 storage class (Glacier or Deep
+    # Archive) that corresponds to the pool.
+    #
+    # Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #
+    # @option params [required, String] :tape_arn
+    #   The unique Amazon Resource Name (ARN) of the virtual tape that you
+    #   want to add to the tape pool.
+    #
+    # @option params [required, String] :pool_id
+    #   The ID of the pool that you want to add your tape to for archiving.
+    #   The tape in this pool is archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #
+    # @return [Types::AssignTapePoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssignTapePoolOutput#tape_arn #tape_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.assign_tape_pool({
+    #     tape_arn: "TapeARN", # required
+    #     pool_id: "PoolId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tape_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssignTapePool AWS API Documentation
+    #
+    # @overload assign_tape_pool(params = {})
+    # @param [Hash] params ({})
+    def assign_tape_pool(params = {}, options = {})
+      req = build_request(:assign_tape_pool, params)
       req.send_request(options)
     end
 
@@ -1223,10 +1272,12 @@ module Aws::StorageGateway
     #   in the Storage Gateway User Guide.
     #
     # @option params [Array<String>] :admin_user_list
-    #   A list of users or groups in the Active Directory that have
-    #   administrator rights to the file share. A group must be prefixed with
-    #   the @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   A list of users in the Active Directory that will be granted
+    #   administrator privileges on the file share. These users can do all
+    #   file operations as the super-user.
+    #
+    #   Use this option very carefully, because any user in this list can do
+    #   anything they like on the file share, regardless of file permissions.
     #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
@@ -1438,6 +1489,17 @@ module Aws::StorageGateway
     #   field, and in the AWS Storage Gateway snapshot **Details** pane,
     #   **Description** field
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters: +
+    #   - = . \_ : / @. The maximum length of a tag's key is 128 characters,
+    #   and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #
     # @return [Types::CreateSnapshotFromVolumeRecoveryPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSnapshotFromVolumeRecoveryPointOutput#snapshot_id #snapshot_id} => String
@@ -1466,6 +1528,12 @@ module Aws::StorageGateway
     #   resp = client.create_snapshot_from_volume_recovery_point({
     #     volume_arn: "VolumeARN", # required
     #     snapshot_description: "SnapshotDescription", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2588,6 +2656,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeGatewayInformationOutput#ec2_instance_id #ec2_instance_id} => String
     #   * {Types::DescribeGatewayInformationOutput#ec2_instance_region #ec2_instance_region} => String
     #   * {Types::DescribeGatewayInformationOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::DescribeGatewayInformationOutput#vpc_endpoint #vpc_endpoint} => String
     #
     #
     # @example Example: To describe metadata about the gateway
@@ -2641,6 +2710,7 @@ module Aws::StorageGateway
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.vpc_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation AWS API Documentation
     #
@@ -2834,6 +2904,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeSMBSettingsOutput#gateway_arn #gateway_arn} => String
     #   * {Types::DescribeSMBSettingsOutput#domain_name #domain_name} => String
     #   * {Types::DescribeSMBSettingsOutput#smb_guest_password_set #smb_guest_password_set} => Boolean
+    #   * {Types::DescribeSMBSettingsOutput#smb_security_strategy #smb_security_strategy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2846,6 +2917,7 @@ module Aws::StorageGateway
     #   resp.gateway_arn #=> String
     #   resp.domain_name #=> String
     #   resp.smb_guest_password_set #=> Boolean
+    #   resp.smb_security_strategy #=> String, one of "ClientSpecified", "MandatorySigning", "MandatoryEncryption"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettings AWS API Documentation
     #
@@ -2872,6 +2944,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeSnapshotScheduleOutput#recurrence_in_hours #recurrence_in_hours} => Integer
     #   * {Types::DescribeSnapshotScheduleOutput#description #description} => String
     #   * {Types::DescribeSnapshotScheduleOutput#timezone #timezone} => String
+    #   * {Types::DescribeSnapshotScheduleOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To describe snapshot schedule for gateway volume
@@ -2905,6 +2978,9 @@ module Aws::StorageGateway
     #   resp.recurrence_in_hours #=> Integer
     #   resp.description #=> String
     #   resp.timezone #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotSchedule AWS API Documentation
     #
@@ -3654,7 +3730,7 @@ module Aws::StorageGateway
     #   The name of the domain that you want the gateway to join.
     #
     # @option params [String] :organizational_unit
-    #   The organizational unit (OU) is a container with an Active Directory
+    #   The organizational unit (OU) is a container in an Active Directory
     #   that can hold users, groups, computers, and other OUs and this
     #   parameter specifies the OU that the gateway will join within the AD
     #   domain.
@@ -4240,13 +4316,13 @@ module Aws::StorageGateway
     end
 
     # Sends you notification through CloudWatch Events when all files
-    # written to your NFS file share have been uploaded to Amazon S3.
+    # written to your file share have been uploaded to Amazon S3.
     #
     # AWS Storage Gateway can send a notification through Amazon CloudWatch
     # Events when all files written to your file share up to that point in
     # time have been uploaded to Amazon S3. These files include files
-    # written to the NFS file share up to the time that you make a request
-    # for notification. When the upload is done, Storage Gateway sends you
+    # written to the file share up to the time that you make a request for
+    # notification. When the upload is done, Storage Gateway sends you
     # notification through an Amazon CloudWatch Event. You can configure
     # CloudWatch Events to send the notification through event targets such
     # as Amazon SNS or AWS Lambda function. This operation is only supported
@@ -5352,10 +5428,10 @@ module Aws::StorageGateway
     #   the Storage Gateway User Guide.
     #
     # @option params [Array<String>] :admin_user_list
-    #   A list of users or groups in the Active Directory that have
-    #   administrator rights to the file share. A group must be prefixed with
-    #   the @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   A list of users in the Active Directory that have administrator rights
+    #   to the file share. A group must be prefixed with the @ character. For
+    #   example `@group1`. Can only be set if Authentication is set to
+    #   `ActiveDirectory`.
     #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
@@ -5400,6 +5476,62 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def update_smb_file_share(params = {}, options = {})
       req = build_request(:update_smb_file_share, params)
+      req.send_request(options)
+    end
+
+    # Updates the SMB security strategy on a file gateway. This action is
+    # only supported in file gateways.
+    #
+    # <note markdown="1"> This API is called Security level in the User Guide.
+    #
+    #  A higher security level can affect performance of the gateway.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #
+    # @option params [required, String] :smb_security_strategy
+    #   Specifies the type of security strategy.
+    #
+    #   ClientSpecified: if you use this option, requests are established
+    #   based on what is negotiated by the client. This option is recommended
+    #   when you want to maximize compatibility across different clients in
+    #   your environment.
+    #
+    #   MandatorySigning: if you use this option, file gateway only allows
+    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
+    #   This option works with SMB clients on Microsoft Windows Vista, Windows
+    #   Server 2008 or newer.
+    #
+    #   MandatoryEncryption: if you use this option, file gateway only allows
+    #   connections from SMBv3 clients that have encryption enabled. This
+    #   option is highly recommended for environments that handle sensitive
+    #   data. This option works with SMB clients on Microsoft Windows 8,
+    #   Windows Server 2012 or newer.
+    #
+    # @return [Types::UpdateSMBSecurityStrategyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSMBSecurityStrategyOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_smb_security_strategy({
+    #     gateway_arn: "GatewayARN", # required
+    #     smb_security_strategy: "ClientSpecified", # required, accepts ClientSpecified, MandatorySigning, MandatoryEncryption
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBSecurityStrategy AWS API Documentation
+    #
+    # @overload update_smb_security_strategy(params = {})
+    # @param [Hash] params ({})
+    def update_smb_security_strategy(params = {}, options = {})
+      req = build_request(:update_smb_security_strategy, params)
       req.send_request(options)
     end
 
@@ -5559,7 +5691,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

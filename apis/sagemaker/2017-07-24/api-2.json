@@ -951,6 +951,10 @@
         "SingleRecord"
       ]
     },
+    "BillableTimeInSeconds":{
+      "type":"integer",
+      "min":1
+    },
     "Boolean":{"type":"boolean"},
     "BooleanOperator":{
       "type":"string",
@@ -1038,6 +1042,14 @@
       "member":{"shape":"ChannelSpecification"},
       "max":8,
       "min":1
+    },
+    "CheckpointConfig":{
+      "type":"structure",
+      "required":["S3Uri"],
+      "members":{
+        "S3Uri":{"shape":"S3Uri"},
+        "LocalPath":{"shape":"DirectoryPath"}
+      }
     },
     "CodeRepositoryArn":{
       "type":"string",
@@ -1527,7 +1539,9 @@
         "StoppingCondition":{"shape":"StoppingCondition"},
         "Tags":{"shape":"TagList"},
         "EnableNetworkIsolation":{"shape":"Boolean"},
-        "EnableInterContainerTrafficEncryption":{"shape":"Boolean"}
+        "EnableInterContainerTrafficEncryption":{"shape":"Boolean"},
+        "EnableManagedSpotTraining":{"shape":"Boolean"},
+        "CheckpointConfig":{"shape":"CheckpointConfig"}
       }
     },
     "CreateTrainingJobResponse":{
@@ -1556,6 +1570,7 @@
         "TransformInput":{"shape":"TransformInput"},
         "TransformOutput":{"shape":"TransformOutput"},
         "TransformResources":{"shape":"TransformResources"},
+        "DataProcessing":{"shape":"DataProcessing"},
         "Tags":{"shape":"TagList"}
       }
     },
@@ -1594,10 +1609,19 @@
       "min":1,
       "pattern":"[\\S\\s]+"
     },
+    "DataProcessing":{
+      "type":"structure",
+      "members":{
+        "InputFilter":{"shape":"JsonPath"},
+        "OutputFilter":{"shape":"JsonPath"},
+        "JoinSource":{"shape":"JoinSource"}
+      }
+    },
     "DataSource":{
       "type":"structure",
       "members":{
-        "S3DataSource":{"shape":"S3DataSource"}
+        "S3DataSource":{"shape":"S3DataSource"},
+        "FileSystemDataSource":{"shape":"FileSystemDataSource"}
       }
     },
     "DeleteAlgorithmInput":{
@@ -2082,7 +2106,11 @@
         "SecondaryStatusTransitions":{"shape":"SecondaryStatusTransitions"},
         "FinalMetricDataList":{"shape":"FinalMetricDataList"},
         "EnableNetworkIsolation":{"shape":"Boolean"},
-        "EnableInterContainerTrafficEncryption":{"shape":"Boolean"}
+        "EnableInterContainerTrafficEncryption":{"shape":"Boolean"},
+        "EnableManagedSpotTraining":{"shape":"Boolean"},
+        "CheckpointConfig":{"shape":"CheckpointConfig"},
+        "TrainingTimeInSeconds":{"shape":"TrainingTimeInSeconds"},
+        "BillableTimeInSeconds":{"shape":"BillableTimeInSeconds"}
       }
     },
     "DescribeTransformJobRequest":{
@@ -2119,7 +2147,8 @@
         "CreationTime":{"shape":"Timestamp"},
         "TransformStartTime":{"shape":"Timestamp"},
         "TransformEndTime":{"shape":"Timestamp"},
-        "LabelingJobArn":{"shape":"LabelingJobArn"}
+        "LabelingJobArn":{"shape":"LabelingJobArn"},
+        "DataProcessing":{"shape":"DataProcessing"}
       }
     },
     "DescribeWorkteamRequest":{
@@ -2174,6 +2203,11 @@
         "Enabled",
         "Disabled"
       ]
+    },
+    "DirectoryPath":{
+      "type":"string",
+      "max":4096,
+      "pattern":".*"
     },
     "DisassociateAdditionalCodeRepositories":{"type":"boolean"},
     "DisassociateDefaultCodeRepository":{"type":"boolean"},
@@ -2313,6 +2347,40 @@
       "type":"string",
       "max":1024
     },
+    "FileSystemAccessMode":{
+      "type":"string",
+      "enum":[
+        "rw",
+        "ro"
+      ]
+    },
+    "FileSystemDataSource":{
+      "type":"structure",
+      "required":[
+        "FileSystemId",
+        "FileSystemAccessMode",
+        "FileSystemType",
+        "DirectoryPath"
+      ],
+      "members":{
+        "FileSystemId":{"shape":"FileSystemId"},
+        "FileSystemAccessMode":{"shape":"FileSystemAccessMode"},
+        "FileSystemType":{"shape":"FileSystemType"},
+        "DirectoryPath":{"shape":"DirectoryPath"}
+      }
+    },
+    "FileSystemId":{
+      "type":"string",
+      "min":11,
+      "pattern":".*"
+    },
+    "FileSystemType":{
+      "type":"string",
+      "enum":[
+        "EFS",
+        "FSxLustre"
+      ]
+    },
     "Filter":{
       "type":"structure",
       "required":["Name"],
@@ -2349,7 +2417,7 @@
     "FinalMetricDataList":{
       "type":"list",
       "member":{"shape":"MetricData"},
-      "max":20,
+      "max":40,
       "min":0
     },
     "Float":{"type":"float"},
@@ -2483,7 +2551,9 @@
         "ResourceConfig":{"shape":"ResourceConfig"},
         "StoppingCondition":{"shape":"StoppingCondition"},
         "EnableNetworkIsolation":{"shape":"Boolean"},
-        "EnableInterContainerTrafficEncryption":{"shape":"Boolean"}
+        "EnableInterContainerTrafficEncryption":{"shape":"Boolean"},
+        "EnableManagedSpotTraining":{"shape":"Boolean"},
+        "CheckpointConfig":{"shape":"CheckpointConfig"}
       }
     },
     "HyperParameterTrainingJobSummaries":{
@@ -2681,7 +2751,7 @@
     "InputDataConfig":{
       "type":"list",
       "member":{"shape":"Channel"},
-      "max":8,
+      "max":20,
       "min":1
     },
     "InputModes":{
@@ -2773,6 +2843,18 @@
       "max":255,
       "min":1,
       "pattern":".+"
+    },
+    "JoinSource":{
+      "type":"string",
+      "enum":[
+        "Input",
+        "None"
+      ]
+    },
+    "JsonPath":{
+      "type":"string",
+      "max":63,
+      "min":0
     },
     "KmsKeyId":{
       "type":"string",
@@ -3413,6 +3495,10 @@
       "type":"integer",
       "min":1
     },
+    "MaxWaitTimeInSeconds":{
+      "type":"integer",
+      "min":1
+    },
     "MemberDefinition":{
       "type":"structure",
       "members":{
@@ -3447,7 +3533,7 @@
     "MetricDefinitionList":{
       "type":"list",
       "member":{"shape":"MetricDefinition"},
-      "max":20,
+      "max":40,
       "min":0
     },
     "MetricName":{
@@ -4005,6 +4091,7 @@
     "ProductionVariantList":{
       "type":"list",
       "member":{"shape":"ProductionVariant"},
+      "max":10,
       "min":1
     },
     "ProductionVariantSummary":{
@@ -4294,7 +4381,9 @@
         "Stopped",
         "MaxRuntimeExceeded",
         "Completed",
-        "Failed"
+        "Failed",
+        "Interrupted",
+        "MaxWaitTimeExceeded"
       ]
     },
     "SecondaryStatusTransition":{
@@ -4441,7 +4530,8 @@
     "StoppingCondition":{
       "type":"structure",
       "members":{
-        "MaxRuntimeInSeconds":{"shape":"MaxRuntimeInSeconds"}
+        "MaxRuntimeInSeconds":{"shape":"MaxRuntimeInSeconds"},
+        "MaxWaitTimeInSeconds":{"shape":"MaxWaitTimeInSeconds"}
       }
     },
     "String":{"type":"string"},
@@ -4535,7 +4625,11 @@
         "rasp3b",
         "deeplens",
         "rk3399",
-        "rk3288"
+        "rk3288",
+        "aisage",
+        "sbe_c",
+        "qcs605",
+        "qcs603"
       ]
     },
     "TaskAvailabilityLifetimeInSeconds":{
@@ -4573,8 +4667,8 @@
     },
     "TaskTimeLimitInSeconds":{
       "type":"integer",
-      "max":3600,
-      "min":1
+      "max":28800,
+      "min":30
     },
     "TaskTitle":{
       "type":"string",
@@ -4633,7 +4727,8 @@
         "ml.c5.2xlarge",
         "ml.c5.4xlarge",
         "ml.c5.9xlarge",
-        "ml.c5.18xlarge"
+        "ml.c5.18xlarge",
+        "ml.p3dn.24xlarge"
       ]
     },
     "TrainingInstanceTypes":{
@@ -4777,6 +4872,10 @@
         "TrainingChannels":{"shape":"ChannelSpecifications"},
         "SupportedTuningJobObjectiveMetrics":{"shape":"HyperParameterTuningJobObjectives"}
       }
+    },
+    "TrainingTimeInSeconds":{
+      "type":"integer",
+      "min":1
     },
     "TransformDataSource":{
       "type":"structure",

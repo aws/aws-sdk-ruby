@@ -762,6 +762,32 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # The directory service doesn't recognize the credentials supplied by
+    # WorkMail.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DirectoryServiceAuthenticationFailedException AWS API Documentation
+    #
+    class DirectoryServiceAuthenticationFailedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The directory on which you are trying to perform operations isn't
+    # available.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DirectoryUnavailableException AWS API Documentation
+    #
+    class DirectoryUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateDelegateFromResourceRequest
     #   data as a hash:
     #
@@ -831,6 +857,58 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateMemberFromGroupResponse AWS API Documentation
     #
     class DisassociateMemberFromGroupResponse < Aws::EmptyStructure; end
+
+    # The email address that you're trying to assign is already created for
+    # a different user, group, or resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/EmailAddressInUseException AWS API Documentation
+    #
+    class EmailAddressInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The user, group, or resource that you're trying to register is
+    # already registered.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/EntityAlreadyRegisteredException AWS API Documentation
+    #
+    class EntityAlreadyRegisteredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The identifier supplied for the user, group, or resource does not
+    # exist in your organization.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/EntityNotFoundException AWS API Documentation
+    #
+    class EntityNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You are performing an operation on a user, group, or resource that
+    # isn't in the expected state, such as trying to delete an active user.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/EntityStateException AWS API Documentation
+    #
+    class EntityStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass GetMailboxDetailsRequest
     #   data as a hash:
@@ -911,6 +989,46 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      include Aws::Structure
+    end
+
+    # The configuration for a resource isn't valid. A resource must either
+    # be able to auto-respond to requests or have at least one delegate
+    # associated that can do so on its behalf.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/InvalidConfigurationException AWS API Documentation
+    #
+    class InvalidConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more of the input parameters don't match the service's
+    # restrictions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The supplied password doesn't match the minimum security constraints,
+    # such as length or use of special characters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/InvalidPasswordException AWS API Documentation
+    #
+    class InvalidPasswordException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1323,6 +1441,32 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # For an email or alias to be created in Amazon WorkMail, the included
+    # domain must be defined in the organization.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/MailDomainNotFoundException AWS API Documentation
+    #
+    class MailDomainNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # After a domain has been added to the organization, it must be
+    # verified. The domain is not yet verified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/MailDomainStateException AWS API Documentation
+    #
+    class MailDomainStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The representation of a user or group.
     #
     # @!attribute [rw] id
@@ -1360,6 +1504,44 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      include Aws::Structure
+    end
+
+    # The user, group, or resource name isn't unique in Amazon WorkMail.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/NameAvailabilityException AWS API Documentation
+    #
+    class NameAvailabilityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An operation received a valid organization identifier that either
+    # doesn't belong or exist in the system.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/OrganizationNotFoundException AWS API Documentation
+    #
+    class OrganizationNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The organization must have a valid state (Active or Synchronizing) to
+    # perform certain operations on the organization or its members.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/OrganizationStateException AWS API Documentation
+    #
+    class OrganizationStateException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1509,6 +1691,18 @@ module Aws::WorkMail
     #
     class RegisterToWorkMailResponse < Aws::EmptyStructure; end
 
+    # This user, group, or resource name is not allowed in Amazon WorkMail.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ReservedNameException AWS API Documentation
+    #
+    class ReservedNameException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ResetPasswordRequest
     #   data as a hash:
     #
@@ -1587,6 +1781,18 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      include Aws::Structure
+    end
+
+    # You can't perform a write operation against a read-only directory.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

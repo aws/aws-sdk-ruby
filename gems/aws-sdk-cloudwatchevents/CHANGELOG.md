@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-07-11)
+------------------
+
+* Feature - Adds APIs for partner event sources, partner event buses, and custom event buses. These new features are managed in the EventBridge service.
+
+1.22.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.19.0 (2019-05-15)
 ------------------
 

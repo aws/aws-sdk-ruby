@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-07-12)
+------------------
+
+* Feature - Amazon Elasticsearch Service now supports M5, C5, and R5 instance types.
+
+1.24.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.21.0 (2019-05-15)
 ------------------
 

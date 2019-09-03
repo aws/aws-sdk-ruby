@@ -43,7 +43,7 @@ module Aws::DeviceFarm
     #
     # @!attribute [rw] default_job_timeout_minutes
     #   The default number of minutes (at the account level) a test run will
-    #   execute before it times out. Default value is 60 minutes.
+    #   execute before it times out. The default value is 150 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] skip_app_resign
@@ -70,6 +70,19 @@ module Aws::DeviceFarm
       :max_slots,
       :default_job_timeout_minutes,
       :skip_app_resign)
+      include Aws::Structure
+    end
+
+    # An invalid argument was specified.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ArgumentException AWS API Documentation
+    #
+    class ArgumentException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -137,7 +150,7 @@ module Aws::DeviceFarm
     #   * APPLICATION\_CRASH\_REPORT: The application crash report output
     #     type.
     #
-    #   * XCTEST\_LOG: The XCode test output type.
+    #   * XCTEST\_LOG: The Xcode test output type.
     #
     #   * VIDEO: The Video output type.
     #
@@ -753,9 +766,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -786,7 +799,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #
     #   **Note** If you call `CreateUpload` with `WEB_APP` specified, AWS
     #   Device Farm throws an `ArgumentException` error.
@@ -1025,7 +1038,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the sesssion for which you want to
+    #   The Amazon Resource Name (ARN) of the session for which you want to
     #   delete remote access.
     #   @return [String]
     #
@@ -1879,9 +1892,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] test
@@ -2362,6 +2375,19 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # An entity with the same name already exists.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/IdempotencyException AWS API Documentation
+    #
+    class IdempotencyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents information about incompatibility.
     #
     # @!attribute [rw] message
@@ -2483,6 +2509,19 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # There was an error with the update request, or you do not have
+    # sufficient permissions to update this VPC endpoint configuration.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a device.
     #
     # @!attribute [rw] arn
@@ -2533,9 +2572,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -2641,6 +2680,19 @@ module Aws::DeviceFarm
       :device_minutes,
       :video_endpoint,
       :video_capture)
+      include Aws::Structure
+    end
+
+    # A limit was exceeded.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2846,7 +2898,7 @@ module Aws::DeviceFarm
     #   attribute, an operator, and one or more values.
     #
     #   * Attribute: The aspect of a device such as platform or model used
-    #     as the selction criteria in a device filter.
+    #     as the selection criteria in a device filter.
     #
     #     Allowed values include:
     #
@@ -3459,6 +3511,42 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) for which to list
+    #   tags. You can associate tags with the following Device Farm
+    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Represents a request to the list tests operation.
     #
     # @note When making an API call, you may pass ListTestsRequest
@@ -3598,7 +3686,7 @@ module Aws::DeviceFarm
     #
     #   * IOS\_APP: An iOS upload.
     #
-    #   * WEB\_APP: A web appliction upload.
+    #   * WEB\_APP: A web application upload.
     #
     #   * EXTERNAL\_DATA: An external data upload.
     #
@@ -3639,9 +3727,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -3672,7 +3760,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3883,6 +3971,33 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # Exception gets thrown when a user is not eligible to perform the
+    # specified transaction.
+    #
+    # @!attribute [rw] message
+    #   The HTTP response code of a Not Eligible exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/NotEligibleException AWS API Documentation
+    #
+    class NotEligibleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified entity was not found.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the metadata of a device offering.
     #
     # @!attribute [rw] id
@@ -4085,7 +4200,7 @@ module Aws::DeviceFarm
     #
     # @!attribute [rw] default_job_timeout_minutes
     #   The default number of minutes (at the project level) a test run will
-    #   execute before it times out. Default value is 60 minutes.
+    #   execute before it times out. The default value is 150 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] created
@@ -4323,7 +4438,7 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] device_minutes
-    #   The number of minutes a device is used in a remote access sesssion
+    #   The number of minutes a device is used in a remote access session
     #   (including setup and teardown minutes).
     #   @return [Types::DeviceMinutes]
     #
@@ -4626,9 +4741,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -5180,9 +5295,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] test_package_arn
@@ -5295,6 +5410,19 @@ module Aws::DeviceFarm
       :test_spec_arn,
       :filter,
       :parameters)
+      include Aws::Structure
+    end
+
+    # There was a problem with the service account.
+    #
+    # @!attribute [rw] message
+    #   Any additional information about the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ServiceAccountException AWS API Documentation
+    #
+    class ServiceAccountException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5448,9 +5576,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -5539,6 +5667,112 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # The metadata that you apply to a resource to help you categorize and
+    # organize it. Each tag consists of a key and an optional value, both of
+    # which you define. Tag keys can have a maximum character length of 128
+    # characters, and tag values can have a maximum length of 256
+    # characters.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that make up a tag. A `key` is a
+    #   general label that acts like a category for more specific tag
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that make up a tag. A `value`
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # The operation was not successful. Try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagOperationException AWS API Documentation
+    #
+    class TagOperationException < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # The request doesn't comply with the AWS Identity and Access
+    # Management (IAM) tag policy. Correct your request and then retry it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagPolicyException AWS API Documentation
+    #
+    class TagPolicyException < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) to which to add
+    #   tags. You can associate tags with the following Device Farm
+    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Represents a condition that is evaluated.
     #
     # @!attribute [rw] arn
@@ -5589,9 +5823,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR: The uiautomator type.
     #
-    #   * XCTEST: The XCode test type.
+    #   * XCTEST: The Xcode test type.
     #
-    #   * XCTEST\_UI: The XCode UI test type.
+    #   * XCTEST\_UI: The Xcode UI test type.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -5680,6 +5914,23 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # The list of tags on the repository is over the limit. The maximum
+    # number of tags that can be applied to a repository is 50.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
     # Represents information about free trial device minutes for an AWS
     # account.
     #
@@ -5717,6 +5968,38 @@ module Aws::DeviceFarm
       :problems)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource(s) from which to
+    #   delete tags. You can associate tags with the following Device Farm
+    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    #   `VPCE_CONFIGURATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDeviceInstanceRequest
     #   data as a hash:
@@ -5782,7 +6065,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resourc Name (ARN) of the Device Farm device pool you
+    #   The Amazon Resource Name (ARN) of the Device Farm device pool you
     #   wish to update.
     #   @return [String]
     #
@@ -5946,7 +6229,7 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The descriptoin of the network profile about which you are returning
+    #   The description of the network profile about which you are returning
     #   information.
     #   @return [String]
     #
@@ -6206,7 +6489,7 @@ module Aws::DeviceFarm
     #
     #   * IOS\_APP: An iOS upload.
     #
-    #   * WEB\_APP: A web appliction upload.
+    #   * WEB\_APP: A web application upload.
     #
     #   * EXTERNAL\_DATA: An external data upload.
     #
@@ -6247,9 +6530,9 @@ module Aws::DeviceFarm
     #
     #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
     #
-    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
     #
     #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
     #     upload.
@@ -6280,7 +6563,7 @@ module Aws::DeviceFarm
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
     #   @return [String]
     #
     # @!attribute [rw] status

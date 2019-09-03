@@ -88,6 +88,9 @@ module Aws::MediaConnect
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
+    AddFlowOutputs420Exception.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    AddFlowOutputs420Exception.struct_class = Types::AddFlowOutputs420Exception
+
     AddFlowOutputsRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
     AddFlowOutputsRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: __listOfAddOutputRequest, required: true, location_name: "outputs"))
     AddFlowOutputsRequest.struct_class = Types::AddFlowOutputsRequest
@@ -96,16 +99,24 @@ module Aws::MediaConnect
     AddFlowOutputsResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: __listOfOutput, location_name: "outputs"))
     AddFlowOutputsResponse.struct_class = Types::AddFlowOutputsResponse
 
+    AddOutputRequest.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     AddOutputRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    AddOutputRequest.add_member(:destination, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "destination"))
+    AddOutputRequest.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     AddOutputRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
     AddOutputRequest.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))
     AddOutputRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    AddOutputRequest.add_member(:port, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "port"))
+    AddOutputRequest.add_member(:port, Shapes::ShapeRef.new(shape: __integer, location_name: "port"))
     AddOutputRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    AddOutputRequest.add_member(:remote_id, Shapes::ShapeRef.new(shape: __string, location_name: "remoteId"))
     AddOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     AddOutputRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     AddOutputRequest.struct_class = Types::AddOutputRequest
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
+    CreateFlow420Exception.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    CreateFlow420Exception.struct_class = Types::CreateFlow420Exception
 
     CreateFlowRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: __string, location_name: "availabilityZone"))
     CreateFlowRequest.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfGrantEntitlementRequest, location_name: "entitlements"))
@@ -132,9 +143,14 @@ module Aws::MediaConnect
     DescribeFlowResponse.struct_class = Types::DescribeFlowResponse
 
     Encryption.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, required: true, location_name: "algorithm"))
+    Encryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
+    Encryption.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, location_name: "deviceId"))
     Encryption.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, location_name: "keyType"))
+    Encryption.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    Encryption.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     Encryption.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
-    Encryption.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secretArn"))
+    Encryption.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "secretArn"))
+    Encryption.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     Encryption.struct_class = Types::Encryption
 
     Entitlement.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -155,11 +171,17 @@ module Aws::MediaConnect
     Flow.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     Flow.struct_class = Types::Flow
 
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     GrantEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     GrantEntitlementRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
     GrantEntitlementRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     GrantEntitlementRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subscribers"))
     GrantEntitlementRequest.struct_class = Types::GrantEntitlementRequest
+
+    GrantFlowEntitlements420Exception.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    GrantFlowEntitlements420Exception.struct_class = Types::GrantFlowEntitlements420Exception
 
     GrantFlowEntitlementsRequest.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfGrantEntitlementRequest, required: true, location_name: "entitlements"))
     GrantFlowEntitlementsRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
@@ -168,6 +190,9 @@ module Aws::MediaConnect
     GrantFlowEntitlementsResponse.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfEntitlement, location_name: "entitlements"))
     GrantFlowEntitlementsResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     GrantFlowEntitlementsResponse.struct_class = Types::GrantFlowEntitlementsResponse
+
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
     ListEntitlementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListEntitlementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -206,6 +231,9 @@ module Aws::MediaConnect
     Messages.add_member(:errors, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "errors"))
     Messages.struct_class = Types::Messages
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     Output.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Output.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     Output.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
@@ -235,6 +263,9 @@ module Aws::MediaConnect
     RevokeFlowEntitlementResponse.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, location_name: "entitlementArn"))
     RevokeFlowEntitlementResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     RevokeFlowEntitlementResponse.struct_class = Types::RevokeFlowEntitlementResponse
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SetSourceRequest.add_member(:decryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "decryption"))
     SetSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -277,9 +308,14 @@ module Aws::MediaConnect
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    Transport.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     Transport.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
     Transport.add_member(:max_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "maxLatency"))
     Transport.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    Transport.add_member(:remote_id, Shapes::ShapeRef.new(shape: __string, location_name: "remoteId"))
     Transport.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     Transport.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     Transport.struct_class = Types::Transport
@@ -289,9 +325,14 @@ module Aws::MediaConnect
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateEncryption.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, location_name: "algorithm"))
+    UpdateEncryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
+    UpdateEncryption.add_member(:device_id, Shapes::ShapeRef.new(shape: __string, location_name: "deviceId"))
     UpdateEncryption.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, location_name: "keyType"))
+    UpdateEncryption.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    UpdateEncryption.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     UpdateEncryption.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateEncryption.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "secretArn"))
+    UpdateEncryption.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     UpdateEncryption.struct_class = Types::UpdateEncryption
 
     UpdateFlowEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -305,6 +346,7 @@ module Aws::MediaConnect
     UpdateFlowEntitlementResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     UpdateFlowEntitlementResponse.struct_class = Types::UpdateFlowEntitlementResponse
 
+    UpdateFlowOutputRequest.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     UpdateFlowOutputRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateFlowOutputRequest.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     UpdateFlowOutputRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: UpdateEncryption, location_name: "encryption"))
@@ -313,6 +355,7 @@ module Aws::MediaConnect
     UpdateFlowOutputRequest.add_member(:output_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "outputArn"))
     UpdateFlowOutputRequest.add_member(:port, Shapes::ShapeRef.new(shape: __integer, location_name: "port"))
     UpdateFlowOutputRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
+    UpdateFlowOutputRequest.add_member(:remote_id, Shapes::ShapeRef.new(shape: __string, location_name: "remoteId"))
     UpdateFlowOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     UpdateFlowOutputRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     UpdateFlowOutputRequest.struct_class = Types::UpdateFlowOutputRequest

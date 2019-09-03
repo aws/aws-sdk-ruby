@@ -77,7 +77,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #         resource_id: "ResourceId", # required
     #         tags: [ # required
     #           {
@@ -91,8 +91,8 @@ module Aws::SSM
     #   Specifies the type of resource you are tagging.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example,
     #   mi-1a2b3c4d5e6f.
     #
     #    </note>
@@ -112,8 +112,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example,
     #   mi-1a2b3c4d5e6f.
     #
     #    </note>
@@ -139,6 +139,20 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResourceResult AWS API Documentation
     #
     class AddTagsToResourceResult < Aws::EmptyStructure; end
+
+    # Error returned if an attempt is made to register a patch group with a
+    # patch baseline that is already registered with a different patch
+    # baseline.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # Describes an association of a Systems Manager document and an
     # instance.
@@ -337,6 +351,18 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The specified association does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDoesNotExist AWS API Documentation
+    #
+    class AssociationDoesNotExist < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Includes information about the specified association.
     #
     # @!attribute [rw] association_id
@@ -383,6 +409,19 @@ module Aws::SSM
       :created_time,
       :last_execution_date,
       :resource_count_by_status)
+      include Aws::Structure
+    end
+
+    # The specified execution ID does not exist. Verify the ID number and
+    # try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionDoesNotExist AWS API Documentation
+    #
+    class AssociationExecutionDoesNotExist < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -690,6 +729,19 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # You have reached the maximum number versions allowed for an
+    # association. Each association has a limit of 1,000 versions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionLimitExceeded AWS API Documentation
+    #
+    class AssociationVersionLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A structure that includes attributes that describe a document
     # attachment.
     #
@@ -763,6 +815,31 @@ module Aws::SSM
     class AttachmentsSource < Struct.new(
       :key,
       :values)
+      include Aws::Structure
+    end
+
+    # An Automation document with the specified name could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationDefinitionNotFoundException AWS API Documentation
+    #
+    class AutomationDefinitionNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An Automation document with the specified name and version could not
+    # be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationDefinitionVersionNotFoundException AWS API Documentation
+    #
+    class AutomationDefinitionVersionNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -942,6 +1019,19 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The number of simultaneously running Automation executions exceeded
+    # the allowable limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionLimitExceededException AWS API Documentation
+    #
+    class AutomationExecutionLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Details about a specific Automation execution.
     #
     # @!attribute [rw] automation_execution_id
@@ -1073,6 +1163,32 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # There is no automation execution information for the requested
+    # automation execution ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionNotFoundException AWS API Documentation
+    #
+    class AutomationExecutionNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified step name and execution ID don't exist. Verify the
+    # information and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationStepNotFoundException AWS API Documentation
+    #
+    class AutomationStepNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelCommandRequest
     #   data as a hash:
     #
@@ -1114,7 +1230,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution to stop.
+    #   The ID of the maintenance window execution to stop.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionRequest AWS API Documentation
@@ -1125,7 +1241,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that has been stopped.
+    #   The ID of the maintenance window execution that has been stopped.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionResult AWS API Documentation
@@ -1957,6 +2073,19 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # You specified too many custom compliance types. You can specify a
+    # maximum of 10 different types.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceTypeCountLimitExceededException AWS API Documentation
+    #
+    class ComplianceTypeCountLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A summary of resources that are compliant. The summary is organized
     # according to the resource count for each compliance type.
     #
@@ -2350,6 +2479,15 @@ module Aws::SSM
     #
     # @!attribute [rw] instance_id
     #   The instance ID.
+    #
+    #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
+    #   association, use the `Targets` parameter. If you use the parameter
+    #   `InstanceId`, you cannot use the parameters `AssociationName`,
+    #   `DocumentVersion`, `MaxErrors`, `MaxConcurrency`, `OutputLocation`,
+    #   or `ScheduleExpression`. To use these parameters, you must use the
+    #   `Targets` parameter.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -2357,7 +2495,9 @@ module Aws::SSM
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags) for the association.
+    #   The targets (either instances or tags) for the association. You must
+    #   specify a value for `Targets` if you don't specify a value for
+    #   `InstanceId`.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] schedule_expression
@@ -2587,36 +2727,36 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   An optional description for the Maintenance Window. We recommend
-    #   specifying a description to help you organize your Maintenance
-    #   Windows.
+    #   An optional description for the maintenance window. We recommend
+    #   specifying a description to help you organize your maintenance
+    #   windows.
     #   @return [String]
     #
     # @!attribute [rw] start_date
     #   The date and time, in ISO-8601 Extended format, for when you want
-    #   the Maintenance Window to become active. StartDate allows you to
-    #   delay activation of the Maintenance Window until the specified
+    #   the maintenance window to become active. StartDate allows you to
+    #   delay activation of the maintenance window until the specified
     #   future date.
     #   @return [String]
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when you want
-    #   the Maintenance Window to become inactive. EndDate allows you to set
-    #   a date and time in the future when the Maintenance Window will no
+    #   the maintenance window to become inactive. EndDate allows you to set
+    #   a date and time in the future when the maintenance window will no
     #   longer run.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -2628,23 +2768,23 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Enables a Maintenance Window task to run on managed instances, even
+    #   Enables a maintenance window task to run on managed instances, even
     #   if you have not registered those instances as targets. If enabled,
     #   then you must specify the unregistered instances (by instance ID)
-    #   when you register a task with the Maintenance Window
+    #   when you register a task with the maintenance window.
     #
     #   If you don't enable this option, then you must specify
     #   previously-registered targets when you register a task with the
-    #   Maintenance Window.
+    #   maintenance window.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
@@ -2657,8 +2797,8 @@ module Aws::SSM
     # @!attribute [rw] tags
     #   Optional metadata that you assign to a resource. Tags enable you to
     #   categorize a resource in different ways, such as by purpose, owner,
-    #   or environment. For example, you might want to tag a Maintenance
-    #   Window to identify the type of tasks it will run, the types of
+    #   or environment. For example, you might want to tag a maintenance
+    #   window to identify the type of tasks it will run, the types of
     #   targets, and the environment it will run in. In this case, you could
     #   specify the following key name/value pairs:
     #
@@ -2668,7 +2808,7 @@ module Aws::SSM
     #
     #   * `Key=Environment,Value=Production`
     #
-    #   <note markdown="1"> To add tags to an existing Maintenance Window, use the
+    #   <note markdown="1"> To add tags to an existing maintenance window, use the
     #   AddTagsToResource action.
     #
     #    </note>
@@ -2692,13 +2832,151 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the created Maintenance Window.
+    #   The ID of the created maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindowResult AWS API Documentation
     #
     class CreateMaintenanceWindowResult < Struct.new(
       :window_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateOpsItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "OpsItemDescription", # required
+    #         operational_data: {
+    #           "OpsItemDataKey" => {
+    #             value: "OpsItemDataValueString",
+    #             type: "SearchableString", # accepts SearchableString, String
+    #           },
+    #         },
+    #         notifications: [
+    #           {
+    #             arn: "String",
+    #           },
+    #         ],
+    #         priority: 1,
+    #         related_ops_items: [
+    #           {
+    #             ops_item_id: "String", # required
+    #           },
+    #         ],
+    #         source: "OpsItemSource", # required
+    #         title: "OpsItemTitle", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] description
+    #   Information about the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] operational_data
+    #   Operational data is custom data that provides useful reference
+    #   details about the OpsItem. For example, you can specify log files,
+    #   error strings, license keys, troubleshooting tips, or other relevant
+    #   data. You enter operational data as key-value pairs. The key has a
+    #   maximum length of 128 characters. The value has a maximum size of 20
+    #   KB.
+    #
+    #   Operational data keys *can't* begin with the following: amazon,
+    #   aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.
+    #
+    #   You can choose to make the data searchable by other users in the
+    #   account or you can restrict search access. Searchable data means
+    #   that all users with access to the OpsItem Overview page (as provided
+    #   by the DescribeOpsItems API action) can view and search on the
+    #   specified data. Operational data that is not searchable is only
+    #   viewable by users who have access to the OpsItem (as provided by the
+    #   GetOpsItem API action).
+    #
+    #   Use the `/aws/resources` key in OperationalData to specify a related
+    #   resource in the request. Use the `/aws/automations` key in
+    #   OperationalData to associate an Automation runbook with the OpsItem.
+    #   To view AWS CLI example commands that use these keys, see [Creating
+    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   @return [Hash<String,Types::OpsItemDataValue>]
+    #
+    # @!attribute [rw] notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications
+    #   are sent when this OpsItem is edited or changed.
+    #   @return [Array<Types::OpsItemNotification>]
+    #
+    # @!attribute [rw] priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItems. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #   @return [Array<Types::RelatedOpsItem>]
+    #
+    # @!attribute [rw] source
+    #   The origin of the OpsItem, such as Amazon EC2 or AWS Systems
+    #   Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. You can restrict
+    #   access to OpsItems by using an inline IAM policy that specifies
+    #   tags. For more information, see [Getting Started with OpsCenter][1]
+    #   in the *AWS Systems Manager User Guide*.
+    #
+    #   Tags use a key-value pair. For example:
+    #
+    #   `Key=Department,Value=Finance`
+    #
+    #   <note markdown="1"> To add tags to an existing OpsItem, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItemRequest AWS API Documentation
+    #
+    class CreateOpsItemRequest < Struct.new(
+      :description,
+      :operational_data,
+      :notifications,
+      :priority,
+      :related_ops_items,
+      :source,
+      :title,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItemResponse AWS API Documentation
+    #
+    class CreateOpsItemResponse < Struct.new(
+      :ops_item_id)
       include Aws::Structure
     end
 
@@ -2924,6 +3202,19 @@ module Aws::SSM
     #
     class CreateResourceDataSyncResult < Aws::EmptyStructure; end
 
+    # You have exceeded the limit for custom schemas. Delete one or more
+    # custom schemas and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CustomSchemaCountLimitExceededException AWS API Documentation
+    #
+    class CustomSchemaCountLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteActivationRequest
     #   data as a hash:
     #
@@ -2985,16 +3276,30 @@ module Aws::SSM
     #
     #       {
     #         name: "DocumentName", # required
+    #         document_version: "DocumentVersion",
+    #         version_name: "DocumentVersionName",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the document.
     #   @return [String]
     #
+    # @!attribute [rw] document_version
+    #   The version of the document that you want to delete. If not
+    #   provided, all versions of the document are deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The version name of the document that you want to delete. If not
+    #   provided, all versions of the document are deleted.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocumentRequest AWS API Documentation
     #
     class DeleteDocumentRequest < Struct.new(
-      :name)
+      :name,
+      :document_version,
+      :version_name)
       include Aws::Structure
     end
 
@@ -3026,7 +3331,7 @@ module Aws::SSM
     #   DisableSchema: If you choose this option, the system ignores all
     #   inventory data for the specified version, and any earlier versions.
     #   To enable this schema again, you must call the `PutInventory` action
-    #   for a version greater than the disbled version.
+    #   for a version greater than the disabled version.
     #
     #   DeleteSchema: This option deletes the specified custom type from the
     #   Inventory service. You can recreate the schema later, if you want.
@@ -3095,7 +3400,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to delete.
+    #   The ID of the maintenance window to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindowRequest AWS API Documentation
@@ -3106,7 +3411,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the deleted Maintenance Window.
+    #   The ID of the deleted maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindowResult AWS API Documentation
@@ -3298,7 +3603,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the target should be removed from.
+    #   The ID of the maintenance window the target should be removed from.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -3308,7 +3613,7 @@ module Aws::SSM
     # @!attribute [rw] safe
     #   The system checks if the target is being referenced by a task. If
     #   the target is being referenced, the system returns an error and does
-    #   not deregister the target from the Maintenance Window.
+    #   not deregister the target from the maintenance window.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindowRequest AWS API Documentation
@@ -3321,7 +3626,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the target was removed from.
+    #   The ID of the maintenance window the target was removed from.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -3345,11 +3650,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the task should be removed from.
+    #   The ID of the maintenance window the task should be removed from.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The ID of the task to remove from the Maintenance Window.
+    #   The ID of the task to remove from the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindowRequest AWS API Documentation
@@ -3361,11 +3666,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the task was removed from.
+    #   The ID of the maintenance window the task was removed from.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The ID of the task removed from the Maintenance Window.
+    #   The ID of the task removed from the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindowResult AWS API Documentation
@@ -4274,11 +4579,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Each entry in the array is a structure containing:
-    #
-    #   Key (string, between 1 and 128 characters)
-    #
-    #   Values (array of strings, each string between 1 and 256 characters)
+    #   An array of structures. Each entry in the array is a structure
+    #   containing a Key, Value combination. Valid values for Key are
+    #   `Classification` \| `KBId` \| `Severity` \| `State`.
     #   @return [Array<Types::PatchOrchestratorFilter>]
     #
     # @!attribute [rw] next_token
@@ -4399,11 +4702,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution the task is part of.
+    #   The ID of the maintenance window execution the task is part of.
     #   @return [String]
     #
     # @!attribute [rw] task_id
-    #   The ID of the specific task in the Maintenance Window task that
+    #   The ID of the specific task in the maintenance window task that
     #   should be retrieved.
     #   @return [String]
     #
@@ -4469,7 +4772,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution whose task executions
+    #   The ID of the maintenance window execution whose task executions
     #   should be retrieved.
     #   @return [String]
     #
@@ -4534,7 +4837,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window whose executions should be
+    #   The ID of the maintenance window whose executions should be
     #   retrieved.
     #   @return [String]
     #
@@ -4572,7 +4875,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_executions
-    #   Information about the Maintenance Windows execution.
+    #   Information about the maintenance window executions.
     #   @return [Array<Types::MaintenanceWindowExecution>]
     #
     # @!attribute [rw] next_token
@@ -4599,7 +4902,7 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
-    #         resource_type: "INSTANCE", # accepts INSTANCE
+    #         resource_type: "INSTANCE", # accepts INSTANCE, RESOURCE_GROUP
     #         filters: [
     #           {
     #             key: "PatchOrchestratorFilterKey",
@@ -4611,7 +4914,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to retrieve information about.
+    #   The ID of the maintenance window to retrieve information about.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -4625,7 +4928,7 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   Filters used to limit the range of results. For example, you can
-    #   limit Maintenance Window executions to only those scheduled before
+    #   limit maintenance window executions to only those scheduled before
     #   or after a certain date and time.
     #   @return [Array<Types::PatchOrchestratorFilter>]
     #
@@ -4653,7 +4956,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] scheduled_window_executions
-    #   Information about Maintenance Window executions scheduled for the
+    #   Information about maintenance window executions scheduled for the
     #   specified time range.
     #   @return [Array<Types::ScheduledWindowExecution>]
     #
@@ -4686,7 +4989,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window whose targets should be retrieved.
+    #   The ID of the maintenance window whose targets should be retrieved.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -4717,7 +5020,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] targets
-    #   Information about the targets in the Maintenance Window.
+    #   Information about the targets in the maintenance window.
     #   @return [Array<Types::MaintenanceWindowTarget>]
     #
     # @!attribute [rw] next_token
@@ -4749,7 +5052,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window whose tasks should be retrieved.
+    #   The ID of the maintenance window whose tasks should be retrieved.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -4780,7 +5083,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] tasks
-    #   Information about the tasks in the Maintenance Window.
+    #   Information about the tasks in the maintenance window.
     #   @return [Array<Types::MaintenanceWindowTask>]
     #
     # @!attribute [rw] next_token
@@ -4806,7 +5109,7 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
-    #         resource_type: "INSTANCE", # required, accepts INSTANCE
+    #         resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -4842,7 +5145,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_identities
-    #   Information about the Maintenance Window targets and tasks an
+    #   Information about the maintenance window targets and tasks an
     #   instance is associated with.
     #   @return [Array<Types::MaintenanceWindowIdentityForTarget>]
     #
@@ -4875,7 +5178,7 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   Optional filters used to narrow down the scope of the returned
-    #   Maintenance Windows. Supported filter keys are **Name** and
+    #   maintenance windows. Supported filter keys are **Name** and
     #   **Enabled**.
     #   @return [Array<Types::MaintenanceWindowFilter>]
     #
@@ -4900,7 +5203,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_identities
-    #   Information about the Maintenance Windows.
+    #   Information about the maintenance windows.
     #   @return [Array<Types::MaintenanceWindowIdentity>]
     #
     # @!attribute [rw] next_token
@@ -4913,6 +5216,118 @@ module Aws::SSM
     class DescribeMaintenanceWindowsResult < Struct.new(
       :window_identities,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOpsItemsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_item_filters: [
+    #           {
+    #             key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId
+    #             values: ["OpsItemFilterValue"], # required
+    #             operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] ops_item_filters
+    #   One or more filters to limit the reponse.
+    #
+    #   * Key: CreatedTime
+    #
+    #     Operations: GreaterThan, LessThan
+    #
+    #   * Key: LastModifiedBy
+    #
+    #     Operations: Contains, Equals
+    #
+    #   * Key: LastModifiedTime
+    #
+    #     Operations: GreaterThan, LessThan
+    #
+    #   * Key: Priority
+    #
+    #     Operations: Equals
+    #
+    #   * Key: Source
+    #
+    #     Operations: Contains, Equals
+    #
+    #   * Key: Status
+    #
+    #     Operations: Equals
+    #
+    #   * Key: Title
+    #
+    #     Operations: Contains
+    #
+    #   * Key: OperationalData*
+    #
+    #     Operations: Equals
+    #
+    #   * Key: OperationalDataKey
+    #
+    #     Operations: Equals
+    #
+    #   * Key: OperationalDataValue
+    #
+    #     Operations: Equals, Contains
+    #
+    #   * Key: OpsItemId
+    #
+    #     Operations: Equals
+    #
+    #   * Key: ResourceId
+    #
+    #     Operations: Contains
+    #
+    #   * Key: AutomationId
+    #
+    #     Operations: Equals
+    #
+    #   *If you filter the response by using the OperationalData operator,
+    #   specify a key-value pair by using the following JSON format:
+    #   \\\{"key":"key\_name","value":"a\_value"\\}
+    #   @return [Array<Types::OpsItemFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeOpsItemsRequest AWS API Documentation
+    #
+    class DescribeOpsItemsRequest < Struct.new(
+      :ops_item_filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_summaries
+    #   A list of OpsItems.
+    #   @return [Array<Types::OpsItemSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeOpsItemsResponse AWS API Documentation
+    #
+    class DescribeOpsItemsResponse < Struct.new(
+      :next_token,
+      :ops_item_summaries)
       include Aws::Structure
     end
 
@@ -5308,6 +5723,18 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The specified document already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentAlreadyExists AWS API Documentation
+    #
+    class DocumentAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A default version of a document.
     #
     # @!attribute [rw] name
@@ -5615,6 +6042,18 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # You can have at most 500 active Systems Manager documents.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentLimitExceeded AWS API Documentation
+    #
+    class DocumentLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Parameters specified in a System Manager document that run on the
     # server when the command is run.
     #
@@ -5644,6 +6083,21 @@ module Aws::SSM
       :type,
       :description,
       :default_value)
+      include Aws::Structure
+    end
+
+    # The document cannot be shared with more AWS user accounts. You can
+    # share a document with a maximum of 20 accounts. You can publicly share
+    # up to five documents. If you need to increase this limit, contact AWS
+    # Support.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentPermissionLimit AWS API Documentation
+    #
+    class DocumentPermissionLimit < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5698,6 +6152,65 @@ module Aws::SSM
       :document_format,
       :status,
       :status_information)
+      include Aws::Structure
+    end
+
+    # The document has too many versions. Delete one or more document
+    # versions and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentVersionLimitExceeded AWS API Documentation
+    #
+    class DocumentVersionLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Error returned when the ID specified for a resource, such as a
+    # maintenance window or Patch baseline, doesn't exist.
+    #
+    # For information about resource limits in Systems Manager, see [AWS
+    # Systems Manager Limits][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_ssm
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DoesNotExistException AWS API Documentation
+    #
+    class DoesNotExistException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The content of the association document matches another document.
+    # Change the content of the document and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DuplicateDocumentContent AWS API Documentation
+    #
+    class DuplicateDocumentContent < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The version name has already been used in this document. Specify a
+    # different version name, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DuplicateDocumentVersionName AWS API Documentation
+    #
+    class DuplicateDocumentVersionName < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5774,6 +6287,19 @@ module Aws::SSM
       :failure_stage,
       :failure_type,
       :details)
+      include Aws::Structure
+    end
+
+    # You attempted to register a LAMBDA or STEP\_FUNCTIONS task in a region
+    # where the corresponding service is not available.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/FeatureNotAvailableException AWS API Documentation
+    #
+    class FeatureNotAvailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6409,7 +6935,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionRequest AWS API Documentation
@@ -6420,15 +6946,15 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution.
+    #   The ID of the maintenance window execution.
     #   @return [String]
     #
     # @!attribute [rw] task_ids
-    #   The ID of the task executions from the Maintenance Window execution.
+    #   The ID of the task executions from the maintenance window execution.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
-    #   The status of the Maintenance Window execution.
+    #   The status of the maintenance window execution.
     #   @return [String]
     #
     # @!attribute [rw] status_details
@@ -6437,11 +6963,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The time the Maintenance Window started running.
+    #   The time the maintenance window started running.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The time the Maintenance Window finished running.
+    #   The time the maintenance window finished running.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionResult AWS API Documentation
@@ -6466,12 +6992,12 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution for which the task is a
+    #   The ID of the maintenance window execution for which the task is a
     #   part.
     #   @return [String]
     #
     # @!attribute [rw] task_id
-    #   The ID of the specific task in the Maintenance Window task that
+    #   The ID of the specific task in the maintenance window task that
     #   should be retrieved.
     #   @return [String]
     #
@@ -6489,7 +7015,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_execution_id
-    #   The Maintenance Window execution ID.
+    #   The maintenance window execution ID.
     #   @return [String]
     #
     # @!attribute [rw] task_execution_id
@@ -6505,8 +7031,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_type
-    #   Retrieves the task type for a Maintenance Window. Task types include
-    #   the following: LAMBDA, STEP\_FUNCTION, AUTOMATION, RUN\_COMMAND.
+    #   Retrieves the task type for a maintenance window. Task types include
+    #   the following: LAMBDA, STEP\_FUNCTIONS, AUTOMATION, RUN\_COMMAND.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -6532,11 +7058,11 @@ module Aws::SSM
     #
     # @!attribute [rw] owner_information
     #   User-provided value to be included in any CloudWatch events raised
-    #   while running tasks for these targets in this Maintenance Window.
+    #   while running tasks for these targets in this maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
-    #   The Maintenance Window target ID.
+    #   The maintenance window target ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocationResult AWS API Documentation
@@ -6566,11 +7092,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #   @return [String]
     #
     # @!attribute [rw] task_id
-    #   The ID of the specific task execution in the Maintenance Window task
+    #   The ID of the specific task execution in the maintenance window task
     #   that should be retrieved.
     #   @return [String]
     #
@@ -6583,11 +7109,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #   @return [String]
     #
     # @!attribute [rw] task_execution_id
-    #   The ID of the specific task execution in the Maintenance Window task
+    #   The ID of the specific task execution in the maintenance window task
     #   that was retrieved.
     #   @return [String]
     #
@@ -6609,8 +7135,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #
@@ -6680,7 +7206,8 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the desired Maintenance Window.
+    #   The ID of the maintenance window for which you want to retrieve
+    #   information.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowRequest AWS API Documentation
@@ -6691,36 +7218,36 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the created Maintenance Window.
+    #   The ID of the created maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the Maintenance Window.
+    #   The description of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] start_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become active. The Maintenance
-    #   Window will not run before this specified time.
+    #   maintenance window is scheduled to become active. The maintenance
+    #   window will not run before this specified time.
     #   @return [String]
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become inactive. The Maintenance
-    #   Window will not run after this specified time.
+    #   maintenance window is scheduled to become inactive. The maintenance
+    #   window will not run after this specified time.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -6732,35 +7259,35 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] next_execution_time
-    #   The next time the Maintenance Window will actually run, taking into
-    #   account any specified times for the Maintenance Window to become
+    #   The next time the maintenance window will actually run, taking into
+    #   account any specified times for the maintenance window to become
     #   active or inactive.
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window
+    #   Whether targets must be registered with the maintenance window
     #   before tasks can be defined for those targets.
     #   @return [Boolean]
     #
     # @!attribute [rw] enabled
-    #   Whether the Maintenance Windows is enabled.
+    #   Indicates whether the maintenance window is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_date
-    #   The date the Maintenance Window was created.
+    #   The date the maintenance window was created.
     #   @return [Time]
     #
     # @!attribute [rw] modified_date
-    #   The date the Maintenance Window was last modified.
+    #   The date the maintenance window was last modified.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowResult AWS API Documentation
@@ -6792,11 +7319,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID that includes the task to retrieve.
+    #   The maintenance window ID that includes the task to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The Maintenance Window task ID to retrieve.
+    #   The maintenance window task ID to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTaskRequest AWS API Documentation
@@ -6808,11 +7335,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The retrieved Maintenance Window ID.
+    #   The retrieved maintenance window ID.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The retrieved Maintenance Window task ID.
+    #   The retrieved maintenance window task ID.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -6823,12 +7350,14 @@ module Aws::SSM
     #   The resource that the task used during execution. For RUN\_COMMAND
     #   and AUTOMATION task types, the TaskArn is the Systems Manager
     #   Document name/ARN. For LAMBDA tasks, the value is the function
-    #   name/ARN. For STEP\_FUNCTION tasks, the value is the state machine
+    #   name/ARN. For STEP\_FUNCTIONS tasks, the value is the state machine
     #   ARN.
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role to assume during task execution.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for maintenance
+    #   window Run Command tasks.
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -6841,8 +7370,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
@@ -6873,7 +7402,7 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -6904,6 +7433,117 @@ module Aws::SSM
       :logging_info,
       :name,
       :description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOpsItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_item_id: "OpsItemId", # required
+    #       }
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem that you want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItemRequest AWS API Documentation
+    #
+    class GetOpsItemRequest < Struct.new(
+      :ops_item_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ops_item
+    #   The OpsItem.
+    #   @return [Types::OpsItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItemResponse AWS API Documentation
+    #
+    class GetOpsItemResponse < Struct.new(
+      :ops_item)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOpsSummaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "OpsFilterKey", # required
+    #             values: ["OpsFilterValue"], # required
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #           },
+    #         ],
+    #         aggregators: [ # required
+    #           {
+    #             aggregator_type: "OpsAggregatorType",
+    #             type_name: "OpsDataTypeName",
+    #             attribute_name: "OpsDataAttributeName",
+    #             values: {
+    #               "OpsAggregatorValueKey" => "OpsAggregatorValue",
+    #             },
+    #             filters: [
+    #               {
+    #                 key: "OpsFilterKey", # required
+    #                 values: ["OpsFilterValue"], # required
+    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #               },
+    #             ],
+    #             aggregators: {
+    #               # recursive OpsAggregatorList
+    #             },
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Optional filters used to scope down the returned OpsItems.
+    #   @return [Array<Types::OpsFilter>]
+    #
+    # @!attribute [rw] aggregators
+    #   Optional aggregators that return counts of OpsItems based on one or
+    #   more expressions.
+    #   @return [Array<Types::OpsAggregator>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsSummaryRequest AWS API Documentation
+    #
+    class GetOpsSummaryRequest < Struct.new(
+      :filters,
+      :aggregators,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   The list of aggregated and filtered OpsItems.
+    #   @return [Array<Types::OpsEntity>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsSummaryResult AWS API Documentation
+    #
+    class GetOpsSummaryResult < Struct.new(
+      :entities,
+      :next_token)
       include Aws::Structure
     end
 
@@ -7120,7 +7760,7 @@ module Aws::SSM
     #
     # @!attribute [rw] invalid_parameters
     #   A list of parameters that are not formatted correctly or do not run
-    #   when executed.
+    #   during an execution.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersResult AWS API Documentation
@@ -7320,6 +7960,77 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # A hierarchy can have a maximum of 15 levels. For more information, see
+    # [Requirements and Constraints for Parameter Names][1] in the *AWS
+    # Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
+    #
+    # @!attribute [rw] message
+    #   A hierarchy can have a maximum of 15 levels. For more information,
+    #   see [Requirements and Constraints for Parameter Names][1] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/HierarchyLevelLimitExceededException AWS API Documentation
+    #
+    class HierarchyLevelLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Parameter Store does not support changing a parameter type in a
+    # hierarchy. For example, you can't change a parameter from a String
+    # type to a SecureString type. You must create a new, unique parameter.
+    #
+    # @!attribute [rw] message
+    #   Parameter Store does not support changing a parameter type in a
+    #   hierarchy. For example, you can't change a parameter from a String
+    #   type to a SecureString type. You must create a new, unique
+    #   parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/HierarchyTypeMismatchException AWS API Documentation
+    #
+    class HierarchyTypeMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Error returned when an idempotent operation is retried and the
+    # parameters don't match the original call to the API with the same
+    # idempotency token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/IdempotentParameterMismatch AWS API Documentation
+    #
+    class IdempotentParameterMismatch < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There is a conflict in the policies specified for this parameter. You
+    # can't, for example, specify two Expiration policies for a parameter.
+    # Review your policies, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/IncompatiblePolicyException AWS API Documentation
+    #
+    class IncompatiblePolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Status information about the aggregated associations.
     #
     # @!attribute [rw] detailed_status
@@ -7418,7 +8129,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   The association document verions.
+    #   The association document versions.
     #   @return [String]
     #
     # @!attribute [rw] association_version
@@ -7817,6 +8528,544 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # An error occurred on the server side.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The activation is not valid. The activation might have been deleted,
+    # or the ActivationId and the ActivationCode do not match.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidActivation AWS API Documentation
+    #
+    class InvalidActivation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The activation ID is not valid. Verify the you entered the correct
+    # ActivationId or ActivationCode and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidActivationId AWS API Documentation
+    #
+    class InvalidActivationId < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified aggregator is not valid for inventory groups. Verify
+    # that the aggregator uses a valid inventory type such as
+    # `AWS:Application` or `AWS:InstanceInformation`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidAggregatorException AWS API Documentation
+    #
+    class InvalidAggregatorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request does not meet the regular expression requirement.
+    #
+    # @!attribute [rw] message
+    #   The request does not meet the regular expression requirement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidAllowedPatternException AWS API Documentation
+    #
+    class InvalidAllowedPatternException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The association is not valid or does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidAssociation AWS API Documentation
+    #
+    class InvalidAssociation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The version you specified is not valid. Use ListAssociationVersions to
+    # view all versions of an association according to the association ID.
+    # Or, use the `$LATEST` parameter to view the latest version of the
+    # association.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidAssociationVersion AWS API Documentation
+    #
+    class InvalidAssociationVersion < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The supplied parameters for invoking the specified Automation document
+    # are incorrect. For example, they may not match the set of parameters
+    # permitted for the specified Automation document.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidAutomationExecutionParametersException AWS API Documentation
+    #
+    class InvalidAutomationExecutionParametersException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The signal is not valid for the current Automation execution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidAutomationSignalException AWS API Documentation
+    #
+    class InvalidAutomationSignalException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified update status operation is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidAutomationStatusUpdateException AWS API Documentation
+    #
+    class InvalidAutomationStatusUpdateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more of the parameters specified for the delete operation is
+    # not valid. Verify all parameters and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidDeleteInventoryParametersException AWS API Documentation
+    #
+    class InvalidDeleteInventoryParametersException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The ID specified for the delete operation does not exist or is not
+    # valid. Verify the ID and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidDeletionIdException AWS API Documentation
+    #
+    class InvalidDeletionIdException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified document does not exist.
+    #
+    # @!attribute [rw] message
+    #   The document does not exist or the document is not available to the
+    #   user. This exception can be issued by CreateAssociation,
+    #   CreateAssociationBatch, DeleteAssociation, DeleteDocument,
+    #   DescribeAssociation, DescribeDocument, GetDocument, SendCommand, or
+    #   UpdateAssociationStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidDocument AWS API Documentation
+    #
+    class InvalidDocument < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The content for the document is not valid.
+    #
+    # @!attribute [rw] message
+    #   A description of the validation error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidDocumentContent AWS API Documentation
+    #
+    class InvalidDocumentContent < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You attempted to delete a document while it is still shared. You must
+    # stop sharing the document before you can delete it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidDocumentOperation AWS API Documentation
+    #
+    class InvalidDocumentOperation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The version of the document schema is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidDocumentSchemaVersion AWS API Documentation
+    #
+    class InvalidDocumentSchemaVersion < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The document version is not valid or does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidDocumentVersion AWS API Documentation
+    #
+    class InvalidDocumentVersion < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The filter name is not valid. Verify the you entered the correct name
+    # and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidFilter AWS API Documentation
+    #
+    class InvalidFilter < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified filter option is not valid. Valid options are Equals and
+    # BeginsWith. For Path filter, valid options are Recursive and OneLevel.
+    #
+    # @!attribute [rw] message
+    #   The specified filter option is not valid. Valid options are Equals
+    #   and BeginsWith. For Path filter, valid options are Recursive and
+    #   OneLevel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidFilterOption AWS API Documentation
+    #
+    class InvalidFilterOption < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The filter value is not valid. Verify the value and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidFilterValue AWS API Documentation
+    #
+    class InvalidFilterValue < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The following problems can cause this exception:
+    #
+    # You do not have permission to access the instance.
+    #
+    # SSM Agent is not running. Verify that SSM Agent is running.
+    #
+    # SSM Agent is not registered with the SSM endpoint. Try reinstalling
+    # SSM Agent.
+    #
+    # The instance is not in valid state. Valid states are: Running,
+    # Pending, Stopped, Stopping. Invalid states are: Shutting-down and
+    # Terminated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidInstanceId AWS API Documentation
+    #
+    class InvalidInstanceId < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified filter value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidInstanceInformationFilterValue AWS API Documentation
+    #
+    class InvalidInstanceInformationFilterValue < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified inventory group is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidInventoryGroupException AWS API Documentation
+    #
+    class InvalidInventoryGroupException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You specified invalid keys or values in the `Context` attribute for
+    # `InventoryItem`. Verify the keys and values, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidInventoryItemContextException AWS API Documentation
+    #
+    class InvalidInventoryItemContextException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidInventoryRequestException AWS API Documentation
+    #
+    class InvalidInventoryRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more content items is not valid.
+    #
+    # @!attribute [rw] type_name
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidItemContentException AWS API Documentation
+    #
+    class InvalidItemContentException < Struct.new(
+      :type_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # The query key ID is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidKeyId AWS API Documentation
+    #
+    class InvalidKeyId < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified token is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidNextToken AWS API Documentation
+    #
+    class InvalidNextToken < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more configuration items is not valid. Verify that a valid
+    # Amazon Resource Name (ARN) was provided for an Amazon SNS topic.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidNotificationConfig AWS API Documentation
+    #
+    class InvalidNotificationConfig < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The delete inventory option specified is not valid. Verify the option
+    # and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidOptionException AWS API Documentation
+    #
+    class InvalidOptionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You must specify values for all required parameters in the Systems
+    # Manager document. You can only supply values to parameters defined in
+    # the Systems Manager document.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidParameters AWS API Documentation
+    #
+    class InvalidParameters < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The permission type is not supported. *Share* is the only supported
+    # permission type.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidPermissionType AWS API Documentation
+    #
+    class InvalidPermissionType < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A policy attribute or its value is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidPolicyAttributeException AWS API Documentation
+    #
+    class InvalidPolicyAttributeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The policy type is not supported. Parameter Store supports the
+    # following policy types: Expiration, ExpirationNotification, and
+    # NoChangeNotification.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidPolicyTypeException AWS API Documentation
+    #
+    class InvalidPolicyTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified inventory item result attribute is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidResultAttributeException AWS API Documentation
+    #
+    class InvalidResultAttributeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The role name can't contain invalid characters. Also verify that you
+    # specified an IAM role for notifications that includes the required
+    # trust policy. For information about configuring the IAM role for Run
+    # Command notifications, see [Configuring Amazon SNS Notifications for
+    # Run Command][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidRole AWS API Documentation
+    #
+    class InvalidRole < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The schedule is invalid. Verify your cron or rate expression and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidSchedule AWS API Documentation
+    #
+    class InvalidSchedule < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The target is not valid or does not exist. It might not be configured
+    # for EC2 Systems Manager or you might not have permission to perform
+    # the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidTarget AWS API Documentation
+    #
+    class InvalidTarget < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The parameter type name is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidTypeNameException AWS API Documentation
+    #
+    class InvalidTypeNameException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The update is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidUpdate AWS API Documentation
+    #
+    class InvalidUpdate < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Specifies the inventory type and attribute for the aggregation
     # execution.
     #
@@ -7913,7 +9162,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete
     #   @return [Types::InventoryDeletionSummary]
     #
     # @!attribute [rw] last_status_update_time
@@ -8230,6 +9479,38 @@ module Aws::SSM
       :capture_time,
       :content_hash,
       :content)
+      include Aws::Structure
+    end
+
+    # The inventory item has invalid content.
+    #
+    # @!attribute [rw] type_name
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ItemContentMismatchException AWS API Documentation
+    #
+    class ItemContentMismatchException < Struct.new(
+      :type_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # The inventory item size has exceeded the size limit.
+    #
+    # @!attribute [rw] type_name
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ItemSizeLimitExceededException AWS API Documentation
+    #
+    class ItemSizeLimitExceededException < Struct.new(
+      :type_name,
+      :message)
       include Aws::Structure
     end
 
@@ -8981,7 +10262,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #         resource_id: "ResourceId", # required
     #       }
     #
@@ -9018,7 +10299,7 @@ module Aws::SSM
     # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     # options in the `TaskInvocationParameters` structure. For information
     # about how Systems Manager handles these options for the supported
-    # Maintenance Window task types, see
+    # maintenance window task types, see
     # MaintenanceWindowTaskInvocationParameters.
     #
     #  </note>
@@ -9079,14 +10360,14 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    For AUTOMATION task types, Systems Manager ignores any values
     #   specified for these parameters.
@@ -9102,14 +10383,14 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes the information about an execution of a Maintenance Window.
+    # Describes the information about an execution of a maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window.
+    #   The ID of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution.
+    #   The ID of the maintenance window execution.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -9141,15 +10422,15 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about a task execution performed as part of a Maintenance
-    # Window execution.
+    # Information about a task execution performed as part of a maintenance
+    # window execution.
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that ran the task.
+    #   The ID of the maintenance window execution that ran the task.
     #   @return [String]
     #
     # @!attribute [rw] task_execution_id
-    #   The ID of the specific task execution in the Maintenance Window
+    #   The ID of the specific task execution in the maintenance window
     #   execution.
     #   @return [String]
     #
@@ -9193,15 +10474,15 @@ module Aws::SSM
     end
 
     # Describes the information about a task invocation for a particular
-    # target as part of a task execution performed as part of a Maintenance
-    # Window execution.
+    # target as part of a task execution performed as part of a maintenance
+    # window execution.
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution that ran the task.
+    #   The ID of the maintenance window execution that ran the task.
     #   @return [String]
     #
     # @!attribute [rw] task_execution_id
-    #   The ID of the specific task execution in the Maintenance Window
+    #   The ID of the specific task execution in the maintenance window
     #   execution.
     #   @return [String]
     #
@@ -9243,12 +10524,12 @@ module Aws::SSM
     #
     # @!attribute [rw] owner_information
     #   User-provided value that was specified when the target was
-    #   registered with the Maintenance Window. This was also included in
+    #   registered with the maintenance window. This was also included in
     #   any CloudWatch events raised during the task invocation.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
-    #   The ID of the target definition in this Maintenance Window the
+    #   The ID of the target definition in this maintenance window the
     #   invocation was performed for.
     #   @return [String]
     #
@@ -9297,56 +10578,56 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about the Maintenance Window.
+    # Information about the maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window.
+    #   The ID of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the Maintenance Window.
+    #   A description of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Whether the Maintenance Window is enabled.
+    #   Indicates whether the maintenance window is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format.
     #   @return [String]
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become inactive.
+    #   maintenance window is scheduled to become inactive.
     #   @return [String]
     #
     # @!attribute [rw] start_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become active.
+    #   maintenance window is scheduled to become active.
     #   @return [String]
     #
     # @!attribute [rw] next_execution_time
-    #   The next time the Maintenance Window will actually run, taking into
-    #   account any specified times for the Maintenance Window to become
+    #   The next time the maintenance window will actually run, taking into
+    #   account any specified times for the maintenance window to become
     #   active or inactive.
     #   @return [String]
     #
@@ -9367,14 +10648,14 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The Maintenance Window to which the specified target belongs.
+    # The maintenance window to which the specified target belongs.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window.
+    #   The ID of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentityForTarget AWS API Documentation
@@ -9394,14 +10675,14 @@ module Aws::SSM
     # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     # options in the `TaskInvocationParameters` structure. For information
     # about how Systems Manager handles these options for the supported
-    # Maintenance Window task types, see
+    # maintenance window task types, see
     # MaintenanceWindowTaskInvocationParameters.
     #
     #  `TaskParameters` has been deprecated. To specify parameters to pass to
     # a task when it runs, instead use the `Parameters` option in the
     # `TaskInvocationParameters` structure. For information about how
-    # Systems Manager handles these options for the supported Maintenance
-    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    # Systems Manager handles these options for the supported maintenance
+    # window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #  For Lambda tasks, Systems Manager ignores any values specified for
     # TaskParameters and LoggingInfo.
@@ -9453,14 +10734,14 @@ module Aws::SSM
     # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     # options in the `TaskInvocationParameters` structure. For information
     # about how Systems Manager handles these options for the supported
-    # Maintenance Window task types, see
+    # maintenance window task types, see
     # MaintenanceWindowTaskInvocationParameters.
     #
     #  `TaskParameters` has been deprecated. To specify parameters to pass to
     # a task when it runs, instead use the `Parameters` option in the
     # `TaskInvocationParameters` structure. For information about how
-    # Systems Manager handles these options for the supported Maintenance
-    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    # Systems Manager handles these options for the supported maintenance
+    # window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #  For Run Command tasks, Systems Manager uses specified values for
     # `TaskParameters` and `LoggingInfo` only if no values are specified for
@@ -9490,7 +10771,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] comment
-    #   Information about the command(s) to run.
+    #   Information about the commands to run.
     #   @return [String]
     #
     # @!attribute [rw] document_hash
@@ -9520,7 +10801,9 @@ module Aws::SSM
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role to assume during task execution.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for maintenance
+    #   window Run Command tasks.
     #   @return [String]
     #
     # @!attribute [rw] timeout_seconds
@@ -9543,7 +10826,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The parameters for a STEP\_FUNCTION task.
+    # The parameters for a STEP\_FUNCTIONS task.
     #
     # For information about specifying and updating task parameters, see
     # RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
@@ -9552,14 +10835,14 @@ module Aws::SSM
     # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     # options in the `TaskInvocationParameters` structure. For information
     # about how Systems Manager handles these options for the supported
-    # Maintenance Window task types, see
+    # maintenance window task types, see
     # MaintenanceWindowTaskInvocationParameters.
     #
     #  `TaskParameters` has been deprecated. To specify parameters to pass to
     # a task when it runs, instead use the `Parameters` option in the
     # `TaskInvocationParameters` structure. For information about how
-    # Systems Manager handles these options for the supported Maintenance
-    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    # Systems Manager handles these options for the supported maintenance
+    # window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #  For Step Functions tasks, Systems Manager ignores any values specified
     # for `TaskParameters` and `LoggingInfo`.
@@ -9575,11 +10858,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] input
-    #   The inputs for the STEP\_FUNCTION task.
+    #   The inputs for the STEP\_FUNCTIONS task.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the STEP\_FUNCTION task.
+    #   The name of the STEP\_FUNCTIONS task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowStepFunctionsParameters AWS API Documentation
@@ -9590,10 +10873,10 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The target registered with the Maintenance Window.
+    # The target registered with the maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to register the target with.
+    #   The ID of the maintenance window to register the target with.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -9601,8 +10884,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of target that is being registered with the Maintenance
-    #   Window.
+    #   The type of target that is being registered with the maintenance
+    #   window.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -9620,11 +10903,11 @@ module Aws::SSM
     # @!attribute [rw] owner_information
     #   A user-provided value that will be included in any CloudWatch events
     #   that are raised while running tasks for these targets in this
-    #   Maintenance Window.
+    #   maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The target name.
+    #   The name for the maintenance window target.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -9644,10 +10927,10 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about a task defined for a Maintenance Window.
+    # Information about a task defined for a maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window where the task is registered.
+    #   The ID of the maintenance window where the task is registered.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
@@ -9658,12 +10941,12 @@ module Aws::SSM
     #   The resource that the task uses during execution. For RUN\_COMMAND
     #   and AUTOMATION task types, `TaskArn` is the Systems Manager document
     #   name or ARN. For LAMBDA tasks, it's the function name or ARN. For
-    #   STEP\_FUNCTION tasks, it's the state machine ARN.
+    #   STEP\_FUNCTIONS tasks, it's the state machine ARN.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of task. The type can be one of the following:
-    #   RUN\_COMMAND, AUTOMATION, LAMBDA, or STEP\_FUNCTION.
+    #   RUN\_COMMAND, AUTOMATION, LAMBDA, or STEP\_FUNCTIONS.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -9679,14 +10962,14 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] priority
-    #   The priority of the task in the Maintenance Window. The lower the
+    #   The priority of the task in the maintenance window. The lower the
     #   number, the higher the priority. Tasks that have the same priority
     #   are scheduled in parallel.
     #   @return [Integer]
@@ -9698,14 +10981,16 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] service_role_arn
-    #   The role that should be assumed when running the task.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for maintenance
+    #   window Run Command tasks.
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
@@ -9793,7 +11078,7 @@ module Aws::SSM
     #   @return [Types::MaintenanceWindowAutomationParameters]
     #
     # @!attribute [rw] step_functions
-    #   The parameters for a STEP\_FUNCTION task type.
+    #   The parameters for a STEP\_FUNCTIONS task type.
     #   @return [Types::MaintenanceWindowStepFunctionsParameters]
     #
     # @!attribute [rw] lambda
@@ -9828,6 +11113,18 @@ module Aws::SSM
     #
     class MaintenanceWindowTaskParameterValueExpression < Struct.new(
       :values)
+      include Aws::Structure
+    end
+
+    # The size limit of a document is 64 KB.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaxDocumentSizeExceeded AWS API Documentation
+    #
+    class MaxDocumentSizeExceeded < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -9908,21 +11205,21 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] notification_arn
-    #   An Amazon Resource Name (ARN) for a Simple Notification Service
-    #   (SNS) topic. Run Command pushes notifications about command status
-    #   changes to this topic.
+    #   An Amazon Resource Name (ARN) for an Amazon Simple Notification
+    #   Service (Amazon SNS) topic. Run Command pushes notifications about
+    #   command status changes to this topic.
     #   @return [String]
     #
     # @!attribute [rw] notification_events
     #   The different events for which you can receive notifications. These
     #   events include the following: All (events), InProgress, Success,
     #   TimedOut, Cancelled, Failed. To learn more about these events, see
-    #   [Configuring Amazon SNS Notifications for Run Command][1] in the
-    #   *AWS Systems Manager User Guide*.
+    #   [Configuring Amazon SNS Notifications for AWS Systems Manager][1] in
+    #   the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] notification_type
@@ -9938,6 +11235,495 @@ module Aws::SSM
       :notification_arn,
       :notification_events,
       :notification_type)
+      include Aws::Structure
+    end
+
+    # One or more aggregators for viewing counts of OpsItems using different
+    # dimensions such as `Source`, `CreatedTime`, or `Source and
+    # CreatedTime`, to name a few.
+    #
+    # @note When making an API call, you may pass OpsAggregator
+    #   data as a hash:
+    #
+    #       {
+    #         aggregator_type: "OpsAggregatorType",
+    #         type_name: "OpsDataTypeName",
+    #         attribute_name: "OpsDataAttributeName",
+    #         values: {
+    #           "OpsAggregatorValueKey" => "OpsAggregatorValue",
+    #         },
+    #         filters: [
+    #           {
+    #             key: "OpsFilterKey", # required
+    #             values: ["OpsFilterValue"], # required
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #           },
+    #         ],
+    #         aggregators: [
+    #           {
+    #             aggregator_type: "OpsAggregatorType",
+    #             type_name: "OpsDataTypeName",
+    #             attribute_name: "OpsDataAttributeName",
+    #             values: {
+    #               "OpsAggregatorValueKey" => "OpsAggregatorValue",
+    #             },
+    #             filters: [
+    #               {
+    #                 key: "OpsFilterKey", # required
+    #                 values: ["OpsFilterValue"], # required
+    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #               },
+    #             ],
+    #             aggregators: {
+    #               # recursive OpsAggregatorList
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aggregator_type
+    #   Either a Range or Count aggregator for limiting an OpsItem summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The data type name to use for viewing counts of OpsItems.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of an OpsItem attribute on which to limit the count of
+    #   OpsItems.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The aggregator value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] filters
+    #   The aggregator filters.
+    #   @return [Array<Types::OpsFilter>]
+    #
+    # @!attribute [rw] aggregators
+    #   A nested aggregator for viewing counts of OpsItems.
+    #   @return [Array<Types::OpsAggregator>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsAggregator AWS API Documentation
+    #
+    class OpsAggregator < Struct.new(
+      :aggregator_type,
+      :type_name,
+      :attribute_name,
+      :values,
+      :filters,
+      :aggregators)
+      include Aws::Structure
+    end
+
+    # The result of the query.
+    #
+    # @!attribute [rw] id
+    #   The query ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The data returned by the query.
+    #   @return [Hash<String,Types::OpsEntityItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsEntity AWS API Documentation
+    #
+    class OpsEntity < Struct.new(
+      :id,
+      :data)
+      include Aws::Structure
+    end
+
+    # The OpsItem summaries result item.
+    #
+    # @!attribute [rw] content
+    #   The detailed data content for an OpsItem summaries result item.
+    #   @return [Array<Hash<String,String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsEntityItem AWS API Documentation
+    #
+    class OpsEntityItem < Struct.new(
+      :content)
+      include Aws::Structure
+    end
+
+    # A filter for viewing OpsItem summaries.
+    #
+    # @note When making an API call, you may pass OpsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "OpsFilterKey", # required
+    #         values: ["OpsFilterValue"], # required
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The filter value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type of filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsFilter AWS API Documentation
+    #
+    class OpsFilter < Struct.new(
+      :key,
+      :values,
+      :type)
+      include Aws::Structure
+    end
+
+    # Operations engineers and IT professionals use OpsCenter to view,
+    # investigate, and remediate operational issues impacting the
+    # performance and health of their AWS resources. For more information,
+    # see [AWS Systems Manager OpsCenter][1] in the *AWS Systems Manager
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
+    #
+    # @!attribute [rw] created_by
+    #   The ARN of the AWS account that created the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the OpsItem was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The OpsItem description.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The ARN of the AWS account that last updated the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the OpsItem was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications
+    #   are sent when this OpsItem is edited or changed.
+    #   @return [Array<Types::OpsItemNotification>]
+    #
+    # @!attribute [rw] priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItem. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #   @return [Array<Types::RelatedOpsItem>]
+    #
+    # @!attribute [rw] status
+    #   The OpsItem status. Status can be `Open`, `In Progress`, or
+    #   `Resolved`. For more information, see [Editing OpsItem Details][1]
+    #   in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of this OpsItem. Each time the OpsItem is edited the
+    #   version number increments by one.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The origin of the OpsItem, such as Amazon EC2 or AWS Systems
+    #   Manager. The impacted resource is a subset of source.
+    #   @return [String]
+    #
+    # @!attribute [rw] operational_data
+    #   Operational data is custom data that provides useful reference
+    #   details about the OpsItem. For example, you can specify log files,
+    #   error strings, license keys, troubleshooting tips, or other relevant
+    #   data. You enter operational data as key-value pairs. The key has a
+    #   maximum length of 128 characters. The value has a maximum size of 20
+    #   KB.
+    #
+    #   Operational data keys *can't* begin with the following: amazon,
+    #   aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.
+    #
+    #   You can choose to make the data searchable by other users in the
+    #   account or you can restrict search access. Searchable data means
+    #   that all users with access to the OpsItem Overview page (as provided
+    #   by the DescribeOpsItems API action) can view and search on the
+    #   specified data. Operational data that is not searchable is only
+    #   viewable by users who have access to the OpsItem (as provided by the
+    #   GetOpsItem API action).
+    #
+    #   Use the `/aws/resources` key in OperationalData to specify a related
+    #   resource in the request. Use the `/aws/automations` key in
+    #   OperationalData to associate an Automation runbook with the OpsItem.
+    #   To view AWS CLI example commands that use these keys, see [Creating
+    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   @return [Hash<String,Types::OpsItemDataValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItem AWS API Documentation
+    #
+    class OpsItem < Struct.new(
+      :created_by,
+      :created_time,
+      :description,
+      :last_modified_by,
+      :last_modified_time,
+      :notifications,
+      :priority,
+      :related_ops_items,
+      :status,
+      :ops_item_id,
+      :version,
+      :title,
+      :source,
+      :operational_data)
+      include Aws::Structure
+    end
+
+    # The OpsItem already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemAlreadyExistsException AWS API Documentation
+    #
+    class OpsItemAlreadyExistsException < Struct.new(
+      :message,
+      :ops_item_id)
+      include Aws::Structure
+    end
+
+    # An object that defines the value of the key and its type in the
+    # OperationalData map.
+    #
+    # @note When making an API call, you may pass OpsItemDataValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "OpsItemDataValueString",
+    #         type: "SearchableString", # accepts SearchableString, String
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value of the OperationalData key.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of key-value pair. Valid types include `SearchableString`
+    #   and `String`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemDataValue AWS API Documentation
+    #
+    class OpsItemDataValue < Struct.new(
+      :value,
+      :type)
+      include Aws::Structure
+    end
+
+    # Describes an OpsItem filter.
+    #
+    # @note When making an API call, you may pass OpsItemFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId
+    #         values: ["OpsItemFilterValue"], # required
+    #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The filter value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator used by the filter call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemFilter AWS API Documentation
+    #
+    class OpsItemFilter < Struct.new(
+      :key,
+      :values,
+      :operator)
+      include Aws::Structure
+    end
+
+    # A specified parameter argument isn't valid. Verify the available
+    # arguments and try again.
+    #
+    # @!attribute [rw] parameter_names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemInvalidParameterException AWS API Documentation
+    #
+    class OpsItemInvalidParameterException < Struct.new(
+      :parameter_names,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request caused OpsItems to exceed one or more limits. For
+    # information about OpsItem limits, see [What are the resource limits
+    # for OpsCenter?][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits
+    #
+    # @!attribute [rw] resource_types
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] limit_type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemLimitExceededException AWS API Documentation
+    #
+    class OpsItemLimitExceededException < Struct.new(
+      :resource_types,
+      :limit,
+      :limit_type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified OpsItem ID doesn't exist. Verify the ID and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemNotFoundException AWS API Documentation
+    #
+    class OpsItemNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A notification about the OpsItem.
+    #
+    # @note When making an API call, you may pass OpsItemNotification
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "String",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications
+    #   are sent when this OpsItem is edited or changed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemNotification AWS API Documentation
+    #
+    class OpsItemNotification < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # A count of OpsItems.
+    #
+    # @!attribute [rw] created_by
+    #   The Amazon Resource Name (ARN) of the IAM entity that created the
+    #   OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the OpsItem was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the IAM entity that created the
+    #   OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the OpsItem was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source
+    #   The impacted AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The OpsItem status. Status can be `Open`, `In Progress`, or
+    #   `Resolved`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] operational_data
+    #   Operational data is custom data that provides useful reference
+    #   details about the OpsItem.
+    #   @return [Hash<String,Types::OpsItemDataValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemSummary AWS API Documentation
+    #
+    class OpsItemSummary < Struct.new(
+      :created_by,
+      :created_time,
+      :last_modified_by,
+      :last_modified_time,
+      :priority,
+      :source,
+      :status,
+      :ops_item_id,
+      :title,
+      :operational_data)
       include Aws::Structure
     end
 
@@ -10020,6 +11806,18 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The parameter already exists. You can't create duplicate parameters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterAlreadyExists AWS API Documentation
+    #
+    class ParameterAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about parameter usage.
     #
     # @!attribute [rw] name
@@ -10071,6 +11869,13 @@ module Aws::SSM
     #
     # @!attribute [rw] policies
     #   Information about the policies assigned to a parameter.
+    #
+    #   [Working with Parameter Policies][1] in the *AWS Systems Manager
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #   @return [Array<Types::ParameterInlinePolicy>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
@@ -10118,7 +11923,32 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Metada includes information like the ARN of the last user and the
+    # You have exceeded the number of parameters for this AWS account.
+    # Delete one or more parameters and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterLimitExceeded AWS API Documentation
+    #
+    class ParameterLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The parameter exceeded the maximum number of allowed versions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMaxVersionLimitExceeded AWS API Documentation
+    #
+    class ParameterMaxVersionLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Metadata includes information like the ARN of the last user and the
     # date/time the parameter was last used.
     #
     # @!attribute [rw] name
@@ -10181,6 +12011,31 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The parameter could not be found. Verify the name and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterNotFound AWS API Documentation
+    #
+    class ParameterNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The parameter name is not valid.
+    #
+    # @!attribute [rw] message
+    #   The parameter name is not valid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterPatternMismatchException AWS API Documentation
+    #
+    class ParameterPatternMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # One or more filters. Use a filter to return a more specific list of
     # results.
     #
@@ -10218,6 +12073,31 @@ module Aws::SSM
       :key,
       :option,
       :values)
+      include Aws::Structure
+    end
+
+    # A parameter version can have a maximum of ten labels.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterVersionLabelLimitExceeded AWS API Documentation
+    #
+    class ParameterVersionLabelLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified parameter version was not found. Verify the parameter
+    # name and version, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterVersionNotFound AWS API Documentation
+    #
+    class ParameterVersionNotFound < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -10685,6 +12565,19 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # You specified more than the maximum number of allowed policies for the
+    # parameter. The maximum is 10.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PoliciesLimitExceededException AWS API Documentation
+    #
+    class PoliciesLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An aggregate of step execution statuses displayed in the AWS Console
     # for a multi-Region and multi-account Automation execution.
     #
@@ -10870,7 +12763,7 @@ module Aws::SSM
     #             value: "TagValue", # required
     #           },
     #         ],
-    #         tier: "Standard", # accepts Standard, Advanced
+    #         tier: "Standard", # accepts Standard, Advanced, Intelligent-Tiering
     #         policies: "ParameterPolicies",
     #       }
     #
@@ -10991,20 +12884,21 @@ module Aws::SSM
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] tier
+    #   The parameter tier to assign to a parameter.
+    #
     #   Parameter Store offers a standard tier and an advanced tier for
-    #   parameters. Standard parameters have a value limit of 4 KB and
-    #   can't be configured to use parameter policies. You can create a
-    #   maximum of 10,000 standard parameters per account and per Region.
-    #   Standard parameters are offered at no additional cost.
+    #   parameters. Standard parameters have a content size limit of 4 KB
+    #   and can't be configured to use parameter policies. You can create a
+    #   maximum of 10,000 standard parameters for each Region in an AWS
+    #   account. Standard parameters are offered at no additional cost.
     #
-    #   Advanced parameters have a value limit of 8 KB and can be configured
-    #   to use parameter policies. You can create a maximum of 100,000
-    #   advanced parameters per account and per Region. Advanced parameters
-    #   incur a charge.
+    #   Advanced parameters have a content size limit of 8 KB and can be
+    #   configured to use parameter policies. You can create a maximum of
+    #   100,000 advanced parameters for each Region in an AWS account.
+    #   Advanced parameters incur a charge. For more information, see [About
+    #   Advanced Parameters][1] in the *AWS Systems Manager User Guide*.
     #
-    #   If you don't specify a parameter tier when you create a new
-    #   parameter, the parameter defaults to using the standard tier. You
-    #   can change a standard parameter to an advanced parameter at any
+    #   You can change a standard parameter to an advanced parameter any
     #   time. But you can't revert an advanced parameter to a standard
     #   parameter. Reverting an advanced parameter to a standard parameter
     #   would result in data loss because the system would truncate the size
@@ -11014,13 +12908,55 @@ module Aws::SSM
     #
     #   If you no longer need an advanced parameter, or if you no longer
     #   want to incur charges for an advanced parameter, you must delete it
-    #   and recreate it as a new standard parameter. For more information,
-    #   see [About Advanced Parameters][1] in the *AWS Systems Manager User
-    #   Guide*.
+    #   and recreate it as a new standard parameter.
+    #
+    #   **Using the Default Tier Configuration**
+    #
+    #   In `PutParameter` requests, you can specify the tier to create the
+    #   parameter in. Whenever you specify a tier in the request, Parameter
+    #   Store creates or updates the parameter according to that request.
+    #   However, if you do not specify a tier in a request, Parameter Store
+    #   assigns the tier based on the current Parameter Store default tier
+    #   configuration.
+    #
+    #   The default tier when you begin using Parameter Store is the
+    #   standard-parameter tier. If you use the advanced-parameter tier, you
+    #   can specify one of the following as the default:
+    #
+    #   * **Advanced**\: With this option, Parameter Store evaluates all
+    #     requests as advanced parameters.
+    #
+    #   * **Intelligent-Tiering**\: With this option, Parameter Store
+    #     evaluates each request to determine if the parameter is standard
+    #     or advanced.
+    #
+    #     If the request doesn't include any options that require an
+    #     advanced parameter, the parameter is created in the
+    #     standard-parameter tier. If one or more options requiring an
+    #     advanced parameter are included in the request, Parameter Store
+    #     create a parameter in the advanced-parameter tier.
+    #
+    #     This approach helps control your parameter-related costs by always
+    #     creating standard parameters unless an advanced parameter is
+    #     necessary.
+    #
+    #   Options that require an advanced parameter include the following:
+    #
+    #   * The content size of the parameter is more than 4 KB.
+    #
+    #   * The parameter uses a parameter policy.
+    #
+    #   * More than 10,000 parameters already exist in your AWS account in
+    #     the current Region.
+    #
+    #   For more information about configuring the default tier option, see
+    #   [Specifying a Default Parameter Tier][2] in the AWS Systems Manager
+    #   User Guide.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html
     #   @return [String]
     #
     # @!attribute [rw] policies
@@ -11162,7 +13098,7 @@ module Aws::SSM
     #
     #       {
     #         window_id: "MaintenanceWindowId", # required
-    #         resource_type: "INSTANCE", # required, accepts INSTANCE
+    #         resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
     #         targets: [ # required
     #           {
     #             key: "TargetKey",
@@ -11176,32 +13112,63 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the target should be registered
+    #   The ID of the maintenance window the target should be registered
     #   with.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of target being registered with the Maintenance Window.
+    #   The type of target being registered with the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags).
+    #   The targets to register with the maintenance window. In other words,
+    #   the instances to run commands on when the maintenance window runs.
     #
-    #   Specify instances using the following format:
+    #   You can specify targets using instance IDs, resource group names, or
+    #   tags that have been applied to instances.
     #
-    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #   **Example 1**\: Specify instance IDs
     #
-    #   Specify tags using either of the following formats:
+    #   `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3 `
     #
-    #   `Key=tag:<tag-key>,Values=<tag-value-1>,<tag-value-2>`
+    #   **Example 2**\: Use tag key-pairs applied to instances
     #
-    #   `Key=tag-key,Values=<tag-key-1>,<tag-key-2>`
+    #   `Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2 `
+    #
+    #   **Example 3**\: Use tag-keys applied to instances
+    #
+    #   `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
+    #
+    #   **Example 4**\: Use resource group names
+    #
+    #   `Key=resource-groups:Name,Values=resource-group-name `
+    #
+    #   **Example 5**\: Use filters for resource group types
+    #
+    #   `Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
+    #   `
+    #
+    #   <note markdown="1"> For `Key=resource-groups:ResourceTypeFilters`, specify resource
+    #   types in the following format
+    #
+    #    `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
+    #   `
+    #
+    #    </note>
+    #
+    #   For more information about these examples formats, including the
+    #   best use case for each one, see [Examples: Register Targets with a
+    #   Maintenance Window][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] owner_information
     #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   raised while running tasks for these targets in this maintenance
+    #   window.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -11233,7 +13200,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_target_id
-    #   The ID of the target definition in this Maintenance Window.
+    #   The ID of the target definition in this maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindowResult AWS API Documentation
@@ -11310,19 +13277,19 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window the task should be added to.
+    #   The ID of the maintenance window the task should be added to.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or Maintenance Window targets).
+    #   The targets (either instances or maintenance window targets).
     #
     #   Specify instances using the following format:
     #
     #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
     #
-    #   Specify Maintenance Window targets using the following format:
+    #   Specify maintenance window targets using the following format:
     #
-    #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
+    #   `Key=WindowTargetIds;,Values=<window-target-id-1>,<window-target-id-2>`
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
@@ -11330,19 +13297,20 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The role to assume when running the Maintenance Window task.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default.
+    #   The ARN of the IAM service role for Systems Manager to assume when
+    #   running a maintenance window task. If you do not specify a service
+    #   role ARN, Systems Manager uses your account's service-linked role.
     #   If no service-linked role for Systems Manager exists in your
-    #   account, it will be created when you run
-    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
-    #   role ARN.
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Service-Linked Role Permissions for
-    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
-    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
-    #   *AWS Systems Manager User Guide*.
+    #   For more information, see the following topics in the in the *AWS
+    #   Systems Manager User Guide*\:
+    #
+    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #
+    #   * [Should I Use a Service-Linked Role or a Custom Service Role to
+    #     Run Maintenance Window Tasks? ][2]
     #
     #
     #
@@ -11360,8 +13328,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
@@ -11373,8 +13341,8 @@ module Aws::SSM
     #   @return [Types::MaintenanceWindowTaskInvocationParameters]
     #
     # @!attribute [rw] priority
-    #   The priority of the task in the Maintenance Window, the lower the
-    #   number the higher the priority. Tasks in a Maintenance Window are
+    #   The priority of the task in the maintenance window, the lower the
+    #   number the higher the priority. Tasks in a maintenance window are
     #   scheduled in priority order with tasks that have the same priority
     #   scheduled in parallel.
     #   @return [Integer]
@@ -11396,7 +13364,7 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -11438,7 +13406,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_task_id
-    #   The ID of the task in the Maintenance Window.
+    #   The ID of the task in the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowResult AWS API Documentation
@@ -11448,29 +13416,50 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # An OpsItems that shares something in common with the current OpsItem.
+    # For example, related OpsItems can include OpsItems with similar error
+    # messages, impacted resources, or statuses for the impacted resource.
+    #
+    # @note When making an API call, you may pass RelatedOpsItem
+    #   data as a hash:
+    #
+    #       {
+    #         ops_item_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of an OpsItem related to the current OpsItem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RelatedOpsItem AWS API Documentation
+    #
+    class RelatedOpsItem < Struct.new(
+      :ops_item_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemoveTagsFromResourceRequest
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #         resource_id: "ResourceId", # required
     #         tag_keys: ["TagKey"], # required
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The type of resource of which you want to remove a tag.
+    #   The type of resource from which you want to remove a tag.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. Specify the name of the managed instance in the
+    #   following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The resource ID for which you want to remove tags. Use the ID of the
-    #   resource. Here are some examples:
+    #   The ID of the resource from which you want to remove tags. For
+    #   example:
     #
     #   ManagedInstance: mi-012345abcde
     #
@@ -11481,9 +13470,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. Specify the name of the managed instance in the
+    #   following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #   @return [String]
@@ -11609,6 +13597,42 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # A sync configuration with the same name already exists.
+    #
+    # @!attribute [rw] sync_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncAlreadyExistsException AWS API Documentation
+    #
+    class ResourceDataSyncAlreadyExistsException < Struct.new(
+      :sync_name)
+      include Aws::Structure
+    end
+
+    # You have exceeded the allowed maximum sync configurations.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncCountExceededException AWS API Documentation
+    #
+    class ResourceDataSyncCountExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified sync configuration is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncInvalidConfigurationException AWS API Documentation
+    #
+    class ResourceDataSyncInvalidConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a Resource Data Sync configuration, including its
     # current status and last successful sync.
     #
@@ -11654,6 +13678,18 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The specified sync name was not found.
+    #
+    # @!attribute [rw] sync_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncNotFoundException AWS API Documentation
+    #
+    class ResourceDataSyncNotFoundException < Struct.new(
+      :sync_name)
+      include Aws::Structure
+    end
+
     # Information about the target Amazon S3 bucket for the Resource Data
     # Sync.
     #
@@ -11689,7 +13725,7 @@ module Aws::SSM
     #
     # @!attribute [rw] awskms_key_arn
     #   The ARN of an encryption key for a destination in Amazon S3. Must
-    #   belong to the same region as the destination Amazon S3 bucket.
+    #   belong to the same Region as the destination Amazon S3 bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncS3Destination AWS API Documentation
@@ -11700,6 +13736,40 @@ module Aws::SSM
       :sync_format,
       :region,
       :awskms_key_arn)
+      include Aws::Structure
+    end
+
+    # Error returned if an attempt is made to delete a patch baseline that
+    # is registered for a patch group.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Error returned when the caller has exceeded the default resource
+    # limits. For example, too many maintenance windows or patch baselines
+    # have been created.
+    #
+    # For information about resource limits in Systems Manager, see [AWS
+    # Systems Manager Limits][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_ssm
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -11755,7 +13825,7 @@ module Aws::SSM
     #   A URL back to SSM Agent on the instance that the Session Manager
     #   client uses to send commands and receive output from the instance.
     #   Format:
-    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`.
+    #   `wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`.
     #
     #   **region** represents the Region identifier for an AWS Region
     #   supported by AWS Systems Manager, such as `us-east-2` for the US
@@ -11830,18 +13900,18 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about a scheduled execution for a Maintenance Window.
+    # Information about a scheduled execution for a maintenance window.
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to be run.
+    #   The ID of the maintenance window to be run.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window to be run.
+    #   The name of the maintenance window to be run.
     #   @return [String]
     #
     # @!attribute [rw] execution_time
-    #   The time, in ISO-8601 Extended format, that the Maintenance Window
+    #   The time, in ISO-8601 Extended format, that the maintenance window
     #   is scheduled to be run.
     #   @return [String]
     #
@@ -11871,13 +13941,27 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] signal_type
-    #   The type of signal. Valid signal types include the following:
-    #   Approve and Reject
+    #   The type of signal to send to an Automation execution.
     #   @return [String]
     #
     # @!attribute [rw] payload
     #   The data sent with the signal. The data schema depends on the type
     #   of signal used in the request.
+    #
+    #   For `Approve` and `Reject` signal types, the payload is an optional
+    #   comment that you can send with the signal type. For example:
+    #
+    #   `Comment="Looks good"`
+    #
+    #   For `StartStep` and `Resume` signal types, you must send the name of
+    #   the Automation step to start or resume as the payload. For example:
+    #
+    #   `StepName="step1"`
+    #
+    #   For the `StopStep` signal type, you must send the step execution ID
+    #   as the payload. For example:
+    #
+    #   `StepExecutionId="97fff367-fc5a-4299-aed8-0123456789ab"`
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignalRequest AWS API Documentation
@@ -12048,7 +14132,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM role that Systems Manager uses to send notifications.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for Run Command
+    #   commands.
     #   @return [String]
     #
     # @!attribute [rw] notification_config
@@ -12157,6 +14243,19 @@ module Aws::SSM
       :last_modified_user,
       :arn,
       :status)
+      include Aws::Structure
+    end
+
+    # The specified service setting was not found. Either the service name
+    # or the setting has not been provisioned by the AWS service team.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ServiceSettingNotFound AWS API Documentation
+    #
+    class ServiceSettingNotFound < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -12552,7 +14651,7 @@ module Aws::SSM
     #   A URL back to SSM Agent on the instance that the Session Manager
     #   client uses to send commands and receive output from the instance.
     #   Format:
-    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`
+    #   `wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`
     #
     #   **region** represents the Region identifier for an AWS Region
     #   supported by AWS Systems Manager, such as `us-east-2` for the US
@@ -12768,10 +14867,22 @@ module Aws::SSM
     #
     class StopAutomationExecutionResult < Aws::EmptyStructure; end
 
+    # The sub-type count exceeded the limit for the inventory type.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SubTypeCountLimitExceededException AWS API Documentation
+    #
+    class SubTypeCountLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Metadata that you assign to your AWS resources. Tags enable you to
     # categorize your resources in different ways, for example, by purpose,
     # owner, or environment. In Systems Manager, you can apply tags to
-    # documents, managed instances, Maintenance Windows, Parameter Store
+    # documents, managed instances, maintenance windows, Parameter Store
     # parameters, and patch baselines.
     #
     # @note When making an API call, you may pass Tag
@@ -12799,8 +14910,45 @@ module Aws::SSM
     end
 
     # An array of search criteria that targets instances using a Key,Value
-    # combination that you specify. `Targets` is required if you don't
-    # provide one or more instance IDs in the call.
+    # combination that you specify.
+    #
+    # Supported formats include the following.
+    #
+    # * `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3 `
+    #
+    # * `Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2 `
+    #
+    # * `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
+    #
+    # * (Maintenance window targets only)
+    #   `Key=resource-groups:Name,Values=resource-group-name `
+    #
+    # * (Maintenance window targets only)
+    #   `Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
+    #   `
+    #
+    # For example:
+    #
+    # * `Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE`
+    #
+    # * `Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3`
+    #
+    # * `Key=tag-key,Values=Name,Instance-Type,CostCenter`
+    #
+    # * (Maintenance window targets only)
+    #   `Key=resource-groups:Name,Values=ProductionResourceGroup`
+    #
+    # * (Maintenance window targets only)
+    #   `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
+    #   `
+    #
+    # For information about how to send commands that target instances using
+    # `Key,Value` parameters, see [Using Targets and Rate Controls to Send
+    # Commands to a Fleet][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -12812,29 +14960,14 @@ module Aws::SSM
     #
     # @!attribute [rw] key
     #   User-defined criteria for sending commands that target instances
-    #   that meet the criteria. `Key` can be `tag:<Amazon EC2 tag>` or
-    #   `InstanceIds`. For more information about how to send commands that
-    #   target instances using `Key,Value` parameters, see [Using Targets
-    #   and Rate Controls to Send Commands to a Fleet][1] in the *AWS
-    #   Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
+    #   that meet the criteria.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   User-defined criteria that maps to `Key`. For example, if you
     #   specified `tag:ServerRole`, you could specify `value:WebServer` to
     #   run a command on instances that include Amazon EC2 tags of
-    #   `ServerRole,WebServer`. For more information about how to send
-    #   commands that target instances using `Key,Value` parameters, see
-    #   [Using Targets and Rate Controls to Send Commands to a Fleet][1] in
-    #   the *AWS Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
+    #   `ServerRole,WebServer`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Target AWS API Documentation
@@ -12842,6 +14975,20 @@ module Aws::SSM
     class Target < Struct.new(
       :key,
       :values)
+      include Aws::Structure
+    end
+
+    # You specified the `Safe` option for the
+    # DeregisterTargetFromMaintenanceWindow operation, but the target is
+    # still referenced in a task.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetInUseException AWS API Documentation
+    #
+    class TargetInUseException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -12868,13 +15015,13 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_location_max_concurrency
-    #   The maxium number of AWS accounts and AWS regions allowed to run the
-    #   Automation concurrently
+    #   The maximum number of AWS accounts and AWS regions allowed to run
+    #   the Automation concurrently
     #   @return [String]
     #
     # @!attribute [rw] target_location_max_errors
-    #   The maxium number of errors allowed before the system stops queueing
-    #   additional Automation executions for the currently running
+    #   The maximum number of errors allowed before the system stops
+    #   queueing additional Automation executions for the currently running
     #   Automation.
     #   @return [String]
     #
@@ -12891,6 +15038,25 @@ module Aws::SSM
       :target_location_max_concurrency,
       :target_location_max_errors,
       :execution_role_name)
+      include Aws::Structure
+    end
+
+    # The specified target instance for the session is not fully configured
+    # for use with Session Manager. For more information, see [Getting
+    # Started with Session Manager][1] in the *AWS Systems Manager User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetNotConnected AWS API Documentation
+    #
+    class TargetNotConnected < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -12920,6 +15086,124 @@ module Aws::SSM
     #
     class TerminateSessionResponse < Struct.new(
       :session_id)
+      include Aws::Structure
+    end
+
+    # There are concurrent updates for a resource that supports one update
+    # at a time.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TooManyUpdates AWS API Documentation
+    #
+    class TooManyUpdates < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The size of inventory data has exceeded the total size limit for the
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TotalSizeLimitExceededException AWS API Documentation
+    #
+    class TotalSizeLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Microsoft application patching is only available on EC2 instances and
+    # Advanced Instances. To patch Microsoft applications on on-premises
+    # servers and VMs, you must enable Advanced Instances. For more
+    # information, see [Using the Advanced-Instances Tier][1] in the *AWS
+    # Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnsupportedFeatureRequiredException AWS API Documentation
+    #
+    class UnsupportedFeatureRequiredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The `Context` attribute that you specified for the `InventoryItem` is
+    # not allowed for this inventory type. You can only use the `Context`
+    # attribute with inventory types like `AWS:ComplianceItem`.
+    #
+    # @!attribute [rw] type_name
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnsupportedInventoryItemContextException AWS API Documentation
+    #
+    class UnsupportedInventoryItemContextException < Struct.new(
+      :type_name,
+      :message)
+      include Aws::Structure
+    end
+
+    # Inventory item type schema version has to match supported versions in
+    # the service. Check output of GetInventorySchema to see the available
+    # schema version for each type.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnsupportedInventorySchemaVersionException AWS API Documentation
+    #
+    class UnsupportedInventorySchemaVersionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operating systems you specified is not supported, or the operation
+    # is not supported for the operating system. Valid operating systems
+    # include: Windows, AmazonLinux, RedhatEnterpriseLinux, and Ubuntu.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnsupportedOperatingSystem AWS API Documentation
+    #
+    class UnsupportedOperatingSystem < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The parameter type is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnsupportedParameterType AWS API Documentation
+    #
+    class UnsupportedParameterType < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The document does not support the platform type of the given instance
+    # ID(s). For example, you sent an document for a Windows instance to a
+    # Linux instance.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnsupportedPlatformType AWS API Documentation
+    #
+    class UnsupportedPlatformType < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -13211,7 +15495,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   The version of the document that you want to update.
+    #   (Required) The version of the document that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] document_format
@@ -13267,11 +15551,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window to update.
+    #   The ID of the maintenance window to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -13279,7 +15563,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] start_date
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -13292,18 +15576,18 @@ module Aws::SSM
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when you want
-    #   the Maintenance Window to become inactive. EndDate allows you to set
-    #   a date and time in the future when the Maintenance Window will no
+    #   the maintenance window to become inactive. EndDate allows you to set
+    #   a date and time in the future when the maintenance window will no
     #   longer run.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -13315,21 +15599,21 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window
+    #   Whether targets must be registered with the maintenance window
     #   before tasks can be defined for those targets.
     #   @return [Boolean]
     #
     # @!attribute [rw] enabled
-    #   Whether the Maintenance Window is enabled.
+    #   Whether the maintenance window is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] replace
@@ -13357,11 +15641,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the created Maintenance Window.
+    #   The ID of the created maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -13370,23 +15654,23 @@ module Aws::SSM
     #
     # @!attribute [rw] start_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become active. The Maintenance
-    #   Window will not run before this specified time.
+    #   maintenance window is scheduled to become active. The maintenance
+    #   window will not run before this specified time.
     #   @return [String]
     #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when the
-    #   Maintenance Window is scheduled to become inactive. The Maintenance
-    #   Window will not run after this specified time.
+    #   maintenance window is scheduled to become inactive. The maintenance
+    #   window will not run after this specified time.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #   @return [String]
     #
     # @!attribute [rw] schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
     #   For more information, see the [Time Zone Database][1] on the IANA
@@ -13398,21 +15682,21 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #   @return [Integer]
     #
     # @!attribute [rw] cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window
+    #   Whether targets must be registered with the maintenance window
     #   before tasks can be defined for those targets.
     #   @return [Boolean]
     #
     # @!attribute [rw] enabled
-    #   Whether the Maintenance Window is enabled.
+    #   Whether the maintenance window is enabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowResult AWS API Documentation
@@ -13451,7 +15735,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID with which to modify the target.
+    #   The maintenance window ID with which to modify the target.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -13464,8 +15748,8 @@ module Aws::SSM
     #
     # @!attribute [rw] owner_information
     #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   raised while running tasks for these targets in this maintenance
+    #   window.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -13497,7 +15781,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID specified in the update request.
+    #   The maintenance window ID specified in the update request.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -13599,7 +15883,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID that contains the task to modify.
+    #   The maintenance window ID that contains the task to modify.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
@@ -13617,20 +15901,20 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role ARN to modify. The system assumes this role
-    #   during task execution.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default.
+    #   The ARN of the IAM service role for Systems Manager to assume when
+    #   running a maintenance window task. If you do not specify a service
+    #   role ARN, Systems Manager uses your account's service-linked role.
     #   If no service-linked role for Systems Manager exists in your
-    #   account, it will be created when you run
-    #   `RegisterTaskWithMaintenanceWindow` without specifying a service
-    #   role ARN.
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Service-Linked Role Permissions for
-    #   Systems Manager][1] and [Should I Use a Service-Linked Role or a
-    #   Custom Service Role to Run Maintenance Window Tasks? ][2] in the
-    #   *AWS Systems Manager User Guide*.
+    #   For more information, see the following topics in the in the *AWS
+    #   Systems Manager User Guide*\:
+    #
+    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #
+    #   * [Should I Use a Service-Linked Role or a Custom Service Role to
+    #     Run Maintenance Window Tasks? ][2]
     #
     #
     #
@@ -13644,8 +15928,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #
@@ -13688,7 +15972,7 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -13729,11 +16013,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The ID of the Maintenance Window that was updated.
+    #   The ID of the maintenance window that was updated.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The task ID of the Maintenance Window that was updated.
+    #   The task ID of the maintenance window that was updated.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -13745,7 +16029,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The updated service role ARN value.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for maintenance
+    #   window Run Command tasks.
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
@@ -13754,8 +16040,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
@@ -13783,7 +16069,7 @@ module Aws::SSM
     #   contain logs, instead use the `OutputS3BucketName` and
     #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
     #   structure. For information about how Systems Manager handles these
-    #   options for the supported Maintenance Window task types, see
+    #   options for the supported maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -13843,6 +16129,132 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRoleResult AWS API Documentation
     #
     class UpdateManagedInstanceRoleResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateOpsItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "OpsItemDescription",
+    #         operational_data: {
+    #           "OpsItemDataKey" => {
+    #             value: "OpsItemDataValueString",
+    #             type: "SearchableString", # accepts SearchableString, String
+    #           },
+    #         },
+    #         operational_data_to_delete: ["String"],
+    #         notifications: [
+    #           {
+    #             arn: "String",
+    #           },
+    #         ],
+    #         priority: 1,
+    #         related_ops_items: [
+    #           {
+    #             ops_item_id: "String", # required
+    #           },
+    #         ],
+    #         status: "Open", # accepts Open, InProgress, Resolved
+    #         ops_item_id: "OpsItemId", # required
+    #         title: "OpsItemTitle",
+    #       }
+    #
+    # @!attribute [rw] description
+    #   Update the information about the OpsItem. Provide enough information
+    #   so that users reading this OpsItem for the first time understand the
+    #   issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] operational_data
+    #   Add new keys or edit existing key-value pairs of the OperationalData
+    #   map in the OpsItem object.
+    #
+    #   Operational data is custom data that provides useful reference
+    #   details about the OpsItem. For example, you can specify log files,
+    #   error strings, license keys, troubleshooting tips, or other relevant
+    #   data. You enter operational data as key-value pairs. The key has a
+    #   maximum length of 128 characters. The value has a maximum size of 20
+    #   KB.
+    #
+    #   Operational data keys *can't* begin with the following: amazon,
+    #   aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.
+    #
+    #   You can choose to make the data searchable by other users in the
+    #   account or you can restrict search access. Searchable data means
+    #   that all users with access to the OpsItem Overview page (as provided
+    #   by the DescribeOpsItems API action) can view and search on the
+    #   specified data. Operational data that is not searchable is only
+    #   viewable by users who have access to the OpsItem (as provided by the
+    #   GetOpsItem API action).
+    #
+    #   Use the `/aws/resources` key in OperationalData to specify a related
+    #   resource in the request. Use the `/aws/automations` key in
+    #   OperationalData to associate an Automation runbook with the OpsItem.
+    #   To view AWS CLI example commands that use these keys, see [Creating
+    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   @return [Hash<String,Types::OpsItemDataValue>]
+    #
+    # @!attribute [rw] operational_data_to_delete
+    #   Keys that you want to remove from the OperationalData map.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications
+    #   are sent when this OpsItem is edited or changed.
+    #   @return [Array<Types::OpsItemNotification>]
+    #
+    # @!attribute [rw] priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItems. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #   @return [Array<Types::RelatedOpsItem>]
+    #
+    # @!attribute [rw] status
+    #   The OpsItem status. Status can be `Open`, `In Progress`, or
+    #   `Resolved`. For more information, see [Editing OpsItem Details][1]
+    #   in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItemRequest AWS API Documentation
+    #
+    class UpdateOpsItemRequest < Struct.new(
+      :description,
+      :operational_data,
+      :operational_data_to_delete,
+      :notifications,
+      :priority,
+      :related_ops_items,
+      :status,
+      :ops_item_id,
+      :title)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItemResponse AWS API Documentation
+    #
+    class UpdateOpsItemResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePatchBaselineRequest
     #   data as a hash:

@@ -116,6 +116,10 @@ module Aws::IoTAnalytics
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -343,6 +347,9 @@ module Aws::IoTAnalytics
     # @option params [required, String] :channel_name
     #   The name of the channel.
     #
+    # @option params [Types::ChannelStorage] :channel_storage
+    #   Where channel data is stored.
+    #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the channel.
     #
@@ -359,6 +366,15 @@ module Aws::IoTAnalytics
     #
     #   resp = client.create_channel({
     #     channel_name: "ChannelName", # required
+    #     channel_storage: {
+    #       service_managed_s3: {
+    #       },
+    #       customer_managed_s3: {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
@@ -567,6 +583,9 @@ module Aws::IoTAnalytics
     # @option params [required, String] :datastore_name
     #   The name of the data store.
     #
+    # @option params [Types::DatastoreStorage] :datastore_storage
+    #   Where data store data is stored.
+    #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data store.
     #
@@ -583,6 +602,15 @@ module Aws::IoTAnalytics
     #
     #   resp = client.create_datastore({
     #     datastore_name: "DatastoreName", # required
+    #     datastore_storage: {
+    #       service_managed_s3: {
+    #       },
+    #       customer_managed_s3: {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
@@ -859,6 +887,9 @@ module Aws::IoTAnalytics
     # @example Response structure
     #
     #   resp.channel.name #=> String
+    #   resp.channel.storage.customer_managed_s3.bucket #=> String
+    #   resp.channel.storage.customer_managed_s3.key_prefix #=> String
+    #   resp.channel.storage.customer_managed_s3.role_arn #=> String
     #   resp.channel.arn #=> String
     #   resp.channel.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.channel.retention_period.unlimited #=> Boolean
@@ -961,6 +992,9 @@ module Aws::IoTAnalytics
     # @example Response structure
     #
     #   resp.datastore.name #=> String
+    #   resp.datastore.storage.customer_managed_s3.bucket #=> String
+    #   resp.datastore.storage.customer_managed_s3.key_prefix #=> String
+    #   resp.datastore.storage.customer_managed_s3.role_arn #=> String
     #   resp.datastore.arn #=> String
     #   resp.datastore.status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.datastore.retention_period.unlimited #=> Boolean
@@ -1135,6 +1169,9 @@ module Aws::IoTAnalytics
     #
     #   resp.channel_summaries #=> Array
     #   resp.channel_summaries[0].channel_name #=> String
+    #   resp.channel_summaries[0].channel_storage.customer_managed_s3.bucket #=> String
+    #   resp.channel_summaries[0].channel_storage.customer_managed_s3.key_prefix #=> String
+    #   resp.channel_summaries[0].channel_storage.customer_managed_s3.role_arn #=> String
     #   resp.channel_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.channel_summaries[0].creation_time #=> Time
     #   resp.channel_summaries[0].last_update_time #=> Time
@@ -1270,6 +1307,9 @@ module Aws::IoTAnalytics
     #
     #   resp.datastore_summaries #=> Array
     #   resp.datastore_summaries[0].datastore_name #=> String
+    #   resp.datastore_summaries[0].datastore_storage.customer_managed_s3.bucket #=> String
+    #   resp.datastore_summaries[0].datastore_storage.customer_managed_s3.key_prefix #=> String
+    #   resp.datastore_summaries[0].datastore_storage.customer_managed_s3.role_arn #=> String
     #   resp.datastore_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING"
     #   resp.datastore_summaries[0].creation_time #=> Time
     #   resp.datastore_summaries[0].last_update_time #=> Time
@@ -1612,6 +1652,9 @@ module Aws::IoTAnalytics
     # @option params [required, String] :channel_name
     #   The name of the channel to be updated.
     #
+    # @option params [Types::ChannelStorage] :channel_storage
+    #   Where channel data is stored.
+    #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the channel.
     #
@@ -1621,6 +1664,15 @@ module Aws::IoTAnalytics
     #
     #   resp = client.update_channel({
     #     channel_name: "ChannelName", # required
+    #     channel_storage: {
+    #       service_managed_s3: {
+    #       },
+    #       customer_managed_s3: {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
@@ -1759,6 +1811,9 @@ module Aws::IoTAnalytics
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data store.
     #
+    # @option params [Types::DatastoreStorage] :datastore_storage
+    #   Where data store data is stored.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1768,6 +1823,15 @@ module Aws::IoTAnalytics
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
+    #     },
+    #     datastore_storage: {
+    #       service_managed_s3: {
+    #       },
+    #       customer_managed_s3: {
+    #         bucket: "BucketName", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         role_arn: "RoleArn", # required
+    #       },
     #     },
     #   })
     #
@@ -1888,7 +1952,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

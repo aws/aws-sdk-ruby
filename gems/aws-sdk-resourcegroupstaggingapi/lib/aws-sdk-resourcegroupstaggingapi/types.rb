@@ -58,23 +58,53 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     #
     # @!attribute [rw] tag_filters
-    #   A list of tags (keys and values). A request can include up to 50
-    #   keys, and each key can include up to 20 values.
+    #   A list of TagFilters (keys and values). Each TagFilter specified
+    #   must contain a key with values as optional. A request can include up
+    #   to 50 keys, and each key can include up to 20 values.
     #
-    #   If you specify multiple filters connected by an AND operator in a
-    #   single request, the response returns only those resources that are
-    #   associated with every specified filter.
+    #   Note the following when deciding how to use TagFilters:
     #
-    #   If you specify multiple filters connected by an OR operator in a
-    #   single request, the response returns all resources that are
-    #   associated with at least one or possibly more of the specified
-    #   filters.
+    #   * If you *do* specify a TagFilter, the response returns only those
+    #     resources that are currently associated with the specified tag.
+    #
+    #   * If you *don't* specify a TagFilter, the response includes all
+    #     resources that were ever associated with tags. Resources that
+    #     currently don't have associated tags are shown with an empty tag
+    #     set, like this: `"Tags": []`.
+    #
+    #   * If you specify more than one filter in a single request, the
+    #     response returns only those resources that satisfy all specified
+    #     filters.
+    #
+    #   * If you specify a filter that contains more than one value for a
+    #     key, the response returns resources that match any of the
+    #     specified values for that key.
+    #
+    #   * If you don't specify any values for a key, the response returns
+    #     resources that are tagged with that key irrespective of the value.
+    #
+    #     For example, for filters: filter1 = \\\{key1, \\\{value1\\}\\},
+    #     filter2 = \\\{key2, \\\{value2,value3,value4\\}\\} , filter3 =
+    #     \\\{key3\\}:
+    #
+    #     * GetResources( \\\{filter1\\} ) returns resources tagged with
+    #       key1=value1
+    #
+    #     * GetResources( \\\{filter2\\} ) returns resources tagged with
+    #       key2=value2 or key2=value3 or key2=value4
+    #
+    #     * GetResources( \\\{filter3\\} ) returns resources tagged with any
+    #       tag containing key3 as its tag key, irrespective of its value
+    #
+    #     * GetResources( \\\{filter1,filter2,filter3\\} ) returns resources
+    #       tagged with ( key1=value1) and ( key2=value2 or key2=value3 or
+    #       key2=value4) and (key3, irrespective of the value)
     #   @return [Array<Types::TagFilter>]
     #
     # @!attribute [rw] resources_per_page
     #   A limit that restricts the number of resources returned by
     #   GetResources in paginated output. You can set ResourcesPerPage to a
-    #   minimum of 1 item and the maximum of 50 items.
+    #   minimum of 1 item and the maximum of 100 items.
     #   @return [Integer]
     #
     # @!attribute [rw] tags_per_page
@@ -94,8 +124,6 @@ module Aws::ResourceGroupsTaggingAPI
     #   resources each with its 10 tags, and the third page displaying the
     #   remaining 2 resources, each with its 10 tags.
     #
-    #
-    #
     #   You can set `TagsPerPage` to a minimum of 100 items and the maximum
     #   of 500 items.
     #   @return [Integer]
@@ -103,9 +131,9 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute [rw] resource_type_filters
     #   The constraints on the resources that you want returned. The format
     #   of each resource type is `service[:resourceType]`. For example,
-    #   specifying a resource type of `ec2` returns all tagged Amazon EC2
-    #   resources (which includes tagged EC2 instances). Specifying a
-    #   resource type of `ec2:instance` returns only EC2 instances.
+    #   specifying a resource type of `ec2` returns all Amazon EC2 resources
+    #   (which includes EC2 instances). Specifying a resource type of
+    #   `ec2:instance` returns only EC2 instances.
     #
     #   The string for each service name and resource type is the same as
     #   that embedded in a resource's Amazon Resource Name (ARN). Consult
@@ -118,6 +146,10 @@ module Aws::ResourceGroupsTaggingAPI
     #
     #   * For more information about ARNs, see [Amazon Resource Names (ARNs)
     #     and AWS Service Namespaces][3].
+    #
+    #   You can specify multiple resource types by using an array. The array
+    #   can include up to 100 items. Note that the length constraint
+    #   requirement applies to each resource type filter.
     #
     #
     #
@@ -244,11 +276,50 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
+    # The request processing failed because of an unknown error, exception,
+    # or failure. You can retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A parameter is missing or a malformed string or invalid or
+    # out-of-range value was supplied for the request parameter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A `PaginationToken` is valid for a maximum of 15 minutes. Your request
+    # was denied because the specified `PaginationToken` has expired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/PaginationTokenExpiredException AWS API Documentation
+    #
+    class PaginationTokenExpiredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A list of resource ARNs and the tags (keys and values) that are
     # associated with each.
     #
     # @!attribute [rw] resource_arn
-    #   An array of resource ARN(s).
+    #   The ARN of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -363,6 +434,18 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class TagResourcesOutput < Struct.new(
       :failed_resources_map)
+      include Aws::Structure
+    end
+
+    # The request was denied to limit the frequency of submitted requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/ThrottledException AWS API Documentation
+    #
+    class ThrottledException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

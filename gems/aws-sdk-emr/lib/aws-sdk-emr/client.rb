@@ -116,6 +116,10 @@ module Aws::EMR
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -969,6 +973,38 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Returns the Amazon EMR block public access configuration for your AWS
+    # account in the current Region. For more information see [Configure
+    # Block Public Access for Amazon EMR][1] in the *Amazon EMR Management
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html
+    #
+    # @return [Types::GetBlockPublicAccessConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlockPublicAccessConfigurationOutput#block_public_access_configuration #block_public_access_configuration} => Types::BlockPublicAccessConfiguration
+    #   * {Types::GetBlockPublicAccessConfigurationOutput#block_public_access_configuration_metadata #block_public_access_configuration_metadata} => Types::BlockPublicAccessConfigurationMetadata
+    #
+    # @example Response structure
+    #
+    #   resp.block_public_access_configuration.block_public_security_group_rules #=> Boolean
+    #   resp.block_public_access_configuration.permitted_public_security_group_rule_ranges #=> Array
+    #   resp.block_public_access_configuration.permitted_public_security_group_rule_ranges[0].min_range #=> Integer
+    #   resp.block_public_access_configuration.permitted_public_security_group_rule_ranges[0].max_range #=> Integer
+    #   resp.block_public_access_configuration_metadata.creation_date_time #=> Time
+    #   resp.block_public_access_configuration_metadata.created_by_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfiguration AWS API Documentation
+    #
+    # @overload get_block_public_access_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_block_public_access_configuration(params = {}, options = {})
+      req = build_request(:get_block_public_access_configuration, params)
+      req.send_request(options)
+    end
+
     # Provides information about the bootstrap actions associated with a
     # cluster.
     #
@@ -1610,6 +1646,53 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Creates or updates an Amazon EMR block public access configuration for
+    # your AWS account in the current Region. For more information see
+    # [Configure Block Public Access for Amazon EMR][1] in the *Amazon EMR
+    # Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html
+    #
+    # @option params [required, Types::BlockPublicAccessConfiguration] :block_public_access_configuration
+    #   A configuration for Amazon EMR block public access. The configuration
+    #   applies to all clusters created in your account for the current
+    #   Region. The configuration specifies whether block public access is
+    #   enabled. If block public access is enabled, security groups associated
+    #   with the cluster cannot have rules that allow inbound traffic from
+    #   0.0.0.0/0 or ::/0 on a port, unless the port is specified as an
+    #   exception using `PermittedPublicSecurityGroupRuleRanges` in the
+    #   `BlockPublicAccessConfiguration`. By default, Port 22 (SSH) is an
+    #   exception, and public access is allowed on this port. You can change
+    #   this by updating `BlockPublicSecurityGroupRules` to remove the
+    #   exception.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_block_public_access_configuration({
+    #     block_public_access_configuration: { # required
+    #       block_public_security_group_rules: false, # required
+    #       permitted_public_security_group_rule_ranges: [
+    #         {
+    #           min_range: 1, # required
+    #           max_range: 1,
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfiguration AWS API Documentation
+    #
+    # @overload put_block_public_access_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_block_public_access_configuration(params = {}, options = {})
+      req = build_request(:put_block_public_access_configuration, params)
+      req.send_request(options)
+    end
+
     # Removes an automatic scaling policy from a specified instance group
     # within an EMR cluster.
     #
@@ -1732,11 +1815,11 @@ module Aws::EMR
     #   The Amazon EMR release label, which determines the version of
     #   open-source application packages installed on the cluster. Release
     #   labels are in the form `emr-x.x.x`, where x.x.x is an Amazon EMR
-    #   release version, for example, `emr-5.14.0`. For more information about
+    #   release version such as `emr-5.14.0`. For more information about
     #   Amazon EMR release versions and included application versions and
     #   features, see
     #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The release
-    #   label applies only to Amazon EMR releases versions 4.x and later.
+    #   label applies only to Amazon EMR releases version 4.0 and later.
     #   Earlier versions use `AmiVersion`.
     #
     #
@@ -1823,6 +1906,8 @@ module Aws::EMR
     #   supplied for the EMR cluster you are creating.
     #
     # @option params [Boolean] :visible_to_all_users
+    #   *This member will be deprecated.*
+    #
     #   Whether the cluster is visible to all IAM users of the AWS account
     #   associated with the cluster. If this value is set to `true`, all IAM
     #   users of that AWS account can view and (if they have the proper policy
@@ -2205,6 +2290,8 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # *This member will be deprecated.*
+    #
     # Sets whether all AWS Identity and Access Management (IAM) users under
     # your account can access the specified clusters (job flows). This
     # action works on running clusters. You can also set the visibility of a
@@ -2217,6 +2304,8 @@ module Aws::EMR
     #   Identifiers of the job flows to receive the new visibility setting.
     #
     # @option params [required, Boolean] :visible_to_all_users
+    #   *This member will be deprecated.*
+    #
     #   Whether the specified clusters are visible to all IAM users of the AWS
     #   account associated with the cluster. If this value is set to True, all
     #   IAM users of that AWS account can view and, if they have the proper
@@ -2287,7 +2376,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

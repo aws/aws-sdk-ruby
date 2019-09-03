@@ -116,6 +116,10 @@ module Aws::SSM
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -262,7 +266,7 @@ module Aws::SSM
 
     # Adds or overwrites one or more tags for the specified resource. Tags
     # are metadata that you can assign to your documents, managed instances,
-    # Maintenance Windows, Parameter Store parameters, and patch baselines.
+    # maintenance windows, Parameter Store parameters, and patch baselines.
     # Tags enable you to categorize your resources in different ways, for
     # example, by purpose, owner, or environment. Each tag consists of a key
     # and an optional value, both of which you define. For example, you
@@ -291,9 +295,8 @@ module Aws::SSM
     #   Specifies the type of resource you are tagging.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
@@ -311,9 +314,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. You must specify the name of the managed instance
+    #   in the following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
@@ -329,7 +331,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #     resource_id: "ResourceId", # required
     #     tags: [ # required
     #       {
@@ -378,12 +380,12 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Stops a Maintenance Window execution that is already in progress and
+    # Stops a maintenance window execution that is already in progress and
     # cancels any tasks in the window that have not already starting
     # running. (Tasks already in progress will continue to completion.)
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution to stop.
+    #   The ID of the maintenance window execution to stop.
     #
     # @return [Types::CancelMaintenanceWindowExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -412,7 +414,7 @@ module Aws::SSM
     # so that you can manage these resources using Run Command. An
     # on-premises server or virtual machine that has been registered with
     # EC2 is called a managed instance. For more information about
-    # activations, see [Setting Up Systems Manager in Hybrid
+    # activations, see [Setting Up AWS Systems Manager for Hybrid
     # Environments][1].
     #
     #
@@ -545,11 +547,22 @@ module Aws::SSM
     # @option params [String] :instance_id
     #   The instance ID.
     #
+    #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
+    #   association, use the `Targets` parameter. If you use the parameter
+    #   `InstanceId`, you cannot use the parameters `AssociationName`,
+    #   `DocumentVersion`, `MaxErrors`, `MaxConcurrency`, `OutputLocation`, or
+    #   `ScheduleExpression`. To use these parameters, you must use the
+    #   `Targets` parameter.
+    #
+    #    </note>
+    #
     # @option params [Hash<String,Array>] :parameters
     #   The parameters for the runtime configuration of the document.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The targets (either instances or tags) for the association.
+    #   The targets (either instances or tags) for the association. You must
+    #   specify a value for `Targets` if you don't specify a value for
+    #   `InstanceId`.
     #
     # @option params [String] :schedule_expression
     #   A cron expression when the association will be applied to the
@@ -934,33 +947,33 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Creates a new Maintenance Window.
+    # Creates a new maintenance window.
     #
     # @option params [required, String] :name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #
     # @option params [String] :description
-    #   An optional description for the Maintenance Window. We recommend
-    #   specifying a description to help you organize your Maintenance
-    #   Windows.
+    #   An optional description for the maintenance window. We recommend
+    #   specifying a description to help you organize your maintenance
+    #   windows.
     #
     # @option params [String] :start_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
-    #   Maintenance Window to become active. StartDate allows you to delay
-    #   activation of the Maintenance Window until the specified future date.
+    #   maintenance window to become active. StartDate allows you to delay
+    #   activation of the maintenance window until the specified future date.
     #
     # @option params [String] :end_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
-    #   Maintenance Window to become inactive. EndDate allows you to set a
-    #   date and time in the future when the Maintenance Window will no longer
+    #   maintenance window to become inactive. EndDate allows you to set a
+    #   date and time in the future when the maintenance window will no longer
     #   run.
     #
     # @option params [required, String] :schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #
     # @option params [String] :schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
     #   more information, see the [Time Zone Database][1] on the IANA website.
@@ -970,21 +983,21 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #
     # @option params [required, Integer] :duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #
     # @option params [required, Integer] :cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #
     # @option params [required, Boolean] :allow_unassociated_targets
-    #   Enables a Maintenance Window task to run on managed instances, even if
+    #   Enables a maintenance window task to run on managed instances, even if
     #   you have not registered those instances as targets. If enabled, then
     #   you must specify the unregistered instances (by instance ID) when you
-    #   register a task with the Maintenance Window
+    #   register a task with the maintenance window.
     #
     #   If you don't enable this option, then you must specify
     #   previously-registered targets when you register a task with the
-    #   Maintenance Window.
+    #   maintenance window.
     #
     # @option params [String] :client_token
     #   User-provided idempotency token.
@@ -995,7 +1008,7 @@ module Aws::SSM
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata that you assign to a resource. Tags enable you to
     #   categorize a resource in different ways, such as by purpose, owner, or
-    #   environment. For example, you might want to tag a Maintenance Window
+    #   environment. For example, you might want to tag a maintenance window
     #   to identify the type of tasks it will run, the types of targets, and
     #   the environment it will run in. In this case, you could specify the
     #   following key name/value pairs:
@@ -1006,7 +1019,7 @@ module Aws::SSM
     #
     #   * `Key=Environment,Value=Production`
     #
-    #   <note markdown="1"> To add tags to an existing Maintenance Window, use the
+    #   <note markdown="1"> To add tags to an existing maintenance window, use the
     #   AddTagsToResource action.
     #
     #    </note>
@@ -1046,6 +1059,140 @@ module Aws::SSM
     # @param [Hash] params ({})
     def create_maintenance_window(params = {}, options = {})
       req = build_request(:create_maintenance_window, params)
+      req.send_request(options)
+    end
+
+    # Creates a new OpsItem. You must have permission in AWS Identity and
+    # Access Management (IAM) to create a new OpsItem. For more information,
+    # see [Getting Started with OpsCenter][1] in the *AWS Systems Manager
+    # User Guide*.
+    #
+    # Operations engineers and IT professionals use OpsCenter to view,
+    # investigate, and remediate operational issues impacting the
+    # performance and health of their AWS resources. For more information,
+    # see [AWS Systems Manager OpsCenter][2] in the *AWS Systems Manager
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
+    #
+    # @option params [required, String] :description
+    #   Information about the OpsItem.
+    #
+    # @option params [Hash<String,Types::OpsItemDataValue>] :operational_data
+    #   Operational data is custom data that provides useful reference details
+    #   about the OpsItem. For example, you can specify log files, error
+    #   strings, license keys, troubleshooting tips, or other relevant data.
+    #   You enter operational data as key-value pairs. The key has a maximum
+    #   length of 128 characters. The value has a maximum size of 20 KB.
+    #
+    #   Operational data keys *can't* begin with the following: amazon, aws,
+    #   amzn, ssm, /amazon, /aws, /amzn, /ssm.
+    #
+    #   You can choose to make the data searchable by other users in the
+    #   account or you can restrict search access. Searchable data means that
+    #   all users with access to the OpsItem Overview page (as provided by the
+    #   DescribeOpsItems API action) can view and search on the specified
+    #   data. Operational data that is not searchable is only viewable by
+    #   users who have access to the OpsItem (as provided by the GetOpsItem
+    #   API action).
+    #
+    #   Use the `/aws/resources` key in OperationalData to specify a related
+    #   resource in the request. Use the `/aws/automations` key in
+    #   OperationalData to associate an Automation runbook with the OpsItem.
+    #   To view AWS CLI example commands that use these keys, see [Creating
+    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #
+    # @option params [Array<Types::OpsItemNotification>] :notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications are
+    #   sent when this OpsItem is edited or changed.
+    #
+    # @option params [Integer] :priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #
+    # @option params [Array<Types::RelatedOpsItem>] :related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItems. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #
+    # @option params [required, String] :source
+    #   The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager.
+    #
+    # @option params [required, String] :title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. You can restrict
+    #   access to OpsItems by using an inline IAM policy that specifies tags.
+    #   For more information, see [Getting Started with OpsCenter][1] in the
+    #   *AWS Systems Manager User Guide*.
+    #
+    #   Tags use a key-value pair. For example:
+    #
+    #   `Key=Department,Value=Finance`
+    #
+    #   <note markdown="1"> To add tags to an existing OpsItem, use the AddTagsToResource action.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions
+    #
+    # @return [Types::CreateOpsItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOpsItemResponse#ops_item_id #ops_item_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ops_item({
+    #     description: "OpsItemDescription", # required
+    #     operational_data: {
+    #       "OpsItemDataKey" => {
+    #         value: "OpsItemDataValueString",
+    #         type: "SearchableString", # accepts SearchableString, String
+    #       },
+    #     },
+    #     notifications: [
+    #       {
+    #         arn: "String",
+    #       },
+    #     ],
+    #     priority: 1,
+    #     related_ops_items: [
+    #       {
+    #         ops_item_id: "String", # required
+    #       },
+    #     ],
+    #     source: "OpsItemSource", # required
+    #     title: "OpsItemTitle", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ops_item_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItem AWS API Documentation
+    #
+    # @overload create_ops_item(params = {})
+    # @param [Hash] params ({})
+    def create_ops_item(params = {}, options = {})
+      req = build_request(:create_ops_item, params)
       req.send_request(options)
     end
 
@@ -1341,12 +1488,22 @@ module Aws::SSM
     # @option params [required, String] :name
     #   The name of the document.
     #
+    # @option params [String] :document_version
+    #   The version of the document that you want to delete. If not provided,
+    #   all versions of the document are deleted.
+    #
+    # @option params [String] :version_name
+    #   The version name of the document that you want to delete. If not
+    #   provided, all versions of the document are deleted.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_document({
     #     name: "DocumentName", # required
+    #     document_version: "DocumentVersion",
+    #     version_name: "DocumentVersionName",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocument AWS API Documentation
@@ -1375,7 +1532,7 @@ module Aws::SSM
     #   DisableSchema: If you choose this option, the system ignores all
     #   inventory data for the specified version, and any earlier versions. To
     #   enable this schema again, you must call the `PutInventory` action for
-    #   a version greater than the disbled version.
+    #   a version greater than the disabled version.
     #
     #   DeleteSchema: This option deletes the specified custom type from the
     #   Inventory service. You can recreate the schema later, if you want.
@@ -1428,10 +1585,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Deletes a Maintenance Window.
+    # Deletes a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window to delete.
+    #   The ID of the maintenance window to delete.
     #
     # @return [Types::DeleteMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1478,8 +1635,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Delete a list of parameters. This API is used to delete parameters by
-    # using the Amazon EC2 console.
+    # Delete a list of parameters.
     #
     # @option params [required, Array<String>] :names
     #   The names of the parameters to delete.
@@ -1625,10 +1781,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Removes a target from a Maintenance Window.
+    # Removes a target from a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window the target should be removed from.
+    #   The ID of the maintenance window the target should be removed from.
     #
     # @option params [required, String] :window_target_id
     #   The ID of the target definition to remove.
@@ -1636,7 +1792,7 @@ module Aws::SSM
     # @option params [Boolean] :safe
     #   The system checks if the target is being referenced by a task. If the
     #   target is being referenced, the system returns an error and does not
-    #   deregister the target from the Maintenance Window.
+    #   deregister the target from the maintenance window.
     #
     # @return [Types::DeregisterTargetFromMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1665,13 +1821,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Removes a task from a Maintenance Window.
+    # Removes a task from a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window the task should be removed from.
+    #   The ID of the maintenance window the task should be removed from.
     #
     # @option params [required, String] :window_task_id
-    #   The ID of the task to remove from the Maintenance Window.
+    #   The ID of the task to remove from the maintenance window.
     #
     # @return [Types::DeregisterTaskFromMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1699,10 +1855,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Details about the activation, including: the date and time the
-    # activation was created, the expiration date, the IAM role assigned to
-    # the instances in the activation, and the number of instances activated
-    # by this registration.
+    # Describes details about the activation, such as the date and time the
+    # activation was created, its expiration date, the IAM role assigned to
+    # the instances in the activation, and the number of instances
+    # registered by using this activation.
     #
     # @option params [Array<Types::DescribeActivationsFilter>] :filters
     #   A filter to view information about your activations.
@@ -2160,7 +2316,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists all patches that could possibly be included in a patch baseline.
+    # Lists all patches eligible to be included in a patch baseline.
     #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
     #   Filters used to scope down the returned patches.
@@ -2711,11 +2867,9 @@ module Aws::SSM
     #   retrieved.
     #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
-    #   Each entry in the array is a structure containing:
-    #
-    #   Key (string, between 1 and 128 characters)
-    #
-    #   Values (array of strings, each string between 1 and 256 characters)
+    #   An array of structures. Each entry in the array is a structure
+    #   containing a Key, Value combination. Valid values for Key are
+    #   `Classification` \| `KBId` \| `Severity` \| `State`.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -2818,13 +2972,13 @@ module Aws::SSM
     end
 
     # Retrieves the individual task executions (one per target) for a
-    # particular task run as part of a Maintenance Window execution.
+    # particular task run as part of a maintenance window execution.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution the task is part of.
+    #   The ID of the maintenance window execution the task is part of.
     #
     # @option params [required, String] :task_id
-    #   The ID of the specific task in the Maintenance Window task that should
+    #   The ID of the specific task in the maintenance window task that should
     #   be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
@@ -2887,11 +3041,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # For a given Maintenance Window execution, lists the tasks that were
+    # For a given maintenance window execution, lists the tasks that were
     # run.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution whose task executions
+    #   The ID of the maintenance window execution whose task executions
     #   should be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
@@ -2949,13 +3103,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the executions of a Maintenance Window. This includes
-    # information about when the Maintenance Window was scheduled to be
+    # Lists the executions of a maintenance window. This includes
+    # information about when the maintenance window was scheduled to be
     # active, and information about tasks registered and run with the
-    # Maintenance Window.
+    # maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window whose executions should be retrieved.
+    #   The ID of the maintenance window whose executions should be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Each entry in the array is a structure containing:
@@ -3015,11 +3169,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves information about upcoming executions of a Maintenance
-    # Window.
+    # Retrieves information about upcoming executions of a maintenance
+    # window.
     #
     # @option params [String] :window_id
-    #   The ID of the Maintenance Window to retrieve information about.
+    #   The ID of the maintenance window to retrieve information about.
     #
     # @option params [Array<Types::Target>] :targets
     #   The instance ID or key/value pair to retrieve information about.
@@ -3030,7 +3184,7 @@ module Aws::SSM
     #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
     #   Filters used to limit the range of results. For example, you can limit
-    #   Maintenance Window executions to only those scheduled before or after
+    #   maintenance window executions to only those scheduled before or after
     #   a certain date and time.
     #
     # @option params [Integer] :max_results
@@ -3057,7 +3211,7 @@ module Aws::SSM
     #         values: ["TargetValue"],
     #       },
     #     ],
-    #     resource_type: "INSTANCE", # accepts INSTANCE
+    #     resource_type: "INSTANCE", # accepts INSTANCE, RESOURCE_GROUP
     #     filters: [
     #       {
     #         key: "PatchOrchestratorFilterKey",
@@ -3085,10 +3239,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the targets registered with the Maintenance Window.
+    # Lists the targets registered with the maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window whose targets should be retrieved.
+    #   The ID of the maintenance window whose targets should be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters that can be used to narrow down the scope of the
@@ -3128,7 +3282,7 @@ module Aws::SSM
     #   resp.targets #=> Array
     #   resp.targets[0].window_id #=> String
     #   resp.targets[0].window_target_id #=> String
-    #   resp.targets[0].resource_type #=> String, one of "INSTANCE"
+    #   resp.targets[0].resource_type #=> String, one of "INSTANCE", "RESOURCE_GROUP"
     #   resp.targets[0].targets #=> Array
     #   resp.targets[0].targets[0].key #=> String
     #   resp.targets[0].targets[0].values #=> Array
@@ -3147,10 +3301,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the tasks in a Maintenance Window.
+    # Lists the tasks in a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window whose tasks should be retrieved.
+    #   The ID of the maintenance window whose tasks should be retrieved.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters used to narrow down the scope of the returned tasks.
@@ -3219,11 +3373,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves the Maintenance Windows in an AWS account.
+    # Retrieves the maintenance windows in an AWS account.
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters used to narrow down the scope of the returned
-    #   Maintenance Windows. Supported filter keys are **Name** and
+    #   maintenance windows. Supported filter keys are **Name** and
     #   **Enabled**.
     #
     # @option params [Integer] :max_results
@@ -3278,7 +3432,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves information about the Maintenance Windows targets or tasks
+    # Retrieves information about the maintenance window targets or tasks
     # that an instance is associated with.
     #
     # @option params [required, Array<Types::Target>] :targets
@@ -3311,7 +3465,7 @@ module Aws::SSM
     #         values: ["TargetValue"],
     #       },
     #     ],
-    #     resource_type: "INSTANCE", # required, accepts INSTANCE
+    #     resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -3329,6 +3483,135 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_maintenance_windows_for_target(params = {}, options = {})
       req = build_request(:describe_maintenance_windows_for_target, params)
+      req.send_request(options)
+    end
+
+    # Query a set of OpsItems. You must have permission in AWS Identity and
+    # Access Management (IAM) to query a list of OpsItems. For more
+    # information, see [Getting Started with OpsCenter][1] in the *AWS
+    # Systems Manager User Guide*.
+    #
+    # Operations engineers and IT professionals use OpsCenter to view,
+    # investigate, and remediate operational issues impacting the
+    # performance and health of their AWS resources. For more information,
+    # see [AWS Systems Manager OpsCenter][2] in the *AWS Systems Manager
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
+    #
+    # @option params [Array<Types::OpsItemFilter>] :ops_item_filters
+    #   One or more filters to limit the reponse.
+    #
+    #   * Key: CreatedTime
+    #
+    #     Operations: GreaterThan, LessThan
+    #
+    #   * Key: LastModifiedBy
+    #
+    #     Operations: Contains, Equals
+    #
+    #   * Key: LastModifiedTime
+    #
+    #     Operations: GreaterThan, LessThan
+    #
+    #   * Key: Priority
+    #
+    #     Operations: Equals
+    #
+    #   * Key: Source
+    #
+    #     Operations: Contains, Equals
+    #
+    #   * Key: Status
+    #
+    #     Operations: Equals
+    #
+    #   * Key: Title
+    #
+    #     Operations: Contains
+    #
+    #   * Key: OperationalData*
+    #
+    #     Operations: Equals
+    #
+    #   * Key: OperationalDataKey
+    #
+    #     Operations: Equals
+    #
+    #   * Key: OperationalDataValue
+    #
+    #     Operations: Equals, Contains
+    #
+    #   * Key: OpsItemId
+    #
+    #     Operations: Equals
+    #
+    #   * Key: ResourceId
+    #
+    #     Operations: Contains
+    #
+    #   * Key: AutomationId
+    #
+    #     Operations: Equals
+    #
+    #   *If you filter the response by using the OperationalData operator,
+    #   specify a key-value pair by using the following JSON format:
+    #   \\\{"key":"key\_name","value":"a\_value"\\}
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::DescribeOpsItemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOpsItemsResponse#next_token #next_token} => String
+    #   * {Types::DescribeOpsItemsResponse#ops_item_summaries #ops_item_summaries} => Array&lt;Types::OpsItemSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ops_items({
+    #     ops_item_filters: [
+    #       {
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId
+    #         values: ["OpsItemFilterValue"], # required
+    #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.ops_item_summaries #=> Array
+    #   resp.ops_item_summaries[0].created_by #=> String
+    #   resp.ops_item_summaries[0].created_time #=> Time
+    #   resp.ops_item_summaries[0].last_modified_by #=> String
+    #   resp.ops_item_summaries[0].last_modified_time #=> Time
+    #   resp.ops_item_summaries[0].priority #=> Integer
+    #   resp.ops_item_summaries[0].source #=> String
+    #   resp.ops_item_summaries[0].status #=> String, one of "Open", "InProgress", "Resolved"
+    #   resp.ops_item_summaries[0].ops_item_id #=> String
+    #   resp.ops_item_summaries[0].title #=> String
+    #   resp.ops_item_summaries[0].operational_data #=> Hash
+    #   resp.ops_item_summaries[0].operational_data["OpsItemDataKey"].value #=> String
+    #   resp.ops_item_summaries[0].operational_data["OpsItemDataKey"].type #=> String, one of "SearchableString", "String"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeOpsItems AWS API Documentation
+    #
+    # @overload describe_ops_items(params = {})
+    # @param [Hash] params ({})
+    def describe_ops_items(params = {}, options = {})
+      req = build_request(:describe_ops_items, params)
       req.send_request(options)
     end
 
@@ -3395,7 +3678,7 @@ module Aws::SSM
     #   resp.parameters[0].description #=> String
     #   resp.parameters[0].allowed_pattern #=> String
     #   resp.parameters[0].version #=> Integer
-    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced"
+    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced", "Intelligent-Tiering"
     #   resp.parameters[0].policies #=> Array
     #   resp.parameters[0].policies[0].policy_text #=> String
     #   resp.parameters[0].policies[0].policy_type #=> String
@@ -4226,10 +4509,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves a Maintenance Window.
+    # Retrieves a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the desired Maintenance Window.
+    #   The ID of the maintenance window for which you want to retrieve
+    #   information.
     #
     # @return [Types::GetMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4280,11 +4564,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves details about a specific task run as part of a Maintenance
-    # Window execution.
+    # Retrieves details about a specific a maintenance window execution.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #
     # @return [Types::GetMaintenanceWindowExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4321,13 +4604,13 @@ module Aws::SSM
     end
 
     # Retrieves the details about a specific task run as part of a
-    # Maintenance Window execution.
+    # maintenance window execution.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution that includes the task.
+    #   The ID of the maintenance window execution that includes the task.
     #
     # @option params [required, String] :task_id
-    #   The ID of the specific task execution in the Maintenance Window task
+    #   The ID of the specific task execution in the maintenance window task
     #   that should be retrieved.
     #
     # @return [Types::GetMaintenanceWindowExecutionTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4381,16 +4664,15 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves a task invocation. A task invocation is a specific task
-    # running on a specific target. Maintenance Windows report status for
-    # all invocations.
+    # Retrieves information about a specific task running on a specific
+    # target.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution for which the task is a
+    #   The ID of the maintenance window execution for which the task is a
     #   part.
     #
     # @option params [required, String] :task_id
-    #   The ID of the specific task in the Maintenance Window task that should
+    #   The ID of the specific task in the maintenance window task that should
     #   be retrieved.
     #
     # @option params [required, String] :invocation_id
@@ -4443,13 +4725,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the tasks in a Maintenance Window.
+    # Lists the tasks in a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The Maintenance Window ID that includes the task to retrieve.
+    #   The maintenance window ID that includes the task to retrieve.
     #
     # @option params [required, String] :window_task_id
-    #   The Maintenance Window task ID to retrieve.
+    #   The maintenance window task ID to retrieve.
     #
     # @return [Types::GetMaintenanceWindowTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4527,6 +4809,141 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_maintenance_window_task(params = {}, options = {})
       req = build_request(:get_maintenance_window_task, params)
+      req.send_request(options)
+    end
+
+    # Get information about an OpsItem by using the ID. You must have
+    # permission in AWS Identity and Access Management (IAM) to view
+    # information about an OpsItem. For more information, see [Getting
+    # Started with OpsCenter][1] in the *AWS Systems Manager User Guide*.
+    #
+    # Operations engineers and IT professionals use OpsCenter to view,
+    # investigate, and remediate operational issues impacting the
+    # performance and health of their AWS resources. For more information,
+    # see [AWS Systems Manager OpsCenter][2] in the *AWS Systems Manager
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
+    #
+    # @option params [required, String] :ops_item_id
+    #   The ID of the OpsItem that you want to get.
+    #
+    # @return [Types::GetOpsItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOpsItemResponse#ops_item #ops_item} => Types::OpsItem
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ops_item({
+    #     ops_item_id: "OpsItemId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ops_item.created_by #=> String
+    #   resp.ops_item.created_time #=> Time
+    #   resp.ops_item.description #=> String
+    #   resp.ops_item.last_modified_by #=> String
+    #   resp.ops_item.last_modified_time #=> Time
+    #   resp.ops_item.notifications #=> Array
+    #   resp.ops_item.notifications[0].arn #=> String
+    #   resp.ops_item.priority #=> Integer
+    #   resp.ops_item.related_ops_items #=> Array
+    #   resp.ops_item.related_ops_items[0].ops_item_id #=> String
+    #   resp.ops_item.status #=> String, one of "Open", "InProgress", "Resolved"
+    #   resp.ops_item.ops_item_id #=> String
+    #   resp.ops_item.version #=> String
+    #   resp.ops_item.title #=> String
+    #   resp.ops_item.source #=> String
+    #   resp.ops_item.operational_data #=> Hash
+    #   resp.ops_item.operational_data["OpsItemDataKey"].value #=> String
+    #   resp.ops_item.operational_data["OpsItemDataKey"].type #=> String, one of "SearchableString", "String"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItem AWS API Documentation
+    #
+    # @overload get_ops_item(params = {})
+    # @param [Hash] params ({})
+    def get_ops_item(params = {}, options = {})
+      req = build_request(:get_ops_item, params)
+      req.send_request(options)
+    end
+
+    # View a summary of OpsItems based on specified filters and aggregators.
+    #
+    # @option params [Array<Types::OpsFilter>] :filters
+    #   Optional filters used to scope down the returned OpsItems.
+    #
+    # @option params [required, Array<Types::OpsAggregator>] :aggregators
+    #   Optional aggregators that return counts of OpsItems based on one or
+    #   more expressions.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @return [Types::GetOpsSummaryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOpsSummaryResult#entities #entities} => Array&lt;Types::OpsEntity&gt;
+    #   * {Types::GetOpsSummaryResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ops_summary({
+    #     filters: [
+    #       {
+    #         key: "OpsFilterKey", # required
+    #         values: ["OpsFilterValue"], # required
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #       },
+    #     ],
+    #     aggregators: [ # required
+    #       {
+    #         aggregator_type: "OpsAggregatorType",
+    #         type_name: "OpsDataTypeName",
+    #         attribute_name: "OpsDataAttributeName",
+    #         values: {
+    #           "OpsAggregatorValueKey" => "OpsAggregatorValue",
+    #         },
+    #         filters: [
+    #           {
+    #             key: "OpsFilterKey", # required
+    #             values: ["OpsFilterValue"], # required
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #           },
+    #         ],
+    #         aggregators: {
+    #           # recursive OpsAggregatorList
+    #         },
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].id #=> String
+    #   resp.entities[0].data #=> Hash
+    #   resp.entities[0].data["OpsEntityItemKey"].content #=> Array
+    #   resp.entities[0].data["OpsEntityItemKey"].content[0] #=> Hash
+    #   resp.entities[0].data["OpsEntityItemKey"].content[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsSummary AWS API Documentation
+    #
+    # @overload get_ops_summary(params = {})
+    # @param [Hash] params ({})
+    def get_ops_summary(params = {}, options = {})
+      req = build_request(:get_ops_summary, params)
       req.send_request(options)
     end
 
@@ -4617,7 +5034,7 @@ module Aws::SSM
     #   resp.parameters[0].version #=> Integer
     #   resp.parameters[0].labels #=> Array
     #   resp.parameters[0].labels[0] #=> String
-    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced"
+    #   resp.parameters[0].tier #=> String, one of "Standard", "Advanced", "Intelligent-Tiering"
     #   resp.parameters[0].policies #=> Array
     #   resp.parameters[0].policies[0].policy_text #=> String
     #   resp.parameters[0].policies[0].policy_type #=> String
@@ -5791,7 +6208,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #     resource_id: "ResourceId", # required
     #   })
     #
@@ -6124,21 +6541,22 @@ module Aws::SSM
     #    </note>
     #
     # @option params [String] :tier
+    #   The parameter tier to assign to a parameter.
+    #
     #   Parameter Store offers a standard tier and an advanced tier for
-    #   parameters. Standard parameters have a value limit of 4 KB and can't
-    #   be configured to use parameter policies. You can create a maximum of
-    #   10,000 standard parameters per account and per Region. Standard
-    #   parameters are offered at no additional cost.
+    #   parameters. Standard parameters have a content size limit of 4 KB and
+    #   can't be configured to use parameter policies. You can create a
+    #   maximum of 10,000 standard parameters for each Region in an AWS
+    #   account. Standard parameters are offered at no additional cost.
     #
-    #   Advanced parameters have a value limit of 8 KB and can be configured
-    #   to use parameter policies. You can create a maximum of 100,000
-    #   advanced parameters per account and per Region. Advanced parameters
-    #   incur a charge.
+    #   Advanced parameters have a content size limit of 8 KB and can be
+    #   configured to use parameter policies. You can create a maximum of
+    #   100,000 advanced parameters for each Region in an AWS account.
+    #   Advanced parameters incur a charge. For more information, see [About
+    #   Advanced Parameters][1] in the *AWS Systems Manager User Guide*.
     #
-    #   If you don't specify a parameter tier when you create a new
-    #   parameter, the parameter defaults to using the standard tier. You can
-    #   change a standard parameter to an advanced parameter at any time. But
-    #   you can't revert an advanced parameter to a standard parameter.
+    #   You can change a standard parameter to an advanced parameter any time.
+    #   But you can't revert an advanced parameter to a standard parameter.
     #   Reverting an advanced parameter to a standard parameter would result
     #   in data loss because the system would truncate the size of the
     #   parameter from 8 KB to 4 KB. Reverting would also remove any policies
@@ -6147,13 +6565,55 @@ module Aws::SSM
     #
     #   If you no longer need an advanced parameter, or if you no longer want
     #   to incur charges for an advanced parameter, you must delete it and
-    #   recreate it as a new standard parameter. For more information, see
-    #   [About Advanced Parameters][1] in the *AWS Systems Manager User
-    #   Guide*.
+    #   recreate it as a new standard parameter.
+    #
+    #   **Using the Default Tier Configuration**
+    #
+    #   In `PutParameter` requests, you can specify the tier to create the
+    #   parameter in. Whenever you specify a tier in the request, Parameter
+    #   Store creates or updates the parameter according to that request.
+    #   However, if you do not specify a tier in a request, Parameter Store
+    #   assigns the tier based on the current Parameter Store default tier
+    #   configuration.
+    #
+    #   The default tier when you begin using Parameter Store is the
+    #   standard-parameter tier. If you use the advanced-parameter tier, you
+    #   can specify one of the following as the default:
+    #
+    #   * **Advanced**\: With this option, Parameter Store evaluates all
+    #     requests as advanced parameters.
+    #
+    #   * **Intelligent-Tiering**\: With this option, Parameter Store
+    #     evaluates each request to determine if the parameter is standard or
+    #     advanced.
+    #
+    #     If the request doesn't include any options that require an advanced
+    #     parameter, the parameter is created in the standard-parameter tier.
+    #     If one or more options requiring an advanced parameter are included
+    #     in the request, Parameter Store create a parameter in the
+    #     advanced-parameter tier.
+    #
+    #     This approach helps control your parameter-related costs by always
+    #     creating standard parameters unless an advanced parameter is
+    #     necessary.
+    #
+    #   Options that require an advanced parameter include the following:
+    #
+    #   * The content size of the parameter is more than 4 KB.
+    #
+    #   * The parameter uses a parameter policy.
+    #
+    #   * More than 10,000 parameters already exist in your AWS account in the
+    #     current Region.
+    #
+    #   For more information about configuring the default tier option, see
+    #   [Specifying a Default Parameter Tier][2] in the AWS Systems Manager
+    #   User Guide.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html
     #
     # @option params [String] :policies
     #   One or more policies to apply to a parameter. This action takes a JSON
@@ -6203,7 +6663,7 @@ module Aws::SSM
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     tier: "Standard", # accepts Standard, Advanced
+    #     tier: "Standard", # accepts Standard, Advanced, Intelligent-Tiering
     #     policies: "ParameterPolicies",
     #   })
     #
@@ -6220,7 +6680,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Defines the default patch baseline.
+    # Defines the default patch baseline for the relevant operating system.
+    #
+    # To reset the AWS predefined patch baseline as the default, specify the
+    # full patch baseline ARN as the baseline ID value. For example, for
+    # CentOS, specify
+    # `arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed`
+    # instead of `pb-0574b43a65ea646ed`.
     #
     # @option params [required, String] :baseline_id
     #   The ID of the patch baseline that should be the default patch
@@ -6284,31 +6750,62 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Registers a target with a Maintenance Window.
+    # Registers a target with a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window the target should be registered with.
+    #   The ID of the maintenance window the target should be registered with.
     #
     # @option params [required, String] :resource_type
-    #   The type of target being registered with the Maintenance Window.
+    #   The type of target being registered with the maintenance window.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   The targets (either instances or tags).
+    #   The targets to register with the maintenance window. In other words,
+    #   the instances to run commands on when the maintenance window runs.
     #
-    #   Specify instances using the following format:
+    #   You can specify targets using instance IDs, resource group names, or
+    #   tags that have been applied to instances.
     #
-    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #   **Example 1**\: Specify instance IDs
     #
-    #   Specify tags using either of the following formats:
+    #   `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3 `
     #
-    #   `Key=tag:<tag-key>,Values=<tag-value-1>,<tag-value-2>`
+    #   **Example 2**\: Use tag key-pairs applied to instances
     #
-    #   `Key=tag-key,Values=<tag-key-1>,<tag-key-2>`
+    #   `Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2 `
+    #
+    #   **Example 3**\: Use tag-keys applied to instances
+    #
+    #   `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
+    #
+    #   **Example 4**\: Use resource group names
+    #
+    #   `Key=resource-groups:Name,Values=resource-group-name `
+    #
+    #   **Example 5**\: Use filters for resource group types
+    #
+    #   `Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
+    #   `
+    #
+    #   <note markdown="1"> For `Key=resource-groups:ResourceTypeFilters`, specify resource types
+    #   in the following format
+    #
+    #    `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
+    #   `
+    #
+    #    </note>
+    #
+    #   For more information about these examples formats, including the best
+    #   use case for each one, see [Examples: Register Targets with a
+    #   Maintenance Window][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html
     #
     # @option params [String] :owner_information
     #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   raised while running tasks for these targets in this maintenance
+    #   window.
     #
     # @option params [String] :name
     #   An optional name for the target.
@@ -6330,7 +6827,7 @@ module Aws::SSM
     #
     #   resp = client.register_target_with_maintenance_window({
     #     window_id: "MaintenanceWindowId", # required
-    #     resource_type: "INSTANCE", # required, accepts INSTANCE
+    #     resource_type: "INSTANCE", # required, accepts INSTANCE, RESOURCE_GROUP
     #     targets: [ # required
     #       {
     #         key: "TargetKey",
@@ -6356,38 +6853,39 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Adds a new task to a Maintenance Window.
+    # Adds a new task to a maintenance window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window the task should be added to.
+    #   The ID of the maintenance window the task should be added to.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   The targets (either instances or Maintenance Window targets).
+    #   The targets (either instances or maintenance window targets).
     #
     #   Specify instances using the following format:
     #
     #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
     #
-    #   Specify Maintenance Window targets using the following format:
+    #   Specify maintenance window targets using the following format:
     #
-    #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
+    #   `Key=WindowTargetIds;,Values=<window-target-id-1>,<window-target-id-2>`
     #
     # @option params [required, String] :task_arn
     #   The ARN of the task to run.
     #
     # @option params [String] :service_role_arn
-    #   The role to assume when running the Maintenance Window task.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default. If
+    #   The ARN of the IAM service role for Systems Manager to assume when
+    #   running a maintenance window task. If you do not specify a service
+    #   role ARN, Systems Manager uses your account's service-linked role. If
     #   no service-linked role for Systems Manager exists in your account, it
-    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
-    #   without specifying a service role ARN.
+    #   is created when you run `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Service-Linked Role Permissions for Systems
-    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
-    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
-    #   Manager User Guide*.
+    #   For more information, see the following topics in the in the *AWS
+    #   Systems Manager User Guide*\:
+    #
+    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #
+    #   * [Should I Use a Service-Linked Role or a Custom Service Role to Run
+    #     Maintenance Window Tasks? ][2]
     #
     #
     #
@@ -6403,8 +6901,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
     #   a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #
@@ -6414,8 +6912,8 @@ module Aws::SSM
     #   empty.
     #
     # @option params [Integer] :priority
-    #   The priority of the task in the Maintenance Window, the lower the
-    #   number the higher the priority. Tasks in a Maintenance Window are
+    #   The priority of the task in the maintenance window, the lower the
+    #   number the higher the priority. Tasks in a maintenance window are
     #   scheduled in priority order with tasks that have the same priority
     #   scheduled in parallel.
     #
@@ -6434,7 +6932,7 @@ module Aws::SSM
     #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     #   options in the `TaskInvocationParameters` structure. For information
     #   about how Systems Manager handles these options for the supported
-    #   Maintenance Window task types, see
+    #   maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -6533,21 +7031,20 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Removes all tags from the specified resource.
+    # Removes tag keys from the specified resource.
     #
     # @option params [required, String] :resource_type
-    #   The type of resource of which you want to remove a tag.
+    #   The type of resource from which you want to remove a tag.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. Specify the name of the managed instance in the
+    #   following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
     # @option params [required, String] :resource_id
-    #   The resource ID for which you want to remove tags. Use the ID of the
-    #   resource. Here are some examples:
+    #   The ID of the resource from which you want to remove tags. For
+    #   example:
     #
     #   ManagedInstance: mi-012345abcde
     #
@@ -6558,9 +7055,8 @@ module Aws::SSM
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   managed instances. Specify the name of the managed instance in the
+    #   following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
@@ -6572,7 +7068,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
@@ -6683,12 +7179,26 @@ module Aws::SSM
     #   want to send the signal to.
     #
     # @option params [required, String] :signal_type
-    #   The type of signal. Valid signal types include the following: Approve
-    #   and Reject
+    #   The type of signal to send to an Automation execution.
     #
     # @option params [Hash<String,Array>] :payload
     #   The data sent with the signal. The data schema depends on the type of
     #   signal used in the request.
+    #
+    #   For `Approve` and `Reject` signal types, the payload is an optional
+    #   comment that you can send with the signal type. For example:
+    #
+    #   `Comment="Looks good"`
+    #
+    #   For `StartStep` and `Resume` signal types, you must send the name of
+    #   the Automation step to start or resume as the payload. For example:
+    #
+    #   `StepName="step1"`
+    #
+    #   For the `StopStep` signal type, you must send the step execution ID as
+    #   the payload. For example:
+    #
+    #   `StepExecutionId="97fff367-fc5a-4299-aed8-0123456789ab"`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6817,7 +7327,9 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors
     #
     # @option params [String] :service_role_arn
-    #   The IAM role that Systems Manager uses to send notifications.
+    #   The ARN of the IAM service role to use to publish Amazon Simple
+    #   Notification Service (Amazon SNS) notifications for Run Command
+    #   commands.
     #
     # @option params [Types::NotificationConfig] :notification_config
     #   Configurations for sending notifications.
@@ -7419,7 +7931,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # The document you want to update.
+    # Updates one or more values for an SSM document.
     #
     # @option params [required, String] :content
     #   A valid JSON or YAML string.
@@ -7438,7 +7950,7 @@ module Aws::SSM
     #   changed.
     #
     # @option params [String] :document_version
-    #   The version of the document that you want to update.
+    #   (Required) The version of the document that you want to update.
     #
     # @option params [String] :document_format
     #   Specify the document format for the new document version. Systems
@@ -7545,20 +8057,20 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Updates an existing Maintenance Window. Only specified parameters are
+    # Updates an existing maintenance window. Only specified parameters are
     # modified.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window to update.
+    #   The ID of the maintenance window to update.
     #
     # @option params [String] :name
-    #   The name of the Maintenance Window.
+    #   The name of the maintenance window.
     #
     # @option params [String] :description
     #   An optional description for the update request.
     #
     # @option params [String] :start_date
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
     #   more information, see the [Time Zone Database][1] on the IANA website.
@@ -7569,16 +8081,16 @@ module Aws::SSM
     #
     # @option params [String] :end_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
-    #   Maintenance Window to become inactive. EndDate allows you to set a
-    #   date and time in the future when the Maintenance Window will no longer
+    #   maintenance window to become inactive. EndDate allows you to set a
+    #   date and time in the future when the maintenance window will no longer
     #   run.
     #
     # @option params [String] :schedule
-    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   The schedule of the maintenance window in the form of a cron or rate
     #   expression.
     #
     # @option params [String] :schedule_timezone
-    #   The time zone that the scheduled Maintenance Window executions are
+    #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
     #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul". For
     #   more information, see the [Time Zone Database][1] on the IANA website.
@@ -7588,18 +8100,18 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #
     # @option params [Integer] :duration
-    #   The duration of the Maintenance Window in hours.
+    #   The duration of the maintenance window in hours.
     #
     # @option params [Integer] :cutoff
-    #   The number of hours before the end of the Maintenance Window that
+    #   The number of hours before the end of the maintenance window that
     #   Systems Manager stops scheduling new tasks for execution.
     #
     # @option params [Boolean] :allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window before
+    #   Whether targets must be registered with the maintenance window before
     #   tasks can be defined for those targets.
     #
     # @option params [Boolean] :enabled
-    #   Whether the Maintenance Window is enabled.
+    #   Whether the maintenance window is enabled.
     #
     # @option params [Boolean] :replace
     #   If True, then all fields that are required by the
@@ -7660,26 +8172,29 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Modifies the target of an existing Maintenance Window. You can't
-    # change the target type, but you can change the following:
+    # Modifies the target of an existing maintenance window. You can change
+    # the following:
     #
-    # The target from being an ID target to a Tag target, or a Tag target to
-    # an ID target.
+    # * Name
     #
-    # IDs for an ID target.
+    # * Description
     #
-    # Tags for a Tag target.
+    # * Owner
     #
-    # Owner.
+    # * IDs for an ID target
     #
-    # Name.
+    # * Tags for a Tag target
     #
-    # Description.
+    # * From any supported tag type to another. The three supported tag
+    #   types are ID target, Tag target, and resource group. For more
+    #   information, see Target.
     #
-    # If a parameter is null, then the corresponding field is not modified.
+    # <note markdown="1"> If a parameter is null, then the corresponding field is not modified.
+    #
+    #  </note>
     #
     # @option params [required, String] :window_id
-    #   The Maintenance Window ID with which to modify the target.
+    #   The maintenance window ID with which to modify the target.
     #
     # @option params [required, String] :window_target_id
     #   The target ID to modify.
@@ -7689,8 +8204,8 @@ module Aws::SSM
     #
     # @option params [String] :owner_information
     #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   raised while running tasks for these targets in this maintenance
+    #   window.
     #
     # @option params [String] :name
     #   A name for the update.
@@ -7750,7 +8265,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Modifies a task assigned to a Maintenance Window. You can't change
+    # Modifies a task assigned to a maintenance window. You can't change
     # the task type, but you can change the following values:
     #
     # * TaskARN. For example, you can change a RUN\_COMMAND task from
@@ -7772,7 +8287,7 @@ module Aws::SSM
     # request. Optional fields that aren't specified are set to null.
     #
     # @option params [required, String] :window_id
-    #   The Maintenance Window ID that contains the task to modify.
+    #   The maintenance window ID that contains the task to modify.
     #
     # @option params [required, String] :window_task_id
     #   The task ID to modify.
@@ -7786,19 +8301,19 @@ module Aws::SSM
     #   The task ARN to modify.
     #
     # @option params [String] :service_role_arn
-    #   The IAM service role ARN to modify. The system assumes this role
-    #   during task execution.
-    #
-    #   If you do not specify a service role ARN, Systems Manager will use
-    #   your account's service-linked role for Systems Manager by default. If
+    #   The ARN of the IAM service role for Systems Manager to assume when
+    #   running a maintenance window task. If you do not specify a service
+    #   role ARN, Systems Manager uses your account's service-linked role. If
     #   no service-linked role for Systems Manager exists in your account, it
-    #   will be created when you run `RegisterTaskWithMaintenanceWindow`
-    #   without specifying a service role ARN.
+    #   is created when you run `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Service-Linked Role Permissions for Systems
-    #   Manager][1] and [Should I Use a Service-Linked Role or a Custom
-    #   Service Role to Run Maintenance Window Tasks? ][2] in the *AWS Systems
-    #   Manager User Guide*.
+    #   For more information, see the following topics in the in the *AWS
+    #   Systems Manager User Guide*\:
+    #
+    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #
+    #   * [Should I Use a Service-Linked Role or a Custom Service Role to Run
+    #     Maintenance Window Tasks? ][2]
     #
     #
     #
@@ -7811,8 +8326,8 @@ module Aws::SSM
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
     #   a task when it runs, instead use the `Parameters` option in the
     #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #   Systems Manager handles these options for the supported maintenance
+    #   window task types, see MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
     #
@@ -7849,7 +8364,7 @@ module Aws::SSM
     #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
     #   options in the `TaskInvocationParameters` structure. For information
     #   about how Systems Manager handles these options for the supported
-    #   Maintenance Window task types, see
+    #   maintenance window task types, see
     #   MaintenanceWindowTaskInvocationParameters.
     #
     #    </note>
@@ -8001,7 +8516,7 @@ module Aws::SSM
     end
 
     # Assigns or changes an Amazon Identity and Access Management (IAM) role
-    # to the managed instance.
+    # for the managed instance.
     #
     # @option params [required, String] :instance_id
     #   The ID of the managed instance where you want to update the role.
@@ -8024,6 +8539,129 @@ module Aws::SSM
     # @param [Hash] params ({})
     def update_managed_instance_role(params = {}, options = {})
       req = build_request(:update_managed_instance_role, params)
+      req.send_request(options)
+    end
+
+    # Edit or change an OpsItem. You must have permission in AWS Identity
+    # and Access Management (IAM) to update an OpsItem. For more
+    # information, see [Getting Started with OpsCenter][1] in the *AWS
+    # Systems Manager User Guide*.
+    #
+    # Operations engineers and IT professionals use OpsCenter to view,
+    # investigate, and remediate operational issues impacting the
+    # performance and health of their AWS resources. For more information,
+    # see [AWS Systems Manager OpsCenter][2] in the *AWS Systems Manager
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
+    #
+    # @option params [String] :description
+    #   Update the information about the OpsItem. Provide enough information
+    #   so that users reading this OpsItem for the first time understand the
+    #   issue.
+    #
+    # @option params [Hash<String,Types::OpsItemDataValue>] :operational_data
+    #   Add new keys or edit existing key-value pairs of the OperationalData
+    #   map in the OpsItem object.
+    #
+    #   Operational data is custom data that provides useful reference details
+    #   about the OpsItem. For example, you can specify log files, error
+    #   strings, license keys, troubleshooting tips, or other relevant data.
+    #   You enter operational data as key-value pairs. The key has a maximum
+    #   length of 128 characters. The value has a maximum size of 20 KB.
+    #
+    #   Operational data keys *can't* begin with the following: amazon, aws,
+    #   amzn, ssm, /amazon, /aws, /amzn, /ssm.
+    #
+    #   You can choose to make the data searchable by other users in the
+    #   account or you can restrict search access. Searchable data means that
+    #   all users with access to the OpsItem Overview page (as provided by the
+    #   DescribeOpsItems API action) can view and search on the specified
+    #   data. Operational data that is not searchable is only viewable by
+    #   users who have access to the OpsItem (as provided by the GetOpsItem
+    #   API action).
+    #
+    #   Use the `/aws/resources` key in OperationalData to specify a related
+    #   resource in the request. Use the `/aws/automations` key in
+    #   OperationalData to associate an Automation runbook with the OpsItem.
+    #   To view AWS CLI example commands that use these keys, see [Creating
+    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #
+    # @option params [Array<String>] :operational_data_to_delete
+    #   Keys that you want to remove from the OperationalData map.
+    #
+    # @option params [Array<Types::OpsItemNotification>] :notifications
+    #   The Amazon Resource Name (ARN) of an SNS topic where notifications are
+    #   sent when this OpsItem is edited or changed.
+    #
+    # @option params [Integer] :priority
+    #   The importance of this OpsItem in relation to other OpsItems in the
+    #   system.
+    #
+    # @option params [Array<Types::RelatedOpsItem>] :related_ops_items
+    #   One or more OpsItems that share something in common with the current
+    #   OpsItems. For example, related OpsItems can include OpsItems with
+    #   similar error messages, impacted resources, or statuses for the
+    #   impacted resource.
+    #
+    # @option params [String] :status
+    #   The OpsItem status. Status can be `Open`, `In Progress`, or
+    #   `Resolved`. For more information, see [Editing OpsItem Details][1] in
+    #   the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
+    #
+    # @option params [required, String] :ops_item_id
+    #   The ID of the OpsItem.
+    #
+    # @option params [String] :title
+    #   A short heading that describes the nature of the OpsItem and the
+    #   impacted resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ops_item({
+    #     description: "OpsItemDescription",
+    #     operational_data: {
+    #       "OpsItemDataKey" => {
+    #         value: "OpsItemDataValueString",
+    #         type: "SearchableString", # accepts SearchableString, String
+    #       },
+    #     },
+    #     operational_data_to_delete: ["String"],
+    #     notifications: [
+    #       {
+    #         arn: "String",
+    #       },
+    #     ],
+    #     priority: 1,
+    #     related_ops_items: [
+    #       {
+    #         ops_item_id: "String", # required
+    #       },
+    #     ],
+    #     status: "Open", # accepts Open, InProgress, Resolved
+    #     ops_item_id: "OpsItemId", # required
+    #     title: "OpsItemTitle",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItem AWS API Documentation
+    #
+    # @overload update_ops_item(params = {})
+    # @param [Hash] params ({})
+    def update_ops_item(params = {}, options = {})
+      req = build_request(:update_ops_item, params)
       req.send_request(options)
     end
 
@@ -8270,7 +8908,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

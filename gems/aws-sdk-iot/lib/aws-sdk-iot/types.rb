@@ -144,6 +144,7 @@ module Aws::IoT
     #         republish: {
     #           role_arn: "AwsArn", # required
     #           topic: "TopicPattern", # required
+    #           qos: 1,
     #         },
     #         s3: {
     #           role_arn: "AwsArn", # required
@@ -408,6 +409,36 @@ module Aws::IoT
 
     class AddThingToThingGroupResponse < Aws::EmptyStructure; end
 
+    # Parameters used when defining a mitigation action that move a set of
+    # things to a thing group.
+    #
+    # @note When making an API call, you may pass AddThingsToThingGroupParams
+    #   data as a hash:
+    #
+    #       {
+    #         thing_group_names: ["ThingGroupName"], # required
+    #         override_dynamic_groups: false,
+    #       }
+    #
+    # @!attribute [rw] thing_group_names
+    #   The list of groups to which you want to add the things that
+    #   triggered the mitigation action. You can add a thing to a maximum of
+    #   10 groups, but you cannot add a thing to more than one group in the
+    #   same hierarchy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] override_dynamic_groups
+    #   Specifies if this mitigation action can move the things that
+    #   triggered the mitigation action even if they are part of one or more
+    #   dynamic things groups.
+    #   @return [Boolean]
+    #
+    class AddThingsToThingGroupParams < Struct.new(
+      :thing_group_names,
+      :override_dynamic_groups)
+      include Aws::Structure
+    end
+
     # A structure containing the alert target ARN and the role ARN.
     #
     # @note When making an API call, you may pass AlertTarget
@@ -623,7 +654,8 @@ module Aws::IoT
     #   To remove an attribute, call `UpdateThing` with an empty attribute
     #   value.
     #
-    #   <note markdown="1"> The `merge` attribute is only valid when calling `UpdateThing`.
+    #   <note markdown="1"> The `merge` attribute is only valid when calling `UpdateThing` or
+    #   `UpdateThingGroup`.
     #
     #    </note>
     #   @return [Boolean]
@@ -655,14 +687,14 @@ module Aws::IoT
     # Information about the audit check.
     #
     # @!attribute [rw] check_run_status
-    #   The completion status of this check, one of "IN\_PROGRESS",
+    #   The completion status of this check. One of "IN\_PROGRESS",
     #   "WAITING\_FOR\_DATA\_COLLECTION", "CANCELED",
     #   "COMPLETED\_COMPLIANT", "COMPLETED\_NON\_COMPLIANT", or
     #   "FAILED".
     #   @return [String]
     #
     # @!attribute [rw] check_compliant
-    #   True if the check completed and found all resources compliant.
+    #   True if the check is complete and found all resources compliant.
     #   @return [Boolean]
     #
     # @!attribute [rw] total_resources_count
@@ -670,18 +702,19 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] non_compliant_resources_count
-    #   The number of resources that the check found non-compliant.
+    #   The number of resources that were found noncompliant during the
+    #   check.
     #   @return [Integer]
     #
     # @!attribute [rw] error_code
-    #   The code of any error encountered when performing this check during
-    #   this audit. One of "INSUFFICIENT\_PERMISSIONS", or
+    #   The code of any error encountered when this check is performed
+    #   during this audit. One of "INSUFFICIENT\_PERMISSIONS" or
     #   "AUDIT\_CHECK\_DISABLED".
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The message associated with any error encountered when performing
-    #   this check during this audit.
+    #   The message associated with any error encountered when this check is
+    #   performed during this audit.
     #   @return [String]
     #
     class AuditCheckDetails < Struct.new(
@@ -696,8 +729,13 @@ module Aws::IoT
 
     # The findings (results) of the audit.
     #
+    # @!attribute [rw] finding_id
+    #   A unique identifier for this set of audit findings. This identifier
+    #   is used to apply mitigation tasks to one or more sets of findings.
+    #   @return [String]
+    #
     # @!attribute [rw] task_id
-    #   The ID of the audit that generated this result (finding)
+    #   The ID of the audit that generated this result (finding).
     #   @return [String]
     #
     # @!attribute [rw] check_name
@@ -717,8 +755,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] non_compliant_resource
-    #   The resource that was found to be non-compliant with the audit
-    #   check.
+    #   The resource that was found to be noncompliant with the audit check.
     #   @return [Types::NonCompliantResource]
     #
     # @!attribute [rw] related_resources
@@ -726,15 +763,15 @@ module Aws::IoT
     #   @return [Array<Types::RelatedResource>]
     #
     # @!attribute [rw] reason_for_non_compliance
-    #   The reason the resource was non-compliant.
+    #   The reason the resource was noncompliant.
     #   @return [String]
     #
     # @!attribute [rw] reason_for_non_compliance_code
-    #   A code which indicates the reason that the resource was
-    #   non-compliant.
+    #   A code that indicates the reason that the resource was noncompliant.
     #   @return [String]
     #
     class AuditFinding < Struct.new(
+      :finding_id,
       :task_id,
       :check_name,
       :task_start_time,
@@ -744,6 +781,124 @@ module Aws::IoT
       :related_resources,
       :reason_for_non_compliance,
       :reason_for_non_compliance_code)
+      include Aws::Structure
+    end
+
+    # Returned by ListAuditMitigationActionsTask, this object contains
+    # information that describes a mitigation action that has been started.
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier for the task that applies the mitigation
+    #   action.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   The unique identifier for the findings to which the task and
+    #   associated mitigation action are applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_name
+    #   The friendly name of the mitigation action being applied by the
+    #   task.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_id
+    #   The unique identifier for the mitigation action being applied by the
+    #   task.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the task being executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time when the task was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time when the task was completed or canceled. Blank if
+    #   the task is still running.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_code
+    #   If an error occurred, the code that indicates which type of error
+    #   occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If an error occurred, a message that describes the error.
+    #   @return [String]
+    #
+    class AuditMitigationActionExecutionMetadata < Struct.new(
+      :task_id,
+      :finding_id,
+      :action_name,
+      :action_id,
+      :status,
+      :start_time,
+      :end_time,
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Information about an audit mitigation actions task that is returned by
+    # `ListAuditMitigationActionsTasks`.
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier for the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time at which the audit mitigation actions task was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_status
+    #   The current state of the audit mitigation actions task.
+    #   @return [String]
+    #
+    class AuditMitigationActionsTaskMetadata < Struct.new(
+      :task_id,
+      :start_time,
+      :task_status)
+      include Aws::Structure
+    end
+
+    # Used in MitigationActionParams, this information identifies the target
+    # findings to which the mitigation actions are applied. Only one entry
+    # appears.
+    #
+    # @note When making an API call, you may pass AuditMitigationActionsTaskTarget
+    #   data as a hash:
+    #
+    #       {
+    #         audit_task_id: "AuditTaskId",
+    #         finding_ids: ["FindingId"],
+    #         audit_check_to_reason_code_filter: {
+    #           "AuditCheckName" => ["ReasonForNonComplianceCode"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] audit_task_id
+    #   If the task will apply a mitigation action to findings from a
+    #   specific audit, this value uniquely identifies the audit.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_ids
+    #   If the task will apply a mitigation action to one or more listed
+    #   findings, this value uniquely identifies those findings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] audit_check_to_reason_code_filter
+    #   Specifies a filter in the form of an audit check and set of reason
+    #   codes that identify the findings from the audit to which the audit
+    #   mitigation actions task apply.
+    #   @return [Hash<String,Array<String>>]
+    #
+    class AuditMitigationActionsTaskTarget < Struct.new(
+      :audit_task_id,
+      :finding_ids,
+      :audit_check_to_reason_code_filter)
       include Aws::Structure
     end
 
@@ -786,12 +941,12 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] task_status
-    #   The status of this audit: one of "IN\_PROGRESS", "COMPLETED",
-    #   "FAILED" or "CANCELED".
+    #   The status of this audit. One of "IN\_PROGRESS", "COMPLETED",
+    #   "FAILED", or "CANCELED".
     #   @return [String]
     #
     # @!attribute [rw] task_type
-    #   The type of this audit: one of "ON\_DEMAND\_AUDIT\_TASK" or
+    #   The type of this audit. One of "ON\_DEMAND\_AUDIT\_TASK" or
     #   "SCHEDULED\_AUDIT\_TASK".
     #   @return [String]
     #
@@ -1174,6 +1329,24 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelAuditMitigationActionsTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "AuditMitigationActionsTaskId", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier for the task that you want to cancel.
+    #   @return [String]
+    #
+    class CancelAuditMitigationActionsTaskRequest < Struct.new(
+      :task_id)
+      include Aws::Structure
+    end
+
+    class CancelAuditMitigationActionsTaskResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CancelAuditTaskRequest
     #   data as a hash:
     #
@@ -1363,6 +1536,20 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Unable to verify the CA certificate used to sign the device
+    # certificate you are attempting to register. This is happens when you
+    # have registered more than one CA certificate that has the same subject
+    # field and public key.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class CertificateConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a certificate.
     #
     # @!attribute [rw] certificate_arn
@@ -1432,6 +1619,28 @@ module Aws::IoT
       :transfer_data,
       :generation_id,
       :validity)
+      include Aws::Structure
+    end
+
+    # The certificate operation is not allowed.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class CertificateStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The certificate is invalid.
+    #
+    # @!attribute [rw] message
+    #   Additional information about the exception.
+    #   @return [String]
+    #
+    class CertificateValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1662,6 +1871,18 @@ module Aws::IoT
     #
     class Configuration < Struct.new(
       :enabled)
+      include Aws::Structure
+    end
+
+    # A conflicting resource update exception. This exception is thrown when
+    # two pending updates cause a conflict.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ConflictingResourceUpdateException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2124,6 +2345,82 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateMitigationActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_name: "MitigationActionName", # required
+    #         role_arn: "RoleArn", # required
+    #         action_params: { # required
+    #           update_device_certificate_params: {
+    #             action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #           },
+    #           update_ca_certificate_params: {
+    #             action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #           },
+    #           add_things_to_thing_group_params: {
+    #             thing_group_names: ["ThingGroupName"], # required
+    #             override_dynamic_groups: false,
+    #           },
+    #           replace_default_policy_version_params: {
+    #             template_name: "BLANK_POLICY", # required, accepts BLANK_POLICY
+    #           },
+    #           enable_io_t_logging_params: {
+    #             role_arn_for_logging: "RoleArn", # required
+    #             log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #           },
+    #           publish_finding_to_sns_params: {
+    #             topic_arn: "SnsTopicArn", # required
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] action_name
+    #   A friendly name for the action. Choose a friendly name that
+    #   accurately describes the action (for example,
+    #   `EnableLoggingAction`).
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that is used to apply the mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_params
+    #   Defines the type of action and the parameters for that action.
+    #   @return [Types::MitigationActionParams]
+    #
+    # @!attribute [rw] tags
+    #   Metadata that can be used to manage the mitigation action.
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateMitigationActionRequest < Struct.new(
+      :action_name,
+      :role_arn,
+      :action_params,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_arn
+    #   The ARN for the new mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_id
+    #   A unique identifier for the new mitigation action.
+    #   @return [String]
+    #
+    class CreateMitigationActionResponse < Struct.new(
+      :action_arn,
+      :action_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOTAUpdateRequest
     #   data as a hash:
     #
@@ -2443,19 +2740,19 @@ module Aws::IoT
     #         day_of_month: "DayOfMonth",
     #         day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
     #         target_check_names: ["AuditCheckName"], # required
+    #         scheduled_audit_name: "ScheduledAuditName", # required
     #         tags: [
     #           {
     #             key: "TagKey",
     #             value: "TagValue",
     #           },
     #         ],
-    #         scheduled_audit_name: "ScheduledAuditName", # required
     #       }
     #
     # @!attribute [rw] frequency
     #   How often the scheduled audit takes place. Can be one of "DAILY",
-    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of
-    #   each audit is determined by the system.
+    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each
+    #   audit is determined by the system.
     #   @return [String]
     #
     # @!attribute [rw] day_of_month
@@ -2468,7 +2765,7 @@ module Aws::IoT
     #
     # @!attribute [rw] day_of_week
     #   The day of the week on which the scheduled audit takes place. Can be
-    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or
+    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or
     #   "SAT". This field is required if the "frequency" parameter is
     #   set to "WEEKLY" or "BIWEEKLY".
     #   @return [String]
@@ -2476,27 +2773,27 @@ module Aws::IoT
     # @!attribute [rw] target_check_names
     #   Which checks are performed during the scheduled audit. Checks must
     #   be enabled for your account. (Use
-    #   `DescribeAccountAuditConfiguration` to see the list of all checks
-    #   including those that are enabled or
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
     #   `UpdateAccountAuditConfiguration` to select which checks are
     #   enabled.)
     #   @return [Array<String>]
     #
-    # @!attribute [rw] tags
-    #   Metadata which can be used to manage the scheduled audit.
-    #   @return [Array<Types::Tag>]
-    #
     # @!attribute [rw] scheduled_audit_name
     #   The name you want to give to the scheduled audit. (Max. 128 chars)
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata that can be used to manage the scheduled audit.
+    #   @return [Array<Types::Tag>]
     #
     class CreateScheduledAuditRequest < Struct.new(
       :frequency,
       :day_of_month,
       :day_of_week,
       :target_check_names,
-      :tags,
-      :scheduled_audit_name)
+      :scheduled_audit_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -2571,12 +2868,12 @@ module Aws::IoT
     #
     # @!attribute [rw] additional_metrics_to_retain
     #   A list of metrics whose data is retained (stored). By default, data
-    #   is retained for any metric used in the profile's `behaviors` but it
-    #   is also retained for any metric specified here.
+    #   is retained for any metric used in the profile's `behaviors`, but
+    #   it is also retained for any metric specified here.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   Metadata which can be used to manage the security profile.
+    #   Metadata that can be used to manage the security profile.
     #   @return [Array<Types::Tag>]
     #
     class CreateSecurityProfileRequest < Struct.new(
@@ -2925,6 +3222,7 @@ module Aws::IoT
     #               republish: {
     #                 role_arn: "AwsArn", # required
     #                 topic: "TopicPattern", # required
+    #                 qos: 1,
     #               },
     #               s3: {
     #                 role_arn: "AwsArn", # required
@@ -3021,6 +3319,7 @@ module Aws::IoT
     #             republish: {
     #               role_arn: "AwsArn", # required
     #               topic: "TopicPattern", # required
+    #               qos: 1,
     #             },
     #             s3: {
     #               role_arn: "AwsArn", # required
@@ -3251,12 +3550,25 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] force_delete
-    #   Forces a certificate request to be deleted.
+    #   Forces the deletion of a certificate if it is inactive and is not
+    #   attached to an IoT thing.
     #   @return [Boolean]
     #
     class DeleteCertificateRequest < Struct.new(
       :certificate_id,
       :force_delete)
+      include Aws::Structure
+    end
+
+    # You can't delete the resource because it is attached to one or more
+    # resources.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class DeleteConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3371,6 +3683,24 @@ module Aws::IoT
       :force)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteMitigationActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_name: "MitigationActionName", # required
+    #       }
+    #
+    # @!attribute [rw] action_name
+    #   The name of the mitigation action that you want to delete.
+    #   @return [String]
+    #
+    class DeleteMitigationActionRequest < Struct.new(
+      :action_name)
+      include Aws::Structure
+    end
+
+    class DeleteMitigationActionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteOTAUpdateRequest
     #   data as a hash:
@@ -3507,7 +3837,7 @@ module Aws::IoT
     # @!attribute [rw] expected_version
     #   The expected version of the security profile. A new version is
     #   generated whenever the security profile is updated. If you specify a
-    #   value that is different than the actual version, a
+    #   value that is different from the actual version, a
     #   `VersionConflictException` is thrown.
     #   @return [Integer]
     #
@@ -3709,10 +4039,10 @@ module Aws::IoT
 
     # @!attribute [rw] role_arn
     #   The ARN of the role that grants permission to AWS IoT to access
-    #   information about your devices, policies, certificates and other
-    #   items as necessary when performing an audit.
+    #   information about your devices, policies, certificates, and other
+    #   items as required when performing an audit.
     #
-    #   On the first call to `UpdateAccountAuditConfiguration` this
+    #   On the first call to `UpdateAccountAuditConfiguration`, this
     #   parameter is required.
     #   @return [String]
     #
@@ -3729,6 +4059,91 @@ module Aws::IoT
       :role_arn,
       :audit_notification_target_configurations,
       :audit_check_configurations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAuditFindingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         finding_id: "FindingId", # required
+    #       }
+    #
+    # @!attribute [rw] finding_id
+    #   A unique identifier for a single audit finding. You can use this
+    #   identifier to apply mitigation actions to the finding.
+    #   @return [String]
+    #
+    class DescribeAuditFindingRequest < Struct.new(
+      :finding_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] finding
+    #   The findings (results) of the audit.
+    #   @return [Types::AuditFinding]
+    #
+    class DescribeAuditFindingResponse < Struct.new(
+      :finding)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAuditMitigationActionsTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "AuditMitigationActionsTaskId", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier for the audit mitigation task.
+    #   @return [String]
+    #
+    class DescribeAuditMitigationActionsTaskRequest < Struct.new(
+      :task_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_status
+    #   The current status of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time when the task was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time when the task was completed or canceled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_statistics
+    #   Aggregate counts of the results when the mitigation tasks were
+    #   applied to the findings for this audit mitigation actions task.
+    #   @return [Hash<String,Types::TaskStatisticsForAuditCheck>]
+    #
+    # @!attribute [rw] target
+    #   Identifies the findings to which the mitigation actions are applied.
+    #   This can be by audit checks, by audit task, or a set of findings.
+    #   @return [Types::AuditMitigationActionsTaskTarget]
+    #
+    # @!attribute [rw] audit_check_to_actions_mapping
+    #   Specifies the mitigation actions that should be applied to specific
+    #   audit checks.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] actions_definition
+    #   Specifies the mitigation actions and their parameters that are
+    #   applied as part of this task.
+    #   @return [Array<Types::MitigationAction>]
+    #
+    class DescribeAuditMitigationActionsTaskResponse < Struct.new(
+      :task_status,
+      :start_time,
+      :end_time,
+      :task_statistics,
+      :target,
+      :audit_check_to_actions_mapping,
+      :actions_definition)
       include Aws::Structure
     end
 
@@ -4127,6 +4542,68 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeMitigationActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_name: "MitigationActionName", # required
+    #       }
+    #
+    # @!attribute [rw] action_name
+    #   The friendly name that uniquely identifies the mitigation action.
+    #   @return [String]
+    #
+    class DescribeMitigationActionRequest < Struct.new(
+      :action_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_name
+    #   The friendly name that uniquely identifies the mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_type
+    #   The type of mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_arn
+    #   The ARN that identifies this migration action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_id
+    #   A unique identifier for this action.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role used to apply this action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_params
+    #   Parameters that control how the mitigation action is applied,
+    #   specific to the type of mitigation action.
+    #   @return [Types::MitigationActionParams]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the mitigation action was added to your AWS
+    #   account.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date and time when the mitigation action was last changed.
+    #   @return [Time]
+    #
+    class DescribeMitigationActionResponse < Struct.new(
+      :action_name,
+      :action_type,
+      :action_arn,
+      :action_id,
+      :role_arn,
+      :action_params,
+      :creation_date,
+      :last_modified_date)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRoleAliasRequest
     #   data as a hash:
     #
@@ -4170,8 +4647,8 @@ module Aws::IoT
 
     # @!attribute [rw] frequency
     #   How often the scheduled audit takes place. One of "DAILY",
-    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of
-    #   each audit is determined by the system.
+    #   "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each
+    #   audit is determined by the system.
     #   @return [String]
     #
     # @!attribute [rw] day_of_month
@@ -4183,14 +4660,14 @@ module Aws::IoT
     #
     # @!attribute [rw] day_of_week
     #   The day of the week on which the scheduled audit takes place. One of
-    #   "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT".
+    #   "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT".
     #   @return [String]
     #
     # @!attribute [rw] target_check_names
-    #   Which checks are performed during the scheduled audit. (Note that
-    #   checks must be enabled for your account. (Use
-    #   `DescribeAccountAuditConfiguration` to see the list of all checks
-    #   including those that are enabled or
+    #   Which checks are performed during the scheduled audit. Checks must
+    #   be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
     #   `UpdateAccountAuditConfiguration` to select which checks are
     #   enabled.)
     #   @return [Array<String>]
@@ -4253,8 +4730,8 @@ module Aws::IoT
     #
     # @!attribute [rw] additional_metrics_to_retain
     #   A list of metrics whose data is retained (stored). By default, data
-    #   is retained for any metric used in the profile's `behaviors` but it
-    #   is also retained for any metric specified here.
+    #   is retained for any metric used in the profile's `behaviors`, but
+    #   it is also retained for any metric specified here.
     #   @return [Array<String>]
     #
     # @!attribute [rw] version
@@ -4918,6 +5395,31 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Parameters used when defining a mitigation action that enable AWS IoT
+    # logging.
+    #
+    # @note When making an API call, you may pass EnableIoTLoggingParams
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn_for_logging: "RoleArn", # required
+    #         log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #       }
+    #
+    # @!attribute [rw] role_arn_for_logging
+    #   The ARN of the IAM role used for logging.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_level
+    #   Specifies the types of information to be logged.
+    #   @return [String]
+    #
+    class EnableIoTLoggingParams < Struct.new(
+      :role_arn_for_logging,
+      :log_level)
+      include Aws::Structure
+    end
+
     # The input for the EnableTopicRuleRequest operation.
     #
     # @note When making an API call, you may pass EnableTopicRuleRequest
@@ -5471,7 +5973,96 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Sends messge data to an AWS IoT Analytics channel.
+    # The index is not ready.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class IndexNotReadyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An unexpected error has occurred.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InternalException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An unexpected error has occurred.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The aggregation is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidAggregationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The query is invalid.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidQueryException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The response is invalid.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidResponseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An attempt was made to change to an invalid state, for example by
+    # deleting a job or a job execution which is "IN\_PROGRESS" without
+    # setting the `force` parameter.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidStateTransitionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Sends message data to an AWS IoT Analytics channel.
     #
     # @note When making an API call, you may pass IotAnalyticsAction
     #   data as a hash:
@@ -6005,11 +6596,22 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # A limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListActiveViolationsRequest
     #   data as a hash:
     #
     #       {
-    #         thing_name: "ThingName",
+    #         thing_name: "DeviceDefenderThingName",
     #         security_profile_name: "SecurityProfileName",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -6066,7 +6668,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] target
-    #   The group for which the policies will be listed.
+    #   The group or principal for which the policies will be listed.
     #   @return [String]
     #
     # @!attribute [rw] recursive
@@ -6139,7 +6741,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] resource_identifier
-    #   Information identifying the non-compliant resource.
+    #   Information identifying the noncompliant resource.
     #   @return [Types::ResourceIdentifier]
     #
     # @!attribute [rw] max_results
@@ -6189,6 +6791,139 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAuditMitigationActionsExecutionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "AuditMitigationActionsTaskId", # required
+    #         action_status: "IN_PROGRESS", # accepts IN_PROGRESS, COMPLETED, FAILED, CANCELED, SKIPPED, PENDING
+    #         finding_id: "FindingId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   Specify this filter to limit results to actions for a specific audit
+    #   mitigation actions task.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_status
+    #   Specify this filter to limit results to those with a specific
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   Specify this filter to limit results to those that were applied to a
+    #   specific audit finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListAuditMitigationActionsExecutionsRequest < Struct.new(
+      :task_id,
+      :action_status,
+      :finding_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] actions_executions
+    #   A set of task execution results based on the input parameters.
+    #   Details include the mitigation action applied, start time, and task
+    #   status.
+    #   @return [Array<Types::AuditMitigationActionExecutionMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListAuditMitigationActionsExecutionsResponse < Struct.new(
+      :actions_executions,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAuditMitigationActionsTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         audit_task_id: "AuditTaskId",
+    #         finding_id: "FindingId",
+    #         task_status: "IN_PROGRESS", # accepts IN_PROGRESS, COMPLETED, FAILED, CANCELED
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] audit_task_id
+    #   Specify this filter to limit results to tasks that were applied to
+    #   results for a specific audit.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   Specify this filter to limit results to tasks that were applied to a
+    #   specific audit finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_status
+    #   Specify this filter to limit results to tasks that are in a specific
+    #   state.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   Specify this filter to limit results to tasks that began on or after
+    #   a specific date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   Specify this filter to limit results to tasks that were completed or
+    #   canceled on or before a specific date and time.
+    #   @return [Time]
+    #
+    class ListAuditMitigationActionsTasksRequest < Struct.new(
+      :audit_task_id,
+      :finding_id,
+      :task_status,
+      :max_results,
+      :next_token,
+      :start_time,
+      :end_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tasks
+    #   The collection of audit mitigation tasks that matched the filter
+    #   criteria.
+    #   @return [Array<Types::AuditMitigationActionsTaskMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListAuditMitigationActionsTasksResponse < Struct.new(
+      :tasks,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAuditTasksRequest
     #   data as a hash:
     #
@@ -6202,9 +6937,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] start_time
-    #   The beginning of the time period. Note that audit information is
-    #   retained for a limited time (180 days). Requesting a start time
-    #   prior to what is retained results in an "InvalidRequestException".
+    #   The beginning of the time period. Audit information is retained for
+    #   a limited time (180 days). Requesting a start time prior to what is
+    #   retained results in an "InvalidRequestException".
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -6218,8 +6953,8 @@ module Aws::IoT
     #
     # @!attribute [rw] task_status
     #   A filter to limit the output to audits with the specified completion
-    #   status: can be one of "IN\_PROGRESS", "COMPLETED", "FAILED" or
-    #   "CANCELED".
+    #   status: can be one of "IN\_PROGRESS", "COMPLETED", "FAILED",
+    #   or "CANCELED".
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -6704,6 +7439,50 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMitigationActionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_type: "UPDATE_DEVICE_CERTIFICATE", # accepts UPDATE_DEVICE_CERTIFICATE, UPDATE_CA_CERTIFICATE, ADD_THINGS_TO_THING_GROUP, REPLACE_DEFAULT_POLICY_VERSION, ENABLE_IOT_LOGGING, PUBLISH_FINDING_TO_SNS
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] action_type
+    #   Specify a value to limit the result to mitigation actions with a
+    #   specific action type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListMitigationActionsRequest < Struct.new(
+      :action_type,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_identifiers
+    #   A set of actions that matched the specified filter criteria.
+    #   @return [Array<Types::MitigationActionIdentifier>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListMitigationActionsResponse < Struct.new(
+      :action_identifiers,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListOTAUpdatesRequest
     #   data as a hash:
     #
@@ -7124,7 +7903,7 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] recursive
-    #   If true, return child groups as well.
+    #   If true, return child groups too.
     #   @return [Boolean]
     #
     # @!attribute [rw] security_profile_target_arn
@@ -7884,7 +8663,7 @@ module Aws::IoT
     #       {
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
-    #         thing_name: "ThingName",
+    #         thing_name: "DeviceDefenderThingName",
     #         security_profile_name: "SecurityProfileName",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -7928,7 +8707,7 @@ module Aws::IoT
 
     # @!attribute [rw] violation_events
     #   The security profile violation alerts issued for this account during
-    #   the given time frame, potentially filtered by security profile,
+    #   the given time period, potentially filtered by security profile,
     #   behavior violated, or thing (device) violating.
     #   @return [Array<Types::ViolationEvent>]
     #
@@ -8007,6 +8786,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The policy documentation is not valid.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class MalformedPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The value to be compared with the `metric`.
     #
     # @note When making an API call, you may pass MetricValue
@@ -8040,25 +8830,158 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Information about the resource that was non-compliant with the audit
+    # Describes which changes should be applied as part of a mitigation
+    # action.
+    #
+    # @!attribute [rw] name
+    #   A user-friendly name for the mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role ARN used to apply this mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_params
+    #   The set of parameters for this mitigation action. The parameters
+    #   vary, depending on the kind of action you apply.
+    #   @return [Types::MitigationActionParams]
+    #
+    class MitigationAction < Struct.new(
+      :name,
+      :id,
+      :role_arn,
+      :action_params)
+      include Aws::Structure
+    end
+
+    # Information that identifies a mitigation action. This information is
+    # returned by ListMitigationActions.
+    #
+    # @!attribute [rw] action_name
+    #   The friendly name of the mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_arn
+    #   The IAM role ARN used to apply this mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when this mitigation action was created.
+    #   @return [Time]
+    #
+    class MitigationActionIdentifier < Struct.new(
+      :action_name,
+      :action_arn,
+      :creation_date)
+      include Aws::Structure
+    end
+
+    # The set of parameters for this mitigation action. You can specify only
+    # one type of parameter (in other words, you can apply only one action
+    # for each defined mitigation action).
+    #
+    # @note When making an API call, you may pass MitigationActionParams
+    #   data as a hash:
+    #
+    #       {
+    #         update_device_certificate_params: {
+    #           action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #         },
+    #         update_ca_certificate_params: {
+    #           action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #         },
+    #         add_things_to_thing_group_params: {
+    #           thing_group_names: ["ThingGroupName"], # required
+    #           override_dynamic_groups: false,
+    #         },
+    #         replace_default_policy_version_params: {
+    #           template_name: "BLANK_POLICY", # required, accepts BLANK_POLICY
+    #         },
+    #         enable_io_t_logging_params: {
+    #           role_arn_for_logging: "RoleArn", # required
+    #           log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #         },
+    #         publish_finding_to_sns_params: {
+    #           topic_arn: "SnsTopicArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] update_device_certificate_params
+    #   Parameters to define a mitigation action that changes the state of
+    #   the device certificate to inactive.
+    #   @return [Types::UpdateDeviceCertificateParams]
+    #
+    # @!attribute [rw] update_ca_certificate_params
+    #   Parameters to define a mitigation action that changes the state of
+    #   the CA certificate to inactive.
+    #   @return [Types::UpdateCACertificateParams]
+    #
+    # @!attribute [rw] add_things_to_thing_group_params
+    #   Parameters to define a mitigation action that moves devices
+    #   associated with a certificate to one or more specified thing groups,
+    #   typically for quarantine.
+    #   @return [Types::AddThingsToThingGroupParams]
+    #
+    # @!attribute [rw] replace_default_policy_version_params
+    #   Parameters to define a mitigation action that adds a blank policy to
+    #   restrict permissions.
+    #   @return [Types::ReplaceDefaultPolicyVersionParams]
+    #
+    # @!attribute [rw] enable_io_t_logging_params
+    #   Parameters to define a mitigation action that enables AWS IoT
+    #   logging at a specified level of detail.
+    #   @return [Types::EnableIoTLoggingParams]
+    #
+    # @!attribute [rw] publish_finding_to_sns_params
+    #   Parameters to define a mitigation action that publishes findings to
+    #   Amazon SNS. You can implement your own custom actions in response to
+    #   the Amazon SNS messages.
+    #   @return [Types::PublishFindingToSnsParams]
+    #
+    class MitigationActionParams < Struct.new(
+      :update_device_certificate_params,
+      :update_ca_certificate_params,
+      :add_things_to_thing_group_params,
+      :replace_default_policy_version_params,
+      :enable_io_t_logging_params,
+      :publish_finding_to_sns_params)
+      include Aws::Structure
+    end
+
+    # Information about the resource that was noncompliant with the audit
     # check.
     #
     # @!attribute [rw] resource_type
-    #   The type of the non-compliant resource.
+    #   The type of the noncompliant resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_identifier
-    #   Information identifying the non-compliant resource.
+    #   Information that identifies the noncompliant resource.
     #   @return [Types::ResourceIdentifier]
     #
     # @!attribute [rw] additional_info
-    #   Additional information about the non-compliant resource.
+    #   Other information about the noncompliant resource.
     #   @return [Hash<String,String>]
     #
     class NonCompliantResource < Struct.new(
       :resource_type,
       :resource_identifier,
       :additional_info)
+      include Aws::Structure
+    end
+
+    # The resource is not configured.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class NotConfiguredException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -8372,6 +9295,26 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Parameters to define a mitigation action that publishes findings to
+    # Amazon SNS. You can implement your own custom actions in response to
+    # the Amazon SNS messages.
+    #
+    # @note When making an API call, you may pass PublishFindingToSnsParams
+    #   data as a hash:
+    #
+    #       {
+    #         topic_arn: "SnsTopicArn", # required
+    #       }
+    #
+    # @!attribute [rw] topic_arn
+    #   The ARN of the topic to which you want to publish the findings.
+    #   @return [String]
+    #
+    class PublishFindingToSnsParams < Struct.new(
+      :topic_arn)
+      include Aws::Structure
+    end
+
     # The input for the DynamoActionVS action that specifies the DynamoDB
     # table to which the message data will be written.
     #
@@ -8383,7 +9326,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] table_name
-    #   The table where the message data will be written
+    #   The table where the message data will be written.
     #   @return [String]
     #
     class PutItemInput < Struct.new(
@@ -8582,6 +9525,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The registration code is invalid.
+    #
+    # @!attribute [rw] message
+    #   Additional information about the exception.
+    #   @return [String]
+    #
+    class RegistrationCodeValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The registration configuration.
     #
     # @note When making an API call, you may pass RegistrationConfig
@@ -8638,11 +9592,11 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] resource_identifier
-    #   Information identifying the resource.
+    #   Information that identifies the resource.
     #   @return [Types::ResourceIdentifier]
     #
     # @!attribute [rw] additional_info
-    #   Additional information about the resource.
+    #   Other information about the resource.
     #   @return [Hash<String,String>]
     #
     class RelatedResource < Struct.new(
@@ -8724,6 +9678,26 @@ module Aws::IoT
 
     class RemoveThingFromThingGroupResponse < Aws::EmptyStructure; end
 
+    # Parameters to define a mitigation action that adds a blank policy to
+    # restrict permissions.
+    #
+    # @note When making an API call, you may pass ReplaceDefaultPolicyVersionParams
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "BLANK_POLICY", # required, accepts BLANK_POLICY
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the template to be applied. The only supported value is
+    #   `BLANK_POLICY`.
+    #   @return [String]
+    #
+    class ReplaceDefaultPolicyVersionParams < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
     # The input for the ReplaceTopicRule operation.
     #
     # @note When making an API call, you may pass ReplaceTopicRuleRequest
@@ -8775,6 +9749,7 @@ module Aws::IoT
     #               republish: {
     #                 role_arn: "AwsArn", # required
     #                 topic: "TopicPattern", # required
+    #                 qos: 1,
     #               },
     #               s3: {
     #                 role_arn: "AwsArn", # required
@@ -8871,6 +9846,7 @@ module Aws::IoT
     #             republish: {
     #               role_arn: "AwsArn", # required
     #               topic: "TopicPattern", # required
+    #               qos: 1,
     #             },
     #             s3: {
     #               role_arn: "AwsArn", # required
@@ -8949,6 +9925,7 @@ module Aws::IoT
     #       {
     #         role_arn: "AwsArn", # required
     #         topic: "TopicPattern", # required
+    #         qos: 1,
     #       }
     #
     # @!attribute [rw] role_arn
@@ -8959,13 +9936,40 @@ module Aws::IoT
     #   The name of the MQTT topic.
     #   @return [String]
     #
+    # @!attribute [rw] qos
+    #   The Quality of Service (QoS) level to use when republishing
+    #   messages.
+    #   @return [Integer]
+    #
     class RepublishAction < Struct.new(
       :role_arn,
-      :topic)
+      :topic,
+      :qos)
       include Aws::Structure
     end
 
-    # Information identifying the non-compliant resource.
+    # The resource already exists.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that caused the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource that caused the exception.
+    #   @return [String]
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # Information that identifies the noncompliant resource.
     #
     # @note When making an API call, you may pass ResourceIdentifier
     #   data as a hash:
@@ -8991,7 +9995,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] cognito_identity_pool_id
-    #   The ID of the Cognito Identity Pool.
+    #   The ID of the Amazon Cognito identity pool.
     #   @return [String]
     #
     # @!attribute [rw] client_id
@@ -9013,6 +10017,28 @@ module Aws::IoT
       :client_id,
       :policy_version_identifier,
       :account)
+      include Aws::Structure
+    end
+
+    # The specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource registration failed.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ResourceRegistrationFailureException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -9193,7 +10219,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] frequency
-    #   How often the scheduled audit takes place.
+    #   How often the scheduled audit occurs.
     #   @return [String]
     #
     # @!attribute [rw] day_of_month
@@ -9321,6 +10347,17 @@ module Aws::IoT
     class SecurityProfileTargetMapping < Struct.new(
       :security_profile_identifier,
       :target)
+      include Aws::Structure
+    end
+
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -9522,6 +10559,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The Rule-SQL expression can't be parsed correctly.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class SqlParseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes an action to publish data to an Amazon SQS queue.
     #
     # @note When making an API call, you may pass SqsAction
@@ -9552,6 +10600,68 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartAuditMitigationActionsTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "AuditMitigationActionsTaskId", # required
+    #         target: { # required
+    #           audit_task_id: "AuditTaskId",
+    #           finding_ids: ["FindingId"],
+    #           audit_check_to_reason_code_filter: {
+    #             "AuditCheckName" => ["ReasonForNonComplianceCode"],
+    #           },
+    #         },
+    #         audit_check_to_actions_mapping: { # required
+    #           "AuditCheckName" => ["MitigationActionName"],
+    #         },
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   A unique identifier for the task. You can use this identifier to
+    #   check the status of the task or to cancel it.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   Specifies the audit findings to which the mitigation actions are
+    #   applied. You can apply them to a type of audit check, to all
+    #   findings from an audit, or to a speecific set of findings.
+    #   @return [Types::AuditMitigationActionsTaskTarget]
+    #
+    # @!attribute [rw] audit_check_to_actions_mapping
+    #   For an audit check, specifies which mitigation actions to apply.
+    #   Those actions must be defined in your AWS account.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Each audit mitigation task must have a unique client request token.
+    #   If you try to start a new task with the same token as a task that
+    #   already exists, an exception occurs. If you omit this value, a
+    #   unique client request token is generated automatically.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class StartAuditMitigationActionsTaskRequest < Struct.new(
+      :task_id,
+      :target,
+      :audit_check_to_actions_mapping,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_id
+    #   The unique identifier for the audit mitigation task. This matches
+    #   the `taskId` that you specified in the request.
+    #   @return [String]
+    #
+    class StartAuditMitigationActionsTaskResponse < Struct.new(
+      :task_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartOnDemandAuditTaskRequest
     #   data as a hash:
     #
@@ -9562,7 +10672,7 @@ module Aws::IoT
     # @!attribute [rw] target_check_names
     #   Which checks are performed during the audit. The checks you specify
     #   must be enabled for your account or an exception occurs. Use
-    #   `DescribeAccountAuditConfiguration` to see the list of all checks
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
     #   including those that are enabled or
     #   `UpdateAccountAuditConfiguration` to select which checks are
     #   enabled.
@@ -9936,6 +11046,17 @@ module Aws::IoT
 
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # This exception occurs if you attempt to start a task with the same
+    # task-id as an existing task but with a different clientRequestToken.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TaskAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Statistics for the checks performed during the audit.
     #
     # @!attribute [rw] total_checks
@@ -9955,11 +11076,11 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] non_compliant_checks
-    #   The number of checks that found non-compliant resources.
+    #   The number of checks that found noncompliant resources.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_checks
-    #   The number of checks
+    #   The number of checks.
     #   @return [Integer]
     #
     # @!attribute [rw] canceled_checks
@@ -9975,6 +11096,43 @@ module Aws::IoT
       :non_compliant_checks,
       :failed_checks,
       :canceled_checks)
+      include Aws::Structure
+    end
+
+    # Provides summary counts of how many tasks for findings are in a
+    # particular state. This information is included in the response from
+    # DescribeAuditMitigationActionsTask.
+    #
+    # @!attribute [rw] total_findings_count
+    #   The total number of findings to which a task is being applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_findings_count
+    #   The number of findings for which at least one of the actions failed
+    #   when applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] succeeded_findings_count
+    #   The number of findings for which all mitigation actions succeeded
+    #   when applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] skipped_findings_count
+    #   The number of findings skipped because of filter conditions provided
+    #   in the parameters to the command.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] canceled_findings_count
+    #   The number of findings to which the mitigation action task was
+    #   canceled when applied.
+    #   @return [Integer]
+    #
+    class TaskStatisticsForAuditCheck < Struct.new(
+      :total_findings_count,
+      :failed_findings_count,
+      :succeeded_findings_count,
+      :skipped_findings_count,
+      :canceled_findings_count)
       include Aws::Structure
     end
 
@@ -10416,6 +11574,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The rate exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Specifies the amount of time each device has to finish its execution
     # of the job. A timer is started when the job execution status is set to
     # `IN_PROGRESS`. If the job execution status is not set to another
@@ -10571,6 +11740,7 @@ module Aws::IoT
     #             republish: {
     #               role_arn: "AwsArn", # required
     #               topic: "TopicPattern", # required
+    #               qos: 1,
     #             },
     #             s3: {
     #               role_arn: "AwsArn", # required
@@ -10667,6 +11837,7 @@ module Aws::IoT
     #           republish: {
     #             role_arn: "AwsArn", # required
     #             topic: "TopicPattern", # required
+    #             qos: 1,
     #           },
     #           s3: {
     #             role_arn: "AwsArn", # required
@@ -10761,6 +11932,18 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # You can't revert the certificate transfer because the transfer is
+    # already complete.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class TransferAlreadyCompletedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The input for the TransferCertificate operation.
     #
     # @note When making an API call, you may pass TransferCertificateRequest
@@ -10803,6 +11986,18 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # You can't transfer the certificate because authorization policies are
+    # still attached.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class TransferConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Data used to transfer a certificate to an AWS account.
     #
     # @!attribute [rw] transfer_message
@@ -10831,6 +12026,17 @@ module Aws::IoT
       :transfer_date,
       :accept_date,
       :reject_date)
+      include Aws::Structure
+    end
+
+    # You are not authorized to perform this operation.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -10880,7 +12086,7 @@ module Aws::IoT
     # @!attribute [rw] role_arn
     #   The ARN of the role that grants permission to AWS IoT to access
     #   information about your devices, policies, certificates and other
-    #   items as necessary when performing an audit.
+    #   items as required when performing an audit.
     #   @return [String]
     #
     # @!attribute [rw] audit_notification_target_configurations
@@ -10890,17 +12096,17 @@ module Aws::IoT
     # @!attribute [rw] audit_check_configurations
     #   Specifies which audit checks are enabled and disabled for this
     #   account. Use `DescribeAccountAuditConfiguration` to see the list of
-    #   all checks including those that are currently enabled.
+    #   all checks, including those that are currently enabled.
     #
-    #   Note that some data collection may begin immediately when certain
-    #   checks are enabled. When a check is disabled, any data collected so
-    #   far in relation to the check is deleted.
+    #   Some data collection might start immediately when certain checks are
+    #   enabled. When a check is disabled, any data collected so far in
+    #   relation to the check is deleted.
     #
     #   You cannot disable a check if it is used by any scheduled audit. You
     #   must first delete the check from the scheduled audit or delete the
     #   scheduled audit itself.
     #
-    #   On the first call to `UpdateAccountAuditConfiguration` this
+    #   On the first call to `UpdateAccountAuditConfiguration`, this
     #   parameter is required and must specify at least one enabled check.
     #   @return [Hash<String,Types::AuditCheckConfiguration>]
     #
@@ -11011,6 +12217,26 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Parameters to define a mitigation action that changes the state of the
+    # CA certificate to inactive.
+    #
+    # @note When making an API call, you may pass UpdateCACertificateParams
+    #   data as a hash:
+    #
+    #       {
+    #         action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that you want to apply to the CA cerrtificate. The only
+    #   supported value is `DEACTIVATE`.
+    #   @return [String]
+    #
+    class UpdateCACertificateParams < Struct.new(
+      :action)
+      include Aws::Structure
+    end
+
     # The input to the UpdateCACertificate operation.
     #
     # @note When making an API call, you may pass UpdateCACertificateRequest
@@ -11048,7 +12274,7 @@ module Aws::IoT
     #   @return [Types::RegistrationConfig]
     #
     # @!attribute [rw] remove_auto_registration
-    #   If true, remove auto registration.
+    #   If true, removes auto registration.
     #   @return [Boolean]
     #
     class UpdateCACertificateRequest < Struct.new(
@@ -11089,6 +12315,26 @@ module Aws::IoT
     class UpdateCertificateRequest < Struct.new(
       :certificate_id,
       :new_status)
+      include Aws::Structure
+    end
+
+    # Parameters to define a mitigation action that changes the state of the
+    # device certificate to inactive.
+    #
+    # @note When making an API call, you may pass UpdateDeviceCertificateParams
+    #   data as a hash:
+    #
+    #       {
+    #         action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that you want to apply to the device cerrtificate. The
+    #   only supported value is `DEACTIVATE`.
+    #   @return [String]
+    #
+    class UpdateDeviceCertificateParams < Struct.new(
+      :action)
       include Aws::Structure
     end
 
@@ -11289,6 +12535,71 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateMitigationActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_name: "MitigationActionName", # required
+    #         role_arn: "RoleArn",
+    #         action_params: {
+    #           update_device_certificate_params: {
+    #             action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #           },
+    #           update_ca_certificate_params: {
+    #             action: "DEACTIVATE", # required, accepts DEACTIVATE
+    #           },
+    #           add_things_to_thing_group_params: {
+    #             thing_group_names: ["ThingGroupName"], # required
+    #             override_dynamic_groups: false,
+    #           },
+    #           replace_default_policy_version_params: {
+    #             template_name: "BLANK_POLICY", # required, accepts BLANK_POLICY
+    #           },
+    #           enable_io_t_logging_params: {
+    #             role_arn_for_logging: "RoleArn", # required
+    #             log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #           },
+    #           publish_finding_to_sns_params: {
+    #             topic_arn: "SnsTopicArn", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action_name
+    #   The friendly name for the mitigation action. You can't change the
+    #   name by using `UpdateMitigationAction`. Instead, you must delete and
+    #   re-create the mitigation action with the new name.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that is used to apply the mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_params
+    #   Defines the type of action and the parameters for that action.
+    #   @return [Types::MitigationActionParams]
+    #
+    class UpdateMitigationActionRequest < Struct.new(
+      :action_name,
+      :role_arn,
+      :action_params)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_arn
+    #   The ARN for the new mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_id
+    #   A unique identifier for the mitigation action.
+    #   @return [String]
+    #
+    class UpdateMitigationActionResponse < Struct.new(
+      :action_arn,
+      :action_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateRoleAliasRequest
     #   data as a hash:
     #
@@ -11344,8 +12655,8 @@ module Aws::IoT
     #
     # @!attribute [rw] frequency
     #   How often the scheduled audit takes place. Can be one of "DAILY",
-    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of
-    #   each audit is determined by the system.
+    #   "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each
+    #   audit is determined by the system.
     #   @return [String]
     #
     # @!attribute [rw] day_of_month
@@ -11358,7 +12669,7 @@ module Aws::IoT
     #
     # @!attribute [rw] day_of_week
     #   The day of the week on which the scheduled audit takes place. Can be
-    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or
+    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or
     #   "SAT". This field is required if the "frequency" parameter is
     #   set to "WEEKLY" or "BIWEEKLY".
     #   @return [String]
@@ -11366,8 +12677,8 @@ module Aws::IoT
     # @!attribute [rw] target_check_names
     #   Which checks are performed during the scheduled audit. Checks must
     #   be enabled for your account. (Use
-    #   `DescribeAccountAuditConfiguration` to see the list of all checks
-    #   including those that are enabled or
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
     #   `UpdateAccountAuditConfiguration` to select which checks are
     #   enabled.)
     #   @return [Array<String>]
@@ -11452,32 +12763,32 @@ module Aws::IoT
     #
     # @!attribute [rw] additional_metrics_to_retain
     #   A list of metrics whose data is retained (stored). By default, data
-    #   is retained for any metric used in the profile's `behaviors` but it
-    #   is also retained for any metric specified here.
+    #   is retained for any metric used in the profile's `behaviors`, but
+    #   it is also retained for any metric specified here.
     #   @return [Array<String>]
     #
     # @!attribute [rw] delete_behaviors
     #   If true, delete all `behaviors` defined for this security profile.
-    #   If any `behaviors` are defined in the current invocation an
+    #   If any `behaviors` are defined in the current invocation, an
     #   exception occurs.
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_alert_targets
     #   If true, delete all `alertTargets` defined for this security
-    #   profile. If any `alertTargets` are defined in the current invocation
-    #   an exception occurs.
+    #   profile. If any `alertTargets` are defined in the current
+    #   invocation, an exception occurs.
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_additional_metrics_to_retain
     #   If true, delete all `additionalMetricsToRetain` defined for this
     #   security profile. If any `additionalMetricsToRetain` are defined in
-    #   the current invocation an exception occurs.
+    #   the current invocation, an exception occurs.
     #   @return [Boolean]
     #
     # @!attribute [rw] expected_version
     #   The expected version of the security profile. A new version is
     #   generated whenever the security profile is updated. If you specify a
-    #   value that is different than the actual version, a
+    #   value that is different from the actual version, a
     #   `VersionConflictException` is thrown.
     #   @return [Integer]
     #
@@ -11518,7 +12829,7 @@ module Aws::IoT
     # @!attribute [rw] additional_metrics_to_retain
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the security profile's
-    #   `behaviors` but it is also retained for any metric specified here.
+    #   `behaviors`, but it is also retained for any metric specified here.
     #   @return [Array<String>]
     #
     # @!attribute [rw] version
@@ -11818,6 +13129,30 @@ module Aws::IoT
     #
     class ValidationError < Struct.new(
       :error_message)
+      include Aws::Structure
+    end
+
+    # An exception thrown when the version of an entity specified with the
+    # `expectedVersion` parameter does not match the latest version in the
+    # system.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class VersionConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The number of policy versions exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class VersionsLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

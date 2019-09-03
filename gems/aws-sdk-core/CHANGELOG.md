@@ -3,6 +3,111 @@ Unreleased Changes
 
 * Feature - Support CLI AWS_DEFAULT_PROFILE environment variable [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1452)
 
+3.65.1 (2019-08-28)
+------------------
+
+* Issue - Auto refresh credentials for Route53 `ExpiredToken` errors
+
+3.65.0 (2019-08-27)
+------------------
+
+* Feature - Support assuming an role `:source_from` profile with `AssumeRoleWebIdentityCredentials`
+
+3.64.0 (2019-08-20)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.63.0 (2019-08-15)
+------------------
+
+* Feature - Support passing AssumeRole `duration_seconds` from shared credentials/config file.
+
+3.62.0 (2019-08-02)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.61.2 (2019-07-29)
+------------------
+
+* Issue - Add `Aws::STS::InvalidIdentityToken` and `Aws::Errors::NoSuchEndpointError` error for retry
+
+3.61.1 (2019-07-25)
+------------------
+
+* Issue - Fix default STS Client credential sourcing in Aws::AssumeRoleWebIdentityCredentialsProvider
+
+3.61.0 (2019-07-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.60.0 (2019-07-23)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Issue - Handle `EncodingError` when using Oj gem [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1831)
+
+3.59.0 (2019-07-03)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.58.0 (2019-07-01)
+------------------
+
+* Feature - Support `Aws::AssumeRoleWebIdentityCredentials` provider
+
+3.57.0 (2019-06-28)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.56.0 (2019-06-17)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Support `:client_side_monitoring_host` configuration for CSM
+
+3.55.0 (2019-06-14)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.54.2 (2019-06-03)
+------------------
+
+* Issue - Mirgate Proc.new without a block usage #2058.
+
+3.54.1 (2019-05-30)
+------------------
+
+* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information.
+
+3.54.0 (2019-05-28)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.53.1 (2019-05-22)
+------------------
+
+* Issue - Support #to_hash for Struct with `:members` member #2053
+
+3.53.0 (2019-05-21)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Feature - Adding support for modeled exceptions
+
 3.52.1 (2019-05-15)
 ------------------
 

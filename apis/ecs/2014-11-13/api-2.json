@@ -534,6 +534,21 @@
         {"shape":"ClusterNotFoundException"}
       ]
     },
+    "SubmitAttachmentStateChanges":{
+      "name":"SubmitAttachmentStateChanges",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SubmitAttachmentStateChangesRequest"},
+      "output":{"shape":"SubmitAttachmentStateChangesResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterException"}
+      ]
+    },
     "SubmitContainerStateChange":{
       "name":"SubmitContainerStateChange",
       "http":{
@@ -591,6 +606,21 @@
         {"shape":"ClientException"},
         {"shape":"ClusterNotFoundException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"}
+      ]
+    },
+    "UpdateClusterSettings":{
+      "name":"UpdateClusterSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateClusterSettingsRequest"},
+      "output":{"shape":"UpdateClusterSettingsResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"ClusterNotFoundException"},
         {"shape":"InvalidParameterException"}
       ]
     },
@@ -808,7 +838,8 @@
         "pendingTasksCount":{"shape":"Integer"},
         "activeServicesCount":{"shape":"Integer"},
         "statistics":{"shape":"Statistics"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "settings":{"shape":"ClusterSettings"}
       }
     },
     "ClusterContainsContainerInstancesException":{
@@ -846,6 +877,21 @@
       },
       "exception":true
     },
+    "ClusterSetting":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"ClusterSettingName"},
+        "value":{"shape":"String"}
+      }
+    },
+    "ClusterSettingName":{
+      "type":"string",
+      "enum":["containerInsights"]
+    },
+    "ClusterSettings":{
+      "type":"list",
+      "member":{"shape":"ClusterSetting"}
+    },
     "Clusters":{
       "type":"list",
       "member":{"shape":"Cluster"}
@@ -874,6 +920,7 @@
         "containerArn":{"shape":"String"},
         "taskArn":{"shape":"String"},
         "name":{"shape":"String"},
+        "runtimeId":{"shape":"String"},
         "lastStatus":{"shape":"String"},
         "exitCode":{"shape":"BoxedInteger"},
         "reason":{"shape":"String"},
@@ -883,7 +930,8 @@
         "cpu":{"shape":"String"},
         "memory":{"shape":"String"},
         "memoryReservation":{"shape":"String"},
-        "gpuIds":{"shape":"GpuIds"}
+        "gpuIds":{"shape":"GpuIds"},
+        "firelensConfiguration":{"shape":"FirelensConfiguration"}
       }
     },
     "ContainerCondition":{
@@ -934,7 +982,8 @@
         "logConfiguration":{"shape":"LogConfiguration"},
         "healthCheck":{"shape":"HealthCheck"},
         "systemControls":{"shape":"SystemControls"},
-        "resourceRequirements":{"shape":"ResourceRequirements"}
+        "resourceRequirements":{"shape":"ResourceRequirements"},
+        "firelensConfiguration":{"shape":"FirelensConfiguration"}
       }
     },
     "ContainerDefinitions":{
@@ -966,6 +1015,7 @@
         "remainingResources":{"shape":"Resources"},
         "registeredResources":{"shape":"Resources"},
         "status":{"shape":"String"},
+        "statusReason":{"shape":"String"},
         "agentConnected":{"shape":"Boolean"},
         "runningTasksCount":{"shape":"Integer"},
         "pendingTasksCount":{"shape":"Integer"},
@@ -988,7 +1038,10 @@
       "type":"string",
       "enum":[
         "ACTIVE",
-        "DRAINING"
+        "DRAINING",
+        "REGISTERING",
+        "DEREGISTERING",
+        "REGISTRATION_FAILED"
       ]
     },
     "ContainerInstances":{
@@ -1015,6 +1068,7 @@
       "type":"structure",
       "members":{
         "containerName":{"shape":"String"},
+        "runtimeId":{"shape":"String"},
         "exitCode":{"shape":"BoxedInteger"},
         "networkBindings":{"shape":"NetworkBindings"},
         "reason":{"shape":"String"},
@@ -1033,7 +1087,8 @@
       "type":"structure",
       "members":{
         "clusterName":{"shape":"String"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "settings":{"shape":"ClusterSettings"}
       }
     },
     "CreateClusterResponse":{
@@ -1421,6 +1476,26 @@
       "type":"list",
       "member":{"shape":"Failure"}
     },
+    "FirelensConfiguration":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "type":{"shape":"FirelensConfigurationType"},
+        "options":{"shape":"FirelensConfigurationOptionsMap"}
+      }
+    },
+    "FirelensConfigurationOptionsMap":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
+    },
+    "FirelensConfigurationType":{
+      "type":"string",
+      "enum":[
+        "fluentd",
+        "fluentbit"
+      ]
+    },
     "GpuIds":{
       "type":"list",
       "member":{"shape":"String"}
@@ -1465,6 +1540,32 @@
         "sourcePath":{"shape":"String"}
       }
     },
+    "InferenceAccelerator":{
+      "type":"structure",
+      "required":[
+        "deviceName",
+        "deviceType"
+      ],
+      "members":{
+        "deviceName":{"shape":"String"},
+        "deviceType":{"shape":"String"}
+      }
+    },
+    "InferenceAcceleratorOverride":{
+      "type":"structure",
+      "members":{
+        "deviceName":{"shape":"String"},
+        "deviceType":{"shape":"String"}
+      }
+    },
+    "InferenceAcceleratorOverrides":{
+      "type":"list",
+      "member":{"shape":"InferenceAcceleratorOverride"}
+    },
+    "InferenceAccelerators":{
+      "type":"list",
+      "member":{"shape":"InferenceAccelerator"}
+    },
     "Integer":{"type":"integer"},
     "InvalidParameterException":{
       "type":"structure",
@@ -1508,7 +1609,9 @@
         "devices":{"shape":"DevicesList"},
         "initProcessEnabled":{"shape":"BoxedBoolean"},
         "sharedMemorySize":{"shape":"BoxedInteger"},
-        "tmpfs":{"shape":"TmpfsList"}
+        "tmpfs":{"shape":"TmpfsList"},
+        "maxSwap":{"shape":"BoxedInteger"},
+        "swappiness":{"shape":"BoxedInteger"}
       }
     },
     "ListAccountSettingsRequest":{
@@ -1699,7 +1802,8 @@
         "gelf",
         "fluentd",
         "awslogs",
-        "splunk"
+        "splunk",
+        "awsfirelens"
       ]
     },
     "Long":{"type":"long"},
@@ -1967,7 +2071,8 @@
         "tags":{"shape":"Tags"},
         "pidMode":{"shape":"PidMode"},
         "ipcMode":{"shape":"IpcMode"},
-        "proxyConfiguration":{"shape":"ProxyConfiguration"}
+        "proxyConfiguration":{"shape":"ProxyConfiguration"},
+        "inferenceAccelerators":{"shape":"InferenceAccelerators"}
       }
     },
     "RegisterTaskDefinitionResponse":{
@@ -2022,7 +2127,10 @@
     },
     "ResourceType":{
       "type":"string",
-      "enum":["GPU"]
+      "enum":[
+        "GPU",
+        "InferenceAccelerator"
+      ]
     },
     "Resources":{
       "type":"list",
@@ -2198,7 +2306,9 @@
       "enum":[
         "serviceLongArnFormat",
         "taskLongArnFormat",
-        "containerInstanceLongArnFormat"
+        "containerInstanceLongArnFormat",
+        "awsvpcTrunking",
+        "containerInsights"
       ]
     },
     "Settings":{
@@ -2274,12 +2384,27 @@
       "key":{"shape":"String"},
       "value":{"shape":"String"}
     },
+    "SubmitAttachmentStateChangesRequest":{
+      "type":"structure",
+      "required":["attachments"],
+      "members":{
+        "cluster":{"shape":"String"},
+        "attachments":{"shape":"AttachmentStateChanges"}
+      }
+    },
+    "SubmitAttachmentStateChangesResponse":{
+      "type":"structure",
+      "members":{
+        "acknowledgment":{"shape":"String"}
+      }
+    },
     "SubmitContainerStateChangeRequest":{
       "type":"structure",
       "members":{
         "cluster":{"shape":"String"},
         "task":{"shape":"String"},
         "containerName":{"shape":"String"},
+        "runtimeId":{"shape":"String"},
         "status":{"shape":"String"},
         "exitCode":{"shape":"BoxedInteger"},
         "reason":{"shape":"String"},
@@ -2409,7 +2534,8 @@
         "platformVersion":{"shape":"String"},
         "attachments":{"shape":"Attachments"},
         "healthStatus":{"shape":"HealthStatus"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "inferenceAccelerators":{"shape":"InferenceAccelerators"}
       }
     },
     "TaskDefinition":{
@@ -2485,6 +2611,7 @@
       "type":"structure",
       "members":{
         "containerOverrides":{"shape":"ContainerOverrides"},
+        "inferenceAcceleratorOverrides":{"shape":"InferenceAcceleratorOverrides"},
         "taskRoleArn":{"shape":"String"},
         "executionRoleArn":{"shape":"String"}
       }
@@ -2618,6 +2745,23 @@
     "UntagResourceResponse":{
       "type":"structure",
       "members":{
+      }
+    },
+    "UpdateClusterSettingsRequest":{
+      "type":"structure",
+      "required":[
+        "cluster",
+        "settings"
+      ],
+      "members":{
+        "cluster":{"shape":"String"},
+        "settings":{"shape":"ClusterSettings"}
+      }
+    },
+    "UpdateClusterSettingsResponse":{
+      "type":"structure",
+      "members":{
+        "cluster":{"shape":"Cluster"}
       }
     },
     "UpdateContainerAgentRequest":{

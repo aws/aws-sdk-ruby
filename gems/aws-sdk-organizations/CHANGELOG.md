@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-08-27)
+------------------
+
+* Feature - Documentation updates for organizations
+
+1.31.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-07-01)
+------------------
+
+* Feature - Specifying the tag key and tag value is required for tagging requests.
+
+1.29.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2019-06-06)
+------------------
+
+* Feature - You can tag and untag accounts in your organization and view tags on an account in your organization.
+
+1.27.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.26.0 (2019-05-15)
 ------------------
 

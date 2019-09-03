@@ -8,6 +8,23 @@
 module Aws::EFS
   module Types
 
+    # Returned if the request is malformed or contains an error such as an
+    # invalid parameter value or a missing required parameter.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/BadRequest AWS API Documentation
+    #
+    class BadRequest < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateFileSystemRequest
     #   data as a hash:
     #
@@ -76,19 +93,27 @@ module Aws::EFS
     #
     # @!attribute [rw] throughput_mode
     #   The throughput mode for the file system to be created. There are two
-    #   throughput modes to choose from for your file system: bursting and
-    #   provisioned. You can decrease your file system's throughput in
-    #   Provisioned Throughput mode or change between the throughput modes
-    #   as long as it’s been more than 24 hours since the last decrease or
-    #   throughput mode change.
+    #   throughput modes to choose from for your file system: `bursting` and
+    #   `provisioned`. If you set `ThroughputMode` to `provisioned`, you
+    #   must also set a value for `ProvisionedThroughPutInMibps`. You can
+    #   decrease your file system's throughput in Provisioned Throughput
+    #   mode or change between the throughput modes as long as it’s been
+    #   more than 24 hours since the last decrease or throughput mode
+    #   change. For more, see [Specifying Throughput with Provisioned
+    #   Mode][1] in the *Amazon EFS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_in_mibps
     #   The throughput, measured in MiB/s, that you want to provision for a
-    #   file system that you're creating. The limit on throughput is 1024
-    #   MiB/s. You can get these limits increased by contacting AWS Support.
-    #   For more information, see [Amazon EFS Limits That You Can
-    #   Increase][1] in the *Amazon EFS User Guide.*
+    #   file system that you're creating. Valid values are 1-1024. Required
+    #   if `ThroughputMode` is set to `provisioned`. The upper limit for
+    #   throughput is 1024 MiB/s. You can get this limit increased by
+    #   contacting AWS Support. For more information, see [Amazon EFS Limits
+    #   That You Can Increase][1] in the *Amazon EFS User Guide.*
     #
     #
     #
@@ -243,6 +268,23 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # The service timed out trying to fulfill the request, and the client
+    # should try the call again.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DependencyTimeout AWS API Documentation
+    #
+    class DependencyTimeout < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeFileSystemsRequest
     #   data as a hash:
     #
@@ -256,7 +298,8 @@ module Aws::EFS
     # @!attribute [rw] max_items
     #   (Optional) Specifies the maximum number of file systems to return in
     #   the response (integer). Currently, this number is automatically set
-    #   to 10.
+    #   to 10, and other values are ignored. The response is paginated at 10
+    #   per page if you have more than 10 file systems.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -370,7 +413,9 @@ module Aws::EFS
     #
     # @!attribute [rw] max_items
     #   (Optional) Maximum number of mount targets to return in the
-    #   response. Currently, this number is automatically set to 10.
+    #   response. Currently, this number is automatically set to 10, and
+    #   other values are ignored. The response is paginated at 10 per page
+    #   if you have more than 10 mount targets.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -438,7 +483,9 @@ module Aws::EFS
     #
     # @!attribute [rw] max_items
     #   (Optional) The maximum number of file system tags to return in the
-    #   response. Currently, this number is automatically set to 10.
+    #   response. Currently, this number is automatically set to 10, and
+    #   other values are ignored. The response is paginated at 10 per page
+    #   if you have more than 10 tags.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -483,6 +530,27 @@ module Aws::EFS
       :marker,
       :tags,
       :next_marker)
+      include Aws::Structure
+    end
+
+    # Returned if the file system you are trying to create already exists,
+    # with the creation token you provided.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemAlreadyExists AWS API Documentation
+    #
+    class FileSystemAlreadyExists < Struct.new(
+      :error_code,
+      :message,
+      :file_system_id)
       include Aws::Structure
     end
 
@@ -551,17 +619,20 @@ module Aws::EFS
     #
     # @!attribute [rw] throughput_mode
     #   The throughput mode for a file system. There are two throughput
-    #   modes to choose from for your file system: bursting and provisioned.
-    #   You can decrease your file system's throughput in Provisioned
-    #   Throughput mode or change between the throughput modes as long as
-    #   it’s been more than 24 hours since the last decrease or throughput
-    #   mode change.
+    #   modes to choose from for your file system: `bursting` and
+    #   `provisioned`. If you set `ThroughputMode` to `provisioned`, you
+    #   must also set a value for `ProvisionedThroughPutInMibps`. You can
+    #   decrease your file system's throughput in Provisioned Throughput
+    #   mode or change between the throughput modes as long as it’s been
+    #   more than 24 hours since the last decrease or throughput mode
+    #   change.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_in_mibps
     #   The throughput, measured in MiB/s, that you want to provision for a
-    #   file system. The limit on throughput is 1024 MiB/s. You can get
-    #   these limits increased by contacting AWS Support. For more
+    #   file system. Valid values are 1-1024. Required if `ThroughputMode`
+    #   is set to `provisioned`. The limit on throughput is 1024 MiB/s. You
+    #   can get these limits increased by contacting AWS Support. For more
     #   information, see [Amazon EFS Limits That You Can Increase][1] in the
     #   *Amazon EFS User Guide.*
     #
@@ -592,6 +663,56 @@ module Aws::EFS
       :throughput_mode,
       :provisioned_throughput_in_mibps,
       :tags)
+      include Aws::Structure
+    end
+
+    # Returned if a file system has mount targets.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemInUse AWS API Documentation
+    #
+    class FileSystemInUse < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if the AWS account has already created the maximum number of
+    # file systems allowed per account.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemLimitExceeded AWS API Documentation
+    #
+    class FileSystemLimitExceeded < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if the specified `FileSystemId` value doesn't exist in the
+    # requester's AWS account.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemNotFound AWS API Documentation
+    #
+    class FileSystemNotFound < Struct.new(
+      :error_code,
+      :message)
       include Aws::Structure
     end
 
@@ -636,6 +757,93 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Returned if the file system's lifecycle state is not "available".
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/IncorrectFileSystemLifeCycleState AWS API Documentation
+    #
+    class IncorrectFileSystemLifeCycleState < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if the mount target is not in the correct state for the
+    # operation.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/IncorrectMountTargetState AWS API Documentation
+    #
+    class IncorrectMountTargetState < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if there's not enough capacity to provision additional
+    # throughput. This value might be returned when you try to create a file
+    # system in provisioned throughput mode, when you attempt to increase
+    # the provisioned throughput of an existing file system, or when you
+    # attempt to change an existing file system from bursting to provisioned
+    # throughput mode.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/InsufficientThroughputCapacity AWS API Documentation
+    #
+    class InsufficientThroughputCapacity < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if an error occurred on the server side.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if the request specified an `IpAddress` that is already in
+    # use in the subnet.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/IpAddressInUse AWS API Documentation
+    #
+    class IpAddressInUse < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] lifecycle_policies
     #   An array of lifecycle management policies. Currently, EFS supports a
     #   maximum of one policy per file system.
@@ -655,18 +863,14 @@ module Aws::EFS
     #   data as a hash:
     #
     #       {
-    #         transition_to_ia: "AFTER_30_DAYS", # accepts AFTER_30_DAYS
+    #         transition_to_ia: "AFTER_14_DAYS", # accepts AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
     #       }
     #
     # @!attribute [rw] transition_to_ia
-    #   A value that indicates how long it takes to transition files to the
-    #   IA storage class. Currently, the only valid value is
-    #   `AFTER_30_DAYS`.
-    #
-    #   `AFTER_30_DAYS` indicates files that have not been read from or
-    #   written to for 30 days are transitioned from the Standard storage
-    #   class to the IA storage class. Metadata operations such as listing
-    #   the contents of a directory don't count as a file access event.
+    #   A value that describes the period of time that a file is not
+    #   accessed, after which it transitions to the IA storage class.
+    #   Metadata operations such as listing the contents of a directory
+    #   don't count as file access events.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/LifecyclePolicy AWS API Documentation
@@ -697,6 +901,23 @@ module Aws::EFS
     class ModifyMountTargetSecurityGroupsRequest < Struct.new(
       :mount_target_id,
       :security_groups)
+      include Aws::Structure
+    end
+
+    # Returned if the mount target would violate one of the specified
+    # restrictions based on the file system's existing mount targets.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/MountTargetConflict AWS API Documentation
+    #
+    class MountTargetConflict < Struct.new(
+      :error_code,
+      :message)
       include Aws::Structure
     end
 
@@ -745,6 +966,65 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Returned if there is no mount target with the specified ID found in
+    # the caller's account.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/MountTargetNotFound AWS API Documentation
+    #
+    class MountTargetNotFound < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The calling account has reached the limit for elastic network
+    # interfaces for the specific AWS Region. The client should try to
+    # delete some elastic network interfaces or get the account limit
+    # raised. For more information, see [Amazon VPC Limits][1] in the
+    # <i>Amazon VPC User Guide </i> (see the Network interfaces per VPC
+    # entry in the table).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/NetworkInterfaceLimitExceeded AWS API Documentation
+    #
+    class NetworkInterfaceLimitExceeded < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if `IpAddress` was not specified in the request and there are
+    # no free IP addresses in the subnet.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/NoFreeAddressesInSubnet AWS API Documentation
+    #
+    class NoFreeAddressesInSubnet < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutLifecycleConfigurationRequest
     #   data as a hash:
     #
@@ -752,7 +1032,7 @@ module Aws::EFS
     #         file_system_id: "FileSystemId", # required
     #         lifecycle_policies: [ # required
     #           {
-    #             transition_to_ia: "AFTER_30_DAYS", # accepts AFTER_30_DAYS
+    #             transition_to_ia: "AFTER_14_DAYS", # accepts AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
     #           },
     #         ],
     #       }
@@ -774,6 +1054,57 @@ module Aws::EFS
     class PutLifecycleConfigurationRequest < Struct.new(
       :file_system_id,
       :lifecycle_policies)
+      include Aws::Structure
+    end
+
+    # Returned if the size of `SecurityGroups` specified in the request is
+    # greater than five.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/SecurityGroupLimitExceeded AWS API Documentation
+    #
+    class SecurityGroupLimitExceeded < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if one of the specified security groups doesn't exist in the
+    # subnet's VPC.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/SecurityGroupNotFound AWS API Documentation
+    #
+    class SecurityGroupNotFound < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if there is no subnet with ID `SubnetId` provided in the
+    # request.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/SubnetNotFound AWS API Documentation
+    #
+    class SubnetNotFound < Struct.new(
+      :error_code,
+      :message)
       include Aws::Structure
     end
 
@@ -805,6 +1136,55 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Returned if the throughput mode or amount of provisioned throughput
+    # can't be changed because the throughput limit of 1024 MiB/s has been
+    # reached.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ThroughputLimitExceeded AWS API Documentation
+    #
+    class ThroughputLimitExceeded < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returned if you don’t wait at least 24 hours before changing the
+    # throughput mode, or decreasing the Provisioned Throughput value.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/TooManyRequests AWS API Documentation
+    #
+    class TooManyRequests < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UnsupportedAvailabilityZone AWS API Documentation
+    #
+    class UnsupportedAvailabilityZone < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateFileSystemRequest
     #   data as a hash:
     #
@@ -821,14 +1201,17 @@ module Aws::EFS
     # @!attribute [rw] throughput_mode
     #   (Optional) The throughput mode that you want your file system to
     #   use. If you're not updating your throughput mode, you don't need
-    #   to provide this value in your request.
+    #   to provide this value in your request. If you are changing the
+    #   `ThroughputMode` to `provisioned`, you must also set a value for
+    #   `ProvisionedThroughputInMibps`.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_in_mibps
     #   (Optional) The amount of throughput, in MiB/s, that you want to
-    #   provision for your file system. If you're not updating the amount
-    #   of provisioned throughput for your file system, you don't need to
-    #   provide this value in your request.
+    #   provision for your file system. Valid values are 1-1024. Required if
+    #   `ThroughputMode` is changed to `provisioned` on update. If you're
+    #   not updating the amount of provisioned throughput for your file
+    #   system, you don't need to provide this value in your request.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystemRequest AWS API Documentation

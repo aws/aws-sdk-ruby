@@ -16,7 +16,8 @@ module Aws::DLM
     #         description: "PolicyDescription", # required
     #         state: "ENABLED", # required, accepts ENABLED, DISABLED
     #         policy_details: { # required
-    #           resource_types: ["VOLUME"], # accepts VOLUME
+    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #           target_tags: [
     #             {
     #               key: "String", # required
@@ -33,6 +34,12 @@ module Aws::DLM
     #                   value: "String", # required
     #                 },
     #               ],
+    #               variable_tags: [
+    #                 {
+    #                   key: "String", # required
+    #                   value: "String", # required
+    #                 },
+    #               ],
     #               create_rule: {
     #                 interval: 1, # required
     #                 interval_unit: "HOURS", # required, accepts HOURS
@@ -43,6 +50,9 @@ module Aws::DLM
     #               },
     #             },
     #           ],
+    #           parameters: {
+    #             exclude_boot_volume: false,
+    #           },
     #         },
     #       }
     #
@@ -99,7 +109,8 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] interval
-    #   The interval. The supported values are 12 and 24.
+    #   The interval between snapshots. The supported values are 2, 3, 4, 6,
+    #   8, 12, and 24.
     #   @return [Integer]
     #
     # @!attribute [rw] interval_unit
@@ -107,7 +118,8 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] times
-    #   The time, in UTC, to start the operation.
+    #   The time, in UTC, to start the operation. The supported format is
+    #   hh:mm.
     #
     #   The operation occurs within a one-hour window following the
     #   specified time.
@@ -150,7 +162,7 @@ module Aws::DLM
     #       {
     #         policy_ids: ["PolicyId"],
     #         state: "ENABLED", # accepts ENABLED, DISABLED, ERROR
-    #         resource_types: ["VOLUME"], # accepts VOLUME
+    #         resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #         target_tags: ["TagFilter"],
     #         tags_to_add: ["TagFilter"],
     #       }
@@ -233,6 +245,49 @@ module Aws::DLM
       include Aws::Structure
     end
 
+    # The service failed in an unexpected way.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
+    # Bad request. The request is missing required parameters or has invalid
+    # parameters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] required_parameters
+    #   The request omitted one or more required parameters.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mutually_exclusive_parameters
+    #   The request included parameters that cannot be provided together.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message,
+      :code,
+      :required_parameters,
+      :mutually_exclusive_parameters)
+      include Aws::Structure
+    end
+
     # Detailed information about a lifecycle policy.
     #
     # @!attribute [rw] policy_id
@@ -300,13 +355,60 @@ module Aws::DLM
       include Aws::Structure
     end
 
+    # The request failed because a limit was exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Value is the type of resource for which a limit was exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message,
+      :code,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # Optional parameters that can be added to the policy. The set of valid
+    # parameters depends on the combination of `policyType` and
+    # `resourceType` values.
+    #
+    # @note When making an API call, you may pass Parameters
+    #   data as a hash:
+    #
+    #       {
+    #         exclude_boot_volume: false,
+    #       }
+    #
+    # @!attribute [rw] exclude_boot_volume
+    #   When executing an EBS Snapshot Management – Instance policy, execute
+    #   all CreateSnapshots calls with the `excludeBootVolume` set to the
+    #   supplied field. Defaults to false. Only valid for EBS Snapshot
+    #   Management – Instance policies.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Parameters AWS API Documentation
+    #
+    class Parameters < Struct.new(
+      :exclude_boot_volume)
+      include Aws::Structure
+    end
+
     # Specifies the configuration of a lifecycle policy.
     #
     # @note When making an API call, you may pass PolicyDetails
     #   data as a hash:
     #
     #       {
-    #         resource_types: ["VOLUME"], # accepts VOLUME
+    #         policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #         resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #         target_tags: [
     #           {
     #             key: "String", # required
@@ -323,6 +425,12 @@ module Aws::DLM
     #                 value: "String", # required
     #               },
     #             ],
+    #             variable_tags: [
+    #               {
+    #                 key: "String", # required
+    #                 value: "String", # required
+    #               },
+    #             ],
     #             create_rule: {
     #               interval: 1, # required
     #               interval_unit: "HOURS", # required, accepts HOURS
@@ -333,7 +441,16 @@ module Aws::DLM
     #             },
     #           },
     #         ],
+    #         parameters: {
+    #           exclude_boot_volume: false,
+    #         },
     #       }
+    #
+    # @!attribute [rw] policy_type
+    #   This field determines the valid target resource types and actions a
+    #   policy can manage. This field defaults to EBS\_SNAPSHOT\_MANAGEMENT
+    #   if not present.
+    #   @return [String]
     #
     # @!attribute [rw] resource_types
     #   The resource type.
@@ -347,12 +464,44 @@ module Aws::DLM
     #   The schedule of policy-defined actions.
     #   @return [Array<Types::Schedule>]
     #
+    # @!attribute [rw] parameters
+    #   A set of optional parameters that can be provided by the policy.
+    #   @return [Types::Parameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/PolicyDetails AWS API Documentation
     #
     class PolicyDetails < Struct.new(
+      :policy_type,
       :resource_types,
       :target_tags,
-      :schedules)
+      :schedules,
+      :parameters)
+      include Aws::Structure
+    end
+
+    # A requested resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Value is the type of resource that was not found.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   Value is a list of resource IDs that were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :code,
+      :resource_type,
+      :resource_ids)
       include Aws::Structure
     end
 
@@ -391,6 +540,12 @@ module Aws::DLM
     #             value: "String", # required
     #           },
     #         ],
+    #         variable_tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
     #         create_rule: {
     #           interval: 1, # required
     #           interval_unit: "HOURS", # required, accepts HOURS
@@ -406,11 +561,21 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] copy_tags
+    #   Copy all user-defined tags on a source volume to snapshots of the
+    #   volume created by this policy.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags_to_add
     #   The tags to apply to policy-created resources. These user-defined
     #   tags are in addition to the AWS-added lifecycle tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] variable_tags
+    #   A collection of key/value pairs with values determined dynamically
+    #   when the policy is executed. Keys may be any valid Amazon EC2 tag
+    #   key. Values must be in one of the two following formats:
+    #   `$(instance-id)` or `$(timestamp)`. Variable tags are only valid for
+    #   EBS Snapshot Management – Instance policies.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] create_rule
@@ -427,6 +592,7 @@ module Aws::DLM
       :name,
       :copy_tags,
       :tags_to_add,
+      :variable_tags,
       :create_rule,
       :retain_rule)
       include Aws::Structure
@@ -467,7 +633,8 @@ module Aws::DLM
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #         description: "PolicyDescription",
     #         policy_details: {
-    #           resource_types: ["VOLUME"], # accepts VOLUME
+    #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT
+    #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #           target_tags: [
     #             {
     #               key: "String", # required
@@ -484,6 +651,12 @@ module Aws::DLM
     #                   value: "String", # required
     #                 },
     #               ],
+    #               variable_tags: [
+    #                 {
+    #                   key: "String", # required
+    #                   value: "String", # required
+    #                 },
+    #               ],
     #               create_rule: {
     #                 interval: 1, # required
     #                 interval_unit: "HOURS", # required, accepts HOURS
@@ -494,6 +667,9 @@ module Aws::DLM
     #               },
     #             },
     #           ],
+    #           parameters: {
+    #             exclude_boot_volume: false,
+    #           },
     #         },
     #       }
     #

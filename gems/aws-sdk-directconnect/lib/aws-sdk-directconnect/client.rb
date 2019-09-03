@@ -116,6 +116,10 @@ module Aws::DirectConnect
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -274,8 +278,15 @@ module Aws::DirectConnect
     #   transit gateway.
     #
     # @option params [Array<Types::RouteFilterPrefix>] :override_allowed_prefixes_to_direct_connect_gateway
-    #   Overrides the existing Amazon VPC prefixes advertised to the Direct
-    #   Connect gateway.
+    #   Overrides the Amazon VPC prefixes advertised to the Direct Connect
+    #   gateway.
+    #
+    #   For information about how to set the prefixes, see [Allowed
+    #   Prefixes][1] in the *AWS Direct Connect User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes
     #
     # @return [Types::AcceptDirectConnectGatewayAssociationProposalResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -369,6 +380,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -397,6 +409,9 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
     #
@@ -439,6 +454,9 @@ module Aws::DirectConnect
     # @option params [required, Integer] :vlan
     #   The dedicated VLAN provisioned to the hosted connection.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to assign to the hosted connection.
+    #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Connection#owner_account #owner_account} => String
@@ -456,6 +474,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -465,6 +484,12 @@ module Aws::DirectConnect
     #     bandwidth: "Bandwidth", # required
     #     connection_name: "ConnectionName", # required
     #     vlan: 1, # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -484,6 +509,9 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection AWS API Documentation
     #
@@ -537,6 +565,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -552,6 +581,12 @@ module Aws::DirectConnect
     #       amazon_address: "AmazonAddress",
     #       address_family: "ipv4", # accepts ipv4, ipv6
     #       customer_address: "CustomerAddress",
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -590,6 +625,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterface AWS API Documentation
     #
@@ -651,6 +689,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -668,6 +707,12 @@ module Aws::DirectConnect
     #       route_filter_prefixes: [
     #         {
     #           cidr: "CIDR",
+    #         },
+    #       ],
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
     #         },
     #       ],
     #     },
@@ -708,6 +753,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface AWS API Documentation
     #
@@ -758,6 +806,12 @@ module Aws::DirectConnect
     #       amazon_address: "AmazonAddress",
     #       customer_address: "CustomerAddress",
     #       address_family: "ipv4", # accepts ipv4, ipv6
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -796,6 +850,9 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interface.region #=> String
     #   resp.virtual_interface.aws_device_v2 #=> String
+    #   resp.virtual_interface.tags #=> Array
+    #   resp.virtual_interface.tags[0].key #=> String
+    #   resp.virtual_interface.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateTransitVirtualInterface AWS API Documentation
     #
@@ -849,6 +906,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -874,6 +932,9 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag AWS API Documentation
     #
@@ -917,6 +978,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -942,6 +1004,9 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection AWS API Documentation
     #
@@ -999,6 +1064,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1042,6 +1108,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterface AWS API Documentation
     #
@@ -1271,6 +1340,9 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interface.region #=> String
     #   resp.virtual_interface.aws_device_v2 #=> String
+    #   resp.virtual_interface.tags #=> Array
+    #   resp.virtual_interface.tags[0].key #=> String
+    #   resp.virtual_interface.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer AWS API Documentation
     #
@@ -1309,6 +1381,9 @@ module Aws::DirectConnect
     # @option params [String] :lag_id
     #   The ID of the LAG.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to assign to the connection.
+    #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Connection#owner_account #owner_account} => String
@@ -1326,6 +1401,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1334,6 +1410,12 @@ module Aws::DirectConnect
     #     bandwidth: "Bandwidth", # required
     #     connection_name: "ConnectionName", # required
     #     lag_id: "LagId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1353,6 +1435,9 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
@@ -1422,6 +1507,13 @@ module Aws::DirectConnect
     #
     # @option params [Array<Types::RouteFilterPrefix>] :add_allowed_prefixes_to_direct_connect_gateway
     #   The Amazon VPC prefixes to advertise to the Direct Connect gateway
+    #
+    #   For information about how to set the prefixes, see [Allowed
+    #   Prefixes][1] in the *AWS Direct Connect User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes
     #
     # @option params [String] :virtual_gateway_id
     #   The ID of the virtual private gateway.
@@ -1579,6 +1671,9 @@ module Aws::DirectConnect
     # @option params [String] :lag_id
     #   The ID of the LAG.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to assign to the interconnect,
+    #
     # @return [Types::Interconnect] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Interconnect#interconnect_id #interconnect_id} => String
@@ -1593,6 +1688,7 @@ module Aws::DirectConnect
     #   * {Types::Interconnect#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Interconnect#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Interconnect#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Interconnect#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1601,6 +1697,12 @@ module Aws::DirectConnect
     #     bandwidth: "Bandwidth", # required
     #     location: "LocationCode", # required
     #     lag_id: "LagId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1617,6 +1719,9 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect AWS API Documentation
     #
@@ -1672,6 +1777,16 @@ module Aws::DirectConnect
     # @option params [String] :connection_id
     #   The ID of an existing connection to migrate to the LAG.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to assign to the link aggregation group (LAG).
+    #
+    # @option params [Array<Types::Tag>] :child_connection_tags
+    #   The tags to assign to the child connections of the LAG. Only newly
+    #   created child connections as the result of creating a LAG connection
+    #   are assigned the provided tags. The tags are not assigned to an
+    #   existing connection that is provided via the “connectionId” parameter
+    #   that will be migrated to the LAG.
+    #
     # @return [Types::Lag] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Lag#connections_bandwidth #connections_bandwidth} => String
@@ -1689,6 +1804,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1698,6 +1814,18 @@ module Aws::DirectConnect
     #     connections_bandwidth: "Bandwidth", # required
     #     lag_name: "LagName", # required
     #     connection_id: "ConnectionId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     child_connection_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1729,9 +1857,15 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag AWS API Documentation
     #
@@ -1782,6 +1916,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1798,6 +1933,12 @@ module Aws::DirectConnect
     #       address_family: "ipv4", # accepts ipv4, ipv6
     #       virtual_gateway_id: "VirtualGatewayId",
     #       direct_connect_gateway_id: "DirectConnectGatewayId",
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1836,6 +1977,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterface AWS API Documentation
     #
@@ -1885,6 +2029,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1901,6 +2046,12 @@ module Aws::DirectConnect
     #       route_filter_prefixes: [
     #         {
     #           cidr: "CIDR",
+    #         },
+    #       ],
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
     #         },
     #       ],
     #     },
@@ -1941,6 +2092,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterface AWS API Documentation
     #
@@ -1951,11 +2105,17 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Creates a transit virtual interface. A transit virtual interface is a
-    # VLAN that transports traffic from a Direct Connect gateway to one or
-    # more transit gateways. A transit virtual interface enables the
+    # Creates a transit virtual interface. A transit virtual interface
+    # should be used to access one or more transit gateways associated with
+    # Direct Connect gateways. A transit virtual interface enables the
     # connection of multiple VPCs attached to a transit gateway to a Direct
     # Connect gateway.
+    #
+    # If you associate your transit gateway with one or more Direct Connect
+    # gateways, the Autonomous System Number (ASN) used by the transit
+    # gateway and the Direct Connect gateway must be different. For example,
+    # if you use the default ASN 64512 for both your the transit gateway and
+    # Direct Connect gateway, the association request fails.
     #
     # @option params [required, String] :connection_id
     #   The ID of the connection.
@@ -1981,6 +2141,12 @@ module Aws::DirectConnect
     #       customer_address: "CustomerAddress",
     #       address_family: "ipv4", # accepts ipv4, ipv6
     #       direct_connect_gateway_id: "DirectConnectGatewayId",
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -2019,6 +2185,9 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interface.region #=> String
     #   resp.virtual_interface.aws_device_v2 #=> String
+    #   resp.virtual_interface.tags #=> Array
+    #   resp.virtual_interface.tags[0].key #=> String
+    #   resp.virtual_interface.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateTransitVirtualInterface AWS API Documentation
     #
@@ -2095,6 +2264,9 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interface.region #=> String
     #   resp.virtual_interface.aws_device_v2 #=> String
+    #   resp.virtual_interface.tags #=> Array
+    #   resp.virtual_interface.tags[0].key #=> String
+    #   resp.virtual_interface.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer AWS API Documentation
     #
@@ -2132,6 +2304,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2156,6 +2329,9 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
     #
@@ -2347,6 +2523,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2383,9 +2560,15 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag AWS API Documentation
     #
@@ -2510,6 +2693,9 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
     #
@@ -2560,6 +2746,9 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
     #
@@ -2861,6 +3050,9 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
     #
@@ -2955,6 +3147,9 @@ module Aws::DirectConnect
     #   resp.interconnects[0].jumbo_frame_capable #=> Boolean
     #   resp.interconnects[0].aws_device_v2 #=> String
     #   resp.interconnects[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.interconnects[0].tags #=> Array
+    #   resp.interconnects[0].tags[0].key #=> String
+    #   resp.interconnects[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects AWS API Documentation
     #
@@ -3010,9 +3205,15 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].jumbo_frame_capable #=> Boolean
     #   resp.lags[0].connections[0].aws_device_v2 #=> String
     #   resp.lags[0].connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.lags[0].connections[0].tags #=> Array
+    #   resp.lags[0].connections[0].tags[0].key #=> String
+    #   resp.lags[0].connections[0].tags[0].value #=> String
     #   resp.lags[0].allows_hosted_connections #=> Boolean
     #   resp.lags[0].jumbo_frame_capable #=> Boolean
     #   resp.lags[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.lags[0].tags #=> Array
+    #   resp.lags[0].tags[0].key #=> String
+    #   resp.lags[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags AWS API Documentation
     #
@@ -3221,6 +3422,9 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interfaces[0].region #=> String
     #   resp.virtual_interfaces[0].aws_device_v2 #=> String
+    #   resp.virtual_interfaces[0].tags #=> Array
+    #   resp.virtual_interfaces[0].tags[0].key #=> String
+    #   resp.virtual_interfaces[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces AWS API Documentation
     #
@@ -3268,6 +3472,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3293,6 +3498,9 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag AWS API Documentation
     #
@@ -3314,7 +3522,7 @@ module Aws::DirectConnect
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags to add.
+    #   The tags to assign.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3471,6 +3679,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3509,9 +3718,15 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag AWS API Documentation
     #
@@ -3566,6 +3781,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3609,6 +3825,9 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateVirtualInterfaceAttributes AWS API Documentation
     #
@@ -3632,7 +3851,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

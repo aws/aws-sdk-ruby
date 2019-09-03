@@ -105,6 +105,21 @@ module Aws::CloudHSMV2
     Certificates.add_member(:cluster_certificate, Shapes::ShapeRef.new(shape: Cert, location_name: "ClusterCertificate"))
     Certificates.struct_class = Types::Certificates
 
+    CloudHsmAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    CloudHsmAccessDeniedException.struct_class = Types::CloudHsmAccessDeniedException
+
+    CloudHsmInternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    CloudHsmInternalFailureException.struct_class = Types::CloudHsmInternalFailureException
+
+    CloudHsmInvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    CloudHsmInvalidRequestException.struct_class = Types::CloudHsmInvalidRequestException
+
+    CloudHsmResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    CloudHsmResourceNotFoundException.struct_class = Types::CloudHsmResourceNotFoundException
+
+    CloudHsmServiceException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    CloudHsmServiceException.struct_class = Types::CloudHsmServiceException
+
     Cluster.add_member(:backup_policy, Shapes::ShapeRef.new(shape: BackupPolicy, location_name: "BackupPolicy"))
     Cluster.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     Cluster.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))

@@ -231,6 +231,8 @@ module Aws::CodeBuild
     CreateProjectInput.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     CreateProjectInput.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, required: true, location_name: "source"))
     CreateProjectInput.add_member(:secondary_sources, Shapes::ShapeRef.new(shape: ProjectSources, location_name: "secondarySources"))
+    CreateProjectInput.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "sourceVersion"))
+    CreateProjectInput.add_member(:secondary_source_versions, Shapes::ShapeRef.new(shape: ProjectSecondarySourceVersions, location_name: "secondarySourceVersions"))
     CreateProjectInput.add_member(:artifacts, Shapes::ShapeRef.new(shape: ProjectArtifacts, required: true, location_name: "artifacts"))
     CreateProjectInput.add_member(:secondary_artifacts, Shapes::ShapeRef.new(shape: ProjectArtifactsList, location_name: "secondaryArtifacts"))
     CreateProjectInput.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
@@ -311,6 +313,7 @@ module Aws::CodeBuild
     ImportSourceCredentialsInput.add_member(:token, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "token"))
     ImportSourceCredentialsInput.add_member(:server_type, Shapes::ShapeRef.new(shape: ServerType, required: true, location_name: "serverType"))
     ImportSourceCredentialsInput.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, required: true, location_name: "authType"))
+    ImportSourceCredentialsInput.add_member(:should_overwrite, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "shouldOverwrite"))
     ImportSourceCredentialsInput.struct_class = Types::ImportSourceCredentialsInput
 
     ImportSourceCredentialsOutput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
@@ -384,6 +387,8 @@ module Aws::CodeBuild
     Project.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     Project.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, location_name: "source"))
     Project.add_member(:secondary_sources, Shapes::ShapeRef.new(shape: ProjectSources, location_name: "secondarySources"))
+    Project.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "sourceVersion"))
+    Project.add_member(:secondary_source_versions, Shapes::ShapeRef.new(shape: ProjectSecondarySourceVersions, location_name: "secondarySourceVersions"))
     Project.add_member(:artifacts, Shapes::ShapeRef.new(shape: ProjectArtifacts, location_name: "artifacts"))
     Project.add_member(:secondary_artifacts, Shapes::ShapeRef.new(shape: ProjectArtifactsList, location_name: "secondaryArtifacts"))
     Project.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
@@ -531,6 +536,8 @@ module Aws::CodeBuild
     UpdateProjectInput.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     UpdateProjectInput.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, location_name: "source"))
     UpdateProjectInput.add_member(:secondary_sources, Shapes::ShapeRef.new(shape: ProjectSources, location_name: "secondarySources"))
+    UpdateProjectInput.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "sourceVersion"))
+    UpdateProjectInput.add_member(:secondary_source_versions, Shapes::ShapeRef.new(shape: ProjectSecondarySourceVersions, location_name: "secondarySourceVersions"))
     UpdateProjectInput.add_member(:artifacts, Shapes::ShapeRef.new(shape: ProjectArtifacts, location_name: "artifacts"))
     UpdateProjectInput.add_member(:secondary_artifacts, Shapes::ShapeRef.new(shape: ProjectArtifactsList, location_name: "secondaryArtifacts"))
     UpdateProjectInput.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
@@ -681,6 +688,7 @@ module Aws::CodeBuild
         o.output = Shapes::ShapeRef.new(shape: ImportSourceCredentialsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccountLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
       end)
 
       api.add_operation(:invalidate_project_cache, Seahorse::Model::Operation.new.tap do |o|

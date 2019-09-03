@@ -320,6 +320,28 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # You have exceeded your maximum total code size per account. [Learn
+    # more][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CodeStorageExceededException AWS API Documentation
+    #
+    class CodeStorageExceededException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] reserved_concurrent_executions
     #   The number of concurrent executions that are reserved for this
     #   function. For more information, see [Managing Concurrency][1].
@@ -406,6 +428,7 @@ module Aws::Lambda
     #         function_name: "FunctionName", # required
     #         enabled: false,
     #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
     #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
     #         starting_position_timestamp: Time.now,
     #       }
@@ -454,6 +477,9 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #   @return [Integer]
     #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   @return [Integer]
+    #
     # @!attribute [rw] starting_position
     #   The position in a stream from which to start reading. Required for
     #   Amazon Kinesis and Amazon DynamoDB Streams sources. `AT_TIMESTAMP`
@@ -472,6 +498,7 @@ module Aws::Lambda
       :function_name,
       :enabled,
       :batch_size,
+      :maximum_batching_window_in_seconds,
       :starting_position,
       :starting_position_timestamp)
       include Aws::Structure
@@ -829,6 +856,79 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Need additional permissions to configure VPC settings.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EC2AccessDeniedException AWS API Documentation
+    #
+    class EC2AccessDeniedException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS Lambda was throttled by Amazon EC2 during Lambda function
+    # initialization using the execution role provided for the Lambda
+    # function.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EC2ThrottledException AWS API Documentation
+    #
+    class EC2ThrottledException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS Lambda received an unexpected EC2 client exception while setting
+    # up for the Lambda function.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_error_code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EC2UnexpectedException AWS API Documentation
+    #
+    class EC2UnexpectedException < Struct.new(
+      :type,
+      :message,
+      :ec2_error_code)
+      include Aws::Structure
+    end
+
+    # AWS Lambda was not able to create an Elastic Network Interface (ENI)
+    # in the VPC, specified as part of Lambda function configuration,
+    # because the limit for network interfaces has been reached.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ENILimitReachedException AWS API Documentation
+    #
+    class ENILimitReachedException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
     # A function's environment variable settings.
     #
     # @note When making an API call, you may pass Environment
@@ -899,6 +999,9 @@ module Aws::Lambda
     #   The maximum number of items to retrieve in a single batch.
     #   @return [Integer]
     #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   @return [Integer]
+    #
     # @!attribute [rw] event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
     #   @return [String]
@@ -932,6 +1035,7 @@ module Aws::Lambda
     class EventSourceMappingConfiguration < Struct.new(
       :uuid,
       :batch_size,
+      :maximum_batching_window_in_seconds,
       :event_source_arn,
       :function_arn,
       :last_modified,
@@ -1496,6 +1600,111 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # One of the parameters in the request is invalid. For example, if you
+    # provided an IAM role for AWS Lambda to assume in the `CreateFunction`
+    # or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to
+    # assume you will get this exception.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request body could not be parsed as JSON.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvalidRequestContentException AWS API Documentation
+    #
+    class InvalidRequestContentException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The runtime or runtime version specified is not supported.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvalidRuntimeException AWS API Documentation
+    #
+    class InvalidRuntimeException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The Security Group ID provided in the Lambda function VPC
+    # configuration is invalid.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvalidSecurityGroupIDException AWS API Documentation
+    #
+    class InvalidSecurityGroupIDException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The Subnet ID provided in the Lambda function VPC configuration is
+    # invalid.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvalidSubnetIDException AWS API Documentation
+    #
+    class InvalidSubnetIDException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS Lambda could not unzip the deployment package.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvalidZipFileException AWS API Documentation
+    #
+    class InvalidZipFileException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass InvocationRequest
     #   data as a hash:
     #
@@ -1663,6 +1872,75 @@ module Aws::Lambda
     #
     class InvokeAsyncResponse < Struct.new(
       :status)
+      include Aws::Structure
+    end
+
+    # Lambda was unable to decrypt the environment variables because KMS
+    # access was denied. Check the Lambda function's KMS permissions.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/KMSAccessDeniedException AWS API Documentation
+    #
+    class KMSAccessDeniedException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # Lambda was unable to decrypt the environment variables because the KMS
+    # key used is disabled. Check the Lambda function's KMS key settings.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/KMSDisabledException AWS API Documentation
+    #
+    class KMSDisabledException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # Lambda was unable to decrypt the environment variables because the KMS
+    # key used is in an invalid state for Decrypt. Check the function's KMS
+    # key settings.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/KMSInvalidStateException AWS API Documentation
+    #
+    class KMSInvalidStateException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # Lambda was unable to decrypt the environment variables because the KMS
+    # key was not found. Check the function's KMS key settings.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/KMSNotFoundException AWS API Documentation
+    #
+    class KMSNotFoundException < Struct.new(
+      :type,
+      :message)
       include Aws::Structure
     end
 
@@ -2220,6 +2498,46 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The permissions policy for the resource is too large. [Learn more][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PolicyLengthExceededException AWS API Documentation
+    #
+    class PolicyLengthExceededException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The RevisionId provided does not match the latest RevisionId for the
+    # Lambda function or alias. Call the `GetFunction` or the `GetAlias` API
+    # to retrieve the latest RevisionId for your resource.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PreconditionFailedException AWS API Documentation
+    #
+    class PreconditionFailedException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PublishLayerVersionRequest
     #   data as a hash:
     #
@@ -2516,6 +2834,114 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The request payload exceeded the `Invoke` request body JSON input
+    # limit. For more information, see [Limits][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RequestTooLargeException AWS API Documentation
+    #
+    class RequestTooLargeException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource already exists.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResourceConflictException AWS API Documentation
+    #
+    class ResourceConflictException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation conflicts with the resource's availability. For
+    # example, you attempted to update an EventSource Mapping in CREATING,
+    # or tried to delete a EventSource mapping currently in the UPDATING
+    # state.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource (for example, a Lambda function or access policy
+    # statement) specified in the request does not exist.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The AWS Lambda service encountered an internal error.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ServiceException AWS API Documentation
+    #
+    class ServiceException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS Lambda was not able to set up VPC access for the Lambda function
+    # because one or more configured subnets has no available IP addresses.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SubnetIPAddressLimitReachedException AWS API Documentation
+    #
+    class SubnetIPAddressLimitReachedException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -2539,6 +2965,31 @@ module Aws::Lambda
     class TagResourceRequest < Struct.new(
       :resource,
       :tags)
+      include Aws::Structure
+    end
+
+    # Request throughput limit exceeded.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds the caller should wait before retrying.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :retry_after_seconds,
+      :type,
+      :message,
+      :reason)
       include Aws::Structure
     end
 
@@ -2572,6 +3023,22 @@ module Aws::Lambda
     #
     class TracingConfigResponse < Struct.new(
       :mode)
+      include Aws::Structure
+    end
+
+    # The content type of the `Invoke` request body is not JSON.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UnsupportedMediaTypeException AWS API Documentation
+    #
+    class UnsupportedMediaTypeException < Struct.new(
+      :type,
+      :message)
       include Aws::Structure
     end
 
@@ -2677,6 +3144,7 @@ module Aws::Lambda
     #         function_name: "FunctionName",
     #         enabled: false,
     #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] uuid
@@ -2716,13 +3184,17 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #   @return [Integer]
     #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
     #
     class UpdateEventSourceMappingRequest < Struct.new(
       :uuid,
       :function_name,
       :enabled,
-      :batch_size)
+      :batch_size,
+      :maximum_batching_window_in_seconds)
       include Aws::Structure
     end
 

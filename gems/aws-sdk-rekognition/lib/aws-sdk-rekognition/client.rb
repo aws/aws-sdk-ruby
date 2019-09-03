@@ -116,6 +116,10 @@ module Aws::Rekognition
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -973,7 +977,7 @@ module Aws::Rekognition
     #   resp.face_details[0].mouth_open.value #=> Boolean
     #   resp.face_details[0].mouth_open.confidence #=> Float
     #   resp.face_details[0].emotions #=> Array
-    #   resp.face_details[0].emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.face_details[0].emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
     #   resp.face_details[0].emotions[0].confidence #=> Float
     #   resp.face_details[0].landmarks #=> Array
     #   resp.face_details[0].landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil", "upperJawlineLeft", "midJawlineLeft", "chinBottom", "midJawlineRight", "upperJawlineRight"
@@ -1169,11 +1173,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Detects explicit or suggestive adult content in a specified JPEG or
-    # PNG format image. Use `DetectModerationLabels` to moderate images
-    # depending on your requirements. For example, you might want to filter
-    # images that contain nudity, but not images containing suggestive
-    # content.
+    # Detects unsafe content in a specified JPEG or PNG format image. Use
+    # `DetectModerationLabels` to moderate images depending on your
+    # requirements. For example, you might want to filter images that
+    # contain nudity, but not images containing suggestive content.
     #
     # To filter images, use the labels returned by `DetectModerationLabels`
     # to determine which types of content are appropriate.
@@ -1499,7 +1502,7 @@ module Aws::Rekognition
     #   resp.celebrities[0].celebrity.face.mouth_open.value #=> Boolean
     #   resp.celebrities[0].celebrity.face.mouth_open.confidence #=> Float
     #   resp.celebrities[0].celebrity.face.emotions #=> Array
-    #   resp.celebrities[0].celebrity.face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.celebrities[0].celebrity.face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
     #   resp.celebrities[0].celebrity.face.emotions[0].confidence #=> Float
     #   resp.celebrities[0].celebrity.face.landmarks #=> Array
     #   resp.celebrities[0].celebrity.face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil", "upperJawlineLeft", "midJawlineLeft", "chinBottom", "midJawlineRight", "upperJawlineRight"
@@ -1519,15 +1522,15 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets the content moderation analysis results for a Amazon Rekognition
+    # Gets the unsafe content analysis results for a Amazon Rekognition
     # Video analysis started by StartContentModeration.
     #
-    # Content moderation analysis of a video is an asynchronous operation.
-    # You start analysis by calling StartContentModeration which returns a
-    # job identifier (`JobId`). When analysis finishes, Amazon Rekognition
-    # Video publishes a completion status to the Amazon Simple Notification
+    # Unsafe content analysis of a video is an asynchronous operation. You
+    # start analysis by calling StartContentModeration which returns a job
+    # identifier (`JobId`). When analysis finishes, Amazon Rekognition Video
+    # publishes a completion status to the Amazon Simple Notification
     # Service topic registered in the initial call to
-    # `StartContentModeration`. To get the results of the content moderation
+    # `StartContentModeration`. To get the results of the unsafe content
     # analysis, first check that the status value published to the Amazon
     # SNS topic is `SUCCEEDED`. If so, call `GetContentModeration` and pass
     # the job identifier (`JobId`) from the initial call to
@@ -1536,8 +1539,8 @@ module Aws::Rekognition
     # For more information, see Working with Stored Videos in the Amazon
     # Rekognition Devlopers Guide.
     #
-    # `GetContentModeration` returns detected content moderation labels, and
-    # the time they are detected, in an array, `ModerationLabels`, of
+    # `GetContentModeration` returns detected unsafe content labels, and the
+    # time they are detected, in an array, `ModerationLabels`, of
     # ContentModerationDetection objects.
     #
     # By default, the moderated labels are returned sorted by time, in
@@ -1557,8 +1560,8 @@ module Aws::Rekognition
     # Rekognition Developer Guide.
     #
     # @option params [required, String] :job_id
-    #   The identifier for the content moderation job. Use `JobId` to identify
-    #   the job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the unsafe content job. Use `JobId` to identify the
+    #   job in a subsequent call to `GetContentModeration`.
     #
     # @option params [Integer] :max_results
     #   Maximum number of results to return per paginated call. The largest
@@ -1570,7 +1573,7 @@ module Aws::Rekognition
     #   If the previous response was incomplete (because there is more data to
     #   retrieve), Amazon Rekognition returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
-    #   of content moderation labels.
+    #   of unsafe content labels.
     #
     # @option params [String] :sort_by
     #   Sort to use for elements in the `ModerationLabelDetections` array. Use
@@ -1714,7 +1717,7 @@ module Aws::Rekognition
     #   resp.faces[0].face.mouth_open.value #=> Boolean
     #   resp.faces[0].face.mouth_open.confidence #=> Float
     #   resp.faces[0].face.emotions #=> Array
-    #   resp.faces[0].face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.faces[0].face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
     #   resp.faces[0].face.emotions[0].confidence #=> Float
     #   resp.faces[0].face.landmarks #=> Array
     #   resp.faces[0].face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil", "upperJawlineLeft", "midJawlineLeft", "chinBottom", "midJawlineRight", "upperJawlineRight"
@@ -1849,7 +1852,7 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.mouth_open.value #=> Boolean
     #   resp.persons[0].person.face.mouth_open.confidence #=> Float
     #   resp.persons[0].person.face.emotions #=> Array
-    #   resp.persons[0].person.face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.persons[0].person.face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
     #   resp.persons[0].person.face.emotions[0].confidence #=> Float
     #   resp.persons[0].person.face.landmarks #=> Array
     #   resp.persons[0].person.face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil", "upperJawlineLeft", "midJawlineLeft", "chinBottom", "midJawlineRight", "upperJawlineRight"
@@ -2106,7 +2109,7 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.mouth_open.value #=> Boolean
     #   resp.persons[0].person.face.mouth_open.confidence #=> Float
     #   resp.persons[0].person.face.emotions #=> Array
-    #   resp.persons[0].person.face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.persons[0].person.face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
     #   resp.persons[0].person.face.emotions[0].confidence #=> Float
     #   resp.persons[0].person.face.landmarks #=> Array
     #   resp.persons[0].person.face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil", "upperJawlineLeft", "midJawlineLeft", "chinBottom", "midJawlineRight", "upperJawlineRight"
@@ -2493,7 +2496,7 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.mouth_open.value #=> Boolean
     #   resp.face_records[0].face_detail.mouth_open.confidence #=> Float
     #   resp.face_records[0].face_detail.emotions #=> Array
-    #   resp.face_records[0].face_detail.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.face_records[0].face_detail.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
     #   resp.face_records[0].face_detail.emotions[0].confidence #=> Float
     #   resp.face_records[0].face_detail.landmarks #=> Array
     #   resp.face_records[0].face_detail.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil", "upperJawlineLeft", "midJawlineLeft", "chinBottom", "midJawlineRight", "upperJawlineRight"
@@ -2533,7 +2536,7 @@ module Aws::Rekognition
     #   resp.unindexed_faces[0].face_detail.mouth_open.value #=> Boolean
     #   resp.unindexed_faces[0].face_detail.mouth_open.confidence #=> Float
     #   resp.unindexed_faces[0].face_detail.emotions #=> Array
-    #   resp.unindexed_faces[0].face_detail.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.unindexed_faces[0].face_detail.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
     #   resp.unindexed_faces[0].face_detail.emotions[0].confidence #=> Float
     #   resp.unindexed_faces[0].face_detail.landmarks #=> Array
     #   resp.unindexed_faces[0].face_detail.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil", "upperJawlineLeft", "midJawlineLeft", "chinBottom", "midJawlineRight", "upperJawlineRight"
@@ -2991,7 +2994,7 @@ module Aws::Rekognition
     # @option params [Float] :face_match_threshold
     #   Optional value specifying the minimum confidence in the face match to
     #   return. For example, don't return any matches where confidence in
-    #   matches is less than 70%.
+    #   matches is less than 70%. The default value is 80%.
     #
     # @return [Types::SearchFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3146,7 +3149,7 @@ module Aws::Rekognition
     # @option params [Float] :face_match_threshold
     #   (Optional) Specifies the minimum confidence in the face match to
     #   return. For example, don't return any matches where confidence in
-    #   matches is less than 70%.
+    #   matches is less than 70%. The default value is 80%.
     #
     # @return [Types::SearchFacesByImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3275,8 +3278,10 @@ module Aws::Rekognition
     #   to.
     #
     # @option params [String] :job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related jobs
+    #   and identify them in the completion notification.
     #
     # @return [Types::StartCelebrityRecognitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3311,29 +3316,27 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Starts asynchronous detection of explicit or suggestive adult content
-    # in a stored video.
+    # Starts asynchronous detection of unsafe content in a stored video.
     #
     # Amazon Rekognition Video can moderate content in a video stored in an
     # Amazon S3 bucket. Use Video to specify the bucket name and the
     # filename of the video. `StartContentModeration` returns a job
     # identifier (`JobId`) which you use to get the results of the analysis.
-    # When content moderation analysis is finished, Amazon Rekognition Video
+    # When unsafe content analysis is finished, Amazon Rekognition Video
     # publishes a completion status to the Amazon Simple Notification
     # Service topic that you specify in `NotificationChannel`.
     #
-    # To get the results of the content moderation analysis, first check
-    # that the status value published to the Amazon SNS topic is
-    # `SUCCEEDED`. If so, call GetContentModeration and pass the job
-    # identifier (`JobId`) from the initial call to
-    # `StartContentModeration`.
+    # To get the results of the unsafe content analysis, first check that
+    # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
+    # so, call GetContentModeration and pass the job identifier (`JobId`)
+    # from the initial call to `StartContentModeration`.
     #
     # For more information, see Detecting Unsafe Content in the Amazon
     # Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
-    #   The video in which you want to moderate content. The video must be
-    #   stored in an Amazon S3 bucket.
+    #   The video in which you want to detect unsafe content. The video must
+    #   be stored in an Amazon S3 bucket.
     #
     # @option params [Float] :min_confidence
     #   Specifies the minimum confidence that Amazon Rekognition must have in
@@ -3353,11 +3356,13 @@ module Aws::Rekognition
     #
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
-    #   publish the completion status of the content moderation analysis to.
+    #   publish the completion status of the unsafe content analysis to.
     #
     # @option params [String] :job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related jobs
+    #   and identify them in the completion notification.
     #
     # @return [Types::StartContentModerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3434,8 +3439,10 @@ module Aws::Rekognition
     #   `ALL` - All facial attributes are returned.
     #
     # @option params [String] :job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related jobs
+    #   and identify them in the completion notification.
     #
     # @return [Types::StartFaceDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3499,7 +3506,7 @@ module Aws::Rekognition
     # @option params [Float] :face_match_threshold
     #   The minimum confidence in the person match to return. For example,
     #   don't return any matches where confidence in matches is less than
-    #   70%.
+    #   70%. The default value is 80%.
     #
     # @option params [required, String] :collection_id
     #   ID of the collection that contains the faces you want to search for.
@@ -3509,8 +3516,10 @@ module Aws::Rekognition
     #   Video to publish the completion status of the search.
     #
     # @option params [String] :job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related jobs
+    #   and identify them in the completion notification.
     #
     # @return [Types::StartFaceSearchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3593,8 +3602,10 @@ module Aws::Rekognition
     #   the completion status of the label detection operation to.
     #
     # @option params [String] :job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related jobs
+    #   and identify them in the completion notification.
     #
     # @return [Types::StartLabelDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3661,8 +3672,10 @@ module Aws::Rekognition
     #   the completion status of the people detection operation to.
     #
     # @option params [String] :job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related jobs
+    #   and identify them in the completion notification.
     #
     # @return [Types::StartPersonTrackingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3754,7 +3767,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

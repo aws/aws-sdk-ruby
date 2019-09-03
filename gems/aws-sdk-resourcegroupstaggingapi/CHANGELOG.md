@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-09-03)
+------------------
+
+* Feature - Documentation updates for resourcegroupstaggingapi
+
+1.17.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2019-06-24)
+------------------
+
+* Feature - Updated service APIs and documentation.
+
+1.14.0 (2019-06-18)
+------------------
+
+* Feature - You can use tag policies to help standardize on tags across your organization's resources.
+
+1.13.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.11.0 (2019-05-15)
 ------------------
 

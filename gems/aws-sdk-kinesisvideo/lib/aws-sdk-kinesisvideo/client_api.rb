@@ -67,6 +67,12 @@ module Aws::KinesisVideo
     Version = Shapes::StringShape.new(name: 'Version')
     VersionMismatchException = Shapes::StructureShape.new(name: 'VersionMismatchException')
 
+    AccountStreamLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccountStreamLimitExceededException.struct_class = Types::AccountStreamLimitExceededException
+
+    ClientLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ClientLimitExceededException.struct_class = Types::ClientLimitExceededException
+
     CreateStreamInput.add_member(:device_name, Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceName"))
     CreateStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     CreateStreamInput.add_member(:media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "MediaType"))
@@ -91,6 +97,9 @@ module Aws::KinesisVideo
     DescribeStreamOutput.add_member(:stream_info, Shapes::ShapeRef.new(shape: StreamInfo, location_name: "StreamInfo"))
     DescribeStreamOutput.struct_class = Types::DescribeStreamOutput
 
+    DeviceStreamLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DeviceStreamLimitExceededException.struct_class = Types::DeviceStreamLimitExceededException
+
     GetDataEndpointInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     GetDataEndpointInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
     GetDataEndpointInput.add_member(:api_name, Shapes::ShapeRef.new(shape: APIName, required: true, location_name: "APIName"))
@@ -98,6 +107,15 @@ module Aws::KinesisVideo
 
     GetDataEndpointOutput.add_member(:data_endpoint, Shapes::ShapeRef.new(shape: DataEndpoint, location_name: "DataEndpoint"))
     GetDataEndpointOutput.struct_class = Types::GetDataEndpointOutput
+
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
+    InvalidDeviceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidDeviceException.struct_class = Types::InvalidDeviceException
+
+    InvalidResourceFormatException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidResourceFormatException.struct_class = Types::InvalidResourceFormatException
 
     ListStreamsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListStreamsInputLimit, location_name: "MaxResults"))
     ListStreamsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -116,6 +134,15 @@ module Aws::KinesisVideo
     ListTagsForStreamOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsForStreamOutput.add_member(:tags, Shapes::ShapeRef.new(shape: ResourceTags, location_name: "Tags"))
     ListTagsForStreamOutput.struct_class = Types::ListTagsForStreamOutput
+
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceTags.key = Shapes::ShapeRef.new(shape: TagKey)
     ResourceTags.value = Shapes::ShapeRef.new(shape: TagValue)
@@ -146,6 +173,9 @@ module Aws::KinesisVideo
 
     TagStreamOutput.struct_class = Types::TagStreamOutput
 
+    TagsPerResourceExceededLimitException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TagsPerResourceExceededLimitException.struct_class = Types::TagsPerResourceExceededLimitException
+
     UntagStreamInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
     UntagStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     UntagStreamInput.add_member(:tag_key_list, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeyList"))
@@ -170,6 +200,9 @@ module Aws::KinesisVideo
     UpdateStreamInput.struct_class = Types::UpdateStreamInput
 
     UpdateStreamOutput.struct_class = Types::UpdateStreamOutput
+
+    VersionMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    VersionMismatchException.struct_class = Types::VersionMismatchException
 
 
     # @api private
@@ -248,6 +281,12 @@ module Aws::KinesisVideo
         o.output = Shapes::ShapeRef.new(shape: ListStreamsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_stream, Seahorse::Model::Operation.new.tap do |o|

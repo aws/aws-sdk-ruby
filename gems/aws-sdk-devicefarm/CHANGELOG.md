@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-06-21)
+------------------
+
+* Feature - This release includes updated documentation about the default timeout value for test runs and remote access sessions. This release also includes miscellaneous bug fixes for the documentation.
+
+1.24.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-05-22)
+------------------
+
+* Feature - This release introduces support for tagging, tag-based access control, and resource-based access control.
+
+1.22.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.21.0 (2019-05-15)
 ------------------
 

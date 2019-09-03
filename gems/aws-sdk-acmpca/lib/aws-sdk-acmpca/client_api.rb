@@ -61,6 +61,7 @@ module Aws::ACMPCA
     InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidPolicyException = Shapes::StructureShape.new(name: 'InvalidPolicyException')
+    InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     InvalidTagException = Shapes::StructureShape.new(name: 'InvalidTagException')
     IssueCertificateRequest = Shapes::StructureShape.new(name: 'IssueCertificateRequest')
@@ -152,6 +153,12 @@ module Aws::ACMPCA
     CertificateAuthorityConfiguration.add_member(:subject, Shapes::ShapeRef.new(shape: ASN1Subject, required: true, location_name: "Subject"))
     CertificateAuthorityConfiguration.struct_class = Types::CertificateAuthorityConfiguration
 
+    CertificateMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    CertificateMismatchException.struct_class = Types::CertificateMismatchException
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     CreateCertificateAuthorityAuditReportRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     CreateCertificateAuthorityAuditReportRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
     CreateCertificateAuthorityAuditReportRequest.add_member(:audit_report_response_format, Shapes::ShapeRef.new(shape: AuditReportResponseFormat, required: true, location_name: "AuditReportResponseFormat"))
@@ -231,18 +238,43 @@ module Aws::ACMPCA
 
     ImportCertificateAuthorityCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     ImportCertificateAuthorityCertificateRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: CertificateBodyBlob, required: true, location_name: "Certificate"))
-    ImportCertificateAuthorityCertificateRequest.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: CertificateChainBlob, required: true, location_name: "CertificateChain"))
+    ImportCertificateAuthorityCertificateRequest.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: CertificateChainBlob, location_name: "CertificateChain"))
     ImportCertificateAuthorityCertificateRequest.struct_class = Types::ImportCertificateAuthorityCertificateRequest
+
+    InvalidArgsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidArgsException.struct_class = Types::InvalidArgsException
+
+    InvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidArnException.struct_class = Types::InvalidArnException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidPolicyException.struct_class = Types::InvalidPolicyException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    InvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidStateException.struct_class = Types::InvalidStateException
+
+    InvalidTagException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidTagException.struct_class = Types::InvalidTagException
 
     IssueCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     IssueCertificateRequest.add_member(:csr, Shapes::ShapeRef.new(shape: CsrBlob, required: true, location_name: "Csr"))
     IssueCertificateRequest.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: SigningAlgorithm, required: true, location_name: "SigningAlgorithm"))
+    IssueCertificateRequest.add_member(:template_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "TemplateArn"))
     IssueCertificateRequest.add_member(:validity, Shapes::ShapeRef.new(shape: Validity, required: true, location_name: "Validity"))
     IssueCertificateRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
     IssueCertificateRequest.struct_class = Types::IssueCertificateRequest
 
     IssueCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
     IssueCertificateResponse.struct_class = Types::IssueCertificateResponse
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListCertificateAuthoritiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCertificateAuthoritiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -270,6 +302,12 @@ module Aws::ACMPCA
     ListTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsResponse.struct_class = Types::ListTagsResponse
 
+    MalformedCSRException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    MalformedCSRException.struct_class = Types::MalformedCSRException
+
+    MalformedCertificateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    MalformedCertificateException.struct_class = Types::MalformedCertificateException
+
     Permission.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
     Permission.add_member(:created_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedAt"))
     Permission.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "Principal"))
@@ -278,7 +316,22 @@ module Aws::ACMPCA
     Permission.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
     Permission.struct_class = Types::Permission
 
+    PermissionAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    PermissionAlreadyExistsException.struct_class = Types::PermissionAlreadyExistsException
+
     PermissionList.member = Shapes::ShapeRef.new(shape: Permission)
+
+    RequestAlreadyProcessedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RequestAlreadyProcessedException.struct_class = Types::RequestAlreadyProcessedException
+
+    RequestFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RequestFailedException.struct_class = Types::RequestFailedException
+
+    RequestInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RequestInProgressException.struct_class = Types::RequestInProgressException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RestoreCertificateAuthorityRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     RestoreCertificateAuthorityRequest.struct_class = Types::RestoreCertificateAuthorityRequest
@@ -300,6 +353,9 @@ module Aws::ACMPCA
     TagCertificateAuthorityRequest.struct_class = Types::TagCertificateAuthorityRequest
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     UntagCertificateAuthorityRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     UntagCertificateAuthorityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -466,6 +522,7 @@ module Aws::ACMPCA
         o.errors << Shapes::ShapeRef.new(shape: RequestFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedCertificateException)
         o.errors << Shapes::ShapeRef.new(shape: CertificateMismatchException)
@@ -527,6 +584,7 @@ module Aws::ACMPCA
         o.output = Shapes::ShapeRef.new(shape: ListTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -554,6 +612,7 @@ module Aws::ACMPCA
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

@@ -1,6 +1,241 @@
 Unreleased Changes
 ------------------
 
+1.207.0 (2019-08-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.206.0 (2019-08-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.205.0 (2019-08-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.204.0 (2019-08-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ForecastService`.
+
+* Feature - Added support for enumerating regions for `Aws::ForecastQueryService`.
+
+1.203.0 (2019-08-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.202.0 (2019-08-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.201.0 (2019-08-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.200.0 (2019-08-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.199.0 (2019-08-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.198.0 (2019-08-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LakeFormation`.
+
+1.197.0 (2019-08-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.196.0 (2019-08-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.195.0 (2019-07-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.194.0 (2019-07-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.193.0 (2019-07-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.192.0 (2019-07-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.191.0 (2019-07-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.190.0 (2019-07-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.189.0 (2019-07-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.188.0 (2019-07-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EventBridge`.
+
+1.187.0 (2019-07-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.186.0 (2019-07-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.185.0 (2019-07-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.184.0 (2019-07-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.183.0 (2019-07-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.182.0 (2019-06-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.181.0 (2019-06-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EC2InstanceConnect`.
+
+1.180.0 (2019-06-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.179.0 (2019-06-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.178.0 (2019-06-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ServiceQuotas`.
+
+* Feature - Added support for enumerating regions for `Aws::ApplicationInsights`.
+
+1.177.0 (2019-06-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.176.0 (2019-06-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.175.0 (2019-06-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.174.0 (2019-06-10)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PersonalizeRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::PersonalizeEvents`.
+
+* Feature - Added support for enumerating regions for `Aws::Personalize`.
+
+1.173.0 (2019-06-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.172.0 (2019-06-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.171.0 (2019-06-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.170.0 (2019-05-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTEventsData`.
+
+* Feature - Added support for enumerating regions for `Aws::IoTEvents`.
+
+1.169.0 (2019-05-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTThingsGraph`.
+
+1.168.0 (2019-05-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::GroundStation`.
+
+1.167.0 (2019-05-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.166.0 (2019-05-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.165.0 (2019-05-21)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.164.0 (2019-05-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaPackageVod`.
+
+1.163.0 (2019-05-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.162.0 (2019-05-15)
 ------------------
 

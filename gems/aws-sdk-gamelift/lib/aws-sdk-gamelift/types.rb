@@ -111,8 +111,8 @@ module Aws::GameLift
 
     # Values for use in Player attribute key:value pairs. This object lets
     # you specify an attribute value using any of the valid data types:
-    # string, number, string array or data map. Each `AttributeValue` object
-    # can use only one of the available properties.
+    # string, number, string array, or data map. Each `AttributeValue`
+    # object can use only one of the available properties.
     #
     # @note When making an API call, you may pass AttributeValue
     #   data as a hash:
@@ -258,6 +258,37 @@ module Aws::GameLift
       :size_on_disk,
       :operating_system,
       :creation_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CertificateConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_type: "DISABLED", # required, accepts DISABLED, GENERATED
+    #       }
+    #
+    # @!attribute [rw] certificate_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CertificateConfiguration AWS API Documentation
+    #
+    class CertificateConfiguration < Struct.new(
+      :certificate_type)
+      include Aws::Structure
+    end
+
+    # The requested operation would cause a conflict with the current state
+    # of a service resource associated with the request. Resolve the
+    # conflict before retrying this request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -443,6 +474,9 @@ module Aws::GameLift
     #         peer_vpc_id: "NonZeroAndMaxString",
     #         fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #         instance_role_arn: "NonEmptyString",
+    #         certificate_configuration: {
+    #           certificate_type: "DISABLED", # required, accepts DISABLED, GENERATED
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -604,6 +638,9 @@ module Aws::GameLift
     #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
+    # @!attribute [rw] certificate_configuration
+    #   @return [Types::CertificateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
     class CreateFleetInput < Struct.new(
@@ -623,7 +660,8 @@ module Aws::GameLift
       :peer_vpc_aws_account_id,
       :peer_vpc_id,
       :fleet_type,
-      :instance_role_arn)
+      :instance_role_arn,
+      :certificate_configuration)
       include Aws::Structure
     end
 
@@ -861,6 +899,7 @@ module Aws::GameLift
     #           },
     #         ],
     #         game_session_data: "GameSessionData",
+    #         backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #       }
     #
     # @!attribute [rw] name
@@ -876,9 +915,9 @@ module Aws::GameLift
     # @!attribute [rw] game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
     #   queue and uniquely identifies it. Format is
-    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    #   These queues are used when placing game sessions for matches that
-    #   are created with this matchmaking configuration. Queues can be
+    #   `arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue
+    #   name>`. These queues are used when placing game sessions for matches
+    #   that are created with this matchmaking configuration. Queues can be
     #   located in any region.
     #
     #
@@ -888,8 +927,8 @@ module Aws::GameLift
     #
     # @!attribute [rw] request_timeout_seconds
     #   Maximum duration, in seconds, that a matchmaking ticket can remain
-    #   in process before timing out. Requests that time out can be
-    #   resubmitted as needed.
+    #   in process before timing out. Requests that fail due to timing out
+    #   can be resubmitted as needed.
     #   @return [Integer]
     #
     # @!attribute [rw] acceptance_timeout_seconds
@@ -899,9 +938,9 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] acceptance_required
-    #   Flag that determines whether or not a match that was created with
-    #   this configuration must be accepted by the matched players. To
-    #   require acceptance, set to TRUE.
+    #   Flag that determines whether a match that was created with this
+    #   configuration must be accepted by the matched players. To require
+    #   acceptance, set to TRUE.
     #   @return [Boolean]
     #
     # @!attribute [rw] rule_set_name
@@ -922,7 +961,7 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] custom_event_data
-    #   Information to attached to all events related to the matchmaking
+    #   Information to be added to all events related to this matchmaking
     #   configuration.
     #   @return [String]
     #
@@ -950,6 +989,20 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
+    # @!attribute [rw] backfill_mode
+    #   Method used to backfill game sessions created with this matchmaking
+    #   configuration. Specify MANUAL when your game manages backfill
+    #   requests manually or does not use the match backfill feature.
+    #   Specify AUTOMATIC to have GameLift create a StartMatchBackfill
+    #   request whenever a game session has one or more open slots. Learn
+    #   more about manual and automatic backfill in [ Backfill Existing
+    #   Games with FlexMatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfigurationInput AWS API Documentation
     #
     class CreateMatchmakingConfigurationInput < Struct.new(
@@ -964,7 +1017,8 @@ module Aws::GameLift
       :additional_player_count,
       :custom_event_data,
       :game_properties,
-      :game_session_data)
+      :game_session_data,
+      :backfill_mode)
       include Aws::Structure
     end
 
@@ -999,8 +1053,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] rule_set_body
-    #   Collection of matchmaking rules, formatted as a JSON string. Note
-    #   that comments are not allowed in JSON, but most elements support a
+    #   Collection of matchmaking rules, formatted as a JSON string.
+    #   Comments are not allowed in JSON, but most elements support a
     #   description field.
     #   @return [String]
     #
@@ -3225,6 +3279,9 @@ module Aws::GameLift
     #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
+    # @!attribute [rw] certificate_configuration
+    #   @return [Types::CertificateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes AWS API Documentation
     #
     class FleetAttributes < Struct.new(
@@ -3247,7 +3304,8 @@ module Aws::GameLift
       :resource_creation_limit_policy,
       :metric_groups,
       :stopped_actions,
-      :instance_role_arn)
+      :instance_role_arn,
+      :certificate_configuration)
       include Aws::Structure
     end
 
@@ -3321,6 +3379,20 @@ module Aws::GameLift
       :fleet_id,
       :instance_type,
       :instance_counts)
+      include Aws::Structure
+    end
+
+    # The specified fleet has no available instances to fulfill a
+    # `CreateGameSession` request. Clients can retry such requests
+    # immediately or after a waiting period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetCapacityExceededException AWS API Documentation
+    #
+    class FleetCapacityExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3530,6 +3602,9 @@ module Aws::GameLift
     #   server, an app needs both the IP address and port number.
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
     #   game server, an app needs both the IP address and port number.
@@ -3585,6 +3660,7 @@ module Aws::GameLift
       :status_reason,
       :game_properties,
       :ip_address,
+      :dns_name,
       :port,
       :player_session_creation_policy,
       :creator_id,
@@ -3615,6 +3691,9 @@ module Aws::GameLift
     #   server, an app needs both the IP address and port number.
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
     #   game server, an app needs both the IP address and port number.
@@ -3630,6 +3709,7 @@ module Aws::GameLift
     class GameSessionConnectionInfo < Struct.new(
       :game_session_arn,
       :ip_address,
+      :dns_name,
       :port,
       :matched_player_sessions)
       include Aws::Structure
@@ -3657,6 +3737,20 @@ module Aws::GameLift
     class GameSessionDetail < Struct.new(
       :game_session,
       :protection_policy)
+      include Aws::Structure
+    end
+
+    # The game instance is currently full and cannot allow the requested
+    # player(s) to join. Clients can retry such requests immediately or
+    # after a waiting period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionFullException AWS API Documentation
+    #
+    class GameSessionFullException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3762,6 +3856,9 @@ module Aws::GameLift
     #   `FULFILLED`).
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
     #   game server, an app needs both the IP address and port number. This
@@ -3819,6 +3916,7 @@ module Aws::GameLift
       :start_time,
       :end_time,
       :ip_address,
+      :dns_name,
       :port,
       :placed_player_sessions,
       :game_session_data,
@@ -3862,7 +3960,8 @@ module Aws::GameLift
     # @!attribute [rw] game_session_queue_arn
     #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
     #   queue and uniquely identifies it. Format is
-    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
+    #   `arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue
+    #   name>`.
     #
     #
     #
@@ -4017,6 +4116,19 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # A game session with this custom ID string already exists in this
+    # fleet. Resolve this conflict before retrying this request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/IdempotentParameterMismatchException AWS API Documentation
+    #
+    class IdempotentParameterMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Properties that describe an instance of a virtual computing resource
     # that hosts one or more game servers. A fleet may contain zero or more
     # instances.
@@ -4031,6 +4143,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] ip_address
     #   IP address assigned to the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
     #   @return [String]
     #
     # @!attribute [rw] operating_system
@@ -4072,6 +4187,7 @@ module Aws::GameLift
       :fleet_id,
       :instance_id,
       :ip_address,
+      :dns_name,
       :operating_system,
       :type,
       :status,
@@ -4136,6 +4252,61 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # The service encountered an unrecoverable internal failure while
+    # processing the request. Clients can retry such requests immediately or
+    # after a waiting period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation would cause a conflict with the current state
+    # of a resource associated with the request and/or the fleet. Resolve
+    # the conflict before retrying.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InvalidFleetStatusException AWS API Documentation
+    #
+    class InvalidFleetStatusException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation would cause a conflict with the current state
+    # of a resource associated with the request and/or the game instance.
+    # Resolve the conflict before retrying.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InvalidGameSessionStatusException AWS API Documentation
+    #
+    class InvalidGameSessionStatusException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more parameter values in the request are invalid. Correct the
+    # invalid parameter values before retrying.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A range of IP addresses and port settings that allow inbound traffic
     # to connect to server processes on an Amazon GameLift. New game
     # sessions that are started on the fleet are assigned an IP address/port
@@ -4181,6 +4352,19 @@ module Aws::GameLift
       :to_port,
       :ip_range,
       :protocol)
+      include Aws::Structure
+    end
+
+    # The requested operation would cause the resource to exceed the allowed
+    # service limit. Resolve the issue before retrying.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4485,9 +4669,9 @@ module Aws::GameLift
     # @!attribute [rw] game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
     #   queue and uniquely identifies it. Format is
-    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    #   These queues are used when placing game sessions for matches that
-    #   are created with this matchmaking configuration. Queues can be
+    #   `arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue
+    #   name>`. These queues are used when placing game sessions for matches
+    #   that are created with this matchmaking configuration. Queues can be
     #   located in any region.
     #
     #
@@ -4497,8 +4681,8 @@ module Aws::GameLift
     #
     # @!attribute [rw] request_timeout_seconds
     #   Maximum duration, in seconds, that a matchmaking ticket can remain
-    #   in process before timing out. Requests that time out can be
-    #   resubmitted as needed.
+    #   in process before timing out. Requests that fail due to timing out
+    #   can be resubmitted as needed.
     #   @return [Integer]
     #
     # @!attribute [rw] acceptance_timeout_seconds
@@ -4508,9 +4692,9 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] acceptance_required
-    #   Flag that determines whether or not a match that was created with
-    #   this configuration must be accepted by the matched players. To
-    #   require acceptance, set to TRUE.
+    #   Flag that determines whether a match that was created with this
+    #   configuration must be accepted by the matched players. To require
+    #   acceptance, set to TRUE.
     #   @return [Boolean]
     #
     # @!attribute [rw] rule_set_name
@@ -4531,7 +4715,7 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] custom_event_data
-    #   Information to attached to all events related to the matchmaking
+    #   Information to attach to all events related to the matchmaking
     #   configuration.
     #   @return [String]
     #
@@ -4565,6 +4749,20 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
+    # @!attribute [rw] backfill_mode
+    #   Method used to backfill game sessions created with this matchmaking
+    #   configuration. MANUAL indicates that the game makes backfill
+    #   requests or does not use the match backfill feature. AUTOMATIC
+    #   indicates that GameLift creates StartMatchBackfill requests whenever
+    #   a game session has one or more open slots. Learn more about manual
+    #   and automatic backfill in [Backfill Existing Games with
+    #   FlexMatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingConfiguration AWS API Documentation
     #
     class MatchmakingConfiguration < Struct.new(
@@ -4580,15 +4778,15 @@ module Aws::GameLift
       :custom_event_data,
       :creation_time,
       :game_properties,
-      :game_session_data)
+      :game_session_data,
+      :backfill_mode)
       include Aws::Structure
     end
 
     # Set of rule statements, used with FlexMatch, that determine how to
-    # build a certain kind of player match. Each rule set describes a type
-    # of group to be created and defines the parameters for acceptable
-    # player matches. Rule sets are used in MatchmakingConfiguration
-    # objects.
+    # build your player matches. Each rule set describes a type of group to
+    # be created and defines the parameters for acceptable player matches.
+    # Rule sets are used in MatchmakingConfiguration objects.
     #
     # A rule set may define the following elements for a match. For detailed
     # information and examples showing how to construct a rule set, see
@@ -4630,9 +4828,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] rule_set_body
-    #   Collection of matchmaking rules, formatted as a JSON string. (Note
-    #   that comments14 are not allowed in JSON, but most elements support a
-    #   description field.)
+    #   Collection of matchmaking rules, formatted as a JSON string.
+    #   Comments are not allowed in JSON, but most elements support a
+    #   description field.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -4687,12 +4885,11 @@ module Aws::GameLift
     #     ready to host the players. A ticket in this state contains the
     #     necessary connection information for players.
     #
-    #   * **FAILED** -- The matchmaking request was not completed. Tickets
-    #     with players who fail to accept a proposed match are placed in
-    #     `FAILED` status.
+    #   * **FAILED** -- The matchmaking request was not completed.
     #
-    #   * **CANCELLED** -- The matchmaking request was canceled with a call
-    #     to StopMatchmaking.
+    #   * **CANCELLED** -- The matchmaking request was canceled. This may be
+    #     the result of a call to StopMatchmaking or a proposed match that
+    #     one or more players failed to accept.
     #
     #   * **TIMED\_OUT** -- The matchmaking request was not successful
     #     within the duration specified in the matchmaking configuration.
@@ -4760,6 +4957,19 @@ module Aws::GameLift
       :players,
       :game_session_connection_info,
       :estimated_wait_time)
+      include Aws::Structure
+    end
+
+    # A service resource associated with the request could not be found.
+    # Clients should not retry such requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5019,6 +5229,9 @@ module Aws::GameLift
     #   server, an app needs both the IP address and port number.
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
     #   server process, an app needs both the IP address and port number.
@@ -5041,6 +5254,7 @@ module Aws::GameLift
       :termination_time,
       :status,
       :ip_address,
+      :dns_name,
       :port,
       :player_data)
       include Aws::Structure
@@ -5317,43 +5531,17 @@ module Aws::GameLift
 
     # Routing configuration for a fleet alias.
     #
-    # * CreateFleet
+    # * CreateAlias
     #
-    # * ListFleets
+    # * ListAliases
     #
-    # * DeleteFleet
+    # * DescribeAlias
     #
-    # * Describe fleets:
+    # * UpdateAlias
     #
-    #   * DescribeFleetAttributes
+    # * DeleteAlias
     #
-    #   * DescribeFleetCapacity
-    #
-    #   * DescribeFleetPortSettings
-    #
-    #   * DescribeFleetUtilization
-    #
-    #   * DescribeRuntimeConfiguration
-    #
-    #   * DescribeEC2InstanceLimits
-    #
-    #   * DescribeFleetEvents
-    #
-    # * Update fleets:
-    #
-    #   * UpdateFleetAttributes
-    #
-    #   * UpdateFleetCapacity
-    #
-    #   * UpdateFleetPortSettings
-    #
-    #   * UpdateRuntimeConfiguration
-    #
-    # * Manage fleet actions:
-    #
-    #   * StartFleetActions
-    #
-    #   * StopFleetActions
+    # * ResolveAlias
     #
     # @note When making an API call, you may pass RoutingStrategy
     #   data as a hash:
@@ -6405,6 +6593,47 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # The service is unable to resolve the routing for a particular alias
+    # because it has a terminal RoutingStrategy associated with it. The
+    # message returned in this exception is the message defined in the
+    # routing strategy itself. Such requests should only be retried if the
+    # routing strategy for the specified alias is modified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/TerminalRoutingStrategyException AWS API Documentation
+    #
+    class TerminalRoutingStrategyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The client failed authentication. Clients should not retry such
+    # requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested operation is not supported in the region specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UnsupportedRegionException AWS API Documentation
+    #
+    class UnsupportedRegionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input for a request action.
     #
     # @note When making an API call, you may pass UpdateAliasInput
@@ -6867,6 +7096,7 @@ module Aws::GameLift
     #           },
     #         ],
     #         game_session_data: "GameSessionData",
+    #         backfill_mode: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #       }
     #
     # @!attribute [rw] name
@@ -6880,9 +7110,9 @@ module Aws::GameLift
     # @!attribute [rw] game_session_queue_arns
     #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
     #   queue and uniquely identifies it. Format is
-    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
-    #   These queues are used when placing game sessions for matches that
-    #   are created with this matchmaking configuration. Queues can be
+    #   `arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue
+    #   name>`. These queues are used when placing game sessions for matches
+    #   that are created with this matchmaking configuration. Queues can be
     #   located in any region.
     #
     #
@@ -6892,8 +7122,8 @@ module Aws::GameLift
     #
     # @!attribute [rw] request_timeout_seconds
     #   Maximum duration, in seconds, that a matchmaking ticket can remain
-    #   in process before timing out. Requests that time out can be
-    #   resubmitted as needed.
+    #   in process before timing out. Requests that fail due to timing out
+    #   can be resubmitted as needed.
     #   @return [Integer]
     #
     # @!attribute [rw] acceptance_timeout_seconds
@@ -6903,9 +7133,9 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] acceptance_required
-    #   Flag that determines whether or not a match that was created with
-    #   this configuration must be accepted by the matched players. To
-    #   require acceptance, set to TRUE.
+    #   Flag that determines whether a match that was created with this
+    #   configuration must be accepted by the matched players. To require
+    #   acceptance, set to TRUE.
     #   @return [Boolean]
     #
     # @!attribute [rw] rule_set_name
@@ -6932,7 +7162,7 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] custom_event_data
-    #   Information to attached to all events related to the matchmaking
+    #   Information to add to all events related to the matchmaking
     #   configuration.
     #   @return [String]
     #
@@ -6960,6 +7190,20 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
+    # @!attribute [rw] backfill_mode
+    #   Method used to backfill game sessions created with this matchmaking
+    #   configuration. Specify MANUAL when your game manages backfill
+    #   requests manually or does not use the match backfill feature.
+    #   Specify AUTOMATIC to have GameLift create a StartMatchBackfill
+    #   request whenever a game session has one or more open slots. Learn
+    #   more about manual and automatic backfill in [Backfill Existing Games
+    #   with FlexMatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfigurationInput AWS API Documentation
     #
     class UpdateMatchmakingConfigurationInput < Struct.new(
@@ -6974,7 +7218,8 @@ module Aws::GameLift
       :additional_player_count,
       :custom_event_data,
       :game_properties,
-      :game_session_data)
+      :game_session_data,
+      :backfill_mode)
       include Aws::Structure
     end
 
@@ -7154,7 +7399,7 @@ module Aws::GameLift
     # Represents the returned data in response to a request action.
     #
     # @!attribute [rw] valid
-    #   Response indicating whether or not the rule set is valid.
+    #   Response indicating whether the rule set is valid.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ValidateMatchmakingRuleSetOutput AWS API Documentation

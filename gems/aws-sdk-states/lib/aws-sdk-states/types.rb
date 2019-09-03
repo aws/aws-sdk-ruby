@@ -8,6 +8,18 @@
 module Aws::States
   module Types
 
+    # The specified activity does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityDoesNotExist AWS API Documentation
+    #
+    class ActivityDoesNotExist < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about an activity that failed during an execution.
     #
     # @!attribute [rw] error
@@ -23,6 +35,19 @@ module Aws::States
     class ActivityFailedEventDetails < Struct.new(
       :error,
       :cause)
+      include Aws::Structure
+    end
+
+    # The maximum number of activities has been reached. Existing activities
+    # must be deleted before a new activity can be created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityLimitExceeded AWS API Documentation
+    #
+    class ActivityLimitExceeded < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -153,6 +178,19 @@ module Aws::States
     class ActivityTimedOutEventDetails < Struct.new(
       :error,
       :cause)
+      include Aws::Structure
+    end
+
+    # The maximum number of workers concurrently polling for activity tasks
+    # has been reached.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityWorkerLimitExceeded AWS API Documentation
+    #
+    class ActivityWorkerLimitExceeded < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -622,6 +660,35 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The execution has the same `name` as another execution (but a
+    # different `input`).
+    #
+    # <note markdown="1"> Executions with the same `name` and `input` are considered idempotent.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionAlreadyExists AWS API Documentation
+    #
+    class ExecutionAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified execution does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionDoesNotExist AWS API Documentation
+    #
+    class ExecutionDoesNotExist < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about an execution failure event.
     #
     # @!attribute [rw] error
@@ -637,6 +704,20 @@ module Aws::States
     class ExecutionFailedEventDetails < Struct.new(
       :error,
       :cause)
+      include Aws::Structure
+    end
+
+    # The maximum number of running executions has been reached. Running
+    # executions must end or be stopped before a new execution can be
+    # started.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionLimitExceeded AWS API Documentation
+    #
+    class ExecutionLimitExceeded < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1029,6 +1110,78 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The provided Amazon Resource Name (ARN) is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidArn AWS API Documentation
+    #
+    class InvalidArn < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided Amazon States Language definition is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidDefinition AWS API Documentation
+    #
+    class InvalidDefinition < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided JSON input data is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidExecutionInput AWS API Documentation
+    #
+    class InvalidExecutionInput < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided name is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidName AWS API Documentation
+    #
+    class InvalidName < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided JSON output data is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidOutput AWS API Documentation
+    #
+    class InvalidOutput < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The provided token is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidToken AWS API Documentation
+    #
+    class InvalidToken < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about a lambda function that failed during an
     # execution.
     #
@@ -1354,6 +1507,36 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Request is missing a required parameter. This error occurs if both
+    # `definition` and `roleArn` are not specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MissingRequiredParameter AWS API Documentation
+    #
+    class MissingRequiredParameter < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Could not fine the referenced resource. Only state machine and
+    # activity ARNs are supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ResourceNotFound AWS API Documentation
+    #
+    class ResourceNotFound < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SendTaskFailureInput
     #   data as a hash:
     #
@@ -1565,6 +1748,56 @@ module Aws::States
       include Aws::Structure
     end
 
+    # A state machine with the same name but a different definition or role
+    # ARN already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineAlreadyExists AWS API Documentation
+    #
+    class StateMachineAlreadyExists < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified state machine is being deleted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineDeleting AWS API Documentation
+    #
+    class StateMachineDeleting < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified state machine does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineDoesNotExist AWS API Documentation
+    #
+    class StateMachineDoesNotExist < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of state machines has been reached. Existing state
+    # machines must be deleted before a new state machine can be created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineLimitExceeded AWS API Documentation
+    #
+    class StateMachineLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about the state machine.
     #
     # @!attribute [rw] state_machine_arn
@@ -1704,6 +1937,16 @@ module Aws::States
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskDoesNotExist AWS API Documentation
+    #
+    class TaskDoesNotExist < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # Contains details about a task failure event.
     #
@@ -1889,6 +2132,16 @@ module Aws::States
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskTimedOut AWS API Documentation
+    #
+    class TaskTimedOut < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about a resource timeout that occurred during an
     # execution.
     #
@@ -1915,6 +2168,27 @@ module Aws::States
       :resource,
       :error,
       :cause)
+      include Aws::Structure
+    end
+
+    # You've exceeded the number of tags allowed for a resource. See the [
+    # Limits Topic][1] in the AWS Step Functions Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TooManyTags AWS API Documentation
+    #
+    class TooManyTags < Struct.new(
+      :message,
+      :resource_name)
       include Aws::Structure
     end
 

@@ -39,6 +39,19 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
+    # Concurrent updates caused an exception, for example, if you request an
+    # update to a scaling plan that already has a pending update.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ConcurrentUpdateException AWS API Documentation
+    #
+    class ConcurrentUpdateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateScalingPlanRequest
     #   data as a hash:
     #
@@ -593,6 +606,43 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
+    # The service encountered an internal error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The token provided is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your account exceeded a limit. This exception is thrown when a
+    # per-account resource limit is exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a dimension for a customized metric.
     #
     # @note When making an API call, you may pass MetricDimension
@@ -616,6 +666,18 @@ module Aws::AutoScalingPlans
     class MetricDimension < Struct.new(
       :name,
       :value)
+      include Aws::Structure
+    end
+
+    # The specified object could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ObjectNotFoundException AWS API Documentation
+    #
+    class ObjectNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1419,6 +1481,19 @@ module Aws::AutoScalingPlans
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlanResponse AWS API Documentation
     #
     class UpdateScalingPlanResponse < Aws::EmptyStructure; end
+
+    # An exception was thrown for a validation issue. Review the parameters
+    # provided.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
   end
 end

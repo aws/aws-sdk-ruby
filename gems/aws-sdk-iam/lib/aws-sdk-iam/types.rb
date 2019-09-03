@@ -8,6 +8,94 @@
 module Aws::IAM
   module Types
 
+    # An object that contains details about when a principal in the reported
+    # AWS Organizations entity last attempted to access an AWS service. A
+    # principal can be an IAM user, an IAM role, or the AWS account root
+    # user within the reported Organizations entity.
+    #
+    # This data type is a response element in the
+    # GetOrganizationsAccessReport operation.
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service in which access was attempted.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_namespace
+    #   The namespace of the service in which access was attempted.
+    #
+    #   To learn the service namespace of a service, go to [Actions,
+    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
+    #   Guide*. Choose the name of the service to view details for that
+    #   service. In the first paragraph, find the service prefix. For
+    #   example, `(service prefix: a4b)`. For more information about service
+    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region where the last service access attempt occurred.
+    #
+    #   This field is null if no principals in the reported Organizations
+    #   entity attempted to access the service within the [reporting
+    #   period][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_path
+    #   The path of the Organizations entity (root, organizational unit, or
+    #   account) from which an authenticated principal last attempted to
+    #   access the service. AWS does not report unauthenticated requests.
+    #
+    #   This field is null if no principals (IAM users, IAM roles, or root
+    #   users) in the reported Organizations entity attempted to access the
+    #   service within the [reporting period][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [String]
+    #
+    # @!attribute [rw] last_authenticated_time
+    #   The date and time, in [ISO 8601 date-time format][1], when an
+    #   authenticated principal most recently attempted to access the
+    #   service. AWS does not report unauthenticated requests.
+    #
+    #   This field is null if no principals in the reported Organizations
+    #   entity attempted to access the service within the [reporting
+    #   period][2].
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_authenticated_entities
+    #   The number of accounts with authenticated principals (root users,
+    #   IAM users, and IAM roles) that attempted to access the service in
+    #   the reporting period.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessDetail AWS API Documentation
+    #
+    class AccessDetail < Struct.new(
+      :service_name,
+      :service_namespace,
+      :region,
+      :entity_path,
+      :last_authenticated_time,
+      :total_authenticated_entities)
+      include Aws::Structure
+    end
+
     # Contains information about an AWS access key.
     #
     # This data type is used as a response element in the CreateAccessKey
@@ -68,7 +156,7 @@ module Aws::IAM
     #   * An access key exists but has not been used since IAM began
     #     tracking this information.
     #
-    #   * There is no sign-in data associated with the user
+    #   * There is no sign-in data associated with the user.
     #
     #
     #
@@ -85,11 +173,11 @@ module Aws::IAM
     #   * An access key exists but has not been used since IAM started
     #     tracking this information.
     #
-    #   * There is no sign-in data associated with the user
+    #   * There is no sign-in data associated with the user.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS region where this access key was most recently used. The
+    #   The AWS Region where this access key was most recently used. The
     #   value for this field is "N/A" in the following situations:
     #
     #   * The user does not have an access key.
@@ -97,9 +185,9 @@ module Aws::IAM
     #   * An access key exists but has not been used since IAM began
     #     tracking this information.
     #
-    #   * There is no sign-in data associated with the user
+    #   * There is no sign-in data associated with the user.
     #
-    #   For more information about AWS regions, see [Regions and
+    #   For more information about AWS Regions, see [Regions and
     #   Endpoints][1] in the Amazon Web Services General Reference.
     #
     #
@@ -489,6 +577,20 @@ module Aws::IAM
     class ChangePasswordRequest < Struct.new(
       :old_password,
       :new_password)
+      include Aws::Structure
+    end
+
+    # The request was rejected because multiple requests to change this
+    # object were submitted simultaneously. Wait a few minutes and submit
+    # your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1120,10 +1222,11 @@ module Aws::IAM
     #   The trust relationship policy document that grants an entity
     #   permission to assume the role.
     #
-    #   You must provide policies in JSON format in IAM. However, for AWS
-    #   CloudFormation templates formatted in YAML, you can provide the
-    #   policy in JSON or YAML format. AWS CloudFormation always converts a
-    #   YAML policy to JSON format before submitting it to IAM.
+    #   In IAM, you must provide a JSON policy that has been converted to a
+    #   string. However, for AWS CloudFormation templates formatted in YAML,
+    #   you can provide the policy in JSON or YAML format. AWS
+    #   CloudFormation always converts a YAML policy to JSON format before
+    #   submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1136,6 +1239,9 @@ module Aws::IAM
     #
     #   * The special characters tab (\\u0009), line feed (\\u000A), and
     #     carriage return (\\u000D)
+    #
+    #   Upon success, the response includes the same trust policy as a
+    #   URL-encoded JSON string.
     #
     #
     #
@@ -1545,6 +1651,52 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the most recent credential report has
+    # expired. To generate a new credential report, use
+    # GenerateCredentialReport. For more information about credential report
+    # expiration, see [Getting Credential Reports][1] in the *IAM User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CredentialReportExpiredException AWS API Documentation
+    #
+    class CredentialReportExpiredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the credential report does not exist.
+    # To generate a credential report, use GenerateCredentialReport.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CredentialReportNotPresentException AWS API Documentation
+    #
+    class CredentialReportNotPresentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the credential report is still being
+    # generated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CredentialReportNotReadyException AWS API Documentation
+    #
+    class CredentialReportNotReadyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeactivateMFADeviceRequest
     #   data as a hash:
     #
@@ -1654,6 +1806,20 @@ module Aws::IAM
     #
     class DeleteAccountAliasRequest < Struct.new(
       :account_alias)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to delete a resource
+    # that has attached subordinate entities. The error message describes
+    # these entities.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteConflictException AWS API Documentation
+    #
+    class DeleteConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2297,7 +2463,7 @@ module Aws::IAM
     #   resources that were used by the role have not been deleted from the
     #   linked service, the role can't be deleted. This parameter includes
     #   a list of the resources that are associated with the role and the
-    #   region in which the resources are being used.
+    #   Region in which the resources are being used.
     #   @return [Array<Types::RoleUsageType>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletionTaskFailureReasonType AWS API Documentation
@@ -2431,6 +2597,32 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the same certificate is associated
+    # with an IAM user in the account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DuplicateCertificateException AWS API Documentation
+    #
+    class DuplicateCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the SSH public key is already
+    # associated with the specified IAM user.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DuplicateSSHPublicKeyException AWS API Documentation
+    #
+    class DuplicateSSHPublicKeyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableMFADeviceRequest
     #   data as a hash:
     #
@@ -2509,6 +2701,19 @@ module Aws::IAM
       :serial_number,
       :authentication_code_1,
       :authentication_code_2)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create a resource
+    # that already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityAlreadyExistsException AWS API Documentation
+    #
+    class EntityAlreadyExistsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2594,11 +2799,27 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because it referenced an entity that is
+    # temporarily unmodifiable, such as a user name that was deleted and
+    # then recreated. The error indicates that the request is likely to
+    # succeed if you try again after waiting several minutes. The error
+    # message describes the entity.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityTemporarilyUnmodifiableException AWS API Documentation
+    #
+    class EntityTemporarilyUnmodifiableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about the reason that the operation failed.
     #
     # This data type is used as a response element in the
-    # GetServiceLastAccessedDetails operation and the
-    # GetServiceLastAccessedDetailsWithEntities operation.
+    # GetOrganizationsAccessReport, GetServiceLastAccessedDetails, and
+    # GetServiceLastAccessedDetailsWithEntities operations.
     #
     # @!attribute [rw] message
     #   Detailed information about the reason that the operation failed.
@@ -2638,8 +2859,8 @@ module Aws::IAM
     #   A list of the statements in the input policies that determine the
     #   result for this scenario. Remember that even if multiple statements
     #   allow the operation on the resource, if only one statement denies
-    #   that operation, then the explicit deny overrides any allow.
-    #   Inaddition, the deny statement is the only entry included in the
+    #   that operation, then the explicit deny overrides any allow. In
+    #   addition, the deny statement is the only entry included in the
     #   result.
     #   @return [Array<Types::Statement>]
     #
@@ -2655,9 +2876,9 @@ module Aws::IAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] organizations_decision_detail
-    #   A structure that details how AWS Organizations and its service
-    #   control policies affect the results of the simulation. Only applies
-    #   if the simulated user's account is part of an organization.
+    #   A structure that details how Organizations and its service control
+    #   policies affect the results of the simulation. Only applies if the
+    #   simulated user's account is part of an organization.
     #   @return [Types::OrganizationsDecisionDetail]
     #
     # @!attribute [rw] eval_decision_details
@@ -2709,6 +2930,53 @@ module Aws::IAM
     class GenerateCredentialReportResponse < Struct.new(
       :state,
       :description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GenerateOrganizationsAccessReportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entity_path: "organizationsEntityPathType", # required
+    #         organizations_policy_id: "organizationsPolicyIdType",
+    #       }
+    #
+    # @!attribute [rw] entity_path
+    #   The path of the AWS Organizations entity (root, OU, or account). You
+    #   can build an entity path using the known structure of your
+    #   organization. For example, assume that your account ID is
+    #   `123456789012` and its parent OU ID is `ou-rge0-awsabcde`. The
+    #   organization root ID is `r-f6g7h8i9j0example` and your organization
+    #   ID is `o-a1b2c3d4e5`. Your entity path is
+    #   `o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-rge0-awsabcde/123456789012`.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizations_policy_id
+    #   The identifier of the AWS Organizations service control policy
+    #   (SCP). This parameter is optional.
+    #
+    #   This ID is used to generate information about when an account
+    #   principal that is limited by the SCP attempted to access an AWS
+    #   service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateOrganizationsAccessReportRequest AWS API Documentation
+    #
+    class GenerateOrganizationsAccessReportRequest < Struct.new(
+      :entity_path,
+      :organizations_policy_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The job identifier that you can use in the
+    #   GetOrganizationsAccessReport operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateOrganizationsAccessReportResponse AWS API Documentation
+    #
+    class GenerateOrganizationsAccessReportResponse < Struct.new(
+      :job_id)
       include Aws::Structure
     end
 
@@ -3348,6 +3616,137 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetOrganizationsAccessReportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "jobIDType", # required
+    #         max_items: 1,
+    #         marker: "markerType",
+    #         sort_key: "SERVICE_NAMESPACE_ASCENDING", # accepts SERVICE_NAMESPACE_ASCENDING, SERVICE_NAMESPACE_DESCENDING, LAST_AUTHENTICATED_TIME_ASCENDING, LAST_AUTHENTICATED_TIME_DESCENDING
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the request generated by the
+    #   GenerateOrganizationsAccessReport operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
+    #
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_key
+    #   The key that is used to sort the results. If you choose the
+    #   namespace key, the results are returned in alphabetical order. If
+    #   you choose the time key, the results are sorted numerically by the
+    #   date and time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOrganizationsAccessReportRequest AWS API Documentation
+    #
+    class GetOrganizationsAccessReportRequest < Struct.new(
+      :job_id,
+      :max_items,
+      :marker,
+      :sort_key)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_creation_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   report job was created.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_completion_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   generated report job was completed or failed.
+    #
+    #   This field is null if the job is still in progress, as indicated by
+    #   a job status value of `IN_PROGRESS`.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] number_of_services_accessible
+    #   The number of services that the applicable SCPs allow account
+    #   principals to access.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_services_not_accessed
+    #   The number of services that account principals are allowed but did
+    #   not attempt to access.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] access_details
+    #   An object that contains details about the most recent attempt to
+    #   access the service.
+    #   @return [Array<Types::AccessDetail>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can make a subsequent pagination
+    #   request using the `Marker` request parameter to retrieve more items.
+    #   Note that IAM might return fewer than the `MaxItems` number of
+    #   results even when there are more results available. We recommend
+    #   that you check `IsTruncated` after every call to ensure that you
+    #   receive all your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Contains information about the reason that the operation failed.
+    #
+    #   This data type is used as a response element in the
+    #   GetOrganizationsAccessReport, GetServiceLastAccessedDetails, and
+    #   GetServiceLastAccessedDetailsWithEntities operations.
+    #   @return [Types::ErrorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOrganizationsAccessReportResponse AWS API Documentation
+    #
+    class GetOrganizationsAccessReportResponse < Struct.new(
+      :job_status,
+      :job_creation_date,
+      :job_completion_date,
+      :number_of_services_accessible,
+      :number_of_services_not_accessed,
+      :access_details,
+      :is_truncated,
+      :marker,
+      :error_details)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetPolicyRequest
     #   data as a hash:
     #
@@ -3770,7 +4169,7 @@ module Aws::IAM
     #   generated report job was completed or failed.
     #
     #   This field is null if the job is still in progress, as indicated by
-    #   a `JobStatus` value of `IN_PROGRESS`.
+    #   a job status value of `IN_PROGRESS`.
     #
     #
     #
@@ -3891,6 +4290,9 @@ module Aws::IAM
     # @!attribute [rw] job_completion_date
     #   The date and time, in [ISO 8601 date-time format][1], when the
     #   generated report job was completed or failed.
+    #
+    #   This field is null if the job is still in progress, as indicated by
+    #   a job status value of `IN_PROGRESS`.
     #
     #
     #
@@ -4306,6 +4708,97 @@ module Aws::IAM
       :arn,
       :create_date,
       :roles)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the authentication code was not
+    # recognized. The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidAuthenticationCodeException AWS API Documentation
+    #
+    class InvalidAuthenticationCodeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the certificate is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidCertificateException AWS API Documentation
+    #
+    class InvalidCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an invalid or out-of-range value was
+    # supplied for an input parameter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the public key is malformed or
+    # otherwise invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidPublicKeyException AWS API Documentation
+    #
+    class InvalidPublicKeyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the type of user for the transaction
+    # was incorrect.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InvalidUserTypeException AWS API Documentation
+    #
+    class InvalidUserTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the public key certificate and the
+    # private key do not match.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/KeyPairMismatchException AWS API Documentation
+    #
+    class KeyPairMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create resources
+    # beyond the current AWS account limits. The error message describes the
+    # limit exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6723,6 +7216,32 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the certificate was malformed or
+    # expired. The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/MalformedCertificateException AWS API Documentation
+    #
+    class MalformedCertificateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the policy document was malformed.
+    # The error message describes the specific error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains information about a managed policy, including the policy's
     # ARN, versions, and the number of principal entities (users, groups,
     # and roles) that the policy is attached to.
@@ -6858,6 +7377,19 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because it referenced a resource entity that
+    # does not exist. The error message describes the resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/NoSuchEntityException AWS API Documentation
+    #
+    class NoSuchEntityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect
     # provider.
     #
@@ -6880,11 +7412,11 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # Contains information about AWS Organizations's effect on a policy
-    # simulation.
+    # Contains information about the effect that Organizations has on a
+    # policy simulation.
     #
     # @!attribute [rw] allowed_by_organizations
-    #   Specifies whether the simulated operation is allowed by the AWS
+    #   Specifies whether the simulated operation is allowed by the
     #   Organizations service control policies that impact the simulated
     #   user's account.
     #   @return [Boolean]
@@ -6961,6 +7493,19 @@ module Aws::IAM
       :max_password_age,
       :password_reuse_prevention,
       :hard_expiry)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the provided password did not meet
+    # the requirements imposed by the account password policy.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PasswordPolicyViolationException AWS API Documentation
+    #
+    class PasswordPolicyViolationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7110,6 +7655,20 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request failed because a provided policy could not be successfully
+    # evaluated. An additional detailed message indicates the source of the
+    # failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyEvaluationException AWS API Documentation
+    #
+    class PolicyEvaluationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about the permissions policies that are attached to
     # the specified identity (user, group, or role).
     #
@@ -7210,6 +7769,19 @@ module Aws::IAM
     class PolicyGroup < Struct.new(
       :group_name,
       :group_id)
+      include Aws::Structure
+    end
+
+    # The request failed because AWS service role policies can only be
+    # attached to the service-linked role for that service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyNotAttachableException AWS API Documentation
+    #
+    class PolicyNotAttachableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7381,7 +7953,14 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to associate the policy with.
     #
-    #   &amp;regex-name;.
+    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: \_+=,.@-.
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @!attribute [rw] policy_name
@@ -7737,6 +8316,19 @@ module Aws::IAM
     class RemoveUserFromGroupRequest < Struct.new(
       :group_name,
       :user_name)
+      include Aws::Structure
+    end
+
+    # The request failed because the maximum number of concurrent requests
+    # for this account are already running.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ReportGenerationLimitExceededException AWS API Documentation
+    #
+    class ReportGenerationLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -8124,7 +8716,7 @@ module Aws::IAM
     # GetServiceLinkedRoleDeletionStatus operation.
     #
     # @!attribute [rw] region
-    #   The name of the region where the service-linked role is being used.
+    #   The name of the Region where the service-linked role is being used.
     #   @return [String]
     #
     # @!attribute [rw] resources
@@ -8335,6 +8927,19 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request processing has failed because of an unknown error,
+    # exception or failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceFailureException AWS API Documentation
+    #
+    class ServiceFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains details about the most recent attempt to access the service.
     #
     # This data type is used as a response element in the
@@ -8389,11 +8994,11 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] total_authenticated_entities
-    #   The total number of authenticated entities that have attempted to
-    #   access the service.
+    #   The total number of authenticated principals (root user, IAM users,
+    #   or IAM roles) that have attempted to access the service.
     #
-    #   This field is null if no IAM entities attempted to access the
-    #   service within the [reporting period][1].
+    #   This field is null if no principals attempted to access the service
+    #   within the [reporting period][1].
     #
     #
     #
@@ -8408,6 +9013,18 @@ module Aws::IAM
       :service_namespace,
       :last_authenticated_entity,
       :total_authenticated_entities)
+      include Aws::Structure
+    end
+
+    # The specified service does not support service-specific credentials.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceNotSupportedException AWS API Documentation
+    #
+    class ServiceNotSupportedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -9030,7 +9647,7 @@ module Aws::IAM
     # @!attribute [rw] context_entries
     #   A list of context keys and corresponding values for the simulation
     #   to use. Whenever a context key is evaluated in one of the simulated
-    #   IAM permission policies, the corresponding value is supplied.
+    #   IAM permissions policies, the corresponding value is supplied.
     #   @return [Array<Types::ContextEntry>]
     #
     # @!attribute [rw] resource_handling_option
@@ -9273,6 +9890,34 @@ module Aws::IAM
     class TagUserRequest < Struct.new(
       :user_name,
       :tags)
+      include Aws::Structure
+    end
+
+    # The request was rejected because only the service that depends on the
+    # service-linked role can modify or delete the role on your behalf. The
+    # error message includes the name of the service that depends on this
+    # service-linked role. You must request the change through that service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UnmodifiableEntityException AWS API Documentation
+    #
+    class UnmodifiableEntityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the public key encoding format is
+    # unsupported or unrecognized.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UnrecognizedPublicKeyEncodingException AWS API Documentation
+    #
+    class UnrecognizedPublicKeyEncodingException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -10458,7 +11103,7 @@ module Aws::IAM
     #   * A password exists but has not been used since IAM started tracking
     #     this information on October 20, 2014.
     #
-    #   A null valuedoes not mean that the user *never* had a password.
+    #   A null value does not mean that the user *never* had a password.
     #   Also, if the user does not currently have a password, but had one in
     #   the past, then this field contains the date and time the most recent
     #   password was used.

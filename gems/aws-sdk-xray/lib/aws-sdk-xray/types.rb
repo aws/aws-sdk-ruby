@@ -1220,6 +1220,18 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # The request is missing required parameters or has invalid parameters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutEncryptionConfigRequest
     #   data as a hash:
     #
@@ -1456,6 +1468,18 @@ module Aws::XRay
     #
     class RootCauseException < Struct.new(
       :name,
+      :message)
+      include Aws::Structure
+    end
+
+    # You have reached the maximum number of sampling rules.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/RuleLimitExceededException AWS API Documentation
+    #
+    class RuleLimitExceededException < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -2054,6 +2078,18 @@ module Aws::XRay
       :segments_spillover_count,
       :segments_rejected_count,
       :backend_connection_errors)
+      include Aws::Structure
+    end
+
+    # The request exceeds the maximum number of requests per second.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ThrottledException AWS API Documentation
+    #
+    class ThrottledException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

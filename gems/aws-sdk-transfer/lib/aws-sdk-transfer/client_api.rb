@@ -57,6 +57,7 @@ module Aws::Transfer
     ResourceExistsException = Shapes::StructureShape.new(name: 'ResourceExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    Response = Shapes::StringShape.new(name: 'Response')
     Role = Shapes::StringShape.new(name: 'Role')
     ServerId = Shapes::StringShape.new(name: 'ServerId')
     ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
@@ -179,6 +180,15 @@ module Aws::Transfer
     ImportSshPublicKeyResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
     ImportSshPublicKeyResponse.struct_class = Types::ImportSshPublicKeyResponse
 
+    InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    InternalServiceError.struct_class = Types::InternalServiceError
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     ListServersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListServersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListServersRequest.struct_class = Types::ListServersRequest
@@ -227,6 +237,19 @@ module Aws::Transfer
 
     ListedUsers.member = Shapes::ShapeRef.new(shape: ListedUser)
 
+    ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    ResourceExistsException.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
+    ResourceExistsException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    ResourceExistsException.struct_class = Types::ResourceExistsException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: "Message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     SshPublicKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, required: true, location_name: "DateImported"))
     SshPublicKey.add_member(:ssh_public_key_body, Shapes::ShapeRef.new(shape: SshPublicKeyBody, required: true, location_name: "SshPublicKeyBody"))
     SshPublicKey.add_member(:ssh_public_key_id, Shapes::ShapeRef.new(shape: SshPublicKeyId, required: true, location_name: "SshPublicKeyId"))
@@ -257,8 +280,9 @@ module Aws::Transfer
     TestIdentityProviderRequest.add_member(:user_password, Shapes::ShapeRef.new(shape: UserPassword, location_name: "UserPassword"))
     TestIdentityProviderRequest.struct_class = Types::TestIdentityProviderRequest
 
-    TestIdentityProviderResponse.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    TestIdentityProviderResponse.add_member(:response, Shapes::ShapeRef.new(shape: Response, location_name: "Response"))
     TestIdentityProviderResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, required: true, location_name: "StatusCode"))
+    TestIdentityProviderResponse.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     TestIdentityProviderResponse.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "Url"))
     TestIdentityProviderResponse.struct_class = Types::TestIdentityProviderResponse
 

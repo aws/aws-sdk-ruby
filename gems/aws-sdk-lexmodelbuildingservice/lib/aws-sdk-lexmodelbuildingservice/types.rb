@@ -8,6 +8,19 @@
 module Aws::LexModelBuildingService
   module Types
 
+    # The request is not well formed. For example, a value is invalid or a
+    # required field is missing. Check the field values, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides information about a bot alias.
     #
     # @!attribute [rw] name
@@ -253,6 +266,18 @@ module Aws::LexModelBuildingService
     class CodeHook < Struct.new(
       :uri,
       :message_version)
+      include Aws::Structure
+    end
+
+    # There was a conflict processing the request. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2346,6 +2371,34 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # An internal Amazon Lex error occurred. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request exceeded a limit. Try your request again.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
     # The message object that provides the message text and its type.
     #
     # @note When making an API call, you may pass Message
@@ -2377,6 +2430,33 @@ module Aws::LexModelBuildingService
       :content_type,
       :content,
       :group_number)
+      include Aws::Structure
+    end
+
+    # The resource specified in the request was not found. Check the
+    # resource and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The checksum of the resource that you are trying to change does not
+    # match the checksum in the request. Check the resource's checksum and
+    # try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PreconditionFailedException AWS API Documentation
+    #
+    class PreconditionFailedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3365,6 +3445,36 @@ module Aws::LexModelBuildingService
       :checksum,
       :value_selection_strategy,
       :create_version)
+      include Aws::Structure
+    end
+
+    # The resource that you are attempting to delete is referred to by
+    # another resource. Use this information to remove references to the
+    # resource that you are trying to delete.
+    #
+    # The body of the exception contains a JSON object that describes the
+    # resource.
+    #
+    # `\{ "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,`
+    #
+    # `"resourceReference": \{`
+    #
+    # `"name": string, "version": string \} \}`
+    #
+    # @!attribute [rw] reference_type
+    #   @return [String]
+    #
+    # @!attribute [rw] example_reference
+    #   Describes the resource that refers to the resource that you are
+    #   attempting to delete. This object is returned as part of the
+    #   `ResourceInUseException` exception.
+    #   @return [Types::ResourceReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :reference_type,
+      :example_reference)
       include Aws::Structure
     end
 

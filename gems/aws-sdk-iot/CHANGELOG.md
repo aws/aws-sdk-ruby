@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2019-08-09)
+------------------
+
+* Feature - This release adds Quality of Service (QoS) support for AWS IoT rules engine republish action.
+
+1.36.0 (2019-08-05)
+------------------
+
+* Feature - In this release, AWS IoT Device Defender introduces audit mitigation actions that can be applied to audit findings to help mitigate security issues.
+
+1.35.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.31.0 (2019-05-15)
 ------------------
 

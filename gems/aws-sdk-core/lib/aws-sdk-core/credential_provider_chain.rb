@@ -21,6 +21,7 @@ module Aws
       [
         [:static_credentials, {}],
         [:env_credentials, {}],
+        [:assume_role_web_identity_credentials, {}],
         [:assume_role_credentials, {}],
         [:shared_credentials, {}],
         [:process_credentials, {}],
@@ -85,6 +86,22 @@ module Aws
     def assume_role_credentials(options)
       if Aws.shared_config.config_enabled?
         assume_role_with_profile(options)
+      else
+        nil
+      end
+    end
+
+    def assume_role_web_identity_credentials(options)
+      if (role_arn = ENV['AWS_ROLE_ARN']) &&
+        (token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE'])
+        AssumeRoleWebIdentityCredentials.new(
+          role_arn: role_arn,
+          web_identity_token_file: token_file,
+          role_session_name: ENV['AWS_ROLE_SESSION_NAME']
+        )
+      elsif Aws.shared_config.config_enabled?
+        profile = options[:config].profile if options[:config]
+        Aws.shared_config.assume_role_web_identity_credentials_from_config(profile)
       else
         nil
       end

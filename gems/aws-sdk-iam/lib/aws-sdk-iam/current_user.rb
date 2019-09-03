@@ -85,7 +85,7 @@ module Aws::IAM
     # * A password exists but has not been used since IAM started tracking
     #   this information on October 20, 2014.
     #
-    # A null valuedoes not mean that the user *never* had a password. Also,
+    # A null value does not mean that the user *never* had a password. Also,
     # if the user does not currently have a password, but had one in the
     # past, then this field contains the date and time the most recent
     # password was used.

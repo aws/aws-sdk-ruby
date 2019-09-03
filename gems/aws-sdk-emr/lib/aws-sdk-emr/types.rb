@@ -498,6 +498,78 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # A configuration for Amazon EMR block public access. When
+    # `BlockPublicSecurityGroupRules` is set to `true`, Amazon EMR prevents
+    # cluster creation if one of the cluster's security groups has a rule
+    # that allows inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless
+    # the port is specified as an exception using
+    # `PermittedPublicSecurityGroupRuleRanges`.
+    #
+    # @note When making an API call, you may pass BlockPublicAccessConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         block_public_security_group_rules: false, # required
+    #         permitted_public_security_group_rule_ranges: [
+    #           {
+    #             min_range: 1, # required
+    #             max_range: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] block_public_security_group_rules
+    #   Indicates whether EMR block public access is enabled (`true`) or
+    #   disabled (`false`). By default, the value is `false` for accounts
+    #   that have created EMR clusters before July 2019. For accounts
+    #   created after this, the default is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] permitted_public_security_group_rule_ranges
+    #   Specifies ports and port ranges that are permitted to have security
+    #   group rules that allow inbound traffic from all public sources. For
+    #   example, if Port 23 (Telnet) is specified for
+    #   `PermittedPublicSecurityGroupRuleRanges`, Amazon EMR allows cluster
+    #   creation if a security group associated with the cluster has a rule
+    #   that allows inbound traffic on Port 23 from IPv4 0.0.0.0/0 or IPv6
+    #   port ::/0 as the source.
+    #
+    #   By default, Port 22, which is used for SSH access to the cluster EC2
+    #   instances, is in the list of
+    #   `PermittedPublicSecurityGroupRuleRanges`.
+    #   @return [Array<Types::PortRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BlockPublicAccessConfiguration AWS API Documentation
+    #
+    class BlockPublicAccessConfiguration < Struct.new(
+      :block_public_security_group_rules,
+      :permitted_public_security_group_rule_ranges)
+      include Aws::Structure
+    end
+
+    # Properties that describe the AWS principal that created the
+    # `BlockPublicAccessConfiguration` using the
+    # `PutBlockPublicAccessConfiguration` action as well as the date and
+    # time that the configuration was created. Each time a configuration for
+    # block public access is updated, Amazon EMR updates this metadata.
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by_arn
+    #   The Amazon Resource Name that created or last modified the
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BlockPublicAccessConfigurationMetadata AWS API Documentation
+    #
+    class BlockPublicAccessConfigurationMetadata < Struct.new(
+      :creation_date_time,
+      :created_by_arn)
+      include Aws::Structure
+    end
+
     # Configuration of a bootstrap action.
     #
     # @note When making an API call, you may pass BootstrapActionConfig
@@ -742,11 +814,11 @@ module Aws::EMR
     #   The Amazon EMR release label, which determines the version of
     #   open-source application packages installed on the cluster. Release
     #   labels are in the form `emr-x.x.x`, where x.x.x is an Amazon EMR
-    #   release version, for example, `emr-5.14.0`. For more information
-    #   about Amazon EMR release versions and included application versions
-    #   and features, see
+    #   release version such as `emr-5.14.0`. For more information about
+    #   Amazon EMR release versions and included application versions and
+    #   features, see
     #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
-    #   release label applies only to Amazon EMR releases versions 4.x and
+    #   release label applies only to Amazon EMR releases version 4.0 and
     #   later. Earlier versions use `AmiVersion`.
     #
     #
@@ -766,6 +838,8 @@ module Aws::EMR
     #   @return [Boolean]
     #
     # @!attribute [rw] visible_to_all_users
+    #   *This member will be deprecated.*
+    #
     #   Indicates whether the cluster is visible to all IAM users of the AWS
     #   account associated with the cluster. If this value is set to `true`,
     #   all IAM users of that AWS account can view and manage the cluster if
@@ -1426,14 +1500,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] ec2_subnet_id
-    #   To launch the cluster in Amazon VPC, set this parameter to the
-    #   identifier of the Amazon VPC subnet where you want the cluster to
-    #   launch. If you do not specify this value, the cluster is launched in
-    #   the normal AWS cloud, outside of a VPC.
-    #
-    #   Amazon VPC currently does not support cluster compute quadruple
-    #   extra large (cc1.4xlarge) instances. Thus, you cannot specify the
-    #   cc1.4xlarge instance type for nodes of a cluster launched in a VPC.
+    #   Set this parameter to the identifier of the Amazon VPC subnet where
+    #   you want the cluster to launch. If you do not specify this value,
+    #   and your account supports EC2-Classic, the cluster launches in
+    #   EC2-Classic.
     #   @return [String]
     #
     # @!attribute [rw] requested_ec2_subnet_ids
@@ -1443,7 +1513,7 @@ module Aws::EMR
     #   same VPC. Amazon EMR chooses the EC2 subnet with the best fit from
     #   among the list of `RequestedEc2SubnetIds`, and then launches all
     #   cluster instances within that Subnet. If this value is not
-    #   specified, and the account and region support EC2-Classic networks,
+    #   specified, and the account and Region support EC2-Classic networks,
     #   the cluster launches instances in the EC2-Classic network and uses
     #   `RequestedEc2AvailabilityZones` instead of this setting. If
     #   EC2-Classic is not supported, and no Subnet is specified, Amazon EMR
@@ -1539,6 +1609,44 @@ module Aws::EMR
       :reason,
       :message,
       :log_file)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfigurationInput AWS API Documentation
+    #
+    class GetBlockPublicAccessConfigurationInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] block_public_access_configuration
+    #   A configuration for Amazon EMR block public access. The
+    #   configuration applies to all clusters created in your account for
+    #   the current Region. The configuration specifies whether block public
+    #   access is enabled. If block public access is enabled, security
+    #   groups associated with the cluster cannot have rules that allow
+    #   inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is
+    #   specified as an exception using
+    #   `PermittedPublicSecurityGroupRuleRanges` in the
+    #   `BlockPublicAccessConfiguration`. By default, Port 22 (SSH) is an
+    #   exception, and public access is allowed on this port. You can change
+    #   this by updating the block public access configuration to remove the
+    #   exception.
+    #   @return [Types::BlockPublicAccessConfiguration]
+    #
+    # @!attribute [rw] block_public_access_configuration_metadata
+    #   Properties that describe the AWS principal that created the
+    #   `BlockPublicAccessConfiguration` using the
+    #   `PutBlockPublicAccessConfiguration` action as well as the date and
+    #   time that the configuration was created. Each time a configuration
+    #   for block public access is updated, Amazon EMR updates this
+    #   metadata.
+    #   @return [Types::BlockPublicAccessConfigurationMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfigurationOutput AWS API Documentation
+    #
+    class GetBlockPublicAccessConfigurationOutput < Struct.new(
+      :block_public_access_configuration,
+      :block_public_access_configuration_metadata)
       include Aws::Structure
     end
 
@@ -2848,6 +2956,38 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # This exception occurs when there is an internal failure in the EMR
+    # service.
+    #
+    # @!attribute [rw] message
+    #   The message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception occurs when there is something wrong with user input.
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # A description of a cluster (job flow).
     #
     # @!attribute [rw] job_flow_id
@@ -2891,6 +3031,8 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
+    #   *This member will be deprecated.*
+    #
     #   Specifies whether the cluster is visible to all IAM users of the AWS
     #   account associated with the cluster. If this value is set to `true`,
     #   all IAM users of that AWS account can view and (if they have the
@@ -3204,14 +3346,8 @@ module Aws::EMR
     #   configuration. To launch the cluster in Amazon Virtual Private Cloud
     #   (Amazon VPC), set this parameter to the identifier of the Amazon VPC
     #   subnet where you want the cluster to launch. If you do not specify
-    #   this value, the cluster launches in the normal Amazon Web Services
-    #   cloud, outside of an Amazon VPC, if the account launching the
-    #   cluster supports EC2 Classic networks in the region where the
-    #   cluster launches.
-    #
-    #   Amazon VPC currently does not support cluster compute quadruple
-    #   extra large (cc1.4xlarge) instances. Thus you cannot specify the
-    #   cc1.4xlarge instance type for clusters launched in an Amazon VPC.
+    #   this value and your account supports EC2-Classic, the cluster
+    #   launches in EC2-Classic.
     #   @return [String]
     #
     # @!attribute [rw] ec2_subnet_ids
@@ -3962,6 +4098,34 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # A list of port ranges that are permitted to allow inbound traffic from
+    # all public IP addresses. To specify a single port, use the same value
+    # for `MinRange` and `MaxRange`.
+    #
+    # @note When making an API call, you may pass PortRange
+    #   data as a hash:
+    #
+    #       {
+    #         min_range: 1, # required
+    #         max_range: 1,
+    #       }
+    #
+    # @!attribute [rw] min_range
+    #   The smallest port number in a specified range of port numbers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_range
+    #   The smallest port number in a specified range of port numbers.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PortRange AWS API Documentation
+    #
+    class PortRange < Struct.new(
+      :min_range,
+      :max_range)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutAutoScalingPolicyInput
     #   data as a hash:
     #
@@ -4053,6 +4217,47 @@ module Aws::EMR
       :auto_scaling_policy)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutBlockPublicAccessConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         block_public_access_configuration: { # required
+    #           block_public_security_group_rules: false, # required
+    #           permitted_public_security_group_rule_ranges: [
+    #             {
+    #               min_range: 1, # required
+    #               max_range: 1,
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] block_public_access_configuration
+    #   A configuration for Amazon EMR block public access. The
+    #   configuration applies to all clusters created in your account for
+    #   the current Region. The configuration specifies whether block public
+    #   access is enabled. If block public access is enabled, security
+    #   groups associated with the cluster cannot have rules that allow
+    #   inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is
+    #   specified as an exception using
+    #   `PermittedPublicSecurityGroupRuleRanges` in the
+    #   `BlockPublicAccessConfiguration`. By default, Port 22 (SSH) is an
+    #   exception, and public access is allowed on this port. You can change
+    #   this by updating `BlockPublicSecurityGroupRules` to remove the
+    #   exception.
+    #   @return [Types::BlockPublicAccessConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfigurationInput AWS API Documentation
+    #
+    class PutBlockPublicAccessConfigurationInput < Struct.new(
+      :block_public_access_configuration)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfigurationOutput AWS API Documentation
+    #
+    class PutBlockPublicAccessConfigurationOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RemoveAutoScalingPolicyInput
     #   data as a hash:
@@ -4368,11 +4573,11 @@ module Aws::EMR
     #   The Amazon EMR release label, which determines the version of
     #   open-source application packages installed on the cluster. Release
     #   labels are in the form `emr-x.x.x`, where x.x.x is an Amazon EMR
-    #   release version, for example, `emr-5.14.0`. For more information
-    #   about Amazon EMR release versions and included application versions
-    #   and features, see
+    #   release version such as `emr-5.14.0`. For more information about
+    #   Amazon EMR release versions and included application versions and
+    #   features, see
     #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
-    #   release label applies only to Amazon EMR releases versions 4.x and
+    #   release label applies only to Amazon EMR releases version 4.0 and
     #   later. Earlier versions use `AmiVersion`.
     #
     #
@@ -4467,6 +4672,8 @@ module Aws::EMR
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] visible_to_all_users
+    #   *This member will be deprecated.*
+    #
     #   Whether the cluster is visible to all IAM users of the AWS account
     #   associated with the cluster. If this value is set to `true`, all IAM
     #   users of that AWS account can view and (if they have the proper
@@ -4855,6 +5062,8 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # *This member will be deprecated.*
+    #
     # The input to the SetVisibleToAllUsers action.
     #
     # @note When making an API call, you may pass SetVisibleToAllUsersInput
@@ -4870,6 +5079,8 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
+    #   *This member will be deprecated.*
+    #
     #   Whether the specified clusters are visible to all IAM users of the
     #   AWS account associated with the cluster. If this value is set to
     #   True, all IAM users of that AWS account can view and, if they have

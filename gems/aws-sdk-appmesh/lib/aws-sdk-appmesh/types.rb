@@ -71,6 +71,16 @@ module Aws::AppMesh
     #             },
     #           },
     #           service_discovery: {
+    #             aws_cloud_map: {
+    #               attributes: [
+    #                 {
+    #                   key: "AwsCloudMapInstanceAttributeKey", # required
+    #                   value: "AwsCloudMapInstanceAttributeValue", # required
+    #                 },
+    #               ],
+    #               namespace_name: "AwsCloudMapName", # required
+    #               service_name: "AwsCloudMapName", # required
+    #             },
     #             dns: {
     #               hostname: "Hostname", # required
     #             },
@@ -201,7 +211,7 @@ module Aws::AppMesh
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
     #         spec: { # required
-    #           listeners: [ # required
+    #           listeners: [
     #             {
     #               port_mapping: { # required
     #                 port: 1, # required
@@ -319,6 +329,18 @@ module Aws::AppMesh
     #
     class Logging < Struct.new(
       :access_log)
+      include Aws::Structure
+    end
+
+    # The request has failed due to a temporary failure of the service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -465,6 +487,19 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # You can't delete the specified resource because it's in use or
+    # required by another resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_node
     #   A full description of the virtual node that was updated.
     #   @return [Types::VirtualNodeData]
@@ -514,6 +549,19 @@ module Aws::AppMesh
     #
     class VirtualServiceBackend < Struct.new(
       :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # The request syntax was malformed. Check your request syntax and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -833,6 +881,49 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object representing the HTTP header in the request.
+    #
+    # @note When making an API call, you may pass HttpRouteHeader
+    #   data as a hash:
+    #
+    #       {
+    #         invert: false,
+    #         match: {
+    #           exact: "HeaderMatch",
+    #           prefix: "HeaderMatch",
+    #           range: {
+    #             end: 1, # required
+    #             start: 1, # required
+    #           },
+    #           regex: "HeaderMatch",
+    #           suffix: "HeaderMatch",
+    #         },
+    #         name: "HeaderName", # required
+    #       }
+    #
+    # @!attribute [rw] invert
+    #   Specify `True` to match the opposite of the `HeaderMatchMethod`
+    #   method and value. The default value is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] match
+    #   The `HeaderMatchMethod` object.
+    #   @return [Types::HeaderMatchMethod]
+    #
+    # @!attribute [rw] name
+    #   A name for the HTTP header in the client request that will be
+    #   matched on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteHeader AWS API Documentation
+    #
+    class HttpRouteHeader < Struct.new(
+      :invert,
+      :match,
+      :name)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_service
     #   The full description of your virtual service.
     #   @return [Types::VirtualServiceData]
@@ -929,6 +1020,23 @@ module Aws::AppMesh
     #
     class DescribeVirtualNodeOutput < Struct.new(
       :virtual_node)
+      include Aws::Structure
+    end
+
+    # You have exceeded a service limit for your account. For more
+    # information, see [Service Limits][1] in the *AWS App Mesh User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/service_limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1068,6 +1176,37 @@ module Aws::AppMesh
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # An object representing the AWS Cloud Map attribute information for
+    # your virtual node.
+    #
+    # @note When making an API call, you may pass AwsCloudMapInstanceAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         key: "AwsCloudMapInstanceAttributeKey", # required
+    #         value: "AwsCloudMapInstanceAttributeValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of an AWS Cloud Map service instance attribute key. Any AWS
+    #   Cloud Map service instance that contains the specified key and value
+    #   is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of an AWS Cloud Map service instance attribute key. Any
+    #   AWS Cloud Map service instance that contains the specified key and
+    #   value is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapInstanceAttribute AWS API Documentation
+    #
+    class AwsCloudMapInstanceAttribute < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
     # An object representing the specification of a virtual service.
     #
     # @note When making an API call, you may pass VirtualServiceSpec
@@ -1116,6 +1255,34 @@ module Aws::AppMesh
     #
     class Backend < Struct.new(
       :virtual_service)
+      include Aws::Structure
+    end
+
+    # The range of values to match on. The first character of the range is
+    # included in the range, though the last character is not. For example,
+    # if the range specified were 1-100, only values 1-99 would be matched.
+    #
+    # @note When making an API call, you may pass MatchRange
+    #   data as a hash:
+    #
+    #       {
+    #         end: 1, # required
+    #         start: 1, # required
+    #       }
+    #
+    # @!attribute [rw] end
+    #   The end of the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start
+    #   The start of the range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MatchRange AWS API Documentation
+    #
+    class MatchRange < Struct.new(
+      :end,
+      :start)
       include Aws::Structure
     end
 
@@ -1346,7 +1513,7 @@ module Aws::AppMesh
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
     #         spec: { # required
-    #           listeners: [ # required
+    #           listeners: [
     #             {
     #               port_mapping: { # required
     #                 port: 1, # required
@@ -1520,7 +1687,7 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
-    #         listeners: [ # required
+    #         listeners: [
     #           {
     #             port_mapping: { # required
     #               port: 1, # required
@@ -1540,6 +1707,20 @@ module Aws::AppMesh
     #
     class VirtualRouterSpec < Struct.new(
       :listeners)
+      include Aws::Structure
+    end
+
+    # The maximum request rate permitted by the App Mesh APIs has been
+    # exceeded for your account. For best results, use an increasing or
+    # variable sleep interval between requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1581,6 +1762,16 @@ module Aws::AppMesh
     #           },
     #         },
     #         service_discovery: {
+    #           aws_cloud_map: {
+    #             attributes: [
+    #               {
+    #                 key: "AwsCloudMapInstanceAttributeKey", # required
+    #                 value: "AwsCloudMapInstanceAttributeValue", # required
+    #               },
+    #             ],
+    #             namespace_name: "AwsCloudMapName", # required
+    #             service_name: "AwsCloudMapName", # required
+    #           },
     #           dns: {
     #             hostname: "Hostname", # required
     #           },
@@ -1638,6 +1829,20 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # The request contains a client token that was used for a previous
+    # update resource call with different specifications. Try the request
+    # again with a new client token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] route
     #   The full description of your route.
     #   @return [Types::RouteData]
@@ -1656,8 +1861,34 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         headers: [
+    #           {
+    #             invert: false,
+    #             match: {
+    #               exact: "HeaderMatch",
+    #               prefix: "HeaderMatch",
+    #               range: {
+    #                 end: 1, # required
+    #                 start: 1, # required
+    #               },
+    #               regex: "HeaderMatch",
+    #               suffix: "HeaderMatch",
+    #             },
+    #             name: "HeaderName", # required
+    #           },
+    #         ],
+    #         method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #         prefix: "String", # required
+    #         scheme: "http", # accepts http, https
     #       }
+    #
+    # @!attribute [rw] headers
+    #   The client request headers to match on.
+    #   @return [Array<Types::HttpRouteHeader>]
+    #
+    # @!attribute [rw] method
+    #   The client request header method to match on.
+    #   @return [String]
     #
     # @!attribute [rw] prefix
     #   Specifies the path to match requests with. This parameter must
@@ -1668,10 +1899,17 @@ module Aws::AppMesh
     #   `my-service.local/metrics`, your prefix should be `/metrics`.
     #   @return [String]
     #
+    # @!attribute [rw] scheme
+    #   The client request header scheme to match on.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch AWS API Documentation
     #
     class HttpRouteMatch < Struct.new(
-      :prefix)
+      :headers,
+      :method,
+      :prefix,
+      :scheme)
       include Aws::Structure
     end
 
@@ -2068,6 +2306,19 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # The request processing has failed because of an unknown error,
+    # exception, or failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeVirtualRouterInput
     #   data as a hash:
     #
@@ -2095,6 +2346,86 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
+
+    # You don't have permissions to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request exceeds the maximum allowed number of tags allowed per
+    # resource. The current limit is 50 user tags per resource. You must
+    # reduce the number of tags in the request. None of the tags in this
+    # request were applied.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An object representing the method and value to match the header value
+    # sent with a request. Specify one match method.
+    #
+    # @note When making an API call, you may pass HeaderMatchMethod
+    #   data as a hash:
+    #
+    #       {
+    #         exact: "HeaderMatch",
+    #         prefix: "HeaderMatch",
+    #         range: {
+    #           end: 1, # required
+    #           start: 1, # required
+    #         },
+    #         regex: "HeaderMatch",
+    #         suffix: "HeaderMatch",
+    #       }
+    #
+    # @!attribute [rw] exact
+    #   The header value sent by the client must match the specified value
+    #   exactly.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The header value sent by the client must begin with the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] range
+    #   The object that specifies the range of numbers that the header value
+    #   sent by the client must be included in.
+    #   @return [Types::MatchRange]
+    #
+    # @!attribute [rw] regex
+    #   The header value sent by the client must include the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] suffix
+    #   The header value sent by the client must end with the specified
+    #   characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HeaderMatchMethod AWS API Documentation
+    #
+    class HeaderMatchMethod < Struct.new(
+      :exact,
+      :prefix,
+      :range,
+      :regex,
+      :suffix)
+      include Aws::Structure
+    end
 
     # @!attribute [rw] mesh
     #   The service mesh that was deleted.
@@ -2157,9 +2488,28 @@ module Aws::AppMesh
     #               ],
     #             },
     #             match: { # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #               prefix: "String", # required
+    #               scheme: "http", # accepts http, https
     #             },
     #           },
+    #           priority: 1,
     #           tcp_route: {
     #             action: { # required
     #               weighted_targets: [ # required
@@ -2255,6 +2605,47 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object representing the AWS Cloud Map service discovery information
+    # for your virtual node.
+    #
+    # @note When making an API call, you may pass AwsCloudMapServiceDiscovery
+    #   data as a hash:
+    #
+    #       {
+    #         attributes: [
+    #           {
+    #             key: "AwsCloudMapInstanceAttributeKey", # required
+    #             value: "AwsCloudMapInstanceAttributeValue", # required
+    #           },
+    #         ],
+    #         namespace_name: "AwsCloudMapName", # required
+    #         service_name: "AwsCloudMapName", # required
+    #       }
+    #
+    # @!attribute [rw] attributes
+    #   A string map that contains attributes with values that you can use
+    #   to filter instances by any custom attribute that you specified when
+    #   you registered the instance. Only instances that match all of the
+    #   specified key/value pairs will be returned.
+    #   @return [Array<Types::AwsCloudMapInstanceAttribute>]
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of the AWS Cloud Map namespace to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the AWS Cloud Map service to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapServiceDiscovery AWS API Documentation
+    #
+    class AwsCloudMapServiceDiscovery < Struct.new(
+      :attributes,
+      :namespace_name,
+      :service_name)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_service
     #   A full description of the virtual service that was updated.
     #   @return [Types::VirtualServiceData]
@@ -2284,9 +2675,28 @@ module Aws::AppMesh
     #               ],
     #             },
     #             match: { # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #               prefix: "String", # required
+    #               scheme: "http", # accepts http, https
     #             },
     #           },
+    #           priority: 1,
     #           tcp_route: {
     #             action: { # required
     #               weighted_targets: [ # required
@@ -2390,6 +2800,16 @@ module Aws::AppMesh
     #             },
     #           },
     #           service_discovery: {
+    #             aws_cloud_map: {
+    #               attributes: [
+    #                 {
+    #                   key: "AwsCloudMapInstanceAttributeKey", # required
+    #                   value: "AwsCloudMapInstanceAttributeValue", # required
+    #                 },
+    #               ],
+    #               namespace_name: "AwsCloudMapName", # required
+    #               service_name: "AwsCloudMapName", # required
+    #             },
     #             dns: {
     #               hostname: "Hostname", # required
     #             },
@@ -2444,6 +2864,19 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # The specified resource doesn't exist. Check your request syntax and
+    # try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing the specification of a route.
     #
     # @note When making an API call, you may pass RouteSpec
@@ -2460,9 +2893,28 @@ module Aws::AppMesh
     #             ],
     #           },
     #           match: { # required
+    #             headers: [
+    #               {
+    #                 invert: false,
+    #                 match: {
+    #                   exact: "HeaderMatch",
+    #                   prefix: "HeaderMatch",
+    #                   range: {
+    #                     end: 1, # required
+    #                     start: 1, # required
+    #                   },
+    #                   regex: "HeaderMatch",
+    #                   suffix: "HeaderMatch",
+    #                 },
+    #                 name: "HeaderName", # required
+    #               },
+    #             ],
+    #             method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #             prefix: "String", # required
+    #             scheme: "http", # accepts http, https
     #           },
     #         },
+    #         priority: 1,
     #         tcp_route: {
     #           action: { # required
     #             weighted_targets: [ # required
@@ -2479,6 +2931,11 @@ module Aws::AppMesh
     #   The HTTP routing information for the route.
     #   @return [Types::HttpRoute]
     #
+    # @!attribute [rw] priority
+    #   The priority for the route. Routes are matched based on the
+    #   specified value, where 0 is the highest priority.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tcp_route
     #   The TCP routing information for the route.
     #   @return [Types::TcpRoute]
@@ -2487,6 +2944,7 @@ module Aws::AppMesh
     #
     class RouteSpec < Struct.new(
       :http_route,
+      :priority,
       :tcp_route)
       include Aws::Structure
     end
@@ -2506,7 +2964,25 @@ module Aws::AppMesh
     #           ],
     #         },
     #         match: { # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #           prefix: "String", # required
+    #           scheme: "http", # accepts http, https
     #         },
     #       }
     #
@@ -2679,10 +3155,24 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         aws_cloud_map: {
+    #           attributes: [
+    #             {
+    #               key: "AwsCloudMapInstanceAttributeKey", # required
+    #               value: "AwsCloudMapInstanceAttributeValue", # required
+    #             },
+    #           ],
+    #           namespace_name: "AwsCloudMapName", # required
+    #           service_name: "AwsCloudMapName", # required
+    #         },
     #         dns: {
     #           hostname: "Hostname", # required
     #         },
     #       }
+    #
+    # @!attribute [rw] aws_cloud_map
+    #   Specifies any AWS Cloud Map information for the virtual node.
+    #   @return [Types::AwsCloudMapServiceDiscovery]
     #
     # @!attribute [rw] dns
     #   Specifies the DNS information for the virtual node.
@@ -2691,6 +3181,7 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ServiceDiscovery AWS API Documentation
     #
     class ServiceDiscovery < Struct.new(
+      :aws_cloud_map,
       :dns)
       include Aws::Structure
     end

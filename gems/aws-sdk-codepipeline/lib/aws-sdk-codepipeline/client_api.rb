@@ -105,6 +105,7 @@ module Aws::CodePipeline
     ExecutionDetails = Shapes::StructureShape.new(name: 'ExecutionDetails')
     ExecutionId = Shapes::StringShape.new(name: 'ExecutionId')
     ExecutionSummary = Shapes::StringShape.new(name: 'ExecutionSummary')
+    ExecutionTrigger = Shapes::StructureShape.new(name: 'ExecutionTrigger')
     ExternalExecutionId = Shapes::StringShape.new(name: 'ExternalExecutionId')
     ExternalExecutionSummary = Shapes::StringShape.new(name: 'ExternalExecutionSummary')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
@@ -256,6 +257,8 @@ module Aws::CodePipeline
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TransitionState = Shapes::StructureShape.new(name: 'TransitionState')
+    TriggerDetail = Shapes::StringShape.new(name: 'TriggerDetail')
+    TriggerType = Shapes::StringShape.new(name: 'TriggerType')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdatePipelineInput = Shapes::StructureShape.new(name: 'UpdatePipelineInput')
@@ -457,6 +460,9 @@ module Aws::CodePipeline
     BlockerDeclaration.add_member(:type, Shapes::ShapeRef.new(shape: BlockerType, required: true, location_name: "type"))
     BlockerDeclaration.struct_class = Types::BlockerDeclaration
 
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     CreateCustomActionTypeInput.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, required: true, location_name: "category"))
     CreateCustomActionTypeInput.add_member(:provider, Shapes::ShapeRef.new(shape: ActionProvider, required: true, location_name: "provider"))
     CreateCustomActionTypeInput.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
@@ -527,6 +533,10 @@ module Aws::CodePipeline
     ExecutionDetails.add_member(:percent_complete, Shapes::ShapeRef.new(shape: Percentage, location_name: "percentComplete"))
     ExecutionDetails.struct_class = Types::ExecutionDetails
 
+    ExecutionTrigger.add_member(:trigger_type, Shapes::ShapeRef.new(shape: TriggerType, location_name: "triggerType"))
+    ExecutionTrigger.add_member(:trigger_detail, Shapes::ShapeRef.new(shape: TriggerDetail, location_name: "triggerDetail"))
+    ExecutionTrigger.struct_class = Types::ExecutionTrigger
+
     FailureDetails.add_member(:type, Shapes::ShapeRef.new(shape: FailureType, required: true, location_name: "type"))
     FailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
     FailureDetails.add_member(:external_execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "externalExecutionId"))
@@ -574,6 +584,12 @@ module Aws::CodePipeline
     InputArtifact.struct_class = Types::InputArtifact
 
     InputArtifactList.member = Shapes::ShapeRef.new(shape: InputArtifact)
+
+    InvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidArnException.struct_class = Types::InvalidArnException
+
+    InvalidTagsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InvalidTagsException.struct_class = Types::InvalidTagsException
 
     Job.add_member(:id, Shapes::ShapeRef.new(shape: JobId, location_name: "id"))
     Job.add_member(:data, Shapes::ShapeRef.new(shape: JobData, location_name: "data"))
@@ -690,6 +706,7 @@ module Aws::CodePipeline
     PipelineExecutionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     PipelineExecutionSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     PipelineExecutionSummary.add_member(:source_revisions, Shapes::ShapeRef.new(shape: SourceRevisionList, location_name: "sourceRevisions"))
+    PipelineExecutionSummary.add_member(:trigger, Shapes::ShapeRef.new(shape: ExecutionTrigger, location_name: "trigger"))
     PipelineExecutionSummary.struct_class = Types::PipelineExecutionSummary
 
     PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)
@@ -871,6 +888,9 @@ module Aws::CodePipeline
     ThirdPartyJobDetails.struct_class = Types::ThirdPartyJobDetails
 
     ThirdPartyJobList.member = Shapes::ShapeRef.new(shape: ThirdPartyJob)
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     TransitionState.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "enabled"))
     TransitionState.add_member(:last_changed_by, Shapes::ShapeRef.new(shape: LastChangedBy, location_name: "lastChangedBy"))

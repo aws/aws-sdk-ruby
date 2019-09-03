@@ -47,6 +47,20 @@ module Aws
         expect(client.config.credentials.access_key_id).to eq("AKID_ENV_STUB")
       end
 
+      it 'prefers assume role web identity over assume role' do
+        allow(File).to receive(:exist?).and_return(true)
+        allow(File).to receive(:read).and_return('token')
+        assume_role_web_identity_stub(
+          "arn:aws:iam:123456789012:role/foo",
+          "AR_AKID",
+          "AR_SECRET",
+          "AR_TOKEN"
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: "ar_web_identity", region: "us-west-2")
+        expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+      end
+
       it 'prefers assume role over shared config' do
         assume_role_stub(
           "arn:aws:iam:123456789012:role/bar",
@@ -117,6 +131,26 @@ JSON
           expect {
             ApiHelper.sample_rest_xml::Client.new(profile: "ar_bad_src", region: "us-east-1")
           }.to raise_error(Errors::NoSourceProfileError)
+        end
+
+        it 'supports :source_profile from assume_role_web_identity' do
+          allow(File).to receive(:exist?).and_return(true)
+          allow(File).to receive(:read).and_return('token')
+          assume_role_web_identity_stub(
+            "arn:aws:iam:123456789012:role/foo",
+            "AR_AKID_WEB",
+            "AR_SECRET",
+            "AR_TOKEN"
+          )
+          assume_role_stub(
+            "arn:aws:iam:123456789012:role/bar",
+            "AR_AKID_WEB", # from web_only
+            "AR_AKID",
+            "AR_SECRET",
+            "AR_TOKEN"
+          )
+          client = ApiHelper.sample_rest_xml::Client.new(profile: "ar_web_src", region: "us-east-1")
+          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
         end
 
         it 'will explicitly raise if credential_source is present but invalid' do
@@ -322,5 +356,34 @@ JSON
 </AssumeRoleResponse>
         RESP
     end
+
+    def assume_role_web_identity_stub(role_arn, access_key, secret_key, token)
+      stub_request(:post, "https://sts.amazonaws.com/").
+        to_return(body: <<-RESP)
+<AssumeRoleWithWebIdentityResponse xmlns=\"https://sts.amazonaws.com/doc/2011-06-15/\">
+  <AssumeRoleWithWebIdentityResult>
+    <Audience>my-cluster.sk1.us-west-2.eks.amazonaws.com</Audience>
+    <AssumedRoleUser>
+      <AssumedRoleId>StubbedRoleId</AssumedRoleId>
+      <Arn>#{role_arn}</Arn>
+    </AssumedRoleUser>
+    <Provider>MockProvider</Provider>
+    <Credentials>
+      <AccessKeyId>#{access_key}</AccessKeyId>
+      <SecretAccessKey>#{secret_key}</SecretAccessKey>
+      <SessionToken>#{token}</SessionToken>
+      <Expiration>#{(Time.now + 3600).utc.iso8601}</Expiration>
+    </Credentials>
+    <SubjectFromWebIdentityToken>
+      system:serviceaccount:default:default
+    </SubjectFromWebIdentityToken>
+  </AssumeRoleWithWebIdentityResult>
+  <ResponseMetadata>
+    <RequestId>MyStubbedRequest</RequestId>
+  </ResponseMetadata>
+</AssumeRoleWithWebIdentityResponse>
+        RESP
+    end
+
   end
 end

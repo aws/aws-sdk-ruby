@@ -390,6 +390,23 @@ module Aws::Redshift
     #   * `updating-hsm`
     #   @return [String]
     #
+    # @!attribute [rw] cluster_availability_status
+    #   The availability status of the cluster for queries. Possible values
+    #   are the following:
+    #
+    #   * Available - The cluster is available for queries.
+    #
+    #   * Unavailable - The cluster is not available for queries.
+    #
+    #   * Maintenance - The cluster is intermittently available for queries
+    #     due to maintenance activities.
+    #
+    #   * Modifying - The cluster is intermittently available for queries
+    #     due to changes that modify the cluster.
+    #
+    #   * Failed - The cluster failed and is not available for queries.
+    #   @return [String]
+    #
     # @!attribute [rw] modify_status
     #   The status of a modify operation, if any, initiated for the cluster.
     #   @return [String]
@@ -592,6 +609,21 @@ module Aws::Redshift
     #   The current state of the cluster snapshot schedule.
     #   @return [String]
     #
+    # @!attribute [rw] expected_next_snapshot_schedule_time
+    #   The date and time when the next snapshot is expected to be taken for
+    #   clusters with a valid snapshot schedule and backups enabled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expected_next_snapshot_schedule_time_status
+    #   The status of next expected snapshot for clusters having a valid
+    #   snapshot schedule and backups enabled. Possible values are the
+    #   following:
+    #
+    #   * OnTrack - The next snapshot is expected to be taken on time.
+    #
+    #   * Pending - The next snapshot is pending to be taken.
+    #   @return [String]
+    #
     # @!attribute [rw] resize_info
     #   Returns the following:
     #
@@ -607,6 +639,7 @@ module Aws::Redshift
       :cluster_identifier,
       :node_type,
       :cluster_status,
+      :cluster_availability_status,
       :modify_status,
       :master_username,
       :db_name,
@@ -645,6 +678,8 @@ module Aws::Redshift
       :deferred_maintenance_windows,
       :snapshot_schedule_identifier,
       :snapshot_schedule_state,
+      :expected_next_snapshot_schedule_time,
+      :expected_next_snapshot_schedule_time_status,
       :resize_info)
       include Aws::Structure
     end
@@ -6684,7 +6719,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] node_type
-    #   The new node type for the nodes you are adding.
+    #   The new node type for the nodes you are adding. If not specified,
+    #   the cluster's current node type is used.
     #   @return [String]
     #
     # @!attribute [rw] number_of_nodes

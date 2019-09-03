@@ -28,6 +28,21 @@
         {"shape":"ThrottlingException"}
       ]
     },
+    "CancelDeploymentJob":{
+      "name":"CancelDeploymentJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/cancelDeploymentJob"
+      },
+      "input":{"shape":"CancelDeploymentJobRequest"},
+      "output":{"shape":"CancelDeploymentJobResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "CancelSimulationJob":{
       "name":"CancelSimulationJob",
       "http":{
@@ -172,7 +187,8 @@
         {"shape":"InternalServerException"},
         {"shape":"ThrottlingException"},
         {"shape":"LimitExceededException"},
-        {"shape":"IdempotentParameterMismatchException"}
+        {"shape":"IdempotentParameterMismatchException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "DeleteFleet":{
@@ -587,6 +603,19 @@
       }
     },
     "Boolean":{"type":"boolean"},
+    "BoxedBoolean":{"type":"boolean"},
+    "CancelDeploymentJobRequest":{
+      "type":"structure",
+      "required":["job"],
+      "members":{
+        "job":{"shape":"Arn"}
+      }
+    },
+    "CancelDeploymentJobResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "CancelSimulationJobRequest":{
       "type":"structure",
       "required":["job"],
@@ -746,8 +775,7 @@
         "name",
         "sources",
         "simulationSoftwareSuite",
-        "robotSoftwareSuite",
-        "renderingEngine"
+        "robotSoftwareSuite"
       ],
       "members":{
         "name":{"shape":"Name"},
@@ -807,11 +835,13 @@
           "idempotencyToken":true
         },
         "outputLocation":{"shape":"OutputLocation"},
+        "loggingConfig":{"shape":"LoggingConfig"},
         "maxJobDurationInSeconds":{"shape":"JobDuration"},
         "iamRole":{"shape":"IamRole"},
         "failureBehavior":{"shape":"FailureBehavior"},
         "robotApplications":{"shape":"RobotApplicationConfigs"},
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
+        "dataSources":{"shape":"DataSourceConfigs"},
         "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfig"}
       }
@@ -821,21 +851,59 @@
       "members":{
         "arn":{"shape":"Arn"},
         "status":{"shape":"SimulationJobStatus"},
+        "lastStartedAt":{"shape":"LastStartedAt"},
         "lastUpdatedAt":{"shape":"LastUpdatedAt"},
         "failureBehavior":{"shape":"FailureBehavior"},
         "failureCode":{"shape":"SimulationJobErrorCode"},
         "clientRequestToken":{"shape":"ClientRequestToken"},
         "outputLocation":{"shape":"OutputLocation"},
+        "loggingConfig":{"shape":"LoggingConfig"},
         "maxJobDurationInSeconds":{"shape":"JobDuration"},
         "simulationTimeMillis":{"shape":"SimulationTimeMillis"},
         "iamRole":{"shape":"IamRole"},
         "robotApplications":{"shape":"RobotApplicationConfigs"},
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
+        "dataSources":{"shape":"DataSources"},
         "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfigResponse"}
       }
     },
     "CreatedAt":{"type":"timestamp"},
+    "DataSource":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"Name"},
+        "s3Bucket":{"shape":"S3Bucket"},
+        "s3Keys":{"shape":"S3KeyOutputs"}
+      }
+    },
+    "DataSourceConfig":{
+      "type":"structure",
+      "required":[
+        "name",
+        "s3Bucket",
+        "s3Keys"
+      ],
+      "members":{
+        "name":{"shape":"Name"},
+        "s3Bucket":{"shape":"S3Bucket"},
+        "s3Keys":{"shape":"S3Keys"}
+      }
+    },
+    "DataSourceConfigs":{
+      "type":"list",
+      "member":{"shape":"DataSourceConfig"},
+      "max":5,
+      "min":1
+    },
+    "DataSourceNames":{
+      "type":"list",
+      "member":{"shape":"Name"}
+    },
+    "DataSources":{
+      "type":"list",
+      "member":{"shape":"DataSource"}
+    },
     "DeleteFleetRequest":{
       "type":"structure",
       "required":["fleet"],
@@ -909,7 +977,8 @@
       "type":"structure",
       "members":{
         "concurrentDeploymentPercentage":{"shape":"Percentage"},
-        "failureThresholdPercentage":{"shape":"Percentage"}
+        "failureThresholdPercentage":{"shape":"Percentage"},
+        "robotDeploymentTimeoutInSeconds":{"shape":"DeploymentTimeout"}
       }
     },
     "DeploymentJob":{
@@ -932,6 +1001,7 @@
         "EnvironmentSetupError",
         "EtagMismatch",
         "FailureThresholdBreached",
+        "RobotDeploymentAborted",
         "RobotDeploymentNoResponse",
         "RobotAgentConnectionTimeout",
         "GreengrassDeploymentFailed",
@@ -973,9 +1043,11 @@
         "Preparing",
         "InProgress",
         "Failed",
-        "Succeeded"
+        "Succeeded",
+        "Canceled"
       ]
     },
+    "DeploymentTimeout":{"type":"long"},
     "DeploymentVersion":{
       "type":"string",
       "max":255,
@@ -1121,17 +1193,20 @@
         "arn":{"shape":"Arn"},
         "name":{"shape":"Name"},
         "status":{"shape":"SimulationJobStatus"},
+        "lastStartedAt":{"shape":"LastStartedAt"},
         "lastUpdatedAt":{"shape":"LastUpdatedAt"},
         "failureBehavior":{"shape":"FailureBehavior"},
         "failureCode":{"shape":"SimulationJobErrorCode"},
         "failureReason":{"shape":"GenericString"},
         "clientRequestToken":{"shape":"ClientRequestToken"},
         "outputLocation":{"shape":"OutputLocation"},
+        "loggingConfig":{"shape":"LoggingConfig"},
         "maxJobDurationInSeconds":{"shape":"JobDuration"},
         "simulationTimeMillis":{"shape":"SimulationTimeMillis"},
         "iamRole":{"shape":"IamRole"},
         "robotApplications":{"shape":"RobotApplicationConfigs"},
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
+        "dataSources":{"shape":"DataSources"},
         "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfigResponse"}
       }
@@ -1203,7 +1278,7 @@
       "type":"string",
       "max":255,
       "min":1,
-      "pattern":"arn:.*"
+      "pattern":"arn:aws:iam::\\w+:role/.*"
     },
     "Id":{
       "type":"string",
@@ -1235,6 +1310,7 @@
       "exception":true
     },
     "JobDuration":{"type":"long"},
+    "LastStartedAt":{"type":"timestamp"},
     "LastUpdatedAt":{"type":"timestamp"},
     "LaunchConfig":{
       "type":"structure",
@@ -1366,12 +1442,23 @@
         "tags":{"shape":"TagMap"}
       }
     },
+    "LoggingConfig":{
+      "type":"structure",
+      "required":["recordAllRosTopics"],
+      "members":{
+        "recordAllRosTopics":{"shape":"BoxedBoolean"}
+      }
+    },
     "MaxResults":{"type":"integer"},
     "Name":{
       "type":"string",
       "max":255,
       "min":1,
       "pattern":"[a-zA-Z0-9_\\-]*"
+    },
+    "NonEmptyString":{
+      "type":"string",
+      "min":1
     },
     "OutputLocation":{
       "type":"structure",
@@ -1511,9 +1598,7 @@
     },
     "RobotApplicationNames":{
       "type":"list",
-      "member":{"shape":"Name"},
-      "max":1,
-      "min":1
+      "member":{"shape":"Name"}
     },
     "RobotApplicationSummaries":{
       "type":"list",
@@ -1527,7 +1612,8 @@
         "name":{"shape":"Name"},
         "arn":{"shape":"Arn"},
         "version":{"shape":"Version"},
-        "lastUpdatedAt":{"shape":"LastUpdatedAt"}
+        "lastUpdatedAt":{"shape":"LastUpdatedAt"},
+        "robotSoftwareSuite":{"shape":"RobotSoftwareSuite"}
       }
     },
     "RobotDeployment":{
@@ -1570,7 +1656,10 @@
     },
     "RobotSoftwareSuiteVersionType":{
       "type":"string",
-      "enum":["Kinetic"]
+      "enum":[
+        "Kinetic",
+        "Melodic"
+      ]
     },
     "RobotStatus":{
       "type":"string",
@@ -1594,7 +1683,7 @@
       "type":"string",
       "max":63,
       "min":3,
-      "pattern":"[a-z0-9][a-z0-9\\-]*[a-z0-9]"
+      "pattern":"[a-z0-9][a-z0-9.\\-]*[a-z0-9]"
     },
     "S3Etag":{"type":"string"},
     "S3Key":{
@@ -1603,11 +1692,36 @@
       "min":1,
       "pattern":".*"
     },
+    "S3KeyOutput":{
+      "type":"structure",
+      "members":{
+        "s3Key":{"shape":"S3Key"},
+        "etag":{"shape":"S3Etag"}
+      }
+    },
+    "S3KeyOutputs":{
+      "type":"list",
+      "member":{"shape":"S3KeyOutput"}
+    },
+    "S3Keys":{
+      "type":"list",
+      "member":{"shape":"S3Key"},
+      "max":100,
+      "min":1
+    },
     "SecurityGroups":{
       "type":"list",
-      "member":{"shape":"GenericString"},
+      "member":{"shape":"NonEmptyString"},
       "max":5,
       "min":1
+    },
+    "ServiceUnavailableException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "error":{"httpStatusCode":503},
+      "exception":true
     },
     "SimulationApplicationConfig":{
       "type":"structure",
@@ -1629,9 +1743,7 @@
     },
     "SimulationApplicationNames":{
       "type":"list",
-      "member":{"shape":"Name"},
-      "max":1,
-      "min":1
+      "member":{"shape":"Name"}
     },
     "SimulationApplicationSummaries":{
       "type":"list",
@@ -1645,7 +1757,9 @@
         "name":{"shape":"Name"},
         "arn":{"shape":"Arn"},
         "version":{"shape":"Version"},
-        "lastUpdatedAt":{"shape":"LastUpdatedAt"}
+        "lastUpdatedAt":{"shape":"LastUpdatedAt"},
+        "robotSoftwareSuite":{"shape":"RobotSoftwareSuite"},
+        "simulationSoftwareSuite":{"shape":"SimulationSoftwareSuite"}
       }
     },
     "SimulationJob":{
@@ -1654,17 +1768,20 @@
         "arn":{"shape":"Arn"},
         "name":{"shape":"Name"},
         "status":{"shape":"SimulationJobStatus"},
+        "lastStartedAt":{"shape":"LastStartedAt"},
         "lastUpdatedAt":{"shape":"LastUpdatedAt"},
         "failureBehavior":{"shape":"FailureBehavior"},
         "failureCode":{"shape":"SimulationJobErrorCode"},
         "failureReason":{"shape":"GenericString"},
         "clientRequestToken":{"shape":"ClientRequestToken"},
         "outputLocation":{"shape":"OutputLocation"},
+        "loggingConfig":{"shape":"LoggingConfig"},
         "maxJobDurationInSeconds":{"shape":"JobDuration"},
         "simulationTimeMillis":{"shape":"SimulationTimeMillis"},
         "iamRole":{"shape":"IamRole"},
         "robotApplications":{"shape":"RobotApplicationConfigs"},
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
+        "dataSources":{"shape":"DataSources"},
         "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfigResponse"}
       }
@@ -1677,6 +1794,7 @@
         "SimulationApplicationCrash",
         "BadPermissionsRobotApplication",
         "BadPermissionsSimulationApplication",
+        "BadPermissionsS3Object",
         "BadPermissionsS3Output",
         "BadPermissionsCloudwatchLogs",
         "SubnetIpLimitExceeded",
@@ -1684,8 +1802,13 @@
         "BadPermissionsUserCredentials",
         "InvalidBundleRobotApplication",
         "InvalidBundleSimulationApplication",
+        "InvalidS3Resource",
+        "MismatchedEtag",
         "RobotApplicationVersionMismatchedEtag",
         "SimulationApplicationVersionMismatchedEtag",
+        "ResourceNotFound",
+        "InvalidInput",
+        "WrongRegionS3Bucket",
         "WrongRegionS3Output",
         "WrongRegionRobotApplication",
         "WrongRegionSimulationApplication"
@@ -1720,7 +1843,8 @@
         "name":{"shape":"Name"},
         "status":{"shape":"SimulationJobStatus"},
         "simulationApplicationNames":{"shape":"SimulationApplicationNames"},
-        "robotApplicationNames":{"shape":"RobotApplicationNames"}
+        "robotApplicationNames":{"shape":"RobotApplicationNames"},
+        "dataSourceNames":{"shape":"DataSourceNames"}
       }
     },
     "SimulationJobs":{
@@ -1736,11 +1860,14 @@
     },
     "SimulationSoftwareSuiteType":{
       "type":"string",
-      "enum":["Gazebo"]
+      "enum":[
+        "Gazebo",
+        "RosbagPlay"
+      ]
     },
     "SimulationSoftwareSuiteVersionType":{
       "type":"string",
-      "pattern":"7|9"
+      "pattern":"7|9|Kinetic|Melodic"
     },
     "SimulationTimeMillis":{"type":"long"},
     "Source":{
@@ -1770,7 +1897,7 @@
     },
     "Subnets":{
       "type":"list",
-      "member":{"shape":"GenericString"},
+      "member":{"shape":"NonEmptyString"},
       "max":16,
       "min":1
     },
@@ -1908,8 +2035,7 @@
         "application",
         "sources",
         "simulationSoftwareSuite",
-        "robotSoftwareSuite",
-        "renderingEngine"
+        "robotSoftwareSuite"
       ],
       "members":{
         "application":{"shape":"Arn"},

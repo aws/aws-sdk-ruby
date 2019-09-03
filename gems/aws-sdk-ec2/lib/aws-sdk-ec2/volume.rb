@@ -49,15 +49,15 @@ module Aws::EC2
       data[:create_time]
     end
 
-    # Indicates whether the volume will be encrypted.
+    # Indicates whether the volume is encrypted.
     # @return [Boolean]
     def encrypted
       data[:encrypted]
     end
 
-    # The full ARN of the AWS Key Management Service (AWS KMS) customer
-    # master key (CMK) that was used to protect the volume encryption key
-    # for the volume.
+    # The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS
+    # KMS) customer master key (CMK) that was used to protect the volume
+    # encryption key for the volume.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -283,7 +283,7 @@ module Aws::EC2
     #     description: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",

@@ -118,6 +118,10 @@ module Aws::RDS
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -1687,13 +1691,32 @@ module Aws::RDS
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
     #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
     #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`, `5.7.12`
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
     #
     #   **Aurora PostgreSQL**
     #
-    #   Example: `9.6.3`
+    #   Example: `9.6.3`, `10.7`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the DB cluster accept
@@ -1853,6 +1876,13 @@ module Aws::RDS
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
     #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+    #
     # @option params [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
@@ -1892,6 +1922,23 @@ module Aws::RDS
     # @option params [String] :global_cluster_identifier
     #   The global cluster ID of an Aurora cluster that becomes the primary
     #   cluster in the new global database cluster.
+    #
+    # @option params [Boolean] :enable_http_endpoint
+    #   A value that indicates whether to enable the HTTP endpoint for an
+    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   disabled.
+    #
+    #   When enabled, the HTTP endpoint provides a connectionless web service
+    #   API for running SQL queries on the Aurora Serverless DB cluster. You
+    #   can also query your database from inside the RDS console with the
+    #   query editor.
+    #
+    #   For more information, see [Using the Data API for Aurora
+    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster to
@@ -1974,6 +2021,7 @@ module Aws::RDS
     #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
+    #     enable_http_endpoint: false,
     #     copy_tags_to_snapshot: false,
     #     source_region: "String",
     #   })
@@ -2044,7 +2092,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -2467,10 +2520,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -2480,10 +2533,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -2493,10 +2546,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -2506,10 +2559,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     32768.
+    #     65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     32768.
+    #     65536.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -2915,8 +2968,8 @@ module Aws::RDS
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
-    #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
-    #   Improve Performance][1] in the *Amazon RDS User Guide*.
+    #   valid Iops values, see [Amazon RDS Provisioned IOPS Storage to Improve
+    #   Performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between 1 and 50 of the storage amount
     #   for the DB instance.
@@ -3117,6 +3170,23 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
+    #   * For MySQL 8.0, minor version 8.0.16 or higher
+    #
+    #   **PostgreSQL**
+    #
+    #   * For PostgreSQL 9.5, minor version 9.5.15 or higher
+    #
+    #   * For PostgreSQL 9.6, minor version 9.6.11 or higher
+    #
+    #   * PostgreSQL 10.6, 10.7, and 10.9
+    #
+    #   For more information, see [ IAM Database Authentication for MySQL and
+    #   PostgreSQL][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
+    #
     # @option params [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   DB instance.
@@ -3166,6 +3236,10 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #
+    # @option params [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3249,6 +3323,7 @@ module Aws::RDS
     #       },
     #     ],
     #     deletion_protection: false,
+    #     max_allocated_storage: 1,
     #   })
     #
     # @example Response structure
@@ -3365,6 +3440,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -3648,16 +3724,16 @@ module Aws::RDS
     # @option params [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora MySQL 5.6 or higher
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #
     # @option params [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
@@ -3904,6 +3980,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -4809,7 +4886,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -5236,6 +5318,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -6325,7 +6408,18 @@ module Aws::RDS
     #   `public`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   A filter that specifies one or more DB cluster snapshots to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-cluster-snapshot-id` - Accepts DB cluster snapshot identifiers.
+    #
+    #   * `snapshot-type` - Accepts types of DB cluster snapshots.
+    #
+    #   * `engine` - Accepts names of database engines.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -6485,6 +6579,10 @@ module Aws::RDS
     #   response includes only records beyond the marker, up to the value
     #   specified by `MaxRecords`.
     #
+    # @option params [Boolean] :include_shared
+    #   Optional Boolean parameter that specifies whether the output includes
+    #   information about clusters shared from other AWS accounts.
+    #
     # @return [Types::DBClusterMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBClusterMessage#marker #marker} => String
@@ -6515,6 +6613,7 @@ module Aws::RDS
     #     ],
     #     max_records: 1,
     #     marker: "String",
+    #     include_shared: false,
     #   })
     #
     # @example Response structure
@@ -6585,7 +6684,12 @@ module Aws::RDS
     #   resp.db_clusters[0].scaling_configuration_info.timeout_action #=> String
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].http_endpoint_enabled #=> Boolean
+    #   resp.db_clusters[0].activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_clusters[0].activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_clusters[0].activity_stream_kms_key_id #=> String
+    #   resp.db_clusters[0].activity_stream_kinesis_stream_name #=> String
     #   resp.db_clusters[0].copy_tags_to_snapshot #=> Boolean
+    #   resp.db_clusters[0].cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -6654,6 +6758,11 @@ module Aws::RDS
     #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
     #   list of supported time zones for each engine version.
     #
+    # @option params [Boolean] :include_all
+    #   A value that indicates whether to include engine versions that aren't
+    #   available in the list. The default is to list only available engine
+    #   versions.
+    #
     # @return [Types::DBEngineVersionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBEngineVersionMessage#marker #marker} => String
@@ -6693,6 +6802,7 @@ module Aws::RDS
     #     default_only: false,
     #     list_supported_character_sets: false,
     #     list_supported_timezones: false,
+    #     include_all: false,
     #   })
     #
     # @example Response structure
@@ -6725,6 +6835,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supported_engine_modes[0] #=> String
     #   resp.db_engine_versions[0].supported_feature_names #=> Array
     #   resp.db_engine_versions[0].supported_feature_names[0] #=> String
+    #   resp.db_engine_versions[0].status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -6877,6 +6988,10 @@ module Aws::RDS
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB instances identified by these ARNs.
+    #
+    #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
+    #     results list will only include information about the DB instances
+    #     identified by these resource identifiers.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -7042,6 +7157,7 @@ module Aws::RDS
     #   resp.db_instances[0].listener_endpoint.address #=> String
     #   resp.db_instances[0].listener_endpoint.port #=> Integer
     #   resp.db_instances[0].listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instances[0].max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -7539,7 +7655,20 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   A filter that specifies one or more DB snapshots to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-snapshot-id` - Accepts DB snapshot identifiers.
+    #
+    #   * `dbi-resource-id` - Accepts identifiers of source DB instances.
+    #
+    #   * `snapshot-type` - Accepts types of DB snapshots.
+    #
+    #   * `engine` - Accepts names of database engines.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -8652,6 +8781,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].available_processor_features[0].allowed_values #=> String
     #   resp.orderable_db_instance_options[0].supported_engine_modes #=> Array
     #   resp.orderable_db_instance_options[0].supported_engine_modes[0] #=> String
+    #   resp.orderable_db_instance_options[0].supports_storage_autoscaling #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -9171,6 +9301,7 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio #=> Array
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].from #=> Float
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].to #=> Float
+    #   resp.valid_db_instance_modifications_message.storage[0].supports_storage_autoscaling #=> Boolean
     #   resp.valid_db_instance_modifications_message.valid_processor_features #=> Array
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].name #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
@@ -9409,7 +9540,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -9610,11 +9746,8 @@ module Aws::RDS
     #   The DB cluster identifier for the cluster being modified. This
     #   parameter is not case-sensitive.
     #
-    #   Constraints:
-    #
-    #   * Must match the identifier of an existing DBCluster.
-    #
-    #   ^
+    #   Constraints: This identifier must match the identifier of an existing
+    #   DB cluster.
     #
     # @option params [String] :new_db_cluster_identifier
     #   The new DB cluster identifier for the DB cluster when renaming a DB
@@ -9741,6 +9874,13 @@ module Aws::RDS
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
     #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+    #
     # @option params [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
@@ -9764,7 +9904,51 @@ module Aws::RDS
     #   applied during the next maintenance window unless `ApplyImmediately`
     #   is enabled.
     #
-    #   For a list of valid engine versions, use DescribeDBEngineVersions.
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
+    # @option params [Boolean] :allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades when specifying a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    #
+    # @option params [String] :db_instance_parameter_group_name
+    #   The name of the DB parameter group to apply to all instances of the DB
+    #   cluster.
+    #
+    #   <note markdown="1"> When you apply a parameter group using the
+    #   `DBInstanceParameterGroupName` parameter, the DB cluster isn't
+    #   rebooted automatically. Also, parameter changes aren't applied during
+    #   the next maintenance window but instead are applied immediately.
+    #
+    #    </note>
+    #
+    #   Default: The existing name setting
+    #
+    #   Constraints:
+    #
+    #   * The DB parameter group must be in the same DB parameter group family
+    #     as this DB cluster.
+    #
+    #   * The `DBInstanceParameterGroupName` parameter is only valid in
+    #     combination with the `AllowMajorVersionUpgrade` parameter.
     #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   The scaling properties of the DB cluster. You can only modify scaling
@@ -9776,11 +9960,6 @@ module Aws::RDS
     #   enabled. By default, deletion protection is disabled.
     #
     # @option params [Boolean] :enable_http_endpoint
-    #   <note markdown="1"> HTTP endpoint functionality is in beta for Aurora Serverless and is
-    #   subject to change.
-    #
-    #    </note>
-    #
     #   A value that indicates whether to enable the HTTP endpoint for an
     #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
     #   disabled.
@@ -9790,12 +9969,12 @@ module Aws::RDS
     #   can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information about Aurora Serverless, see [Using Amazon Aurora
+    #   For more information, see [Using the Data API for Aurora
     #   Serverless][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster to
@@ -9846,6 +10025,8 @@ module Aws::RDS
     #       disable_log_types: ["String"],
     #     },
     #     engine_version: "String",
+    #     allow_major_version_upgrade: false,
+    #     db_instance_parameter_group_name: "String",
     #     scaling_configuration: {
     #       min_capacity: 1,
     #       max_capacity: 1,
@@ -9924,7 +10105,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -10371,8 +10557,8 @@ module Aws::RDS
     #   Changing this setting doesn't result in an outage. The parameter
     #   group name itself is changed immediately, but the actual parameter
     #   changes are not applied until you reboot the instance without
-    #   failover. The DB instance will NOT be rebooted automatically and the
-    #   parameter changes will NOT be applied during the next maintenance
+    #   failover. In this case, the DB instance isn't rebooted automatically
+    #   and the parameter changes isn't applied during the next maintenance
     #   window.
     #
     #   Default: Uses existing setting
@@ -10724,22 +10910,16 @@ module Aws::RDS
     # @option params [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   **Amazon Aurora**
     #
-    #   Not applicable. Mapping AWS IAM accounts to database accounts is
-    #   managed by the DB cluster. For more information, see
-    #   `ModifyDBCluster`.
     #
-    #   **MySQL**
-    #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
-    #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #
     # @option params [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
@@ -10791,6 +10971,10 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    #
+    # @option params [Integer] :max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10869,6 +11053,7 @@ module Aws::RDS
     #     ],
     #     use_default_processor_features: false,
     #     deletion_protection: false,
+    #     max_allocated_storage: 1,
     #   })
     #
     # @example Response structure
@@ -10985,6 +11170,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -11882,6 +12068,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -11986,7 +12173,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -12259,6 +12451,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -12795,13 +12988,32 @@ module Aws::RDS
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
     #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
     #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
     #
     #   **Aurora PostgreSQL**
     #
-    #   Example: `9.6.3`
+    #   Example: `9.6.3`, `10.7`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the restored DB cluster
@@ -12907,6 +13119,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     #
     # @option params [required, String] :source_engine
     #   The identifier for the database engine that was backed up to create
@@ -13078,7 +13297,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -13153,6 +13377,33 @@ module Aws::RDS
     # @option params [String] :engine_version
     #   The version of the database engine to use for the new DB cluster.
     #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`, `10.7`
+    #
     # @option params [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
@@ -13204,6 +13455,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     #
     # @option params [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
@@ -13385,7 +13643,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -13550,6 +13813,13 @@ module Aws::RDS
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
     #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+    #
     # @option params [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
@@ -13713,7 +13983,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -13955,14 +14230,16 @@ module Aws::RDS
     # @option params [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
@@ -14263,6 +14540,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -14457,7 +14735,7 @@ module Aws::RDS
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   allocate initially for the DB instance. For information about valid
-    #   Iops values, see see [Amazon RDS Provisioned IOPS Storage to Improve
+    #   Iops values, see [Amazon RDS Provisioned IOPS Storage to Improve
     #   Performance][1] in the *Amazon RDS User Guide.*
     #
     #
@@ -14548,7 +14826,16 @@ module Aws::RDS
     # @option params [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
+    #
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #
     # @option params [required, String] :source_engine
     #   The name of the engine of your source database.
@@ -14800,6 +15087,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -15041,14 +15329,16 @@ module Aws::RDS
     # @option params [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
@@ -15356,6 +15646,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -15455,6 +15746,68 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Starts a database activity stream to monitor activity on the database.
+    # For more information, see [Database Activity Streams][1] in the
+    # *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster, for example
+    #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
+    #
+    # @option params [required, String] :mode
+    #   Specifies the mode of the database activity stream. Database events
+    #   such as a change or access generate an activity stream event. The
+    #   database session can handle these events either synchronously or
+    #   asynchronously.
+    #
+    # @option params [required, String] :kms_key_id
+    #   The AWS KMS key identifier for encrypting messages in the database
+    #   activity stream. The key identifier can be either a key ID, a key ARN,
+    #   or a key alias.
+    #
+    # @option params [Boolean] :apply_immediately
+    #   Specifies whether or not the database activity stream is to start as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #
+    # @return [Types::StartActivityStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartActivityStreamResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::StartActivityStreamResponse#kinesis_stream_name #kinesis_stream_name} => String
+    #   * {Types::StartActivityStreamResponse#status #status} => String
+    #   * {Types::StartActivityStreamResponse#mode #mode} => String
+    #   * {Types::StartActivityStreamResponse#apply_immediately #apply_immediately} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_activity_stream({
+    #     resource_arn: "String", # required
+    #     mode: "sync", # required, accepts sync, async
+    #     kms_key_id: "String", # required
+    #     apply_immediately: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #   resp.kinesis_stream_name #=> String
+    #   resp.status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.mode #=> String, one of "sync", "async"
+    #   resp.apply_immediately #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartActivityStream AWS API Documentation
+    #
+    # @overload start_activity_stream(params = {})
+    # @param [Hash] params ({})
+    def start_activity_stream(params = {}, options = {})
+      req = build_request(:start_activity_stream, params)
+      req.send_request(options)
+    end
+
     # Starts an Amazon Aurora DB cluster that was stopped using the AWS
     # console, the stop-db-cluster AWS CLI command, or the StopDBCluster
     # action.
@@ -15550,7 +15903,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -15704,6 +16062,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -15711,6 +16070,55 @@ module Aws::RDS
     # @param [Hash] params ({})
     def start_db_instance(params = {}, options = {})
       req = build_request(:start_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Stops a database activity stream that was started using the AWS
+    # console, the `start-activity-stream` AWS CLI command, or the
+    # `StartActivityStream` action.
+    #
+    # For more information, see [Database Activity Streams][1] in the
+    # *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster for the database
+    #   activity stream. For example,
+    #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
+    #
+    # @option params [Boolean] :apply_immediately
+    #   Specifies whether or not the database activity stream is to stop as
+    #   soon as possible, regardless of the maintenance window for the
+    #   database.
+    #
+    # @return [Types::StopActivityStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopActivityStreamResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::StopActivityStreamResponse#kinesis_stream_name #kinesis_stream_name} => String
+    #   * {Types::StopActivityStreamResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_activity_stream({
+    #     resource_arn: "String", # required
+    #     apply_immediately: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #   resp.kinesis_stream_name #=> String
+    #   resp.status #=> String, one of "stopped", "starting", "started", "stopping"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopActivityStream AWS API Documentation
+    #
+    # @overload stop_activity_stream(params = {})
+    # @param [Hash] params ({})
+    def stop_activity_stream(params = {}, options = {})
+      req = build_request(:stop_activity_stream, params)
       req.send_request(options)
     end
 
@@ -15810,7 +16218,12 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
+    #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_cluster.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_cluster.activity_stream_kms_key_id #=> String
+    #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_cluster.cross_account_clone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -15971,6 +16384,7 @@ module Aws::RDS
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -15994,7 +16408,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

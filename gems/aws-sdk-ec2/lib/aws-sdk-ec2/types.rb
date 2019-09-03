@@ -433,7 +433,7 @@ module Aws::EC2
     #         quantity: 1, # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -442,6 +442,7 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         host_recovery: "on", # accepts on, off
     #       }
     #
     # @!attribute [rw] auto_placement
@@ -465,11 +466,11 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -487,6 +488,19 @@ module Aws::EC2
     #   The tags to apply to the Dedicated Host during creation.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] host_recovery
+    #   Indicates whether to enable or disable host recovery for the
+    #   Dedicated Host. Host recovery is disabled by default. For more
+    #   information, see [ Host Recovery][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #   Default: `off`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsRequest AWS API Documentation
     #
     class AllocateHostsRequest < Struct.new(
@@ -495,7 +509,8 @@ module Aws::EC2
       :client_token,
       :instance_type,
       :quantity,
-      :tag_specifications)
+      :tag_specifications,
+      :host_recovery)
       include Aws::Structure
     end
 
@@ -681,6 +696,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] assigned_private_ip_addresses
+    #   The private IP addresses assigned to the network interface.
+    #   @return [Array<Types::AssignedPrivateIpAddress>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesResult AWS API Documentation
+    #
+    class AssignPrivateIpAddressesResult < Struct.new(
+      :network_interface_id,
+      :assigned_private_ip_addresses)
+      include Aws::Structure
+    end
+
+    # Describes the private IP addresses assigned to a network interface.
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IP address assigned to the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignedPrivateIpAddress AWS API Documentation
+    #
+    class AssignedPrivateIpAddress < Struct.new(
+      :private_ip_address)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateAddressRequest
     #   data as a hash:
     #
@@ -774,6 +818,7 @@ module Aws::EC2
     #       {
     #         client_vpn_endpoint_id: "String", # required
     #         subnet_id: "String", # required
+    #         client_token: "String",
     #         dry_run: false,
     #       }
     #
@@ -783,6 +828,19 @@ module Aws::EC2
     #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet to associate with the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -797,6 +855,7 @@ module Aws::EC2
     class AssociateClientVpnTargetNetworkRequest < Struct.new(
       :client_vpn_endpoint_id,
       :subnet_id,
+      :client_token,
       :dry_run)
       include Aws::Structure
     end
@@ -1431,6 +1490,7 @@ module Aws::EC2
     #         access_group_id: "String",
     #         authorize_all_groups: false,
     #         description: "String",
+    #         client_token: "String",
     #         dry_run: false,
     #       }
     #
@@ -1457,6 +1517,19 @@ module Aws::EC2
     #   A brief description of the authorization rule.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1472,6 +1545,7 @@ module Aws::EC2
       :access_group_id,
       :authorize_all_groups,
       :description,
+      :client_token,
       :dry_run)
       include Aws::Structure
     end
@@ -2136,8 +2210,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CancelConversionTask.
-    #
     # @note When making an API call, you may pass CancelConversionRequest
     #   data as a hash:
     #
@@ -2171,8 +2243,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CancelExportTask.
-    #
     # @note When making an API call, you may pass CancelExportTaskRequest
     #   data as a hash:
     #
@@ -2192,8 +2262,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CancelImportTask.
-    #
     # @note When making an API call, you may pass CancelImportTaskRequest
     #   data as a hash:
     #
@@ -2227,8 +2295,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for CancelImportTask.
-    #
     # @!attribute [rw] import_task_id
     #   The ID of the task being canceled.
     #   @return [String]
@@ -2464,6 +2530,18 @@ module Aws::EC2
     #   The ID of the Capacity Reservation.
     #   @return [String]
     #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID of the Capacity Reservation.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_type
     #   The type of instance for which the Capacity Reservation reserves
     #   capacity.
@@ -2490,8 +2568,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] total_instance_count
-    #   The number of instances for which the Capacity Reservation reserves
-    #   capacity.
+    #   The total number of instances for which the Capacity Reservation
+    #   reserves capacity.
     #   @return [Integer]
     #
     # @!attribute [rw] available_instance_count
@@ -2520,11 +2598,11 @@ module Aws::EC2
     #   * `active` - The Capacity Reservation is active and the capacity is
     #     available for your use.
     #
-    #   * `cancelled` - The Capacity Reservation expired automatically at
-    #     the date and time specified in your request. The reserved capacity
-    #     is no longer available for your use.
+    #   * `expired` - The Capacity Reservation expired automatically at the
+    #     date and time specified in your request. The reserved capacity is
+    #     no longer available for your use.
     #
-    #   * `expired` - The Capacity Reservation was manually cancelled. The
+    #   * `cancelled` - The Capacity Reservation was manually cancelled. The
     #     reserved capacity is no longer available for your use.
     #
     #   * `pending` - The Capacity Reservation request was successful but
@@ -2584,6 +2662,9 @@ module Aws::EC2
     #
     class CapacityReservation < Struct.new(
       :capacity_reservation_id,
+      :owner_id,
+      :capacity_reservation_arn,
+      :availability_zone_id,
       :instance_type,
       :instance_platform,
       :availability_zone,
@@ -3173,7 +3254,16 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] split_tunnel
-    #   Indicates whether VPN split tunneling is supported.
+    #   Indicates whether split-tunnel is enabled in the AWS Client VPN
+    #   endpoint.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
     #   @return [Boolean]
     #
     # @!attribute [rw] vpn_protocol
@@ -3651,25 +3741,18 @@ module Aws::EC2
     #   this parameter is not specified, the default CMK for EBS is used. If
     #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   "alias/". For example:
     #
-    #   * Key ID
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #   * Alias name: `alias/ExampleAlias`
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID
-    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
-    #     For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
     #
     #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
     #   call may appear to complete even though you provided an invalid
@@ -3758,11 +3841,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Specifies whether the destination snapshot should be encrypted. You
-    #   can encrypt a copy of an unencrypted snapshot, but you cannot use it
-    #   to create an unencrypted copy of an encrypted snapshot. Your default
-    #   CMK for EBS is used unless you specify a non-default AWS Key
-    #   Management Service (AWS KMS) CMK using `KmsKeyId`. For more
+    #   To encrypt a copy of an unencrypted snapshot if encryption by
+    #   default is not enabled, enable encryption using this parameter.
+    #   Otherwise, omit this parameter. Encrypted snapshots are encrypted,
+    #   even if you omit this parameter and encryption by default is not
+    #   enabled. You cannot set this parameter to false. For more
     #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
@@ -3772,35 +3855,26 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If
-    #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If
+    #   `KmsKeyId` is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID
-    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
-    #     For example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
-    #   call may appear to complete even though you provided an invalid
-    #   identifier. The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
+    #   an ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #   @return [String]
     #
     # @!attribute [rw] presigned_url
@@ -3903,9 +3977,9 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] threads_per_core
-    #   The number of threads per CPU core. To disable Intel Hyper-Threading
-    #   Technology for the instance, specify a value of `1`. Otherwise,
-    #   specify the default value of `2`.
+    #   The number of threads per CPU core. To disable multithreading for
+    #   the instance, specify a value of `1`. Otherwise, specify the default
+    #   value of `2`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptionsRequest AWS API Documentation
@@ -3923,7 +3997,8 @@ module Aws::EC2
     #         client_token: "String",
     #         instance_type: "String", # required
     #         instance_platform: "Linux/UNIX", # required, accepts Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard, Windows with SQL Server Web, Linux with SQL Server Standard, Linux with SQL Server Web, Linux with SQL Server Enterprise
-    #         availability_zone: "String", # required
+    #         availability_zone: "String",
+    #         availability_zone_id: "String",
     #         tenancy: "default", # accepts default, dedicated
     #         instance_count: 1, # required
     #         ebs_optimized: false,
@@ -3933,7 +4008,7 @@ module Aws::EC2
     #         instance_match_criteria: "open", # accepts open, targeted
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -3973,6 +4048,11 @@ module Aws::EC2
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which to create the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which to create the Capacity
+    #   Reservation.
     #   @return [String]
     #
     # @!attribute [rw] tenancy
@@ -4070,6 +4150,7 @@ module Aws::EC2
       :instance_type,
       :instance_platform,
       :availability_zone,
+      :availability_zone_id,
       :tenancy,
       :instance_count,
       :ebs_optimized,
@@ -4118,11 +4199,12 @@ module Aws::EC2
     #         dns_servers: ["String"],
     #         transport_protocol: "tcp", # accepts tcp, udp
     #         description: "String",
+    #         split_tunnel: false,
     #         dry_run: false,
     #         client_token: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -4175,8 +4257,8 @@ module Aws::EC2
     # @!attribute [rw] dns_servers
     #   Information about the DNS servers to be used for DNS resolution. A
     #   Client VPN endpoint can have up to two DNS servers. If no DNS server
-    #   is specified, the DNS address of the VPC that is to be associated
-    #   with Client VPN endpoint is used as the DNS server.
+    #   is specified, the DNS address configured on the device is used for
+    #   the DNS server.
     #   @return [Array<String>]
     #
     # @!attribute [rw] transport_protocol
@@ -4189,6 +4271,21 @@ module Aws::EC2
     #   A brief description of the Client VPN endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] split_tunnel
+    #   Indicates whether split-tunnel is enabled on the AWS Client VPN
+    #   endpoint.
+    #
+    #   By default, split-tunnel on a VPN endpoint is disabled.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -4197,16 +4294,16 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [ How to
-    #   Ensure Idempotency][1].
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -4223,6 +4320,7 @@ module Aws::EC2
       :dns_servers,
       :transport_protocol,
       :description,
+      :split_tunnel,
       :dry_run,
       :client_token,
       :tag_specifications)
@@ -4259,6 +4357,7 @@ module Aws::EC2
     #         destination_cidr_block: "String", # required
     #         target_vpc_subnet_id: "String", # required
     #         description: "String",
+    #         client_token: "String",
     #         dry_run: false,
     #       }
     #
@@ -4292,6 +4391,19 @@ module Aws::EC2
     #   A brief description of the route.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -4306,6 +4418,7 @@ module Aws::EC2
       :destination_cidr_block,
       :target_vpc_subnet_id,
       :description,
+      :client_token,
       :dry_run)
       include Aws::Structure
     end
@@ -4328,7 +4441,8 @@ module Aws::EC2
     #
     #       {
     #         bgp_asn: 1, # required
-    #         public_ip: "String", # required
+    #         public_ip: "String",
+    #         certificate_arn: "String",
     #         type: "ipsec.1", # required, accepts ipsec.1
     #         dry_run: false,
     #       }
@@ -4342,6 +4456,10 @@ module Aws::EC2
     # @!attribute [rw] public_ip
     #   The Internet-routable IP address for the customer gateway's outside
     #   interface. The address must be static.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) for the customer gateway certificate.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4361,6 +4479,7 @@ module Aws::EC2
     class CreateCustomerGatewayRequest < Struct.new(
       :bgp_asn,
       :public_ip,
+      :certificate_arn,
       :type,
       :dry_run)
       include Aws::Structure
@@ -4635,18 +4754,20 @@ module Aws::EC2
     #         dry_run: false,
     #         client_token: "String",
     #         spot_options: {
-    #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
     #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #           instance_pools_to_use_count: 1,
     #           single_instance_type: false,
     #           single_availability_zone: false,
     #           min_target_capacity: 1,
+    #           max_total_price: "String",
     #         },
     #         on_demand_options: {
     #           allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
     #           single_instance_type: false,
     #           single_availability_zone: false,
     #           min_target_capacity: 1,
+    #           max_total_price: "String",
     #         },
     #         excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
     #         launch_template_configs: [ # required
@@ -4658,7 +4779,7 @@ module Aws::EC2
     #             },
     #             overrides: [
     #               {
-    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #                 max_price: "String",
     #                 subnet_id: "String",
     #                 availability_zone: "String",
@@ -4690,7 +4811,7 @@ module Aws::EC2
     #         replace_unhealthy_instances: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -4723,7 +4844,7 @@ module Aws::EC2
     #   @return [Types::SpotOptionsRequest]
     #
     # @!attribute [rw] on_demand_options
-    #   The allocation strategy of On-Demand Instances in an EC2 Fleet.
+    #   Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #   @return [Types::OnDemandOptionsRequest]
     #
     # @!attribute [rw] excess_capacity_termination_policy
@@ -4737,8 +4858,7 @@ module Aws::EC2
     #   @return [Array<Types::FleetLaunchTemplateConfigRequest>]
     #
     # @!attribute [rw] target_capacity_specification
-    #   The `TotalTargetCapacity`, `OnDemandTargetCapacity`,
-    #   `SpotTargetCapacity`, and `DefaultCapacityType` structure.
+    #   The number of units to request.
     #   @return [Types::TargetCapacitySpecificationRequest]
     #
     # @!attribute [rw] terminate_instances_with_expiration
@@ -5078,7 +5198,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] block_device_mappings
-    #   Tthe block device mappings. This parameter cannot be used to modify
+    #   The block device mappings. This parameter cannot be used to modify
     #   the encryption status of existing volumes or snapshots. To create an
     #   AMI with encrypted snapshots, use the CopyImage action.
     #   @return [Array<Types::BlockDeviceMapping>]
@@ -5137,8 +5257,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateInstanceExportTask.
-    #
     # @note When making an API call, you may pass CreateInstanceExportTaskRequest
     #   data as a hash:
     #
@@ -5181,8 +5299,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for CreateInstanceExportTask.
-    #
     # @!attribute [rw] export_task
     #   Information about the instance export task.
     #   @return [Types::ExportTask]
@@ -5313,7 +5429,7 @@ module Aws::EC2
     #             },
     #           ],
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           key_name: "String",
     #           monitoring: {
     #             enabled: false,
@@ -5332,7 +5448,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -5385,6 +5501,17 @@ module Aws::EC2
     #             configured: false,
     #           },
     #         },
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -5418,6 +5545,10 @@ module Aws::EC2
     #   The information for the launch template.
     #   @return [Types::RequestLaunchTemplateData]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the launch template during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateRequest AWS API Documentation
     #
     class CreateLaunchTemplateRequest < Struct.new(
@@ -5425,7 +5556,8 @@ module Aws::EC2
       :client_token,
       :launch_template_name,
       :version_description,
-      :launch_template_data)
+      :launch_template_data,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -5500,7 +5632,7 @@ module Aws::EC2
     #             },
     #           ],
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           key_name: "String",
     #           monitoring: {
     #             enabled: false,
@@ -5519,7 +5651,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #               tags: [
     #                 {
     #                   key: "String",
@@ -5607,7 +5739,9 @@ module Aws::EC2
     #   The version number of the launch template version on which to base
     #   the new version. The new version inherits the same launch parameters
     #   as the source version, except for parameters that you specify in
-    #   LaunchTemplateData.
+    #   `LaunchTemplateData`. Snapshots applied to the block device mapping
+    #   are ignored when creating a new version unless they are explicitly
+    #   included.
     #   @return [String]
     #
     # @!attribute [rw] version_description
@@ -5984,12 +6118,9 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] interface_type
-    #   Indicates whether the network interface is an Elastic Fabric Adapter
-    #   (EFA). Only specify this parameter to create an EFA. For more
-    #   information, see [Elastic Fabric Adapter][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
-    #
-    #   If you are not creating an EFA ENI, omit this parameter.
+    #   Indicates the type of network interface. To create an Elastic Fabric
+    #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
+    #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -6350,7 +6481,7 @@ module Aws::EC2
     #         volume_id: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -6388,6 +6519,77 @@ module Aws::EC2
       :volume_id,
       :tag_specifications,
       :dry_run)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "String",
+    #         instance_specification: { # required
+    #           instance_id: "String",
+    #           exclude_boot_volume: false,
+    #         },
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         copy_tags_from_source: "volume", # accepts volume
+    #       }
+    #
+    # @!attribute [rw] description
+    #   A description propagated to every snapshot specified by the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_specification
+    #   The instance to specify which volumes should be included in the
+    #   snapshots.
+    #   @return [Types::InstanceSpecification]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Tags to apply to every snapshot specified by the instance.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action
+    #   without actually making the request. Provides an error response. If
+    #   you have the required permissions, the error response is
+    #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] copy_tags_from_source
+    #   Copies the tags from the specified volume to corresponding snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshotsRequest AWS API Documentation
+    #
+    class CreateSnapshotsRequest < Struct.new(
+      :description,
+      :instance_specification,
+      :tag_specifications,
+      :dry_run,
+      :copy_tags_from_source)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshots
+    #   List of snapshots.
+    #   @return [Array<Types::SnapshotInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshotsResult AWS API Documentation
+    #
+    class CreateSnapshotsResult < Struct.new(
+      :snapshots)
       include Aws::Structure
     end
 
@@ -6550,6 +6752,447 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTrafficMirrorFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to a Traffic Mirror filter.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRequest AWS API Documentation
+    #
+    class CreateTrafficMirrorFilterRequest < Struct.new(
+      :description,
+      :tag_specifications,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter
+    #   Information about the Traffic Mirror filter.
+    #   @return [Types::TrafficMirrorFilter]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterResult AWS API Documentation
+    #
+    class CreateTrafficMirrorFilterResult < Struct.new(
+      :traffic_mirror_filter,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTrafficMirrorFilterRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_id: "String", # required
+    #         traffic_direction: "ingress", # required, accepts ingress, egress
+    #         rule_number: 1, # required
+    #         rule_action: "accept", # required, accepts accept, reject
+    #         destination_port_range: {
+    #           from_port: 1,
+    #           to_port: 1,
+    #         },
+    #         source_port_range: {
+    #           from_port: 1,
+    #           to_port: 1,
+    #         },
+    #         protocol: 1,
+    #         destination_cidr_block: "String", # required
+    #         source_cidr_block: "String", # required
+    #         description: "String",
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the filter that this rule is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_direction
+    #   The type of traffic (`ingress` \| `egress`).
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_number
+    #   The number of the Traffic Mirror rule. This number must be unique
+    #   for each Traffic Mirror rule in a given direction. The rules are
+    #   processed in ascending order by rule number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_action
+    #   The action to take (`accept` \| `reject`) on the filtered traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination port range.
+    #   @return [Types::TrafficMirrorPortRangeRequest]
+    #
+    # @!attribute [rw] source_port_range
+    #   The source port range.
+    #   @return [Types::TrafficMirrorPortRangeRequest]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol, for example UDP, to assign to the Traffic Mirror rule.
+    #
+    #   For information about the protocol value, see [Protocol Numbers][1]
+    #   on the Internet Assigned Numbers Authority (IANA) website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The destination CIDR block to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cidr_block
+    #   The source CIDR block to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRuleRequest AWS API Documentation
+    #
+    class CreateTrafficMirrorFilterRuleRequest < Struct.new(
+      :traffic_mirror_filter_id,
+      :traffic_direction,
+      :rule_number,
+      :rule_action,
+      :destination_port_range,
+      :source_port_range,
+      :protocol,
+      :destination_cidr_block,
+      :source_cidr_block,
+      :description,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rule
+    #   The Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorFilterRule]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRuleResult AWS API Documentation
+    #
+    class CreateTrafficMirrorFilterRuleResult < Struct.new(
+      :traffic_mirror_filter_rule,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTrafficMirrorSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_interface_id: "String", # required
+    #         traffic_mirror_target_id: "String", # required
+    #         traffic_mirror_filter_id: "String", # required
+    #         packet_length: 1,
+    #         session_number: 1, # required
+    #         virtual_network_id: 1,
+    #         description: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the source network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] packet_length
+    #   The number of bytes in each packet to mirror. These are bytes after
+    #   the VXLAN header. Do not specify this parameter when you want to
+    #   mirror the entire packet. To mirror a subset of the packet, set this
+    #   to the length (in bytes) that you want to mirror. For example, if
+    #   you set this value to 1network0, then the first 100 bytes that meet
+    #   the filter criteria are copied to the target.
+    #
+    #   If you do not want to mirror the entire packet, use the
+    #   `PacketLength` parameter to specify the number of bytes in each
+    #   packet to mirror.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_number
+    #   The session number determines the order in which sessions are
+    #   evaluated when an interface is used by multiple sessions. The first
+    #   session with a matching filter is the one that mirrors the packets.
+    #
+    #   Valid values are 1-32766.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] virtual_network_id
+    #   The VXLAN ID for the Traffic Mirror session. For more information
+    #   about the VXLAN protocol, see [RFC 7348][1]. If you do not specify a
+    #   `VirtualNetworkId`, an account-wide unique id is chosen at random.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7348
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to a Traffic Mirror session.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSessionRequest AWS API Documentation
+    #
+    class CreateTrafficMirrorSessionRequest < Struct.new(
+      :network_interface_id,
+      :traffic_mirror_target_id,
+      :traffic_mirror_filter_id,
+      :packet_length,
+      :session_number,
+      :virtual_network_id,
+      :description,
+      :tag_specifications,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_session
+    #   Information about the Traffic Mirror session.
+    #   @return [Types::TrafficMirrorSession]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSessionResult AWS API Documentation
+    #
+    class CreateTrafficMirrorSessionResult < Struct.new(
+      :traffic_mirror_session,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTrafficMirrorTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_interface_id: "String",
+    #         network_load_balancer_arn: "String",
+    #         description: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID that is associated with the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the Network Load Balancer that is
+    #   associated with the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the Traffic Mirror target.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTargetRequest AWS API Documentation
+    #
+    class CreateTrafficMirrorTargetRequest < Struct.new(
+      :network_interface_id,
+      :network_load_balancer_arn,
+      :description,
+      :tag_specifications,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_target
+    #   Information about the Traffic Mirror target.
+    #   @return [Types::TrafficMirrorTarget]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTargetResult AWS API Documentation
+    #
+    class CreateTrafficMirrorTargetResult < Struct.new(
+      :traffic_mirror_target,
+      :client_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTransitGatewayRequest
     #   data as a hash:
     #
@@ -6565,7 +7208,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -6681,7 +7324,7 @@ module Aws::EC2
     #         transit_gateway_id: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -6741,7 +7384,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -6912,7 +7555,7 @@ module Aws::EC2
     #         dry_run: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -6924,24 +7567,25 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone in which to create the volume. Use
-    #   DescribeAvailabilityZones to list the Availability Zones that are
-    #   currently available to you.
+    #   The Availability Zone in which to create the volume.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Specifies whether the volume should be encrypted. Encrypted Amazon
-    #   EBS volumes may only be attached to instances that support Amazon
-    #   EBS encryption. Volumes that are created from encrypted snapshots
-    #   are automatically encrypted. There is no way to create an encrypted
-    #   volume from an unencrypted snapshot or vice versa. If your AMI uses
-    #   encrypted volumes, you can only launch it on supported instance
-    #   types. For more information, see [Amazon EBS Encryption][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   Specifies whether the volume should be encrypted. The effect of
+    #   setting the encryption state to `true` depends on the volume origin
+    #   (new or from a snapshot), starting encryption state, ownership, and
+    #   whether encryption by default is enabled. For more information, see
+    #   [Encryption by Default][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #   Encrypted Amazon EBS volumes must be attached to instances that
+    #   support Amazon EBS encryption. For more information, see [Supported
+    #   Instance Types][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
@@ -6962,35 +7606,26 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If
-    #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If
+    #   `KmsKeyId` is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
-    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID
-    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
-    #     For example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
-    #   call may appear to complete even though you provided an invalid
-    #   identifier. The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
+    #   an ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -7004,7 +7639,7 @@ module Aws::EC2
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
     #
-    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #   <note markdown="1"> At least one of Size or SnapshotId is required.
     #
     #    </note>
     #   @return [Integer]
@@ -7022,11 +7657,7 @@ module Aws::EC2
     #   for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
     #   for Cold HDD, or `standard` for Magnetic volumes.
     #
-    #   Defaults: If no volume type is specified, the default is `standard`
-    #   in us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1,
-    #   sa-east-1, ap-northeast-1, ap-northeast-2, ap-southeast-1,
-    #   ap-southeast-2, ap-south-1, us-gov-west-1, and cn-north-1. In all
-    #   other Regions, EBS defaults to `gp2`.
+    #   Default: `gp2`
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -7216,7 +7847,7 @@ module Aws::EC2
     #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
     #
-    #   Default: `false`
+    #   Default: `true`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointRequest AWS API Documentation
@@ -7658,6 +8289,10 @@ module Aws::EC2
     #   interface.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) for the customer gateway certificate.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The current state of the customer gateway (`pending | available |
     #   deleting | deleted`).
@@ -7678,6 +8313,7 @@ module Aws::EC2
       :bgp_asn,
       :customer_gateway_id,
       :ip_address,
+      :certificate_arn,
       :state,
       :type,
       :tags)
@@ -7995,6 +8631,8 @@ module Aws::EC2
     #
     # @!attribute [rw] flow_log_ids
     #   One or more flow log IDs.
+    #
+    #   Constraint: Maximum of 1000 flow log IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFlowLogsRequest AWS API Documentation
@@ -8693,6 +9331,158 @@ module Aws::EC2
       :dry_run,
       :resources,
       :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTrafficMirrorFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterRequest AWS API Documentation
+    #
+    class DeleteTrafficMirrorFilterRequest < Struct.new(
+      :traffic_mirror_filter_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterResult AWS API Documentation
+    #
+    class DeleteTrafficMirrorFilterResult < Struct.new(
+      :traffic_mirror_filter_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTrafficMirrorFilterRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_rule_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_rule_id
+    #   The ID of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterRuleRequest AWS API Documentation
+    #
+    class DeleteTrafficMirrorFilterRuleRequest < Struct.new(
+      :traffic_mirror_filter_rule_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rule_id
+    #   The ID of the deleted Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterRuleResult AWS API Documentation
+    #
+    class DeleteTrafficMirrorFilterRuleResult < Struct.new(
+      :traffic_mirror_filter_rule_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTrafficMirrorSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_session_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_session_id
+    #   The ID of the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorSessionRequest AWS API Documentation
+    #
+    class DeleteTrafficMirrorSessionRequest < Struct.new(
+      :traffic_mirror_session_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_session_id
+    #   The ID of the deleted Traffic Mirror session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorSessionResult AWS API Documentation
+    #
+    class DeleteTrafficMirrorSessionResult < Struct.new(
+      :traffic_mirror_session_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTrafficMirrorTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_target_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorTargetRequest AWS API Documentation
+    #
+    class DeleteTrafficMirrorTargetRequest < Struct.new(
+      :traffic_mirror_target_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the deleted Traffic Mirror target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorTargetResult AWS API Documentation
+    #
+    class DeleteTrafficMirrorTargetResult < Struct.new(
+      :traffic_mirror_target_id)
       include Aws::Structure
     end
 
@@ -10097,8 +10887,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeConversionTasks.
-    #
     # @note When making an API call, you may pass DescribeConversionTasksRequest
     #   data as a hash:
     #
@@ -10126,8 +10914,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for DescribeConversionTasks.
-    #
     # @!attribute [rw] conversion_tasks
     #   Information about the conversion tasks.
     #   @return [Array<Types::ConversionTask>]
@@ -10459,8 +11245,74 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeExportTasks.
+    # @note When making an API call, you may pass DescribeExportImageTasksRequest
+    #   data as a hash:
     #
+    #       {
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         export_image_task_ids: ["String"],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   Filter tasks using the `task-state` filter and one of the following
+    #   values: `active`, `completed`, `deleting`, or `deleted`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] export_image_task_ids
+    #   The IDs of the export image tasks.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportImageTasksRequest AWS API Documentation
+    #
+    class DescribeExportImageTasksRequest < Struct.new(
+      :dry_run,
+      :filters,
+      :export_image_task_ids,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_image_tasks
+    #   Information about the export image tasks.
+    #   @return [Array<Types::ExportImageTask>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to get the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportImageTasksResult AWS API Documentation
+    #
+    class DescribeExportImageTasksResult < Struct.new(
+      :export_image_tasks,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeExportTasksRequest
     #   data as a hash:
     #
@@ -10479,8 +11331,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for DescribeExportTasks.
-    #
     # @!attribute [rw] export_tasks
     #   Information about the export tasks.
     #   @return [Array<Types::ExportTask>]
@@ -10874,6 +11724,8 @@ module Aws::EC2
     #
     # @!attribute [rw] flow_log_ids
     #   One or more flow log IDs.
+    #
+    #   Constraint: Maximum of 1000 flow log IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -11284,12 +12136,14 @@ module Aws::EC2
     #   page. The remaining results can be seen by sending another request
     #   with the returned `nextToken` value. This value can be between 5 and
     #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error. You cannot specify this parameter and the host IDs
-    #   parameter in the same request.
+    #   an error.
+    #
+    #   You cannot specify this parameter and the host IDs parameter in the
+    #   same request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token to use to retrieve the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostsRequest AWS API Documentation
@@ -11532,7 +12386,8 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters.
     #
-    #   * `architecture` - The image architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The image architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `block-device-mapping.delete-on-termination` - A Boolean value
     #     that indicates whether the Amazon EBS volume is deleted on
@@ -11665,8 +12520,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeImportImageTasks.
-    #
     # @note When making an API call, you may pass DescribeImportImageTasksRequest
     #   data as a hash:
     #
@@ -11692,17 +12545,15 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   Filter tasks using the `task-state` filter and one of the following
-    #   values: active, completed, deleting, deleted.
+    #   values: `active`, `completed`, `deleting`, or `deleted`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] import_task_ids
-    #   A list of import image task IDs.
+    #   The IDs of the import image tasks.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -11720,8 +12571,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for DescribeImportImageTasks.
-    #
     # @!attribute [rw] import_image_tasks
     #   A list of zero or more import image tasks that are currently active
     #   or were completed or canceled in the previous 7 days.
@@ -11740,8 +12589,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeImportSnapshotTasks.
-    #
     # @note When making an API call, you may pass DescribeImportSnapshotTasksRequest
     #   data as a hash:
     #
@@ -11794,8 +12641,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for DescribeImportSnapshotTasks.
-    #
     # @!attribute [rw] import_snapshot_tasks
     #   A list of zero or more import snapshot tasks that are currently
     #   active or were completed or canceled in the previous 7 days.
@@ -12081,7 +12926,8 @@ module Aws::EC2
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -13226,7 +14072,7 @@ module Aws::EC2
     #
     #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
-    #   * `attachment.attach.time` - The time that the network interface was
+    #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the
@@ -13621,6 +14467,7 @@ module Aws::EC2
     #         ],
     #         region_names: ["String"],
     #         dry_run: false,
+    #         all_regions: false,
     #       }
     #
     # @!attribute [rw] filters
@@ -13629,11 +14476,15 @@ module Aws::EC2
     #   * `endpoint` - The endpoint of the Region (for example,
     #     `ec2.us-east-1.amazonaws.com`).
     #
+    #   * `opt-in-status` - The opt-in status of the Region
+    #     (`opt-in-not-required` \| `opted-in` \| `not-opted-in`).
+    #
     #   * `region-name` - The name of the Region (for example, `us-east-1`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] region_names
-    #   The names of the Regions.
+    #   The names of the Regions. You can specify any Regions, whether they
+    #   are enabled and disabled for your account.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -13643,12 +14494,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] all_regions
+    #   Indicates whether to display all Regions, including Regions that are
+    #   disabled for your account.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegionsRequest AWS API Documentation
     #
     class DescribeRegionsRequest < Struct.new(
       :filters,
       :region_names,
-      :dry_run)
+      :dry_run,
+      :all_regions)
       include Aws::Structure
     end
 
@@ -13834,7 +14691,7 @@ module Aws::EC2
     #           },
     #         ],
     #         include_marketplace: false,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         max_duration: 1,
     #         max_instance_count: 1,
     #         min_duration: 1,
@@ -15002,7 +15859,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         event_type: "instanceChange", # accepts instanceChange, fleetRequestChange, error
+    #         event_type: "instanceChange", # accepts instanceChange, fleetRequestChange, error, information
     #         max_results: 1,
     #         next_token: "String",
     #         spot_fleet_request_id: "String", # required
@@ -15365,7 +16222,7 @@ module Aws::EC2
     #         availability_zone: "String",
     #         dry_run: false,
     #         end_time: Time.now,
-    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         max_results: 1,
     #         next_token: "String",
     #         product_descriptions: ["String"],
@@ -15727,6 +16584,254 @@ module Aws::EC2
     class DescribeTagsResult < Struct.new(
       :next_token,
       :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTrafficMirrorFiltersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_ids: ["String"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_ids
+    #   The ID of the Traffic Mirror filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `description`\: The Traffic Mirror filter description.
+    #
+    #   * `traffic-mirror-filter-id`\: The ID of the Traffic Mirror filter.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorFiltersRequest AWS API Documentation
+    #
+    class DescribeTrafficMirrorFiltersRequest < Struct.new(
+      :traffic_mirror_filter_ids,
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filters
+    #   Information about one or more Traffic Mirror filters.
+    #   @return [Array<Types::TrafficMirrorFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorFiltersResult AWS API Documentation
+    #
+    class DescribeTrafficMirrorFiltersResult < Struct.new(
+      :traffic_mirror_filters,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTrafficMirrorSessionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_session_ids: ["String"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_session_ids
+    #   The ID of the Traffic Mirror session.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `description`\: The Traffic Mirror session description.
+    #
+    #   * `network-interface-id`\: The ID of the Traffic Mirror session
+    #     network interface.
+    #
+    #   * `owner-id`\: The ID of the account that owns the Traffic Mirror
+    #     session.
+    #
+    #   * `packet-length`\: The assigned number of packets to mirror.
+    #
+    #   * `session-number`\: The assigned session number.
+    #
+    #   * `traffic-mirror-filter-id`\: The ID of the Traffic Mirror filter.
+    #
+    #   * `traffic-mirror-session-id`\: The ID of the Traffic Mirror
+    #     session.
+    #
+    #   * `traffic-mirror-target-id`\: The ID of the Traffic Mirror target.
+    #
+    #   * `virtual-network-id`\: The virtual network ID of the Traffic
+    #     Mirror session.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorSessionsRequest AWS API Documentation
+    #
+    class DescribeTrafficMirrorSessionsRequest < Struct.new(
+      :traffic_mirror_session_ids,
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_sessions
+    #   Describes one or more Traffic Mirror sessions. By default, all
+    #   Traffic Mirror sessions are described. Alternatively, you can filter
+    #   the results.
+    #   @return [Array<Types::TrafficMirrorSession>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorSessionsResult AWS API Documentation
+    #
+    class DescribeTrafficMirrorSessionsResult < Struct.new(
+      :traffic_mirror_sessions,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTrafficMirrorTargetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_target_ids: ["String"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_target_ids
+    #   The ID of the Traffic Mirror targets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `description`\: The Traffic Mirror target description.
+    #
+    #   * `network-interface-id`\: The ID of the Traffic Mirror session
+    #     network interface.
+    #
+    #   * `network-load-balancer-arn`\: The Amazon Resource Name (ARN) of
+    #     the Network Load Balancer that is associated with the session.
+    #
+    #   * `owner-id`\: The ID of the account that owns the Traffic Mirror
+    #     session.
+    #
+    #   * `traffic-mirror-target-id`\: The ID of the Traffic Mirror target.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorTargetsRequest AWS API Documentation
+    #
+    class DescribeTrafficMirrorTargetsRequest < Struct.new(
+      :traffic_mirror_target_ids,
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_targets
+    #   Information about one or more Traffic Mirror targets.
+    #   @return [Array<Types::TrafficMirrorTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorTargetsResult AWS API Documentation
+    #
+    class DescribeTrafficMirrorTargetsResult < Struct.new(
+      :traffic_mirror_targets,
+      :next_token)
       include Aws::Structure
     end
 
@@ -16529,7 +17634,7 @@ module Aws::EC2
     #
     #       {
     #         max_results: 1,
-    #         next_token: "NextToken",
+    #         next_token: "DescribeVpcClassicLinkDnsSupportNextToken",
     #         vpc_ids: ["String"],
     #       }
     #
@@ -17653,6 +18758,26 @@ module Aws::EC2
     #
     # @!attribute [rw] force
     #   Specifies whether to force a detachment.
+    #
+    #   <note markdown="1"> * Use the `Force` parameter only as a last resort to detach a
+    #     network interface from a failed instance.
+    #
+    #   * If you use the `Force` parameter to detach a network interface,
+    #     you might not be able to attach a different network interface to
+    #     the same index on the instance without first stopping and starting
+    #     the instance.
+    #
+    #   * If you force the detachment of a network interface, the [instance
+    #     metadata][1] might not get updated. This means that the attributes
+    #     associated with the detached network interface might still be
+    #     visible. The instance metadata will get updated when you stop and
+    #     start the instance.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachNetworkInterfaceRequest AWS API Documentation
@@ -17829,6 +18954,38 @@ module Aws::EC2
     #
     class DirectoryServiceAuthenticationRequest < Struct.new(
       :directory_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisableEbsEncryptionByDefaultRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableEbsEncryptionByDefaultRequest AWS API Documentation
+    #
+    class DisableEbsEncryptionByDefaultRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ebs_encryption_by_default
+    #   The updated status of encryption by default.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableEbsEncryptionByDefaultResult AWS API Documentation
+    #
+    class DisableEbsEncryptionByDefaultResult < Struct.new(
+      :ebs_encryption_by_default)
       include Aws::Structure
     end
 
@@ -18446,9 +19603,11 @@ module Aws::EC2
     #   Cloud User Guide*.
     #
     #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    #   64,000IOPS for `io1` volumes, in most Regions. The maximum IOPS for
-    #   `io1` of 64,000 is guaranteed only on [Nitro-based instances][2].
-    #   Other instance families guarantee performance up to 32,000 IOPS.
+    #   64,000IOPS for `io1` volumes in most Regions. Maximum `io1` IOPS of
+    #   64,000 is guaranteed only on [Nitro-based instances][2]. Other
+    #   instance families guarantee performance up to 32,000 IOPS. For more
+    #   information, see [Amazon EBS Volume Types][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #   Condition: This parameter is required for requests to create `io1`
     #   volumes; it is not used in requests to create `gp2`, `st1`, `sc1`,
@@ -18478,28 +19637,35 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type. If you set the type to `io1`, you must also set the
-    #   **Iops** property.
+    #   The volume type. If you set the type to `io1`, you must also specify
+    #   the IOPS that the volume supports.
     #
-    #   Default: `standard`
+    #   Default: `gp2`
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the EBS volume is encrypted. Encrypted volumes can
-    #   only be attached to instances that support Amazon EBS encryption.
+    #   Indicates whether the encryption state of an EBS volume is changed
+    #   while being restored from a backing snapshot. The effect of setting
+    #   the encryption state to `true` depends on the volume origin (new or
+    #   from a snapshot), starting encryption state, ownership, and whether
+    #   encryption by default is enabled. For more information, see [Amazon
+    #   EBS Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   If you are creating a volume from a snapshot, you cannot specify an
-    #   encryption value. This is because only blank volumes can be
-    #   encrypted on creation. If you are creating a snapshot from an
-    #   existing EBS volume, you cannot specify an encryption value that
-    #   differs from that of the EBS volume. We recommend that you omit the
-    #   encryption value from the block device mappings when creating an
-    #   image from an instance.
+    #   In no case can you remove encryption from an encrypted volume.
+    #
+    #   Encrypted volumes can only be attached to instances that support
+    #   Amazon EBS encryption. For more information, see [Supported Instance
+    #   Types][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a
-    #   user-managed CMK under which the EBS volume is encrypted.
+    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer
+    #   managed CMK under which the EBS volume is encrypted.
     #
     #   This parameter is only supported on `BlockDeviceMapping` objects
     #   called by [RunInstances][1], [RequestSpotFleet][2], and
@@ -18765,6 +19931,38 @@ module Aws::EC2
       :elastic_inference_accelerator_association_id,
       :elastic_inference_accelerator_association_state,
       :elastic_inference_accelerator_association_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableEbsEncryptionByDefaultRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableEbsEncryptionByDefaultRequest AWS API Documentation
+    #
+    class EnableEbsEncryptionByDefaultRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ebs_encryption_by_default
+    #   The updated status of encryption by default.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableEbsEncryptionByDefaultResult AWS API Documentation
+    #
+    class EnableEbsEncryptionByDefaultResult < Struct.new(
+      :ebs_encryption_by_default)
       include Aws::Structure
     end
 
@@ -19113,6 +20311,171 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExportImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         description: "String",
+    #         disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #         dry_run: false,
+    #         image_id: "String", # required
+    #         s3_export_location: { # required
+    #           s3_bucket: "String", # required
+    #           s3_prefix: "String",
+    #         },
+    #         role_name: "String",
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Token to enable idempotency for export image requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the image being exported. The maximum length is 255
+    #   bytes.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_image_format
+    #   The disk image format.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_export_location
+    #   Information about the destination S3 bucket. The bucket must exist
+    #   and grant WRITE and READ\_ACP permissions to the AWS account
+    #   vm-import-export@amazon.com.
+    #   @return [Types::ExportTaskS3LocationRequest]
+    #
+    # @!attribute [rw] role_name
+    #   The name of the role that grants VM Import/Export permission to
+    #   export images to your S3 bucket. If this parameter is not specified,
+    #   the default role is named 'vmimport'.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageRequest AWS API Documentation
+    #
+    class ExportImageRequest < Struct.new(
+      :client_token,
+      :description,
+      :disk_image_format,
+      :dry_run,
+      :image_id,
+      :s3_export_location,
+      :role_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   A description of the image being exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_image_format
+    #   The disk image format for the exported image.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_image_task_id
+    #   The ID of the export image task.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   The name of the role that grants VM Import/Export permission to
+    #   export images to your S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The percent complete of the export image task.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_export_location
+    #   Information about the destination S3 bucket.
+    #   @return [Types::ExportTaskS3Location]
+    #
+    # @!attribute [rw] status
+    #   The status of the export image task. The possible values are
+    #   `active`, `completed`, `deleting`, and `deleted`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the export image task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageResult AWS API Documentation
+    #
+    class ExportImageResult < Struct.new(
+      :description,
+      :disk_image_format,
+      :export_image_task_id,
+      :image_id,
+      :role_name,
+      :progress,
+      :s3_export_location,
+      :status,
+      :status_message)
+      include Aws::Structure
+    end
+
+    # Describes an export image task.
+    #
+    # @!attribute [rw] description
+    #   A description of the image being exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_image_task_id
+    #   The ID of the export image task.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The percent complete of the export image task.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_export_location
+    #   Information about the destination S3 bucket.
+    #   @return [Types::ExportTaskS3Location]
+    #
+    # @!attribute [rw] status
+    #   The status of the export image task. The possible values are
+    #   `active`, `completed`, `deleting`, and `deleted`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the export image task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageTask AWS API Documentation
+    #
+    class ExportImageTask < Struct.new(
+      :description,
+      :export_image_task_id,
+      :image_id,
+      :progress,
+      :s3_export_location,
+      :status,
+      :status_message)
+      include Aws::Structure
+    end
+
     # Describes an instance export task.
     #
     # @!attribute [rw] description
@@ -19148,6 +20511,50 @@ module Aws::EC2
       :instance_export_details,
       :state,
       :status_message)
+      include Aws::Structure
+    end
+
+    # Describes the destination for an export image task.
+    #
+    # @!attribute [rw] s3_bucket
+    #   The destination S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The prefix (logical hierarchy) in the bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTaskS3Location AWS API Documentation
+    #
+    class ExportTaskS3Location < Struct.new(
+      :s3_bucket,
+      :s3_prefix)
+      include Aws::Structure
+    end
+
+    # Describes the destination for an export image task.
+    #
+    # @note When making an API call, you may pass ExportTaskS3LocationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket: "String", # required
+    #         s3_prefix: "String",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket
+    #   The destination S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The prefix (logical hierarchy) in the bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTaskS3LocationRequest AWS API Documentation
+    #
+    class ExportTaskS3LocationRequest < Struct.new(
+      :s3_bucket,
+      :s3_prefix)
       include Aws::Structure
     end
 
@@ -19246,7 +20653,7 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `attachment.transit-gateway-attachment-id`- The id of the transit
+    #   * `attachment.transit-gateway-attachment-id` - The id of the transit
     #     gateway attachment.
     #
     #   * `attachment.resource-id` - The resource id of the transit gateway
@@ -19273,7 +20680,7 @@ module Aws::EC2
     #
     #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
     #
-    #   * `type` - The type of roue (`active` \| `blackhole`).
+    #   * `type` - The type of route (`active` \| `blackhole`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] s3_bucket
@@ -19536,7 +20943,7 @@ module Aws::EC2
     #         },
     #         overrides: [
     #           {
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             max_price: "String",
     #             subnet_id: "String",
     #             availability_zone: "String",
@@ -19629,7 +21036,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         max_price: "String",
     #         subnet_id: "String",
     #         availability_zone: "String",
@@ -19750,7 +21157,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number of the launch template.
+    #   The version number of the launch template. Note: This is a required
+    #   parameter and will be updated soon.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecificationRequest AWS API Documentation
@@ -19983,6 +21391,113 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCapacityReservationUsageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_reservation_id: "String", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned nextToken value.
+    #
+    #   Valid range: Minimum value of 1. Maximum value of 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityReservationUsageRequest AWS API Documentation
+    #
+    class GetCapacityReservationUsageRequest < Struct.new(
+      :capacity_reservation_id,
+      :next_token,
+      :max_results,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The type of instance for which the Capacity Reservation reserves
+    #   capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_instance_count
+    #   The number of instances for which the Capacity Reservation reserves
+    #   capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_instance_count
+    #   The remaining capacity. Indicates the number of instances that can
+    #   be launched in the Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Capacity Reservation. A Capacity
+    #   Reservation can be in one of the following states:
+    #
+    #   * `active` - The Capacity Reservation is active and the capacity is
+    #     available for your use.
+    #
+    #   * `expired` - The Capacity Reservation expired automatically at the
+    #     date and time specified in your request. The reserved capacity is
+    #     no longer available for your use.
+    #
+    #   * `cancelled` - The Capacity Reservation was manually cancelled. The
+    #     reserved capacity is no longer available for your use.
+    #
+    #   * `pending` - The Capacity Reservation request was successful but
+    #     the capacity provisioning is still pending.
+    #
+    #   * `failed` - The Capacity Reservation request has failed. A request
+    #     might fail due to invalid request parameters, capacity
+    #     constraints, or instance limit constraints. Failed requests are
+    #     retained for 60 minutes.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_usages
+    #   Information about the Capacity Reservation usage.
+    #   @return [Array<Types::InstanceUsage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityReservationUsageResult AWS API Documentation
+    #
+    class GetCapacityReservationUsageResult < Struct.new(
+      :next_token,
+      :capacity_reservation_id,
+      :instance_type,
+      :total_instance_count,
+      :available_instance_count,
+      :state,
+      :instance_usages)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetConsoleOutputRequest
     #   data as a hash:
     #
@@ -20087,6 +21602,71 @@ module Aws::EC2
     class GetConsoleScreenshotResult < Struct.new(
       :image_data,
       :instance_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEbsDefaultKmsKeyIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsDefaultKmsKeyIdRequest AWS API Documentation
+    #
+    class GetEbsDefaultKmsKeyIdRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of the default CMK for encryption by
+    #   default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsDefaultKmsKeyIdResult AWS API Documentation
+    #
+    class GetEbsDefaultKmsKeyIdResult < Struct.new(
+      :kms_key_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEbsEncryptionByDefaultRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsEncryptionByDefaultRequest AWS API Documentation
+    #
+    class GetEbsEncryptionByDefaultRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ebs_encryption_by_default
+    #   Indicates whether encryption by default is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsEncryptionByDefaultResult AWS API Documentation
+    #
+    class GetEbsEncryptionByDefaultResult < Struct.new(
+      :ebs_encryption_by_default)
       include Aws::Structure
     end
 
@@ -20704,13 +22284,13 @@ module Aws::EC2
     #   @return [Types::AvailableCapacity]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] host_id
@@ -20748,6 +22328,11 @@ module Aws::EC2
     #   Any tags assigned to the Dedicated Host.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] host_recovery
+    #   Indicates whether host recovery is enabled or disabled for the
+    #   Dedicated Host.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
@@ -20762,7 +22347,8 @@ module Aws::EC2
       :state,
       :allocation_time,
       :release_time,
-      :tags)
+      :tags,
+      :host_recovery)
       include Aws::Structure
     end
 
@@ -21112,7 +22698,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The value is `Windows` for Windows AMIs; otherwise blank.
+    #   This value is set to `windows` for Windows AMIs; otherwise, it is
+    #   blank.
     #   @return [String]
     #
     # @!attribute [rw] product_codes
@@ -21368,8 +22955,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ImportImage.
-    #
     # @note When making an API call, you may pass ImportImageRequest
     #   data as a hash:
     #
@@ -21408,7 +22993,7 @@ module Aws::EC2
     # @!attribute [rw] architecture
     #   The architecture of the virtual machine.
     #
-    #   Valid values: `i386` \| `x86_64`
+    #   Valid values: `i386` \| `x86_64` \| `arm64`
     #   @return [String]
     #
     # @!attribute [rw] client_data
@@ -21491,22 +23076,15 @@ module Aws::EC2
     #   The license type to be used for the Amazon Machine Image (AMI) after
     #   importing.
     #
-    #   **Note:** You may only use BYOL if you have existing licenses with
-    #   rights to use these licenses in a third party cloud like AWS. For
-    #   more information, see [Prerequisites][1] in the VM Import/Export
-    #   User Guide.
+    #   By default, we detect the source-system operating system (OS) and
+    #   apply the appropriate license. Specify `AWS` to replace the
+    #   source-system license with an AWS license, if appropriate. Specify
+    #   `BYOL` to retain the source-system license, if appropriate.
     #
-    #   Valid values include:
-    #
-    #   * `Auto` - Detects the source-system operating system (OS) and
-    #     applies the appropriate license.
-    #
-    #   * `AWS` - Replaces the source-system license with an AWS license, if
-    #     appropriate.
-    #
-    #   * `BYOL` - Retains the source-system license, if appropriate.
-    #
-    #   Default value: `Auto`
+    #   To use `BYOL`, you must have existing licenses with rights to use
+    #   these licenses in a third party cloud, such as AWS. For more
+    #   information, see [Prerequisites][1] in the VM Import/Export User
+    #   Guide.
     #
     #
     #
@@ -21542,8 +23120,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for ImportImage.
-    #
     # @!attribute [rw] architecture
     #   The architecture of the virtual machine.
     #   @return [String]
@@ -21621,7 +23197,7 @@ module Aws::EC2
     # @!attribute [rw] architecture
     #   The architecture of the virtual machine.
     #
-    #   Valid values: `i386` \| `x86_64`
+    #   Valid values: `i386` \| `x86_64` \| `arm64`
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -21706,7 +23282,7 @@ module Aws::EC2
     #         group_ids: ["String"],
     #         group_names: ["String"],
     #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         monitoring: false,
     #         placement: {
     #           availability_zone: "String",
@@ -21794,8 +23370,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ImportInstance.
-    #
     # @note When making an API call, you may pass ImportInstanceRequest
     #   data as a hash:
     #
@@ -21821,7 +23395,7 @@ module Aws::EC2
     #           group_ids: ["String"],
     #           group_names: ["String"],
     #           instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           monitoring: false,
     #           placement: {
     #             availability_zone: "String",
@@ -21875,8 +23449,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for ImportInstance.
-    #
     # @!attribute [rw] conversion_task
     #   Information about the conversion task.
     #   @return [Types::ConversionTask]
@@ -22010,8 +23582,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ImportSnapshot.
-    #
     # @note When making an API call, you may pass ImportSnapshotRequest
     #   data as a hash:
     #
@@ -22128,8 +23698,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for ImportSnapshot.
-    #
     # @!attribute [rw] description
     #   A description of the import snapshot task.
     #   @return [String]
@@ -22174,8 +23742,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ImportVolume.
-    #
     # @note When making an API call, you may pass ImportVolumeRequest
     #   data as a hash:
     #
@@ -22227,8 +23793,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output for ImportVolume.
-    #
     # @!attribute [rw] conversion_task
     #   Information about the conversion task.
     #   @return [Types::ConversionTask]
@@ -22956,6 +24520,8 @@ module Aws::EC2
     #
     # @!attribute [rw] interface_type
     #   Describes the type of network interface.
+    #
+    #   Valid values: `interface` \| `efa`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
@@ -23156,12 +24722,23 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet associated with the network string. Applies
+    #   The ID of the subnet associated with the network interface. Applies
     #   only if creating a network interface when launching an instance.
     #   @return [String]
     #
     # @!attribute [rw] interface_type
-    #   The type of interface.
+    #   The type of network interface. To create an Elastic Fabric Adapter
+    #   (EFA), specify `efa`. For more information, see [Elastic Fabric
+    #   Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   If you are not creating an EFA, specify `interface` or omit this
+    #   parameter.
+    #
+    #   Valid values: `interface` \| `efa`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
@@ -23210,6 +24787,32 @@ module Aws::EC2
       :primary,
       :private_dns_name,
       :private_ip_address)
+      include Aws::Structure
+    end
+
+    # The instance details to specify which volumes should be snapshotted.
+    #
+    # @note When making an API call, you may pass InstanceSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "String",
+    #         exclude_boot_volume: false,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The instance to specify which volumes should be snapshotted.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclude_boot_volume
+    #   Excludes the root volume from being snapshotted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSpecification AWS API Documentation
+    #
+    class InstanceSpecification < Struct.new(
+      :instance_id,
+      :exclude_boot_volume)
       include Aws::Structure
     end
 
@@ -23403,6 +25006,26 @@ module Aws::EC2
     class InstanceStatusSummary < Struct.new(
       :details,
       :status)
+      include Aws::Structure
+    end
+
+    # Information about the Capacity Reservation usage.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the AWS account that is making use of the Capacity
+    #   Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] used_instance_count
+    #   The number of instances the AWS account currently has in the
+    #   Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceUsage AWS API Documentation
+    #
+    class InstanceUsage < Struct.new(
+      :account_id,
+      :used_instance_count)
       include Aws::Structure
     end
 
@@ -24061,7 +25684,7 @@ module Aws::EC2
     #         },
     #         overrides: [
     #           {
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             spot_price: "String",
     #             subnet_id: "String",
     #             availability_zone: "String",
@@ -24122,9 +25745,9 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] threads_per_core
-    #   The number of threads per CPU core. To disable Intel Hyper-Threading
-    #   Technology for the instance, specify a value of 1. Otherwise,
-    #   specify the default value of 2.
+    #   The number of threads per CPU core. To disable multithreading for
+    #   the instance, specify a value of 1. Otherwise, specify the default
+    #   value of 2.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptionsRequest AWS API Documentation
@@ -24560,7 +26183,18 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] interface_type
-    #   The type of networking interface.
+    #   The type of network interface. To create an Elastic Fabric Adapter
+    #   (EFA), specify `efa`. For more information, see [Elastic Fabric
+    #   Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   If you are not creating an EFA, specify `interface` or omit this
+    #   parameter.
+    #
+    #   Valid values: `interface` \| `efa`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_address_count
@@ -24655,7 +26289,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         spot_price: "String",
     #         subnet_id: "String",
     #         availability_zone: "String",
@@ -24948,7 +26582,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -25282,7 +26916,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] return
-    #   Information about the Capacity Reservation.
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservationResult AWS API Documentation
@@ -25308,6 +26943,7 @@ module Aws::EC2
     #           enabled: false,
     #         },
     #         description: "String",
+    #         split_tunnel: false,
     #         dry_run: false,
     #       }
     #
@@ -25345,6 +26981,18 @@ module Aws::EC2
     #   A brief description of the Client VPN endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] split_tunnel
+    #   Indicates whether the VPN is split-tunnel.
+    #
+    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
+    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -25360,6 +27008,7 @@ module Aws::EC2
       :connection_log_options,
       :dns_servers,
       :description,
+      :split_tunnel,
       :dry_run)
       include Aws::Structure
     end
@@ -25373,6 +27022,64 @@ module Aws::EC2
     #
     class ModifyClientVpnEndpointResult < Struct.new(
       :return)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyEbsDefaultKmsKeyIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If
+    #   `KmsKeyId` is specified, the encrypted state must be `true`.
+    #
+    #   You can specify the CMK using any of the following:
+    #
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    #
+    #   * Key alias. For example, alias/ExampleAlias.
+    #
+    #   * Key ARN. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * Alias ARN. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify
+    #   an ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyEbsDefaultKmsKeyIdRequest AWS API Documentation
+    #
+    class ModifyEbsDefaultKmsKeyIdRequest < Struct.new(
+      :kms_key_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of the default CMK for encryption by
+    #   default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyEbsDefaultKmsKeyIdResult AWS API Documentation
+    #
+    class ModifyEbsDefaultKmsKeyIdResult < Struct.new(
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -25540,8 +27247,9 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         auto_placement: "on", # required, accepts on, off
+    #         auto_placement: "on", # accepts on, off
     #         host_ids: ["String"], # required
+    #         host_recovery: "on", # accepts on, off
     #       }
     #
     # @!attribute [rw] auto_placement
@@ -25552,11 +27260,22 @@ module Aws::EC2
     #   The IDs of the Dedicated Hosts to modify.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] host_recovery
+    #   Indicates whether to enable or disable host recovery for the
+    #   Dedicated Host. For more information, see [ Host Recovery][1] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyHostsRequest AWS API Documentation
     #
     class ModifyHostsRequest < Struct.new(
       :auto_placement,
-      :host_ids)
+      :host_ids,
+      :host_recovery)
       include Aws::Structure
     end
 
@@ -26326,7 +28045,7 @@ module Aws::EC2
     #           {
     #             availability_zone: "String",
     #             instance_count: 1,
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             platform: "String",
     #             scope: "Availability Zone", # accepts Availability Zone, Region
     #           },
@@ -26455,6 +28174,7 @@ module Aws::EC2
     #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #         spot_fleet_request_id: "String", # required
     #         target_capacity: 1,
+    #         on_demand_target_capacity: 1,
     #       }
     #
     # @!attribute [rw] excess_capacity_termination_policy
@@ -26471,12 +28191,17 @@ module Aws::EC2
     #   The size of the fleet.
     #   @return [Integer]
     #
+    # @!attribute [rw] on_demand_target_capacity
+    #   The number of On-Demand Instances in the fleet.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestRequest AWS API Documentation
     #
     class ModifySpotFleetRequestRequest < Struct.new(
       :excess_capacity_termination_policy,
       :spot_fleet_request_id,
-      :target_capacity)
+      :target_capacity,
+      :on_demand_target_capacity)
       include Aws::Structure
     end
 
@@ -26518,11 +28243,8 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] map_public_ip_on_launch
-    #   Specify `true` to indicate that network interfaces created in the
-    #   specified subnet should be assigned a public IPv4 address. This
-    #   includes a network interface that's created when launching an
-    #   instance into the subnet (the instance therefore receives a public
-    #   IPv4 address).
+    #   Specify `true` to indicate that ENIs attached to instances created
+    #   in the specified subnet should be assigned a public IPv4 address.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] subnet_id
@@ -26535,6 +28257,264 @@ module Aws::EC2
       :assign_ipv_6_address_on_creation,
       :map_public_ip_on_launch,
       :subnet_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyTrafficMirrorFilterNetworkServicesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_id: "String", # required
+    #         add_network_services: ["amazon-dns"], # accepts amazon-dns
+    #         remove_network_services: ["amazon-dns"], # accepts amazon-dns
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_network_services
+    #   The network service, for example Amazon DNS, that you want to
+    #   mirror.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_network_services
+    #   The network service, for example Amazon DNS, that you no longer want
+    #   to mirror.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterNetworkServicesRequest AWS API Documentation
+    #
+    class ModifyTrafficMirrorFilterNetworkServicesRequest < Struct.new(
+      :traffic_mirror_filter_id,
+      :add_network_services,
+      :remove_network_services,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter
+    #   The Traffic Mirror filter that the network service is associated
+    #   with.
+    #   @return [Types::TrafficMirrorFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterNetworkServicesResult AWS API Documentation
+    #
+    class ModifyTrafficMirrorFilterNetworkServicesResult < Struct.new(
+      :traffic_mirror_filter)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyTrafficMirrorFilterRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_filter_rule_id: "String", # required
+    #         traffic_direction: "ingress", # accepts ingress, egress
+    #         rule_number: 1,
+    #         rule_action: "accept", # accepts accept, reject
+    #         destination_port_range: {
+    #           from_port: 1,
+    #           to_port: 1,
+    #         },
+    #         source_port_range: {
+    #           from_port: 1,
+    #           to_port: 1,
+    #         },
+    #         protocol: 1,
+    #         destination_cidr_block: "String",
+    #         source_cidr_block: "String",
+    #         description: "String",
+    #         remove_fields: ["destination-port-range"], # accepts destination-port-range, source-port-range, protocol, description
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_filter_rule_id
+    #   The ID of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_direction
+    #   The type of traffic (`ingress` \| `egress`) to assign to the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_number
+    #   The number of the Traffic Mirror rule. This number must be unique
+    #   for each Traffic Mirror rule in a given direction. The rules are
+    #   processed in ascending order by rule number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_action
+    #   The action to assign to the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination ports that are associated with the Traffic Mirror
+    #   rule.
+    #   @return [Types::TrafficMirrorPortRangeRequest]
+    #
+    # @!attribute [rw] source_port_range
+    #   The port range to assign to the Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorPortRangeRequest]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol, for example TCP, to assign to the Traffic Mirror rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The destination CIDR block to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cidr_block
+    #   The source CIDR block to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description to assign to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_fields
+    #   The properties that you want to remove from the Traffic Mirror
+    #   filter rule.
+    #
+    #   When you remove a property from a Traffic Mirror filter rule, the
+    #   property is set to the default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterRuleRequest AWS API Documentation
+    #
+    class ModifyTrafficMirrorFilterRuleRequest < Struct.new(
+      :traffic_mirror_filter_rule_id,
+      :traffic_direction,
+      :rule_number,
+      :rule_action,
+      :destination_port_range,
+      :source_port_range,
+      :protocol,
+      :destination_cidr_block,
+      :source_cidr_block,
+      :description,
+      :remove_fields,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rule
+    #   Modifies a Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorFilterRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterRuleResult AWS API Documentation
+    #
+    class ModifyTrafficMirrorFilterRuleResult < Struct.new(
+      :traffic_mirror_filter_rule)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyTrafficMirrorSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_mirror_session_id: "String", # required
+    #         traffic_mirror_target_id: "String",
+    #         traffic_mirror_filter_id: "String",
+    #         packet_length: 1,
+    #         session_number: 1,
+    #         virtual_network_id: 1,
+    #         description: "String",
+    #         remove_fields: ["packet-length"], # accepts packet-length, description, virtual-network-id
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] traffic_mirror_session_id
+    #   The ID of the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The Traffic Mirror target. The target must be in the same VPC as the
+    #   source, or have a VPC peering connection with the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] packet_length
+    #   The number of bytes in each packet to mirror. These are bytes after
+    #   the VXLAN header. To mirror a subset, set this to the length (in
+    #   bytes) to mirror. For example, if you set this value to 100, then
+    #   the first 100 bytes that meet the filter criteria are copied to the
+    #   target. Do not specify this parameter when you want to mirror the
+    #   entire packet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_number
+    #   The session number determines the order in which sessions are
+    #   evaluated when an interface is used by multiple sessions. The first
+    #   session with a matching filter is the one that mirrors the packets.
+    #
+    #   Valid values are 1-32766.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] virtual_network_id
+    #   The virtual network ID of the Traffic Mirror session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description to assign to the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_fields
+    #   The properties that you want to remove from the Traffic Mirror
+    #   session.
+    #
+    #   When you remove a property from a Traffic Mirror session, the
+    #   property is set to the default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorSessionRequest AWS API Documentation
+    #
+    class ModifyTrafficMirrorSessionRequest < Struct.new(
+      :traffic_mirror_session_id,
+      :traffic_mirror_target_id,
+      :traffic_mirror_filter_id,
+      :packet_length,
+      :session_number,
+      :virtual_network_id,
+      :description,
+      :remove_fields,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_session
+    #   Information about the Traffic Mirror session.
+    #   @return [Types::TrafficMirrorSession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorSessionResult AWS API Documentation
+    #
+    class ModifyTrafficMirrorSessionResult < Struct.new(
+      :traffic_mirror_session)
       include Aws::Structure
     end
 
@@ -26877,9 +28857,7 @@ module Aws::EC2
     #
     # @!attribute [rw] policy_document
     #   A policy to attach to the endpoint that controls access to the
-    #   service. The policy must be in valid JSON format. If this parameter
-    #   is not specified, we attach a default policy that allows full access
-    #   to the service.
+    #   service. The policy must be in valid JSON format.
     #   @return [String]
     #
     # @!attribute [rw] add_route_table_ids
@@ -27175,6 +29153,7 @@ module Aws::EC2
     #       {
     #         vpn_connection_id: "String", # required
     #         transit_gateway_id: "String",
+    #         customer_gateway_id: "String",
     #         vpn_gateway_id: "String",
     #         dry_run: false,
     #       }
@@ -27185,6 +29164,10 @@ module Aws::EC2
     #
     # @!attribute [rw] transit_gateway_id
     #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_gateway_id
+    #   The ID of the customer gateway at your end of the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] vpn_gateway_id
@@ -27204,6 +29187,7 @@ module Aws::EC2
     class ModifyVpnConnectionRequest < Struct.new(
       :vpn_connection_id,
       :transit_gateway_id,
+      :customer_gateway_id,
       :vpn_gateway_id,
       :dry_run)
       include Aws::Structure
@@ -27216,6 +29200,50 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionResult AWS API Documentation
     #
     class ModifyVpnConnectionResult < Struct.new(
+      :vpn_connection)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyVpnTunnelCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpn_connection_id: "String", # required
+    #         vpn_tunnel_outside_ip_address: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the AWS Site-to-Site VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelCertificateRequest AWS API Documentation
+    #
+    class ModifyVpnTunnelCertificateRequest < Struct.new(
+      :vpn_connection_id,
+      :vpn_tunnel_outside_ip_address,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection
+    #   Describes a VPN connection.
+    #   @return [Types::VpnConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelCertificateResult AWS API Documentation
+    #
+    class ModifyVpnTunnelCertificateResult < Struct.new(
       :vpn_connection)
       include Aws::Structure
     end
@@ -27391,7 +29419,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [Types::ProvisionedBandwidth]
     #
@@ -27929,7 +29957,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The allocation strategy of On-Demand Instances in an EC2 Fleet.
+    # Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #
     # @!attribute [rw] allocation_strategy
     #   The order of the launch template overrides to use in fulfilling
@@ -27957,17 +29985,23 @@ module Aws::EC2
     #   instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_total_price
+    #   The maximum amount per hour for On-Demand Instances that you're
+    #   willing to pay.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptions AWS API Documentation
     #
     class OnDemandOptions < Struct.new(
       :allocation_strategy,
       :single_instance_type,
       :single_availability_zone,
-      :min_target_capacity)
+      :min_target_capacity,
+      :max_total_price)
       include Aws::Structure
     end
 
-    # The allocation strategy of On-Demand Instances in an EC2 Fleet.
+    # Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #
     # @note When making an API call, you may pass OnDemandOptionsRequest
     #   data as a hash:
@@ -27977,6 +30011,7 @@ module Aws::EC2
     #         single_instance_type: false,
     #         single_availability_zone: false,
     #         min_target_capacity: 1,
+    #         max_total_price: "String",
     #       }
     #
     # @!attribute [rw] allocation_strategy
@@ -28005,13 +30040,19 @@ module Aws::EC2
     #   instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_total_price
+    #   The maximum amount per hour for On-Demand Instances that you're
+    #   willing to pay.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptionsRequest AWS API Documentation
     #
     class OnDemandOptionsRequest < Struct.new(
       :allocation_strategy,
       :single_instance_type,
       :single_availability_zone,
-      :min_target_capacity)
+      :min_target_capacity,
+      :max_total_price)
       include Aws::Structure
     end
 
@@ -28154,12 +30195,8 @@ module Aws::EC2
     # @!attribute [rw] tenancy
     #   The tenancy of the instance (if the instance is running in a VPC).
     #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware. The `host` tenancy is not supported for the
-    #   [ImportInstance][1] command.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
+    #   hardware. The `host` tenancy is not supported for the ImportInstance
+    #   command.
     #   @return [String]
     #
     # @!attribute [rw] spread_domain
@@ -28532,7 +30569,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     # [2]: https://console.aws.amazon.com/support/home?
     #
     # @!attribute [rw] provision_time
@@ -28541,7 +30578,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [Time]
     #
@@ -28551,7 +30588,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [String]
     #
@@ -28561,7 +30598,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [Time]
     #
@@ -28571,7 +30608,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [String]
     #
@@ -28581,7 +30618,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [String]
     #
@@ -28719,13 +30756,13 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] currency_code
@@ -28765,13 +30802,13 @@ module Aws::EC2
     end
 
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] currency_code
@@ -29005,11 +31042,17 @@ module Aws::EC2
     #   The name of the Region.
     #   @return [String]
     #
+    # @!attribute [rw] opt_in_status
+    #   The Region opt-in status. The possible values are
+    #   `opt-in-not-required`, `opted-in`, and `not-opted-in`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Region AWS API Documentation
     #
     class Region < Struct.new(
       :endpoint,
-      :region_name)
+      :region_name,
+      :opt_in_status)
       include Aws::Structure
     end
 
@@ -29050,7 +31093,15 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] image_location
-    #   The full path to your AMI manifest in Amazon S3 storage.
+    #   The full path to your AMI manifest in Amazon S3 storage. The
+    #   specified bucket must have the `aws-exec-read` canned access control
+    #   list (ACL) to ensure that it can be accessed by Amazon EC2. For more
+    #   information, see [Canned ACLs][1] in the *Amazon S3 Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     #   @return [String]
     #
     # @!attribute [rw] architecture
@@ -29851,7 +31902,7 @@ module Aws::EC2
     #           },
     #         ],
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         key_name: "String",
     #         monitoring: {
     #           enabled: false,
@@ -29870,7 +31921,7 @@ module Aws::EC2
     #         user_data: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -29962,16 +32013,12 @@ module Aws::EC2
     #
     # @!attribute [rw] network_interfaces
     #   One or more network interfaces. If you specify a network interface,
-    #   you must specify any security groups as part of the network
-    #   interface.
+    #   you must specify any security groups and subnets as part of the
+    #   network interface.
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI, which you can get by using [DescribeImages][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
+    #   The ID of the AMI.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -30018,9 +32065,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] disable_api_termination
-    #   If set to `true`, you can't terminate the instance using the Amazon
-    #   EC2 console, CLI, or API. To change this attribute to `false` after
-    #   launch, use [ ModifyInstanceAttribute][1].
+    #   If you set this parameter to `true`, you can't terminate the
+    #   instance using the Amazon EC2 console, CLI, or API; otherwise, you
+    #   can. To change this attribute after launch, use
+    #   [ModifyInstanceAttribute][1]. Alternatively, if you set
+    #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can
+    #   terminate the instance by running the shutdown command from the
+    #   instance.
     #
     #
     #
@@ -30165,7 +32216,7 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         spot_fleet_request_config: { # required
-    #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
+    #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #           on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #           client_token: "String",
     #           excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
@@ -30203,7 +32254,7 @@ module Aws::EC2
     #                 name: "String",
     #               },
     #               image_id: "String",
-    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #               kernel_id: "String",
     #               key_name: "String",
     #               monitoring: {
@@ -30247,7 +32298,7 @@ module Aws::EC2
     #               weighted_capacity: 1.0,
     #               tag_specifications: [
     #                 {
-    #                   resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #                   resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #                   tags: [
     #                     {
     #                       key: "String",
@@ -30267,7 +32318,7 @@ module Aws::EC2
     #               },
     #               overrides: [
     #                 {
-    #                   instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #                   instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #                   spot_price: "String",
     #                   subnet_id: "String",
     #                   availability_zone: "String",
@@ -30280,6 +32331,8 @@ module Aws::EC2
     #           spot_price: "String",
     #           target_capacity: 1, # required
     #           on_demand_target_capacity: 1,
+    #           on_demand_max_total_price: "String",
+    #           spot_max_total_price: "String",
     #           terminate_instances_with_expiration: false,
     #           type: "request", # accepts request, maintain, instant
     #           valid_from: Time.now,
@@ -30376,7 +32429,7 @@ module Aws::EC2
     #             name: "String",
     #           },
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #           kernel_id: "String",
     #           key_name: "String",
     #           monitoring: {
@@ -30593,7 +32646,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -30711,7 +32764,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet in which to launch the instance.
+    #   The IDs of the subnets in which to launch the instance. To specify
+    #   multiple subnets, separate them using commas; for example,
+    #   "subnet-1234abcdeexample1, subnet-0987cdef6example2".
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -30955,7 +33010,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String",
     #         instance_count: 1,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         platform: "String",
     #         scope: "Availability Zone", # accepts Availability Zone, Region
     #       }
@@ -31245,6 +33300,39 @@ module Aws::EC2
       :pricing_details,
       :recurring_charges,
       :scope)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ResetEbsDefaultKmsKeyIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetEbsDefaultKmsKeyIdRequest AWS API Documentation
+    #
+    class ResetEbsDefaultKmsKeyIdRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of the default CMK for EBS encryption
+    #   by default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetEbsDefaultKmsKeyIdResult AWS API Documentation
+    #
+    class ResetEbsDefaultKmsKeyIdResult < Struct.new(
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -32148,7 +34236,7 @@ module Aws::EC2
     #           },
     #         ],
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -32225,7 +34313,7 @@ module Aws::EC2
     #         ],
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -32273,16 +34361,12 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] block_device_mappings
-    #   The block device mapping entries. You can't specify both a snapshot
-    #   ID and an encryption value. This is because only blank volumes can
-    #   be encrypted on creation. If a snapshot is the basis for a volume,
-    #   it is not blank and its encryption status is used for the volume
-    #   encryption status.
+    #   The block device mapping entries.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI. An AMI is required to launch an instance and must
-    #   be specified here or in a launch template.
+    #   The ID of the AMI. An AMI ID is required to launch an instance and
+    #   must be specified here or in a launch template.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -32425,8 +34509,8 @@ module Aws::EC2
     # @!attribute [rw] subnet_id
     #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   If you specify a network interface, you must specify any subnets as
+    #   part of the network interface.
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -32462,7 +34546,7 @@ module Aws::EC2
     # @!attribute [rw] disable_api_termination
     #   If you set this parameter to `true`, you can't terminate the
     #   instance using the Amazon EC2 console, CLI, or API; otherwise, you
-    #   can. To change this attribute to `false` after launch, use
+    #   can. To change this attribute after launch, use
     #   [ModifyInstanceAttribute][1]. Alternatively, if you set
     #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can
     #   terminate the instance by running the shutdown command from the
@@ -32507,8 +34591,8 @@ module Aws::EC2
     #
     # @!attribute [rw] network_interfaces
     #   The network interfaces to associate with the instance. If you
-    #   specify a network interface, you must specify any security groups as
-    #   part of the network interface.
+    #   specify a network interface, you must specify any security groups
+    #   and subnets as part of the network interface.
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] private_ip_address
@@ -33212,7 +35296,7 @@ module Aws::EC2
     #   Provisioned IOPS SSD, Throughput Optimized HDD for `st1`, Cold HDD
     #   for `sc1`, or `standard` for Magnetic.
     #
-    #   Default: `standard`
+    #   Default: `gp2`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesEbs AWS API Documentation
@@ -33649,11 +35733,9 @@ module Aws::EC2
     #     supernet-of-match as 10.0.1.0/30, then the result returns
     #     10.0.1.0/29.
     #
-    #   * `state` - The state of the attachment (`available` \| `deleted` \|
-    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
-    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #   * `state` - The state of the route (`active` \| `blackhole`).
     #
-    #   * `type` - The type of roue (`active` \| `blackhole`).
+    #   * `type` - The type of route (`propagated` \| `static`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -33780,6 +35862,33 @@ module Aws::EC2
       :group_id,
       :referencing_vpc_id,
       :vpc_peering_connection_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SendDiagnosticInterruptRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SendDiagnosticInterruptRequest AWS API Documentation
+    #
+    class SendDiagnosticInterruptRequest < Struct.new(
+      :instance_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -33997,8 +36106,8 @@ module Aws::EC2
     #   data encryption keys are inherited by volumes created from
     #   snapshots, and vice versa, if snapshots share the same data
     #   encryption key identifier, then they belong to the same
-    #   volume/snapshot lineage. This parameter is only returned by the
-    #   DescribeSnapshots API operation.
+    #   volume/snapshot lineage. This parameter is only returned by
+    #   DescribeSnapshots.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -34010,9 +36119,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) that was used to protect the volume encryption key
-    #   for the parent volume.
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) customer master key (CMK) that was used to protect the
+    #   volume encryption key for the parent volume.
     #   @return [String]
     #
     # @!attribute [rw] owner_id
@@ -34041,8 +36150,8 @@ module Aws::EC2
     #   snapshot copy operation fails (for example, if the proper AWS Key
     #   Management Service (AWS KMS) permissions are not obtained) this
     #   field displays error state details to help you diagnose why the
-    #   error occurred. This parameter is only returned by the
-    #   DescribeSnapshots API operation.
+    #   error occurred. This parameter is only returned by
+    #   DescribeSnapshots.
     #   @return [String]
     #
     # @!attribute [rw] volume_id
@@ -34188,6 +36297,66 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about a snapshot.
+    #
+    # @!attribute [rw] description
+    #   Description specified by the CreateSnapshotRequest that has been
+    #   applied to all snapshots.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with this snapshot.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the snapshot is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] volume_id
+    #   Source volume from which this snapshot was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Current state of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size
+    #   Size of the volume from which this snapshot was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   Time this snapshot was started. This is the same for all snapshots
+    #   initiated by the same request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] progress
+    #   Progress this snapshot has made towards completing.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   Account id used when creating this snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   Snapshot id that can be used to describe this snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotInfo AWS API Documentation
+    #
+    class SnapshotInfo < Struct.new(
+      :description,
+      :tags,
+      :encrypted,
+      :volume_id,
+      :state,
+      :volume_size,
+      :start_time,
+      :progress,
+      :owner_id,
+      :snapshot_id)
+      include Aws::Structure
+    end
+
     # Details about the import snapshot task.
     #
     # @!attribute [rw] description
@@ -34327,7 +36496,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -34371,7 +36540,7 @@ module Aws::EC2
     #         weighted_capacity: 1.0,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #             tags: [
     #               {
     #                 key: "String",
@@ -34394,7 +36563,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block devices that are mapped to the Spot instances. You
+    #   One or more block devices that are mapped to the Spot Instances. You
     #   can't specify both a snapshot ID and an encryption value. This is
     #   because only blank volumes can be encrypted on creation. If a
     #   snapshot is the basis for a volume, it is not blank and its
@@ -34461,9 +36630,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet in which to launch the instances. To specify
+    #   The IDs of the subnets in which to launch the instances. To specify
     #   multiple subnets, separate them using commas; for example,
-    #   "subnet-a61dafcf, subnet-65ea5f08".
+    #   "subnet-1234abcdeexample1, subnet-0987cdef6example2".
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -34575,7 +36744,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
+    #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
     #         on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #         client_token: "String",
     #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
@@ -34613,7 +36782,7 @@ module Aws::EC2
     #               name: "String",
     #             },
     #             image_id: "String",
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #             kernel_id: "String",
     #             key_name: "String",
     #             monitoring: {
@@ -34657,7 +36826,7 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             tag_specifications: [
     #               {
-    #                 resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #                 resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #                 tags: [
     #                   {
     #                     key: "String",
@@ -34677,7 +36846,7 @@ module Aws::EC2
     #             },
     #             overrides: [
     #               {
-    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
     #                 spot_price: "String",
     #                 subnet_id: "String",
     #                 availability_zone: "String",
@@ -34690,6 +36859,8 @@ module Aws::EC2
     #         spot_price: "String",
     #         target_capacity: 1, # required
     #         on_demand_target_capacity: 1,
+    #         on_demand_max_total_price: "String",
+    #         spot_max_total_price: "String",
     #         terminate_instances_with_expiration: false,
     #         type: "request", # accepts request, maintain, instant
     #         valid_from: Time.now,
@@ -34716,8 +36887,19 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] allocation_strategy
-    #   Indicates how to allocate the target capacity across the Spot pools
-    #   specified by the Spot Fleet request. The default is `lowestPrice`.
+    #   Indicates how to allocate the target Spot Instance capacity across
+    #   the Spot Instance pools specified by the Spot Fleet request.
+    #
+    #   If the allocation strategy is `lowestPrice`, Spot Fleet launches
+    #   instances from the Spot Instance pools with the lowest price. This
+    #   is the default allocation strategy.
+    #
+    #   If the allocation strategy is `diversified`, Spot Fleet launches
+    #   instances from all the Spot Instance pools that you specify.
+    #
+    #   If the allocation strategy is `capacityOptimized`, Spot Fleet
+    #   launches instances from Spot Instance pools with optimal capacity
+    #   for the number of instances that are launching.
     #   @return [String]
     #
     # @!attribute [rw] on_demand_allocation_strategy
@@ -34806,6 +36988,30 @@ module Aws::EC2
     #   specify a target capacity of 0 and add capacity later.
     #   @return [Integer]
     #
+    # @!attribute [rw] on_demand_max_total_price
+    #   The maximum amount per hour for On-Demand Instances that you're
+    #   willing to pay. You can use the `onDemandMaxTotalPrice` parameter,
+    #   the `spotMaxTotalPrice` parameter, or both parameters to ensure that
+    #   your fleet cost does not exceed your budget. If you set a maximum
+    #   price per hour for the On-Demand Instances and Spot Instances in
+    #   your request, Spot Fleet will launch instances until it reaches the
+    #   maximum amount you're willing to pay. When the maximum amount
+    #   you're willing to pay is reached, the fleet stops launching
+    #   instances even if it hasn’t met the target capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_max_total_price
+    #   The maximum amount per hour for Spot Instances that you're willing
+    #   to pay. You can use the `spotdMaxTotalPrice` parameter, the
+    #   `onDemandMaxTotalPrice` parameter, or both parameters to ensure that
+    #   your fleet cost does not exceed your budget. If you set a maximum
+    #   price per hour for the On-Demand Instances and Spot Instances in
+    #   your request, Spot Fleet will launch instances until it reaches the
+    #   maximum amount you're willing to pay. When the maximum amount
+    #   you're willing to pay is reached, the fleet stops launching
+    #   instances even if it hasn’t met the target capacity.
+    #   @return [String]
+    #
     # @!attribute [rw] terminate_instances_with_expiration
     #   Indicates whether running Spot Instances are terminated when the
     #   Spot Fleet request expires.
@@ -34881,6 +37087,8 @@ module Aws::EC2
       :spot_price,
       :target_capacity,
       :on_demand_target_capacity,
+      :on_demand_max_total_price,
+      :spot_max_total_price,
       :terminate_instances_with_expiration,
       :type,
       :valid_from,
@@ -34898,7 +37106,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -35154,8 +37362,19 @@ module Aws::EC2
     # Describes the configuration of Spot Instances in an EC2 Fleet.
     #
     # @!attribute [rw] allocation_strategy
-    #   Indicates how to allocate the target capacity across the Spot pools
-    #   specified by the Spot Fleet request. The default is `lowest-price`.
+    #   Indicates how to allocate the target Spot Instance capacity across
+    #   the Spot Instance pools specified by the EC2 Fleet.
+    #
+    #   If the allocation strategy is `lowestPrice`, EC2 Fleet launches
+    #   instances from the Spot Instance pools with the lowest price. This
+    #   is the default allocation strategy.
+    #
+    #   If the allocation strategy is `diversified`, EC2 Fleet launches
+    #   instances from all the Spot Instance pools that you specify.
+    #
+    #   If the allocation strategy is `capacityOptimized`, EC2 Fleet
+    #   launches instances from Spot Instance pools with optimal capacity
+    #   for the number of instances that are launching.
     #   @return [String]
     #
     # @!attribute [rw] instance_interruption_behavior
@@ -35187,6 +37406,11 @@ module Aws::EC2
     #   instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_total_price
+    #   The maximum amount per hour for Spot Instances that you're willing
+    #   to pay.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptions AWS API Documentation
     #
     class SpotOptions < Struct.new(
@@ -35195,7 +37419,8 @@ module Aws::EC2
       :instance_pools_to_use_count,
       :single_instance_type,
       :single_availability_zone,
-      :min_target_capacity)
+      :min_target_capacity,
+      :max_total_price)
       include Aws::Structure
     end
 
@@ -35205,17 +37430,29 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
     #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #         instance_pools_to_use_count: 1,
     #         single_instance_type: false,
     #         single_availability_zone: false,
     #         min_target_capacity: 1,
+    #         max_total_price: "String",
     #       }
     #
     # @!attribute [rw] allocation_strategy
-    #   Indicates how to allocate the target capacity across the Spot pools
-    #   specified by the Spot Fleet request. The default is `lowestPrice`.
+    #   Indicates how to allocate the target Spot Instance capacity across
+    #   the Spot Instance pools specified by the EC2 Fleet.
+    #
+    #   If the allocation strategy is `lowestPrice`, EC2 Fleet launches
+    #   instances from the Spot Instance pools with the lowest price. This
+    #   is the default allocation strategy.
+    #
+    #   If the allocation strategy is `diversified`, EC2 Fleet launches
+    #   instances from all the Spot Instance pools that you specify.
+    #
+    #   If the allocation strategy is `capacityOptimized`, EC2 Fleet
+    #   launches instances from Spot Instance pools with optimal capacity
+    #   for the number of instances that are launching.
     #   @return [String]
     #
     # @!attribute [rw] instance_interruption_behavior
@@ -35247,6 +37484,11 @@ module Aws::EC2
     #   instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_total_price
+    #   The maximum amount per hour for Spot Instances that you're willing
+    #   to pay.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptionsRequest AWS API Documentation
     #
     class SpotOptionsRequest < Struct.new(
@@ -35255,7 +37497,8 @@ module Aws::EC2
       :instance_pools_to_use_count,
       :single_instance_type,
       :single_availability_zone,
-      :min_target_capacity)
+      :min_target_capacity,
+      :max_total_price)
       include Aws::Structure
     end
 
@@ -35841,7 +38084,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -35852,9 +38095,13 @@ module Aws::EC2
     #
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
-    #   support tagging on creation are `fleet`, `dedicated-host`,
-    #   `instance`, `snapshot`, and `volume`. To tag a resource after it has
-    #   been created, see CreateTags.
+    #   support tagging on creation are: `capacity-reservation` \|
+    #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `instance`
+    #   \| `launch-template` \| `snapshot` \| `transit-gateway` \|
+    #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
+    #   `volume`.
+    #
+    #   To tag a resource after it has been created, see CreateTags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -35875,17 +38122,30 @@ module Aws::EC2
     # If the request type is `maintain`, you can specify a target capacity
     # of 0 and add capacity later.
     #
+    # You can use the On-Demand Instance `MaxTotalPrice` parameter, the Spot
+    # Instance `MaxTotalPrice`, or both to ensure your fleet cost does not
+    # exceed your budget. If you set a maximum price per hour for the
+    # On-Demand Instances and Spot Instances in your request, EC2 Fleet will
+    # launch instances until it reaches the maximum amount you're willing
+    # to pay. When the maximum amount you're willing to pay is reached, the
+    # fleet stops launching instances even if it hasn’t met the target
+    # capacity. The `MaxTotalPrice` parameters are located in and
+    #
     # @!attribute [rw] total_target_capacity
     #   The number of units to request, filled using
     #   `DefaultTargetCapacityType`.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
-    #   The number of On-Demand units to request.
+    #   The number of On-Demand units to request. If you specify a target
+    #   capacity for Spot units, you cannot specify a target capacity for
+    #   On-Demand units.
     #   @return [Integer]
     #
     # @!attribute [rw] spot_target_capacity
-    #   The maximum number of Spot units to launch.
+    #   The maximum number of Spot units to launch. If you specify a target
+    #   capacity for On-Demand units, you cannot specify a target capacity
+    #   for Spot units.
     #   @return [Integer]
     #
     # @!attribute [rw] default_target_capacity_type
@@ -35904,10 +38164,21 @@ module Aws::EC2
     end
 
     # The number of units to request. You can choose to set the target
-    # capacity in terms of instances or a performance characteristic that is
-    # important to your application workload, such as vCPUs, memory, or I/O.
-    # If the request type is `maintain`, you can specify a target capacity
-    # of 0 and add capacity later.
+    # capacity as the number of instances. Or you can set the target
+    # capacity to a performance characteristic that is important to your
+    # application workload, such as vCPUs, memory, or I/O. If the request
+    # type is `maintain`, you can specify a target capacity of 0 and add
+    # capacity later.
+    #
+    # You can use the On-Demand Instance `MaxTotalPrice` parameter, the Spot
+    # Instance `MaxTotalPrice` parameter, or both parameters to ensure that
+    # your fleet cost does not exceed your budget. If you set a maximum
+    # price per hour for the On-Demand Instances and Spot Instances in your
+    # request, EC2 Fleet will launch instances until it reaches the maximum
+    # amount you're willing to pay. When the maximum amount you're willing
+    # to pay is reached, the fleet stops launching instances even if it
+    # hasn’t met the target capacity. The `MaxTotalPrice` parameters are
+    # located in and .
     #
     # @note When making an API call, you may pass TargetCapacitySpecificationRequest
     #   data as a hash:
@@ -36225,6 +38496,269 @@ module Aws::EC2
     #
     class TerminateInstancesResult < Struct.new(
       :terminating_instances)
+      include Aws::Structure
+    end
+
+    # Describes the Traffic Mirror filter.
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_filter_rules
+    #   Information about the ingress rules that are associated with the
+    #   Traffic Mirror filter.
+    #   @return [Array<Types::TrafficMirrorFilterRule>]
+    #
+    # @!attribute [rw] egress_filter_rules
+    #   Information about the egress rules that are associated with the
+    #   Traffic Mirror filter.
+    #   @return [Array<Types::TrafficMirrorFilterRule>]
+    #
+    # @!attribute [rw] network_services
+    #   The network service traffic that is associated with the Traffic
+    #   Mirror filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Traffic Mirror filter.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilter AWS API Documentation
+    #
+    class TrafficMirrorFilter < Struct.new(
+      :traffic_mirror_filter_id,
+      :ingress_filter_rules,
+      :egress_filter_rules,
+      :network_services,
+      :description,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes the Traffic Mirror rule.
+    #
+    # @!attribute [rw] traffic_mirror_filter_rule_id
+    #   The ID of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter that the rule is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_direction
+    #   The traffic direction assigned to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number of the Traffic Mirror rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_action
+    #   The action assigned to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol assigned to the Traffic Mirror rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination port range assigned to the Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorPortRange]
+    #
+    # @!attribute [rw] source_port_range
+    #   The source port range assigned to the Traffic Mirror rule.
+    #   @return [Types::TrafficMirrorPortRange]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The destination CIDR block assigned to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cidr_block
+    #   The source CIDR block assigned to the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilterRule AWS API Documentation
+    #
+    class TrafficMirrorFilterRule < Struct.new(
+      :traffic_mirror_filter_rule_id,
+      :traffic_mirror_filter_id,
+      :traffic_direction,
+      :rule_number,
+      :rule_action,
+      :protocol,
+      :destination_port_range,
+      :source_port_range,
+      :destination_cidr_block,
+      :source_cidr_block,
+      :description)
+      include Aws::Structure
+    end
+
+    # Describes the Traffic Mirror port range.
+    #
+    # @!attribute [rw] from_port
+    #   The start of the Traffic Mirror port range. This applies to the TCP
+    #   and UDP protocols.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The end of the Traffic Mirror port range. This applies to the TCP
+    #   and UDP protocols.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorPortRange AWS API Documentation
+    #
+    class TrafficMirrorPortRange < Struct.new(
+      :from_port,
+      :to_port)
+      include Aws::Structure
+    end
+
+    # Information about the Traffic Mirror filter rule port range.
+    #
+    # @note When making an API call, you may pass TrafficMirrorPortRangeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       }
+    #
+    # @!attribute [rw] from_port
+    #   The first port in the Traffic Mirror port range. This applies to the
+    #   TCP and UDP protocols.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The last port in the Traffic Mirror port range. This applies to the
+    #   TCP and UDP protocols.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorPortRangeRequest AWS API Documentation
+    #
+    class TrafficMirrorPortRangeRequest < Struct.new(
+      :from_port,
+      :to_port)
+      include Aws::Structure
+    end
+
+    # Describes a Traffic Mirror session.
+    #
+    # @!attribute [rw] traffic_mirror_session_id
+    #   The ID for the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   The ID of the Traffic Mirror filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the Traffic Mirror session's network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the account that owns the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] packet_length
+    #   The number of bytes in each packet to mirror. These are the bytes
+    #   after the VXLAN header. To mirror a subset, set this to the length
+    #   (in bytes) to mirror. For example, if you set this value to 100,
+    #   then the first 100 bytes that meet the filter criteria are copied to
+    #   the target. Do not specify this parameter when you want to mirror
+    #   the entire packet
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_number
+    #   The session number determines the order in which sessions are
+    #   evaluated when an interface is used by multiple sessions. The first
+    #   session with a matching filter is the one that mirrors the packets.
+    #
+    #   Valid values are 1-32766.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] virtual_network_id
+    #   The virtual network ID associated with the Traffic Mirror session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the Traffic Mirror session.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Traffic Mirror session.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorSession AWS API Documentation
+    #
+    class TrafficMirrorSession < Struct.new(
+      :traffic_mirror_session_id,
+      :traffic_mirror_target_id,
+      :traffic_mirror_filter_id,
+      :network_interface_id,
+      :owner_id,
+      :packet_length,
+      :session_number,
+      :virtual_network_id,
+      :description,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes a Traffic Mirror target.
+    #
+    # @!attribute [rw] traffic_mirror_target_id
+    #   The ID of the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID that is attached to the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the Network Load Balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Information about the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the account that owns the Traffic Mirror target.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Traffic Mirror target.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorTarget AWS API Documentation
+    #
+    class TrafficMirrorTarget < Struct.new(
+      :traffic_mirror_target_id,
+      :network_interface_id,
+      :network_load_balancer_arn,
+      :type,
+      :description,
+      :owner_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -37295,6 +39829,11 @@ module Aws::EC2
     #   If an error occurs, a description of the error.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the VPN tunnel endpoint
+    #   certificate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VgwTelemetry AWS API Documentation
     #
     class VgwTelemetry < Struct.new(
@@ -37302,7 +39841,8 @@ module Aws::EC2
       :last_status_change,
       :outside_ip_address,
       :status,
-      :status_message)
+      :status_message,
+      :certificate_arn)
       include Aws::Structure
     end
 
@@ -37321,13 +39861,13 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the volume will be encrypted.
+    #   Indicates whether the volume is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) that was used to protect the volume encryption key
-    #   for the volume.
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) customer master key (CMK) that was used to protect the
+    #   volume encryption key for the volume.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -37866,6 +40406,10 @@ module Aws::EC2
     #   Any tags assigned to the VPC endpoint.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the VPC endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
     #
     class VpcEndpoint < Struct.new(
@@ -37883,7 +40427,8 @@ module Aws::EC2
       :network_interface_ids,
       :dns_entries,
       :creation_timestamp,
-      :tags)
+      :tags,
+      :owner_id)
       include Aws::Structure
     end
 
@@ -37909,6 +40454,15 @@ module Aws::EC2
     #   The date and time the VPC endpoint was created.
     #   @return [Time]
     #
+    # @!attribute [rw] dns_entries
+    #   The DNS entries for the VPC endpoint.
+    #   @return [Array<Types::DnsEntry>]
+    #
+    # @!attribute [rw] network_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of the network load balancers for
+    #   the service.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpointConnection AWS API Documentation
     #
     class VpcEndpointConnection < Struct.new(
@@ -37916,7 +40470,9 @@ module Aws::EC2
       :vpc_endpoint_id,
       :vpc_endpoint_owner,
       :vpc_endpoint_state,
-      :creation_timestamp)
+      :creation_timestamp,
+      :dns_entries,
+      :network_load_balancer_arns)
       include Aws::Structure
     end
 

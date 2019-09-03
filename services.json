@@ -39,6 +39,9 @@
   "ApplicationDiscoveryService": {
     "models": "discovery/2015-11-01"
   },
+  "ApplicationInsights": {
+    "models": "application-insights/2018-11-25"
+  },
   "Athena": {
     "models": "athena/2017-05-18"
   },
@@ -70,7 +73,7 @@
     "models": "cloudformation/2010-05-15"
   },
   "CloudFront": {
-    "models": "cloudfront/2018-11-05"
+    "models": "cloudfront/2019-03-26"
   },
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
@@ -196,6 +199,9 @@
       "aws-sigv4": "~> 1.0"
     }
   },
+  "EC2InstanceConnect": {
+    "models": "ec2-instance-connect/2018-04-02"
+  },
   "ECR": {
     "models": "ecr/2015-09-21"
   },
@@ -229,6 +235,9 @@
   "ElasticsearchService": {
     "models": "es/2015-01-01"
   },
+  "EventBridge": {
+    "models": "eventbridge/2015-10-07"
+  },
   "FMS": {
     "models": "fms/2018-01-01"
   },
@@ -237,6 +246,12 @@
   },
   "Firehose": {
     "models": "firehose/2015-08-04"
+  },
+  "ForecastQueryService": {
+    "models": "forecastquery/2018-06-26"
+  },
+  "ForecastService": {
+    "models": "forecast/2018-06-26"
   },
   "GameLift": {
     "models": "gamelift/2015-10-01"
@@ -257,6 +272,9 @@
   },
   "Greengrass": {
     "models": "greengrass/2017-06-07"
+  },
+  "GroundStation": {
+    "models": "groundstation/2019-05-23"
   },
   "GuardDuty": {
     "models": "guardduty/2017-11-28"
@@ -289,8 +307,17 @@
     "models": "iot-data/2015-05-28",
     "partitionsKey": null
   },
+  "IoTEvents": {
+    "models": "iotevents/2018-07-27"
+  },
+  "IoTEventsData": {
+    "models": "iotevents-data/2018-10-23"
+  },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
+  },
+  "IoTThingsGraph": {
+    "models": "iotthingsgraph/2018-09-06"
   },
   "KMS": {
     "models": "kms/2014-11-01"
@@ -315,6 +342,9 @@
   },
   "KinesisVideoMedia": {
     "models": "kinesis-video-media/2017-09-30"
+  },
+  "LakeFormation": {
+    "models": "lakeformation/2017-03-31"
   },
   "Lambda": {
     "models": "lambda/2015-03-31"
@@ -373,6 +403,9 @@
   "MediaPackage": {
     "models": "mediapackage/2017-10-12"
   },
+  "MediaPackageVod": {
+    "models": "mediapackage-vod/2018-11-07"
+  },
   "MediaStore": {
     "models": "mediastore/2017-09-01"
   },
@@ -402,6 +435,15 @@
   },
   "PI": {
     "models": "pi/2018-02-27"
+  },
+  "Personalize": {
+    "models": "personalize/2018-05-22"
+  },
+  "PersonalizeEvents": {
+    "models": "personalize-events/2018-03-22"
+  },
+  "PersonalizeRuntime": {
+    "models": "personalize-runtime/2018-05-22"
   },
   "Pinpoint": {
     "models": "pinpoint/2016-12-01"
@@ -467,7 +509,7 @@
     "models": "s3/2006-03-01",
     "dependencies": {
       "aws-sdk-kms": "~> 1",
-      "aws-sigv4": "~> 1.0"
+      "aws-sigv4": "~> 1.1"
     },
     "removePlugins": [
       "Aws::Plugins::SignatureV4"
@@ -492,7 +534,7 @@
   "S3Control": {
     "models": "s3control/2018-08-20",
     "dependencies": {
-      "aws-sigv4": "~> 1.0"
+      "aws-sigv4": "~> 1.1"
     },
     "removePlugins": [
       "Aws::Plugins::SignatureV4"
@@ -553,6 +595,9 @@
   },
   "ServiceDiscovery": {
     "models": "servicediscovery/2017-03-14"
+  },
+  "ServiceQuotas": {
+    "models": "service-quotas/2019-06-24"
   },
   "Shield": {
     "models": "shield/2016-06-02"

@@ -660,6 +660,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -667,6 +670,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ]
     },
@@ -790,6 +796,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -797,6 +806,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         },
         {
           "shape": "TooManyTagsException"
@@ -822,6 +834,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -829,6 +844,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "idempotent": true
@@ -1660,6 +1678,27 @@
         }
       }
     },
+    "Boolean": {
+      "type": "boolean",
+      "box": true
+    },
+    "HttpRouteHeader": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "invert": {
+          "shape": "Boolean"
+        },
+        "match": {
+          "shape": "HeaderMatchMethod"
+        },
+        "name": {
+          "shape": "HeaderName"
+        }
+      }
+    },
     "DescribeVirtualServiceOutput": {
       "type": "structure",
       "required": [
@@ -1676,6 +1715,12 @@
       "type": "string",
       "min": 1,
       "max": 255
+    },
+    "AwsCloudMapInstanceAttributes": {
+      "type": "list",
+      "member": {
+        "shape": "AwsCloudMapInstanceAttribute"
+      }
     },
     "VirtualNodeRef": {
       "type": "structure",
@@ -1728,6 +1773,12 @@
         }
       },
       "payload": "virtualNode"
+    },
+    "AwsCloudMapName": {
+      "type": "string",
+      "min": 1,
+      "max": 1024,
+      "pattern": "((?=^.{1,127}$)^([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9])(.([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9]))*$)|(^.$)"
     },
     "LimitExceededException": {
       "type": "structure",
@@ -1859,6 +1910,21 @@
       "type": "structure",
       "members": { }
     },
+    "AwsCloudMapInstanceAttribute": {
+      "type": "structure",
+      "required": [
+        "key",
+        "value"
+      ],
+      "members": {
+        "key": {
+          "shape": "AwsCloudMapInstanceAttributeKey"
+        },
+        "value": {
+          "shape": "AwsCloudMapInstanceAttributeValue"
+        }
+      }
+    },
     "VirtualServiceSpec": {
       "type": "structure",
       "members": {
@@ -1872,6 +1938,21 @@
       "members": {
         "virtualService": {
           "shape": "VirtualServiceBackend"
+        }
+      }
+    },
+    "MatchRange": {
+      "type": "structure",
+      "required": [
+        "end",
+        "start"
+      ],
+      "members": {
+        "end": {
+          "shape": "Long"
+        },
+        "start": {
+          "shape": "Long"
         }
       }
     },
@@ -1997,6 +2078,12 @@
           "shape": "MeshSpec"
         }
       }
+    },
+    "RoutePriority": {
+      "type": "integer",
+      "box": true,
+      "min": 0,
+      "max": 1000
     },
     "ListVirtualServicesInput": {
       "type": "structure",
@@ -2150,11 +2237,14 @@
       "min": 1,
       "max": 255
     },
+    "AwsCloudMapInstanceAttributeKey": {
+      "type": "string",
+      "min": 1,
+      "max": 255,
+      "pattern": "^[a-zA-Z0-9!-~]+$"
+    },
     "VirtualRouterSpec": {
       "type": "structure",
-      "required": [
-        "listeners"
-      ],
       "members": {
         "listeners": {
           "shape": "VirtualRouterListeners"
@@ -2177,6 +2267,11 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "HeaderMatch": {
+      "type": "string",
+      "min": 1,
+      "max": 255
     },
     "VirtualNodeSpec": {
       "type": "structure",
@@ -2217,6 +2312,20 @@
       "min": 1,
       "max": 1
     },
+    "HttpMethod": {
+      "type": "string",
+      "enum": [
+        "CONNECT",
+        "DELETE",
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PATCH",
+        "POST",
+        "PUT",
+        "TRACE"
+      ]
+    },
     "ConflictException": {
       "type": "structure",
       "members": {
@@ -2249,8 +2358,17 @@
         "prefix"
       ],
       "members": {
+        "headers": {
+          "shape": "HttpRouteHeaders"
+        },
+        "method": {
+          "shape": "HttpMethod"
+        },
         "prefix": {
           "shape": "String"
+        },
+        "scheme": {
+          "shape": "HttpScheme"
         }
       }
     },
@@ -2359,6 +2477,12 @@
           "shape": "VirtualServiceList"
         }
       }
+    },
+    "AwsCloudMapInstanceAttributeValue": {
+      "type": "string",
+      "min": 1,
+      "max": 1024,
+      "pattern": "^([a-zA-Z0-9!-~][ ta-zA-Z0-9!-~]*){0,1}[a-zA-Z0-9!-~]{0,1}$"
     },
     "WeightedTarget": {
       "type": "structure",
@@ -2554,6 +2678,11 @@
         "fault": true
       }
     },
+    "HeaderName": {
+      "type": "string",
+      "min": 1,
+      "max": 50
+    },
     "TagList": {
       "type": "list",
       "member": {
@@ -2617,6 +2746,26 @@
         "code": "TooManyTagsException",
         "httpStatusCode": 400,
         "senderFault": true
+      }
+    },
+    "HeaderMatchMethod": {
+      "type": "structure",
+      "members": {
+        "exact": {
+          "shape": "HeaderMatch"
+        },
+        "prefix": {
+          "shape": "HeaderMatch"
+        },
+        "range": {
+          "shape": "MatchRange"
+        },
+        "regex": {
+          "shape": "HeaderMatch"
+        },
+        "suffix": {
+          "shape": "HeaderMatch"
+        }
       }
     },
     "DeleteMeshOutput": {
@@ -2705,6 +2854,14 @@
       "min": 1,
       "max": 10
     },
+    "HttpRouteHeaders": {
+      "type": "list",
+      "member": {
+        "shape": "HttpRouteHeader"
+      },
+      "min": 1,
+      "max": 10
+    },
     "VirtualServiceProvider": {
       "type": "structure",
       "members": {
@@ -2718,6 +2875,31 @@
     },
     "String": {
       "type": "string"
+    },
+    "AwsCloudMapServiceDiscovery": {
+      "type": "structure",
+      "required": [
+        "namespaceName",
+        "serviceName"
+      ],
+      "members": {
+        "attributes": {
+          "shape": "AwsCloudMapInstanceAttributes"
+        },
+        "namespaceName": {
+          "shape": "AwsCloudMapName"
+        },
+        "serviceName": {
+          "shape": "AwsCloudMapName"
+        }
+      }
+    },
+    "HttpScheme": {
+      "type": "string",
+      "enum": [
+        "http",
+        "https"
+      ]
     },
     "UpdateVirtualServiceOutput": {
       "type": "structure",
@@ -2819,6 +3001,9 @@
       "members": {
         "httpRoute": {
           "shape": "HttpRoute"
+        },
+        "priority": {
+          "shape": "RoutePriority"
         },
         "tcpRoute": {
           "shape": "TcpRoute"
@@ -2931,6 +3116,9 @@
     "ServiceDiscovery": {
       "type": "structure",
       "members": {
+        "awsCloudMap": {
+          "shape": "AwsCloudMapServiceDiscovery"
+        },
         "dns": {
           "shape": "DnsServiceDiscovery"
         }

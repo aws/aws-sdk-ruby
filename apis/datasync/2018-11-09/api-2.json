@@ -79,6 +79,19 @@
         {"shape":"InternalException"}
       ]
     },
+    "CreateLocationSmb":{
+      "name":"CreateLocationSmb",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateLocationSmbRequest"},
+      "output":{"shape":"CreateLocationSmbResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalException"}
+      ]
+    },
     "CreateTask":{
       "name":"CreateTask",
       "http":{
@@ -178,6 +191,19 @@
       },
       "input":{"shape":"DescribeLocationS3Request"},
       "output":{"shape":"DescribeLocationS3Response"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalException"}
+      ]
+    },
+    "DescribeLocationSmb":{
+      "name":"DescribeLocationSmb",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeLocationSmbRequest"},
+      "output":{"shape":"DescribeLocationSmbResponse"},
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalException"}
@@ -349,7 +375,7 @@
     "AgentArn":{
       "type":"string",
       "max":128,
-      "pattern":"^arn:(aws|aws-cn):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"
     },
     "AgentArnList":{
       "type":"list",
@@ -405,7 +431,10 @@
       "members":{
         "ActivationKey":{"shape":"ActivationKey"},
         "AgentName":{"shape":"TagValue"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "VpcEndpointId":{"shape":"VpcEndpointId"},
+        "SubnetArns":{"shape":"PLSubnetArnList"},
+        "SecurityGroupArns":{"shape":"PLSecurityGroupArnList"}
       }
     },
     "CreateAgentResponse":{
@@ -468,6 +497,32 @@
       }
     },
     "CreateLocationS3Response":{
+      "type":"structure",
+      "members":{
+        "LocationArn":{"shape":"LocationArn"}
+      }
+    },
+    "CreateLocationSmbRequest":{
+      "type":"structure",
+      "required":[
+        "Subdirectory",
+        "ServerHostname",
+        "User",
+        "Password",
+        "AgentArns"
+      ],
+      "members":{
+        "Subdirectory":{"shape":"NonEmptySubdirectory"},
+        "ServerHostname":{"shape":"ServerHostname"},
+        "User":{"shape":"SmbUser"},
+        "Domain":{"shape":"SmbDomain"},
+        "Password":{"shape":"SmbPassword"},
+        "AgentArns":{"shape":"AgentArnList"},
+        "MountOptions":{"shape":"SmbMountOptions"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CreateLocationSmbResponse":{
       "type":"structure",
       "members":{
         "LocationArn":{"shape":"LocationArn"}
@@ -545,7 +600,9 @@
         "Name":{"shape":"TagValue"},
         "Status":{"shape":"AgentStatus"},
         "LastConnectionTime":{"shape":"Time"},
-        "CreationTime":{"shape":"Time"}
+        "CreationTime":{"shape":"Time"},
+        "EndpointType":{"shape":"EndpointType"},
+        "PrivateLinkConfig":{"shape":"PrivateLinkConfig"}
       }
     },
     "DescribeLocationEfsRequest":{
@@ -597,6 +654,25 @@
         "CreationTime":{"shape":"Time"}
       }
     },
+    "DescribeLocationSmbRequest":{
+      "type":"structure",
+      "required":["LocationArn"],
+      "members":{
+        "LocationArn":{"shape":"LocationArn"}
+      }
+    },
+    "DescribeLocationSmbResponse":{
+      "type":"structure",
+      "members":{
+        "LocationArn":{"shape":"LocationArn"},
+        "LocationUri":{"shape":"LocationUri"},
+        "AgentArns":{"shape":"AgentArnList"},
+        "User":{"shape":"SmbUser"},
+        "Domain":{"shape":"SmbDomain"},
+        "MountOptions":{"shape":"SmbMountOptions"},
+        "CreationTime":{"shape":"Time"}
+      }
+    },
     "DescribeTaskExecutionRequest":{
       "type":"structure",
       "required":["TaskExecutionArn"],
@@ -638,12 +714,18 @@
         "SourceLocationArn":{"shape":"LocationArn"},
         "DestinationLocationArn":{"shape":"LocationArn"},
         "CloudWatchLogGroupArn":{"shape":"LogGroupArn"},
+        "SourceNetworkInterfaceArns":{"shape":"SourceNetworkInterfaceArns"},
+        "DestinationNetworkInterfaceArns":{"shape":"DestinationNetworkInterfaceArns"},
         "Options":{"shape":"Options"},
         "Excludes":{"shape":"FilterList"},
         "ErrorCode":{"shape":"string"},
         "ErrorDetail":{"shape":"string"},
         "CreationTime":{"shape":"Time"}
       }
+    },
+    "DestinationNetworkInterfaceArns":{
+      "type":"list",
+      "member":{"shape":"NetworkInterfaceArn"}
     },
     "Duration":{
       "type":"long",
@@ -663,7 +745,7 @@
     "Ec2SecurityGroupArn":{
       "type":"string",
       "max":128,
-      "pattern":"^arn:(aws|aws-cn):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"
     },
     "Ec2SecurityGroupArnList":{
       "type":"list",
@@ -674,12 +756,25 @@
     "Ec2SubnetArn":{
       "type":"string",
       "max":128,
-      "pattern":"^arn:(aws|aws-cn):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$"
     },
     "EfsFilesystemArn":{
       "type":"string",
       "max":128,
-      "pattern":"^arn:(aws|aws-cn):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
+    },
+    "Endpoint":{
+      "type":"string",
+      "max":15,
+      "min":7,
+      "pattern":"\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z"
+    },
+    "EndpointType":{
+      "type":"string",
+      "enum":[
+        "PUBLIC",
+        "PRIVATE_LINK"
+      ]
     },
     "FilterList":{
       "type":"list",
@@ -703,7 +798,7 @@
     "FilterValue":{
       "type":"string",
       "max":409600,
-      "pattern":"^.+$"
+      "pattern":"^[^\\x00]+$"
     },
     "Gid":{
       "type":"string",
@@ -717,7 +812,7 @@
     "IamRoleArn":{
       "type":"string",
       "max":2048,
-      "pattern":"^arn:(aws|aws-cn):iam::[0-9]{12}:role/.*$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"
     },
     "InternalException":{
       "type":"structure",
@@ -812,7 +907,7 @@
     "LocationArn":{
       "type":"string",
       "max":128,
-      "pattern":"^arn:(aws|aws-cn):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$"
     },
     "LocationList":{
       "type":"list",
@@ -827,12 +922,13 @@
     },
     "LocationUri":{
       "type":"string",
-      "pattern":"(efs|nfs|s3)://[a-zA-Z0-9.\\-]+"
+      "max":4355,
+      "pattern":"^(efs|nfs|s3|smb)://[a-zA-Z0-9.\\-]+$"
     },
     "LogGroupArn":{
       "type":"string",
       "max":562,
-      "pattern":"^arn:(aws|aws-cn):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)$"
     },
     "MaxResults":{
       "type":"integer",
@@ -846,9 +942,14 @@
         "PRESERVE"
       ]
     },
+    "NetworkInterfaceArn":{
+      "type":"string",
+      "max":128,
+      "pattern":"^arn:aws[\\-a-z]{0,}:ec2:[a-z\\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$"
+    },
     "NextToken":{
       "type":"string",
-      "max":93,
+      "max":65535,
       "pattern":"[a-zA-Z0-9=_-]+"
     },
     "NfsMountOptions":{
@@ -892,6 +993,18 @@
         "BytesPerSecond":{"shape":"BytesPerSecond"}
       }
     },
+    "PLSecurityGroupArnList":{
+      "type":"list",
+      "member":{"shape":"Ec2SecurityGroupArn"},
+      "max":1,
+      "min":1
+    },
+    "PLSubnetArnList":{
+      "type":"list",
+      "member":{"shape":"Ec2SubnetArn"},
+      "max":1,
+      "min":1
+    },
     "PhaseStatus":{
       "type":"string",
       "enum":[
@@ -922,10 +1035,19 @@
         "PRESERVE"
       ]
     },
+    "PrivateLinkConfig":{
+      "type":"structure",
+      "members":{
+        "VpcEndpointId":{"shape":"VpcEndpointId"},
+        "PrivateLinkEndpoint":{"shape":"Endpoint"},
+        "SubnetArns":{"shape":"PLSubnetArnList"},
+        "SecurityGroupArns":{"shape":"PLSecurityGroupArnList"}
+      }
+    },
     "S3BucketArn":{
       "type":"string",
       "max":76,
-      "pattern":"^arn:(aws|aws-cn):s3:::([^/]*)$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:::([^/]*)$"
     },
     "S3Config":{
       "type":"structure",
@@ -938,6 +1060,39 @@
       "type":"string",
       "max":255,
       "pattern":"^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"
+    },
+    "SmbDomain":{
+      "type":"string",
+      "max":253,
+      "pattern":"^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$"
+    },
+    "SmbMountOptions":{
+      "type":"structure",
+      "members":{
+        "Version":{"shape":"SmbVersion"}
+      }
+    },
+    "SmbPassword":{
+      "type":"string",
+      "max":104,
+      "pattern":"^.{0,104}$"
+    },
+    "SmbUser":{
+      "type":"string",
+      "max":104,
+      "pattern":"^[^\\\\x5B\\\\x5D\\\\/:;|=,+*?]{1,104}$"
+    },
+    "SmbVersion":{
+      "type":"string",
+      "enum":[
+        "AUTOMATIC",
+        "SMB2",
+        "SMB3"
+      ]
+    },
+    "SourceNetworkInterfaceArns":{
+      "type":"list",
+      "member":{"shape":"NetworkInterfaceArn"}
     },
     "StartTaskExecutionRequest":{
       "type":"structure",
@@ -1010,17 +1165,17 @@
     "TaggableResourceArn":{
       "type":"string",
       "max":128,
-      "pattern":"^arn:(aws|aws-cn):datasync:[a-z\\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$"
     },
     "TaskArn":{
       "type":"string",
       "max":128,
-      "pattern":"^arn:(aws|aws-cn):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$"
     },
     "TaskExecutionArn":{
       "type":"string",
       "max":128,
-      "pattern":"^arn:(aws|aws-cn):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$"
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$"
     },
     "TaskExecutionList":{
       "type":"list",
@@ -1139,6 +1294,10 @@
         "POINT_IN_TIME_CONSISTENT",
         "NONE"
       ]
+    },
+    "VpcEndpointId":{
+      "type":"string",
+      "pattern":"^vpce-[0-9a-f]{17}$"
     },
     "long":{"type":"long"},
     "string":{"type":"string"}

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2019-08-08)
+------------------
+
+* Feature - CodeBuild adds CloudFormation support for SourceCredential
+
+1.39.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2019-06-10)
+------------------
+
+* Feature - AWS CodeBuild adds support for source version on project level.
+
+1.35.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.34.0 (2019-05-15)
 ------------------
 

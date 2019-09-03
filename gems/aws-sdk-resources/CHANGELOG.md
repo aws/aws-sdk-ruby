@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+3.52.0 (2019-08-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-forecastservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-forecastqueryservice` gem.
+
+3.51.0 (2019-08-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lakeformation` gem.
+
+3.50.0 (2019-07-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-eventbridge` gem.
+
+3.49.0 (2019-06-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ec2instanceconnect` gem.
+
+3.48.0 (2019-06-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-servicequotas` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-applicationinsights` gem.
+
+3.47.0 (2019-06-10)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-personalizeruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-personalizeevents` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-personalize` gem.
+
+3.46.0 (2019-05-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ioteventsdata` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotevents` gem.
+
+3.45.0 (2019-05-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iotthingsgraph` gem.
+
+3.44.0 (2019-05-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-groundstation` gem.
+
+3.43.0 (2019-05-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mediapackagevod` gem.
+
 3.42.0 (2019-04-30)
 ------------------
 

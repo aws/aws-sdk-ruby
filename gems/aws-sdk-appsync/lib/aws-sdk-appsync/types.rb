@@ -8,6 +8,18 @@
 module Aws::AppSync
   module Types
 
+    # You do not have access to perform this operation on this resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes an additional authentication provider.
     #
     # @note When making an API call, you may pass AdditionalAuthenticationProvider
@@ -112,6 +124,44 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # The API key exceeded a limit. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiKeyLimitExceededException AWS API Documentation
+    #
+    class ApiKeyLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The API key expiration must be set to a value between 1 and 365 days
+    # from creation (for `CreateApiKey`) or from update (for
+    # `UpdateApiKey`).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiKeyValidityOutOfBoundsException AWS API Documentation
+    #
+    class ApiKeyValidityOutOfBoundsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The GraphQL API exceeded a limit. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiLimitExceededException AWS API Documentation
+    #
+    class ApiLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The authorization config in case the HTTP endpoint requires
     # authorization.
     #
@@ -172,6 +222,19 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # The request is not well formed. For example, a value is invalid or a
+    # required field is missing. Check the field values, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes an Amazon Cognito user pool configuration.
     #
     # @note When making an API call, you may pass CognitoUserPoolConfig
@@ -202,6 +265,19 @@ module Aws::AppSync
       :user_pool_id,
       :aws_region,
       :app_id_client_regex)
+      include Aws::Structure
+    end
+
+    # Another modification is in progress at this time and it must complete
+    # before you can make your change.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -435,6 +511,7 @@ module Aws::AppSync
     #         log_config: {
     #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #           cloud_watch_logs_role_arn: "String", # required
+    #           exclude_verbose_content: false,
     #         },
     #         authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #         user_pool_config: {
@@ -1278,6 +1355,18 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # The GraphQL schema is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphQLSchemaException AWS API Documentation
+    #
+    class GraphQLSchemaException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a GraphQL API.
     #
     # @!attribute [rw] name
@@ -1373,6 +1462,18 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # An internal AWS AppSync error occurred. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes an AWS Lambda data source configuration.
     #
     # @note When making an API call, you may pass LambdaDataSourceConfig
@@ -1390,6 +1491,18 @@ module Aws::AppSync
     #
     class LambdaDataSourceConfig < Struct.new(
       :lambda_function_arn)
+      include Aws::Structure
+    end
+
+    # The request exceeded a limit. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1786,6 +1899,7 @@ module Aws::AppSync
     #       {
     #         field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #         cloud_watch_logs_role_arn: "String", # required
+    #         exclude_verbose_content: false,
     #       }
     #
     # @!attribute [rw] field_log_level
@@ -1817,11 +1931,31 @@ module Aws::AppSync
     #   CloudWatch logs in your account.
     #   @return [String]
     #
+    # @!attribute [rw] exclude_verbose_content
+    #   Set to TRUE to exclude sections that contain information such as
+    #   headers, context, and evaluated mapping templates, regardless of
+    #   logging level.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LogConfig AWS API Documentation
     #
     class LogConfig < Struct.new(
       :field_log_level,
-      :cloud_watch_logs_role_arn)
+      :cloud_watch_logs_role_arn,
+      :exclude_verbose_content)
+      include Aws::Structure
+    end
+
+    # The resource specified in the request was not found. Check the
+    # resource, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2128,6 +2262,18 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # You are not authorized to perform this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -2397,6 +2543,7 @@ module Aws::AppSync
     #         log_config: {
     #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #           cloud_watch_logs_role_arn: "String", # required
+    #           exclude_verbose_content: false,
     #         },
     #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #         user_pool_config: {

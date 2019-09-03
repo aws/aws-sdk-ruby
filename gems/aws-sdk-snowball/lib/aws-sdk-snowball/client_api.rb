@@ -132,6 +132,9 @@ module Aws::Snowball
 
     CancelJobResult.struct_class = Types::CancelJobResult
 
+    ClusterLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ClusterLimitExceededException.struct_class = Types::ClusterLimitExceededException
+
     ClusterListEntry.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "ClusterId"))
     ClusterListEntry.add_member(:cluster_state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "ClusterState"))
     ClusterListEntry.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
@@ -238,6 +241,9 @@ module Aws::Snowball
 
     Ec2AmiResourceList.member = Shapes::ShapeRef.new(shape: Ec2AmiResource)
 
+    Ec2RequestFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    Ec2RequestFailedException.struct_class = Types::Ec2RequestFailedException
+
     EventTriggerDefinition.add_member(:event_resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "EventResourceARN"))
     EventTriggerDefinition.struct_class = Types::EventTriggerDefinition
 
@@ -260,6 +266,22 @@ module Aws::Snowball
     GetSnowballUsageResult.add_member(:snowball_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "SnowballLimit"))
     GetSnowballUsageResult.add_member(:snowballs_in_use, Shapes::ShapeRef.new(shape: Integer, location_name: "SnowballsInUse"))
     GetSnowballUsageResult.struct_class = Types::GetSnowballUsageResult
+
+    InvalidAddressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidAddressException.struct_class = Types::InvalidAddressException
+
+    InvalidInputCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidInputCombinationException.struct_class = Types::InvalidInputCombinationException
+
+    InvalidJobStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidJobStateException.struct_class = Types::InvalidJobStateException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidResourceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidResourceException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    InvalidResourceException.struct_class = Types::InvalidResourceException
 
     JobListEntry.add_member(:job_id, Shapes::ShapeRef.new(shape: String, location_name: "JobId"))
     JobListEntry.add_member(:job_state, Shapes::ShapeRef.new(shape: JobState, location_name: "JobState"))
@@ -304,6 +326,9 @@ module Aws::Snowball
     JobResource.struct_class = Types::JobResource
 
     JobStateList.member = Shapes::ShapeRef.new(shape: JobState)
+
+    KMSRequestFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    KMSRequestFailedException.struct_class = Types::KMSRequestFailedException
 
     KeyRange.add_member(:begin_marker, Shapes::ShapeRef.new(shape: String, location_name: "BeginMarker"))
     KeyRange.add_member(:end_marker, Shapes::ShapeRef.new(shape: String, location_name: "EndMarker"))
@@ -367,6 +392,9 @@ module Aws::Snowball
     ShippingDetails.add_member(:inbound_shipment, Shapes::ShapeRef.new(shape: Shipment, location_name: "InboundShipment"))
     ShippingDetails.add_member(:outbound_shipment, Shapes::ShapeRef.new(shape: Shipment, location_name: "OutboundShipment"))
     ShippingDetails.struct_class = Types::ShippingDetails
+
+    UnsupportedAddressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedAddressException.struct_class = Types::UnsupportedAddressException
 
     UpdateClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     UpdateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))

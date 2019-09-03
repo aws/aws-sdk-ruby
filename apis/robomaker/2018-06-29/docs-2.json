@@ -3,6 +3,7 @@
   "service": "<p>This section provides documentation for the AWS RoboMaker API operations.</p>",
   "operations": {
     "BatchDescribeSimulationJob": "<p>Describes one or more simulation jobs.</p>",
+    "CancelDeploymentJob": "<p>Cancels the specified deployment job.</p>",
     "CancelSimulationJob": "<p>Cancels the specified simulation job.</p>",
     "CreateDeploymentJob": "<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>",
     "CreateFleet": "<p>Creates a fleet, a logical group of robots running the same robot application.</p>",
@@ -17,13 +18,13 @@
     "DeleteRobotApplication": "<p>Deletes a robot application.</p>",
     "DeleteSimulationApplication": "<p>Deletes a simulation application.</p>",
     "DeregisterRobot": "<p>Deregisters a robot.</p>",
-    "DescribeDeploymentJob": "<p>Describes a deployment job. [Does it work regardless of deployment status, e.g. Failed?]</p>",
+    "DescribeDeploymentJob": "<p>Describes a deployment job.</p>",
     "DescribeFleet": "<p>Describes a fleet.</p>",
     "DescribeRobot": "<p>Describes a robot.</p>",
     "DescribeRobotApplication": "<p>Describes a robot application.</p>",
     "DescribeSimulationApplication": "<p>Describes a simulation application.</p>",
     "DescribeSimulationJob": "<p>Describes a simulation job.</p>",
-    "ListDeploymentJobs": "<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. </p> <note> <p> </p> </note>",
+    "ListDeploymentJobs": "<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. </p>",
     "ListFleets": "<p>Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. </p>",
     "ListRobotApplications": "<p>Returns a list of robot application. You can optionally provide filters to retrieve specific robot applications.</p>",
     "ListRobots": "<p>Returns a list of robots. You can optionally provide filters to retrieve specific robots.</p>",
@@ -54,6 +55,7 @@
       "base": null,
       "refs": {
         "Arns$member": null,
+        "CancelDeploymentJobRequest$job": "<p>The deployment job ARN to cancel.</p>",
         "CancelSimulationJobRequest$job": "<p>The simulation job ARN to cancel.</p>",
         "CreateDeploymentJobRequest$fleet": "<p>The Amazon Resource Name (ARN) of the fleet to deploy.</p>",
         "CreateDeploymentJobResponse$arn": "<p>The Amazon Resource Name (ARN) of the deployment job.</p>",
@@ -145,6 +147,22 @@
       "refs": {
         "VPCConfig$assignPublicIp": "<p>A boolean indicating whether to assign a public IP address.</p>",
         "VPCConfigResponse$assignPublicIp": "<p>A boolean indicating if a public IP was assigned.</p>"
+      }
+    },
+    "BoxedBoolean": {
+      "base": null,
+      "refs": {
+        "LoggingConfig$recordAllRosTopics": "<p>A boolean indicating whether to record all ROS topics.</p>"
+      }
+    },
+    "CancelDeploymentJobRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CancelDeploymentJobResponse": {
+      "base": null,
+      "refs": {
       }
     },
     "CancelSimulationJobRequest": {
@@ -283,6 +301,38 @@
         "SyncDeploymentJobResponse$createdAt": "<p>The time, in milliseconds since the epoch, when the fleet was created.</p>"
       }
     },
+    "DataSource": {
+      "base": "<p>Information about a data source.</p>",
+      "refs": {
+        "DataSources$member": null
+      }
+    },
+    "DataSourceConfig": {
+      "base": "<p>Information about a data source.</p>",
+      "refs": {
+        "DataSourceConfigs$member": null
+      }
+    },
+    "DataSourceConfigs": {
+      "base": null,
+      "refs": {
+        "CreateSimulationJobRequest$dataSources": "<p>The data sources for the simulation job.</p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>"
+      }
+    },
+    "DataSourceNames": {
+      "base": null,
+      "refs": {
+        "SimulationJobSummary$dataSourceNames": "<p>The names of the data sources.</p>"
+      }
+    },
+    "DataSources": {
+      "base": null,
+      "refs": {
+        "CreateSimulationJobResponse$dataSources": "<p>The data sources for the simulation job.</p>",
+        "DescribeSimulationJobResponse$dataSources": "<p>The data sources for the simulation job.</p>",
+        "SimulationJob$dataSources": "<p>The data sources for the simulation job.</p>"
+      }
+    },
     "DeleteFleetRequest": {
       "base": null,
       "refs": {
@@ -386,6 +436,12 @@
         "DescribeFleetResponse$lastDeploymentStatus": "<p>The status of the last deployment.</p>",
         "Fleet$lastDeploymentStatus": "<p>The status of the last fleet deployment.</p>",
         "SyncDeploymentJobResponse$status": "<p>The status of the synchronization job.</p>"
+      }
+    },
+    "DeploymentTimeout": {
+      "base": null,
+      "refs": {
+        "DeploymentConfig$robotDeploymentTimeoutInSeconds": "<p>The amount of time, in seconds, to wait for deployment to a single robot to complete. Choose a time between 1 minute and 7 days. The default is 5 hours.</p>"
       }
     },
     "DeploymentVersion": {
@@ -542,9 +598,7 @@
         "DescribeSimulationJobResponse$failureReason": "<p>Details about why the simulation job failed. For more information about troubleshooting, see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html\">Troubleshooting</a>.</p>",
         "ProgressDetail$targetResource": "<p>The Amazon Resource Name (ARN) of the deployment job.</p>",
         "RobotDeployment$failureReason": "<p>A short description of the reason why the robot deployment failed.</p>",
-        "SecurityGroups$member": null,
         "SimulationJob$failureReason": "<p>The reason why the simulation job failed.</p>",
-        "Subnets$member": null,
         "SyncDeploymentJobResponse$failureReason": "<p>The failure reason if the job fails.</p>",
         "VPCConfigResponse$vpcId": "<p>The VPC ID associated with your simulation job.</p>"
       }
@@ -555,7 +609,7 @@
         "CreateSimulationJobRequest$iamRole": "<p>The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. </p>",
         "CreateSimulationJobResponse$iamRole": "<p>The IAM role that allows the simulation job to call the AWS APIs that are specified in its associated policies on your behalf.</p>",
         "DescribeSimulationJobResponse$iamRole": "<p>The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf.</p>",
-        "SimulationJob$iamRole": "<p>The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href=\"https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials\">specify AWS security credentials for your application</a>. </p>"
+        "SimulationJob$iamRole": "<p>The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. </p>"
       }
     },
     "Id": {
@@ -589,6 +643,14 @@
         "CreateSimulationJobResponse$maxJobDurationInSeconds": "<p>The maximum simulation job duration in seconds. </p>",
         "DescribeSimulationJobResponse$maxJobDurationInSeconds": "<p>The maximum job duration in seconds. The value must be 8 days (691,200 seconds) or less.</p>",
         "SimulationJob$maxJobDurationInSeconds": "<p>The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.</p>"
+      }
+    },
+    "LastStartedAt": {
+      "base": null,
+      "refs": {
+        "CreateSimulationJobResponse$lastStartedAt": "<p>The time, in milliseconds since the epoch, when the simulation job was last started.</p>",
+        "DescribeSimulationJobResponse$lastStartedAt": "<p>The time, in milliseconds since the epoch, when the simulation job was last started.</p>",
+        "SimulationJob$lastStartedAt": "<p>The time, in milliseconds since the epoch, when the simulation job was last started.</p>"
       }
     },
     "LastUpdatedAt": {
@@ -692,6 +754,15 @@
       "refs": {
       }
     },
+    "LoggingConfig": {
+      "base": "<p>The logging configuration.</p>",
+      "refs": {
+        "CreateSimulationJobRequest$loggingConfig": "<p>The logging configuration.</p>",
+        "CreateSimulationJobResponse$loggingConfig": "<p>The logging configuration.</p>",
+        "DescribeSimulationJobResponse$loggingConfig": "<p>The logging configuration.</p>",
+        "SimulationJob$loggingConfig": "<p>The logging configuration.</p>"
+      }
+    },
     "MaxResults": {
       "base": null,
       "refs": {
@@ -716,6 +787,9 @@
         "CreateSimulationApplicationRequest$name": "<p>The name of the simulation application.</p>",
         "CreateSimulationApplicationResponse$name": "<p>The name of the simulation application.</p>",
         "CreateSimulationApplicationVersionResponse$name": "<p>The name of the simulation application.</p>",
+        "DataSource$name": "<p>The name of the data source.</p>",
+        "DataSourceConfig$name": "<p>The name of the data source.</p>",
+        "DataSourceNames$member": null,
         "DescribeFleetResponse$name": "<p>The name of the fleet.</p>",
         "DescribeRobotApplicationResponse$name": "<p>The name of the robot application.</p>",
         "DescribeRobotResponse$name": "<p>The name of the robot.</p>",
@@ -733,6 +807,13 @@
         "SimulationJobSummary$name": "<p>The name of the simulation job.</p>",
         "UpdateRobotApplicationResponse$name": "<p>The name of the robot application.</p>",
         "UpdateSimulationApplicationResponse$name": "<p>The name of the simulation application.</p>"
+      }
+    },
+    "NonEmptyString": {
+      "base": null,
+      "refs": {
+        "SecurityGroups$member": null,
+        "Subnets$member": null
       }
     },
     "OutputLocation": {
@@ -905,7 +986,7 @@
     "RobotDeploymentStep": {
       "base": null,
       "refs": {
-        "ProgressDetail$currentProgress": "<p>The current progress status.</p> <dl> <dt>Validating</dt> <dd> <p>Validating the deployment.</p> </dd> <dt>Downloading/Extracting</dt> <dd> <p>Downloading and extracting the bundle on the robot.</p> </dd> <dt>Executing pre-launch script(s)</dt> <dd> <p>Executing pre-launch script(s) if provided.</p> </dd> <dt>Launching</dt> <dd> <p>Launching the robot application.</p> </dd> <dt>Executing post-launch script(s)</dt> <dd> <p>Executing post-launch script(s) if provided.</p> </dd> <dt>Finished</dt> <dd> <p>Deployment is complete.</p> </dd> </dl>"
+        "ProgressDetail$currentProgress": "<p>The current progress status.</p> <dl> <dt>Validating</dt> <dd> <p>Validating the deployment.</p> </dd> <dt>DownloadingExtracting</dt> <dd> <p>Downloading and extracting the bundle on the robot.</p> </dd> <dt>ExecutingPreLaunch</dt> <dd> <p>Executing pre-launch script(s) if provided.</p> </dd> <dt>Launching</dt> <dd> <p>Launching the robot application.</p> </dd> <dt>ExecutingPostLaunch</dt> <dd> <p>Executing post-launch script(s) if provided.</p> </dd> <dt>Finished</dt> <dd> <p>Deployment is complete.</p> </dd> </dl>"
       }
     },
     "RobotDeploymentSummary": {
@@ -925,6 +1006,8 @@
         "CreateSimulationApplicationVersionResponse$robotSoftwareSuite": "<p>Information about the robot software suite.</p>",
         "DescribeRobotApplicationResponse$robotSoftwareSuite": "<p>The robot software suite used by the robot application.</p>",
         "DescribeSimulationApplicationResponse$robotSoftwareSuite": "<p>Information about the robot software suite.</p>",
+        "RobotApplicationSummary$robotSoftwareSuite": "<p>Information about a robot software suite.</p>",
+        "SimulationApplicationSummary$robotSoftwareSuite": "<p>Information about a robot software suite.</p>",
         "UpdateRobotApplicationRequest$robotSoftwareSuite": "<p>The robot software suite used by the robot application.</p>",
         "UpdateRobotApplicationResponse$robotSoftwareSuite": "<p>The robot software suite used by the robot application.</p>",
         "UpdateSimulationApplicationRequest$robotSoftwareSuite": "<p>Information about the robot software suite.</p>",
@@ -961,6 +1044,8 @@
     "S3Bucket": {
       "base": null,
       "refs": {
+        "DataSource$s3Bucket": "<p>The S3 bucket where the data files are located.</p>",
+        "DataSourceConfig$s3Bucket": "<p>The S3 bucket where the data files are located.</p>",
         "OutputLocation$s3Bucket": "<p>The S3 bucket for output.</p>",
         "Source$s3Bucket": "<p>The s3 bucket name.</p>",
         "SourceConfig$s3Bucket": "<p>The Amazon S3 bucket name.</p>"
@@ -969,6 +1054,7 @@
     "S3Etag": {
       "base": null,
       "refs": {
+        "S3KeyOutput$etag": "<p>The etag for the object.</p>",
         "Source$etag": "<p>A hash of the object specified by <code>s3Bucket</code> and <code>s3Key</code>.</p>"
       }
     },
@@ -976,8 +1062,28 @@
       "base": null,
       "refs": {
         "OutputLocation$s3Prefix": "<p>The S3 folder in the <code>s3Bucket</code> where output files will be placed.</p>",
+        "S3KeyOutput$s3Key": "<p>The S3 key.</p>",
+        "S3Keys$member": null,
         "Source$s3Key": "<p>The s3 object key.</p>",
         "SourceConfig$s3Key": "<p>The s3 object key.</p>"
+      }
+    },
+    "S3KeyOutput": {
+      "base": "<p>Information about S3 keys.</p>",
+      "refs": {
+        "S3KeyOutputs$member": null
+      }
+    },
+    "S3KeyOutputs": {
+      "base": null,
+      "refs": {
+        "DataSource$s3Keys": "<p>The list of S3 keys identifying the data source files.</p>"
+      }
+    },
+    "S3Keys": {
+      "base": null,
+      "refs": {
+        "DataSourceConfig$s3Keys": "<p>The list of S3 keys identifying the data source files.</p>"
       }
     },
     "SecurityGroups": {
@@ -985,6 +1091,11 @@
       "refs": {
         "VPCConfig$securityGroups": "<p>A list of one or more security groups IDs in your VPC.</p>",
         "VPCConfigResponse$securityGroups": "<p>A list of security group IDs associated with the simulation job.</p>"
+      }
+    },
+    "ServiceUnavailableException": {
+      "base": "<p>The request has failed due to a temporary failure of the server.</p>",
+      "refs": {
       }
     },
     "SimulationApplicationConfig": {
@@ -1029,7 +1140,7 @@
     "SimulationJobErrorCode": {
       "base": null,
       "refs": {
-        "CreateSimulationJobResponse$failureCode": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>",
+        "CreateSimulationJobResponse$failureCode": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> <dt>WrongRegionS3Output</dt> <dd> <p>S3 output bucket is in a different region than AWS RoboMaker.</p> </dd> <dt>WrongRegionRobotApplication</dt> <dd> <p>RobotApplication bucket is in a different region than AWS RoboMaker.</p> </dd> <dt>WrongRegionSimulationApplication</dt> <dd> <p>SimulationApplication bucket is in a different region than AWS RoboMaker.</p> </dd> </dl>",
         "DescribeSimulationJobResponse$failureCode": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>",
         "SimulationJob$failureCode": "<p>The failure code of the simulation job if it failed.</p>"
       }
@@ -1068,6 +1179,7 @@
         "CreateSimulationApplicationResponse$simulationSoftwareSuite": "<p>The simulation software suite used by the simulation application.</p>",
         "CreateSimulationApplicationVersionResponse$simulationSoftwareSuite": "<p>The simulation software suite used by the simulation application.</p>",
         "DescribeSimulationApplicationResponse$simulationSoftwareSuite": "<p>The simulation software suite used by the simulation application.</p>",
+        "SimulationApplicationSummary$simulationSoftwareSuite": "<p>Information about a simulation software suite.</p>",
         "UpdateSimulationApplicationRequest$simulationSoftwareSuite": "<p>The simulation software suite used by the simulation application.</p>",
         "UpdateSimulationApplicationResponse$simulationSoftwareSuite": "<p>The simulation software suite used by the simulation application.</p>"
       }
@@ -1285,6 +1397,7 @@
         "LimitExceededException$message": null,
         "ResourceAlreadyExistsException$message": null,
         "ResourceNotFoundException$message": null,
+        "ServiceUnavailableException$message": null,
         "ThrottlingException$message": null
       }
     }

@@ -116,6 +116,10 @@ module Aws::EFS
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -354,18 +358,26 @@ module Aws::EFS
     #
     # @option params [String] :throughput_mode
     #   The throughput mode for the file system to be created. There are two
-    #   throughput modes to choose from for your file system: bursting and
-    #   provisioned. You can decrease your file system's throughput in
-    #   Provisioned Throughput mode or change between the throughput modes as
-    #   long as it’s been more than 24 hours since the last decrease or
-    #   throughput mode change.
+    #   throughput modes to choose from for your file system: `bursting` and
+    #   `provisioned`. If you set `ThroughputMode` to `provisioned`, you must
+    #   also set a value for `ProvisionedThroughPutInMibps`. You can decrease
+    #   your file system's throughput in Provisioned Throughput mode or
+    #   change between the throughput modes as long as it’s been more than 24
+    #   hours since the last decrease or throughput mode change. For more, see
+    #   [Specifying Throughput with Provisioned Mode][1] in the *Amazon EFS
+    #   User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput
     #
     # @option params [Float] :provisioned_throughput_in_mibps
     #   The throughput, measured in MiB/s, that you want to provision for a
-    #   file system that you're creating. The limit on throughput is 1024
-    #   MiB/s. You can get these limits increased by contacting AWS Support.
-    #   For more information, see [Amazon EFS Limits That You Can Increase][1]
-    #   in the *Amazon EFS User Guide.*
+    #   file system that you're creating. Valid values are 1-1024. Required
+    #   if `ThroughputMode` is set to `provisioned`. The upper limit for
+    #   throughput is 1024 MiB/s. You can get this limit increased by
+    #   contacting AWS Support. For more information, see [Amazon EFS Limits
+    #   That You Can Increase][1] in the *Amazon EFS User Guide.*
     #
     #
     #
@@ -911,7 +923,8 @@ module Aws::EFS
     # @option params [Integer] :max_items
     #   (Optional) Specifies the maximum number of file systems to return in
     #   the response (integer). Currently, this number is automatically set to
-    #   10.
+    #   10, and other values are ignored. The response is paginated at 10 per
+    #   page if you have more than 10 file systems.
     #
     # @option params [String] :marker
     #   (Optional) Opaque pagination token returned from a previous
@@ -1055,7 +1068,7 @@ module Aws::EFS
     # @example Response structure
     #
     #   resp.lifecycle_policies #=> Array
-    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_30_DAYS"
+    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_14_DAYS", "AFTER_30_DAYS", "AFTER_60_DAYS", "AFTER_90_DAYS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeLifecycleConfiguration AWS API Documentation
     #
@@ -1134,7 +1147,9 @@ module Aws::EFS
     #
     # @option params [Integer] :max_items
     #   (Optional) Maximum number of mount targets to return in the response.
-    #   Currently, this number is automatically set to 10.
+    #   Currently, this number is automatically set to 10, and other values
+    #   are ignored. The response is paginated at 10 per page if you have more
+    #   than 10 mount targets.
     #
     # @option params [String] :marker
     #   (Optional) Opaque pagination token returned from a previous
@@ -1222,7 +1237,9 @@ module Aws::EFS
     #
     # @option params [Integer] :max_items
     #   (Optional) The maximum number of file system tags to return in the
-    #   response. Currently, this number is automatically set to 10.
+    #   response. Currently, this number is automatically set to 10, and other
+    #   values are ignored. The response is paginated at 10 per page if you
+    #   have more than 10 tags.
     #
     # @option params [String] :marker
     #   (Optional) An opaque pagination token returned from a previous
@@ -1351,19 +1368,14 @@ module Aws::EFS
     # `LifecyclePolicies` array in the request body deletes any existing
     # `LifecycleConfiguration` and disables lifecycle management.
     #
-    # <note markdown="1"> You can enable lifecycle management only for EFS file systems created
-    # after the release of EFS infrequent access.
-    #
-    #  </note>
-    #
     # In the request, specify the following:
     #
-    # * The ID for the file system for which you are creating a lifecycle
-    #   management configuration.
+    # * The ID for the file system for which you are enabling, disabling, or
+    #   modifying lifecycle management.
     #
     # * A `LifecyclePolicies` array of `LifecyclePolicy` objects that define
     #   when files are moved to the IA storage class. The array can contain
-    #   only one `"TransitionToIA": "AFTER_30_DAYS"` `LifecyclePolicy` item.
+    #   only one `LifecyclePolicy` item.
     #
     # This operation requires permissions for the
     # `elasticfilesystem:PutLifecycleConfiguration` operation.
@@ -1417,7 +1429,7 @@ module Aws::EFS
     #     file_system_id: "FileSystemId", # required
     #     lifecycle_policies: [ # required
     #       {
-    #         transition_to_ia: "AFTER_30_DAYS", # accepts AFTER_30_DAYS
+    #         transition_to_ia: "AFTER_14_DAYS", # accepts AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
     #       },
     #     ],
     #   })
@@ -1425,7 +1437,7 @@ module Aws::EFS
     # @example Response structure
     #
     #   resp.lifecycle_policies #=> Array
-    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_30_DAYS"
+    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_14_DAYS", "AFTER_30_DAYS", "AFTER_60_DAYS", "AFTER_90_DAYS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutLifecycleConfiguration AWS API Documentation
     #
@@ -1445,13 +1457,16 @@ module Aws::EFS
     # @option params [String] :throughput_mode
     #   (Optional) The throughput mode that you want your file system to use.
     #   If you're not updating your throughput mode, you don't need to
-    #   provide this value in your request.
+    #   provide this value in your request. If you are changing the
+    #   `ThroughputMode` to `provisioned`, you must also set a value for
+    #   `ProvisionedThroughputInMibps`.
     #
     # @option params [Float] :provisioned_throughput_in_mibps
     #   (Optional) The amount of throughput, in MiB/s, that you want to
-    #   provision for your file system. If you're not updating the amount of
-    #   provisioned throughput for your file system, you don't need to
-    #   provide this value in your request.
+    #   provision for your file system. Valid values are 1-1024. Required if
+    #   `ThroughputMode` is changed to `provisioned` on update. If you're not
+    #   updating the amount of provisioned throughput for your file system,
+    #   you don't need to provide this value in your request.
     #
     # @return [Types::FileSystemDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1522,7 +1537,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

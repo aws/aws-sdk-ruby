@@ -116,6 +116,10 @@ module Aws::ApplicationAutoScaling
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
     #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
     #     agent is running on, where client metrics will be published via UDP.
@@ -260,14 +264,24 @@ module Aws::ApplicationAutoScaling
 
     # @!group API Operations
 
-    # Deletes the specified Application Auto Scaling scaling policy.
+    # Deletes the specified scaling policy for an Application Auto Scaling
+    # scalable target.
     #
-    # Deleting a policy deletes the underlying alarm action, but does not
-    # delete the CloudWatch alarm associated with the scaling policy, even
-    # if it no longer has an associated action.
+    # Deleting a step scaling policy deletes the underlying alarm action,
+    # but does not delete the CloudWatch alarm associated with the scaling
+    # policy, even if it no longer has an associated action.
+    #
+    # For more information, see [Delete a Step Scaling Policy][1] and
+    # [Delete a Target Tracking Scaling Policy][2] in the *Application Auto
+    # Scaling User Guide*.
     #
     # To create a scaling policy or update an existing one, see
     # PutScalingPolicy.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#delete-step-scaling-policy
+    # [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#delete-target-tracking-policy
     #
     # @option params [required, String] :policy_name
     #   The name of the scaling policy.
@@ -280,7 +294,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scalable target.
@@ -290,8 +304,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -333,7 +347,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -400,7 +414,15 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Deletes the specified Application Auto Scaling scheduled action.
+    # Deletes the specified scheduled action for an Application Auto Scaling
+    # scalable target.
+    #
+    # For more information, see [Delete a Scheduled Action][1] in the
+    # *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html#delete-scheduled-action
     #
     # @option params [required, String] :service_namespace
     #   The namespace of the AWS service that provides the resource or
@@ -410,7 +432,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of the scheduled action.
@@ -423,8 +445,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -466,7 +488,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -516,7 +538,7 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Deregisters a scalable target.
+    # Deregisters an Application Auto Scaling scalable target.
     #
     # Deregistering a scalable target deletes the scaling policies that are
     # associated with it.
@@ -532,7 +554,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scalable target.
@@ -542,8 +564,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -586,7 +608,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -654,8 +676,8 @@ module Aws::ApplicationAutoScaling
     # Gets information about the scalable targets in the specified
     # namespace.
     #
-    # You can filter the results using the `ResourceIds` and
-    # `ScalableDimension` parameters.
+    # You can filter the results using `ResourceIds` and
+    # `ScalableDimension`.
     #
     # To create a scalable target or update an existing one, see
     # RegisterScalableTarget. If you are no longer using a scalable target,
@@ -669,7 +691,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [Array<String>] :resource_ids
     #   The identifier of the resource associated with the scalable target.
@@ -680,8 +702,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -725,7 +747,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -817,6 +839,9 @@ module Aws::ApplicationAutoScaling
     #   resp.scalable_targets[0].max_capacity #=> Integer
     #   resp.scalable_targets[0].role_arn #=> String
     #   resp.scalable_targets[0].creation_time #=> Time
+    #   resp.scalable_targets[0].suspended_state.dynamic_scaling_in_suspended #=> Boolean
+    #   resp.scalable_targets[0].suspended_state.dynamic_scaling_out_suspended #=> Boolean
+    #   resp.scalable_targets[0].suspended_state.scheduled_scaling_suspended #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargets AWS API Documentation
@@ -831,8 +856,7 @@ module Aws::ApplicationAutoScaling
     # Provides descriptive information about the scaling activities in the
     # specified namespace from the previous six weeks.
     #
-    # You can filter the results using the `ResourceId` and
-    # `ScalableDimension` parameters.
+    # You can filter the results using `ResourceId` and `ScalableDimension`.
     #
     # Scaling activities are triggered by CloudWatch alarms that are
     # associated with scaling policies. To view the scaling policies for a
@@ -847,7 +871,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scaling activity.
@@ -858,8 +882,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -902,7 +926,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1015,10 +1039,11 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Describes the scaling policies for the specified service namespace.
+    # Describes the Application Auto Scaling scaling policies for the
+    # specified service namespace.
     #
-    # You can filter the results using the `ResourceId`,
-    # `ScalableDimension`, and `PolicyNames` parameters.
+    # You can filter the results using `ResourceId`, `ScalableDimension`,
+    # and `PolicyNames`.
     #
     # To create a scaling policy or update an existing one, see
     # PutScalingPolicy. If you are no longer using a scaling policy, you can
@@ -1035,7 +1060,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scaling policy.
@@ -1046,8 +1071,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1090,7 +1115,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1235,7 +1260,8 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Describes the scheduled actions for the specified service namespace.
+    # Describes the Application Auto Scaling scheduled actions for the
+    # specified service namespace.
     #
     # You can filter the results using the `ResourceId`,
     # `ScalableDimension`, and `ScheduledActionNames` parameters.
@@ -1255,7 +1281,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scheduled action.
@@ -1266,8 +1292,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1310,7 +1336,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1441,7 +1467,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scaling policy.
@@ -1451,8 +1477,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1494,7 +1520,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1528,10 +1554,15 @@ module Aws::ApplicationAutoScaling
     #   The policy type. This parameter is required if you are creating a
     #   scaling policy.
     #
-    #   For information on which services do not support `StepScaling` or
-    #   `TargetTrackingScaling`, see the information about **Limits** in [Step
-    #   Scaling Policies][1] and [Target Tracking Scaling Policies][2] in the
-    #   *Application Auto Scaling User Guide*.
+    #   The following policy types are supported:
+    #
+    #   `TargetTrackingScaling`—Not supported for Amazon EMR or AppStream
+    #
+    #   `StepScaling`—Not supported for Amazon DynamoDB
+    #
+    #   For more information, see [Step Scaling Policies for Application Auto
+    #   Scaling][1] and [Target Tracking Scaling Policies for Application Auto
+    #   Scaling][2] in the *Application Auto Scaling User Guide*.
     #
     #
     #
@@ -1707,7 +1738,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [String] :schedule
     #   The schedule for this action. The following formats are supported:
@@ -1742,8 +1773,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1785,7 +1816,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1857,17 +1888,26 @@ module Aws::ApplicationAutoScaling
 
     # Registers or updates a scalable target. A scalable target is a
     # resource that Application Auto Scaling can scale out and scale in.
-    # Each scalable target has a resource ID, scalable dimension, and
-    # namespace, as well as values for minimum and maximum capacity.
+    # Scalable targets are uniquely identified by the combination of
+    # resource ID, scalable dimension, and namespace.
+    #
+    # When you register a new scalable target, you must specify values for
+    # minimum and maximum capacity. Application Auto Scaling will not scale
+    # capacity to values that are outside of this range.
+    #
+    # To update a scalable target, specify the parameter that you want to
+    # change as well as the following parameters that identify the scalable
+    # target: resource ID, scalable dimension, and namespace. Any parameters
+    # that you don't specify are not changed by this update request.
     #
     # After you register a scalable target, you do not need to register it
     # again to use other Application Auto Scaling operations. To see which
     # resources have been registered, use DescribeScalableTargets. You can
-    # also view the scaling policies for a service namespace using
+    # also view the scaling policies for a service namespace by using
     # DescribeScalableTargets.
     #
-    # If you no longer need a scalable target, you can deregister it using
-    # DeregisterScalableTarget.
+    # If you no longer need a scalable target, you can deregister it by
+    # using DeregisterScalableTarget.
     #
     # @option params [required, String] :service_namespace
     #   The namespace of the AWS service that provides the resource or
@@ -1877,18 +1917,19 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the resource associated with the scalable target.
-    #   This string consists of the resource type and unique identifier.
+    #   The identifier of the resource that is associated with the scalable
+    #   target. This string consists of the resource type and unique
+    #   identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot fleet request ID. Example:
+    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1931,7 +1972,7 @@ module Aws::ApplicationAutoScaling
     #     service.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot fleet request.
+    #     Spot Fleet request.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
@@ -1962,12 +2003,12 @@ module Aws::ApplicationAutoScaling
     #     a custom resource provided by your own application or service.
     #
     # @option params [Integer] :min_capacity
-    #   The minimum value to scale to in response to a scale-in event. This
-    #   parameter is required to register a scalable target.
+    #   The minimum value to scale to in response to a scale-in event.
+    #   `MinCapacity` is required to register a scalable target.
     #
     # @option params [Integer] :max_capacity
-    #   The maximum value to scale to in response to a scale-out event. This
-    #   parameter is required to register a scalable target.
+    #   The maximum value to scale to in response to a scale-out event.
+    #   `MaxCapacity` is required to register a scalable target.
     #
     # @option params [String] :role_arn
     #   Application Auto Scaling creates a service-linked role that grants it
@@ -1976,13 +2017,40 @@ module Aws::ApplicationAutoScaling
     #   Scaling][1].
     #
     #   For resources that are not supported using a service-linked role, this
-    #   parameter is required and must specify the ARN of an IAM role that
+    #   parameter is required, and it must specify the ARN of an IAM role that
     #   allows Application Auto Scaling to modify the scalable target on your
     #   behalf.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html
+    #
+    # @option params [Types::SuspendedState] :suspended_state
+    #   An embedded object that contains attributes and attribute values that
+    #   are used to suspend and resume automatic scaling. Setting the value of
+    #   an attribute to `true` suspends the specified scaling activities.
+    #   Setting it to `false` (default) resumes the specified scaling
+    #   activities.
+    #
+    #   **Suspension Outcomes**
+    #
+    #   * For `DynamicScalingInSuspended`, while a suspension is in effect,
+    #     all scale-in activities that are triggered by a scaling policy are
+    #     suspended.
+    #
+    #   * For `DynamicScalingOutSuspended`, while a suspension is in effect,
+    #     all scale-out activities that are triggered by a scaling policy are
+    #     suspended.
+    #
+    #   * For `ScheduledScalingSuspended`, while a suspension is in effect,
+    #     all scaling activities that involve scheduled actions are suspended.
+    #
+    #   For more information, see [Suspend and Resume Application Auto
+    #   Scaling][1] in the *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2028,6 +2096,11 @@ module Aws::ApplicationAutoScaling
     #     min_capacity: 1,
     #     max_capacity: 1,
     #     role_arn: "ResourceIdMaxLen1600",
+    #     suspended_state: {
+    #       dynamic_scaling_in_suspended: false,
+    #       dynamic_scaling_out_suspended: false,
+    #       scheduled_scaling_suspended: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTarget AWS API Documentation
@@ -2052,7 +2125,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

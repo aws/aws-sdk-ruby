@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-08-15)
+------------------
+
+* Feature - This release adds an API, BatchGetCommits, that allows retrieval of metadata for multiple commits in an AWS CodeCommit repository.
+
+1.27.0 (2019-07-29)
+------------------
+
+* Feature - This release supports better exception handling for merges.
+
+1.26.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2019-06-26)
+------------------
+
+* Feature - This release supports better exception handling for merges.
+
+1.23.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-06-10)
+------------------
+
+* Feature - This release adds two merge strategies for merging pull requests: squash and three-way. It also adds functionality for resolving merge conflicts, testing merge outcomes, and for merging branches using one of the three supported merge strategies.
+
+1.21.0 (2019-05-30)
+------------------
+
+* Feature - This release adds APIs that allow adding and removing tags to a repository, and viewing tags for a repository. It also enables adding tags when creating a repository.
+
+1.20.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.19.0 (2019-05-15)
 ------------------
 

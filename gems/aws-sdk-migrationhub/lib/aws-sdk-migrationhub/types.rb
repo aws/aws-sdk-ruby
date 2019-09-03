@@ -8,6 +8,18 @@
 module Aws::MigrationHub
   module Types
 
+    # You do not have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateCreatedArtifactRequest
     #   data as a hash:
     #
@@ -365,6 +377,19 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
+    # Exception raised to indicate a successfully authorized action when the
+    # `DryRun` flag is set to "true".
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DryRunOperation AWS API Documentation
+    #
+    class DryRunOperation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportMigrationTaskRequest
     #   data as a hash:
     #
@@ -399,6 +424,32 @@ module Aws::MigrationHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTaskResult AWS API Documentation
     #
     class ImportMigrationTaskResult < Aws::EmptyStructure; end
+
+    # Exception raised when there is an internal, configuration, or
+    # dependency error encountered.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception raised when the provided input violates a policy constraint
+    # or is entered in the wrong format or data type.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass ListCreatedArtifactsRequest
     #   data as a hash:
@@ -779,6 +830,20 @@ module Aws::MigrationHub
     #
     class NotifyMigrationTaskStateResult < Aws::EmptyStructure; end
 
+    # Exception raised when there are problems accessing ADS (Application
+    # Discovery Service); most likely due to a misconfigured policy or the
+    # `migrationhub-discovery` role is missing or not configured correctly.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PolicyErrorException AWS API Documentation
+    #
+    class PolicyErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Summary of the AWS resource used for access control that is implicitly
     # linked to your AWS account.
     #
@@ -914,6 +979,34 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
+    # Exception raised when the request references a resource (ADS
+    # configuration, update stream, migration task, etc.) that does not
+    # exist in ADS (Application Discovery Service) or in Migration Hub's
+    # repository.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception raised when there is an internal, configuration, or
+    # dependency error encountered.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Task object encapsulating task information.
     #
     # @note When making an API call, you may pass Task
@@ -945,6 +1038,19 @@ module Aws::MigrationHub
       :status,
       :status_detail,
       :progress_percent)
+      include Aws::Structure
+    end
+
+    # Exception raised to indicate a request was not authorized when the
+    # `DryRun` flag is set to "true".
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/UnauthorizedOperation AWS API Documentation
+    #
+    class UnauthorizedOperation < Struct.new(
+      :message)
       include Aws::Structure
     end
 

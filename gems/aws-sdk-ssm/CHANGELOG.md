@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2019-08-26)
+------------------
+
+* Feature - This feature adds "default tier" to the AWS Systems Manager Parameter Store for parameter creation and update. AWS customers can now set the "default tier" to one of the following values: Standard (default), Advanced or Intelligent-Tiering.  This allows customers to create advanced parameters or parameters in corresponding tiers with one setting rather than code change to specify parameter tiers.
+
+1.54.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2019-07-23)
+------------------
+
+* Feature - You can now use Maintenance Windows to select a resource group as the target. By selecting a resource group as the target of a Maintenance Window, customers can perform routine tasks across different resources such as Amazon Elastic Compute Cloud (AmazonEC2) instances, Amazon Elastic Block Store (Amazon EBS) volumes, and Amazon Simple Storage Service(Amazon S3) buckets within the same recurring time window.
+
+1.52.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2019-06-24)
+------------------
+
+* Feature - AWS Systems Manager now supports deleting a specific version of a SSM Document.
+
+1.50.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2019-06-06)
+------------------
+
+* Feature - OpsCenter is a new Systems Manager capability that allows you to view, diagnose, and remediate, operational issues, aka OpsItems, related to various AWS resources by bringing together contextually relevant investigation information. New APIs to create, update, describe, and get OpsItems as well as OpsItems summary API.
+
+1.48.0 (2019-05-29)
+------------------
+
+* Feature - Systems Manager - Documentation updates
+
+1.47.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
 1.46.0 (2019-05-15)
 ------------------
 

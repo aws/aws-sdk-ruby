@@ -24,6 +24,8 @@ module Aws::STS
     DecodeAuthorizationMessageResponse = Shapes::StructureShape.new(name: 'DecodeAuthorizationMessageResponse')
     ExpiredTokenException = Shapes::StructureShape.new(name: 'ExpiredTokenException')
     FederatedUser = Shapes::StructureShape.new(name: 'FederatedUser')
+    GetAccessKeyInfoRequest = Shapes::StructureShape.new(name: 'GetAccessKeyInfoRequest')
+    GetAccessKeyInfoResponse = Shapes::StructureShape.new(name: 'GetAccessKeyInfoResponse')
     GetCallerIdentityRequest = Shapes::StructureShape.new(name: 'GetCallerIdentityRequest')
     GetCallerIdentityResponse = Shapes::StructureShape.new(name: 'GetCallerIdentityResponse')
     GetFederationTokenRequest = Shapes::StructureShape.new(name: 'GetFederationTokenRequest')
@@ -142,9 +144,18 @@ module Aws::STS
     DecodeAuthorizationMessageResponse.add_member(:decoded_message, Shapes::ShapeRef.new(shape: decodedMessageType, location_name: "DecodedMessage"))
     DecodeAuthorizationMessageResponse.struct_class = Types::DecodeAuthorizationMessageResponse
 
+    ExpiredTokenException.add_member(:message, Shapes::ShapeRef.new(shape: expiredIdentityTokenMessage, location_name: "message"))
+    ExpiredTokenException.struct_class = Types::ExpiredTokenException
+
     FederatedUser.add_member(:federated_user_id, Shapes::ShapeRef.new(shape: federatedIdType, required: true, location_name: "FederatedUserId"))
     FederatedUser.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "Arn"))
     FederatedUser.struct_class = Types::FederatedUser
+
+    GetAccessKeyInfoRequest.add_member(:access_key_id, Shapes::ShapeRef.new(shape: accessKeyIdType, required: true, location_name: "AccessKeyId"))
+    GetAccessKeyInfoRequest.struct_class = Types::GetAccessKeyInfoRequest
+
+    GetAccessKeyInfoResponse.add_member(:account, Shapes::ShapeRef.new(shape: accountType, location_name: "Account"))
+    GetAccessKeyInfoResponse.struct_class = Types::GetAccessKeyInfoResponse
 
     GetCallerIdentityRequest.struct_class = Types::GetCallerIdentityRequest
 
@@ -172,8 +183,29 @@ module Aws::STS
     GetSessionTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     GetSessionTokenResponse.struct_class = Types::GetSessionTokenResponse
 
+    IDPCommunicationErrorException.add_member(:message, Shapes::ShapeRef.new(shape: idpCommunicationErrorMessage, location_name: "message"))
+    IDPCommunicationErrorException.struct_class = Types::IDPCommunicationErrorException
+
+    IDPRejectedClaimException.add_member(:message, Shapes::ShapeRef.new(shape: idpRejectedClaimMessage, location_name: "message"))
+    IDPRejectedClaimException.struct_class = Types::IDPRejectedClaimException
+
+    InvalidAuthorizationMessageException.add_member(:message, Shapes::ShapeRef.new(shape: invalidAuthorizationMessage, location_name: "message"))
+    InvalidAuthorizationMessageException.struct_class = Types::InvalidAuthorizationMessageException
+
+    InvalidIdentityTokenException.add_member(:message, Shapes::ShapeRef.new(shape: invalidIdentityTokenMessage, location_name: "message"))
+    InvalidIdentityTokenException.struct_class = Types::InvalidIdentityTokenException
+
+    MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: malformedPolicyDocumentMessage, location_name: "message"))
+    MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
+
+    PackedPolicyTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: packedPolicyTooLargeMessage, location_name: "message"))
+    PackedPolicyTooLargeException.struct_class = Types::PackedPolicyTooLargeException
+
     PolicyDescriptorType.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "arn"))
     PolicyDescriptorType.struct_class = Types::PolicyDescriptorType
+
+    RegionDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: regionDisabledMessage, location_name: "message"))
+    RegionDisabledException.struct_class = Types::RegionDisabledException
 
     policyDescriptorListType.member = Shapes::ShapeRef.new(shape: PolicyDescriptorType)
 
@@ -245,6 +277,14 @@ module Aws::STS
         o.input = Shapes::ShapeRef.new(shape: DecodeAuthorizationMessageRequest)
         o.output = Shapes::ShapeRef.new(shape: DecodeAuthorizationMessageResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAuthorizationMessageException)
+      end)
+
+      api.add_operation(:get_access_key_info, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessKeyInfo"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAccessKeyInfoRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessKeyInfoResponse)
       end)
 
       api.add_operation(:get_caller_identity, Seahorse::Model::Operation.new.tap do |o|

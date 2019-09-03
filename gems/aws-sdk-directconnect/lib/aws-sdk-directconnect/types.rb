@@ -36,8 +36,15 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] override_allowed_prefixes_to_direct_connect_gateway
-    #   Overrides the existing Amazon VPC prefixes advertised to the Direct
-    #   Connect gateway.
+    #   Overrides the Amazon VPC prefixes advertised to the Direct Connect
+    #   gateway.
+    #
+    #   For information about how to set the prefixes, see [Allowed
+    #   Prefixes][1] in the *AWS Direct Connect User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes
     #   @return [Array<Types::RouteFilterPrefix>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AcceptDirectConnectGatewayAssociationProposalRequest AWS API Documentation
@@ -119,6 +126,12 @@ module Aws::DirectConnect
     #         bandwidth: "Bandwidth", # required
     #         connection_name: "ConnectionName", # required
     #         vlan: 1, # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] connection_id
@@ -145,6 +158,10 @@ module Aws::DirectConnect
     #   The dedicated VLAN provisioned to the hosted connection.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the hosted connection.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnectionRequest AWS API Documentation
     #
     class AllocateHostedConnectionRequest < Struct.new(
@@ -152,7 +169,8 @@ module Aws::DirectConnect
       :owner_account,
       :bandwidth,
       :connection_name,
-      :vlan)
+      :vlan,
+      :tags)
       include Aws::Structure
     end
 
@@ -171,6 +189,12 @@ module Aws::DirectConnect
     #           amazon_address: "AmazonAddress",
     #           address_family: "ipv4", # accepts ipv4, ipv6
     #           customer_address: "CustomerAddress",
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -215,6 +239,12 @@ module Aws::DirectConnect
     #               cidr: "CIDR",
     #             },
     #           ],
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -255,6 +285,12 @@ module Aws::DirectConnect
     #           amazon_address: "AmazonAddress",
     #           customer_address: "CustomerAddress",
     #           address_family: "ipv4", # accepts ipv4, ipv6
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -404,7 +440,9 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   The authentication key for BGP configuration.
+    #   The authentication key for BGP configuration. This string has a
+    #   minimum length of 6 characters and and a maximun lenth of 80
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] address_family
@@ -815,6 +853,10 @@ module Aws::DirectConnect
     #   the same address family (IPv4/IPv6).
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the connection.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection AWS API Documentation
     #
     class Connection < Struct.new(
@@ -832,7 +874,8 @@ module Aws::DirectConnect
       :aws_device,
       :jumbo_frame_capable,
       :aws_device_v2,
-      :has_logical_redundancy)
+      :has_logical_redundancy,
+      :tags)
       include Aws::Structure
     end
 
@@ -896,6 +939,12 @@ module Aws::DirectConnect
     #         bandwidth: "Bandwidth", # required
     #         connection_name: "ConnectionName", # required
     #         lag_id: "LagId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] location
@@ -914,13 +963,18 @@ module Aws::DirectConnect
     #   The ID of the LAG.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the connection.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnectionRequest AWS API Documentation
     #
     class CreateConnectionRequest < Struct.new(
       :location,
       :bandwidth,
       :connection_name,
-      :lag_id)
+      :lag_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1010,6 +1064,13 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] add_allowed_prefixes_to_direct_connect_gateway
     #   The Amazon VPC prefixes to advertise to the Direct Connect gateway
+    #
+    #   For information about how to set the prefixes, see [Allowed
+    #   Prefixes][1] in the *AWS Direct Connect User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes
     #   @return [Array<Types::RouteFilterPrefix>]
     #
     # @!attribute [rw] virtual_gateway_id
@@ -1083,6 +1144,12 @@ module Aws::DirectConnect
     #         bandwidth: "Bandwidth", # required
     #         location: "LocationCode", # required
     #         lag_id: "LagId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] interconnect_name
@@ -1101,13 +1168,18 @@ module Aws::DirectConnect
     #   The ID of the LAG.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the interconnect,
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnectRequest AWS API Documentation
     #
     class CreateInterconnectRequest < Struct.new(
       :interconnect_name,
       :bandwidth,
       :location,
-      :lag_id)
+      :lag_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1120,6 +1192,18 @@ module Aws::DirectConnect
     #         connections_bandwidth: "Bandwidth", # required
     #         lag_name: "LagName", # required
     #         connection_id: "ConnectionId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         child_connection_tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] number_of_connections
@@ -1145,6 +1229,18 @@ module Aws::DirectConnect
     #   The ID of an existing connection to migrate to the LAG.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the link aggregation group (LAG).
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] child_connection_tags
+    #   The tags to assign to the child connections of the LAG. Only newly
+    #   created child connections as the result of creating a LAG connection
+    #   are assigned the provided tags. The tags are not assigned to an
+    #   existing connection that is provided via the “connectionId”
+    #   parameter that will be migrated to the LAG.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLagRequest AWS API Documentation
     #
     class CreateLagRequest < Struct.new(
@@ -1152,7 +1248,9 @@ module Aws::DirectConnect
       :location,
       :connections_bandwidth,
       :lag_name,
-      :connection_id)
+      :connection_id,
+      :tags,
+      :child_connection_tags)
       include Aws::Structure
     end
 
@@ -1172,6 +1270,12 @@ module Aws::DirectConnect
     #           address_family: "ipv4", # accepts ipv4, ipv6
     #           virtual_gateway_id: "VirtualGatewayId",
     #           direct_connect_gateway_id: "DirectConnectGatewayId",
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -1209,6 +1313,12 @@ module Aws::DirectConnect
     #               cidr: "CIDR",
     #             },
     #           ],
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -1243,6 +1353,12 @@ module Aws::DirectConnect
     #           customer_address: "CustomerAddress",
     #           address_family: "ipv4", # accepts ipv4, ipv6
     #           direct_connect_gateway_id: "DirectConnectGatewayId",
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -2075,6 +2191,18 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # One or more parameters are not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectClientException AWS API Documentation
+    #
+    class DirectConnectClientException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about a Direct Connect gateway, which enables you to
     # connect virtual interfaces and virtual private gateway or transit
     # gateways.
@@ -2295,7 +2423,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] attachment_type
-    #   The type of attachment.
+    #   The interface type.
     #   @return [String]
     #
     # @!attribute [rw] state_change_error
@@ -2312,6 +2440,18 @@ module Aws::DirectConnect
       :attachment_state,
       :attachment_type,
       :state_change_error)
+      include Aws::Structure
+    end
+
+    # A server-side error occurred.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectServerException AWS API Documentation
+    #
+    class DirectConnectServerException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2411,6 +2551,10 @@ module Aws::DirectConnect
     #   same address family (IPv4/IPv6).
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the interconnect.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnect AWS API Documentation
     #
     class Interconnect < Struct.new(
@@ -2425,7 +2569,8 @@ module Aws::DirectConnect
       :aws_device,
       :jumbo_frame_capable,
       :aws_device_v2,
-      :has_logical_redundancy)
+      :has_logical_redundancy,
+      :tags)
       include Aws::Structure
     end
 
@@ -2523,6 +2668,10 @@ module Aws::DirectConnect
     #   address family (IPv4/IPv6).
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to link aggregation group (LAG).
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lag AWS API Documentation
     #
     class Lag < Struct.new(
@@ -2540,7 +2689,8 @@ module Aws::DirectConnect
       :connections,
       :allows_hosted_connections,
       :jumbo_frame_capable,
-      :has_logical_redundancy)
+      :has_logical_redundancy,
+      :tags)
       include Aws::Structure
     end
 
@@ -2634,7 +2784,9 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   The authentication key for BGP configuration.
+    #   The authentication key for BGP configuration. This string has a
+    #   minimum length of 6 characters and and a maximun lenth of 80
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] address_family
@@ -2676,6 +2828,12 @@ module Aws::DirectConnect
     #         address_family: "ipv4", # accepts ipv4, ipv6
     #         virtual_gateway_id: "VirtualGatewayId",
     #         direct_connect_gateway_id: "DirectConnectGatewayId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] virtual_interface_name
@@ -2697,7 +2855,9 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   The authentication key for BGP configuration.
+    #   The authentication key for BGP configuration. This string has a
+    #   minimum length of 6 characters and and a maximun lenth of 80
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] amazon_address
@@ -2720,6 +2880,10 @@ module Aws::DirectConnect
     #   The ID of the Direct Connect gateway.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the private virtual interface.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterface AWS API Documentation
     #
     class NewPrivateVirtualInterface < Struct.new(
@@ -2732,7 +2896,8 @@ module Aws::DirectConnect
       :customer_address,
       :address_family,
       :virtual_gateway_id,
-      :direct_connect_gateway_id)
+      :direct_connect_gateway_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -2751,6 +2916,12 @@ module Aws::DirectConnect
     #         amazon_address: "AmazonAddress",
     #         address_family: "ipv4", # accepts ipv4, ipv6
     #         customer_address: "CustomerAddress",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] virtual_interface_name
@@ -2772,7 +2943,9 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   The authentication key for BGP configuration.
+    #   The authentication key for BGP configuration. This string has a
+    #   minimum length of 6 characters and and a maximun lenth of 80
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] amazon_address
@@ -2787,6 +2960,11 @@ module Aws::DirectConnect
     #   The IP address assigned to the customer interface.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the private virtual interface to be provisioned
+    #   on a connection.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterfaceAllocation AWS API Documentation
     #
     class NewPrivateVirtualInterfaceAllocation < Struct.new(
@@ -2797,7 +2975,8 @@ module Aws::DirectConnect
       :auth_key,
       :amazon_address,
       :address_family,
-      :customer_address)
+      :customer_address,
+      :tags)
       include Aws::Structure
     end
 
@@ -2819,6 +2998,12 @@ module Aws::DirectConnect
     #             cidr: "CIDR",
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] virtual_interface_name
@@ -2835,7 +3020,9 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   The authentication key for BGP configuration.
+    #   The authentication key for BGP configuration. This string has a
+    #   minimum length of 6 characters and and a maximun lenth of 80
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] amazon_address
@@ -2855,6 +3042,10 @@ module Aws::DirectConnect
     #   Applies to public virtual interfaces.
     #   @return [Array<Types::RouteFilterPrefix>]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the public virtual interface.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPublicVirtualInterface AWS API Documentation
     #
     class NewPublicVirtualInterface < Struct.new(
@@ -2865,7 +3056,8 @@ module Aws::DirectConnect
       :amazon_address,
       :customer_address,
       :address_family,
-      :route_filter_prefixes)
+      :route_filter_prefixes,
+      :tags)
       include Aws::Structure
     end
 
@@ -2888,6 +3080,12 @@ module Aws::DirectConnect
     #             cidr: "CIDR",
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] virtual_interface_name
@@ -2904,7 +3102,9 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   The authentication key for BGP configuration.
+    #   The authentication key for BGP configuration. This string has a
+    #   minimum length of 6 characters and and a maximun lenth of 80
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] amazon_address
@@ -2924,6 +3124,11 @@ module Aws::DirectConnect
     #   Applies to public virtual interfaces.
     #   @return [Array<Types::RouteFilterPrefix>]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the public virtual interface to be provisioned
+    #   on a connection.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPublicVirtualInterfaceAllocation AWS API Documentation
     #
     class NewPublicVirtualInterfaceAllocation < Struct.new(
@@ -2934,11 +3139,12 @@ module Aws::DirectConnect
       :amazon_address,
       :customer_address,
       :address_family,
-      :route_filter_prefixes)
+      :route_filter_prefixes,
+      :tags)
       include Aws::Structure
     end
 
-    # Information about a transit virtual interface.
+    # Information about the transit virtual interface.
     #
     # @note When making an API call, you may pass NewTransitVirtualInterface
     #   data as a hash:
@@ -2953,6 +3159,12 @@ module Aws::DirectConnect
     #         customer_address: "CustomerAddress",
     #         address_family: "ipv4", # accepts ipv4, ipv6
     #         direct_connect_gateway_id: "DirectConnectGatewayId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] virtual_interface_name
@@ -2970,7 +3182,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] mtu
     #   The maximum transmission unit (MTU), in bytes. The supported values
-    #   are 1500 and 9001. The default value is 1500.
+    #   are 1500 and 8500. The default value is 1500.
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
@@ -2993,6 +3205,10 @@ module Aws::DirectConnect
     #   The ID of the Direct Connect gateway.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the transit virtual interface.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterface AWS API Documentation
     #
     class NewTransitVirtualInterface < Struct.new(
@@ -3004,12 +3220,12 @@ module Aws::DirectConnect
       :amazon_address,
       :customer_address,
       :address_family,
-      :direct_connect_gateway_id)
+      :direct_connect_gateway_id,
+      :tags)
       include Aws::Structure
     end
 
-    # Information about a transit virtual interface to be provisioned on a
-    # connection.
+    # Information about a transit virtual interface.
     #
     # @note When making an API call, you may pass NewTransitVirtualInterfaceAllocation
     #   data as a hash:
@@ -3023,6 +3239,12 @@ module Aws::DirectConnect
     #         amazon_address: "AmazonAddress",
     #         customer_address: "CustomerAddress",
     #         address_family: "ipv4", # accepts ipv4, ipv6
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] virtual_interface_name
@@ -3040,7 +3262,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] mtu
     #   The maximum transmission unit (MTU), in bytes. The supported values
-    #   are 1500 and 9001. The default value is 1500.
+    #   are 1500 and 8500. The default value is 1500.
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
@@ -3059,6 +3281,10 @@ module Aws::DirectConnect
     #   The address family for the BGP peer.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the transit virtual interface.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterfaceAllocation AWS API Documentation
     #
     class NewTransitVirtualInterfaceAllocation < Struct.new(
@@ -3069,7 +3295,8 @@ module Aws::DirectConnect
       :auth_key,
       :amazon_address,
       :customer_address,
-      :address_family)
+      :address_family,
+      :tags)
       include Aws::Structure
     end
 
@@ -3158,7 +3385,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to add.
+    #   The tags to assign.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResourceRequest AWS API Documentation
@@ -3392,7 +3619,9 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   The authentication key for BGP configuration.
+    #   The authentication key for BGP configuration. This string has a
+    #   minimum length of 6 characters and and a maximun lenth of 80
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] amazon_address
@@ -3483,6 +3712,10 @@ module Aws::DirectConnect
     #   terminates.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the virtual interface.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterface AWS API Documentation
     #
     class VirtualInterface < Struct.new(
@@ -3508,7 +3741,8 @@ module Aws::DirectConnect
       :route_filter_prefixes,
       :bgp_peers,
       :region,
-      :aws_device_v2)
+      :aws_device_v2,
+      :tags)
       include Aws::Structure
     end
 

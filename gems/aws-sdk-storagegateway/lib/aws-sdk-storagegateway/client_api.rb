@@ -22,6 +22,8 @@ module Aws::StorageGateway
     AddUploadBufferOutput = Shapes::StructureShape.new(name: 'AddUploadBufferOutput')
     AddWorkingStorageInput = Shapes::StructureShape.new(name: 'AddWorkingStorageInput')
     AddWorkingStorageOutput = Shapes::StructureShape.new(name: 'AddWorkingStorageOutput')
+    AssignTapePoolInput = Shapes::StructureShape.new(name: 'AssignTapePoolInput')
+    AssignTapePoolOutput = Shapes::StructureShape.new(name: 'AssignTapePoolOutput')
     AttachVolumeInput = Shapes::StructureShape.new(name: 'AttachVolumeInput')
     AttachVolumeOutput = Shapes::StructureShape.new(name: 'AttachVolumeOutput')
     Authentication = Shapes::StringShape.new(name: 'Authentication')
@@ -219,6 +221,7 @@ module Aws::StorageGateway
     SMBFileShareInfo = Shapes::StructureShape.new(name: 'SMBFileShareInfo')
     SMBFileShareInfoList = Shapes::ListShape.new(name: 'SMBFileShareInfoList')
     SMBGuestPassword = Shapes::StringShape.new(name: 'SMBGuestPassword')
+    SMBSecurityStrategy = Shapes::StringShape.new(name: 'SMBSecurityStrategy')
     ServiceUnavailableError = Shapes::StructureShape.new(name: 'ServiceUnavailableError')
     SetLocalConsolePasswordInput = Shapes::StructureShape.new(name: 'SetLocalConsolePasswordInput')
     SetLocalConsolePasswordOutput = Shapes::StructureShape.new(name: 'SetLocalConsolePasswordOutput')
@@ -275,6 +278,8 @@ module Aws::StorageGateway
     UpdateNFSFileShareOutput = Shapes::StructureShape.new(name: 'UpdateNFSFileShareOutput')
     UpdateSMBFileShareInput = Shapes::StructureShape.new(name: 'UpdateSMBFileShareInput')
     UpdateSMBFileShareOutput = Shapes::StructureShape.new(name: 'UpdateSMBFileShareOutput')
+    UpdateSMBSecurityStrategyInput = Shapes::StructureShape.new(name: 'UpdateSMBSecurityStrategyInput')
+    UpdateSMBSecurityStrategyOutput = Shapes::StructureShape.new(name: 'UpdateSMBSecurityStrategyOutput')
     UpdateSnapshotScheduleInput = Shapes::StructureShape.new(name: 'UpdateSnapshotScheduleInput')
     UpdateSnapshotScheduleOutput = Shapes::StructureShape.new(name: 'UpdateSnapshotScheduleOutput')
     UpdateVTLDeviceTypeInput = Shapes::StructureShape.new(name: 'UpdateVTLDeviceTypeInput')
@@ -345,6 +350,13 @@ module Aws::StorageGateway
 
     AddWorkingStorageOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     AddWorkingStorageOutput.struct_class = Types::AddWorkingStorageOutput
+
+    AssignTapePoolInput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, required: true, location_name: "TapeARN"))
+    AssignTapePoolInput.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, required: true, location_name: "PoolId"))
+    AssignTapePoolInput.struct_class = Types::AssignTapePoolInput
+
+    AssignTapePoolOutput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
+    AssignTapePoolOutput.struct_class = Types::AssignTapePoolOutput
 
     AttachVolumeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     AttachVolumeInput.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName"))
@@ -456,6 +468,7 @@ module Aws::StorageGateway
 
     CreateSnapshotFromVolumeRecoveryPointInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     CreateSnapshotFromVolumeRecoveryPointInput.add_member(:snapshot_description, Shapes::ShapeRef.new(shape: SnapshotDescription, required: true, location_name: "SnapshotDescription"))
+    CreateSnapshotFromVolumeRecoveryPointInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSnapshotFromVolumeRecoveryPointInput.struct_class = Types::CreateSnapshotFromVolumeRecoveryPointInput
 
     CreateSnapshotFromVolumeRecoveryPointOutput.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
@@ -614,6 +627,7 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: Ec2InstanceId, location_name: "Ec2InstanceId"))
     DescribeGatewayInformationOutput.add_member(:ec2_instance_region, Shapes::ShapeRef.new(shape: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
     DescribeGatewayInformationOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribeGatewayInformationOutput.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "VPCEndpoint"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
@@ -645,6 +659,7 @@ module Aws::StorageGateway
     DescribeSMBSettingsOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     DescribeSMBSettingsOutput.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     DescribeSMBSettingsOutput.add_member(:smb_guest_password_set, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBGuestPasswordSet"))
+    DescribeSMBSettingsOutput.add_member(:smb_security_strategy, Shapes::ShapeRef.new(shape: SMBSecurityStrategy, location_name: "SMBSecurityStrategy"))
     DescribeSMBSettingsOutput.struct_class = Types::DescribeSMBSettingsOutput
 
     DescribeSnapshotScheduleInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
@@ -655,6 +670,7 @@ module Aws::StorageGateway
     DescribeSnapshotScheduleOutput.add_member(:recurrence_in_hours, Shapes::ShapeRef.new(shape: RecurrenceInHours, location_name: "RecurrenceInHours"))
     DescribeSnapshotScheduleOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DescribeSnapshotScheduleOutput.add_member(:timezone, Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "Timezone"))
+    DescribeSnapshotScheduleOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeSnapshotScheduleOutput.struct_class = Types::DescribeSnapshotScheduleOutput
 
     DescribeStorediSCSIVolumesInput.add_member(:volume_arns, Shapes::ShapeRef.new(shape: VolumeARNs, required: true, location_name: "VolumeARNs"))
@@ -789,6 +805,14 @@ module Aws::StorageGateway
     Hosts.member = Shapes::ShapeRef.new(shape: Host)
 
     Initiators.member = Shapes::ShapeRef.new(shape: Initiator)
+
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InternalServerError.add_member(:error, Shapes::ShapeRef.new(shape: StorageGatewayError, location_name: "error"))
+    InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidGatewayRequestException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidGatewayRequestException.add_member(:error, Shapes::ShapeRef.new(shape: StorageGatewayError, location_name: "error"))
+    InvalidGatewayRequestException.struct_class = Types::InvalidGatewayRequestException
 
     JoinDomainInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     JoinDomainInput.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -967,6 +991,10 @@ module Aws::StorageGateway
     SMBFileShareInfo.struct_class = Types::SMBFileShareInfo
 
     SMBFileShareInfoList.member = Shapes::ShapeRef.new(shape: SMBFileShareInfo)
+
+    ServiceUnavailableError.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ServiceUnavailableError.add_member(:error, Shapes::ShapeRef.new(shape: StorageGatewayError, location_name: "error"))
+    ServiceUnavailableError.struct_class = Types::ServiceUnavailableError
 
     SetLocalConsolePasswordInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     SetLocalConsolePasswordInput.add_member(:local_console_password, Shapes::ShapeRef.new(shape: LocalConsolePassword, required: true, location_name: "LocalConsolePassword"))
@@ -1149,6 +1177,13 @@ module Aws::StorageGateway
     UpdateSMBFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
     UpdateSMBFileShareOutput.struct_class = Types::UpdateSMBFileShareOutput
 
+    UpdateSMBSecurityStrategyInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    UpdateSMBSecurityStrategyInput.add_member(:smb_security_strategy, Shapes::ShapeRef.new(shape: SMBSecurityStrategy, required: true, location_name: "SMBSecurityStrategy"))
+    UpdateSMBSecurityStrategyInput.struct_class = Types::UpdateSMBSecurityStrategyInput
+
+    UpdateSMBSecurityStrategyOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateSMBSecurityStrategyOutput.struct_class = Types::UpdateSMBSecurityStrategyOutput
+
     UpdateSnapshotScheduleInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     UpdateSnapshotScheduleInput.add_member(:start_at, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "StartAt"))
     UpdateSnapshotScheduleInput.add_member(:recurrence_in_hours, Shapes::ShapeRef.new(shape: RecurrenceInHours, required: true, location_name: "RecurrenceInHours"))
@@ -1272,6 +1307,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AddWorkingStorageInput)
         o.output = Shapes::ShapeRef.new(shape: AddWorkingStorageOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:assign_tape_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssignTapePool"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssignTapePoolInput)
+        o.output = Shapes::ShapeRef.new(shape: AssignTapePoolOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
@@ -1968,6 +2013,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateSMBFileShareInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateSMBFileShareOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_smb_security_strategy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSMBSecurityStrategy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSMBSecurityStrategyInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSMBSecurityStrategyOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
