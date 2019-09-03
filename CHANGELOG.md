@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Updated the documentation for AWS Resource Groups Tagging API.
+
 2.11.345 (2019-08-30)
 ------------------
 
