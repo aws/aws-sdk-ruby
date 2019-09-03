@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2019-09-03)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for attaching Amazon Elastic Inference accelerators to your containers. This enables you to run deep learning inference workloads with hardware acceleration in a more efficient way.
+
 1.48.0 (2019-08-30)
 ------------------
 

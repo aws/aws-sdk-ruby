@@ -606,6 +606,10 @@ module Aws::ECS
     #   The number of instantiations of the specified task definition to place
     #   and keep running on your cluster.
     #
+    #   This is required if `schedulingStrategy` is `REPLICA` or is not
+    #   specified. If `schedulingStrategy` is `DAEMON` then this is not
+    #   required.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
@@ -1952,7 +1956,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
-    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
@@ -2673,7 +2677,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
-    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
@@ -2909,7 +2913,10 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -2969,6 +2976,9 @@ module Aws::ECS
     #   resp.tasks[0].tags #=> Array
     #   resp.tasks[0].tags[0].key #=> String
     #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].inference_accelerators #=> Array
+    #   resp.tasks[0].inference_accelerators[0].device_name #=> String
+    #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4655,6 +4665,10 @@ module Aws::ECS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #
+    # @option params [Array<Types::InferenceAccelerator>] :inference_accelerators
+    #   The Elastic Inference accelerators to use for the containers in the
+    #   task.
+    #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
@@ -4857,7 +4871,7 @@ module Aws::ECS
     #         resource_requirements: [
     #           {
     #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU
+    #             type: "GPU", # required, accepts GPU, InferenceAccelerator
     #           },
     #         ],
     #         firelens_configuration: {
@@ -4914,6 +4928,12 @@ module Aws::ECS
     #         },
     #       ],
     #     },
+    #     inference_accelerators: [
+    #       {
+    #         device_name: "String", # required
+    #         device_type: "String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5013,7 +5033,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
-    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
@@ -5304,9 +5324,15 @@ module Aws::ECS
     #           resource_requirements: [
     #             {
     #               value: "String", # required
-    #               type: "GPU", # required, accepts GPU
+    #               type: "GPU", # required, accepts GPU, InferenceAccelerator
     #             },
     #           ],
+    #         },
+    #       ],
+    #       inference_accelerator_overrides: [
+    #         {
+    #           device_name: "String",
+    #           device_type: "String",
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -5365,7 +5391,10 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -5425,6 +5454,9 @@ module Aws::ECS
     #   resp.tasks[0].tags #=> Array
     #   resp.tasks[0].tags[0].key #=> String
     #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].inference_accelerators #=> Array
+    #   resp.tasks[0].inference_accelerators[0].device_name #=> String
+    #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -5572,9 +5604,15 @@ module Aws::ECS
     #           resource_requirements: [
     #             {
     #               value: "String", # required
-    #               type: "GPU", # required, accepts GPU
+    #               type: "GPU", # required, accepts GPU, InferenceAccelerator
     #             },
     #           ],
+    #         },
+    #       ],
+    #       inference_accelerator_overrides: [
+    #         {
+    #           device_name: "String",
+    #           device_type: "String",
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -5619,7 +5657,10 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -5679,6 +5720,9 @@ module Aws::ECS
     #   resp.tasks[0].tags #=> Array
     #   resp.tasks[0].tags[0].key #=> String
     #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].inference_accelerators #=> Array
+    #   resp.tasks[0].inference_accelerators[0].device_name #=> String
+    #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -5758,7 +5802,10 @@ module Aws::ECS
     #   resp.task.overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.task.overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.task.overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task.overrides.inference_accelerator_overrides #=> Array
+    #   resp.task.overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.task.overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.task.overrides.task_role_arn #=> String
     #   resp.task.overrides.execution_role_arn #=> String
     #   resp.task.last_status #=> String
@@ -5818,6 +5865,9 @@ module Aws::ECS
     #   resp.task.tags #=> Array
     #   resp.task.tags[0].key #=> String
     #   resp.task.tags[0].value #=> String
+    #   resp.task.inference_accelerators #=> Array
+    #   resp.task.inference_accelerators[0].device_name #=> String
+    #   resp.task.inference_accelerators[0].device_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -6624,11 +6674,11 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 1,800 seconds.
-    #   During that time, the ECS service scheduler ignores the Elastic Load
-    #   Balancing health check status. This grace period can prevent the ECS
-    #   service scheduler from marking tasks as unhealthy and stopping them
-    #   before they have time to come up.
+    #   you can specify a health check grace period of up to 2,147,483,647
+    #   seconds. During that time, the ECS service scheduler ignores the
+    #   Elastic Load Balancing health check status. This grace period can
+    #   prevent the ECS service scheduler from marking tasks as unhealthy and
+    #   stopping them before they have time to come up.
     #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6976,7 +7026,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

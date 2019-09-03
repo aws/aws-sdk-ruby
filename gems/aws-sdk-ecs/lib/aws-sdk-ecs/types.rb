@@ -554,7 +554,7 @@ module Aws::ECS
     #         resource_requirements: [
     #           {
     #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU
+    #             type: "GPU", # required, accepts GPU, InferenceAccelerator
     #           },
     #         ],
     #         firelens_configuration: {
@@ -706,13 +706,12 @@ module Aws::ECS
     #   a container][1] section of the [Docker Remote API][2] and the
     #   `--memory` option to [docker run][3].
     #
-    #   If your containers are part of a task using the Fargate launch type,
-    #   this field is optional.
+    #   If using the Fargate launch type, this parameter is optional.
     #
-    #   For containers that are part of a task using the EC2 launch type,
-    #   you must specify a non-zero integer for one or both of `memory` or
-    #   `memoryReservation` in container definitions. If you specify both,
-    #   `memory` must be greater than `memoryReservation`. If you specify
+    #   If using the EC2 launch type, you must specify either a task-level
+    #   memory value or a container-level memory value. If you specify both
+    #   a container-level `memory` and `memoryReservation` value, `memory`
+    #   must be greater than `memoryReservation`. If you specify
     #   `memoryReservation`, then that value is subtracted from the
     #   available memory resources for the container instance on which the
     #   container is placed. Otherwise, the value of `memory` is used.
@@ -739,9 +738,10 @@ module Aws::ECS
     #   container][1] section of the [Docker Remote API][2] and the
     #   `--memory-reservation` option to [docker run][3].
     #
-    #   You must specify a non-zero integer for one or both of `memory` or
-    #   `memoryReservation` in container definitions. If you specify both,
-    #   `memory` must be greater than `memoryReservation`. If you specify
+    #   If a task-level memory value is not specified, you must specify a
+    #   non-zero integer for one or both of `memory` or `memoryReservation`
+    #   in a container definition. If you specify both, `memory` must be
+    #   greater than `memoryReservation`. If you specify
     #   `memoryReservation`, then that value is subtracted from the
     #   available memory resources for the container instance on which the
     #   container is placed. Otherwise, the value of `memory` is used.
@@ -1714,7 +1714,7 @@ module Aws::ECS
     #         resource_requirements: [
     #           {
     #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU
+    #             type: "GPU", # required, accepts GPU, InferenceAccelerator
     #           },
     #         ],
     #       }
@@ -2080,6 +2080,10 @@ module Aws::ECS
     # @!attribute [rw] desired_count
     #   The number of instantiations of the specified task definition to
     #   place and keep running on your cluster.
+    #
+    #   This is required if `schedulingStrategy` is `REPLICA` or is not
+    #   specified. If `schedulingStrategy` is `DAEMON` then this is not
+    #   required.
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
@@ -3709,6 +3713,76 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # Details on a Elastic Inference accelerator. For more information, see
+    # [Working with Amazon Elastic Inference on Amazon ECS][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html
+    #
+    # @note When making an API call, you may pass InferenceAccelerator
+    #   data as a hash:
+    #
+    #       {
+    #         device_name: "String", # required
+    #         device_type: "String", # required
+    #       }
+    #
+    # @!attribute [rw] device_name
+    #   The Elastic Inference accelerator device name. The `deviceName` must
+    #   also be referenced in a container definition as a
+    #   ResourceRequirement.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_type
+    #   The Elastic Inference accelerator type to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InferenceAccelerator AWS API Documentation
+    #
+    class InferenceAccelerator < Struct.new(
+      :device_name,
+      :device_type)
+      include Aws::Structure
+    end
+
+    # Details on an Elastic Inference accelerator task override. This
+    # parameter is used to override the Elastic Inference accelerator
+    # specified in the task definition. For more information, see [Working
+    # with Amazon Elastic Inference on Amazon ECS][1] in the *Amazon Elastic
+    # Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html
+    #
+    # @note When making an API call, you may pass InferenceAcceleratorOverride
+    #   data as a hash:
+    #
+    #       {
+    #         device_name: "String",
+    #         device_type: "String",
+    #       }
+    #
+    # @!attribute [rw] device_name
+    #   The Elastic Inference accelerator device name to override for the
+    #   task. This parameter must match a `deviceName` specified in the task
+    #   definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_type
+    #   The Elastic Inference accelerator type to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InferenceAcceleratorOverride AWS API Documentation
+    #
+    class InferenceAcceleratorOverride < Struct.new(
+      :device_name,
+      :device_type)
+      include Aws::Structure
+    end
+
     # The Linux capabilities for the container that are added to or dropped
     # from the default configuration provided by Docker. For more
     # information on the default capabilities and the non-default available
@@ -4833,7 +4907,7 @@ module Aws::ECS
     #
     #   For tasks using the EC2 launch type, the supported log drivers are
     #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `logentries`,
-    #   `syslog`, `splunk`, and `syslog`.
+    #   `syslog`, and `splunk`.
     #
     #   For more information about using the `awslogs` log driver, see
     #   [Using the awslogs Log Driver][1] in the *Amazon Elastic Container
@@ -5019,6 +5093,11 @@ module Aws::ECS
     # information, see [Task Placement Constraints][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
+    # <note markdown="1"> If you are using the Fargate launch type, task placement constraints
+    # are not supported.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
@@ -5035,8 +5114,7 @@ module Aws::ECS
     #   The type of constraint. Use `distinctInstance` to ensure that each
     #   task in a particular group is running on a different container
     #   instance. Use `memberOf` to restrict the selection to a group of
-    #   valid candidates. The value `distinctInstance` is not supported in
-    #   task definitions.
+    #   valid candidates.
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -5745,7 +5823,7 @@ module Aws::ECS
     #             resource_requirements: [
     #               {
     #                 value: "String", # required
-    #                 type: "GPU", # required, accepts GPU
+    #                 type: "GPU", # required, accepts GPU, InferenceAccelerator
     #               },
     #             ],
     #             firelens_configuration: {
@@ -5802,6 +5880,12 @@ module Aws::ECS
     #             },
     #           ],
     #         },
+    #         inference_accelerators: [
+    #           {
+    #             device_name: "String", # required
+    #             device_type: "String", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] family
@@ -6091,6 +6175,11 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Types::ProxyConfiguration]
     #
+    # @!attribute [rw] inference_accelerators
+    #   The Elastic Inference accelerators to use for the containers in the
+    #   task.
+    #   @return [Array<Types::InferenceAccelerator>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
     #
     class RegisterTaskDefinitionRequest < Struct.new(
@@ -6107,7 +6196,8 @@ module Aws::ECS
       :tags,
       :pid_mode,
       :ipc_mode,
-      :proxy_configuration)
+      :proxy_configuration,
+      :inference_accelerators)
       include Aws::Structure
     end
 
@@ -6212,33 +6302,42 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # The type and amount of a resource to assign to a container. The only
-    # supported resource is a GPU. For more information, see [Working with
-    # GPUs on Amazon ECS][1] in the *Amazon Elastic Container Service
-    # Developer Guide*
+    # The type and amount of a resource to assign to a container. The
+    # supported resource types are GPUs and Elastic Inference accelerators.
+    # For more information, see [Working with GPUs on Amazon ECS][1] or
+    # [Working with Amazon Elastic Inference on Amazon ECS][2] in the
+    # *Amazon Elastic Container Service Developer Guide*
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html
     #
     # @note When making an API call, you may pass ResourceRequirement
     #   data as a hash:
     #
     #       {
     #         value: "String", # required
-    #         type: "GPU", # required, accepts GPU
+    #         type: "GPU", # required, accepts GPU, InferenceAccelerator
     #       }
     #
     # @!attribute [rw] value
-    #   The number of physical `GPUs` the Amazon ECS container agent will
-    #   reserve for the container. The number of GPUs reserved for all
-    #   containers in a task should not exceed the number of available GPUs
-    #   on the container instance the task is launched on.
+    #   The value for the specified resource type.
+    #
+    #   If the `GPU` type is used, the value is the number of physical
+    #   `GPUs` the Amazon ECS container agent will reserve for the
+    #   container. The number of GPUs reserved for all containers in a task
+    #   should not exceed the number of available GPUs on the container
+    #   instance the task is launched on.
+    #
+    #   If the `InferenceAccelerator` type is used, the `value` should match
+    #   the `deviceName` for an InferenceAccelerator specified in a task
+    #   definition.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of resource to assign to a container. The only supported
-    #   value is `GPU`.
+    #   The type of resource to assign to a container. The supported values
+    #   are `GPU` or `InferenceAccelerator`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceRequirement AWS API Documentation
@@ -6272,9 +6371,15 @@ module Aws::ECS
     #               resource_requirements: [
     #                 {
     #                   value: "String", # required
-    #                   type: "GPU", # required, accepts GPU
+    #                   type: "GPU", # required, accepts GPU, InferenceAccelerator
     #                 },
     #               ],
+    #             },
+    #           ],
+    #           inference_accelerator_overrides: [
+    #             {
+    #               device_name: "String",
+    #               device_type: "String",
     #             },
     #           ],
     #           task_role_arn: "String",
@@ -6983,9 +7088,15 @@ module Aws::ECS
     #               resource_requirements: [
     #                 {
     #                   value: "String", # required
-    #                   type: "GPU", # required, accepts GPU
+    #                   type: "GPU", # required, accepts GPU, InferenceAccelerator
     #                 },
     #               ],
+    #             },
+    #           ],
+    #           inference_accelerator_overrides: [
+    #             {
+    #               device_name: "String",
+    #               device_type: "String",
     #             },
     #           ],
     #           task_role_arn: "String",
@@ -7838,6 +7949,10 @@ module Aws::ECS
     #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] inference_accelerators
+    #   The Elastic Inference accelerator associated with the task.
+    #   @return [Array<Types::InferenceAccelerator>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
     #
     class Task < Struct.new(
@@ -7869,7 +7984,8 @@ module Aws::ECS
       :platform_version,
       :attachments,
       :health_status,
-      :tags)
+      :tags,
+      :inference_accelerators)
       include Aws::Structure
     end
 
@@ -8058,10 +8174,14 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] memory
-    #   The amount (in MiB) of memory used by the task. If using the EC2
-    #   launch type, this field is optional and any value can be used. If
-    #   using the Fargate launch type, this field is required and you must
-    #   use one of the following values, which determines your range of
+    #   The amount (in MiB) of memory used by the task.
+    #
+    #   If using the EC2 launch type, this field is optional and any value
+    #   can be used. If a task-level memory value is specified then the
+    #   container-level memory value is optional.
+    #
+    #   If using the Fargate launch type, this field is required and you
+    #   must use one of the following values, which determines your range of
     #   valid values for the `cpu` parameter:
     #
     #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values:
@@ -8189,13 +8309,13 @@ module Aws::ECS
     end
 
     # An object representing a constraint on task placement in the task
-    # definition.
+    # definition. For more information, see [Task Placement Constraints][1]
+    # in the *Amazon Elastic Container Service Developer Guide*.
     #
-    # If you are using the Fargate launch type, task placement constraints
+    # <note markdown="1"> If you are using the Fargate launch type, task placement constraints
     # are not supported.
     #
-    # For more information, see [Task Placement Constraints][1] in the
-    # *Amazon Elastic Container Service Developer Guide*.
+    #  </note>
     #
     #
     #
@@ -8210,10 +8330,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] type
-    #   The type of constraint. The `DistinctInstance` constraint ensures
-    #   that each task in a particular group is running on a different
-    #   container instance. The `MemberOf` constraint restricts selection to
-    #   be from a group of valid candidates.
+    #   The type of constraint. The `MemberOf` constraint restricts
+    #   selection to be from a group of valid candidates.
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -8256,9 +8374,15 @@ module Aws::ECS
     #             resource_requirements: [
     #               {
     #                 value: "String", # required
-    #                 type: "GPU", # required, accepts GPU
+    #                 type: "GPU", # required, accepts GPU, InferenceAccelerator
     #               },
     #             ],
+    #           },
+    #         ],
+    #         inference_accelerator_overrides: [
+    #           {
+    #             device_name: "String",
+    #             device_type: "String",
     #           },
     #         ],
     #         task_role_arn: "String",
@@ -8268,6 +8392,10 @@ module Aws::ECS
     # @!attribute [rw] container_overrides
     #   One or more container overrides sent to a task.
     #   @return [Array<Types::ContainerOverride>]
+    #
+    # @!attribute [rw] inference_accelerator_overrides
+    #   The Elastic Inference accelerator override for the task.
+    #   @return [Array<Types::InferenceAcceleratorOverride>]
     #
     # @!attribute [rw] task_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that containers in
@@ -8284,6 +8412,7 @@ module Aws::ECS
     #
     class TaskOverride < Struct.new(
       :container_overrides,
+      :inference_accelerator_overrides,
       :task_role_arn,
       :execution_role_arn)
       include Aws::Structure
@@ -8871,10 +9000,11 @@ module Aws::ECS
     #   your service is configured to use a load balancer. If your
     #   service's tasks take a while to start and respond to Elastic Load
     #   Balancing health checks, you can specify a health check grace period
-    #   of up to 1,800 seconds. During that time, the ECS service scheduler
-    #   ignores the Elastic Load Balancing health check status. This grace
-    #   period can prevent the ECS service scheduler from marking tasks as
-    #   unhealthy and stopping them before they have time to come up.
+    #   of up to 2,147,483,647 seconds. During that time, the ECS service
+    #   scheduler ignores the Elastic Load Balancing health check status.
+    #   This grace period can prevent the ECS service scheduler from marking
+    #   tasks as unhealthy and stopping them before they have time to come
+    #   up.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation

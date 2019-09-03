@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-09-03)
+------------------
+
+* Feature - You can now make use of PKI resources to provide more secure connections between your game clients and servers.  To learn more, please refer to the public Amazon GameLift documentation.
+
 1.23.0 (2019-07-25)
 ------------------
 
