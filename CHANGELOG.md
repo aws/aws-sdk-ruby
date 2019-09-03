@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.346 (2019-09-03)
+------------------
+
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
 
 * Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
