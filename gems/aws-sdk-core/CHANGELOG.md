@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support CLI AWS_DEFAULT_PROFILE environment variable [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1452)
+
 3.65.1 (2019-08-28)
 ------------------
 
@@ -389,7 +391,7 @@ Unreleased Changes
 3.20.0 (2018-04-23)
 ------------------
 
-* Feature - Aws::InstanceProfileCredentials - Add sending a User-Agent other than the default User-Agent in Ruby.  Adding the User-Agent `aws-sdk-ruby3/<version>` to allow protection against Server Side Request Forgery (SSRF) credential theft vectors by use of a metadata proxy.  
+* Feature - Aws::InstanceProfileCredentials - Add sending a User-Agent other than the default User-Agent in Ruby.  Adding the User-Agent `aws-sdk-ruby3/<version>` to allow protection against Server Side Request Forgery (SSRF) credential theft vectors by use of a metadata proxy.
 
 3.19.0 (2018-04-04)
 ------------------

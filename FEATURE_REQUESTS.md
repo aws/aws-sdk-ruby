@@ -12,15 +12,6 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ### Credentials
 
-### Add Support for CLI Profile Environment Variable
-
-While the SDKs generally use `AWS_PROFILE` as the environment variable source of
-the shared config/credentials profile, the CLI promotes the
-`AWS_DEFAULT_PROFILE` environment variable. Request is to also support that as a
-secondary source.
-
-See [related GitHub issue #1452](https://github.com/aws/aws-sdk-ruby/issues/1452).
-
 ### Add Region Detection from EC2 Metadata
 
 We use instance metadata for credentials, feature request is to also use it for
