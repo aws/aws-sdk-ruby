@@ -29,6 +29,7 @@ module Aws::EKS
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorDetails = Shapes::ListShape.new(name: 'ErrorDetails')
+    Identity = Shapes::StructureShape.new(name: 'Identity')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
@@ -42,6 +43,7 @@ module Aws::EKS
     LogType = Shapes::StringShape.new(name: 'LogType')
     LogTypes = Shapes::ListShape.new(name: 'LogTypes')
     Logging = Shapes::StructureShape.new(name: 'Logging')
+    OIDC = Shapes::StructureShape.new(name: 'OIDC')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -79,6 +81,7 @@ module Aws::EKS
     Cluster.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
     Cluster.add_member(:resources_vpc_config, Shapes::ShapeRef.new(shape: VpcConfigResponse, location_name: "resourcesVpcConfig"))
     Cluster.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
+    Cluster.add_member(:identity, Shapes::ShapeRef.new(shape: Identity, location_name: "identity"))
     Cluster.add_member(:status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "status"))
     Cluster.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: Certificate, location_name: "certificateAuthority"))
     Cluster.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken"))
@@ -122,6 +125,9 @@ module Aws::EKS
 
     ErrorDetails.member = Shapes::ShapeRef.new(shape: ErrorDetail)
 
+    Identity.add_member(:oidc, Shapes::ShapeRef.new(shape: OIDC, location_name: "oidc"))
+    Identity.struct_class = Types::Identity
+
     InvalidParameterException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
@@ -157,6 +163,9 @@ module Aws::EKS
 
     Logging.add_member(:cluster_logging, Shapes::ShapeRef.new(shape: LogSetups, location_name: "clusterLogging"))
     Logging.struct_class = Types::Logging
+
+    OIDC.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "issuer"))
+    OIDC.struct_class = Types::OIDC
 
     ResourceInUseException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -309,6 +318,12 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_updates, Seahorse::Model::Operation.new.tap do |o|
@@ -321,6 +336,12 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:update_cluster_config, Seahorse::Model::Operation.new.tap do |o|

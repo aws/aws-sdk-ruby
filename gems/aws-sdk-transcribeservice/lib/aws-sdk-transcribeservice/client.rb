@@ -588,7 +588,7 @@ module Aws::TranscribeService
     #   The language code for the language used in the input media file.
     #
     # @option params [Integer] :media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in the input media file.
+    #   The sample rate of the audio track in the input media file in Hertz.
     #
     #   If you do not specify the media sample rate, Amazon Transcribe
     #   determines the sample rate. If you specify the sample rate, it must
@@ -596,8 +596,14 @@ module Aws::TranscribeService
     #   you should leave the `MediaSampleRateHertz` field blank and let Amazon
     #   Transcribe determine the sample rate.
     #
-    # @option params [required, String] :media_format
+    # @option params [String] :media_format
     #   The format of the input media file.
+    #
+    #   If you do not specify the format of the media file, Amazon Transcribe
+    #   determines the format. If the format is not recognized, Amazon
+    #   Transcribe returns an `InternalFailureException` exception. If you
+    #   specify the format, it must match the format detected by Amazon
+    #   Transcribe, otherwise you get an `InternalFailureException` exception.
     #
     # @option params [required, Types::Media] :media
     #   An object that describes the input media for a transcription job.
@@ -639,7 +645,7 @@ module Aws::TranscribeService
     #     transcription_job_name: "TranscriptionJobName", # required
     #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #     media_sample_rate_hertz: 1,
-    #     media_format: "mp3", # required, accepts mp3, mp4, wav, flac
+    #     media_format: "mp3", # accepts mp3, mp4, wav, flac
     #     media: { # required
     #       media_file_uri: "Uri",
     #     },
@@ -760,7 +766,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

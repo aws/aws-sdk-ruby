@@ -543,7 +543,7 @@ module Aws::TranscribeService
     #         transcription_job_name: "TranscriptionJobName", # required
     #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN
     #         media_sample_rate_hertz: 1,
-    #         media_format: "mp3", # required, accepts mp3, mp4, wav, flac
+    #         media_format: "mp3", # accepts mp3, mp4, wav, flac
     #         media: { # required
     #           media_file_uri: "Uri",
     #         },
@@ -567,8 +567,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in the input media
-    #   file.
+    #   The sample rate of the audio track in the input media file in Hertz.
     #
     #   If you do not specify the media sample rate, Amazon Transcribe
     #   determines the sample rate. If you specify the sample rate, it must
@@ -579,6 +578,13 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] media_format
     #   The format of the input media file.
+    #
+    #   If you do not specify the format of the media file, Amazon
+    #   Transcribe determines the format. If the format is not recognized,
+    #   Amazon Transcribe returns an `InternalFailureException` exception.
+    #   If you specify the format, it must match the format detected by
+    #   Amazon Transcribe, otherwise you get an `InternalFailureException`
+    #   exception.
     #   @return [String]
     #
     # @!attribute [rw] media

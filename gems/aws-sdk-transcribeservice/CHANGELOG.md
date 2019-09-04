@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-09-04)
+------------------
+
+* Feature - MediaFormat is now optional for StartTranscriptionJob API.
+
 1.27.0 (2019-08-23)
 ------------------
 

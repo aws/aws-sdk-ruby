@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.66.0 (2019-09-04)
+------------------
+
 * Feature - Support CLI AWS_DEFAULT_PROFILE environment variable [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1452)
 
 3.65.1 (2019-08-28)

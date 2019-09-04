@@ -435,6 +435,7 @@ module Aws::EKS
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
     #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
+    #   resp.cluster.identity.oidc.issuer #=> String
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
@@ -509,6 +510,7 @@ module Aws::EKS
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
     #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
+    #   resp.cluster.identity.oidc.issuer #=> String
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
@@ -606,6 +608,7 @@ module Aws::EKS
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
     #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
+    #   resp.cluster.identity.oidc.issuer #=> String
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
@@ -978,7 +981,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

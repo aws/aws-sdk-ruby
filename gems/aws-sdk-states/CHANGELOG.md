@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-09-04)
+------------------
+
+* Feature - Added support for new history events
+
 1.20.0 (2019-07-25)
 ------------------
 

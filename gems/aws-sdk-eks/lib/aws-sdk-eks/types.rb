@@ -90,6 +90,10 @@ module Aws::EKS
     #   The logging configuration for your cluster.
     #   @return [Types::Logging]
     #
+    # @!attribute [rw] identity
+    #   The identity provider information for the cluster.
+    #   @return [Types::Identity]
+    #
     # @!attribute [rw] status
     #   The current status of the cluster.
     #   @return [String]
@@ -124,6 +128,7 @@ module Aws::EKS
       :role_arn,
       :resources_vpc_config,
       :logging,
+      :identity,
       :status,
       :certificate_authority,
       :client_request_token,
@@ -380,6 +385,25 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An object representing an identity provider for authentication
+    # credentials.
+    #
+    # @!attribute [rw] oidc
+    #   The [OpenID Connect][1] identity provider information for the
+    #   cluster.
+    #
+    #
+    #
+    #   [1]: https://openid.net/connect/
+    #   @return [Types::OIDC]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Identity AWS API Documentation
+    #
+    class Identity < Struct.new(
+      :oidc)
+      include Aws::Structure
+    end
+
     # The specified parameter is invalid. Review the available parameters
     # for the API request.
     #
@@ -588,6 +612,24 @@ module Aws::EKS
     #
     class Logging < Struct.new(
       :cluster_logging)
+      include Aws::Structure
+    end
+
+    # An object representing the [OpenID Connect][1] identity provider
+    # information for the cluster.
+    #
+    #
+    #
+    # [1]: https://openid.net/connect/
+    #
+    # @!attribute [rw] issuer
+    #   The issuer URL for the OpenID Connect identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OIDC AWS API Documentation
+    #
+    class OIDC < Struct.new(
+      :issuer)
       include Aws::Structure
     end
 
