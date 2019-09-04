@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.347 (2019-09-04)
+------------------
+
 * Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
 
 * Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
