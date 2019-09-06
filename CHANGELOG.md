@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::KinesisAnalytics - Updated the documentation for Amazon Kinesis Analytics.
+
 2.11.348 (2019-09-05)
 ------------------
 
