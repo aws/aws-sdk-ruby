@@ -822,12 +822,11 @@ module Aws::KinesisAnalytics
     #   key-value pair that identifies an application. Note that the maximum
     #   number of application tags includes system tags. The maximum number of
     #   user-defined application tags is 50. For more information, see [Using
-    #   Cost Allocation Tags][1] in the *AWS Billing and Cost Management
-    #   Guide*.
+    #   Tagging][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html
     #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1475,7 +1474,12 @@ module Aws::KinesisAnalytics
       req.send_request(options)
     end
 
-    # Retrieves the list of key-value tags assigned to the application.
+    # Retrieves the list of key-value tags assigned to the application. For
+    # more information, see [Using Tagging][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the application for which to retrieve tags.
@@ -1613,7 +1617,12 @@ module Aws::KinesisAnalytics
 
     # Adds one or more key-value tags to a Kinesis Analytics application.
     # Note that the maximum number of application tags includes system tags.
-    # The maximum number of user-defined application tags is 50.
+    # The maximum number of user-defined application tags is 50. For more
+    # information, see [Using Tagging][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the application to assign the tags.
@@ -1644,7 +1653,12 @@ module Aws::KinesisAnalytics
       req.send_request(options)
     end
 
-    # Removes one or more tags from a Kinesis Analytics application.
+    # Removes one or more tags from a Kinesis Analytics application. For
+    # more information, see [Using Tagging][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the Kinesis Analytics application from which to remove the
@@ -1843,7 +1857,7 @@ module Aws::KinesisAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalytics'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

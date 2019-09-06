@@ -946,12 +946,11 @@ module Aws::KinesisAnalytics
     #   key-value pair that identifies an application. Note that the maximum
     #   number of application tags includes system tags. The maximum number
     #   of user-defined application tags is 50. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management Guide*.
+    #   [Using Tagging][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplicationRequest AWS API Documentation
@@ -1683,7 +1682,7 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ambda/
+    #   [1]: https://docs.aws.amazon.com/lambda/
     #   @return [String]
     #
     # @!attribute [rw] role_arn_update
@@ -3112,9 +3111,12 @@ module Aws::KinesisAnalytics
 
     # Discovery failed to get a record from the streaming source because of
     # the Amazon Kinesis Streams ProvisionedThroughputExceededException. For
-    # more information, see
-    # [GetRecords](kinesis/latest/APIReference/API_GetRecords.html) in the
-    # Amazon Kinesis Streams API Reference.
+    # more information, see [GetRecords][1] in the Amazon Kinesis Streams
+    # API Reference.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3396,12 +3398,11 @@ module Aws::KinesisAnalytics
     # tag value is replaced with the value that you specify in the request.
     # Note that the maximum number of application tags includes system tags.
     # The maximum number of user-defined application tags is 50. For more
-    # information, see [Using Cost Allocation Tags][1] in the *AWS Billing
-    # and Cost Management Guide*.
+    # information, see [Using Tagging][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
