@@ -460,6 +460,12 @@
   "Pricing": {
     "models": "pricing/2017-10-15"
   },
+  "QLDB": {
+    "models": "qldb/2019-01-02"
+  },
+  "QLDBSession": {
+    "models": "qldb-session/2019-07-11"
+  },
   "QuickSight": {
     "models": "quicksight/2018-04-01"
   },

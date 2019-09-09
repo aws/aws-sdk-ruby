@@ -357,8 +357,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
-| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
+| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
@@ -436,8 +436,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Aws::Snowball                        | aws-sdk-snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Aws::Inspector                       | aws-sdk-inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Aws::Kinesis                         | aws-sdk-kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Aws::Firehose                        | aws-sdk-firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | Aws::KinesisVideo                    | aws-sdk-kinesisvideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | Aws::KinesisVideoArchivedMedia       | aws-sdk-kinesisvideoarchivedmedia       | 2017-09-30  |
@@ -457,6 +457,8 @@ to be backwards compatible.
 | Amazon Pinpoint Email Service                         | Aws::PinpointEmail                   | aws-sdk-pinpointemail                   | 2018-07-26  |
 | Amazon Pinpoint SMS and Voice Service                 | Aws::PinpointSMSVoice                | aws-sdk-pinpointsmsvoice                | 2018-09-05  |
 | Amazon Polly                                          | Aws::Polly                           | aws-sdk-polly                           | 2016-06-10  |
+| Amazon QLDB                                           | Aws::QLDB                            | aws-sdk-qldb                            | 2019-01-02  |
+| Amazon QLDB Session                                   | Aws::QLDBSession                     | aws-sdk-qldbsession                     | 2019-07-11  |
 | Amazon QuickSight                                     | Aws::QuickSight                      | aws-sdk-quicksight                      | 2018-04-01  |
 | Amazon Redshift                                       | Aws::Redshift                        | aws-sdk-redshift                        | 2012-12-01  |
 | Amazon Rekognition                                    | Aws::Rekognition                     | aws-sdk-rekognition                     | 2016-06-27  |
@@ -486,8 +488,8 @@ to be backwards compatible.
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |

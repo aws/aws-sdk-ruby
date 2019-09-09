@@ -1829,6 +1829,32 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object representing the duration between retry attempts.
+    #
+    # @note When making an API call, you may pass Duration
+    #   data as a hash:
+    #
+    #       {
+    #         unit: "ms", # accepts ms, s
+    #         value: 1,
+    #       }
+    #
+    # @!attribute [rw] unit
+    #   The unit of time between retry attempts.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The duration of time between retry attempts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Duration AWS API Documentation
+    #
+    class Duration < Struct.new(
+      :unit,
+      :value)
+      include Aws::Structure
+    end
+
     # The request contains a client token that was used for a previous
     # update resource call with different specifications. Try the request
     # again with a new client token.
@@ -2319,6 +2345,57 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a retry policy.
+    #
+    # @note When making an API call, you may pass HttpRetryPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         http_retry_events: ["HttpRetryPolicyEvent"],
+    #         max_retries: 1, # required
+    #         per_retry_timeout: { # required
+    #           unit: "ms", # accepts ms, s
+    #           value: 1,
+    #         },
+    #         tcp_retry_events: ["connection-error"], # accepts connection-error
+    #       }
+    #
+    # @!attribute [rw] http_retry_events
+    #   Specify at least one of the following values.
+    #
+    #   * **server-error** – HTTP status codes 500, 501, 502, 503, 504, 505,
+    #     506, 507, 508, 510, and 511
+    #
+    #   * **gateway-error** – HTTP status codes 502, 503, and 504
+    #
+    #   * **client-error** – HTTP status code 409
+    #
+    #   * **stream-error** – Retry on refused stream
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_retries
+    #   The maximum number of retry attempts. If no value is specified, the
+    #   default is 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] per_retry_timeout
+    #   An object that represents the retry duration.
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] tcp_retry_events
+    #   Specify a valid value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRetryPolicy AWS API Documentation
+    #
+    class HttpRetryPolicy < Struct.new(
+      :http_retry_events,
+      :max_retries,
+      :per_retry_timeout,
+      :tcp_retry_events)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeVirtualRouterInput
     #   data as a hash:
     #
@@ -2508,6 +2585,15 @@ module Aws::AppMesh
     #               prefix: "String", # required
     #               scheme: "http", # accepts http, https
     #             },
+    #             retry_policy: {
+    #               http_retry_events: ["HttpRetryPolicyEvent"],
+    #               max_retries: 1, # required
+    #               per_retry_timeout: { # required
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               tcp_retry_events: ["connection-error"], # accepts connection-error
+    #             },
     #           },
     #           priority: 1,
     #           tcp_route: {
@@ -2694,6 +2780,15 @@ module Aws::AppMesh
     #               method: "CONNECT", # accepts CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
     #               prefix: "String", # required
     #               scheme: "http", # accepts http, https
+    #             },
+    #             retry_policy: {
+    #               http_retry_events: ["HttpRetryPolicyEvent"],
+    #               max_retries: 1, # required
+    #               per_retry_timeout: { # required
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               tcp_retry_events: ["connection-error"], # accepts connection-error
     #             },
     #           },
     #           priority: 1,
@@ -2913,6 +3008,15 @@ module Aws::AppMesh
     #             prefix: "String", # required
     #             scheme: "http", # accepts http, https
     #           },
+    #           retry_policy: {
+    #             http_retry_events: ["HttpRetryPolicyEvent"],
+    #             max_retries: 1, # required
+    #             per_retry_timeout: { # required
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             tcp_retry_events: ["connection-error"], # accepts connection-error
+    #           },
     #         },
     #         priority: 1,
     #         tcp_route: {
@@ -2984,6 +3088,15 @@ module Aws::AppMesh
     #           prefix: "String", # required
     #           scheme: "http", # accepts http, https
     #         },
+    #         retry_policy: {
+    #           http_retry_events: ["HttpRetryPolicyEvent"],
+    #           max_retries: 1, # required
+    #           per_retry_timeout: { # required
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
     #       }
     #
     # @!attribute [rw] action
@@ -2994,11 +3107,16 @@ module Aws::AppMesh
     #   The criteria for determining an HTTP request match.
     #   @return [Types::HttpRouteMatch]
     #
+    # @!attribute [rw] retry_policy
+    #   An object that represents a retry policy.
+    #   @return [Types::HttpRetryPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRoute AWS API Documentation
     #
     class HttpRoute < Struct.new(
       :action,
-      :match)
+      :match,
+      :retry_policy)
       include Aws::Structure
     end
 

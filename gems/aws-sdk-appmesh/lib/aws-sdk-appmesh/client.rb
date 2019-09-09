@@ -402,6 +402,15 @@ module Aws::AppMesh
     #           prefix: "String", # required
     #           scheme: "http", # accepts http, https
     #         },
+    #         retry_policy: {
+    #           http_retry_events: ["HttpRetryPolicyEvent"],
+    #           max_retries: 1, # required
+    #           per_retry_timeout: { # required
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
     #       },
     #       priority: 1,
     #       tcp_route: {
@@ -448,6 +457,13 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.http_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
@@ -874,6 +890,13 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.http_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
@@ -1119,6 +1142,13 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.http_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
@@ -1767,6 +1797,15 @@ module Aws::AppMesh
     #           prefix: "String", # required
     #           scheme: "http", # accepts http, https
     #         },
+    #         retry_policy: {
+    #           http_retry_events: ["HttpRetryPolicyEvent"],
+    #           max_retries: 1, # required
+    #           per_retry_timeout: { # required
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
     #       },
     #       priority: 1,
     #       tcp_route: {
@@ -1807,6 +1846,13 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.match.method #=> String, one of "CONNECT", "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "TRACE"
     #   resp.route.spec.http_route.match.prefix #=> String
     #   resp.route.spec.http_route.match.scheme #=> String, one of "http", "https"
+    #   resp.route.spec.http_route.retry_policy.http_retry_events #=> Array
+    #   resp.route.spec.http_route.retry_policy.http_retry_events[0] #=> String
+    #   resp.route.spec.http_route.retry_policy.max_retries #=> Integer
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
+    #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
+    #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
@@ -2084,7 +2130,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

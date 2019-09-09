@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2019-09-09)
+------------------
+
+* Feature - IamRoleArn support in CreateFleet, UpdateFleet, CreateImageBuilder APIs
+
 1.35.0 (2019-08-20)
 ------------------
 

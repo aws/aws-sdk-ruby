@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2019-09-09)
+------------------
+
+* Feature - This release expands Site-to-Site VPN tunnel options to allow customers to restrict security algorithms and configure timer settings for VPN connections. Customers can specify these new options while creating new VPN connections, or they can modify the tunnel options on existing connections using a new API.
+
 1.106.0 (2019-08-23)
 ------------------
 

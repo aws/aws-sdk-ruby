@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2019-09-09)
+------------------
+
+* Feature - This release adds support for http retry policies.
+
 1.15.0 (2019-08-19)
 ------------------
 

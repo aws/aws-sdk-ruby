@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.53.0 (2019-09-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-qldbsession` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-qldb` gem.
+
 3.52.0 (2019-08-21)
 ------------------
 

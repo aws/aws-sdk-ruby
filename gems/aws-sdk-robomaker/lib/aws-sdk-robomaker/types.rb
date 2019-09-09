@@ -800,6 +800,15 @@ module Aws::RoboMaker
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
+    #               port_forwarding_config: {
+    #                 port_mappings: [
+    #                   {
+    #                     job_port: 1, # required
+    #                     application_port: 1, # required
+    #                     enable_on_public_ip: false,
+    #                   },
+    #                 ],
+    #               },
     #             },
     #           },
     #         ],
@@ -812,6 +821,15 @@ module Aws::RoboMaker
     #               launch_file: "Command", # required
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #               },
+    #               port_forwarding_config: {
+    #                 port_mappings: [
+    #                   {
+    #                     job_port: 1, # required
+    #                     application_port: 1, # required
+    #                     enable_on_public_ip: false,
+    #                   },
+    #                 ],
     #               },
     #             },
     #           },
@@ -1005,20 +1023,6 @@ module Aws::RoboMaker
     #
     #   : Etag for SimulationApplication does not match value during version
     #     creation.
-    #
-    #   WrongRegionS3Output
-    #
-    #   : S3 output bucket is in a different region than AWS RoboMaker.
-    #
-    #   WrongRegionRobotApplication
-    #
-    #   : RobotApplication bucket is in a different region than AWS
-    #     RoboMaker.
-    #
-    #   WrongRegionSimulationApplication
-    #
-    #   : SimulationApplication bucket is in a different region than AWS
-    #     RoboMaker.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1992,6 +1996,10 @@ module Aws::RoboMaker
     #   The VPC configuration.
     #   @return [Types::VPCConfigResponse]
     #
+    # @!attribute [rw] network_interface
+    #   The network interface information for the simulation job.
+    #   @return [Types::NetworkInterface]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJobResponse AWS API Documentation
     #
     class DescribeSimulationJobResponse < Struct.new(
@@ -2013,7 +2021,8 @@ module Aws::RoboMaker
       :simulation_applications,
       :data_sources,
       :tags,
-      :vpc_config)
+      :vpc_config,
+      :network_interface)
       include Aws::Structure
     end
 
@@ -2133,6 +2142,15 @@ module Aws::RoboMaker
     #         environment_variables: {
     #           "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #         },
+    #         port_forwarding_config: {
+    #           port_mappings: [
+    #             {
+    #               job_port: 1, # required
+    #               application_port: 1, # required
+    #               enable_on_public_ip: false,
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] package_name
@@ -2147,12 +2165,17 @@ module Aws::RoboMaker
     #   The environment variables for the application launch.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] port_forwarding_config
+    #   The port forwarding configuration.
+    #   @return [Types::PortForwardingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LaunchConfig AWS API Documentation
     #
     class LaunchConfig < Struct.new(
       :package_name,
       :launch_file,
-      :environment_variables)
+      :environment_variables,
+      :port_forwarding_config)
       include Aws::Structure
     end
 
@@ -2698,6 +2721,29 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # Describes a network interface.
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The IPv4 address of the network interface within the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip_address
+    #   The IPv4 public address of the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/NetworkInterface AWS API Documentation
+    #
+    class NetworkInterface < Struct.new(
+      :network_interface_id,
+      :private_ip_address,
+      :public_ip_address)
+      include Aws::Structure
+    end
+
     # The output location.
     #
     # @note When making an API call, you may pass OutputLocation
@@ -2721,6 +2767,66 @@ module Aws::RoboMaker
     class OutputLocation < Struct.new(
       :s3_bucket,
       :s3_prefix)
+      include Aws::Structure
+    end
+
+    # Configuration information for port forwarding.
+    #
+    # @note When making an API call, you may pass PortForwardingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         port_mappings: [
+    #           {
+    #             job_port: 1, # required
+    #             application_port: 1, # required
+    #             enable_on_public_ip: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] port_mappings
+    #   The port mappings for the configuration.
+    #   @return [Array<Types::PortMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/PortForwardingConfig AWS API Documentation
+    #
+    class PortForwardingConfig < Struct.new(
+      :port_mappings)
+      include Aws::Structure
+    end
+
+    # An object representing a port mapping.
+    #
+    # @note When making an API call, you may pass PortMapping
+    #   data as a hash:
+    #
+    #       {
+    #         job_port: 1, # required
+    #         application_port: 1, # required
+    #         enable_on_public_ip: false,
+    #       }
+    #
+    # @!attribute [rw] job_port
+    #   The port number on the simulation job instance to use as a remote
+    #   connection point.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_port
+    #   The port number on the application.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_on_public_ip
+    #   A Boolean indicating whether to enable this port mapping on public
+    #   IP.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/PortMapping AWS API Documentation
+    #
+    class PortMapping < Struct.new(
+      :job_port,
+      :application_port,
+      :enable_on_public_ip)
       include Aws::Structure
     end
 
@@ -2961,6 +3067,15 @@ module Aws::RoboMaker
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
+    #           port_forwarding_config: {
+    #             port_mappings: [
+    #               {
+    #                 job_port: 1, # required
+    #                 application_port: 1, # required
+    #                 enable_on_public_ip: false,
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -3134,6 +3249,15 @@ module Aws::RoboMaker
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
+    #           port_forwarding_config: {
+    #             port_mappings: [
+    #               {
+    #                 job_port: 1, # required
+    #                 application_port: 1, # required
+    #                 enable_on_public_ip: false,
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -3289,6 +3413,9 @@ module Aws::RoboMaker
     #   VPC configuration information.
     #   @return [Types::VPCConfigResponse]
     #
+    # @!attribute [rw] network_interface
+    #   @return [Types::NetworkInterface]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJob AWS API Documentation
     #
     class SimulationJob < Struct.new(
@@ -3310,7 +3437,8 @@ module Aws::RoboMaker
       :simulation_applications,
       :data_sources,
       :tags,
-      :vpc_config)
+      :vpc_config,
+      :network_interface)
       include Aws::Structure
     end
 

@@ -325,6 +325,7 @@ module Aws::AppStream
     CreateFleetRequest.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
     CreateFleetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFleetRequest.add_member(:idle_disconnect_timeout_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "IdleDisconnectTimeoutInSeconds"))
+    CreateFleetRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -337,6 +338,7 @@ module Aws::AppStream
     CreateImageBuilderRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateImageBuilderRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     CreateImageBuilderRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    CreateImageBuilderRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
     CreateImageBuilderRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     CreateImageBuilderRequest.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
     CreateImageBuilderRequest.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
@@ -593,6 +595,7 @@ module Aws::AppStream
     Fleet.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     Fleet.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
     Fleet.add_member(:idle_disconnect_timeout_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "IdleDisconnectTimeoutInSeconds"))
+    Fleet.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
     Fleet.struct_class = Types::Fleet
 
     FleetAttributes.member = Shapes::ShapeRef.new(shape: FleetAttribute)
@@ -631,6 +634,7 @@ module Aws::AppStream
     ImageBuilder.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     ImageBuilder.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
     ImageBuilder.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformType, location_name: "Platform"))
+    ImageBuilder.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
     ImageBuilder.add_member(:state, Shapes::ShapeRef.new(shape: ImageBuilderState, location_name: "State"))
     ImageBuilder.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: ImageBuilderStateChangeReason, location_name: "StateChangeReason"))
     ImageBuilder.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
@@ -856,6 +860,7 @@ module Aws::AppStream
     UpdateFleetRequest.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
     UpdateFleetRequest.add_member(:idle_disconnect_timeout_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "IdleDisconnectTimeoutInSeconds"))
     UpdateFleetRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: FleetAttributes, location_name: "AttributesToDelete"))
+    UpdateFleetRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -1085,6 +1090,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: CreateUsageReportSubscriptionResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
@@ -1364,6 +1370,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
       end)
 
       api.add_operation(:start_image_builder, Seahorse::Model::Operation.new.tap do |o|

@@ -72,6 +72,7 @@ module Aws::MarketplaceCommerceAnalytics
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Marketplace Commerce Analytics",
+        "serviceId" => "Marketplace Commerce Analytics",
         "signatureVersion" => "v4",
         "signingName" => "marketplacecommerceanalytics",
         "targetPrefix" => "MarketplaceCommerceAnalytics20150701",

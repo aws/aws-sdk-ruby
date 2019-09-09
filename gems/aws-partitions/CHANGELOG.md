@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.211.0 (2019-09-09)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::QLDBSession`.
+
+* Feature - Added support for enumerating regions for `Aws::QLDB`.
+
 1.210.0 (2019-09-06)
 ------------------
 

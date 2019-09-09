@@ -55,6 +55,9 @@ module Aws::AppMesh
     DescribeVirtualServiceInput = Shapes::StructureShape.new(name: 'DescribeVirtualServiceInput')
     DescribeVirtualServiceOutput = Shapes::StructureShape.new(name: 'DescribeVirtualServiceOutput')
     DnsServiceDiscovery = Shapes::StructureShape.new(name: 'DnsServiceDiscovery')
+    Duration = Shapes::StructureShape.new(name: 'Duration')
+    DurationUnit = Shapes::StringShape.new(name: 'DurationUnit')
+    DurationValue = Shapes::IntegerShape.new(name: 'DurationValue')
     EgressFilter = Shapes::StructureShape.new(name: 'EgressFilter')
     EgressFilterType = Shapes::StringShape.new(name: 'EgressFilterType')
     FileAccessLog = Shapes::StructureShape.new(name: 'FileAccessLog')
@@ -69,6 +72,9 @@ module Aws::AppMesh
     HealthCheckTimeoutMillis = Shapes::IntegerShape.new(name: 'HealthCheckTimeoutMillis')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
     HttpMethod = Shapes::StringShape.new(name: 'HttpMethod')
+    HttpRetryPolicy = Shapes::StructureShape.new(name: 'HttpRetryPolicy')
+    HttpRetryPolicyEvent = Shapes::StringShape.new(name: 'HttpRetryPolicyEvent')
+    HttpRetryPolicyEvents = Shapes::ListShape.new(name: 'HttpRetryPolicyEvents')
     HttpRoute = Shapes::StructureShape.new(name: 'HttpRoute')
     HttpRouteAction = Shapes::StructureShape.new(name: 'HttpRouteAction')
     HttpRouteHeader = Shapes::StructureShape.new(name: 'HttpRouteHeader')
@@ -99,6 +105,7 @@ module Aws::AppMesh
     Logging = Shapes::StructureShape.new(name: 'Logging')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MatchRange = Shapes::StructureShape.new(name: 'MatchRange')
+    MaxRetries = Shapes::IntegerShape.new(name: 'MaxRetries')
     MeshData = Shapes::StructureShape.new(name: 'MeshData')
     MeshList = Shapes::ListShape.new(name: 'MeshList')
     MeshRef = Shapes::StructureShape.new(name: 'MeshRef')
@@ -132,6 +139,8 @@ module Aws::AppMesh
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsLimit = Shapes::IntegerShape.new(name: 'TagsLimit')
+    TcpRetryPolicyEvent = Shapes::StringShape.new(name: 'TcpRetryPolicyEvent')
+    TcpRetryPolicyEvents = Shapes::ListShape.new(name: 'TcpRetryPolicyEvents')
     TcpRoute = Shapes::StructureShape.new(name: 'TcpRoute')
     TcpRouteAction = Shapes::StructureShape.new(name: 'TcpRouteAction')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -354,6 +363,10 @@ module Aws::AppMesh
     DnsServiceDiscovery.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, required: true, location_name: "hostname"))
     DnsServiceDiscovery.struct_class = Types::DnsServiceDiscovery
 
+    Duration.add_member(:unit, Shapes::ShapeRef.new(shape: DurationUnit, location_name: "unit"))
+    Duration.add_member(:value, Shapes::ShapeRef.new(shape: DurationValue, location_name: "value"))
+    Duration.struct_class = Types::Duration
+
     EgressFilter.add_member(:type, Shapes::ShapeRef.new(shape: EgressFilterType, required: true, location_name: "type"))
     EgressFilter.struct_class = Types::EgressFilter
 
@@ -379,8 +392,17 @@ module Aws::AppMesh
     HealthCheckPolicy.add_member(:unhealthy_threshold, Shapes::ShapeRef.new(shape: HealthCheckThreshold, required: true, location_name: "unhealthyThreshold"))
     HealthCheckPolicy.struct_class = Types::HealthCheckPolicy
 
+    HttpRetryPolicy.add_member(:http_retry_events, Shapes::ShapeRef.new(shape: HttpRetryPolicyEvents, location_name: "httpRetryEvents"))
+    HttpRetryPolicy.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, required: true, location_name: "maxRetries"))
+    HttpRetryPolicy.add_member(:per_retry_timeout, Shapes::ShapeRef.new(shape: Duration, required: true, location_name: "perRetryTimeout"))
+    HttpRetryPolicy.add_member(:tcp_retry_events, Shapes::ShapeRef.new(shape: TcpRetryPolicyEvents, location_name: "tcpRetryEvents"))
+    HttpRetryPolicy.struct_class = Types::HttpRetryPolicy
+
+    HttpRetryPolicyEvents.member = Shapes::ShapeRef.new(shape: HttpRetryPolicyEvent)
+
     HttpRoute.add_member(:action, Shapes::ShapeRef.new(shape: HttpRouteAction, required: true, location_name: "action"))
     HttpRoute.add_member(:match, Shapes::ShapeRef.new(shape: HttpRouteMatch, required: true, location_name: "match"))
+    HttpRoute.add_member(:retry_policy, Shapes::ShapeRef.new(shape: HttpRetryPolicy, location_name: "retryPolicy"))
     HttpRoute.struct_class = Types::HttpRoute
 
     HttpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
@@ -551,6 +573,8 @@ module Aws::AppMesh
     TagResourceInput.struct_class = Types::TagResourceInput
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    TcpRetryPolicyEvents.member = Shapes::ShapeRef.new(shape: TcpRetryPolicyEvent)
 
     TcpRoute.add_member(:action, Shapes::ShapeRef.new(shape: TcpRouteAction, required: true, location_name: "action"))
     TcpRoute.struct_class = Types::TcpRoute

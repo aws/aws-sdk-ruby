@@ -361,6 +361,8 @@ module Aws
             'PinpointSMSVoice' => 'sms-voice.pinpoint',
             'Polly' => 'polly',
             'Pricing' => 'api.pricing',
+            'QLDB' => 'qldb',
+            'QLDBSession' => 'session.qldb',
             'QuickSight' => 'quicksight',
             'RAM' => 'ram',
             'RDS' => 'rds',

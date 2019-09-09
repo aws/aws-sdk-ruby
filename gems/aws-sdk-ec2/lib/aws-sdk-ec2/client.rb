@@ -3633,7 +3633,7 @@ module Aws::EC2
     # connection. (The device on the AWS side of the VPN connection is the
     # virtual private gateway.) You must provide the Internet-routable IP
     # address of the customer gateway's external interface. The IP address
-    # must be static and may be behind a device performing network address
+    # must be static and can be behind a device performing network address
     # translation (NAT).
     #
     # For devices that use Border Gateway Protocol (BGP), you can also
@@ -8459,7 +8459,7 @@ module Aws::EC2
     end
 
     # Creates a VPN connection between an existing virtual private gateway
-    # and a VPN customer gateway. The supported connection types is
+    # and a VPN customer gateway. The supported connection type is
     # `ipsec.1`.
     #
     # The response includes information that you need to give to your
@@ -8524,6 +8524,47 @@ module Aws::EC2
     #         {
     #           tunnel_inside_cidr: "String",
     #           pre_shared_key: "String",
+    #           phase_1_lifetime_seconds: 1,
+    #           phase_2_lifetime_seconds: 1,
+    #           rekey_margin_time_seconds: 1,
+    #           rekey_fuzz_percentage: 1,
+    #           replay_window_size: 1,
+    #           dpd_timeout_seconds: 1,
+    #           phase_1_encryption_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_2_encryption_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_1_integrity_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_2_integrity_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_1_dh_group_numbers: [
+    #             {
+    #               value: 1,
+    #             },
+    #           ],
+    #           phase_2_dh_group_numbers: [
+    #             {
+    #               value: 1,
+    #             },
+    #           ],
+    #           ike_versions: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
     #         },
     #       ],
     #     },
@@ -8540,6 +8581,30 @@ module Aws::EC2
     #   resp.vpn_connection.vpn_gateway_id #=> String
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -21927,6 +21992,30 @@ module Aws::EC2
     #   resp.vpn_connections[0].vpn_gateway_id #=> String
     #   resp.vpn_connections[0].transit_gateway_id #=> String
     #   resp.vpn_connections[0].options.static_routes_only #=> Boolean
+    #   resp.vpn_connections[0].options.tunnel_options #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connections[0].routes #=> Array
     #   resp.vpn_connections[0].routes[0].destination_cidr_block #=> String
     #   resp.vpn_connections[0].routes[0].source #=> String, one of "Static"
@@ -27576,7 +27665,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the target gateway of a AWS Site-to-Site VPN connection. The
+    # Modifies the target gateway of an AWS Site-to-Site VPN connection. The
     # following migration options are available:
     #
     # * An existing virtual private gateway to a new virtual private gateway
@@ -27666,6 +27755,30 @@ module Aws::EC2
     #   resp.vpn_connection.vpn_gateway_id #=> String
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -27727,6 +27840,30 @@ module Aws::EC2
     #   resp.vpn_connection.vpn_gateway_id #=> String
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -27748,6 +27885,148 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_vpn_tunnel_certificate(params = {}, options = {})
       req = build_request(:modify_vpn_tunnel_certificate, params)
+      req.send_request(options)
+    end
+
+    # Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN
+    # connection. You can modify multiple options for a tunnel in a single
+    # request, but you can only modify one tunnel at a time. For more
+    # information, see [Site-to-Site VPN Tunnel Options for Your
+    # Site-to-Site VPN Connection][1] in the *AWS Site-to-Site VPN User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html
+    #
+    # @option params [required, String] :vpn_connection_id
+    #   The ID of the AWS Site-to-Site VPN connection.
+    #
+    # @option params [required, String] :vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #
+    # @option params [required, Types::ModifyVpnTunnelOptionsSpecification] :tunnel_options
+    #   The tunnel options to modify.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyVpnTunnelOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpnTunnelOptionsResult#vpn_connection #vpn_connection} => Types::VpnConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpn_tunnel_options({
+    #     vpn_connection_id: "String", # required
+    #     vpn_tunnel_outside_ip_address: "String", # required
+    #     tunnel_options: { # required
+    #       tunnel_inside_cidr: "String",
+    #       pre_shared_key: "String",
+    #       phase_1_lifetime_seconds: 1,
+    #       phase_2_lifetime_seconds: 1,
+    #       rekey_margin_time_seconds: 1,
+    #       rekey_fuzz_percentage: 1,
+    #       replay_window_size: 1,
+    #       dpd_timeout_seconds: 1,
+    #       phase_1_encryption_algorithms: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #       phase_2_encryption_algorithms: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #       phase_1_integrity_algorithms: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #       phase_2_integrity_algorithms: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #       phase_1_dh_group_numbers: [
+    #         {
+    #           value: 1,
+    #         },
+    #       ],
+    #       phase_2_dh_group_numbers: [
+    #         {
+    #           value: 1,
+    #         },
+    #       ],
+    #       ike_versions: [
+    #         {
+    #           value: "String",
+    #         },
+    #       ],
+    #     },
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.category #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
+    #   resp.vpn_connection.transit_gateway_id #=> String
+    #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_margin_time_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].rekey_fuzz_percentage #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].replay_window_size #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].dpd_timeout_seconds #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_encryption_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_integrity_algorithms[0].value #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_dh_group_numbers[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].ike_versions[0].value #=> String
+    #   resp.vpn_connection.routes #=> Array
+    #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
+    #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
+    #   resp.vpn_connection.routes[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.tags #=> Array
+    #   resp.vpn_connection.tags[0].key #=> String
+    #   resp.vpn_connection.tags[0].value #=> String
+    #   resp.vpn_connection.vgw_telemetry #=> Array
+    #   resp.vpn_connection.vgw_telemetry[0].accepted_route_count #=> Integer
+    #   resp.vpn_connection.vgw_telemetry[0].last_status_change #=> Time
+    #   resp.vpn_connection.vgw_telemetry[0].outside_ip_address #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
+    #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
+    #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptions AWS API Documentation
+    #
+    # @overload modify_vpn_tunnel_options(params = {})
+    # @param [Hash] params ({})
+    def modify_vpn_tunnel_options(params = {}, options = {})
+      req = build_request(:modify_vpn_tunnel_options, params)
       req.send_request(options)
     end
 
@@ -32339,7 +32618,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

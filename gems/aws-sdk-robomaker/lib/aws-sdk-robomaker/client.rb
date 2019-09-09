@@ -295,6 +295,10 @@ module Aws::RoboMaker
     #   resp.jobs[0].robot_applications[0].launch_config.launch_file #=> String
     #   resp.jobs[0].robot_applications[0].launch_config.environment_variables #=> Hash
     #   resp.jobs[0].robot_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.jobs[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.jobs[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.jobs[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.jobs[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.jobs[0].simulation_applications #=> Array
     #   resp.jobs[0].simulation_applications[0].application #=> String
     #   resp.jobs[0].simulation_applications[0].application_version #=> String
@@ -302,6 +306,10 @@ module Aws::RoboMaker
     #   resp.jobs[0].simulation_applications[0].launch_config.launch_file #=> String
     #   resp.jobs[0].simulation_applications[0].launch_config.environment_variables #=> Hash
     #   resp.jobs[0].simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.jobs[0].data_sources #=> Array
     #   resp.jobs[0].data_sources[0].name #=> String
     #   resp.jobs[0].data_sources[0].s3_bucket #=> String
@@ -316,6 +324,9 @@ module Aws::RoboMaker
     #   resp.jobs[0].vpc_config.security_groups[0] #=> String
     #   resp.jobs[0].vpc_config.vpc_id #=> String
     #   resp.jobs[0].vpc_config.assign_public_ip #=> Boolean
+    #   resp.jobs[0].network_interface.network_interface_id #=> String
+    #   resp.jobs[0].network_interface.private_ip_address #=> String
+    #   resp.jobs[0].network_interface.public_ip_address #=> String
     #   resp.unprocessed_jobs #=> Array
     #   resp.unprocessed_jobs[0] #=> String
     #
@@ -961,6 +972,15 @@ module Aws::RoboMaker
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
+    #           port_forwarding_config: {
+    #             port_mappings: [
+    #               {
+    #                 job_port: 1, # required
+    #                 application_port: 1, # required
+    #                 enable_on_public_ip: false,
+    #               },
+    #             ],
+    #           },
     #         },
     #       },
     #     ],
@@ -973,6 +993,15 @@ module Aws::RoboMaker
     #           launch_file: "Command", # required
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #           },
+    #           port_forwarding_config: {
+    #             port_mappings: [
+    #               {
+    #                 job_port: 1, # required
+    #                 application_port: 1, # required
+    #                 enable_on_public_ip: false,
+    #               },
+    #             ],
     #           },
     #         },
     #       },
@@ -1016,6 +1045,10 @@ module Aws::RoboMaker
     #   resp.robot_applications[0].launch_config.launch_file #=> String
     #   resp.robot_applications[0].launch_config.environment_variables #=> Hash
     #   resp.robot_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.simulation_applications #=> Array
     #   resp.simulation_applications[0].application #=> String
     #   resp.simulation_applications[0].application_version #=> String
@@ -1023,6 +1056,10 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.launch_file #=> String
     #   resp.simulation_applications[0].launch_config.environment_variables #=> Hash
     #   resp.simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.data_sources #=> Array
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].s3_bucket #=> String
@@ -1479,6 +1516,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeSimulationJobResponse#data_sources #data_sources} => Array&lt;Types::DataSource&gt;
     #   * {Types::DescribeSimulationJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeSimulationJobResponse#vpc_config #vpc_config} => Types::VPCConfigResponse
+    #   * {Types::DescribeSimulationJobResponse#network_interface #network_interface} => Types::NetworkInterface
     #
     # @example Request syntax with placeholder values
     #
@@ -1510,6 +1548,10 @@ module Aws::RoboMaker
     #   resp.robot_applications[0].launch_config.launch_file #=> String
     #   resp.robot_applications[0].launch_config.environment_variables #=> Hash
     #   resp.robot_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.simulation_applications #=> Array
     #   resp.simulation_applications[0].application #=> String
     #   resp.simulation_applications[0].application_version #=> String
@@ -1517,6 +1559,10 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.launch_file #=> String
     #   resp.simulation_applications[0].launch_config.environment_variables #=> Hash
     #   resp.simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.data_sources #=> Array
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].s3_bucket #=> String
@@ -1531,6 +1577,9 @@ module Aws::RoboMaker
     #   resp.vpc_config.security_groups[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
     #   resp.vpc_config.assign_public_ip #=> Boolean
+    #   resp.network_interface.network_interface_id #=> String
+    #   resp.network_interface.private_ip_address #=> String
+    #   resp.network_interface.public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJob AWS API Documentation
     #
@@ -1543,6 +1592,10 @@ module Aws::RoboMaker
 
     # Returns a list of deployment jobs for a fleet. You can optionally
     # provide filters to retrieve specific deployment jobs.
+    #
+    # <note markdown="1">
+    #
+    #  </note>
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
@@ -2388,7 +2441,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

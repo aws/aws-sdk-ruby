@@ -117,12 +117,18 @@ module Aws::RoboMaker
     LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
+    NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    NonSystemPort = Shapes::IntegerShape.new(name: 'NonSystemPort')
     OutputLocation = Shapes::StructureShape.new(name: 'OutputLocation')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Path = Shapes::StringShape.new(name: 'Path')
     PercentDone = Shapes::FloatShape.new(name: 'PercentDone')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
+    Port = Shapes::IntegerShape.new(name: 'Port')
+    PortForwardingConfig = Shapes::StructureShape.new(name: 'PortForwardingConfig')
+    PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
+    PortMappingList = Shapes::ListShape.new(name: 'PortMappingList')
     ProgressDetail = Shapes::StructureShape.new(name: 'ProgressDetail')
     RegisterRobotRequest = Shapes::StructureShape.new(name: 'RegisterRobotRequest')
     RegisterRobotResponse = Shapes::StructureShape.new(name: 'RegisterRobotResponse')
@@ -529,6 +535,7 @@ module Aws::RoboMaker
     DescribeSimulationJobResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     DescribeSimulationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     DescribeSimulationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfigResponse, location_name: "vpcConfig"))
+    DescribeSimulationJobResponse.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
     DescribeSimulationJobResponse.struct_class = Types::DescribeSimulationJobResponse
 
     EnvironmentVariableMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
@@ -564,6 +571,7 @@ module Aws::RoboMaker
     LaunchConfig.add_member(:package_name, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "packageName"))
     LaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "launchFile"))
     LaunchConfig.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
+    LaunchConfig.add_member(:port_forwarding_config, Shapes::ShapeRef.new(shape: PortForwardingConfig, location_name: "portForwardingConfig"))
     LaunchConfig.struct_class = Types::LaunchConfig
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -634,9 +642,24 @@ module Aws::RoboMaker
     LoggingConfig.add_member(:record_all_ros_topics, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "recordAllRosTopics"))
     LoggingConfig.struct_class = Types::LoggingConfig
 
+    NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "networkInterfaceId"))
+    NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: GenericString, location_name: "privateIpAddress"))
+    NetworkInterface.add_member(:public_ip_address, Shapes::ShapeRef.new(shape: GenericString, location_name: "publicIpAddress"))
+    NetworkInterface.struct_class = Types::NetworkInterface
+
     OutputLocation.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "s3Bucket"))
     OutputLocation.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3Key, location_name: "s3Prefix"))
     OutputLocation.struct_class = Types::OutputLocation
+
+    PortForwardingConfig.add_member(:port_mappings, Shapes::ShapeRef.new(shape: PortMappingList, location_name: "portMappings"))
+    PortForwardingConfig.struct_class = Types::PortForwardingConfig
+
+    PortMapping.add_member(:job_port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "jobPort"))
+    PortMapping.add_member(:application_port, Shapes::ShapeRef.new(shape: NonSystemPort, required: true, location_name: "applicationPort"))
+    PortMapping.add_member(:enable_on_public_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableOnPublicIp"))
+    PortMapping.struct_class = Types::PortMapping
+
+    PortMappingList.member = Shapes::ShapeRef.new(shape: PortMapping)
 
     ProgressDetail.add_member(:current_progress, Shapes::ShapeRef.new(shape: RobotDeploymentStep, location_name: "currentProgress"))
     ProgressDetail.add_member(:percent_done, Shapes::ShapeRef.new(shape: PercentDone, location_name: "percentDone"))
@@ -764,6 +787,7 @@ module Aws::RoboMaker
     SimulationJob.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     SimulationJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     SimulationJob.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfigResponse, location_name: "vpcConfig"))
+    SimulationJob.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
     SimulationJob.struct_class = Types::SimulationJob
 
     SimulationJobSummaries.member = Shapes::ShapeRef.new(shape: SimulationJobSummary)

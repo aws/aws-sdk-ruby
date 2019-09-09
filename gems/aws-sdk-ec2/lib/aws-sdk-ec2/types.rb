@@ -8093,6 +8093,47 @@ module Aws::EC2
     #             {
     #               tunnel_inside_cidr: "String",
     #               pre_shared_key: "String",
+    #               phase_1_lifetime_seconds: 1,
+    #               phase_2_lifetime_seconds: 1,
+    #               rekey_margin_time_seconds: 1,
+    #               rekey_fuzz_percentage: 1,
+    #               replay_window_size: 1,
+    #               dpd_timeout_seconds: 1,
+    #               phase_1_encryption_algorithms: [
+    #                 {
+    #                   value: "String",
+    #                 },
+    #               ],
+    #               phase_2_encryption_algorithms: [
+    #                 {
+    #                   value: "String",
+    #                 },
+    #               ],
+    #               phase_1_integrity_algorithms: [
+    #                 {
+    #                   value: "String",
+    #                 },
+    #               ],
+    #               phase_2_integrity_algorithms: [
+    #                 {
+    #                   value: "String",
+    #                 },
+    #               ],
+    #               phase_1_dh_group_numbers: [
+    #                 {
+    #                   value: 1,
+    #                 },
+    #               ],
+    #               phase_2_dh_group_numbers: [
+    #                 {
+    #                   value: 1,
+    #                 },
+    #               ],
+    #               ike_versions: [
+    #                 {
+    #                   value: "String",
+    #                 },
+    #               ],
     #             },
     #           ],
     #         },
@@ -22529,6 +22570,39 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The internet key exchange (IKE) version permitted for the VPN tunnel.
+    #
+    # @!attribute [rw] value
+    #   The IKE version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IKEVersionsListValue AWS API Documentation
+    #
+    class IKEVersionsListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # The IKE version that is permitted for the VPN tunnel.
+    #
+    # @note When making an API call, you may pass IKEVersionsRequestListValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The IKE version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IKEVersionsRequestListValue AWS API Documentation
+    #
+    class IKEVersionsRequestListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
     # Describes an IAM instance profile.
     #
     # @!attribute [rw] arn
@@ -29248,6 +29322,308 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyVpnTunnelOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpn_connection_id: "String", # required
+    #         vpn_tunnel_outside_ip_address: "String", # required
+    #         tunnel_options: { # required
+    #           tunnel_inside_cidr: "String",
+    #           pre_shared_key: "String",
+    #           phase_1_lifetime_seconds: 1,
+    #           phase_2_lifetime_seconds: 1,
+    #           rekey_margin_time_seconds: 1,
+    #           rekey_fuzz_percentage: 1,
+    #           replay_window_size: 1,
+    #           dpd_timeout_seconds: 1,
+    #           phase_1_encryption_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_2_encryption_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_1_integrity_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_2_integrity_algorithms: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #           phase_1_dh_group_numbers: [
+    #             {
+    #               value: 1,
+    #             },
+    #           ],
+    #           phase_2_dh_group_numbers: [
+    #             {
+    #               value: 1,
+    #             },
+    #           ],
+    #           ike_versions: [
+    #             {
+    #               value: "String",
+    #             },
+    #           ],
+    #         },
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the AWS Site-to-Site VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] tunnel_options
+    #   The tunnel options to modify.
+    #   @return [Types::ModifyVpnTunnelOptionsSpecification]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsRequest AWS API Documentation
+    #
+    class ModifyVpnTunnelOptionsRequest < Struct.new(
+      :vpn_connection_id,
+      :vpn_tunnel_outside_ip_address,
+      :tunnel_options,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection
+    #   Describes a VPN connection.
+    #   @return [Types::VpnConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsResult AWS API Documentation
+    #
+    class ModifyVpnTunnelOptionsResult < Struct.new(
+      :vpn_connection)
+      include Aws::Structure
+    end
+
+    # The AWS Site-to-Site VPN tunnel options to modify.
+    #
+    # @note When making an API call, you may pass ModifyVpnTunnelOptionsSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         tunnel_inside_cidr: "String",
+    #         pre_shared_key: "String",
+    #         phase_1_lifetime_seconds: 1,
+    #         phase_2_lifetime_seconds: 1,
+    #         rekey_margin_time_seconds: 1,
+    #         rekey_fuzz_percentage: 1,
+    #         replay_window_size: 1,
+    #         dpd_timeout_seconds: 1,
+    #         phase_1_encryption_algorithms: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
+    #         phase_2_encryption_algorithms: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
+    #         phase_1_integrity_algorithms: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
+    #         phase_2_integrity_algorithms: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
+    #         phase_1_dh_group_numbers: [
+    #           {
+    #             value: 1,
+    #           },
+    #         ],
+    #         phase_2_dh_group_numbers: [
+    #           {
+    #             value: 1,
+    #           },
+    #         ],
+    #         ike_versions: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] tunnel_inside_cidr
+    #   The range of inside IP addresses for the tunnel. Any specified CIDR
+    #   blocks must be unique across all VPN connections that use the same
+    #   virtual private gateway.
+    #
+    #   Constraints: A size /30 CIDR block from the `169.254.0.0/16` range.
+    #   The following CIDR blocks are reserved and cannot be used:
+    #
+    #   * `169.254.0.0/30`
+    #
+    #   * `169.254.1.0/30`
+    #
+    #   * `169.254.2.0/30`
+    #
+    #   * `169.254.3.0/30`
+    #
+    #   * `169.254.4.0/30`
+    #
+    #   * `169.254.5.0/30`
+    #
+    #   * `169.254.169.252/30`
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_shared_key
+    #   The pre-shared key (PSK) to establish initial authentication between
+    #   the virtual private gateway and the customer gateway.
+    #
+    #   Constraints: Allowed characters are alphanumeric characters, periods
+    #   (.), and underscores (\_). Must be between 8 and 64 characters in
+    #   length and cannot start with zero (0).
+    #   @return [String]
+    #
+    # @!attribute [rw] phase_1_lifetime_seconds
+    #   The lifetime for phase 1 of the IKE negotiation, in seconds.
+    #
+    #   Constraints: A value between 900 and 28,800.
+    #
+    #   Default: `28800`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] phase_2_lifetime_seconds
+    #   The lifetime for phase 2 of the IKE negotiation, in seconds.
+    #
+    #   Constraints: A value between 900 and 3,600. The value must be less
+    #   than the value for `Phase1LifetimeSeconds`.
+    #
+    #   Default: `3600`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rekey_margin_time_seconds
+    #   The margin time, in seconds, before the phase 2 lifetime expires,
+    #   during which the AWS side of the VPN connection performs an IKE
+    #   rekey. The exact time of the rekey is randomly selected based on the
+    #   value for `RekeyFuzzPercentage`.
+    #
+    #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
+    #
+    #   Default: `540`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rekey_fuzz_percentage
+    #   The percentage of the rekey window (determined by
+    #   `RekeyMarginTimeSeconds`) during which the rekey time is randomly
+    #   selected.
+    #
+    #   Constraints: A value between 0 and 100.
+    #
+    #   Default: `100`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replay_window_size
+    #   The number of packets in an IKE replay window.
+    #
+    #   Constraints: A value between 64 and 2048.
+    #
+    #   Default: `1024`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dpd_timeout_seconds
+    #   The number of seconds after which a DPD timeout occurs.
+    #
+    #   Constraints: A value between 0 and 30.
+    #
+    #   Default: `30`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] phase_1_encryption_algorithms
+    #   One or more encryption algorithms that are permitted for the VPN
+    #   tunnel for phase 1 IKE negotiations.
+    #
+    #   Valid values: `AES128` \| `AES256`
+    #   @return [Array<Types::Phase1EncryptionAlgorithmsRequestListValue>]
+    #
+    # @!attribute [rw] phase_2_encryption_algorithms
+    #   One or more encryption algorithms that are permitted for the VPN
+    #   tunnel for phase 2 IKE negotiations.
+    #
+    #   Valid values: `AES128` \| `AES256`
+    #   @return [Array<Types::Phase2EncryptionAlgorithmsRequestListValue>]
+    #
+    # @!attribute [rw] phase_1_integrity_algorithms
+    #   One or more integrity algorithms that are permitted for the VPN
+    #   tunnel for phase 1 IKE negotiations.
+    #
+    #   Valid values: `SHA1` \| `SHA2-256`
+    #   @return [Array<Types::Phase1IntegrityAlgorithmsRequestListValue>]
+    #
+    # @!attribute [rw] phase_2_integrity_algorithms
+    #   One or more integrity algorithms that are permitted for the VPN
+    #   tunnel for phase 2 IKE negotiations.
+    #
+    #   Valid values: `SHA1` \| `SHA2-256`
+    #   @return [Array<Types::Phase2IntegrityAlgorithmsRequestListValue>]
+    #
+    # @!attribute [rw] phase_1_dh_group_numbers
+    #   One or more Diffie-Hellman group numbers that are permitted for the
+    #   VPN tunnel for phase 1 IKE negotiations.
+    #
+    #   Valid values: `2` \| `14` \| `15` \| `16` \| `17` \| `18` \| `22` \|
+    #   `23` \| `24`
+    #   @return [Array<Types::Phase1DHGroupNumbersRequestListValue>]
+    #
+    # @!attribute [rw] phase_2_dh_group_numbers
+    #   One or more Diffie-Hellman group numbers that are permitted for the
+    #   VPN tunnel for phase 2 IKE negotiations.
+    #
+    #   Valid values: `2` \| `5` \| `14` \| `15` \| `16` \| `17` \| `18` \|
+    #   `22` \| `23` \| `24`
+    #   @return [Array<Types::Phase2DHGroupNumbersRequestListValue>]
+    #
+    # @!attribute [rw] ike_versions
+    #   The IKE versions that are permitted for the VPN tunnel.
+    #
+    #   Valid values: `ikev1` \| `ikev2`
+    #   @return [Array<Types::IKEVersionsRequestListValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsSpecification AWS API Documentation
+    #
+    class ModifyVpnTunnelOptionsSpecification < Struct.new(
+      :tunnel_inside_cidr,
+      :pre_shared_key,
+      :phase_1_lifetime_seconds,
+      :phase_2_lifetime_seconds,
+      :rekey_margin_time_seconds,
+      :rekey_fuzz_percentage,
+      :replay_window_size,
+      :dpd_timeout_seconds,
+      :phase_1_encryption_algorithms,
+      :phase_2_encryption_algorithms,
+      :phase_1_integrity_algorithms,
+      :phase_2_integrity_algorithms,
+      :phase_1_dh_group_numbers,
+      :phase_2_dh_group_numbers,
+      :ike_versions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass MonitorInstancesRequest
     #   data as a hash:
     #
@@ -30148,6 +30524,210 @@ module Aws::EC2
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link)
+      include Aws::Structure
+    end
+
+    # The Diffie-Hellmann group number for phase 1 IKE negotiations.
+    #
+    # @!attribute [rw] value
+    #   The Diffie-Hellmann group number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase1DHGroupNumbersListValue AWS API Documentation
+    #
+    class Phase1DHGroupNumbersListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # Specifies a Diffie-Hellman group number for the VPN tunnel for phase 1
+    # IKE negotiations.
+    #
+    # @note When making an API call, you may pass Phase1DHGroupNumbersRequestListValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: 1,
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The Diffie-Hellmann group number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase1DHGroupNumbersRequestListValue AWS API Documentation
+    #
+    class Phase1DHGroupNumbersRequestListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # The encryption algorithm for phase 1 IKE negotiations.
+    #
+    # @!attribute [rw] value
+    #   The value for the encryption algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase1EncryptionAlgorithmsListValue AWS API Documentation
+    #
+    class Phase1EncryptionAlgorithmsListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # Specifies the encryption algorithm for the VPN tunnel for phase 1 IKE
+    # negotiations.
+    #
+    # @note When making an API call, you may pass Phase1EncryptionAlgorithmsRequestListValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value for the encryption algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase1EncryptionAlgorithmsRequestListValue AWS API Documentation
+    #
+    class Phase1EncryptionAlgorithmsRequestListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # The integrity algorithm for phase 1 IKE negotiations.
+    #
+    # @!attribute [rw] value
+    #   The value for the integrity algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase1IntegrityAlgorithmsListValue AWS API Documentation
+    #
+    class Phase1IntegrityAlgorithmsListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # Specifies the integrity algorithm for the VPN tunnel for phase 1 IKE
+    # negotiations.
+    #
+    # @note When making an API call, you may pass Phase1IntegrityAlgorithmsRequestListValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value for the integrity algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase1IntegrityAlgorithmsRequestListValue AWS API Documentation
+    #
+    class Phase1IntegrityAlgorithmsRequestListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # The Diffie-Hellmann group number for phase 2 IKE negotiations.
+    #
+    # @!attribute [rw] value
+    #   The Diffie-Hellmann group number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase2DHGroupNumbersListValue AWS API Documentation
+    #
+    class Phase2DHGroupNumbersListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # Specifies a Diffie-Hellman group number for the VPN tunnel for phase 2
+    # IKE negotiations.
+    #
+    # @note When making an API call, you may pass Phase2DHGroupNumbersRequestListValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: 1,
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The Diffie-Hellmann group number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase2DHGroupNumbersRequestListValue AWS API Documentation
+    #
+    class Phase2DHGroupNumbersRequestListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # The encryption algorithm for phase 2 IKE negotiations.
+    #
+    # @!attribute [rw] value
+    #   The encryption algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase2EncryptionAlgorithmsListValue AWS API Documentation
+    #
+    class Phase2EncryptionAlgorithmsListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # Specifies the encryption algorithm for the VPN tunnel for phase 2 IKE
+    # negotiations.
+    #
+    # @note When making an API call, you may pass Phase2EncryptionAlgorithmsRequestListValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The encryption algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase2EncryptionAlgorithmsRequestListValue AWS API Documentation
+    #
+    class Phase2EncryptionAlgorithmsRequestListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # The integrity algorithm for phase 2 IKE negotiations.
+    #
+    # @!attribute [rw] value
+    #   The integrity algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase2IntegrityAlgorithmsListValue AWS API Documentation
+    #
+    class Phase2IntegrityAlgorithmsListValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
+    # Specifies the integrity algorithm for the VPN tunnel for phase 2 IKE
+    # negotiations.
+    #
+    # @note When making an API call, you may pass Phase2IntegrityAlgorithmsRequestListValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The integrity algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Phase2IntegrityAlgorithmsRequestListValue AWS API Documentation
+    #
+    class Phase2IntegrityAlgorithmsRequestListValue < Struct.new(
+      :value)
       include Aws::Structure
     end
 
@@ -39302,6 +39882,105 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The VPN tunnel options.
+    #
+    # @!attribute [rw] outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] tunnel_inside_cidr
+    #   The range of inside IP addresses for the tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_shared_key
+    #   The pre-shared key (PSK) to establish initial authentication between
+    #   the virtual private gateway and the customer gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] phase_1_lifetime_seconds
+    #   The lifetime for phase 1 of the IKE negotiation, in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] phase_2_lifetime_seconds
+    #   The lifetime for phase 2 of the IKE negotiation, in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rekey_margin_time_seconds
+    #   The margin time, in seconds, before the phase 2 lifetime expires,
+    #   during which the AWS side of the VPN connection performs an IKE
+    #   rekey.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rekey_fuzz_percentage
+    #   The percentage of the rekey window determined by
+    #   `RekeyMarginTimeSeconds` during which the rekey time is randomly
+    #   selected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replay_window_size
+    #   The number of packets in an IKE replay window.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dpd_timeout_seconds
+    #   The number of seconds after which a DPD timeout occurs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] phase_1_encryption_algorithms
+    #   The permitted encryption algorithms for the VPN tunnel for phase 1
+    #   IKE negotiations.
+    #   @return [Array<Types::Phase1EncryptionAlgorithmsListValue>]
+    #
+    # @!attribute [rw] phase_2_encryption_algorithms
+    #   The permitted encryption algorithms for the VPN tunnel for phase 2
+    #   IKE negotiations.
+    #   @return [Array<Types::Phase2EncryptionAlgorithmsListValue>]
+    #
+    # @!attribute [rw] phase_1_integrity_algorithms
+    #   The permitted integrity algorithms for the VPN tunnel for phase 1
+    #   IKE negotiations.
+    #   @return [Array<Types::Phase1IntegrityAlgorithmsListValue>]
+    #
+    # @!attribute [rw] phase_2_integrity_algorithms
+    #   The permitted integrity algorithms for the VPN tunnel for phase 2
+    #   IKE negotiations.
+    #   @return [Array<Types::Phase2IntegrityAlgorithmsListValue>]
+    #
+    # @!attribute [rw] phase_1_dh_group_numbers
+    #   The permitted Diffie-Hellman group numbers for the VPN tunnel for
+    #   phase 1 IKE negotiations.
+    #   @return [Array<Types::Phase1DHGroupNumbersListValue>]
+    #
+    # @!attribute [rw] phase_2_dh_group_numbers
+    #   The permitted Diffie-Hellman group numbers for the VPN tunnel for
+    #   phase 2 IKE negotiations.
+    #   @return [Array<Types::Phase2DHGroupNumbersListValue>]
+    #
+    # @!attribute [rw] ike_versions
+    #   The IKE versions that are permitted for the VPN tunnel.
+    #   @return [Array<Types::IKEVersionsListValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TunnelOption AWS API Documentation
+    #
+    class TunnelOption < Struct.new(
+      :outside_ip_address,
+      :tunnel_inside_cidr,
+      :pre_shared_key,
+      :phase_1_lifetime_seconds,
+      :phase_2_lifetime_seconds,
+      :rekey_margin_time_seconds,
+      :rekey_fuzz_percentage,
+      :replay_window_size,
+      :dpd_timeout_seconds,
+      :phase_1_encryption_algorithms,
+      :phase_2_encryption_algorithms,
+      :phase_1_integrity_algorithms,
+      :phase_2_integrity_algorithms,
+      :phase_1_dh_group_numbers,
+      :phase_2_dh_group_numbers,
+      :ike_versions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UnassignIpv6AddressesRequest
     #   data as a hash:
     #
@@ -40710,10 +41389,15 @@ module Aws::EC2
     #   routes must be used for devices that don't support BGP.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tunnel_options
+    #   Indicates the VPN tunnel options.
+    #   @return [Array<Types::TunnelOption>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionOptions AWS API Documentation
     #
     class VpnConnectionOptions < Struct.new(
-      :static_routes_only)
+      :static_routes_only,
+      :tunnel_options)
       include Aws::Structure
     end
 
@@ -40728,6 +41412,47 @@ module Aws::EC2
     #           {
     #             tunnel_inside_cidr: "String",
     #             pre_shared_key: "String",
+    #             phase_1_lifetime_seconds: 1,
+    #             phase_2_lifetime_seconds: 1,
+    #             rekey_margin_time_seconds: 1,
+    #             rekey_fuzz_percentage: 1,
+    #             replay_window_size: 1,
+    #             dpd_timeout_seconds: 1,
+    #             phase_1_encryption_algorithms: [
+    #               {
+    #                 value: "String",
+    #               },
+    #             ],
+    #             phase_2_encryption_algorithms: [
+    #               {
+    #                 value: "String",
+    #               },
+    #             ],
+    #             phase_1_integrity_algorithms: [
+    #               {
+    #                 value: "String",
+    #               },
+    #             ],
+    #             phase_2_integrity_algorithms: [
+    #               {
+    #                 value: "String",
+    #               },
+    #             ],
+    #             phase_1_dh_group_numbers: [
+    #               {
+    #                 value: 1,
+    #               },
+    #             ],
+    #             phase_2_dh_group_numbers: [
+    #               {
+    #                 value: 1,
+    #               },
+    #             ],
+    #             ike_versions: [
+    #               {
+    #                 value: "String",
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -40830,6 +41555,47 @@ module Aws::EC2
     #       {
     #         tunnel_inside_cidr: "String",
     #         pre_shared_key: "String",
+    #         phase_1_lifetime_seconds: 1,
+    #         phase_2_lifetime_seconds: 1,
+    #         rekey_margin_time_seconds: 1,
+    #         rekey_fuzz_percentage: 1,
+    #         replay_window_size: 1,
+    #         dpd_timeout_seconds: 1,
+    #         phase_1_encryption_algorithms: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
+    #         phase_2_encryption_algorithms: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
+    #         phase_1_integrity_algorithms: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
+    #         phase_2_integrity_algorithms: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
+    #         phase_1_dh_group_numbers: [
+    #           {
+    #             value: 1,
+    #           },
+    #         ],
+    #         phase_2_dh_group_numbers: [
+    #           {
+    #             value: 1,
+    #           },
+    #         ],
+    #         ike_versions: [
+    #           {
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] tunnel_inside_cidr
@@ -40859,16 +41625,133 @@ module Aws::EC2
     #   The pre-shared key (PSK) to establish initial authentication between
     #   the virtual private gateway and customer gateway.
     #
-    #   Constraints: Allowed characters are alphanumeric characters and .\_.
-    #   Must be between 8 and 64 characters in length and cannot start with
-    #   zero (0).
+    #   Constraints: Allowed characters are alphanumeric characters, periods
+    #   (.), and underscores (\_). Must be between 8 and 64 characters in
+    #   length and cannot start with zero (0).
     #   @return [String]
+    #
+    # @!attribute [rw] phase_1_lifetime_seconds
+    #   The lifetime for phase 1 of the IKE negotiation, in seconds.
+    #
+    #   Constraints: A value between 900 and 28,800.
+    #
+    #   Default: `28800`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] phase_2_lifetime_seconds
+    #   The lifetime for phase 2 of the IKE negotiation, in seconds.
+    #
+    #   Constraints: A value between 900 and 3,600. The value must be less
+    #   than the value for `Phase1LifetimeSeconds`.
+    #
+    #   Default: `3600`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rekey_margin_time_seconds
+    #   The margin time, in seconds, before the phase 2 lifetime expires,
+    #   during which the AWS side of the VPN connection performs an IKE
+    #   rekey. The exact time of the rekey is randomly selected based on the
+    #   value for `RekeyFuzzPercentage`.
+    #
+    #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
+    #
+    #   Default: `540`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rekey_fuzz_percentage
+    #   The percentage of the rekey window (determined by
+    #   `RekeyMarginTimeSeconds`) during which the rekey time is randomly
+    #   selected.
+    #
+    #   Constraints: A value between 0 and 100.
+    #
+    #   Default: `100`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replay_window_size
+    #   The number of packets in an IKE replay window.
+    #
+    #   Constraints: A value between 64 and 2048.
+    #
+    #   Default: `1024`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dpd_timeout_seconds
+    #   The number of seconds after which a DPD timeout occurs.
+    #
+    #   Constraints: A value between 0 and 30.
+    #
+    #   Default: `30`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] phase_1_encryption_algorithms
+    #   One or more encryption algorithms that are permitted for the VPN
+    #   tunnel for phase 1 IKE negotiations.
+    #
+    #   Valid values: `AES128` \| `AES256`
+    #   @return [Array<Types::Phase1EncryptionAlgorithmsRequestListValue>]
+    #
+    # @!attribute [rw] phase_2_encryption_algorithms
+    #   One or more encryption algorithms that are permitted for the VPN
+    #   tunnel for phase 2 IKE negotiations.
+    #
+    #   Valid values: `AES128` \| `AES256`
+    #   @return [Array<Types::Phase2EncryptionAlgorithmsRequestListValue>]
+    #
+    # @!attribute [rw] phase_1_integrity_algorithms
+    #   One or more integrity algorithms that are permitted for the VPN
+    #   tunnel for phase 1 IKE negotiations.
+    #
+    #   Valid values: `SHA1` \| `SHA2-256`
+    #   @return [Array<Types::Phase1IntegrityAlgorithmsRequestListValue>]
+    #
+    # @!attribute [rw] phase_2_integrity_algorithms
+    #   One or more integrity algorithms that are permitted for the VPN
+    #   tunnel for phase 2 IKE negotiations.
+    #
+    #   Valid values: `SHA1` \| `SHA2-256`
+    #   @return [Array<Types::Phase2IntegrityAlgorithmsRequestListValue>]
+    #
+    # @!attribute [rw] phase_1_dh_group_numbers
+    #   One or more Diffie-Hellman group numbers that are permitted for the
+    #   VPN tunnel for phase 1 IKE negotiations.
+    #
+    #   Valid values: `2` \| `14` \| `15` \| `16` \| `17` \| `18` \| `22` \|
+    #   `23` \| `24`
+    #   @return [Array<Types::Phase1DHGroupNumbersRequestListValue>]
+    #
+    # @!attribute [rw] phase_2_dh_group_numbers
+    #   One or more Diffie-Hellman group numbers that are permitted for the
+    #   VPN tunnel for phase 2 IKE negotiations.
+    #
+    #   Valid values: `2` \| `5` \| `14` \| `15` \| `16` \| `17` \| `18` \|
+    #   `22` \| `23` \| `24`
+    #   @return [Array<Types::Phase2DHGroupNumbersRequestListValue>]
+    #
+    # @!attribute [rw] ike_versions
+    #   The IKE versions that are permitted for the VPN tunnel.
+    #
+    #   Valid values: `ikev1` \| `ikev2`
+    #   @return [Array<Types::IKEVersionsRequestListValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnTunnelOptionsSpecification AWS API Documentation
     #
     class VpnTunnelOptionsSpecification < Struct.new(
       :tunnel_inside_cidr,
-      :pre_shared_key)
+      :pre_shared_key,
+      :phase_1_lifetime_seconds,
+      :phase_2_lifetime_seconds,
+      :rekey_margin_time_seconds,
+      :rekey_fuzz_percentage,
+      :replay_window_size,
+      :dpd_timeout_seconds,
+      :phase_1_encryption_algorithms,
+      :phase_2_encryption_algorithms,
+      :phase_1_integrity_algorithms,
+      :phase_2_integrity_algorithms,
+      :phase_1_dh_group_numbers,
+      :phase_2_dh_group_numbers,
+      :ike_versions)
       include Aws::Structure
     end
 

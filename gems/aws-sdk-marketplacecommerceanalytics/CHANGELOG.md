@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2019-09-09)
+------------------
+
+* Feature - Add FDP+FPS (monthly_revenue_field_demonstration_usage + monthly_revenue_flexible_payment_schedule)  to Marketplace Commerce Analytics Service
+
 1.15.0 (2019-07-25)
 ------------------
 
