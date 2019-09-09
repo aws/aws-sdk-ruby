@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.350 (2019-09-09)
+------------------
+
 * Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
 
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
