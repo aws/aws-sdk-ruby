@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
+
+* Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, documentation, and integration test for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::RoboMaker - Updated the API, and documentation for AWS RoboMaker.
+
+* Feature - Aws::QLDBSession - Added support for a new service, Amazon QLDB Session.
+
+* Feature - Aws::QLDB - Added support for a new service, Amazon QLDB.
+
 2.11.349 (2019-09-06)
 ------------------
 

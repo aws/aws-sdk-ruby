@@ -165,6 +165,8 @@ module Aws
     PinpointSMSVoice
     Polly
     Pricing
+    QLDB
+    QLDBSession
     QuickSight
     RAM
     RDS

@@ -391,8 +391,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |
@@ -412,6 +412,8 @@ to be backwards compatible.
 | Amazon Pinpoint Email Service                         | PinpointEmail                   | 2018-07-26  |
 | Amazon Pinpoint SMS and Voice Service                 | PinpointSMSVoice                | 2018-09-05  |
 | Amazon Polly                                          | Polly                           | 2016-06-10  |
+| Amazon QLDB                                           | QLDB                            | 2019-01-02  |
+| Amazon QLDB Session                                   | QLDBSession                     | 2019-07-11  |
 | Amazon QuickSight                                     | QuickSight                      | 2018-04-01  |
 | Amazon Redshift                                       | Redshift                        | 2012-12-01  |
 | Amazon Rekognition                                    | Rekognition                     | 2016-06-27  |
