@@ -41,6 +41,7 @@ module Aws::StorageGateway
     ChapInfo = Shapes::StructureShape.new(name: 'ChapInfo')
     ChapSecret = Shapes::StringShape.new(name: 'ChapSecret')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CloudWatchLogGroupARN = Shapes::StringShape.new(name: 'CloudWatchLogGroupARN')
     CreateCachediSCSIVolumeInput = Shapes::StructureShape.new(name: 'CreateCachediSCSIVolumeInput')
     CreateCachediSCSIVolumeOutput = Shapes::StructureShape.new(name: 'CreateCachediSCSIVolumeOutput')
     CreateNFSFileShareInput = Shapes::StructureShape.new(name: 'CreateNFSFileShareInput')
@@ -628,6 +629,7 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:ec2_instance_region, Shapes::ShapeRef.new(shape: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
     DescribeGatewayInformationOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeGatewayInformationOutput.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "VPCEndpoint"))
+    DescribeGatewayInformationOutput.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
@@ -1122,6 +1124,7 @@ module Aws::StorageGateway
     UpdateGatewayInformationInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     UpdateGatewayInformationInput.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, location_name: "GatewayName"))
     UpdateGatewayInformationInput.add_member(:gateway_timezone, Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "GatewayTimezone"))
+    UpdateGatewayInformationInput.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
     UpdateGatewayInformationInput.struct_class = Types::UpdateGatewayInformationInput
 
     UpdateGatewayInformationOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
