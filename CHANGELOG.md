@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::SES - Updated the documentation for Amazon Simple Email Service.
+
+* Feature - Aws::MediaConnect - Updated the API, and documentation for AWS MediaConnect.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
 2.11.351 (2019-09-10)
 ------------------
 
