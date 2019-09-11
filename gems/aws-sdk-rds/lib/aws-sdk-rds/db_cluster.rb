@@ -331,7 +331,7 @@ module Aws::RDS
     end
 
     # The DB engine mode of the DB cluster, either `provisioned`,
-    # `serverless`, or `parallelquery`.
+    # `serverless`, `parallelquery`, `global`, or `multimaster`.
     # @return [String]
     def engine_mode
       data[:engine_mode]
@@ -854,7 +854,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, `parallelquery`, or `global`.
+    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.

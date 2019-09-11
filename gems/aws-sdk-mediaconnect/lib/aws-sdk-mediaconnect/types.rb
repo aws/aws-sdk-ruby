@@ -49,7 +49,7 @@ module Aws::MediaConnect
     #             max_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
@@ -114,7 +114,7 @@ module Aws::MediaConnect
     #         max_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -164,7 +164,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] smoothing_latency
-    #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+    #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
+    #   streams.
     #   @return [Integer]
     #
     # @!attribute [rw] stream_id
@@ -263,7 +264,7 @@ module Aws::MediaConnect
     #             max_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
@@ -287,7 +288,7 @@ module Aws::MediaConnect
     #           max_bitrate: 1,
     #           max_latency: 1,
     #           name: "__string",
-    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #           stream_id: "__string",
     #           whitelist_cidr: "__string",
     #         },
@@ -1154,7 +1155,7 @@ module Aws::MediaConnect
     #         max_bitrate: 1,
     #         max_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         stream_id: "__string",
     #         whitelist_cidr: "__string",
     #       }
@@ -1180,11 +1181,12 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] max_bitrate
-    #   The smoothing max bitrate for RTP and RTP-FEC streams.
+    #   The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -1412,11 +1414,12 @@ module Aws::MediaConnect
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_bitrate
-    #   The smoothing max bitrate for RTP and RTP-FEC streams.
+    #   The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -1428,7 +1431,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] smoothing_latency
-    #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+    #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
+    #   streams.
     #   @return [Integer]
     #
     # @!attribute [rw] stream_id
@@ -1658,7 +1662,7 @@ module Aws::MediaConnect
     #         max_latency: 1,
     #         output_arn: "__string", # required
     #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -1709,7 +1713,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] smoothing_latency
-    #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+    #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
+    #   streams.
     #   @return [Integer]
     #
     # @!attribute [rw] stream_id
@@ -1777,7 +1782,7 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         source_arn: "__string", # required
     #         stream_id: "__string",
     #         whitelist_cidr: "__string",
@@ -1807,11 +1812,12 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] max_bitrate
-    #   The smoothing max bitrate for RTP and RTP-FEC streams.
+    #   The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol

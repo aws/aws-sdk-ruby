@@ -582,7 +582,7 @@ module Aws::ConfigService
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_organization_config_rule({
-    #     organization_config_rule_name: "StringWithCharLimit64", # required
+    #     organization_config_rule_name: "OrganizationConfigRuleName", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConfigRule AWS API Documentation
@@ -2433,7 +2433,7 @@ module Aws::ConfigService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_organization_config_rule_detailed_status({
-    #     organization_config_rule_name: "StringWithCharLimit64", # required
+    #     organization_config_rule_name: "OrganizationConfigRuleName", # required
     #     filters: {
     #       account_id: "AccountId",
     #       member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_SUCCESSFUL, UPDATE_FAILED, UPDATE_IN_PROGRESS, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
@@ -3189,7 +3189,7 @@ module Aws::ConfigService
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_organization_config_rule({
-    #     organization_config_rule_name: "StringWithCharLimit64", # required
+    #     organization_config_rule_name: "OrganizationConfigRuleName", # required
     #     organization_managed_rule_metadata: {
     #       description: "StringWithCharLimit256Min0",
     #       rule_identifier: "StringWithCharLimit256", # required
@@ -3697,7 +3697,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

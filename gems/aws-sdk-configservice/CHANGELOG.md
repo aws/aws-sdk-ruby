@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2019-09-11)
+------------------
+
+* Feature - Adding input validation for the OrganizationConfigRuleName string.
+
 1.36.0 (2019-09-05)
 ------------------
 

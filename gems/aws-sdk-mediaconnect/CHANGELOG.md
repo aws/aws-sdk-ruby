@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2019-09-11)
+------------------
+
+* Feature - This release adds support for the RIST protocol on sources and outputs.
+
 1.13.0 (2019-07-26)
 ------------------
 

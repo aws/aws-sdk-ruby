@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2019-09-11)
+------------------
+
+* Feature - This release adds support for new data fields and log format in VPC flow logs.
+
 1.107.0 (2019-09-09)
 ------------------
 

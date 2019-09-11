@@ -1320,7 +1320,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of the endpoint. One of: `READER`, `ANY`.
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `ANY`.
     #   @return [String]
     #
     # @!attribute [rw] static_members
@@ -1713,7 +1713,7 @@ module Aws::RDS
     #
     # @!attribute [rw] engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, `parallelquery`, or `global`.
+    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -2414,8 +2414,9 @@ module Aws::RDS
     #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB
-    #   instance. If this argument is omitted, the default DBParameterGroup
-    #   for the specified engine is used.
+    #   instance. If you do not specify a value for `DBParameterGroupName`,
+    #   then the default `DBParameterGroup` for the specified DB engine is
+    #   used.
     #
     #   Constraints:
     #
@@ -2961,6 +2962,7 @@ module Aws::RDS
     #         auto_minor_version_upgrade: false,
     #         iops: 1,
     #         option_group_name: "String",
+    #         db_parameter_group_name: "String",
     #         publicly_accessible: false,
     #         tags: [
     #           {
@@ -3092,6 +3094,24 @@ module Aws::RDS
     # @!attribute [rw] option_group_name
     #   The option group the DB instance is associated with. If omitted, the
     #   option group associated with the source instance is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB
+    #   instance.
+    #
+    #   If you do not specify a value for `DBParameterGroupName`, then
+    #   Amazon RDS uses the `DBParameterGroup` of source DB instance for a
+    #   same region Read Replica, or the default `DBParameterGroup` for the
+    #   specified DB engine for a cross region Read Replica.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -3361,6 +3381,7 @@ module Aws::RDS
       :auto_minor_version_upgrade,
       :iops,
       :option_group_name,
+      :db_parameter_group_name,
       :publicly_accessible,
       :tags,
       :db_subnet_group_name,
@@ -4179,7 +4200,7 @@ module Aws::RDS
     #
     # @!attribute [rw] engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, or `parallelquery`.
+    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration_info
@@ -4456,7 +4477,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_type
-    #   The type associated with a custom endpoint. One of: `READER`, `ANY`.
+    #   The type associated with a custom endpoint. One of: `READER`,
+    #   `WRITER`, `ANY`.
     #   @return [String]
     #
     # @!attribute [rw] static_members
@@ -4518,8 +4540,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] is_cluster_writer
-    #   A value that indicates whehter the cluster member is the primary
-    #   instance for the DB cluster.
+    #   Value that is `true` if the cluster member is the primary instance
+    #   for the DB cluster and `false` otherwise.
     #   @return [Boolean]
     #
     # @!attribute [rw] db_cluster_parameter_group_status
@@ -5804,7 +5826,7 @@ module Aws::RDS
     # * `RestoreDBInstanceFromDBSnapshot`
     #
     # @!attribute [rw] db_parameter_group_name
-    #   The name of the DP parameter group.
+    #   The name of the DB parameter group.
     #   @return [String]
     #
     # @!attribute [rw] parameter_apply_status
@@ -9889,7 +9911,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of the endpoint. One of: `READER`, `ANY`.
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `ANY`.
     #   @return [String]
     #
     # @!attribute [rw] static_members
@@ -11129,7 +11151,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #   * If supplied, must match the name of an existing
+    #     `DBParameterGroup`.
     #
     #   ^
     #   @return [String]
@@ -12598,17 +12621,18 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] backup_retention_period
-    #   The number of days to retain automated backups. Setting this
-    #   parameter to a positive number enables backups. Setting this
+    #   The number of days for which automated backups are retained. Setting
+    #   this parameter to a positive number enables backups. Setting this
     #   parameter to 0 disables automated backups.
     #
     #   Default: 1
     #
     #   Constraints:
     #
-    #   * Must be a value from 0 to 8
+    #   * Must be a value from 0 to 35.
     #
-    #   ^
+    #   * Can't be set to 0 if the DB instance is a source to Read
+    #     Replicas.
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_backup_window
@@ -13258,7 +13282,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must match the name of an existing DBParameterGroup.
+    #   * Must match the name of an existing `DBParameterGroup`.
     #
     #   ^
     #   @return [String]
@@ -13920,7 +13944,7 @@ module Aws::RDS
     #
     # @!attribute [rw] engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, or `parallelquery`.
+    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -14570,8 +14594,10 @@ module Aws::RDS
     #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB
-    #   instance. If this argument is omitted, the default DBParameterGroup
-    #   for the specified engine is used.
+    #   instance.
+    #
+    #   If you do not specify a value for `DBParameterGroupName`, then the
+    #   default `DBParameterGroup` for the specified DB engine is used.
     #
     #   Constraints:
     #
@@ -14831,8 +14857,10 @@ module Aws::RDS
     #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB
-    #   instance. If this argument is omitted, the default parameter group
-    #   for the specified engine is used.
+    #   instance.
+    #
+    #   If you do not specify a value for `DBParameterGroupName`, then the
+    #   default `DBParameterGroup` for the specified DB engine is used.
     #   @return [String]
     #
     # @!attribute [rw] backup_retention_period
@@ -15482,8 +15510,10 @@ module Aws::RDS
     #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB
-    #   instance. If this argument is omitted, the default DBParameterGroup
-    #   for the specified engine is used.
+    #   instance.
+    #
+    #   If you do not specify a value for `DBParameterGroupName`, then the
+    #   default `DBParameterGroup` for the specified DB engine is used.
     #
     #   Constraints:
     #

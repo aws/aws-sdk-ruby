@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2019-09-11)
+------------------
+
+* Feature - This release allows customers to specify a custom parameter group when creating a Read Replica, for DB engines which support this feature.
+
 1.64.0 (2019-08-22)
 ------------------
 

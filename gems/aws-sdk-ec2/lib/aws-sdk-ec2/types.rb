@@ -4967,6 +4967,7 @@ module Aws::EC2
     #         traffic_type: "ACCEPT", # required, accepts ACCEPT, REJECT, ALL
     #         log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
     #         log_destination: "String",
+    #         log_format: "String",
     #       }
     #
     # @!attribute [rw] dry_run
@@ -5052,6 +5053,25 @@ module Aws::EC2
     #   a subfolder name. This is a reserved term.
     #   @return [String]
     #
+    # @!attribute [rw] log_format
+    #   The fields to include in the flow log record, in the order in which
+    #   they should appear. For a list of available fields, see [Flow Log
+    #   Records][1]. If you omit this parameter, the flow log is created
+    #   using the default format. If you specify this parameter, you must
+    #   specify at least one field.
+    #
+    #   Specify the fields using the `$\{field-id\}` format, separated by
+    #   spaces. For the AWS CLI, use single quotation marks (' ') to
+    #   surround the parameter value.
+    #
+    #   Only applicable to flow logs that are published to an Amazon S3
+    #   bucket.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsRequest AWS API Documentation
     #
     class CreateFlowLogsRequest < Struct.new(
@@ -5063,7 +5083,8 @@ module Aws::EC2
       :resource_type,
       :traffic_type,
       :log_destination_type,
-      :log_destination)
+      :log_destination,
+      :log_format)
       include Aws::Structure
     end
 
@@ -18238,8 +18259,9 @@ module Aws::EC2
     #
     #   * `vpc-endpoint-id`\: The ID of the endpoint.
     #
-    #   * `vpc-endpoint-state`\: The state of the endpoint. (`pending` \|
-    #     `available` \| `deleting` \| `deleted`)
+    #   * `vpc-endpoint-state` - The state of the endpoint
+    #     (`pendingAcceptance` \| `pending` \| `available` \| `deleting` \|
+    #     `deleted` \| `rejected` \| `failed`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
@@ -21271,6 +21293,10 @@ module Aws::EC2
     #   S3 bucket to which the data is published.
     #   @return [String]
     #
+    # @!attribute [rw] log_format
+    #   The format of the flow log record.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlowLog AWS API Documentation
     #
     class FlowLog < Struct.new(
@@ -21284,7 +21310,8 @@ module Aws::EC2
       :resource_id,
       :traffic_type,
       :log_destination_type,
-      :log_destination)
+      :log_destination,
+      :log_format)
       include Aws::Structure
     end
 

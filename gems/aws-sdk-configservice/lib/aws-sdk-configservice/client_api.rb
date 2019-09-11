@@ -255,6 +255,7 @@ module Aws::ConfigService
     OrganizationAllFeaturesNotEnabledException = Shapes::StructureShape.new(name: 'OrganizationAllFeaturesNotEnabledException')
     OrganizationConfigRule = Shapes::StructureShape.new(name: 'OrganizationConfigRule')
     OrganizationConfigRuleDetailedStatus = Shapes::ListShape.new(name: 'OrganizationConfigRuleDetailedStatus')
+    OrganizationConfigRuleName = Shapes::StringShape.new(name: 'OrganizationConfigRuleName')
     OrganizationConfigRuleNames = Shapes::ListShape.new(name: 'OrganizationConfigRuleNames')
     OrganizationConfigRuleStatus = Shapes::StructureShape.new(name: 'OrganizationConfigRuleStatus')
     OrganizationConfigRuleStatuses = Shapes::ListShape.new(name: 'OrganizationConfigRuleStatuses')
@@ -652,7 +653,7 @@ module Aws::ConfigService
 
     DeleteEvaluationResultsResponse.struct_class = Types::DeleteEvaluationResultsResponse
 
-    DeleteOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    DeleteOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, required: true, location_name: "OrganizationConfigRuleName"))
     DeleteOrganizationConfigRuleRequest.struct_class = Types::DeleteOrganizationConfigRuleRequest
 
     DeletePendingAggregationRequestRequest.add_member(:requester_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "RequesterAccountId"))
@@ -1000,7 +1001,7 @@ module Aws::ConfigService
     GetDiscoveredResourceCountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetDiscoveredResourceCountsResponse.struct_class = Types::GetDiscoveredResourceCountsResponse
 
-    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    GetOrganizationConfigRuleDetailedStatusRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, required: true, location_name: "OrganizationConfigRuleName"))
     GetOrganizationConfigRuleDetailedStatusRequest.add_member(:filters, Shapes::ShapeRef.new(shape: StatusDetailFilters, location_name: "Filters"))
     GetOrganizationConfigRuleDetailedStatusRequest.add_member(:limit, Shapes::ShapeRef.new(shape: CosmosPageLimit, location_name: "Limit"))
     GetOrganizationConfigRuleDetailedStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -1074,7 +1075,7 @@ module Aws::ConfigService
     OrganizationAggregationSource.add_member(:all_aws_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAwsRegions"))
     OrganizationAggregationSource.struct_class = Types::OrganizationAggregationSource
 
-    OrganizationConfigRule.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    OrganizationConfigRule.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, required: true, location_name: "OrganizationConfigRuleName"))
     OrganizationConfigRule.add_member(:organization_config_rule_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "OrganizationConfigRuleArn"))
     OrganizationConfigRule.add_member(:organization_managed_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
     OrganizationConfigRule.add_member(:organization_custom_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
@@ -1086,7 +1087,7 @@ module Aws::ConfigService
 
     OrganizationConfigRuleNames.member = Shapes::ShapeRef.new(shape: StringWithCharLimit64)
 
-    OrganizationConfigRuleStatus.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    OrganizationConfigRuleStatus.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, required: true, location_name: "OrganizationConfigRuleName"))
     OrganizationConfigRuleStatus.add_member(:organization_rule_status, Shapes::ShapeRef.new(shape: OrganizationRuleStatus, required: true, location_name: "OrganizationRuleStatus"))
     OrganizationConfigRuleStatus.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
     OrganizationConfigRuleStatus.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -1161,7 +1162,7 @@ module Aws::ConfigService
     PutEvaluationsResponse.add_member(:failed_evaluations, Shapes::ShapeRef.new(shape: Evaluations, location_name: "FailedEvaluations"))
     PutEvaluationsResponse.struct_class = Types::PutEvaluationsResponse
 
-    PutOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "OrganizationConfigRuleName"))
+    PutOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, required: true, location_name: "OrganizationConfigRuleName"))
     PutOrganizationConfigRuleRequest.add_member(:organization_managed_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
     PutOrganizationConfigRuleRequest.add_member(:organization_custom_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
     PutOrganizationConfigRuleRequest.add_member(:excluded_accounts, Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))

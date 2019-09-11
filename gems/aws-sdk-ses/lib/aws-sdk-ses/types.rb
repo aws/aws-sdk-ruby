@@ -1724,15 +1724,15 @@ module Aws::SES
     #       }
     #
     # @!attribute [rw] to_addresses
-    #   The To: field(s) of the message.
+    #   The recipients to place on the To: line of the message.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cc_addresses
-    #   The CC: field(s) of the message.
+    #   The recipients to place on the CC: line of the message.
     #   @return [Array<String>]
     #
     # @!attribute [rw] bcc_addresses
-    #   The BCC: field(s) of the message.
+    #   The recipients to place on the BCC: line of the message.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Destination AWS API Documentation
@@ -2795,9 +2795,12 @@ module Aws::SES
     # templates for your account.
     #
     # For more information about custom verification email templates, see
-    # [Using Custom Verification Email
-    # Templates](ses/latest/DeveloperGuide/custom-verification-emails.html)
-    # in the *Amazon SES Developer Guide*.
+    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
     #
     # @note When making an API call, you may pass ListCustomVerificationEmailTemplatesRequest
     #   data as a hash:
@@ -5515,7 +5518,7 @@ module Aws::SES
     #       }
     #
     # @!attribute [rw] scope
-    #   The name of the RuleSet that is being stopped.
+    #   The scope of the StopAction. The only acceptable value is `RuleSet`.
     #   @return [String]
     #
     # @!attribute [rw] topic_arn

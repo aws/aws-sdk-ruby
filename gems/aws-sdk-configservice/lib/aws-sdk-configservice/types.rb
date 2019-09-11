@@ -1413,7 +1413,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         organization_config_rule_name: "StringWithCharLimit64", # required
+    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
     #       }
     #
     # @!attribute [rw] organization_config_rule_name
@@ -3403,7 +3403,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         organization_config_rule_name: "StringWithCharLimit64", # required
+    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
     #         filters: {
     #           account_id: "AccountId",
     #           member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_SUCCESSFUL, UPDATE_FAILED, UPDATE_IN_PROGRESS, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
@@ -4474,7 +4474,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         organization_config_rule_name: "StringWithCharLimit64", # required
+    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
     #         organization_managed_rule_metadata: {
     #           description: "StringWithCharLimit256Min0",
     #           rule_identifier: "StringWithCharLimit256", # required

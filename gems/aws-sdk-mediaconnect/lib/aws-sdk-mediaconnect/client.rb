@@ -290,7 +290,7 @@ module Aws::MediaConnect
     #         max_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -322,7 +322,7 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.outputs[0].transport.max_bitrate #=> Integer
     #   resp.outputs[0].transport.max_latency #=> Integer
-    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
     #   resp.outputs[0].transport.remote_id #=> String
     #   resp.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.outputs[0].transport.stream_id #=> String
@@ -402,7 +402,7 @@ module Aws::MediaConnect
     #         max_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -426,7 +426,7 @@ module Aws::MediaConnect
     #       max_bitrate: 1,
     #       max_latency: 1,
     #       name: "__string",
-    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #       stream_id: "__string",
     #       whitelist_cidr: "__string",
     #     },
@@ -475,7 +475,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
@@ -498,7 +498,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
@@ -603,7 +603,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
@@ -626,7 +626,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
@@ -1103,7 +1103,8 @@ module Aws::MediaConnect
     #   The remote ID for the Zixi-pull stream.
     #
     # @option params [Integer] :smoothing_latency
-    #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+    #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
+    #   streams.
     #
     # @option params [String] :stream_id
     #   The stream ID that you want to use for this transport. This parameter
@@ -1135,7 +1136,7 @@ module Aws::MediaConnect
     #     max_latency: 1,
     #     output_arn: "__string", # required
     #     port: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #     remote_id: "__string",
     #     smoothing_latency: 1,
     #     stream_id: "__string",
@@ -1164,7 +1165,7 @@ module Aws::MediaConnect
     #   resp.output.transport.cidr_allow_list[0] #=> String
     #   resp.output.transport.max_bitrate #=> Integer
     #   resp.output.transport.max_latency #=> Integer
-    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
     #   resp.output.transport.remote_id #=> String
     #   resp.output.transport.smoothing_latency #=> Integer
     #   resp.output.transport.stream_id #=> String
@@ -1198,10 +1199,11 @@ module Aws::MediaConnect
     #   The port that the flow will be listening on for incoming content.
     #
     # @option params [Integer] :max_bitrate
-    #   The smoothing max bitrate for RTP and RTP-FEC streams.
+    #   The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
     #
     # @option params [Integer] :max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based and Zixi-based streams.
     #
     # @option params [String] :protocol
     #   The protocol that is used by the source.
@@ -1242,7 +1244,7 @@ module Aws::MediaConnect
     #     ingest_port: 1,
     #     max_bitrate: 1,
     #     max_latency: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #     source_arn: "__string", # required
     #     stream_id: "__string",
     #     whitelist_cidr: "__string",
@@ -1270,7 +1272,7 @@ module Aws::MediaConnect
     #   resp.source.transport.cidr_allow_list[0] #=> String
     #   resp.source.transport.max_bitrate #=> Integer
     #   resp.source.transport.max_latency #=> Integer
-    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull"
+    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
     #   resp.source.transport.remote_id #=> String
     #   resp.source.transport.smoothing_latency #=> Integer
     #   resp.source.transport.stream_id #=> String
@@ -1298,7 +1300,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
