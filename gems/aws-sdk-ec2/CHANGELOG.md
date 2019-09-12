@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2019-09-12)
+------------------
+
+* Feature - Fix for FleetActivityStatus and FleetStateCode enum
+
 1.108.0 (2019-09-11)
 ------------------
 

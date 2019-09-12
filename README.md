@@ -357,8 +357,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
-| AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
+| AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
@@ -436,8 +436,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Aws::Snowball                        | aws-sdk-snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Aws::Inspector                       | aws-sdk-inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Aws::Kinesis                         | aws-sdk-kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Aws::Firehose                        | aws-sdk-firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | Aws::KinesisVideo                    | aws-sdk-kinesisvideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | Aws::KinesisVideoArchivedMedia       | aws-sdk-kinesisvideoarchivedmedia       | 2017-09-30  |
@@ -482,6 +482,7 @@ to be backwards compatible.
 | Amazon WorkDocs                                       | Aws::WorkDocs                        | aws-sdk-workdocs                        | 2016-05-01  |
 | Amazon WorkLink                                       | Aws::WorkLink                        | aws-sdk-worklink                        | 2018-09-25  |
 | Amazon WorkMail                                       | Aws::WorkMail                        | aws-sdk-workmail                        | 2017-10-01  |
+| Amazon WorkMail Message Flow                          | Aws::WorkMailMessageFlow             | aws-sdk-workmailmessageflow             | 2019-05-01  |
 | Amazon WorkSpaces                                     | Aws::WorkSpaces                      | aws-sdk-workspaces                      | 2015-04-08  |
 | AmazonApiGatewayManagementApi                         | Aws::ApiGatewayManagementApi         | aws-sdk-apigatewaymanagementapi         | 2018-11-29  |
 | AmazonApiGatewayV2                                    | Aws::ApiGatewayV2                    | aws-sdk-apigatewayv2                    | 2018-11-29  |

@@ -83,6 +83,7 @@ module Aws::MediaLive
     ChannelEgressEndpoint = Shapes::StructureShape.new(name: 'ChannelEgressEndpoint')
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
+    ColorSpacePassthroughSettings = Shapes::StructureShape.new(name: 'ColorSpacePassthroughSettings')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateChannel = Shapes::StructureShape.new(name: 'CreateChannel')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
@@ -171,6 +172,7 @@ module Aws::MediaLive
     GlobalConfigurationOutputTimingSource = Shapes::StringShape.new(name: 'GlobalConfigurationOutputTimingSource')
     H264AdaptiveQuantization = Shapes::StringShape.new(name: 'H264AdaptiveQuantization')
     H264ColorMetadata = Shapes::StringShape.new(name: 'H264ColorMetadata')
+    H264ColorSpaceSettings = Shapes::StructureShape.new(name: 'H264ColorSpaceSettings')
     H264EntropyEncoding = Shapes::StringShape.new(name: 'H264EntropyEncoding')
     H264FlickerAq = Shapes::StringShape.new(name: 'H264FlickerAq')
     H264FramerateControl = Shapes::StringShape.new(name: 'H264FramerateControl')
@@ -189,6 +191,22 @@ module Aws::MediaLive
     H264Syntax = Shapes::StringShape.new(name: 'H264Syntax')
     H264TemporalAq = Shapes::StringShape.new(name: 'H264TemporalAq')
     H264TimecodeInsertionBehavior = Shapes::StringShape.new(name: 'H264TimecodeInsertionBehavior')
+    H265AdaptiveQuantization = Shapes::StringShape.new(name: 'H265AdaptiveQuantization')
+    H265AlternativeTransferFunction = Shapes::StringShape.new(name: 'H265AlternativeTransferFunction')
+    H265ColorMetadata = Shapes::StringShape.new(name: 'H265ColorMetadata')
+    H265ColorSpaceSettings = Shapes::StructureShape.new(name: 'H265ColorSpaceSettings')
+    H265FlickerAq = Shapes::StringShape.new(name: 'H265FlickerAq')
+    H265GopSizeUnits = Shapes::StringShape.new(name: 'H265GopSizeUnits')
+    H265Level = Shapes::StringShape.new(name: 'H265Level')
+    H265LookAheadRateControl = Shapes::StringShape.new(name: 'H265LookAheadRateControl')
+    H265Profile = Shapes::StringShape.new(name: 'H265Profile')
+    H265RateControlMode = Shapes::StringShape.new(name: 'H265RateControlMode')
+    H265ScanType = Shapes::StringShape.new(name: 'H265ScanType')
+    H265SceneChangeDetect = Shapes::StringShape.new(name: 'H265SceneChangeDetect')
+    H265Settings = Shapes::StructureShape.new(name: 'H265Settings')
+    H265Tier = Shapes::StringShape.new(name: 'H265Tier')
+    H265TimecodeInsertionBehavior = Shapes::StringShape.new(name: 'H265TimecodeInsertionBehavior')
+    Hdr10Settings = Shapes::StructureShape.new(name: 'Hdr10Settings')
     HlsAdMarkers = Shapes::StringShape.new(name: 'HlsAdMarkers')
     HlsAkamaiHttpTransferMode = Shapes::StringShape.new(name: 'HlsAkamaiHttpTransferMode')
     HlsAkamaiSettings = Shapes::StructureShape.new(name: 'HlsAkamaiSettings')
@@ -315,6 +333,7 @@ module Aws::MediaLive
     Mp2CodingMode = Shapes::StringShape.new(name: 'Mp2CodingMode')
     Mp2Settings = Shapes::StructureShape.new(name: 'Mp2Settings')
     MsSmoothGroupSettings = Shapes::StructureShape.new(name: 'MsSmoothGroupSettings')
+    MsSmoothH265PackagingType = Shapes::StringShape.new(name: 'MsSmoothH265PackagingType')
     MsSmoothOutputSettings = Shapes::StructureShape.new(name: 'MsSmoothOutputSettings')
     NetworkInputServerValidation = Shapes::StringShape.new(name: 'NetworkInputServerValidation')
     NetworkInputSettings = Shapes::StructureShape.new(name: 'NetworkInputSettings')
@@ -338,6 +357,8 @@ module Aws::MediaLive
     PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
     PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
     PurchaseOfferingResultModel = Shapes::StructureShape.new(name: 'PurchaseOfferingResultModel')
+    Rec601Settings = Shapes::StructureShape.new(name: 'Rec601Settings')
+    Rec709Settings = Shapes::StructureShape.new(name: 'Rec709Settings')
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
     Reservation = Shapes::StructureShape.new(name: 'Reservation')
     ReservationCodec = Shapes::StringShape.new(name: 'ReservationCodec')
@@ -385,7 +406,6 @@ module Aws::MediaLive
     Scte35TimeSignalApos = Shapes::StructureShape.new(name: 'Scte35TimeSignalApos')
     Scte35TimeSignalScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35TimeSignalScheduleActionSettings')
     Scte35WebDeliveryAllowedFlag = Shapes::StringShape.new(name: 'Scte35WebDeliveryAllowedFlag')
-    ServiceDescriptor = Shapes::StructureShape.new(name: 'ServiceDescriptor')
     SmoothGroupAudioOnlyTimecodeControl = Shapes::StringShape.new(name: 'SmoothGroupAudioOnlyTimecodeControl')
     SmoothGroupCertificateMode = Shapes::StringShape.new(name: 'SmoothGroupCertificateMode')
     SmoothGroupEventIdMode = Shapes::StringShape.new(name: 'SmoothGroupEventIdMode')
@@ -468,6 +488,7 @@ module Aws::MediaLive
     __integerMin0Max15 = Shapes::IntegerShape.new(name: '__integerMin0Max15')
     __integerMin0Max255 = Shapes::IntegerShape.new(name: '__integerMin0Max255')
     __integerMin0Max30 = Shapes::IntegerShape.new(name: '__integerMin0Max30')
+    __integerMin0Max32768 = Shapes::IntegerShape.new(name: '__integerMin0Max32768')
     __integerMin0Max3600 = Shapes::IntegerShape.new(name: '__integerMin0Max3600')
     __integerMin0Max500 = Shapes::IntegerShape.new(name: '__integerMin0Max500')
     __integerMin0Max600 = Shapes::IntegerShape.new(name: '__integerMin0Max600')
@@ -477,12 +498,14 @@ module Aws::MediaLive
     __integerMin0Max8191 = Shapes::IntegerShape.new(name: '__integerMin0Max8191')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
     __integerMin1000 = Shapes::IntegerShape.new(name: '__integerMin1000')
-    __integerMin100000Max100000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max100000000')
+    __integerMin100000Max40000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max40000000')
+    __integerMin100000Max80000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max80000000')
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
     __integerMin1Max10 = Shapes::IntegerShape.new(name: '__integerMin1Max10')
     __integerMin1Max1000000 = Shapes::IntegerShape.new(name: '__integerMin1Max1000000')
     __integerMin1Max16 = Shapes::IntegerShape.new(name: '__integerMin1Max16')
     __integerMin1Max20 = Shapes::IntegerShape.new(name: '__integerMin1Max20')
+    __integerMin1Max3003 = Shapes::IntegerShape.new(name: '__integerMin1Max3003')
     __integerMin1Max31 = Shapes::IntegerShape.new(name: '__integerMin1Max31')
     __integerMin1Max32 = Shapes::IntegerShape.new(name: '__integerMin1Max32')
     __integerMin1Max3600 = Shapes::IntegerShape.new(name: '__integerMin1Max3600')
@@ -783,6 +806,8 @@ module Aws::MediaLive
     ChannelSummary.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ChannelSummary.struct_class = Types::ChannelSummary
+
+    ColorSpacePassthroughSettings.struct_class = Types::ColorSpacePassthroughSettings
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -1139,12 +1164,18 @@ module Aws::MediaLive
     GlobalConfiguration.add_member(:support_low_framerate_inputs, Shapes::ShapeRef.new(shape: GlobalConfigurationLowFramerateInputs, location_name: "supportLowFramerateInputs"))
     GlobalConfiguration.struct_class = Types::GlobalConfiguration
 
+    H264ColorSpaceSettings.add_member(:color_space_passthrough_settings, Shapes::ShapeRef.new(shape: ColorSpacePassthroughSettings, location_name: "colorSpacePassthroughSettings"))
+    H264ColorSpaceSettings.add_member(:rec_601_settings, Shapes::ShapeRef.new(shape: Rec601Settings, location_name: "rec601Settings"))
+    H264ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
+    H264ColorSpaceSettings.struct_class = Types::H264ColorSpaceSettings
+
     H264Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H264AdaptiveQuantization, location_name: "adaptiveQuantization"))
     H264Settings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: AfdSignaling, location_name: "afdSignaling"))
     H264Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin1000, location_name: "bitrate"))
     H264Settings.add_member(:buf_fill_pct, Shapes::ShapeRef.new(shape: __integerMin0Max100, location_name: "bufFillPct"))
     H264Settings.add_member(:buf_size, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "bufSize"))
     H264Settings.add_member(:color_metadata, Shapes::ShapeRef.new(shape: H264ColorMetadata, location_name: "colorMetadata"))
+    H264Settings.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: H264ColorSpaceSettings, location_name: "colorSpaceSettings"))
     H264Settings.add_member(:entropy_encoding, Shapes::ShapeRef.new(shape: H264EntropyEncoding, location_name: "entropyEncoding"))
     H264Settings.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: FixedAfd, location_name: "fixedAfd"))
     H264Settings.add_member(:flicker_aq, Shapes::ShapeRef.new(shape: H264FlickerAq, location_name: "flickerAq"))
@@ -1177,6 +1208,46 @@ module Aws::MediaLive
     H264Settings.add_member(:temporal_aq, Shapes::ShapeRef.new(shape: H264TemporalAq, location_name: "temporalAq"))
     H264Settings.add_member(:timecode_insertion, Shapes::ShapeRef.new(shape: H264TimecodeInsertionBehavior, location_name: "timecodeInsertion"))
     H264Settings.struct_class = Types::H264Settings
+
+    H265ColorSpaceSettings.add_member(:color_space_passthrough_settings, Shapes::ShapeRef.new(shape: ColorSpacePassthroughSettings, location_name: "colorSpacePassthroughSettings"))
+    H265ColorSpaceSettings.add_member(:hdr_10_settings, Shapes::ShapeRef.new(shape: Hdr10Settings, location_name: "hdr10Settings"))
+    H265ColorSpaceSettings.add_member(:rec_601_settings, Shapes::ShapeRef.new(shape: Rec601Settings, location_name: "rec601Settings"))
+    H265ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
+    H265ColorSpaceSettings.struct_class = Types::H265ColorSpaceSettings
+
+    H265Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H265AdaptiveQuantization, location_name: "adaptiveQuantization"))
+    H265Settings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: AfdSignaling, location_name: "afdSignaling"))
+    H265Settings.add_member(:alternative_transfer_function, Shapes::ShapeRef.new(shape: H265AlternativeTransferFunction, location_name: "alternativeTransferFunction"))
+    H265Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max40000000, location_name: "bitrate"))
+    H265Settings.add_member(:buf_size, Shapes::ShapeRef.new(shape: __integerMin100000Max80000000, location_name: "bufSize"))
+    H265Settings.add_member(:color_metadata, Shapes::ShapeRef.new(shape: H265ColorMetadata, location_name: "colorMetadata"))
+    H265Settings.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: H265ColorSpaceSettings, location_name: "colorSpaceSettings"))
+    H265Settings.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: FixedAfd, location_name: "fixedAfd"))
+    H265Settings.add_member(:flicker_aq, Shapes::ShapeRef.new(shape: H265FlickerAq, location_name: "flickerAq"))
+    H265Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max3003, required: true, location_name: "framerateDenominator"))
+    H265Settings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "framerateNumerator"))
+    H265Settings.add_member(:gop_closed_cadence, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "gopClosedCadence"))
+    H265Settings.add_member(:gop_size, Shapes::ShapeRef.new(shape: __doubleMin1, location_name: "gopSize"))
+    H265Settings.add_member(:gop_size_units, Shapes::ShapeRef.new(shape: H265GopSizeUnits, location_name: "gopSizeUnits"))
+    H265Settings.add_member(:level, Shapes::ShapeRef.new(shape: H265Level, location_name: "level"))
+    H265Settings.add_member(:look_ahead_rate_control, Shapes::ShapeRef.new(shape: H265LookAheadRateControl, location_name: "lookAheadRateControl"))
+    H265Settings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max40000000, location_name: "maxBitrate"))
+    H265Settings.add_member(:min_i_interval, Shapes::ShapeRef.new(shape: __integerMin0Max30, location_name: "minIInterval"))
+    H265Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parDenominator"))
+    H265Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parNumerator"))
+    H265Settings.add_member(:profile, Shapes::ShapeRef.new(shape: H265Profile, location_name: "profile"))
+    H265Settings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
+    H265Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: H265RateControlMode, location_name: "rateControlMode"))
+    H265Settings.add_member(:scan_type, Shapes::ShapeRef.new(shape: H265ScanType, location_name: "scanType"))
+    H265Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: H265SceneChangeDetect, location_name: "sceneChangeDetect"))
+    H265Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max16, location_name: "slices"))
+    H265Settings.add_member(:tier, Shapes::ShapeRef.new(shape: H265Tier, location_name: "tier"))
+    H265Settings.add_member(:timecode_insertion, Shapes::ShapeRef.new(shape: H265TimecodeInsertionBehavior, location_name: "timecodeInsertion"))
+    H265Settings.struct_class = Types::H265Settings
+
+    Hdr10Settings.add_member(:max_cll, Shapes::ShapeRef.new(shape: __integerMin0Max32768, location_name: "maxCll"))
+    Hdr10Settings.add_member(:max_fall, Shapes::ShapeRef.new(shape: __integerMin0Max32768, location_name: "maxFall"))
+    Hdr10Settings.struct_class = Types::Hdr10Settings
 
     HlsAkamaiSettings.add_member(:connection_retry_interval, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "connectionRetryInterval"))
     HlsAkamaiSettings.add_member(:filecache_duration, Shapes::ShapeRef.new(shape: __integerMin0Max600, location_name: "filecacheDuration"))
@@ -1584,6 +1655,7 @@ module Aws::MediaLive
     MsSmoothGroupSettings.add_member(:timestamp_offset_mode, Shapes::ShapeRef.new(shape: SmoothGroupTimestampOffsetMode, location_name: "timestampOffsetMode"))
     MsSmoothGroupSettings.struct_class = Types::MsSmoothGroupSettings
 
+    MsSmoothOutputSettings.add_member(:h265_packaging_type, Shapes::ShapeRef.new(shape: MsSmoothH265PackagingType, location_name: "h265PackagingType"))
     MsSmoothOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
     MsSmoothOutputSettings.struct_class = Types::MsSmoothOutputSettings
 
@@ -1684,6 +1756,10 @@ module Aws::MediaLive
 
     PurchaseOfferingResultModel.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
     PurchaseOfferingResultModel.struct_class = Types::PurchaseOfferingResultModel
+
+    Rec601Settings.struct_class = Types::Rec601Settings
+
+    Rec709Settings.struct_class = Types::Rec709Settings
 
     RemixSettings.add_member(:channel_mappings, Shapes::ShapeRef.new(shape: __listOfAudioChannelMapping, required: true, location_name: "channelMappings"))
     RemixSettings.add_member(:channels_in, Shapes::ShapeRef.new(shape: __integerMin1Max16, location_name: "channelsIn"))
@@ -1823,10 +1899,6 @@ module Aws::MediaLive
 
     Scte35TimeSignalScheduleActionSettings.add_member(:scte_35_descriptors, Shapes::ShapeRef.new(shape: __listOfScte35Descriptor, required: true, location_name: "scte35Descriptors"))
     Scte35TimeSignalScheduleActionSettings.struct_class = Types::Scte35TimeSignalScheduleActionSettings
-
-    ServiceDescriptor.add_member(:provider_name, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "providerName"))
-    ServiceDescriptor.add_member(:service_name, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "serviceName"))
-    ServiceDescriptor.struct_class = Types::ServiceDescriptor
 
     SmpteTtDestinationSettings.struct_class = Types::SmpteTtDestinationSettings
 
@@ -2030,6 +2102,7 @@ module Aws::MediaLive
 
     VideoCodecSettings.add_member(:frame_capture_settings, Shapes::ShapeRef.new(shape: FrameCaptureSettings, location_name: "frameCaptureSettings"))
     VideoCodecSettings.add_member(:h264_settings, Shapes::ShapeRef.new(shape: H264Settings, location_name: "h264Settings"))
+    VideoCodecSettings.add_member(:h265_settings, Shapes::ShapeRef.new(shape: H265Settings, location_name: "h265Settings"))
     VideoCodecSettings.struct_class = Types::VideoCodecSettings
 
     VideoDescription.add_member(:codec_settings, Shapes::ShapeRef.new(shape: VideoCodecSettings, location_name: "codecSettings"))

@@ -656,6 +656,9 @@
   "WorkMail": {
     "models": "workmail/2017-10-01"
   },
+  "WorkMailMessageFlow": {
+    "models": "workmailmessageflow/2019-05-01"
+  },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08"
   },

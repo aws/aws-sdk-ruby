@@ -409,6 +409,7 @@ module Aws
             'WorkDocs' => 'workdocs',
             'WorkLink' => 'worklink',
             'WorkMail' => 'workmail',
+            'WorkMailMessageFlow' => 'workmailmessageflow',
             'WorkSpaces' => 'workspaces',
             'XRay' => 'xray',
           }

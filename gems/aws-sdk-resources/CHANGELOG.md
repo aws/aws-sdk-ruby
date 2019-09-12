@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.54.0 (2019-09-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-workmailmessageflow` gem.
+
 3.53.0 (2019-09-09)
 ------------------
 

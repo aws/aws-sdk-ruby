@@ -8991,8 +8991,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.successful_fleet_deletions #=> Array
-    #   resp.successful_fleet_deletions[0].current_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted-running", "deleted-terminating", "modifying"
-    #   resp.successful_fleet_deletions[0].previous_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted-running", "deleted-terminating", "modifying"
+    #   resp.successful_fleet_deletions[0].current_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted_running", "deleted_terminating", "modifying"
+    #   resp.successful_fleet_deletions[0].previous_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted_running", "deleted_terminating", "modifying"
     #   resp.successful_fleet_deletions[0].fleet_id #=> String
     #   resp.unsuccessful_fleet_deletions #=> Array
     #   resp.unsuccessful_fleet_deletions[0].error.code #=> String, one of "fleetIdDoesNotExist", "fleetIdMalformed", "fleetNotInDeletableState", "unexpectedError"
@@ -12629,10 +12629,10 @@ module Aws::EC2
     #
     #   resp.next_token #=> String
     #   resp.fleets #=> Array
-    #   resp.fleets[0].activity_status #=> String, one of "error", "pending-fulfillment", "pending-termination", "fulfilled"
+    #   resp.fleets[0].activity_status #=> String, one of "error", "pending_fulfillment", "pending_termination", "fulfilled"
     #   resp.fleets[0].create_time #=> Time
     #   resp.fleets[0].fleet_id #=> String
-    #   resp.fleets[0].fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted-running", "deleted-terminating", "modifying"
+    #   resp.fleets[0].fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted_running", "deleted_terminating", "modifying"
     #   resp.fleets[0].client_token #=> String
     #   resp.fleets[0].excess_capacity_termination_policy #=> String, one of "no-termination", "termination"
     #   resp.fleets[0].fulfilled_capacity #=> Float
@@ -32639,7 +32639,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -752,14 +752,11 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] audio_only_image
-    #   For use with an audio only Stream. Must be a .jpg or .png file. If
-    #   given, this image will be used as the cover-art for the audio only
-    #   output. Ideally, it should be formatted for an iPhone screen for two
-    #   reasons. The iPhone does not resize the image, it crops a centered
-    #   image on the top/bottom and left/right. Additionally, this image
-    #   file gets saved bit-for-bit into every 10-second segment file, so
-    #   will increase bandwidth by \\\{image file size\\} * \\\{segment
-    #   count\\} * \\\{user count.\\}.
+    #   Optional. Specifies the .jpg or .png image to use as the cover art
+    #   for an audio-only output. We recommend a low bit-size file because
+    #   the image increases the output audio bandwidth. The image is
+    #   attached to the audio as an ID3 tag, frame type APIC, picture type
+    #   0x10, as per the "ID3 tag version 2.4.0 - Native Frames" standard.
     #   @return [Types::InputLocation]
     #
     # @!attribute [rw] audio_track_type
@@ -2149,6 +2146,14 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Passthrough applies no color space conversion to the output
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ColorSpacePassthroughSettings AWS API Documentation
+    #
+    class ColorSpacePassthroughSettings < Aws::EmptyStructure; end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2717,6 +2722,7 @@ module Aws::MediaLive
     #                     media_package_output_settings: {
     #                     },
     #                     ms_smooth_output_settings: {
+    #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                       name_modifier: "__string",
     #                     },
     #                     rtmp_output_settings: {
@@ -2822,6 +2828,14 @@ module Aws::MediaLive
     #                   buf_fill_pct: 1,
     #                   buf_size: 1,
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #                   color_space_settings: {
+    #                     color_space_passthrough_settings: {
+    #                     },
+    #                     rec_601_settings: {
+    #                     },
+    #                     rec_709_settings: {
+    #                     },
+    #                   },
     #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
@@ -2843,7 +2857,7 @@ module Aws::MediaLive
     #                   par_numerator: 1,
     #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                   qvbr_quality_level: 1,
-    #                   rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
+    #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
@@ -2852,6 +2866,47 @@ module Aws::MediaLive
     #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #                   syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #                   temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
+    #                 },
+    #                 h265_settings: {
+    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
+    #                   alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
+    #                   bitrate: 1,
+    #                   buf_size: 1,
+    #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #                   color_space_settings: {
+    #                     color_space_passthrough_settings: {
+    #                     },
+    #                     hdr_10_settings: {
+    #                       max_cll: 1,
+    #                       max_fall: 1,
+    #                     },
+    #                     rec_601_settings: {
+    #                     },
+    #                     rec_709_settings: {
+    #                     },
+    #                   },
+    #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
+    #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   framerate_denominator: 1, # required
+    #                   framerate_numerator: 1, # required
+    #                   gop_closed_cadence: 1,
+    #                   gop_size: 1.0,
+    #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                   level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
+    #                   look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
+    #                   max_bitrate: 1,
+    #                   min_i_interval: 1,
+    #                   par_denominator: 1,
+    #                   par_numerator: 1,
+    #                   profile: "MAIN", # accepts MAIN, MAIN_10BIT
+    #                   qvbr_quality_level: 1,
+    #                   rate_control_mode: "CBR", # accepts CBR, QVBR
+    #                   scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #                   slices: 1,
+    #                   tier: "HIGH", # accepts HIGH, MAIN
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #                 },
     #               },
@@ -4978,6 +5033,7 @@ module Aws::MediaLive
     #                   media_package_output_settings: {
     #                   },
     #                   ms_smooth_output_settings: {
+    #                     h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                     name_modifier: "__string",
     #                   },
     #                   rtmp_output_settings: {
@@ -5083,6 +5139,14 @@ module Aws::MediaLive
     #                 buf_fill_pct: 1,
     #                 buf_size: 1,
     #                 color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #                 color_space_settings: {
+    #                   color_space_passthrough_settings: {
+    #                   },
+    #                   rec_601_settings: {
+    #                   },
+    #                   rec_709_settings: {
+    #                   },
+    #                 },
     #                 entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                 fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                 flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
@@ -5104,7 +5168,7 @@ module Aws::MediaLive
     #                 par_numerator: 1,
     #                 profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                 qvbr_quality_level: 1,
-    #                 rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
+    #                 rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #                 scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slices: 1,
@@ -5113,6 +5177,47 @@ module Aws::MediaLive
     #                 subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #                 syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #                 temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                 timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
+    #               },
+    #               h265_settings: {
+    #                 adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
+    #                 alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
+    #                 bitrate: 1,
+    #                 buf_size: 1,
+    #                 color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #                 color_space_settings: {
+    #                   color_space_passthrough_settings: {
+    #                   },
+    #                   hdr_10_settings: {
+    #                     max_cll: 1,
+    #                     max_fall: 1,
+    #                   },
+    #                   rec_601_settings: {
+    #                   },
+    #                   rec_709_settings: {
+    #                   },
+    #                 },
+    #                 fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
+    #                 flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                 framerate_denominator: 1, # required
+    #                 framerate_numerator: 1, # required
+    #                 gop_closed_cadence: 1,
+    #                 gop_size: 1.0,
+    #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                 level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
+    #                 look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
+    #                 max_bitrate: 1,
+    #                 min_i_interval: 1,
+    #                 par_denominator: 1,
+    #                 par_numerator: 1,
+    #                 profile: "MAIN", # accepts MAIN, MAIN_10BIT
+    #                 qvbr_quality_level: 1,
+    #                 rate_control_mode: "CBR", # accepts CBR, QVBR
+    #                 scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #                 slices: 1,
+    #                 tier: "HIGH", # accepts HIGH, MAIN
     #                 timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #               },
     #             },
@@ -5432,6 +5537,41 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # H264 Color Space Settings
+    #
+    # @note When making an API call, you may pass H264ColorSpaceSettings
+    #   data as a hash:
+    #
+    #       {
+    #         color_space_passthrough_settings: {
+    #         },
+    #         rec_601_settings: {
+    #         },
+    #         rec_709_settings: {
+    #         },
+    #       }
+    #
+    # @!attribute [rw] color_space_passthrough_settings
+    #   Passthrough applies no color space conversion to the output
+    #   @return [Types::ColorSpacePassthroughSettings]
+    #
+    # @!attribute [rw] rec_601_settings
+    #   Rec601 Settings
+    #   @return [Types::Rec601Settings]
+    #
+    # @!attribute [rw] rec_709_settings
+    #   Rec709 Settings
+    #   @return [Types::Rec709Settings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264ColorSpaceSettings AWS API Documentation
+    #
+    class H264ColorSpaceSettings < Struct.new(
+      :color_space_passthrough_settings,
+      :rec_601_settings,
+      :rec_709_settings)
+      include Aws::Structure
+    end
+
     # H264 Settings
     #
     # @note When making an API call, you may pass H264Settings
@@ -5444,6 +5584,14 @@ module Aws::MediaLive
     #         buf_fill_pct: 1,
     #         buf_size: 1,
     #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #         color_space_settings: {
+    #           color_space_passthrough_settings: {
+    #           },
+    #           rec_601_settings: {
+    #           },
+    #           rec_709_settings: {
+    #           },
+    #         },
     #         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #         fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #         flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
@@ -5465,7 +5613,7 @@ module Aws::MediaLive
     #         par_numerator: 1,
     #         profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #         qvbr_quality_level: 1,
-    #         rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
+    #         rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #         scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #         slices: 1,
@@ -5503,12 +5651,16 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] buf_size
-    #   Size of buffer (HRD buffer model) in bits/second.
+    #   Size of buffer (HRD buffer model) in bits.
     #   @return [Integer]
     #
     # @!attribute [rw] color_metadata
     #   Includes colorspace metadata in the output.
     #   @return [String]
+    #
+    # @!attribute [rw] color_space_settings
+    #   Color Space settings
+    #   @return [Types::H264ColorSpaceSettings]
     #
     # @!attribute [rw] entropy_encoding
     #   Entropy encoding mode. Use cabac (must be in Main or High profile)
@@ -5703,6 +5855,7 @@ module Aws::MediaLive
       :buf_fill_pct,
       :buf_size,
       :color_metadata,
+      :color_space_settings,
       :entropy_encoding,
       :fixed_afd,
       :flicker_aq,
@@ -5734,6 +5887,319 @@ module Aws::MediaLive
       :syntax,
       :temporal_aq,
       :timecode_insertion)
+      include Aws::Structure
+    end
+
+    # H265 Color Space Settings
+    #
+    # @note When making an API call, you may pass H265ColorSpaceSettings
+    #   data as a hash:
+    #
+    #       {
+    #         color_space_passthrough_settings: {
+    #         },
+    #         hdr_10_settings: {
+    #           max_cll: 1,
+    #           max_fall: 1,
+    #         },
+    #         rec_601_settings: {
+    #         },
+    #         rec_709_settings: {
+    #         },
+    #       }
+    #
+    # @!attribute [rw] color_space_passthrough_settings
+    #   Passthrough applies no color space conversion to the output
+    #   @return [Types::ColorSpacePassthroughSettings]
+    #
+    # @!attribute [rw] hdr_10_settings
+    #   Hdr10 Settings
+    #   @return [Types::Hdr10Settings]
+    #
+    # @!attribute [rw] rec_601_settings
+    #   Rec601 Settings
+    #   @return [Types::Rec601Settings]
+    #
+    # @!attribute [rw] rec_709_settings
+    #   Rec709 Settings
+    #   @return [Types::Rec709Settings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265ColorSpaceSettings AWS API Documentation
+    #
+    class H265ColorSpaceSettings < Struct.new(
+      :color_space_passthrough_settings,
+      :hdr_10_settings,
+      :rec_601_settings,
+      :rec_709_settings)
+      include Aws::Structure
+    end
+
+    # H265 Settings
+    #
+    # @note When making an API call, you may pass H265Settings
+    #   data as a hash:
+    #
+    #       {
+    #         adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #         afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
+    #         alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
+    #         bitrate: 1,
+    #         buf_size: 1,
+    #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #         color_space_settings: {
+    #           color_space_passthrough_settings: {
+    #           },
+    #           hdr_10_settings: {
+    #             max_cll: 1,
+    #             max_fall: 1,
+    #           },
+    #           rec_601_settings: {
+    #           },
+    #           rec_709_settings: {
+    #           },
+    #         },
+    #         fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
+    #         flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #         framerate_denominator: 1, # required
+    #         framerate_numerator: 1, # required
+    #         gop_closed_cadence: 1,
+    #         gop_size: 1.0,
+    #         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #         level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
+    #         look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
+    #         max_bitrate: 1,
+    #         min_i_interval: 1,
+    #         par_denominator: 1,
+    #         par_numerator: 1,
+    #         profile: "MAIN", # accepts MAIN, MAIN_10BIT
+    #         qvbr_quality_level: 1,
+    #         rate_control_mode: "CBR", # accepts CBR, QVBR
+    #         scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #         slices: 1,
+    #         tier: "HIGH", # accepts HIGH, MAIN
+    #         timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
+    #       }
+    #
+    # @!attribute [rw] adaptive_quantization
+    #   Adaptive quantization. Allows intra-frame quantizers to vary to
+    #   improve visual quality.
+    #   @return [String]
+    #
+    # @!attribute [rw] afd_signaling
+    #   Indicates that AFD values will be written into the output stream. If
+    #   afdSignaling is "auto", the system will try to preserve the input
+    #   AFD value (in cases where multiple AFD values are valid). If set to
+    #   "fixed", the AFD value will be the value configured in the
+    #   fixedAfd parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternative_transfer_function
+    #   Whether or not EML should insert an Alternative Transfer Function
+    #   SEI message to support backwards compatibility with non-HDR decoders
+    #   and displays.
+    #   @return [String]
+    #
+    # @!attribute [rw] bitrate
+    #   Average bitrate in bits/second. Required when the rate control mode
+    #   is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each
+    #   output must have a unique value when its bitrate is rounded down to
+    #   the nearest multiple of 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] buf_size
+    #   Size of buffer (HRD buffer model) in bits.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] color_metadata
+    #   Includes colorspace metadata in the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] color_space_settings
+    #   Color Space settings
+    #   @return [Types::H265ColorSpaceSettings]
+    #
+    # @!attribute [rw] fixed_afd
+    #   Four bit AFD value to write on all frames of video in the output
+    #   stream. Only valid when afdSignaling is set to 'Fixed'.
+    #   @return [String]
+    #
+    # @!attribute [rw] flicker_aq
+    #   If set to enabled, adjust quantization within each frame to reduce
+    #   flicker or 'pop' on I-frames.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   Framerate denominator.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 =
+    #   23.976 fps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gop_closed_cadence
+    #   Frequency of closed GOPs. In streaming applications, it is
+    #   recommended that this be set to 1 so a decoder joining mid-stream
+    #   will receive an IDR frame as quickly as possible. Setting this value
+    #   to 0 will break output segmenting.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gop_size
+    #   GOP size (keyframe interval) in units of either frames or seconds
+    #   per gopSizeUnits. Must be greater than zero.
+    #   @return [Float]
+    #
+    # @!attribute [rw] gop_size_units
+    #   Indicates if the gopSize is specified in frames or seconds. If
+    #   seconds the system will convert the gopSize into a frame count at
+    #   run time.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   H.265 Level.
+    #   @return [String]
+    #
+    # @!attribute [rw] look_ahead_rate_control
+    #   Amount of lookahead. A value of low can decrease latency and memory
+    #   usage, while high can produce better quality for certain content.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_bitrate
+    #   For QVBR: See the tooltip for Quality level
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_i_interval
+    #   Only meaningful if sceneChangeDetect is set to enabled. Enforces
+    #   separation between repeated (cadence) I-frames and I-frames inserted
+    #   by Scene Change Detection. If a scene change I-frame is within
+    #   I-interval frames of a cadence I-frame, the GOP is shrunk and/or
+    #   stretched to the scene change I-frame. GOP stretch requires enabling
+    #   lookahead as well as setting I-interval. The normal cadence resumes
+    #   for the next GOP. Note: Maximum GOP stretch = GOP size +
+    #   Min-I-interval - 1
+    #   @return [Integer]
+    #
+    # @!attribute [rw] par_denominator
+    #   Pixel Aspect Ratio denominator.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] par_numerator
+    #   Pixel Aspect Ratio numerator.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   H.265 Profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] qvbr_quality_level
+    #   Controls the target quality for the video encode. Applies only when
+    #   the rate control mode is QVBR. Set values for the QVBR quality level
+    #   field and Max bitrate field that suit your most important viewing
+    #   devices. Recommended values are: - Primary screen: Quality level: 8
+    #   to 10. Max bitrate: 4M - PC or tablet: Quality level: 7. Max
+    #   bitrate: 1.5M to 3M - Smartphone: Quality level: 6. Max bitrate: 1M
+    #   to 1.5M
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rate_control_mode
+    #   Rate control mode. QVBR: Quality will match the specified quality
+    #   level except when it is constrained by the maximum bitrate.
+    #   Recommended if you or your viewers pay for bandwidth. CBR: Quality
+    #   varies, depending on the video complexity. Recommended only if you
+    #   distribute your assets to devices that cannot handle variable
+    #   bitrates.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type
+    #   Sets the scan type of the output to progressive or top-field-first
+    #   interlaced.
+    #   @return [String]
+    #
+    # @!attribute [rw] scene_change_detect
+    #   Scene change detection.
+    #   @return [String]
+    #
+    # @!attribute [rw] slices
+    #   Number of slices per picture. Must be less than or equal to the
+    #   number of macroblock rows for progressive pictures, and less than or
+    #   equal to half the number of macroblock rows for interlaced pictures.
+    #   This field is optional; when no value is specified the encoder will
+    #   choose the number of slices based on encode resolution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tier
+    #   H.265 Tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] timecode_insertion
+    #   Determines how timecodes should be inserted into the video
+    #   elementary stream. - 'disabled': Do not include timecodes -
+    #   'picTimingSei': Pass through picture timing SEI messages from the
+    #   source specified in Timecode Config
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265Settings AWS API Documentation
+    #
+    class H265Settings < Struct.new(
+      :adaptive_quantization,
+      :afd_signaling,
+      :alternative_transfer_function,
+      :bitrate,
+      :buf_size,
+      :color_metadata,
+      :color_space_settings,
+      :fixed_afd,
+      :flicker_aq,
+      :framerate_denominator,
+      :framerate_numerator,
+      :gop_closed_cadence,
+      :gop_size,
+      :gop_size_units,
+      :level,
+      :look_ahead_rate_control,
+      :max_bitrate,
+      :min_i_interval,
+      :par_denominator,
+      :par_numerator,
+      :profile,
+      :qvbr_quality_level,
+      :rate_control_mode,
+      :scan_type,
+      :scene_change_detect,
+      :slices,
+      :tier,
+      :timecode_insertion)
+      include Aws::Structure
+    end
+
+    # Hdr10 Settings
+    #
+    # @note When making an API call, you may pass Hdr10Settings
+    #   data as a hash:
+    #
+    #       {
+    #         max_cll: 1,
+    #         max_fall: 1,
+    #       }
+    #
+    # @!attribute [rw] max_cll
+    #   Maximum Content Light Level An integer metadata value defining the
+    #   maximum light level, in nits, of any single pixel within an encoded
+    #   HDR video stream or file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_fall
+    #   Maximum Frame Average Light Level An integer metadata value defining
+    #   the maximum average light level, in nits, for any single frame
+    #   within an encoded HDR video stream or file.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Hdr10Settings AWS API Documentation
+    #
+    class Hdr10Settings < Struct.new(
+      :max_cll,
+      :max_fall)
       include Aws::Structure
     end
 
@@ -8628,8 +9094,15 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #         name_modifier: "__string",
     #       }
+    #
+    # @!attribute [rw] h265_packaging_type
+    #   Only applicable when this output is referencing an H.265 video
+    #   description. Specifies whether MP4 segments should be packaged as
+    #   HEV1 or HVC1.
+    #   @return [String]
     #
     # @!attribute [rw] name_modifier
     #   String concatenated to the end of the destination filename. Required
@@ -8639,6 +9112,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MsSmoothOutputSettings AWS API Documentation
     #
     class MsSmoothOutputSettings < Struct.new(
+      :h265_packaging_type,
       :name_modifier)
       include Aws::Structure
     end
@@ -8875,6 +9349,7 @@ module Aws::MediaLive
     #           media_package_output_settings: {
     #           },
     #           ms_smooth_output_settings: {
+    #             h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #             name_modifier: "__string",
     #           },
     #           rtmp_output_settings: {
@@ -9334,6 +9809,7 @@ module Aws::MediaLive
     #               media_package_output_settings: {
     #               },
     #               ms_smooth_output_settings: {
+    #                 h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                 name_modifier: "__string",
     #               },
     #               rtmp_output_settings: {
@@ -9763,6 +10239,7 @@ module Aws::MediaLive
     #         media_package_output_settings: {
     #         },
     #         ms_smooth_output_settings: {
+    #           h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #           name_modifier: "__string",
     #         },
     #         rtmp_output_settings: {
@@ -10070,6 +10547,22 @@ module Aws::MediaLive
       :reservation)
       include Aws::Structure
     end
+
+    # Rec601 Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Rec601Settings AWS API Documentation
+    #
+    class Rec601Settings < Aws::EmptyStructure; end
+
+    # Rec709 Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Rec709Settings AWS API Documentation
+    #
+    class Rec709Settings < Aws::EmptyStructure; end
 
     # Remix Settings
     #
@@ -11191,22 +11684,6 @@ module Aws::MediaLive
     #
     class Scte35TimeSignalScheduleActionSettings < Struct.new(
       :scte_35_descriptors)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] provider_name
-    #   Name of provider
-    #   @return [String]
-    #
-    # @!attribute [rw] service_name
-    #   Name of service
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ServiceDescriptor AWS API Documentation
-    #
-    class ServiceDescriptor < Struct.new(
-      :provider_name,
-      :service_name)
       include Aws::Structure
     end
 
@@ -12608,6 +13085,7 @@ module Aws::MediaLive
     #                     media_package_output_settings: {
     #                     },
     #                     ms_smooth_output_settings: {
+    #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                       name_modifier: "__string",
     #                     },
     #                     rtmp_output_settings: {
@@ -12713,6 +13191,14 @@ module Aws::MediaLive
     #                   buf_fill_pct: 1,
     #                   buf_size: 1,
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #                   color_space_settings: {
+    #                     color_space_passthrough_settings: {
+    #                     },
+    #                     rec_601_settings: {
+    #                     },
+    #                     rec_709_settings: {
+    #                     },
+    #                   },
     #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
@@ -12734,7 +13220,7 @@ module Aws::MediaLive
     #                   par_numerator: 1,
     #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                   qvbr_quality_level: 1,
-    #                   rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
+    #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
@@ -12743,6 +13229,47 @@ module Aws::MediaLive
     #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #                   syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #                   temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
+    #                 },
+    #                 h265_settings: {
+    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
+    #                   alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
+    #                   bitrate: 1,
+    #                   buf_size: 1,
+    #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #                   color_space_settings: {
+    #                     color_space_passthrough_settings: {
+    #                     },
+    #                     hdr_10_settings: {
+    #                       max_cll: 1,
+    #                       max_fall: 1,
+    #                     },
+    #                     rec_601_settings: {
+    #                     },
+    #                     rec_709_settings: {
+    #                     },
+    #                   },
+    #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
+    #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   framerate_denominator: 1, # required
+    #                   framerate_numerator: 1, # required
+    #                   gop_closed_cadence: 1,
+    #                   gop_size: 1.0,
+    #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                   level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
+    #                   look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
+    #                   max_bitrate: 1,
+    #                   min_i_interval: 1,
+    #                   par_denominator: 1,
+    #                   par_numerator: 1,
+    #                   profile: "MAIN", # accepts MAIN, MAIN_10BIT
+    #                   qvbr_quality_level: 1,
+    #                   rate_control_mode: "CBR", # accepts CBR, QVBR
+    #                   scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #                   slices: 1,
+    #                   tier: "HIGH", # accepts HIGH, MAIN
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #                 },
     #               },
@@ -13172,6 +13699,14 @@ module Aws::MediaLive
     #           buf_fill_pct: 1,
     #           buf_size: 1,
     #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #           color_space_settings: {
+    #             color_space_passthrough_settings: {
+    #             },
+    #             rec_601_settings: {
+    #             },
+    #             rec_709_settings: {
+    #             },
+    #           },
     #           entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #           fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #           flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
@@ -13193,7 +13728,7 @@ module Aws::MediaLive
     #           par_numerator: 1,
     #           profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #           qvbr_quality_level: 1,
-    #           rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
+    #           rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #           scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #           slices: 1,
@@ -13202,6 +13737,47 @@ module Aws::MediaLive
     #           subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #           syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #           temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #           timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
+    #         },
+    #         h265_settings: {
+    #           adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
+    #           alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
+    #           bitrate: 1,
+    #           buf_size: 1,
+    #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #           color_space_settings: {
+    #             color_space_passthrough_settings: {
+    #             },
+    #             hdr_10_settings: {
+    #               max_cll: 1,
+    #               max_fall: 1,
+    #             },
+    #             rec_601_settings: {
+    #             },
+    #             rec_709_settings: {
+    #             },
+    #           },
+    #           fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
+    #           flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #           framerate_denominator: 1, # required
+    #           framerate_numerator: 1, # required
+    #           gop_closed_cadence: 1,
+    #           gop_size: 1.0,
+    #           gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #           level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
+    #           look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
+    #           max_bitrate: 1,
+    #           min_i_interval: 1,
+    #           par_denominator: 1,
+    #           par_numerator: 1,
+    #           profile: "MAIN", # accepts MAIN, MAIN_10BIT
+    #           qvbr_quality_level: 1,
+    #           rate_control_mode: "CBR", # accepts CBR, QVBR
+    #           scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #           slices: 1,
+    #           tier: "HIGH", # accepts HIGH, MAIN
     #           timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #         },
     #       }
@@ -13214,11 +13790,16 @@ module Aws::MediaLive
     #   H264 Settings
     #   @return [Types::H264Settings]
     #
+    # @!attribute [rw] h265_settings
+    #   H265 Settings
+    #   @return [Types::H265Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoCodecSettings AWS API Documentation
     #
     class VideoCodecSettings < Struct.new(
       :frame_capture_settings,
-      :h264_settings)
+      :h264_settings,
+      :h265_settings)
       include Aws::Structure
     end
 
@@ -13239,6 +13820,14 @@ module Aws::MediaLive
     #             buf_fill_pct: 1,
     #             buf_size: 1,
     #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #             color_space_settings: {
+    #               color_space_passthrough_settings: {
+    #               },
+    #               rec_601_settings: {
+    #               },
+    #               rec_709_settings: {
+    #               },
+    #             },
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #             fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #             flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
@@ -13260,7 +13849,7 @@ module Aws::MediaLive
     #             par_numerator: 1,
     #             profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #             qvbr_quality_level: 1,
-    #             rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
+    #             rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #             scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,
@@ -13269,6 +13858,47 @@ module Aws::MediaLive
     #             subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #             syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #             temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #             timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
+    #           },
+    #           h265_settings: {
+    #             adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
+    #             alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
+    #             bitrate: 1,
+    #             buf_size: 1,
+    #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #             color_space_settings: {
+    #               color_space_passthrough_settings: {
+    #               },
+    #               hdr_10_settings: {
+    #                 max_cll: 1,
+    #                 max_fall: 1,
+    #               },
+    #               rec_601_settings: {
+    #               },
+    #               rec_709_settings: {
+    #               },
+    #             },
+    #             fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
+    #             flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #             framerate_denominator: 1, # required
+    #             framerate_numerator: 1, # required
+    #             gop_closed_cadence: 1,
+    #             gop_size: 1.0,
+    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #             level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
+    #             look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
+    #             max_bitrate: 1,
+    #             min_i_interval: 1,
+    #             par_denominator: 1,
+    #             par_numerator: 1,
+    #             profile: "MAIN", # accepts MAIN, MAIN_10BIT
+    #             qvbr_quality_level: 1,
+    #             rate_control_mode: "CBR", # accepts CBR, QVBR
+    #             scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #             slices: 1,
+    #             tier: "HIGH", # accepts HIGH, MAIN
     #             timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #           },
     #         },
@@ -13364,8 +13994,9 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] color_space
-    #   Specifies the colorspace of an input. This setting works in tandem
-    #   with colorSpaceConversion to determine if any conversion will be
+    #   Specifies the color space of an input. This setting works in tandem
+    #   with colorSpaceUsage and a video description's
+    #   colorSpaceSettingsChoice to determine if any conversion will be
     #   performed.
     #   @return [String]
     #

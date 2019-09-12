@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.212.0 (2019-09-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WorkMailMessageFlow`.
+
 1.211.0 (2019-09-09)
 ------------------
 

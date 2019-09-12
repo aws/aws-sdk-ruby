@@ -193,6 +193,7 @@ module Aws
   autoload :WorkDocs, 'aws-sdk-workdocs'
   autoload :WorkLink, 'aws-sdk-worklink'
   autoload :WorkMail, 'aws-sdk-workmail'
+  autoload :WorkMailMessageFlow, 'aws-sdk-workmailmessageflow'
   autoload :WorkSpaces, 'aws-sdk-workspaces'
   autoload :XRay, 'aws-sdk-xray'
   # end service gems

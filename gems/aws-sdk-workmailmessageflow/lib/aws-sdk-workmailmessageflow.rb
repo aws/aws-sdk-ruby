@@ -8,16 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-medialive/types'
-require_relative 'aws-sdk-medialive/client_api'
-require_relative 'aws-sdk-medialive/client'
-require_relative 'aws-sdk-medialive/errors'
-require_relative 'aws-sdk-medialive/waiters'
-require_relative 'aws-sdk-medialive/resource'
-require_relative 'aws-sdk-medialive/customizations'
+require_relative 'aws-sdk-workmailmessageflow/types'
+require_relative 'aws-sdk-workmailmessageflow/client_api'
+require_relative 'aws-sdk-workmailmessageflow/client'
+require_relative 'aws-sdk-workmailmessageflow/errors'
+require_relative 'aws-sdk-workmailmessageflow/resource'
+require_relative 'aws-sdk-workmailmessageflow/customizations'
 
-# This module provides support for AWS Elemental MediaLive. This module is available in the
-# `aws-sdk-medialive` gem.
+# This module provides support for Amazon WorkMail Message Flow. This module is available in the
+# `aws-sdk-workmailmessageflow` gem.
 #
 # # Client
 #
@@ -29,20 +28,20 @@ require_relative 'aws-sdk-medialive/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS Elemental MediaLive all
+# Errors returned from Amazon WorkMail Message Flow all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::MediaLive::Errors::ServiceError
+#     rescue Aws::WorkMailMessageFlow::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::MediaLive
+module Aws::WorkMailMessageFlow
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.0.0'
 
 end

@@ -255,7 +255,7 @@ module Aws::ElasticLoadBalancingV2
     # @!group API Operations
 
     # Adds the specified SSL server certificate to the certificate list for
-    # the specified HTTPS listener.
+    # the specified HTTPS or TLS listener.
     #
     # If the certificate in already in the certificate list, the call is
     # successful but the certificate is not added again.
@@ -705,7 +705,8 @@ module Aws::ElasticLoadBalancingV2
     #   your subnets.
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones. You can specify one Elastic IP address per subnet.
+    #   Availability Zones. You can specify one Elastic IP address per subnet
+    #   if you need static IP addresses for your load balancer.
     #
     # @option params [Array<String>] :security_groups
     #   \[Application Load Balancers\] The IDs of the security groups for the
@@ -1197,7 +1198,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :vpc_id
     #   The identifier of the virtual private cloud (VPC). If the target is a
-    #   Lambda function, this parameter does not apply.
+    #   Lambda function, this parameter does not apply. Otherwise, this
+    #   parameter is required.
     #
     # @option params [String] :health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
@@ -1601,7 +1603,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Describes the default certificate and the certificate list for the
-    # specified HTTPS listener.
+    # specified HTTPS or TLS listener.
     #
     # If the default certificate is also in the certificate list, it appears
     # twice in the results (once with `IsDefault` set to true and once with
@@ -3581,7 +3583,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Removes the specified certificate from the certificate list for the
-    # specified HTTPS listener.
+    # specified HTTPS or TLS listener.
     #
     # You can't remove the default certificate for a listener. To replace
     # the default certificate, call ModifyListener.
@@ -3984,7 +3986,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

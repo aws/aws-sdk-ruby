@@ -202,6 +202,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-workdocs', '~> 1')
   spec.add_dependency('aws-sdk-worklink', '~> 1')
   spec.add_dependency('aws-sdk-workmail', '~> 1')
+  spec.add_dependency('aws-sdk-workmailmessageflow', '~> 1')
   spec.add_dependency('aws-sdk-workspaces', '~> 1')
   spec.add_dependency('aws-sdk-xray', '~> 1')
   # end service gems
