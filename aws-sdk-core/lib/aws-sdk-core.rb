@@ -212,6 +212,7 @@ module Aws
     WorkDocs
     WorkLink
     WorkMail
+    WorkMailMessageFlow
     WorkSpaces
     XRay
   )
