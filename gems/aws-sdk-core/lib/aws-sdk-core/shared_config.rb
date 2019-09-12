@@ -99,12 +99,10 @@ module Aws
     def credentials(opts = {})
       p = opts[:profile] || @profile_name
       validate_profile_exists(p) if credentials_present?
-      if credentials = credentials_from_shared(p, opts)
+      if (credentials = credentials_from_shared(p, opts))
         credentials
-      elsif credentials = credentials_from_config(p, opts)
+      elsif (credentials = credentials_from_config(p, opts))
         credentials
-      else
-        nil
       end
     end
 
@@ -228,6 +226,7 @@ module Aws
     end
 
     private
+
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||
         (@parsed_config && !@parsed_config.empty?)
@@ -293,17 +292,17 @@ module Aws
       end
     end
 
-    def resolve_source_profile(src)
-      if (creds = credentials(profile: src))
+    def resolve_source_profile(profile)
+      if (creds = credentials(profile: profile))
         creds # static credentials
-      elsif (provider = assume_role_web_identity_credentials_from_config(src))
+      elsif (provider = assume_role_web_identity_credentials_from_config(profile))
         if provider.credentials.set?
           provider.credentials
-        else
-          nil
         end
-      else
-        nil
+      elsif (provider = assume_role_process_credentials_from_config(profile))
+        if provider.credentials.set?
+          provider.credentials
+        end
       end
     end
 
@@ -322,6 +321,11 @@ module Aws
           "Unsupported credential_source: #{credential_source}"
         )
       end
+    end
+
+    def assume_role_process_credentials_from_config(profile)
+      credential_process = credentials_process(profile)
+      ProcessCredentials.new(credential_process) if credential_process
     end
 
     def credentials_from_shared(profile, opts)

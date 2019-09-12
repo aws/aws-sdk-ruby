@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support assuming a role with `:source_profile` from a profile that can be resolved from a `ProcessCredentials` provider.
+
 3.67.0 (2019-09-09)
 ------------------
 
@@ -9,17 +11,17 @@ Unreleased Changes
 3.66.0 (2019-09-04)
 ------------------
 
-* Feature - Support CLI AWS_DEFAULT_PROFILE environment variable [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1452)
+* Feature - Support CLI AWS_DEFAULT_PROFILE environment variable [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1452).
 
 3.65.1 (2019-08-28)
 ------------------
 
-* Issue - Auto refresh credentials for Route53 `ExpiredToken` errors
+* Issue - Auto refresh credentials for Route53 `ExpiredToken` errors.
 
 3.65.0 (2019-08-27)
 ------------------
 
-* Feature - Support assuming an role `:source_from` profile with `AssumeRoleWebIdentityCredentials`
+* Feature - Support assuming a role `:source_profile` profile with `AssumeRoleWebIdentityCredentials`.
 
 3.64.0 (2019-08-20)
 ------------------
@@ -39,12 +41,12 @@ Unreleased Changes
 3.61.2 (2019-07-29)
 ------------------
 
-* Issue - Add `Aws::STS::InvalidIdentityToken` and `Aws::Errors::NoSuchEndpointError` error for retry
+* Issue - Add `Aws::STS::InvalidIdentityToken` and `Aws::Errors::NoSuchEndpointError` error for retry.
 
 3.61.1 (2019-07-25)
 ------------------
 
-* Issue - Fix default STS Client credential sourcing in Aws::AssumeRoleWebIdentityCredentialsProvider
+* Issue - Fix default STS Client credential sourcing in `Aws::AssumeRoleWebIdentityCredentialsProvider`.
 
 3.61.0 (2019-07-24)
 ------------------
