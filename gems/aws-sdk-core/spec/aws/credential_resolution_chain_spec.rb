@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 module Aws
   describe "Credential Resolution Chain" do
@@ -58,7 +58,7 @@ module Aws
         )
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: "ar_web_identity", region: "us-west-2")
-        expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+        expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
       end
 
       it 'prefers assume role over shared config' do
@@ -70,22 +70,22 @@ module Aws
           "AR_TOKEN"
         )
         client = ApiHelper.sample_rest_xml::Client.new(profile: "ar_plus_creds", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+        expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
       end
 
       it 'prefers shared credential file static credentials over shared config' do
         client = ApiHelper.sample_rest_xml::Client.new(profile: "credentials_first", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("ACCESS_KEY_CRD")
+        expect(client.config.credentials.credentials.access_key_id).to eq("ACCESS_KEY_CRD")
       end
 
       it 'will source static credentials from shared config after shared credentials' do
         client = ApiHelper.sample_rest_xml::Client.new(profile: "incomplete_cred", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("ACCESS_KEY_SC1")
+        expect(client.config.credentials.credentials.access_key_id).to eq("ACCESS_KEY_SC1")
       end
 
       it 'prefers process credentials over metadata credentials' do
         client = ApiHelper.sample_rest_xml::Client.new(profile: "creds_from_process", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("AK_PROC1")
+        expect(client.config.credentials.credentials.access_key_id).to eq("AK_PROC1")
       end
 
       it 'prefers direct credentials over process credentials' do
@@ -94,7 +94,7 @@ module Aws
           "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
         })
         client = ApiHelper.sample_rest_xml::Client.new(profile: "creds_from_process", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("AKID_ENV_STUB")
+        expect(client.config.credentials.credentials.access_key_id).to eq("AKID_ENV_STUB")
       end
 
       it 'attempts to fetch metadata credentials last' do
@@ -117,7 +117,7 @@ module Aws
 }
 JSON
         client = ApiHelper.sample_rest_xml::Client.new(profile: "nonexistant", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("akid-md")
+        expect(client.config.credentials.credentials.access_key_id).to eq("akid-md")
       end
 
       describe 'Assume Role Resolution' do
@@ -150,7 +150,20 @@ JSON
             "AR_TOKEN"
           )
           client = ApiHelper.sample_rest_xml::Client.new(profile: "ar_web_src", region: "us-east-1")
-          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+          expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
+        end
+
+        it 'supports :source_profile from process credentials' do
+          assume_role_stub(
+            "arn:aws:iam:123456789012:role/foo",
+            "AK_PROC1",
+            "AK_PROC1",
+            "SECRET_AK_PROC1",
+            "TOKEN_PROC1"
+          )
+
+          client = ApiHelper.sample_rest_xml::Client.new(profile: "creds_from_sc_process", region: "us-east-1")
+          expect(client.config.credentials.credentials.access_key_id).to eq("AK_PROC1")
         end
 
         it 'will explicitly raise if credential_source is present but invalid' do
@@ -174,7 +187,7 @@ JSON
             "AR_TOKEN"
           )
           client = ApiHelper.sample_rest_xml::Client.new(profile: "assumerole_sc", region: "us-east-1")
-          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+          expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
         end
 
         it 'will then try to assume a role from shared config' do
@@ -186,7 +199,7 @@ JSON
             "AR_TOKEN"
           )
           client = ApiHelper.sample_rest_xml::Client.new(profile: "ar_from_self", region: "us-east-1")
-          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+          expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
         end
 
         it 'will assume a role from config using source credentials in shared credentials' do
@@ -198,7 +211,7 @@ JSON
             "AR_TOKEN"
           )
           client = ApiHelper.sample_rest_xml::Client.new(profile: "creds_from_sc", region: "us-east-1")
-          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+          expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
         end
       end
 
@@ -230,7 +243,7 @@ JSON
           profile: profile,
           region: "us-east-1"
         )
-        expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+        expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
       end
 
       it 'can assume a role with ECS Credentials as a source' do
@@ -261,7 +274,7 @@ JSON
           profile: profile,
           region: "us-east-1"
         )
-        expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+        expect(client.config.credentials.credentials.access_key_id).to eq("AR_AKID")
       end
     end
 
@@ -287,7 +300,7 @@ JSON
           profile: "fooprofile",
           region: "us-east-1"
         )
-        expect(client.config.credentials.access_key_id).to eq("ACCESS_DIRECT")
+        expect(client.config.credentials.credentials.access_key_id).to eq("ACCESS_DIRECT")
       end
 
       it 'prefers ENV credentials over shared config' do
@@ -296,7 +309,7 @@ JSON
           "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
         })
         client = ApiHelper.sample_rest_xml::Client.new(profile: "fooprofile", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("AKID_ENV_STUB")
+        expect(client.config.credentials.credentials.access_key_id).to eq("AKID_ENV_STUB")
       end
 
       it 'will not load credentials from shared config' do
@@ -329,7 +342,7 @@ JSON
 }
 JSON
         client = ApiHelper.sample_rest_xml::Client.new(profile: "nonexistant", region: "us-east-1")
-        expect(client.config.credentials.access_key_id).to eq("akid-md")
+        expect(client.config.credentials.credentials.access_key_id).to eq("akid-md")
       end
     end
 
