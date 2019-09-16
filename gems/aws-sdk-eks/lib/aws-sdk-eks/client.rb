@@ -364,6 +364,11 @@ module Aws::EKS
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata to apply to the cluster to assist with categorization and
+    #   organization. Each tag consists of a key and an optional value, both
+    #   of which you define.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -414,6 +419,9 @@ module Aws::EKS
     #       ],
     #     },
     #     client_request_token: "String",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -440,6 +448,8 @@ module Aws::EKS
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
+    #   resp.cluster.tags #=> Hash
+    #   resp.cluster.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCluster AWS API Documentation
     #
@@ -515,6 +525,8 @@ module Aws::EKS
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
+    #   resp.cluster.tags #=> Hash
+    #   resp.cluster.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCluster AWS API Documentation
     #
@@ -613,6 +625,8 @@ module Aws::EKS
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
+    #   resp.cluster.tags #=> Hash
+    #   resp.cluster.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCluster AWS API Documentation
     #
@@ -739,6 +753,37 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # List the tags for an Amazon EKS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. Currently, the supported resources are Amazon EKS
+    #   clusters.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Lists the updates associated with an Amazon EKS cluster in your AWS
     # account, in the specified Region.
     #
@@ -786,6 +831,65 @@ module Aws::EKS
     # @param [Hash] params ({})
     def list_updates(params = {}, options = {})
       req = build_request(:list_updates, params)
+      req.send_request(options)
+    end
+
+    # Associates the specified tags to a resource with the specified
+    # `resourceArn`. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are deleted as well.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   Currently, the supported resources are Amazon EKS clusters.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource. A tag is an array of key-value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   tags. Currently, the supported resources are Amazon EKS clusters.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -981,7 +1085,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

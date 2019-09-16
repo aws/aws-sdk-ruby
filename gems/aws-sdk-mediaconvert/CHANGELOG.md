@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2019-09-16)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for multi-DRM SPEKE with CMAF outputs, MP3 ingest, and options for improved video quality.
+
 1.35.0 (2019-08-28)
 ------------------
 

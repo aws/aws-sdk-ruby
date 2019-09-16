@@ -224,10 +224,9 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] channels
-    #   Set Channels to specify the number of channels in this output audio
-    #   track. Choosing Mono in the console will give you 1 output channel;
-    #   choosing Stereo will give you 2. In the API, valid values are 1 and
-    #   2.
+    #   Specify the number of channels in this output audio track. Valid
+    #   values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and
+    #   so on, up to 64.
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
@@ -249,18 +248,36 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #         source_ancillary_channel_number: 1,
+    #         terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #       }
+    #
+    # @!attribute [rw] convert_608_to_708
+    #   Specify whether this set of input captions appears in your outputs
+    #   in both 608 and 708 format. If you choose Upconvert (UPCONVERT),
+    #   MediaConvert includes the captions data in two ways: it passes the
+    #   608 data through using the 608 compatibility bytes fields of the 708
+    #   wrapper, and it also translates the 608 data into 708.
+    #   @return [String]
     #
     # @!attribute [rw] source_ancillary_channel_number
     #   Specifies the 608 channel number in the ancillary data track from
     #   which to extract captions. Unused for passthrough.
     #   @return [Integer]
     #
+    # @!attribute [rw] terminate_captions
+    #   By default, the service terminates any unterminated captions at the
+    #   end of each input. If you want the caption to continue onto your
+    #   next input, disable this setting.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AncillarySourceSettings AWS API Documentation
     #
     class AncillarySourceSettings < Struct.new(
-      :source_ancillary_channel_number)
+      :convert_608_to_708,
+      :source_ancillary_channel_number,
+      :terminate_captions)
       include Aws::Structure
     end
 
@@ -1120,7 +1137,7 @@ module Aws::MediaConvert
     #             x_position: 1,
     #             y_position: 1,
     #           },
-    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #           dvb_sub_destination_settings: {
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1143,6 +1160,9 @@ module Aws::MediaConvert
     #           embedded_destination_settings: {
     #             destination_608_channel_number: 1,
     #             destination_708_service_number: 1,
+    #           },
+    #           imsc_destination_settings: {
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #           scc_destination_settings: {
     #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -1232,7 +1252,7 @@ module Aws::MediaConvert
     #             x_position: 1,
     #             y_position: 1,
     #           },
-    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #           dvb_sub_destination_settings: {
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1255,6 +1275,9 @@ module Aws::MediaConvert
     #           embedded_destination_settings: {
     #             destination_608_channel_number: 1,
     #             destination_708_service_number: 1,
+    #           },
+    #           imsc_destination_settings: {
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #           scc_destination_settings: {
     #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -1339,7 +1362,7 @@ module Aws::MediaConvert
     #           x_position: 1,
     #           y_position: 1,
     #         },
-    #         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #         dvb_sub_destination_settings: {
     #           alignment: "CENTERED", # accepts CENTERED, LEFT
     #           background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1363,6 +1386,9 @@ module Aws::MediaConvert
     #           destination_608_channel_number: 1,
     #           destination_708_service_number: 1,
     #         },
+    #         imsc_destination_settings: {
+    #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #         scc_destination_settings: {
     #           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #         },
@@ -1382,11 +1408,11 @@ module Aws::MediaConvert
     # @!attribute [rw] destination_type
     #   Specify the format for this set of captions on this output. The
     #   default format is embedded without SCTE-20. Other options are
-    #   embedded with SCTE-20, burn-in, DVB-sub, SCC, SRT, teletext, TTML,
-    #   and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded
-    #   (SCTE20\_PLUS\_EMBEDDED) to create an output that complies with the
-    #   SCTE-43 spec. To create a non-compliant output where the embedded
-    #   captions come first, choose Embedded plus SCTE-20
+    #   embedded with SCTE-20, burn-in, DVB-sub, IMSC, SCC, SRT, teletext,
+    #   TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus
+    #   embedded (SCTE20\_PLUS\_EMBEDDED) to create an output that complies
+    #   with the SCTE-43 spec. To create a non-compliant output where the
+    #   embedded captions come first, choose Embedded plus SCTE-20
     #   (EMBEDDED\_PLUS\_SCTE20).
     #   @return [String]
     #
@@ -1398,6 +1424,10 @@ module Aws::MediaConvert
     #   Settings specific to embedded/ancillary caption outputs, including
     #   608/708 Channel destination number.
     #   @return [Types::EmbeddedDestinationSettings]
+    #
+    # @!attribute [rw] imsc_destination_settings
+    #   Settings specific to IMSC caption outputs.
+    #   @return [Types::ImscDestinationSettings]
     #
     # @!attribute [rw] scc_destination_settings
     #   Settings for SCC caption output.
@@ -1419,6 +1449,7 @@ module Aws::MediaConvert
       :destination_type,
       :dvb_sub_destination_settings,
       :embedded_destination_settings,
+      :imsc_destination_settings,
       :scc_destination_settings,
       :teletext_destination_settings,
       :ttml_destination_settings)
@@ -1436,7 +1467,9 @@ module Aws::MediaConvert
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #         source_settings: {
     #           ancillary_source_settings: {
+    #             convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #             source_ancillary_channel_number: 1,
+    #             terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #           },
     #           dvb_sub_source_settings: {
     #             pid: 1,
@@ -1445,10 +1478,11 @@ module Aws::MediaConvert
     #             convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #             source_608_channel_number: 1,
     #             source_608_track_number: 1,
+    #             terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #           },
     #           file_source_settings: {
     #             convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #             time_delta: 1,
     #           },
     #           source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -1483,8 +1517,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] source_settings
-    #   Source settings (SourceSettings) contains the group of settings for
-    #   captions in the input.
+    #   If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an
+    #   xml file, specify the URI of the input captions source file. If your
+    #   input captions are IMSC in an IMF package, use TrackSourceSettings
+    #   instead of FileSoureSettings.
     #   @return [Types::CaptionSourceSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionSelector AWS API Documentation
@@ -1496,15 +1532,19 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Source settings (SourceSettings) contains the group of settings for
-    # captions in the input.
+    # If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml
+    # file, specify the URI of the input captions source file. If your input
+    # captions are IMSC in an IMF package, use TrackSourceSettings instead
+    # of FileSoureSettings.
     #
     # @note When making an API call, you may pass CaptionSourceSettings
     #   data as a hash:
     #
     #       {
     #         ancillary_source_settings: {
+    #           convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #           source_ancillary_channel_number: 1,
+    #           terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #         },
     #         dvb_sub_source_settings: {
     #           pid: 1,
@@ -1513,10 +1553,11 @@ module Aws::MediaConvert
     #           convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #           source_608_channel_number: 1,
     #           source_608_track_number: 1,
+    #           terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #         },
     #         file_source_settings: {
     #           convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #           time_delta: 1,
     #         },
     #         source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -1541,7 +1582,10 @@ module Aws::MediaConvert
     #   @return [Types::EmbeddedSourceSettings]
     #
     # @!attribute [rw] file_source_settings
-    #   Settings for File-based Captions in Source
+    #   If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in
+    #   an xml file, specify the URI of the input caption source file. If
+    #   your caption source is IMSC in an IMF package, use
+    #   TrackSourceSettings instead of FileSoureSettings.
     #   @return [Types::FileSourceSettings]
     #
     # @!attribute [rw] source_type
@@ -1555,8 +1599,10 @@ module Aws::MediaConvert
     #   @return [Types::TeletextSourceSettings]
     #
     # @!attribute [rw] track_source_settings
-    #   Settings specific to caption sources that are specfied by track
-    #   number. Sources include IMSC in IMF.
+    #   Settings specific to caption sources that are specified by track
+    #   number. Currently, this is only IMSC captions in an IMF package. If
+    #   your caption source is IMSC 1.1 in a separate xml file, use
+    #   FileSourceSettings instead of TrackSourceSettings.
     #   @return [Types::TrackSourceSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionSourceSettings AWS API Documentation
@@ -1607,7 +1653,7 @@ module Aws::MediaConvert
     #
     #       {
     #         constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #         encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #         encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #         initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         speke_key_provider: {
     #           certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -1632,7 +1678,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] encryption_method
-    #   For DRM with CMAF, the encryption type is always sample AES.
+    #   Specify the encryption scheme that you want the service to use when
+    #   encrypting your CMAF segments. Choose AES-CBC subsample (SAMPLE-AES)
+    #   or AES\_CTR (AES-CTR).
     #   @return [String]
     #
     # @!attribute [rw] initialization_vector_in_manifest
@@ -1642,9 +1690,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] speke_key_provider
-    #   Use these settings when doing DRM encryption with a SPEKE-compliant
-    #   key provider, if your output group type is CMAF. If your output
-    #   group type is HLS, MS Smooth, or DASH, use the SpekeKeyProvider
+    #   If your output group type is CMAF, use these settings when doing DRM
+    #   encryption with a SPEKE-compliant key provider. If your output group
+    #   type is HLS, DASH, or Microsoft Smooth, use the SpekeKeyProvider
     #   settings instead.
     #   @return [Types::SpekeKeyProviderCmaf]
     #
@@ -1694,7 +1742,7 @@ module Aws::MediaConvert
     #         },
     #         encryption: {
     #           constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #           encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #           encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #           initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           speke_key_provider: {
     #             certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -2153,7 +2201,9 @@ module Aws::MediaConvert
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   source_settings: {
     #                     ancillary_source_settings: {
+    #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                       source_ancillary_channel_number: 1,
+    #                       terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                     },
     #                     dvb_sub_source_settings: {
     #                       pid: 1,
@@ -2162,10 +2212,11 @@ module Aws::MediaConvert
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                       source_608_channel_number: 1,
     #                       source_608_track_number: 1,
+    #                       terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -2228,6 +2279,7 @@ module Aws::MediaConvert
     #               psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
     #               supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #               timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #               video_selector: {
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
@@ -2289,7 +2341,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -2573,7 +2625,7 @@ module Aws::MediaConvert
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
-    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -2596,6 +2648,9 @@ module Aws::MediaConvert
     #                         embedded_destination_settings: {
     #                           destination_608_channel_number: 1,
     #                           destination_708_service_number: 1,
+    #                         },
+    #                         imsc_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         scc_destination_settings: {
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -3145,7 +3200,9 @@ module Aws::MediaConvert
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   source_settings: {
     #                     ancillary_source_settings: {
+    #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                       source_ancillary_channel_number: 1,
+    #                       terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                     },
     #                     dvb_sub_source_settings: {
     #                       pid: 1,
@@ -3154,10 +3211,11 @@ module Aws::MediaConvert
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                       source_608_channel_number: 1,
     #                       source_608_track_number: 1,
+    #                       terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -3212,6 +3270,7 @@ module Aws::MediaConvert
     #               program_number: 1,
     #               psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
     #               timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #               video_selector: {
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
@@ -3273,7 +3332,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -3557,7 +3616,7 @@ module Aws::MediaConvert
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
-    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -3580,6 +3639,9 @@ module Aws::MediaConvert
     #                         embedded_destination_settings: {
     #                           destination_608_channel_number: 1,
     #                           destination_708_service_number: 1,
+    #                         },
+    #                         imsc_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         scc_destination_settings: {
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -4180,7 +4242,7 @@ module Aws::MediaConvert
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
-    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                 dvb_sub_destination_settings: {
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -4203,6 +4265,9 @@ module Aws::MediaConvert
     #                 embedded_destination_settings: {
     #                   destination_608_channel_number: 1,
     #                   destination_708_service_number: 1,
+    #                 },
+    #                 imsc_destination_settings: {
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 scc_destination_settings: {
     #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -4707,10 +4772,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] speke_key_provider
-    #   Use these settings when doing DRM encryption with a SPEKE-compliant
-    #   key provider, if your output group type is HLS, MS Smooth, or DASH.
-    #   If your output group type is CMAF, use the SpekeKeyProviderCmaf
-    #   settings instead.
+    #   If your output group type is HLS, DASH, or Microsoft Smooth, use
+    #   these settings when doing DRM encryption with a SPEKE-compliant key
+    #   provider. If your output group type is CMAF, use the
+    #   SpekeKeyProviderCmaf settings instead.
     #   @return [Types::SpekeKeyProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoEncryptionSettings AWS API Documentation
@@ -5736,7 +5801,7 @@ module Aws::MediaConvert
     #   Ignore this setting unless your input captions are SCC format and
     #   your output captions are embedded in the video stream. Specify a CC
     #   number for each captions channel in this output. If you have two
-    #   channels, pick CC numbers that aren't in the same field. For
+    #   channels, choose CC numbers that aren't in the same field. For
     #   example, choose 1 and 3. For more information, see
     #   https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
     #   @return [Integer]
@@ -5749,7 +5814,7 @@ module Aws::MediaConvert
     #   setting, also set Force 608 to 708 upconvert (Convert608To708) to
     #   Upconvert (UPCONVERT) in your input captions selector settings. If
     #   you choose to upconvert but don't specify a 708 service number,
-    #   MediaConvert uses the number you specify for CC channel number
+    #   MediaConvert uses the number that you specify for CC channel number
     #   (destination608ChannelNumber) for the 708 service number. For more
     #   information, see
     #   https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
@@ -5772,13 +5837,15 @@ module Aws::MediaConvert
     #         convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #         source_608_channel_number: 1,
     #         source_608_track_number: 1,
+    #         terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #       }
     #
     # @!attribute [rw] convert_608_to_708
-    #   When set to UPCONVERT, 608 data is both passed through via the "608
-    #   compatibility bytes" fields of the 708 wrapper as well as
-    #   translated into 708. 708 data present in the source content will be
-    #   discarded.
+    #   Specify whether this set of input captions appears in your outputs
+    #   in both 608 and 708 format. If you choose Upconvert (UPCONVERT),
+    #   MediaConvert includes the captions data in two ways: it passes the
+    #   608 data through using the 608 compatibility bytes fields of the 708
+    #   wrapper, and it also translates the 608 data into 708.
     #   @return [String]
     #
     # @!attribute [rw] source_608_channel_number
@@ -5792,12 +5859,19 @@ module Aws::MediaConvert
     #   set to '1'.
     #   @return [Integer]
     #
+    # @!attribute [rw] terminate_captions
+    #   By default, the service terminates any unterminated captions at the
+    #   end of each input. If you want the caption to continue onto your
+    #   next input, disable this setting.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EmbeddedSourceSettings AWS API Documentation
     #
     class EmbeddedSourceSettings < Struct.new(
       :convert_608_to_708,
       :source_608_channel_number,
-      :source_608_track_number)
+      :source_608_track_number,
+      :terminate_captions)
       include Aws::Structure
     end
 
@@ -5985,28 +6059,32 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for File-based Captions in Source
+    # If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an
+    # xml file, specify the URI of the input caption source file. If your
+    # caption source is IMSC in an IMF package, use TrackSourceSettings
+    # instead of FileSoureSettings.
     #
     # @note When making an API call, you may pass FileSourceSettings
     #   data as a hash:
     #
     #       {
     #         convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #         time_delta: 1,
     #       }
     #
     # @!attribute [rw] convert_608_to_708
-    #   If set to UPCONVERT, 608 caption data is both passed through via the
-    #   "608 compatibility bytes" fields of the 708 wrapper as well as
-    #   translated into 708. 708 data present in the source content will be
-    #   discarded.
+    #   Specify whether this set of input captions appears in your outputs
+    #   in both 608 and 708 format. If you choose Upconvert (UPCONVERT),
+    #   MediaConvert includes the captions data in two ways: it passes the
+    #   608 data through using the 608 compatibility bytes fields of the 708
+    #   wrapper, and it also translates the 608 data into 708.
     #   @return [String]
     #
     # @!attribute [rw] source_file
     #   External caption file used for loading captions. Accepted file
-    #   extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and
-    #   'smi'.
+    #   extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt',
+    #   'xml', and 'smi'.
     #   @return [String]
     #
     # @!attribute [rw] time_delta
@@ -7226,10 +7304,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] speke_key_provider
-    #   Use these settings when doing DRM encryption with a SPEKE-compliant
-    #   key provider, if your output group type is HLS, MS Smooth, or DASH.
-    #   If your output group type is CMAF, use the SpekeKeyProviderCmaf
-    #   settings instead.
+    #   If your output group type is HLS, DASH, or Microsoft Smooth, use
+    #   these settings when doing DRM encryption with a SPEKE-compliant key
+    #   provider. If your output group type is CMAF, use the
+    #   SpekeKeyProviderCmaf settings instead.
     #   @return [Types::SpekeKeyProvider]
     #
     # @!attribute [rw] static_key_provider
@@ -7632,6 +7710,30 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Settings specific to IMSC caption outputs.
+    #
+    # @note When making an API call, you may pass ImscDestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] style_passthrough
+    #   Keep this setting enabled to have MediaConvert use the font style
+    #   and position information from the captions source in the output.
+    #   This option is available only when your input captions are CFF-TT,
+    #   IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output
+    #   captions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ImscDestinationSettings AWS API Documentation
+    #
+    class ImscDestinationSettings < Struct.new(
+      :style_passthrough)
+      include Aws::Structure
+    end
+
     # Specifies media input
     #
     # @note When making an API call, you may pass Input
@@ -7673,7 +7775,9 @@ module Aws::MediaConvert
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             source_settings: {
     #               ancillary_source_settings: {
+    #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                 source_ancillary_channel_number: 1,
+    #                 terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #               },
     #               dvb_sub_source_settings: {
     #                 pid: 1,
@@ -7682,10 +7786,11 @@ module Aws::MediaConvert
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                 source_608_channel_number: 1,
     #                 source_608_track_number: 1,
+    #                 terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                 time_delta: 1,
     #               },
     #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -7748,6 +7853,7 @@ module Aws::MediaConvert
     #         psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
     #         supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #         timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #         timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #         video_selector: {
     #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #           color_space_usage: "FORCE", # accepts FORCE, FALLBACK
@@ -7897,15 +8003,27 @@ module Aws::MediaConvert
     #   @return [Array<String>]
     #
     # @!attribute [rw] timecode_source
-    #   Timecode source under input settings (InputTimecodeSource) only
-    #   affects the behavior of features that apply to a single input at a
-    #   time, such as input clipping and synchronizing some captions
-    #   formats. Use this setting to specify whether the service counts
-    #   frames by timecodes embedded in the video (EMBEDDED) or by starting
-    #   the first frame at zero (ZEROBASED). In both cases, the timecode
-    #   format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number.
-    #   Only set this to EMBEDDED if your source video has embedded
-    #   timecodes.
+    #   Use this Timecode source setting, located under the input settings
+    #   (InputTimecodeSource), to specify how the service counts input video
+    #   frames. This input frame count affects only the behavior of features
+    #   that apply to a single input at a time, such as input clipping and
+    #   synchronizing some captions formats. Choose Embedded (EMBEDDED) to
+    #   use the timecodes in your input video. Choose Start at zero
+    #   (ZEROBASED) to start the first frame at zero. Choose Specified start
+    #   (SPECIFIEDSTART) to start the first frame at the timecode that you
+    #   specify in the setting Start timecode (timecodeStart). If you don't
+    #   specify a value for Timecode source, the service will use Embedded
+    #   by default. For more information about timecodes, see
+    #   https://docs.aws.amazon.com/console/mediaconvert/timecode.
+    #   @return [String]
+    #
+    # @!attribute [rw] timecode_start
+    #   Specify the timecode that you want the service to use for this
+    #   input's initial frame. To use this setting, you must set the
+    #   Timecode source setting, located under the input settings
+    #   (InputTimecodeSource), to Specified start (SPECIFIEDSTART). For more
+    #   information about timecodes, see
+    #   https://docs.aws.amazon.com/console/mediaconvert/timecode.
     #   @return [String]
     #
     # @!attribute [rw] video_selector
@@ -7932,6 +8050,7 @@ module Aws::MediaConvert
       :psi_control,
       :supplemental_imps,
       :timecode_source,
+      :timecode_start,
       :video_selector)
       include Aws::Structure
     end
@@ -8075,7 +8194,9 @@ module Aws::MediaConvert
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             source_settings: {
     #               ancillary_source_settings: {
+    #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                 source_ancillary_channel_number: 1,
+    #                 terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #               },
     #               dvb_sub_source_settings: {
     #                 pid: 1,
@@ -8084,10 +8205,11 @@ module Aws::MediaConvert
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                 source_608_channel_number: 1,
     #                 source_608_track_number: 1,
+    #                 terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                 time_delta: 1,
     #               },
     #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -8142,6 +8264,7 @@ module Aws::MediaConvert
     #         program_number: 1,
     #         psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
     #         timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #         timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #         video_selector: {
     #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #           color_space_usage: "FORCE", # accepts FORCE, FALLBACK
@@ -8263,15 +8386,27 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] timecode_source
-    #   Timecode source under input settings (InputTimecodeSource) only
-    #   affects the behavior of features that apply to a single input at a
-    #   time, such as input clipping and synchronizing some captions
-    #   formats. Use this setting to specify whether the service counts
-    #   frames by timecodes embedded in the video (EMBEDDED) or by starting
-    #   the first frame at zero (ZEROBASED). In both cases, the timecode
-    #   format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number.
-    #   Only set this to EMBEDDED if your source video has embedded
-    #   timecodes.
+    #   Use this Timecode source setting, located under the input settings
+    #   (InputTimecodeSource), to specify how the service counts input video
+    #   frames. This input frame count affects only the behavior of features
+    #   that apply to a single input at a time, such as input clipping and
+    #   synchronizing some captions formats. Choose Embedded (EMBEDDED) to
+    #   use the timecodes in your input video. Choose Start at zero
+    #   (ZEROBASED) to start the first frame at zero. Choose Specified start
+    #   (SPECIFIEDSTART) to start the first frame at the timecode that you
+    #   specify in the setting Start timecode (timecodeStart). If you don't
+    #   specify a value for Timecode source, the service will use Embedded
+    #   by default. For more information about timecodes, see
+    #   https://docs.aws.amazon.com/console/mediaconvert/timecode.
+    #   @return [String]
+    #
+    # @!attribute [rw] timecode_start
+    #   Specify the timecode that you want the service to use for this
+    #   input's initial frame. To use this setting, you must set the
+    #   Timecode source setting, located under the input settings
+    #   (InputTimecodeSource), to Specified start (SPECIFIEDSTART). For more
+    #   information about timecodes, see
+    #   https://docs.aws.amazon.com/console/mediaconvert/timecode.
     #   @return [String]
     #
     # @!attribute [rw] video_selector
@@ -8295,6 +8430,7 @@ module Aws::MediaConvert
       :program_number,
       :psi_control,
       :timecode_source,
+      :timecode_start,
       :video_selector)
       include Aws::Structure
     end
@@ -8621,7 +8757,9 @@ module Aws::MediaConvert
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 source_settings: {
     #                   ancillary_source_settings: {
+    #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                     source_ancillary_channel_number: 1,
+    #                     terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                   },
     #                   dvb_sub_source_settings: {
     #                     pid: 1,
@@ -8630,10 +8768,11 @@ module Aws::MediaConvert
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                     source_608_channel_number: 1,
     #                     source_608_track_number: 1,
+    #                     terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                     time_delta: 1,
     #                   },
     #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -8696,6 +8835,7 @@ module Aws::MediaConvert
     #             psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
     #             supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #             timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #             timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #             video_selector: {
     #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #               color_space_usage: "FORCE", # accepts FORCE, FALLBACK
@@ -8757,7 +8897,7 @@ module Aws::MediaConvert
     #                 },
     #                 encryption: {
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #                   encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                   encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -9041,7 +9181,7 @@ module Aws::MediaConvert
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
-    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                       dvb_sub_destination_settings: {
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -9064,6 +9204,9 @@ module Aws::MediaConvert
     #                       embedded_destination_settings: {
     #                         destination_608_channel_number: 1,
     #                         destination_708_service_number: 1,
+    #                       },
+    #                       imsc_destination_settings: {
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
     #                       scc_destination_settings: {
     #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -9650,7 +9793,9 @@ module Aws::MediaConvert
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 source_settings: {
     #                   ancillary_source_settings: {
+    #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                     source_ancillary_channel_number: 1,
+    #                     terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                   },
     #                   dvb_sub_source_settings: {
     #                     pid: 1,
@@ -9659,10 +9804,11 @@ module Aws::MediaConvert
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                     source_608_channel_number: 1,
     #                     source_608_track_number: 1,
+    #                     terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                     time_delta: 1,
     #                   },
     #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -9717,6 +9863,7 @@ module Aws::MediaConvert
     #             program_number: 1,
     #             psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
     #             timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #             timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #             video_selector: {
     #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #               color_space_usage: "FORCE", # accepts FORCE, FALLBACK
@@ -9778,7 +9925,7 @@ module Aws::MediaConvert
     #                 },
     #                 encryption: {
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #                   encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                   encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -10062,7 +10209,7 @@ module Aws::MediaConvert
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
-    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                       dvb_sub_destination_settings: {
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -10085,6 +10232,9 @@ module Aws::MediaConvert
     #                       embedded_destination_settings: {
     #                         destination_608_channel_number: 1,
     #                         destination_708_service_number: 1,
+    #                       },
+    #                       imsc_destination_settings: {
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
     #                       scc_destination_settings: {
     #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -11935,10 +12085,10 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] speke_key_provider
-    #   Use these settings when doing DRM encryption with a SPEKE-compliant
-    #   key provider, if your output group type is HLS, MS Smooth, or DASH.
-    #   If your output group type is CMAF, use the SpekeKeyProviderCmaf
-    #   settings instead.
+    #   If your output group type is HLS, DASH, or Microsoft Smooth, use
+    #   these settings when doing DRM encryption with a SPEKE-compliant key
+    #   provider. If your output group type is CMAF, use the
+    #   SpekeKeyProviderCmaf settings instead.
     #   @return [Types::SpekeKeyProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MsSmoothEncryptionSettings AWS API Documentation
@@ -12200,11 +12350,12 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] strength
-    #   Relative strength of noise reducing filter. Higher values produce
-    #   stronger filtering. Recommended Range: * \[0 .. 2\] for complexity
-    #   reduction with minimal sharpness loss * \[2 .. 8\] for complexity
-    #   reduction with image preservation * \[8 .. 16\] for noise
-    #   reduction. Reduce noise combined high complexity reduction
+    #   Specify the strength of the noise reducing filter on this output.
+    #   Higher values produce stronger filtering. We recommend the following
+    #   value ranges, depending on the result that you want: * 0-2 for
+    #   complexity reduction with minimal sharpness loss * 2-8 for
+    #   complexity reduction with image preservation * 8-16 for a high
+    #   level of complexity reduction
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NoiseReducerTemporalFilterSettings AWS API Documentation
@@ -12367,7 +12518,7 @@ module Aws::MediaConvert
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
-    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #               dvb_sub_destination_settings: {
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -12390,6 +12541,9 @@ module Aws::MediaConvert
     #               embedded_destination_settings: {
     #                 destination_608_channel_number: 1,
     #                 destination_708_service_number: 1,
+    #               },
+    #               imsc_destination_settings: {
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               scc_destination_settings: {
     #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -12875,7 +13029,7 @@ module Aws::MediaConvert
     #             },
     #             encryption: {
     #               constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #               encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #               encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #               initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               speke_key_provider: {
     #                 certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -13159,7 +13313,7 @@ module Aws::MediaConvert
     #                     x_position: 1,
     #                     y_position: 1,
     #                   },
-    #                   destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                   destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                   dvb_sub_destination_settings: {
     #                     alignment: "CENTERED", # accepts CENTERED, LEFT
     #                     background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -13182,6 +13336,9 @@ module Aws::MediaConvert
     #                   embedded_destination_settings: {
     #                     destination_608_channel_number: 1,
     #                     destination_708_service_number: 1,
+    #                   },
+    #                   imsc_destination_settings: {
+    #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                   },
     #                   scc_destination_settings: {
     #                     framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -13603,7 +13760,7 @@ module Aws::MediaConvert
     #           },
     #           encryption: {
     #             constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #             encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #             encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #             initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             speke_key_provider: {
     #               certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -14014,7 +14171,7 @@ module Aws::MediaConvert
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
-    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #               dvb_sub_destination_settings: {
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -14037,6 +14194,9 @@ module Aws::MediaConvert
     #               embedded_destination_settings: {
     #                 destination_608_channel_number: 1,
     #                 destination_708_service_number: 1,
+    #               },
+    #               imsc_destination_settings: {
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               scc_destination_settings: {
     #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -14686,7 +14846,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] channels_out
     #   Specify the number of channels in this output after remixing. Valid
-    #   values: 1, 2, 4, 6, 8
+    #   values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.)
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/RemixSettings AWS API Documentation
@@ -14910,10 +15070,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Use these settings when doing DRM encryption with a SPEKE-compliant
-    # key provider, if your output group type is HLS, MS Smooth, or DASH. If
-    # your output group type is CMAF, use the SpekeKeyProviderCmaf settings
-    # instead.
+    # If your output group type is HLS, DASH, or Microsoft Smooth, use these
+    # settings when doing DRM encryption with a SPEKE-compliant key
+    # provider. If your output group type is CMAF, use the
+    # SpekeKeyProviderCmaf settings instead.
     #
     # @note When making an API call, you may pass SpekeKeyProvider
     #   data as a hash:
@@ -14960,10 +15120,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Use these settings when doing DRM encryption with a SPEKE-compliant
-    # key provider, if your output group type is CMAF. If your output group
-    # type is HLS, MS Smooth, or DASH, use the SpekeKeyProvider settings
-    # instead.
+    # If your output group type is CMAF, use these settings when doing DRM
+    # encryption with a SPEKE-compliant key provider. If your output group
+    # type is HLS, DASH, or Microsoft Smooth, use the SpekeKeyProvider
+    # settings instead.
     #
     # @note When making an API call, you may pass SpekeKeyProviderCmaf
     #   data as a hash:
@@ -15334,8 +15494,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings specific to caption sources that are specfied by track
-    # number. Sources include IMSC in IMF.
+    # Settings specific to caption sources that are specified by track
+    # number. Currently, this is only IMSC captions in an IMF package. If
+    # your caption source is IMSC 1.1 in a separate xml file, use
+    # FileSourceSettings instead of TrackSourceSettings.
     #
     # @note When making an API call, you may pass TrackSourceSettings
     #   data as a hash:
@@ -15487,7 +15649,9 @@ module Aws::MediaConvert
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   source_settings: {
     #                     ancillary_source_settings: {
+    #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                       source_ancillary_channel_number: 1,
+    #                       terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                     },
     #                     dvb_sub_source_settings: {
     #                       pid: 1,
@@ -15496,10 +15660,11 @@ module Aws::MediaConvert
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                       source_608_channel_number: 1,
     #                       source_608_track_number: 1,
+    #                       terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -15554,6 +15719,7 @@ module Aws::MediaConvert
     #               program_number: 1,
     #               psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
     #               timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #               video_selector: {
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
@@ -15615,7 +15781,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -15899,7 +16065,7 @@ module Aws::MediaConvert
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
-    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -15922,6 +16088,9 @@ module Aws::MediaConvert
     #                         embedded_destination_settings: {
     #                           destination_608_channel_number: 1,
     #                           destination_708_service_number: 1,
+    #                         },
+    #                         imsc_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         scc_destination_settings: {
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -16513,7 +16682,7 @@ module Aws::MediaConvert
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
-    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                 dvb_sub_destination_settings: {
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -16536,6 +16705,9 @@ module Aws::MediaConvert
     #                 embedded_destination_settings: {
     #                   destination_608_channel_number: 1,
     #                   destination_708_service_number: 1,
+    #                 },
+    #                 imsc_destination_settings: {
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 scc_destination_settings: {
     #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -17831,9 +18003,9 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] channels
-    #   Set Channels to specify the number of channels in this output audio
-    #   track. With WAV, valid values 1, 2, 4, and 8. In the console, these
-    #   values are Mono, Stereo, 4-Channel, and 8-Channel, respectively.
+    #   Specify the number of channels in this output audio track. Valid
+    #   values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and
+    #   so on, up to 64.
     #   @return [Integer]
     #
     # @!attribute [rw] format

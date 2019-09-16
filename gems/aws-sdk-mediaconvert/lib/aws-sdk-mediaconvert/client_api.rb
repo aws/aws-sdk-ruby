@@ -29,7 +29,9 @@ module Aws::MediaConvert
     AccelerationSettings = Shapes::StructureShape.new(name: 'AccelerationSettings')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     AiffSettings = Shapes::StructureShape.new(name: 'AiffSettings')
+    AncillaryConvert608To708 = Shapes::StringShape.new(name: 'AncillaryConvert608To708')
     AncillarySourceSettings = Shapes::StructureShape.new(name: 'AncillarySourceSettings')
+    AncillaryTerminateCaptions = Shapes::StringShape.new(name: 'AncillaryTerminateCaptions')
     AntiAlias = Shapes::StringShape.new(name: 'AntiAlias')
     AssociateCertificateRequest = Shapes::StructureShape.new(name: 'AssociateCertificateRequest')
     AssociateCertificateResponse = Shapes::StructureShape.new(name: 'AssociateCertificateResponse')
@@ -159,6 +161,7 @@ module Aws::MediaConvert
     EmbeddedConvert608To708 = Shapes::StringShape.new(name: 'EmbeddedConvert608To708')
     EmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedDestinationSettings')
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
+    EmbeddedTerminateCaptions = Shapes::StringShape.new(name: 'EmbeddedTerminateCaptions')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EsamManifestConfirmConditionNotification = Shapes::StructureShape.new(name: 'EsamManifestConfirmConditionNotification')
     EsamSettings = Shapes::StructureShape.new(name: 'EsamSettings')
@@ -257,6 +260,8 @@ module Aws::MediaConvert
     HlsTimedMetadataId3Frame = Shapes::StringShape.new(name: 'HlsTimedMetadataId3Frame')
     Id3Insertion = Shapes::StructureShape.new(name: 'Id3Insertion')
     ImageInserter = Shapes::StructureShape.new(name: 'ImageInserter')
+    ImscDestinationSettings = Shapes::StructureShape.new(name: 'ImscDestinationSettings')
+    ImscStylePassthrough = Shapes::StringShape.new(name: 'ImscStylePassthrough')
     Input = Shapes::StructureShape.new(name: 'Input')
     InputClipping = Shapes::StructureShape.new(name: 'InputClipping')
     InputDeblockFilter = Shapes::StringShape.new(name: 'InputDeblockFilter')
@@ -475,7 +480,6 @@ module Aws::MediaConvert
     __integerMin1Max100 = Shapes::IntegerShape.new(name: '__integerMin1Max100')
     __integerMin1Max10000000 = Shapes::IntegerShape.new(name: '__integerMin1Max10000000')
     __integerMin1Max1001 = Shapes::IntegerShape.new(name: '__integerMin1Max1001')
-    __integerMin1Max16 = Shapes::IntegerShape.new(name: '__integerMin1Max16')
     __integerMin1Max17895697 = Shapes::IntegerShape.new(name: '__integerMin1Max17895697')
     __integerMin1Max2 = Shapes::IntegerShape.new(name: '__integerMin1Max2')
     __integerMin1Max20 = Shapes::IntegerShape.new(name: '__integerMin1Max20')
@@ -485,14 +489,13 @@ module Aws::MediaConvert
     __integerMin1Max32 = Shapes::IntegerShape.new(name: '__integerMin1Max32')
     __integerMin1Max4 = Shapes::IntegerShape.new(name: '__integerMin1Max4')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
-    __integerMin1Max8 = Shapes::IntegerShape.new(name: '__integerMin1Max8')
+    __integerMin1Max64 = Shapes::IntegerShape.new(name: '__integerMin1Max64')
     __integerMin24Max60000 = Shapes::IntegerShape.new(name: '__integerMin24Max60000')
     __integerMin25Max10000 = Shapes::IntegerShape.new(name: '__integerMin25Max10000')
     __integerMin25Max2000 = Shapes::IntegerShape.new(name: '__integerMin25Max2000')
     __integerMin2Max2147483647 = Shapes::IntegerShape.new(name: '__integerMin2Max2147483647')
     __integerMin32000Max384000 = Shapes::IntegerShape.new(name: '__integerMin32000Max384000')
     __integerMin32000Max48000 = Shapes::IntegerShape.new(name: '__integerMin32000Max48000')
-    __integerMin32Max2160 = Shapes::IntegerShape.new(name: '__integerMin32Max2160')
     __integerMin32Max4096 = Shapes::IntegerShape.new(name: '__integerMin32Max4096')
     __integerMin32Max8182 = Shapes::IntegerShape.new(name: '__integerMin32Max8182')
     __integerMin384000Max768000 = Shapes::IntegerShape.new(name: '__integerMin384000Max768000')
@@ -551,7 +554,7 @@ module Aws::MediaConvert
     __stringMin14Max1285PatternS3Mov09Png = Shapes::StringShape.new(name: '__stringMin14Max1285PatternS3Mov09Png')
     __stringMin14PatternS3BmpBMPPngPNG = Shapes::StringShape.new(name: '__stringMin14PatternS3BmpBMPPngPNG')
     __stringMin14PatternS3BmpBMPPngPNGTgaTGA = Shapes::StringShape.new(name: '__stringMin14PatternS3BmpBMPPngPNGTgaTGA')
-    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI = Shapes::StringShape.new(name: '__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI')
+    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI = Shapes::StringShape.new(name: '__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI')
     __stringMin16Max24PatternAZaZ0922AZaZ0916 = Shapes::StringShape.new(name: '__stringMin16Max24PatternAZaZ0922AZaZ0916')
     __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
     __stringMin24Max512PatternAZaZ0902 = Shapes::StringShape.new(name: '__stringMin24Max512PatternAZaZ0902')
@@ -608,11 +611,13 @@ module Aws::MediaConvert
     AccelerationSettings.struct_class = Types::AccelerationSettings
 
     AiffSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integerMin16Max24, location_name: "bitDepth"))
-    AiffSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max2, location_name: "channels"))
+    AiffSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "channels"))
     AiffSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin8000Max192000, location_name: "sampleRate"))
     AiffSettings.struct_class = Types::AiffSettings
 
+    AncillarySourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: AncillaryConvert608To708, location_name: "convert608To708"))
     AncillarySourceSettings.add_member(:source_ancillary_channel_number, Shapes::ShapeRef.new(shape: __integerMin1Max4, location_name: "sourceAncillaryChannelNumber"))
+    AncillarySourceSettings.add_member(:terminate_captions, Shapes::ShapeRef.new(shape: AncillaryTerminateCaptions, location_name: "terminateCaptions"))
     AncillarySourceSettings.struct_class = Types::AncillarySourceSettings
 
     AssociateCertificateRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "arn"))
@@ -712,6 +717,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings.add_member(:destination_type, Shapes::ShapeRef.new(shape: CaptionDestinationType, location_name: "destinationType"))
     CaptionDestinationSettings.add_member(:dvb_sub_destination_settings, Shapes::ShapeRef.new(shape: DvbSubDestinationSettings, location_name: "dvbSubDestinationSettings"))
     CaptionDestinationSettings.add_member(:embedded_destination_settings, Shapes::ShapeRef.new(shape: EmbeddedDestinationSettings, location_name: "embeddedDestinationSettings"))
+    CaptionDestinationSettings.add_member(:imsc_destination_settings, Shapes::ShapeRef.new(shape: ImscDestinationSettings, location_name: "imscDestinationSettings"))
     CaptionDestinationSettings.add_member(:scc_destination_settings, Shapes::ShapeRef.new(shape: SccDestinationSettings, location_name: "sccDestinationSettings"))
     CaptionDestinationSettings.add_member(:teletext_destination_settings, Shapes::ShapeRef.new(shape: TeletextDestinationSettings, location_name: "teletextDestinationSettings"))
     CaptionDestinationSettings.add_member(:ttml_destination_settings, Shapes::ShapeRef.new(shape: TtmlDestinationSettings, location_name: "ttmlDestinationSettings"))
@@ -966,6 +972,7 @@ module Aws::MediaConvert
     EmbeddedSourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: EmbeddedConvert608To708, location_name: "convert608To708"))
     EmbeddedSourceSettings.add_member(:source_608_channel_number, Shapes::ShapeRef.new(shape: __integerMin1Max4, location_name: "source608ChannelNumber"))
     EmbeddedSourceSettings.add_member(:source_608_track_number, Shapes::ShapeRef.new(shape: __integerMin1Max1, location_name: "source608TrackNumber"))
+    EmbeddedSourceSettings.add_member(:terminate_captions, Shapes::ShapeRef.new(shape: EmbeddedTerminateCaptions, location_name: "terminateCaptions"))
     EmbeddedSourceSettings.struct_class = Types::EmbeddedSourceSettings
 
     Endpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
@@ -993,7 +1000,7 @@ module Aws::MediaConvert
     FileGroupSettings.struct_class = Types::FileGroupSettings
 
     FileSourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: FileSourceConvert608To708, location_name: "convert608To708"))
-    FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI, location_name: "sourceFile"))
+    FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
     FileSourceSettings.struct_class = Types::FileSourceSettings
 
@@ -1190,6 +1197,9 @@ module Aws::MediaConvert
     ImageInserter.add_member(:insertable_images, Shapes::ShapeRef.new(shape: __listOfInsertableImage, location_name: "insertableImages"))
     ImageInserter.struct_class = Types::ImageInserter
 
+    ImscDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: ImscStylePassthrough, location_name: "stylePassthrough"))
+    ImscDestinationSettings.struct_class = Types::ImscDestinationSettings
+
     Input.add_member(:audio_selector_groups, Shapes::ShapeRef.new(shape: __mapOfAudioSelectorGroup, location_name: "audioSelectorGroups"))
     Input.add_member(:audio_selectors, Shapes::ShapeRef.new(shape: __mapOfAudioSelector, location_name: "audioSelectors"))
     Input.add_member(:caption_selectors, Shapes::ShapeRef.new(shape: __mapOfCaptionSelector, location_name: "captionSelectors"))
@@ -1207,6 +1217,7 @@ module Aws::MediaConvert
     Input.add_member(:psi_control, Shapes::ShapeRef.new(shape: InputPsiControl, location_name: "psiControl"))
     Input.add_member(:supplemental_imps, Shapes::ShapeRef.new(shape: __listOf__stringPatternS3ASSETMAPXml, location_name: "supplementalImps"))
     Input.add_member(:timecode_source, Shapes::ShapeRef.new(shape: InputTimecodeSource, location_name: "timecodeSource"))
+    Input.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
     Input.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     Input.struct_class = Types::Input
 
@@ -1234,6 +1245,7 @@ module Aws::MediaConvert
     InputTemplate.add_member(:program_number, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "programNumber"))
     InputTemplate.add_member(:psi_control, Shapes::ShapeRef.new(shape: InputPsiControl, location_name: "psiControl"))
     InputTemplate.add_member(:timecode_source, Shapes::ShapeRef.new(shape: InputTimecodeSource, location_name: "timecodeSource"))
+    InputTemplate.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
     InputTemplate.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     InputTemplate.struct_class = Types::InputTemplate
 
@@ -1610,8 +1622,8 @@ module Aws::MediaConvert
     Rectangle.struct_class = Types::Rectangle
 
     RemixSettings.add_member(:channel_mapping, Shapes::ShapeRef.new(shape: ChannelMapping, location_name: "channelMapping"))
-    RemixSettings.add_member(:channels_in, Shapes::ShapeRef.new(shape: __integerMin1Max16, location_name: "channelsIn"))
-    RemixSettings.add_member(:channels_out, Shapes::ShapeRef.new(shape: __integerMin1Max8, location_name: "channelsOut"))
+    RemixSettings.add_member(:channels_in, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "channelsIn"))
+    RemixSettings.add_member(:channels_out, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "channelsOut"))
     RemixSettings.struct_class = Types::RemixSettings
 
     ReservationPlan.add_member(:commitment, Shapes::ShapeRef.new(shape: Commitment, location_name: "commitment"))
@@ -1753,7 +1765,7 @@ module Aws::MediaConvert
     VideoDescription.add_member(:crop, Shapes::ShapeRef.new(shape: Rectangle, location_name: "crop"))
     VideoDescription.add_member(:drop_frame_timecode, Shapes::ShapeRef.new(shape: DropFrameTimecode, location_name: "dropFrameTimecode"))
     VideoDescription.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: __integerMin0Max15, location_name: "fixedAfd"))
-    VideoDescription.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin32Max2160, location_name: "height"))
+    VideoDescription.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin32Max4096, location_name: "height"))
     VideoDescription.add_member(:position, Shapes::ShapeRef.new(shape: Rectangle, location_name: "position"))
     VideoDescription.add_member(:respond_to_afd, Shapes::ShapeRef.new(shape: RespondToAfd, location_name: "respondToAfd"))
     VideoDescription.add_member(:scaling_behavior, Shapes::ShapeRef.new(shape: ScalingBehavior, location_name: "scalingBehavior"))
@@ -1783,7 +1795,7 @@ module Aws::MediaConvert
     VideoSelector.struct_class = Types::VideoSelector
 
     WavSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integerMin16Max24, location_name: "bitDepth"))
-    WavSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max8, location_name: "channels"))
+    WavSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "channels"))
     WavSettings.add_member(:format, Shapes::ShapeRef.new(shape: WavFormat, location_name: "format"))
     WavSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin8000Max192000, location_name: "sampleRate"))
     WavSettings.struct_class = Types::WavSettings

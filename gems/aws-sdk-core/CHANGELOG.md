@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.68.0 (2019-09-16)
+------------------
+
 * Feature - Support assuming a role with `:source_profile` from a profile that can be resolved from a `ProcessCredentials` provider.
 
 3.67.0 (2019-09-09)

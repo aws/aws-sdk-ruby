@@ -8,6 +8,20 @@
 module Aws::EKS
   module Types
 
+    # This exception is thrown if the request contains a semantic error. The
+    # precise meaning will depend on the API, and will be documented in the
+    # error message.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing the `certificate-authority-data` for your
     # cluster.
     #
@@ -117,6 +131,12 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the cluster to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -132,7 +152,8 @@ module Aws::EKS
       :status,
       :certificate_authority,
       :client_request_token,
-      :platform_version)
+      :platform_version,
+      :tags)
       include Aws::Structure
     end
 
@@ -158,6 +179,9 @@ module Aws::EKS
     #           ],
     #         },
     #         client_request_token: "String",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -223,6 +247,12 @@ module Aws::EKS
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the cluster to assist with categorization
+    #   and organization. Each tag consists of a key and an optional value,
+    #   both of which you define.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -231,7 +261,8 @@ module Aws::EKS
       :role_arn,
       :resources_vpc_config,
       :logging,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -500,6 +531,37 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   Amazon EKS clusters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListUpdatesRequest
     #   data as a hash:
     #
@@ -615,6 +677,19 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # A service resource associated with the request could not be found.
+    # Clients should not retry such requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing the [OpenID Connect][1] identity provider
     # information for the cluster.
     #
@@ -714,6 +789,38 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   Currently, the supported resources are Amazon EKS clusters.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # At least one of your specified cluster subnets is in an Availability
     # Zone that does not support Amazon EKS. The exception output specifies
     # the supported Availability Zones for your account, from which you can
@@ -739,6 +846,35 @@ module Aws::EKS
       :valid_zones)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   tags. Currently, the supported resources are Amazon EKS clusters.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # An object representing an asynchronous update.
     #
