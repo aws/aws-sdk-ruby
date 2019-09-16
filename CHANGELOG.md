@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
 2.11.353 (2019-09-12)
 ------------------
 
