@@ -807,9 +807,9 @@ module Aws::Athena
     #   @return [Types::QueryExecutionStatus]
     #
     # @!attribute [rw] statistics
-    #   The amount of data scanned during the query execution and the amount
-    #   of time that it took to execute, and the type of statement that was
-    #   run.
+    #   The location of a manifest file that tracks file locations generated
+    #   by the query, the amount of data scanned by the query, and the
+    #   amount of time that it took the query to run.
     #   @return [Types::QueryExecutionStatistics]
     #
     # @!attribute [rw] work_group
@@ -850,9 +850,9 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # The amount of data scanned during the query execution and the amount
-    # of time that it took to execute, and the type of statement that was
-    # run.
+    # The location of a manifest file that tracks file locations generated
+    # by the query, the amount of data scanned by the query, and the amount
+    # of time that it took the query to run.
     #
     # @!attribute [rw] engine_execution_time_in_millis
     #   The number of milliseconds that the query took to execute.
@@ -862,11 +862,26 @@ module Aws::Athena
     #   The number of bytes in the data that was queried.
     #   @return [Integer]
     #
+    # @!attribute [rw] data_manifest_location
+    #   The location and file name of a data manifest file. The manifest
+    #   file is saved to the Athena query results location in Amazon S3. It
+    #   tracks files that the query wrote to Amazon S3. If the query fails,
+    #   the manifest file also tracks files that the query intended to
+    #   write. The manifest is useful for identifying orphaned files
+    #   resulting from a failed query. For more information, see [Working
+    #   with Query Output Files][1] in the *Amazon Athena User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionStatistics AWS API Documentation
     #
     class QueryExecutionStatistics < Struct.new(
       :engine_execution_time_in_millis,
-      :data_scanned_in_bytes)
+      :data_scanned_in_bytes,
+      :data_manifest_location)
       include Aws::Structure
     end
 

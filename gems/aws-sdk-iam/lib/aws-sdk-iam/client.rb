@@ -1492,8 +1492,8 @@ module Aws::IAM
     #   * The special characters tab (\\u0009), line feed (\\u000A), and
     #     carriage return (\\u000D)
     #
-    #   Upon success, the response includes the same trust policy as a
-    #   URL-encoded JSON string.
+    #   Upon success, the response includes the same trust policy in JSON
+    #   format.
     #
     #
     #
@@ -4973,7 +4973,7 @@ module Aws::IAM
     #       assume_role_policy_document: "<URL-encoded-JSON>", 
     #       create_date: Time.parse("2013-04-18T05:01:58Z"), 
     #       path: "/", 
-    #       role_id: "AIDIODR4TAW7CSEXAMPLE", 
+    #       role_id: "AROADBQP57FF2AEXAMPLE", 
     #       role_name: "Test-Role", 
     #     }, 
     #   }
@@ -11310,7 +11310,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -286,6 +286,7 @@ module Aws::Athena
 
     QueryExecutionStatistics.add_member(:engine_execution_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "EngineExecutionTimeInMillis"))
     QueryExecutionStatistics.add_member(:data_scanned_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "DataScannedInBytes"))
+    QueryExecutionStatistics.add_member(:data_manifest_location, Shapes::ShapeRef.new(shape: String, location_name: "DataManifestLocation"))
     QueryExecutionStatistics.struct_class = Types::QueryExecutionStatistics
 
     QueryExecutionStatus.add_member(:state, Shapes::ShapeRef.new(shape: QueryExecutionState, location_name: "State"))

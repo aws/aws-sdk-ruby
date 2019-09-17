@@ -19,6 +19,7 @@ module Aws::Personalize
     AutoMLConfig = Shapes::StructureShape.new(name: 'AutoMLConfig')
     AutoMLResult = Shapes::StructureShape.new(name: 'AutoMLResult')
     AvroSchema = Shapes::StringShape.new(name: 'AvroSchema')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignSummary = Shapes::StructureShape.new(name: 'CampaignSummary')
     CampaignUpdateSummary = Shapes::StructureShape.new(name: 'CampaignUpdateSummary')
@@ -175,6 +176,7 @@ module Aws::Personalize
     Solutions = Shapes::ListShape.new(name: 'Solutions')
     Status = Shapes::StringShape.new(name: 'Status')
     TrackingId = Shapes::StringShape.new(name: 'TrackingId')
+    TrainingHours = Shapes::FloatShape.new(name: 'TrainingHours')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
     TransactionsPerSecond = Shapes::IntegerShape.new(name: 'TransactionsPerSecond')
     Tunable = Shapes::BooleanShape.new(name: 'Tunable')
@@ -300,7 +302,7 @@ module Aws::Personalize
     CreateSchemaResponse.struct_class = Types::CreateSchemaResponse
 
     CreateSolutionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    CreateSolutionRequest.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: PerformHPO, location_name: "performHPO"))
+    CreateSolutionRequest.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: Boolean, location_name: "performHPO"))
     CreateSolutionRequest.add_member(:perform_auto_ml, Shapes::ShapeRef.new(shape: PerformAutoML, location_name: "performAutoML"))
     CreateSolutionRequest.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
     CreateSolutionRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
@@ -737,6 +739,7 @@ module Aws::Personalize
     SolutionVersion.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "eventType"))
     SolutionVersion.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
     SolutionVersion.add_member(:solution_config, Shapes::ShapeRef.new(shape: SolutionConfig, location_name: "solutionConfig"))
+    SolutionVersion.add_member(:training_hours, Shapes::ShapeRef.new(shape: TrainingHours, location_name: "trainingHours"))
     SolutionVersion.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     SolutionVersion.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     SolutionVersion.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
@@ -828,6 +831,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:create_event_tracker, Seahorse::Model::Operation.new.tap do |o|
@@ -1182,6 +1186,7 @@ module Aws::Personalize
         o.output = Shapes::ShapeRef.new(shape: ListSolutionVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

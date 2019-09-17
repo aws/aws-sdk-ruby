@@ -1595,6 +1595,7 @@ module Aws::Personalize
     #   resp.solution_version.solution_config.auto_ml_config.metric_name #=> String
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list #=> Array
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list[0] #=> String
+    #   resp.solution_version.training_hours #=> Float
     #   resp.solution_version.status #=> String
     #   resp.solution_version.failure_reason #=> String
     #   resp.solution_version.creation_date_time #=> Time
@@ -2126,7 +2127,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

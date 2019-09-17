@@ -64,6 +64,6 @@ require_relative 'aws-sdk-iam/customizations'
 # @service
 module Aws::IAM
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end
