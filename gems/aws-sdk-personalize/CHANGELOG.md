@@ -4,7 +4,7 @@ Unreleased Changes
 1.5.0 (2019-09-17)
 ------------------
 
-* Feature - [Personalize] Adds trainingHours to solutionVersion properties.
+* Feature - Adds trainingHours to solutionVersion properties.
 
 1.4.0 (2019-07-25)
 ------------------
