@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Athena - Updated the API, and documentation for Amazon Athena.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Personalize - Updated the API, and documentation for Amazon Personalize.
+
 2.11.354 (2019-09-16)
 ------------------
 
