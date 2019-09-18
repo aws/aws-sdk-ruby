@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.356 (2019-09-18)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::RAM - Updated the API, and documentation for AWS Resource Access Manager.
