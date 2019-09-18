@@ -314,6 +314,22 @@ module Aws::RAM
 
     end
 
+    class TagPolicyViolationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RAM::Types::TagPolicyViolationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class UnknownResourceException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

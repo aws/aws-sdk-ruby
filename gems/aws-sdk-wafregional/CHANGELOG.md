@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-09-18)
+------------------
+
+* Feature - Lowering the threshold for Rate Based rule from 2000 to 100.
+
 1.25.0 (2019-07-25)
 ------------------
 

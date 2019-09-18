@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2019-09-18)
+------------------
+
+* Feature - AWS RAM provides a new ListPendingInvitationResources API action that lists the resources in a resource share that is shared with you but that the invitation is still pending for
+
 1.10.0 (2019-07-25)
 ------------------
 

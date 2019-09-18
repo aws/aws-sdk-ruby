@@ -631,6 +631,7 @@ module Aws::APIGateway
     DomainNames.struct_class = Types::DomainNames
 
     EndpointConfiguration.add_member(:types, Shapes::ShapeRef.new(shape: ListOfEndpointType, location_name: "types"))
+    EndpointConfiguration.add_member(:vpc_endpoint_ids, Shapes::ShapeRef.new(shape: ListOfString, location_name: "vpcEndpointIds"))
     EndpointConfiguration.struct_class = Types::EndpointConfiguration
 
     ExportResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
@@ -1758,6 +1759,7 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:delete_gateway_response, Seahorse::Model::Operation.new.tap do |o|

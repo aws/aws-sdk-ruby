@@ -795,6 +795,7 @@ module Aws::APIGateway
     #     regional_certificate_arn: "String",
     #     endpoint_configuration: {
     #       types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #       vpc_endpoint_ids: ["String"],
     #     },
     #     tags: {
     #       "String" => "String",
@@ -816,6 +817,8 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
     #   resp.domain_name_status_message #=> String
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
@@ -1089,6 +1092,7 @@ module Aws::APIGateway
     #     api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #     endpoint_configuration: {
     #       types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #       vpc_endpoint_ids: ["String"],
     #     },
     #     policy: "String",
     #     tags: {
@@ -1111,6 +1115,8 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
@@ -2810,6 +2816,8 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
     #   resp.domain_name_status_message #=> String
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
@@ -2860,6 +2868,8 @@ module Aws::APIGateway
     #   resp.items[0].distribution_hosted_zone_id #=> String
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.items[0].endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.items[0].endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.items[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
     #   resp.items[0].domain_name_status_message #=> String
     #   resp.items[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
@@ -3714,6 +3724,8 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
@@ -3763,6 +3775,8 @@ module Aws::APIGateway
     #   resp.items[0].api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.items[0].endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.items[0].endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.items[0].policy #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["String"] #=> String
@@ -4586,6 +4600,8 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
@@ -5265,6 +5281,8 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
@@ -5979,6 +5997,8 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
     #   resp.domain_name_status_message #=> String
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
@@ -6608,6 +6628,8 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
+    #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
@@ -6893,7 +6915,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
