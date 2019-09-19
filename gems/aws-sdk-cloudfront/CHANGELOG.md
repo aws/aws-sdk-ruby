@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix url argument of #signed_cookie.
+
 1.22.0 (2019-07-25)
 ------------------
 
