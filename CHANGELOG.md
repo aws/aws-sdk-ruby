@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::MediaConnect - Updated the API, and documentation for AWS MediaConnect.
+
 2.11.356 (2019-09-18)
 ------------------
 
