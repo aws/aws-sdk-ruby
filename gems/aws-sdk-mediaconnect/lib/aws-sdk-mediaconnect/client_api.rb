@@ -153,6 +153,7 @@ module Aws::MediaConnect
     Encryption.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     Encryption.struct_class = Types::Encryption
 
+    Entitlement.add_member(:data_transfer_subscriber_fee_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "dataTransferSubscriberFeePercent"))
     Entitlement.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Entitlement.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
     Entitlement.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "entitlementArn"))
@@ -174,6 +175,7 @@ module Aws::MediaConnect
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
+    GrantEntitlementRequest.add_member(:data_transfer_subscriber_fee_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "dataTransferSubscriberFeePercent"))
     GrantEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     GrantEntitlementRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
     GrantEntitlementRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -216,6 +218,7 @@ module Aws::MediaConnect
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListedEntitlement.add_member(:data_transfer_subscriber_fee_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "dataTransferSubscriberFeePercent"))
     ListedEntitlement.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "entitlementArn"))
     ListedEntitlement.add_member(:entitlement_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "entitlementName"))
     ListedEntitlement.struct_class = Types::ListedEntitlement
@@ -234,6 +237,7 @@ module Aws::MediaConnect
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    Output.add_member(:data_transfer_subscriber_fee_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "dataTransferSubscriberFeePercent"))
     Output.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Output.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     Output.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
@@ -279,6 +283,7 @@ module Aws::MediaConnect
     SetSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: __string, location_name: "whitelistCidr"))
     SetSourceRequest.struct_class = Types::SetSourceRequest
 
+    Source.add_member(:data_transfer_subscriber_fee_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "dataTransferSubscriberFeePercent"))
     Source.add_member(:decryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "decryption"))
     Source.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Source.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, location_name: "entitlementArn"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-09-19)
+------------------
+
+* Feature - When you grant an entitlement, you can now specify the percentage of the entitlement data transfer that you want the subscriber to be responsible for.
+
 1.14.0 (2019-09-11)
 ------------------
 

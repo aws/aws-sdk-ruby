@@ -342,6 +342,19 @@ module Aws::ECS
     #   The name of the container.
     #   @return [String]
     #
+    # @!attribute [rw] image
+    #   The image used for the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_digest
+    #   The container image manifest digest.
+    #
+    #   <note markdown="1"> The `imageDigest` is only returned if the container is using an
+    #   image hosted in Amazon ECR, otherwise it is omitted.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] runtime_id
     #   The ID of the Docker container.
     #   @return [String]
@@ -401,6 +414,8 @@ module Aws::ECS
       :container_arn,
       :task_arn,
       :name,
+      :image,
+      :image_digest,
       :runtime_id,
       :last_status,
       :exit_code,
@@ -1397,7 +1412,13 @@ module Aws::ECS
     #
     # @!attribute [rw] firelens_configuration
     #   The FireLens configuration for the container. This is used to
-    #   specify and configure a log router for container logs.
+    #   specify and configure a log router for container logs. For more
+    #   information, see [Custom Log Routing][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
     #   @return [Types::FirelensConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition AWS API Documentation
@@ -1783,6 +1804,7 @@ module Aws::ECS
     #
     #       {
     #         container_name: "String",
+    #         image_digest: "String",
     #         runtime_id: "String",
     #         exit_code: 1,
     #         network_bindings: [
@@ -1799,6 +1821,10 @@ module Aws::ECS
     #
     # @!attribute [rw] container_name
     #   The name of the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_digest
+    #   The container image SHA 256 digest.
     #   @return [String]
     #
     # @!attribute [rw] runtime_id
@@ -1826,6 +1852,7 @@ module Aws::ECS
     #
     class ContainerStateChange < Struct.new(
       :container_name,
+      :image_digest,
       :runtime_id,
       :exit_code,
       :network_bindings,
@@ -2013,7 +2040,10 @@ module Aws::ECS
     #   If the service is using the rolling update (`ECS`) deployment
     #   controller and using either an Application Load Balancer or Network
     #   Load Balancer, you can specify multiple target groups to attach to
-    #   the service.
+    #   the service. The service-linked role is required for services that
+    #   make use of multiple target groups. For more information, see [Using
+    #   Service-Linked Roles for Amazon ECS][2] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -2059,6 +2089,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
@@ -2126,10 +2157,12 @@ module Aws::ECS
     #   If your account has already created the Amazon ECS service-linked
     #   role, that role is used by default for your service unless you
     #   specify a role here. The service-linked role is required if your
-    #   task definition uses the `awsvpc` network mode, in which case you
-    #   should not specify a role here. For more information, see [Using
-    #   Service-Linked Roles for Amazon ECS][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   task definition uses the `awsvpc` network mode or if the service is
+    #   configured to use service discovery, an external deployment
+    #   controller, or multiple target groups in which case you should not
+    #   specify a role here. For more information, see [Using Service-Linked
+    #   Roles for Amazon ECS][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must
     #   either specify the full role ARN (this is recommended) or prefix the
@@ -3527,7 +3560,13 @@ module Aws::ECS
     end
 
     # The FireLens configuration for the container. This is used to specify
-    # and configure a log router for container logs.
+    # and configure a log router for container logs. For more information,
+    # see [Custom Log Routing][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
     #
     # @note When making an API call, you may pass FirelensConfiguration
     #   data as a hash:
@@ -4903,19 +4942,23 @@ module Aws::ECS
     #   can communicate with by default.
     #
     #   For tasks using the Fargate launch type, the supported log drivers
-    #   are `awslogs` and `splunk`.
+    #   are `awslogs`, `splunk`, and `awsfirelens`.
     #
     #   For tasks using the EC2 launch type, the supported log drivers are
-    #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `logentries`,
-    #   `syslog`, and `splunk`.
+    #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `syslog`,
+    #   `splunk`, and `awsfirelens`.
     #
     #   For more information about using the `awslogs` log driver, see
     #   [Using the awslogs Log Driver][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
+    #   For more information about using the `awsfirelens` log driver, see
+    #   [Custom Log Routing][2] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
     #   <note markdown="1"> If you have a custom driver that is not listed above that you would
     #   like to work with the Amazon ECS container agent, you can fork the
-    #   Amazon ECS container agent project that is [available on GitHub][2]
+    #   Amazon ECS container agent project that is [available on GitHub][3]
     #   and customize it to work with that driver. We encourage you to
     #   submit pull requests for changes that you would like to have
     #   included. However, Amazon Web Services does not currently support
@@ -4932,7 +4975,8 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
-    #   [2]: https://github.com/aws/amazon-ecs-agent
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+    #   [3]: https://github.com/aws/amazon-ecs-agent
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -7439,6 +7483,7 @@ module Aws::ECS
     #         containers: [
     #           {
     #             container_name: "String",
+    #             image_digest: "String",
     #             runtime_id: "String",
     #             exit_code: 1,
     #             network_bindings: [
@@ -7813,7 +7858,7 @@ module Aws::ECS
     #   change that triggers a CloudWatch event, the version counter is
     #   incremented. If you are replicating your Amazon ECS task state with
     #   CloudWatch Events, you can compare the version of a task reported by
-    #   the Amazon ECS API actionss with the version reported in CloudWatch
+    #   the Amazon ECS API actions with the version reported in CloudWatch
     #   Events for the task (inside the `detail` object) to verify that the
     #   version in your event stream is current.
     #   @return [Integer]

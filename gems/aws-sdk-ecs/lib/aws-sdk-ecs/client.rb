@@ -542,7 +542,10 @@ module Aws::ECS
     #   If the service is using the rolling update (`ECS`) deployment
     #   controller and using either an Application Load Balancer or Network
     #   Load Balancer, you can specify multiple target groups to attach to the
-    #   service.
+    #   service. The service-linked role is required for services that make
+    #   use of multiple target groups. For more information, see [Using
+    #   Service-Linked Roles for Amazon ECS][2] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -586,6 +589,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
     #   The details of the service discovery registries to assign to this
@@ -646,10 +650,12 @@ module Aws::ECS
     #   If your account has already created the Amazon ECS service-linked
     #   role, that role is used by default for your service unless you specify
     #   a role here. The service-linked role is required if your task
-    #   definition uses the `awsvpc` network mode, in which case you should
-    #   not specify a role here. For more information, see [Using
-    #   Service-Linked Roles for Amazon ECS][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   definition uses the `awsvpc` network mode or if the service is
+    #   configured to use service discovery, an external deployment
+    #   controller, or multiple target groups in which case you should not
+    #   specify a role here. For more information, see [Using Service-Linked
+    #   Roles for Amazon ECS][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
@@ -2927,6 +2933,8 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].image #=> String
+    #   resp.tasks[0].containers[0].image_digest #=> String
     #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
@@ -5405,6 +5413,8 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].image #=> String
+    #   resp.tasks[0].containers[0].image_digest #=> String
     #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
@@ -5671,6 +5681,8 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].image #=> String
+    #   resp.tasks[0].containers[0].image_digest #=> String
     #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
@@ -5816,6 +5828,8 @@ module Aws::ECS
     #   resp.task.containers[0].container_arn #=> String
     #   resp.task.containers[0].task_arn #=> String
     #   resp.task.containers[0].name #=> String
+    #   resp.task.containers[0].image #=> String
+    #   resp.task.containers[0].image_digest #=> String
     #   resp.task.containers[0].runtime_id #=> String
     #   resp.task.containers[0].last_status #=> String
     #   resp.task.containers[0].exit_code #=> Integer
@@ -6039,6 +6053,7 @@ module Aws::ECS
     #     containers: [
     #       {
     #         container_name: "String",
+    #         image_digest: "String",
     #         runtime_id: "String",
     #         exit_code: 1,
     #         network_bindings: [
@@ -7026,7 +7041,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

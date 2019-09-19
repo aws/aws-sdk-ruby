@@ -664,6 +664,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
     #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
     #   resp.dev_endpoints[0].availability_zone #=> String
@@ -1480,6 +1481,27 @@ module Aws::Glue
     #   `WorkerType` configuration, the Spark drivers for the development
     #   endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
     #
+    # @option params [String] :glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version supported
+    #   for running your ETL scripts on development endpoints.
+    #
+    #   For more information about the available AWS Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in the
+    #   developer guide.
+    #
+    #   Development endpoints that are created without specifying a Glue
+    #   version default to Glue 0.9.
+    #
+    #   You can specify a version of Python support for development endpoints
+    #   by using the `Arguments` parameter in the `CreateDevEndpoint` or
+    #   `UpdateDevEndpoint` APIs. If no arguments are provided, the version
+    #   defaults to Python 2.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated to
     #   the development endpoint.
@@ -1533,6 +1555,7 @@ module Aws::Glue
     #   * {Types::CreateDevEndpointResponse#zeppelin_remote_spark_interpreter_port #zeppelin_remote_spark_interpreter_port} => Integer
     #   * {Types::CreateDevEndpointResponse#number_of_nodes #number_of_nodes} => Integer
     #   * {Types::CreateDevEndpointResponse#worker_type #worker_type} => String
+    #   * {Types::CreateDevEndpointResponse#glue_version #glue_version} => String
     #   * {Types::CreateDevEndpointResponse#number_of_workers #number_of_workers} => Integer
     #   * {Types::CreateDevEndpointResponse#availability_zone #availability_zone} => String
     #   * {Types::CreateDevEndpointResponse#vpc_id #vpc_id} => String
@@ -1554,6 +1577,7 @@ module Aws::Glue
     #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
     #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
@@ -1578,6 +1602,7 @@ module Aws::Glue
     #   resp.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.number_of_nodes #=> Integer
     #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.glue_version #=> String
     #   resp.number_of_workers #=> Integer
     #   resp.availability_zone #=> String
     #   resp.vpc_id #=> String
@@ -3524,6 +3549,7 @@ module Aws::Glue
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
     #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoint.glue_version #=> String
     #   resp.dev_endpoint.number_of_workers #=> Integer
     #   resp.dev_endpoint.number_of_nodes #=> Integer
     #   resp.dev_endpoint.availability_zone #=> String
@@ -3591,6 +3617,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
     #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
     #   resp.dev_endpoints[0].availability_zone #=> String
@@ -7238,6 +7265,19 @@ module Aws::Glue
     #   The map of arguments to add the map of arguments used to configure the
     #   `DevEndpoint`.
     #
+    #   Valid arguments are:
+    #
+    #   * `"--enable-glue-datacatalog": ""`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "3"`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "2"`
+    #
+    #   You can specify a version of Python support for development endpoints
+    #   by using the `Arguments` parameter in the `CreateDevEndpoint` or
+    #   `UpdateDevEndpoint` APIs. If no arguments are provided, the version
+    #   defaults to Python 2.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -7810,7 +7850,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

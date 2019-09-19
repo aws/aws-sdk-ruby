@@ -2081,6 +2081,7 @@ module Aws::Glue
     #         public_keys: ["GenericString"],
     #         number_of_nodes: 1,
     #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         glue_version: "GlueVersionString",
     #         number_of_workers: 1,
     #         extra_python_libs_s3_path: "GenericString",
     #         extra_jars_s3_path: "GenericString",
@@ -2156,6 +2157,28 @@ module Aws::Glue
     #   endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
     #   @return [String]
     #
+    # @!attribute [rw] glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version
+    #   supported for running your ETL scripts on development endpoints.
+    #
+    #   For more information about the available AWS Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in
+    #   the developer guide.
+    #
+    #   Development endpoints that are created without specifying a Glue
+    #   version default to Glue 0.9.
+    #
+    #   You can specify a version of Python support for development
+    #   endpoints by using the `Arguments` parameter in the
+    #   `CreateDevEndpoint` or `UpdateDevEndpoint` APIs. If no arguments are
+    #   provided, the version defaults to Python 2.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   @return [String]
+    #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   to the development endpoint.
@@ -2215,6 +2238,7 @@ module Aws::Glue
       :public_keys,
       :number_of_nodes,
       :worker_type,
+      :glue_version,
       :number_of_workers,
       :extra_python_libs_s3_path,
       :extra_jars_s3_path,
@@ -2263,6 +2287,12 @@ module Aws::Glue
     #   endpoint. May be a value of Standard, G.1X, or G.2X.
     #   @return [String]
     #
+    # @!attribute [rw] glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version
+    #   supported for running your ETL scripts on development endpoints.
+    #   @return [String]
+    #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   to the development endpoint.
@@ -2302,6 +2332,19 @@ module Aws::Glue
     #
     # @!attribute [rw] arguments
     #   The map of arguments used to configure this `DevEndpoint`.
+    #
+    #   Valid arguments are:
+    #
+    #   * `"--enable-glue-datacatalog": ""`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "3"`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "2"`
+    #
+    #   You can specify a version of Python support for development
+    #   endpoints by using the `Arguments` parameter in the
+    #   `CreateDevEndpoint` or `UpdateDevEndpoint` APIs. If no arguments are
+    #   provided, the version defaults to Python 2.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpointResponse AWS API Documentation
@@ -2316,6 +2359,7 @@ module Aws::Glue
       :zeppelin_remote_spark_interpreter_port,
       :number_of_nodes,
       :worker_type,
+      :glue_version,
       :number_of_workers,
       :availability_zone,
       :vpc_id,
@@ -4060,6 +4104,28 @@ module Aws::Glue
     #   endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
     #   @return [String]
     #
+    # @!attribute [rw] glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version
+    #   supported for running your ETL scripts on development endpoints.
+    #
+    #   For more information about the available AWS Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in
+    #   the developer guide.
+    #
+    #   Development endpoints that are created without specifying a Glue
+    #   version default to Glue 0.9.
+    #
+    #   You can specify a version of Python support for development
+    #   endpoints by using the `Arguments` parameter in the
+    #   `CreateDevEndpoint` or `UpdateDevEndpoint` APIs. If no arguments are
+    #   provided, the version defaults to Python 2.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   @return [String]
+    #
     # @!attribute [rw] number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
     #   to the development endpoint.
@@ -4152,8 +4218,18 @@ module Aws::Glue
     # @!attribute [rw] arguments
     #   A map of arguments used to configure the `DevEndpoint`.
     #
-    #   Currently, only `"--enable-glue-datacatalog": ""` is supported as a
-    #   valid argument.
+    #   Valid arguments are:
+    #
+    #   * `"--enable-glue-datacatalog": ""`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "3"`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "2"`
+    #
+    #   You can specify a version of Python support for development
+    #   endpoints by using the `Arguments` parameter in the
+    #   `CreateDevEndpoint` or `UpdateDevEndpoint` APIs. If no arguments are
+    #   provided, the version defaults to Python 2.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpoint AWS API Documentation
@@ -4169,6 +4245,7 @@ module Aws::Glue
       :public_address,
       :status,
       :worker_type,
+      :glue_version,
       :number_of_workers,
       :number_of_nodes,
       :availability_zone,
@@ -11251,6 +11328,19 @@ module Aws::Glue
     # @!attribute [rw] add_arguments
     #   The map of arguments to add the map of arguments used to configure
     #   the `DevEndpoint`.
+    #
+    #   Valid arguments are:
+    #
+    #   * `"--enable-glue-datacatalog": ""`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "3"`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "2"`
+    #
+    #   You can specify a version of Python support for development
+    #   endpoints by using the `Arguments` parameter in the
+    #   `CreateDevEndpoint` or `UpdateDevEndpoint` APIs. If no arguments are
+    #   provided, the version defaults to Python 2.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpointRequest AWS API Documentation

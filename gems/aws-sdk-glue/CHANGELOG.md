@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2019-09-19)
+------------------
+
+* Feature - AWS Glue DevEndpoints now supports GlueVersion, enabling you to choose Apache Spark 2.4.3 (in addition to Apache Spark 2.2.1). In addition to supporting the latest version of Spark, you will also have the ability to choose between Python 2 and Python 3.
+
 1.43.0 (2019-08-15)
 ------------------
 

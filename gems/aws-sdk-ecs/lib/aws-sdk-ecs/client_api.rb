@@ -352,6 +352,8 @@ module Aws::ECS
     Container.add_member(:container_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerArn"))
     Container.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
     Container.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    Container.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
+    Container.add_member(:image_digest, Shapes::ShapeRef.new(shape: String, location_name: "imageDigest"))
     Container.add_member(:runtime_id, Shapes::ShapeRef.new(shape: String, location_name: "runtimeId"))
     Container.add_member(:last_status, Shapes::ShapeRef.new(shape: String, location_name: "lastStatus"))
     Container.add_member(:exit_code, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "exitCode"))
@@ -448,6 +450,7 @@ module Aws::ECS
     ContainerOverrides.member = Shapes::ShapeRef.new(shape: ContainerOverride)
 
     ContainerStateChange.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
+    ContainerStateChange.add_member(:image_digest, Shapes::ShapeRef.new(shape: String, location_name: "imageDigest"))
     ContainerStateChange.add_member(:runtime_id, Shapes::ShapeRef.new(shape: String, location_name: "runtimeId"))
     ContainerStateChange.add_member(:exit_code, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "exitCode"))
     ContainerStateChange.add_member(:network_bindings, Shapes::ShapeRef.new(shape: NetworkBindings, location_name: "networkBindings"))
@@ -1836,6 +1839,7 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

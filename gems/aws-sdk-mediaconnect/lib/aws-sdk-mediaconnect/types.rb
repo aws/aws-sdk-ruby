@@ -228,6 +228,7 @@ module Aws::MediaConnect
     #         availability_zone: "__string",
     #         entitlements: [
     #           {
+    #             data_transfer_subscriber_fee_percent: 1,
     #             description: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
@@ -499,6 +500,11 @@ module Aws::MediaConnect
 
     # The settings for a flow entitlement.
     #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
+    #
     # @!attribute [rw] description
     #   A description of the entitlement.
     #   @return [String]
@@ -525,6 +531,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Entitlement AWS API Documentation
     #
     class Entitlement < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :description,
       :encryption,
       :entitlement_arn,
@@ -611,6 +618,7 @@ module Aws::MediaConnect
     #   data as a hash:
     #
     #       {
+    #         data_transfer_subscriber_fee_percent: 1,
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
@@ -626,6 +634,11 @@ module Aws::MediaConnect
     #         name: "__string",
     #         subscribers: ["__string"], # required
     #       }
+    #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
     #
     # @!attribute [rw] description
     #   A description of the entitlement. This description appears only on
@@ -652,6 +665,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantEntitlementRequest AWS API Documentation
     #
     class GrantEntitlementRequest < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :description,
       :encryption,
       :name,
@@ -681,6 +695,7 @@ module Aws::MediaConnect
     #       {
     #         entitlements: [ # required
     #           {
+    #             data_transfer_subscriber_fee_percent: 1,
     #             description: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
@@ -875,6 +890,11 @@ module Aws::MediaConnect
 
     # An entitlement that has been granted to you from other AWS accounts.
     #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
+    #
     # @!attribute [rw] entitlement_arn
     #   The ARN of the entitlement.
     #   @return [String]
@@ -886,6 +906,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListedEntitlement AWS API Documentation
     #
     class ListedEntitlement < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :entitlement_arn,
       :entitlement_name)
       include Aws::Structure
@@ -963,6 +984,11 @@ module Aws::MediaConnect
 
     # The settings for an output.
     #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
+    #
     # @!attribute [rw] description
     #   A description of the output.
     #   @return [String]
@@ -1008,6 +1034,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Output AWS API Documentation
     #
     class Output < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :description,
       :destination,
       :encryption,
@@ -1227,6 +1254,11 @@ module Aws::MediaConnect
 
     # The settings for the source of the flow.
     #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
+    #
     # @!attribute [rw] decryption
     #   The type of encryption that is used on the content ingested from
     #   this source.
@@ -1276,6 +1308,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Source AWS API Documentation
     #
     class Source < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :decryption,
       :description,
       :entitlement_arn,

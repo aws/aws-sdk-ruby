@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2019-09-19)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for container image manifest digests. This enables you to identify all tasks launched using a container image pulled from ECR in order to correlate what was built with where it is running.
+
 1.49.0 (2019-09-03)
 ------------------
 

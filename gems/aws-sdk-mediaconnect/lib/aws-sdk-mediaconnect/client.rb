@@ -302,6 +302,7 @@ module Aws::MediaConnect
     #
     #   resp.flow_arn #=> String
     #   resp.outputs #=> Array
+    #   resp.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].destination #=> String
     #   resp.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
@@ -366,6 +367,7 @@ module Aws::MediaConnect
     #     availability_zone: "__string",
     #     entitlements: [
     #       {
+    #         data_transfer_subscriber_fee_percent: 1,
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
@@ -438,6 +440,7 @@ module Aws::MediaConnect
     #   resp.flow.description #=> String
     #   resp.flow.egress_ip #=> String
     #   resp.flow.entitlements #=> Array
+    #   resp.flow.entitlements[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.entitlements[0].description #=> String
     #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
@@ -455,6 +458,7 @@ module Aws::MediaConnect
     #   resp.flow.flow_arn #=> String
     #   resp.flow.name #=> String
     #   resp.flow.outputs #=> Array
+    #   resp.flow.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.outputs[0].description #=> String
     #   resp.flow.outputs[0].destination #=> String
     #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
@@ -479,6 +483,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
+    #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
     #   resp.flow.source.decryption.device_id #=> String
@@ -566,6 +571,7 @@ module Aws::MediaConnect
     #   resp.flow.description #=> String
     #   resp.flow.egress_ip #=> String
     #   resp.flow.entitlements #=> Array
+    #   resp.flow.entitlements[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.entitlements[0].description #=> String
     #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
@@ -583,6 +589,7 @@ module Aws::MediaConnect
     #   resp.flow.flow_arn #=> String
     #   resp.flow.name #=> String
     #   resp.flow.outputs #=> Array
+    #   resp.flow.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.outputs[0].description #=> String
     #   resp.flow.outputs[0].destination #=> String
     #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
@@ -607,6 +614,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
+    #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
     #   resp.flow.source.decryption.device_id #=> String
@@ -661,6 +669,7 @@ module Aws::MediaConnect
     #   resp = client.grant_flow_entitlements({
     #     entitlements: [ # required
     #       {
+    #         data_transfer_subscriber_fee_percent: 1,
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
@@ -683,6 +692,7 @@ module Aws::MediaConnect
     # @example Response structure
     #
     #   resp.entitlements #=> Array
+    #   resp.entitlements[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.entitlements[0].description #=> String
     #   resp.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.entitlements[0].encryption.constant_initialization_vector #=> String
@@ -730,6 +740,7 @@ module Aws::MediaConnect
     # @example Response structure
     #
     #   resp.entitlements #=> Array
+    #   resp.entitlements[0].data_transfer_subscriber_fee_percent #=> Integer
     #   resp.entitlements[0].entitlement_arn #=> String
     #   resp.entitlements[0].entitlement_name #=> String
     #   resp.next_token #=> String
@@ -1043,6 +1054,7 @@ module Aws::MediaConnect
     #
     # @example Response structure
     #
+    #   resp.entitlement.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.entitlement.description #=> String
     #   resp.entitlement.encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.entitlement.encryption.constant_initialization_vector #=> String
@@ -1145,6 +1157,7 @@ module Aws::MediaConnect
     # @example Response structure
     #
     #   resp.flow_arn #=> String
+    #   resp.output.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.output.description #=> String
     #   resp.output.destination #=> String
     #   resp.output.encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
@@ -1253,6 +1266,7 @@ module Aws::MediaConnect
     # @example Response structure
     #
     #   resp.flow_arn #=> String
+    #   resp.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.source.decryption.constant_initialization_vector #=> String
     #   resp.source.decryption.device_id #=> String
@@ -1300,7 +1314,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
