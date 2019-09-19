@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.357 (2019-09-19)
+------------------
+
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
 
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
