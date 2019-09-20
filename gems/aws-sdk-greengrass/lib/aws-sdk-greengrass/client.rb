@@ -1348,6 +1348,7 @@ module Aws::Greengrass
     #
     #   * {Types::CreateSoftwareUpdateJobResponse#iot_job_arn #iot_job_arn} => String
     #   * {Types::CreateSoftwareUpdateJobResponse#iot_job_id #iot_job_id} => String
+    #   * {Types::CreateSoftwareUpdateJobResponse#platform_software_version #platform_software_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1365,6 +1366,7 @@ module Aws::Greengrass
     #
     #   resp.iot_job_arn #=> String
     #   resp.iot_job_id #=> String
+    #   resp.platform_software_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJob AWS API Documentation
     #
@@ -3606,9 +3608,11 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Add resource tags to a Greengrass Resource. Valid resources are Group,
-    # Connector, Core, Device, Function, Logger, Subscription, and Resource
-    # Defintions, and also BulkDeploymentIds.
+    # Adds tags to a Greengrass resource. Valid resources are 'Group',
+    # 'ConnectorDefinition', 'CoreDefinition', 'DeviceDefinition',
+    # 'FunctionDefinition', 'LoggerDefinition',
+    # 'SubscriptionDefinition', 'ResourceDefinition', and
+    # 'BulkDeployment'.
     #
     # @option params [required, String] :resource_arn
     #
@@ -3942,7 +3946,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

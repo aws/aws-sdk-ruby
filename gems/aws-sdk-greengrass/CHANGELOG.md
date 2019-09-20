@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-09-20)
+------------------
+
+* Feature - Greengrass OTA service now returns the updated software version in the PlatformSoftwareVersion parameter of a CreateSoftwareUpdateJob response
+
 1.24.0 (2019-07-26)
 ------------------
 

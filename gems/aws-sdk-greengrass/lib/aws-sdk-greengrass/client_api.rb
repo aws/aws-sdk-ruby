@@ -559,6 +559,7 @@ module Aws::Greengrass
 
     CreateSoftwareUpdateJobResponse.add_member(:iot_job_arn, Shapes::ShapeRef.new(shape: __string, location_name: "IotJobArn"))
     CreateSoftwareUpdateJobResponse.add_member(:iot_job_id, Shapes::ShapeRef.new(shape: __string, location_name: "IotJobId"))
+    CreateSoftwareUpdateJobResponse.add_member(:platform_software_version, Shapes::ShapeRef.new(shape: __string, location_name: "PlatformSoftwareVersion"))
     CreateSoftwareUpdateJobResponse.struct_class = Types::CreateSoftwareUpdateJobResponse
 
     CreateSubscriptionDefinitionRequest.add_member(:amzn_client_token, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "X-Amzn-Client-Token"))

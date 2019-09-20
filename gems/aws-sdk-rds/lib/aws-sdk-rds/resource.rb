@@ -2478,6 +2478,7 @@ module Aws::RDS
     #     product_description: "String",
     #     offering_type: "String",
     #     multi_az: false,
+    #     lease_id: "String",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -2513,6 +2514,14 @@ module Aws::RDS
     # @option options [Boolean] :multi_az
     #   A value that indicates whether to show only those reservations that
     #   support Multi-AZ.
+    # @option options [String] :lease_id
+    #   The lease identifier filter value. Specify this parameter to show only
+    #   the reservation that matches the specified lease ID.
+    #
+    #   <note markdown="1"> AWS Support might request the lease ID for an issue related to a
+    #   reserved DB instance.
+    #
+    #    </note>
     # @option options [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.
     # @return [ReservedDBInstance::Collection]

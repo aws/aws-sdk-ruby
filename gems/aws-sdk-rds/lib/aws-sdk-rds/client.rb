@@ -8938,6 +8938,15 @@ module Aws::RDS
     #   A value that indicates whether to show only those reservations that
     #   support Multi-AZ.
     #
+    # @option params [String] :lease_id
+    #   The lease identifier filter value. Specify this parameter to show only
+    #   the reservation that matches the specified lease ID.
+    #
+    #   <note markdown="1"> AWS Support might request the lease ID for an issue related to a
+    #   reserved DB instance.
+    #
+    #    </note>
+    #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.
     #
@@ -8989,6 +8998,7 @@ module Aws::RDS
     #     product_description: "String",
     #     offering_type: "String",
     #     multi_az: false,
+    #     lease_id: "String",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -9020,6 +9030,7 @@ module Aws::RDS
     #   resp.reserved_db_instances[0].recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_db_instances[0].recurring_charges[0].recurring_charge_frequency #=> String
     #   resp.reserved_db_instances[0].reserved_db_instance_arn #=> String
+    #   resp.reserved_db_instances[0].lease_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstances AWS API Documentation
     #
@@ -12284,6 +12295,7 @@ module Aws::RDS
     #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_frequency #=> String
     #   resp.reserved_db_instance.reserved_db_instance_arn #=> String
+    #   resp.reserved_db_instance.lease_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOffering AWS API Documentation
     #
@@ -16428,7 +16440,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

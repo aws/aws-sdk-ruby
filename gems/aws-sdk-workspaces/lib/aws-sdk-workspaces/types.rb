@@ -816,6 +816,43 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeWorkspaceSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The identifier of the WorkSpace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshotsRequest AWS API Documentation
+    #
+    class DescribeWorkspaceSnapshotsRequest < Struct.new(
+      :workspace_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rebuild_snapshots
+    #   Information about the snapshots that can be used to rebuild a
+    #   WorkSpace. These snapshots include the root volume.
+    #   @return [Array<Types::Snapshot>]
+    #
+    # @!attribute [rw] restore_snapshots
+    #   Information about the snapshots that can be used to restore a
+    #   WorkSpace. These snapshots include both the root volume and the user
+    #   volume.
+    #   @return [Array<Types::Snapshot>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshotsResult AWS API Documentation
+    #
+    class DescribeWorkspaceSnapshotsResult < Struct.new(
+      :rebuild_snapshots,
+      :restore_snapshots)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeWorkspacesConnectionStatusRequest
     #   data as a hash:
     #
@@ -992,8 +1029,9 @@ module Aws::WorkSpaces
     end
 
     # Describes a WorkSpace that could not be rebooted. (RebootWorkspaces),
-    # rebuilt (RebuildWorkspaces), terminated (TerminateWorkspaces), started
-    # (StartWorkspaces), or stopped (StopWorkspaces).
+    # rebuilt (RebuildWorkspaces), restored (RestoreWorkspace), terminated
+    # (TerminateWorkspaces), started (StartWorkspaces), or stopped
+    # (StopWorkspaces).
     #
     # @!attribute [rw] workspace_id
     #   The identifier of the WorkSpace.
@@ -1549,6 +1587,28 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RestoreWorkspaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The identifier of the WorkSpace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspaceRequest AWS API Documentation
+    #
+    class RestoreWorkspaceRequest < Struct.new(
+      :workspace_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspaceResult AWS API Documentation
+    #
+    class RestoreWorkspaceResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass RevokeIpRulesRequest
     #   data as a hash:
     #
@@ -1587,6 +1647,19 @@ module Aws::WorkSpaces
     #
     class RootStorage < Struct.new(
       :capacity)
+      include Aws::Structure
+    end
+
+    # Describes a snapshot.
+    #
+    # @!attribute [rw] snapshot_time
+    #   The time when the snapshot was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Snapshot AWS API Documentation
+    #
+    class Snapshot < Struct.new(
+      :snapshot_time)
       include Aws::Structure
     end
 

@@ -1630,11 +1630,17 @@ module Aws::Greengrass
     #   The IoT Job Id corresponding to this update.
     #   @return [String]
     #
+    # @!attribute [rw] platform_software_version
+    #   The software version installed on the device or devices after the
+    #   update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobResponse AWS API Documentation
     #
     class CreateSoftwareUpdateJobResponse < Struct.new(
       :iot_job_arn,
-      :iot_job_id)
+      :iot_job_id,
+      :platform_software_version)
       include Aws::Structure
     end
 
@@ -3424,11 +3430,11 @@ module Aws::Greengrass
     #   @return [Types::GroupVersion]
     #
     # @!attribute [rw] id
-    #   The ID of the group version.
+    #   The ID of the group that the version is associated with.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The unique ID for the version of the group.
+    #   The ID of the group version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersionResponse AWS API Documentation
@@ -5864,11 +5870,11 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID of the version.
+    #   The ID of the parent definition that the version is associated with.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The unique ID of the version.
+    #   The ID of the version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/VersionInformation AWS API Documentation

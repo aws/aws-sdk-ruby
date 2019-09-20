@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2019-09-20)
+------------------
+
+* Feature - Add a new LeaseID output field to DescribeReservedDBInstances, which shows the unique identifier for the lease associated with the reserved DB instance. AWS Support might request the lease ID for an issue related to a reserved DB instance.
+
 1.65.0 (2019-09-11)
 ------------------
 

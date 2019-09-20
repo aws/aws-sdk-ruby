@@ -8848,6 +8848,7 @@ module Aws::RDS
     #         product_description: "String",
     #         offering_type: "String",
     #         multi_az: false,
+    #         lease_id: "String",
     #         filters: [
     #           {
     #             name: "String", # required
@@ -8899,6 +8900,16 @@ module Aws::RDS
     #   support Multi-AZ.
     #   @return [Boolean]
     #
+    # @!attribute [rw] lease_id
+    #   The lease identifier filter value. Specify this parameter to show
+    #   only the reservation that matches the specified lease ID.
+    #
+    #   <note markdown="1"> AWS Support might request the lease ID for an issue related to a
+    #   reserved DB instance.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   This parameter is not currently supported.
     #   @return [Array<Types::Filter>]
@@ -8930,6 +8941,7 @@ module Aws::RDS
       :product_description,
       :offering_type,
       :multi_az,
+      :lease_id,
       :filters,
       :max_records,
       :marker)
@@ -13083,6 +13095,16 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the reserved DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] lease_id
+    #   The unique identifier for the lease associated with the reserved DB
+    #   instance.
+    #
+    #   <note markdown="1"> AWS Support might request the lease ID for an issue related to a
+    #   reserved DB instance.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstance AWS API Documentation
     #
     class ReservedDBInstance < Struct.new(
@@ -13100,7 +13122,8 @@ module Aws::RDS
       :multi_az,
       :state,
       :recurring_charges,
-      :reserved_db_instance_arn)
+      :reserved_db_instance_arn,
+      :lease_id)
       include Aws::Structure
     end
 

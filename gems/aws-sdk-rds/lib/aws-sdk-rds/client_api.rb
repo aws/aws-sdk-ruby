@@ -1554,6 +1554,7 @@ module Aws::RDS
     DescribeReservedDBInstancesMessage.add_member(:product_description, Shapes::ShapeRef.new(shape: String, location_name: "ProductDescription"))
     DescribeReservedDBInstancesMessage.add_member(:offering_type, Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
     DescribeReservedDBInstancesMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
+    DescribeReservedDBInstancesMessage.add_member(:lease_id, Shapes::ShapeRef.new(shape: String, location_name: "LeaseId"))
     DescribeReservedDBInstancesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeReservedDBInstancesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeReservedDBInstancesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -2176,6 +2177,7 @@ module Aws::RDS
     ReservedDBInstance.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
     ReservedDBInstance.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
     ReservedDBInstance.add_member(:reserved_db_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReservedDBInstanceArn"))
+    ReservedDBInstance.add_member(:lease_id, Shapes::ShapeRef.new(shape: String, location_name: "LeaseId"))
     ReservedDBInstance.struct_class = Types::ReservedDBInstance
 
     ReservedDBInstanceList.member = Shapes::ShapeRef.new(shape: ReservedDBInstance, location_name: "ReservedDBInstance")

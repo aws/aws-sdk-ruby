@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-09-20)
+------------------
+
+* Feature - Adds the WorkSpaces restore feature
+
 1.27.0 (2019-07-25)
 ------------------
 
