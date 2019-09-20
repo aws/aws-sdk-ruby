@@ -147,7 +147,7 @@ module Aws::TranscribeService
     StartTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))
     StartTranscriptionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     StartTranscriptionJobRequest.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
-    StartTranscriptionJobRequest.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, required: true, location_name: "MediaFormat"))
+    StartTranscriptionJobRequest.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, location_name: "MediaFormat"))
     StartTranscriptionJobRequest.add_member(:media, Shapes::ShapeRef.new(shape: Media, required: true, location_name: "Media"))
     StartTranscriptionJobRequest.add_member(:output_bucket_name, Shapes::ShapeRef.new(shape: OutputBucketName, location_name: "OutputBucketName"))
     StartTranscriptionJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "Settings"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2019-09-03)
+------------------
+
+* Feature - Documentation updates for resourcegroupstaggingapi
+
 1.17.0 (2019-07-25)
 ------------------
 

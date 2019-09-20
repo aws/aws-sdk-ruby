@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-08-29)
+------------------
+
+* Feature - Adds a "MaximumBatchingWindowInSeconds" parameter to event source mapping api's. Usable by Dynamodb and Kinesis event sources.
+
 1.29.0 (2019-07-25)
 ------------------
 

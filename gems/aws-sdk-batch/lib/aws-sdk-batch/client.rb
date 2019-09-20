@@ -1038,6 +1038,11 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.resource_requirements #=> Array
     #   resp.job_definitions[0].container_properties.resource_requirements[0].value #=> String
     #   resp.job_definitions[0].container_properties.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices #=> Array
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].host_path #=> String
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].container_path #=> String
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].permissions #=> Array
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
     #   resp.job_definitions[0].node_properties.main_node #=> Integer
@@ -1070,6 +1075,11 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].host_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1309,6 +1319,11 @@ module Aws::Batch
     #   resp.jobs[0].container.resource_requirements #=> Array
     #   resp.jobs[0].container.resource_requirements[0].value #=> String
     #   resp.jobs[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.jobs[0].container.linux_parameters.devices #=> Array
+    #   resp.jobs[0].container.linux_parameters.devices[0].host_path #=> String
+    #   resp.jobs[0].container.linux_parameters.devices[0].container_path #=> String
+    #   resp.jobs[0].container.linux_parameters.devices[0].permissions #=> Array
+    #   resp.jobs[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.jobs[0].node_details.node_index #=> Integer
     #   resp.jobs[0].node_details.is_main_node #=> Boolean
     #   resp.jobs[0].node_properties.num_nodes #=> Integer
@@ -1342,6 +1357,11 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].host_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -1631,6 +1651,15 @@ module Aws::Batch
     #           type: "GPU", # required, accepts GPU
     #         },
     #       ],
+    #       linux_parameters: {
+    #         devices: [
+    #           {
+    #             host_path: "String", # required
+    #             container_path: "String",
+    #             permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #           },
+    #         ],
+    #       },
     #     },
     #     node_properties: {
     #       num_nodes: 1, # required
@@ -1682,6 +1711,15 @@ module Aws::Batch
     #                 type: "GPU", # required, accepts GPU
     #               },
     #             ],
+    #             linux_parameters: {
+    #               devices: [
+    #                 {
+    #                   host_path: "String", # required
+    #                   container_path: "String",
+    #                   permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #       ],
@@ -2101,7 +2139,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

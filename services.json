@@ -247,6 +247,12 @@
   "Firehose": {
     "models": "firehose/2015-08-04"
   },
+  "ForecastQueryService": {
+    "models": "forecastquery/2018-06-26"
+  },
+  "ForecastService": {
+    "models": "forecast/2018-06-26"
+  },
   "GameLift": {
     "models": "gamelift/2015-10-01"
   },
@@ -336,6 +342,9 @@
   },
   "KinesisVideoMedia": {
     "models": "kinesis-video-media/2017-09-30"
+  },
+  "LakeFormation": {
+    "models": "lakeformation/2017-03-31"
   },
   "Lambda": {
     "models": "lambda/2015-03-31"
@@ -450,6 +459,12 @@
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
+  },
+  "QLDB": {
+    "models": "qldb/2019-01-02"
+  },
+  "QLDBSession": {
+    "models": "qldb-session/2019-07-11"
   },
   "QuickSight": {
     "models": "quicksight/2018-04-01"
@@ -643,6 +658,9 @@
   },
   "WorkMail": {
     "models": "workmail/2017-10-01"
+  },
+  "WorkMailMessageFlow": {
+    "models": "workmailmessageflow/2019-05-01"
   },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08"

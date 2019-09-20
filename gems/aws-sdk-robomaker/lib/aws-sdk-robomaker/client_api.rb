@@ -17,6 +17,7 @@ module Aws::RoboMaker
     BatchDescribeSimulationJobRequest = Shapes::StructureShape.new(name: 'BatchDescribeSimulationJobRequest')
     BatchDescribeSimulationJobResponse = Shapes::StructureShape.new(name: 'BatchDescribeSimulationJobResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     CancelDeploymentJobRequest = Shapes::StructureShape.new(name: 'CancelDeploymentJobRequest')
     CancelDeploymentJobResponse = Shapes::StructureShape.new(name: 'CancelDeploymentJobResponse')
     CancelSimulationJobRequest = Shapes::StructureShape.new(name: 'CancelSimulationJobRequest')
@@ -41,6 +42,11 @@ module Aws::RoboMaker
     CreateSimulationJobRequest = Shapes::StructureShape.new(name: 'CreateSimulationJobRequest')
     CreateSimulationJobResponse = Shapes::StructureShape.new(name: 'CreateSimulationJobResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
+    DataSource = Shapes::StructureShape.new(name: 'DataSource')
+    DataSourceConfig = Shapes::StructureShape.new(name: 'DataSourceConfig')
+    DataSourceConfigs = Shapes::ListShape.new(name: 'DataSourceConfigs')
+    DataSourceNames = Shapes::ListShape.new(name: 'DataSourceNames')
+    DataSources = Shapes::ListShape.new(name: 'DataSources')
     DeleteFleetRequest = Shapes::StructureShape.new(name: 'DeleteFleetRequest')
     DeleteFleetResponse = Shapes::StructureShape.new(name: 'DeleteFleetResponse')
     DeleteRobotApplicationRequest = Shapes::StructureShape.new(name: 'DeleteRobotApplicationRequest')
@@ -57,6 +63,7 @@ module Aws::RoboMaker
     DeploymentJobs = Shapes::ListShape.new(name: 'DeploymentJobs')
     DeploymentLaunchConfig = Shapes::StructureShape.new(name: 'DeploymentLaunchConfig')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
+    DeploymentTimeout = Shapes::IntegerShape.new(name: 'DeploymentTimeout')
     DeploymentVersion = Shapes::StringShape.new(name: 'DeploymentVersion')
     DeregisterRobotRequest = Shapes::StructureShape.new(name: 'DeregisterRobotRequest')
     DeregisterRobotResponse = Shapes::StructureShape.new(name: 'DeregisterRobotResponse')
@@ -107,14 +114,21 @@ module Aws::RoboMaker
     ListSimulationJobsResponse = Shapes::StructureShape.new(name: 'ListSimulationJobsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
+    NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    NonSystemPort = Shapes::IntegerShape.new(name: 'NonSystemPort')
     OutputLocation = Shapes::StructureShape.new(name: 'OutputLocation')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Path = Shapes::StringShape.new(name: 'Path')
     PercentDone = Shapes::FloatShape.new(name: 'PercentDone')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
+    Port = Shapes::IntegerShape.new(name: 'Port')
+    PortForwardingConfig = Shapes::StructureShape.new(name: 'PortForwardingConfig')
+    PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
+    PortMappingList = Shapes::ListShape.new(name: 'PortMappingList')
     ProgressDetail = Shapes::StructureShape.new(name: 'ProgressDetail')
     RegisterRobotRequest = Shapes::StructureShape.new(name: 'RegisterRobotRequest')
     RegisterRobotResponse = Shapes::StructureShape.new(name: 'RegisterRobotResponse')
@@ -143,6 +157,9 @@ module Aws::RoboMaker
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Etag = Shapes::StringShape.new(name: 'S3Etag')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3KeyOutput = Shapes::StructureShape.new(name: 'S3KeyOutput')
+    S3KeyOutputs = Shapes::ListShape.new(name: 'S3KeyOutputs')
+    S3Keys = Shapes::ListShape.new(name: 'S3Keys')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SimulationApplicationConfig = Shapes::StructureShape.new(name: 'SimulationApplicationConfig')
@@ -283,7 +300,7 @@ module Aws::RoboMaker
     CreateSimulationApplicationRequest.add_member(:sources, Shapes::ShapeRef.new(shape: SourceConfigs, required: true, location_name: "sources"))
     CreateSimulationApplicationRequest.add_member(:simulation_software_suite, Shapes::ShapeRef.new(shape: SimulationSoftwareSuite, required: true, location_name: "simulationSoftwareSuite"))
     CreateSimulationApplicationRequest.add_member(:robot_software_suite, Shapes::ShapeRef.new(shape: RobotSoftwareSuite, required: true, location_name: "robotSoftwareSuite"))
-    CreateSimulationApplicationRequest.add_member(:rendering_engine, Shapes::ShapeRef.new(shape: RenderingEngine, required: true, location_name: "renderingEngine"))
+    CreateSimulationApplicationRequest.add_member(:rendering_engine, Shapes::ShapeRef.new(shape: RenderingEngine, location_name: "renderingEngine"))
     CreateSimulationApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSimulationApplicationRequest.struct_class = Types::CreateSimulationApplicationRequest
 
@@ -316,11 +333,13 @@ module Aws::RoboMaker
 
     CreateSimulationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateSimulationJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
+    CreateSimulationJobRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "loggingConfig"))
     CreateSimulationJobRequest.add_member(:max_job_duration_in_seconds, Shapes::ShapeRef.new(shape: JobDuration, required: true, location_name: "maxJobDurationInSeconds"))
     CreateSimulationJobRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, required: true, location_name: "iamRole"))
     CreateSimulationJobRequest.add_member(:failure_behavior, Shapes::ShapeRef.new(shape: FailureBehavior, location_name: "failureBehavior"))
     CreateSimulationJobRequest.add_member(:robot_applications, Shapes::ShapeRef.new(shape: RobotApplicationConfigs, location_name: "robotApplications"))
     CreateSimulationJobRequest.add_member(:simulation_applications, Shapes::ShapeRef.new(shape: SimulationApplicationConfigs, location_name: "simulationApplications"))
+    CreateSimulationJobRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigs, location_name: "dataSources"))
     CreateSimulationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSimulationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfig, location_name: "vpcConfig"))
     CreateSimulationJobRequest.struct_class = Types::CreateSimulationJobRequest
@@ -333,14 +352,32 @@ module Aws::RoboMaker
     CreateSimulationJobResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: SimulationJobErrorCode, location_name: "failureCode"))
     CreateSimulationJobResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
     CreateSimulationJobResponse.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
+    CreateSimulationJobResponse.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "loggingConfig"))
     CreateSimulationJobResponse.add_member(:max_job_duration_in_seconds, Shapes::ShapeRef.new(shape: JobDuration, location_name: "maxJobDurationInSeconds"))
     CreateSimulationJobResponse.add_member(:simulation_time_millis, Shapes::ShapeRef.new(shape: SimulationTimeMillis, location_name: "simulationTimeMillis"))
     CreateSimulationJobResponse.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, location_name: "iamRole"))
     CreateSimulationJobResponse.add_member(:robot_applications, Shapes::ShapeRef.new(shape: RobotApplicationConfigs, location_name: "robotApplications"))
     CreateSimulationJobResponse.add_member(:simulation_applications, Shapes::ShapeRef.new(shape: SimulationApplicationConfigs, location_name: "simulationApplications"))
+    CreateSimulationJobResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     CreateSimulationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSimulationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfigResponse, location_name: "vpcConfig"))
     CreateSimulationJobResponse.struct_class = Types::CreateSimulationJobResponse
+
+    DataSource.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    DataSource.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "s3Bucket"))
+    DataSource.add_member(:s3_keys, Shapes::ShapeRef.new(shape: S3KeyOutputs, location_name: "s3Keys"))
+    DataSource.struct_class = Types::DataSource
+
+    DataSourceConfig.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    DataSourceConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "s3Bucket"))
+    DataSourceConfig.add_member(:s3_keys, Shapes::ShapeRef.new(shape: S3Keys, required: true, location_name: "s3Keys"))
+    DataSourceConfig.struct_class = Types::DataSourceConfig
+
+    DataSourceConfigs.member = Shapes::ShapeRef.new(shape: DataSourceConfig)
+
+    DataSourceNames.member = Shapes::ShapeRef.new(shape: Name)
+
+    DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
 
     DeleteFleetRequest.add_member(:fleet, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "fleet"))
     DeleteFleetRequest.struct_class = Types::DeleteFleetRequest
@@ -373,6 +410,7 @@ module Aws::RoboMaker
 
     DeploymentConfig.add_member(:concurrent_deployment_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "concurrentDeploymentPercentage"))
     DeploymentConfig.add_member(:failure_threshold_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "failureThresholdPercentage"))
+    DeploymentConfig.add_member(:robot_deployment_timeout_in_seconds, Shapes::ShapeRef.new(shape: DeploymentTimeout, location_name: "robotDeploymentTimeoutInSeconds"))
     DeploymentConfig.struct_class = Types::DeploymentConfig
 
     DeploymentJob.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
@@ -488,13 +526,16 @@ module Aws::RoboMaker
     DescribeSimulationJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "failureReason"))
     DescribeSimulationJobResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
     DescribeSimulationJobResponse.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
+    DescribeSimulationJobResponse.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "loggingConfig"))
     DescribeSimulationJobResponse.add_member(:max_job_duration_in_seconds, Shapes::ShapeRef.new(shape: JobDuration, location_name: "maxJobDurationInSeconds"))
     DescribeSimulationJobResponse.add_member(:simulation_time_millis, Shapes::ShapeRef.new(shape: SimulationTimeMillis, location_name: "simulationTimeMillis"))
     DescribeSimulationJobResponse.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, location_name: "iamRole"))
     DescribeSimulationJobResponse.add_member(:robot_applications, Shapes::ShapeRef.new(shape: RobotApplicationConfigs, location_name: "robotApplications"))
     DescribeSimulationJobResponse.add_member(:simulation_applications, Shapes::ShapeRef.new(shape: SimulationApplicationConfigs, location_name: "simulationApplications"))
+    DescribeSimulationJobResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     DescribeSimulationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     DescribeSimulationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfigResponse, location_name: "vpcConfig"))
+    DescribeSimulationJobResponse.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
     DescribeSimulationJobResponse.struct_class = Types::DescribeSimulationJobResponse
 
     EnvironmentVariableMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
@@ -530,6 +571,7 @@ module Aws::RoboMaker
     LaunchConfig.add_member(:package_name, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "packageName"))
     LaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "launchFile"))
     LaunchConfig.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
+    LaunchConfig.add_member(:port_forwarding_config, Shapes::ShapeRef.new(shape: PortForwardingConfig, location_name: "portForwardingConfig"))
     LaunchConfig.struct_class = Types::LaunchConfig
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -597,9 +639,27 @@ module Aws::RoboMaker
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LoggingConfig.add_member(:record_all_ros_topics, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "recordAllRosTopics"))
+    LoggingConfig.struct_class = Types::LoggingConfig
+
+    NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "networkInterfaceId"))
+    NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: GenericString, location_name: "privateIpAddress"))
+    NetworkInterface.add_member(:public_ip_address, Shapes::ShapeRef.new(shape: GenericString, location_name: "publicIpAddress"))
+    NetworkInterface.struct_class = Types::NetworkInterface
+
     OutputLocation.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "s3Bucket"))
     OutputLocation.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3Key, location_name: "s3Prefix"))
     OutputLocation.struct_class = Types::OutputLocation
+
+    PortForwardingConfig.add_member(:port_mappings, Shapes::ShapeRef.new(shape: PortMappingList, location_name: "portMappings"))
+    PortForwardingConfig.struct_class = Types::PortForwardingConfig
+
+    PortMapping.add_member(:job_port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "jobPort"))
+    PortMapping.add_member(:application_port, Shapes::ShapeRef.new(shape: NonSystemPort, required: true, location_name: "applicationPort"))
+    PortMapping.add_member(:enable_on_public_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableOnPublicIp"))
+    PortMapping.struct_class = Types::PortMapping
+
+    PortMappingList.member = Shapes::ShapeRef.new(shape: PortMapping)
 
     ProgressDetail.add_member(:current_progress, Shapes::ShapeRef.new(shape: RobotDeploymentStep, location_name: "currentProgress"))
     ProgressDetail.add_member(:percent_done, Shapes::ShapeRef.new(shape: PercentDone, location_name: "percentDone"))
@@ -676,6 +736,14 @@ module Aws::RoboMaker
 
     Robots.member = Shapes::ShapeRef.new(shape: Robot)
 
+    S3KeyOutput.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "s3Key"))
+    S3KeyOutput.add_member(:etag, Shapes::ShapeRef.new(shape: S3Etag, location_name: "etag"))
+    S3KeyOutput.struct_class = Types::S3KeyOutput
+
+    S3KeyOutputs.member = Shapes::ShapeRef.new(shape: S3KeyOutput)
+
+    S3Keys.member = Shapes::ShapeRef.new(shape: S3Key)
+
     SecurityGroups.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -710,13 +778,16 @@ module Aws::RoboMaker
     SimulationJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "failureReason"))
     SimulationJob.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
     SimulationJob.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
+    SimulationJob.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "loggingConfig"))
     SimulationJob.add_member(:max_job_duration_in_seconds, Shapes::ShapeRef.new(shape: JobDuration, location_name: "maxJobDurationInSeconds"))
     SimulationJob.add_member(:simulation_time_millis, Shapes::ShapeRef.new(shape: SimulationTimeMillis, location_name: "simulationTimeMillis"))
     SimulationJob.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, location_name: "iamRole"))
     SimulationJob.add_member(:robot_applications, Shapes::ShapeRef.new(shape: RobotApplicationConfigs, location_name: "robotApplications"))
     SimulationJob.add_member(:simulation_applications, Shapes::ShapeRef.new(shape: SimulationApplicationConfigs, location_name: "simulationApplications"))
+    SimulationJob.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     SimulationJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     SimulationJob.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfigResponse, location_name: "vpcConfig"))
+    SimulationJob.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
     SimulationJob.struct_class = Types::SimulationJob
 
     SimulationJobSummaries.member = Shapes::ShapeRef.new(shape: SimulationJobSummary)
@@ -727,6 +798,7 @@ module Aws::RoboMaker
     SimulationJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: SimulationJobStatus, location_name: "status"))
     SimulationJobSummary.add_member(:simulation_application_names, Shapes::ShapeRef.new(shape: SimulationApplicationNames, location_name: "simulationApplicationNames"))
     SimulationJobSummary.add_member(:robot_application_names, Shapes::ShapeRef.new(shape: RobotApplicationNames, location_name: "robotApplicationNames"))
+    SimulationJobSummary.add_member(:data_source_names, Shapes::ShapeRef.new(shape: DataSourceNames, location_name: "dataSourceNames"))
     SimulationJobSummary.struct_class = Types::SimulationJobSummary
 
     SimulationJobs.member = Shapes::ShapeRef.new(shape: SimulationJob)
@@ -805,7 +877,7 @@ module Aws::RoboMaker
     UpdateSimulationApplicationRequest.add_member(:sources, Shapes::ShapeRef.new(shape: SourceConfigs, required: true, location_name: "sources"))
     UpdateSimulationApplicationRequest.add_member(:simulation_software_suite, Shapes::ShapeRef.new(shape: SimulationSoftwareSuite, required: true, location_name: "simulationSoftwareSuite"))
     UpdateSimulationApplicationRequest.add_member(:robot_software_suite, Shapes::ShapeRef.new(shape: RobotSoftwareSuite, required: true, location_name: "robotSoftwareSuite"))
-    UpdateSimulationApplicationRequest.add_member(:rendering_engine, Shapes::ShapeRef.new(shape: RenderingEngine, required: true, location_name: "renderingEngine"))
+    UpdateSimulationApplicationRequest.add_member(:rendering_engine, Shapes::ShapeRef.new(shape: RenderingEngine, location_name: "renderingEngine"))
     UpdateSimulationApplicationRequest.add_member(:current_revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "currentRevisionId"))
     UpdateSimulationApplicationRequest.struct_class = Types::UpdateSimulationApplicationRequest
 

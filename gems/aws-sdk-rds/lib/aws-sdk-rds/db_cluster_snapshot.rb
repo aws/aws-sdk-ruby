@@ -511,6 +511,33 @@ module Aws::RDS
     #   Constraint: Must be compatible with the engine of the source
     # @option options [String] :engine_version
     #   The version of the database engine to use for the new DB cluster.
+    #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`, `10.7`
     # @option options [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
@@ -555,6 +582,13 @@ module Aws::RDS
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
+    #
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
@@ -578,7 +612,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, or `parallelquery`.
+    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.

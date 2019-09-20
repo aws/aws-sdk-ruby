@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2019-08-30)
+------------------
+
+* Feature - You can use getConnection to return information about the connection (when it is connected, IP address, etc) and deleteConnection to disconnect the given connection
+
 1.9.0 (2019-07-25)
 ------------------
 

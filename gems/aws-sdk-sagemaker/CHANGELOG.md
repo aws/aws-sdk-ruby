@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2019-08-21)
+------------------
+
+* Feature - Amazon SageMaker now supports Amazon EFS and Amazon FSx for Lustre file systems as data sources for training machine learning models. Amazon SageMaker now supports running training jobs on ml.p3dn.24xlarge instance type. This instance type is offered as a limited private preview for certain SageMaker customers. If you are interested in joining the private preview, please reach out to the SageMaker Product Management team via AWS Support."
+
+1.42.0 (2019-08-20)
+------------------
+
+* Feature - Amazon SageMaker introduces Managed Spot Training. Increases the maximum number of metric definitions to 40 for SageMaker Training and Hyperparameter Tuning Jobs. SageMaker Neo adds support for Acer aiSage and Qualcomm QCS605 and QCS603.
+
 1.41.0 (2019-07-25)
 ------------------
 

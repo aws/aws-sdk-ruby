@@ -51,8 +51,9 @@ module Aws
       super
     end
 
-    # @return [Integer] The number of times to retry failed attempts to
-    #   fetch credentials from the instance metadata service. Defaults to 0.
+    # @return [Integer] Number of times to retry when retrieving credentials
+    #   from the instance metadata service. Defaults to 0 when resolving from
+    #   the default credential chain ({Aws::CredentialProviderChain}).
     attr_reader :retries
 
     private

@@ -1291,14 +1291,14 @@ module Aws::STS
     #
     # This operation does not indicate the state of the access key. The key
     # might be active, inactive, or deleted. Active keys might not have
-    # permissions to perform an operation. Providing a deleted keys might
-    # return an error that the key doesn't exist.
+    # permissions to perform an operation. Providing a deleted access key
+    # might return an error that the key doesn't exist.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html
     #
     # @option params [required, String] :access_key_id
     #   The identifier of an access key.
@@ -1330,8 +1330,22 @@ module Aws::STS
       req.send_request(options)
     end
 
-    # Returns details about the IAM identity whose credentials are used to
-    # call the API.
+    # Returns details about the IAM user or role whose credentials are used
+    # to call the operation.
+    #
+    # <note markdown="1"> No permissions are required to perform this operation. If an
+    # administrator adds a policy to your IAM user or role that explicitly
+    # denies access to the `sts:GetCallerIdentity` action, you can still
+    # perform this operation. Permissions are not required because the same
+    # information is returned when an IAM user or role is denied access. To
+    # view an example response, see [I Am Not Authorized to Perform:
+    # iam:DeleteVirtualMFADevice][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_access-denied-delete-mfa
     #
     # @return [Types::GetCallerIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1545,8 +1559,7 @@ module Aws::STS
     #   both inline and managed session policies shouldn't exceed 2048
     #   characters. You can provide up to 10 managed policy ARNs. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html) in
-    #   the AWS General Reference.
+    #   Service Namespaces][2] in the AWS General Reference.
     #
     #   This parameter is optional. However, if you do not pass any session
     #   policies, then the resulting federated user session has no
@@ -1575,6 +1588,7 @@ module Aws::STS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Integer] :duration_seconds
     #   The duration, in seconds, that the session should last. Acceptable
@@ -1801,7 +1815,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.61.1'
+      context[:gem_version] = '3.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

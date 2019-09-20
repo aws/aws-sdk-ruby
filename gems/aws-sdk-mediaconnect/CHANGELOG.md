@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-09-19)
+------------------
+
+* Feature - When you grant an entitlement, you can now specify the percentage of the entitlement data transfer that you want the subscriber to be responsible for.
+
+1.14.0 (2019-09-11)
+------------------
+
+* Feature - This release adds support for the RIST protocol on sources and outputs.
+
+1.13.0 (2019-07-26)
+------------------
+
+* Feature - This release adds support for the Zixi pull protocol on outputs.
+
 1.12.0 (2019-07-25)
 ------------------
 

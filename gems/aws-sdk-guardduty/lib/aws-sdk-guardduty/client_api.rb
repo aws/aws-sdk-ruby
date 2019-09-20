@@ -69,6 +69,7 @@ module Aws::GuardDuty
     Email = Shapes::StringShape.new(name: 'Email')
     Eq = Shapes::ListShape.new(name: 'Eq')
     Equals = Shapes::ListShape.new(name: 'Equals')
+    Evidence = Shapes::StructureShape.new(name: 'Evidence')
     Feedback = Shapes::StringShape.new(name: 'Feedback')
     FilterAction = Shapes::StringShape.new(name: 'FilterAction')
     FilterDescription = Shapes::StringShape.new(name: 'FilterDescription')
@@ -179,6 +180,9 @@ module Aws::GuardDuty
     ThreatIntelSetFormat = Shapes::StringShape.new(name: 'ThreatIntelSetFormat')
     ThreatIntelSetIds = Shapes::ListShape.new(name: 'ThreatIntelSetIds')
     ThreatIntelSetStatus = Shapes::StringShape.new(name: 'ThreatIntelSetStatus')
+    ThreatIntelligenceDetail = Shapes::StructureShape.new(name: 'ThreatIntelligenceDetail')
+    ThreatIntelligenceDetails = Shapes::ListShape.new(name: 'ThreatIntelligenceDetails')
+    ThreatNames = Shapes::ListShape.new(name: 'ThreatNames')
     UnarchiveFindingsRequest = Shapes::StructureShape.new(name: 'UnarchiveFindingsRequest')
     UnarchiveFindingsResponse = Shapes::StructureShape.new(name: 'UnarchiveFindingsResponse')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
@@ -392,6 +396,9 @@ module Aws::GuardDuty
     Eq.member = Shapes::ShapeRef.new(shape: String)
 
     Equals.member = Shapes::ShapeRef.new(shape: String)
+
+    Evidence.add_member(:threat_intelligence_details, Shapes::ShapeRef.new(shape: ThreatIntelligenceDetails, location_name: "threatIntelligenceDetails"))
+    Evidence.struct_class = Types::Evidence
 
     FilterNames.member = Shapes::ShapeRef.new(shape: FilterName)
 
@@ -721,6 +728,7 @@ module Aws::GuardDuty
     SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroup)
 
     Service.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "action"))
+    Service.add_member(:evidence, Shapes::ShapeRef.new(shape: Evidence, location_name: "evidence"))
     Service.add_member(:archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "archived"))
     Service.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
     Service.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "detectorId"))
@@ -767,6 +775,14 @@ module Aws::GuardDuty
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
     ThreatIntelSetIds.member = Shapes::ShapeRef.new(shape: String)
+
+    ThreatIntelligenceDetail.add_member(:threat_list_name, Shapes::ShapeRef.new(shape: String, location_name: "threatListName"))
+    ThreatIntelligenceDetail.add_member(:threat_names, Shapes::ShapeRef.new(shape: ThreatNames, location_name: "threatNames"))
+    ThreatIntelligenceDetail.struct_class = Types::ThreatIntelligenceDetail
+
+    ThreatIntelligenceDetails.member = Shapes::ShapeRef.new(shape: ThreatIntelligenceDetail)
+
+    ThreatNames.member = Shapes::ShapeRef.new(shape: String)
 
     UnarchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UnarchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))

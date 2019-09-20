@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-09-11)
+------------------
+
+* Feature - Fixing letter case in Map history event details to be small case
+
+1.21.0 (2019-09-04)
+------------------
+
+* Feature - Added support for new history events
+
 1.20.0 (2019-07-25)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2019-09-12)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports High Efficiency Video Coding (HEVC) for standard-definition (SD), high-definition (HD), and ultra-high-definition (UHD) encoding with HDR support.Encoding with HEVC offers a number of advantages. While UHD video requires an advanced codec beyond H.264 (AVC), high frame rate (HFR) or High Dynamic Range (HDR) content in HD also benefit from HEVC's advancements. In addition, benefits can be achieved with HD and SD content even if HDR and HFR are not needed.
+
 1.36.0 (2019-07-25)
 ------------------
 

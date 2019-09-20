@@ -416,7 +416,7 @@ module Aws::MQ
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   The list of rules (1 minimum, 125 maximum) that authorize
+    #   The list of security groups (1 minimum, 5 maximum) that authorize
     #   connections to brokers.
     #   @return [Array<String>]
     #
@@ -1109,13 +1109,18 @@ module Aws::MQ
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
+    # @!attribute [rw] pending_security_groups
+    #   The list of pending security groups to authorize connections to
+    #   brokers.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] publicly_accessible
     #   Required. Enables connections from applications outside of the VPC
     #   that hosts the broker's subnets.
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   Required. The list of rules (1 minimum, 125 maximum) that authorize
+    #   The list of security groups (1 minimum, 5 maximum) that authorize
     #   connections to brokers.
     #   @return [Array<String>]
     #
@@ -1154,6 +1159,7 @@ module Aws::MQ
       :logs,
       :maintenance_window_start_time,
       :pending_engine_version,
+      :pending_security_groups,
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
@@ -1237,6 +1243,9 @@ module Aws::MQ
     # @!attribute [rw] pending_engine_version
     #   @return [String]
     #
+    # @!attribute [rw] pending_security_groups
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] publicly_accessible
     #   @return [Boolean]
     #
@@ -1271,6 +1280,7 @@ module Aws::MQ
       :logs,
       :maintenance_window_start_time,
       :pending_engine_version,
+      :pending_security_groups,
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
@@ -2104,13 +2114,19 @@ module Aws::MQ
     #   Enables Amazon CloudWatch logging for brokers.
     #   @return [Types::Logs]
     #
+    # @!attribute [rw] security_groups
+    #   The list of security groups (1 minimum, 5 maximum) that authorize
+    #   connections to brokers.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerInput AWS API Documentation
     #
     class UpdateBrokerInput < Struct.new(
       :auto_minor_version_upgrade,
       :configuration,
       :engine_version,
-      :logs)
+      :logs,
+      :security_groups)
       include Aws::Structure
     end
 
@@ -2140,6 +2156,11 @@ module Aws::MQ
     #   broker.
     #   @return [Types::Logs]
     #
+    # @!attribute [rw] security_groups
+    #   The list of security groups (1 minimum, 5 maximum) that authorize
+    #   connections to brokers.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerOutput AWS API Documentation
     #
     class UpdateBrokerOutput < Struct.new(
@@ -2147,7 +2168,8 @@ module Aws::MQ
       :broker_id,
       :configuration,
       :engine_version,
-      :logs)
+      :logs,
+      :security_groups)
       include Aws::Structure
     end
 
@@ -2166,6 +2188,7 @@ module Aws::MQ
     #           audit: false,
     #           general: false,
     #         },
+    #         security_groups: ["__string"],
     #       }
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -2186,6 +2209,9 @@ module Aws::MQ
     #   broker.
     #   @return [Types::Logs]
     #
+    # @!attribute [rw] security_groups
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerRequest AWS API Documentation
     #
     class UpdateBrokerRequest < Struct.new(
@@ -2193,7 +2219,8 @@ module Aws::MQ
       :broker_id,
       :configuration,
       :engine_version,
-      :logs)
+      :logs,
+      :security_groups)
       include Aws::Structure
     end
 
@@ -2215,6 +2242,9 @@ module Aws::MQ
     #   broker.
     #   @return [Types::Logs]
     #
+    # @!attribute [rw] security_groups
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse AWS API Documentation
     #
     class UpdateBrokerResponse < Struct.new(
@@ -2222,7 +2252,8 @@ module Aws::MQ
       :broker_id,
       :configuration,
       :engine_version,
-      :logs)
+      :logs,
+      :security_groups)
       include Aws::Structure
     end
 

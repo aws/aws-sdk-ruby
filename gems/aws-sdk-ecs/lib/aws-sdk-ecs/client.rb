@@ -291,9 +291,32 @@ module Aws::ECS
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the cluster to help you categorize and
     #   organize them. Each tag consists of a key and an optional value, both
-    #   of which you define. Tag keys can have a maximum character length of
-    #   128 characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @option params [Array<Types::ClusterSetting>] :settings
     #   The setting to use when creating a cluster. This parameter is used to
@@ -375,14 +398,15 @@ module Aws::ECS
 
     # Runs and maintains a desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
-    # the `desiredCount`, Amazon ECS spawns another copy of the task in the
+    # the `desiredCount`, Amazon ECS runs another copy of the task in the
     # specified cluster. To update an existing service, see UpdateService.
     #
     # In addition to maintaining the desired count of tasks in your service,
-    # you can optionally run your service behind a load balancer. The load
-    # balancer distributes traffic across the tasks that are associated with
-    # the service. For more information, see [Service Load Balancing][1] in
-    # the *Amazon Elastic Container Service Developer Guide*.
+    # you can optionally run your service behind one or more load balancers.
+    # The load balancers distribute traffic across the tasks that are
+    # associated with the service. For more information, see [Service Load
+    # Balancing][1] in the *Amazon Elastic Container Service Developer
+    # Guide*.
     #
     # Tasks for services that *do not* use a load balancer are considered
     # healthy if they're in the `RUNNING` state. Tasks for services that
@@ -511,11 +535,17 @@ module Aws::ECS
     #   deployment controller.
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
-    #   A load balancer object representing the load balancer to use with your
-    #   service.
+    #   A load balancer object representing the load balancers to use with
+    #   your service. For more information, see [Service Load Balancing][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
-    #   If the service is using the `ECS` deployment controller, you are
-    #   limited to one load balancer or target group.
+    #   If the service is using the rolling update (`ECS`) deployment
+    #   controller and using either an Application Load Balancer or Network
+    #   Load Balancer, you can specify multiple target groups to attach to the
+    #   service. The service-linked role is required for services that make
+    #   use of multiple target groups. For more information, see [Using
+    #   Service-Linked Roles for Amazon ECS][2] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -535,18 +565,18 @@ module Aws::ECS
     #   using the `CODE_DEPLOY` deployment controller, these values can be
     #   changed when updating the service.
     #
-    #   For Classic Load Balancers, this object must contain the load balancer
-    #   name, the container name (as it appears in a container definition),
-    #   and the container port to access from the load balancer. When a task
-    #   from this service is placed on a container instance, the container
-    #   instance is registered with the load balancer specified here.
-    #
     #   For Application Load Balancers and Network Load Balancers, this object
     #   must contain the load balancer target group ARN, the container name
     #   (as it appears in a container definition), and the container port to
     #   access from the load balancer. When a task from this service is placed
     #   on a container instance, the container instance and port combination
     #   is registered as a target in the target group specified here.
+    #
+    #   For Classic Load Balancers, this object must contain the load balancer
+    #   name, the container name (as it appears in a container definition),
+    #   and the container port to access from the load balancer. When a task
+    #   from this service is placed on a container instance, the container
+    #   instance is registered with the load balancer specified here.
     #
     #   Services with tasks that use the `awsvpc` network mode (for example,
     #   those with the Fargate launch type) only support Application Load
@@ -555,6 +585,11 @@ module Aws::ECS
     #   you must choose `ip` as the target type, not `instance`, because tasks
     #   that use the `awsvpc` network mode are associated with an elastic
     #   network interface, not an Amazon EC2 instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
     #   The details of the service discovery registries to assign to this
@@ -574,6 +609,10 @@ module Aws::ECS
     # @option params [Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
     #   and keep running on your cluster.
+    #
+    #   This is required if `schedulingStrategy` is `REPLICA` or is not
+    #   specified. If `schedulingStrategy` is `DAEMON` then this is not
+    #   required.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -611,10 +650,12 @@ module Aws::ECS
     #   If your account has already created the Amazon ECS service-linked
     #   role, that role is used by default for your service unless you specify
     #   a role here. The service-linked role is required if your task
-    #   definition uses the `awsvpc` network mode, in which case you should
-    #   not specify a role here. For more information, see [Using
-    #   Service-Linked Roles for Amazon ECS][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   definition uses the `awsvpc` network mode or if the service is
+    #   configured to use service discovery, an external deployment
+    #   controller, or multiple target groups in which case you should not
+    #   specify a role here. For more information, see [Using Service-Linked
+    #   Roles for Amazon ECS][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
@@ -701,9 +742,32 @@ module Aws::ECS
     #   The metadata that you apply to the service to help you categorize and
     #   organize them. Each tag consists of a key and an optional value, both
     #   of which you define. When a service is deleted, the tags are deleted
-    #   as well. Tag keys can have a maximum character length of 128
-    #   characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   as well.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
     #   Specifies whether to enable Amazon ECS managed tags for the tasks
@@ -1386,13 +1450,13 @@ module Aws::ECS
     # <note markdown="1"> When you delete a service, if there are still running tasks that
     # require cleanup, the service status moves from `ACTIVE` to `DRAINING`,
     # and the service is no longer visible in the console or in the
-    # ListServices API operation. After the tasks have stopped, then the
-    # service status moves from `DRAINING` to `INACTIVE`. Services in the
-    # `DRAINING` or `INACTIVE` status can still be viewed with the
-    # DescribeServices API operation. However, in the future, `INACTIVE`
-    # services may be cleaned up and purged from Amazon ECS record keeping,
-    # and DescribeServices calls on those services return a
-    # `ServiceNotFoundException` error.
+    # ListServices API operation. After all tasks have transitioned to
+    # either `STOPPING` or `STOPPED` status, the service status moves from
+    # `DRAINING` to `INACTIVE`. Services in the `DRAINING` or `INACTIVE`
+    # status can still be viewed with the DescribeServices API operation.
+    # However, in the future, `INACTIVE` services may be cleaned up and
+    # purged from Amazon ECS record keeping, and DescribeServices calls on
+    # those services return a `ServiceNotFoundException` error.
     #
     #  </note>
     #
@@ -1848,6 +1912,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.max_swap #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.swappiness #=> Integer
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
@@ -1879,7 +1945,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
     #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
     #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
     #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
@@ -1896,7 +1962,10 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
-    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -2564,6 +2633,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.max_swap #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.swappiness #=> Integer
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
@@ -2595,7 +2666,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
     #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
     #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
     #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
@@ -2612,7 +2683,10 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
-    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -2845,7 +2919,10 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -2856,6 +2933,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].image #=> String
+    #   resp.tasks[0].containers[0].image_digest #=> String
+    #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
     #   resp.tasks[0].containers[0].reason #=> String
@@ -2874,6 +2954,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
+    #   resp.tasks[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.tasks[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.tasks[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -2901,6 +2984,9 @@ module Aws::ECS
     #   resp.tasks[0].tags #=> Array
     #   resp.tasks[0].tags[0].key #=> String
     #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].inference_accelerators #=> Array
+    #   resp.tasks[0].inference_accelerators[0].device_name #=> String
+    #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3853,11 +3939,14 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Modifies an account setting. If you change the account setting for the
-    # root user, the default settings for all of the IAM users and roles for
-    # which no individual account setting has been specified are reset. For
-    # more information, see [Account Settings][1] in the *Amazon Elastic
-    # Container Service Developer Guide*.
+    # Modifies an account setting. Account settings are set on a per-Region
+    # basis.
+    #
+    # If you change the account setting for the root user, the default
+    # settings for all of the IAM users and roles for which no individual
+    # account setting has been specified are reset. For more information,
+    # see [Account Settings][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
     #
     # When `serviceLongArnFormat`, `taskLongArnFormat`, or
     # `containerInstanceLongArnFormat` are specified, the Amazon Resource
@@ -3985,7 +4074,8 @@ module Aws::ECS
     end
 
     # Modifies an account setting for all IAM users on an account for whom
-    # no individual account setting has been specified.
+    # no individual account setting has been specified. Account settings are
+    # set on a per-Region basis.
     #
     # @option params [required, String] :name
     #   The resource name for which to modify the account setting. If
@@ -4151,9 +4241,32 @@ module Aws::ECS
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a maximum
-    #   character length of 128 characters, and tag values can have a maximum
-    #   length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @return [Types::RegisterContainerInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4450,9 +4563,32 @@ module Aws::ECS
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task definition to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a maximum
-    #   character length of 128 characters, and tag values can have a maximum
-    #   length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @option params [String] :pid_mode
     #   The process namespace to use for the containers in the task. The valid
@@ -4536,6 +4672,10 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #
+    # @option params [Array<Types::InferenceAccelerator>] :inference_accelerators
+    #   The Elastic Inference accelerators to use for the containers in the
+    #   task.
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4667,6 +4807,8 @@ module Aws::ECS
     #               mount_options: ["String"],
     #             },
     #           ],
+    #           max_swap: 1,
+    #           swappiness: 1,
     #         },
     #         secrets: [
     #           {
@@ -4710,7 +4852,7 @@ module Aws::ECS
     #           },
     #         ],
     #         log_configuration: {
-    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #           options: {
     #             "String" => "String",
     #           },
@@ -4737,9 +4879,15 @@ module Aws::ECS
     #         resource_requirements: [
     #           {
     #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU
+    #             type: "GPU", # required, accepts GPU, InferenceAccelerator
     #           },
     #         ],
+    #         firelens_configuration: {
+    #           type: "fluentd", # required, accepts fluentd, fluentbit
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #         },
     #       },
     #     ],
     #     volumes: [
@@ -4788,6 +4936,12 @@ module Aws::ECS
     #         },
     #       ],
     #     },
+    #     inference_accelerators: [
+    #       {
+    #         device_name: "String", # required
+    #         device_type: "String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4837,6 +4991,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.max_swap #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.swappiness #=> Integer
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
@@ -4868,7 +5024,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
     #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
     #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
     #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
@@ -4885,7 +5041,10 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
-    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -5061,9 +5220,32 @@ module Aws::ECS
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value, both
-    #   of which you define. Tag keys can have a maximum character length of
-    #   128 characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
     #   Specifies whether to enable Amazon ECS managed tags for the task. For
@@ -5150,9 +5332,15 @@ module Aws::ECS
     #           resource_requirements: [
     #             {
     #               value: "String", # required
-    #               type: "GPU", # required, accepts GPU
+    #               type: "GPU", # required, accepts GPU, InferenceAccelerator
     #             },
     #           ],
+    #         },
+    #       ],
+    #       inference_accelerator_overrides: [
+    #         {
+    #           device_name: "String",
+    #           device_type: "String",
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -5211,7 +5399,10 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -5222,6 +5413,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].image #=> String
+    #   resp.tasks[0].containers[0].image_digest #=> String
+    #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
     #   resp.tasks[0].containers[0].reason #=> String
@@ -5240,6 +5434,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
+    #   resp.tasks[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.tasks[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.tasks[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -5267,6 +5464,9 @@ module Aws::ECS
     #   resp.tasks[0].tags #=> Array
     #   resp.tasks[0].tags[0].key #=> String
     #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].inference_accelerators #=> Array
+    #   resp.tasks[0].inference_accelerators[0].device_name #=> String
+    #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -5346,9 +5546,32 @@ module Aws::ECS
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value, both
-    #   of which you define. Tag keys can have a maximum character length of
-    #   128 characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
     #   Specifies whether to enable Amazon ECS managed tags for the task. For
@@ -5391,9 +5614,15 @@ module Aws::ECS
     #           resource_requirements: [
     #             {
     #               value: "String", # required
-    #               type: "GPU", # required, accepts GPU
+    #               type: "GPU", # required, accepts GPU, InferenceAccelerator
     #             },
     #           ],
+    #         },
+    #       ],
+    #       inference_accelerator_overrides: [
+    #         {
+    #           device_name: "String",
+    #           device_type: "String",
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -5438,7 +5667,10 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -5449,6 +5681,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].container_arn #=> String
     #   resp.tasks[0].containers[0].task_arn #=> String
     #   resp.tasks[0].containers[0].name #=> String
+    #   resp.tasks[0].containers[0].image #=> String
+    #   resp.tasks[0].containers[0].image_digest #=> String
+    #   resp.tasks[0].containers[0].runtime_id #=> String
     #   resp.tasks[0].containers[0].last_status #=> String
     #   resp.tasks[0].containers[0].exit_code #=> Integer
     #   resp.tasks[0].containers[0].reason #=> String
@@ -5467,6 +5702,9 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].memory_reservation #=> String
     #   resp.tasks[0].containers[0].gpu_ids #=> Array
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
+    #   resp.tasks[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.tasks[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.tasks[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -5494,6 +5732,9 @@ module Aws::ECS
     #   resp.tasks[0].tags #=> Array
     #   resp.tasks[0].tags[0].key #=> String
     #   resp.tasks[0].tags[0].value #=> String
+    #   resp.tasks[0].inference_accelerators #=> Array
+    #   resp.tasks[0].inference_accelerators[0].device_name #=> String
+    #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -5573,7 +5814,10 @@ module Aws::ECS
     #   resp.task.overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.task.overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.task.overrides.container_overrides[0].resource_requirements[0].value #=> String
-    #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator"
+    #   resp.task.overrides.inference_accelerator_overrides #=> Array
+    #   resp.task.overrides.inference_accelerator_overrides[0].device_name #=> String
+    #   resp.task.overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.task.overrides.task_role_arn #=> String
     #   resp.task.overrides.execution_role_arn #=> String
     #   resp.task.last_status #=> String
@@ -5584,6 +5828,9 @@ module Aws::ECS
     #   resp.task.containers[0].container_arn #=> String
     #   resp.task.containers[0].task_arn #=> String
     #   resp.task.containers[0].name #=> String
+    #   resp.task.containers[0].image #=> String
+    #   resp.task.containers[0].image_digest #=> String
+    #   resp.task.containers[0].runtime_id #=> String
     #   resp.task.containers[0].last_status #=> String
     #   resp.task.containers[0].exit_code #=> Integer
     #   resp.task.containers[0].reason #=> String
@@ -5602,6 +5849,9 @@ module Aws::ECS
     #   resp.task.containers[0].memory_reservation #=> String
     #   resp.task.containers[0].gpu_ids #=> Array
     #   resp.task.containers[0].gpu_ids[0] #=> String
+    #   resp.task.containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.task.containers[0].firelens_configuration.options #=> Hash
+    #   resp.task.containers[0].firelens_configuration.options["String"] #=> String
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
@@ -5629,6 +5879,9 @@ module Aws::ECS
     #   resp.task.tags #=> Array
     #   resp.task.tags[0].key #=> String
     #   resp.task.tags[0].value #=> String
+    #   resp.task.inference_accelerators #=> Array
+    #   resp.task.inference_accelerators[0].device_name #=> String
+    #   resp.task.inference_accelerators[0].device_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -5699,6 +5952,9 @@ module Aws::ECS
     # @option params [String] :container_name
     #   The name of the container.
     #
+    # @option params [String] :runtime_id
+    #   The ID of the Docker container.
+    #
     # @option params [String] :status
     #   The status of the state change request.
     #
@@ -5721,6 +5977,7 @@ module Aws::ECS
     #     cluster: "String",
     #     task: "String",
     #     container_name: "String",
+    #     runtime_id: "String",
     #     status: "String",
     #     exit_code: 1,
     #     reason: "String",
@@ -5796,6 +6053,8 @@ module Aws::ECS
     #     containers: [
     #       {
     #         container_name: "String",
+    #         image_digest: "String",
+    #         runtime_id: "String",
     #         exit_code: 1,
     #         network_bindings: [
     #           {
@@ -5845,8 +6104,31 @@ module Aws::ECS
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to add to the resource. A tag is an array of key-value pairs.
-    #   Tag keys can have a maximum character length of 128 characters, and
-    #   tag values can have a maximum length of 256 characters.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5931,6 +6213,61 @@ module Aws::ECS
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Modifies the settings to use for a cluster.
+    #
+    # @option params [required, String] :cluster
+    #   The name of the cluster to modify the settings for.
+    #
+    # @option params [required, Array<Types::ClusterSetting>] :settings
+    #   The setting to use by default for a cluster. This parameter is used to
+    #   enable CloudWatch Container Insights for a cluster. If this value is
+    #   specified, it will override the `containerInsights` value set with
+    #   PutAccountSetting or PutAccountSettingDefault.
+    #
+    # @return [Types::UpdateClusterSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterSettingsResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_settings({
+    #     cluster: "String", # required
+    #     settings: [ # required
+    #       {
+    #         name: "containerInsights", # accepts containerInsights
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_arn #=> String
+    #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.status #=> String
+    #   resp.cluster.registered_container_instances_count #=> Integer
+    #   resp.cluster.running_tasks_count #=> Integer
+    #   resp.cluster.pending_tasks_count #=> Integer
+    #   resp.cluster.active_services_count #=> Integer
+    #   resp.cluster.statistics #=> Array
+    #   resp.cluster.statistics[0].name #=> String
+    #   resp.cluster.statistics[0].value #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.settings #=> Array
+    #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
+    #   resp.cluster.settings[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettings AWS API Documentation
+    #
+    # @overload update_cluster_settings(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_settings(params = {}, options = {})
+      req = build_request(:update_cluster_settings, params)
       req.send_request(options)
     end
 
@@ -6352,11 +6689,11 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 1,800 seconds.
-    #   During that time, the ECS service scheduler ignores the Elastic Load
-    #   Balancing health check status. This grace period can prevent the ECS
-    #   service scheduler from marking tasks as unhealthy and stopping them
-    #   before they have time to come up.
+    #   you can specify a health check grace period of up to 2,147,483,647
+    #   seconds. During that time, the ECS service scheduler ignores the
+    #   Elastic Load Balancing health check status. This grace period can
+    #   prevent the ECS service scheduler from marking tasks as unhealthy and
+    #   stopping them before they have time to come up.
     #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6704,7 +7041,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

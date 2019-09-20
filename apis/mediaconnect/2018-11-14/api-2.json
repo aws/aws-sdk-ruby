@@ -602,6 +602,10 @@
     "AddOutputRequest": {
       "type": "structure",
       "members": {
+        "CidrAllowList": {
+          "shape": "__listOf__string",
+          "locationName": "cidrAllowList"
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description"
@@ -630,6 +634,10 @@
           "shape": "Protocol",
           "locationName": "protocol"
         },
+        "RemoteId": {
+          "shape": "__string",
+          "locationName": "remoteId"
+        },
         "SmoothingLatency": {
           "shape": "__integer",
           "locationName": "smoothingLatency"
@@ -640,8 +648,6 @@
         }
       },
       "required": [
-        "Destination",
-        "Port",
         "Protocol"
       ]
     },
@@ -823,6 +829,10 @@
     "Entitlement": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent"
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description"
@@ -919,6 +929,10 @@
     "GrantEntitlementRequest": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent"
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description"
@@ -1091,6 +1105,10 @@
     "ListedEntitlement": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent"
+        },
         "EntitlementArn": {
           "shape": "__string",
           "locationName": "entitlementArn"
@@ -1178,6 +1196,10 @@
     "Output": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent"
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description"
@@ -1225,7 +1247,9 @@
       "enum": [
         "zixi-push",
         "rtp-fec",
-        "rtp"
+        "rtp",
+        "zixi-pull",
+        "rist"
       ]
     },
     "RemoveFlowOutputRequest": {
@@ -1368,6 +1392,10 @@
     "Source": {
       "type": "structure",
       "members": {
+        "DataTransferSubscriberFeePercent": {
+          "shape": "__integer",
+          "locationName": "dataTransferSubscriberFeePercent"
+        },
         "Decryption": {
           "shape": "Encryption",
           "locationName": "decryption"
@@ -1518,6 +1546,10 @@
     "Transport": {
       "type": "structure",
       "members": {
+        "CidrAllowList": {
+          "shape": "__listOf__string",
+          "locationName": "cidrAllowList"
+        },
         "MaxBitrate": {
           "shape": "__integer",
           "locationName": "maxBitrate"
@@ -1529,6 +1561,10 @@
         "Protocol": {
           "shape": "Protocol",
           "locationName": "protocol"
+        },
+        "RemoteId": {
+          "shape": "__string",
+          "locationName": "remoteId"
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -1650,6 +1686,10 @@
     "UpdateFlowOutputRequest": {
       "type": "structure",
       "members": {
+        "CidrAllowList": {
+          "shape": "__listOf__string",
+          "locationName": "cidrAllowList"
+        },
         "Description": {
           "shape": "__string",
           "locationName": "description"
@@ -1683,6 +1723,10 @@
         "Protocol": {
           "shape": "Protocol",
           "locationName": "protocol"
+        },
+        "RemoteId": {
+          "shape": "__string",
+          "locationName": "remoteId"
         },
         "SmoothingLatency": {
           "shape": "__integer",

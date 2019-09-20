@@ -8,6 +8,39 @@
 module Aws::AppStream
   module Types
 
+    # Describes an interface VPC endpoint (interface endpoint) that lets you
+    # create a private connection between the virtual private cloud (VPC)
+    # that you specify and AppStream 2.0. When you specify an interface
+    # endpoint for a stack, users of the stack can connect to AppStream 2.0
+    # only through that endpoint. When you specify an interface endpoint for
+    # an image builder, administrators can connect to the image builder only
+    # through that endpoint.
+    #
+    # @note When making an API call, you may pass AccessEndpoint
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_type: "STREAMING", # required, accepts STREAMING
+    #         vpce_id: "String",
+    #       }
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of interface endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpce_id
+    #   The identifier (ID) of the VPC in which the interface endpoint is
+    #   used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AccessEndpoint AWS API Documentation
+    #
+    class AccessEndpoint < Struct.new(
+      :endpoint_type,
+      :vpce_id)
+      include Aws::Structure
+    end
+
     # Describes an application in the application catalog.
     #
     # @!attribute [rw] name
@@ -400,6 +433,7 @@ module Aws::AppStream
     #           "TagKey" => "TagValue",
     #         },
     #         idle_disconnect_timeout_in_seconds: 1,
+    #         iam_role_arn: "Arn",
     #       }
     #
     # @!attribute [rw] name
@@ -535,7 +569,7 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information, see [Tagging Your Resources][1] in the *Amazon
-    #   AppStream 2.0 Developer Guide*.
+    #   AppStream 2.0 Administration Guide*.
     #
     #
     #
@@ -572,6 +606,14 @@ module Aws::AppStream
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to apply to the
+    #   fleet. To assume a role, a fleet instance calls the AWS Security
+    #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
+    #   the role to use. The operation creates a new session with temporary
+    #   credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -589,7 +631,8 @@ module Aws::AppStream
       :enable_default_internet_access,
       :domain_join_info,
       :tags,
-      :idle_disconnect_timeout_in_seconds)
+      :idle_disconnect_timeout_in_seconds,
+      :iam_role_arn)
       include Aws::Structure
     end
 
@@ -618,6 +661,7 @@ module Aws::AppStream
     #           subnet_ids: ["String"],
     #           security_group_ids: ["String"],
     #         },
+    #         iam_role_arn: "Arn",
     #         enable_default_internet_access: false,
     #         domain_join_info: {
     #           directory_name: "DirectoryName",
@@ -627,6 +671,12 @@ module Aws::AppStream
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         access_endpoints: [
+    #           {
+    #             endpoint_type: "STREAMING", # required, accepts STREAMING
+    #             vpce_id: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -658,6 +708,14 @@ module Aws::AppStream
     #   one subnet.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to apply to the image
+    #   builder. To assume a role, the image builder calls the AWS Security
+    #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
+    #   the role to use. The operation creates a new session with temporary
+    #   credentials.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_default_internet_access
     #   Enables or disables default internet access for the image builder.
     #   @return [Boolean]
@@ -686,12 +744,18 @@ module Aws::AppStream
     #   If you do not specify a value, the value is set to an empty string.
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #   the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] access_endpoints
+    #   The list of interface VPC endpoint (interface endpoint) objects.
+    #   Administrators can connect to the image builder only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
     #
@@ -703,10 +767,12 @@ module Aws::AppStream
       :description,
       :display_name,
       :vpc_config,
+      :iam_role_arn,
       :enable_default_internet_access,
       :domain_join_info,
       :appstream_agent_version,
-      :tags)
+      :tags,
+      :access_endpoints)
       include Aws::Structure
     end
 
@@ -792,6 +858,12 @@ module Aws::AppStream
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         access_endpoints: [
+    #           {
+    #             endpoint_type: "STREAMING", # required, accepts STREAMING
+    #             vpce_id: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -846,12 +918,18 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #   the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] access_endpoints
+    #   The list of interface VPC endpoint (interface endpoint) objects.
+    #   Users of the stack can connect to AppStream 2.0 only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
@@ -864,7 +942,8 @@ module Aws::AppStream
       :feedback_url,
       :user_settings,
       :application_settings,
-      :tags)
+      :tags,
+      :access_endpoints)
       include Aws::Structure
     end
 
@@ -915,7 +994,7 @@ module Aws::AppStream
     #
     # @!attribute [rw] session_context
     #   The session context. For more information, see [Session Context][1]
-    #   in the *Amazon AppStream 2.0 Developer Guide*.
+    #   in the *Amazon AppStream 2.0 Administration Guide*.
     #
     #
     #
@@ -1948,7 +2027,7 @@ module Aws::AppStream
     # Describes a fleet.
     #
     # @!attribute [rw] arn
-    #   The ARN for the fleet.
+    #   The Amazon Resource Name (ARN) for the fleet.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2072,6 +2151,13 @@ module Aws::AppStream
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role that is applied to the fleet. To assume a
+    #   role, the fleet instance calls the AWS Security Token Service (STS)
+    #   `AssumeRole` API operation and passes the ARN of the role to use.
+    #   The operation creates a new session with temporary credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
     class Fleet < Struct.new(
@@ -2092,7 +2178,8 @@ module Aws::AppStream
       :fleet_errors,
       :enable_default_internet_access,
       :domain_join_info,
-      :idle_disconnect_timeout_in_seconds)
+      :idle_disconnect_timeout_in_seconds,
+      :iam_role_arn)
       include Aws::Structure
     end
 
@@ -2243,6 +2330,14 @@ module Aws::AppStream
     #   The operating system platform of the image builder.
     #   @return [String]
     #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role that is applied to the image builder. To
+    #   assume a role, the image builder calls the AWS Security Token
+    #   Service (STS) `AssumeRole` API operation and passes the ARN of the
+    #   role to use. The operation creates a new session with temporary
+    #   credentials.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The state of the image builder.
     #   @return [String]
@@ -2278,6 +2373,12 @@ module Aws::AppStream
     #   by the image builder.
     #   @return [String]
     #
+    # @!attribute [rw] access_endpoints
+    #   The list of virtual private cloud (VPC) interface endpoint objects.
+    #   Administrators can connect to the image builder only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
     #
     class ImageBuilder < Struct.new(
@@ -2289,6 +2390,7 @@ module Aws::AppStream
       :vpc_config,
       :instance_type,
       :platform,
+      :iam_role_arn,
       :state,
       :state_change_reason,
       :created_time,
@@ -2296,7 +2398,8 @@ module Aws::AppStream
       :domain_join_info,
       :network_access_configuration,
       :image_builder_errors,
-      :appstream_agent_version)
+      :appstream_agent_version,
+      :access_endpoints)
       include Aws::Structure
     end
 
@@ -2839,6 +2942,12 @@ module Aws::AppStream
     #   The persistent application settings for users of the stack.
     #   @return [Types::ApplicationSettingsResponse]
     #
+    # @!attribute [rw] access_endpoints
+    #   The list of virtual private cloud (VPC) interface endpoint objects.
+    #   Users of the stack can connect to AppStream 2.0 only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -2852,7 +2961,8 @@ module Aws::AppStream
       :feedback_url,
       :stack_errors,
       :user_settings,
-      :application_settings)
+      :application_settings,
+      :access_endpoints)
       include Aws::Structure
     end
 
@@ -3155,7 +3265,8 @@ module Aws::AppStream
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         },
     #         idle_disconnect_timeout_in_seconds: 1,
-    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO
+    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN
+    #         iam_role_arn: "Arn",
     #       }
     #
     # @!attribute [rw] image_name
@@ -3299,6 +3410,14 @@ module Aws::AppStream
     #   The fleet attributes to delete.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to apply to the
+    #   fleet. To assume a role, a fleet instance calls the AWS Security
+    #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
+    #   the role to use. The operation creates a new session with temporary
+    #   credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
     #
     class UpdateFleetRequest < Struct.new(
@@ -3316,7 +3435,8 @@ module Aws::AppStream
       :enable_default_internet_access,
       :domain_join_info,
       :idle_disconnect_timeout_in_seconds,
-      :attributes_to_delete)
+      :attributes_to_delete,
+      :iam_role_arn)
       include Aws::Structure
     end
 
@@ -3386,7 +3506,7 @@ module Aws::AppStream
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
     #         user_settings: [
     #           {
     #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
@@ -3397,6 +3517,12 @@ module Aws::AppStream
     #           enabled: false, # required
     #           settings_group: "SettingsGroup",
     #         },
+    #         access_endpoints: [
+    #           {
+    #             endpoint_type: "STREAMING", # required, accepts STREAMING
+    #             vpce_id: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] display_name
@@ -3446,6 +3572,12 @@ module Aws::AppStream
     #   applied to the next session.
     #   @return [Types::ApplicationSettings]
     #
+    # @!attribute [rw] access_endpoints
+    #   The list of interface VPC endpoint (interface endpoint) objects.
+    #   Users of the stack can connect to AppStream 2.0 only through the
+    #   specified endpoints.
+    #   @return [Array<Types::AccessEndpoint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -3458,7 +3590,8 @@ module Aws::AppStream
       :feedback_url,
       :attributes_to_delete,
       :user_settings,
-      :application_settings)
+      :application_settings,
+      :access_endpoints)
       include Aws::Structure
     end
 

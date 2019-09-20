@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2019-09-11)
+------------------
+
+* Feature - Adding input validation for the OrganizationConfigRuleName string.
+
+1.36.0 (2019-09-05)
+------------------
+
+* Feature - AWS Config now includes the option for marking RemediationConfigurations as automatic, removing the need to call the StartRemediationExecution API. Manual control over resource execution rate is also included, and RemediationConfigurations are now ARN addressable. Exceptions to exclude account resources from being remediated can be configured with the new PutRemediationExceptions, DescribeRemediationExceptions, and DeleteRemediationExceptions APIs.
+
 1.35.0 (2019-07-25)
 ------------------
 

@@ -1009,6 +1009,7 @@ module Aws::APIGateway
     #         regional_certificate_arn: "String",
     #         endpoint_configuration: {
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #           vpc_endpoint_ids: ["String"],
     #         },
     #         tags: {
     #           "String" => "String",
@@ -1227,6 +1228,7 @@ module Aws::APIGateway
     #         api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #         endpoint_configuration: {
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #           vpc_endpoint_ids: ["String"],
     #         },
     #         policy: "String",
     #         tags: {
@@ -2643,6 +2645,7 @@ module Aws::APIGateway
     #
     #       {
     #         types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #         vpc_endpoint_ids: ["String"],
     #       }
     #
     # @!attribute [rw] types
@@ -2653,8 +2656,14 @@ module Aws::APIGateway
     #   API, the endpoint type is `PRIVATE`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] vpc_endpoint_ids
+    #   A list of VpcEndpointIds of an API (RestApi) against which to create
+    #   Route53 ALIASes. It is only supported for `PRIVATE` endpoint type.
+    #   @return [Array<String>]
+    #
     class EndpointConfiguration < Struct.new(
-      :types)
+      :types,
+      :vpc_endpoint_ids)
       include Aws::Structure
     end
 

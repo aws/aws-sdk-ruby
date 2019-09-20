@@ -1025,8 +1025,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
-    #   If this argument is omitted, the default DBParameterGroup for the
-    #   specified engine is used.
+    #   If you do not specify a value for `DBParameterGroupName`, then the
+    #   default `DBParameterGroup` for the specified DB engine is used.
     #
     #   Constraints:
     #
@@ -1191,8 +1191,8 @@ module Aws::RDS
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
-    #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
-    #   Improve Performance][1] in the *Amazon RDS User Guide*.
+    #   valid Iops values, see [Amazon RDS Provisioned IOPS Storage to Improve
+    #   Performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between 1 and 50 of the storage amount
     #   for the DB instance.
@@ -1374,6 +1374,23 @@ module Aws::RDS
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   * For MySQL 8.0, minor version 8.0.16 or higher
+    #
+    #   **PostgreSQL**
+    #
+    #   * For PostgreSQL 9.5, minor version 9.5.15 or higher
+    #
+    #   * For PostgreSQL 9.6, minor version 9.6.11 or higher
+    #
+    #   * PostgreSQL 10.6, 10.7, and 10.9
+    #
+    #   For more information, see [ IAM Database Authentication for MySQL and
+    #   PostgreSQL][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   DB instance.
@@ -1443,6 +1460,7 @@ module Aws::RDS
     #     auto_minor_version_upgrade: false,
     #     iops: 1,
     #     option_group_name: "String",
+    #     db_parameter_group_name: "String",
     #     publicly_accessible: false,
     #     tags: [
     #       {
@@ -1523,6 +1541,21 @@ module Aws::RDS
     # @option options [String] :option_group_name
     #   The option group the DB instance is associated with. If omitted, the
     #   option group associated with the source instance is used.
+    # @option options [String] :db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB instance.
+    #
+    #   If you do not specify a value for `DBParameterGroupName`, then Amazon
+    #   RDS uses the `DBParameterGroup` of source DB instance for a same
+    #   region Read Replica, or the default `DBParameterGroup` for the
+    #   specified DB engine for a cross region Read Replica.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
@@ -1674,16 +1707,16 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora MySQL 5.6 or higher
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   Read Replica.
@@ -2367,22 +2400,16 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   **Amazon Aurora**
     #
-    #   Not applicable. Mapping AWS IAM accounts to database accounts is
-    #   managed by the DB cluster. For more information, see
-    #   `ModifyDBCluster`.
     #
-    #   **MySQL**
-    #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
-    #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   DB instance.
@@ -2449,17 +2476,17 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :backup_retention_period
-    #   The number of days to retain automated backups. Setting this parameter
-    #   to a positive number enables backups. Setting this parameter to 0
-    #   disables automated backups.
+    #   The number of days for which automated backups are retained. Setting
+    #   this parameter to a positive number enables backups. Setting this
+    #   parameter to 0 disables automated backups.
     #
     #   Default: 1
     #
     #   Constraints:
     #
-    #   * Must be a value from 0 to 8
+    #   * Must be a value from 0 to 35.
     #
-    #   ^
+    #   * Can't be set to 0 if the DB instance is a source to Read Replicas.
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
@@ -2742,14 +2769,16 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   mapping is disabled. For information about the supported DB engines,
+    #   see CreateDBInstance.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines
+    #   For more information about IAM database authentication, see [ IAM
+    #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
+    #   RDS User Guide.*
     #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
@@ -2767,8 +2796,9 @@ module Aws::RDS
     #   instance uses its default processor features.
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
-    #   If this argument is omitted, the default DBParameterGroup for the
-    #   specified engine is used.
+    #
+    #   If you do not specify a value for `DBParameterGroupName`, then the
+    #   default `DBParameterGroup` for the specified DB engine is used.
     #
     #   Constraints:
     #
@@ -3162,7 +3192,20 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   A filter that specifies one or more DB snapshots to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-snapshot-id` - Accepts DB snapshot identifiers.
+    #
+    #   * `dbi-resource-id` - Accepts identifiers of source DB instances.
+    #
+    #   * `snapshot-type` - Accepts types of DB snapshots.
+    #
+    #   * `engine` - Accepts names of database engines.
     # @option options [Boolean] :include_shared
     #   A value that indicates whether to include shared manual DB cluster
     #   snapshots from other AWS accounts that this AWS account has been given

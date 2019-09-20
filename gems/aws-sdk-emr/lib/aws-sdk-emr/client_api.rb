@@ -23,12 +23,15 @@ module Aws::EMR
     AdjustmentType = Shapes::StringShape.new(name: 'AdjustmentType')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationList = Shapes::ListShape.new(name: 'ApplicationList')
+    ArnType = Shapes::StringShape.new(name: 'ArnType')
     AutoScalingPolicy = Shapes::StructureShape.new(name: 'AutoScalingPolicy')
     AutoScalingPolicyDescription = Shapes::StructureShape.new(name: 'AutoScalingPolicyDescription')
     AutoScalingPolicyState = Shapes::StringShape.new(name: 'AutoScalingPolicyState')
     AutoScalingPolicyStateChangeReason = Shapes::StructureShape.new(name: 'AutoScalingPolicyStateChangeReason')
     AutoScalingPolicyStateChangeReasonCode = Shapes::StringShape.new(name: 'AutoScalingPolicyStateChangeReasonCode')
     AutoScalingPolicyStatus = Shapes::StructureShape.new(name: 'AutoScalingPolicyStatus')
+    BlockPublicAccessConfiguration = Shapes::StructureShape.new(name: 'BlockPublicAccessConfiguration')
+    BlockPublicAccessConfigurationMetadata = Shapes::StructureShape.new(name: 'BlockPublicAccessConfigurationMetadata')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BootstrapActionConfig = Shapes::StructureShape.new(name: 'BootstrapActionConfig')
@@ -82,6 +85,8 @@ module Aws::EMR
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
+    GetBlockPublicAccessConfigurationInput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationInput')
+    GetBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationOutput')
     HadoopJarStepConfig = Shapes::StructureShape.new(name: 'HadoopJarStepConfig')
     HadoopStepConfig = Shapes::StructureShape.new(name: 'HadoopStepConfig')
     Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -169,8 +174,13 @@ module Aws::EMR
     NewSupportedProductsList = Shapes::ListShape.new(name: 'NewSupportedProductsList')
     NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
     PlacementType = Shapes::StructureShape.new(name: 'PlacementType')
+    Port = Shapes::IntegerShape.new(name: 'Port')
+    PortRange = Shapes::StructureShape.new(name: 'PortRange')
+    PortRanges = Shapes::ListShape.new(name: 'PortRanges')
     PutAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'PutAutoScalingPolicyInput')
     PutAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutAutoScalingPolicyOutput')
+    PutBlockPublicAccessConfigurationInput = Shapes::StructureShape.new(name: 'PutBlockPublicAccessConfigurationInput')
+    PutBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'PutBlockPublicAccessConfigurationOutput')
     RemoveAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyInput')
     RemoveAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyOutput')
     RemoveTagsInput = Shapes::StructureShape.new(name: 'RemoveTagsInput')
@@ -282,6 +292,14 @@ module Aws::EMR
     AutoScalingPolicyStatus.add_member(:state, Shapes::ShapeRef.new(shape: AutoScalingPolicyState, location_name: "State"))
     AutoScalingPolicyStatus.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: AutoScalingPolicyStateChangeReason, location_name: "StateChangeReason"))
     AutoScalingPolicyStatus.struct_class = Types::AutoScalingPolicyStatus
+
+    BlockPublicAccessConfiguration.add_member(:block_public_security_group_rules, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "BlockPublicSecurityGroupRules"))
+    BlockPublicAccessConfiguration.add_member(:permitted_public_security_group_rule_ranges, Shapes::ShapeRef.new(shape: PortRanges, location_name: "PermittedPublicSecurityGroupRuleRanges"))
+    BlockPublicAccessConfiguration.struct_class = Types::BlockPublicAccessConfiguration
+
+    BlockPublicAccessConfigurationMetadata.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "CreationDateTime"))
+    BlockPublicAccessConfigurationMetadata.add_member(:created_by_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "CreatedByArn"))
+    BlockPublicAccessConfigurationMetadata.struct_class = Types::BlockPublicAccessConfigurationMetadata
 
     BootstrapActionConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Name"))
     BootstrapActionConfig.add_member(:script_bootstrap_action, Shapes::ShapeRef.new(shape: ScriptBootstrapActionConfig, required: true, location_name: "ScriptBootstrapAction"))
@@ -470,6 +488,12 @@ module Aws::EMR
     FailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     FailureDetails.add_member(:log_file, Shapes::ShapeRef.new(shape: String, location_name: "LogFile"))
     FailureDetails.struct_class = Types::FailureDetails
+
+    GetBlockPublicAccessConfigurationInput.struct_class = Types::GetBlockPublicAccessConfigurationInput
+
+    GetBlockPublicAccessConfigurationOutput.add_member(:block_public_access_configuration, Shapes::ShapeRef.new(shape: BlockPublicAccessConfiguration, required: true, location_name: "BlockPublicAccessConfiguration"))
+    GetBlockPublicAccessConfigurationOutput.add_member(:block_public_access_configuration_metadata, Shapes::ShapeRef.new(shape: BlockPublicAccessConfigurationMetadata, required: true, location_name: "BlockPublicAccessConfigurationMetadata"))
+    GetBlockPublicAccessConfigurationOutput.struct_class = Types::GetBlockPublicAccessConfigurationOutput
 
     HadoopJarStepConfig.add_member(:properties, Shapes::ShapeRef.new(shape: KeyValueList, location_name: "Properties"))
     HadoopJarStepConfig.add_member(:jar, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Jar"))
@@ -832,6 +856,12 @@ module Aws::EMR
     PlacementType.add_member(:availability_zones, Shapes::ShapeRef.new(shape: XmlStringMaxLen256List, location_name: "AvailabilityZones"))
     PlacementType.struct_class = Types::PlacementType
 
+    PortRange.add_member(:min_range, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "MinRange"))
+    PortRange.add_member(:max_range, Shapes::ShapeRef.new(shape: Port, location_name: "MaxRange"))
+    PortRange.struct_class = Types::PortRange
+
+    PortRanges.member = Shapes::ShapeRef.new(shape: PortRange)
+
     PutAutoScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     PutAutoScalingPolicyInput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, required: true, location_name: "InstanceGroupId"))
     PutAutoScalingPolicyInput.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicy, required: true, location_name: "AutoScalingPolicy"))
@@ -841,6 +871,11 @@ module Aws::EMR
     PutAutoScalingPolicyOutput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, location_name: "InstanceGroupId"))
     PutAutoScalingPolicyOutput.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicyDescription, location_name: "AutoScalingPolicy"))
     PutAutoScalingPolicyOutput.struct_class = Types::PutAutoScalingPolicyOutput
+
+    PutBlockPublicAccessConfigurationInput.add_member(:block_public_access_configuration, Shapes::ShapeRef.new(shape: BlockPublicAccessConfiguration, required: true, location_name: "BlockPublicAccessConfiguration"))
+    PutBlockPublicAccessConfigurationInput.struct_class = Types::PutBlockPublicAccessConfigurationInput
+
+    PutBlockPublicAccessConfigurationOutput.struct_class = Types::PutBlockPublicAccessConfigurationOutput
 
     RemoveAutoScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     RemoveAutoScalingPolicyInput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, required: true, location_name: "InstanceGroupId"))
@@ -1146,6 +1181,16 @@ module Aws::EMR
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:get_block_public_access_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBlockPublicAccessConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBlockPublicAccessConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetBlockPublicAccessConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:list_bootstrap_actions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBootstrapActions"
         o.http_method = "POST"
@@ -1276,6 +1321,16 @@ module Aws::EMR
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutAutoScalingPolicyInput)
         o.output = Shapes::ShapeRef.new(shape: PutAutoScalingPolicyOutput)
+      end)
+
+      api.add_operation(:put_block_public_access_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBlockPublicAccessConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutBlockPublicAccessConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: PutBlockPublicAccessConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:remove_auto_scaling_policy, Seahorse::Model::Operation.new.tap do |o|

@@ -116,6 +116,49 @@ module Aws::CostandUsageReportService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyReportDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         report_name: "ReportName", # required
+    #         report_definition: { # required
+    #           report_name: "ReportName", # required
+    #           time_unit: "HOURLY", # required, accepts HOURLY, DAILY
+    #           format: "textORcsv", # required, accepts textORcsv, Parquet
+    #           compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
+    #           additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_prefix: "S3Prefix", # required
+    #           s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
+    #           additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
+    #           refresh_closed_reports: false,
+    #           report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
+    #         },
+    #       }
+    #
+    # @!attribute [rw] report_name
+    #   The name of the report that you want to create. The name must be
+    #   unique, is case sensitive, and can't include spaces.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_definition
+    #   The definition of AWS Cost and Usage Report. You can specify the
+    #   report name, time unit, report format, compression format, S3
+    #   bucket, additional artifacts, and schema elements in the definition.
+    #   @return [Types::ReportDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ModifyReportDefinitionRequest AWS API Documentation
+    #
+    class ModifyReportDefinitionRequest < Struct.new(
+      :report_name,
+      :report_definition)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ModifyReportDefinitionResponse AWS API Documentation
+    #
+    class ModifyReportDefinitionResponse < Aws::EmptyStructure; end
+
     # Creates a Cost and Usage Report.
     #
     # @note When making an API call, you may pass PutReportDefinitionRequest
@@ -130,7 +173,7 @@ module Aws::CostandUsageReportService
     #           additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
     #           s3_bucket: "S3Bucket", # required
     #           s3_prefix: "S3Prefix", # required
-    #           s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3
+    #           s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
     #           additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
     #           refresh_closed_reports: false,
     #           report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
@@ -171,7 +214,7 @@ module Aws::CostandUsageReportService
     #         additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
     #         s3_bucket: "S3Bucket", # required
     #         s3_prefix: "S3Prefix", # required
-    #         s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3
+    #         s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
     #         additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
     #         refresh_closed_reports: false,
     #         report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT

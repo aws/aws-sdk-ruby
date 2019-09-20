@@ -660,6 +660,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -667,6 +670,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ]
     },
@@ -790,6 +796,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -797,6 +806,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         },
         {
           "shape": "TooManyTagsException"
@@ -822,6 +834,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -829,6 +844,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "idempotent": true
@@ -1087,6 +1105,14 @@
           "locationName": "meshName"
         }
       }
+    },
+    "TcpRetryPolicyEvents": {
+      "type": "list",
+      "member": {
+        "shape": "TcpRetryPolicyEvent"
+      },
+      "min": 1,
+      "max": 1
     },
     "CreateVirtualServiceInput": {
       "type": "structure",
@@ -1660,6 +1686,32 @@
         }
       }
     },
+    "Boolean": {
+      "type": "boolean",
+      "box": true
+    },
+    "HttpRouteHeader": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "invert": {
+          "shape": "Boolean"
+        },
+        "match": {
+          "shape": "HeaderMatchMethod"
+        },
+        "name": {
+          "shape": "HeaderName"
+        }
+      }
+    },
+    "HttpRetryPolicyEvent": {
+      "type": "string",
+      "min": 1,
+      "max": 25
+    },
     "DescribeVirtualServiceOutput": {
       "type": "structure",
       "required": [
@@ -1886,6 +1938,12 @@
         }
       }
     },
+    "TcpRetryPolicyEvent": {
+      "type": "string",
+      "enum": [
+        "connection-error"
+      ]
+    },
     "VirtualServiceSpec": {
       "type": "structure",
       "members": {
@@ -1899,6 +1957,21 @@
       "members": {
         "virtualService": {
           "shape": "VirtualServiceBackend"
+        }
+      }
+    },
+    "MatchRange": {
+      "type": "structure",
+      "required": [
+        "end",
+        "start"
+      ],
+      "members": {
+        "end": {
+          "shape": "Long"
+        },
+        "start": {
+          "shape": "Long"
         }
       }
     },
@@ -2024,6 +2097,19 @@
           "shape": "MeshSpec"
         }
       }
+    },
+    "DurationUnit": {
+      "type": "string",
+      "enum": [
+        "ms",
+        "s"
+      ]
+    },
+    "RoutePriority": {
+      "type": "integer",
+      "box": true,
+      "min": 0,
+      "max": 1000
     },
     "ListVirtualServicesInput": {
       "type": "structure",
@@ -2154,6 +2240,14 @@
         }
       }
     },
+    "HttpRetryPolicyEvents": {
+      "type": "list",
+      "member": {
+        "shape": "HttpRetryPolicyEvent"
+      },
+      "min": 1,
+      "max": 25
+    },
     "ListVirtualNodesLimit": {
       "type": "integer",
       "box": true,
@@ -2208,6 +2302,11 @@
     "Timestamp": {
       "type": "timestamp"
     },
+    "HeaderMatch": {
+      "type": "string",
+      "min": 1,
+      "max": 255
+    },
     "VirtualNodeSpec": {
       "type": "structure",
       "members": {
@@ -2247,6 +2346,31 @@
       "min": 1,
       "max": 1
     },
+    "HttpMethod": {
+      "type": "string",
+      "enum": [
+        "CONNECT",
+        "DELETE",
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PATCH",
+        "POST",
+        "PUT",
+        "TRACE"
+      ]
+    },
+    "Duration": {
+      "type": "structure",
+      "members": {
+        "unit": {
+          "shape": "DurationUnit"
+        },
+        "value": {
+          "shape": "DurationValue"
+        }
+      }
+    },
     "ConflictException": {
       "type": "structure",
       "members": {
@@ -2279,8 +2403,17 @@
         "prefix"
       ],
       "members": {
+        "headers": {
+          "shape": "HttpRouteHeaders"
+        },
+        "method": {
+          "shape": "HttpMethod"
+        },
         "prefix": {
           "shape": "String"
+        },
+        "scheme": {
+          "shape": "HttpScheme"
         }
       }
     },
@@ -2318,6 +2451,11 @@
           "shape": "ResourceName"
         }
       }
+    },
+    "MaxRetries": {
+      "type": "long",
+      "box": true,
+      "min": 0
     },
     "MeshStatusCode": {
       "type": "string",
@@ -2590,6 +2728,11 @@
         "fault": true
       }
     },
+    "HeaderName": {
+      "type": "string",
+      "min": 1,
+      "max": 50
+    },
     "TagList": {
       "type": "list",
       "member": {
@@ -2597,6 +2740,27 @@
       },
       "min": 0,
       "max": 50
+    },
+    "HttpRetryPolicy": {
+      "type": "structure",
+      "required": [
+        "maxRetries",
+        "perRetryTimeout"
+      ],
+      "members": {
+        "httpRetryEvents": {
+          "shape": "HttpRetryPolicyEvents"
+        },
+        "maxRetries": {
+          "shape": "MaxRetries"
+        },
+        "perRetryTimeout": {
+          "shape": "Duration"
+        },
+        "tcpRetryEvents": {
+          "shape": "TcpRetryPolicyEvents"
+        }
+      }
     },
     "DescribeVirtualRouterInput": {
       "type": "structure",
@@ -2655,6 +2819,26 @@
         "senderFault": true
       }
     },
+    "HeaderMatchMethod": {
+      "type": "structure",
+      "members": {
+        "exact": {
+          "shape": "HeaderMatch"
+        },
+        "prefix": {
+          "shape": "HeaderMatch"
+        },
+        "range": {
+          "shape": "MatchRange"
+        },
+        "regex": {
+          "shape": "HeaderMatch"
+        },
+        "suffix": {
+          "shape": "HeaderMatch"
+        }
+      }
+    },
     "DeleteMeshOutput": {
       "type": "structure",
       "required": [
@@ -2673,6 +2857,11 @@
         "ALLOW_ALL",
         "DROP_ALL"
       ]
+    },
+    "DurationValue": {
+      "type": "long",
+      "box": true,
+      "min": 0
     },
     "Hostname": {
       "type": "string"
@@ -2741,6 +2930,14 @@
       "min": 1,
       "max": 10
     },
+    "HttpRouteHeaders": {
+      "type": "list",
+      "member": {
+        "shape": "HttpRouteHeader"
+      },
+      "min": 1,
+      "max": 10
+    },
     "VirtualServiceProvider": {
       "type": "structure",
       "members": {
@@ -2772,6 +2969,13 @@
           "shape": "AwsCloudMapName"
         }
       }
+    },
+    "HttpScheme": {
+      "type": "string",
+      "enum": [
+        "http",
+        "https"
+      ]
     },
     "UpdateVirtualServiceOutput": {
       "type": "structure",
@@ -2874,6 +3078,9 @@
         "httpRoute": {
           "shape": "HttpRoute"
         },
+        "priority": {
+          "shape": "RoutePriority"
+        },
         "tcpRoute": {
           "shape": "TcpRoute"
         }
@@ -2891,6 +3098,9 @@
         },
         "match": {
           "shape": "HttpRouteMatch"
+        },
+        "retryPolicy": {
+          "shape": "HttpRetryPolicy"
         }
       }
     },

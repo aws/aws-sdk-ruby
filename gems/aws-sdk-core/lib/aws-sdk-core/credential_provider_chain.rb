@@ -60,22 +60,20 @@ module Aws
       nil
     end
 
+    def determine_profile_name(options)
+      (options[:config] && options[:config].profile) || ENV['AWS_PROFILE'] || ENV['AWS_DEFAULT_PROFILE'] || 'default'
+    end
+
     def shared_credentials(options)
-      if options[:config]
-        SharedCredentials.new(profile_name: options[:config].profile)
-      else
-        SharedCredentials.new(
-          profile_name: ENV['AWS_PROFILE'].nil? ? 'default' : ENV['AWS_PROFILE'])
-      end
+      profile_name = determine_profile_name(options)
+      SharedCredentials.new(profile_name: profile_name)
     rescue Errors::NoSuchProfileError
       nil
     end
 
     def process_credentials(options)
-      profile_name = options[:config].profile if options[:config]
-      profile_name ||= ENV['AWS_PROFILE'].nil? ? 'default' : ENV['AWS_PROFILE']
-      
       config = Aws.shared_config
+      profile_name = determine_profile_name(options)
       if config.config_enabled? && process_provider = config.credentials_process(profile_name)
         ProcessCredentials.new(process_provider)
       else
@@ -87,13 +85,7 @@ module Aws
 
     def assume_role_credentials(options)
       if Aws.shared_config.config_enabled?
-        profile, region = nil, nil
-        if options[:config]
-          profile = options[:config].profile
-          region = options[:config].region
-          assume_role_with_profile(options[:config].profile, options[:config].region)
-        end
-        assume_role_with_profile(profile, region)
+        assume_role_with_profile(options)
       else
         nil
       end
@@ -123,9 +115,11 @@ module Aws
       end
     end
 
-    def assume_role_with_profile(prof, region)
+    def assume_role_with_profile(options)
+      profile_name = determine_profile_name(options)
+      region = (options[:config] && options[:config].region)
       Aws.shared_config.assume_role_credentials_from_config(
-        profile: prof,
+        profile: profile_name,
         region: region,
         chain_config: @config
       )

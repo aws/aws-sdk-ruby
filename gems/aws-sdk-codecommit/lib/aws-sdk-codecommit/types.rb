@@ -156,6 +156,81 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Returns information about errors in a BatchGetCommits operation.
+    #
+    # @!attribute [rw] commit_id
+    #   A commit ID that either could not be found or was not in a valid
+    #   format.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code that specifies whether the commit ID was not valid or
+    #   not found.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message that provides detail about why the commit ID either
+    #   was not found or was not valid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommitsError AWS API Documentation
+    #
+    class BatchGetCommitsError < Struct.new(
+      :commit_id,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetCommitsInput
+    #   data as a hash:
+    #
+    #       {
+    #         commit_ids: ["ObjectId"], # required
+    #         repository_name: "RepositoryName", # required
+    #       }
+    #
+    # @!attribute [rw] commit_ids
+    #   The full commit IDs of the commits to get information about.
+    #
+    #   <note markdown="1"> You must supply the full SHAs of each commit. You cannot use
+    #   shortened SHAs.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the commits.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommitsInput AWS API Documentation
+    #
+    class BatchGetCommitsInput < Struct.new(
+      :commit_ids,
+      :repository_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commits
+    #   An array of commit data type objects, each of which contains
+    #   information about a specified commit.
+    #   @return [Array<Types::Commit>]
+    #
+    # @!attribute [rw] errors
+    #   Returns any commit IDs for which information could not be found. For
+    #   example, if one of the commit IDs was a shortened SHA or that commit
+    #   was not found in the specified repository, the ID will return an
+    #   error object with additional information.
+    #   @return [Array<Types::BatchGetCommitsError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommitsOutput AWS API Documentation
+    #
+    class BatchGetCommitsOutput < Struct.new(
+      :commits,
+      :errors)
+      include Aws::Structure
+    end
+
     # Represents the input of a batch get repositories operation.
     #
     # @note When making an API call, you may pass BatchGetRepositoriesInput
@@ -4416,8 +4491,7 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] destination_arn
     #   The ARN of the resource that is the target for a trigger. For
-    #   example, the ARN of a topic in Amazon Simple Notification Service
-    #   (SNS).
+    #   example, the ARN of a topic in Amazon SNS.
     #   @return [String]
     #
     # @!attribute [rw] custom_data
@@ -4429,7 +4503,7 @@ module Aws::CodeCommit
     #   The branches that will be included in the trigger configuration. If
     #   you specify an empty array, the trigger will apply to all branches.
     #
-    #   <note markdown="1"> While no content is required in the array, you must include the
+    #   <note markdown="1"> Although no content is required in the array, you must include the
     #   array itself.
     #
     #    </note>
@@ -4437,8 +4511,7 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] events
     #   The repository events that will cause the trigger to run actions in
-    #   another service, such as sending a notification through Amazon
-    #   Simple Notification Service (SNS).
+    #   another service, such as sending a notification through Amazon SNS.
     #
     #   <note markdown="1"> The valid value "all" cannot be used with any other values.
     #

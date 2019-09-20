@@ -601,7 +601,7 @@ module Aws::IAM
     # policies.
     #
     # This data type is used as an input parameter to ` SimulateCustomPolicy
-    # ` and ` SimulateCustomPolicy `.
+    # ` and ` SimulatePrincipalPolicy `.
     #
     # @note When making an API call, you may pass ContextEntry
     #   data as a hash:
@@ -1240,8 +1240,8 @@ module Aws::IAM
     #   * The special characters tab (\\u0009), line feed (\\u000A), and
     #     carriage return (\\u000D)
     #
-    #   Upon success, the response includes the same trust policy as a
-    #   URL-encoded JSON string.
+    #   Upon success, the response includes the same trust policy in JSON
+    #   format.
     #
     #
     #

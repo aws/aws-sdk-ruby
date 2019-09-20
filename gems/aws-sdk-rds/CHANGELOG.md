@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2019-09-11)
+------------------
+
+* Feature - This release allows customers to specify a custom parameter group when creating a Read Replica, for DB engines which support this feature.
+
+1.64.0 (2019-08-22)
+------------------
+
+* Feature - This release allows users to enable RDS Data API while creating Aurora Serverless databases.
+
 1.63.0 (2019-07-25)
 ------------------
 

@@ -1004,9 +1004,7 @@ module Aws::STS
     #   use for both inline and managed session policies shouldn't exceed
     #   2048 characters. You can provide up to 10 managed policy ARNs. For
     #   more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service
-    #   Namespaces](general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   AWS General Reference.
+    #   AWS Service Namespaces][2] in the AWS General Reference.
     #
     #   This parameter is optional. However, if you do not pass any session
     #   policies, then the resulting federated user session has no
@@ -1035,6 +1033,7 @@ module Aws::STS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<Types::PolicyDescriptorType>]
     #
     # @!attribute [rw] duration_seconds

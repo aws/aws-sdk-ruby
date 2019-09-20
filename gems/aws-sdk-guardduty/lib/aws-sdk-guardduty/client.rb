@@ -286,8 +286,12 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Archives Amazon GuardDuty findings specified by the list of finding
-    # IDs.
+    # Archives GuardDuty findings specified by the list of finding IDs.
+    #
+    # <note markdown="1"> Only the master account can archive findings. Member accounts do not
+    # have permission to archive findings from their accounts.
+    #
+    #  </note>
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
@@ -314,9 +318,10 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Creates a single Amazon GuardDuty detector. A detector is an object
-    # that represents the GuardDuty service. A detector must be created in
-    # order for GuardDuty to become operational.
+    # Creates a single Amazon GuardDuty detector. A detector is a resource
+    # that represents the GuardDuty service. To start using GuardDuty, you
+    # must create a detector in each region that you enable the service. You
+    # can have only one detector per account per region.
     #
     # @option params [required, Boolean] :enable
     #   A boolean value that specifies whether the detector is to be enabled.
@@ -1126,6 +1131,10 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.isp #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.org #=> String
+    #   resp.findings[0].service.evidence.threat_intelligence_details #=> Array
+    #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_list_name #=> String
+    #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_names #=> Array
+    #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_names[0] #=> String
     #   resp.findings[0].service.archived #=> Boolean
     #   resp.findings[0].service.count #=> Integer
     #   resp.findings[0].service.detector_id #=> String
@@ -1266,8 +1275,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Provides the details for the GuardDuty master account to the current
-    # GuardDuty member account.
+    # Provides the details for the GuardDuty master account associated with
+    # the current GuardDuty member account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
@@ -2218,7 +2227,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

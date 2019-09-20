@@ -1226,6 +1226,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -2222,6 +2224,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -3556,6 +3560,8 @@ module Aws::Redshift
     #   resp.clusters[0].deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.clusters[0].snapshot_schedule_identifier #=> String
     #   resp.clusters[0].snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.clusters[0].expected_next_snapshot_schedule_time #=> Time
+    #   resp.clusters[0].expected_next_snapshot_schedule_time_status #=> String
     #   resp.clusters[0].resize_info.resize_type #=> String
     #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
     #
@@ -4601,8 +4607,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Returns the total amount of snapshot usage and provisioned storage for
-    # a user in megabytes.
+    # Returns the total amount of snapshot usage and provisioned storage in
+    # megabytes.
     #
     # @return [Types::CustomerStorageMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4980,6 +4986,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5211,6 +5219,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5826,6 +5836,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5954,6 +5966,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6089,6 +6103,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6234,6 +6250,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6711,6 +6729,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6954,6 +6974,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7055,7 +7077,8 @@ module Aws::Redshift
     #   The new cluster type for the specified cluster.
     #
     # @option params [String] :node_type
-    #   The new node type for the nodes you are adding.
+    #   The new node type for the nodes you are adding. If not specified, the
+    #   cluster's current node type is used.
     #
     # @option params [required, Integer] :number_of_nodes
     #   The new number of nodes for the cluster.
@@ -7171,6 +7194,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7541,6 +7566,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7915,6 +7942,8 @@ module Aws::Redshift
     #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
     #   resp.cluster.snapshot_schedule_identifier #=> String
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7940,7 +7969,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -35,10 +35,16 @@ module Aws::Polly
     #   data as a hash:
     #
     #       {
+    #         engine: "standard", # accepts standard, neural
     #         language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #         include_additional_language_codes: false,
     #         next_token: "NextToken",
     #       }
+    #
+    # @!attribute [rw] engine
+    #   Specifies the engine (`standard` or `neural`) used by Amazon Polly
+    #   when processing input text for speech synthesis.
+    #   @return [String]
     #
     # @!attribute [rw] language_code
     #   The language identification tag (ISO 639 code for the language
@@ -65,6 +71,7 @@ module Aws::Polly
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoicesInput AWS API Documentation
     #
     class DescribeVoicesInput < Struct.new(
+      :engine,
       :language_code,
       :include_additional_language_codes,
       :next_token)
@@ -86,6 +93,20 @@ module Aws::Polly
     class DescribeVoicesOutput < Struct.new(
       :voices,
       :next_token)
+      include Aws::Structure
+    end
+
+    # This engine is not compatible with the voice that you have designated.
+    # Choose a new voice that is compatible with the engine or change the
+    # engine and restart the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/EngineNotSupportedException AWS API Documentation
+    #
+    class EngineNotSupportedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -304,7 +325,7 @@ module Aws::Polly
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
+    # [1]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
     #
     # @!attribute [rw] alphabet
     #   Phonetic alphabet used in the lexicon. Valid values are `ipa` and
@@ -578,6 +599,8 @@ module Aws::Polly
     #   data as a hash:
     #
     #       {
+    #         engine: "standard", # accepts standard, neural
+    #         language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #         lexicon_names: ["LexiconName"],
     #         output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
     #         output_s3_bucket_name: "OutputS3BucketName", # required
@@ -588,8 +611,31 @@ module Aws::Polly
     #         text: "Text", # required
     #         text_type: "ssml", # accepts ssml, text
     #         voice_id: "Aditi", # required, accepts Aditi, Amy, Astrid, Bianca, Brian, Carla, Carmen, Celine, Chantal, Conchita, Cristiano, Dora, Emma, Enrique, Ewa, Filiz, Geraint, Giorgio, Gwyneth, Hans, Ines, Ivy, Jacek, Jan, Joanna, Joey, Justin, Karl, Kendra, Kimberly, Lea, Liv, Lotte, Lucia, Mads, Maja, Marlene, Mathieu, Matthew, Maxim, Mia, Miguel, Mizuki, Naja, Nicole, Penelope, Raveena, Ricardo, Ruben, Russell, Salli, Seoyeon, Takumi, Tatyana, Vicki, Vitoria, Zeina, Zhiyu
-    #         language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #       }
+    #
+    # @!attribute [rw] engine
+    #   Specifies the engine (`standard` or `neural`) for Amazon Polly to
+    #   use when processing input text for speech synthesis. Using a voice
+    #   that is not supported for the engine selected will result in an
+    #   error.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   Optional language code for the Speech Synthesis request. This is
+    #   only necessary if using a bilingual voice, such as Aditi, which can
+    #   be used for either Indian English (en-IN) or Hindi (hi-IN).
+    #
+    #   If a bilingual voice is used and no language code is specified,
+    #   Amazon Polly will use the default language of the bilingual voice.
+    #   The default language for any voice is the one returned by the
+    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
+    #   example, if no language code is specified, Aditi will use Indian
+    #   English rather than Hindi.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+    #   @return [String]
     #
     # @!attribute [rw] lexicon_names
     #   List of one or more pronunciation lexicon names you want the service
@@ -615,7 +661,8 @@ module Aws::Polly
     #   The audio frequency specified in Hz.
     #
     #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
-    #   and "22050". The default value is "22050".
+    #   "22050", and "24000". The default value for standard voices is
+    #   "22050". The default value for neural voices is "24000".
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
@@ -644,26 +691,11 @@ module Aws::Polly
     #   Voice ID to use for the synthesis.
     #   @return [String]
     #
-    # @!attribute [rw] language_code
-    #   Optional language code for the Speech Synthesis request. This is
-    #   only necessary if using a bilingual voice, such as Aditi, which can
-    #   be used for either Indian English (en-IN) or Hindi (hi-IN).
-    #
-    #   If a bilingual voice is used and no language code is specified,
-    #   Amazon Polly will use the default language of the bilingual voice.
-    #   The default language for any voice is the one returned by the
-    #   [DescribeVoices][1] operation for the `LanguageCode` parameter. For
-    #   example, if no language code is specified, Aditi will use Indian
-    #   English rather than Hindi.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTaskInput AWS API Documentation
     #
     class StartSpeechSynthesisTaskInput < Struct.new(
+      :engine,
+      :language_code,
       :lexicon_names,
       :output_format,
       :output_s3_bucket_name,
@@ -673,8 +705,7 @@ module Aws::Polly
       :speech_mark_types,
       :text,
       :text_type,
-      :voice_id,
-      :language_code)
+      :voice_id)
       include Aws::Structure
     end
 
@@ -692,6 +723,13 @@ module Aws::Polly
 
     # SynthesisTask object that provides information about a speech
     # synthesis task.
+    #
+    # @!attribute [rw] engine
+    #   Specifies the engine (`standard` or `neural`) for Amazon Polly to
+    #   use when processing input text for speech synthesis. Using a voice
+    #   that is not supported for the engine selected will result in an
+    #   error.
+    #   @return [String]
     #
     # @!attribute [rw] task_id
     #   The Amazon Polly generated identifier for a speech synthesis task.
@@ -739,7 +777,8 @@ module Aws::Polly
     #   The audio frequency specified in Hz.
     #
     #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
-    #   and "22050". The default value is "22050".
+    #   "22050", and "24000". The default value for standard voices is
+    #   "22050". The default value for neural voices is "24000".
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
@@ -778,6 +817,7 @@ module Aws::Polly
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesisTask AWS API Documentation
     #
     class SynthesisTask < Struct.new(
+      :engine,
       :task_id,
       :task_status,
       :task_status_reason,
@@ -811,6 +851,8 @@ module Aws::Polly
     #   data as a hash:
     #
     #       {
+    #         engine: "standard", # accepts standard, neural
+    #         language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #         lexicon_names: ["LexiconName"],
     #         output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
     #         sample_rate: "SampleRate",
@@ -818,64 +860,13 @@ module Aws::Polly
     #         text: "Text", # required
     #         text_type: "ssml", # accepts ssml, text
     #         voice_id: "Aditi", # required, accepts Aditi, Amy, Astrid, Bianca, Brian, Carla, Carmen, Celine, Chantal, Conchita, Cristiano, Dora, Emma, Enrique, Ewa, Filiz, Geraint, Giorgio, Gwyneth, Hans, Ines, Ivy, Jacek, Jan, Joanna, Joey, Justin, Karl, Kendra, Kimberly, Lea, Liv, Lotte, Lucia, Mads, Maja, Marlene, Mathieu, Matthew, Maxim, Mia, Miguel, Mizuki, Naja, Nicole, Penelope, Raveena, Ricardo, Ruben, Russell, Salli, Seoyeon, Takumi, Tatyana, Vicki, Vitoria, Zeina, Zhiyu
-    #         language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
     #       }
     #
-    # @!attribute [rw] lexicon_names
-    #   List of one or more pronunciation lexicon names you want the service
-    #   to apply during synthesis. Lexicons are applied only if the language
-    #   of the lexicon is the same as the language of the voice. For
-    #   information about storing lexicons, see [PutLexicon][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] output_format
-    #   The format in which the returned output will be encoded. For audio
-    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks,
-    #   this will be json.
-    #
-    #   When pcm is used, the content returned is audio/pcm in a signed
-    #   16-bit, 1 channel (mono), little-endian format.
-    #   @return [String]
-    #
-    # @!attribute [rw] sample_rate
-    #   The audio frequency specified in Hz.
-    #
-    #   The valid values for `mp3` and `ogg_vorbis` are "8000", "16000",
-    #   and "22050". The default value is "22050".
-    #
-    #   Valid values for `pcm` are "8000" and "16000" The default value
-    #   is "16000".
-    #   @return [String]
-    #
-    # @!attribute [rw] speech_mark_types
-    #   The type of speech marks returned for the input text.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] text
-    #   Input text to synthesize. If you specify `ssml` as the `TextType`,
-    #   follow the SSML format for the input text.
-    #   @return [String]
-    #
-    # @!attribute [rw] text_type
-    #   Specifies whether the input text is plain text or SSML. The default
-    #   value is plain text. For more information, see [Using SSML][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/ssml.html
-    #   @return [String]
-    #
-    # @!attribute [rw] voice_id
-    #   Voice ID to use for the synthesis. You can get a list of available
-    #   voice IDs by calling the [DescribeVoices][1] operation.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+    # @!attribute [rw] engine
+    #   Specifies the engine (`standard` or `neural`) for Amazon Polly to
+    #   use when processing input text for speech synthesis. Using a voice
+    #   that is not supported for the engine selected will result in an
+    #   error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -895,17 +886,76 @@ module Aws::Polly
     #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
     #   @return [String]
     #
+    # @!attribute [rw] lexicon_names
+    #   List of one or more pronunciation lexicon names you want the service
+    #   to apply during synthesis. Lexicons are applied only if the language
+    #   of the lexicon is the same as the language of the voice. For
+    #   information about storing lexicons, see [PutLexicon][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_format
+    #   The format in which the returned output will be encoded. For audio
+    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks,
+    #   this will be json.
+    #
+    #   When pcm is used, the content returned is audio/pcm in a signed
+    #   16-bit, 1 channel (mono), little-endian format.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_rate
+    #   The audio frequency specified in Hz.
+    #
+    #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
+    #   "22050", and "24000". The default value for standard voices is
+    #   "22050". The default value for neural voices is "24000".
+    #
+    #   Valid values for pcm are "8000" and "16000" The default value is
+    #   "16000".
+    #   @return [String]
+    #
+    # @!attribute [rw] speech_mark_types
+    #   The type of speech marks returned for the input text.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] text
+    #   Input text to synthesize. If you specify `ssml` as the `TextType`,
+    #   follow the SSML format for the input text.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_type
+    #   Specifies whether the input text is plain text or SSML. The default
+    #   value is plain text. For more information, see [Using SSML][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/ssml.html
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_id
+    #   Voice ID to use for the synthesis. You can get a list of available
+    #   voice IDs by calling the [DescribeVoices][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeechInput AWS API Documentation
     #
     class SynthesizeSpeechInput < Struct.new(
+      :engine,
+      :language_code,
       :lexicon_names,
       :output_format,
       :sample_rate,
       :speech_mark_types,
       :text,
       :text_type,
-      :voice_id,
-      :language_code)
+      :voice_id)
       include Aws::Structure
     end
 
@@ -979,7 +1029,7 @@ module Aws::Polly
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html
+    # [1]: https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1026,6 +1076,11 @@ module Aws::Polly
     #   parameter would show the code `hi-IN`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_engines
+    #   Specifies which engines (`standard` or `neural`) that are supported
+    #   by a given voice.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Voice AWS API Documentation
     #
     class Voice < Struct.new(
@@ -1034,7 +1089,8 @@ module Aws::Polly
       :language_code,
       :language_name,
       :name,
-      :additional_language_codes)
+      :additional_language_codes,
+      :supported_engines)
       include Aws::Structure
     end
 

@@ -245,9 +245,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the cluster to help you categorize
     #   and organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] settings
@@ -319,6 +342,23 @@ module Aws::ECS
     #   The name of the container.
     #   @return [String]
     #
+    # @!attribute [rw] image
+    #   The image used for the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_digest
+    #   The container image manifest digest.
+    #
+    #   <note markdown="1"> The `imageDigest` is only returned if the container is using an
+    #   image hosted in Amazon ECR, otherwise it is omitted.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_id
+    #   The ID of the Docker container.
+    #   @return [String]
+    #
     # @!attribute [rw] last_status
     #   The last known status of the container.
     #   @return [String]
@@ -364,12 +404,19 @@ module Aws::ECS
     #   The IDs of each GPU assigned to the container.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] firelens_configuration
+    #   The FireLens configuration for the container.
+    #   @return [Types::FirelensConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container AWS API Documentation
     #
     class Container < Struct.new(
       :container_arn,
       :task_arn,
       :name,
+      :image,
+      :image_digest,
+      :runtime_id,
       :last_status,
       :exit_code,
       :reason,
@@ -379,7 +426,8 @@ module Aws::ECS
       :cpu,
       :memory,
       :memory_reservation,
-      :gpu_ids)
+      :gpu_ids,
+      :firelens_configuration)
       include Aws::Structure
     end
 
@@ -449,6 +497,8 @@ module Aws::ECS
     #               mount_options: ["String"],
     #             },
     #           ],
+    #           max_swap: 1,
+    #           swappiness: 1,
     #         },
     #         secrets: [
     #           {
@@ -492,7 +542,7 @@ module Aws::ECS
     #           },
     #         ],
     #         log_configuration: {
-    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #           options: {
     #             "String" => "String",
     #           },
@@ -519,9 +569,15 @@ module Aws::ECS
     #         resource_requirements: [
     #           {
     #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU
+    #             type: "GPU", # required, accepts GPU, InferenceAccelerator
     #           },
     #         ],
+    #         firelens_configuration: {
+    #           type: "fluentd", # required, accepts fluentd, fluentbit
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -665,13 +721,12 @@ module Aws::ECS
     #   a container][1] section of the [Docker Remote API][2] and the
     #   `--memory` option to [docker run][3].
     #
-    #   If your containers are part of a task using the Fargate launch type,
-    #   this field is optional.
+    #   If using the Fargate launch type, this parameter is optional.
     #
-    #   For containers that are part of a task using the EC2 launch type,
-    #   you must specify a non-zero integer for one or both of `memory` or
-    #   `memoryReservation` in container definitions. If you specify both,
-    #   `memory` must be greater than `memoryReservation`. If you specify
+    #   If using the EC2 launch type, you must specify either a task-level
+    #   memory value or a container-level memory value. If you specify both
+    #   a container-level `memory` and `memoryReservation` value, `memory`
+    #   must be greater than `memoryReservation`. If you specify
     #   `memoryReservation`, then that value is subtracted from the
     #   available memory resources for the container instance on which the
     #   container is placed. Otherwise, the value of `memory` is used.
@@ -698,9 +753,10 @@ module Aws::ECS
     #   container][1] section of the [Docker Remote API][2] and the
     #   `--memory-reservation` option to [docker run][3].
     #
-    #   You must specify a non-zero integer for one or both of `memory` or
-    #   `memoryReservation` in container definitions. If you specify both,
-    #   `memory` must be greater than `memoryReservation`. If you specify
+    #   If a task-level memory value is not specified, you must specify a
+    #   non-zero integer for one or both of `memory` or `memoryReservation`
+    #   in a container definition. If you specify both, `memory` must be
+    #   greater than `memoryReservation`. If you specify
     #   `memoryReservation`, then that value is subtracted from the
     #   available memory resources for the container instance on which the
     #   container is placed. Otherwise, the value of `memory` is used.
@@ -943,13 +999,13 @@ module Aws::ECS
     #   @return [Array<Types::ContainerDependency>]
     #
     # @!attribute [rw] start_timeout
-    #   Time duration to wait before giving up on resolving dependencies for
-    #   a container. For example, you specify two containers in a task
-    #   definition with containerA having a dependency on containerB
-    #   reaching a `COMPLETE`, `SUCCESS`, or `HEALTHY` status. If a
-    #   `startTimeout` value is specified for containerB and it does not
-    #   reach the desired status within that time then containerA will give
-    #   up and not start. This results in the task transitioning to a
+    #   Time duration (in seconds) to wait before giving up on resolving
+    #   dependencies for a container. For example, you specify two
+    #   containers in a task definition with containerA having a dependency
+    #   on containerB reaching a `COMPLETE`, `SUCCESS`, or `HEALTHY` status.
+    #   If a `startTimeout` value is specified for containerB and it does
+    #   not reach the desired status within that time then containerA will
+    #   give up and not start. This results in the task transitioning to a
     #   `STOPPED` state.
     #
     #   For tasks using the EC2 launch type, the container instances require
@@ -977,12 +1033,12 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] stop_timeout
-    #   Time duration to wait before the container is forcefully killed if
-    #   it doesn't exit normally on its own. For tasks using the Fargate
-    #   launch type, the max `stopTimeout` value is 2 minutes. This
-    #   parameter is available for tasks using the Fargate launch type in
-    #   the Ohio (us-east-2) region only and the task or service requires
-    #   platform version 1.3.0 or later.
+    #   Time duration (in seconds) to wait before the container is
+    #   forcefully killed if it doesn't exit normally on its own. For tasks
+    #   using the Fargate launch type, the max `stopTimeout` value is 2
+    #   minutes. This parameter is available for tasks using the Fargate
+    #   launch type in the Ohio (us-east-2) region only and the task or
+    #   service requires platform version 1.3.0 or later.
     #
     #   For tasks using the EC2 launch type, the stop timeout value for the
     #   container takes precedence over the `ECS_CONTAINER_STOP_TIMEOUT`
@@ -1268,13 +1324,6 @@ module Aws::ECS
     # @!attribute [rw] log_configuration
     #   The log configuration specification for the container.
     #
-    #   For tasks using the Fargate launch type, the supported log drivers
-    #   are `awslogs` and `splunk`.
-    #
-    #   For tasks using the EC2 launch type, the supported log drivers are
-    #   `awslogs`, `syslog`, `gelf`, `fluentd`, `splunk`, `journald`, and
-    #   `json-file`.
-    #
     #   This parameter maps to `LogConfig` in the [Create a container][1]
     #   section of the [Docker Remote API][2] and the `--log-driver` option
     #   to [docker run][3]. By default, containers use the same logging
@@ -1361,6 +1410,17 @@ module Aws::ECS
     #   supported resource is a GPU.
     #   @return [Array<Types::ResourceRequirement>]
     #
+    # @!attribute [rw] firelens_configuration
+    #   The FireLens configuration for the container. This is used to
+    #   specify and configure a log router for container logs. For more
+    #   information, see [Custom Log Routing][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+    #   @return [Types::FirelensConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
@@ -1400,7 +1460,8 @@ module Aws::ECS
       :log_configuration,
       :health_check,
       :system_controls,
-      :resource_requirements)
+      :resource_requirements,
+      :firelens_configuration)
       include Aws::Structure
     end
 
@@ -1601,9 +1662,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a
-    #   maximum character length of 128 characters, and tag values can have
-    #   a maximum length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance AWS API Documentation
@@ -1651,7 +1735,7 @@ module Aws::ECS
     #         resource_requirements: [
     #           {
     #             value: "String", # required
-    #             type: "GPU", # required, accepts GPU
+    #             type: "GPU", # required, accepts GPU, InferenceAccelerator
     #           },
     #         ],
     #       }
@@ -1720,6 +1804,8 @@ module Aws::ECS
     #
     #       {
     #         container_name: "String",
+    #         image_digest: "String",
+    #         runtime_id: "String",
     #         exit_code: 1,
     #         network_bindings: [
     #           {
@@ -1735,6 +1821,14 @@ module Aws::ECS
     #
     # @!attribute [rw] container_name
     #   The name of the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_digest
+    #   The container image SHA 256 digest.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_id
+    #   The ID of the Docker container.
     #   @return [String]
     #
     # @!attribute [rw] exit_code
@@ -1758,6 +1852,8 @@ module Aws::ECS
     #
     class ContainerStateChange < Struct.new(
       :container_name,
+      :image_digest,
+      :runtime_id,
       :exit_code,
       :network_bindings,
       :reason,
@@ -1793,9 +1889,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the cluster to help you categorize
     #   and organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] settings
@@ -1914,11 +2033,17 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] load_balancers
-    #   A load balancer object representing the load balancer to use with
-    #   your service.
+    #   A load balancer object representing the load balancers to use with
+    #   your service. For more information, see [Service Load Balancing][1]
+    #   in the *Amazon Elastic Container Service Developer Guide*.
     #
-    #   If the service is using the `ECS` deployment controller, you are
-    #   limited to one load balancer or target group.
+    #   If the service is using the rolling update (`ECS`) deployment
+    #   controller and using either an Application Load Balancer or Network
+    #   Load Balancer, you can specify multiple target groups to attach to
+    #   the service. The service-linked role is required for services that
+    #   make use of multiple target groups. For more information, see [Using
+    #   Service-Linked Roles for Amazon ECS][2] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   If the service is using the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
@@ -1938,13 +2063,6 @@ module Aws::ECS
     #   you are using the `CODE_DEPLOY` deployment controller, these values
     #   can be changed when updating the service.
     #
-    #   For Classic Load Balancers, this object must contain the load
-    #   balancer name, the container name (as it appears in a container
-    #   definition), and the container port to access from the load
-    #   balancer. When a task from this service is placed on a container
-    #   instance, the container instance is registered with the load
-    #   balancer specified here.
-    #
     #   For Application Load Balancers and Network Load Balancers, this
     #   object must contain the load balancer target group ARN, the
     #   container name (as it appears in a container definition), and the
@@ -1953,6 +2071,13 @@ module Aws::ECS
     #   instance and port combination is registered as a target in the
     #   target group specified here.
     #
+    #   For Classic Load Balancers, this object must contain the load
+    #   balancer name, the container name (as it appears in a container
+    #   definition), and the container port to access from the load
+    #   balancer. When a task from this service is placed on a container
+    #   instance, the container instance is registered with the load
+    #   balancer specified here.
+    #
     #   Services with tasks that use the `awsvpc` network mode (for example,
     #   those with the Fargate launch type) only support Application Load
     #   Balancers and Network Load Balancers. Classic Load Balancers are not
@@ -1960,6 +2085,11 @@ module Aws::ECS
     #   services, you must choose `ip` as the target type, not `instance`,
     #   because tasks that use the `awsvpc` network mode are associated with
     #   an elastic network interface, not an Amazon EC2 instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
@@ -1981,6 +2111,10 @@ module Aws::ECS
     # @!attribute [rw] desired_count
     #   The number of instantiations of the specified task definition to
     #   place and keep running on your cluster.
+    #
+    #   This is required if `schedulingStrategy` is `REPLICA` or is not
+    #   specified. If `schedulingStrategy` is `DAEMON` then this is not
+    #   required.
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
@@ -2023,10 +2157,12 @@ module Aws::ECS
     #   If your account has already created the Amazon ECS service-linked
     #   role, that role is used by default for your service unless you
     #   specify a role here. The service-linked role is required if your
-    #   task definition uses the `awsvpc` network mode, in which case you
-    #   should not specify a role here. For more information, see [Using
-    #   Service-Linked Roles for Amazon ECS][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   task definition uses the `awsvpc` network mode or if the service is
+    #   configured to use service discovery, an external deployment
+    #   controller, or multiple target groups in which case you should not
+    #   specify a role here. For more information, see [Using Service-Linked
+    #   Roles for Amazon ECS][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must
     #   either specify the full role ARN (this is recommended) or prefix the
@@ -2125,9 +2261,32 @@ module Aws::ECS
     #   The metadata that you apply to the service to help you categorize
     #   and organize them. Each tag consists of a key and an optional value,
     #   both of which you define. When a service is deleted, the tags are
-    #   deleted as well. Tag keys can have a maximum character length of 128
-    #   characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   deleted as well.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_ecs_managed_tags
@@ -3073,9 +3232,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that is applied to the task definition to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a
-    #   maximum character length of 128 characters, and tag values can have
-    #   a maximum length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinitionResponse AWS API Documentation
@@ -3377,6 +3559,46 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The FireLens configuration for the container. This is used to specify
+    # and configure a log router for container logs. For more information,
+    # see [Custom Log Routing][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+    #
+    # @note When making an API call, you may pass FirelensConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         type: "fluentd", # required, accepts fluentd, fluentbit
+    #         options: {
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The log router to use. The valid values are `fluentd` or
+    #   `fluentbit`.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The options to use when configuring the log router. This field is
+    #   optional and can be used to add additional metadata, such as the
+    #   task, task definition, cluster, and container instance details to
+    #   the log event. If specified, the syntax to use is
+    #   `"options":\{"enable-ecs-log-metadata":"true|false"\}`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/FirelensConfiguration AWS API Documentation
+    #
+    class FirelensConfiguration < Struct.new(
+      :type,
+      :options)
+      include Aws::Structure
+    end
+
     # An object representing a container health check. Health check
     # parameters that are specified in a container definition override any
     # Docker health checks that exist in the container image (such as those
@@ -3530,6 +3752,76 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # Details on a Elastic Inference accelerator. For more information, see
+    # [Working with Amazon Elastic Inference on Amazon ECS][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html
+    #
+    # @note When making an API call, you may pass InferenceAccelerator
+    #   data as a hash:
+    #
+    #       {
+    #         device_name: "String", # required
+    #         device_type: "String", # required
+    #       }
+    #
+    # @!attribute [rw] device_name
+    #   The Elastic Inference accelerator device name. The `deviceName` must
+    #   also be referenced in a container definition as a
+    #   ResourceRequirement.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_type
+    #   The Elastic Inference accelerator type to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InferenceAccelerator AWS API Documentation
+    #
+    class InferenceAccelerator < Struct.new(
+      :device_name,
+      :device_type)
+      include Aws::Structure
+    end
+
+    # Details on an Elastic Inference accelerator task override. This
+    # parameter is used to override the Elastic Inference accelerator
+    # specified in the task definition. For more information, see [Working
+    # with Amazon Elastic Inference on Amazon ECS][1] in the *Amazon Elastic
+    # Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html
+    #
+    # @note When making an API call, you may pass InferenceAcceleratorOverride
+    #   data as a hash:
+    #
+    #       {
+    #         device_name: "String",
+    #         device_type: "String",
+    #       }
+    #
+    # @!attribute [rw] device_name
+    #   The Elastic Inference accelerator device name to override for the
+    #   task. This parameter must match a `deviceName` specified in the task
+    #   definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_type
+    #   The Elastic Inference accelerator type to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InferenceAcceleratorOverride AWS API Documentation
+    #
+    class InferenceAcceleratorOverride < Struct.new(
+      :device_name,
+      :device_type)
+      include Aws::Structure
+    end
+
     # The Linux capabilities for the container that are added to or dropped
     # from the default configuration provided by Docker. For more
     # information on the default capabilities and the non-default available
@@ -3664,6 +3956,8 @@ module Aws::ECS
     #             mount_options: ["String"],
     #           },
     #         ],
+    #         max_swap: 1,
+    #         swappiness: 1,
     #       }
     #
     # @!attribute [rw] capabilities
@@ -3737,6 +4031,50 @@ module Aws::ECS
     #   [1]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Tmpfs>]
     #
+    # @!attribute [rw] max_swap
+    #   The total amount of swap memory (in MiB) a container can use. This
+    #   parameter will be translated to the `--memory-swap` option to
+    #   [docker run][1] where the value would be the sum of the container
+    #   memory plus the `maxSwap` value.
+    #
+    #   If a `maxSwap` value of `0` is specified, the container will not use
+    #   swap. Accepted values are `0` or any positive integer. If the
+    #   `maxSwap` parameter is omitted, the container will use the swap
+    #   configuration for the container instance it is running on. A
+    #   `maxSwap` value must be set for the `swappiness` parameter to be
+    #   used.
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the
+    #   `maxSwap` parameter is not supported.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Integer]
+    #
+    # @!attribute [rw] swappiness
+    #   This allows you to tune a container's memory swappiness behavior. A
+    #   `swappiness` value of `0` will cause swapping to not happen unless
+    #   absolutely necessary. A `swappiness` value of `100` will cause pages
+    #   to be swapped very aggressively. Accepted values are whole numbers
+    #   between `0` and `100`. If the `swappiness` parameter is not
+    #   specified, a default value of `60` is used. If a value is not
+    #   specified for `maxSwap` then this parameter is ignored. This
+    #   parameter maps to the `--memory-swappiness` option to [docker
+    #   run][1].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the
+    #   `swappiness` parameter is not supported.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LinuxParameters AWS API Documentation
     #
     class LinuxParameters < Struct.new(
@@ -3744,7 +4082,9 @@ module Aws::ECS
       :devices,
       :init_process_enabled,
       :shared_memory_size,
-      :tmpfs)
+      :tmpfs,
+      :max_swap,
+      :swappiness)
       include Aws::Structure
     end
 
@@ -4501,28 +4841,8 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Details on a load balancer to be used with a service or task set.
-    #
-    # If the service is using the `ECS` deployment controller, you are
-    # limited to one load balancer or target group.
-    #
-    # If the service is using the `CODE_DEPLOY` deployment controller, the
-    # service is required to use either an Application Load Balancer or
-    # Network Load Balancer. When you are creating an AWS CodeDeploy
-    # deployment group, you specify two target groups (referred to as a
-    # `targetGroupPair`). Each target group binds to a separate task set in
-    # the deployment. The load balancer can also have up to two listeners, a
-    # required listener for production traffic and an optional listener that
-    # allows you to test new revisions of the service before routing
-    # production traffic to it.
-    #
-    # Services with tasks that use the `awsvpc` network mode (for example,
-    # those with the Fargate launch type) only support Application Load
-    # Balancers and Network Load Balancers. Classic Load Balancers are not
-    # supported. Also, when you create any target groups for these services,
-    # you must choose `ip` as the target type, not `instance`. Tasks that
-    # use the `awsvpc` network mode are associated with an elastic network
-    # interface, not an Amazon EC2 instance.
+    # Details on the load balancer or load balancers to use with a service
+    # or task set.
     #
     # @note When making an API call, you may pass LoadBalancer
     #   data as a hash:
@@ -4538,29 +4858,40 @@ module Aws::ECS
     #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
     #   target group or groups associated with a service or task set.
     #
-    #   A target group ARN is only specified when using an application load
-    #   balancer or a network load balancer. If you are using a classic load
-    #   balancer this should be omitted.
+    #   A target group ARN is only specified when using an Application Load
+    #   Balancer or Network Load Balancer. If you are using a Classic Load
+    #   Balancer this should be omitted.
     #
-    #   For services using the `ECS` deployment controller, you are limited
-    #   to one target group. For services using the `CODE_DEPLOY` deployment
-    #   controller, you are required to define two target groups for the
-    #   load balancer.
+    #   For services using the `ECS` deployment controller, you can specify
+    #   one or multiple target groups. For more information, see
+    #   [Registering Multiple Target Groups with a Service][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #   For services using the `CODE_DEPLOY` deployment controller, you are
+    #   required to define two target groups for the load balancer. For more
+    #   information, see [Blue/Green Deployment with CodeDeploy][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If your service's task definition uses the `awsvpc` network mode
     #   (which is required for the Fargate launch type), you must choose
-    #   `ip` as the target type, not `instance`, because tasks that use the
-    #   `awsvpc` network mode are associated with an elastic network
-    #   interface, not an Amazon EC2 instance.
+    #   `ip` as the target type, not `instance`, when creating your target
+    #   groups because tasks that use the `awsvpc` network mode are
+    #   associated with an elastic network interface, not an Amazon EC2
+    #   instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer to associate with the Amazon ECS
     #   service or task set.
     #
-    #   A load balancer name is only specified when using a classic load
-    #   balancer. If you are using an application load balancer or a network
-    #   load balancer this should be omitted.
+    #   A load balancer name is only specified when using a Classic Load
+    #   Balancer. If you are using an Application Load Balancer or a Network
+    #   Load Balancer this should be omitted.
     #   @return [String]
     #
     # @!attribute [rw] container_name
@@ -4570,9 +4901,10 @@ module Aws::ECS
     #
     # @!attribute [rw] container_port
     #   The port on the container to associate with the load balancer. This
-    #   port must correspond to a `containerPort` in the service's task
-    #   definition. Your container instances must allow ingress traffic on
-    #   the `hostPort` of the port mapping.
+    #   port must correspond to a `containerPort` in the task definition the
+    #   tasks in the service are using. For tasks that use the EC2 launch
+    #   type, the container instance they are launched on must allow ingress
+    #   traffic on the `hostPort` of the port mapping.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LoadBalancer AWS API Documentation
@@ -4592,7 +4924,7 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #         options: {
     #           "String" => "String",
     #         },
@@ -4610,19 +4942,23 @@ module Aws::ECS
     #   can communicate with by default.
     #
     #   For tasks using the Fargate launch type, the supported log drivers
-    #   are `awslogs` and `splunk`.
+    #   are `awslogs`, `splunk`, and `awsfirelens`.
     #
     #   For tasks using the EC2 launch type, the supported log drivers are
-    #   `awslogs`, `syslog`, `gelf`, `fluentd`, `splunk`, `journald`, and
-    #   `json-file`.
+    #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `syslog`,
+    #   `splunk`, and `awsfirelens`.
     #
     #   For more information about using the `awslogs` log driver, see
     #   [Using the awslogs Log Driver][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
+    #   For more information about using the `awsfirelens` log driver, see
+    #   [Custom Log Routing][2] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
     #   <note markdown="1"> If you have a custom driver that is not listed above that you would
     #   like to work with the Amazon ECS container agent, you can fork the
-    #   Amazon ECS container agent project that is [available on GitHub][2]
+    #   Amazon ECS container agent project that is [available on GitHub][3]
     #   and customize it to work with that driver. We encourage you to
     #   submit pull requests for changes that you would like to have
     #   included. However, Amazon Web Services does not currently support
@@ -4639,7 +4975,8 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
-    #   [2]: https://github.com/aws/amazon-ecs-agent
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+    #   [3]: https://github.com/aws/amazon-ecs-agent
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -4800,6 +5137,11 @@ module Aws::ECS
     # information, see [Task Placement Constraints][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
+    # <note markdown="1"> If you are using the Fargate launch type, task placement constraints
+    # are not supported.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
@@ -4816,8 +5158,7 @@ module Aws::ECS
     #   The type of constraint. Use `distinctInstance` to ensure that each
     #   task in a particular group is running on a different container
     #   instance. Use `memberOf` to restrict the selection to a group of
-    #   valid candidates. The value `distinctInstance` is not supported in
-    #   task definitions.
+    #   valid candidates.
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -5331,9 +5672,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a
-    #   maximum character length of 128 characters, and tag values can have
-    #   a maximum length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstanceRequest AWS API Documentation
@@ -5431,6 +5795,8 @@ module Aws::ECS
     #                   mount_options: ["String"],
     #                 },
     #               ],
+    #               max_swap: 1,
+    #               swappiness: 1,
     #             },
     #             secrets: [
     #               {
@@ -5474,7 +5840,7 @@ module Aws::ECS
     #               },
     #             ],
     #             log_configuration: {
-    #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #               options: {
     #                 "String" => "String",
     #               },
@@ -5501,9 +5867,15 @@ module Aws::ECS
     #             resource_requirements: [
     #               {
     #                 value: "String", # required
-    #                 type: "GPU", # required, accepts GPU
+    #                 type: "GPU", # required, accepts GPU, InferenceAccelerator
     #               },
     #             ],
+    #             firelens_configuration: {
+    #               type: "fluentd", # required, accepts fluentd, fluentbit
+    #               options: {
+    #                 "String" => "String",
+    #               },
+    #             },
     #           },
     #         ],
     #         volumes: [
@@ -5552,6 +5924,12 @@ module Aws::ECS
     #             },
     #           ],
     #         },
+    #         inference_accelerators: [
+    #           {
+    #             device_name: "String", # required
+    #             device_type: "String", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] family
@@ -5726,9 +6104,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the task definition to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define. Tag keys can have a
-    #   maximum character length of 128 characters, and tag values can have
-    #   a maximum length of 256 characters.
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] pid_mode
@@ -5818,6 +6219,11 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Types::ProxyConfiguration]
     #
+    # @!attribute [rw] inference_accelerators
+    #   The Elastic Inference accelerators to use for the containers in the
+    #   task.
+    #   @return [Array<Types::InferenceAccelerator>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
     #
     class RegisterTaskDefinitionRequest < Struct.new(
@@ -5834,7 +6240,8 @@ module Aws::ECS
       :tags,
       :pid_mode,
       :ipc_mode,
-      :proxy_configuration)
+      :proxy_configuration,
+      :inference_accelerators)
       include Aws::Structure
     end
 
@@ -5939,33 +6346,42 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # The type and amount of a resource to assign to a container. The only
-    # supported resource is a GPU. For more information, see [Working with
-    # GPUs on Amazon ECS][1] in the *Amazon Elastic Container Service
-    # Developer Guide*
+    # The type and amount of a resource to assign to a container. The
+    # supported resource types are GPUs and Elastic Inference accelerators.
+    # For more information, see [Working with GPUs on Amazon ECS][1] or
+    # [Working with Amazon Elastic Inference on Amazon ECS][2] in the
+    # *Amazon Elastic Container Service Developer Guide*
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html
     #
     # @note When making an API call, you may pass ResourceRequirement
     #   data as a hash:
     #
     #       {
     #         value: "String", # required
-    #         type: "GPU", # required, accepts GPU
+    #         type: "GPU", # required, accepts GPU, InferenceAccelerator
     #       }
     #
     # @!attribute [rw] value
-    #   The number of physical `GPUs` the Amazon ECS container agent will
-    #   reserve for the container. The number of GPUs reserved for all
-    #   containers in a task should not exceed the number of available GPUs
-    #   on the container instance the task is launched on.
+    #   The value for the specified resource type.
+    #
+    #   If the `GPU` type is used, the value is the number of physical
+    #   `GPUs` the Amazon ECS container agent will reserve for the
+    #   container. The number of GPUs reserved for all containers in a task
+    #   should not exceed the number of available GPUs on the container
+    #   instance the task is launched on.
+    #
+    #   If the `InferenceAccelerator` type is used, the `value` should match
+    #   the `deviceName` for an InferenceAccelerator specified in a task
+    #   definition.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of resource to assign to a container. The only supported
-    #   value is `GPU`.
+    #   The type of resource to assign to a container. The supported values
+    #   are `GPU` or `InferenceAccelerator`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceRequirement AWS API Documentation
@@ -5999,9 +6415,15 @@ module Aws::ECS
     #               resource_requirements: [
     #                 {
     #                   value: "String", # required
-    #                   type: "GPU", # required, accepts GPU
+    #                   type: "GPU", # required, accepts GPU, InferenceAccelerator
     #                 },
     #               ],
+    #             },
+    #           ],
+    #           inference_accelerator_overrides: [
+    #             {
+    #               device_name: "String",
+    #               device_type: "String",
     #             },
     #           ],
     #           task_role_arn: "String",
@@ -6141,9 +6563,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_ecs_managed_tags
@@ -6322,14 +6767,6 @@ module Aws::ECS
     #   the load balancer name, the container name (as it appears in a
     #   container definition), and the container port to access from the
     #   load balancer.
-    #
-    #   Services with tasks that use the `awsvpc` network mode (for example,
-    #   those with the Fargate launch type) only support Application Load
-    #   Balancers and Network Load Balancers. Classic Load Balancers are not
-    #   supported. Also, when you create any target groups for these
-    #   services, you must choose `ip` as the target type, not `instance`.
-    #   Tasks that use the `awsvpc` network mode are associated with an
-    #   elastic network interface, not an Amazon EC2 instance.
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
@@ -6471,15 +6908,40 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] deployment_controller
-    #   The deployment controller type the service is using.
+    #   The deployment controller type the service is using. When using the
+    #   DescribeServices API, this field is omitted if the service is using
+    #   the `ECS` deployment controller type.
     #   @return [Types::DeploymentController]
     #
     # @!attribute [rw] tags
     #   The metadata that you apply to the service to help you categorize
     #   and organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] created_by
@@ -6670,9 +7132,15 @@ module Aws::ECS
     #               resource_requirements: [
     #                 {
     #                   value: "String", # required
-    #                   type: "GPU", # required, accepts GPU
+    #                   type: "GPU", # required, accepts GPU, InferenceAccelerator
     #                 },
     #               ],
+    #             },
+    #           ],
+    #           inference_accelerator_overrides: [
+    #             {
+    #               device_name: "String",
+    #               device_type: "String",
     #             },
     #           ],
     #           task_role_arn: "String",
@@ -6760,9 +7228,32 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_ecs_managed_tags
@@ -6909,6 +7400,7 @@ module Aws::ECS
     #         cluster: "String",
     #         task: "String",
     #         container_name: "String",
+    #         runtime_id: "String",
     #         status: "String",
     #         exit_code: 1,
     #         reason: "String",
@@ -6935,6 +7427,10 @@ module Aws::ECS
     #   The name of the container.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_id
+    #   The ID of the Docker container.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the state change request.
     #   @return [String]
@@ -6957,6 +7453,7 @@ module Aws::ECS
       :cluster,
       :task,
       :container_name,
+      :runtime_id,
       :status,
       :exit_code,
       :reason,
@@ -6986,6 +7483,8 @@ module Aws::ECS
     #         containers: [
     #           {
     #             container_name: "String",
+    #             image_digest: "String",
+    #             runtime_id: "String",
     #             exit_code: 1,
     #             network_bindings: [
     #               {
@@ -7127,9 +7626,32 @@ module Aws::ECS
 
     # The metadata that you apply to a resource to help you categorize and
     # organize them. Each tag consists of a key and an optional value, both
-    # of which you define. Tag keys can have a maximum character length of
-    # 128 characters, and tag values can have a maximum length of 256
-    # characters.
+    # of which you define.
+    #
+    # The following basic restrictions apply to tags:
+    #
+    # * Maximum number of tags per resource - 50
+    #
+    # * For each resource, each tag key must be unique, and each tag key can
+    #   have only one value.
+    #
+    # * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    # * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    # * If your tagging schema is used across multiple services and
+    #   resources, remember that other services may have restrictions on
+    #   allowed characters. Generally allowed characters are: letters,
+    #   numbers, and spaces representable in UTF-8, and the following
+    #   characters: + - = . \_ : / @.
+    #
+    # * Tag keys and values are case-sensitive.
+    #
+    # * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #   such as a prefix for either keys or values as it is reserved for AWS
+    #   use. You cannot edit or delete tag keys or values with this prefix.
+    #   Tags with this prefix do not count against your tags per resource
+    #   limit.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -7179,9 +7701,32 @@ module Aws::ECS
     #
     # @!attribute [rw] tags
     #   The tags to add to the resource. A tag is an array of key-value
-    #   pairs. Tag keys can have a maximum character length of 128
-    #   characters, and tag values can have a maximum length of 256
-    #   characters.
+    #   pairs.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TagResourceRequest AWS API Documentation
@@ -7313,7 +7858,7 @@ module Aws::ECS
     #   change that triggers a CloudWatch event, the version counter is
     #   incremented. If you are replicating your Amazon ECS task state with
     #   CloudWatch Events, you can compare the version of a task reported by
-    #   the Amazon ECS API actionss with the version reported in CloudWatch
+    #   the Amazon ECS API actions with the version reported in CloudWatch
     #   Events for the task (inside the `detail` object) to verify that the
     #   version in your event stream is current.
     #   @return [Integer]
@@ -7421,10 +7966,37 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value,
-    #   both of which you define. Tag keys can have a maximum character
-    #   length of 128 characters, and tag values can have a maximum length
-    #   of 256 characters.
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] inference_accelerators
+    #   The Elastic Inference accelerator associated with the task.
+    #   @return [Array<Types::InferenceAccelerator>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
     #
@@ -7457,7 +8029,8 @@ module Aws::ECS
       :platform_version,
       :attachments,
       :health_status,
-      :tags)
+      :tags,
+      :inference_accelerators)
       include Aws::Structure
     end
 
@@ -7492,11 +8065,11 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] task_role_arn
-    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
-    #   Management (IAM) role that grants containers in the task permission
-    #   to call AWS APIs on your behalf. For more information, see [Amazon
-    #   ECS Task Role][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   The short name or full Amazon Resource Name (ARN) of the AWS
+    #   Identity and Access Management (IAM) role that grants containers in
+    #   the task permission to call AWS APIs on your behalf. For more
+    #   information, see [Amazon ECS Task Role][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   IAM roles for tasks on Windows require that the `-EnableTaskIAMRole`
     #   option is set when you launch the Amazon ECS-optimized Windows AMI.
@@ -7646,10 +8219,14 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] memory
-    #   The amount (in MiB) of memory used by the task. If using the EC2
-    #   launch type, this field is optional and any value can be used. If
-    #   using the Fargate launch type, this field is required and you must
-    #   use one of the following values, which determines your range of
+    #   The amount (in MiB) of memory used by the task.
+    #
+    #   If using the EC2 launch type, this field is optional and any value
+    #   can be used. If a task-level memory value is specified then the
+    #   container-level memory value is optional.
+    #
+    #   If using the Fargate launch type, this field is required and you
+    #   must use one of the following values, which determines your range of
     #   valid values for the `cpu` parameter:
     #
     #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values:
@@ -7777,13 +8354,13 @@ module Aws::ECS
     end
 
     # An object representing a constraint on task placement in the task
-    # definition.
+    # definition. For more information, see [Task Placement Constraints][1]
+    # in the *Amazon Elastic Container Service Developer Guide*.
     #
-    # If you are using the Fargate launch type, task placement constraints
+    # <note markdown="1"> If you are using the Fargate launch type, task placement constraints
     # are not supported.
     #
-    # For more information, see [Task Placement Constraints][1] in the
-    # *Amazon Elastic Container Service Developer Guide*.
+    #  </note>
     #
     #
     #
@@ -7798,10 +8375,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] type
-    #   The type of constraint. The `DistinctInstance` constraint ensures
-    #   that each task in a particular group is running on a different
-    #   container instance. The `MemberOf` constraint restricts selection to
-    #   be from a group of valid candidates.
+    #   The type of constraint. The `MemberOf` constraint restricts
+    #   selection to be from a group of valid candidates.
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -7844,9 +8419,15 @@ module Aws::ECS
     #             resource_requirements: [
     #               {
     #                 value: "String", # required
-    #                 type: "GPU", # required, accepts GPU
+    #                 type: "GPU", # required, accepts GPU, InferenceAccelerator
     #               },
     #             ],
+    #           },
+    #         ],
+    #         inference_accelerator_overrides: [
+    #           {
+    #             device_name: "String",
+    #             device_type: "String",
     #           },
     #         ],
     #         task_role_arn: "String",
@@ -7856,6 +8437,10 @@ module Aws::ECS
     # @!attribute [rw] container_overrides
     #   One or more container overrides sent to a task.
     #   @return [Array<Types::ContainerOverride>]
+    #
+    # @!attribute [rw] inference_accelerator_overrides
+    #   The Elastic Inference accelerator override for the task.
+    #   @return [Array<Types::InferenceAcceleratorOverride>]
     #
     # @!attribute [rw] task_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that containers in
@@ -7872,6 +8457,7 @@ module Aws::ECS
     #
     class TaskOverride < Struct.new(
       :container_overrides,
+      :inference_accelerator_overrides,
       :task_role_arn,
       :execution_role_arn)
       include Aws::Structure
@@ -8030,13 +8616,6 @@ module Aws::ECS
     #   * All tasks are reporting a healthy status from the load balancers,
     #     service discovery, and container health checks.
     #
-    #     <note markdown="1"> If a `healthCheckGracePeriodSeconds` value was set when the
-    #     service was created, you may see a `STEADY_STATE` reached since
-    #     unhealthy Elastic Load Balancing target health checks will be
-    #     ignored until it expires.
-    #
-    #      </note>
-    #
     #   If any of those conditions are not met, the stability status returns
     #   `STABILIZING`.
     #   @return [String]
@@ -8174,6 +8753,53 @@ module Aws::ECS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateClusterSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String", # required
+    #         settings: [ # required
+    #           {
+    #             name: "containerInsights", # accepts containerInsights
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The name of the cluster to modify the settings for.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   The setting to use by default for a cluster. This parameter is used
+    #   to enable CloudWatch Container Insights for a cluster. If this value
+    #   is specified, it will override the `containerInsights` value set
+    #   with PutAccountSetting or PutAccountSettingDefault.
+    #   @return [Array<Types::ClusterSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettingsRequest AWS API Documentation
+    #
+    class UpdateClusterSettingsRequest < Struct.new(
+      :cluster,
+      :settings)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   A regional grouping of one or more container instances on which you
+    #   can run task requests. Each account receives a default cluster the
+    #   first time you use the Amazon ECS service, but you may also create
+    #   other clusters. Clusters may contain more than one instance type
+    #   simultaneously.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettingsResponse AWS API Documentation
+    #
+    class UpdateClusterSettingsResponse < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateContainerAgentRequest
     #   data as a hash:
@@ -8419,10 +9045,11 @@ module Aws::ECS
     #   your service is configured to use a load balancer. If your
     #   service's tasks take a while to start and respond to Elastic Load
     #   Balancing health checks, you can specify a health check grace period
-    #   of up to 1,800 seconds. During that time, the ECS service scheduler
-    #   ignores the Elastic Load Balancing health check status. This grace
-    #   period can prevent the ECS service scheduler from marking tasks as
-    #   unhealthy and stopping them before they have time to come up.
+    #   of up to 2,147,483,647 seconds. During that time, the ECS service
+    #   scheduler ignores the Elastic Load Balancing health check status.
+    #   This grace period can prevent the ECS service scheduler from marking
+    #   tasks as unhealthy and stopping them before they have time to come
+    #   up.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation

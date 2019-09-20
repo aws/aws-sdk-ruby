@@ -155,7 +155,7 @@ module Aws::ConfigService
     #         source_account_id: "AccountId", # required
     #         source_region: "AwsRegion", # required
     #         resource_id: "ResourceId", # required
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         resource_name: "ResourceName",
     #       }
     #
@@ -361,7 +361,7 @@ module Aws::ConfigService
     #             source_account_id: "AccountId", # required
     #             source_region: "AwsRegion", # required
     #             resource_id: "ResourceId", # required
-    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #             resource_name: "ResourceName",
     #           },
     #         ],
@@ -407,7 +407,7 @@ module Aws::ConfigService
     #       {
     #         resource_keys: [ # required
     #           {
-    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #             resource_id: "ResourceId", # required
     #           },
     #         ],
@@ -1203,7 +1203,7 @@ module Aws::ConfigService
     #         recording_group: {
     #           all_supported: false,
     #           include_global_resource_types: false,
-    #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         },
     #       }
     #
@@ -1413,10 +1413,11 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         organization_config_rule_name: "StringWithCharLimit64", # required
+    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
     #       }
     #
     # @!attribute [rw] organization_config_rule_name
+    #   The name of organization config rule that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConfigRuleRequest AWS API Documentation
@@ -1454,7 +1455,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_name: "StringWithCharLimit64", # required
+    #         config_rule_name: "ConfigRuleName", # required
     #         resource_type: "String",
     #       }
     #
@@ -1478,6 +1479,51 @@ module Aws::ConfigService
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfigurationResponse AWS API Documentation
     #
     class DeleteRemediationConfigurationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteRemediationExceptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         resource_keys: [ # required
+    #           {
+    #             resource_type: "StringWithCharLimit256",
+    #             resource_id: "StringWithCharLimit1024",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule for which you want to delete
+    #   remediation exception configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   An exception list of resource exception keys to be processed with
+    #   the current request. AWS Config adds exception for each resource
+    #   key. For example, AWS Config adds 3 exceptions for 3 resource keys.
+    #   @return [Array<Types::RemediationExceptionResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationExceptionsRequest AWS API Documentation
+    #
+    class DeleteRemediationExceptionsRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_batches
+    #   Returns a list of failed delete remediation exceptions batch
+    #   objects. Each object in the batch consists of a list of failed items
+    #   and failure messages.
+    #   @return [Array<Types::FailedDeleteRemediationExceptionsBatch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationExceptionsResponse AWS API Documentation
+    #
+    class DeleteRemediationExceptionsResponse < Struct.new(
+      :failed_batches)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteRetentionConfigurationRequest
     #   data as a hash:
@@ -1666,8 +1712,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregateComplianceByConfigRulesRequest AWS API Documentation
@@ -1685,8 +1731,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregateComplianceByConfigRule>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregateComplianceByConfigRulesResponse AWS API Documentation
@@ -1712,8 +1758,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregationAuthorizationsRequest AWS API Documentation
@@ -1730,8 +1776,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregationAuthorization>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregationAuthorizationsResponse AWS API Documentation
@@ -1746,7 +1792,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_names: ["StringWithCharLimit64"],
+    #         config_rule_names: ["ConfigRuleName"],
     #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
     #         next_token: "String",
     #       }
@@ -1869,7 +1915,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_names: ["StringWithCharLimit64"],
+    #         config_rule_names: ["ConfigRuleName"],
     #         next_token: "String",
     #         limit: 1,
     #       }
@@ -1929,7 +1975,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_names: ["StringWithCharLimit64"],
+    #         config_rule_names: ["ConfigRuleName"],
     #         next_token: "String",
     #       }
     #
@@ -1994,8 +2040,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -2019,8 +2065,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregatedSourceStatus>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorSourcesStatusResponse AWS API Documentation
@@ -2045,8 +2091,8 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -2069,8 +2115,8 @@ module Aws::ConfigService
     #   @return [Array<Types::ConfigurationAggregator>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorsResponse AWS API Documentation
@@ -2228,12 +2274,20 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] organization_config_rule_names
+    #   The names of organization config rules for which you want status
+    #   details. If you do not specify any names, AWS Config returns details
+    #   for all your organization AWS Confg rules.
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
+    #   The maximum number of `OrganizationConfigRuleStatuses` returned on
+    #   each page. If you do no specify a number, AWS Config uses the
+    #   default. The default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRuleStatusesRequest AWS API Documentation
@@ -2246,9 +2300,12 @@ module Aws::ConfigService
     end
 
     # @!attribute [rw] organization_config_rule_statuses
+    #   A list of `OrganizationConfigRuleStatus` objects.
     #   @return [Array<Types::OrganizationConfigRuleStatus>]
     #
     # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRuleStatusesResponse AWS API Documentation
@@ -2269,12 +2326,20 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] organization_config_rule_names
+    #   The names of organization config rules for which you want details.
+    #   If you do not specify any names, AWS Config returns details for all
+    #   your organization config rules.
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
+    #   The maximum number of organization config rules returned on each
+    #   page. If you do no specify a number, AWS Config uses the default.
+    #   The default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRulesRequest AWS API Documentation
@@ -2287,9 +2352,12 @@ module Aws::ConfigService
     end
 
     # @!attribute [rw] organization_config_rules
+    #   Retuns a list `OrganizationConfigRule` objects.
     #   @return [Array<Types::OrganizationConfigRule>]
     #
     # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRulesResponse AWS API Documentation
@@ -2314,8 +2382,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequestsRequest AWS API Documentation
@@ -2331,8 +2399,8 @@ module Aws::ConfigService
     #   @return [Array<Types::PendingAggregationRequest>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequestsResponse AWS API Documentation
@@ -2347,7 +2415,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_names: ["StringWithCharLimit64"], # required
+    #         config_rule_names: ["ConfigRuleName"], # required
     #       }
     #
     # @!attribute [rw] config_rule_names
@@ -2373,19 +2441,82 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeRemediationExceptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         resource_keys: [
+    #           {
+    #             resource_type: "StringWithCharLimit256",
+    #             resource_id: "StringWithCharLimit1024",
+    #           },
+    #         ],
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   An exception list of resource exception keys to be processed with
+    #   the current request. AWS Config adds exception for each resource
+    #   key. For example, AWS Config adds 3 exceptions for 3 resource keys.
+    #   @return [Array<Types::RemediationExceptionResourceKey>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of RemediationExceptionResourceKey returned on
+    #   each page. The default is 25. If you specify 0, AWS Config uses the
+    #   default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExceptionsRequest AWS API Documentation
+    #
+    class DescribeRemediationExceptionsRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remediation_exceptions
+    #   Returns a list of remediation exception objects.
+    #   @return [Array<Types::RemediationException>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExceptionsResponse AWS API Documentation
+    #
+    class DescribeRemediationExceptionsResponse < Struct.new(
+      :remediation_exceptions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRemediationExecutionStatusRequest
     #   data as a hash:
     #
     #       {
-    #         config_rule_name: "StringWithCharLimit64", # required
+    #         config_rule_name: "ConfigRuleName", # required
     #         resource_keys: [
     #           {
-    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #             resource_id: "ResourceId", # required
     #           },
     #         ],
     #         limit: 1,
-    #         next_token: "StringWithCharLimit256",
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] config_rule_name
@@ -2643,6 +2774,50 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # The controls that AWS Config uses for executing remediations.
+    #
+    # @note When making an API call, you may pass ExecutionControls
+    #   data as a hash:
+    #
+    #       {
+    #         ssm_controls: {
+    #           concurrent_execution_rate_percentage: 1,
+    #           error_percentage: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ssm_controls
+    #   A SsmControls object.
+    #   @return [Types::SsmControls]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ExecutionControls AWS API Documentation
+    #
+    class ExecutionControls < Struct.new(
+      :ssm_controls)
+      include Aws::Structure
+    end
+
+    # List of each of the failed delete remediation exceptions with specific
+    # reasons.
+    #
+    # @!attribute [rw] failure_message
+    #   Returns a failure message for delete remediation exception. For
+    #   example, AWS Config creates an exception due to an internal error.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   Returns remediation exception resource key object of the failed
+    #   items.
+    #   @return [Array<Types::RemediationExceptionResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FailedDeleteRemediationExceptionsBatch AWS API Documentation
+    #
+    class FailedDeleteRemediationExceptionsBatch < Struct.new(
+      :failure_message,
+      :failed_items)
+      include Aws::Structure
+    end
+
     # List of each of the failed remediations with specific reasons.
     #
     # @!attribute [rw] failure_message
@@ -2657,6 +2832,27 @@ module Aws::ConfigService
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FailedRemediationBatch AWS API Documentation
     #
     class FailedRemediationBatch < Struct.new(
+      :failure_message,
+      :failed_items)
+      include Aws::Structure
+    end
+
+    # List of each of the failed remediation exceptions with specific
+    # reasons.
+    #
+    # @!attribute [rw] failure_message
+    #   Returns a failure message. For example, the auto-remediation has
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   Returns remediation exception resource key object of the failed
+    #   items.
+    #   @return [Array<Types::RemediationException>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FailedRemediationExceptionBatch AWS API Documentation
+    #
+    class FailedRemediationExceptionBatch < Struct.new(
       :failure_message,
       :failed_items)
       include Aws::Structure
@@ -2723,8 +2919,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateComplianceDetailsByConfigRuleRequest AWS API Documentation
@@ -2745,8 +2941,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregateEvaluationResult>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateComplianceDetailsByConfigRuleResponse AWS API Documentation
@@ -2791,8 +2987,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummaryRequest AWS API Documentation
@@ -2815,8 +3011,8 @@ module Aws::ConfigService
     #   @return [Array<Types::AggregateComplianceCount>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummaryResponse AWS API Documentation
@@ -2834,7 +3030,7 @@ module Aws::ConfigService
     #       {
     #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
     #         filters: {
-    #           resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #           resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #           account_id: "AccountId",
     #           region: "AwsRegion",
     #         },
@@ -2915,7 +3111,7 @@ module Aws::ConfigService
     #           source_account_id: "AccountId", # required
     #           source_region: "AwsRegion", # required
     #           resource_id: "ResourceId", # required
-    #           resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #           resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #           resource_name: "ResourceName",
     #         },
     #       }
@@ -3207,7 +3403,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         organization_config_rule_name: "StringWithCharLimit64", # required
+    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
     #         filters: {
     #           account_id: "AccountId",
     #           member_account_rule_status: "CREATE_SUCCESSFUL", # accepts CREATE_SUCCESSFUL, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_SUCCESSFUL, UPDATE_FAILED, UPDATE_IN_PROGRESS, DELETE_SUCCESSFUL, DELETE_FAILED, DELETE_IN_PROGRESS
@@ -3217,15 +3413,23 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] organization_config_rule_name
+    #   The name of organization config rule for which you want status
+    #   details for member accounts.
     #   @return [String]
     #
     # @!attribute [rw] filters
+    #   A `StatusDetailFilters` object.
     #   @return [Types::StatusDetailFilters]
     #
     # @!attribute [rw] limit
+    #   The maximum number of `OrganizationConfigRuleDetailedStatus`
+    #   returned on each page. If you do not specify a number, AWS Config
+    #   uses the default. The default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConfigRuleDetailedStatusRequest AWS API Documentation
@@ -3239,9 +3443,12 @@ module Aws::ConfigService
     end
 
     # @!attribute [rw] organization_config_rule_detailed_status
+    #   A list of `MemberAccountStatus` objects.
     #   @return [Array<Types::MemberAccountStatus>]
     #
     # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetOrganizationConfigRuleDetailedStatusResponse AWS API Documentation
@@ -3258,7 +3465,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         resource_id: "ResourceId", # required
     #         later_time: Time.now,
     #         earlier_time: Time.now,
@@ -3360,7 +3567,7 @@ module Aws::ConfigService
     #
     #       {
     #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         filters: {
     #           account_id: "AccountId",
     #           resource_id: "ResourceId",
@@ -3427,7 +3634,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         resource_ids: ["ResourceId"],
     #         resource_name: "ResourceName",
     #         limit: 1,
@@ -3523,8 +3730,8 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListTagsForResourceRequest AWS API Documentation
@@ -3541,8 +3748,8 @@ module Aws::ConfigService
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token
-    #   The nextToken string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListTagsForResourceResponse AWS API Documentation
@@ -3553,22 +3760,70 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Organization config rule creation or deletion status in each member
+    # account. This includes the name of the rule, the status, error code
+    # and error message when the rule creation or deletion failed.
+    #
     # @!attribute [rw] account_id
+    #   The 12-digit account ID of a member account.
     #   @return [String]
     #
     # @!attribute [rw] config_rule_name
+    #   The name of config rule deployed in the member account.
     #   @return [String]
     #
     # @!attribute [rw] member_account_rule_status
+    #   Indicates deployment status for config rule in the member account.
+    #   When master account calls `PutOrganizationConfigRule` action for the
+    #   first time, config rule status is created in the member account.
+    #   When master account calls `PutOrganizationConfigRule` action for the
+    #   second time, config rule status is updated in the member account.
+    #   Config rule status is deleted when the master account deletes
+    #   `OrganizationConfigRule` and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the rule to:
+    #
+    #   * `CREATE_SUCCESSFUL` when config rule has been created in the
+    #     member account.
+    #
+    #   * `CREATE_IN_PROGRESS` when config rule is being created in the
+    #     member account.
+    #
+    #   * `CREATE_FAILED` when config rule creation has failed in the member
+    #     account.
+    #
+    #   * `DELETE_FAILED` when config rule deletion has failed in the member
+    #     account.
+    #
+    #   * `DELETE_IN_PROGRESS` when config rule is being deleted in the
+    #     member account.
+    #
+    #   * `DELETE_SUCCESSFUL` when config rule has been deleted in the
+    #     member account.
+    #
+    #   * `UPDATE_SUCCESSFUL` when config rule has been updated in the
+    #     member account.
+    #
+    #   * `UPDATE_IN_PROGRESS` when config rule is being updated in the
+    #     member account.
+    #
+    #   * `UPDATE_FAILED` when config rule deletion has failed in the member
+    #     account.
     #   @return [String]
     #
     # @!attribute [rw] error_code
+    #   An error code that is returned when config rule creation or deletion
+    #   failed in the member account.
     #   @return [String]
     #
     # @!attribute [rw] error_message
+    #   An error message indicating that config rule account creation or
+    #   deletion has failed due to an error in the member account.
     #   @return [String]
     #
     # @!attribute [rw] last_update_time
+    #   The timestamp of the last status update.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/MemberAccountStatus AWS API Documentation
@@ -3617,22 +3872,32 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # An organization config rule that has information about config rules
+    # that AWS Config creates in member accounts.
+    #
     # @!attribute [rw] organization_config_rule_name
+    #   The name that you assign to organization config rule.
     #   @return [String]
     #
     # @!attribute [rw] organization_config_rule_arn
+    #   The Amazon Resource Name (ARN) of organization config rule.
     #   @return [String]
     #
     # @!attribute [rw] organization_managed_rule_metadata
+    #   An `OrganizationManagedRuleMetadata` object.
     #   @return [Types::OrganizationManagedRuleMetadata]
     #
     # @!attribute [rw] organization_custom_rule_metadata
+    #   An `OrganizationCustomRuleMetadata` object.
     #   @return [Types::OrganizationCustomRuleMetadata]
     #
     # @!attribute [rw] excluded_accounts
+    #   A comma-separated list of accounts excluded from organization config
+    #   rule.
     #   @return [Array<String>]
     #
     # @!attribute [rw] last_update_time
+    #   The timestamp of the last update.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRule AWS API Documentation
@@ -3647,19 +3912,66 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Returns the status for an organization config rule in an organization.
+    #
     # @!attribute [rw] organization_config_rule_name
+    #   The name that you assign to organization config rule.
     #   @return [String]
     #
     # @!attribute [rw] organization_rule_status
+    #   Indicates deployment status of an organization config rule. When
+    #   master account calls PutOrganizationConfigRule action for the first
+    #   time, config rule status is created in all the member accounts. When
+    #   master account calls PutOrganizationConfigRule action for the second
+    #   time, config rule status is updated in all the member accounts.
+    #   Additionally, config rule status is updated when one or more member
+    #   accounts join or leave an organization. Config rule status is
+    #   deleted when the master account deletes OrganizationConfigRule in
+    #   all the member accounts and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the rule to:
+    #
+    #   * `CREATE_SUCCESSFUL` when an organization config rule has been
+    #     successfully created in all the member accounts.
+    #
+    #   * `CREATE_IN_PROGRESS` when an organization config rule creation is
+    #     in progress.
+    #
+    #   * `CREATE_FAILED` when an organization config rule creation failed
+    #     in one or more member accounts within that organization.
+    #
+    #   * `DELETE_FAILED` when an organization config rule deletion failed
+    #     in one or more member accounts within that organization.
+    #
+    #   * `DELETE_IN_PROGRESS` when an organization config rule deletion is
+    #     in progress.
+    #
+    #   * `DELETE_SUCCESSFUL` when an organization config rule has been
+    #     successfully deleted from all the member accounts.
+    #
+    #   * `UPDATE_SUCCESSFUL` when an organization config rule has been
+    #     successfully updated in all the member accounts.
+    #
+    #   * `UPDATE_IN_PROGRESS` when an organization config rule update is in
+    #     progress.
+    #
+    #   * `UPDATE_FAILED` when an organization config rule update failed in
+    #     one or more member accounts within that organization.
     #   @return [String]
     #
     # @!attribute [rw] error_code
+    #   An error code that is returned when organization config rule
+    #   creation or deletion has failed.
     #   @return [String]
     #
     # @!attribute [rw] error_message
+    #   An error message indicating that organization config rule creation
+    #   or deletion failed due to an error.
     #   @return [String]
     #
     # @!attribute [rw] last_update_time
+    #   The timestamp of the last update.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRuleStatus AWS API Documentation
@@ -3673,6 +3985,13 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # An object that specifies organization custom rule metadata such as
+    # resource type, resource ID of AWS resource, Lamdba function ARN, and
+    # organization trigger types that trigger AWS Config to evaluate your
+    # AWS resources against a rule. It also provides the frequency with
+    # which you want AWS Config to run evaluations for the rule if the
+    # trigger type is periodic.
+    #
     # @note When making an API call, you may pass OrganizationCustomRuleMetadata
     #   data as a hash:
     #
@@ -3689,30 +4008,66 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] description
+    #   The description that you provide for organization config rule.
     #   @return [String]
     #
     # @!attribute [rw] lambda_function_arn
+    #   The lambda function ARN.
     #   @return [String]
     #
     # @!attribute [rw] organization_config_rule_trigger_types
+    #   The type of notification that triggers AWS Config to run an
+    #   evaluation for a rule. You can specify the following notification
+    #   types:
+    #
+    #   * `ConfigurationItemChangeNotification` - Triggers an evaluation
+    #     when AWS Config delivers a configuration item as a result of a
+    #     resource change.
+    #
+    #   * `OversizedConfigurationItemChangeNotification` - Triggers an
+    #     evaluation when AWS Config delivers an oversized configuration
+    #     item. AWS Config may generate this notification type when a
+    #     resource changes and the notification exceeds the maximum size
+    #     allowed by Amazon SNS.
+    #
+    #   * `ScheduledNotification` - Triggers a periodic evaluation at the
+    #     frequency specified for `MaximumExecutionFrequency`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] input_parameters
+    #   A string, in JSON format, that is passed to organization config rule
+    #   Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] maximum_execution_frequency
+    #   The maximum frequency with which AWS Config runs evaluations for a
+    #   rule. Your custom rule is triggered when AWS Config delivers the
+    #   configuration snapshot. For more information, see
+    #   ConfigSnapshotDeliveryProperties.
+    #
+    #   <note markdown="1"> By default, rules with a periodic trigger are evaluated every 24
+    #   hours. To change the frequency, specify a valid value for the
+    #   `MaximumExecutionFrequency` parameter.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_types_scope
+    #   The type of the AWS resource that was evaluated.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_id_scope
+    #   The ID of the AWS resource that was evaluated.
     #   @return [String]
     #
     # @!attribute [rw] tag_key_scope
+    #   One part of a key-value pair that make up a tag. A key is a general
+    #   label that acts like a category for more specific tag values.
     #   @return [String]
     #
     # @!attribute [rw] tag_value_scope
+    #   The optional part of a key-value pair that make up a tag. A value
+    #   acts as a descriptor within a tag category (key).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationCustomRuleMetadata AWS API Documentation
@@ -3730,6 +4085,11 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # An object that specifies organization managed rule metadata such as
+    # resource type and ID of AWS resource along with the rule identifier.
+    # It also provides the frequency with which you want AWS Config to run
+    # evaluations for the rule if the trigger type is periodic.
+    #
     # @note When making an API call, you may pass OrganizationManagedRuleMetadata
     #   data as a hash:
     #
@@ -3745,27 +4105,52 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] description
+    #   The description that you provide for organization config rule.
     #   @return [String]
     #
     # @!attribute [rw] rule_identifier
+    #   For organization config managed rules, a predefined identifier from
+    #   a list. For example, `IAM_PASSWORD_POLICY` is a managed rule. To
+    #   reference a managed rule, see [Using AWS Managed Config Rules][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
     #   @return [String]
     #
     # @!attribute [rw] input_parameters
+    #   A string, in JSON format, that is passed to organization config rule
+    #   Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] maximum_execution_frequency
+    #   The maximum frequency with which AWS Config runs evaluations for a
+    #   rule. You are using an AWS managed rule that is triggered at a
+    #   periodic frequency.
+    #
+    #   <note markdown="1"> By default, rules with a periodic trigger are evaluated every 24
+    #   hours. To change the frequency, specify a valid value for the
+    #   `MaximumExecutionFrequency` parameter.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_types_scope
+    #   The type of the AWS resource that was evaluated.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_id_scope
+    #   The ID of the AWS resource that was evaluated.
     #   @return [String]
     #
     # @!attribute [rw] tag_key_scope
+    #   One part of a key-value pair that make up a tag. A key is a general
+    #   label that acts like a category for more specific tag values.
     #   @return [String]
     #
     # @!attribute [rw] tag_value_scope
+    #   The optional part of a key-value pair that make up a tag. A value
+    #   acts as a descriptor within a tag category (key).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationManagedRuleMetadata AWS API Documentation
@@ -3824,6 +4209,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   An array of tag object.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutAggregationAuthorizationRequest AWS API Documentation
@@ -3890,6 +4276,7 @@ module Aws::ConfigService
     #   @return [Types::ConfigRule]
     #
     # @!attribute [rw] tags
+    #   An array of tag object.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRuleRequest AWS API Documentation
@@ -3938,6 +4325,7 @@ module Aws::ConfigService
     #   @return [Types::OrganizationAggregationSource]
     #
     # @!attribute [rw] tags
+    #   An array of tag object.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationAggregatorRequest AWS API Documentation
@@ -3973,7 +4361,7 @@ module Aws::ConfigService
     #           recording_group: {
     #             all_supported: false,
     #             include_global_resource_types: false,
-    #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #           },
     #         },
     #       }
@@ -4086,7 +4474,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         organization_config_rule_name: "StringWithCharLimit64", # required
+    #         organization_config_rule_name: "OrganizationConfigRuleName", # required
     #         organization_managed_rule_metadata: {
     #           description: "StringWithCharLimit256Min0",
     #           rule_identifier: "StringWithCharLimit256", # required
@@ -4112,15 +4500,20 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] organization_config_rule_name
+    #   The name that you assign to an organization config rule.
     #   @return [String]
     #
     # @!attribute [rw] organization_managed_rule_metadata
+    #   An `OrganizationManagedRuleMetadata` object.
     #   @return [Types::OrganizationManagedRuleMetadata]
     #
     # @!attribute [rw] organization_custom_rule_metadata
+    #   An `OrganizationCustomRuleMetadata` object.
     #   @return [Types::OrganizationCustomRuleMetadata]
     #
     # @!attribute [rw] excluded_accounts
+    #   A comma-separated list of accounts that you want to exclude from an
+    #   organization config rule.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleRequest AWS API Documentation
@@ -4134,6 +4527,7 @@ module Aws::ConfigService
     end
 
     # @!attribute [rw] organization_config_rule_arn
+    #   The Amazon Resource Name (ARN) of an organization config rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleResponse AWS API Documentation
@@ -4149,21 +4543,32 @@ module Aws::ConfigService
     #       {
     #         remediation_configurations: [ # required
     #           {
-    #             config_rule_name: "StringWithCharLimit64", # required
+    #             config_rule_name: "ConfigRuleName", # required
     #             target_type: "SSM_DOCUMENT", # required, accepts SSM_DOCUMENT
     #             target_id: "StringWithCharLimit256", # required
     #             target_version: "String",
     #             parameters: {
     #               "StringWithCharLimit256" => {
     #                 resource_value: {
-    #                   value: "RESOURCE_ID", # accepts RESOURCE_ID
+    #                   value: "RESOURCE_ID", # required, accepts RESOURCE_ID
     #                 },
     #                 static_value: {
-    #                   values: ["StringWithCharLimit256"],
+    #                   values: ["StringWithCharLimit256"], # required
     #                 },
     #               },
     #             },
     #             resource_type: "String",
+    #             automatic: false,
+    #             execution_controls: {
+    #               ssm_controls: {
+    #                 concurrent_execution_rate_percentage: 1,
+    #                 error_percentage: 1,
+    #               },
+    #             },
+    #             maximum_automatic_attempts: 1,
+    #             retry_attempt_seconds: 1,
+    #             arn: "StringWithCharLimit1024",
+    #             created_by_service: "StringWithCharLimit1024",
     #           },
     #         ],
     #       }
@@ -4186,6 +4591,63 @@ module Aws::ConfigService
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationConfigurationsResponse AWS API Documentation
     #
     class PutRemediationConfigurationsResponse < Struct.new(
+      :failed_batches)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutRemediationExceptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         resource_keys: [ # required
+    #           {
+    #             resource_type: "StringWithCharLimit256",
+    #             resource_id: "StringWithCharLimit1024",
+    #           },
+    #         ],
+    #         message: "StringWithCharLimit1024",
+    #         expiration_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule for which you want to create
+    #   remediation exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   An exception list of resource exception keys to be processed with
+    #   the current request. AWS Config adds exception for each resource
+    #   key. For example, AWS Config adds 3 exceptions for 3 resource keys.
+    #   @return [Array<Types::RemediationExceptionResourceKey>]
+    #
+    # @!attribute [rw] message
+    #   The message contains an explanation of the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The exception is automatically deleted after the expiration date.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationExceptionsRequest AWS API Documentation
+    #
+    class PutRemediationExceptionsRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys,
+      :message,
+      :expiration_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_batches
+    #   Returns a list of failed remediation exceptions batch objects. Each
+    #   object in the batch consists of a list of failed items and failure
+    #   messages.
+    #   @return [Array<Types::FailedRemediationExceptionBatch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationExceptionsResponse AWS API Documentation
+    #
+    class PutRemediationExceptionsResponse < Struct.new(
       :failed_batches)
       include Aws::Structure
     end
@@ -4283,7 +4745,7 @@ module Aws::ConfigService
     #       {
     #         all_supported: false,
     #         include_global_resource_types: false,
-    #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #       }
     #
     # @!attribute [rw] all_supported
@@ -4381,21 +4843,32 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_name: "StringWithCharLimit64", # required
+    #         config_rule_name: "ConfigRuleName", # required
     #         target_type: "SSM_DOCUMENT", # required, accepts SSM_DOCUMENT
     #         target_id: "StringWithCharLimit256", # required
     #         target_version: "String",
     #         parameters: {
     #           "StringWithCharLimit256" => {
     #             resource_value: {
-    #               value: "RESOURCE_ID", # accepts RESOURCE_ID
+    #               value: "RESOURCE_ID", # required, accepts RESOURCE_ID
     #             },
     #             static_value: {
-    #               values: ["StringWithCharLimit256"],
+    #               values: ["StringWithCharLimit256"], # required
     #             },
     #           },
     #         },
     #         resource_type: "String",
+    #         automatic: false,
+    #         execution_controls: {
+    #           ssm_controls: {
+    #             concurrent_execution_rate_percentage: 1,
+    #             error_percentage: 1,
+    #           },
+    #         },
+    #         maximum_automatic_attempts: 1,
+    #         retry_attempt_seconds: 1,
+    #         arn: "StringWithCharLimit1024",
+    #         created_by_service: "StringWithCharLimit1024",
     #       }
     #
     # @!attribute [rw] config_rule_name
@@ -4423,6 +4896,41 @@ module Aws::ConfigService
     #   The type of a resource.
     #   @return [String]
     #
+    # @!attribute [rw] automatic
+    #   The remediation is triggered automatically.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] execution_controls
+    #   An ExecutionControls object.
+    #   @return [Types::ExecutionControls]
+    #
+    # @!attribute [rw] maximum_automatic_attempts
+    #   The maximum number of failed attempts for auto-remediation. If you
+    #   do not select a number, the default is 5.
+    #
+    #   For example, if you specify MaximumAutomaticAttempts as 5 with
+    #   RetryAttemptsSeconds as 50 seconds, AWS Config throws an exception
+    #   after the 5th failed attempt within 50 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retry_attempt_seconds
+    #   Maximum time in seconds that AWS Config runs auto-remediation. If
+    #   you do not select a number, the default is 60 seconds.
+    #
+    #   For example, if you specify RetryAttemptsSeconds as 50 seconds and
+    #   MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations
+    #   5 times within 50 seconds before throwing an exception.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   Amazon Resource Name (ARN) of remediation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by_service
+    #   Name of the service that owns the service linked rule, if
+    #   applicable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationConfiguration AWS API Documentation
     #
     class RemediationConfiguration < Struct.new(
@@ -4431,7 +4939,76 @@ module Aws::ConfigService
       :target_id,
       :target_version,
       :parameters,
-      :resource_type)
+      :resource_type,
+      :automatic,
+      :execution_controls,
+      :maximum_automatic_attempts,
+      :retry_attempt_seconds,
+      :arn,
+      :created_by_service)
+      include Aws::Structure
+    end
+
+    # An object that represents the details about the remediation exception.
+    # The details include the rule name, an explanation of an exception, the
+    # time when the exception will be deleted, the resource ID, and resource
+    # type.
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource (for example., sg-xxxxxx).
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An explanation of an remediation exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The time when the remediation exception will be deleted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationException AWS API Documentation
+    #
+    class RemediationException < Struct.new(
+      :config_rule_name,
+      :resource_type,
+      :resource_id,
+      :message,
+      :expiration_time)
+      include Aws::Structure
+    end
+
+    # The details that identify a resource within AWS Config, including the
+    # resource type and resource ID.
+    #
+    # @note When making an API call, you may pass RemediationExceptionResourceKey
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "StringWithCharLimit256",
+    #         resource_id: "StringWithCharLimit1024",
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource (for example., sg-xxxxxx).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationExceptionResourceKey AWS API Documentation
+    #
+    class RemediationExceptionResourceKey < Struct.new(
+      :resource_type,
+      :resource_id)
       include Aws::Structure
     end
 
@@ -4511,10 +5088,10 @@ module Aws::ConfigService
     #
     #       {
     #         resource_value: {
-    #           value: "RESOURCE_ID", # accepts RESOURCE_ID
+    #           value: "RESOURCE_ID", # required, accepts RESOURCE_ID
     #         },
     #         static_value: {
-    #           values: ["StringWithCharLimit256"],
+    #           values: ["StringWithCharLimit256"], # required
     #         },
     #       }
     #
@@ -4559,7 +5136,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_type: "AWS::EC2::CustomerGateway", # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         account_id: "AccountId",
     #         region: "AwsRegion",
     #       }
@@ -4661,7 +5238,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #         resource_id: "ResourceId", # required
     #       }
     #
@@ -4687,7 +5264,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         value: "RESOURCE_ID", # accepts RESOURCE_ID
+    #         value: "RESOURCE_ID", # required, accepts RESOURCE_ID
     #       }
     #
     # @!attribute [rw] value
@@ -4955,6 +5532,39 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # AWS Systems Manager (SSM) specific remediation controls.
+    #
+    # @note When making an API call, you may pass SsmControls
+    #   data as a hash:
+    #
+    #       {
+    #         concurrent_execution_rate_percentage: 1,
+    #         error_percentage: 1,
+    #       }
+    #
+    # @!attribute [rw] concurrent_execution_rate_percentage
+    #   The maximum percentage of remediation actions allowed to run in
+    #   parallel on the non-compliant resources for that specific rule. You
+    #   can specify a percentage, such as 10%. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_percentage
+    #   The percentage of errors that are allowed before SSM stops running
+    #   automations on non-compliant resources for that specific rule. You
+    #   can specify a percentage of errors, for example 10%. If you do not
+    #   specifiy a percentage, the default is 50%. For example, if you set
+    #   the ErrorPercentage to 40% for 10 non-compliant resources, then SSM
+    #   stops running the automations when the fifth error is received.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SsmControls AWS API Documentation
+    #
+    class SsmControls < Struct.new(
+      :concurrent_execution_rate_percentage,
+      :error_percentage)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartConfigRulesEvaluationRequest
     #   data as a hash:
     #
@@ -5006,10 +5616,10 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         config_rule_name: "StringWithCharLimit64", # required
+    #         config_rule_name: "ConfigRuleName", # required
     #         resource_keys: [ # required
     #           {
-    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::EC2::RegisteredHAInstance, AWS::EC2::NatGateway, AWS::EC2::EgressOnlyInternetGateway, AWS::EC2::VPCEndpoint, AWS::EC2::VPCEndpointService, AWS::EC2::FlowLog, AWS::EC2::VPCPeeringConnection, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBParameterGroup, AWS::RDS::DBOptionGroup, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::DBCluster, AWS::RDS::DBClusterParameterGroup, AWS::RDS::DBClusterSnapshot, AWS::RDS::EventSubscription, AWS::S3::Bucket, AWS::S3::AccountPublicAccessBlock, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::SSM::ManagedInstanceInventory, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::ElasticLoadBalancing::LoadBalancer, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::DynamoDB::Table, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::RuleGroup, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::RuleGroup, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::Lambda::Alias, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::MobileHub::Project, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::LicenseManager::LicenseConfiguration, AWS::ApiGateway::DomainName, AWS::ApiGateway::Method, AWS::ApiGateway::Stage, AWS::ApiGateway::RestApi, AWS::ApiGatewayV2::DomainName, AWS::ApiGatewayV2::Stage, AWS::ApiGatewayV2::Api, AWS::CodePipeline::Pipeline, AWS::ServiceCatalog::CloudFormationProvisionedProduct, AWS::ServiceCatalog::CloudFormationProduct, AWS::ServiceCatalog::Portfolio
     #             resource_id: "ResourceId", # required
     #           },
     #         ],
@@ -5058,7 +5668,7 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         values: ["StringWithCharLimit256"],
+    #         values: ["StringWithCharLimit256"], # required
     #       }
     #
     # @!attribute [rw] values
@@ -5072,6 +5682,9 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Status filter object to filter results based on specific member
+    # account ID or status type for an organization config rule.
+    #
     # @note When making an API call, you may pass StatusDetailFilters
     #   data as a hash:
     #
@@ -5081,9 +5694,48 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] account_id
+    #   The 12-digit account ID of the member account within an
+    #   organization.
     #   @return [String]
     #
     # @!attribute [rw] member_account_rule_status
+    #   Indicates deployment status for config rule in the member account.
+    #   When master account calls `PutOrganizationConfigRule` action for the
+    #   first time, config rule status is created in the member account.
+    #   When master account calls `PutOrganizationConfigRule` action for the
+    #   second time, config rule status is updated in the member account.
+    #   Config rule status is deleted when the master account deletes
+    #   `OrganizationConfigRule` and disables service access for
+    #   `config-multiaccountsetup.amazonaws.com`.
+    #
+    #   AWS Config sets the state of the rule to:
+    #
+    #   * `CREATE_SUCCESSFUL` when config rule has been created in the
+    #     member account.
+    #
+    #   * `CREATE_IN_PROGRESS` when config rule is being created in the
+    #     member account.
+    #
+    #   * `CREATE_FAILED` when config rule creation has failed in the member
+    #     account.
+    #
+    #   * `DELETE_FAILED` when config rule deletion has failed in the member
+    #     account.
+    #
+    #   * `DELETE_IN_PROGRESS` when config rule is being deleted in the
+    #     member account.
+    #
+    #   * `DELETE_SUCCESSFUL` when config rule has been deleted in the
+    #     member account.
+    #
+    #   * `UPDATE_SUCCESSFUL` when config rule has been updated in the
+    #     member account.
+    #
+    #   * `UPDATE_IN_PROGRESS` when config rule is being updated in the
+    #     member account.
+    #
+    #   * `UPDATE_FAILED` when config rule deletion has failed in the member
+    #     account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StatusDetailFilters AWS API Documentation

@@ -372,6 +372,22 @@ module Aws::IoT
 
     end
 
+    class TaskAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoT::Types::TaskAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class ThrottlingException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

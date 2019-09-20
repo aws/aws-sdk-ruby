@@ -12,8 +12,8 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         master_id: "NonEmptyString",
-    #         invitation_id: "NonEmptyString",
+    #         master_id: "NonEmptyString", # required
+    #         invitation_id: "NonEmptyString", # required
     #       }
     #
     # @!attribute [rw] master_id
@@ -2631,7 +2631,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -2720,7 +2720,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids

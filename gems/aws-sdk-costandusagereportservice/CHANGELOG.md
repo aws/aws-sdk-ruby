@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2019-08-19)
+------------------
+
+* Feature - New IAM permission required for editing AWS Cost and Usage Reports - Starting today, you can allow or deny IAM users permission to edit Cost & Usage Reports through the API and the Billing and Cost Management console. To allow users to edit Cost & Usage Reports, ensure that they have 'cur: ModifyReportDefinition' permission. Refer to the technical documentation (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_cur_ModifyReportDefinition.html) for additional details.
+
 1.16.0 (2019-07-25)
 ------------------
 

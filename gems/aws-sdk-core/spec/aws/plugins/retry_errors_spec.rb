@@ -18,14 +18,14 @@ module Aws
         config = config.build!
         expect(config.retry_max_delay).to eq(0)
       end
-      
+
       it 'defaults config.retry_base_delay to 0.3' do
         config = Seahorse::Client::Configuration.new
         RetryErrors.new.add_options(config)
         config = config.build!
         expect(config.retry_base_delay).to eq(0.3)
       end
-      
+
       it 'defaults config.retry_jitter to :none' do
         config = Seahorse::Client::Configuration.new
         RetryErrors.new.add_options(config)
@@ -41,27 +41,32 @@ module Aws
 
         describe '#expired_credentials?' do
 
-          it 'returns true if the error code is InvalidClientTokenId' do
+          it 'returns true for InvalidClientTokenId' do
             error = RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
-          it 'returns true if the error code is UnrecognizedClientException' do
+          it 'returns true for UnrecognizedClientException' do
             error = RetryErrorsSvc::Errors::UnrecognizedClientException.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
-          it 'returns true if the error code is InvalidAccessKeyId' do
+          it 'returns true for InvalidAccessKeyId' do
             error = RetryErrorsSvc::Errors::InvalidAccessKeyId.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
-          it 'returns true if the error code is AuthFailure' do
+          it 'returns true for AuthFailure' do
             error = RetryErrorsSvc::Errors::AuthFailure.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
-          it 'returns true if the error code matches /expired/' do
+          it 'returns true for InvalidIdentityToken' do
+            error = RetryErrorsSvc::Errors::InvalidIdentityToken.new(nil,nil)
+            expect(inspector(error).expired_credentials?).to be(true)
+          end
+
+          it 'returns true for error types that match /expired/' do
             error = RetryErrorsSvc::Errors::SomethingExpiredError.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
@@ -125,7 +130,7 @@ module Aws
             expect(inspector(error).throttling_error?).to be(true)
           end
 
-          it 'returns true for error codes that match /throttl/' do
+          it 'returns true for error types that match /throttl/' do
             error = RetryErrorsSvc::Errors::Throttled.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
           end
@@ -172,7 +177,7 @@ module Aws
 
         describe '#networking?' do
 
-          it 'returns true if the error code is RequestTimeout' do
+          it 'returns true for RequestTimeout' do
             error = RetryErrorsSvc::Errors::RequestTimeout.new(nil,nil)
             expect(inspector(error).networking?).to be(true)
           end
@@ -191,6 +196,13 @@ module Aws
             error = StandardError.new('oops')
             error = Seahorse::Client::NetworkingError.new(error)
             expect(inspector(error, 200).networking?).to be(true)
+          end
+
+          it 'returns true if the error is wrapped in a NoSuchEndpointError' do
+            req = double('request', endpoint: 'https://example.com')
+            context = double('ctx', http_request: req)
+            error = Errors::NoSuchEndpointError.new(context: context)
+            expect(inspector(error).networking?).to be(true)
           end
 
         end

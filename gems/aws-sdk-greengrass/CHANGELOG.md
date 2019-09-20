@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-07-26)
+------------------
+
+* Feature - Greengrass OTA service supports openwrt/aarch64 and openwrt/armv7l platforms.
+
 1.23.0 (2019-07-25)
 ------------------
 

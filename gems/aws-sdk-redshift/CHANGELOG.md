@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-08-09)
+------------------
+
+* Feature - Add expectedNextSnapshotScheduleTime and expectedNextSnapshotScheduleTimeStatus to redshift cluster object.
+
 1.30.0 (2019-07-25)
 ------------------
 

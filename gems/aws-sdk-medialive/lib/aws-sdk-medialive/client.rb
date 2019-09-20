@@ -1008,6 +1008,7 @@ module Aws::MediaLive
     #                 media_package_output_settings: {
     #                 },
     #                 ms_smooth_output_settings: {
+    #                   h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                   name_modifier: "__string",
     #                 },
     #                 rtmp_output_settings: {
@@ -1113,6 +1114,14 @@ module Aws::MediaLive
     #               buf_fill_pct: 1,
     #               buf_size: 1,
     #               color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #               color_space_settings: {
+    #                 color_space_passthrough_settings: {
+    #                 },
+    #                 rec_601_settings: {
+    #                 },
+    #                 rec_709_settings: {
+    #                 },
+    #               },
     #               entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #               flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
@@ -1134,7 +1143,7 @@ module Aws::MediaLive
     #               par_numerator: 1,
     #               profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #               qvbr_quality_level: 1,
-    #               rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
+    #               rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -1143,6 +1152,47 @@ module Aws::MediaLive
     #               subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #               syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #               temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
+    #             },
+    #             h265_settings: {
+    #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #               afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
+    #               alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
+    #               bitrate: 1,
+    #               buf_size: 1,
+    #               color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #               color_space_settings: {
+    #                 color_space_passthrough_settings: {
+    #                 },
+    #                 hdr_10_settings: {
+    #                   max_cll: 1,
+    #                   max_fall: 1,
+    #                 },
+    #                 rec_601_settings: {
+    #                 },
+    #                 rec_709_settings: {
+    #                 },
+    #               },
+    #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
+    #               flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               framerate_denominator: 1, # required
+    #               framerate_numerator: 1, # required
+    #               gop_closed_cadence: 1,
+    #               gop_size: 1.0,
+    #               gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #               level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
+    #               look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
+    #               max_bitrate: 1,
+    #               min_i_interval: 1,
+    #               par_denominator: 1,
+    #               par_numerator: 1,
+    #               profile: "MAIN", # accepts MAIN, MAIN_10BIT
+    #               qvbr_quality_level: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, QVBR
+    #               scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #               slices: 1,
+    #               tier: "HIGH", # accepts HIGH, MAIN
     #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #             },
     #           },
@@ -1576,6 +1626,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.video_pid #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
@@ -1669,7 +1720,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -1679,6 +1730,35 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.buf_size #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_numerator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_closed_cadence #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size #=> Float
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.level #=> String, one of "H265_LEVEL_1", "H265_LEVEL_2", "H265_LEVEL_2_1", "H265_LEVEL_3", "H265_LEVEL_3_1", "H265_LEVEL_4", "H265_LEVEL_4_1", "H265_LEVEL_5", "H265_LEVEL_5_1", "H265_LEVEL_5_2", "H265_LEVEL_6", "H265_LEVEL_6_1", "H265_LEVEL_6_2", "H265_LEVEL_AUTO"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.look_ahead_rate_control #=> String, one of "HIGH", "LOW", "MEDIUM"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.max_bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_denominator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -2276,6 +2356,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.video_pid #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
@@ -2369,7 +2450,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -2379,6 +2460,35 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.buf_size #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_numerator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_closed_cadence #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size #=> Float
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.level #=> String, one of "H265_LEVEL_1", "H265_LEVEL_2", "H265_LEVEL_2_1", "H265_LEVEL_3", "H265_LEVEL_3_1", "H265_LEVEL_4", "H265_LEVEL_4_1", "H265_LEVEL_5", "H265_LEVEL_5_1", "H265_LEVEL_5_2", "H265_LEVEL_6", "H265_LEVEL_6_1", "H265_LEVEL_6_2", "H265_LEVEL_AUTO"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.look_ahead_rate_control #=> String, one of "HIGH", "LOW", "MEDIUM"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.max_bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_denominator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -2957,6 +3067,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.video_pid #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
@@ -3050,7 +3161,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -3060,6 +3171,35 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.buf_size #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_numerator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_closed_cadence #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size #=> Float
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.level #=> String, one of "H265_LEVEL_1", "H265_LEVEL_2", "H265_LEVEL_2_1", "H265_LEVEL_3", "H265_LEVEL_3_1", "H265_LEVEL_4", "H265_LEVEL_4_1", "H265_LEVEL_5", "H265_LEVEL_5_1", "H265_LEVEL_5_2", "H265_LEVEL_6", "H265_LEVEL_6_1", "H265_LEVEL_6_2", "H265_LEVEL_AUTO"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.look_ahead_rate_control #=> String, one of "HIGH", "LOW", "MEDIUM"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.max_bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_denominator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -4238,6 +4378,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.video_pid #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
@@ -4331,7 +4472,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -4341,6 +4482,35 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.buf_size #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_numerator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_closed_cadence #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size #=> Float
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.level #=> String, one of "H265_LEVEL_1", "H265_LEVEL_2", "H265_LEVEL_2_1", "H265_LEVEL_3", "H265_LEVEL_3_1", "H265_LEVEL_4", "H265_LEVEL_4_1", "H265_LEVEL_5", "H265_LEVEL_5_1", "H265_LEVEL_5_2", "H265_LEVEL_6", "H265_LEVEL_6_1", "H265_LEVEL_6_2", "H265_LEVEL_AUTO"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.look_ahead_rate_control #=> String, one of "HIGH", "LOW", "MEDIUM"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.max_bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_denominator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -4763,6 +4933,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.video_pid #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
@@ -4856,7 +5027,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -4866,6 +5037,35 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.buf_size #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_numerator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_closed_cadence #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size #=> Float
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.level #=> String, one of "H265_LEVEL_1", "H265_LEVEL_2", "H265_LEVEL_2_1", "H265_LEVEL_3", "H265_LEVEL_3_1", "H265_LEVEL_4", "H265_LEVEL_4_1", "H265_LEVEL_5", "H265_LEVEL_5_1", "H265_LEVEL_5_2", "H265_LEVEL_6", "H265_LEVEL_6_1", "H265_LEVEL_6_2", "H265_LEVEL_AUTO"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.look_ahead_rate_control #=> String, one of "HIGH", "LOW", "MEDIUM"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.max_bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_denominator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -5448,6 +5648,7 @@ module Aws::MediaLive
     #                 media_package_output_settings: {
     #                 },
     #                 ms_smooth_output_settings: {
+    #                   h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                   name_modifier: "__string",
     #                 },
     #                 rtmp_output_settings: {
@@ -5553,6 +5754,14 @@ module Aws::MediaLive
     #               buf_fill_pct: 1,
     #               buf_size: 1,
     #               color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #               color_space_settings: {
+    #                 color_space_passthrough_settings: {
+    #                 },
+    #                 rec_601_settings: {
+    #                 },
+    #                 rec_709_settings: {
+    #                 },
+    #               },
     #               entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #               flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
@@ -5574,7 +5783,7 @@ module Aws::MediaLive
     #               par_numerator: 1,
     #               profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #               qvbr_quality_level: 1,
-    #               rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
+    #               rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -5583,6 +5792,47 @@ module Aws::MediaLive
     #               subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #               syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #               temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
+    #             },
+    #             h265_settings: {
+    #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #               afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
+    #               alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
+    #               bitrate: 1,
+    #               buf_size: 1,
+    #               color_metadata: "IGNORE", # accepts IGNORE, INSERT
+    #               color_space_settings: {
+    #                 color_space_passthrough_settings: {
+    #                 },
+    #                 hdr_10_settings: {
+    #                   max_cll: 1,
+    #                   max_fall: 1,
+    #                 },
+    #                 rec_601_settings: {
+    #                 },
+    #                 rec_709_settings: {
+    #                 },
+    #               },
+    #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
+    #               flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               framerate_denominator: 1, # required
+    #               framerate_numerator: 1, # required
+    #               gop_closed_cadence: 1,
+    #               gop_size: 1.0,
+    #               gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #               level: "H265_LEVEL_1", # accepts H265_LEVEL_1, H265_LEVEL_2, H265_LEVEL_2_1, H265_LEVEL_3, H265_LEVEL_3_1, H265_LEVEL_4, H265_LEVEL_4_1, H265_LEVEL_5, H265_LEVEL_5_1, H265_LEVEL_5_2, H265_LEVEL_6, H265_LEVEL_6_1, H265_LEVEL_6_2, H265_LEVEL_AUTO
+    #               look_ahead_rate_control: "HIGH", # accepts HIGH, LOW, MEDIUM
+    #               max_bitrate: 1,
+    #               min_i_interval: 1,
+    #               par_denominator: 1,
+    #               par_numerator: 1,
+    #               profile: "MAIN", # accepts MAIN, MAIN_10BIT
+    #               qvbr_quality_level: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, QVBR
+    #               scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #               slices: 1,
+    #               tier: "HIGH", # accepts HIGH, MAIN
     #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #             },
     #           },
@@ -6011,6 +6261,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.video_pid #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
@@ -6104,7 +6355,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -6114,6 +6365,35 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.buf_size #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_numerator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_closed_cadence #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size #=> Float
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.level #=> String, one of "H265_LEVEL_1", "H265_LEVEL_2", "H265_LEVEL_2_1", "H265_LEVEL_3", "H265_LEVEL_3_1", "H265_LEVEL_4", "H265_LEVEL_4_1", "H265_LEVEL_5", "H265_LEVEL_5_1", "H265_LEVEL_5_2", "H265_LEVEL_6", "H265_LEVEL_6_1", "H265_LEVEL_6_2", "H265_LEVEL_AUTO"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.look_ahead_rate_control #=> String, one of "HIGH", "LOW", "MEDIUM"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.max_bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_denominator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -6547,6 +6827,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.video_pid #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
@@ -6640,7 +6921,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
@@ -6650,6 +6931,35 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.buf_size #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_numerator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_closed_cadence #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size #=> Float
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.level #=> String, one of "H265_LEVEL_1", "H265_LEVEL_2", "H265_LEVEL_2_1", "H265_LEVEL_3", "H265_LEVEL_3_1", "H265_LEVEL_4", "H265_LEVEL_4_1", "H265_LEVEL_5", "H265_LEVEL_5_1", "H265_LEVEL_5_2", "H265_LEVEL_6", "H265_LEVEL_6_1", "H265_LEVEL_6_2", "H265_LEVEL_AUTO"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.look_ahead_rate_control #=> String, one of "HIGH", "LOW", "MEDIUM"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.max_bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_denominator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -6914,7 +7224,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

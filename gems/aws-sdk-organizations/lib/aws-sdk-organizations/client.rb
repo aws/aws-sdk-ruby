@@ -410,28 +410,28 @@ module Aws::Organizations
     #   influence for a policy depends on what you attach the policy to:
     #
     #   * If you attach an SCP to a root, it affects all accounts in the
-    #     organization
+    #     organization.
     #
     #   * If you attach an SCP to an OU, it affects all accounts in that OU
-    #     and in any child OUs
+    #     and in any child OUs.
     #
     #   * If you attach the policy directly to an account, it affects only
-    #     that account
+    #     that account.
     #
     #   SCPs are JSON policies that specify the maximum permissions for an
-    #   organization or organizational unit (OU). When you attach one SCP to
-    #   a higher level root or OU, and you also attach a different SCP to a
-    #   child OU or to an account, the child policy can further restrict
-    #   only the permissions that pass through the parent filter and are
-    #   available to the child. An SCP that is attached to a child can't
-    #   grant a permission that the paren't hasn't already granted. For
-    #   example, imagine that the parent SCP allows permissions A, B, C, D,
-    #   and E. The child SCP allows C, D, E, F, and G. The result is that
-    #   the accounts affected by the child SCP are allowed to use only C, D,
-    #   and E. They can't use A or B because the child OU filtered them
-    #   out. They also can't use F and G because the parent OU filtered
-    #   them out. They can't be granted back by the child SCP; child SCPs
-    #   can only filter the permissions they receive from the parent SCP.
+    #   organization or organizational unit (OU). You can attach one SCP to
+    #   a higher level root or OU, and a different SCP to a child OU or to
+    #   an account. The child policy can further restrict only the
+    #   permissions that pass through the parent filter and are available to
+    #   the child. An SCP that is attached to a child can't grant a
+    #   permission that the parent hasn't already granted. For example,
+    #   imagine that the parent SCP allows permissions A, B, C, D, and E.
+    #   The child SCP allows C, D, E, F, and G. The result is that the
+    #   accounts affected by the child SCP are allowed to use only C, D, and
+    #   E. They can't use A or B because the child OU filtered them out.
+    #   They also can't use F and G because the parent OU filtered them
+    #   out. They can't be granted back by the child SCP; child SCPs can
+    #   only filter the permissions they receive from the parent SCP.
     #
     #   AWS Organizations attaches a default SCP named `"FullAWSAccess` to
     #   every root, OU, and account. This default SCP allows all services
@@ -471,15 +471,15 @@ module Aws::Organizations
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * **Root** - A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-" followed
-    #     by from 4 to 32 lower-case letters or digits (the ID of the root
-    #     that the OU is in) followed by a second "-" dash and from 8 to 32
-    #     additional lower-case letters or digits.
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
+    #     root that the OU is in) followed by a second "-" dash and from 8
+    #     to 32 additional lower-case letters or digits.
     #
     #
     #
@@ -660,7 +660,7 @@ module Aws::Organizations
     #
     # The user who calls the API to create an account must have the
     # `organizations:CreateAccount` permission. If you enabled all features
-    # in the organization, AWS Organizations will create the required
+    # in the organization, AWS Organizations creates the required
     # service-linked role named `AWSServiceRoleForOrganizations`. For more
     # information, see [AWS Organizations and Service-Linked Roles][2] in
     # the *AWS Organizations User Guide*.
@@ -1080,9 +1080,9 @@ module Aws::Organizations
     #
     #   * `ALL`\: In addition to all the features supported by the
     #     consolidated billing feature set, the master account can also apply
-    #     any type of policy to any member account in the organization. For
-    #     more information, see [All features][2] in the *AWS Organizations
-    #     User Guide.*
+    #     any policy type to any member account in the organization. For more
+    #     information, see [All features][2] in the *AWS Organizations User
+    #     Guide.*
     #
     #
     #
@@ -1195,13 +1195,13 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * **Root** - A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-" followed
-    #     by from 4 to 32 lower-case letters or digits (the ID of the root
-    #     that the OU is in) followed by a second "-" dash and from 8 to 32
-    #     additional lower-case letters or digits.
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
+    #     root that the OU is in) followed by a second "-" dash and from 8
+    #     to 32 additional lower-case letters or digits.
     #
     #
     #
@@ -1661,9 +1661,8 @@ module Aws::Organizations
     #   can get the ID from the response to an earlier CreateAccount request,
     #   or from the ListCreateAccountStatus operation.
     #
-    #   The [regex pattern][1] for an create account request ID string
-    #   requires "car-" followed by from 8 to 32 lower-case letters or
-    #   digits.
+    #   The [regex pattern][1] for a create account request ID string requires
+    #   "car-" followed by from 8 to 32 lower-case letters or digits.
     #
     #
     #
@@ -2037,7 +2036,7 @@ module Aws::Organizations
     # attached, and specify `"Effect": "Deny"` in the second SCP to override
     # the `"Effect": "Allow"` in the `FullAWSAccess` policy (or any other
     # attached SCP), you're using the authorization strategy of
-    # [blacklisting][2].
+    # [blacklisting][2] .
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2066,15 +2065,15 @@ module Aws::Organizations
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * **Root** - A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-" followed
-    #     by from 4 to 32 lower-case letters or digits (the ID of the root
-    #     that the OU is in) followed by a second "-" dash and from 8 to 32
-    #     additional lower-case letters or digits.
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
+    #     root that the OU is in) followed by a second "-" dash and from 8
+    #     to 32 additional lower-case letters or digits.
     #
     #
     #
@@ -2174,16 +2173,21 @@ module Aws::Organizations
     # any organizational unit (OU) or account in that root. You can undo
     # this by using the EnablePolicyType operation.
     #
+    # This is an asynchronous request that AWS performs in the background.
+    # If you disable a policy for a root, it still appears enabled for the
+    # organization if [all features][1] are enabled for the organization.
+    # AWS recommends that you first use ListRoots to see the status of
+    # policy types for a specified root, and then use this operation.
+    #
     # This operation can be called only from the organization's master
     # account.
     #
-    # <note markdown="1"> If you disable a policy type for a root, it still shows as enabled for
-    # the organization if all features are enabled in that organization. Use
-    # ListRoots to see the status of policy types for a specified root. Use
-    # DescribeOrganization to see the status of policy types in the
-    # organization.
+    # To view the status of available policy types in the organization, use
+    # DescribeOrganization.
     #
-    #  </note>
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #
     # @option params [required, String] :root_id
     #   The unique identifier (ID) of the root in which you want to disable a
@@ -2408,14 +2412,16 @@ module Aws::Organizations
     # organizational unit (OU), or account in that root. You can undo this
     # by using the DisablePolicyType operation.
     #
+    # This is an asynchronous request that AWS performs in the background.
+    # AWS recommends that you first use ListRoots to see the status of
+    # policy types for a specified root, and then use this operation.
+    #
     # This operation can be called only from the organization's master
     # account.
     #
     # You can enable a policy type in a root only if that policy type is
-    # available in the organization. Use DescribeOrganization to view the
-    # status of available policy types in the organization.
-    #
-    # To view the status of policy type in a root, use ListRoots.
+    # available in the organization. To view the status of available policy
+    # types in the organization, use DescribeOrganization.
     #
     # @option params [required, String] :root_id
     #   The unique identifier (ID) of the root in which you want to enable a
@@ -3002,13 +3008,13 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * **Root** - A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-" followed
-    #     by from 4 to 32 lower-case letters or digits (the ID of the root
-    #     that the OU is in) followed by a second "-" dash and from 8 to 32
-    #     additional lower-case letters or digits.
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
+    #     root that the OU is in) followed by a second "-" dash and from 8
+    #     to 32 additional lower-case letters or digits.
     #
     #
     #
@@ -3563,13 +3569,13 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * **Root** - A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-" followed
-    #     by from 4 to 32 lower-case letters or digits (the ID of the root
-    #     that the OU is in) followed by a second "-" dash and from 8 to 32
-    #     additional lower-case letters or digits.
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
+    #     root that the OU is in) followed by a second "-" dash and from 8
+    #     to 32 additional lower-case letters or digits.
     #
     #
     #
@@ -3675,12 +3681,12 @@ module Aws::Organizations
     #   The [regex pattern][1] for a child ID string requires one of the
     #   following:
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-" followed
-    #     by from 4 to 32 lower-case letters or digits (the ID of the root
-    #     that contains the OU) followed by a second "-" dash and from 8 to
-    #     32 additional lower-case letters or digits.
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
+    #     root that contains the OU) followed by a second "-" dash and from
+    #     8 to 32 additional lower-case letters or digits.
     #
     #
     #
@@ -3881,15 +3887,15 @@ module Aws::Organizations
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * **Root** - A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * **Account** - A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-" followed
-    #     by from 4 to 32 lower-case letters or digits (the ID of the root
-    #     that the OU is in) followed by a second "-" dash and from 8 to 32
-    #     additional lower-case letters or digits.
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
+    #     root that the OU is in) followed by a second "-" dash and from 8
+    #     to 32 additional lower-case letters or digits.
     #
     #
     #
@@ -4245,13 +4251,13 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * **Root** - A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-" followed
-    #     by from 4 to 32 lower-case letters or digits (the ID of the root
-    #     that the OU is in) followed by a second "-" dash and from 8 to 32
-    #     additional lower-case letters or digits.
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
+    #     root that the OU is in) followed by a second "-" dash and from 8
+    #     to 32 additional lower-case letters or digits.
     #
     #
     #
@@ -4264,13 +4270,13 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * **Root** - A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-" followed
-    #     by from 4 to 32 lower-case letters or digits (the ID of the root
-    #     that the OU is in) followed by a second "-" dash and from 8 to 32
-    #     additional lower-case letters or digits.
+    #   * **Organizational unit (OU)** - A string that begins with "ou-"
+    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
+    #     root that the OU is in) followed by a second "-" dash and from 8
+    #     to 32 additional lower-case letters or digits.
     #
     #
     #
@@ -4650,7 +4656,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

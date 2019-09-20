@@ -218,6 +218,22 @@ module Aws::Glue
 
     end
 
+    class MLTransformNotReadyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::MLTransformNotReadyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class NoScheduleException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

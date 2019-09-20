@@ -267,7 +267,7 @@ module Aws::Glue
     # Creates one or more partitions in a batch operation.
     #
     # @option params [String] :catalog_id
-    #   The ID of the catalog in which the partion is to be created.
+    #   The ID of the catalog in which the partition is to be created.
     #   Currently, this should be the AWS account ID.
     #
     # @option params [required, String] :database_name
@@ -302,6 +302,9 @@ module Aws::Glue
     #               name: "NameString", # required
     #               type: "ColumnTypeString",
     #               comment: "CommentString",
+    #               parameters: {
+    #                 "KeyString" => "ParametersMapValue",
+    #               },
     #             },
     #           ],
     #           location: "LocationString",
@@ -402,14 +405,14 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition to be deleted resides.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table in question
     #   resides.
     #
     # @option params [required, String] :table_name
-    #   The name of the table where the partitions to be deleted is located.
+    #   The name of the table that contains the partitions to be deleted.
     #
     # @option params [required, Array<Types::PartitionValueList>] :partitions_to_delete
     #   A list of `PartitionInput` structures that define the partitions to be
@@ -451,13 +454,13 @@ module Aws::Glue
 
     # Deletes multiple tables at once.
     #
-    # <note markdown="1"> After completing this operation, you will no longer have access to the
+    # <note markdown="1"> After completing this operation, you no longer have access to the
     # table versions and partitions that belong to the deleted table. AWS
     # Glue deletes these "orphaned" resources asynchronously in a timely
     # manner, at the discretion of the service.
     #
-    #  To ensure immediate deletion of all related resources, before calling
-    # `BatchDeleteTable`, use `DeleteTableVersion` or
+    #  To ensure the immediate deletion of all related resources, before
+    # calling `BatchDeleteTable`, use `DeleteTableVersion` or
     # `BatchDeleteTableVersion`, and `DeletePartition` or
     # `BatchDeletePartition`, to delete any resources that belong to the
     # table.
@@ -466,10 +469,10 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
-    #   The name of the catalog database where the tables to delete reside.
+    #   The name of the catalog database in which the tables to delete reside.
     #   For Hive compatibility, this name is entirely lowercase.
     #
     # @option params [required, Array<String>] :tables_to_delete
@@ -507,7 +510,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -661,6 +664,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
     #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
     #   resp.dev_endpoints[0].availability_zone #=> String
@@ -794,6 +798,8 @@ module Aws::Glue
     #   resp.partitions[0].storage_descriptor.columns[0].name #=> String
     #   resp.partitions[0].storage_descriptor.columns[0].type #=> String
     #   resp.partitions[0].storage_descriptor.columns[0].comment #=> String
+    #   resp.partitions[0].storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.partitions[0].storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].storage_descriptor.location #=> String
     #   resp.partitions[0].storage_descriptor.input_format #=> String
     #   resp.partitions[0].storage_descriptor.output_format #=> String
@@ -1116,6 +1122,46 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Cancels (stops) a task run. Machine learning task runs are
+    # asynchronous tasks that AWS Glue runs on your behalf as part of
+    # various machine learning workflows. You can cancel a machine learning
+    # task run at any time by calling `CancelMLTaskRun` with a task run's
+    # parent transform's `TransformID` and the task run's `TaskRunId`.
+    #
+    # @option params [required, String] :transform_id
+    #   The unique identifier of the machine learning transform.
+    #
+    # @option params [required, String] :task_run_id
+    #   A unique identifier for the task run.
+    #
+    # @return [Types::CancelMLTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelMLTaskRunResponse#transform_id #transform_id} => String
+    #   * {Types::CancelMLTaskRunResponse#task_run_id #task_run_id} => String
+    #   * {Types::CancelMLTaskRunResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_ml_task_run({
+    #     transform_id: "HashString", # required
+    #     task_run_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_id #=> String
+    #   resp.task_run_id #=> String
+    #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelMLTaskRun AWS API Documentation
+    #
+    # @overload cancel_ml_task_run(params = {})
+    # @param [Hash] params ({})
+    def cancel_ml_task_run(params = {}, options = {})
+      req = build_request(:cancel_ml_task_run, params)
+      req.send_request(options)
+    end
+
     # Creates a classifier in the user's account. This can be a
     # `GrokClassifier`, an `XMLClassifier`, a `JsonClassifier`, or a
     # `CsvClassifier`, depending on which field of the request is present.
@@ -1340,11 +1386,10 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the database. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, Types::DatabaseInput] :database_input
-    #   A `DatabaseInput` object defining the metadata database to create in
-    #   the catalog.
+    #   The metadata for the database.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1359,6 +1404,14 @@ module Aws::Glue
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
     #       },
+    #       create_table_default_permissions: [
+    #         {
+    #           principal: {
+    #             data_lake_principal_identifier: "DataLakePrincipalString",
+    #           },
+    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1424,6 +1477,31 @@ module Aws::Glue
     #     of memory, 128 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for memory-intensive jobs.
     #
+    #   Known issue: when a development endpoint is created with the `G.2X`
+    #   `WorkerType` configuration, the Spark drivers for the development
+    #   endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
+    #
+    # @option params [String] :glue_version
+    #   Glue version determines the versions of Apache Spark and Python that
+    #   AWS Glue supports. The Python version indicates the version supported
+    #   for running your ETL scripts on development endpoints.
+    #
+    #   For more information about the available AWS Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in the
+    #   developer guide.
+    #
+    #   Development endpoints that are created without specifying a Glue
+    #   version default to Glue 0.9.
+    #
+    #   You can specify a version of Python support for development endpoints
+    #   by using the `Arguments` parameter in the `CreateDevEndpoint` or
+    #   `UpdateDevEndpoint` APIs. If no arguments are provided, the version
+    #   defaults to Python 2.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated to
     #   the development endpoint.
@@ -1477,6 +1555,7 @@ module Aws::Glue
     #   * {Types::CreateDevEndpointResponse#zeppelin_remote_spark_interpreter_port #zeppelin_remote_spark_interpreter_port} => Integer
     #   * {Types::CreateDevEndpointResponse#number_of_nodes #number_of_nodes} => Integer
     #   * {Types::CreateDevEndpointResponse#worker_type #worker_type} => String
+    #   * {Types::CreateDevEndpointResponse#glue_version #glue_version} => String
     #   * {Types::CreateDevEndpointResponse#number_of_workers #number_of_workers} => Integer
     #   * {Types::CreateDevEndpointResponse#availability_zone #availability_zone} => String
     #   * {Types::CreateDevEndpointResponse#vpc_id #vpc_id} => String
@@ -1498,6 +1577,7 @@ module Aws::Glue
     #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
     #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
@@ -1522,6 +1602,7 @@ module Aws::Glue
     #   resp.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.number_of_nodes #=> Integer
     #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.glue_version #=> String
     #   resp.number_of_workers #=> Integer
     #   resp.availability_zone #=> String
     #   resp.vpc_id #=> String
@@ -1741,11 +1822,138 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Creates an AWS Glue machine learning transform. This operation creates
+    # the transform and all the necessary parameters to train it.
+    #
+    # Call this operation as the first step in the process of using a
+    # machine learning transform (such as the `FindMatches` transform) for
+    # deduplicating data. You can provide an optional `Description`, in
+    # addition to the parameters that you want to use for your algorithm.
+    #
+    # You must also specify certain parameters for the tasks that AWS Glue
+    # runs on your behalf as part of learning from your data and creating a
+    # high-quality machine learning transform. These parameters include
+    # `Role`, and optionally, `AllocatedCapacity`, `Timeout`, and
+    # `MaxRetries`. For more information, see [Jobs][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html
+    #
+    # @option params [required, String] :name
+    #   The unique name that you give the transform when you create it.
+    #
+    # @option params [String] :description
+    #   A description of the machine learning transform that is being defined.
+    #   The default is an empty string.
+    #
+    # @option params [required, Array<Types::GlueTable>] :input_record_tables
+    #   A list of AWS Glue table definitions used by the transform.
+    #
+    # @option params [required, Types::TransformParameters] :parameters
+    #   The algorithmic parameters that are specific to the transform type
+    #   used. Conditionally dependent on the transform type.
+    #
+    # @option params [required, String] :role
+    #   The name or Amazon Resource Name (ARN) of the IAM role with the
+    #   required permissions. Ensure that this role has permission to your
+    #   Amazon Simple Storage Service (Amazon S3) sources, targets, temporary
+    #   directory, scripts, and any libraries that are used by the task run
+    #   for this transform.
+    #
+    # @option params [Float] :max_capacity
+    #   The number of AWS Glue data processing units (DPUs) that are allocated
+    #   to task runs for this transform. You can allocate from 2 to 100 DPUs;
+    #   the default is 10. A DPU is a relative measure of processing power
+    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
+    #   more information, see the [AWS Glue pricing page][1].
+    #
+    #   When the `WorkerType` field is set to a value other than `Standard`,
+    #   the `MaxCapacity` field is set automatically and becomes read-only.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
+    #
+    # @option params [String] :worker_type
+    #   The type of predefined worker that is allocated when this task runs.
+    #   Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
+    #     memory and a 64GB disk, and 1 executor per worker.
+    #
+    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
+    #     memory and a 128GB disk, and 1 executor per worker.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   when this task runs.
+    #
+    # @option params [Integer] :timeout
+    #   The timeout of the task run for this transform in minutes. This is the
+    #   maximum time that a task run for this transform can consume resources
+    #   before it is terminated and enters `TIMEOUT` status. The default is
+    #   2,880 minutes (48 hours).
+    #
+    # @option params [Integer] :max_retries
+    #   The maximum number of times to retry a task for this transform after a
+    #   task run fails.
+    #
+    # @return [Types::CreateMLTransformResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMLTransformResponse#transform_id #transform_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ml_transform({
+    #     name: "NameString", # required
+    #     description: "DescriptionString",
+    #     input_record_tables: [ # required
+    #       {
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #       },
+    #     ],
+    #     parameters: { # required
+    #       transform_type: "FIND_MATCHES", # required, accepts FIND_MATCHES
+    #       find_matches_parameters: {
+    #         primary_key_column_name: "ColumnNameString",
+    #         precision_recall_tradeoff: 1.0,
+    #         accuracy_cost_tradeoff: 1.0,
+    #         enforce_provided_labels: false,
+    #       },
+    #     },
+    #     role: "RoleString", # required
+    #     max_capacity: 1.0,
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     number_of_workers: 1,
+    #     timeout: 1,
+    #     max_retries: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateMLTransform AWS API Documentation
+    #
+    # @overload create_ml_transform(params = {})
+    # @param [Hash] params ({})
+    def create_ml_transform(params = {}, options = {})
+      req = build_request(:create_ml_transform, params)
+      req.send_request(options)
+    end
+
     # Creates a new partition.
     #
     # @option params [String] :catalog_id
-    #   The ID of the catalog in which the partion is to be created.
-    #   Currently, this should be the AWS account ID.
+    #   The AWS account ID of the catalog in which the partition is to be
+    #   created.
     #
     # @option params [required, String] :database_name
     #   The name of the metadata database in which the partition is to be
@@ -1775,6 +1983,9 @@ module Aws::Glue
     #             name: "NameString", # required
     #             type: "ColumnTypeString",
     #             comment: "CommentString",
+    #             parameters: {
+    #               "KeyString" => "ParametersMapValue",
+    #             },
     #           },
     #         ],
     #         location: "LocationString",
@@ -1972,6 +2183,9 @@ module Aws::Glue
     #             name: "NameString", # required
     #             type: "ColumnTypeString",
     #             comment: "CommentString",
+    #             parameters: {
+    #               "KeyString" => "ParametersMapValue",
+    #             },
     #           },
     #         ],
     #         location: "LocationString",
@@ -2010,6 +2224,9 @@ module Aws::Glue
     #           name: "NameString", # required
     #           type: "ColumnTypeString",
     #           comment: "CommentString",
+    #           parameters: {
+    #             "KeyString" => "ParametersMapValue",
+    #           },
     #         },
     #       ],
     #       view_original_text: "ViewTextString",
@@ -2137,7 +2354,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the function. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which to create the function.
@@ -2294,16 +2511,16 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Removes a specified Database from a Data Catalog.
+    # Removes a specified database from a Data Catalog.
     #
-    # <note markdown="1"> After completing this operation, you will no longer have access to the
+    # <note markdown="1"> After completing this operation, you no longer have access to the
     # tables (and all table versions and partitions that might belong to the
     # tables) and the user-defined functions in the deleted database. AWS
     # Glue deletes these "orphaned" resources asynchronously in a timely
     # manner, at the discretion of the service.
     #
-    #  To ensure immediate deletion of all related resources, before calling
-    # `DeleteDatabase`, use `DeleteTableVersion` or
+    #  To ensure the immediate deletion of all related resources, before
+    # calling `DeleteDatabase`, use `DeleteTableVersion` or
     # `BatchDeleteTableVersion`, `DeletePartition` or
     # `BatchDeletePartition`, `DeleteUserDefinedFunction`, and `DeleteTable`
     # or `BatchDeleteTable`, to delete any resources that belong to the
@@ -2313,10 +2530,10 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
-    #   The name of the Database to delete. For Hive compatibility, this must
+    #   The name of the database to delete. For Hive compatibility, this must
     #   be all lowercase.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2388,18 +2605,52 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes an AWS Glue machine learning transform. Machine learning
+    # transforms are a special type of transform that use machine learning
+    # to learn the details of the transformation to be performed by learning
+    # from examples provided by humans. These transformations are then saved
+    # by AWS Glue. If you no longer need a transform, you can delete it by
+    # calling `DeleteMLTransforms`. However, any AWS Glue jobs that still
+    # reference the deleted transform will no longer succeed.
+    #
+    # @option params [required, String] :transform_id
+    #   The unique identifier of the transform to delete.
+    #
+    # @return [Types::DeleteMLTransformResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteMLTransformResponse#transform_id #transform_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ml_transform({
+    #     transform_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteMLTransform AWS API Documentation
+    #
+    # @overload delete_ml_transform(params = {})
+    # @param [Hash] params ({})
+    def delete_ml_transform(params = {}, options = {})
+      req = build_request(:delete_ml_transform, params)
+      req.send_request(options)
+    end
+
     # Deletes a specified partition.
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition to be deleted resides.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table in question
     #   resides.
     #
     # @option params [required, String] :table_name
-    #   The name of the table where the partition to be deleted is located.
+    #   The name of the table that contains the partition to be deleted.
     #
     # @option params [required, Array<String>] :partition_values
     #   The values that define the partition.
@@ -2470,21 +2721,22 @@ module Aws::Glue
 
     # Removes a table definition from the Data Catalog.
     #
-    # <note markdown="1"> After completing this operation, you will no longer have access to the
+    # <note markdown="1"> After completing this operation, you no longer have access to the
     # table versions and partitions that belong to the deleted table. AWS
     # Glue deletes these "orphaned" resources asynchronously in a timely
     # manner, at the discretion of the service.
     #
-    #  To ensure immediate deletion of all related resources, before calling
-    # `DeleteTable`, use `DeleteTableVersion` or `BatchDeleteTableVersion`,
-    # and `DeletePartition` or `BatchDeletePartition`, to delete any
-    # resources that belong to the table.
+    #  To ensure the immediate deletion of all related resources, before
+    # calling `DeleteTable`, use `DeleteTableVersion` or
+    # `BatchDeleteTableVersion`, and `DeletePartition` or
+    # `BatchDeletePartition`, to delete any resources that belong to the
+    # table.
     #
     #  </note>
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table resides. For Hive
@@ -2517,7 +2769,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -2803,7 +3055,7 @@ module Aws::Glue
     #   password. For instance, the AWS Glue console uses this flag to
     #   retrieve the connection, and does not display the password. Set this
     #   parameter when the caller might not have permission to use the AWS KMS
-    #   key to decrypt the password, but does have permission to access the
+    #   key to decrypt the password, but it does have permission to access the
     #   rest of the connection properties.
     #
     # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2851,14 +3103,14 @@ module Aws::Glue
     #   provided, the AWS account ID is used by default.
     #
     # @option params [Types::GetConnectionsFilter] :filter
-    #   A filter that controls which connections will be returned.
+    #   A filter that controls which connections are returned.
     #
     # @option params [Boolean] :hide_password
     #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
     #   retrieve the connection, and does not display the password. Set this
     #   parameter when the caller might not have permission to use the AWS KMS
-    #   key to decrypt the password, but does have permission to access the
+    #   key to decrypt the password, but it does have permission to access the
     #   rest of the connection properties.
     #
     # @option params [String] :next_token
@@ -3101,9 +3353,8 @@ module Aws::Glue
     # Retrieves the security configuration for a specified catalog.
     #
     # @option params [String] :catalog_id
-    #   The ID of the Data Catalog for which to retrieve the security
-    #   configuration. If none is provided, the AWS account ID is used by
-    #   default.
+    #   The ID of the Data Catalog to retrieve the security configuration for.
+    #   If none is provided, the AWS account ID is used by default.
     #
     # @return [Types::GetDataCatalogEncryptionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3135,7 +3386,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the database to retrieve. For Hive compatibility, this
@@ -3160,6 +3411,10 @@ module Aws::Glue
     #   resp.database.parameters #=> Hash
     #   resp.database.parameters["KeyString"] #=> String
     #   resp.database.create_time #=> Time
+    #   resp.database.create_table_default_permissions #=> Array
+    #   resp.database.create_table_default_permissions[0].principal.data_lake_principal_identifier #=> String
+    #   resp.database.create_table_default_permissions[0].permissions #=> Array
+    #   resp.database.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabase AWS API Documentation
     #
@@ -3170,11 +3425,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves all Databases defined in a given Data Catalog.
+    # Retrieves all databases defined in a given Data Catalog.
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog from which to retrieve `Databases`. If none
-    #   is supplied, the AWS account ID is used by default.
+    #   is provided, the AWS account ID is used by default.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
@@ -3204,6 +3459,10 @@ module Aws::Glue
     #   resp.database_list[0].parameters #=> Hash
     #   resp.database_list[0].parameters["KeyString"] #=> String
     #   resp.database_list[0].create_time #=> Time
+    #   resp.database_list[0].create_table_default_permissions #=> Array
+    #   resp.database_list[0].create_table_default_permissions[0].principal.data_lake_principal_identifier #=> String
+    #   resp.database_list[0].create_table_default_permissions[0].permissions #=> Array
+    #   resp.database_list[0].create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabases AWS API Documentation
@@ -3290,6 +3549,7 @@ module Aws::Glue
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
     #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoint.glue_version #=> String
     #   resp.dev_endpoint.number_of_workers #=> Integer
     #   resp.dev_endpoint.number_of_nodes #=> Integer
     #   resp.dev_endpoint.availability_zone #=> String
@@ -3357,6 +3617,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
     #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
     #   resp.dev_endpoints[0].availability_zone #=> String
@@ -3431,6 +3692,44 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_job(params = {}, options = {})
       req = build_request(:get_job, params)
+      req.send_request(options)
+    end
+
+    # Returns information on a job bookmark entry.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job in question.
+    #
+    # @option params [String] :run_id
+    #   The unique run identifier associated with this job run.
+    #
+    # @return [Types::GetJobBookmarkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJobBookmarkResponse#job_bookmark_entry #job_bookmark_entry} => Types::JobBookmarkEntry
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_job_bookmark({
+    #     job_name: "JobName", # required
+    #     run_id: "RunId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_bookmark_entry.job_name #=> String
+    #   resp.job_bookmark_entry.version #=> Integer
+    #   resp.job_bookmark_entry.run #=> Integer
+    #   resp.job_bookmark_entry.attempt #=> Integer
+    #   resp.job_bookmark_entry.previous_run_id #=> String
+    #   resp.job_bookmark_entry.run_id #=> String
+    #   resp.job_bookmark_entry.job_bookmark #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobBookmark AWS API Documentation
+    #
+    # @overload get_job_bookmark(params = {})
+    # @param [Hash] params ({})
+    def get_job_bookmark(params = {}, options = {})
+      req = build_request(:get_job_bookmark, params)
       req.send_request(options)
     end
 
@@ -3614,6 +3913,330 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Gets details for a specific task run on a machine learning transform.
+    # Machine learning task runs are asynchronous tasks that AWS Glue runs
+    # on your behalf as part of various machine learning workflows. You can
+    # check the stats of any task run by calling `GetMLTaskRun` with the
+    # `TaskRunID` and its parent transform's `TransformID`.
+    #
+    # @option params [required, String] :transform_id
+    #   The unique identifier of the machine learning transform.
+    #
+    # @option params [required, String] :task_run_id
+    #   The unique identifier of the task run.
+    #
+    # @return [Types::GetMLTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMLTaskRunResponse#transform_id #transform_id} => String
+    #   * {Types::GetMLTaskRunResponse#task_run_id #task_run_id} => String
+    #   * {Types::GetMLTaskRunResponse#status #status} => String
+    #   * {Types::GetMLTaskRunResponse#log_group_name #log_group_name} => String
+    #   * {Types::GetMLTaskRunResponse#properties #properties} => Types::TaskRunProperties
+    #   * {Types::GetMLTaskRunResponse#error_string #error_string} => String
+    #   * {Types::GetMLTaskRunResponse#started_on #started_on} => Time
+    #   * {Types::GetMLTaskRunResponse#last_modified_on #last_modified_on} => Time
+    #   * {Types::GetMLTaskRunResponse#completed_on #completed_on} => Time
+    #   * {Types::GetMLTaskRunResponse#execution_time #execution_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ml_task_run({
+    #     transform_id: "HashString", # required
+    #     task_run_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_id #=> String
+    #   resp.task_run_id #=> String
+    #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.log_group_name #=> String
+    #   resp.properties.task_type #=> String, one of "EVALUATION", "LABELING_SET_GENERATION", "IMPORT_LABELS", "EXPORT_LABELS", "FIND_MATCHES"
+    #   resp.properties.import_labels_task_run_properties.input_s3_path #=> String
+    #   resp.properties.import_labels_task_run_properties.replace #=> Boolean
+    #   resp.properties.export_labels_task_run_properties.output_s3_path #=> String
+    #   resp.properties.labeling_set_generation_task_run_properties.output_s3_path #=> String
+    #   resp.properties.find_matches_task_run_properties.job_id #=> String
+    #   resp.properties.find_matches_task_run_properties.job_name #=> String
+    #   resp.properties.find_matches_task_run_properties.job_run_id #=> String
+    #   resp.error_string #=> String
+    #   resp.started_on #=> Time
+    #   resp.last_modified_on #=> Time
+    #   resp.completed_on #=> Time
+    #   resp.execution_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTaskRun AWS API Documentation
+    #
+    # @overload get_ml_task_run(params = {})
+    # @param [Hash] params ({})
+    def get_ml_task_run(params = {}, options = {})
+      req = build_request(:get_ml_task_run, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of runs for a machine learning transform. Machine learning
+    # task runs are asynchronous tasks that AWS Glue runs on your behalf as
+    # part of various machine learning workflows. You can get a sortable,
+    # filterable list of machine learning task runs by calling
+    # `GetMLTaskRuns` with their parent transform's `TransformID` and other
+    # optional parameters as documented in this section.
+    #
+    # This operation returns a list of historic runs and must be paginated.
+    #
+    # @option params [required, String] :transform_id
+    #   The unique identifier of the machine learning transform.
+    #
+    # @option params [String] :next_token
+    #   A token for pagination of the results. The default is empty.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [Types::TaskRunFilterCriteria] :filter
+    #   The filter criteria, in the `TaskRunFilterCriteria` structure, for the
+    #   task run.
+    #
+    # @option params [Types::TaskRunSortCriteria] :sort
+    #   The sorting criteria, in the `TaskRunSortCriteria` structure, for the
+    #   task run.
+    #
+    # @return [Types::GetMLTaskRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMLTaskRunsResponse#task_runs #task_runs} => Array&lt;Types::TaskRun&gt;
+    #   * {Types::GetMLTaskRunsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ml_task_runs({
+    #     transform_id: "HashString", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     filter: {
+    #       task_run_type: "EVALUATION", # accepts EVALUATION, LABELING_SET_GENERATION, IMPORT_LABELS, EXPORT_LABELS, FIND_MATCHES
+    #       status: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #       started_before: Time.now,
+    #       started_after: Time.now,
+    #     },
+    #     sort: {
+    #       column: "TASK_RUN_TYPE", # required, accepts TASK_RUN_TYPE, STATUS, STARTED
+    #       sort_direction: "DESCENDING", # required, accepts DESCENDING, ASCENDING
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_runs #=> Array
+    #   resp.task_runs[0].transform_id #=> String
+    #   resp.task_runs[0].task_run_id #=> String
+    #   resp.task_runs[0].status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.task_runs[0].log_group_name #=> String
+    #   resp.task_runs[0].properties.task_type #=> String, one of "EVALUATION", "LABELING_SET_GENERATION", "IMPORT_LABELS", "EXPORT_LABELS", "FIND_MATCHES"
+    #   resp.task_runs[0].properties.import_labels_task_run_properties.input_s3_path #=> String
+    #   resp.task_runs[0].properties.import_labels_task_run_properties.replace #=> Boolean
+    #   resp.task_runs[0].properties.export_labels_task_run_properties.output_s3_path #=> String
+    #   resp.task_runs[0].properties.labeling_set_generation_task_run_properties.output_s3_path #=> String
+    #   resp.task_runs[0].properties.find_matches_task_run_properties.job_id #=> String
+    #   resp.task_runs[0].properties.find_matches_task_run_properties.job_name #=> String
+    #   resp.task_runs[0].properties.find_matches_task_run_properties.job_run_id #=> String
+    #   resp.task_runs[0].error_string #=> String
+    #   resp.task_runs[0].started_on #=> Time
+    #   resp.task_runs[0].last_modified_on #=> Time
+    #   resp.task_runs[0].completed_on #=> Time
+    #   resp.task_runs[0].execution_time #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTaskRuns AWS API Documentation
+    #
+    # @overload get_ml_task_runs(params = {})
+    # @param [Hash] params ({})
+    def get_ml_task_runs(params = {}, options = {})
+      req = build_request(:get_ml_task_runs, params)
+      req.send_request(options)
+    end
+
+    # Gets an AWS Glue machine learning transform artifact and all its
+    # corresponding metadata. Machine learning transforms are a special type
+    # of transform that use machine learning to learn the details of the
+    # transformation to be performed by learning from examples provided by
+    # humans. These transformations are then saved by AWS Glue. You can
+    # retrieve their metadata by calling `GetMLTransform`.
+    #
+    # @option params [required, String] :transform_id
+    #   The unique identifier of the transform, generated at the time that the
+    #   transform was created.
+    #
+    # @return [Types::GetMLTransformResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMLTransformResponse#transform_id #transform_id} => String
+    #   * {Types::GetMLTransformResponse#name #name} => String
+    #   * {Types::GetMLTransformResponse#description #description} => String
+    #   * {Types::GetMLTransformResponse#status #status} => String
+    #   * {Types::GetMLTransformResponse#created_on #created_on} => Time
+    #   * {Types::GetMLTransformResponse#last_modified_on #last_modified_on} => Time
+    #   * {Types::GetMLTransformResponse#input_record_tables #input_record_tables} => Array&lt;Types::GlueTable&gt;
+    #   * {Types::GetMLTransformResponse#parameters #parameters} => Types::TransformParameters
+    #   * {Types::GetMLTransformResponse#evaluation_metrics #evaluation_metrics} => Types::EvaluationMetrics
+    #   * {Types::GetMLTransformResponse#label_count #label_count} => Integer
+    #   * {Types::GetMLTransformResponse#schema #schema} => Array&lt;Types::SchemaColumn&gt;
+    #   * {Types::GetMLTransformResponse#role #role} => String
+    #   * {Types::GetMLTransformResponse#max_capacity #max_capacity} => Float
+    #   * {Types::GetMLTransformResponse#worker_type #worker_type} => String
+    #   * {Types::GetMLTransformResponse#number_of_workers #number_of_workers} => Integer
+    #   * {Types::GetMLTransformResponse#timeout #timeout} => Integer
+    #   * {Types::GetMLTransformResponse#max_retries #max_retries} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ml_transform({
+    #     transform_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "NOT_READY", "READY", "DELETING"
+    #   resp.created_on #=> Time
+    #   resp.last_modified_on #=> Time
+    #   resp.input_record_tables #=> Array
+    #   resp.input_record_tables[0].database_name #=> String
+    #   resp.input_record_tables[0].table_name #=> String
+    #   resp.input_record_tables[0].catalog_id #=> String
+    #   resp.input_record_tables[0].connection_name #=> String
+    #   resp.parameters.transform_type #=> String, one of "FIND_MATCHES"
+    #   resp.parameters.find_matches_parameters.primary_key_column_name #=> String
+    #   resp.parameters.find_matches_parameters.precision_recall_tradeoff #=> Float
+    #   resp.parameters.find_matches_parameters.accuracy_cost_tradeoff #=> Float
+    #   resp.parameters.find_matches_parameters.enforce_provided_labels #=> Boolean
+    #   resp.evaluation_metrics.transform_type #=> String, one of "FIND_MATCHES"
+    #   resp.evaluation_metrics.find_matches_metrics.area_under_pr_curve #=> Float
+    #   resp.evaluation_metrics.find_matches_metrics.precision #=> Float
+    #   resp.evaluation_metrics.find_matches_metrics.recall #=> Float
+    #   resp.evaluation_metrics.find_matches_metrics.f1 #=> Float
+    #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_positives #=> Integer
+    #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_positives #=> Integer
+    #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_negatives #=> Integer
+    #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_negatives #=> Integer
+    #   resp.label_count #=> Integer
+    #   resp.schema #=> Array
+    #   resp.schema[0].name #=> String
+    #   resp.schema[0].data_type #=> String
+    #   resp.role #=> String
+    #   resp.max_capacity #=> Float
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.number_of_workers #=> Integer
+    #   resp.timeout #=> Integer
+    #   resp.max_retries #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTransform AWS API Documentation
+    #
+    # @overload get_ml_transform(params = {})
+    # @param [Hash] params ({})
+    def get_ml_transform(params = {}, options = {})
+      req = build_request(:get_ml_transform, params)
+      req.send_request(options)
+    end
+
+    # Gets a sortable, filterable list of existing AWS Glue machine learning
+    # transforms. Machine learning transforms are a special type of
+    # transform that use machine learning to learn the details of the
+    # transformation to be performed by learning from examples provided by
+    # humans. These transformations are then saved by AWS Glue, and you can
+    # retrieve their metadata by calling `GetMLTransforms`.
+    #
+    # @option params [String] :next_token
+    #   A paginated token to offset the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [Types::TransformFilterCriteria] :filter
+    #   The filter transformation criteria.
+    #
+    # @option params [Types::TransformSortCriteria] :sort
+    #   The sorting criteria.
+    #
+    # @return [Types::GetMLTransformsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMLTransformsResponse#transforms #transforms} => Array&lt;Types::MLTransform&gt;
+    #   * {Types::GetMLTransformsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ml_transforms({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     filter: {
+    #       name: "NameString",
+    #       transform_type: "FIND_MATCHES", # accepts FIND_MATCHES
+    #       status: "NOT_READY", # accepts NOT_READY, READY, DELETING
+    #       created_before: Time.now,
+    #       created_after: Time.now,
+    #       last_modified_before: Time.now,
+    #       last_modified_after: Time.now,
+    #       schema: [
+    #         {
+    #           name: "ColumnNameString",
+    #           data_type: "ColumnTypeString",
+    #         },
+    #       ],
+    #     },
+    #     sort: {
+    #       column: "NAME", # required, accepts NAME, TRANSFORM_TYPE, STATUS, CREATED, LAST_MODIFIED
+    #       sort_direction: "DESCENDING", # required, accepts DESCENDING, ASCENDING
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transforms #=> Array
+    #   resp.transforms[0].transform_id #=> String
+    #   resp.transforms[0].name #=> String
+    #   resp.transforms[0].description #=> String
+    #   resp.transforms[0].status #=> String, one of "NOT_READY", "READY", "DELETING"
+    #   resp.transforms[0].created_on #=> Time
+    #   resp.transforms[0].last_modified_on #=> Time
+    #   resp.transforms[0].input_record_tables #=> Array
+    #   resp.transforms[0].input_record_tables[0].database_name #=> String
+    #   resp.transforms[0].input_record_tables[0].table_name #=> String
+    #   resp.transforms[0].input_record_tables[0].catalog_id #=> String
+    #   resp.transforms[0].input_record_tables[0].connection_name #=> String
+    #   resp.transforms[0].parameters.transform_type #=> String, one of "FIND_MATCHES"
+    #   resp.transforms[0].parameters.find_matches_parameters.primary_key_column_name #=> String
+    #   resp.transforms[0].parameters.find_matches_parameters.precision_recall_tradeoff #=> Float
+    #   resp.transforms[0].parameters.find_matches_parameters.accuracy_cost_tradeoff #=> Float
+    #   resp.transforms[0].parameters.find_matches_parameters.enforce_provided_labels #=> Boolean
+    #   resp.transforms[0].evaluation_metrics.transform_type #=> String, one of "FIND_MATCHES"
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.area_under_pr_curve #=> Float
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.precision #=> Float
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.recall #=> Float
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.f1 #=> Float
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_positives #=> Integer
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_positives #=> Integer
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_negatives #=> Integer
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_negatives #=> Integer
+    #   resp.transforms[0].label_count #=> Integer
+    #   resp.transforms[0].schema #=> Array
+    #   resp.transforms[0].schema[0].name #=> String
+    #   resp.transforms[0].schema[0].data_type #=> String
+    #   resp.transforms[0].role #=> String
+    #   resp.transforms[0].max_capacity #=> Float
+    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X"
+    #   resp.transforms[0].number_of_workers #=> Integer
+    #   resp.transforms[0].timeout #=> Integer
+    #   resp.transforms[0].max_retries #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTransforms AWS API Documentation
+    #
+    # @overload get_ml_transforms(params = {})
+    # @param [Hash] params ({})
+    def get_ml_transforms(params = {}, options = {})
+      req = build_request(:get_ml_transforms, params)
+      req.send_request(options)
+    end
+
     # Creates mappings.
     #
     # @option params [required, Types::CatalogEntry] :source
@@ -3690,7 +4313,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition in question resides. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partition resides.
@@ -3726,6 +4349,8 @@ module Aws::Glue
     #   resp.partition.storage_descriptor.columns[0].name #=> String
     #   resp.partition.storage_descriptor.columns[0].type #=> String
     #   resp.partition.storage_descriptor.columns[0].comment #=> String
+    #   resp.partition.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.partition.storage_descriptor.location #=> String
     #   resp.partition.storage_descriptor.input_format #=> String
     #   resp.partition.storage_descriptor.output_format #=> String
@@ -3766,7 +4391,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -3775,7 +4400,7 @@ module Aws::Glue
     #   The name of the partitions' table.
     #
     # @option params [String] :expression
-    #   An expression filtering the partitions to be returned.
+    #   An expression that filters the partitions to be returned.
     #
     #   The expression uses SQL syntax similar to the SQL `WHERE` filter
     #   clause. The SQL statement parser [JSQLParser][1] parses the
@@ -3786,7 +4411,7 @@ module Aws::Glue
     #
     #   =
     #
-    #   : Checks if the values of the two operands are equal or not; if yes,
+    #   : Checks whether the values of the two operands are equal; if yes,
     #     then the condition becomes true.
     #
     #     Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
@@ -3795,37 +4420,38 @@ module Aws::Glue
     #
     #   &lt; &gt;
     #
-    #   : Checks if the values of two operands are equal or not; if the values
+    #   : Checks whether the values of two operands are equal; if the values
     #     are not equal, then the condition becomes true.
     #
     #     Example: (a &lt; &gt; b) is true.
     #
     #   &gt;
     #
-    #   : Checks if the value of the left operand is greater than the value of
-    #     the right operand; if yes, then the condition becomes true.
+    #   : Checks whether the value of the left operand is greater than the
+    #     value of the right operand; if yes, then the condition becomes true.
     #
     #     Example: (a &gt; b) is not true.
     #
     #   &lt;
     #
-    #   : Checks if the value of the left operand is less than the value of
-    #     the right operand; if yes, then the condition becomes true.
+    #   : Checks whether the value of the left operand is less than the value
+    #     of the right operand; if yes, then the condition becomes true.
     #
     #     Example: (a &lt; b) is true.
     #
     #   &gt;=
     #
-    #   : Checks if the value of the left operand is greater than or equal to
-    #     the value of the right operand; if yes, then the condition becomes
-    #     true.
+    #   : Checks whether the value of the left operand is greater than or
+    #     equal to the value of the right operand; if yes, then the condition
+    #     becomes true.
     #
     #     Example: (a &gt;= b) is not true.
     #
     #   &lt;=
     #
-    #   : Checks if the value of the left operand is less than or equal to the
-    #     value of the right operand; if yes, then the condition becomes true.
+    #   : Checks whether the value of the left operand is less than or equal
+    #     to the value of the right operand; if yes, then the condition
+    #     becomes true.
     #
     #     Example: (a &lt;= b) is true.
     #
@@ -3833,7 +4459,7 @@ module Aws::Glue
     #
     #   : Logical operators.
     #
-    #   *Supported Partition Key Types*\: The following are the the supported
+    #   *Supported Partition Key Types*\: The following are the supported
     #   partition keys.
     #
     #   * `string`
@@ -3909,6 +4535,8 @@ module Aws::Glue
     #   resp.partitions[0].storage_descriptor.columns[0].name #=> String
     #   resp.partitions[0].storage_descriptor.columns[0].type #=> String
     #   resp.partitions[0].storage_descriptor.columns[0].comment #=> String
+    #   resp.partitions[0].storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.partitions[0].storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].storage_descriptor.location #=> String
     #   resp.partitions[0].storage_descriptor.input_format #=> String
     #   resp.partitions[0].storage_descriptor.output_format #=> String
@@ -4140,7 +4768,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the database in the catalog in which the table resides.
@@ -4177,6 +4805,8 @@ module Aws::Glue
     #   resp.table.storage_descriptor.columns[0].name #=> String
     #   resp.table.storage_descriptor.columns[0].type #=> String
     #   resp.table.storage_descriptor.columns[0].comment #=> String
+    #   resp.table.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.table.storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.table.storage_descriptor.location #=> String
     #   resp.table.storage_descriptor.input_format #=> String
     #   resp.table.storage_descriptor.output_format #=> String
@@ -4204,12 +4834,15 @@ module Aws::Glue
     #   resp.table.partition_keys[0].name #=> String
     #   resp.table.partition_keys[0].type #=> String
     #   resp.table.partition_keys[0].comment #=> String
+    #   resp.table.partition_keys[0].parameters #=> Hash
+    #   resp.table.partition_keys[0].parameters["KeyString"] #=> String
     #   resp.table.view_original_text #=> String
     #   resp.table.view_expanded_text #=> String
     #   resp.table.table_type #=> String
     #   resp.table.parameters #=> Hash
     #   resp.table.parameters["KeyString"] #=> String
     #   resp.table.created_by #=> String
+    #   resp.table.is_registered_with_lake_formation #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -4224,7 +4857,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -4266,6 +4899,8 @@ module Aws::Glue
     #   resp.table_version.table.storage_descriptor.columns[0].name #=> String
     #   resp.table_version.table.storage_descriptor.columns[0].type #=> String
     #   resp.table_version.table.storage_descriptor.columns[0].comment #=> String
+    #   resp.table_version.table.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.table_version.table.storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.table_version.table.storage_descriptor.location #=> String
     #   resp.table_version.table.storage_descriptor.input_format #=> String
     #   resp.table_version.table.storage_descriptor.output_format #=> String
@@ -4293,12 +4928,15 @@ module Aws::Glue
     #   resp.table_version.table.partition_keys[0].name #=> String
     #   resp.table_version.table.partition_keys[0].type #=> String
     #   resp.table_version.table.partition_keys[0].comment #=> String
+    #   resp.table_version.table.partition_keys[0].parameters #=> Hash
+    #   resp.table_version.table.partition_keys[0].parameters["KeyString"] #=> String
     #   resp.table_version.table.view_original_text #=> String
     #   resp.table_version.table.view_expanded_text #=> String
     #   resp.table_version.table.table_type #=> String
     #   resp.table_version.table.parameters #=> Hash
     #   resp.table_version.table.parameters["KeyString"] #=> String
     #   resp.table_version.table.created_by #=> String
+    #   resp.table_version.table.is_registered_with_lake_formation #=> Boolean
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -4315,7 +4953,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -4362,6 +5000,8 @@ module Aws::Glue
     #   resp.table_versions[0].table.storage_descriptor.columns[0].name #=> String
     #   resp.table_versions[0].table.storage_descriptor.columns[0].type #=> String
     #   resp.table_versions[0].table.storage_descriptor.columns[0].comment #=> String
+    #   resp.table_versions[0].table.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.table_versions[0].table.storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.table_versions[0].table.storage_descriptor.location #=> String
     #   resp.table_versions[0].table.storage_descriptor.input_format #=> String
     #   resp.table_versions[0].table.storage_descriptor.output_format #=> String
@@ -4389,12 +5029,15 @@ module Aws::Glue
     #   resp.table_versions[0].table.partition_keys[0].name #=> String
     #   resp.table_versions[0].table.partition_keys[0].type #=> String
     #   resp.table_versions[0].table.partition_keys[0].comment #=> String
+    #   resp.table_versions[0].table.partition_keys[0].parameters #=> Hash
+    #   resp.table_versions[0].table.partition_keys[0].parameters["KeyString"] #=> String
     #   resp.table_versions[0].table.view_original_text #=> String
     #   resp.table_versions[0].table.view_expanded_text #=> String
     #   resp.table_versions[0].table.table_type #=> String
     #   resp.table_versions[0].table.parameters #=> Hash
     #   resp.table_versions[0].table.parameters["KeyString"] #=> String
     #   resp.table_versions[0].table.created_by #=> String
+    #   resp.table_versions[0].table.is_registered_with_lake_formation #=> Boolean
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -4412,7 +5055,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog whose tables to list. For Hive
@@ -4459,6 +5102,8 @@ module Aws::Glue
     #   resp.table_list[0].storage_descriptor.columns[0].name #=> String
     #   resp.table_list[0].storage_descriptor.columns[0].type #=> String
     #   resp.table_list[0].storage_descriptor.columns[0].comment #=> String
+    #   resp.table_list[0].storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.table_list[0].storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.table_list[0].storage_descriptor.location #=> String
     #   resp.table_list[0].storage_descriptor.input_format #=> String
     #   resp.table_list[0].storage_descriptor.output_format #=> String
@@ -4486,12 +5131,15 @@ module Aws::Glue
     #   resp.table_list[0].partition_keys[0].name #=> String
     #   resp.table_list[0].partition_keys[0].type #=> String
     #   resp.table_list[0].partition_keys[0].comment #=> String
+    #   resp.table_list[0].partition_keys[0].parameters #=> Hash
+    #   resp.table_list[0].partition_keys[0].parameters["KeyString"] #=> String
     #   resp.table_list[0].view_original_text #=> String
     #   resp.table_list[0].view_expanded_text #=> String
     #   resp.table_list[0].table_type #=> String
     #   resp.table_list[0].parameters #=> Hash
     #   resp.table_list[0].parameters["KeyString"] #=> String
     #   resp.table_list[0].created_by #=> String
+    #   resp.table_list[0].is_registered_with_lake_formation #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -4648,7 +5296,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the function to be retrieved is
-    #   located. If none is supplied, the AWS account ID is used by default.
+    #   located. If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the function is located.
@@ -4688,11 +5336,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves a multiple function definitions from the Data Catalog.
+    # Retrieves multiple function definitions from the Data Catalog.
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the functions to be retrieved are
-    #   located. If none is supplied, the AWS account ID is used by default.
+    #   located. If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the functions are located.
@@ -5179,7 +5827,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Imports an existing Athena Data Catalog to AWS Glue
+    # Imports an existing Amazon Athena Data Catalog to AWS Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the catalog to import. Currently, this should be the AWS
@@ -5441,9 +6089,8 @@ module Aws::Glue
     # every catalog write thereafter.
     #
     # @option params [String] :catalog_id
-    #   The ID of the Data Catalog for which to set the security
-    #   configuration. If none is provided, the AWS account ID is used by
-    #   default.
+    #   The ID of the Data Catalog to set the security configuration for. If
+    #   none is provided, the AWS account ID is used by default.
     #
     # @option params [required, Types::DataCatalogEncryptionSettings] :data_catalog_encryption_settings
     #   The security configuration to set.
@@ -5557,6 +6204,9 @@ module Aws::Glue
     # @option params [required, String] :job_name
     #   The name of the job in question.
     #
+    # @option params [String] :run_id
+    #   The unique run identifier associated with this job run.
+    #
     # @return [Types::ResetJobBookmarkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ResetJobBookmarkResponse#job_bookmark_entry #job_bookmark_entry} => Types::JobBookmarkEntry
@@ -5565,6 +6215,7 @@ module Aws::Glue
     #
     #   resp = client.reset_job_bookmark({
     #     job_name: "JobName", # required
+    #     run_id: "RunId",
     #   })
     #
     # @example Response structure
@@ -5573,6 +6224,8 @@ module Aws::Glue
     #   resp.job_bookmark_entry.version #=> Integer
     #   resp.job_bookmark_entry.run #=> Integer
     #   resp.job_bookmark_entry.attempt #=> Integer
+    #   resp.job_bookmark_entry.previous_run_id #=> String
+    #   resp.job_bookmark_entry.run_id #=> String
     #   resp.job_bookmark_entry.job_bookmark #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResetJobBookmark AWS API Documentation
@@ -5581,6 +6234,134 @@ module Aws::Glue
     # @param [Hash] params ({})
     def reset_job_bookmark(params = {}, options = {})
       req = build_request(:reset_job_bookmark, params)
+      req.send_request(options)
+    end
+
+    # Searches a set of tables based on properties in the table metadata as
+    # well as on the parent database. You can search against text or filter
+    # conditions.
+    #
+    # You can only get tables that you have access to based on the security
+    # policies defined in Lake Formation. You need at least a read-only
+    # access to the table for it to be returned. If you do not have access
+    # to all the columns in the table, these columns will not be searched
+    # against when returning the list of tables back to you. If you have
+    # access to the columns but not the data in the columns, those columns
+    # and the associated metadata for those columns will be included in the
+    # search.
+    #
+    # @option params [String] :catalog_id
+    #   A unique identifier, consisting of ` account_id/datalake`.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, included if this is a continuation call.
+    #
+    # @option params [Array<Types::PropertyPredicate>] :filters
+    #   A list of key-value pairs, and a comparator used to filter the search
+    #   results. Returns all entities matching the predicate.
+    #
+    # @option params [String] :search_text
+    #   A string used for a text search.
+    #
+    #   Specifying a value in quotes filters based on an exact match to the
+    #   value.
+    #
+    # @option params [Array<Types::SortCriterion>] :sort_criteria
+    #   A list of criteria for sorting the results by a field name, in an
+    #   ascending or descending order.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of tables to return in a single response.
+    #
+    # @return [Types::SearchTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchTablesResponse#next_token #next_token} => String
+    #   * {Types::SearchTablesResponse#table_list #table_list} => Array&lt;Types::Table&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_tables({
+    #     catalog_id: "CatalogIdString",
+    #     next_token: "Token",
+    #     filters: [
+    #       {
+    #         key: "ValueString",
+    #         value: "ValueString",
+    #         comparator: "EQUALS", # accepts EQUALS, GREATER_THAN, LESS_THAN, GREATER_THAN_EQUALS, LESS_THAN_EQUALS
+    #       },
+    #     ],
+    #     search_text: "ValueString",
+    #     sort_criteria: [
+    #       {
+    #         field_name: "ValueString",
+    #         sort: "ASC", # accepts ASC, DESC
+    #       },
+    #     ],
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.table_list #=> Array
+    #   resp.table_list[0].name #=> String
+    #   resp.table_list[0].database_name #=> String
+    #   resp.table_list[0].description #=> String
+    #   resp.table_list[0].owner #=> String
+    #   resp.table_list[0].create_time #=> Time
+    #   resp.table_list[0].update_time #=> Time
+    #   resp.table_list[0].last_access_time #=> Time
+    #   resp.table_list[0].last_analyzed_time #=> Time
+    #   resp.table_list[0].retention #=> Integer
+    #   resp.table_list[0].storage_descriptor.columns #=> Array
+    #   resp.table_list[0].storage_descriptor.columns[0].name #=> String
+    #   resp.table_list[0].storage_descriptor.columns[0].type #=> String
+    #   resp.table_list[0].storage_descriptor.columns[0].comment #=> String
+    #   resp.table_list[0].storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.table_list[0].storage_descriptor.columns[0].parameters["KeyString"] #=> String
+    #   resp.table_list[0].storage_descriptor.location #=> String
+    #   resp.table_list[0].storage_descriptor.input_format #=> String
+    #   resp.table_list[0].storage_descriptor.output_format #=> String
+    #   resp.table_list[0].storage_descriptor.compressed #=> Boolean
+    #   resp.table_list[0].storage_descriptor.number_of_buckets #=> Integer
+    #   resp.table_list[0].storage_descriptor.serde_info.name #=> String
+    #   resp.table_list[0].storage_descriptor.serde_info.serialization_library #=> String
+    #   resp.table_list[0].storage_descriptor.serde_info.parameters #=> Hash
+    #   resp.table_list[0].storage_descriptor.serde_info.parameters["KeyString"] #=> String
+    #   resp.table_list[0].storage_descriptor.bucket_columns #=> Array
+    #   resp.table_list[0].storage_descriptor.bucket_columns[0] #=> String
+    #   resp.table_list[0].storage_descriptor.sort_columns #=> Array
+    #   resp.table_list[0].storage_descriptor.sort_columns[0].column #=> String
+    #   resp.table_list[0].storage_descriptor.sort_columns[0].sort_order #=> Integer
+    #   resp.table_list[0].storage_descriptor.parameters #=> Hash
+    #   resp.table_list[0].storage_descriptor.parameters["KeyString"] #=> String
+    #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_names #=> Array
+    #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_names[0] #=> String
+    #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_values #=> Array
+    #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_values[0] #=> String
+    #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
+    #   resp.table_list[0].storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
+    #   resp.table_list[0].storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_list[0].partition_keys #=> Array
+    #   resp.table_list[0].partition_keys[0].name #=> String
+    #   resp.table_list[0].partition_keys[0].type #=> String
+    #   resp.table_list[0].partition_keys[0].comment #=> String
+    #   resp.table_list[0].partition_keys[0].parameters #=> Hash
+    #   resp.table_list[0].partition_keys[0].parameters["KeyString"] #=> String
+    #   resp.table_list[0].view_original_text #=> String
+    #   resp.table_list[0].view_expanded_text #=> String
+    #   resp.table_list[0].table_type #=> String
+    #   resp.table_list[0].parameters #=> Hash
+    #   resp.table_list[0].parameters["KeyString"] #=> String
+    #   resp.table_list[0].created_by #=> String
+    #   resp.table_list[0].is_registered_with_lake_formation #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
+    #
+    # @overload search_tables(params = {})
+    # @param [Hash] params ({})
+    def search_tables(params = {}, options = {})
+      req = build_request(:search_tables, params)
       req.send_request(options)
     end
 
@@ -5633,6 +6414,113 @@ module Aws::Glue
     # @param [Hash] params ({})
     def start_crawler_schedule(params = {}, options = {})
       req = build_request(:start_crawler_schedule, params)
+      req.send_request(options)
+    end
+
+    # Begins an asynchronous task to export all labeled data for a
+    # particular transform. This task is the only label-related API call
+    # that is not part of the typical active learning workflow. You
+    # typically use `StartExportLabelsTaskRun` when you want to work with
+    # all of your existing labels at the same time, such as when you want to
+    # remove or change labels that were previously submitted as truth. This
+    # API operation accepts the `TransformId` whose labels you want to
+    # export and an Amazon Simple Storage Service (Amazon S3) path to export
+    # the labels to. The operation returns a `TaskRunId`. You can check on
+    # the status of your task run by calling the `GetMLTaskRun` API.
+    #
+    # @option params [required, String] :transform_id
+    #   The unique identifier of the machine learning transform.
+    #
+    # @option params [required, String] :output_s3_path
+    #   The Amazon S3 path where you export the labels.
+    #
+    # @return [Types::StartExportLabelsTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartExportLabelsTaskRunResponse#task_run_id #task_run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_export_labels_task_run({
+    #     transform_id: "HashString", # required
+    #     output_s3_path: "UriString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartExportLabelsTaskRun AWS API Documentation
+    #
+    # @overload start_export_labels_task_run(params = {})
+    # @param [Hash] params ({})
+    def start_export_labels_task_run(params = {}, options = {})
+      req = build_request(:start_export_labels_task_run, params)
+      req.send_request(options)
+    end
+
+    # Enables you to provide additional labels (examples of truth) to be
+    # used to teach the machine learning transform and improve its quality.
+    # This API operation is generally used as part of the active learning
+    # workflow that starts with the `StartMLLabelingSetGenerationTaskRun`
+    # call and that ultimately results in improving the quality of your
+    # machine learning transform.
+    #
+    # After the `StartMLLabelingSetGenerationTaskRun` finishes, AWS Glue
+    # machine learning will have generated a series of questions for humans
+    # to answer. (Answering these questions is often called 'labeling' in
+    # the machine learning workflows). In the case of the `FindMatches`
+    # transform, these questions are of the form, “What is the correct way
+    # to group these rows together into groups composed entirely of matching
+    # records?” After the labeling process is finished, users upload their
+    # answers/labels with a call to `StartImportLabelsTaskRun`. After
+    # `StartImportLabelsTaskRun` finishes, all future runs of the machine
+    # learning transform use the new and improved labels and perform a
+    # higher-quality transformation.
+    #
+    # By default, `StartMLLabelingSetGenerationTaskRun` continually learns
+    # from and combines all labels that you upload unless you set `Replace`
+    # to true. If you set `Replace` to true, `StartImportLabelsTaskRun`
+    # deletes and forgets all previously uploaded labels and learns only
+    # from the exact set that you upload. Replacing labels can be helpful if
+    # you realize that you previously uploaded incorrect labels, and you
+    # believe that they are having a negative effect on your transform
+    # quality.
+    #
+    # You can check on the status of your task run by calling the
+    # `GetMLTaskRun` operation.
+    #
+    # @option params [required, String] :transform_id
+    #   The unique identifier of the machine learning transform.
+    #
+    # @option params [required, String] :input_s3_path
+    #   The Amazon Simple Storage Service (Amazon S3) path from where you
+    #   import the labels.
+    #
+    # @option params [Boolean] :replace_all_labels
+    #   Indicates whether to overwrite your existing labels.
+    #
+    # @return [Types::StartImportLabelsTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportLabelsTaskRunResponse#task_run_id #task_run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import_labels_task_run({
+    #     transform_id: "HashString", # required
+    #     input_s3_path: "UriString", # required
+    #     replace_all_labels: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartImportLabelsTaskRun AWS API Documentation
+    #
+    # @overload start_import_labels_task_run(params = {})
+    # @param [Hash] params ({})
+    def start_import_labels_task_run(params = {}, options = {})
+      req = build_request(:start_import_labels_task_run, params)
       req.send_request(options)
     end
 
@@ -5768,6 +6656,90 @@ module Aws::Glue
     # @param [Hash] params ({})
     def start_job_run(params = {}, options = {})
       req = build_request(:start_job_run, params)
+      req.send_request(options)
+    end
+
+    # Starts a task to estimate the quality of the transform.
+    #
+    # When you provide label sets as examples of truth, AWS Glue machine
+    # learning uses some of those examples to learn from them. The rest of
+    # the labels are used as a test to estimate quality.
+    #
+    # Returns a unique identifier for the run. You can call `GetMLTaskRun`
+    # to get more information about the stats of the `EvaluationTaskRun`.
+    #
+    # @option params [required, String] :transform_id
+    #   The unique identifier of the machine learning transform.
+    #
+    # @return [Types::StartMLEvaluationTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMLEvaluationTaskRunResponse#task_run_id #task_run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_ml_evaluation_task_run({
+    #     transform_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartMLEvaluationTaskRun AWS API Documentation
+    #
+    # @overload start_ml_evaluation_task_run(params = {})
+    # @param [Hash] params ({})
+    def start_ml_evaluation_task_run(params = {}, options = {})
+      req = build_request(:start_ml_evaluation_task_run, params)
+      req.send_request(options)
+    end
+
+    # Starts the active learning workflow for your machine learning
+    # transform to improve the transform's quality by generating label sets
+    # and adding labels.
+    #
+    # When the `StartMLLabelingSetGenerationTaskRun` finishes, AWS Glue will
+    # have generated a "labeling set" or a set of questions for humans to
+    # answer.
+    #
+    # In the case of the `FindMatches` transform, these questions are of the
+    # form, “What is the correct way to group these rows together into
+    # groups composed entirely of matching records?”
+    #
+    # After the labeling process is finished, you can upload your labels
+    # with a call to `StartImportLabelsTaskRun`. After
+    # `StartImportLabelsTaskRun` finishes, all future runs of the machine
+    # learning transform will use the new and improved labels and perform a
+    # higher-quality transformation.
+    #
+    # @option params [required, String] :transform_id
+    #   The unique identifier of the machine learning transform.
+    #
+    # @option params [required, String] :output_s3_path
+    #   The Amazon Simple Storage Service (Amazon S3) path where you generate
+    #   the labeling set.
+    #
+    # @return [Types::StartMLLabelingSetGenerationTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMLLabelingSetGenerationTaskRunResponse#task_run_id #task_run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_ml_labeling_set_generation_task_run({
+    #     transform_id: "HashString", # required
+    #     output_s3_path: "UriString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartMLLabelingSetGenerationTaskRun AWS API Documentation
+    #
+    # @overload start_ml_labeling_set_generation_task_run(params = {})
+    # @param [Hash] params ({})
+    def start_ml_labeling_set_generation_task_run(params = {}, options = {})
+      req = build_request(:start_ml_labeling_set_generation_task_run, params)
       req.send_request(options)
     end
 
@@ -6220,7 +7192,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the metadata database resides. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the database to update in the catalog. For Hive
@@ -6244,6 +7216,14 @@ module Aws::Glue
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
     #       },
+    #       create_table_default_permissions: [
+    #         {
+    #           principal: {
+    #             data_lake_principal_identifier: "DataLakePrincipalString",
+    #           },
+    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -6284,6 +7264,19 @@ module Aws::Glue
     # @option params [Hash<String,String>] :add_arguments
     #   The map of arguments to add the map of arguments used to configure the
     #   `DevEndpoint`.
+    #
+    #   Valid arguments are:
+    #
+    #   * `"--enable-glue-datacatalog": ""`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "3"`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "2"`
+    #
+    #   You can specify a version of Python support for development endpoints
+    #   by using the `Arguments` parameter in the `CreateDevEndpoint` or
+    #   `UpdateDevEndpoint` APIs. If no arguments are provided, the version
+    #   defaults to Python 2.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6375,24 +7368,130 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Updates an existing machine learning transform. Call this operation to
+    # tune the algorithm parameters to achieve better results.
+    #
+    # After calling this operation, you can call the
+    # `StartMLEvaluationTaskRun` operation to assess how well your new
+    # parameters achieved your goals (such as improving the quality of your
+    # machine learning transform, or making it more cost-effective).
+    #
+    # @option params [required, String] :transform_id
+    #   A unique identifier that was generated when the transform was created.
+    #
+    # @option params [String] :name
+    #   The unique name that you gave the transform when you created it.
+    #
+    # @option params [String] :description
+    #   A description of the transform. The default is an empty string.
+    #
+    # @option params [Types::TransformParameters] :parameters
+    #   The configuration parameters that are specific to the transform type
+    #   (algorithm) used. Conditionally dependent on the transform type.
+    #
+    # @option params [String] :role
+    #   The name or Amazon Resource Name (ARN) of the IAM role with the
+    #   required permissions.
+    #
+    # @option params [Float] :max_capacity
+    #   The number of AWS Glue data processing units (DPUs) that are allocated
+    #   to task runs for this transform. You can allocate from 2 to 100 DPUs;
+    #   the default is 10. A DPU is a relative measure of processing power
+    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
+    #   more information, see the [AWS Glue pricing page][1].
+    #
+    #   When the `WorkerType` field is set to a value other than `Standard`,
+    #   the `MaxCapacity` field is set automatically and becomes read-only.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
+    #
+    # @option params [String] :worker_type
+    #   The type of predefined worker that is allocated when this task runs.
+    #   Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
+    #     memory and a 64GB disk, and 1 executor per worker.
+    #
+    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
+    #     memory and a 128GB disk, and 1 executor per worker.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   when this task runs.
+    #
+    # @option params [Integer] :timeout
+    #   The timeout for a task run for this transform in minutes. This is the
+    #   maximum time that a task run for this transform can consume resources
+    #   before it is terminated and enters `TIMEOUT` status. The default is
+    #   2,880 minutes (48 hours).
+    #
+    # @option params [Integer] :max_retries
+    #   The maximum number of times to retry a task for this transform after a
+    #   task run fails.
+    #
+    # @return [Types::UpdateMLTransformResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMLTransformResponse#transform_id #transform_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ml_transform({
+    #     transform_id: "HashString", # required
+    #     name: "NameString",
+    #     description: "DescriptionString",
+    #     parameters: {
+    #       transform_type: "FIND_MATCHES", # required, accepts FIND_MATCHES
+    #       find_matches_parameters: {
+    #         primary_key_column_name: "ColumnNameString",
+    #         precision_recall_tradeoff: 1.0,
+    #         accuracy_cost_tradeoff: 1.0,
+    #         enforce_provided_labels: false,
+    #       },
+    #     },
+    #     role: "RoleString",
+    #     max_capacity: 1.0,
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     number_of_workers: 1,
+    #     timeout: 1,
+    #     max_retries: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateMLTransform AWS API Documentation
+    #
+    # @overload update_ml_transform(params = {})
+    # @param [Hash] params ({})
+    def update_ml_transform(params = {}, options = {})
+      req = build_request(:update_ml_transform, params)
+      req.send_request(options)
+    end
+
     # Updates a partition.
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition to be updated resides.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table in question
     #   resides.
     #
     # @option params [required, String] :table_name
-    #   The name of the table where the partition to be updated is located.
+    #   The name of the table in which the partition to be updated is located.
     #
     # @option params [required, Array<String>] :partition_value_list
     #   A list of the values defining the partition.
     #
     # @option params [required, Types::PartitionInput] :partition_input
-    #   The new partition object to which to update the partition.
+    #   The new partition object to update the partition to.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6412,6 +7511,9 @@ module Aws::Glue
     #             name: "NameString", # required
     #             type: "ColumnTypeString",
     #             comment: "CommentString",
+    #             parameters: {
+    #               "KeyString" => "ParametersMapValue",
+    #             },
     #           },
     #         ],
     #         location: "LocationString",
@@ -6465,7 +7567,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table resides. For Hive
@@ -6477,7 +7579,7 @@ module Aws::Glue
     #
     # @option params [Boolean] :skip_archive
     #   By default, `UpdateTable` always creates an archived version of the
-    #   table before updating it. If `skipArchive` is set to true, however,
+    #   table before updating it. However, if `skipArchive` is set to true,
     #   `UpdateTable` does not create the archived version.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -6500,6 +7602,9 @@ module Aws::Glue
     #             name: "NameString", # required
     #             type: "ColumnTypeString",
     #             comment: "CommentString",
+    #             parameters: {
+    #               "KeyString" => "ParametersMapValue",
+    #             },
     #           },
     #         ],
     #         location: "LocationString",
@@ -6538,6 +7643,9 @@ module Aws::Glue
     #           name: "NameString", # required
     #           type: "ColumnTypeString",
     #           comment: "CommentString",
+    #           parameters: {
+    #             "KeyString" => "ParametersMapValue",
+    #           },
     #         },
     #       ],
     #       view_original_text: "ViewTextString",
@@ -6646,7 +7754,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the function to be updated is
-    #   located. If none is supplied, the AWS account ID is used by default.
+    #   located. If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the function to be updated is
@@ -6656,7 +7764,7 @@ module Aws::Glue
     #   The name of the function.
     #
     # @option params [required, Types::UserDefinedFunctionInput] :function_input
-    #   A `FunctionInput` object that re-defines the function in the Data
+    #   A `FunctionInput` object that redefines the function in the Data
     #   Catalog.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -6742,7 +7850,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

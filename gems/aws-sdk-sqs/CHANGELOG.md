@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-08-28)
+------------------
+
+* Feature - Added support for message system attributes, which currently lets you send AWS X-Ray trace IDs through Amazon SQS.
+
+1.21.0 (2019-08-21)
+------------------
+
+* Feature - This release provides a way to add metadata tags to a queue when it is created. You can use tags to organize and identify your Amazon SQS queues for cost allocation.
+
 1.20.0 (2019-07-25)
 ------------------
 

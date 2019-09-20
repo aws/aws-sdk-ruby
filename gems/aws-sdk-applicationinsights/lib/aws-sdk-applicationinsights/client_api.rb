@@ -67,12 +67,15 @@ module Aws::ApplicationInsights
     Observation = Shapes::StructureShape.new(name: 'Observation')
     ObservationId = Shapes::StringShape.new(name: 'ObservationId')
     ObservationList = Shapes::ListShape.new(name: 'ObservationList')
+    OpsCenterEnabled = Shapes::BooleanShape.new(name: 'OpsCenterEnabled')
+    OpsItemSNSTopicArn = Shapes::StringShape.new(name: 'OpsItemSNSTopicArn')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Problem = Shapes::StructureShape.new(name: 'Problem')
     ProblemId = Shapes::StringShape.new(name: 'ProblemId')
     ProblemList = Shapes::ListShape.new(name: 'ProblemList')
     RelatedObservations = Shapes::StructureShape.new(name: 'RelatedObservations')
     Remarks = Shapes::StringShape.new(name: 'Remarks')
+    RemoveSNSTopic = Shapes::BooleanShape.new(name: 'RemoveSNSTopic')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceGroupName = Shapes::StringShape.new(name: 'ResourceGroupName')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
@@ -87,6 +90,8 @@ module Aws::ApplicationInsights
     Tier = Shapes::StringShape.new(name: 'Tier')
     Title = Shapes::StringShape.new(name: 'Title')
     Unit = Shapes::StringShape.new(name: 'Unit')
+    UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
+    UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
     UpdateComponentConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateComponentConfigurationRequest')
     UpdateComponentConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateComponentConfigurationResponse')
     UpdateComponentRequest = Shapes::StructureShape.new(name: 'UpdateComponentRequest')
@@ -104,6 +109,8 @@ module Aws::ApplicationInsights
 
     ApplicationInfo.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
     ApplicationInfo.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
+    ApplicationInfo.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
+    ApplicationInfo.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
     ApplicationInfo.add_member(:remarks, Shapes::ShapeRef.new(shape: Remarks, location_name: "Remarks"))
     ApplicationInfo.struct_class = Types::ApplicationInfo
 
@@ -113,6 +120,8 @@ module Aws::ApplicationInsights
     BadRequestException.struct_class = Types::BadRequestException
 
     CreateApplicationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
+    CreateApplicationRequest.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
+    CreateApplicationRequest.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_info, Shapes::ShapeRef.new(shape: ApplicationInfo, location_name: "ApplicationInfo"))
@@ -260,6 +269,15 @@ module Aws::ApplicationInsights
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMsg, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    UpdateApplicationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
+    UpdateApplicationRequest.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
+    UpdateApplicationRequest.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
+    UpdateApplicationRequest.add_member(:remove_sns_topic, Shapes::ShapeRef.new(shape: RemoveSNSTopic, location_name: "RemoveSNSTopic"))
+    UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
+
+    UpdateApplicationResponse.add_member(:application_info, Shapes::ShapeRef.new(shape: ApplicationInfo, location_name: "ApplicationInfo"))
+    UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
 
     UpdateComponentConfigurationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
     UpdateComponentConfigurationRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentName, required: true, location_name: "ComponentName"))
@@ -473,6 +491,17 @@ module Aws::ApplicationInsights
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_component, Seahorse::Model::Operation.new.tap do |o|

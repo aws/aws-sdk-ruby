@@ -44,6 +44,8 @@ module Aws::GuardDuty
     #
     class AcceptInvitationResponse < Aws::EmptyStructure; end
 
+    # Contains information about the access keys.
+    #
     # @!attribute [rw] access_key_id
     #   Access key ID of the user.
     #   @return [String]
@@ -70,6 +72,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the account.
+    #
     # @note When making an API call, you may pass AccountDetail
     #   data as a hash:
     #
@@ -94,6 +98,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about action.
+    #
     # @!attribute [rw] action_type
     #   GuardDuty Finding activity type.
     #   @return [String]
@@ -156,6 +162,8 @@ module Aws::GuardDuty
     #
     class ArchiveFindingsResponse < Aws::EmptyStructure; end
 
+    # Contains information about the API operation.
+    #
     # @!attribute [rw] api
     #   AWS API name.
     #   @return [String]
@@ -205,6 +213,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the city associated with the IP address.
+    #
     # @!attribute [rw] city_name
     #   City name of the remote IP address.
     #   @return [String]
@@ -216,6 +226,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the condition.
+    #
     # @note When making an API call, you may pass Condition
     #   data as a hash:
     #
@@ -235,39 +247,43 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] eq
-    #   Represents the equal condition to be applied to a single field when
-    #   querying for findings.
+    #   Deprecated. Represents the equal condition to be applied to a single
+    #   field when querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] neq
-    #   Represents the not equal condition to be applied to a single field
-    #   when querying for findings.
+    #   Deprecated. Represents the not equal condition to be applied to a
+    #   single field when querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] gt
-    #   Represents a greater than condition to be applied to a single field
-    #   when querying for findings.
+    #   Deprecated. Represents a greater than condition to be applied to a
+    #   single field when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] gte
-    #   Represents a greater than equal condition to be applied to a single
-    #   field when querying for findings.
+    #   Deprecated. Represents a greater than equal condition to be applied
+    #   to a single field when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] lt
-    #   Represents a less than condition to be applied to a single field
-    #   when querying for findings.
+    #   Deprecated. Represents a less than condition to be applied to a
+    #   single field when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] lte
-    #   Represents a less than equal condition to be applied to a single
-    #   field when querying for findings.
+    #   Deprecated. Represents a less than equal condition to be applied to
+    #   a single field when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] equals
+    #   Represents an **equal** condition to be applied to a single field
+    #   when querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] not_equals
+    #   Represents an **not equal** condition to be applied to a single
+    #   field when querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] greater_than
@@ -308,6 +324,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the country.
+    #
     # @!attribute [rw] country_code
     #   Country code of the remote IP address.
     #   @return [String]
@@ -865,8 +883,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   A list of objects containing the unprocessed account and a result
-    #   string explaining why it was unprocessed.
+    #   The accounts that could not be processed.
     #   @return [Array<Types::UnprocessedAccount>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembersResponse AWS API Documentation
@@ -964,6 +981,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the DNS request.
+    #
     # @!attribute [rw] domain
     #   Domain information for the DNS request.
     #   @return [String]
@@ -975,6 +994,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the domain.
+    #
     # @!attribute [rw] domain
     #   Domain information for the AWS API call.
     #   @return [String]
@@ -986,69 +1007,79 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the reason that the finding was generated.
+    #
+    # @!attribute [rw] threat_intelligence_details
+    #   A list of threat intelligence details related to the evidence.
+    #   @return [Array<Types::ThreatIntelligenceDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Evidence AWS API Documentation
+    #
+    class Evidence < Struct.new(
+      :threat_intelligence_details)
+      include Aws::Structure
+    end
+
+    # Contains information about the finding.
+    #
     # @!attribute [rw] account_id
-    #   AWS account ID where the activity occurred that prompted GuardDuty
-    #   to generate a finding.
+    #   The ID of the account in which the finding was generated.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN of a finding described by the action.
+    #   The ARN for the finding.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   The confidence level of a finding.
+    #   The confidence score for the finding.
     #   @return [Float]
     #
     # @!attribute [rw] created_at
-    #   The time stamp at which a finding was generated.
+    #   The time and date at which the finding was created.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of a finding.
+    #   The description of the finding.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier that corresponds to a finding described by the
-    #   action.
+    #   The ID of the finding.
     #   @return [String]
     #
     # @!attribute [rw] partition
-    #   The AWS resource partition.
+    #   The partition associated with the finding.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS region where the activity occurred that prompted GuardDuty
-    #   to generate a finding.
+    #   The Region in which the finding was generated.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The AWS resource associated with the activity that prompted
-    #   GuardDuty to generate a finding.
+    #   Contains information about the resource.
     #   @return [Types::Resource]
     #
     # @!attribute [rw] schema_version
-    #   Findings' schema version.
+    #   The version of the schema used for the finding.
     #   @return [String]
     #
     # @!attribute [rw] service
-    #   Additional information assigned to the generated finding by
-    #   GuardDuty.
+    #   Contains information about the service.
     #   @return [Types::Service]
     #
     # @!attribute [rw] severity
-    #   The severity of a finding.
+    #   The severity of the finding.
     #   @return [Float]
     #
     # @!attribute [rw] title
-    #   The title of a finding.
+    #   The title for the finding.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of a finding described by the action.
+    #   The type of the finding.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The time stamp at which a finding was last updated.
+    #   The time and date at which the finding was laste updated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Finding AWS API Documentation
@@ -1072,6 +1103,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains finding criteria information.
+    #
     # @note When making an API call, you may pass FindingCriteria
     #   data as a hash:
     #
@@ -1106,6 +1139,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about finding statistics.
+    #
     # @!attribute [rw] count_by_severity
     #   Represents a map of severity to count statistic for a set of
     #   findings
@@ -1118,6 +1153,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the
+    #
     # @!attribute [rw] lat
     #   Latitude information of remote IP address.
     #   @return [Float]
@@ -1561,6 +1598,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the instance profile.
+    #
     # @!attribute [rw] arn
     #   AWS EC2 instance profile ARN.
     #   @return [String]
@@ -1577,6 +1616,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the details of an instance.
+    #
     # @!attribute [rw] availability_zone
     #   The availability zone of the EC2 instance.
     #   @return [String]
@@ -1661,6 +1702,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the invitation.
+    #
     # @!attribute [rw] account_id
     #   Inviter account ID
     #   @return [String]
@@ -2108,6 +2151,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] tags
+    #   The tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListTagsForResourceResponse AWS API Documentation
@@ -2170,6 +2214,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the port for the local connection.
+    #
     # @!attribute [rw] port
     #   Port number of the local connection.
     #   @return [Integer]
@@ -2186,8 +2232,10 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the Master account and invitation.
+    #
     # @!attribute [rw] account_id
-    #   Master account ID
+    #   The ID of the account used as the Master account.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
@@ -2201,7 +2249,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] invited_at
-    #   Timestamp at which the invitation was sent
+    #   Timestamp at which the invitation was sent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Master AWS API Documentation
@@ -2214,6 +2262,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Continas information about the member account
+    #
     # @!attribute [rw] account_id
     #   Member account ID.
     #   @return [String]
@@ -2255,6 +2305,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the network connection.
+    #
     # @!attribute [rw] blocked
     #   Network connection blocked information.
     #   @return [Boolean]
@@ -2291,6 +2343,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the network interface.
+    #
     # @!attribute [rw] ipv_6_addresses
     #   A list of EC2 instance IPv6 address information.
     #   @return [Array<String>]
@@ -2347,6 +2401,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Continas information about the organization.
+    #
     # @!attribute [rw] asn
     #   Autonomous system number of the internet provider of the remote IP
     #   address.
@@ -2374,6 +2430,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the port probe.
+    #
     # @!attribute [rw] blocked
     #   Port probe blocked information.
     #   @return [Boolean]
@@ -2390,6 +2448,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the port probe details.
+    #
     # @!attribute [rw] local_port_details
     #   Local port information of the connection.
     #   @return [Types::LocalPortDetails]
@@ -2406,6 +2466,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the private IP address.
+    #
     # @!attribute [rw] private_dns_name
     #   Private DNS name of the EC2 instance.
     #   @return [String]
@@ -2422,6 +2484,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the product code.
+    #
     # @!attribute [rw] code
     #   Product code information.
     #   @return [String]
@@ -2438,6 +2502,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Continas information about the remote IP address.
+    #
     # @!attribute [rw] city
     #   City information of the remote IP address.
     #   @return [Types::City]
@@ -2469,6 +2535,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the remote port.
+    #
     # @!attribute [rw] port
     #   Port number of the remote connection.
     #   @return [Integer]
@@ -2485,6 +2553,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the resource.
+    #
     # @!attribute [rw] access_key_details
     #   The IAM access key details (IAM user information) of a user that
     #   engaged in the activity that prompted GuardDuty to generate a
@@ -2509,6 +2579,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the security group.
+    #
     # @!attribute [rw] group_id
     #   EC2 instance's security group ID.
     #   @return [String]
@@ -2525,9 +2597,15 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the service.
+    #
     # @!attribute [rw] action
     #   Information about the activity described in a finding.
     #   @return [Types::Action]
+    #
+    # @!attribute [rw] evidence
+    #   An evidence object associated with the service.
+    #   @return [Types::Evidence]
     #
     # @!attribute [rw] archived
     #   Indicates whether this finding is archived.
@@ -2567,6 +2645,7 @@ module Aws::GuardDuty
     #
     class Service < Struct.new(
       :action,
+      :evidence,
       :archived,
       :count,
       :detector_id,
@@ -2578,6 +2657,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the criteria for sorting.
+    #
     # @note When making an API call, you may pass SortCriteria
     #   data as a hash:
     #
@@ -2679,6 +2760,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the tag associated with the resource.
+    #
     # @!attribute [rw] key
     #   EC2 instance tag key.
     #   @return [String]
@@ -2725,6 +2808,26 @@ module Aws::GuardDuty
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # An instance of a threat intelligence detail that constitutes evidence
+    # for the finding.
+    #
+    # @!attribute [rw] threat_list_name
+    #   The name of the threat intelligence list that triggered the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] threat_names
+    #   A list of names of the threats in the threat intelligence list that
+    #   triggered the finding.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ThreatIntelligenceDetail AWS API Documentation
+    #
+    class ThreatIntelligenceDetail < Struct.new(
+      :threat_list_name,
+      :threat_names)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UnarchiveFindingsRequest
     #   data as a hash:
     #
@@ -2754,6 +2857,8 @@ module Aws::GuardDuty
     #
     class UnarchiveFindingsResponse < Aws::EmptyStructure; end
 
+    # Contains information about the accounts that were not processed.
+    #
     # @!attribute [rw] account_id
     #   AWS Account ID.
     #   @return [String]

@@ -3330,12 +3330,10 @@ module Aws::WAFRegional
     # Returns an array of IPSetSummary objects in the response.
     #
     # @option params [String] :next_marker
-    #   If you specify a value for `Limit` and you have more `IPSets` than the
-    #   value of `Limit`, AWS WAF returns a `NextMarker` value in the response
-    #   that allows you to list another group of `IPSets`. For the second and
-    #   subsequent `ListIPSets` requests, specify the value of `NextMarker`
-    #   from the previous response to get information about another batch of
-    #   `IPSets`.
+    #   AWS WAF returns a `NextMarker` value in the response that allows you
+    #   to list another group of `IPSets`. For the second and subsequent
+    #   `ListIPSets` requests, specify the value of `NextMarker` from the
+    #   previous response to get information about another batch of `IPSets`.
     #
     # @option params [Integer] :limit
     #   Specifies the number of `IPSet` objects that you want AWS WAF to
@@ -4061,7 +4059,7 @@ module Aws::WAFRegional
     # You can access information about all traffic that AWS WAF inspects
     # using the following steps:
     #
-    # 1.  Create an Amazon Kinesis Data Firehose .
+    # 1.  Create an Amazon Kinesis Data Firehose.
     #
     #     Create the data firehose with a PUT source and in the region that
     #     you are operating. However, if you are capturing logs for Amazon
@@ -4089,6 +4087,11 @@ module Aws::WAFRegional
     #   The Amazon Kinesis Data Firehose that contains the inspected traffic
     #   information, the redacted fields details, and the Amazon Resource Name
     #   (ARN) of the web ACL to monitor.
+    #
+    #   <note markdown="1"> When specifying `Type` in `RedactedFields`, you must use one of the
+    #   following values: `URI`, `QUERY_STRING`, `HEADER`, or `METHOD`.
+    #
+    #    </note>
     #
     # @return [Types::PutLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5658,7 +5661,7 @@ module Aws::WAFRegional
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafregional'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -10,6 +10,22 @@ module Aws::EKS
 
     extend Aws::Errors::DynamicErrors
 
+    class BadRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EKS::Types::BadRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class ClientException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -64,6 +80,22 @@ module Aws::EKS
       # @return [String]
       def cluster_name
         @data[:cluster_name]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class NotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EKS::Types::NotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
       # @return [String]

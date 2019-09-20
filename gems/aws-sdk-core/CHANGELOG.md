@@ -3,10 +3,55 @@ Unreleased Changes
 
 * Feature - Support enable STS regional endpoints by `sts_regional_endpoints: 'regional'`
 
+3.68.0 (2019-09-16)
+------------------
+
+* Feature - Support assuming a role with `:source_profile` from a profile that can be resolved from a `ProcessCredentials` provider.
+
+3.67.0 (2019-09-09)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.66.0 (2019-09-04)
+------------------
+
+* Feature - Support CLI AWS_DEFAULT_PROFILE environment variable [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1452).
+
+3.65.1 (2019-08-28)
+------------------
+
+* Issue - Auto refresh credentials for Route53 `ExpiredToken` errors.
+
+3.65.0 (2019-08-27)
+------------------
+
+* Feature - Support assuming a role `:source_profile` profile with `AssumeRoleWebIdentityCredentials`.
+
+3.64.0 (2019-08-20)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.63.0 (2019-08-15)
+------------------
+
+* Feature - Support passing AssumeRole `duration_seconds` from shared credentials/config file.
+
+3.62.0 (2019-08-02)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.61.2 (2019-07-29)
+------------------
+
+* Issue - Add `Aws::STS::InvalidIdentityToken` and `Aws::Errors::NoSuchEndpointError` error for retry.
+
 3.61.1 (2019-07-25)
 ------------------
 
-* Issue - Fix default STS Client credential sourcing in Aws::AssumeRoleWebIdentityCredentialsProvider
+* Issue - Fix default STS Client credential sourcing in `Aws::AssumeRoleWebIdentityCredentialsProvider`.
 
 3.61.0 (2019-07-24)
 ------------------
@@ -55,7 +100,7 @@ Unreleased Changes
 3.54.1 (2019-05-30)
 ------------------
 
-* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information. 
+* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information.
 
 3.54.0 (2019-05-28)
 ------------------
@@ -110,7 +155,7 @@ Unreleased Changes
 3.48.6 (2019-04-26)
 ------------------
 
-* Issue - Call RefreshingCredentials initialize method in ProcessCredentials to set mutex. 
+* Issue - Call RefreshingCredentials initialize method in ProcessCredentials to set mutex.
 
 3.48.5 (2019-04-24)
 ------------------
@@ -361,7 +406,7 @@ Unreleased Changes
 3.20.0 (2018-04-23)
 ------------------
 
-* Feature - Aws::InstanceProfileCredentials - Add sending a User-Agent other than the default User-Agent in Ruby.  Adding the User-Agent `aws-sdk-ruby3/<version>` to allow protection against Server Side Request Forgery (SSRF) credential theft vectors by use of a metadata proxy.  
+* Feature - Aws::InstanceProfileCredentials - Add sending a User-Agent other than the default User-Agent in Ruby.  Adding the User-Agent `aws-sdk-ruby3/<version>` to allow protection against Server Side Request Forgery (SSRF) credential theft vectors by use of a metadata proxy.
 
 3.19.0 (2018-04-04)
 ------------------

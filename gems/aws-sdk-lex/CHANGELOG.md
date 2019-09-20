@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2019-08-09)
+------------------
+
+* Feature - Manage Amazon Lex session state using APIs on the client
+
 1.18.0 (2019-07-25)
 ------------------
 

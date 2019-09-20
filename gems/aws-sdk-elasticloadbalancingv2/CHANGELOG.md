@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2019-09-12)
+------------------
+
+* Feature - Documentation updates for elasticloadbalancingv2: This release adds support for TLS SNI on Network Load Balancers
+
 1.33.0 (2019-07-25)
 ------------------
 

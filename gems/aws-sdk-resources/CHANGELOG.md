@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+3.54.0 (2019-09-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-workmailmessageflow` gem.
+
+3.53.0 (2019-09-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-qldbsession` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-qldb` gem.
+
+3.52.0 (2019-08-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-forecastservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-forecastqueryservice` gem.
+
+3.51.0 (2019-08-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lakeformation` gem.
+
 3.50.0 (2019-07-11)
 ------------------
 

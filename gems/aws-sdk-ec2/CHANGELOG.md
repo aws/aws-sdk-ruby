@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2019-09-12)
+------------------
+
+* Feature - Fix for FleetActivityStatus and FleetStateCode enum
+
+1.108.0 (2019-09-11)
+------------------
+
+* Feature - This release adds support for new data fields and log format in VPC flow logs.
+
+1.107.0 (2019-09-09)
+------------------
+
+* Feature - This release expands Site-to-Site VPN tunnel options to allow customers to restrict security algorithms and configure timer settings for VPN connections. Customers can specify these new options while creating new VPN connections, or they can modify the tunnel options on existing connections using a new API.
+
+1.106.0 (2019-08-23)
+------------------
+
+* Feature - This release of EC2 VM Import Export adds support for exporting Amazon Machine Image(AMI)s to a VM file
+
+1.105.0 (2019-08-15)
+------------------
+
+* Feature - This release adds an option to use private certificates from AWS Certificate Manager (ACM) to authenticate a Site-to-Site VPN connection's tunnel endpoints and customer gateway device.
+
+1.104.0 (2019-08-14)
+------------------
+
+* Feature - This release adds a new API called SendDiagnosticInterrupt, which allows you to send diagnostic interrupts to your EC2 instance.
+
+1.103.0 (2019-08-05)
+------------------
+
+* Feature - Amazon EC2 now supports a new Spot allocation strategy "Capacity-optimized" that fulfills your request using Spot Instance pools that are optimally chosen based on the available Spot capacity.
+
+1.102.0 (2019-07-26)
+------------------
+
+* Feature - You can now create EC2 Capacity Reservations using Availability Zone ID or Availability Zone name. You can view usage of Amazon EC2 Capacity Reservations per AWS account.
+
 1.101.0 (2019-07-25)
 ------------------
 

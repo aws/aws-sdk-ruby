@@ -350,6 +350,7 @@ module Aws::Athena
     #   resp.query_executions[0].status.completion_date_time #=> Time
     #   resp.query_executions[0].statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.data_scanned_in_bytes #=> Integer
+    #   resp.query_executions[0].statistics.data_manifest_location #=> String
     #   resp.query_executions[0].work_group #=> String
     #   resp.unprocessed_query_execution_ids #=> Array
     #   resp.unprocessed_query_execution_ids[0].query_execution_id #=> String
@@ -473,6 +474,7 @@ module Aws::Athena
     #       enforce_work_group_configuration: false,
     #       publish_cloud_watch_metrics_enabled: false,
     #       bytes_scanned_cutoff_per_query: 1,
+    #       requester_pays_enabled: false,
     #     },
     #     description: "WorkGroupDescriptionString",
     #     tags: [
@@ -620,6 +622,7 @@ module Aws::Athena
     #   resp.query_execution.status.completion_date_time #=> Time
     #   resp.query_execution.statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_execution.statistics.data_scanned_in_bytes #=> Integer
+    #   resp.query_execution.statistics.data_manifest_location #=> String
     #   resp.query_execution.work_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution AWS API Documentation
@@ -631,10 +634,25 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Returns the results of a single query execution specified by
-    # `QueryExecutionId` if you have access to the workgroup in which the
-    # query ran. This request does not execute the query but returns
+    # Streams the results of a single query execution specified by
+    # `QueryExecutionId` from the Athena query results location in Amazon
+    # S3. For more information, see [Query Results][1] in the *Amazon Athena
+    # User Guide*. This request does not execute the query but returns
     # results. Use StartQueryExecution to run a query.
+    #
+    # To stream query results successfully, the IAM principal with
+    # permission to call `GetQueryResults` also must have permissions to the
+    # Amazon S3 `GetObject` action for the Athena query results location.
+    #
+    # IAM principals with permission to the Amazon S3 `GetObject` action for
+    # the query results location are able to retrieve query results from
+    # Amazon S3 even if permission to the `GetQueryResults` action is
+    # denied. To restrict user or role access, ensure that Amazon S3
+    # permissions to the Athena query location are denied.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
     #
     # @option params [required, String] :query_execution_id
     #   The unique ID of the query execution.
@@ -713,6 +731,7 @@ module Aws::Athena
     #   resp.work_group.configuration.enforce_work_group_configuration #=> Boolean
     #   resp.work_group.configuration.publish_cloud_watch_metrics_enabled #=> Boolean
     #   resp.work_group.configuration.bytes_scanned_cutoff_per_query #=> Integer
+    #   resp.work_group.configuration.requester_pays_enabled #=> Boolean
     #   resp.work_group.description #=> String
     #   resp.work_group.creation_time #=> Time
     #
@@ -1131,6 +1150,7 @@ module Aws::Athena
     #       publish_cloud_watch_metrics_enabled: false,
     #       bytes_scanned_cutoff_per_query: 1,
     #       remove_bytes_scanned_cutoff_per_query: false,
+    #       requester_pays_enabled: false,
     #     },
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #   })
@@ -1157,7 +1177,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

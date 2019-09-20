@@ -389,11 +389,14 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
+    #   The ID of the subnet. You can specify one subnet per Availability
+    #   Zone.
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_addresses
-    #   \[Network Load Balancers\] The static IP address.
+    #   \[Network Load Balancers\] If you need static IP addresses for your
+    #   load balancer, you can specify one Elastic IP address per
+    #   Availability Zone when you create the load balancer.
     #   @return [Array<Types::LoadBalancerAddress>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZone AWS API Documentation
@@ -650,7 +653,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
     #   Availability Zones. You can specify one Elastic IP address per
-    #   subnet.
+    #   subnet if you need static IP addresses for your load balancer.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] security_groups
@@ -909,7 +912,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] vpc_id
     #   The identifier of the virtual private cloud (VPC). If the target is
-    #   a Lambda function, this parameter does not apply.
+    #   a Lambda function, this parameter does not apply. Otherwise, this
+    #   parameter is required.
     #   @return [String]
     #
     # @!attribute [rw] health_check_protocol
@@ -3569,10 +3573,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `Target.Timeout` - The health check requests timed out.
     #
-    #   * `Target.FailedHealthChecks` - The health checks failed because the
-    #     connection to the target timed out, the target response was
-    #     malformed, or the target failed the health check for an unknown
-    #     reason.
+    #   * `Target.FailedHealthChecks` - The load balancer received an error
+    #     while establishing a connection to the target or the target
+    #     response was malformed.
     #
     #   * `Elb.InternalError` - The health checks failed due to an internal
     #     error.

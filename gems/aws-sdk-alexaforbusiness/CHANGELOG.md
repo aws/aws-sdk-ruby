@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-08-20)
+------------------
+
+* Feature - Adding support for optional locale input in CreateProfile and UpdateProfile APIs
+
 1.29.0 (2019-07-25)
 ------------------
 

@@ -286,6 +286,7 @@ module Aws::RAM
     #   resp.resource_share_invitation.status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "EXPIRED"
     #   resp.resource_share_invitation.resource_share_associations #=> Array
     #   resp.resource_share_invitation.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_invitation.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_invitation.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -338,6 +339,7 @@ module Aws::RAM
     #
     #   resp.resource_share_associations #=> Array
     #   resp.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -374,7 +376,7 @@ module Aws::RAM
     #   One or more tags.
     #
     # @option params [Boolean] :allow_external_principals
-    #   Indicates whether principals outside your organization can be
+    #   Indicates whether principals outside your AWS organization can be
     #   associated with a resource share.
     #
     # @option params [String] :client_token
@@ -495,6 +497,7 @@ module Aws::RAM
     #
     #   resp.resource_share_associations #=> Array
     #   resp.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -513,7 +516,9 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Enables resource sharing within your organization.
+    # Enables resource sharing within your AWS Organization.
+    #
+    # The caller must be the master account for the AWS Organization.
     #
     # @return [Types::EnableSharingWithAwsOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -532,7 +537,8 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the policies for the specifies resources.
+    # Gets the policies for the specified resources that you own and have
+    # shared.
     #
     # @option params [required, Array<String>] :resource_arns
     #   The Amazon Resource Names (ARN) of the resources.
@@ -577,7 +583,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the associations for the specified resource share.
+    # Gets the resources or principals for the resource shares that you own.
     #
     # @option params [required, String] :association_type
     #   The association type.
@@ -586,13 +592,15 @@ module Aws::RAM
     #   The Amazon Resource Names (ARN) of the resource shares.
     #
     # @option params [String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource. You cannot specify
+    #   this parameter if the association type is `PRINCIPAL`.
     #
     # @option params [String] :principal
-    #   The principal.
+    #   The principal. You cannot specify this parameter if the association
+    #   type is `RESOURCE`.
     #
     # @option params [String] :association_status
-    #   The status of the association.
+    #   The association status.
     #
     # @option params [String] :next_token
     #   The token for the next page of results.
@@ -623,6 +631,7 @@ module Aws::RAM
     #
     #   resp.resource_share_associations #=> Array
     #   resp.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -641,7 +650,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the specified invitations for resource sharing.
+    # Gets the invitations for resource sharing that you've received.
     #
     # @option params [Array<String>] :resource_share_invitation_arns
     #   The Amazon Resource Names (ARN) of the invitations.
@@ -683,6 +692,7 @@ module Aws::RAM
     #   resp.resource_share_invitations[0].status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "EXPIRED"
     #   resp.resource_share_invitations[0].resource_share_associations #=> Array
     #   resp.resource_share_invitations[0].resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_invitations[0].resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_invitations[0].resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_invitations[0].resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_invitations[0].resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -701,7 +711,8 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the specified resource shares or all of your resource shares.
+    # Gets the resource shares that you own or the resource shares that are
+    # shared with you.
     #
     # @option params [Array<String>] :resource_share_arns
     #   The Amazon Resource Names (ARN) of the resource shares.
@@ -773,7 +784,56 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the principals with access to the specified resource.
+    # Lists the resources in a resource share that is shared with you but
+    # that the invitation is still pending for.
+    #
+    # @option params [required, String] :resource_share_invitation_arn
+    #   The Amazon Resource Name (ARN) of the invitation.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::ListPendingInvitationResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPendingInvitationResourcesResponse#resources #resources} => Array&lt;Types::Resource&gt;
+    #   * {Types::ListPendingInvitationResourcesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pending_invitation_resources({
+    #     resource_share_invitation_arn: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resources #=> Array
+    #   resp.resources[0].arn #=> String
+    #   resp.resources[0].type #=> String
+    #   resp.resources[0].resource_share_arn #=> String
+    #   resp.resources[0].status #=> String, one of "AVAILABLE", "ZONAL_RESOURCE_INACCESSIBLE", "LIMIT_EXCEEDED", "UNAVAILABLE", "PENDING"
+    #   resp.resources[0].status_message #=> String
+    #   resp.resources[0].creation_time #=> Time
+    #   resp.resources[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPendingInvitationResources AWS API Documentation
+    #
+    # @overload list_pending_invitation_resources(params = {})
+    # @param [Hash] params ({})
+    def list_pending_invitation_resources(params = {}, options = {})
+      req = build_request(:list_pending_invitation_resources, params)
+      req.send_request(options)
+    end
+
+    # Lists the principals that you have shared resources with or the
+    # principals that have shared resources with you.
     #
     # @option params [required, String] :resource_owner
     #   The type of owner.
@@ -786,6 +846,9 @@ module Aws::RAM
     #
     # @option params [String] :resource_type
     #   The resource type.
+    #
+    #   Valid values: `route53resolver:ResolverRule` \| `ec2:TransitGateway`
+    #   \| `ec2:Subnet` \| `license-manager:LicenseConfiguration`
     #
     # @option params [Array<String>] :resource_share_arns
     #   The Amazon Resource Names (ARN) of the resource shares.
@@ -834,7 +897,8 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the resources that the specified principal can access.
+    # Lists the resources that you added to a resource shares or the
+    # resources that are shared with you.
     #
     # @option params [required, String] :resource_owner
     #   The type of owner.
@@ -844,6 +908,9 @@ module Aws::RAM
     #
     # @option params [String] :resource_type
     #   The resource type.
+    #
+    #   Valid values: `route53resolver:ResolverRule` \| `ec2:TransitGateway`
+    #   \| `ec2:Subnet` \| `license-manager:LicenseConfiguration`
     #
     # @option params [Array<String>] :resource_arns
     #   The Amazon Resource Names (ARN) of the resources.
@@ -882,7 +949,7 @@ module Aws::RAM
     #   resp.resources[0].arn #=> String
     #   resp.resources[0].type #=> String
     #   resp.resources[0].resource_share_arn #=> String
-    #   resp.resources[0].status #=> String, one of "AVAILABLE", "ZONAL_RESOURCE_INACCESSIBLE", "LIMIT_EXCEEDED", "UNAVAILABLE"
+    #   resp.resources[0].status #=> String, one of "AVAILABLE", "ZONAL_RESOURCE_INACCESSIBLE", "LIMIT_EXCEEDED", "UNAVAILABLE", "PENDING"
     #   resp.resources[0].status_message #=> String
     #   resp.resources[0].creation_time #=> Time
     #   resp.resources[0].last_updated_time #=> Time
@@ -929,6 +996,7 @@ module Aws::RAM
     #   resp.resource_share_invitation.status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "EXPIRED"
     #   resp.resource_share_invitation.resource_share_associations #=> Array
     #   resp.resource_share_invitation.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_invitation.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_invitation.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -947,7 +1015,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Adds the specified tags to the specified resource share.
+    # Adds the specified tags to the specified resource share that you own.
     #
     # @option params [required, String] :resource_share_arn
     #   The Amazon Resource Name (ARN) of the resource share.
@@ -978,7 +1046,8 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Removes the specified tags from the specified resource share.
+    # Removes the specified tags from the specified resource share that you
+    # own.
     #
     # @option params [required, String] :resource_share_arn
     #   The Amazon Resource Name (ARN) of the resource share.
@@ -1004,7 +1073,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Updates the specified resource share.
+    # Updates the specified resource share that you own.
     #
     # @option params [required, String] :resource_share_arn
     #   The Amazon Resource Name (ARN) of the resource share.
@@ -1013,7 +1082,7 @@ module Aws::RAM
     #   The name of the resource share.
     #
     # @option params [Boolean] :allow_external_principals
-    #   Indicates whether principals outside your organization can be
+    #   Indicates whether principals outside your AWS organization can be
     #   associated with a resource share.
     #
     # @option params [String] :client_token
@@ -1071,7 +1140,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

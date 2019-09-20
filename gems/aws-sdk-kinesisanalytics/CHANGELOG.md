@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-09-06)
+------------------
+
+* Feature - Documentation updates for kinesisanalytics
+
 1.19.0 (2019-07-25)
 ------------------
 

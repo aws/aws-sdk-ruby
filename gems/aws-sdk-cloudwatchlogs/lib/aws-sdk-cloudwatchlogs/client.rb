@@ -351,6 +351,9 @@ module Aws::CloudWatchLogs
     # you can specify a prefix to be used as the Amazon S3 key prefix for
     # all exported objects.
     #
+    # Exporting to S3 buckets that are encrypted with AES-256 is supported.
+    # Exporting to S3 buckets encrypted with SSE-KMS is not supported.
+    #
     # @option params [String] :task_name
     #   The name of the export task.
     #
@@ -1308,6 +1311,9 @@ module Aws::CloudWatchLogs
     #   the value is false, the latest log events are returned first. The
     #   default value is false.
     #
+    #   If you are using `nextToken` in this operation, you must specify
+    #   `true` for `startFromHead`.
+    #
     # @return [Types::GetLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLogEventsResponse#events #events} => Array&lt;Types::OutputLogEvent&gt;
@@ -1432,8 +1438,7 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Returns the results from the specified query. If the query is in
-    # progress, partial results of that current execution are returned.
+    # Returns the results from the specified query.
     #
     # Only the fields requested in the query are returned, along with a
     # `@ptr` field which is the identifier for the log record. You can use
@@ -1441,6 +1446,11 @@ module Aws::CloudWatchLogs
     #
     # `GetQueryResults` does not start a query execution. To run a query,
     # use .
+    #
+    # If the value of the `Status` field in the output is `Running`, this
+    # operation returns only partial results. If you see a value of
+    # `Scheduled` or `Running` for the status, you can retry the operation
+    # later to see the final results.
     #
     # @option params [required, String] :query_id
     #   The ID number of the query.
@@ -1509,15 +1519,15 @@ module Aws::CloudWatchLogs
     # Creates or updates a destination. A destination encapsulates a
     # physical resource (such as an Amazon Kinesis stream) and enables you
     # to subscribe to a real-time stream of log events for a different
-    # account, ingested using PutLogEvents. Currently, the only supported
-    # physical resource is a Kinesis stream belonging to the same account as
-    # the destination.
+    # account, ingested using PutLogEvents. A destination can be an Amazon
+    # Kinesis stream, Amazon Kinesis Data Firehose strea, or an AWS Lambda
+    # function.
     #
     # Through an access policy, a destination controls what is written to
-    # its Kinesis stream. By default, `PutDestination` does not set any
-    # access policy with the destination, which means a cross-account user
-    # cannot call PutSubscriptionFilter against this destination. To enable
-    # this, the destination owner must call PutDestinationPolicy after
+    # it. By default, `PutDestination` does not set any access policy with
+    # the destination, which means a cross-account user cannot call
+    # PutSubscriptionFilter against this destination. To enable this, the
+    # destination owner must call PutDestinationPolicy after
     # `PutDestination`.
     #
     # @option params [required, String] :destination_name
@@ -1908,8 +1918,18 @@ module Aws::CloudWatchLogs
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #
-    # @option params [required, String] :log_group_name
+    # @option params [String] :log_group_name
     #   The log group on which to perform the query.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
+    #
+    # @option params [Array<String>] :log_group_names
+    #   The list of log groups to be queried. You can include up to 20 log
+    #   groups.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
     #
     # @option params [required, Integer] :start_time
     #   The beginning of the time range to query. The range is inclusive, so
@@ -1941,7 +1961,8 @@ module Aws::CloudWatchLogs
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_query({
-    #     log_group_name: "LogGroupName", # required
+    #     log_group_name: "LogGroupName",
+    #     log_group_names: ["LogGroupName"],
     #     start_time: 1, # required
     #     end_time: 1, # required
     #     query_string: "QueryString", # required
@@ -2113,7 +2134,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

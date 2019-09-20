@@ -53,6 +53,8 @@ module Aws::Glue
     BooleanNullable = Shapes::BooleanShape.new(name: 'BooleanNullable')
     BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
     BoundedPartitionValueList = Shapes::ListShape.new(name: 'BoundedPartitionValueList')
+    CancelMLTaskRunRequest = Shapes::StructureShape.new(name: 'CancelMLTaskRunRequest')
+    CancelMLTaskRunResponse = Shapes::StructureShape.new(name: 'CancelMLTaskRunResponse')
     CatalogEncryptionMode = Shapes::StringShape.new(name: 'CatalogEncryptionMode')
     CatalogEntries = Shapes::ListShape.new(name: 'CatalogEntries')
     CatalogEntry = Shapes::StructureShape.new(name: 'CatalogEntry')
@@ -77,15 +79,18 @@ module Aws::Glue
     CodeGenNodeType = Shapes::StringShape.new(name: 'CodeGenNodeType')
     Column = Shapes::StructureShape.new(name: 'Column')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
+    ColumnNameString = Shapes::StringShape.new(name: 'ColumnNameString')
     ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
     ColumnValueStringList = Shapes::ListShape.new(name: 'ColumnValueStringList')
     ColumnValuesString = Shapes::StringShape.new(name: 'ColumnValuesString')
     CommentString = Shapes::StringShape.new(name: 'CommentString')
+    Comparator = Shapes::StringShape.new(name: 'Comparator')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConcurrentRunsExceededException = Shapes::StructureShape.new(name: 'ConcurrentRunsExceededException')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionCheckFailureException = Shapes::StructureShape.new(name: 'ConditionCheckFailureException')
     ConditionList = Shapes::ListShape.new(name: 'ConditionList')
+    ConfusionMatrix = Shapes::StructureShape.new(name: 'ConfusionMatrix')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionInput = Shapes::StructureShape.new(name: 'ConnectionInput')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
@@ -126,6 +131,8 @@ module Aws::Glue
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResponse = Shapes::StructureShape.new(name: 'CreateJobResponse')
     CreateJsonClassifierRequest = Shapes::StructureShape.new(name: 'CreateJsonClassifierRequest')
+    CreateMLTransformRequest = Shapes::StructureShape.new(name: 'CreateMLTransformRequest')
+    CreateMLTransformResponse = Shapes::StructureShape.new(name: 'CreateMLTransformResponse')
     CreatePartitionRequest = Shapes::StructureShape.new(name: 'CreatePartitionRequest')
     CreatePartitionResponse = Shapes::StructureShape.new(name: 'CreatePartitionResponse')
     CreateScriptRequest = Shapes::StructureShape.new(name: 'CreateScriptRequest')
@@ -151,6 +158,8 @@ module Aws::Glue
     DagEdges = Shapes::ListShape.new(name: 'DagEdges')
     DagNodes = Shapes::ListShape.new(name: 'DagNodes')
     DataCatalogEncryptionSettings = Shapes::StructureShape.new(name: 'DataCatalogEncryptionSettings')
+    DataLakePrincipal = Shapes::StructureShape.new(name: 'DataLakePrincipal')
+    DataLakePrincipalString = Shapes::StringShape.new(name: 'DataLakePrincipalString')
     Database = Shapes::StructureShape.new(name: 'Database')
     DatabaseInput = Shapes::StructureShape.new(name: 'DatabaseInput')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
@@ -169,6 +178,8 @@ module Aws::Glue
     DeleteDevEndpointResponse = Shapes::StructureShape.new(name: 'DeleteDevEndpointResponse')
     DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
     DeleteJobResponse = Shapes::StructureShape.new(name: 'DeleteJobResponse')
+    DeleteMLTransformRequest = Shapes::StructureShape.new(name: 'DeleteMLTransformRequest')
+    DeleteMLTransformResponse = Shapes::StructureShape.new(name: 'DeleteMLTransformResponse')
     DeletePartitionRequest = Shapes::StructureShape.new(name: 'DeletePartitionRequest')
     DeletePartitionResponse = Shapes::StructureShape.new(name: 'DeletePartitionResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
@@ -202,12 +213,18 @@ module Aws::Glue
     ErrorByName = Shapes::MapShape.new(name: 'ErrorByName')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
+    EvaluationMetrics = Shapes::StructureShape.new(name: 'EvaluationMetrics')
     ExecutionProperty = Shapes::StructureShape.new(name: 'ExecutionProperty')
     ExecutionTime = Shapes::IntegerShape.new(name: 'ExecutionTime')
     ExistCondition = Shapes::StringShape.new(name: 'ExistCondition')
+    ExportLabelsTaskRunProperties = Shapes::StructureShape.new(name: 'ExportLabelsTaskRunProperties')
     FieldType = Shapes::StringShape.new(name: 'FieldType')
     FilterString = Shapes::StringShape.new(name: 'FilterString')
+    FindMatchesMetrics = Shapes::StructureShape.new(name: 'FindMatchesMetrics')
+    FindMatchesParameters = Shapes::StructureShape.new(name: 'FindMatchesParameters')
+    FindMatchesTaskRunProperties = Shapes::StructureShape.new(name: 'FindMatchesTaskRunProperties')
     FormatString = Shapes::StringShape.new(name: 'FormatString')
+    GenericBoundedDouble = Shapes::FloatShape.new(name: 'GenericBoundedDouble')
     GenericMap = Shapes::MapShape.new(name: 'GenericMap')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GetCatalogImportStatusRequest = Shapes::StructureShape.new(name: 'GetCatalogImportStatusRequest')
@@ -239,6 +256,8 @@ module Aws::Glue
     GetDevEndpointResponse = Shapes::StructureShape.new(name: 'GetDevEndpointResponse')
     GetDevEndpointsRequest = Shapes::StructureShape.new(name: 'GetDevEndpointsRequest')
     GetDevEndpointsResponse = Shapes::StructureShape.new(name: 'GetDevEndpointsResponse')
+    GetJobBookmarkRequest = Shapes::StructureShape.new(name: 'GetJobBookmarkRequest')
+    GetJobBookmarkResponse = Shapes::StructureShape.new(name: 'GetJobBookmarkResponse')
     GetJobRequest = Shapes::StructureShape.new(name: 'GetJobRequest')
     GetJobResponse = Shapes::StructureShape.new(name: 'GetJobResponse')
     GetJobRunRequest = Shapes::StructureShape.new(name: 'GetJobRunRequest')
@@ -247,6 +266,14 @@ module Aws::Glue
     GetJobRunsResponse = Shapes::StructureShape.new(name: 'GetJobRunsResponse')
     GetJobsRequest = Shapes::StructureShape.new(name: 'GetJobsRequest')
     GetJobsResponse = Shapes::StructureShape.new(name: 'GetJobsResponse')
+    GetMLTaskRunRequest = Shapes::StructureShape.new(name: 'GetMLTaskRunRequest')
+    GetMLTaskRunResponse = Shapes::StructureShape.new(name: 'GetMLTaskRunResponse')
+    GetMLTaskRunsRequest = Shapes::StructureShape.new(name: 'GetMLTaskRunsRequest')
+    GetMLTaskRunsResponse = Shapes::StructureShape.new(name: 'GetMLTaskRunsResponse')
+    GetMLTransformRequest = Shapes::StructureShape.new(name: 'GetMLTransformRequest')
+    GetMLTransformResponse = Shapes::StructureShape.new(name: 'GetMLTransformResponse')
+    GetMLTransformsRequest = Shapes::StructureShape.new(name: 'GetMLTransformsRequest')
+    GetMLTransformsResponse = Shapes::StructureShape.new(name: 'GetMLTransformsResponse')
     GetMappingRequest = Shapes::StructureShape.new(name: 'GetMappingRequest')
     GetMappingResponse = Shapes::StructureShape.new(name: 'GetMappingResponse')
     GetPartitionRequest = Shapes::StructureShape.new(name: 'GetPartitionRequest')
@@ -290,6 +317,8 @@ module Aws::Glue
     GetWorkflowRunsResponse = Shapes::StructureShape.new(name: 'GetWorkflowRunsResponse')
     GlueEncryptionException = Shapes::StructureShape.new(name: 'GlueEncryptionException')
     GlueResourceArn = Shapes::StringShape.new(name: 'GlueResourceArn')
+    GlueTable = Shapes::StructureShape.new(name: 'GlueTable')
+    GlueTables = Shapes::ListShape.new(name: 'GlueTables')
     GlueVersionString = Shapes::StringShape.new(name: 'GlueVersionString')
     GrokClassifier = Shapes::StructureShape.new(name: 'GrokClassifier')
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
@@ -298,6 +327,7 @@ module Aws::Glue
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     ImportCatalogToGlueRequest = Shapes::StructureShape.new(name: 'ImportCatalogToGlueRequest')
     ImportCatalogToGlueResponse = Shapes::StructureShape.new(name: 'ImportCatalogToGlueResponse')
+    ImportLabelsTaskRunProperties = Shapes::StructureShape.new(name: 'ImportLabelsTaskRunProperties')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerFlag = Shapes::IntegerShape.new(name: 'IntegerFlag')
     IntegerValue = Shapes::IntegerShape.new(name: 'IntegerValue')
@@ -323,6 +353,8 @@ module Aws::Glue
     JsonValue = Shapes::StringShape.new(name: 'JsonValue')
     KeyString = Shapes::StringShape.new(name: 'KeyString')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    LabelCount = Shapes::IntegerShape.new(name: 'LabelCount')
+    LabelingSetGenerationTaskRunProperties = Shapes::StructureShape.new(name: 'LabelingSetGenerationTaskRunProperties')
     Language = Shapes::StringShape.new(name: 'Language')
     LastCrawlInfo = Shapes::StructureShape.new(name: 'LastCrawlInfo')
     LastCrawlStatus = Shapes::StringShape.new(name: 'LastCrawlStatus')
@@ -343,6 +375,8 @@ module Aws::Glue
     LogStream = Shapes::StringShape.new(name: 'LogStream')
     Logical = Shapes::StringShape.new(name: 'Logical')
     LogicalOperator = Shapes::StringShape.new(name: 'LogicalOperator')
+    MLTransform = Shapes::StructureShape.new(name: 'MLTransform')
+    MLTransformNotReadyException = Shapes::StructureShape.new(name: 'MLTransformNotReadyException')
     MapValue = Shapes::MapShape.new(name: 'MapValue')
     MappingEntry = Shapes::StructureShape.new(name: 'MappingEntry')
     MappingList = Shapes::ListShape.new(name: 'MappingList')
@@ -370,6 +404,7 @@ module Aws::Glue
     Order = Shapes::StructureShape.new(name: 'Order')
     OrderList = Shapes::ListShape.new(name: 'OrderList')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
+    PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     ParametersMapValue = Shapes::StringShape.new(name: 'ParametersMapValue')
     Partition = Shapes::StructureShape.new(name: 'Partition')
@@ -381,13 +416,18 @@ module Aws::Glue
     PartitionValueList = Shapes::StructureShape.new(name: 'PartitionValueList')
     Path = Shapes::StringShape.new(name: 'Path')
     PathList = Shapes::ListShape.new(name: 'PathList')
+    Permission = Shapes::StringShape.new(name: 'Permission')
+    PermissionList = Shapes::ListShape.new(name: 'PermissionList')
     PhysicalConnectionRequirements = Shapes::StructureShape.new(name: 'PhysicalConnectionRequirements')
     PolicyJsonString = Shapes::StringShape.new(name: 'PolicyJsonString')
     Predecessor = Shapes::StructureShape.new(name: 'Predecessor')
     PredecessorList = Shapes::ListShape.new(name: 'PredecessorList')
     Predicate = Shapes::StructureShape.new(name: 'Predicate')
     PredicateString = Shapes::StringShape.new(name: 'PredicateString')
+    PrincipalPermissions = Shapes::StructureShape.new(name: 'PrincipalPermissions')
+    PrincipalPermissionsList = Shapes::ListShape.new(name: 'PrincipalPermissionsList')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    PropertyPredicate = Shapes::StructureShape.new(name: 'PropertyPredicate')
     PublicKeysList = Shapes::ListShape.new(name: 'PublicKeysList')
     PutDataCatalogEncryptionSettingsRequest = Shapes::StructureShape.new(name: 'PutDataCatalogEncryptionSettingsRequest')
     PutDataCatalogEncryptionSettingsResponse = Shapes::StructureShape.new(name: 'PutDataCatalogEncryptionSettingsResponse')
@@ -397,6 +437,8 @@ module Aws::Glue
     PutWorkflowRunPropertiesResponse = Shapes::StructureShape.new(name: 'PutWorkflowRunPropertiesResponse')
     PythonScript = Shapes::StringShape.new(name: 'PythonScript')
     PythonVersionString = Shapes::StringShape.new(name: 'PythonVersionString')
+    RecordsCount = Shapes::IntegerShape.new(name: 'RecordsCount')
+    ReplaceBoolean = Shapes::BooleanShape.new(name: 'ReplaceBoolean')
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
     ResourceNumberLimitExceededException = Shapes::StructureShape.new(name: 'ResourceNumberLimitExceededException')
@@ -407,6 +449,7 @@ module Aws::Glue
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleString = Shapes::StringShape.new(name: 'RoleString')
     RowTag = Shapes::StringShape.new(name: 'RowTag')
+    RunId = Shapes::StringShape.new(name: 'RunId')
     S3Encryption = Shapes::StructureShape.new(name: 'S3Encryption')
     S3EncryptionList = Shapes::ListShape.new(name: 'S3EncryptionList')
     S3EncryptionMode = Shapes::StringShape.new(name: 'S3EncryptionMode')
@@ -419,20 +462,36 @@ module Aws::Glue
     SchedulerRunningException = Shapes::StructureShape.new(name: 'SchedulerRunningException')
     SchedulerTransitioningException = Shapes::StructureShape.new(name: 'SchedulerTransitioningException')
     SchemaChangePolicy = Shapes::StructureShape.new(name: 'SchemaChangePolicy')
+    SchemaColumn = Shapes::StructureShape.new(name: 'SchemaColumn')
     SchemaPathString = Shapes::StringShape.new(name: 'SchemaPathString')
     ScriptLocationString = Shapes::StringShape.new(name: 'ScriptLocationString')
+    SearchPropertyPredicates = Shapes::ListShape.new(name: 'SearchPropertyPredicates')
+    SearchTablesRequest = Shapes::StructureShape.new(name: 'SearchTablesRequest')
+    SearchTablesResponse = Shapes::StructureShape.new(name: 'SearchTablesResponse')
     SecurityConfiguration = Shapes::StructureShape.new(name: 'SecurityConfiguration')
     SecurityConfigurationList = Shapes::ListShape.new(name: 'SecurityConfigurationList')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Segment = Shapes::StructureShape.new(name: 'Segment')
     SerDeInfo = Shapes::StructureShape.new(name: 'SerDeInfo')
     SkewedInfo = Shapes::StructureShape.new(name: 'SkewedInfo')
+    Sort = Shapes::StringShape.new(name: 'Sort')
+    SortCriteria = Shapes::ListShape.new(name: 'SortCriteria')
+    SortCriterion = Shapes::StructureShape.new(name: 'SortCriterion')
+    SortDirectionType = Shapes::StringShape.new(name: 'SortDirectionType')
     StartCrawlerRequest = Shapes::StructureShape.new(name: 'StartCrawlerRequest')
     StartCrawlerResponse = Shapes::StructureShape.new(name: 'StartCrawlerResponse')
     StartCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'StartCrawlerScheduleRequest')
     StartCrawlerScheduleResponse = Shapes::StructureShape.new(name: 'StartCrawlerScheduleResponse')
+    StartExportLabelsTaskRunRequest = Shapes::StructureShape.new(name: 'StartExportLabelsTaskRunRequest')
+    StartExportLabelsTaskRunResponse = Shapes::StructureShape.new(name: 'StartExportLabelsTaskRunResponse')
+    StartImportLabelsTaskRunRequest = Shapes::StructureShape.new(name: 'StartImportLabelsTaskRunRequest')
+    StartImportLabelsTaskRunResponse = Shapes::StructureShape.new(name: 'StartImportLabelsTaskRunResponse')
     StartJobRunRequest = Shapes::StructureShape.new(name: 'StartJobRunRequest')
     StartJobRunResponse = Shapes::StructureShape.new(name: 'StartJobRunResponse')
+    StartMLEvaluationTaskRunRequest = Shapes::StructureShape.new(name: 'StartMLEvaluationTaskRunRequest')
+    StartMLEvaluationTaskRunResponse = Shapes::StructureShape.new(name: 'StartMLEvaluationTaskRunResponse')
+    StartMLLabelingSetGenerationTaskRunRequest = Shapes::StructureShape.new(name: 'StartMLLabelingSetGenerationTaskRunRequest')
+    StartMLLabelingSetGenerationTaskRunResponse = Shapes::StructureShape.new(name: 'StartMLLabelingSetGenerationTaskRunResponse')
     StartTriggerRequest = Shapes::StructureShape.new(name: 'StartTriggerRequest')
     StartTriggerResponse = Shapes::StructureShape.new(name: 'StartTriggerResponse')
     StartWorkflowRunRequest = Shapes::StructureShape.new(name: 'StartWorkflowRunRequest')
@@ -462,11 +521,27 @@ module Aws::Glue
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
+    TaskRun = Shapes::StructureShape.new(name: 'TaskRun')
+    TaskRunFilterCriteria = Shapes::StructureShape.new(name: 'TaskRunFilterCriteria')
+    TaskRunList = Shapes::ListShape.new(name: 'TaskRunList')
+    TaskRunProperties = Shapes::StructureShape.new(name: 'TaskRunProperties')
+    TaskRunSortColumnType = Shapes::StringShape.new(name: 'TaskRunSortColumnType')
+    TaskRunSortCriteria = Shapes::StructureShape.new(name: 'TaskRunSortCriteria')
+    TaskStatusType = Shapes::StringShape.new(name: 'TaskStatusType')
+    TaskType = Shapes::StringShape.new(name: 'TaskType')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampValue = Shapes::TimestampShape.new(name: 'TimestampValue')
     Token = Shapes::StringShape.new(name: 'Token')
     TotalSegmentsInteger = Shapes::IntegerShape.new(name: 'TotalSegmentsInteger')
+    TransformFilterCriteria = Shapes::StructureShape.new(name: 'TransformFilterCriteria')
+    TransformList = Shapes::ListShape.new(name: 'TransformList')
+    TransformParameters = Shapes::StructureShape.new(name: 'TransformParameters')
+    TransformSchema = Shapes::ListShape.new(name: 'TransformSchema')
+    TransformSortColumnType = Shapes::StringShape.new(name: 'TransformSortColumnType')
+    TransformSortCriteria = Shapes::StructureShape.new(name: 'TransformSortCriteria')
+    TransformStatusType = Shapes::StringShape.new(name: 'TransformStatusType')
+    TransformType = Shapes::StringShape.new(name: 'TransformType')
     Trigger = Shapes::StructureShape.new(name: 'Trigger')
     TriggerList = Shapes::ListShape.new(name: 'TriggerList')
     TriggerNameList = Shapes::ListShape.new(name: 'TriggerNameList')
@@ -495,6 +570,8 @@ module Aws::Glue
     UpdateJobRequest = Shapes::StructureShape.new(name: 'UpdateJobRequest')
     UpdateJobResponse = Shapes::StructureShape.new(name: 'UpdateJobResponse')
     UpdateJsonClassifierRequest = Shapes::StructureShape.new(name: 'UpdateJsonClassifierRequest')
+    UpdateMLTransformRequest = Shapes::StructureShape.new(name: 'UpdateMLTransformRequest')
+    UpdateMLTransformResponse = Shapes::StructureShape.new(name: 'UpdateMLTransformResponse')
     UpdatePartitionRequest = Shapes::StructureShape.new(name: 'UpdatePartitionRequest')
     UpdatePartitionResponse = Shapes::StructureShape.new(name: 'UpdatePartitionResponse')
     UpdateTableRequest = Shapes::StructureShape.new(name: 'UpdateTableRequest')
@@ -667,6 +744,15 @@ module Aws::Glue
 
     BoundedPartitionValueList.member = Shapes::ShapeRef.new(shape: ValueString)
 
+    CancelMLTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    CancelMLTaskRunRequest.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TaskRunId"))
+    CancelMLTaskRunRequest.struct_class = Types::CancelMLTaskRunRequest
+
+    CancelMLTaskRunResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
+    CancelMLTaskRunResponse.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
+    CancelMLTaskRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatusType, location_name: "Status"))
+    CancelMLTaskRunResponse.struct_class = Types::CancelMLTaskRunResponse
+
     CatalogEntries.member = Shapes::ShapeRef.new(shape: CatalogEntry)
 
     CatalogEntry.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -721,6 +807,7 @@ module Aws::Glue
     Column.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     Column.add_member(:type, Shapes::ShapeRef.new(shape: ColumnTypeString, location_name: "Type"))
     Column.add_member(:comment, Shapes::ShapeRef.new(shape: CommentString, location_name: "Comment"))
+    Column.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     Column.struct_class = Types::Column
 
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
@@ -744,6 +831,12 @@ module Aws::Glue
     ConditionCheckFailureException.struct_class = Types::ConditionCheckFailureException
 
     ConditionList.member = Shapes::ShapeRef.new(shape: Condition)
+
+    ConfusionMatrix.add_member(:num_true_positives, Shapes::ShapeRef.new(shape: RecordsCount, location_name: "NumTruePositives"))
+    ConfusionMatrix.add_member(:num_false_positives, Shapes::ShapeRef.new(shape: RecordsCount, location_name: "NumFalsePositives"))
+    ConfusionMatrix.add_member(:num_true_negatives, Shapes::ShapeRef.new(shape: RecordsCount, location_name: "NumTrueNegatives"))
+    ConfusionMatrix.add_member(:num_false_negatives, Shapes::ShapeRef.new(shape: RecordsCount, location_name: "NumFalseNegatives"))
+    ConfusionMatrix.struct_class = Types::ConfusionMatrix
 
     Connection.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     Connection.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -892,6 +985,7 @@ module Aws::Glue
     CreateDevEndpointRequest.add_member(:public_keys, Shapes::ShapeRef.new(shape: PublicKeysList, location_name: "PublicKeys"))
     CreateDevEndpointRequest.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NumberOfNodes"))
     CreateDevEndpointRequest.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
+    CreateDevEndpointRequest.add_member(:glue_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "GlueVersion"))
     CreateDevEndpointRequest.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
     CreateDevEndpointRequest.add_member(:extra_python_libs_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraPythonLibsS3Path"))
     CreateDevEndpointRequest.add_member(:extra_jars_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraJarsS3Path"))
@@ -909,6 +1003,7 @@ module Aws::Glue
     CreateDevEndpointResponse.add_member(:zeppelin_remote_spark_interpreter_port, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "ZeppelinRemoteSparkInterpreterPort"))
     CreateDevEndpointResponse.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NumberOfNodes"))
     CreateDevEndpointResponse.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
+    CreateDevEndpointResponse.add_member(:glue_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "GlueVersion"))
     CreateDevEndpointResponse.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
     CreateDevEndpointResponse.add_member(:availability_zone, Shapes::ShapeRef.new(shape: GenericString, location_name: "AvailabilityZone"))
     CreateDevEndpointResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "VpcId"))
@@ -952,6 +1047,21 @@ module Aws::Glue
     CreateJsonClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateJsonClassifierRequest.add_member(:json_path, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "JsonPath"))
     CreateJsonClassifierRequest.struct_class = Types::CreateJsonClassifierRequest
+
+    CreateMLTransformRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateMLTransformRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateMLTransformRequest.add_member(:input_record_tables, Shapes::ShapeRef.new(shape: GlueTables, required: true, location_name: "InputRecordTables"))
+    CreateMLTransformRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: TransformParameters, required: true, location_name: "Parameters"))
+    CreateMLTransformRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, required: true, location_name: "Role"))
+    CreateMLTransformRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "MaxCapacity"))
+    CreateMLTransformRequest.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
+    CreateMLTransformRequest.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    CreateMLTransformRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    CreateMLTransformRequest.add_member(:max_retries, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxRetries"))
+    CreateMLTransformRequest.struct_class = Types::CreateMLTransformRequest
+
+    CreateMLTransformResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
+    CreateMLTransformResponse.struct_class = Types::CreateMLTransformResponse
 
     CreatePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreatePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -1042,17 +1152,22 @@ module Aws::Glue
     DataCatalogEncryptionSettings.add_member(:connection_password_encryption, Shapes::ShapeRef.new(shape: ConnectionPasswordEncryption, location_name: "ConnectionPasswordEncryption"))
     DataCatalogEncryptionSettings.struct_class = Types::DataCatalogEncryptionSettings
 
+    DataLakePrincipal.add_member(:data_lake_principal_identifier, Shapes::ShapeRef.new(shape: DataLakePrincipalString, location_name: "DataLakePrincipalIdentifier"))
+    DataLakePrincipal.struct_class = Types::DataLakePrincipal
+
     Database.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     Database.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     Database.add_member(:location_uri, Shapes::ShapeRef.new(shape: URI, location_name: "LocationUri"))
     Database.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     Database.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
+    Database.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
     Database.struct_class = Types::Database
 
     DatabaseInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     DatabaseInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     DatabaseInput.add_member(:location_uri, Shapes::ShapeRef.new(shape: URI, location_name: "LocationUri"))
     DatabaseInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
+    DatabaseInput.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
     DatabaseInput.struct_class = Types::DatabaseInput
 
     DatabaseList.member = Shapes::ShapeRef.new(shape: Database)
@@ -1091,6 +1206,12 @@ module Aws::Glue
 
     DeleteJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
     DeleteJobResponse.struct_class = Types::DeleteJobResponse
+
+    DeleteMLTransformRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    DeleteMLTransformRequest.struct_class = Types::DeleteMLTransformRequest
+
+    DeleteMLTransformResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
+    DeleteMLTransformResponse.struct_class = Types::DeleteMLTransformResponse
 
     DeletePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DeletePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -1154,6 +1275,7 @@ module Aws::Glue
     DevEndpoint.add_member(:public_address, Shapes::ShapeRef.new(shape: GenericString, location_name: "PublicAddress"))
     DevEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: GenericString, location_name: "Status"))
     DevEndpoint.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
+    DevEndpoint.add_member(:glue_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "GlueVersion"))
     DevEndpoint.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
     DevEndpoint.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NumberOfNodes"))
     DevEndpoint.add_member(:availability_zone, Shapes::ShapeRef.new(shape: GenericString, location_name: "AvailabilityZone"))
@@ -1210,8 +1332,33 @@ module Aws::Glue
     ErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "ErrorMessage"))
     ErrorDetail.struct_class = Types::ErrorDetail
 
+    EvaluationMetrics.add_member(:transform_type, Shapes::ShapeRef.new(shape: TransformType, required: true, location_name: "TransformType"))
+    EvaluationMetrics.add_member(:find_matches_metrics, Shapes::ShapeRef.new(shape: FindMatchesMetrics, location_name: "FindMatchesMetrics"))
+    EvaluationMetrics.struct_class = Types::EvaluationMetrics
+
     ExecutionProperty.add_member(:max_concurrent_runs, Shapes::ShapeRef.new(shape: MaxConcurrentRuns, location_name: "MaxConcurrentRuns"))
     ExecutionProperty.struct_class = Types::ExecutionProperty
+
+    ExportLabelsTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))
+    ExportLabelsTaskRunProperties.struct_class = Types::ExportLabelsTaskRunProperties
+
+    FindMatchesMetrics.add_member(:area_under_pr_curve, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "AreaUnderPRCurve"))
+    FindMatchesMetrics.add_member(:precision, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "Precision"))
+    FindMatchesMetrics.add_member(:recall, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "Recall"))
+    FindMatchesMetrics.add_member(:f1, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "F1"))
+    FindMatchesMetrics.add_member(:confusion_matrix, Shapes::ShapeRef.new(shape: ConfusionMatrix, location_name: "ConfusionMatrix"))
+    FindMatchesMetrics.struct_class = Types::FindMatchesMetrics
+
+    FindMatchesParameters.add_member(:primary_key_column_name, Shapes::ShapeRef.new(shape: ColumnNameString, location_name: "PrimaryKeyColumnName"))
+    FindMatchesParameters.add_member(:precision_recall_tradeoff, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "PrecisionRecallTradeoff"))
+    FindMatchesParameters.add_member(:accuracy_cost_tradeoff, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "AccuracyCostTradeoff"))
+    FindMatchesParameters.add_member(:enforce_provided_labels, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "EnforceProvidedLabels"))
+    FindMatchesParameters.struct_class = Types::FindMatchesParameters
+
+    FindMatchesTaskRunProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: HashString, location_name: "JobId"))
+    FindMatchesTaskRunProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    FindMatchesTaskRunProperties.add_member(:job_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "JobRunId"))
+    FindMatchesTaskRunProperties.struct_class = Types::FindMatchesTaskRunProperties
 
     GenericMap.key = Shapes::ShapeRef.new(shape: GenericString)
     GenericMap.value = Shapes::ShapeRef.new(shape: GenericString)
@@ -1325,6 +1472,13 @@ module Aws::Glue
     GetDevEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     GetDevEndpointsResponse.struct_class = Types::GetDevEndpointsResponse
 
+    GetJobBookmarkRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
+    GetJobBookmarkRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "RunId"))
+    GetJobBookmarkRequest.struct_class = Types::GetJobBookmarkRequest
+
+    GetJobBookmarkResponse.add_member(:job_bookmark_entry, Shapes::ShapeRef.new(shape: JobBookmarkEntry, location_name: "JobBookmarkEntry"))
+    GetJobBookmarkResponse.struct_class = Types::GetJobBookmarkResponse
+
     GetJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "JobName"))
     GetJobRequest.struct_class = Types::GetJobRequest
 
@@ -1355,6 +1509,65 @@ module Aws::Glue
     GetJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: JobList, location_name: "Jobs"))
     GetJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     GetJobsResponse.struct_class = Types::GetJobsResponse
+
+    GetMLTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    GetMLTaskRunRequest.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TaskRunId"))
+    GetMLTaskRunRequest.struct_class = Types::GetMLTaskRunRequest
+
+    GetMLTaskRunResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
+    GetMLTaskRunResponse.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
+    GetMLTaskRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatusType, location_name: "Status"))
+    GetMLTaskRunResponse.add_member(:log_group_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "LogGroupName"))
+    GetMLTaskRunResponse.add_member(:properties, Shapes::ShapeRef.new(shape: TaskRunProperties, location_name: "Properties"))
+    GetMLTaskRunResponse.add_member(:error_string, Shapes::ShapeRef.new(shape: GenericString, location_name: "ErrorString"))
+    GetMLTaskRunResponse.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
+    GetMLTaskRunResponse.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedOn"))
+    GetMLTaskRunResponse.add_member(:completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedOn"))
+    GetMLTaskRunResponse.add_member(:execution_time, Shapes::ShapeRef.new(shape: ExecutionTime, location_name: "ExecutionTime"))
+    GetMLTaskRunResponse.struct_class = Types::GetMLTaskRunResponse
+
+    GetMLTaskRunsRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    GetMLTaskRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetMLTaskRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetMLTaskRunsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: TaskRunFilterCriteria, location_name: "Filter"))
+    GetMLTaskRunsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: TaskRunSortCriteria, location_name: "Sort"))
+    GetMLTaskRunsRequest.struct_class = Types::GetMLTaskRunsRequest
+
+    GetMLTaskRunsResponse.add_member(:task_runs, Shapes::ShapeRef.new(shape: TaskRunList, location_name: "TaskRuns"))
+    GetMLTaskRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetMLTaskRunsResponse.struct_class = Types::GetMLTaskRunsResponse
+
+    GetMLTransformRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    GetMLTransformRequest.struct_class = Types::GetMLTransformRequest
+
+    GetMLTransformResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
+    GetMLTransformResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    GetMLTransformResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    GetMLTransformResponse.add_member(:status, Shapes::ShapeRef.new(shape: TransformStatusType, location_name: "Status"))
+    GetMLTransformResponse.add_member(:created_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedOn"))
+    GetMLTransformResponse.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedOn"))
+    GetMLTransformResponse.add_member(:input_record_tables, Shapes::ShapeRef.new(shape: GlueTables, location_name: "InputRecordTables"))
+    GetMLTransformResponse.add_member(:parameters, Shapes::ShapeRef.new(shape: TransformParameters, location_name: "Parameters"))
+    GetMLTransformResponse.add_member(:evaluation_metrics, Shapes::ShapeRef.new(shape: EvaluationMetrics, location_name: "EvaluationMetrics"))
+    GetMLTransformResponse.add_member(:label_count, Shapes::ShapeRef.new(shape: LabelCount, location_name: "LabelCount"))
+    GetMLTransformResponse.add_member(:schema, Shapes::ShapeRef.new(shape: TransformSchema, location_name: "Schema"))
+    GetMLTransformResponse.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
+    GetMLTransformResponse.add_member(:max_capacity, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "MaxCapacity"))
+    GetMLTransformResponse.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
+    GetMLTransformResponse.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    GetMLTransformResponse.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    GetMLTransformResponse.add_member(:max_retries, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxRetries"))
+    GetMLTransformResponse.struct_class = Types::GetMLTransformResponse
+
+    GetMLTransformsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetMLTransformsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetMLTransformsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: TransformFilterCriteria, location_name: "Filter"))
+    GetMLTransformsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: TransformSortCriteria, location_name: "Sort"))
+    GetMLTransformsRequest.struct_class = Types::GetMLTransformsRequest
+
+    GetMLTransformsResponse.add_member(:transforms, Shapes::ShapeRef.new(shape: TransformList, required: true, location_name: "Transforms"))
+    GetMLTransformsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetMLTransformsResponse.struct_class = Types::GetMLTransformsResponse
 
     GetMappingRequest.add_member(:source, Shapes::ShapeRef.new(shape: CatalogEntry, required: true, location_name: "Source"))
     GetMappingRequest.add_member(:sinks, Shapes::ShapeRef.new(shape: CatalogEntries, location_name: "Sinks"))
@@ -1535,6 +1748,14 @@ module Aws::Glue
     GlueEncryptionException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     GlueEncryptionException.struct_class = Types::GlueEncryptionException
 
+    GlueTable.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GlueTable.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GlueTable.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, location_name: "CatalogId"))
+    GlueTable.add_member(:connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionName"))
+    GlueTable.struct_class = Types::GlueTable
+
+    GlueTables.member = Shapes::ShapeRef.new(shape: GlueTable)
+
     GrokClassifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GrokClassifier.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, required: true, location_name: "Classification"))
     GrokClassifier.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
@@ -1551,6 +1772,10 @@ module Aws::Glue
     ImportCatalogToGlueRequest.struct_class = Types::ImportCatalogToGlueRequest
 
     ImportCatalogToGlueResponse.struct_class = Types::ImportCatalogToGlueResponse
+
+    ImportLabelsTaskRunProperties.add_member(:input_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "InputS3Path"))
+    ImportLabelsTaskRunProperties.add_member(:replace, Shapes::ShapeRef.new(shape: ReplaceBoolean, location_name: "Replace"))
+    ImportLabelsTaskRunProperties.struct_class = Types::ImportLabelsTaskRunProperties
 
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     InternalServiceException.struct_class = Types::InternalServiceException
@@ -1590,6 +1815,8 @@ module Aws::Glue
     JobBookmarkEntry.add_member(:version, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Version"))
     JobBookmarkEntry.add_member(:run, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Run"))
     JobBookmarkEntry.add_member(:attempt, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Attempt"))
+    JobBookmarkEntry.add_member(:previous_run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "PreviousRunId"))
+    JobBookmarkEntry.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "RunId"))
     JobBookmarkEntry.add_member(:job_bookmark, Shapes::ShapeRef.new(shape: JsonValue, location_name: "JobBookmark"))
     JobBookmarkEntry.struct_class = Types::JobBookmarkEntry
 
@@ -1660,6 +1887,9 @@ module Aws::Glue
     JsonClassifier.add_member(:json_path, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "JsonPath"))
     JsonClassifier.struct_class = Types::JsonClassifier
 
+    LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))
+    LabelingSetGenerationTaskRunProperties.struct_class = Types::LabelingSetGenerationTaskRunProperties
+
     LastCrawlInfo.add_member(:status, Shapes::ShapeRef.new(shape: LastCrawlStatus, location_name: "Status"))
     LastCrawlInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "ErrorMessage"))
     LastCrawlInfo.add_member(:log_group, Shapes::ShapeRef.new(shape: LogGroup, location_name: "LogGroup"))
@@ -1720,6 +1950,28 @@ module Aws::Glue
 
     LocationMap.key = Shapes::ShapeRef.new(shape: ColumnValuesString)
     LocationMap.value = Shapes::ShapeRef.new(shape: ColumnValuesString)
+
+    MLTransform.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
+    MLTransform.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    MLTransform.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    MLTransform.add_member(:status, Shapes::ShapeRef.new(shape: TransformStatusType, location_name: "Status"))
+    MLTransform.add_member(:created_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedOn"))
+    MLTransform.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedOn"))
+    MLTransform.add_member(:input_record_tables, Shapes::ShapeRef.new(shape: GlueTables, location_name: "InputRecordTables"))
+    MLTransform.add_member(:parameters, Shapes::ShapeRef.new(shape: TransformParameters, location_name: "Parameters"))
+    MLTransform.add_member(:evaluation_metrics, Shapes::ShapeRef.new(shape: EvaluationMetrics, location_name: "EvaluationMetrics"))
+    MLTransform.add_member(:label_count, Shapes::ShapeRef.new(shape: LabelCount, location_name: "LabelCount"))
+    MLTransform.add_member(:schema, Shapes::ShapeRef.new(shape: TransformSchema, location_name: "Schema"))
+    MLTransform.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
+    MLTransform.add_member(:max_capacity, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "MaxCapacity"))
+    MLTransform.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
+    MLTransform.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    MLTransform.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    MLTransform.add_member(:max_retries, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxRetries"))
+    MLTransform.struct_class = Types::MLTransform
+
+    MLTransformNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    MLTransformNotReadyException.struct_class = Types::MLTransformNotReadyException
 
     MapValue.key = Shapes::ShapeRef.new(shape: GenericString)
     MapValue.value = Shapes::ShapeRef.new(shape: GenericString)
@@ -1800,6 +2052,8 @@ module Aws::Glue
 
     PathList.member = Shapes::ShapeRef.new(shape: Path)
 
+    PermissionList.member = Shapes::ShapeRef.new(shape: Permission)
+
     PhysicalConnectionRequirements.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NameString, location_name: "SubnetId"))
     PhysicalConnectionRequirements.add_member(:security_group_id_list, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "SecurityGroupIdList"))
     PhysicalConnectionRequirements.add_member(:availability_zone, Shapes::ShapeRef.new(shape: NameString, location_name: "AvailabilityZone"))
@@ -1814,6 +2068,17 @@ module Aws::Glue
     Predicate.add_member(:logical, Shapes::ShapeRef.new(shape: Logical, location_name: "Logical"))
     Predicate.add_member(:conditions, Shapes::ShapeRef.new(shape: ConditionList, location_name: "Conditions"))
     Predicate.struct_class = Types::Predicate
+
+    PrincipalPermissions.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, location_name: "Principal"))
+    PrincipalPermissions.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
+    PrincipalPermissions.struct_class = Types::PrincipalPermissions
+
+    PrincipalPermissionsList.member = Shapes::ShapeRef.new(shape: PrincipalPermissions)
+
+    PropertyPredicate.add_member(:key, Shapes::ShapeRef.new(shape: ValueString, location_name: "Key"))
+    PropertyPredicate.add_member(:value, Shapes::ShapeRef.new(shape: ValueString, location_name: "Value"))
+    PropertyPredicate.add_member(:comparator, Shapes::ShapeRef.new(shape: Comparator, location_name: "Comparator"))
+    PropertyPredicate.struct_class = Types::PropertyPredicate
 
     PublicKeysList.member = Shapes::ShapeRef.new(shape: GenericString)
 
@@ -1839,6 +2104,7 @@ module Aws::Glue
     PutWorkflowRunPropertiesResponse.struct_class = Types::PutWorkflowRunPropertiesResponse
 
     ResetJobBookmarkRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
+    ResetJobBookmarkRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "RunId"))
     ResetJobBookmarkRequest.struct_class = Types::ResetJobBookmarkRequest
 
     ResetJobBookmarkResponse.add_member(:job_bookmark_entry, Shapes::ShapeRef.new(shape: JobBookmarkEntry, location_name: "JobBookmarkEntry"))
@@ -1882,6 +2148,24 @@ module Aws::Glue
     SchemaChangePolicy.add_member(:delete_behavior, Shapes::ShapeRef.new(shape: DeleteBehavior, location_name: "DeleteBehavior"))
     SchemaChangePolicy.struct_class = Types::SchemaChangePolicy
 
+    SchemaColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnNameString, location_name: "Name"))
+    SchemaColumn.add_member(:data_type, Shapes::ShapeRef.new(shape: ColumnTypeString, location_name: "DataType"))
+    SchemaColumn.struct_class = Types::SchemaColumn
+
+    SearchPropertyPredicates.member = Shapes::ShapeRef.new(shape: PropertyPredicate)
+
+    SearchTablesRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    SearchTablesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    SearchTablesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SearchPropertyPredicates, location_name: "Filters"))
+    SearchTablesRequest.add_member(:search_text, Shapes::ShapeRef.new(shape: ValueString, location_name: "SearchText"))
+    SearchTablesRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
+    SearchTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    SearchTablesRequest.struct_class = Types::SearchTablesRequest
+
+    SearchTablesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    SearchTablesResponse.add_member(:table_list, Shapes::ShapeRef.new(shape: TableList, location_name: "TableList"))
+    SearchTablesResponse.struct_class = Types::SearchTablesResponse
+
     SecurityConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     SecurityConfiguration.add_member(:created_time_stamp, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedTimeStamp"))
     SecurityConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
@@ -1905,6 +2189,12 @@ module Aws::Glue
     SkewedInfo.add_member(:skewed_column_value_location_maps, Shapes::ShapeRef.new(shape: LocationMap, location_name: "SkewedColumnValueLocationMaps"))
     SkewedInfo.struct_class = Types::SkewedInfo
 
+    SortCriteria.member = Shapes::ShapeRef.new(shape: SortCriterion)
+
+    SortCriterion.add_member(:field_name, Shapes::ShapeRef.new(shape: ValueString, location_name: "FieldName"))
+    SortCriterion.add_member(:sort, Shapes::ShapeRef.new(shape: Sort, location_name: "Sort"))
+    SortCriterion.struct_class = Types::SortCriterion
+
     StartCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     StartCrawlerRequest.struct_class = Types::StartCrawlerRequest
 
@@ -1914,6 +2204,21 @@ module Aws::Glue
     StartCrawlerScheduleRequest.struct_class = Types::StartCrawlerScheduleRequest
 
     StartCrawlerScheduleResponse.struct_class = Types::StartCrawlerScheduleResponse
+
+    StartExportLabelsTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    StartExportLabelsTaskRunRequest.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, required: true, location_name: "OutputS3Path"))
+    StartExportLabelsTaskRunRequest.struct_class = Types::StartExportLabelsTaskRunRequest
+
+    StartExportLabelsTaskRunResponse.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
+    StartExportLabelsTaskRunResponse.struct_class = Types::StartExportLabelsTaskRunResponse
+
+    StartImportLabelsTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    StartImportLabelsTaskRunRequest.add_member(:input_s3_path, Shapes::ShapeRef.new(shape: UriString, required: true, location_name: "InputS3Path"))
+    StartImportLabelsTaskRunRequest.add_member(:replace_all_labels, Shapes::ShapeRef.new(shape: ReplaceBoolean, location_name: "ReplaceAllLabels"))
+    StartImportLabelsTaskRunRequest.struct_class = Types::StartImportLabelsTaskRunRequest
+
+    StartImportLabelsTaskRunResponse.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
+    StartImportLabelsTaskRunResponse.struct_class = Types::StartImportLabelsTaskRunResponse
 
     StartJobRunRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "JobName"))
     StartJobRunRequest.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))
@@ -1929,6 +2234,19 @@ module Aws::Glue
 
     StartJobRunResponse.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))
     StartJobRunResponse.struct_class = Types::StartJobRunResponse
+
+    StartMLEvaluationTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    StartMLEvaluationTaskRunRequest.struct_class = Types::StartMLEvaluationTaskRunRequest
+
+    StartMLEvaluationTaskRunResponse.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
+    StartMLEvaluationTaskRunResponse.struct_class = Types::StartMLEvaluationTaskRunResponse
+
+    StartMLLabelingSetGenerationTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    StartMLLabelingSetGenerationTaskRunRequest.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, required: true, location_name: "OutputS3Path"))
+    StartMLLabelingSetGenerationTaskRunRequest.struct_class = Types::StartMLLabelingSetGenerationTaskRunRequest
+
+    StartMLLabelingSetGenerationTaskRunResponse.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
+    StartMLLabelingSetGenerationTaskRunResponse.struct_class = Types::StartMLLabelingSetGenerationTaskRunResponse
 
     StartTriggerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     StartTriggerRequest.struct_class = Types::StartTriggerRequest
@@ -1990,6 +2308,7 @@ module Aws::Glue
     Table.add_member(:table_type, Shapes::ShapeRef.new(shape: TableTypeString, location_name: "TableType"))
     Table.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     Table.add_member(:created_by, Shapes::ShapeRef.new(shape: NameString, location_name: "CreatedBy"))
+    Table.add_member(:is_registered_with_lake_formation, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRegisteredWithLakeFormation"))
     Table.struct_class = Types::Table
 
     TableError.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TableName"))
@@ -2035,6 +2354,59 @@ module Aws::Glue
 
     TagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TaskRun.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
+    TaskRun.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
+    TaskRun.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatusType, location_name: "Status"))
+    TaskRun.add_member(:log_group_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "LogGroupName"))
+    TaskRun.add_member(:properties, Shapes::ShapeRef.new(shape: TaskRunProperties, location_name: "Properties"))
+    TaskRun.add_member(:error_string, Shapes::ShapeRef.new(shape: GenericString, location_name: "ErrorString"))
+    TaskRun.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
+    TaskRun.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedOn"))
+    TaskRun.add_member(:completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedOn"))
+    TaskRun.add_member(:execution_time, Shapes::ShapeRef.new(shape: ExecutionTime, location_name: "ExecutionTime"))
+    TaskRun.struct_class = Types::TaskRun
+
+    TaskRunFilterCriteria.add_member(:task_run_type, Shapes::ShapeRef.new(shape: TaskType, location_name: "TaskRunType"))
+    TaskRunFilterCriteria.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatusType, location_name: "Status"))
+    TaskRunFilterCriteria.add_member(:started_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedBefore"))
+    TaskRunFilterCriteria.add_member(:started_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedAfter"))
+    TaskRunFilterCriteria.struct_class = Types::TaskRunFilterCriteria
+
+    TaskRunList.member = Shapes::ShapeRef.new(shape: TaskRun)
+
+    TaskRunProperties.add_member(:task_type, Shapes::ShapeRef.new(shape: TaskType, location_name: "TaskType"))
+    TaskRunProperties.add_member(:import_labels_task_run_properties, Shapes::ShapeRef.new(shape: ImportLabelsTaskRunProperties, location_name: "ImportLabelsTaskRunProperties"))
+    TaskRunProperties.add_member(:export_labels_task_run_properties, Shapes::ShapeRef.new(shape: ExportLabelsTaskRunProperties, location_name: "ExportLabelsTaskRunProperties"))
+    TaskRunProperties.add_member(:labeling_set_generation_task_run_properties, Shapes::ShapeRef.new(shape: LabelingSetGenerationTaskRunProperties, location_name: "LabelingSetGenerationTaskRunProperties"))
+    TaskRunProperties.add_member(:find_matches_task_run_properties, Shapes::ShapeRef.new(shape: FindMatchesTaskRunProperties, location_name: "FindMatchesTaskRunProperties"))
+    TaskRunProperties.struct_class = Types::TaskRunProperties
+
+    TaskRunSortCriteria.add_member(:column, Shapes::ShapeRef.new(shape: TaskRunSortColumnType, required: true, location_name: "Column"))
+    TaskRunSortCriteria.add_member(:sort_direction, Shapes::ShapeRef.new(shape: SortDirectionType, required: true, location_name: "SortDirection"))
+    TaskRunSortCriteria.struct_class = Types::TaskRunSortCriteria
+
+    TransformFilterCriteria.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    TransformFilterCriteria.add_member(:transform_type, Shapes::ShapeRef.new(shape: TransformType, location_name: "TransformType"))
+    TransformFilterCriteria.add_member(:status, Shapes::ShapeRef.new(shape: TransformStatusType, location_name: "Status"))
+    TransformFilterCriteria.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedBefore"))
+    TransformFilterCriteria.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAfter"))
+    TransformFilterCriteria.add_member(:last_modified_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedBefore"))
+    TransformFilterCriteria.add_member(:last_modified_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedAfter"))
+    TransformFilterCriteria.add_member(:schema, Shapes::ShapeRef.new(shape: TransformSchema, location_name: "Schema"))
+    TransformFilterCriteria.struct_class = Types::TransformFilterCriteria
+
+    TransformList.member = Shapes::ShapeRef.new(shape: MLTransform)
+
+    TransformParameters.add_member(:transform_type, Shapes::ShapeRef.new(shape: TransformType, required: true, location_name: "TransformType"))
+    TransformParameters.add_member(:find_matches_parameters, Shapes::ShapeRef.new(shape: FindMatchesParameters, location_name: "FindMatchesParameters"))
+    TransformParameters.struct_class = Types::TransformParameters
+
+    TransformSchema.member = Shapes::ShapeRef.new(shape: SchemaColumn)
+
+    TransformSortCriteria.add_member(:column, Shapes::ShapeRef.new(shape: TransformSortColumnType, required: true, location_name: "Column"))
+    TransformSortCriteria.add_member(:sort_direction, Shapes::ShapeRef.new(shape: SortDirectionType, required: true, location_name: "SortDirection"))
+    TransformSortCriteria.struct_class = Types::TransformSortCriteria
 
     Trigger.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     Trigger.add_member(:workflow_name, Shapes::ShapeRef.new(shape: NameString, location_name: "WorkflowName"))
@@ -2147,6 +2519,21 @@ module Aws::Glue
     UpdateJsonClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     UpdateJsonClassifierRequest.add_member(:json_path, Shapes::ShapeRef.new(shape: JsonPath, location_name: "JsonPath"))
     UpdateJsonClassifierRequest.struct_class = Types::UpdateJsonClassifierRequest
+
+    UpdateMLTransformRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
+    UpdateMLTransformRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    UpdateMLTransformRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    UpdateMLTransformRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: TransformParameters, location_name: "Parameters"))
+    UpdateMLTransformRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
+    UpdateMLTransformRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "MaxCapacity"))
+    UpdateMLTransformRequest.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
+    UpdateMLTransformRequest.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    UpdateMLTransformRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    UpdateMLTransformRequest.add_member(:max_retries, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxRetries"))
+    UpdateMLTransformRequest.struct_class = Types::UpdateMLTransformRequest
+
+    UpdateMLTransformResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
+    UpdateMLTransformResponse.struct_class = Types::UpdateMLTransformResponse
 
     UpdatePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdatePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -2424,6 +2811,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:cancel_ml_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelMLTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelMLTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelMLTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:create_classifier, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateClassifier"
         o.http_method = "POST"
@@ -2503,6 +2902,21 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:create_ml_transform, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMLTransform"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateMLTransformRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMLTransformResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
       end)
 
       api.add_operation(:create_partition, Seahorse::Model::Operation.new.tap do |o|
@@ -2669,6 +3083,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:delete_ml_transform, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMLTransform"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMLTransformRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMLTransformResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:delete_partition, Seahorse::Model::Operation.new.tap do |o|
@@ -2968,6 +3394,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:get_job_bookmark, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetJobBookmark"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetJobBookmarkRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetJobBookmarkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_job_run, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetJobRun"
         o.http_method = "POST"
@@ -3008,6 +3447,66 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_ml_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMLTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMLTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMLTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_ml_task_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMLTaskRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMLTaskRunsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMLTaskRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_ml_transform, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMLTransform"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMLTransformRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMLTransformResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_ml_transforms, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMLTransforms"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMLTransformsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMLTransformsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3452,6 +3951,23 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:search_tables, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchTables"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SearchTablesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchTablesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:start_crawler, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartCrawler"
         o.http_method = "POST"
@@ -3476,6 +3992,31 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:start_export_labels_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartExportLabelsTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartExportLabelsTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartExportLabelsTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:start_import_labels_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartImportLabelsTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartImportLabelsTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartImportLabelsTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:start_job_run, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartJobRun"
         o.http_method = "POST"
@@ -3487,6 +4028,33 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentRunsExceededException)
+      end)
+
+      api.add_operation(:start_ml_evaluation_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMLEvaluationTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMLEvaluationTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMLEvaluationTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentRunsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MLTransformNotReadyException)
+      end)
+
+      api.add_operation(:start_ml_labeling_set_generation_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMLLabelingSetGenerationTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMLLabelingSetGenerationTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMLLabelingSetGenerationTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentRunsExceededException)
       end)
 
@@ -3667,6 +4235,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:update_ml_transform, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMLTransform"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMLTransformRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMLTransformResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_partition, Seahorse::Model::Operation.new.tap do |o|

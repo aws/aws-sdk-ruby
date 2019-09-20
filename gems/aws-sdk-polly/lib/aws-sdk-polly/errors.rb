@@ -10,6 +10,22 @@ module Aws::Polly
 
     extend Aws::Errors::DynamicErrors
 
+    class EngineNotSupportedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Polly::Types::EngineNotSupportedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class InvalidLexiconException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

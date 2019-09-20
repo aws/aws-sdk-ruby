@@ -29,6 +29,8 @@ module Aws::DataSync
     CreateLocationNfsResponse = Shapes::StructureShape.new(name: 'CreateLocationNfsResponse')
     CreateLocationS3Request = Shapes::StructureShape.new(name: 'CreateLocationS3Request')
     CreateLocationS3Response = Shapes::StructureShape.new(name: 'CreateLocationS3Response')
+    CreateLocationSmbRequest = Shapes::StructureShape.new(name: 'CreateLocationSmbRequest')
+    CreateLocationSmbResponse = Shapes::StructureShape.new(name: 'CreateLocationSmbResponse')
     CreateTaskRequest = Shapes::StructureShape.new(name: 'CreateTaskRequest')
     CreateTaskResponse = Shapes::StructureShape.new(name: 'CreateTaskResponse')
     DeleteAgentRequest = Shapes::StructureShape.new(name: 'DeleteAgentRequest')
@@ -45,17 +47,21 @@ module Aws::DataSync
     DescribeLocationNfsResponse = Shapes::StructureShape.new(name: 'DescribeLocationNfsResponse')
     DescribeLocationS3Request = Shapes::StructureShape.new(name: 'DescribeLocationS3Request')
     DescribeLocationS3Response = Shapes::StructureShape.new(name: 'DescribeLocationS3Response')
+    DescribeLocationSmbRequest = Shapes::StructureShape.new(name: 'DescribeLocationSmbRequest')
+    DescribeLocationSmbResponse = Shapes::StructureShape.new(name: 'DescribeLocationSmbResponse')
     DescribeTaskExecutionRequest = Shapes::StructureShape.new(name: 'DescribeTaskExecutionRequest')
     DescribeTaskExecutionResponse = Shapes::StructureShape.new(name: 'DescribeTaskExecutionResponse')
     DescribeTaskRequest = Shapes::StructureShape.new(name: 'DescribeTaskRequest')
     DescribeTaskResponse = Shapes::StructureShape.new(name: 'DescribeTaskResponse')
+    DestinationNetworkInterfaceArns = Shapes::ListShape.new(name: 'DestinationNetworkInterfaceArns')
     Duration = Shapes::IntegerShape.new(name: 'Duration')
     Ec2Config = Shapes::StructureShape.new(name: 'Ec2Config')
     Ec2SecurityGroupArn = Shapes::StringShape.new(name: 'Ec2SecurityGroupArn')
     Ec2SecurityGroupArnList = Shapes::ListShape.new(name: 'Ec2SecurityGroupArnList')
     Ec2SubnetArn = Shapes::StringShape.new(name: 'Ec2SubnetArn')
     EfsFilesystemArn = Shapes::StringShape.new(name: 'EfsFilesystemArn')
-    EndpointOptions = Shapes::StructureShape.new(name: 'EndpointOptions')
+    Endpoint = Shapes::StringShape.new(name: 'Endpoint')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterRule = Shapes::StructureShape.new(name: 'FilterRule')
     FilterType = Shapes::StringShape.new(name: 'FilterType')
@@ -81,6 +87,7 @@ module Aws::DataSync
     LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Mtime = Shapes::StringShape.new(name: 'Mtime')
+    NetworkInterfaceArn = Shapes::StringShape.new(name: 'NetworkInterfaceArn')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NfsMountOptions = Shapes::StructureShape.new(name: 'NfsMountOptions')
     NfsVersion = Shapes::StringShape.new(name: 'NfsVersion')
@@ -97,6 +104,12 @@ module Aws::DataSync
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     ServerHostname = Shapes::StringShape.new(name: 'ServerHostname')
+    SmbDomain = Shapes::StringShape.new(name: 'SmbDomain')
+    SmbMountOptions = Shapes::StructureShape.new(name: 'SmbMountOptions')
+    SmbPassword = Shapes::StringShape.new(name: 'SmbPassword')
+    SmbUser = Shapes::StringShape.new(name: 'SmbUser')
+    SmbVersion = Shapes::StringShape.new(name: 'SmbVersion')
+    SourceNetworkInterfaceArns = Shapes::ListShape.new(name: 'SourceNetworkInterfaceArns')
     StartTaskExecutionRequest = Shapes::StructureShape.new(name: 'StartTaskExecutionRequest')
     StartTaskExecutionResponse = Shapes::StructureShape.new(name: 'StartTaskExecutionResponse')
     Subdirectory = Shapes::StringShape.new(name: 'Subdirectory')
@@ -126,7 +139,7 @@ module Aws::DataSync
     UpdateTaskRequest = Shapes::StructureShape.new(name: 'UpdateTaskRequest')
     UpdateTaskResponse = Shapes::StructureShape.new(name: 'UpdateTaskResponse')
     VerifyMode = Shapes::StringShape.new(name: 'VerifyMode')
-    boolean = Shapes::BooleanShape.new(name: 'boolean')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
     long = Shapes::IntegerShape.new(name: 'long')
     string = Shapes::StringShape.new(name: 'string')
 
@@ -147,6 +160,9 @@ module Aws::DataSync
     CreateAgentRequest.add_member(:activation_key, Shapes::ShapeRef.new(shape: ActivationKey, required: true, location_name: "ActivationKey"))
     CreateAgentRequest.add_member(:agent_name, Shapes::ShapeRef.new(shape: TagValue, location_name: "AgentName"))
     CreateAgentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAgentRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    CreateAgentRequest.add_member(:subnet_arns, Shapes::ShapeRef.new(shape: PLSubnetArnList, location_name: "SubnetArns"))
+    CreateAgentRequest.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: PLSecurityGroupArnList, location_name: "SecurityGroupArns"))
     CreateAgentRequest.struct_class = Types::CreateAgentRequest
 
     CreateAgentResponse.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn"))
@@ -179,6 +195,19 @@ module Aws::DataSync
 
     CreateLocationS3Response.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     CreateLocationS3Response.struct_class = Types::CreateLocationS3Response
+
+    CreateLocationSmbRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: NonEmptySubdirectory, required: true, location_name: "Subdirectory"))
+    CreateLocationSmbRequest.add_member(:server_hostname, Shapes::ShapeRef.new(shape: ServerHostname, required: true, location_name: "ServerHostname"))
+    CreateLocationSmbRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, required: true, location_name: "User"))
+    CreateLocationSmbRequest.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
+    CreateLocationSmbRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, required: true, location_name: "Password"))
+    CreateLocationSmbRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
+    CreateLocationSmbRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
+    CreateLocationSmbRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLocationSmbRequest.struct_class = Types::CreateLocationSmbRequest
+
+    CreateLocationSmbResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationSmbResponse.struct_class = Types::CreateLocationSmbResponse
 
     CreateTaskRequest.add_member(:source_location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "SourceLocationArn"))
     CreateTaskRequest.add_member(:destination_location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "DestinationLocationArn"))
@@ -215,7 +244,7 @@ module Aws::DataSync
     DescribeAgentResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "Status"))
     DescribeAgentResponse.add_member(:last_connection_time, Shapes::ShapeRef.new(shape: Time, location_name: "LastConnectionTime"))
     DescribeAgentResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
-    DescribeAgentResponse.add_member(:endpoint_options, Shapes::ShapeRef.new(shape: EndpointOptions, location_name: "EndpointOptions"))
+    DescribeAgentResponse.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     DescribeAgentResponse.add_member(:private_link_config, Shapes::ShapeRef.new(shape: PrivateLinkConfig, location_name: "PrivateLinkConfig"))
     DescribeAgentResponse.struct_class = Types::DescribeAgentResponse
 
@@ -247,6 +276,18 @@ module Aws::DataSync
     DescribeLocationS3Response.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationS3Response.struct_class = Types::DescribeLocationS3Response
 
+    DescribeLocationSmbRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    DescribeLocationSmbRequest.struct_class = Types::DescribeLocationSmbRequest
+
+    DescribeLocationSmbResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    DescribeLocationSmbResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
+    DescribeLocationSmbResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    DescribeLocationSmbResponse.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
+    DescribeLocationSmbResponse.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
+    DescribeLocationSmbResponse.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
+    DescribeLocationSmbResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationSmbResponse.struct_class = Types::DescribeLocationSmbResponse
+
     DescribeTaskExecutionRequest.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, required: true, location_name: "TaskExecutionArn"))
     DescribeTaskExecutionRequest.struct_class = Types::DescribeTaskExecutionRequest
 
@@ -274,6 +315,8 @@ module Aws::DataSync
     DescribeTaskResponse.add_member(:source_location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "SourceLocationArn"))
     DescribeTaskResponse.add_member(:destination_location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "DestinationLocationArn"))
     DescribeTaskResponse.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
+    DescribeTaskResponse.add_member(:source_network_interface_arns, Shapes::ShapeRef.new(shape: SourceNetworkInterfaceArns, location_name: "SourceNetworkInterfaceArns"))
+    DescribeTaskResponse.add_member(:destination_network_interface_arns, Shapes::ShapeRef.new(shape: DestinationNetworkInterfaceArns, location_name: "DestinationNetworkInterfaceArns"))
     DescribeTaskResponse.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
     DescribeTaskResponse.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
     DescribeTaskResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "ErrorCode"))
@@ -281,15 +324,13 @@ module Aws::DataSync
     DescribeTaskResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeTaskResponse.struct_class = Types::DescribeTaskResponse
 
+    DestinationNetworkInterfaceArns.member = Shapes::ShapeRef.new(shape: NetworkInterfaceArn)
+
     Ec2Config.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: Ec2SubnetArn, required: true, location_name: "SubnetArn"))
     Ec2Config.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, required: true, location_name: "SecurityGroupArns"))
     Ec2Config.struct_class = Types::Ec2Config
 
     Ec2SecurityGroupArnList.member = Shapes::ShapeRef.new(shape: Ec2SecurityGroupArn)
-
-    EndpointOptions.add_member(:fips, Shapes::ShapeRef.new(shape: boolean, location_name: "Fips"))
-    EndpointOptions.add_member(:private_link, Shapes::ShapeRef.new(shape: boolean, location_name: "PrivateLink"))
-    EndpointOptions.struct_class = Types::EndpointOptions
 
     FilterList.member = Shapes::ShapeRef.new(shape: FilterRule)
 
@@ -374,13 +415,19 @@ module Aws::DataSync
 
     PLSubnetArnList.member = Shapes::ShapeRef.new(shape: Ec2SubnetArn)
 
-    PrivateLinkConfig.add_member(:private_link_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "PrivateLinkEndpoint"))
+    PrivateLinkConfig.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    PrivateLinkConfig.add_member(:private_link_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "PrivateLinkEndpoint"))
     PrivateLinkConfig.add_member(:subnet_arns, Shapes::ShapeRef.new(shape: PLSubnetArnList, location_name: "SubnetArns"))
     PrivateLinkConfig.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: PLSecurityGroupArnList, location_name: "SecurityGroupArns"))
     PrivateLinkConfig.struct_class = Types::PrivateLinkConfig
 
     S3Config.add_member(:bucket_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "BucketAccessRoleArn"))
     S3Config.struct_class = Types::S3Config
+
+    SmbMountOptions.add_member(:version, Shapes::ShapeRef.new(shape: SmbVersion, location_name: "Version"))
+    SmbMountOptions.struct_class = Types::SmbMountOptions
+
+    SourceNetworkInterfaceArns.member = Shapes::ShapeRef.new(shape: NetworkInterfaceArn)
 
     StartTaskExecutionRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, required: true, location_name: "TaskArn"))
     StartTaskExecutionRequest.add_member(:override_options, Shapes::ShapeRef.new(shape: Options, location_name: "OverrideOptions"))
@@ -518,6 +565,16 @@ module Aws::DataSync
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:create_location_smb, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLocationSmb"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLocationSmbRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLocationSmbResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:create_task, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTask"
         o.http_method = "POST"
@@ -594,6 +651,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocationS3Request)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocationS3Response)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:describe_location_smb, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLocationSmb"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLocationSmbRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLocationSmbResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

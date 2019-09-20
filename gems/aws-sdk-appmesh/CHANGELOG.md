@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2019-09-09)
+------------------
+
+* Feature - This release adds support for http retry policies.
+
+1.15.0 (2019-08-19)
+------------------
+
+* Feature - Fix for HttpMethod enum
+
+1.14.0 (2019-08-15)
+------------------
+
+* Feature - This release adds support for http header based routing and route prioritization.
+
 1.13.0 (2019-07-25)
 ------------------
 

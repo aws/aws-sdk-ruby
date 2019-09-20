@@ -792,6 +792,8 @@ module Aws::GameLift
     #   [1]: https://console.aws.amazon.com/iam/
     #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #
+    # @option params [Types::CertificateConfiguration] :certificate_configuration
+    #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetOutput#fleet_attributes #fleet_attributes} => Types::FleetAttributes
@@ -836,6 +838,9 @@ module Aws::GameLift
     #     peer_vpc_id: "NonZeroAndMaxString",
     #     fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #     instance_role_arn: "NonEmptyString",
+    #     certificate_configuration: {
+    #       certificate_type: "DISABLED", # required, accepts DISABLED, GENERATED
+    #     },
     #   })
     #
     # @example Response structure
@@ -864,6 +869,7 @@ module Aws::GameLift
     #   resp.fleet_attributes.stopped_actions #=> Array
     #   resp.fleet_attributes.stopped_actions[0] #=> String, one of "AUTO_SCALING"
     #   resp.fleet_attributes.instance_role_arn #=> String
+    #   resp.fleet_attributes.certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet AWS API Documentation
     #
@@ -1028,6 +1034,7 @@ module Aws::GameLift
     #   resp.game_session.game_properties[0].key #=> String
     #   resp.game_session.game_properties[0].value #=> String
     #   resp.game_session.ip_address #=> String
+    #   resp.game_session.dns_name #=> String
     #   resp.game_session.port #=> Integer
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
@@ -1496,6 +1503,7 @@ module Aws::GameLift
     #   resp.player_session.termination_time #=> Time
     #   resp.player_session.status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_session.ip_address #=> String
+    #   resp.player_session.dns_name #=> String
     #   resp.player_session.port #=> Integer
     #   resp.player_session.player_data #=> String
     #
@@ -1575,6 +1583,7 @@ module Aws::GameLift
     #   resp.player_sessions[0].termination_time #=> Time
     #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_sessions[0].ip_address #=> String
+    #   resp.player_sessions[0].dns_name #=> String
     #   resp.player_sessions[0].port #=> Integer
     #   resp.player_sessions[0].player_data #=> String
     #
@@ -2707,6 +2716,7 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].stopped_actions #=> Array
     #   resp.fleet_attributes[0].stopped_actions[0] #=> String, one of "AUTO_SCALING"
     #   resp.fleet_attributes[0].instance_role_arn #=> String
+    #   resp.fleet_attributes[0].certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes AWS API Documentation
@@ -3236,6 +3246,7 @@ module Aws::GameLift
     #   resp.game_session_details[0].game_session.game_properties[0].key #=> String
     #   resp.game_session_details[0].game_session.game_properties[0].value #=> String
     #   resp.game_session_details[0].game_session.ip_address #=> String
+    #   resp.game_session_details[0].game_session.dns_name #=> String
     #   resp.game_session_details[0].game_session.port #=> Integer
     #   resp.game_session_details[0].game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session_details[0].game_session.creator_id #=> String
@@ -3294,7 +3305,7 @@ module Aws::GameLift
     #
     #   resp.game_session_placement.placement_id #=> String
     #   resp.game_session_placement.game_session_queue_name #=> String
-    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT"
+    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT", "FAILED"
     #   resp.game_session_placement.game_properties #=> Array
     #   resp.game_session_placement.game_properties[0].key #=> String
     #   resp.game_session_placement.game_properties[0].value #=> String
@@ -3310,6 +3321,7 @@ module Aws::GameLift
     #   resp.game_session_placement.start_time #=> Time
     #   resp.game_session_placement.end_time #=> Time
     #   resp.game_session_placement.ip_address #=> String
+    #   resp.game_session_placement.dns_name #=> String
     #   resp.game_session_placement.port #=> Integer
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
@@ -3480,6 +3492,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].game_properties[0].key #=> String
     #   resp.game_sessions[0].game_properties[0].value #=> String
     #   resp.game_sessions[0].ip_address #=> String
+    #   resp.game_sessions[0].dns_name #=> String
     #   resp.game_sessions[0].port #=> Integer
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
@@ -3541,6 +3554,7 @@ module Aws::GameLift
     #   resp.instances[0].fleet_id #=> String
     #   resp.instances[0].instance_id #=> String
     #   resp.instances[0].ip_address #=> String
+    #   resp.instances[0].dns_name #=> String
     #   resp.instances[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
     #   resp.instances[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
     #   resp.instances[0].status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
@@ -3626,6 +3640,7 @@ module Aws::GameLift
     #   resp.ticket_list[0].players[0].latency_in_ms["NonEmptyString"] #=> Integer
     #   resp.ticket_list[0].game_session_connection_info.game_session_arn #=> String
     #   resp.ticket_list[0].game_session_connection_info.ip_address #=> String
+    #   resp.ticket_list[0].game_session_connection_info.dns_name #=> String
     #   resp.ticket_list[0].game_session_connection_info.port #=> Integer
     #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions #=> Array
     #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions[0].player_id #=> String
@@ -3914,6 +3929,7 @@ module Aws::GameLift
     #   resp.player_sessions[0].termination_time #=> Time
     #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_sessions[0].ip_address #=> String
+    #   resp.player_sessions[0].dns_name #=> String
     #   resp.player_sessions[0].port #=> Integer
     #   resp.player_sessions[0].player_data #=> String
     #   resp.next_token #=> String
@@ -5272,6 +5288,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].game_properties[0].key #=> String
     #   resp.game_sessions[0].game_properties[0].value #=> String
     #   resp.game_sessions[0].ip_address #=> String
+    #   resp.game_sessions[0].dns_name #=> String
     #   resp.game_sessions[0].port #=> Integer
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
@@ -5520,7 +5537,7 @@ module Aws::GameLift
     #
     #   resp.game_session_placement.placement_id #=> String
     #   resp.game_session_placement.game_session_queue_name #=> String
-    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT"
+    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT", "FAILED"
     #   resp.game_session_placement.game_properties #=> Array
     #   resp.game_session_placement.game_properties[0].key #=> String
     #   resp.game_session_placement.game_properties[0].value #=> String
@@ -5536,6 +5553,7 @@ module Aws::GameLift
     #   resp.game_session_placement.start_time #=> Time
     #   resp.game_session_placement.end_time #=> Time
     #   resp.game_session_placement.ip_address #=> String
+    #   resp.game_session_placement.dns_name #=> String
     #   resp.game_session_placement.port #=> Integer
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
@@ -5686,6 +5704,7 @@ module Aws::GameLift
     #   resp.matchmaking_ticket.players[0].latency_in_ms["NonEmptyString"] #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.game_session_arn #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.ip_address #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.dns_name #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.port #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
@@ -5856,6 +5875,7 @@ module Aws::GameLift
     #   resp.matchmaking_ticket.players[0].latency_in_ms["NonEmptyString"] #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.game_session_arn #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.ip_address #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.dns_name #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.port #=> Integer
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
@@ -5997,7 +6017,7 @@ module Aws::GameLift
     #
     #   resp.game_session_placement.placement_id #=> String
     #   resp.game_session_placement.game_session_queue_name #=> String
-    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT"
+    #   resp.game_session_placement.status #=> String, one of "PENDING", "FULFILLED", "CANCELLED", "TIMED_OUT", "FAILED"
     #   resp.game_session_placement.game_properties #=> Array
     #   resp.game_session_placement.game_properties[0].key #=> String
     #   resp.game_session_placement.game_properties[0].value #=> String
@@ -6013,6 +6033,7 @@ module Aws::GameLift
     #   resp.game_session_placement.start_time #=> Time
     #   resp.game_session_placement.end_time #=> Time
     #   resp.game_session_placement.ip_address #=> String
+    #   resp.game_session_placement.dns_name #=> String
     #   resp.game_session_placement.port #=> Integer
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
@@ -6630,6 +6651,7 @@ module Aws::GameLift
     #   resp.game_session.game_properties[0].key #=> String
     #   resp.game_session.game_properties[0].value #=> String
     #   resp.game_session.ip_address #=> String
+    #   resp.game_session.dns_name #=> String
     #   resp.game_session.port #=> Integer
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
@@ -7202,7 +7224,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

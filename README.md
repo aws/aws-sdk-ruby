@@ -356,6 +356,7 @@ to be backwards compatible.
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
+| AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
 | AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
@@ -366,7 +367,7 @@ to be backwards compatible.
 | AWS Migration Hub                                     | Aws::MigrationHub                    | aws-sdk-migrationhub                    | 2017-05-31  |
 | AWS Mobile                                            | Aws::Mobile                          | aws-sdk-mobile                          | 2017-07-01  |
 | AWS OpsWorks                                          | Aws::OpsWorks                        | aws-sdk-opsworks                        | 2013-02-18  |
-| AWS OpsWorks for Chef Automate                        | Aws::OpsWorksCM                      | aws-sdk-opsworkscm                      | 2016-11-01  |
+| AWS OpsWorks CM                                       | Aws::OpsWorksCM                      | aws-sdk-opsworkscm                      | 2016-11-01  |
 | AWS Organizations                                     | Aws::Organizations                   | aws-sdk-organizations                   | 2016-11-28  |
 | AWS Performance Insights                              | Aws::PI                              | aws-sdk-pi                              | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                         | aws-sdk-pricing                         | 2017-10-15  |
@@ -427,6 +428,8 @@ to be backwards compatible.
 | Amazon Elasticsearch Service                          | Aws::ElasticsearchService            | aws-sdk-elasticsearchservice            | 2015-01-01  |
 | Amazon EventBridge                                    | Aws::EventBridge                     | aws-sdk-eventbridge                     | 2015-10-07  |
 | Amazon FSx                                            | Aws::FSx                             | aws-sdk-fsx                             | 2018-03-01  |
+| Amazon Forecast Query Service                         | Aws::ForecastQueryService            | aws-sdk-forecastqueryservice            | 2018-06-26  |
+| Amazon Forecast Service                               | Aws::ForecastService                 | aws-sdk-forecastservice                 | 2018-06-26  |
 | Amazon GameLift                                       | Aws::GameLift                        | aws-sdk-gamelift                        | 2015-10-01  |
 | Amazon Glacier                                        | Aws::Glacier                         | aws-sdk-glacier                         | 2012-06-01  |
 | Amazon GuardDuty                                      | Aws::GuardDuty                       | aws-sdk-guardduty                       | 2017-11-28  |
@@ -454,6 +457,8 @@ to be backwards compatible.
 | Amazon Pinpoint Email Service                         | Aws::PinpointEmail                   | aws-sdk-pinpointemail                   | 2018-07-26  |
 | Amazon Pinpoint SMS and Voice Service                 | Aws::PinpointSMSVoice                | aws-sdk-pinpointsmsvoice                | 2018-09-05  |
 | Amazon Polly                                          | Aws::Polly                           | aws-sdk-polly                           | 2016-06-10  |
+| Amazon QLDB                                           | Aws::QLDB                            | aws-sdk-qldb                            | 2019-01-02  |
+| Amazon QLDB Session                                   | Aws::QLDBSession                     | aws-sdk-qldbsession                     | 2019-07-11  |
 | Amazon QuickSight                                     | Aws::QuickSight                      | aws-sdk-quicksight                      | 2018-04-01  |
 | Amazon Redshift                                       | Aws::Redshift                        | aws-sdk-redshift                        | 2012-12-01  |
 | Amazon Rekognition                                    | Aws::Rekognition                     | aws-sdk-rekognition                     | 2016-06-27  |
@@ -477,14 +482,15 @@ to be backwards compatible.
 | Amazon WorkDocs                                       | Aws::WorkDocs                        | aws-sdk-workdocs                        | 2016-05-01  |
 | Amazon WorkLink                                       | Aws::WorkLink                        | aws-sdk-worklink                        | 2018-09-25  |
 | Amazon WorkMail                                       | Aws::WorkMail                        | aws-sdk-workmail                        | 2017-10-01  |
+| Amazon WorkMail Message Flow                          | Aws::WorkMailMessageFlow             | aws-sdk-workmailmessageflow             | 2019-05-01  |
 | Amazon WorkSpaces                                     | Aws::WorkSpaces                      | aws-sdk-workspaces                      | 2015-04-08  |
 | AmazonApiGatewayManagementApi                         | Aws::ApiGatewayManagementApi         | aws-sdk-apigatewaymanagementapi         | 2018-11-29  |
 | AmazonApiGatewayV2                                    | Aws::ApiGatewayV2                    | aws-sdk-apigatewayv2                    | 2018-11-29  |
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |

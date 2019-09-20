@@ -378,7 +378,7 @@ module Aws::CostandUsageReportService
     #   resp.report_definitions[0].additional_schema_elements[0] #=> String, one of "RESOURCES"
     #   resp.report_definitions[0].s3_bucket #=> String
     #   resp.report_definitions[0].s3_prefix #=> String
-    #   resp.report_definitions[0].s3_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "eu-north-1", "ap-northeast-3"
+    #   resp.report_definitions[0].s3_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "eu-north-1", "ap-northeast-3", "ap-east-1"
     #   resp.report_definitions[0].additional_artifacts #=> Array
     #   resp.report_definitions[0].additional_artifacts[0] #=> String, one of "REDSHIFT", "QUICKSIGHT", "ATHENA"
     #   resp.report_definitions[0].refresh_closed_reports #=> Boolean
@@ -391,6 +391,47 @@ module Aws::CostandUsageReportService
     # @param [Hash] params ({})
     def describe_report_definitions(params = {}, options = {})
       req = build_request(:describe_report_definitions, params)
+      req.send_request(options)
+    end
+
+    # Allows you to programatically update your report preferences.
+    #
+    # @option params [required, String] :report_name
+    #   The name of the report that you want to create. The name must be
+    #   unique, is case sensitive, and can't include spaces.
+    #
+    # @option params [required, Types::ReportDefinition] :report_definition
+    #   The definition of AWS Cost and Usage Report. You can specify the
+    #   report name, time unit, report format, compression format, S3 bucket,
+    #   additional artifacts, and schema elements in the definition.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_report_definition({
+    #     report_name: "ReportName", # required
+    #     report_definition: { # required
+    #       report_name: "ReportName", # required
+    #       time_unit: "HOURLY", # required, accepts HOURLY, DAILY
+    #       format: "textORcsv", # required, accepts textORcsv, Parquet
+    #       compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
+    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_prefix: "S3Prefix", # required
+    #       s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
+    #       additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
+    #       refresh_closed_reports: false,
+    #       report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ModifyReportDefinition AWS API Documentation
+    #
+    # @overload modify_report_definition(params = {})
+    # @param [Hash] params ({})
+    def modify_report_definition(params = {}, options = {})
+      req = build_request(:modify_report_definition, params)
       req.send_request(options)
     end
 
@@ -437,7 +478,7 @@ module Aws::CostandUsageReportService
     #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
     #       s3_bucket: "S3Bucket", # required
     #       s3_prefix: "S3Prefix", # required
-    #       s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3
+    #       s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
     #       additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
     #       refresh_closed_reports: false,
     #       report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
@@ -466,7 +507,7 @@ module Aws::CostandUsageReportService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costandusagereportservice'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

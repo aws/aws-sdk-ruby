@@ -373,7 +373,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -496,7 +496,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -650,7 +650,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #     context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS
     #     next_page_token: "NextPageToken",
     #   })
@@ -838,7 +838,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1156,7 +1156,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1227,6 +1227,177 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def get_reservation_utilization(params = {}, options = {})
       req = build_request(:get_reservation_utilization, params)
+      req.send_request(options)
+    end
+
+    # Creates recommendations that helps you save cost by identifying idle
+    # and underutilized Amazon EC2 instances.
+    #
+    # Recommendations are generated to either downsize or terminate
+    # instances, along with providing savings detail and metrics. For
+    # details on calculation and function, see [Optimizing Your Cost with
+    # Rightsizing Recommendations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-what-is.html
+    #
+    # @option params [Types::Expression] :filter
+    #   Use `Expression` to filter by cost or by usage. There are two
+    #   patterns:
+    #
+    #   * Simple dimension values - You can set the dimension name and values
+    #     for the filters that you plan to use. For example, you can filter
+    #     for `REGION==us-east-1 OR REGION==us-west-1`. The `Expression` for
+    #     that looks like this:
+    #
+    #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
+    #     “us-west-1” ] \} \}`
+    #
+    #     The list of dimension values are OR'd together to retrieve cost or
+    #     usage data. You can create `Expression` and `DimensionValues`
+    #     objects using either `with*` methods or `set*` methods in multiple
+    #     lines.
+    #
+    #   * Compound dimension values with logical operations - You can use
+    #     multiple `Expression` types and the logical operators `AND/OR/NOT`
+    #     to create a list of one or more `Expression` objects. This allows
+    #     you to filter on more advanced options. For example, you can filter
+    #     on `((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type ==
+    #     Type1)) AND (USAGE_TYPE != DataTransfer)`. The `Expression` for that
+    #     looks like this:
+    #
+    #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values":
+    #     [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
+    #     "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
+    #     "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
+    #
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error.
+    #
+    #      </note>
+    #
+    #     ` \{ "And": [ ... ], "DimensionValues": \{ "Dimension":
+    #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
+    #
+    #   <note markdown="1"> For `GetRightsizingRecommendation` action, a combination of OR and NOT
+    #   is not supported. OR is not supported between different dimensions, or
+    #   dimensions and tags. NOT operators aren't supported. Dimentions are
+    #   also limited to `LINKED_ACCOUNT`, `REGION`, or `RIGHTSIZING_TYPE`.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :service
+    #   The specific service that you want recommendations for.
+    #
+    # @option params [Integer] :page_size
+    #   The number of recommendations that you want returned in a single
+    #   response object.
+    #
+    # @option params [String] :next_page_token
+    #   The pagination token that indicates the next set of results that you
+    #   want to retrieve.
+    #
+    # @return [Types::GetRightsizingRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRightsizingRecommendationResponse#metadata #metadata} => Types::RightsizingRecommendationMetadata
+    #   * {Types::GetRightsizingRecommendationResponse#summary #summary} => Types::RightsizingRecommendationSummary
+    #   * {Types::GetRightsizingRecommendationResponse#rightsizing_recommendations #rightsizing_recommendations} => Array&lt;Types::RightsizingRecommendation&gt;
+    #   * {Types::GetRightsizingRecommendationResponse#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_rightsizing_recommendation({
+    #     filter: {
+    #       or: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
+    #         values: ["Value"],
+    #       },
+    #       tags: {
+    #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #     },
+    #     service: "GenericString", # required
+    #     page_size: 1,
+    #     next_page_token: "NextPageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metadata.recommendation_id #=> String
+    #   resp.metadata.generation_timestamp #=> String
+    #   resp.metadata.lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
+    #   resp.summary.total_recommendation_count #=> String
+    #   resp.summary.estimated_total_monthly_savings_amount #=> String
+    #   resp.summary.savings_currency_code #=> String
+    #   resp.summary.savings_percentage #=> String
+    #   resp.rightsizing_recommendations #=> Array
+    #   resp.rightsizing_recommendations[0].account_id #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_id #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.tags #=> Array
+    #   resp.rightsizing_recommendations[0].current_instance.tags[0].key #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.tags[0].values #=> Array
+    #   resp.rightsizing_recommendations[0].current_instance.tags[0].values[0] #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.hourly_on_demand_rate #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.instance_type #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.platform #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.region #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.sku #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.memory #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.network_performance #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.storage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.vcpu #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_cpu_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_memory_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_storage_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.reservation_covered_hours_in_lookback_period #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.on_demand_hours_in_lookback_period #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.total_running_hours_in_lookback_period #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.monthly_cost #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.currency_code #=> String
+    #   resp.rightsizing_recommendations[0].rightsizing_type #=> String, one of "TERMINATE", "MODIFY"
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances #=> Array
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].estimated_monthly_cost #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].estimated_monthly_savings #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].currency_code #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].default_target_instance #=> Boolean
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.hourly_on_demand_rate #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.instance_type #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.platform #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.region #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.sku #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.memory #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.network_performance #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.storage #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].resource_details.ec2_resource_details.vcpu #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_cpu_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_memory_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_storage_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.estimated_monthly_savings #=> String
+    #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.currency_code #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendation AWS API Documentation
+    #
+    # @overload get_rightsizing_recommendation(params = {})
+    # @param [Hash] params ({})
+    def get_rightsizing_recommendation(params = {}, options = {})
+      req = build_request(:get_rightsizing_recommendation, params)
       req.send_request(options)
     end
 
@@ -1356,7 +1527,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RIGHTSIZING_TYPE
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -1400,7 +1571,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

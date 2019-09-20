@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-09-11)
+------------------
+
+* Feature - Updated API documentation to correct broken links, and to update content based on customer feedback.
+
 1.25.0 (2019-07-25)
 ------------------
 

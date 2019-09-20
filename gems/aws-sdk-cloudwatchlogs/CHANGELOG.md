@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-07-26)
+------------------
+
+* Feature - Allow for specifying multiple log groups in an Insights query, and deprecate storedByte field for LogStreams and interleaved field for FilterLogEventsRequest.
+
 1.24.0 (2019-07-25)
 ------------------
 

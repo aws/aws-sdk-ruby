@@ -227,6 +227,7 @@ module Aws::MediaPackageVod
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
+    HlsEncryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
     HlsEncryption.add_member(:encryption_method, Shapes::ShapeRef.new(shape: EncryptionMethod, location_name: "encryptionMethod"))
     HlsEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     HlsEncryption.struct_class = Types::HlsEncryption

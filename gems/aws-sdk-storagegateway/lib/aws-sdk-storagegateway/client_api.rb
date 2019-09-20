@@ -41,6 +41,7 @@ module Aws::StorageGateway
     ChapInfo = Shapes::StructureShape.new(name: 'ChapInfo')
     ChapSecret = Shapes::StringShape.new(name: 'ChapSecret')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CloudWatchLogGroupARN = Shapes::StringShape.new(name: 'CloudWatchLogGroupARN')
     CreateCachediSCSIVolumeInput = Shapes::StructureShape.new(name: 'CreateCachediSCSIVolumeInput')
     CreateCachediSCSIVolumeOutput = Shapes::StructureShape.new(name: 'CreateCachediSCSIVolumeOutput')
     CreateNFSFileShareInput = Shapes::StructureShape.new(name: 'CreateNFSFileShareInput')
@@ -468,6 +469,7 @@ module Aws::StorageGateway
 
     CreateSnapshotFromVolumeRecoveryPointInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     CreateSnapshotFromVolumeRecoveryPointInput.add_member(:snapshot_description, Shapes::ShapeRef.new(shape: SnapshotDescription, required: true, location_name: "SnapshotDescription"))
+    CreateSnapshotFromVolumeRecoveryPointInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSnapshotFromVolumeRecoveryPointInput.struct_class = Types::CreateSnapshotFromVolumeRecoveryPointInput
 
     CreateSnapshotFromVolumeRecoveryPointOutput.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
@@ -627,6 +629,7 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:ec2_instance_region, Shapes::ShapeRef.new(shape: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
     DescribeGatewayInformationOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeGatewayInformationOutput.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "VPCEndpoint"))
+    DescribeGatewayInformationOutput.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
@@ -669,6 +672,7 @@ module Aws::StorageGateway
     DescribeSnapshotScheduleOutput.add_member(:recurrence_in_hours, Shapes::ShapeRef.new(shape: RecurrenceInHours, location_name: "RecurrenceInHours"))
     DescribeSnapshotScheduleOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DescribeSnapshotScheduleOutput.add_member(:timezone, Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "Timezone"))
+    DescribeSnapshotScheduleOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeSnapshotScheduleOutput.struct_class = Types::DescribeSnapshotScheduleOutput
 
     DescribeStorediSCSIVolumesInput.add_member(:volume_arns, Shapes::ShapeRef.new(shape: VolumeARNs, required: true, location_name: "VolumeARNs"))
@@ -1120,6 +1124,7 @@ module Aws::StorageGateway
     UpdateGatewayInformationInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     UpdateGatewayInformationInput.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, location_name: "GatewayName"))
     UpdateGatewayInformationInput.add_member(:gateway_timezone, Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "GatewayTimezone"))
+    UpdateGatewayInformationInput.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
     UpdateGatewayInformationInput.struct_class = Types::UpdateGatewayInformationInput
 
     UpdateGatewayInformationOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))

@@ -22,6 +22,7 @@ module Aws::AppMesh
     Backend = Shapes::StructureShape.new(name: 'Backend')
     Backends = Shapes::ListShape.new(name: 'Backends')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateMeshInput = Shapes::StructureShape.new(name: 'CreateMeshInput')
     CreateMeshOutput = Shapes::StructureShape.new(name: 'CreateMeshOutput')
@@ -54,19 +55,32 @@ module Aws::AppMesh
     DescribeVirtualServiceInput = Shapes::StructureShape.new(name: 'DescribeVirtualServiceInput')
     DescribeVirtualServiceOutput = Shapes::StructureShape.new(name: 'DescribeVirtualServiceOutput')
     DnsServiceDiscovery = Shapes::StructureShape.new(name: 'DnsServiceDiscovery')
+    Duration = Shapes::StructureShape.new(name: 'Duration')
+    DurationUnit = Shapes::StringShape.new(name: 'DurationUnit')
+    DurationValue = Shapes::IntegerShape.new(name: 'DurationValue')
     EgressFilter = Shapes::StructureShape.new(name: 'EgressFilter')
     EgressFilterType = Shapes::StringShape.new(name: 'EgressFilterType')
     FileAccessLog = Shapes::StructureShape.new(name: 'FileAccessLog')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    HeaderMatch = Shapes::StringShape.new(name: 'HeaderMatch')
+    HeaderMatchMethod = Shapes::StructureShape.new(name: 'HeaderMatchMethod')
+    HeaderName = Shapes::StringShape.new(name: 'HeaderName')
     HealthCheckIntervalMillis = Shapes::IntegerShape.new(name: 'HealthCheckIntervalMillis')
     HealthCheckPolicy = Shapes::StructureShape.new(name: 'HealthCheckPolicy')
     HealthCheckThreshold = Shapes::IntegerShape.new(name: 'HealthCheckThreshold')
     HealthCheckTimeoutMillis = Shapes::IntegerShape.new(name: 'HealthCheckTimeoutMillis')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
+    HttpMethod = Shapes::StringShape.new(name: 'HttpMethod')
+    HttpRetryPolicy = Shapes::StructureShape.new(name: 'HttpRetryPolicy')
+    HttpRetryPolicyEvent = Shapes::StringShape.new(name: 'HttpRetryPolicyEvent')
+    HttpRetryPolicyEvents = Shapes::ListShape.new(name: 'HttpRetryPolicyEvents')
     HttpRoute = Shapes::StructureShape.new(name: 'HttpRoute')
     HttpRouteAction = Shapes::StructureShape.new(name: 'HttpRouteAction')
+    HttpRouteHeader = Shapes::StructureShape.new(name: 'HttpRouteHeader')
+    HttpRouteHeaders = Shapes::ListShape.new(name: 'HttpRouteHeaders')
     HttpRouteMatch = Shapes::StructureShape.new(name: 'HttpRouteMatch')
+    HttpScheme = Shapes::StringShape.new(name: 'HttpScheme')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListMeshesInput = Shapes::StructureShape.new(name: 'ListMeshesInput')
@@ -90,6 +104,8 @@ module Aws::AppMesh
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     Logging = Shapes::StructureShape.new(name: 'Logging')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MatchRange = Shapes::StructureShape.new(name: 'MatchRange')
+    MaxRetries = Shapes::IntegerShape.new(name: 'MaxRetries')
     MeshData = Shapes::StructureShape.new(name: 'MeshData')
     MeshList = Shapes::ListShape.new(name: 'MeshList')
     MeshRef = Shapes::StructureShape.new(name: 'MeshRef')
@@ -106,6 +122,7 @@ module Aws::AppMesh
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     RouteData = Shapes::StructureShape.new(name: 'RouteData')
     RouteList = Shapes::ListShape.new(name: 'RouteList')
+    RoutePriority = Shapes::IntegerShape.new(name: 'RoutePriority')
     RouteRef = Shapes::StructureShape.new(name: 'RouteRef')
     RouteSpec = Shapes::StructureShape.new(name: 'RouteSpec')
     RouteStatus = Shapes::StructureShape.new(name: 'RouteStatus')
@@ -122,6 +139,8 @@ module Aws::AppMesh
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsLimit = Shapes::IntegerShape.new(name: 'TagsLimit')
+    TcpRetryPolicyEvent = Shapes::StringShape.new(name: 'TcpRetryPolicyEvent')
+    TcpRetryPolicyEvents = Shapes::ListShape.new(name: 'TcpRetryPolicyEvents')
     TcpRoute = Shapes::StructureShape.new(name: 'TcpRoute')
     TcpRouteAction = Shapes::StructureShape.new(name: 'TcpRouteAction')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -344,6 +363,10 @@ module Aws::AppMesh
     DnsServiceDiscovery.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, required: true, location_name: "hostname"))
     DnsServiceDiscovery.struct_class = Types::DnsServiceDiscovery
 
+    Duration.add_member(:unit, Shapes::ShapeRef.new(shape: DurationUnit, location_name: "unit"))
+    Duration.add_member(:value, Shapes::ShapeRef.new(shape: DurationValue, location_name: "value"))
+    Duration.struct_class = Types::Duration
+
     EgressFilter.add_member(:type, Shapes::ShapeRef.new(shape: EgressFilterType, required: true, location_name: "type"))
     EgressFilter.struct_class = Types::EgressFilter
 
@@ -352,6 +375,13 @@ module Aws::AppMesh
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
+
+    HeaderMatchMethod.add_member(:exact, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "exact"))
+    HeaderMatchMethod.add_member(:prefix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "prefix"))
+    HeaderMatchMethod.add_member(:range, Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
+    HeaderMatchMethod.add_member(:regex, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
+    HeaderMatchMethod.add_member(:suffix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
+    HeaderMatchMethod.struct_class = Types::HeaderMatchMethod
 
     HealthCheckPolicy.add_member(:healthy_threshold, Shapes::ShapeRef.new(shape: HealthCheckThreshold, required: true, location_name: "healthyThreshold"))
     HealthCheckPolicy.add_member(:interval_millis, Shapes::ShapeRef.new(shape: HealthCheckIntervalMillis, required: true, location_name: "intervalMillis"))
@@ -362,14 +392,33 @@ module Aws::AppMesh
     HealthCheckPolicy.add_member(:unhealthy_threshold, Shapes::ShapeRef.new(shape: HealthCheckThreshold, required: true, location_name: "unhealthyThreshold"))
     HealthCheckPolicy.struct_class = Types::HealthCheckPolicy
 
+    HttpRetryPolicy.add_member(:http_retry_events, Shapes::ShapeRef.new(shape: HttpRetryPolicyEvents, location_name: "httpRetryEvents"))
+    HttpRetryPolicy.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, required: true, location_name: "maxRetries"))
+    HttpRetryPolicy.add_member(:per_retry_timeout, Shapes::ShapeRef.new(shape: Duration, required: true, location_name: "perRetryTimeout"))
+    HttpRetryPolicy.add_member(:tcp_retry_events, Shapes::ShapeRef.new(shape: TcpRetryPolicyEvents, location_name: "tcpRetryEvents"))
+    HttpRetryPolicy.struct_class = Types::HttpRetryPolicy
+
+    HttpRetryPolicyEvents.member = Shapes::ShapeRef.new(shape: HttpRetryPolicyEvent)
+
     HttpRoute.add_member(:action, Shapes::ShapeRef.new(shape: HttpRouteAction, required: true, location_name: "action"))
     HttpRoute.add_member(:match, Shapes::ShapeRef.new(shape: HttpRouteMatch, required: true, location_name: "match"))
+    HttpRoute.add_member(:retry_policy, Shapes::ShapeRef.new(shape: HttpRetryPolicy, location_name: "retryPolicy"))
     HttpRoute.struct_class = Types::HttpRoute
 
     HttpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
     HttpRouteAction.struct_class = Types::HttpRouteAction
 
+    HttpRouteHeader.add_member(:invert, Shapes::ShapeRef.new(shape: Boolean, location_name: "invert"))
+    HttpRouteHeader.add_member(:match, Shapes::ShapeRef.new(shape: HeaderMatchMethod, location_name: "match"))
+    HttpRouteHeader.add_member(:name, Shapes::ShapeRef.new(shape: HeaderName, required: true, location_name: "name"))
+    HttpRouteHeader.struct_class = Types::HttpRouteHeader
+
+    HttpRouteHeaders.member = Shapes::ShapeRef.new(shape: HttpRouteHeader)
+
+    HttpRouteMatch.add_member(:headers, Shapes::ShapeRef.new(shape: HttpRouteHeaders, location_name: "headers"))
+    HttpRouteMatch.add_member(:method, Shapes::ShapeRef.new(shape: HttpMethod, location_name: "method"))
     HttpRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "prefix"))
+    HttpRouteMatch.add_member(:scheme, Shapes::ShapeRef.new(shape: HttpScheme, location_name: "scheme"))
     HttpRouteMatch.struct_class = Types::HttpRouteMatch
 
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -441,6 +490,10 @@ module Aws::AppMesh
     Logging.add_member(:access_log, Shapes::ShapeRef.new(shape: AccessLog, location_name: "accessLog"))
     Logging.struct_class = Types::Logging
 
+    MatchRange.add_member(:end, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "end"))
+    MatchRange.add_member(:start, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "start"))
+    MatchRange.struct_class = Types::MatchRange
+
     MeshData.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     MeshData.add_member(:metadata, Shapes::ShapeRef.new(shape: ResourceMetadata, required: true, location_name: "metadata"))
     MeshData.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, required: true, location_name: "spec"))
@@ -493,6 +546,7 @@ module Aws::AppMesh
     RouteRef.struct_class = Types::RouteRef
 
     RouteSpec.add_member(:http_route, Shapes::ShapeRef.new(shape: HttpRoute, location_name: "httpRoute"))
+    RouteSpec.add_member(:priority, Shapes::ShapeRef.new(shape: RoutePriority, location_name: "priority"))
     RouteSpec.add_member(:tcp_route, Shapes::ShapeRef.new(shape: TcpRoute, location_name: "tcpRoute"))
     RouteSpec.struct_class = Types::RouteSpec
 
@@ -519,6 +573,8 @@ module Aws::AppMesh
     TagResourceInput.struct_class = Types::TagResourceInput
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    TcpRetryPolicyEvents.member = Shapes::ShapeRef.new(shape: TcpRetryPolicyEvent)
 
     TcpRoute.add_member(:action, Shapes::ShapeRef.new(shape: TcpRouteAction, required: true, location_name: "action"))
     TcpRoute.struct_class = Types::TcpRoute
@@ -969,9 +1025,11 @@ module Aws::AppMesh
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1047,9 +1105,11 @@ module Aws::AppMesh
         o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
@@ -1060,9 +1120,11 @@ module Aws::AppMesh
         o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_mesh, Seahorse::Model::Operation.new.tap do |o|

@@ -1326,6 +1326,11 @@ module Aws::CodeBuild
     #   supported by the API and must be created using the AWS CodeBuild
     #   console.
     #
+    # @option params [Boolean] :should_overwrite
+    #   Set to `false` to prevent overwriting the repository source
+    #   credentials. Set to `true` to overwrite the repository source
+    #   credentials. The default value is `true`.
+    #
     # @return [Types::ImportSourceCredentialsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportSourceCredentialsOutput#arn #arn} => String
@@ -1337,6 +1342,7 @@ module Aws::CodeBuild
     #     token: "SensitiveNonEmptyString", # required
     #     server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE
     #     auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN
+    #     should_overwrite: false,
     #   })
     #
     # @example Response structure
@@ -2516,7 +2522,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

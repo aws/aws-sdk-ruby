@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2019-08-22)
+------------------
+
+* Feature - This release adds support for SMB location type.
+
+1.11.0 (2019-08-05)
+------------------
+
+* Feature - Support VPC endpoints.
+
 1.10.0 (2019-07-25)
 ------------------
 

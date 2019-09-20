@@ -254,6 +254,55 @@ module Aws::ApiGatewayManagementApi
 
     # @!group API Operations
 
+    # Delete the connection with the provided id.
+    #
+    # @option params [required, String] :connection_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connection({
+    #     connection_id: "__string", # required
+    #   })
+    #
+    # @overload delete_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_connection(params = {}, options = {})
+      req = build_request(:delete_connection, params)
+      req.send_request(options)
+    end
+
+    # Get information about the connection with the provided id.
+    #
+    # @option params [required, String] :connection_id
+    #
+    # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectionResponse#connected_at #connected_at} => Time
+    #   * {Types::GetConnectionResponse#identity #identity} => Types::Identity
+    #   * {Types::GetConnectionResponse#last_active_at #last_active_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connection({
+    #     connection_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connected_at #=> Time
+    #   resp.identity.source_ip #=> String
+    #   resp.identity.user_agent #=> String
+    #   resp.last_active_at #=> Time
+    #
+    # @overload get_connection(params = {})
+    # @param [Hash] params ({})
+    def get_connection(params = {}, options = {})
+      req = build_request(:get_connection, params)
+      req.send_request(options)
+    end
+
     # Sends the provided data to the specified connection.
     #
     # @option params [required, String, IO] :data
@@ -290,7 +339,7 @@ module Aws::ApiGatewayManagementApi
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewaymanagementapi'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

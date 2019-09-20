@@ -261,6 +261,23 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CertificateConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_type: "DISABLED", # required, accepts DISABLED, GENERATED
+    #       }
+    #
+    # @!attribute [rw] certificate_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CertificateConfiguration AWS API Documentation
+    #
+    class CertificateConfiguration < Struct.new(
+      :certificate_type)
+      include Aws::Structure
+    end
+
     # The requested operation would cause a conflict with the current state
     # of a service resource associated with the request. Resolve the
     # conflict before retrying this request.
@@ -457,6 +474,9 @@ module Aws::GameLift
     #         peer_vpc_id: "NonZeroAndMaxString",
     #         fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #         instance_role_arn: "NonEmptyString",
+    #         certificate_configuration: {
+    #           certificate_type: "DISABLED", # required, accepts DISABLED, GENERATED
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -618,6 +638,9 @@ module Aws::GameLift
     #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
+    # @!attribute [rw] certificate_configuration
+    #   @return [Types::CertificateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
     class CreateFleetInput < Struct.new(
@@ -637,7 +660,8 @@ module Aws::GameLift
       :peer_vpc_aws_account_id,
       :peer_vpc_id,
       :fleet_type,
-      :instance_role_arn)
+      :instance_role_arn,
+      :certificate_configuration)
       include Aws::Structure
     end
 
@@ -3255,6 +3279,9 @@ module Aws::GameLift
     #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
+    # @!attribute [rw] certificate_configuration
+    #   @return [Types::CertificateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes AWS API Documentation
     #
     class FleetAttributes < Struct.new(
@@ -3277,7 +3304,8 @@ module Aws::GameLift
       :resource_creation_limit_policy,
       :metric_groups,
       :stopped_actions,
-      :instance_role_arn)
+      :instance_role_arn,
+      :certificate_configuration)
       include Aws::Structure
     end
 
@@ -3574,6 +3602,9 @@ module Aws::GameLift
     #   server, an app needs both the IP address and port number.
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
     #   game server, an app needs both the IP address and port number.
@@ -3629,6 +3660,7 @@ module Aws::GameLift
       :status_reason,
       :game_properties,
       :ip_address,
+      :dns_name,
       :port,
       :player_session_creation_policy,
       :creator_id,
@@ -3659,6 +3691,9 @@ module Aws::GameLift
     #   server, an app needs both the IP address and port number.
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
     #   game server, an app needs both the IP address and port number.
@@ -3674,6 +3709,7 @@ module Aws::GameLift
     class GameSessionConnectionInfo < Struct.new(
       :game_session_arn,
       :ip_address,
+      :dns_name,
       :port,
       :matched_player_sessions)
       include Aws::Structure
@@ -3820,6 +3856,9 @@ module Aws::GameLift
     #   `FULFILLED`).
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
     #   game server, an app needs both the IP address and port number. This
@@ -3877,6 +3916,7 @@ module Aws::GameLift
       :start_time,
       :end_time,
       :ip_address,
+      :dns_name,
       :port,
       :placed_player_sessions,
       :game_session_data,
@@ -4105,6 +4145,9 @@ module Aws::GameLift
     #   IP address assigned to the instance.
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   @return [String]
+    #
     # @!attribute [rw] operating_system
     #   Operating system that is running on this instance.
     #   @return [String]
@@ -4144,6 +4187,7 @@ module Aws::GameLift
       :fleet_id,
       :instance_id,
       :ip_address,
+      :dns_name,
       :operating_system,
       :type,
       :status,
@@ -5185,6 +5229,9 @@ module Aws::GameLift
     #   server, an app needs both the IP address and port number.
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
     #   server process, an app needs both the IP address and port number.
@@ -5207,6 +5254,7 @@ module Aws::GameLift
       :termination_time,
       :status,
       :ip_address,
+      :dns_name,
       :port,
       :player_data)
       include Aws::Structure

@@ -78,10 +78,13 @@ module Aws::States
     ListActivitiesOutput = Shapes::StructureShape.new(name: 'ListActivitiesOutput')
     ListExecutionsInput = Shapes::StructureShape.new(name: 'ListExecutionsInput')
     ListExecutionsOutput = Shapes::StructureShape.new(name: 'ListExecutionsOutput')
+    ListExecutionsPageToken = Shapes::StringShape.new(name: 'ListExecutionsPageToken')
     ListStateMachinesInput = Shapes::StructureShape.new(name: 'ListStateMachinesInput')
     ListStateMachinesOutput = Shapes::StructureShape.new(name: 'ListStateMachinesOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    MapIterationEventDetails = Shapes::StructureShape.new(name: 'MapIterationEventDetails')
+    MapStateStartedEventDetails = Shapes::StructureShape.new(name: 'MapStateStartedEventDetails')
     MissingRequiredParameter = Shapes::StructureShape.new(name: 'MissingRequiredParameter')
     Name = Shapes::StringShape.new(name: 'Name')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
@@ -132,6 +135,7 @@ module Aws::States
     TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyTags = Shapes::StructureShape.new(name: 'TooManyTags')
+    UnsignedInteger = Shapes::IntegerShape.new(name: 'UnsignedInteger')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateStateMachineInput = Shapes::StructureShape.new(name: 'UpdateStateMachineInput')
@@ -326,6 +330,11 @@ module Aws::States
     HistoryEvent.add_member(:execution_succeeded_event_details, Shapes::ShapeRef.new(shape: ExecutionSucceededEventDetails, location_name: "executionSucceededEventDetails"))
     HistoryEvent.add_member(:execution_aborted_event_details, Shapes::ShapeRef.new(shape: ExecutionAbortedEventDetails, location_name: "executionAbortedEventDetails"))
     HistoryEvent.add_member(:execution_timed_out_event_details, Shapes::ShapeRef.new(shape: ExecutionTimedOutEventDetails, location_name: "executionTimedOutEventDetails"))
+    HistoryEvent.add_member(:map_state_started_event_details, Shapes::ShapeRef.new(shape: MapStateStartedEventDetails, location_name: "mapStateStartedEventDetails"))
+    HistoryEvent.add_member(:map_iteration_started_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationStartedEventDetails"))
+    HistoryEvent.add_member(:map_iteration_succeeded_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationSucceededEventDetails"))
+    HistoryEvent.add_member(:map_iteration_failed_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationFailedEventDetails"))
+    HistoryEvent.add_member(:map_iteration_aborted_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationAbortedEventDetails"))
     HistoryEvent.add_member(:lambda_function_failed_event_details, Shapes::ShapeRef.new(shape: LambdaFunctionFailedEventDetails, location_name: "lambdaFunctionFailedEventDetails"))
     HistoryEvent.add_member(:lambda_function_schedule_failed_event_details, Shapes::ShapeRef.new(shape: LambdaFunctionScheduleFailedEventDetails, location_name: "lambdaFunctionScheduleFailedEventDetails"))
     HistoryEvent.add_member(:lambda_function_scheduled_event_details, Shapes::ShapeRef.new(shape: LambdaFunctionScheduledEventDetails, location_name: "lambdaFunctionScheduledEventDetails"))
@@ -391,11 +400,11 @@ module Aws::States
     ListExecutionsInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     ListExecutionsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "statusFilter"))
     ListExecutionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
-    ListExecutionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListExecutionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExecutionsPageToken, location_name: "nextToken"))
     ListExecutionsInput.struct_class = Types::ListExecutionsInput
 
     ListExecutionsOutput.add_member(:executions, Shapes::ShapeRef.new(shape: ExecutionList, required: true, location_name: "executions"))
-    ListExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExecutionsPageToken, location_name: "nextToken"))
     ListExecutionsOutput.struct_class = Types::ListExecutionsOutput
 
     ListStateMachinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
@@ -411,6 +420,13 @@ module Aws::States
 
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
+    MapIterationEventDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    MapIterationEventDetails.add_member(:index, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "index"))
+    MapIterationEventDetails.struct_class = Types::MapIterationEventDetails
+
+    MapStateStartedEventDetails.add_member(:length, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "length"))
+    MapStateStartedEventDetails.struct_class = Types::MapStateStartedEventDetails
 
     MissingRequiredParameter.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     MissingRequiredParameter.struct_class = Types::MissingRequiredParameter

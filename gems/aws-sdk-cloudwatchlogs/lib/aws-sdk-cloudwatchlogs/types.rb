@@ -1175,6 +1175,9 @@ module Aws::CloudWatchLogs
     #   If the value is true, the earliest log events are returned first. If
     #   the value is false, the latest log events are returned first. The
     #   default value is false.
+    #
+    #   If you are using `nextToken` in this operation, you must specify
+    #   `true` for `startFromHead`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsRequest AWS API Documentation
@@ -2196,7 +2199,8 @@ module Aws::CloudWatchLogs
     #   data as a hash:
     #
     #       {
-    #         log_group_name: "LogGroupName", # required
+    #         log_group_name: "LogGroupName",
+    #         log_group_names: ["LogGroupName"],
     #         start_time: 1, # required
     #         end_time: 1, # required
     #         query_string: "QueryString", # required
@@ -2205,7 +2209,18 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] log_group_name
     #   The log group on which to perform the query.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
     #   @return [String]
+    #
+    # @!attribute [rw] log_group_names
+    #   The list of log groups to be queried. You can include up to 20 log
+    #   groups.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] start_time
     #   The beginning of the time range to query. The range is inclusive, so
@@ -2239,6 +2254,7 @@ module Aws::CloudWatchLogs
     #
     class StartQueryRequest < Struct.new(
       :log_group_name,
+      :log_group_names,
       :start_time,
       :end_time,
       :query_string,

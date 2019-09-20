@@ -612,6 +612,9 @@ module Aws::ElastiCache
     #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
     #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
     #
+    # @option params [String] :kms_key_id
+    #   The ID of the KMS key used to encrypt the target snapshot.
+    #
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopySnapshotResult#snapshot #snapshot} => Types::Snapshot
@@ -665,6 +668,7 @@ module Aws::ElastiCache
     #     source_snapshot_name: "String", # required
     #     target_snapshot_name: "String", # required
     #     target_bucket: "String",
+    #     kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -705,6 +709,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_size #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+    #   resp.snapshot.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshot AWS API Documentation
     #
@@ -727,7 +732,7 @@ module Aws::ElastiCache
     #
     #   **Constraints:**
     #
-    #   * A name must contain from 1 to 20 alphanumeric characters or hyphens.
+    #   * A name must contain from 1 to 50 alphanumeric characters or hyphens.
     #
     #   * The first character must be a letter.
     #
@@ -1500,7 +1505,7 @@ module Aws::ElastiCache
     #
     #   Constraints:
     #
-    #   * A name must contain from 1 to 20 alphanumeric characters or hyphens.
+    #   * A name must contain from 1 to 40 alphanumeric characters or hyphens.
     #
     #   * The first character must be a letter.
     #
@@ -1855,8 +1860,8 @@ module Aws::ElastiCache
     #   cluster.
     #
     #   This parameter is valid only if the `Engine` parameter is `redis`, the
-    #   `EngineVersion` parameter is `3.2.6` or `4.x`, and the cluster is
-    #   being created in an Amazon VPC.
+    #   `EngineVersion` parameter is `3.2.6`, `4.x` or later, and the cluster
+    #   is being created in an Amazon VPC.
     #
     #   If you enable in-transit encryption, you must also specify a value for
     #   `CacheSubnetGroup`.
@@ -1881,6 +1886,9 @@ module Aws::ElastiCache
     #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
+    #
+    # @option params [String] :kms_key_id
+    #   The ID of the KMS key used to encrypt the disk on the cluster.
     #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2021,6 +2029,7 @@ module Aws::ElastiCache
     #     auth_token: "String",
     #     transit_encryption_enabled: false,
     #     at_rest_encryption_enabled: false,
+    #     kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -2059,6 +2068,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_enabled #=> Boolean
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -2086,6 +2096,9 @@ module Aws::ElastiCache
     #
     # @option params [required, String] :snapshot_name
     #   A name for the snapshot being created.
+    #
+    # @option params [String] :kms_key_id
+    #   The ID of the KMS key used to encrypt the snapshot.
     #
     # @return [Types::CreateSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2222,6 +2235,7 @@ module Aws::ElastiCache
     #     replication_group_id: "String",
     #     cache_cluster_id: "String",
     #     snapshot_name: "String", # required
+    #     kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -2262,6 +2276,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_size #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+    #   resp.snapshot.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshot AWS API Documentation
     #
@@ -2370,6 +2385,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_enabled #=> Boolean
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -2732,6 +2748,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_enabled #=> Boolean
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -2842,6 +2859,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_size #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+    #   resp.snapshot.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshot AWS API Documentation
     #
@@ -5078,6 +5096,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].auth_token_enabled #=> Boolean
     #   resp.replication_groups[0].transit_encryption_enabled #=> Boolean
     #   resp.replication_groups[0].at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_groups[0].kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroups AWS API Documentation
     #
@@ -5944,6 +5963,7 @@ module Aws::ElastiCache
     #   resp.snapshots[0].node_snapshots[0].cache_size #=> String
     #   resp.snapshots[0].node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshots[0].node_snapshots[0].snapshot_create_time #=> Time
+    #   resp.snapshots[0].kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshots AWS API Documentation
     #
@@ -6126,6 +6146,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_enabled #=> Boolean
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -6137,10 +6158,10 @@ module Aws::ElastiCache
     end
 
     # Lists all available node types that you can scale your Redis
-    # cluster's or replication group's current node type up to.
+    # cluster's or replication group's current node type.
     #
     # When you use the `ModifyCacheCluster` or `ModifyReplicationGroup`
-    # operations to scale up your cluster or replication group, the value of
+    # operations to scale your cluster or replication group, the value of
     # the `CacheNodeType` parameter must be one of the node types returned
     # by this operation.
     #
@@ -6165,6 +6186,7 @@ module Aws::ElastiCache
     # @return [Types::AllowedNodeTypeModificationsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AllowedNodeTypeModificationsMessage#scale_up_modifications #scale_up_modifications} => Array&lt;String&gt;
+    #   * {Types::AllowedNodeTypeModificationsMessage#scale_down_modifications #scale_down_modifications} => Array&lt;String&gt;
     #
     #
     # @example Example: ListAllowedNodeTypeModifications
@@ -6214,6 +6236,8 @@ module Aws::ElastiCache
     #
     #   resp.scale_up_modifications #=> Array
     #   resp.scale_up_modifications[0] #=> String
+    #   resp.scale_down_modifications #=> Array
+    #   resp.scale_down_modifications[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModifications AWS API Documentation
     #
@@ -7178,6 +7202,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_enabled #=> Boolean
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -7290,6 +7315,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_enabled #=> Boolean
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -7839,6 +7865,7 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_enabled #=> Boolean
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -7862,7 +7889,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

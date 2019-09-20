@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2019-09-09)
+------------------
+
+* Feature - IamRoleArn support in CreateFleet, UpdateFleet, CreateImageBuilder APIs
+
+1.35.0 (2019-08-20)
+------------------
+
+* Feature - Includes API updates to support streaming through VPC endpoints for image builders and stacks.
+
 1.34.0 (2019-07-25)
 ------------------
 

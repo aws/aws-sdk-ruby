@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-08-29)
+------------------
+
+* Feature - Introducing pipeline execution trigger details in ListPipelineExecutions API.
+
 1.23.0 (2019-07-25)
 ------------------
 

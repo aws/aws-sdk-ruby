@@ -2760,7 +2760,7 @@ module Aws::WAFRegional
     # supports IPv6 address ranges: /24, /32, /48, /56, /64, and /128.
     #
     # To specify an individual IP address, you specify the four-part IP
-    # address followed by a `/32`, for example, 192.0.2.0/31. To block a
+    # address followed by a `/32`, for example, 192.0.2.0/32. To block a
     # range of IP addresses, you can specify /8 or any range between /16
     # through /32 (for IPv4) or /24, /32, /48, /56, /64, or /128 (for IPv6).
     # For more information about CIDR notation, see the Wikipedia entry
@@ -3087,12 +3087,11 @@ module Aws::WAFRegional
     #       }
     #
     # @!attribute [rw] next_marker
-    #   If you specify a value for `Limit` and you have more `IPSets` than
-    #   the value of `Limit`, AWS WAF returns a `NextMarker` value in the
-    #   response that allows you to list another group of `IPSets`. For the
-    #   second and subsequent `ListIPSets` requests, specify the value of
-    #   `NextMarker` from the previous response to get information about
-    #   another batch of `IPSets`.
+    #   AWS WAF returns a `NextMarker` value in the response that allows you
+    #   to list another group of `IPSets`. For the second and subsequent
+    #   `ListIPSets` requests, specify the value of `NextMarker` from the
+    #   previous response to get information about another batch of
+    #   `IPSets`.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -3111,11 +3110,9 @@ module Aws::WAFRegional
     end
 
     # @!attribute [rw] next_marker
-    #   If you have more `IPSet` objects than the number that you specified
-    #   for `Limit` in the request, the response includes a `NextMarker`
-    #   value. To list more `IPSet` objects, submit another `ListIPSets`
-    #   request, and specify the `NextMarker` value from the response in the
-    #   `NextMarker` value in the next request.
+    #   To list more `IPSet` objects, submit another `ListIPSets` request,
+    #   and in the next request use the `NextMarker` response value as the
+    #   `NextMarker` value.
     #   @return [String]
     #
     # @!attribute [rw] ip_sets
@@ -3922,6 +3919,11 @@ module Aws::WAFRegional
     #   The Amazon Kinesis Data Firehose that contains the inspected traffic
     #   information, the redacted fields details, and the Amazon Resource
     #   Name (ARN) of the web ACL to monitor.
+    #
+    #   <note markdown="1"> When specifying `Type` in `RedactedFields`, you must use one of the
+    #   following values: `URI`, `QUERY_STRING`, `HEADER`, or `METHOD`.
+    #
+    #    </note>
     #   @return [Types::LoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/PutLoggingConfigurationRequest AWS API Documentation

@@ -269,6 +269,15 @@ module Aws::ApplicationInsights
     # @option params [required, String] :resource_group_name
     #   The name of the resource group.
     #
+    # @option params [Boolean] :ops_center_enabled
+    #   When set to `true`, creates opsItems for any problems detected on an
+    #   application.
+    #
+    # @option params [String] :ops_item_sns_topic_arn
+    #   The SNS topic provided to Application Insights that is associated to
+    #   the created opsItem. Allows you to receive notifications for updates
+    #   to the opsItem.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_info #application_info} => Types::ApplicationInfo
@@ -277,12 +286,16 @@ module Aws::ApplicationInsights
     #
     #   resp = client.create_application({
     #     resource_group_name: "ResourceGroupName", # required
+    #     ops_center_enabled: false,
+    #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #   })
     #
     # @example Response structure
     #
     #   resp.application_info.resource_group_name #=> String
     #   resp.application_info.life_cycle #=> String
+    #   resp.application_info.ops_item_sns_topic_arn #=> String
+    #   resp.application_info.ops_center_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplication AWS API Documentation
@@ -395,6 +408,8 @@ module Aws::ApplicationInsights
     #
     #   resp.application_info.resource_group_name #=> String
     #   resp.application_info.life_cycle #=> String
+    #   resp.application_info.ops_item_sns_topic_arn #=> String
+    #   resp.application_info.ops_center_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeApplication AWS API Documentation
@@ -491,7 +506,7 @@ module Aws::ApplicationInsights
     #
     # @option params [required, String] :tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB_TIER`, `SQL_SERVER`, and `DEFAULT`.
+    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`.
     #
     # @return [Types::DescribeComponentConfigurationRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -664,6 +679,8 @@ module Aws::ApplicationInsights
     #   resp.application_info_list #=> Array
     #   resp.application_info_list[0].resource_group_name #=> String
     #   resp.application_info_list[0].life_cycle #=> String
+    #   resp.application_info_list[0].ops_item_sns_topic_arn #=> String
+    #   resp.application_info_list[0].ops_center_enabled #=> Boolean
     #   resp.application_info_list[0].remarks #=> String
     #   resp.next_token #=> String
     #
@@ -783,6 +800,54 @@ module Aws::ApplicationInsights
       req.send_request(options)
     end
 
+    # Updates the application.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [Boolean] :ops_center_enabled
+    #   When set to `true`, creates opsItems for any problems detected on an
+    #   application.
+    #
+    # @option params [String] :ops_item_sns_topic_arn
+    #   The SNS topic provided to Application Insights that is associated to
+    #   the created opsItem. Allows you to receive notifications for updates
+    #   to the opsItem.
+    #
+    # @option params [Boolean] :remove_sns_topic
+    #   Disassociates the SNS topic from the opsItem created for detected
+    #   problems.
+    #
+    # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApplicationResponse#application_info #application_info} => Types::ApplicationInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_application({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     ops_center_enabled: false,
+    #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
+    #     remove_sns_topic: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_info.resource_group_name #=> String
+    #   resp.application_info.life_cycle #=> String
+    #   resp.application_info.ops_item_sns_topic_arn #=> String
+    #   resp.application_info.ops_center_enabled #=> Boolean
+    #   resp.application_info.remarks #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplication AWS API Documentation
+    #
+    # @overload update_application(params = {})
+    # @param [Hash] params ({})
+    def update_application(params = {}, options = {})
+      req = build_request(:update_application, params)
+      req.send_request(options)
+    end
+
     # Updates the custom component name and/or the list of resources that
     # make up the component.
     #
@@ -834,7 +899,7 @@ module Aws::ApplicationInsights
     #
     # @option params [String] :tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB_TIER`, `SQL_SERVER`, and `DEFAULT`.
+    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`.
     #
     # @option params [String] :component_configuration
     #   The configuration settings of the component. The value is the escaped
@@ -881,7 +946,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -25,6 +25,8 @@ module Aws::CostandUsageReportService
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    ModifyReportDefinitionRequest = Shapes::StructureShape.new(name: 'ModifyReportDefinitionRequest')
+    ModifyReportDefinitionResponse = Shapes::StructureShape.new(name: 'ModifyReportDefinitionResponse')
     PutReportDefinitionRequest = Shapes::StructureShape.new(name: 'PutReportDefinitionRequest')
     PutReportDefinitionResponse = Shapes::StructureShape.new(name: 'PutReportDefinitionResponse')
     RefreshClosedReports = Shapes::BooleanShape.new(name: 'RefreshClosedReports')
@@ -62,6 +64,12 @@ module Aws::CostandUsageReportService
 
     InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalErrorException.struct_class = Types::InternalErrorException
+
+    ModifyReportDefinitionRequest.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, required: true, location_name: "ReportName"))
+    ModifyReportDefinitionRequest.add_member(:report_definition, Shapes::ShapeRef.new(shape: ReportDefinition, required: true, location_name: "ReportDefinition"))
+    ModifyReportDefinitionRequest.struct_class = Types::ModifyReportDefinitionRequest
+
+    ModifyReportDefinitionResponse.struct_class = Types::ModifyReportDefinitionResponse
 
     PutReportDefinitionRequest.add_member(:report_definition, Shapes::ShapeRef.new(shape: ReportDefinition, required: true, location_name: "ReportDefinition"))
     PutReportDefinitionRequest.struct_class = Types::PutReportDefinitionRequest
@@ -133,6 +141,16 @@ module Aws::CostandUsageReportService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:modify_report_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyReportDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyReportDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyReportDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:put_report_definition, Seahorse::Model::Operation.new.tap do |o|

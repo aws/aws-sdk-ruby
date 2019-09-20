@@ -96,6 +96,36 @@ module Aws
           expect(actual_url).to eq(expected_url)
         end
 
+        it 'can sign with a given time' do
+          bucket = "examplebucket"
+          key = "test.txt"
+
+          pre = Presigner.new(client: client)
+          params = {
+            bucket: bucket,
+            key: key,
+            expires_in: 86400,
+            time: Time.utc(1969, 4, 20)
+          }
+          actual_url = pre.presigned_url(:get_object, params)
+          expect(actual_url).to include('&X-Amz-Date=19690420T000000Z')
+        end
+
+        it 'can sign with additional whitelisted headers' do
+          bucket = "examplebucket"
+          key = "test.txt"
+
+          pre = Presigner.new(client: client)
+          params = {
+            bucket: bucket,
+            key: key,
+            expires_in: 86400,
+            whitelist_headers: ['user-agent']
+          }
+          actual_url = pre.presigned_url(:get_object, params)
+          expect(actual_url).to include('&X-Amz-SignedHeaders=host%3Buser-agent')
+        end
+
         it 'raises when expires_in length is over 1 week' do
           bucket = "examplebucket"
           key = "test.txt"

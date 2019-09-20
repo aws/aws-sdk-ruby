@@ -313,6 +313,7 @@ module Aws::CodeBuild
     ImportSourceCredentialsInput.add_member(:token, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "token"))
     ImportSourceCredentialsInput.add_member(:server_type, Shapes::ShapeRef.new(shape: ServerType, required: true, location_name: "serverType"))
     ImportSourceCredentialsInput.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, required: true, location_name: "authType"))
+    ImportSourceCredentialsInput.add_member(:should_overwrite, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "shouldOverwrite"))
     ImportSourceCredentialsInput.struct_class = Types::ImportSourceCredentialsInput
 
     ImportSourceCredentialsOutput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
@@ -687,6 +688,7 @@ module Aws::CodeBuild
         o.output = Shapes::ShapeRef.new(shape: ImportSourceCredentialsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccountLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
       end)
 
       api.add_operation(:invalidate_project_cache, Seahorse::Model::Operation.new.tap do |o|

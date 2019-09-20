@@ -3000,6 +3000,10 @@ module Aws::Personalize
     #   Describes the configuration properties for the solution.
     #   @return [Types::SolutionConfig]
     #
+    # @!attribute [rw] training_hours
+    #   The time used to train the model.
+    #   @return [Float]
+    #
     # @!attribute [rw] status
     #   The status of the solution version.
     #
@@ -3035,6 +3039,7 @@ module Aws::Personalize
       :event_type,
       :dataset_group_arn,
       :solution_config,
+      :training_hours,
       :status,
       :failure_reason,
       :creation_date_time,

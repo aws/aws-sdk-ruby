@@ -62,7 +62,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -215,7 +215,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -232,6 +232,18 @@ module Aws::States
     #
     # @!attribute [rw] tags
     #   The list of tags to add to a resource.
+    #
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityInput AWS API Documentation
@@ -278,7 +290,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -305,6 +317,18 @@ module Aws::States
     #
     # @!attribute [rw] tags
     #   Tags to be added when creating a state machine.
+    #
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineInput AWS API Documentation
@@ -405,7 +429,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -460,7 +484,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -596,7 +620,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -736,7 +760,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -1035,6 +1059,26 @@ module Aws::States
     #   the execution.
     #   @return [Types::ExecutionTimedOutEventDetails]
     #
+    # @!attribute [rw] map_state_started_event_details
+    #   Contains details about Map state that was started.
+    #   @return [Types::MapStateStartedEventDetails]
+    #
+    # @!attribute [rw] map_iteration_started_event_details
+    #   Contains details about an iteration of a Map state that was started.
+    #   @return [Types::MapIterationEventDetails]
+    #
+    # @!attribute [rw] map_iteration_succeeded_event_details
+    #   Contains details about an iteration of a Map state that succeeded.
+    #   @return [Types::MapIterationEventDetails]
+    #
+    # @!attribute [rw] map_iteration_failed_event_details
+    #   Contains details about an iteration of a Map state that failed.
+    #   @return [Types::MapIterationEventDetails]
+    #
+    # @!attribute [rw] map_iteration_aborted_event_details
+    #   Contains details about an iteration of a Map state that was aborted.
+    #   @return [Types::MapIterationEventDetails]
+    #
     # @!attribute [rw] lambda_function_failed_event_details
     #   Contains details about a lambda function that failed during an
     #   execution.
@@ -1099,6 +1143,11 @@ module Aws::States
       :execution_succeeded_event_details,
       :execution_aborted_event_details,
       :execution_timed_out_event_details,
+      :map_state_started_event_details,
+      :map_iteration_started_event_details,
+      :map_iteration_succeeded_event_details,
+      :map_iteration_failed_event_details,
+      :map_iteration_aborted_event_details,
       :lambda_function_failed_event_details,
       :lambda_function_schedule_failed_event_details,
       :lambda_function_scheduled_event_details,
@@ -1359,7 +1408,7 @@ module Aws::States
     #         state_machine_arn: "Arn", # required
     #         status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, ABORTED
     #         max_results: 1,
-    #         next_token: "PageToken",
+    #         next_token: "ListExecutionsPageToken",
     #       }
     #
     # @!attribute [rw] state_machine_arn
@@ -1507,6 +1556,37 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Contains details about an iteration of a Map state.
+    #
+    # @!attribute [rw] name
+    #   The name of the iteration’s parent Map state.
+    #   @return [String]
+    #
+    # @!attribute [rw] index
+    #   The index of the array belonging to the Map state iteration.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapIterationEventDetails AWS API Documentation
+    #
+    class MapIterationEventDetails < Struct.new(
+      :name,
+      :index)
+      include Aws::Structure
+    end
+
+    # Details about a Map state that was started.
+    #
+    # @!attribute [rw] length
+    #   The size of the array for Map state iterations.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapStateStartedEventDetails AWS API Documentation
+    #
+    class MapStateStartedEventDetails < Struct.new(
+      :length)
+      include Aws::Structure
+    end
+
     # Request is missing a required parameter. This error occurs if both
     # `definition` and `roleArn` are not specified.
     #
@@ -1520,7 +1600,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Could not fine the referenced resource. Only state machine and
+    # Could not find the referenced resource. Only state machine and
     # activity ARNs are supported.
     #
     # @!attribute [rw] message
@@ -1548,8 +1628,13 @@ module Aws::States
     #
     # @!attribute [rw] task_token
     #   The token that represents this task. Task tokens are generated by
-    #   the service when the tasks are assigned to a worker (see
-    #   GetActivityTask::taskToken).
+    #   Step Functions when tasks are assigned to a worker, or in the
+    #   [context object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -1582,8 +1667,13 @@ module Aws::States
     #
     # @!attribute [rw] task_token
     #   The token that represents this task. Task tokens are generated by
-    #   the service when the tasks are assigned to a worker (see
-    #   GetActivityTaskOutput$taskToken).
+    #   Step Functions when tasks are assigned to a worker, or in the
+    #   [context object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeatInput AWS API Documentation
@@ -1607,8 +1697,13 @@ module Aws::States
     #
     # @!attribute [rw] task_token
     #   The token that represents this task. Task tokens are generated by
-    #   the service when the tasks are assigned to a worker (see
-    #   GetActivityTaskOutput$taskToken).
+    #   Step Functions when tasks are assigned to a worker, or in the
+    #   [context object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #   @return [String]
     #
     # @!attribute [rw] output
@@ -1648,7 +1743,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -1725,7 +1820,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -1809,7 +1904,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -1877,6 +1972,18 @@ module Aws::States
     # Tags are key-value pairs that can be associated with Step Functions
     # state machines and activities.
     #
+    # An array of key-value pairs. For more information, see [Using Cost
+    # Allocation Tags][1] in the *AWS Billing and Cost Management User
+    # Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    # Tags may only contain Unicode letters, digits, white space, or these
+    # symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
+    #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
@@ -1922,7 +2029,7 @@ module Aws::States
     # @!attribute [rw] tags
     #   The list of tags to add to a resource.
     #
-    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   Tags may only contain Unicode letters, digits, white space, or these
     #   symbols: `_ . : / = + - @`.
     #   @return [Array<Types::Tag>]
     #

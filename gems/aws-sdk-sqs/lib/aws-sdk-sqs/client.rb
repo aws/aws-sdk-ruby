@@ -731,6 +731,41 @@ module Aws::SQS
     #   [10]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
     #   [11]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
     #
+    # @option params [Hash<String,String>] :tags
+    #   Add cost allocation tags to the specified Amazon SQS queue. For an
+    #   overview, see [Tagging Your Amazon SQS Queues][1] in the *Amazon
+    #   Simple Queue Service Developer Guide*.
+    #
+    #   When you use queue tags, keep the following guidelines in mind:
+    #
+    #   * Adding more than 50 tags to a queue isn't recommended.
+    #
+    #   * Tags don't have any semantic meaning. Amazon SQS interprets tags as
+    #     character strings.
+    #
+    #   * Tags are case-sensitive.
+    #
+    #   * A new tag with a key identical to that of an existing tag overwrites
+    #     the existing tag.
+    #
+    #   For a full list of tag restrictions, see [Limits Related to Queues][2]
+    #   in the *Amazon Simple Queue Service Developer Guide*.
+    #
+    #   <note markdown="1"> To be able to tag a queue on creation, you must have the
+    #   `sqs:CreateQueue` and `sqs:TagQueue` permissions.
+    #
+    #    Cross-account permissions don't apply to this action. For more
+    #   information, see [Grant Cross-Account Permissions to a Role and a User
+    #   Name][3] in the *Amazon Simple Queue Service Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name
+    #
     # @return [Types::CreateQueueResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateQueueResult#queue_url #queue_url} => String
@@ -741,6 +776,9 @@ module Aws::SQS
     #     queue_name: "String", # required
     #     attributes: {
     #       "All" => "String",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -1359,6 +1397,8 @@ module Aws::SQS
     #   * `ApproximateReceiveCount` - Returns the number of times a message
     #     has been received from the queue but not deleted.
     #
+    #   * `AWSTraceHeader` - Returns the AWS X-Ray trace header string.
+    #
     #   * `SenderId`
     #
     #     * For an IAM user, returns the IAM user ID, for example
@@ -1634,6 +1674,17 @@ module Aws::SQS
     #
     #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
     #
+    # @option params [Hash<String,Types::MessageSystemAttributeValue>] :message_system_attributes
+    #   The message system attribute to send. Each message system attribute
+    #   consists of a `Name`, `Type`, and `Value`.
+    #
+    #   * Currently, the only supported message system attribute is
+    #     `AWSTraceHeader`. Its type must be `String` and its value must be a
+    #     correctly formatted AWS X-Ray trace string.
+    #
+    #   * The size of a message system attribute doesn't count towards the
+    #     total size of a message.
+    #
     # @option params [String] :message_deduplication_id
     #   This parameter applies only to FIFO (first-in-first-out) queues.
     #
@@ -1734,6 +1785,7 @@ module Aws::SQS
     #
     #   * {Types::SendMessageResult#md5_of_message_body #md5_of_message_body} => String
     #   * {Types::SendMessageResult#md5_of_message_attributes #md5_of_message_attributes} => String
+    #   * {Types::SendMessageResult#md5_of_message_system_attributes #md5_of_message_system_attributes} => String
     #   * {Types::SendMessageResult#message_id #message_id} => String
     #   * {Types::SendMessageResult#sequence_number #sequence_number} => String
     #
@@ -1752,6 +1804,15 @@ module Aws::SQS
     #         data_type: "String", # required
     #       },
     #     },
+    #     message_system_attributes: {
+    #       "AWSTraceHeader" => {
+    #         string_value: "String",
+    #         binary_value: "data",
+    #         string_list_values: ["String"],
+    #         binary_list_values: ["data"],
+    #         data_type: "String", # required
+    #       },
+    #     },
     #     message_deduplication_id: "String",
     #     message_group_id: "String",
     #   })
@@ -1760,6 +1821,7 @@ module Aws::SQS
     #
     #   resp.md5_of_message_body #=> String
     #   resp.md5_of_message_attributes #=> String
+    #   resp.md5_of_message_system_attributes #=> String
     #   resp.message_id #=> String
     #   resp.sequence_number #=> String
     #
@@ -1840,6 +1902,15 @@ module Aws::SQS
     #             data_type: "String", # required
     #           },
     #         },
+    #         message_system_attributes: {
+    #           "AWSTraceHeader" => {
+    #             string_value: "String",
+    #             binary_value: "data",
+    #             string_list_values: ["String"],
+    #             binary_list_values: ["data"],
+    #             data_type: "String", # required
+    #           },
+    #         },
     #         message_deduplication_id: "String",
     #         message_group_id: "String",
     #       },
@@ -1853,6 +1924,7 @@ module Aws::SQS
     #   resp.successful[0].message_id #=> String
     #   resp.successful[0].md5_of_message_body #=> String
     #   resp.successful[0].md5_of_message_attributes #=> String
+    #   resp.successful[0].md5_of_message_system_attributes #=> String
     #   resp.successful[0].sequence_number #=> String
     #   resp.failed #=> Array
     #   resp.failed[0].id #=> String
@@ -2055,25 +2127,20 @@ module Aws::SQS
     # * A new tag with a key identical to that of an existing tag overwrites
     #   the existing tag.
     #
-    # * Tagging actions are limited to 5 TPS per AWS account. If your
-    #   application requires a higher throughput, file a [technical support
-    #   request][2].
-    #
-    # For a full list of tag restrictions, see [Limits Related to Queues][3]
+    # For a full list of tag restrictions, see [Limits Related to Queues][2]
     # in the *Amazon Simple Queue Service Developer Guide*.
     #
     # <note markdown="1"> Cross-account permissions don't apply to this action. For more
     # information, see [Grant Cross-Account Permissions to a Role and a User
-    # Name][4] in the *Amazon Simple Queue Service Developer Guide*.
+    # Name][3] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html
-    # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=technical
-    # [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues
-    # [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name
+    # [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues
+    # [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name
     #
     # @option params [required, String] :queue_url
     #   The URL of the queue.
@@ -2153,7 +2220,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

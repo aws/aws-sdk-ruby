@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2019-09-19)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for container image manifest digests. This enables you to identify all tasks launched using a container image pulled from ECR in order to correlate what was built with where it is running.
+
+1.49.0 (2019-09-03)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for attaching Amazon Elastic Inference accelerators to your containers. This enables you to run deep learning inference workloads with hardware acceleration in a more efficient way.
+
+1.48.0 (2019-08-30)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for modifying the cluster settings for existing clusters, which enables you to toggle whether Container Insights is enabled or not. Support is also introduced for custom log routing using the ECS FireLens integration.
+
+1.47.0 (2019-08-29)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for including Docker container IDs in the API response when describing and stopping tasks. This enables customers to easily map containers to the tasks they are associated with.
+
+1.46.0 (2019-08-16)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) introduces support for controlling the usage of swap space on a per-container basis for Linux containers.
+
 1.45.0 (2019-07-25)
 ------------------
 

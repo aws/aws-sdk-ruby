@@ -511,6 +511,8 @@ module Aws::Redshift
     Cluster.add_member(:deferred_maintenance_windows, Shapes::ShapeRef.new(shape: DeferredMaintenanceWindowsList, location_name: "DeferredMaintenanceWindows"))
     Cluster.add_member(:snapshot_schedule_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotScheduleIdentifier"))
     Cluster.add_member(:snapshot_schedule_state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "SnapshotScheduleState"))
+    Cluster.add_member(:expected_next_snapshot_schedule_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ExpectedNextSnapshotScheduleTime"))
+    Cluster.add_member(:expected_next_snapshot_schedule_time_status, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedNextSnapshotScheduleTimeStatus"))
     Cluster.add_member(:resize_info, Shapes::ShapeRef.new(shape: ResizeInfo, location_name: "ResizeInfo"))
     Cluster.struct_class = Types::Cluster
 

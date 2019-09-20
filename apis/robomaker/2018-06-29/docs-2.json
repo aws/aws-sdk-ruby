@@ -145,8 +145,15 @@
     "Boolean": {
       "base": null,
       "refs": {
+        "PortMapping$enableOnPublicIp": "<p>A Boolean indicating whether to enable this port mapping on public IP.</p>",
         "VPCConfig$assignPublicIp": "<p>A boolean indicating whether to assign a public IP address.</p>",
         "VPCConfigResponse$assignPublicIp": "<p>A boolean indicating if a public IP was assigned.</p>"
+      }
+    },
+    "BoxedBoolean": {
+      "base": null,
+      "refs": {
+        "LoggingConfig$recordAllRosTopics": "<p>A boolean indicating whether to record all ROS topics.</p>"
       }
     },
     "CancelDeploymentJobRequest": {
@@ -295,6 +302,38 @@
         "SyncDeploymentJobResponse$createdAt": "<p>The time, in milliseconds since the epoch, when the fleet was created.</p>"
       }
     },
+    "DataSource": {
+      "base": "<p>Information about a data source.</p>",
+      "refs": {
+        "DataSources$member": null
+      }
+    },
+    "DataSourceConfig": {
+      "base": "<p>Information about a data source.</p>",
+      "refs": {
+        "DataSourceConfigs$member": null
+      }
+    },
+    "DataSourceConfigs": {
+      "base": null,
+      "refs": {
+        "CreateSimulationJobRequest$dataSources": "<p>The data sources for the simulation job.</p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>"
+      }
+    },
+    "DataSourceNames": {
+      "base": null,
+      "refs": {
+        "SimulationJobSummary$dataSourceNames": "<p>The names of the data sources.</p>"
+      }
+    },
+    "DataSources": {
+      "base": null,
+      "refs": {
+        "CreateSimulationJobResponse$dataSources": "<p>The data sources for the simulation job.</p>",
+        "DescribeSimulationJobResponse$dataSources": "<p>The data sources for the simulation job.</p>",
+        "SimulationJob$dataSources": "<p>The data sources for the simulation job.</p>"
+      }
+    },
     "DeleteFleetRequest": {
       "base": null,
       "refs": {
@@ -398,6 +437,12 @@
         "DescribeFleetResponse$lastDeploymentStatus": "<p>The status of the last deployment.</p>",
         "Fleet$lastDeploymentStatus": "<p>The status of the last fleet deployment.</p>",
         "SyncDeploymentJobResponse$status": "<p>The status of the synchronization job.</p>"
+      }
+    },
+    "DeploymentTimeout": {
+      "base": null,
+      "refs": {
+        "DeploymentConfig$robotDeploymentTimeoutInSeconds": "<p>The amount of time, in seconds, to wait for deployment to a single robot to complete. Choose a time between 1 minute and 7 days. The default is 5 hours.</p>"
       }
     },
     "DeploymentVersion": {
@@ -552,6 +597,9 @@
         "DeploymentJob$failureReason": "<p>A short description of the reason why the deployment job failed.</p>",
         "DescribeDeploymentJobResponse$failureReason": "<p>A short description of the reason why the deployment job failed.</p>",
         "DescribeSimulationJobResponse$failureReason": "<p>Details about why the simulation job failed. For more information about troubleshooting, see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html\">Troubleshooting</a>.</p>",
+        "NetworkInterface$networkInterfaceId": "<p>The ID of the network interface.</p>",
+        "NetworkInterface$privateIpAddress": "<p>The IPv4 address of the network interface within the subnet.</p>",
+        "NetworkInterface$publicIpAddress": "<p>The IPv4 public address of the network interface.</p>",
         "ProgressDetail$targetResource": "<p>The Amazon Resource Name (ARN) of the deployment job.</p>",
         "RobotDeployment$failureReason": "<p>A short description of the reason why the robot deployment failed.</p>",
         "SimulationJob$failureReason": "<p>The reason why the simulation job failed.</p>",
@@ -710,6 +758,15 @@
       "refs": {
       }
     },
+    "LoggingConfig": {
+      "base": "<p>The logging configuration.</p>",
+      "refs": {
+        "CreateSimulationJobRequest$loggingConfig": "<p>The logging configuration.</p>",
+        "CreateSimulationJobResponse$loggingConfig": "<p>The logging configuration.</p>",
+        "DescribeSimulationJobResponse$loggingConfig": "<p>The logging configuration.</p>",
+        "SimulationJob$loggingConfig": "<p>The logging configuration.</p>"
+      }
+    },
     "MaxResults": {
       "base": null,
       "refs": {
@@ -734,6 +791,9 @@
         "CreateSimulationApplicationRequest$name": "<p>The name of the simulation application.</p>",
         "CreateSimulationApplicationResponse$name": "<p>The name of the simulation application.</p>",
         "CreateSimulationApplicationVersionResponse$name": "<p>The name of the simulation application.</p>",
+        "DataSource$name": "<p>The name of the data source.</p>",
+        "DataSourceConfig$name": "<p>The name of the data source.</p>",
+        "DataSourceNames$member": null,
         "DescribeFleetResponse$name": "<p>The name of the fleet.</p>",
         "DescribeRobotApplicationResponse$name": "<p>The name of the robot application.</p>",
         "DescribeRobotResponse$name": "<p>The name of the robot.</p>",
@@ -753,11 +813,24 @@
         "UpdateSimulationApplicationResponse$name": "<p>The name of the simulation application.</p>"
       }
     },
+    "NetworkInterface": {
+      "base": "<p>Describes a network interface.</p>",
+      "refs": {
+        "DescribeSimulationJobResponse$networkInterface": "<p>The network interface information for the simulation job.</p>",
+        "SimulationJob$networkInterface": "<p/>"
+      }
+    },
     "NonEmptyString": {
       "base": null,
       "refs": {
         "SecurityGroups$member": null,
         "Subnets$member": null
+      }
+    },
+    "NonSystemPort": {
+      "base": null,
+      "refs": {
+        "PortMapping$applicationPort": "<p>The port number on the application.</p>"
       }
     },
     "OutputLocation": {
@@ -804,6 +877,30 @@
       "refs": {
         "DeploymentConfig$concurrentDeploymentPercentage": "<p>The percentage of robots receiving the deployment at the same time.</p>",
         "DeploymentConfig$failureThresholdPercentage": "<p>The percentage of deployments that need to fail before stopping deployment.</p>"
+      }
+    },
+    "Port": {
+      "base": null,
+      "refs": {
+        "PortMapping$jobPort": "<p>The port number on the simulation job instance to use as a remote connection point. </p>"
+      }
+    },
+    "PortForwardingConfig": {
+      "base": "<p>Configuration information for port forwarding.</p>",
+      "refs": {
+        "LaunchConfig$portForwardingConfig": "<p>The port forwarding configuration.</p>"
+      }
+    },
+    "PortMapping": {
+      "base": "<p>An object representing a port mapping.</p>",
+      "refs": {
+        "PortMappingList$member": null
+      }
+    },
+    "PortMappingList": {
+      "base": null,
+      "refs": {
+        "PortForwardingConfig$portMappings": "<p>The port mappings for the configuration.</p>"
       }
     },
     "ProgressDetail": {
@@ -988,6 +1085,8 @@
     "S3Bucket": {
       "base": null,
       "refs": {
+        "DataSource$s3Bucket": "<p>The S3 bucket where the data files are located.</p>",
+        "DataSourceConfig$s3Bucket": "<p>The S3 bucket where the data files are located.</p>",
         "OutputLocation$s3Bucket": "<p>The S3 bucket for output.</p>",
         "Source$s3Bucket": "<p>The s3 bucket name.</p>",
         "SourceConfig$s3Bucket": "<p>The Amazon S3 bucket name.</p>"
@@ -996,6 +1095,7 @@
     "S3Etag": {
       "base": null,
       "refs": {
+        "S3KeyOutput$etag": "<p>The etag for the object.</p>",
         "Source$etag": "<p>A hash of the object specified by <code>s3Bucket</code> and <code>s3Key</code>.</p>"
       }
     },
@@ -1003,8 +1103,28 @@
       "base": null,
       "refs": {
         "OutputLocation$s3Prefix": "<p>The S3 folder in the <code>s3Bucket</code> where output files will be placed.</p>",
+        "S3KeyOutput$s3Key": "<p>The S3 key.</p>",
+        "S3Keys$member": null,
         "Source$s3Key": "<p>The s3 object key.</p>",
         "SourceConfig$s3Key": "<p>The s3 object key.</p>"
+      }
+    },
+    "S3KeyOutput": {
+      "base": "<p>Information about S3 keys.</p>",
+      "refs": {
+        "S3KeyOutputs$member": null
+      }
+    },
+    "S3KeyOutputs": {
+      "base": null,
+      "refs": {
+        "DataSource$s3Keys": "<p>The list of S3 keys identifying the data source files.</p>"
+      }
+    },
+    "S3Keys": {
+      "base": null,
+      "refs": {
+        "DataSourceConfig$s3Keys": "<p>The list of S3 keys identifying the data source files.</p>"
       }
     },
     "SecurityGroups": {

@@ -48,9 +48,20 @@ module Aws::ApplicationInsights
     #   The lifecycle of the application.
     #   @return [String]
     #
+    # @!attribute [rw] ops_item_sns_topic_arn
+    #   The SNS topic provided to Application Insights that is associated to
+    #   the created opsItems to receive SNS notifications for opsItem
+    #   updates.
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_center_enabled
+    #   Indicates whether Application Insights will create opsItems for any
+    #   problem detected by Application Insights for an application.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] remarks
-    #   The issues on the user side that are blocking Application Insights
-    #   from fully monitoring the application.
+    #   The issues on the user side that block Application Insights from
+    #   successfully monitoring an application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ApplicationInfo AWS API Documentation
@@ -58,6 +69,8 @@ module Aws::ApplicationInsights
     class ApplicationInfo < Struct.new(
       :resource_group_name,
       :life_cycle,
+      :ops_item_sns_topic_arn,
+      :ops_center_enabled,
       :remarks)
       include Aws::Structure
     end
@@ -79,16 +92,31 @@ module Aws::ApplicationInsights
     #
     #       {
     #         resource_group_name: "ResourceGroupName", # required
+    #         ops_center_enabled: false,
+    #         ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #       }
     #
     # @!attribute [rw] resource_group_name
     #   The name of the resource group.
     #   @return [String]
     #
+    # @!attribute [rw] ops_center_enabled
+    #   When set to `true`, creates opsItems for any problems detected on an
+    #   application.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ops_item_sns_topic_arn
+    #   The SNS topic provided to Application Insights that is associated to
+    #   the created opsItem. Allows you to receive notifications for updates
+    #   to the opsItem.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
-      :resource_group_name)
+      :resource_group_name,
+      :ops_center_enabled,
+      :ops_item_sns_topic_arn)
       include Aws::Structure
     end
 
@@ -235,7 +263,7 @@ module Aws::ApplicationInsights
     #
     # @!attribute [rw] tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB_TIER`, `SQL_SERVER`, and `DEFAULT`.
+    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentConfigurationRecommendationRequest AWS API Documentation
@@ -289,7 +317,7 @@ module Aws::ApplicationInsights
     #
     # @!attribute [rw] tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB_TIER`, `SQL_SERVER`, and `DEFAULT`
+    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`
     #   @return [String]
     #
     # @!attribute [rw] component_configuration
@@ -771,6 +799,57 @@ module Aws::ApplicationInsights
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_group_name: "ResourceGroupName", # required
+    #         ops_center_enabled: false,
+    #         ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
+    #         remove_sns_topic: false,
+    #       }
+    #
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_center_enabled
+    #   When set to `true`, creates opsItems for any problems detected on an
+    #   application.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ops_item_sns_topic_arn
+    #   The SNS topic provided to Application Insights that is associated to
+    #   the created opsItem. Allows you to receive notifications for updates
+    #   to the opsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_sns_topic
+    #   Disassociates the SNS topic from the opsItem created for detected
+    #   problems.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplicationRequest AWS API Documentation
+    #
+    class UpdateApplicationRequest < Struct.new(
+      :resource_group_name,
+      :ops_center_enabled,
+      :ops_item_sns_topic_arn,
+      :remove_sns_topic)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_info
+    #   Information about the application.
+    #   @return [Types::ApplicationInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplicationResponse AWS API Documentation
+    #
+    class UpdateApplicationResponse < Struct.new(
+      :application_info)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateComponentConfigurationRequest
     #   data as a hash:
     #
@@ -796,7 +875,7 @@ module Aws::ApplicationInsights
     #
     # @!attribute [rw] tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB_TIER`, `SQL_SERVER`, and `DEFAULT`.
+    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`.
     #   @return [String]
     #
     # @!attribute [rw] component_configuration

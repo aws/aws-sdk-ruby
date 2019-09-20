@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-08-13)
+------------------
+
+* Feature - Adds a configuration option for AppSync GraphQL APIs
+
 1.19.0 (2019-07-25)
 ------------------
 

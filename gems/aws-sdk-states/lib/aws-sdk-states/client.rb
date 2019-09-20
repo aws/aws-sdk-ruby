@@ -277,6 +277,16 @@ module Aws::States
     #
     #  </note>
     #
+    # <note markdown="1"> `CreateActivity` is an idempotent API. Subsequent requests won’t
+    # create a duplicate resource if it was already created.
+    # `CreateActivity`'s idempotency check is based on the activity `name`.
+    # If a following request has different `tags` values, Step Functions
+    # will ignore these differences and treat it as an idempotent request of
+    # the previous. In this case, `tags` will not be updated, even if they
+    # are different.
+    #
+    #  </note>
+    #
     # @option params [required, String] :name
     #   The name of the activity to create. This name must be unique for your
     #   AWS account and region for 90 days. For more information, see [ Limits
@@ -285,7 +295,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -301,6 +311,18 @@ module Aws::States
     #
     # @option params [Array<Types::Tag>] :tags
     #   The list of tags to add to a resource.
+    #
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #
     # @return [Types::CreateActivityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -344,12 +366,23 @@ module Aws::States
     #
     #  </note>
     #
+    # <note markdown="1"> `CreateStateMachine` is an idempotent API. Subsequent requests won’t
+    # create a duplicate resource if it was already created.
+    # `CreateStateMachine`'s idempotency check is based on the state
+    # machine `name` and `definition`. If a following request has a
+    # different `roleArn` or `tags`, Step Functions will ignore these
+    # differences and treat it as an idempotent request of the previous. In
+    # this case, `roleArn` and `tags` will not be updated, even if they are
+    # different.
+    #
+    #  </note>
+    #
     # @option params [required, String] :name
     #   The name of the state machine.
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -373,6 +406,18 @@ module Aws::States
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to be added when creating a state machine.
+    #
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #
     # @return [Types::CreateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -736,7 +781,7 @@ module Aws::States
     #
     #   resp.events #=> Array
     #   resp.events[0].timestamp #=> Time
-    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduleFailed", "ActivityScheduled", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "TaskFailed", "TaskScheduled", "TaskStartFailed", "TaskStarted", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionAborted", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduleFailed", "LambdaFunctionScheduled", "LambdaFunctionStartFailed", "LambdaFunctionStarted", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "SucceedStateEntered", "SucceedStateExited", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "PassStateEntered", "PassStateExited", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
+    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduled", "ActivityScheduleFailed", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionAborted", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduled", "LambdaFunctionScheduleFailed", "LambdaFunctionStarted", "LambdaFunctionStartFailed", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "MapIterationAborted", "MapIterationFailed", "MapIterationStarted", "MapIterationSucceeded", "MapStateAborted", "MapStateEntered", "MapStateExited", "MapStateFailed", "MapStateStarted", "MapStateSucceeded", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "PassStateEntered", "PassStateExited", "SucceedStateEntered", "SucceedStateExited", "TaskFailed", "TaskScheduled", "TaskStarted", "TaskStartFailed", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
     #   resp.events[0].id #=> Integer
     #   resp.events[0].previous_event_id #=> Integer
     #   resp.events[0].activity_failed_event_details.error #=> String
@@ -789,6 +834,15 @@ module Aws::States
     #   resp.events[0].execution_aborted_event_details.cause #=> String
     #   resp.events[0].execution_timed_out_event_details.error #=> String
     #   resp.events[0].execution_timed_out_event_details.cause #=> String
+    #   resp.events[0].map_state_started_event_details.length #=> Integer
+    #   resp.events[0].map_iteration_started_event_details.name #=> String
+    #   resp.events[0].map_iteration_started_event_details.index #=> Integer
+    #   resp.events[0].map_iteration_succeeded_event_details.name #=> String
+    #   resp.events[0].map_iteration_succeeded_event_details.index #=> Integer
+    #   resp.events[0].map_iteration_failed_event_details.name #=> String
+    #   resp.events[0].map_iteration_failed_event_details.index #=> Integer
+    #   resp.events[0].map_iteration_aborted_event_details.name #=> String
+    #   resp.events[0].map_iteration_aborted_event_details.index #=> Integer
     #   resp.events[0].lambda_function_failed_event_details.error #=> String
     #   resp.events[0].lambda_function_failed_event_details.cause #=> String
     #   resp.events[0].lambda_function_schedule_failed_event_details.error #=> String
@@ -926,7 +980,7 @@ module Aws::States
     #     state_machine_arn: "Arn", # required
     #     status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, ABORTED
     #     max_results: 1,
-    #     next_token: "PageToken",
+    #     next_token: "ListExecutionsPageToken",
     #   })
     #
     # @example Response structure
@@ -1010,6 +1064,9 @@ module Aws::States
 
     # List tags for a given resource.
     #
+    # Tags may only contain Unicode letters, digits, white space, or these
+    # symbols: `_ . : / = + - @`.
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) for the Step Functions state machine or
     #   activity.
@@ -1039,13 +1096,22 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Used by workers to report that the task identified by the `taskToken`
-    # failed.
+    # Used by activity workers and task states using the [callback][1]
+    # pattern to report that the task identified by the `taskToken` failed.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token
     #
     # @option params [required, String] :task_token
-    #   The token that represents this task. Task tokens are generated by the
-    #   service when the tasks are assigned to a worker (see
-    #   GetActivityTask::taskToken).
+    #   The token that represents this task. Task tokens are generated by Step
+    #   Functions when tasks are assigned to a worker, or in the [context
+    #   object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #
     # @option params [String] :error
     #   The error code of the failure.
@@ -1072,29 +1138,38 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Used by workers to report to the service that the task represented by
-    # the specified `taskToken` is still making progress. This action resets
-    # the `Heartbeat` clock. The `Heartbeat` threshold is specified in the
-    # state machine's Amazon States Language definition. This action does
-    # not in itself create an event in the execution history. However, if
-    # the task times out, the execution history contains an
-    # `ActivityTimedOut` event.
+    # Used by activity workers and task states using the [callback][1]
+    # pattern to report to Step Functions that the task represented by the
+    # specified `taskToken` is still making progress. This action resets the
+    # `Heartbeat` clock. The `Heartbeat` threshold is specified in the state
+    # machine's Amazon States Language definition (`HeartbeatSeconds`).
+    # This action does not in itself create an event in the execution
+    # history. However, if the task times out, the execution history
+    # contains an `ActivityTimedOut` entry for activities, or a
+    # `TaskTimedOut` entry for for tasks using the [job run][2] or
+    # [callback][1] pattern.
     #
     # <note markdown="1"> The `Timeout` of a task, defined in the state machine's Amazon States
     # Language definition, is its maximum allowed duration, regardless of
-    # the number of SendTaskHeartbeat requests received.
+    # the number of SendTaskHeartbeat requests received. Use
+    # `HeartbeatSeconds` to configure the timeout interval for heartbeats.
     #
     #  </note>
     #
-    # <note markdown="1"> This operation is only useful for long-lived tasks to report the
-    # liveliness of the task.
     #
-    #  </note>
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync
     #
     # @option params [required, String] :task_token
-    #   The token that represents this task. Task tokens are generated by the
-    #   service when the tasks are assigned to a worker (see
-    #   GetActivityTaskOutput$taskToken).
+    #   The token that represents this task. Task tokens are generated by Step
+    #   Functions when tasks are assigned to a worker, or in the [context
+    #   object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1113,13 +1188,23 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Used by workers to report that the task identified by the `taskToken`
+    # Used by activity workers and task states using the [callback][1]
+    # pattern to report that the task identified by the `taskToken`
     # completed successfully.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token
+    #
     # @option params [required, String] :task_token
-    #   The token that represents this task. Task tokens are generated by the
-    #   service when the tasks are assigned to a worker (see
-    #   GetActivityTaskOutput$taskToken).
+    #   The token that represents this task. Task tokens are generated by Step
+    #   Functions when tasks are assigned to a worker, or in the [context
+    #   object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #
     # @option params [required, String] :output
     #   The JSON output of the task.
@@ -1163,7 +1248,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -1253,6 +1338,18 @@ module Aws::States
 
     # Add a tag to a Step Functions resource.
     #
+    # An array of key-value pairs. For more information, see [Using Cost
+    # Allocation Tags][1] in the *AWS Billing and Cost Management User
+    # Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    # Tags may only contain Unicode letters, digits, white space, or these
+    # symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) for the Step Functions state machine or
     #   activity.
@@ -1260,7 +1357,7 @@ module Aws::States
     # @option params [required, Array<Types::Tag>] :tags
     #   The list of tags to add to a resource.
     #
-    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   Tags may only contain Unicode letters, digits, white space, or these
     #   symbols: `_ . : / = + - @`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1378,7 +1475,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

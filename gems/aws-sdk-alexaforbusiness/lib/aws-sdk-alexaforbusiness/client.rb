@@ -817,6 +817,9 @@ module Aws::AlexaForBusiness
     # @option params [required, String] :wake_word
     #   A wake word for Alexa, Echo, Amazon, or a computer.
     #
+    # @option params [String] :locale
+    #   The locale of the room profile.
+    #
     # @option params [String] :client_request_token
     #   The user-specified token that is used during the creation of a
     #   profile.
@@ -846,6 +849,7 @@ module Aws::AlexaForBusiness
     #     distance_unit: "METRIC", # required, accepts METRIC, IMPERIAL
     #     temperature_unit: "FAHRENHEIT", # required, accepts FAHRENHEIT, CELSIUS
     #     wake_word: "ALEXA", # required, accepts ALEXA, AMAZON, ECHO, COMPUTER
+    #     locale: "DeviceLocale",
     #     client_request_token: "ClientRequestToken",
     #     setup_mode_disabled: false,
     #     max_volume_limit: 1,
@@ -1134,11 +1138,6 @@ module Aws::AlexaForBusiness
     # authorized users to delete the device's entire previous history of
     # voice input data and associated response data. This action can be
     # called once every 24 hours for a specific shared device.
-    #
-    # When this action is called for a specified shared device, it allows
-    # authorized users to delete the device's entire previous history of
-    # voice input data. This action can be called once every 24 hours for a
-    # specific shared device.
     #
     # @option params [required, String] :device_arn
     #   The ARN of the device.
@@ -1824,6 +1823,7 @@ module Aws::AlexaForBusiness
     #   resp.profile.distance_unit #=> String, one of "METRIC", "IMPERIAL"
     #   resp.profile.temperature_unit #=> String, one of "FAHRENHEIT", "CELSIUS"
     #   resp.profile.wake_word #=> String, one of "ALEXA", "AMAZON", "ECHO", "COMPUTER"
+    #   resp.profile.locale #=> String
     #   resp.profile.setup_mode_disabled #=> Boolean
     #   resp.profile.max_volume_limit #=> Integer
     #   resp.profile.pstn_enabled #=> Boolean
@@ -3043,6 +3043,7 @@ module Aws::AlexaForBusiness
     #   resp.profiles[0].distance_unit #=> String, one of "METRIC", "IMPERIAL"
     #   resp.profiles[0].temperature_unit #=> String, one of "FAHRENHEIT", "CELSIUS"
     #   resp.profiles[0].wake_word #=> String, one of "ALEXA", "AMAZON", "ECHO", "COMPUTER"
+    #   resp.profiles[0].locale #=> String
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -3843,6 +3844,9 @@ module Aws::AlexaForBusiness
     # @option params [String] :wake_word
     #   The updated wake word for the room profile.
     #
+    # @option params [String] :locale
+    #   The updated locale for the room profile.
+    #
     # @option params [Boolean] :setup_mode_disabled
     #   Whether the setup mode of the profile is enabled.
     #
@@ -3865,6 +3869,7 @@ module Aws::AlexaForBusiness
     #     distance_unit: "METRIC", # accepts METRIC, IMPERIAL
     #     temperature_unit: "FAHRENHEIT", # accepts FAHRENHEIT, CELSIUS
     #     wake_word: "ALEXA", # accepts ALEXA, AMAZON, ECHO, COMPUTER
+    #     locale: "DeviceLocale",
     #     setup_mode_disabled: false,
     #     max_volume_limit: 1,
     #     pstn_enabled: false,
@@ -3960,7 +3965,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

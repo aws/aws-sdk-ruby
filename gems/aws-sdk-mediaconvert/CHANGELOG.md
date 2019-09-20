@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2019-09-16)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for multi-DRM SPEKE with CMAF outputs, MP3 ingest, and options for improved video quality.
+
+1.35.0 (2019-08-28)
+------------------
+
+* Feature - This release adds the ability to send a job to an on-demand queue while simulating the performance of a job sent to a reserved queue. Use this setting to estimate the number of reserved transcoding slots (RTS) you need for a reserved queue.
+
+1.34.0 (2019-08-09)
+------------------
+
+* Feature - AWS Elemental MediaConvert has added support for multi-DRM SPEKE with CMAF outputs, MP3 ingest, and options for improved video quality.
+
+1.33.0 (2019-07-30)
+------------------
+
+* Feature - MediaConvert adds support for specifying priority (-50 to 50) on jobs submitted to on demand or reserved queues
+
 1.32.0 (2019-07-25)
 ------------------
 
