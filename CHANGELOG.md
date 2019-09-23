@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.359 (2019-09-23)
+------------------
+
 * Feature - Aws::RDSDataService - Updated the API, and documentation for AWS RDS DataService.
 
 * Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
