@@ -197,13 +197,6 @@ module Aws::DynamoDB
     #     checksum errors, networking errors, timeout errors and auth
     #     errors from expired credentials.
     #
-    #   @option options [Integer] :retry_limit (3)
-    #     The maximum number of times to retry failed requests.  Only
-    #     ~ 500 level server errors and certain ~ 400 level client errors
-    #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
-    #
     #   @option options [Integer] :retry_max_delay (0)
     #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
