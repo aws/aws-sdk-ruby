@@ -12,6 +12,8 @@ module Aws::RDSDataService
     include Seahorse::Model
 
     Arn = Shapes::StringShape.new(name: 'Arn')
+    ArrayOfArray = Shapes::ListShape.new(name: 'ArrayOfArray')
+    ArrayValue = Shapes::StructureShape.new(name: 'ArrayValue')
     ArrayValueList = Shapes::ListShape.new(name: 'ArrayValueList')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchExecuteStatementRequest = Shapes::StructureShape.new(name: 'BatchExecuteStatementRequest')
@@ -20,6 +22,7 @@ module Aws::RDSDataService
     BeginTransactionResponse = Shapes::StructureShape.new(name: 'BeginTransactionResponse')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanArray = Shapes::ListShape.new(name: 'BooleanArray')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BoxedDouble = Shapes::FloatShape.new(name: 'BoxedDouble')
     BoxedFloat = Shapes::FloatShape.new(name: 'BoxedFloat')
@@ -29,6 +32,8 @@ module Aws::RDSDataService
     CommitTransactionRequest = Shapes::StructureShape.new(name: 'CommitTransactionRequest')
     CommitTransactionResponse = Shapes::StructureShape.new(name: 'CommitTransactionResponse')
     DbName = Shapes::StringShape.new(name: 'DbName')
+    DecimalReturnType = Shapes::StringShape.new(name: 'DecimalReturnType')
+    DoubleArray = Shapes::ListShape.new(name: 'DoubleArray')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExecuteSqlRequest = Shapes::StructureShape.new(name: 'ExecuteSqlRequest')
     ExecuteSqlResponse = Shapes::StructureShape.new(name: 'ExecuteSqlResponse')
@@ -41,6 +46,7 @@ module Aws::RDSDataService
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    LongArray = Shapes::ListShape.new(name: 'LongArray')
     Metadata = Shapes::ListShape.new(name: 'Metadata')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
@@ -49,6 +55,7 @@ module Aws::RDSDataService
     RecordsUpdated = Shapes::IntegerShape.new(name: 'RecordsUpdated')
     ResultFrame = Shapes::StructureShape.new(name: 'ResultFrame')
     ResultSetMetadata = Shapes::StructureShape.new(name: 'ResultSetMetadata')
+    ResultSetOptions = Shapes::StructureShape.new(name: 'ResultSetOptions')
     RollbackTransactionRequest = Shapes::StructureShape.new(name: 'RollbackTransactionRequest')
     RollbackTransactionResponse = Shapes::StructureShape.new(name: 'RollbackTransactionResponse')
     Row = Shapes::ListShape.new(name: 'Row')
@@ -62,11 +69,21 @@ module Aws::RDSDataService
     SqlStatementResults = Shapes::ListShape.new(name: 'SqlStatementResults')
     StatementTimeoutException = Shapes::StructureShape.new(name: 'StatementTimeoutException')
     String = Shapes::StringShape.new(name: 'String')
+    StringArray = Shapes::ListShape.new(name: 'StringArray')
     StructValue = Shapes::StructureShape.new(name: 'StructValue')
     TransactionStatus = Shapes::StringShape.new(name: 'TransactionStatus')
     UpdateResult = Shapes::StructureShape.new(name: 'UpdateResult')
     UpdateResults = Shapes::ListShape.new(name: 'UpdateResults')
     Value = Shapes::StructureShape.new(name: 'Value')
+
+    ArrayOfArray.member = Shapes::ShapeRef.new(shape: ArrayValue)
+
+    ArrayValue.add_member(:array_values, Shapes::ShapeRef.new(shape: ArrayOfArray, location_name: "arrayValues"))
+    ArrayValue.add_member(:boolean_values, Shapes::ShapeRef.new(shape: BooleanArray, location_name: "booleanValues"))
+    ArrayValue.add_member(:double_values, Shapes::ShapeRef.new(shape: DoubleArray, location_name: "doubleValues"))
+    ArrayValue.add_member(:long_values, Shapes::ShapeRef.new(shape: LongArray, location_name: "longValues"))
+    ArrayValue.add_member(:string_values, Shapes::ShapeRef.new(shape: StringArray, location_name: "stringValues"))
+    ArrayValue.struct_class = Types::ArrayValue
 
     ArrayValueList.member = Shapes::ShapeRef.new(shape: Value)
 
@@ -94,6 +111,8 @@ module Aws::RDSDataService
     BeginTransactionResponse.add_member(:transaction_id, Shapes::ShapeRef.new(shape: Id, location_name: "transactionId"))
     BeginTransactionResponse.struct_class = Types::BeginTransactionResponse
 
+    BooleanArray.member = Shapes::ShapeRef.new(shape: BoxedBoolean)
+
     ColumnMetadata.add_member(:array_base_column_type, Shapes::ShapeRef.new(shape: Integer, location_name: "arrayBaseColumnType"))
     ColumnMetadata.add_member(:is_auto_increment, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAutoIncrement"))
     ColumnMetadata.add_member(:is_case_sensitive, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCaseSensitive"))
@@ -118,6 +137,8 @@ module Aws::RDSDataService
     CommitTransactionResponse.add_member(:transaction_status, Shapes::ShapeRef.new(shape: TransactionStatus, location_name: "transactionStatus"))
     CommitTransactionResponse.struct_class = Types::CommitTransactionResponse
 
+    DoubleArray.member = Shapes::ShapeRef.new(shape: BoxedDouble)
+
     ExecuteSqlRequest.add_member(:aws_secret_store_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "awsSecretStoreArn"))
     ExecuteSqlRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
     ExecuteSqlRequest.add_member(:db_cluster_or_instance_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "dbClusterOrInstanceArn"))
@@ -133,6 +154,7 @@ module Aws::RDSDataService
     ExecuteStatementRequest.add_member(:include_result_metadata, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeResultMetadata"))
     ExecuteStatementRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "parameters"))
     ExecuteStatementRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    ExecuteStatementRequest.add_member(:result_set_options, Shapes::ShapeRef.new(shape: ResultSetOptions, location_name: "resultSetOptions"))
     ExecuteStatementRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
     ExecuteStatementRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "secretArn"))
     ExecuteStatementRequest.add_member(:sql, Shapes::ShapeRef.new(shape: SqlStatement, required: true, location_name: "sql"))
@@ -145,6 +167,7 @@ module Aws::RDSDataService
     ExecuteStatementResponse.add_member(:records, Shapes::ShapeRef.new(shape: SqlRecords, location_name: "records"))
     ExecuteStatementResponse.struct_class = Types::ExecuteStatementResponse
 
+    Field.add_member(:array_value, Shapes::ShapeRef.new(shape: ArrayValue, location_name: "arrayValue"))
     Field.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
     Field.add_member(:boolean_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "booleanValue"))
     Field.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
@@ -157,6 +180,8 @@ module Aws::RDSDataService
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
+
+    LongArray.member = Shapes::ShapeRef.new(shape: BoxedLong)
 
     Metadata.member = Shapes::ShapeRef.new(shape: ColumnMetadata)
 
@@ -175,6 +200,9 @@ module Aws::RDSDataService
     ResultSetMetadata.add_member(:column_count, Shapes::ShapeRef.new(shape: Long, location_name: "columnCount"))
     ResultSetMetadata.add_member(:column_metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "columnMetadata"))
     ResultSetMetadata.struct_class = Types::ResultSetMetadata
+
+    ResultSetOptions.add_member(:decimal_return_type, Shapes::ShapeRef.new(shape: DecimalReturnType, location_name: "decimalReturnType"))
+    ResultSetOptions.struct_class = Types::ResultSetOptions
 
     RollbackTransactionRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     RollbackTransactionRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "secretArn"))
@@ -205,6 +233,8 @@ module Aws::RDSDataService
     StatementTimeoutException.add_member(:db_connection_id, Shapes::ShapeRef.new(shape: Long, location_name: "dbConnectionId"))
     StatementTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     StatementTimeoutException.struct_class = Types::StatementTimeoutException
+
+    StringArray.member = Shapes::ShapeRef.new(shape: String)
 
     StructValue.add_member(:attributes, Shapes::ShapeRef.new(shape: ArrayValueList, location_name: "attributes"))
     StructValue.struct_class = Types::StructValue
@@ -251,10 +281,10 @@ module Aws::RDSDataService
         o.input = Shapes::ShapeRef.new(shape: BatchExecuteStatementRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchExecuteStatementResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
       end)
 
       api.add_operation(:begin_transaction, Seahorse::Model::Operation.new.tap do |o|
@@ -264,10 +294,10 @@ module Aws::RDSDataService
         o.input = Shapes::ShapeRef.new(shape: BeginTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: BeginTransactionResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
       end)
 
       api.add_operation(:commit_transaction, Seahorse::Model::Operation.new.tap do |o|
@@ -277,10 +307,10 @@ module Aws::RDSDataService
         o.input = Shapes::ShapeRef.new(shape: CommitTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: CommitTransactionResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:execute_sql, Seahorse::Model::Operation.new.tap do |o|
@@ -291,8 +321,8 @@ module Aws::RDSDataService
         o.input = Shapes::ShapeRef.new(shape: ExecuteSqlRequest)
         o.output = Shapes::ShapeRef.new(shape: ExecuteSqlResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
       end)
 
@@ -303,10 +333,10 @@ module Aws::RDSDataService
         o.input = Shapes::ShapeRef.new(shape: ExecuteStatementRequest)
         o.output = Shapes::ShapeRef.new(shape: ExecuteStatementResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
       end)
 
       api.add_operation(:rollback_transaction, Seahorse::Model::Operation.new.tap do |o|
@@ -316,10 +346,10 @@ module Aws::RDSDataService
         o.input = Shapes::ShapeRef.new(shape: RollbackTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: RollbackTransactionResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
     end
 

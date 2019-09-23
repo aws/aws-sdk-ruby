@@ -261,11 +261,9 @@ module Aws::RDSDataService
     # can provide a significant performance improvement over individual
     # insert and update operations.
     #
-    # <important markdown="1"> If a call isn't part of a transaction because it doesn't include the
+    # If a call isn't part of a transaction because it doesn't include the
     # `transactionID` parameter, changes that result from the call are
     # committed automatically.
-    #
-    #  </important>
     #
     # @option params [String] :database
     #   The name of the database.
@@ -306,6 +304,17 @@ module Aws::RDSDataService
     #         {
     #           name: "ParameterName",
     #           value: {
+    #             array_value: {
+    #               array_values: [
+    #                 {
+    #                   # recursive ArrayValue
+    #                 },
+    #               ],
+    #               boolean_values: [false],
+    #               double_values: [1.0],
+    #               long_values: [1],
+    #               string_values: ["String"],
+    #             },
     #             blob_value: "data",
     #             boolean_value: false,
     #             double_value: 1.0,
@@ -327,6 +336,16 @@ module Aws::RDSDataService
     #
     #   resp.update_results #=> Array
     #   resp.update_results[0].generated_fields #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.array_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.array_values[0] #=> Types::ArrayValue
+    #   resp.update_results[0].generated_fields[0].array_value.boolean_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.boolean_values[0] #=> Boolean
+    #   resp.update_results[0].generated_fields[0].array_value.double_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.double_values[0] #=> Float
+    #   resp.update_results[0].generated_fields[0].array_value.long_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.long_values[0] #=> Integer
+    #   resp.update_results[0].generated_fields[0].array_value.string_values #=> Array
+    #   resp.update_results[0].generated_fields[0].array_value.string_values[0] #=> String
     #   resp.update_results[0].generated_fields[0].blob_value #=> String
     #   resp.update_results[0].generated_fields[0].boolean_value #=> Boolean
     #   resp.update_results[0].generated_fields[0].double_value #=> Float
@@ -345,18 +364,7 @@ module Aws::RDSDataService
 
     # Starts a SQL transaction.
     #
-    # <important markdown="1"> A transaction can run for a maximum of 24 hours. A transaction is
-    # terminated and rolled back automatically after 24 hours.
-    #
-    #  A transaction times out if no calls use its transaction ID in three
-    # minutes. If a transaction times out before it's committed, it's
-    # rolled back automatically.
-    #
-    #  DDL statements inside a transaction cause an implicit commit. We
-    # recommend that you run each DDL statement in a separate
-    # `ExecuteStatement` call with `continueAfterTimeout` enabled.
-    #
-    #  </important>
+    #      <important> <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.</p> <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically.</p> <p>DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p> </important>
     #
     # @option params [String] :database
     #   The name of the database.
@@ -435,10 +443,8 @@ module Aws::RDSDataService
 
     # Runs one or more SQL statements.
     #
-    # <important markdown="1"> This operation is deprecated. Use the `BatchExecuteStatement` or
+    # This operation is deprecated. Use the `BatchExecuteStatement` or
     # `ExecuteStatement` operation.
-    #
-    #  </important>
     #
     # @option params [required, String] :aws_secret_store_arn
     #   The Amazon Resource Name (ARN) of the secret that enables access to
@@ -520,11 +526,9 @@ module Aws::RDSDataService
 
     # Runs a SQL statement against a database.
     #
-    # <important markdown="1"> If a call isn't part of a transaction because it doesn't include the
+    # If a call isn't part of a transaction because it doesn't include the
     # `transactionID` parameter, changes that result from the call are
     # committed automatically.
-    #
-    #  </important>
     #
     # The response size limit is 1 MB or 1,000 records. If the call returns
     # more than 1 MB of response data or over 1,000 records, the call is
@@ -535,12 +539,10 @@ module Aws::RDSDataService
     #   the call times out. By default, the statement stops running when the
     #   call times out.
     #
-    #   <important markdown="1"> For DDL statements, we recommend continuing to run the statement after
+    #   For DDL statements, we recommend continuing to run the statement after
     #   the call times out. When a DDL statement terminates before it is
     #   finished running, it can result in errors and possibly corrupted data
     #   structures.
-    #
-    #    </important>
     #
     # @option params [String] :database
     #   The name of the database.
@@ -553,6 +555,9 @@ module Aws::RDSDataService
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+    #
+    # @option params [Types::ResultSetOptions] :result_set_options
+    #   Options that control how the result set is returned.
     #
     # @option params [String] :schema
     #   The name of the database schema.
@@ -588,6 +593,17 @@ module Aws::RDSDataService
     #       {
     #         name: "ParameterName",
     #         value: {
+    #           array_value: {
+    #             array_values: [
+    #               {
+    #                 # recursive ArrayValue
+    #               },
+    #             ],
+    #             boolean_values: [false],
+    #             double_values: [1.0],
+    #             long_values: [1],
+    #             string_values: ["String"],
+    #           },
     #           blob_value: "data",
     #           boolean_value: false,
     #           double_value: 1.0,
@@ -598,6 +614,9 @@ module Aws::RDSDataService
     #       },
     #     ],
     #     resource_arn: "Arn", # required
+    #     result_set_options: {
+    #       decimal_return_type: "DOUBLE_OR_LONG", # accepts DOUBLE_OR_LONG, STRING
+    #     },
     #     schema: "DbName",
     #     secret_arn: "Arn", # required
     #     sql: "SqlStatement", # required
@@ -622,6 +641,16 @@ module Aws::RDSDataService
     #   resp.column_metadata[0].type #=> Integer
     #   resp.column_metadata[0].type_name #=> String
     #   resp.generated_fields #=> Array
+    #   resp.generated_fields[0].array_value.array_values #=> Array
+    #   resp.generated_fields[0].array_value.array_values[0] #=> Types::ArrayValue
+    #   resp.generated_fields[0].array_value.boolean_values #=> Array
+    #   resp.generated_fields[0].array_value.boolean_values[0] #=> Boolean
+    #   resp.generated_fields[0].array_value.double_values #=> Array
+    #   resp.generated_fields[0].array_value.double_values[0] #=> Float
+    #   resp.generated_fields[0].array_value.long_values #=> Array
+    #   resp.generated_fields[0].array_value.long_values[0] #=> Integer
+    #   resp.generated_fields[0].array_value.string_values #=> Array
+    #   resp.generated_fields[0].array_value.string_values[0] #=> String
     #   resp.generated_fields[0].blob_value #=> String
     #   resp.generated_fields[0].boolean_value #=> Boolean
     #   resp.generated_fields[0].double_value #=> Float
@@ -631,6 +660,16 @@ module Aws::RDSDataService
     #   resp.number_of_records_updated #=> Integer
     #   resp.records #=> Array
     #   resp.records[0] #=> Array
+    #   resp.records[0][0].array_value.array_values #=> Array
+    #   resp.records[0][0].array_value.array_values[0] #=> Types::ArrayValue
+    #   resp.records[0][0].array_value.boolean_values #=> Array
+    #   resp.records[0][0].array_value.boolean_values[0] #=> Boolean
+    #   resp.records[0][0].array_value.double_values #=> Array
+    #   resp.records[0][0].array_value.double_values[0] #=> Float
+    #   resp.records[0][0].array_value.long_values #=> Array
+    #   resp.records[0][0].array_value.long_values[0] #=> Integer
+    #   resp.records[0][0].array_value.string_values #=> Array
+    #   resp.records[0][0].array_value.string_values[0] #=> String
     #   resp.records[0][0].blob_value #=> String
     #   resp.records[0][0].boolean_value #=> Boolean
     #   resp.records[0][0].double_value #=> Float
@@ -697,7 +736,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

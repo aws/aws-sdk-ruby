@@ -624,6 +624,10 @@ module Aws::Redshift
     #   * Pending - The next snapshot is pending to be taken.
     #   @return [String]
     #
+    # @!attribute [rw] next_maintenance_window_start_time
+    #   The date and time in UTC when system maintenance can begin.
+    #   @return [Time]
+    #
     # @!attribute [rw] resize_info
     #   Returns the following:
     #
@@ -680,6 +684,7 @@ module Aws::Redshift
       :snapshot_schedule_state,
       :expected_next_snapshot_schedule_time,
       :expected_next_snapshot_schedule_time_status,
+      :next_maintenance_window_start_time,
       :resize_info)
       include Aws::Structure
     end
@@ -3953,6 +3958,78 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeNodeConfigurationOptionsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         action_type: "restore-cluster", # required, accepts restore-cluster
+    #         snapshot_identifier: "String",
+    #         owner_account: "String",
+    #         filters: [
+    #           {
+    #             name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent
+    #             operator: "eq", # accepts eq, lt, gt, le, ge, in, between
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         marker: "String",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] action_type
+    #   The action type to evaluate for possible node configurations.
+    #   Currently, it must be "restore-cluster".
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_identifier
+    #   The identifier of the snapshot to evaluate for possible node
+    #   configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The AWS customer account used to create or copy the snapshot.
+    #   Required if you are restoring a snapshot you do not own, optional if
+    #   you own the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A set of name, operator, and value items to filter the results.
+    #   @return [Array<Types::NodeConfigurationOptionsFilter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeNodeConfigurationOptions request exceed the value specified
+    #   in `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `500`
+    #
+    #   Constraints: minimum 100, maximum 500.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeNodeConfigurationOptionsMessage AWS API Documentation
+    #
+    class DescribeNodeConfigurationOptionsMessage < Struct.new(
+      :action_type,
+      :snapshot_identifier,
+      :owner_account,
+      :filters,
+      :marker,
+      :max_records)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeOrderableClusterOptionsMessage
     #   data as a hash:
     #
@@ -6153,6 +6230,89 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # A list of node configurations.
+    #
+    # @!attribute [rw] node_type
+    #   The node type, such as, "ds2.8xlarge".
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_nodes
+    #   The number of nodes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] estimated_disk_utilization_percent
+    #   The estimated disk utilizaton percentage.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/NodeConfigurationOption AWS API Documentation
+    #
+    class NodeConfigurationOption < Struct.new(
+      :node_type,
+      :number_of_nodes,
+      :estimated_disk_utilization_percent)
+      include Aws::Structure
+    end
+
+    # A set of elements to filter the returned node configurations.
+    #
+    # @note When making an API call, you may pass NodeConfigurationOptionsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent
+    #         operator: "eq", # accepts eq, lt, gt, le, ge, in, between
+    #         values: ["String"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the element to filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The filter operator. If filter Name is NodeType only the 'in'
+    #   operator is supported. Provide one value to evaluate for 'eq',
+    #   'lt', 'le', 'gt', and 'ge'. Provide two values to evaluate
+    #   for 'between'. Provide a list of values for 'in'.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   List of values. Compare Name using Operator to Values. If filter
+    #   Name is NumberOfNodes, then values can range from 0 to 200. If
+    #   filter Name is EstimatedDiskUtilizationPercent, then values can
+    #   range from 0 to 100. For example, filter NumberOfNodes (name) GT
+    #   (operator) 3 (values).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/NodeConfigurationOptionsFilter AWS API Documentation
+    #
+    class NodeConfigurationOptionsFilter < Struct.new(
+      :name,
+      :operator,
+      :values)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] node_configuration_option_list
+    #   A list of valid node configurations.
+    #   @return [Array<Types::NodeConfigurationOption>]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the `Marker` parameter and retrying
+    #   the command. If the `Marker` field is empty, all response records
+    #   have been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/NodeConfigurationOptionsMessage AWS API Documentation
+    #
+    class NodeConfigurationOptionsMessage < Struct.new(
+      :node_configuration_option_list,
+      :marker)
+      include Aws::Structure
+    end
+
     # Describes an orderable cluster option.
     #
     # @!attribute [rw] cluster_version
@@ -6923,6 +7083,7 @@ module Aws::Redshift
     #         iam_roles: ["String"],
     #         maintenance_track_name: "String",
     #         snapshot_schedule_identifier: "String",
+    #         number_of_nodes: 1,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -7162,6 +7323,11 @@ module Aws::Redshift
     #   A unique identifier for the snapshot schedule.
     #   @return [String]
     #
+    # @!attribute [rw] number_of_nodes
+    #   The number of nodes specified when provisioning the restored
+    #   cluster.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -7189,7 +7355,8 @@ module Aws::Redshift
       :additional_info,
       :iam_roles,
       :maintenance_track_name,
-      :snapshot_schedule_identifier)
+      :snapshot_schedule_identifier,
+      :number_of_nodes)
       include Aws::Structure
     end
 

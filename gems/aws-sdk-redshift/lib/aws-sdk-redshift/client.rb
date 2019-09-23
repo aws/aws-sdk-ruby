@@ -1228,6 +1228,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -2226,6 +2227,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -3562,6 +3564,7 @@ module Aws::Redshift
     #   resp.clusters[0].snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.clusters[0].expected_next_snapshot_schedule_time #=> Time
     #   resp.clusters[0].expected_next_snapshot_schedule_time_status #=> String
+    #   resp.clusters[0].next_maintenance_window_start_time #=> Time
     #   resp.clusters[0].resize_info.resize_type #=> String
     #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
     #
@@ -4148,6 +4151,84 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_logging_status(params = {}, options = {})
       req = build_request(:describe_logging_status, params)
+      req.send_request(options)
+    end
+
+    # Returns properties of possible node configurations such as node type,
+    # number of nodes, and disk usage for the specified action type.
+    #
+    # @option params [required, String] :action_type
+    #   The action type to evaluate for possible node configurations.
+    #   Currently, it must be "restore-cluster".
+    #
+    # @option params [String] :snapshot_identifier
+    #   The identifier of the snapshot to evaluate for possible node
+    #   configurations.
+    #
+    # @option params [String] :owner_account
+    #   The AWS customer account used to create or copy the snapshot. Required
+    #   if you are restoring a snapshot you do not own, optional if you own
+    #   the snapshot.
+    #
+    # @option params [Array<Types::NodeConfigurationOptionsFilter>] :filters
+    #   A set of name, operator, and value items to filter the results.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeNodeConfigurationOptions request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `500`
+    #
+    #   Constraints: minimum 100, maximum 500.
+    #
+    # @return [Types::NodeConfigurationOptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::NodeConfigurationOptionsMessage#node_configuration_option_list #node_configuration_option_list} => Array&lt;Types::NodeConfigurationOption&gt;
+    #   * {Types::NodeConfigurationOptionsMessage#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_node_configuration_options({
+    #     action_type: "restore-cluster", # required, accepts restore-cluster
+    #     snapshot_identifier: "String",
+    #     owner_account: "String",
+    #     filters: [
+    #       {
+    #         name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent
+    #         operator: "eq", # accepts eq, lt, gt, le, ge, in, between
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.node_configuration_option_list #=> Array
+    #   resp.node_configuration_option_list[0].node_type #=> String
+    #   resp.node_configuration_option_list[0].number_of_nodes #=> Integer
+    #   resp.node_configuration_option_list[0].estimated_disk_utilization_percent #=> Float
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeNodeConfigurationOptions AWS API Documentation
+    #
+    # @overload describe_node_configuration_options(params = {})
+    # @param [Hash] params ({})
+    def describe_node_configuration_options(params = {}, options = {})
+      req = build_request(:describe_node_configuration_options, params)
       req.send_request(options)
     end
 
@@ -4988,6 +5069,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5221,6 +5303,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5838,6 +5921,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -5968,6 +6052,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6105,6 +6190,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6252,6 +6338,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6731,6 +6818,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -6976,6 +7064,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7196,6 +7285,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7440,6 +7530,9 @@ module Aws::Redshift
     # @option params [String] :snapshot_schedule_identifier
     #   A unique identifier for the snapshot schedule.
     #
+    # @option params [Integer] :number_of_nodes
+    #   The number of nodes specified when provisioning the restored cluster.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -7472,6 +7565,7 @@ module Aws::Redshift
     #     iam_roles: ["String"],
     #     maintenance_track_name: "String",
     #     snapshot_schedule_identifier: "String",
+    #     number_of_nodes: 1,
     #   })
     #
     # @example Response structure
@@ -7568,6 +7662,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7944,6 +8039,7 @@ module Aws::Redshift
     #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
     #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #
@@ -7969,7 +8065,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
