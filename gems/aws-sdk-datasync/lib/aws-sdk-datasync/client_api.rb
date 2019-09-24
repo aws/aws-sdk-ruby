@@ -94,6 +94,7 @@ module Aws::DataSync
     NonEmptySubdirectory = Shapes::StringShape.new(name: 'NonEmptySubdirectory')
     OnPremConfig = Shapes::StructureShape.new(name: 'OnPremConfig')
     Options = Shapes::StructureShape.new(name: 'Options')
+    OverwriteMode = Shapes::StringShape.new(name: 'OverwriteMode')
     PLSecurityGroupArnList = Shapes::ListShape.new(name: 'PLSecurityGroupArnList')
     PLSubnetArnList = Shapes::ListShape.new(name: 'PLSubnetArnList')
     PhaseStatus = Shapes::StringShape.new(name: 'PhaseStatus')
@@ -103,6 +104,7 @@ module Aws::DataSync
     PrivateLinkConfig = Shapes::StructureShape.new(name: 'PrivateLinkConfig')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
+    S3StorageClass = Shapes::StringShape.new(name: 'S3StorageClass')
     ServerHostname = Shapes::StringShape.new(name: 'ServerHostname')
     SmbDomain = Shapes::StringShape.new(name: 'SmbDomain')
     SmbMountOptions = Shapes::StructureShape.new(name: 'SmbMountOptions')
@@ -189,6 +191,7 @@ module Aws::DataSync
 
     CreateLocationS3Request.add_member(:subdirectory, Shapes::ShapeRef.new(shape: Subdirectory, location_name: "Subdirectory"))
     CreateLocationS3Request.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "S3BucketArn"))
+    CreateLocationS3Request.add_member(:s3_storage_class, Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
     CreateLocationS3Request.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, required: true, location_name: "S3Config"))
     CreateLocationS3Request.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateLocationS3Request.struct_class = Types::CreateLocationS3Request
@@ -272,6 +275,7 @@ module Aws::DataSync
 
     DescribeLocationS3Response.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     DescribeLocationS3Response.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
+    DescribeLocationS3Response.add_member(:s3_storage_class, Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
     DescribeLocationS3Response.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config"))
     DescribeLocationS3Response.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationS3Response.struct_class = Types::DescribeLocationS3Response
@@ -401,6 +405,7 @@ module Aws::DataSync
     OnPremConfig.struct_class = Types::OnPremConfig
 
     Options.add_member(:verify_mode, Shapes::ShapeRef.new(shape: VerifyMode, location_name: "VerifyMode"))
+    Options.add_member(:overwrite_mode, Shapes::ShapeRef.new(shape: OverwriteMode, location_name: "OverwriteMode"))
     Options.add_member(:atime, Shapes::ShapeRef.new(shape: Atime, location_name: "Atime"))
     Options.add_member(:mtime, Shapes::ShapeRef.new(shape: Mtime, location_name: "Mtime"))
     Options.add_member(:uid, Shapes::ShapeRef.new(shape: Uid, location_name: "Uid"))

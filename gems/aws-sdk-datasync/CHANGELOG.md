@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2019-09-24)
+------------------
+
+* Feature - Added S3StorageClass, OverwriteMode sync option, and ONLY_FILES_TRANSFERRED setting for the VerifyMode sync option.
+
 1.12.0 (2019-08-22)
 ------------------
 
