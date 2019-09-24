@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.360 (2019-09-24)
+------------------
+
 * Feature - Aws::ComprehendMedical - Updated the API, and documentation for AWS Comprehend Medical.
 
 * Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
