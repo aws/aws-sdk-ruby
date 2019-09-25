@@ -39,6 +39,24 @@ module Aws::GlobalAccelerator
     #   accelerator.
     #   @return [Array<Types::IpSet>]
     #
+    # @!attribute [rw] dns_name
+    #   The Domain Name System (DNS) name that Global Accelerator creates
+    #   that points to your accelerator's static IP addresses.
+    #
+    #   The naming convention for the DNS name is: a lower case letter a,
+    #   followed by a 16-bit random hex string, followed by
+    #   .awsglobalaccelerator.com. For example:
+    #   a1234567890abcdef.awsglobalaccelerator.com.
+    #
+    #   For more information about the default DNS name, see [Support for
+    #   DNS Addressing in Global Accelerator][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   Describes the deployment status of the accelerator.
     #   @return [String]
@@ -59,6 +77,7 @@ module Aws::GlobalAccelerator
       :ip_address_type,
       :enabled,
       :ip_sets,
+      :dns_name,
       :status,
       :created_time,
       :last_modified_time)

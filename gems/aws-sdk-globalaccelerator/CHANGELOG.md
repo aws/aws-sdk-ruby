@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2019-09-25)
+------------------
+
+* Feature - API Update for AWS Global Accelerator to support for DNS aliasing.
+
 1.11.0 (2019-08-28)
 ------------------
 

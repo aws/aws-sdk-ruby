@@ -96,6 +96,7 @@ module Aws::GlobalAccelerator
     Accelerator.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     Accelerator.add_member(:enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "Enabled"))
     Accelerator.add_member(:ip_sets, Shapes::ShapeRef.new(shape: IpSets, location_name: "IpSets"))
+    Accelerator.add_member(:dns_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "DnsName"))
     Accelerator.add_member(:status, Shapes::ShapeRef.new(shape: AcceleratorStatus, location_name: "Status"))
     Accelerator.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Accelerator.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))

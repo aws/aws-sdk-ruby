@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2019-09-25)
+------------------
+
+* Feature - Enable G4D and R5 instances in SageMaker Hosting Services
+
 1.43.0 (2019-08-21)
 ------------------
 

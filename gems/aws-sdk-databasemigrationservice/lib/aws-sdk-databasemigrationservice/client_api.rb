@@ -43,6 +43,8 @@ module Aws::DatabaseMigrationService
     DataFormatValue = Shapes::StringShape.new(name: 'DataFormatValue')
     DeleteCertificateMessage = Shapes::StructureShape.new(name: 'DeleteCertificateMessage')
     DeleteCertificateResponse = Shapes::StructureShape.new(name: 'DeleteCertificateResponse')
+    DeleteConnectionMessage = Shapes::StructureShape.new(name: 'DeleteConnectionMessage')
+    DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
     DeleteEndpointMessage = Shapes::StructureShape.new(name: 'DeleteEndpointMessage')
     DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
     DeleteEventSubscriptionMessage = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionMessage')
@@ -358,6 +360,13 @@ module Aws::DatabaseMigrationService
 
     DeleteCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
     DeleteCertificateResponse.struct_class = Types::DeleteCertificateResponse
+
+    DeleteConnectionMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
+    DeleteConnectionMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
+    DeleteConnectionMessage.struct_class = Types::DeleteConnectionMessage
+
+    DeleteConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
+    DeleteConnectionResponse.struct_class = Types::DeleteConnectionResponse
 
     DeleteEndpointMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     DeleteEndpointMessage.struct_class = Types::DeleteEndpointMessage
@@ -988,6 +997,7 @@ module Aws::DatabaseMigrationService
     S3Settings.add_member(:include_op_for_full_load, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeOpForFullLoad"))
     S3Settings.add_member(:cdc_inserts_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CdcInsertsOnly"))
     S3Settings.add_member(:timestamp_column_name, Shapes::ShapeRef.new(shape: String, location_name: "TimestampColumnName"))
+    S3Settings.add_member(:parquet_timestamp_in_millisecond, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ParquetTimestampInMillisecond"))
     S3Settings.struct_class = Types::S3Settings
 
     SNSInvalidTopicFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -1215,6 +1225,17 @@ module Aws::DatabaseMigrationService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteCertificateMessage)
         o.output = Shapes::ShapeRef.new(shape: DeleteCertificateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+      end)
+
+      api.add_operation(:delete_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConnectionMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
