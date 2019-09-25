@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.361 (2019-09-25)
+------------------
+
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
 
 * Feature - Aws::GlobalAccelerator - Updated the API, and documentation for AWS Global Accelerator.
