@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.362 (2019-09-26)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the documentation for AWS CodePipeline.
 
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
