@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix aws-v3.rb to correctly load source code changes for core gems.
+
 3.54.0 (2019-09-12)
 ------------------
 
@@ -395,4 +397,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-resources` gem.
-
