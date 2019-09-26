@@ -8206,11 +8206,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] is_latest_version
-    #   Indicates whether latest version of SSM Agent is running on your
-    #   instance. Some older versions of Windows Server use the EC2Config
-    #   service to process SSM requests. For this reason, this field does
-    #   not indicate whether or not the latest version is installed on
-    #   Windows managed instances.
+    #   Indicates whether the latest version of SSM Agent is running on your
+    #   Linux Managed Instance. This field does not indicate whether or not
+    #   the latest version is installed on Windows managed instances,
+    #   because some older versions of Windows Server use the EC2Config
+    #   service to process SSM requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] platform_type
@@ -9530,7 +9530,7 @@ module Aws::SSM
     # @!attribute [rw] parameter_version
     #   The specific version of the parameter on which you want to attach
     #   one or more labels. If no version is specified, the system attaches
-    #   the label to the latest version.)
+    #   the label to the latest version.
     #   @return [Integer]
     #
     # @!attribute [rw] labels
@@ -9556,10 +9556,15 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] parameter_version
+    #   The version of the parameter that has been labeled.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersionResult AWS API Documentation
     #
     class LabelParameterVersionResult < Struct.new(
-      :invalid_labels)
+      :invalid_labels,
+      :parameter_version)
       include Aws::Structure
     end
 
@@ -12950,8 +12955,8 @@ module Aws::SSM
     #     the current Region.
     #
     #   For more information about configuring the default tier option, see
-    #   [Specifying a Default Parameter Tier][2] in the AWS Systems Manager
-    #   User Guide.
+    #   [Specifying a Default Parameter Tier][2] in the *AWS Systems Manager
+    #   User Guide*.
     #
     #
     #
@@ -13015,10 +13020,15 @@ module Aws::SSM
     #   called.
     #   @return [Integer]
     #
+    # @!attribute [rw] tier
+    #   The tier assigned to the parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterResult AWS API Documentation
     #
     class PutParameterResult < Struct.new(
-      :version)
+      :version,
+      :tier)
       include Aws::Structure
     end
 

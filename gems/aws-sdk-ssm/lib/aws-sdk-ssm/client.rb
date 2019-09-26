@@ -5395,7 +5395,7 @@ module Aws::SSM
     # @option params [Integer] :parameter_version
     #   The specific version of the parameter on which you want to attach one
     #   or more labels. If no version is specified, the system attaches the
-    #   label to the latest version.)
+    #   label to the latest version.
     #
     # @option params [required, Array<String>] :labels
     #   One or more labels to attach to the specified parameter version.
@@ -5403,6 +5403,7 @@ module Aws::SSM
     # @return [Types::LabelParameterVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::LabelParameterVersionResult#invalid_labels #invalid_labels} => Array&lt;String&gt;
+    #   * {Types::LabelParameterVersionResult#parameter_version #parameter_version} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -5416,6 +5417,7 @@ module Aws::SSM
     #
     #   resp.invalid_labels #=> Array
     #   resp.invalid_labels[0] #=> String
+    #   resp.parameter_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersion AWS API Documentation
     #
@@ -6607,8 +6609,8 @@ module Aws::SSM
     #     current Region.
     #
     #   For more information about configuring the default tier option, see
-    #   [Specifying a Default Parameter Tier][2] in the AWS Systems Manager
-    #   User Guide.
+    #   [Specifying a Default Parameter Tier][2] in the *AWS Systems Manager
+    #   User Guide*.
     #
     #
     #
@@ -6646,6 +6648,7 @@ module Aws::SSM
     # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutParameterResult#version #version} => Integer
+    #   * {Types::PutParameterResult#tier #tier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6670,6 +6673,7 @@ module Aws::SSM
     # @example Response structure
     #
     #   resp.version #=> Integer
+    #   resp.tier #=> String, one of "Standard", "Advanced", "Intelligent-Tiering"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameter AWS API Documentation
     #
@@ -7683,6 +7687,14 @@ module Aws::SSM
     # Updates an association. You can update the association name and
     # version, the document version, schedule, parameters, and Amazon S3
     # output.
+    #
+    # In order to call this API action, your IAM user account, group, or
+    # role must be configured with permission to call the
+    # DescribeAssociation API action. If you don't have permission to call
+    # DescribeAssociation, then you receive the following error: `An error
+    # occurred (AccessDeniedException) when calling the UpdateAssociation
+    # operation: User: <user_arn> is not authorized to perform:
+    # ssm:DescribeAssociation on resource: <resource_arn>`
     #
     # When you update an association, the association immediately runs
     # against the specified targets.
@@ -8908,7 +8920,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

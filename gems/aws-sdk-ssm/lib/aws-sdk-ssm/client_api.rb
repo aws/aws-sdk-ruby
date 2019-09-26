@@ -2655,6 +2655,7 @@ module Aws::SSM
     LabelParameterVersionRequest.struct_class = Types::LabelParameterVersionRequest
 
     LabelParameterVersionResult.add_member(:invalid_labels, Shapes::ShapeRef.new(shape: ParameterLabelList, location_name: "InvalidLabels"))
+    LabelParameterVersionResult.add_member(:parameter_version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "ParameterVersion"))
     LabelParameterVersionResult.struct_class = Types::LabelParameterVersionResult
 
     ListAssociationVersionsRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location_name: "AssociationId"))
@@ -3291,6 +3292,7 @@ module Aws::SSM
     PutParameterRequest.struct_class = Types::PutParameterRequest
 
     PutParameterResult.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
+    PutParameterResult.add_member(:tier, Shapes::ShapeRef.new(shape: ParameterTier, location_name: "Tier"))
     PutParameterResult.struct_class = Types::PutParameterResult
 
     Regions.member = Shapes::ShapeRef.new(shape: Region)

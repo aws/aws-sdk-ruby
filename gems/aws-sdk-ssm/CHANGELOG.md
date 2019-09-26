@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2019-09-26)
+------------------
+
+* Feature - This release updates the AWS Systems Manager Parameter Store PutParameter and LabelParameterVersion APIs to return the "Tier" of parameter created/updated and the "parameter version" labeled respectively.
+
 1.55.0 (2019-08-26)
 ------------------
 

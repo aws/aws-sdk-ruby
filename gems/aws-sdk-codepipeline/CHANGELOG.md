@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2019-09-26)
+------------------
+
+* Feature - Documentation updates for CodePipeline
+
 1.24.0 (2019-08-29)
 ------------------
 
