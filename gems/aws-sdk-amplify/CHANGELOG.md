@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2019-09-27)
+------------------
+
+* Feature - This release adds access logs APIs and artifact APIs for AWS Amplify Console.
+
 1.10.0 (2019-07-25)
 ------------------
 

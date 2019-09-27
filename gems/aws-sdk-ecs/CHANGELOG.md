@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2019-09-27)
+------------------
+
+* Feature - This release of Amazon Elastic Container Service (Amazon ECS) removes FirelensConfiguration from the DescribeTask output during the FireLens public preview.
+
 1.50.0 (2019-09-19)
 ------------------
 

@@ -122,13 +122,31 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Structure for artifact.
+    #
+    # @!attribute [rw] artifact_file_name
+    #   File name for the artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_id
+    #   Unique Id for a artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Artifact AWS API Documentation
+    #
+    class Artifact < Struct.new(
+      :artifact_file_name,
+      :artifact_id)
+      include Aws::Structure
+    end
+
     # Structure with auto branch creation config.
     #
     # @note When making an API call, you may pass AutoBranchCreationConfig
     #   data as a hash:
     #
     #       {
-    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #         framework: "Framework",
     #         enable_auto_build: false,
     #         environment_variables: {
@@ -137,6 +155,7 @@ module Aws::Amplify
     #         basic_auth_credentials: "BasicAuthCredentials",
     #         enable_basic_auth: false,
     #         build_spec: "BuildSpec",
+    #         enable_pull_request_preview: false,
     #       }
     #
     # @!attribute [rw] stage
@@ -167,6 +186,10 @@ module Aws::Amplify
     #   BuildSpec for the auto created branch.
     #   @return [String]
     #
+    # @!attribute [rw] enable_pull_request_preview
+    #   Enables Pull Request Preview for auto created branch.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/AutoBranchCreationConfig AWS API Documentation
     #
     class AutoBranchCreationConfig < Struct.new(
@@ -176,7 +199,8 @@ module Aws::Amplify
       :environment_variables,
       :basic_auth_credentials,
       :enable_basic_auth,
-      :build_spec)
+      :build_spec,
+      :enable_pull_request_preview)
       include Aws::Structure
     end
 
@@ -280,6 +304,18 @@ module Aws::Amplify
     #   List of custom resources that are linked to this branch.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] enable_pull_request_preview
+    #   Enables Pull Request Preview for this branch.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] destination_branch
+    #   The destination branch if the branch is a pull request branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_branch
+    #   The source branch if the branch is a pull request branch.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Branch AWS API Documentation
     #
     class Branch < Struct.new(
@@ -303,7 +339,10 @@ module Aws::Amplify
       :basic_auth_credentials,
       :build_spec,
       :ttl,
-      :associated_resources)
+      :associated_resources,
+      :enable_pull_request_preview,
+      :destination_branch,
+      :source_branch)
       include Aws::Structure
     end
 
@@ -341,7 +380,7 @@ module Aws::Amplify
     #         enable_auto_branch_creation: false,
     #         auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #         auto_branch_creation_config: {
-    #           stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #           stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #           framework: "Framework",
     #           enable_auto_build: false,
     #           environment_variables: {
@@ -350,6 +389,7 @@ module Aws::Amplify
     #           basic_auth_credentials: "BasicAuthCredentials",
     #           enable_basic_auth: false,
     #           build_spec: "BuildSpec",
+    #           enable_pull_request_preview: false,
     #         },
     #       }
     #
@@ -470,7 +510,7 @@ module Aws::Amplify
     #         app_id: "AppId", # required
     #         branch_name: "BranchName", # required
     #         description: "Description",
-    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #         framework: "Framework",
     #         enable_notification: false,
     #         enable_auto_build: false,
@@ -485,6 +525,7 @@ module Aws::Amplify
     #         build_spec: "BuildSpec",
     #         ttl: "TTL",
     #         display_name: "DisplayName",
+    #         enable_pull_request_preview: false,
     #       }
     #
     # @!attribute [rw] app_id
@@ -543,6 +584,10 @@ module Aws::Amplify
     #   Display name for a branch, will use as the default domain prefix.
     #   @return [String]
     #
+    # @!attribute [rw] enable_pull_request_preview
+    #   Enables Pull Request Preview for this branch.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchRequest AWS API Documentation
     #
     class CreateBranchRequest < Struct.new(
@@ -559,7 +604,8 @@ module Aws::Amplify
       :tags,
       :build_spec,
       :ttl,
-      :display_name)
+      :display_name,
+      :enable_pull_request_preview)
       include Aws::Structure
     end
 
@@ -1023,6 +1069,57 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Request structure for the generate access logs request.
+    #
+    # @note When making an API call, you may pass GenerateAccessLogsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         domain_name: "DomainName", # required
+    #         app_id: "AppId", # required
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The time at which the logs should start, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the logs should end, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GenerateAccessLogsRequest AWS API Documentation
+    #
+    class GenerateAccessLogsRequest < Struct.new(
+      :start_time,
+      :end_time,
+      :domain_name,
+      :app_id)
+      include Aws::Structure
+    end
+
+    # Result structure for the generate access logs request.
+    #
+    # @!attribute [rw] log_url
+    #   Pre-signed URL for the requested access logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GenerateAccessLogsResult AWS API Documentation
+    #
+    class GenerateAccessLogsResult < Struct.new(
+      :log_url)
+      include Aws::Structure
+    end
+
     # Request structure for get App request.
     #
     # @note When making an API call, you may pass GetAppRequest
@@ -1052,6 +1149,44 @@ module Aws::Amplify
     #
     class GetAppResult < Struct.new(
       :app)
+      include Aws::Structure
+    end
+
+    # Request structure for the get artifact request.
+    #
+    # @note When making an API call, you may pass GetArtifactUrlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         artifact_id: "ArtifactId", # required
+    #       }
+    #
+    # @!attribute [rw] artifact_id
+    #   Unique Id for a artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetArtifactUrlRequest AWS API Documentation
+    #
+    class GetArtifactUrlRequest < Struct.new(
+      :artifact_id)
+      include Aws::Structure
+    end
+
+    # Result structure for the get artifact request.
+    #
+    # @!attribute [rw] artifact_id
+    #   Unique Id for a artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_url
+    #   Presigned url for the artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetArtifactUrlResult AWS API Documentation
+    #
+    class GetArtifactUrlResult < Struct.new(
+      :artifact_id,
+      :artifact_url)
       include Aws::Structure
     end
 
@@ -1351,6 +1486,78 @@ module Aws::Amplify
     #
     class ListAppsResult < Struct.new(
       :apps,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Request structure for the list artifacts request.
+    #
+    # @note When making an API call, you may pass ListArtifactsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         branch_name: "BranchName", # required
+    #         job_id: "JobId", # required
+    #         artifact_type: "TEST", # accepts TEST
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   Name for a branch, part of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   Unique Id for an Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_type
+    #   Type for an artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Set to null to start listing artifacts from start.
+    #   If non-null pagination token is returned in a result, then pass its
+    #   value in here to list more artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of records to list in a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListArtifactsRequest AWS API Documentation
+    #
+    class ListArtifactsRequest < Struct.new(
+      :app_id,
+      :branch_name,
+      :job_id,
+      :artifact_type,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Result structure for the list artifacts request.
+    #
+    # @!attribute [rw] artifacts
+    #   List of artifacts.
+    #   @return [Array<Types::Artifact>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. If non-null pagination token is returned in a
+    #   result, then pass its value in another request to fetch more
+    #   entries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListArtifactsResult AWS API Documentation
+    #
+    class ListArtifactsResult < Struct.new(
+      :artifacts,
       :next_token)
       include Aws::Structure
     end
@@ -1826,6 +2033,14 @@ module Aws::Amplify
     #   URL to the artifact for the execution step.
     #   @return [String]
     #
+    # @!attribute [rw] test_artifacts_url
+    #   URL to the test artifact for the execution step.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_config_url
+    #   URL to the test config for the execution step.
+    #   @return [String]
+    #
     # @!attribute [rw] screenshots
     #   List of screenshot URLs for the execution step, if relevant.
     #   @return [Hash<String,String>]
@@ -1848,6 +2063,8 @@ module Aws::Amplify
       :end_time,
       :log_url,
       :artifacts_url,
+      :test_artifacts_url,
+      :test_config_url,
       :screenshots,
       :status_reason,
       :context)
@@ -2055,7 +2272,7 @@ module Aws::Amplify
     #         enable_auto_branch_creation: false,
     #         auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #         auto_branch_creation_config: {
-    #           stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #           stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #           framework: "Framework",
     #           enable_auto_build: false,
     #           environment_variables: {
@@ -2064,7 +2281,11 @@ module Aws::Amplify
     #           basic_auth_credentials: "BasicAuthCredentials",
     #           enable_basic_auth: false,
     #           build_spec: "BuildSpec",
+    #           enable_pull_request_preview: false,
     #         },
+    #         repository: "Repository",
+    #         oauth_token: "OauthToken",
+    #         access_token: "AccessToken",
     #       }
     #
     # @!attribute [rw] app_id
@@ -2120,8 +2341,24 @@ module Aws::Amplify
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_branch_creation_config
-    #   Automated branch creation config for the Amplify App.
+    #   Automated branch creation branchConfig for the Amplify App.
     #   @return [Types::AutoBranchCreationConfig]
+    #
+    # @!attribute [rw] repository
+    #   Repository for an Amplify App
+    #   @return [String]
+    #
+    # @!attribute [rw] oauth_token
+    #   OAuth token for 3rd party source control system for an Amplify App,
+    #   used to create webhook and read-only deploy key. OAuth token is not
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_token
+    #   Personal Access token for 3rd party source control system for an
+    #   Amplify App, used to create webhook and read-only deploy key. Token
+    #   is not stored.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateAppRequest AWS API Documentation
     #
@@ -2139,7 +2376,10 @@ module Aws::Amplify
       :build_spec,
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
-      :auto_branch_creation_config)
+      :auto_branch_creation_config,
+      :repository,
+      :oauth_token,
+      :access_token)
       include Aws::Structure
     end
 
@@ -2166,7 +2406,7 @@ module Aws::Amplify
     #         branch_name: "BranchName", # required
     #         description: "Description",
     #         framework: "Framework",
-    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #         enable_notification: false,
     #         enable_auto_build: false,
     #         environment_variables: {
@@ -2177,6 +2417,7 @@ module Aws::Amplify
     #         build_spec: "BuildSpec",
     #         ttl: "TTL",
     #         display_name: "DisplayName",
+    #         enable_pull_request_preview: false,
     #       }
     #
     # @!attribute [rw] app_id
@@ -2231,6 +2472,10 @@ module Aws::Amplify
     #   Display name for a branch, will use as the default domain prefix.
     #   @return [String]
     #
+    # @!attribute [rw] enable_pull_request_preview
+    #   Enables Pull Request Preview for this branch.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchRequest AWS API Documentation
     #
     class UpdateBranchRequest < Struct.new(
@@ -2246,7 +2491,8 @@ module Aws::Amplify
       :enable_basic_auth,
       :build_spec,
       :ttl,
-      :display_name)
+      :display_name,
+      :enable_pull_request_preview)
       include Aws::Structure
     end
 

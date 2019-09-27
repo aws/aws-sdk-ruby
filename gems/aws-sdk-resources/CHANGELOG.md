@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.54.1 (2019-09-27)
+------------------
+
 * Issue - Fix aws-v3.rb to correctly load source code changes for core gems.
 
 3.54.0 (2019-09-12)
