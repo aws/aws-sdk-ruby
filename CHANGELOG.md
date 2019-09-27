@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.363 (2019-09-27)
+------------------
+
 * Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
 
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
