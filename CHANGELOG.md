@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MQ - Updated the API, and documentation for AmazonMQ.
+
+* Feature - Aws::RDS - Updated the API, documentation, and waiters for Amazon Relational Database Service.
+
+* Feature - Aws::WAF - Updated the API, and documentation for AWS WAF.
+
 2.11.363 (2019-09-27)
 ------------------
 
