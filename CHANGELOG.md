@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.364 (2019-09-30)
+------------------
+
 * Feature - Aws::MQ - Updated the API, and documentation for AmazonMQ.
 
 * Feature - Aws::RDS - Updated the API, documentation, and waiters for Amazon Relational Database Service.
