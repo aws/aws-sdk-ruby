@@ -2720,17 +2720,27 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   For an Amazon RDS DB instance that's running Microsoft SQL Server,
-    #   this parameter specifies the Active Directory directory ID to create
-    #   the instance in. Amazon RDS uses Windows Authentication to
-    #   authenticate users that connect to the DB instance. For more
-    #   information, see [Using Windows Authentication with an Amazon RDS DB
-    #   Instance Running Microsoft SQL Server][1] in the *Amazon RDS User
-    #   Guide*.
+    #   The Active Directory directory ID to create the DB instance in.
+    #   Currently, only Microsoft SQL Server and Oracle DB instances can be
+    #   created in an Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB
+    #   instance. For more information, see [ Using Windows Authentication
+    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
+    #   the *Amazon RDS User Guide*.
+    #
+    #   For Oracle DB instance, Amazon RDS can use Kerberos Authentication
+    #   to authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_SQLServerWinAuth.html
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
@@ -2991,6 +3001,8 @@ module Aws::RDS
     #         ],
     #         use_default_processor_features: false,
     #         deletion_protection: false,
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #         source_region: "String",
     #       }
     #
@@ -3361,6 +3373,24 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain
+    #   The Active Directory directory ID to create the DB instance in.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
+    #   to authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -3400,6 +3430,8 @@ module Aws::RDS
       :processor_features,
       :use_default_processor_features,
       :deletion_protection,
+      :domain,
+      :domain_iam_role_name,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -7602,7 +7634,14 @@ module Aws::RDS
     #
     #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
     #     results list will only include information about the DB instances
-    #     identified by these resource identifiers.
+    #     identified by these DB instance resource identifiers.
+    #
+    #   * `domain` - Accepts Active Directory directory IDs. The results
+    #     list will only include information about the DB instances
+    #     associated with these domains.
+    #
+    #   * `engine` - Accepts engine names. The results list will only
+    #     include information about the DB instances for these engines.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -10866,10 +10905,27 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The Active Directory Domain to move the instance to. Specify `none`
-    #   to remove the instance from its current domain. The domain must be
-    #   created prior to this operation. Currently only a Microsoft SQL
-    #   Server instance can be created in a Active Directory Domain.
+    #   The Active Directory directory ID to move the DB instance to.
+    #   Specify `none` to remove the instance from its current domain. The
+    #   domain must be created prior to this operation. Currently, only
+    #   Microsoft SQL Server and Oracle DB instances can be created in an
+    #   Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB
+    #   instance. For more information, see [ Using Windows Authentication
+    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
+    #   the *Amazon RDS User Guide*.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
+    #   to authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
@@ -12175,6 +12231,10 @@ module Aws::RDS
     #   instances that use the specified instance class.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_kerberos_authentication
+    #   Whether a DB instance supports Kerberos Authentication.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -12200,7 +12260,8 @@ module Aws::RDS
       :max_iops_per_gib,
       :available_processor_features,
       :supported_engine_modes,
-      :supports_storage_autoscaling)
+      :supports_storage_autoscaling,
+      :supports_kerberos_authentication)
       include Aws::Structure
     end
 
@@ -14565,7 +14626,26 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain
-    #   Specify the Active Directory Domain to restore the instance in.
+    #   Specify the Active Directory directory ID to restore the DB instance
+    #   in. The domain must be created prior to this operation. Currently,
+    #   only Microsoft SQL Server and Oracle DB instances can be created in
+    #   an Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB
+    #   instance. For more information, see [ Using Windows Authentication
+    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
+    #   the *Amazon RDS User Guide*.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
+    #   to authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
@@ -15487,7 +15567,26 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain
-    #   Specify the Active Directory Domain to restore the instance in.
+    #   Specify the Active Directory directory ID to restore the DB instance
+    #   in. The domain must be created prior to this operation. Currently,
+    #   only Microsoft SQL Server and Oracle DB instances can be created in
+    #   an Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB
+    #   instance. For more information, see [ Using Windows Authentication
+    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
+    #   the *Amazon RDS User Guide*.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
+    #   to authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     #   @return [String]
     #
     # @!attribute [rw] domain_iam_role_name

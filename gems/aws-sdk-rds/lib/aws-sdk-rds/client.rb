@@ -3079,17 +3079,27 @@ module Aws::RDS
     #   for each AWS Region.
     #
     # @option params [String] :domain
-    #   For an Amazon RDS DB instance that's running Microsoft SQL Server,
-    #   this parameter specifies the Active Directory directory ID to create
-    #   the instance in. Amazon RDS uses Windows Authentication to
+    #   The Active Directory directory ID to create the DB instance in.
+    #   Currently, only Microsoft SQL Server and Oracle DB instances can be
+    #   created in an Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   For Oracle DB instance, Amazon RDS can use Kerberos Authentication to
     #   authenticate users that connect to the DB instance. For more
-    #   information, see [Using Windows Authentication with an Amazon RDS DB
-    #   Instance Running Microsoft SQL Server][1] in the *Amazon RDS User
-    #   Guide*.
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_SQLServerWinAuth.html
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy tags from the DB instance to
@@ -3804,6 +3814,22 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
+    # @option params [String] :domain
+    #   The Active Directory directory ID to create the DB instance in.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3880,6 +3906,8 @@ module Aws::RDS
     #     ],
     #     use_default_processor_features: false,
     #     deletion_protection: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #     source_region: "String",
     #   })
     #
@@ -7008,7 +7036,14 @@ module Aws::RDS
     #
     #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
     #     results list will only include information about the DB instances
-    #     identified by these resource identifiers.
+    #     identified by these DB instance resource identifiers.
+    #
+    #   * `domain` - Accepts Active Directory directory IDs. The results list
+    #     will only include information about the DB instances associated with
+    #     these domains.
+    #
+    #   * `engine` - Accepts engine names. The results list will only include
+    #     information about the DB instances for these engines.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -8799,6 +8834,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supported_engine_modes #=> Array
     #   resp.orderable_db_instance_options[0].supported_engine_modes[0] #=> String
     #   resp.orderable_db_instance_options[0].supports_storage_autoscaling #=> Boolean
+    #   resp.orderable_db_instance_options[0].supports_kerberos_authentication #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -10814,10 +10850,27 @@ module Aws::RDS
     #   instance.
     #
     # @option params [String] :domain
-    #   The Active Directory Domain to move the instance to. Specify `none` to
-    #   remove the instance from its current domain. The domain must be
-    #   created prior to this operation. Currently only a Microsoft SQL Server
-    #   instance can be created in a Active Directory Domain.
+    #   The Active Directory directory ID to move the DB instance to. Specify
+    #   `none` to remove the instance from its current domain. The domain must
+    #   be created prior to this operation. Currently, only Microsoft SQL
+    #   Server and Oracle DB instances can be created in an Active Directory
+    #   Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB instance
@@ -14245,7 +14298,26 @@ module Aws::RDS
     #   VPC.
     #
     # @option params [String] :domain
-    #   Specify the Active Directory Domain to restore the instance in.
+    #   Specify the Active Directory directory ID to restore the DB instance
+    #   in. The domain must be created prior to this operation. Currently,
+    #   only Microsoft SQL Server and Oracle DB instances can be created in an
+    #   Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the restored DB
@@ -15351,7 +15423,26 @@ module Aws::RDS
     #   VPC.
     #
     # @option params [String] :domain
-    #   Specify the Active Directory Domain to restore the instance in.
+    #   Specify the Active Directory directory ID to restore the DB instance
+    #   in. The domain must be created prior to this operation. Currently,
+    #   only Microsoft SQL Server and Oracle DB instances can be created in an
+    #   Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     #
     # @option params [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
@@ -16440,7 +16531,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -16506,12 +16597,14 @@ module Aws::RDS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params                   | :delay   | :max_attempts |
-    # | --------------------- | ------------------------ | -------- | ------------- |
-    # | db_instance_available | {#describe_db_instances} | 30       | 60            |
-    # | db_instance_deleted   | {#describe_db_instances} | 30       | 60            |
-    # | db_snapshot_available | {#describe_db_snapshots} | 30       | 60            |
-    # | db_snapshot_deleted   | {#describe_db_snapshots} | 30       | 60            |
+    # | waiter_name                   | params                           | :delay   | :max_attempts |
+    # | ----------------------------- | -------------------------------- | -------- | ------------- |
+    # | db_cluster_snapshot_available | {#describe_db_cluster_snapshots} | 30       | 60            |
+    # | db_cluster_snapshot_deleted   | {#describe_db_cluster_snapshots} | 30       | 60            |
+    # | db_instance_available         | {#describe_db_instances}         | 30       | 60            |
+    # | db_instance_deleted           | {#describe_db_instances}         | 30       | 60            |
+    # | db_snapshot_available         | {#describe_db_snapshots}         | 30       | 60            |
+    # | db_snapshot_deleted           | {#describe_db_snapshots}         | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -16562,6 +16655,8 @@ module Aws::RDS
 
     def waiters
       {
+        db_cluster_snapshot_available: Waiters::DBClusterSnapshotAvailable,
+        db_cluster_snapshot_deleted: Waiters::DBClusterSnapshotDeleted,
         db_instance_available: Waiters::DBInstanceAvailable,
         db_instance_deleted: Waiters::DBInstanceDeleted,
         db_snapshot_available: Waiters::DBSnapshotAvailable,

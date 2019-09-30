@@ -1291,17 +1291,27 @@ module Aws::RDS
     #   AWS account. Your AWS account has a different default encryption key
     #   for each AWS Region.
     # @option options [String] :domain
-    #   For an Amazon RDS DB instance that's running Microsoft SQL Server,
-    #   this parameter specifies the Active Directory directory ID to create
-    #   the instance in. Amazon RDS uses Windows Authentication to
+    #   The Active Directory directory ID to create the DB instance in.
+    #   Currently, only Microsoft SQL Server and Oracle DB instances can be
+    #   created in an Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   For Oracle DB instance, Amazon RDS can use Kerberos Authentication to
     #   authenticate users that connect to the DB instance. For more
-    #   information, see [Using Windows Authentication with an Amazon RDS DB
-    #   Instance Running Microsoft SQL Server][1] in the *Amazon RDS User
-    #   Guide*.
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_SQLServerWinAuth.html
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy tags from the DB instance to
     #   snapshots of the DB instance. By default, tags are not copied.
@@ -1489,6 +1499,8 @@ module Aws::RDS
     #     ],
     #     use_default_processor_features: false,
     #     deletion_protection: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1763,6 +1775,20 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    # @option options [String] :domain
+    #   The Active Directory directory ID to create the DB instance in.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    # @option options [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -2284,10 +2310,27 @@ module Aws::RDS
     #   Indicates the certificate that needs to be associated with the
     #   instance.
     # @option options [String] :domain
-    #   The Active Directory Domain to move the instance to. Specify `none` to
-    #   remove the instance from its current domain. The domain must be
-    #   created prior to this operation. Currently only a Microsoft SQL Server
-    #   instance can be created in a Active Directory Domain.
+    #   The Active Directory directory ID to move the DB instance to. Specify
+    #   `none` to remove the instance from its current domain. The domain must
+    #   be created prior to this operation. Currently, only Microsoft SQL
+    #   Server and Oracle DB instances can be created in an Active Directory
+    #   Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB instance
     #   to snapshots of the DB instance. By default, tags are not copied.
@@ -2762,7 +2805,26 @@ module Aws::RDS
     #   Default: The default EC2 VPC security group for the DB subnet group's
     #   VPC.
     # @option options [String] :domain
-    #   Specify the Active Directory Domain to restore the instance in.
+    #   Specify the Active Directory directory ID to restore the DB instance
+    #   in. The domain must be created prior to this operation. Currently,
+    #   only Microsoft SQL Server and Oracle DB instances can be created in an
+    #   Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   authenticate users that connect to the DB instance. For more
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.

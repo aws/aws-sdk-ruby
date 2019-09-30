@@ -1128,17 +1128,27 @@ module Aws::RDS
     #   AWS account. Your AWS account has a different default encryption key
     #   for each AWS Region.
     # @option options [String] :domain
-    #   For an Amazon RDS DB instance that's running Microsoft SQL Server,
-    #   this parameter specifies the Active Directory directory ID to create
-    #   the instance in. Amazon RDS uses Windows Authentication to
+    #   The Active Directory directory ID to create the DB instance in.
+    #   Currently, only Microsoft SQL Server and Oracle DB instances can be
+    #   created in an Active Directory Domain.
+    #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   For Oracle DB instance, Amazon RDS can use Kerberos Authentication to
     #   authenticate users that connect to the DB instance. For more
-    #   information, see [Using Windows Authentication with an Amazon RDS DB
-    #   Instance Running Microsoft SQL Server][1] in the *Amazon RDS User
-    #   Guide*.
+    #   information, see [ Using Kerberos Authentication with Amazon RDS for
+    #   Oracle][2] in the *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_SQLServerWinAuth.html
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy tags from the DB instance to
     #   snapshots of the DB instance. By default, tags are not copied.
@@ -1916,7 +1926,14 @@ module Aws::RDS
     #
     #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
     #     results list will only include information about the DB instances
-    #     identified by these resource identifiers.
+    #     identified by these DB instance resource identifiers.
+    #
+    #   * `domain` - Accepts Active Directory directory IDs. The results list
+    #     will only include information about the DB instances associated with
+    #     these domains.
+    #
+    #   * `engine` - Accepts engine names. The results list will only include
+    #     information about the DB instances for these engines.
     # @return [DBInstance::Collection]
     def db_instances(options = {})
       batches = Enumerator.new do |y|

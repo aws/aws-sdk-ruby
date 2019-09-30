@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2019-09-30)
+------------------
+
+* Feature - This release adds support for creating a Read Replica with Active Directory domain information. This release updates RDS API to indicate whether an OrderableDBInstanceOption supports Kerberos Authentication.
+
 1.66.0 (2019-09-20)
 ------------------
 
