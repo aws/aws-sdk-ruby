@@ -2,11 +2,15 @@ Unreleased Changes
 ------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 * Issue - Remove misleading IO documentation from `BlobShape` error output.
 =======
 * Feature - Remove deprecated methods `access_key_id`, `secret_access_key`, and
 `session_token` from credential providers.
 >>>>>>> 9615a656f... Fully deprecate methods in credential provider
+=======
+* Feature - Remove deprecated methods `access_key_id`, `secret_access_key`, and `session_token` from credential providers.
+>>>>>>> 59ec29701... Add version option to deprecation module
 
 3.68.0 (2019-09-16)
 ------------------
