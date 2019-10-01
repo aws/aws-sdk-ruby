@@ -202,7 +202,7 @@ module Aws
       #
       def sign_request(request)
 
-        creds = get_credentials
+        creds = fetch_credentials
 
         http_method = extract_http_method(request)
         url = extract_url(request)
@@ -280,7 +280,7 @@ module Aws
       #   signature value (a binary string) used at ':chunk-signature' needs to converted to
       #   hex-encoded string using #unpack
       def sign_event(prior_signature, payload, encoder)
-        creds = get_credentials
+        creds = fetch_credentials
         time = Time.now
         headers = {}
 
@@ -367,7 +367,7 @@ module Aws
       #
       def presign_url(options)
 
-        creds = get_credentials
+        creds = fetch_credentials
 
         http_method = extract_http_method(options)
         url = extract_url(options)
@@ -656,18 +656,14 @@ module Aws
         self.class.uri_escape_path(string)
       end
 
-      def get_credentials
+      def fetch_credentials
         credentials = @credentials_provider.credentials
-        if credentials_set?(credentials)
+        if credentials.access_key_id && credentials.secret_access_key
           credentials
         else
-          msg = 'unable to sign request without credentials set'
-          raise Errors::MissingCredentialsError.new(msg)
+          raise Errors::MissingCredentialsError,
+                'unable to sign request without credentials set'
         end
-      end
-
-      def credentials_set?(credentials)
-        credentials.access_key_id && credentials.secret_access_key
       end
 
       class << self
