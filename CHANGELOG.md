@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.365 (2019-10-01)
+------------------
+
 * Feature - Aws::DocDB - Updated the API, and documentation for Amazon DocumentDB with MongoDB compatibility.
 
 2.11.364 (2019-09-30)
