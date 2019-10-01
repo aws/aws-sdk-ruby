@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove misleading IO documentation from `BlobShape` error output.
+
 3.68.0 (2019-09-16)
 ------------------
 

@@ -141,8 +141,8 @@ module Aws
           errors << expected_got(context, "true or false", value)
         end
       when BlobShape
-        unless io_like?(value) or value.is_a?(String)
-          errors << expected_got(context, "a String or IO object", value)
+        unless value.is_a?(String) || io_like?(value)
+          errors << expected_got(context, "a String or File object", value)
         end
       else
         raise "unhandled shape type: #{ref.shape.class.name}"
@@ -166,9 +166,8 @@ module Aws
     end
 
     def io_like?(value)
-      value.respond_to?(:read) &&
-      value.respond_to?(:rewind) &&
-      value.respond_to?(:size)
+      value.respond_to?(:read) && value.respond_to?(:rewind) &&
+        value.respond_to?(:size)
     end
 
     def error_messages(errors)
