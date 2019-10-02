@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.68.1 (2019-10-02)
+------------------
+
 * Issue - Add final deprecation warnings to `access_key_id`, `secret_access_key`, and `session_token` in credential providers.
 
 * Issue - Remove misleading IO documentation from `BlobShape` error output.
