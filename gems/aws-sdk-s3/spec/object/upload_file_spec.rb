@@ -94,6 +94,12 @@ module Aws
             object.upload_file(ten_meg_file.path)
           end
 
+          it 'yields the response to the given block' do
+            object.upload_file(ten_meg_file) do |response|
+              expect(response).to be_kind_of(Seahorse::Client::Response)
+              expect(response.etag).to eq("ETag")
+            end
+          end
         end
 
         describe 'large objects' do
@@ -158,6 +164,11 @@ module Aws
             }.to raise_error(S3::MultipartUploadError, 'failed to abort multipart upload: network-error')
           end
 
+          it 'yields the response to the given block' do
+            object.upload_file(seventeen_meg_file) do |response|
+              expect(response.etag).to eq("ETag")
+            end
+          end
         end
       end
     end
