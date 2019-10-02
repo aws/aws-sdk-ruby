@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.366 (2019-10-02)
+------------------
+
 * Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
 
 2.11.365 (2019-10-01)
