@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.367 (2019-10-03)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
 
 * Feature - Aws::DeviceFarm - Updated the documentation for AWS Device Farm.
