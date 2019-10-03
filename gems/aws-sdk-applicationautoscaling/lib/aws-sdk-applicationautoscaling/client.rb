@@ -812,9 +812,14 @@ module Aws::ApplicationAutoScaling
     #         max_capacity: 10, 
     #         min_capacity: 1, 
     #         resource_id: "service/default/web-app", 
-    #         role_arn: "arn:aws:iam::012345678910:role/ApplicationAutoscalingECSRole", 
+    #         role_arn: "arn:aws:iam::012345678910:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService", 
     #         scalable_dimension: "ecs:service:DesiredCount", 
     #         service_namespace: "ecs", 
+    #         suspended_state: {
+    #           dynamic_scaling_in_suspended: false, 
+    #           dynamic_scaling_out_suspended: false, 
+    #           scheduled_scaling_suspended: false, 
+    #         }, 
     #       }, 
     #     ], 
     #   }
@@ -1443,7 +1448,7 @@ module Aws::ApplicationAutoScaling
     # is a chance that multiple policies could conflict, instructing the
     # scalable target to scale out or in at the same time. Application Auto
     # Scaling gives precedence to the policy that provides the largest
-    # capacity for both scale in and scale out. For example, if one policy
+    # capacity for both scale out and scale in. For example, if one policy
     # increases capacity by 3, another policy increases capacity by 200
     # percent, and the current capacity is 10, Application Auto Scaling uses
     # the policy with the highest calculated capacity (200% of 10 = 20) and
@@ -1560,14 +1565,14 @@ module Aws::ApplicationAutoScaling
     #
     #   `StepScaling`—Not supported for Amazon DynamoDB
     #
-    #   For more information, see [Step Scaling Policies for Application Auto
-    #   Scaling][1] and [Target Tracking Scaling Policies for Application Auto
-    #   Scaling][2] in the *Application Auto Scaling User Guide*.
+    #   For more information, see [Target Tracking Scaling Policies][1] and
+    #   [Step Scaling Policies][2] in the *Application Auto Scaling User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
-    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
     #
     # @option params [Types::StepScalingPolicyConfiguration] :step_scaling_policy_configuration
     #   A step scaling policy.
@@ -1588,9 +1593,127 @@ module Aws::ApplicationAutoScaling
     #   * {Types::PutScalingPolicyResponse#alarms #alarms} => Array&lt;Types::Alarm&gt;
     #
     #
-    # @example Example: To apply a scaling policy to an Amazon ECS service
+    # @example Example: To apply a target tracking scaling policy with a predefined metric specification
     #
-    #   # This example applies a scaling policy to an Amazon ECS service called web-app in the default cluster. The policy
+    #   # The following example applies a target tracking scaling policy with a predefined metric specification to an Amazon ECS
+    #   # service called web-app in the default cluster. The policy keeps the average CPU utilization of the service at 75
+    #   # percent, with scale-out and scale-in cooldown periods of 60 seconds.
+    #
+    #   resp = client.put_scaling_policy({
+    #     policy_name: "cpu75-target-tracking-scaling-policy", 
+    #     policy_type: "TargetTrackingScaling", 
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #     target_tracking_scaling_policy_configuration: {
+    #       predefined_metric_specification: {
+    #         predefined_metric_type: "ECSServiceAverageCPUUtilization", 
+    #       }, 
+    #       scale_in_cooldown: 60, 
+    #       scale_out_cooldown: 60, 
+    #       target_value: 75, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alarms: [
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
+    #         alarm_name: "TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
+    #       }, 
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmLow-1b437334-d19b-4a63-a812-6c67aaf2910d", 
+    #         alarm_name: "TargetTracking-service/default/web-app-AlarmLow-1b437334-d19b-4a63-a812-6c67aaf2910d", 
+    #       }, 
+    #     ], 
+    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/cpu75-target-tracking-scaling-policy", 
+    #   }
+    #
+    # @example Example: To apply a target tracking scaling policy with a customized metric specification
+    #
+    #   # The following example applies a target tracking scaling policy with a customized metric specification to an Amazon ECS
+    #   # service called web-app in the default cluster. The policy keeps the average utilization of the service at 75 percent,
+    #   # with scale-out and scale-in cooldown periods of 60 seconds. 
+    #
+    #   resp = client.put_scaling_policy({
+    #     policy_name: "cms75-target-tracking-scaling-policy", 
+    #     policy_type: "TargetTrackingScaling", 
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #     target_tracking_scaling_policy_configuration: {
+    #       customized_metric_specification: {
+    #         dimensions: [
+    #           {
+    #             name: "MyOptionalMetricDimensionName", 
+    #             value: "MyOptionalMetricDimensionValue", 
+    #           }, 
+    #         ], 
+    #         metric_name: "MyUtilizationMetric", 
+    #         namespace: "MyNamespace", 
+    #         statistic: "Average", 
+    #         unit: "Percent", 
+    #       }, 
+    #       scale_in_cooldown: 60, 
+    #       scale_out_cooldown: 60, 
+    #       target_value: 75, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alarms: [
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmHigh-9bc77b56-0571-4276-ba0f-d4178882e0a0", 
+    #         alarm_name: "TargetTracking-service/default/web-app-AlarmHigh-9bc77b56-0571-4276-ba0f-d4178882e0a0", 
+    #       }, 
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmLow-9b6ad934-6d37-438e-9e05-02836ddcbdc4", 
+    #         alarm_name: "TargetTracking-service/default/web-app-AlarmLow-9b6ad934-6d37-438e-9e05-02836ddcbdc4", 
+    #       }, 
+    #     ], 
+    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy: 8784a896-b2ba-47a1-b08c-27301cc499a1:resource/ecs/service/default/web-app:policyName/cms75-target-tracking-scaling-policy", 
+    #   }
+    #
+    # @example Example: To apply a target tracking scaling policy for scale out only
+    #
+    #   # The following example applies a target tracking scaling policy to an Amazon ECS service called web-app in the default
+    #   # cluster. The policy is used to scale out the ECS service when the RequestCountPerTarget metric from the Application Load
+    #   # Balancer exceeds the threshold.
+    #
+    #   resp = client.put_scaling_policy({
+    #     policy_name: "alb-scale-out-target-tracking-scaling-policy", 
+    #     policy_type: "TargetTrackingScaling", 
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #     target_tracking_scaling_policy_configuration: {
+    #       disable_scale_in: true, 
+    #       predefined_metric_specification: {
+    #         predefined_metric_type: "ALBRequestCountPerTarget", 
+    #         resource_label: "app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d", 
+    #       }, 
+    #       scale_in_cooldown: 60, 
+    #       scale_out_cooldown: 60, 
+    #       target_value: 1000, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alarms: [
+    #       {
+    #         alarm_arn: "TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
+    #         alarm_name: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
+    #       }, 
+    #     ], 
+    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/alb-scale-out-target-tracking-scaling-policy", 
+    #   }
+    #
+    # @example Example: To apply a step scaling policy to an Amazon ECS service
+    #
+    #   # This example applies a step scaling policy to an Amazon ECS service called web-app in the default cluster. The policy
     #   # increases the desired count of the service by 200%, with a cool down period of 60 seconds.
     #
     #   resp = client.put_scaling_policy({
@@ -1616,10 +1739,10 @@ module Aws::ApplicationAutoScaling
     #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75", 
     #   }
     #
-    # @example Example: To apply a scaling policy to an Amazon EC2 Spot fleet
+    # @example Example: To apply a step scaling policy to an Amazon EC2 Spot fleet
     #
-    #   # This example applies a scaling policy to an Amazon EC2 Spot fleet. The policy increases the target capacity of the spot
-    #   # fleet by 200%, with a cool down period of 180 seconds.",
+    #   # This example applies a step scaling policy to an Amazon EC2 Spot fleet. The policy increases the target capacity of the
+    #   # spot fleet by 200%, with a cool down period of 180 seconds.",
     #
     #   resp = client.put_scaling_policy({
     #     policy_name: "fleet-cpu-gt-75", 
@@ -2016,10 +2139,9 @@ module Aws::ApplicationAutoScaling
     #   information, see [Service-Linked Roles for Application Auto
     #   Scaling][1].
     #
-    #   For resources that are not supported using a service-linked role, this
-    #   parameter is required, and it must specify the ARN of an IAM role that
-    #   allows Application Auto Scaling to modify the scalable target on your
-    #   behalf.
+    #   For Amazon EMR, this parameter is required, and it must specify the
+    #   ARN of an IAM role that allows Application Auto Scaling to modify the
+    #   scalable target on your behalf.
     #
     #
     #
@@ -2064,7 +2186,6 @@ module Aws::ApplicationAutoScaling
     #     max_capacity: 10, 
     #     min_capacity: 1, 
     #     resource_id: "service/default/web-app", 
-    #     role_arn: "arn:aws:iam::012345678910:role/ApplicationAutoscalingECSRole", 
     #     scalable_dimension: "ecs:service:DesiredCount", 
     #     service_namespace: "ecs", 
     #   })
@@ -2078,7 +2199,6 @@ module Aws::ApplicationAutoScaling
     #     max_capacity: 10, 
     #     min_capacity: 1, 
     #     resource_id: "spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3", 
-    #     role_arn: "arn:aws:iam::012345678910:role/ApplicationAutoscalingSpotRole", 
     #     scalable_dimension: "ec2:spot-fleet-request:TargetCapacity", 
     #     service_namespace: "ec2", 
     #   })
@@ -2125,7 +2245,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

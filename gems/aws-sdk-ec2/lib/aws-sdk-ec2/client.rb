@@ -9581,6 +9581,47 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes the queued purchases for the specified Reserved Instances.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, Array<String>] :reserved_instances_ids
+    #   The IDs of the Reserved Instances.
+    #
+    # @return [Types::DeleteQueuedReservedInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteQueuedReservedInstancesResult#successful_queued_purchase_deletions #successful_queued_purchase_deletions} => Array&lt;Types::SuccessfulQueuedPurchaseDeletion&gt;
+    #   * {Types::DeleteQueuedReservedInstancesResult#failed_queued_purchase_deletions #failed_queued_purchase_deletions} => Array&lt;Types::FailedQueuedPurchaseDeletion&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_queued_reserved_instances({
+    #     dry_run: false,
+    #     reserved_instances_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_queued_purchase_deletions #=> Array
+    #   resp.successful_queued_purchase_deletions[0].reserved_instances_id #=> String
+    #   resp.failed_queued_purchase_deletions #=> Array
+    #   resp.failed_queued_purchase_deletions[0].error.code #=> String, one of "reserved-instances-id-invalid", "reserved-instances-not-in-queued-state", "unexpected-error"
+    #   resp.failed_queued_purchase_deletions[0].error.message #=> String
+    #   resp.failed_queued_purchase_deletions[0].reserved_instances_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteQueuedReservedInstances AWS API Documentation
+    #
+    # @overload delete_queued_reserved_instances(params = {})
+    # @param [Hash] params ({})
+    def delete_queued_reserved_instances(params = {}, options = {})
+      req = build_request(:delete_queued_reserved_instances, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified route from the specified route table.
     #
     # @option params [String] :destination_cidr_block
@@ -16852,7 +16893,7 @@ module Aws::EC2
     #   resp.reserved_instances[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #   resp.reserved_instances[0].reserved_instances_id #=> String
     #   resp.reserved_instances[0].start #=> Time
-    #   resp.reserved_instances[0].state #=> String, one of "payment-pending", "active", "payment-failed", "retired"
+    #   resp.reserved_instances[0].state #=> String, one of "payment-pending", "active", "payment-failed", "retired", "queued", "queued-deleted"
     #   resp.reserved_instances[0].usage_price #=> Float
     #   resp.reserved_instances[0].currency_code #=> String, one of "USD"
     #   resp.reserved_instances[0].instance_tenancy #=> String, one of "default", "dedicated", "host"
@@ -28318,6 +28359,10 @@ module Aws::EC2
     # purchased a Reserved Instance, you can check for your new Reserved
     # Instance with DescribeReservedInstances.
     #
+    # To queue a purchase for a future date and time, specify a purchase
+    # time. If you do not specify a purchase time, the default is the
+    # current time.
+    #
     # For more information, see [Reserved Instances][1] and [Reserved
     # Instance Marketplace][2] in the *Amazon Elastic Compute Cloud User
     # Guide*.
@@ -28344,6 +28389,9 @@ module Aws::EC2
     #   total order and ensure that the Reserved Instances are not purchased
     #   at unexpected prices.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :purchase_time
+    #   The time at which to purchase the Reserved Instance.
+    #
     # @return [Types::PurchaseReservedInstancesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseReservedInstancesOfferingResult#reserved_instances_id #reserved_instances_id} => String
@@ -28358,6 +28406,7 @@ module Aws::EC2
     #       amount: 1.0,
     #       currency_code: "USD", # accepts USD
     #     },
+    #     purchase_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -29929,6 +29978,10 @@ module Aws::EC2
     #   all instances launch, the request expires, or the request is canceled.
     #   If the request is persistent, the request becomes active at this date
     #   and time and remains active until it expires or is canceled.
+    #
+    #   The specified start date and time cannot be equal to the current date
+    #   and time. You must specify a start date and time that occurs after the
+    #   current date and time.
     #
     # @option params [Time,DateTime,Date,Integer,String] :valid_until
     #   The end date of the request. If this is a one-time request, the
@@ -32639,7 +32692,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

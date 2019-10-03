@@ -594,14 +594,26 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key
-    #   The public key of the `ssh` key pair you want to use for connecting
-    #   to remote devices in your remote debugging session. This is only
-    #   required if `remoteDebugEnabled` is set to `true`.
+    #   *Ignored.* The public key of the `ssh` key pair you want to use for
+    #   connecting to remote devices in your remote debugging session. This
+    #   is only required if `remoteDebugEnabled` is set to `true`.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [String]
     #
     # @!attribute [rw] remote_debug_enabled
     #   Set to `true` if you want to access devices remotely for debugging
     #   in your remote access session.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [Boolean]
     #
     # @!attribute [rw] remote_record_enabled
@@ -623,6 +635,12 @@ module Aws::DeviceFarm
     #   devices on the same client, you should pass the same `clientId`
     #   value in each call to `CreateRemoteAccessSession`. This is required
     #   only if `remoteDebugEnabled` is set to `true`.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -1214,6 +1232,12 @@ module Aws::DeviceFarm
     # @!attribute [rw] remote_debug_enabled
     #   This flag is set to `true` if remote debugging is enabled for the
     #   device.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [Boolean]
     #
     # @!attribute [rw] fleet_type
@@ -1341,10 +1365,13 @@ module Aws::DeviceFarm
     #
     #   REMOTE\_DEBUG\_ENABLED
     #
-    #   : Whether the device is enabled for remote debugging. Valid values
-    #     are "TRUE" or "FALSE".
+    #   : *Ignored.*Whether the device is enabled for remote debugging.
+    #     Valid values are "TRUE" or "FALSE".
     #
     #     *Supported operators*\: `EQUALS`
+    #
+    #     *This filter will be ignored, as remote debugging is [no longer
+    #     supported][1].*
     #
     #   INSTANCE\_ARN
     #
@@ -1363,6 +1390,10 @@ module Aws::DeviceFarm
     #   : The fleet type. Valid values are "PUBLIC" or "PRIVATE".
     #
     #     *Supported operators*\: `EQUALS`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -1599,7 +1630,9 @@ module Aws::DeviceFarm
     #       remote access. Valid values are "TRUE" or "FALSE".
     #
     #     * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
-    #       debugging. Valid values are "TRUE" or "FALSE".
+    #       debugging. Valid values are "TRUE" or "FALSE". *This filter
+    #       will be ignored, as remote debugging is [no longer
+    #       supported][1].*
     #
     #     * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
     #       instance.
@@ -1650,6 +1683,10 @@ module Aws::DeviceFarm
     #
     #     * The FLEET\_TYPE attribute can be set to "PUBLIC" or
     #       "PRIVATE".
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [Array<Types::DeviceFilter>]
     #
     # @!attribute [rw] max_devices
@@ -2926,7 +2963,9 @@ module Aws::DeviceFarm
     #       remote access. Valid values are "TRUE" or "FALSE".
     #
     #     * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
-    #       debugging. Valid values are "TRUE" or "FALSE".
+    #       debugging. Valid values are "TRUE" or "FALSE". *This
+    #       attribute will be ignored, as remote debugging is [no longer
+    #       supported][1].*
     #
     #     * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
     #       instance.
@@ -2961,6 +3000,10 @@ module Aws::DeviceFarm
     #     * In a request, the AVAILABILITY attribute takes "AVAILABLE",
     #       "HIGHLY\_AVAILABLE", "BUSY", or
     #       "TEMPORARY\_NOT\_AVAILABLE" as values.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [Array<Types::DeviceFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicesRequest AWS API Documentation
@@ -3323,8 +3366,8 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the remote access session about
-    #   which you are requesting information.
+    #   The Amazon Resource Name (ARN) of the project about which you are
+    #   requesting information.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4403,6 +4446,12 @@ module Aws::DeviceFarm
     # @!attribute [rw] remote_debug_enabled
     #   This flag is set to `true` if remote debugging is enabled for the
     #   remote access session.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [Boolean]
     #
     # @!attribute [rw] remote_record_enabled
@@ -4419,12 +4468,24 @@ module Aws::DeviceFarm
     #   IP address of the EC2 host where you need to connect to remotely
     #   debug devices. Only returned if remote debugging is enabled for the
     #   remote access session.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [String]
     #
     # @!attribute [rw] client_id
     #   Unique identifier of your client for the remote access session. Only
     #   returned if remote debugging is enabled for the remote access
     #   session.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [String]
     #
     # @!attribute [rw] billing_method
@@ -4449,6 +4510,12 @@ module Aws::DeviceFarm
     # @!attribute [rw] device_udid
     #   Unique device identifier for the remote device. Only returned if
     #   remote debugging is enabled for the remote access session.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [String]
     #
     # @!attribute [rw] interaction_mode
@@ -4669,6 +4736,13 @@ module Aws::DeviceFarm
     #     are "TRUE" or "FALSE".
     #
     #     *Supported operators*\: `EQUALS`
+    #
+    #     *This filter will be ignored, as remote debugging is [no longer
+    #     supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -5087,7 +5161,8 @@ module Aws::DeviceFarm
     #   @return [Types::Radios]
     #
     # @!attribute [rw] auxiliary_apps
-    #   A list of auxiliary apps for the run.
+    #   A list of Upload ARNs for app packages that will be installed
+    #   alongside your app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] billing_method

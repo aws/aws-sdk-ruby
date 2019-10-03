@@ -336,7 +336,7 @@ module Aws::ElasticsearchService
     # @option params [required, String] :domain_name
     #   The name of the Elasticsearch domain that you are creating. Domain
     #   names are unique across the domains owned by an account within an AWS
-    #   region. Domain names must start with a letter or number and can
+    #   region. Domain names must start with a lowercase letter and can
     #   contain the following characters: a-z (lowercase), 0-9, and -
     #   (hyphen).
     #
@@ -403,6 +403,10 @@ module Aws::ElasticsearchService
     #   Map of `LogType` and `LogPublishingOption`, each containing options to
     #   publish a given type of Elasticsearch log.
     #
+    # @option params [Types::DomainEndpointOptions] :domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #
     # @return [Types::CreateElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateElasticsearchDomainResponse#domain_status #domain_status} => Types::ElasticsearchDomainStatus
@@ -459,6 +463,10 @@ module Aws::ElasticsearchService
     #         enabled: false,
     #       },
     #     },
+    #     domain_endpoint_options: {
+    #       enforce_https: false,
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #     },
     #   })
     #
     # @example Response structure
@@ -513,6 +521,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status.service_software_options.description #=> String
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
+    #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -590,6 +600,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status.service_software_options.description #=> String
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
+    #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -687,6 +699,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status.service_software_options.description #=> String
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
+    #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -802,6 +816,13 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.update_version #=> Integer
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.status.creation_date #=> Time
+    #   resp.domain_config.domain_endpoint_options.status.update_date #=> Time
+    #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
+    #   resp.domain_config.domain_endpoint_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
     #
     # @overload describe_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -880,6 +901,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status_list[0].service_software_options.description #=> String
     #   resp.domain_status_list[0].service_software_options.automated_update_date #=> Time
+    #   resp.domain_status_list[0].domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -1445,6 +1468,10 @@ module Aws::ElasticsearchService
     #   Map of `LogType` and `LogPublishingOption`, each containing options to
     #   publish a given type of Elasticsearch log.
     #
+    # @option params [Types::DomainEndpointOptions] :domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #
     # @return [Types::UpdateElasticsearchDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateElasticsearchDomainConfigResponse#domain_config #domain_config} => Types::ElasticsearchDomainConfig
@@ -1492,6 +1519,10 @@ module Aws::ElasticsearchService
     #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
     #         enabled: false,
     #       },
+    #     },
+    #     domain_endpoint_options: {
+    #       enforce_https: false,
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
     #     },
     #   })
     #
@@ -1585,6 +1616,13 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.update_version #=> Integer
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.status.creation_date #=> Time
+    #   resp.domain_config.domain_endpoint_options.status.update_date #=> Time
+    #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
+    #   resp.domain_config.domain_endpoint_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
     #
     # @overload update_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -1650,7 +1688,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

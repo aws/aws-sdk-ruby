@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2019-10-03)
+------------------
+
+* Feature - This release allows customers to purchase regional EC2 RIs on a future date.
+
 1.110.0 (2019-09-20)
 ------------------
 

@@ -9166,6 +9166,69 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the error for a Reserved Instance whose queued purchase
+    # could not be deleted.
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteQueuedReservedInstancesError AWS API Documentation
+    #
+    class DeleteQueuedReservedInstancesError < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteQueuedReservedInstancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         reserved_instances_ids: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] reserved_instances_ids
+    #   The IDs of the Reserved Instances.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteQueuedReservedInstancesRequest AWS API Documentation
+    #
+    class DeleteQueuedReservedInstancesRequest < Struct.new(
+      :dry_run,
+      :reserved_instances_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_queued_purchase_deletions
+    #   Information about the queued purchases that were successfully
+    #   deleted.
+    #   @return [Array<Types::SuccessfulQueuedPurchaseDeletion>]
+    #
+    # @!attribute [rw] failed_queued_purchase_deletions
+    #   Information about the queued purchases that could not be deleted.
+    #   @return [Array<Types::FailedQueuedPurchaseDeletion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteQueuedReservedInstancesResult AWS API Documentation
+    #
+    class DeleteQueuedReservedInstancesResult < Struct.new(
+      :successful_queued_purchase_deletions,
+      :failed_queued_purchase_deletions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRouteRequest
     #   data as a hash:
     #
@@ -19654,6 +19717,12 @@ module Aws::EC2
     #
     # @!attribute [rw] delete_on_termination
     #   Indicates whether the EBS volume is deleted on instance termination.
+    #   For more information, see [Preserving Amazon EBS Volumes on Instance
+    #   Termination][1] in the Amazon Elastic Compute Cloud User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
@@ -20776,6 +20845,24 @@ module Aws::EC2
     #
     class ExportTransitGatewayRoutesResult < Struct.new(
       :s3_location)
+      include Aws::Structure
+    end
+
+    # Describes a Reserved Instance whose queued purchase was not deleted.
+    #
+    # @!attribute [rw] error
+    #   The error.
+    #   @return [Types::DeleteQueuedReservedInstancesError]
+    #
+    # @!attribute [rw] reserved_instances_id
+    #   The ID of the Reserved Instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FailedQueuedPurchaseDeletion AWS API Documentation
+    #
+    class FailedQueuedPurchaseDeletion < Struct.new(
+      :error,
+      :reserved_instances_id)
       include Aws::Structure
     end
 
@@ -31487,6 +31574,7 @@ module Aws::EC2
     #           amount: 1.0,
     #           currency_code: "USD", # accepts USD
     #         },
+    #         purchase_time: Time.now,
     #       }
     #
     # @!attribute [rw] instance_count
@@ -31510,13 +31598,18 @@ module Aws::EC2
     #   at unexpected prices.
     #   @return [Types::ReservedInstanceLimitPrice]
     #
+    # @!attribute [rw] purchase_time
+    #   The time at which to purchase the Reserved Instance.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseReservedInstancesOfferingRequest AWS API Documentation
     #
     class PurchaseReservedInstancesOfferingRequest < Struct.new(
       :instance_count,
       :reserved_instances_offering_id,
       :dry_run,
-      :limit_price)
+      :limit_price,
+      :purchase_time)
       include Aws::Structure
     end
 
@@ -33176,6 +33269,10 @@ module Aws::EC2
     #   canceled. If the request is persistent, the request becomes active
     #   at this date and time and remains active until it expires or is
     #   canceled.
+    #
+    #   The specified start date and time cannot be equal to the current
+    #   date and time. You must specify a start date and time that occurs
+    #   after the current date and time.
     #   @return [Time]
     #
     # @!attribute [rw] valid_until
@@ -38622,6 +38719,20 @@ module Aws::EC2
     #
     class SuccessfulInstanceCreditSpecificationItem < Struct.new(
       :instance_id)
+      include Aws::Structure
+    end
+
+    # Describes a Reserved Instance whose queued purchase was successfully
+    # deleted.
+    #
+    # @!attribute [rw] reserved_instances_id
+    #   The ID of the Reserved Instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SuccessfulQueuedPurchaseDeletion AWS API Documentation
+    #
+    class SuccessfulQueuedPurchaseDeletion < Struct.new(
+      :reserved_instances_id)
       include Aws::Structure
     end
 

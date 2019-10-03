@@ -1391,15 +1391,14 @@ module Aws::ApplicationAutoScaling
     #
     #   `StepScaling`—Not supported for Amazon DynamoDB
     #
-    #   For more information, see [Step Scaling Policies for Application
-    #   Auto Scaling][1] and [Target Tracking Scaling Policies for
-    #   Application Auto Scaling][2] in the *Application Auto Scaling User
+    #   For more information, see [Target Tracking Scaling Policies][1] and
+    #   [Step Scaling Policies][2] in the *Application Auto Scaling User
     #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
-    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
     #   @return [String]
     #
     # @!attribute [rw] step_scaling_policy_configuration
@@ -1749,10 +1748,9 @@ module Aws::ApplicationAutoScaling
     #   more information, see [Service-Linked Roles for Application Auto
     #   Scaling][1].
     #
-    #   For resources that are not supported using a service-linked role,
-    #   this parameter is required, and it must specify the ARN of an IAM
-    #   role that allows Application Auto Scaling to modify the scalable
-    #   target on your behalf.
+    #   For Amazon EMR, this parameter is required, and it must specify the
+    #   ARN of an IAM role that allows Application Auto Scaling to modify
+    #   the scalable target on your behalf.
     #
     #
     #

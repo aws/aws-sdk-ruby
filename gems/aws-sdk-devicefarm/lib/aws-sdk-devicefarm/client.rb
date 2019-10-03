@@ -568,13 +568,25 @@ module Aws::DeviceFarm
     #   want to create a remote access session.
     #
     # @option params [String] :ssh_public_key
-    #   The public key of the `ssh` key pair you want to use for connecting to
-    #   remote devices in your remote debugging session. This is only required
-    #   if `remoteDebugEnabled` is set to `true`.
+    #   *Ignored.* The public key of the `ssh` key pair you want to use for
+    #   connecting to remote devices in your remote debugging session. This is
+    #   only required if `remoteDebugEnabled` is set to `true`.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #
     # @option params [Boolean] :remote_debug_enabled
     #   Set to `true` if you want to access devices remotely for debugging in
     #   your remote access session.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #
     # @option params [Boolean] :remote_record_enabled
     #   Set to `true` to enable remote recording for the remote access
@@ -592,6 +604,12 @@ module Aws::DeviceFarm
     #   devices on the same client, you should pass the same `clientId` value
     #   in each call to `CreateRemoteAccessSession`. This is required only if
     #   `remoteDebugEnabled` is set to `true`.
+    #
+    #   *Remote debugging is [no longer supported][1].*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #
     # @option params [Types::CreateRemoteAccessSessionConfiguration] :configuration
     #   The configuration information for the remote access session request.
@@ -2738,7 +2756,8 @@ module Aws::DeviceFarm
     #       access. Valid values are "TRUE" or "FALSE".
     #
     #     * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
-    #       debugging. Valid values are "TRUE" or "FALSE".
+    #       debugging. Valid values are "TRUE" or "FALSE". *This attribute
+    #       will be ignored, as remote debugging is [no longer supported][1].*
     #
     #     * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
     #       instance.
@@ -2773,6 +2792,10 @@ module Aws::DeviceFarm
     #     * In a request, the AVAILABILITY attribute takes "AVAILABLE",
     #       "HIGHLY\_AVAILABLE", "BUSY", or "TEMPORARY\_NOT\_AVAILABLE"
     #       as values.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #
     # @return [Types::ListDevicesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3435,8 +3458,8 @@ module Aws::DeviceFarm
     # Returns a list of all currently running remote access sessions.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the remote access session about
-    #   which you are requesting information.
+    #   The Amazon Resource Name (ARN) of the project about which you are
+    #   requesting information.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -3761,10 +3784,10 @@ module Aws::DeviceFarm
     #
     # @example Example: To get information about suites
     #
-    #   # The following example returns information about suites, given a specific Device Farm project.
+    #   # The following example returns information about suites, given a specific Device Farm job.
     #
     #   resp = client.list_suites({
-    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the project by using the list-projects CLI command.
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:job:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the job by using the list-jobs CLI command.
     #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE", # A dynamically generated value, used for paginating results.
     #   })
     #
@@ -5439,7 +5462,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
