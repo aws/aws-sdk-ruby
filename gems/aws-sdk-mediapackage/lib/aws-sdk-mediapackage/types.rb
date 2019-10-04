@@ -295,6 +295,93 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateHarvestJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         end_time: "__string", # required
+    #         id: "__string", # required
+    #         origin_endpoint_id: "__string", # required
+    #         s3_destination: { # required
+    #           bucket_name: "__string", # required
+    #           manifest_key: "__string", # required
+    #           role_arn: "__string", # required
+    #         },
+    #         start_time: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] end_time
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_id
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Configuration parameters for where in an S3 bucket to place the
+    #   harvested content
+    #   @return [Types::S3Destination]
+    #
+    # @!attribute [rw] start_time
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateHarvestJobRequest AWS API Documentation
+    #
+    class CreateHarvestJobRequest < Struct.new(
+      :end_time,
+      :id,
+      :origin_endpoint_id,
+      :s3_destination,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_id
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Configuration parameters for where in an S3 bucket to place the
+    #   harvested content
+    #   @return [Types::S3Destination]
+    #
+    # @!attribute [rw] start_time
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateHarvestJobResponse AWS API Documentation
+    #
+    class CreateHarvestJobResponse < Struct.new(
+      :arn,
+      :channel_id,
+      :created_at,
+      :end_time,
+      :id,
+      :origin_endpoint_id,
+      :s3_destination,
+      :start_time,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOriginEndpointRequest
     #   data as a hash:
     #
@@ -410,6 +497,7 @@ module Aws::MediaPackage
     #             stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #           },
     #         },
+    #         origination: "ALLOW", # accepts ALLOW, DENY
     #         startover_window_seconds: 1,
     #         tags: {
     #           "__string" => "__string",
@@ -447,6 +535,9 @@ module Aws::MediaPackage
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #   @return [Types::MssPackage]
     #
+    # @!attribute [rw] origination
+    #   @return [String]
+    #
     # @!attribute [rw] startover_window_seconds
     #   @return [Integer]
     #
@@ -471,6 +562,7 @@ module Aws::MediaPackage
       :id,
       :manifest_name,
       :mss_package,
+      :origination,
       :startover_window_seconds,
       :tags,
       :time_delay_seconds,
@@ -510,6 +602,9 @@ module Aws::MediaPackage
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #   @return [Types::MssPackage]
     #
+    # @!attribute [rw] origination
+    #   @return [String]
+    #
     # @!attribute [rw] startover_window_seconds
     #   @return [Integer]
     #
@@ -538,6 +633,7 @@ module Aws::MediaPackage
       :id,
       :manifest_name,
       :mss_package,
+      :origination,
       :startover_window_seconds,
       :tags,
       :time_delay_seconds,
@@ -806,6 +902,67 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeHarvestJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeHarvestJobRequest AWS API Documentation
+    #
+    class DescribeHarvestJobRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_id
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Configuration parameters for where in an S3 bucket to place the
+    #   harvested content
+    #   @return [Types::S3Destination]
+    #
+    # @!attribute [rw] start_time
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeHarvestJobResponse AWS API Documentation
+    #
+    class DescribeHarvestJobResponse < Struct.new(
+      :arn,
+      :channel_id,
+      :created_at,
+      :end_time,
+      :id,
+      :origin_endpoint_id,
+      :s3_destination,
+      :start_time,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeOriginEndpointRequest
     #   data as a hash:
     #
@@ -855,6 +1012,9 @@ module Aws::MediaPackage
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #   @return [Types::MssPackage]
     #
+    # @!attribute [rw] origination
+    #   @return [String]
+    #
     # @!attribute [rw] startover_window_seconds
     #   @return [Integer]
     #
@@ -883,6 +1043,7 @@ module Aws::MediaPackage
       :id,
       :manifest_name,
       :mss_package,
+      :origination,
       :startover_window_seconds,
       :tags,
       :time_delay_seconds,
@@ -898,6 +1059,120 @@ module Aws::MediaPackage
     #
     class ForbiddenException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # A HarvestJob resource configuration
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) assigned to the HarvestJob.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_id
+    #   The ID of the Channel that the HarvestJob will harvest from.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time the HarvestJob was submitted
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time-window which will be harvested.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the HarvestJob. The ID must be unique within the region
+    #   and it cannot be changed after the HarvestJob is submitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_id
+    #   The ID of the OriginEndpoint that the HarvestJob will harvest from.
+    #   This cannot be changed after the HarvestJob is submitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Configuration parameters for where in an S3 bucket to place the
+    #   harvested content
+    #   @return [Types::S3Destination]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time-window which will be harvested.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the HarvestJob. Consider setting up a
+    #   CloudWatch Event to listen for HarvestJobs as they succeed or fail.
+    #   In the event of failure, the CloudWatch Event will include an
+    #   explanation of why the HarvestJob failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HarvestJob AWS API Documentation
+    #
+    class HarvestJob < Struct.new(
+      :arn,
+      :channel_id,
+      :created_at,
+      :end_time,
+      :id,
+      :origin_endpoint_id,
+      :s3_destination,
+      :start_time,
+      :status)
+      include Aws::Structure
+    end
+
+    # Configuration parameters for a new HarvestJob
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time-window which will be harvested
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the HarvestJob. The ID must be unique within the region
+    #   and it cannot be changed after the HarvestJob is submitted
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_id
+    #   The ID of the OriginEndpoint that the HarvestJob will harvest from.
+    #   This cannot be changed after the HarvestJob is submitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Configuration parameters for where in an S3 bucket to place the
+    #   harvested content
+    #   @return [Types::S3Destination]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time-window which will be harvested
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HarvestJobCreateParameters AWS API Documentation
+    #
+    class HarvestJobCreateParameters < Struct.new(
+      :end_time,
+      :id,
+      :origin_endpoint_id,
+      :s3_destination,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # A collection of HarvestJob records.
+    #
+    # @!attribute [rw] harvest_jobs
+    #   A list of HarvestJob records.
+    #   @return [Array<Types::HarvestJob>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to resume pagination from the end of the
+    #   collection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HarvestJobList AWS API Documentation
+    #
+    class HarvestJobList < Struct.new(
+      :harvest_jobs,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1334,6 +1609,52 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListHarvestJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         include_channel_id: "__string",
+    #         include_status: "__string",
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] include_channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] include_status
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListHarvestJobsRequest AWS API Documentation
+    #
+    class ListHarvestJobsRequest < Struct.new(
+      :include_channel_id,
+      :include_status,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] harvest_jobs
+    #   @return [Array<Types::HarvestJob>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListHarvestJobsResponse AWS API Documentation
+    #
+    class ListHarvestJobsResponse < Struct.new(
+      :harvest_jobs,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListOriginEndpointsRequest
     #   data as a hash:
     #
@@ -1529,6 +1850,14 @@ module Aws::MediaPackage
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #   @return [Types::MssPackage]
     #
+    # @!attribute [rw] origination
+    #   Control whether origination of video is allowed for this
+    #   OriginEndpoint. If set to ALLOW, the OriginEndpoint may by
+    #   requested, pursuant to any other form of access control. If set to
+    #   DENY, the OriginEndpoint may not be requested. This can be helpful
+    #   for Live to VOD harvesting, or for temporarily disabling origination
+    #   @return [String]
+    #
     # @!attribute [rw] startover_window_seconds
     #   Maximum duration (seconds) of content to retain for startover
     #   playback. If not specified, startover playback will be disabled for
@@ -1566,6 +1895,7 @@ module Aws::MediaPackage
       :id,
       :manifest_name,
       :mss_package,
+      :origination,
       :startover_window_seconds,
       :tags,
       :time_delay_seconds,
@@ -1612,6 +1942,14 @@ module Aws::MediaPackage
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #   @return [Types::MssPackage]
     #
+    # @!attribute [rw] origination
+    #   Control whether origination of video is allowed for this
+    #   OriginEndpoint. If set to ALLOW, the OriginEndpoint may by
+    #   requested, pursuant to any other form of access control. If set to
+    #   DENY, the OriginEndpoint may not be requested. This can be helpful
+    #   for Live to VOD harvesting, or for temporarily disabling origination
+    #   @return [String]
+    #
     # @!attribute [rw] startover_window_seconds
     #   Maximum duration (seconds) of content to retain for startover
     #   playback. If not specified, startover playback will be disabled for
@@ -1644,6 +1982,7 @@ module Aws::MediaPackage
       :id,
       :manifest_name,
       :mss_package,
+      :origination,
       :startover_window_seconds,
       :tags,
       :time_delay_seconds,
@@ -1697,6 +2036,14 @@ module Aws::MediaPackage
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #   @return [Types::MssPackage]
     #
+    # @!attribute [rw] origination
+    #   Control whether origination of video is allowed for this
+    #   OriginEndpoint. If set to ALLOW, the OriginEndpoint may by
+    #   requested, pursuant to any other form of access control. If set to
+    #   DENY, the OriginEndpoint may not be requested. This can be helpful
+    #   for Live to VOD harvesting, or for temporarily disabling origination
+    #   @return [String]
+    #
     # @!attribute [rw] startover_window_seconds
     #   Maximum duration (in seconds) of content to retain for startover
     #   playback. If not specified, startover playback will be disabled for
@@ -1723,6 +2070,7 @@ module Aws::MediaPackage
       :hls_package,
       :manifest_name,
       :mss_package,
+      :origination,
       :startover_window_seconds,
       :time_delay_seconds,
       :whitelist)
@@ -1821,6 +2169,41 @@ module Aws::MediaPackage
       :hls_ingest,
       :id,
       :tags)
+      include Aws::Structure
+    end
+
+    # Configuration parameters for where in an S3 bucket to place the
+    # harvested content
+    #
+    # @note When making an API call, you may pass S3Destination
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "__string", # required
+    #         manifest_key: "__string", # required
+    #         role_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of an S3 bucket within which harvested content will be
+    #   exported
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_key
+    #   The key in the specified S3 bucket where the harvested top-level
+    #   manifest will be placed.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role used to write to the specified S3 bucket
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/S3Destination AWS API Documentation
+    #
+    class S3Destination < Struct.new(
+      :bucket_name,
+      :manifest_key,
+      :role_arn)
       include Aws::Structure
     end
 
@@ -2154,6 +2537,7 @@ module Aws::MediaPackage
     #             stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #           },
     #         },
+    #         origination: "ALLOW", # accepts ALLOW, DENY
     #         startover_window_seconds: 1,
     #         time_delay_seconds: 1,
     #         whitelist: ["__string"],
@@ -2185,6 +2569,9 @@ module Aws::MediaPackage
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #   @return [Types::MssPackage]
     #
+    # @!attribute [rw] origination
+    #   @return [String]
+    #
     # @!attribute [rw] startover_window_seconds
     #   @return [Integer]
     #
@@ -2204,6 +2591,7 @@ module Aws::MediaPackage
       :id,
       :manifest_name,
       :mss_package,
+      :origination,
       :startover_window_seconds,
       :time_delay_seconds,
       :whitelist)
@@ -2242,6 +2630,9 @@ module Aws::MediaPackage
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #   @return [Types::MssPackage]
     #
+    # @!attribute [rw] origination
+    #   @return [String]
+    #
     # @!attribute [rw] startover_window_seconds
     #   @return [Integer]
     #
@@ -2270,6 +2661,7 @@ module Aws::MediaPackage
       :id,
       :manifest_name,
       :mss_package,
+      :origination,
       :startover_window_seconds,
       :tags,
       :time_delay_seconds,

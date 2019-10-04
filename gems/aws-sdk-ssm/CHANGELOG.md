@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2019-10-04)
+------------------
+
+* Feature - Documentation updates for Systems Manager / StartSession.
+
 1.56.0 (2019-09-26)
 ------------------
 

@@ -303,6 +303,69 @@ module Aws::MediaPackage
       req.send_request(options)
     end
 
+    # Creates a new HarvestJob record.
+    #
+    # @option params [required, String] :end_time
+    #
+    # @option params [required, String] :id
+    #
+    # @option params [required, String] :origin_endpoint_id
+    #
+    # @option params [required, Types::S3Destination] :s3_destination
+    #   Configuration parameters for where in an S3 bucket to place the
+    #   harvested content
+    #
+    # @option params [required, String] :start_time
+    #
+    # @return [Types::CreateHarvestJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHarvestJobResponse#arn #arn} => String
+    #   * {Types::CreateHarvestJobResponse#channel_id #channel_id} => String
+    #   * {Types::CreateHarvestJobResponse#created_at #created_at} => String
+    #   * {Types::CreateHarvestJobResponse#end_time #end_time} => String
+    #   * {Types::CreateHarvestJobResponse#id #id} => String
+    #   * {Types::CreateHarvestJobResponse#origin_endpoint_id #origin_endpoint_id} => String
+    #   * {Types::CreateHarvestJobResponse#s3_destination #s3_destination} => Types::S3Destination
+    #   * {Types::CreateHarvestJobResponse#start_time #start_time} => String
+    #   * {Types::CreateHarvestJobResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_harvest_job({
+    #     end_time: "__string", # required
+    #     id: "__string", # required
+    #     origin_endpoint_id: "__string", # required
+    #     s3_destination: { # required
+    #       bucket_name: "__string", # required
+    #       manifest_key: "__string", # required
+    #       role_arn: "__string", # required
+    #     },
+    #     start_time: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.channel_id #=> String
+    #   resp.created_at #=> String
+    #   resp.end_time #=> String
+    #   resp.id #=> String
+    #   resp.origin_endpoint_id #=> String
+    #   resp.s3_destination.bucket_name #=> String
+    #   resp.s3_destination.manifest_key #=> String
+    #   resp.s3_destination.role_arn #=> String
+    #   resp.start_time #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateHarvestJob AWS API Documentation
+    #
+    # @overload create_harvest_job(params = {})
+    # @param [Hash] params ({})
+    def create_harvest_job(params = {}, options = {})
+      req = build_request(:create_harvest_job, params)
+      req.send_request(options)
+    end
+
     # Creates a new OriginEndpoint record.
     #
     # @option params [required, String] :channel_id
@@ -325,6 +388,8 @@ module Aws::MediaPackage
     # @option params [Types::MssPackage] :mss_package
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #
+    # @option params [String] :origination
+    #
     # @option params [Integer] :startover_window_seconds
     #
     # @option params [Hash<String,String>] :tags
@@ -345,6 +410,7 @@ module Aws::MediaPackage
     #   * {Types::CreateOriginEndpointResponse#id #id} => String
     #   * {Types::CreateOriginEndpointResponse#manifest_name #manifest_name} => String
     #   * {Types::CreateOriginEndpointResponse#mss_package #mss_package} => Types::MssPackage
+    #   * {Types::CreateOriginEndpointResponse#origination #origination} => String
     #   * {Types::CreateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::CreateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateOriginEndpointResponse#time_delay_seconds #time_delay_seconds} => Integer
@@ -465,6 +531,7 @@ module Aws::MediaPackage
     #         stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #       },
     #     },
+    #     origination: "ALLOW", # accepts ALLOW, DENY
     #     startover_window_seconds: 1,
     #     tags: {
     #       "__string" => "__string",
@@ -558,6 +625,7 @@ module Aws::MediaPackage
     #   resp.mss_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.mss_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.mss_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.origination #=> String, one of "ALLOW", "DENY"
     #   resp.startover_window_seconds #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -657,6 +725,51 @@ module Aws::MediaPackage
       req.send_request(options)
     end
 
+    # Gets details about an existing HarvestJob.
+    #
+    # @option params [required, String] :id
+    #
+    # @return [Types::DescribeHarvestJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHarvestJobResponse#arn #arn} => String
+    #   * {Types::DescribeHarvestJobResponse#channel_id #channel_id} => String
+    #   * {Types::DescribeHarvestJobResponse#created_at #created_at} => String
+    #   * {Types::DescribeHarvestJobResponse#end_time #end_time} => String
+    #   * {Types::DescribeHarvestJobResponse#id #id} => String
+    #   * {Types::DescribeHarvestJobResponse#origin_endpoint_id #origin_endpoint_id} => String
+    #   * {Types::DescribeHarvestJobResponse#s3_destination #s3_destination} => Types::S3Destination
+    #   * {Types::DescribeHarvestJobResponse#start_time #start_time} => String
+    #   * {Types::DescribeHarvestJobResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_harvest_job({
+    #     id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.channel_id #=> String
+    #   resp.created_at #=> String
+    #   resp.end_time #=> String
+    #   resp.id #=> String
+    #   resp.origin_endpoint_id #=> String
+    #   resp.s3_destination.bucket_name #=> String
+    #   resp.s3_destination.manifest_key #=> String
+    #   resp.s3_destination.role_arn #=> String
+    #   resp.start_time #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeHarvestJob AWS API Documentation
+    #
+    # @overload describe_harvest_job(params = {})
+    # @param [Hash] params ({})
+    def describe_harvest_job(params = {}, options = {})
+      req = build_request(:describe_harvest_job, params)
+      req.send_request(options)
+    end
+
     # Gets details about an existing OriginEndpoint.
     #
     # @option params [required, String] :id
@@ -672,6 +785,7 @@ module Aws::MediaPackage
     #   * {Types::DescribeOriginEndpointResponse#id #id} => String
     #   * {Types::DescribeOriginEndpointResponse#manifest_name #manifest_name} => String
     #   * {Types::DescribeOriginEndpointResponse#mss_package #mss_package} => Types::MssPackage
+    #   * {Types::DescribeOriginEndpointResponse#origination #origination} => String
     #   * {Types::DescribeOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::DescribeOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeOriginEndpointResponse#time_delay_seconds #time_delay_seconds} => Integer
@@ -769,6 +883,7 @@ module Aws::MediaPackage
     #   resp.mss_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.mss_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.mss_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.origination #=> String, one of "ALLOW", "DENY"
     #   resp.startover_window_seconds #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -825,6 +940,55 @@ module Aws::MediaPackage
     # @param [Hash] params ({})
     def list_channels(params = {}, options = {})
       req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
+    # Returns a collection of HarvestJob records.
+    #
+    # @option params [String] :include_channel_id
+    #
+    # @option params [String] :include_status
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListHarvestJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHarvestJobsResponse#harvest_jobs #harvest_jobs} => Array&lt;Types::HarvestJob&gt;
+    #   * {Types::ListHarvestJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_harvest_jobs({
+    #     include_channel_id: "__string",
+    #     include_status: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.harvest_jobs #=> Array
+    #   resp.harvest_jobs[0].arn #=> String
+    #   resp.harvest_jobs[0].channel_id #=> String
+    #   resp.harvest_jobs[0].created_at #=> String
+    #   resp.harvest_jobs[0].end_time #=> String
+    #   resp.harvest_jobs[0].id #=> String
+    #   resp.harvest_jobs[0].origin_endpoint_id #=> String
+    #   resp.harvest_jobs[0].s3_destination.bucket_name #=> String
+    #   resp.harvest_jobs[0].s3_destination.manifest_key #=> String
+    #   resp.harvest_jobs[0].s3_destination.role_arn #=> String
+    #   resp.harvest_jobs[0].start_time #=> String
+    #   resp.harvest_jobs[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListHarvestJobs AWS API Documentation
+    #
+    # @overload list_harvest_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_harvest_jobs(params = {}, options = {})
+      req = build_request(:list_harvest_jobs, params)
       req.send_request(options)
     end
 
@@ -936,6 +1100,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].mss_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].mss_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].mss_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.origin_endpoints[0].origination #=> String, one of "ALLOW", "DENY"
     #   resp.origin_endpoints[0].startover_window_seconds #=> Integer
     #   resp.origin_endpoints[0].tags #=> Hash
     #   resp.origin_endpoints[0].tags["__string"] #=> String
@@ -1174,6 +1339,8 @@ module Aws::MediaPackage
     # @option params [Types::MssPackage] :mss_package
     #   A Microsoft Smooth Streaming (MSS) packaging configuration.
     #
+    # @option params [String] :origination
+    #
     # @option params [Integer] :startover_window_seconds
     #
     # @option params [Integer] :time_delay_seconds
@@ -1191,6 +1358,7 @@ module Aws::MediaPackage
     #   * {Types::UpdateOriginEndpointResponse#id #id} => String
     #   * {Types::UpdateOriginEndpointResponse#manifest_name #manifest_name} => String
     #   * {Types::UpdateOriginEndpointResponse#mss_package #mss_package} => Types::MssPackage
+    #   * {Types::UpdateOriginEndpointResponse#origination #origination} => String
     #   * {Types::UpdateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::UpdateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::UpdateOriginEndpointResponse#time_delay_seconds #time_delay_seconds} => Integer
@@ -1310,6 +1478,7 @@ module Aws::MediaPackage
     #         stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #       },
     #     },
+    #     origination: "ALLOW", # accepts ALLOW, DENY
     #     startover_window_seconds: 1,
     #     time_delay_seconds: 1,
     #     whitelist: ["__string"],
@@ -1400,6 +1569,7 @@ module Aws::MediaPackage
     #   resp.mss_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.mss_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.mss_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.origination #=> String, one of "ALLOW", "DENY"
     #   resp.startover_window_seconds #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -1430,7 +1600,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
