@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Remove deprecated `access_key_id`, `secret_access_key`, and `session_token` methods in credential providers.
+
 3.68.1 (2019-10-02)
 ------------------
 
