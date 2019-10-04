@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.368 (2019-10-04)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
