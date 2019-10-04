@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
+
+* Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.367 (2019-10-03)
 ------------------
 
