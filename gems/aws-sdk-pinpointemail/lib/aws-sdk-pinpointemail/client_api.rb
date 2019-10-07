@@ -209,6 +209,9 @@ module Aws::PinpointEmail
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Template = Shapes::StructureShape.new(name: 'Template')
+    TemplateArn = Shapes::StringShape.new(name: 'TemplateArn')
+    TemplateData = Shapes::StringShape.new(name: 'TemplateData')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TlsPolicy = Shapes::StringShape.new(name: 'TlsPolicy')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -395,6 +398,7 @@ module Aws::PinpointEmail
 
     EmailContent.add_member(:simple, Shapes::ShapeRef.new(shape: Message, location_name: "Simple"))
     EmailContent.add_member(:raw, Shapes::ShapeRef.new(shape: RawMessage, location_name: "Raw"))
+    EmailContent.add_member(:template, Shapes::ShapeRef.new(shape: Template, location_name: "Template"))
     EmailContent.struct_class = Types::EmailContent
 
     Esps.member = Shapes::ShapeRef.new(shape: Esp)
@@ -733,6 +737,10 @@ module Aws::PinpointEmail
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    Template.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    Template.add_member(:template_data, Shapes::ShapeRef.new(shape: TemplateData, location_name: "TemplateData"))
+    Template.struct_class = Types::Template
 
     TrackingOptions.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, required: true, location_name: "CustomRedirectDomain"))
     TrackingOptions.struct_class = Types::TrackingOptions

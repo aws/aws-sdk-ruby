@@ -511,19 +511,63 @@ module Aws::Pinpoint
     # @!attribute [rw] raw_content
     #   The raw, JSON-formatted string to use as the payload for the
     #   notification message. This value overrides the message.
+    #
+    #   <note markdown="1">If you specify the raw content of an APNs push notification, the
+    #   message payload has to include the content-available key. The value
+    #   of the content-available key has to be an integer, and can only be 0
+    #   or 1. If you're sending a standard notification, set the value of
+    #   content-available to 0. If you're sending a silent (background)
+    #   notification, set the value of content-available to 1. Additionally,
+    #   silent notification payloads can't include the alert, badge, or
+    #   sound keys. For more information, see [Generating a Remote
+    #   Notification][1] and [Pushing Background Updates to Your App][2] on
+    #   the Apple Developer website.
+    #
+    #   </note>
+    #
+    #
+    #
+    #   [1]: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification
+    #   [2]: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app
     #   @return [String]
     #
     # @!attribute [rw] silent_push
-    #   Specifies whether the notification is a silent push notification,
-    #   which is a push notification that doesn't display on a recipient's
-    #   device. Silent push notifications can be used for cases such as
-    #   updating an app's configuration, displaying messages in an in-app
-    #   message center, or supporting phone home functionality.
+    #   Specifies whether the notification is a silent push notification. A
+    #   silent (or background) push notification isn't displayed on
+    #   recipients' devices. You can use silent push notifications to make
+    #   small updates to your app, or to display messages in an in-app
+    #   message center.
+    #
+    #   Amazon Pinpoint uses this property to determine the correct value
+    #   for the apns-push-type request header when it sends the notification
+    #   message to APNs. If you specify a value of true for this property,
+    #   Amazon Pinpoint sets the value for the apns-push-type header field
+    #   to background.
+    #
+    #   <note markdown="1">If you specify the raw content of an APNs push notification, the
+    #   message payload has to include the content-available key. For silent
+    #   (background) notifications, set the value of content-available to 1.
+    #   Additionally, the message payload for a silent notification can't
+    #   include the alert, badge, or sound keys. For more information, see
+    #   [Generating a Remote Notification][1] and [Pushing Background
+    #   Updates to Your App][2] on the Apple Developer website.
+    #
+    #    Apple has indicated that they will throttle "excessive" background
+    #   notifications based on current traffic volumes. To prevent your
+    #   notifications being throttled, Apple recommends that you send no
+    #   more than 3 silent push notifications to each recipient per hour.
+    #
+    #   </note>
+    #
+    #
+    #
+    #   [1]: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification
+    #   [2]: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app
     #   @return [Boolean]
     #
     # @!attribute [rw] sound
     #   The key for the sound to play when the recipient receives the push
-    #   notification. The value of this key is the name of a sound file in
+    #   notification. The value for this key is the name of a sound file in
     #   your app's main bundle or the Library/Sounds folder in your app's
     #   data container. If the sound file can't be found or you specify
     #   default for the value, the system plays the default alert sound.
@@ -581,6 +625,80 @@ module Aws::Pinpoint
       :substitutions,
       :thread_id,
       :time_to_live,
+      :title,
+      :url)
+      include Aws::Structure
+    end
+
+    # Specifies the content and settings for a message template that can be
+    # used in push notifications that are sent through the APNs (Apple Push
+    # Notification service) channel.
+    #
+    # @note When making an API call, you may pass APNSPushNotificationTemplate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         media_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that's
+    #   based on the message template. Valid values are:
+    #
+    #   * OPEN\_APP - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * DEEP\_LINK - Your app opens and displays a designated user
+    #     interface in the app. This setting uses the deep-linking features
+    #     of the iOS platform.
+    #
+    #   * URL - The default mobile browser on the recipient's device opens
+    #     and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in push notifications that are based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_url
+    #   The URL of an image or video to display in push notifications that
+    #   are based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The key for the sound to play when the recipient receives a push
+    #   notification that's based on the message template. The value for
+    #   this key is the name of a sound file in your app's main bundle or
+    #   the Library/Sounds folder in your app's data container. If the
+    #   sound file can't be found or you specify default for the value, the
+    #   system plays the default alert sound.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title to use in push notifications that are based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in the recipient's default mobile browser, if a
+    #   recipient taps a push notification that's based on the message
+    #   template and the value of the Action property is URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSPushNotificationTemplate AWS API Documentation
+    #
+    class APNSPushNotificationTemplate < Struct.new(
+      :action,
+      :body,
+      :media_url,
+      :sound,
       :title,
       :url)
       include Aws::Structure
@@ -1209,6 +1327,95 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the content and settings for a message template can be used
+    # in push notifications that are sent through the ADM (Amazon Device
+    # Messaging), GCM (Firebase Cloud Messaging, formerly Google Cloud
+    # Messaging), or Baidu (Baidu Cloud Push) channel.
+    #
+    # @note When making an API call, you may pass AndroidPushNotificationTemplate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that's
+    #   based on the message template. Valid values are:
+    #
+    #   * OPEN\_APP - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * DEEP\_LINK - Your app opens and displays a designated user
+    #     interface in the app. This action uses the deep-linking features
+    #     of the Android platform.
+    #
+    #   * URL - The default mobile browser on the recipient's device opens
+    #     and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in a push notification that's based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_icon_url
+    #   The URL of the large icon image to display in the content view of a
+    #   push notification that's based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The URL of an image to display in a push notification that's based
+    #   on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] small_image_icon_url
+    #   The URL of the small icon image to display in the status bar and the
+    #   content view of a push notification that's based on the message
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The sound to play when a recipient receives a push notification
+    #   that's based on the message template. You can use the default
+    #   stream or specify the file name of a sound resource that's bundled
+    #   in your app. On an Android platform, the sound file must reside in
+    #   /res/raw/.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title to use in a push notification that's based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in a recipient's default mobile browser, if a
+    #   recipient taps a a push notification that's based on the message
+    #   template and the value of the Action property is URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/AndroidPushNotificationTemplate AWS API Documentation
+    #
+    class AndroidPushNotificationTemplate < Struct.new(
+      :action,
+      :body,
+      :image_icon_url,
+      :image_url,
+      :small_image_icon_url,
+      :sound,
+      :title,
+      :url)
+      include Aws::Structure
+    end
+
     # Provides the results of a query that retrieved the data for a standard
     # metric that applies to an application, and provides information about
     # that query.
@@ -1219,8 +1426,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   The last date or date and time of the date range that was used to
-    #   filter the query results, in ISO 8601 format. The date range is
+    #   The last date and time of the date range that was used to filter the
+    #   query results, in extended ISO 8601 format. The date range is
     #   inclusive.
     #   @return [Time]
     #
@@ -1230,7 +1437,11 @@ module Aws::Pinpoint
     #   describes the associated metric and consists of two or more terms,
     #   which are comprised of lowercase alphanumeric characters, separated
     #   by a hyphen. For a list of valid values, see the [Amazon Pinpoint
-    #   Developer Guide](developerguide.html).
+    #   Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
     #   @return [String]
     #
     # @!attribute [rw] kpi_result
@@ -1241,14 +1452,14 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] next_token
     #   The string to use in a subsequent request to get the next page of
-    #   results in a paginated response. This value is null for the App
-    #   Metrics resource. The App Metrics resource returns all results in a
-    #   single page.
+    #   results in a paginated response. This value is null for the
+    #   Application Metrics resource. The Application Metrics resource
+    #   returns all results in a single page.
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The first date or date and time of the date range that was used to
-    #   filter the query results, in ISO 8601 format. The date range is
+    #   The first date and time of the date range that was used to filter
+    #   the query results, in extended ISO 8601 format. The date range is
     #   inclusive.
     #   @return [Time]
     #
@@ -1416,12 +1627,12 @@ module Aws::Pinpoint
     #   endpoints. Valid values are:
     #
     #   * endpoint-custom-attributes - Custom attributes that describe
-    #     endpoints
+    #     endpoints.
     #
     #   * endpoint-custom-metrics - Custom metrics that your app reports to
-    #     Amazon Pinpoint for endpoints
+    #     Amazon Pinpoint for endpoints.
     #
-    #   * endpoint-user-attributes - Custom attributes that describe users
+    #   * endpoint-user-attributes - Custom attributes that describe users.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -1722,8 +1933,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   The last date or date and time of the date range that was used to
-    #   filter the query results, in ISO 8601 format. The date range is
+    #   The last date and time of the date range that was used to filter the
+    #   query results, in extended ISO 8601 format. The date range is
     #   inclusive.
     #   @return [Time]
     #
@@ -1733,7 +1944,11 @@ module Aws::Pinpoint
     #   describes the associated metric and consists of two or more terms,
     #   which are comprised of lowercase alphanumeric characters, separated
     #   by a hyphen. For a list of valid values, see the [Amazon Pinpoint
-    #   Developer Guide](developerguide.html).
+    #   Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
     #   @return [String]
     #
     # @!attribute [rw] kpi_result
@@ -1750,8 +1965,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The first date or date and time of the date range that was used to
-    #   filter the query results, in ISO 8601 format. The date range is
+    #   The first date and time of the date range that was used to filter
+    #   the query results, in extended ISO 8601 format. The date range is
     #   inclusive.
     #   @return [Time]
     #
@@ -2029,6 +2244,10 @@ module Aws::Pinpoint
     #   required tag key and an associated tag value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template that’s used for the campaign.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] treatment_description
     #   The custom description of a variation of the campaign that's used
     #   for A/B testing.
@@ -2065,6 +2284,7 @@ module Aws::Pinpoint
       :segment_version,
       :state,
       :tags,
+      :template_configuration,
       :treatment_description,
       :treatment_name,
       :version)
@@ -2411,6 +2631,17 @@ module Aws::Pinpoint
     #                 timezone: "__string",
     #               },
     #               size_percent: 1, # required
+    #               template_configuration: {
+    #                 email_template: {
+    #                   name: "__string",
+    #                 },
+    #                 push_template: {
+    #                   name: "__string",
+    #                 },
+    #                 sms_template: {
+    #                   name: "__string",
+    #                 },
+    #               },
     #               treatment_description: "__string",
     #               treatment_name: "__string",
     #             },
@@ -2550,6 +2781,17 @@ module Aws::Pinpoint
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -2579,6 +2821,48 @@ module Aws::Pinpoint
     #
     class CreateCampaignResponse < Struct.new(
       :campaign_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_template_request: { # required
+    #           html_part: "__string",
+    #           subject: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #           text_part: "__string",
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] email_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through the email channel.
+    #   @return [Types::EmailTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateEmailTemplateRequest AWS API Documentation
+    #
+    class CreateEmailTemplateRequest < Struct.new(
+      :email_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_template_message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::CreateTemplateMessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateEmailTemplateResponse AWS API Documentation
+    #
+    class CreateEmailTemplateResponse < Struct.new(
+      :create_template_message_body)
       include Aws::Structure
     end
 
@@ -2671,6 +2955,91 @@ module Aws::Pinpoint
     #
     class CreateImportJobResponse < Struct.new(
       :import_job_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreatePushTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         push_notification_template_request: { # required
+    #           adm: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           apns: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             media_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           default: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           gcm: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] push_notification_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through a push notification
+    #   channel.
+    #   @return [Types::PushNotificationTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreatePushTemplateRequest AWS API Documentation
+    #
+    class CreatePushTemplateRequest < Struct.new(
+      :push_notification_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_template_message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::CreateTemplateMessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreatePushTemplateResponse AWS API Documentation
+    #
+    class CreatePushTemplateResponse < Struct.new(
+      :create_template_message_body)
       include Aws::Structure
     end
 
@@ -2863,6 +3232,66 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSmsTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sms_template_request: { # required
+    #           body: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] sms_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in text messages that are sent through the SMS channel.
+    #   @return [Types::SMSTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSmsTemplateRequest AWS API Documentation
+    #
+    class CreateSmsTemplateRequest < Struct.new(
+      :sms_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_template_message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::CreateTemplateMessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSmsTemplateResponse AWS API Documentation
+    #
+    class CreateSmsTemplateResponse < Struct.new(
+      :create_template_message_body)
+      include Aws::Structure
+    end
+
+    # Provides information about an API request or response.
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateTemplateMessageBody AWS API Documentation
+    #
+    class CreateTemplateMessageBody < Struct.new(
+      :arn,
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Specifies the default message to use for all channels.
     #
     # @note When making an API call, you may pass DefaultMessage
@@ -2972,6 +3401,78 @@ module Aws::Pinpoint
       :data,
       :silent_push,
       :substitutions,
+      :title,
+      :url)
+      include Aws::Structure
+    end
+
+    # Specifies the settings and content for the default message template
+    # that's used in messages that are sent through a push notification
+    # channel.
+    #
+    # @note When making an API call, you may pass DefaultPushNotificationTemplate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         sound: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that's
+    #   based on the message template. Valid values are:
+    #
+    #   * OPEN\_APP - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * DEEP\_LINK - Your app opens and displays a designated user
+    #     interface in the app. This setting uses the deep-linking features
+    #     of the iOS and Android platforms.
+    #
+    #   * URL - The default mobile browser on the recipient's device opens
+    #     and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in push notifications that are based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The sound to play when a recipient receives a push notification
+    #   that's based on the message template. You can use the default
+    #   stream or specify the file name of a sound resource that's bundled
+    #   in your app. On an Android platform, the sound file must reside in
+    #   /res/raw/.
+    #
+    #   For an iOS platform, this value is the key for the name of a sound
+    #   file in your app's main bundle or the Library/Sounds folder in your
+    #   app's data container. If the sound file can't be found or you
+    #   specify default for the value, the system plays the default alert
+    #   sound.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title to use in push notifications that are based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in a recipient's default mobile browser, if a
+    #   recipient taps a push notification that's based on the message
+    #   template and the value of the Action property is URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DefaultPushNotificationTemplate AWS API Documentation
+    #
+    class DefaultPushNotificationTemplate < Struct.new(
+      :action,
+      :body,
+      :sound,
       :title,
       :url)
       include Aws::Structure
@@ -3244,6 +3745,34 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailTemplateRequest AWS API Documentation
+    #
+    class DeleteEmailTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailTemplateResponse AWS API Documentation
+    #
+    class DeleteEmailTemplateResponse < Struct.new(
+      :message_body)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteEndpointRequest
     #   data as a hash:
     #
@@ -3338,6 +3867,34 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeletePushTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeletePushTemplateRequest AWS API Documentation
+    #
+    class DeletePushTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeletePushTemplateResponse AWS API Documentation
+    #
+    class DeletePushTemplateResponse < Struct.new(
+      :message_body)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteSegmentRequest
     #   data as a hash:
     #
@@ -3398,6 +3955,34 @@ module Aws::Pinpoint
     #
     class DeleteSmsChannelResponse < Struct.new(
       :sms_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteSmsTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsTemplateRequest AWS API Documentation
+    #
+    class DeleteSmsTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsTemplateResponse AWS API Documentation
+    #
+    class DeleteSmsTemplateResponse < Struct.new(
+      :message_body)
       include Aws::Structure
     end
 
@@ -3648,7 +4233,8 @@ module Aws::Pinpoint
     #   @return [Types::DefaultMessage]
     #
     # @!attribute [rw] default_push_notification_message
-    #   The default push notification message for all push channels.
+    #   The default push notification message for all push notification
+    #   channels.
     #   @return [Types::DefaultPushNotificationMessage]
     #
     # @!attribute [rw] email_message
@@ -3918,6 +4504,116 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the content and settings for a message template that can be
+    # used in messages that are sent through the email channel.
+    #
+    # @note When making an API call, you may pass EmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         html_part: "__string",
+    #         subject: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #         text_part: "__string",
+    #       }
+    #
+    # @!attribute [rw] html_part
+    #   The message body, in HTML format, to use in email messages that are
+    #   based on the message template. We recommend using HTML format for
+    #   email clients that support HTML. You can include links, formatted
+    #   text, and more in an HTML message.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject line, or title, to use in email messages that are based
+    #   on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that defines the tags to
+    #   associate with the message template. Each tag consists of a required
+    #   tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] text_part
+    #   The message body, in text format, to use in email messages that are
+    #   based on the message template. We recommend using text format for
+    #   email clients that don't support HTML and clients that are
+    #   connected to high-latency networks, such as mobile devices.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailTemplateRequest AWS API Documentation
+    #
+    class EmailTemplateRequest < Struct.new(
+      :html_part,
+      :subject,
+      :tags,
+      :text_part)
+      include Aws::Structure
+    end
+
+    # Provides information about the content and settings for a message
+    # template that can be used in messages that are sent through the email
+    # channel.
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] html_part
+    #   The message body, in HTML format, that's used in email messages
+    #   that are based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the message template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject line, or title, that's used in email messages that are
+    #   based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the message template. Each tag consists of
+    #   a required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for. For
+    #   an email template, this value is EMAIL.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_part
+    #   The message body, in text format, that's used in email messages
+    #   that are based on the message template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailTemplateResponse AWS API Documentation
+    #
+    class EmailTemplateResponse < Struct.new(
+      :arn,
+      :creation_date,
+      :html_part,
+      :last_modified_date,
+      :subject,
+      :tags,
+      :template_name,
+      :template_type,
+      :text_part)
+      include Aws::Structure
+    end
+
     # Specifies an endpoint to create or update and the settings and
     # attributes to set or change for the endpoint.
     #
@@ -4004,7 +4700,15 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
-    #   Not used.
+    #   Specifies whether to send messages or push notifications to the
+    #   endpoint. Valid values are: ACTIVE, messages are sent to the
+    #   endpoint; and, INACTIVE, messages aren’t sent to the endpoint.
+    #
+    #   Amazon Pinpoint automatically sets this value to ACTIVE when you
+    #   create an endpoint or update an existing endpoint. Amazon Pinpoint
+    #   automatically sets this value to INACTIVE if you update another
+    #   endpoint that has the same address specified by the Address
+    #   property.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4312,8 +5016,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] updated_token
     #   For push notifications that are sent through the GCM channel,
-    #   specifies whether the token was updated as part of delivering the
-    #   message.
+    #   specifies whether the endpoint's device registration token was
+    #   updated as part of delivering the message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointMessageResult AWS API Documentation
@@ -4411,7 +5115,15 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
-    #   Not used.
+    #   Specifies whether to send messages or push notifications to the
+    #   endpoint. Valid values are: ACTIVE, messages are sent to the
+    #   endpoint; and, INACTIVE, messages aren’t sent to the endpoint.
+    #
+    #   Amazon Pinpoint automatically sets this value to ACTIVE when you
+    #   create an endpoint or update an existing endpoint. Amazon Pinpoint
+    #   automatically sets this value to INACTIVE if you update another
+    #   endpoint that has the same address specified by the Address
+    #   property.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -4515,7 +5227,15 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
-    #   Not used.
+    #   Specifies whether messages or push notifications are sent to the
+    #   endpoint. Possible values are: ACTIVE, messages are sent to the
+    #   endpoint; and, INACTIVE, messages aren’t sent to the endpoint.
+    #
+    #   Amazon Pinpoint automatically sets this value to ACTIVE when you
+    #   create an endpoint or update an existing endpoint. Amazon Pinpoint
+    #   automatically sets this value to INACTIVE if you update another
+    #   endpoint that has the same address specified by the Address
+    #   property.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -5337,8 +6057,8 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] api_key
-    #   The API key, also referred to as a *server key*, that you received
-    #   from Google to communicate with Google services.
+    #   The Web API Key, also referred to as an *API\_KEY* or *server key*,
+    #   that you received from Google to communicate with Google services.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -5368,8 +6088,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] credential
-    #   The API key, also referred to as a *server key*, that you received
-    #   from Google to communicate with Google services.
+    #   The Web API Key, also referred to as an *API\_KEY* or *server key*,
+    #   that you received from Google to communicate with Google services.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -6300,6 +7020,36 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailTemplateRequest AWS API Documentation
+    #
+    class GetEmailTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] email_template_response
+    #   Provides information about the content and settings for a message
+    #   template that can be used in messages that are sent through the
+    #   email channel.
+    #   @return [Types::EmailTemplateResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailTemplateResponse AWS API Documentation
+    #
+    class GetEmailTemplateResponse < Struct.new(
+      :email_template_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetEndpointRequest
     #   data as a hash:
     #
@@ -6546,6 +7296,36 @@ module Aws::Pinpoint
     #
     class GetImportJobsResponse < Struct.new(
       :import_jobs_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPushTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplateRequest AWS API Documentation
+    #
+    class GetPushTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] push_notification_template_response
+    #   Provides information about the content and settings for a message
+    #   template that can be used in messages that are sent through a push
+    #   notification channel.
+    #   @return [Types::PushNotificationTemplateResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplateResponse AWS API Documentation
+    #
+    class GetPushTemplateResponse < Struct.new(
+      :push_notification_template_response)
       include Aws::Structure
     end
 
@@ -6822,6 +7602,36 @@ module Aws::Pinpoint
     #
     class GetSmsChannelResponse < Struct.new(
       :sms_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSmsTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplateRequest AWS API Documentation
+    #
+    class GetSmsTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sms_template_response
+    #   Provides information about the content and settings for a message
+    #   template that can be used in text messages that are sent through the
+    #   SMS channel.
+    #   @return [Types::SMSTemplateResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplateResponse AWS API Documentation
+    #
+    class GetSmsTemplateResponse < Struct.new(
+      :sms_template_response)
       include Aws::Structure
     end
 
@@ -7231,13 +8041,57 @@ module Aws::Pinpoint
 
     # @!attribute [rw] tags_model
     #   Specifies the tags (keys and values) for an application, campaign,
-    #   or segment.
+    #   message template, or segment.
     #   @return [Types::TagsModel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags_model)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #         prefix: "__string",
+    #         template_type: "__string",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplatesRequest AWS API Documentation
+    #
+    class ListTemplatesRequest < Struct.new(
+      :next_token,
+      :page_size,
+      :prefix,
+      :template_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] templates_response
+    #   Provides information about all the message templates that are
+    #   associated with your Amazon Pinpoint account.
+    #   @return [Types::TemplatesResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplatesResponse AWS API Documentation
+    #
+    class ListTemplatesResponse < Struct.new(
+      :templates_response)
       include Aws::Structure
     end
 
@@ -7706,6 +8560,17 @@ module Aws::Pinpoint
     #             voice_id: "__string",
     #           },
     #         },
+    #         template_configuration: {
+    #           email_template: {
+    #             name: "__string",
+    #           },
+    #           push_template: {
+    #             name: "__string",
+    #           },
+    #           sms_template: {
+    #             name: "__string",
+    #           },
+    #         },
     #         trace_id: "__string",
     #       }
     #
@@ -7738,6 +8603,10 @@ module Aws::Pinpoint
     #   the message.
     #   @return [Types::DirectMessageConfiguration]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template to use for the message.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] trace_id
     #   The unique identifier for tracing the message. This identifier is
     #   visible to message recipients.
@@ -7750,6 +8619,7 @@ module Aws::Pinpoint
       :context,
       :endpoints,
       :message_configuration,
+      :template_configuration,
       :trace_id)
       include Aws::Structure
     end
@@ -7836,8 +8706,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] updated_token
     #   For push notifications that are sent through the GCM channel,
-    #   specifies whether the token was updated as part of delivering the
-    #   message.
+    #   specifies whether the endpoint's device registration token was
+    #   updated as part of delivering the message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageResult AWS API Documentation
@@ -8140,9 +9010,15 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_status
-    #   The status of the update request for the endpoint. Possible values
-    #   are: INACTIVE, the update failed; and, ACTIVE, the endpoint was
-    #   updated successfully.
+    #   Specifies whether to send messages or push notifications to the
+    #   endpoint. Valid values are: ACTIVE, messages are sent to the
+    #   endpoint; and, INACTIVE, messages aren’t sent to the endpoint.
+    #
+    #   Amazon Pinpoint automatically sets this value to ACTIVE when you
+    #   create an endpoint or update an existing endpoint. Amazon Pinpoint
+    #   automatically sets this value to INACTIVE if you update another
+    #   endpoint that has the same address specified by the Address
+    #   property.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -8187,6 +9063,192 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user)
+      include Aws::Structure
+    end
+
+    # Specifies the content and settings for a message template that can be
+    # used in messages that are sent through a push notification channel.
+    #
+    # @note When making an API call, you may pass PushNotificationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         adm: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_url: "__string",
+    #           small_image_icon_url: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         apns: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           media_url: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         baidu: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_url: "__string",
+    #           small_image_icon_url: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         default: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         gcm: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_url: "__string",
+    #           small_image_icon_url: "__string",
+    #           sound: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] adm
+    #   The message template to use for the ADM (Amazon Device Messaging)
+    #   channel. This message template overrides the default template for
+    #   push notification channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] apns
+    #   The message template to use for the APNs (Apple Push Notification
+    #   service) channel. This message template overrides the default
+    #   template for push notification channels
+    #   (DefaultPushNotificationTemplate).
+    #   @return [Types::APNSPushNotificationTemplate]
+    #
+    # @!attribute [rw] baidu
+    #   The message template to use for the Baidu (Baidu Cloud Push)
+    #   channel. This message template overrides the default template for
+    #   push notification channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] default
+    #   The default message template to use for push notification channels.
+    #   @return [Types::DefaultPushNotificationTemplate]
+    #
+    # @!attribute [rw] gcm
+    #   The message template to use for the GCM channel, which is used to
+    #   send notifications through the Firebase Cloud Messaging (FCM),
+    #   formerly Google Cloud Messaging (GCM), service. This message
+    #   template overrides the default template for push notification
+    #   channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that defines the tags to
+    #   associate with the message template. Each tag consists of a required
+    #   tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PushNotificationTemplateRequest AWS API Documentation
+    #
+    class PushNotificationTemplateRequest < Struct.new(
+      :adm,
+      :apns,
+      :baidu,
+      :default,
+      :gcm,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Provides information about the content and settings for a message
+    # template that can be used in messages that are sent through a push
+    # notification channel.
+    #
+    # @!attribute [rw] adm
+    #   The message template that's used for the ADM (Amazon Device
+    #   Messaging) channel. This message template overrides the default
+    #   template for push notification channels
+    #   (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] apns
+    #   The message template that's used for the APNs (Apple Push
+    #   Notification service) channel. This message template overrides the
+    #   default template for push notification channels
+    #   (DefaultPushNotificationTemplate).
+    #   @return [Types::APNSPushNotificationTemplate]
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] baidu
+    #   The message template that's used for the Baidu (Baidu Cloud Push)
+    #   channel. This message template overrides the default template for
+    #   push notification channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] default
+    #   The default message template that's used for push notification
+    #   channels.
+    #   @return [Types::DefaultPushNotificationTemplate]
+    #
+    # @!attribute [rw] gcm
+    #   The message template that's used for the GCM channel, which is used
+    #   to send notifications through the Firebase Cloud Messaging (FCM),
+    #   formerly Google Cloud Messaging (GCM), service. This message
+    #   template overrides the default template for push notification
+    #   channels (DefaultPushNotificationTemplate).
+    #   @return [Types::AndroidPushNotificationTemplate]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the message template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the message template. Each tag consists of
+    #   a required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for. For a
+    #   push notification template, this value is PUSH.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PushNotificationTemplateResponse AWS API Documentation
+    #
+    class PushNotificationTemplateResponse < Struct.new(
+      :adm,
+      :apns,
+      :arn,
+      :baidu,
+      :creation_date,
+      :default,
+      :gcm,
+      :last_modified_date,
+      :tags,
+      :template_name,
+      :template_type)
       include Aws::Structure
     end
 
@@ -8672,11 +9734,11 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] origination_number
-    #   The number that the SMS message originates from. This should be one
-    #   of the dedicated long codes or short codes that you requested from
-    #   AWS Support and is assigned to your AWS account. If you don't
-    #   specify a long or short code, Amazon Pinpoint assigns a random long
-    #   code to the SMS message.
+    #   The number to send the SMS message from. This value should be one of
+    #   the dedicated long or short codes that's assigned to your AWS
+    #   account. If you don't specify a long or short code, Amazon Pinpoint
+    #   assigns a random long code to the SMS message and sends the message
+    #   from that code.
     #   @return [String]
     #
     # @!attribute [rw] sender_id
@@ -8699,6 +9761,86 @@ module Aws::Pinpoint
       :origination_number,
       :sender_id,
       :substitutions)
+      include Aws::Structure
+    end
+
+    # Specifies the content and settings for a message template that can be
+    # used in text messages that are sent through the SMS channel.
+    #
+    # @note When making an API call, you may pass SMSTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] body
+    #   The message body to use in text messages that are based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that defines the tags to
+    #   associate with the message template. Each tag consists of a required
+    #   tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSTemplateRequest AWS API Documentation
+    #
+    class SMSTemplateRequest < Struct.new(
+      :body,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Provides information about the content and settings for a message
+    # template that can be used in text messages that are sent through the
+    # SMS channel.
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body that's used in text messages that are based on the
+    #   message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the message template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the message template. Each tag consists of
+    #   a required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for. For
+    #   an SMS template, this value is SMS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSTemplateResponse AWS API Documentation
+    #
+    class SMSTemplateResponse < Struct.new(
+      :arn,
+      :body,
+      :creation_date,
+      :last_modified_date,
+      :tags,
+      :template_name,
+      :template_type)
       include Aws::Structure
     end
 
@@ -9657,6 +10799,17 @@ module Aws::Pinpoint
     #               voice_id: "__string",
     #             },
     #           },
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           trace_id: "__string",
     #         },
     #       }
@@ -9853,6 +11006,17 @@ module Aws::Pinpoint
     #             voice_id: "__string",
     #           },
     #         },
+    #         template_configuration: {
+    #           email_template: {
+    #             name: "__string",
+    #           },
+    #           push_template: {
+    #             name: "__string",
+    #           },
+    #           sms_template: {
+    #             name: "__string",
+    #           },
+    #         },
     #         trace_id: "__string",
     #         users: { # required
     #           "__string" => {
@@ -9882,6 +11046,10 @@ module Aws::Pinpoint
     #   messages that you defined for specific channels.
     #   @return [Types::DirectMessageConfiguration]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template to use for the message.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] trace_id
     #   The unique identifier for tracing the message. This identifier is
     #   visible to message recipients.
@@ -9899,6 +11067,7 @@ module Aws::Pinpoint
     class SendUsersMessageRequest < Struct.new(
       :context,
       :message_configuration,
+      :template_configuration,
       :trace_id,
       :users)
       include Aws::Structure
@@ -10095,6 +11264,17 @@ module Aws::Pinpoint
     #               voice_id: "__string",
     #             },
     #           },
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           trace_id: "__string",
     #           users: { # required
     #             "__string" => {
@@ -10209,7 +11389,7 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the content of an email message, composed of a subject, a
+    # Specifies the contents of an email message, composed of a subject, a
     # text part, and an HTML part.
     #
     # @note When making an API call, you may pass SimpleEmail
@@ -10299,7 +11479,7 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] tags_model
     #   Specifies the tags (keys and values) for an application, campaign,
-    #   or segment.
+    #   message template, or segment.
     #   @return [Types::TagsModel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResourceRequest AWS API Documentation
@@ -10310,8 +11490,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the tags (keys and values) for an application, campaign, or
-    # segment.
+    # Specifies the tags (keys and values) for an application, campaign,
+    # message template, or segment.
     #
     # @note When making an API call, you may pass TagsModel
     #   data as a hash:
@@ -10324,8 +11504,9 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that defines the tags for
-    #   an application, campaign, or segment. A project, campaign, or
-    #   segment can have a maximum of 50 tags.
+    #   an application, campaign, message template, or segment. Each
+    #   project, campaign, message template, or segment can have a maximum
+    #   of 50 tags.
     #
     #   Each tag consists of a required tag key and an associated tag value.
     #   The maximum length of a tag key is 128 characters. The maximum
@@ -10336,6 +11517,131 @@ module Aws::Pinpoint
     #
     class TagsModel < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # Specifies the name of the message template to use for the message.
+    #
+    # @note When making an API call, you may pass Template
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the message template to use for the message. If
+    #   specified, this value must match the name of an existing message
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Template AWS API Documentation
+    #
+    class Template < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # Specifies the message template to use for the message, for each type
+    # of channel.
+    #
+    # @note When making an API call, you may pass TemplateConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         email_template: {
+    #           name: "__string",
+    #         },
+    #         push_template: {
+    #           name: "__string",
+    #         },
+    #         sms_template: {
+    #           name: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] email_template
+    #   The email template to use for the message.
+    #   @return [Types::Template]
+    #
+    # @!attribute [rw] push_template
+    #   The push notification template to use for the message.
+    #   @return [Types::Template]
+    #
+    # @!attribute [rw] sms_template
+    #   The SMS template to use for the message.
+    #   @return [Types::Template]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateConfiguration AWS API Documentation
+    #
+    class TemplateConfiguration < Struct.new(
+      :email_template,
+      :push_template,
+      :sms_template)
+      include Aws::Structure
+    end
+
+    # Provides information about a message template that's associated with
+    # your Amazon Pinpoint account.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the message template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the message template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that identifies the tags
+    #   that are associated with the message template. Each tag consists of
+    #   a required tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateResponse AWS API Documentation
+    #
+    class TemplateResponse < Struct.new(
+      :arn,
+      :creation_date,
+      :last_modified_date,
+      :tags,
+      :template_name,
+      :template_type)
+      include Aws::Structure
+    end
+
+    # Provides information about all the message templates that are
+    # associated with your Amazon Pinpoint account.
+    #
+    # @!attribute [rw] item
+    #   An array of responses, one for each message template that's
+    #   associated with your Amazon Pinpoint account and meets any filter
+    #   criteria that you specified in the request.
+    #   @return [Array<Types::TemplateResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   The string to use in a subsequent request to get the next page of
+    #   results in a paginated response. This value is null if there are no
+    #   additional pages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplatesResponse AWS API Documentation
+    #
+    class TemplatesResponse < Struct.new(
+      :item,
+      :next_token)
       include Aws::Structure
     end
 
@@ -10379,6 +11685,10 @@ module Aws::Pinpoint
     #   The status of the treatment.
     #   @return [Types::CampaignState]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template that’s used for the treatment.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] treatment_description
     #   The custom description of the treatment.
     #   @return [String]
@@ -10396,6 +11706,7 @@ module Aws::Pinpoint
       :schedule,
       :size_percent,
       :state,
+      :template_configuration,
       :treatment_description,
       :treatment_name)
       include Aws::Structure
@@ -10887,6 +12198,17 @@ module Aws::Pinpoint
     #                 timezone: "__string",
     #               },
     #               size_percent: 1, # required
+    #               template_configuration: {
+    #                 email_template: {
+    #                   name: "__string",
+    #                 },
+    #                 push_template: {
+    #                   name: "__string",
+    #                 },
+    #                 sms_template: {
+    #                   name: "__string",
+    #                 },
+    #               },
     #               treatment_description: "__string",
     #               treatment_name: "__string",
     #             },
@@ -11026,6 +12348,17 @@ module Aws::Pinpoint
     #           tags: {
     #             "__string" => "__string",
     #           },
+    #           template_configuration: {
+    #             email_template: {
+    #               name: "__string",
+    #             },
+    #             push_template: {
+    #               name: "__string",
+    #             },
+    #             sms_template: {
+    #               name: "__string",
+    #             },
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -11101,6 +12434,48 @@ module Aws::Pinpoint
     #
     class UpdateEmailChannelResponse < Struct.new(
       :email_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_template_request: { # required
+    #           html_part: "__string",
+    #           subject: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #           text_part: "__string",
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] email_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through the email channel.
+    #   @return [Types::EmailTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailTemplateRequest AWS API Documentation
+    #
+    class UpdateEmailTemplateRequest < Struct.new(
+      :email_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailTemplateResponse AWS API Documentation
+    #
+    class UpdateEmailTemplateResponse < Struct.new(
+      :message_body)
       include Aws::Structure
     end
 
@@ -11297,6 +12672,91 @@ module Aws::Pinpoint
     #
     class UpdateGcmChannelResponse < Struct.new(
       :gcm_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePushTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         push_notification_template_request: { # required
+    #           adm: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           apns: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             media_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           default: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           gcm: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] push_notification_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in messages that are sent through a push notification
+    #   channel.
+    #   @return [Types::PushNotificationTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdatePushTemplateRequest AWS API Documentation
+    #
+    class UpdatePushTemplateRequest < Struct.new(
+      :push_notification_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdatePushTemplateResponse AWS API Documentation
+    #
+    class UpdatePushTemplateResponse < Struct.new(
+      :message_body)
       include Aws::Structure
     end
 
@@ -11534,6 +12994,46 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateSmsTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sms_template_request: { # required
+    #           body: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] sms_template_request
+    #   Specifies the content and settings for a message template that can
+    #   be used in text messages that are sent through the SMS channel.
+    #   @return [Types::SMSTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsTemplateRequest AWS API Documentation
+    #
+    class UpdateSmsTemplateRequest < Struct.new(
+      :sms_template_request,
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsTemplateResponse AWS API Documentation
+    #
+    class UpdateSmsTemplateResponse < Struct.new(
+      :message_body)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateVoiceChannelRequest
     #   data as a hash:
     #
@@ -11689,10 +13189,11 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] origination_number
-    #   The phone number from the pool or messaging service to send the
-    #   message from. Although it isn't required, we recommend that you
-    #   specify the phone number in E.164 format to ensure prompt and
-    #   accurate delivery.
+    #   The long code to send the voice message from. This value should be
+    #   one of the dedicated long codes that's assigned to your AWS
+    #   account. Although it isn't required, we recommend that you specify
+    #   the long code in E.164 format, for example +12065550100, to ensure
+    #   prompt and accurate delivery of the message.
     #   @return [String]
     #
     # @!attribute [rw] substitutions
@@ -11925,6 +13426,17 @@ module Aws::Pinpoint
     #               timezone: "__string",
     #             },
     #             size_percent: 1, # required
+    #             template_configuration: {
+    #               email_template: {
+    #                 name: "__string",
+    #               },
+    #               push_template: {
+    #                 name: "__string",
+    #               },
+    #               sms_template: {
+    #                 name: "__string",
+    #               },
+    #             },
     #             treatment_description: "__string",
     #             treatment_name: "__string",
     #           },
@@ -12064,6 +13576,17 @@ module Aws::Pinpoint
     #         tags: {
     #           "__string" => "__string",
     #         },
+    #         template_configuration: {
+    #           email_template: {
+    #             name: "__string",
+    #           },
+    #           push_template: {
+    #             name: "__string",
+    #           },
+    #           sms_template: {
+    #             name: "__string",
+    #           },
+    #         },
     #         treatment_description: "__string",
     #         treatment_name: "__string",
     #       }
@@ -12123,6 +13646,10 @@ module Aws::Pinpoint
     #   and an associated tag value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template to use for the campaign.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] treatment_description
     #   The custom description of a variation of the campaign to use for A/B
     #   testing.
@@ -12148,6 +13675,7 @@ module Aws::Pinpoint
       :segment_id,
       :segment_version,
       :tags,
+      :template_configuration,
       :treatment_description,
       :treatment_name)
       include Aws::Structure
@@ -12514,6 +14042,17 @@ module Aws::Pinpoint
     #           timezone: "__string",
     #         },
     #         size_percent: 1, # required
+    #         template_configuration: {
+    #           email_template: {
+    #             name: "__string",
+    #           },
+    #           push_template: {
+    #             name: "__string",
+    #           },
+    #           sms_template: {
+    #             name: "__string",
+    #           },
+    #         },
     #         treatment_description: "__string",
     #         treatment_name: "__string",
     #       }
@@ -12531,6 +14070,10 @@ module Aws::Pinpoint
     #   treatment to.
     #   @return [Integer]
     #
+    # @!attribute [rw] template_configuration
+    #   The message template to use for the treatment.
+    #   @return [Types::TemplateConfiguration]
+    #
     # @!attribute [rw] treatment_description
     #   The custom description of the treatment.
     #   @return [String]
@@ -12546,6 +14089,7 @@ module Aws::Pinpoint
       :message_configuration,
       :schedule,
       :size_percent,
+      :template_configuration,
       :treatment_description,
       :treatment_name)
       include Aws::Structure

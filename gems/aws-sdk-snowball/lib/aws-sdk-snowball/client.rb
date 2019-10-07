@@ -432,7 +432,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #
     # @option params [required, String] :role_arn
     #   The `RoleARN` that you want to associate with this cluster. `RoleArn`
@@ -441,12 +441,11 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snowball device to use for this cluster. The only
-    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
-    #   `EDGE_CG`.
+    #   The type of AWS Snowball device to use for this cluster. Currently,
+    #   the only supported device type for cluster jobs is `EDGE`.
     #
     # @option params [required, String] :shipping_option
     #   The shipping speed for each node in this cluster. This speed doesn't
@@ -462,7 +461,7 @@ module Aws::Snowball
     #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, devices are delivered in one to seven days.
+    #   * In India, Snowball Edges are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day shipping.
     #
@@ -608,7 +607,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #
     # @option params [String] :role_arn
     #   The `RoleARN` that you want to associate with this job. `RoleArn`s are
@@ -617,7 +616,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [String] :snowball_capacity_preference
     #   If your job is being created in one of the US regions, you have the
@@ -652,9 +651,8 @@ module Aws::Snowball
     #   job attributes are inherited from the cluster.
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snowball device to use for this job. The only
-    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
-    #   `EDGE_CG`.
+    #   The type of AWS Snowball device to use for this job. Currently, the
+    #   only supported device type for cluster jobs is `EDGE`.
     #
     # @option params [String] :forwarding_address_id
     #   The forwarding address ID for a job. This field is not supported in
@@ -1325,6 +1323,36 @@ module Aws::Snowball
       req.send_request(options)
     end
 
+    # Returns an Amazon S3 presigned URL for an update file associated with
+    # a specified `JobId`.
+    #
+    # @option params [required, String] :job_id
+    #   The ID for a job that you want to get the software update file for,
+    #   for example `JID123e4567-e89b-12d3-a456-426655440000`.
+    #
+    # @return [Types::GetSoftwareUpdatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSoftwareUpdatesResult#updates_uri #updates_uri} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_software_updates({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.updates_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSoftwareUpdates AWS API Documentation
+    #
+    # @overload get_software_updates(params = {})
+    # @param [Hash] params ({})
+    def get_software_updates(params = {}, options = {})
+      req = build_request(:get_software_updates, params)
+      req.send_request(options)
+    end
+
     # Returns an array of `JobListEntry` objects of the specified length.
     # Each `JobListEntry` object is for a job in the specified cluster and
     # contains a job's state, a job's ID, and other information.
@@ -1501,17 +1529,14 @@ module Aws::Snowball
 
     # This action returns a list of the different Amazon EC2 Amazon Machine
     # Images (AMIs) that are owned by your AWS account that would be
-    # supported for use on `EDGE`, `EDGE_C`, and `EDGE_CG` devices. For more
-    # information on compatible AMIs, see [Using Amazon EC2 Compute
-    # Instances][1] in the *AWS Snowball Developer Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html
+    # supported for use on a Snowball Edge device. Currently, supported AMIs
+    # are based on the CentOS 7 (x86\_64) - with Updates HVM, Ubuntu Server
+    # 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available
+    # on the AWS Marketplace.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results for the list of compatible images.
-    #   Currently, each supported device can store 10 AMIs.
+    #   Currently, a Snowball Edge device can store 10 AMIs.
     #
     # @option params [String] :next_token
     #   HTTP requests are stateless. To identify what object comes "next" in
@@ -1636,7 +1661,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [String] :description
     #   The updated description of this cluster.
@@ -1741,7 +1766,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [Types::Notification] :notification
     #   The new or updated Notification object.
@@ -1849,7 +1874,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

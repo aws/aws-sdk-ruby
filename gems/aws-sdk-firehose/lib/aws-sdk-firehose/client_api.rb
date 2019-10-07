@@ -51,6 +51,7 @@ module Aws::Firehose
     ElasticsearchBufferingHints = Shapes::StructureShape.new(name: 'ElasticsearchBufferingHints')
     ElasticsearchBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'ElasticsearchBufferingIntervalInSeconds')
     ElasticsearchBufferingSizeInMBs = Shapes::IntegerShape.new(name: 'ElasticsearchBufferingSizeInMBs')
+    ElasticsearchClusterEndpoint = Shapes::StringShape.new(name: 'ElasticsearchClusterEndpoint')
     ElasticsearchDestinationConfiguration = Shapes::StructureShape.new(name: 'ElasticsearchDestinationConfiguration')
     ElasticsearchDestinationDescription = Shapes::StructureShape.new(name: 'ElasticsearchDestinationDescription')
     ElasticsearchDestinationUpdate = Shapes::StructureShape.new(name: 'ElasticsearchDestinationUpdate')
@@ -259,7 +260,8 @@ module Aws::Firehose
     ElasticsearchBufferingHints.struct_class = Types::ElasticsearchBufferingHints
 
     ElasticsearchDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
-    ElasticsearchDestinationConfiguration.add_member(:domain_arn, Shapes::ShapeRef.new(shape: ElasticsearchDomainARN, required: true, location_name: "DomainARN"))
+    ElasticsearchDestinationConfiguration.add_member(:domain_arn, Shapes::ShapeRef.new(shape: ElasticsearchDomainARN, location_name: "DomainARN"))
+    ElasticsearchDestinationConfiguration.add_member(:cluster_endpoint, Shapes::ShapeRef.new(shape: ElasticsearchClusterEndpoint, location_name: "ClusterEndpoint"))
     ElasticsearchDestinationConfiguration.add_member(:index_name, Shapes::ShapeRef.new(shape: ElasticsearchIndexName, required: true, location_name: "IndexName"))
     ElasticsearchDestinationConfiguration.add_member(:type_name, Shapes::ShapeRef.new(shape: ElasticsearchTypeName, required: true, location_name: "TypeName"))
     ElasticsearchDestinationConfiguration.add_member(:index_rotation_period, Shapes::ShapeRef.new(shape: ElasticsearchIndexRotationPeriod, location_name: "IndexRotationPeriod"))
@@ -273,6 +275,7 @@ module Aws::Firehose
 
     ElasticsearchDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     ElasticsearchDestinationDescription.add_member(:domain_arn, Shapes::ShapeRef.new(shape: ElasticsearchDomainARN, location_name: "DomainARN"))
+    ElasticsearchDestinationDescription.add_member(:cluster_endpoint, Shapes::ShapeRef.new(shape: ElasticsearchClusterEndpoint, location_name: "ClusterEndpoint"))
     ElasticsearchDestinationDescription.add_member(:index_name, Shapes::ShapeRef.new(shape: ElasticsearchIndexName, location_name: "IndexName"))
     ElasticsearchDestinationDescription.add_member(:type_name, Shapes::ShapeRef.new(shape: ElasticsearchTypeName, location_name: "TypeName"))
     ElasticsearchDestinationDescription.add_member(:index_rotation_period, Shapes::ShapeRef.new(shape: ElasticsearchIndexRotationPeriod, location_name: "IndexRotationPeriod"))
@@ -286,6 +289,7 @@ module Aws::Firehose
 
     ElasticsearchDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     ElasticsearchDestinationUpdate.add_member(:domain_arn, Shapes::ShapeRef.new(shape: ElasticsearchDomainARN, location_name: "DomainARN"))
+    ElasticsearchDestinationUpdate.add_member(:cluster_endpoint, Shapes::ShapeRef.new(shape: ElasticsearchClusterEndpoint, location_name: "ClusterEndpoint"))
     ElasticsearchDestinationUpdate.add_member(:index_name, Shapes::ShapeRef.new(shape: ElasticsearchIndexName, location_name: "IndexName"))
     ElasticsearchDestinationUpdate.add_member(:type_name, Shapes::ShapeRef.new(shape: ElasticsearchTypeName, location_name: "TypeName"))
     ElasticsearchDestinationUpdate.add_member(:index_rotation_period, Shapes::ShapeRef.new(shape: ElasticsearchIndexRotationPeriod, location_name: "IndexRotationPeriod"))

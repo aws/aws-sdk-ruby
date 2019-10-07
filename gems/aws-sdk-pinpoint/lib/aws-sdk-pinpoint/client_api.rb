@@ -17,6 +17,7 @@ module Aws::Pinpoint
     APNSChannelRequest = Shapes::StructureShape.new(name: 'APNSChannelRequest')
     APNSChannelResponse = Shapes::StructureShape.new(name: 'APNSChannelResponse')
     APNSMessage = Shapes::StructureShape.new(name: 'APNSMessage')
+    APNSPushNotificationTemplate = Shapes::StructureShape.new(name: 'APNSPushNotificationTemplate')
     APNSSandboxChannelRequest = Shapes::StructureShape.new(name: 'APNSSandboxChannelRequest')
     APNSSandboxChannelResponse = Shapes::StructureShape.new(name: 'APNSSandboxChannelResponse')
     APNSVoipChannelRequest = Shapes::StructureShape.new(name: 'APNSVoipChannelRequest')
@@ -27,6 +28,7 @@ module Aws::Pinpoint
     ActivitiesResponse = Shapes::StructureShape.new(name: 'ActivitiesResponse')
     ActivityResponse = Shapes::StructureShape.new(name: 'ActivityResponse')
     AddressConfiguration = Shapes::StructureShape.new(name: 'AddressConfiguration')
+    AndroidPushNotificationTemplate = Shapes::StructureShape.new(name: 'AndroidPushNotificationTemplate')
     ApplicationDateRangeKpiResponse = Shapes::StructureShape.new(name: 'ApplicationDateRangeKpiResponse')
     ApplicationResponse = Shapes::StructureShape.new(name: 'ApplicationResponse')
     ApplicationSettingsResource = Shapes::StructureShape.new(name: 'ApplicationSettingsResource')
@@ -57,14 +59,22 @@ module Aws::Pinpoint
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateCampaignRequest = Shapes::StructureShape.new(name: 'CreateCampaignRequest')
     CreateCampaignResponse = Shapes::StructureShape.new(name: 'CreateCampaignResponse')
+    CreateEmailTemplateRequest = Shapes::StructureShape.new(name: 'CreateEmailTemplateRequest')
+    CreateEmailTemplateResponse = Shapes::StructureShape.new(name: 'CreateEmailTemplateResponse')
     CreateExportJobRequest = Shapes::StructureShape.new(name: 'CreateExportJobRequest')
     CreateExportJobResponse = Shapes::StructureShape.new(name: 'CreateExportJobResponse')
     CreateImportJobRequest = Shapes::StructureShape.new(name: 'CreateImportJobRequest')
     CreateImportJobResponse = Shapes::StructureShape.new(name: 'CreateImportJobResponse')
+    CreatePushTemplateRequest = Shapes::StructureShape.new(name: 'CreatePushTemplateRequest')
+    CreatePushTemplateResponse = Shapes::StructureShape.new(name: 'CreatePushTemplateResponse')
     CreateSegmentRequest = Shapes::StructureShape.new(name: 'CreateSegmentRequest')
     CreateSegmentResponse = Shapes::StructureShape.new(name: 'CreateSegmentResponse')
+    CreateSmsTemplateRequest = Shapes::StructureShape.new(name: 'CreateSmsTemplateRequest')
+    CreateSmsTemplateResponse = Shapes::StructureShape.new(name: 'CreateSmsTemplateResponse')
+    CreateTemplateMessageBody = Shapes::StructureShape.new(name: 'CreateTemplateMessageBody')
     DefaultMessage = Shapes::StructureShape.new(name: 'DefaultMessage')
     DefaultPushNotificationMessage = Shapes::StructureShape.new(name: 'DefaultPushNotificationMessage')
+    DefaultPushNotificationTemplate = Shapes::StructureShape.new(name: 'DefaultPushNotificationTemplate')
     DeleteAdmChannelRequest = Shapes::StructureShape.new(name: 'DeleteAdmChannelRequest')
     DeleteAdmChannelResponse = Shapes::StructureShape.new(name: 'DeleteAdmChannelResponse')
     DeleteApnsChannelRequest = Shapes::StructureShape.new(name: 'DeleteApnsChannelRequest')
@@ -83,16 +93,22 @@ module Aws::Pinpoint
     DeleteCampaignResponse = Shapes::StructureShape.new(name: 'DeleteCampaignResponse')
     DeleteEmailChannelRequest = Shapes::StructureShape.new(name: 'DeleteEmailChannelRequest')
     DeleteEmailChannelResponse = Shapes::StructureShape.new(name: 'DeleteEmailChannelResponse')
+    DeleteEmailTemplateRequest = Shapes::StructureShape.new(name: 'DeleteEmailTemplateRequest')
+    DeleteEmailTemplateResponse = Shapes::StructureShape.new(name: 'DeleteEmailTemplateResponse')
     DeleteEndpointRequest = Shapes::StructureShape.new(name: 'DeleteEndpointRequest')
     DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
     DeleteEventStreamRequest = Shapes::StructureShape.new(name: 'DeleteEventStreamRequest')
     DeleteEventStreamResponse = Shapes::StructureShape.new(name: 'DeleteEventStreamResponse')
     DeleteGcmChannelRequest = Shapes::StructureShape.new(name: 'DeleteGcmChannelRequest')
     DeleteGcmChannelResponse = Shapes::StructureShape.new(name: 'DeleteGcmChannelResponse')
+    DeletePushTemplateRequest = Shapes::StructureShape.new(name: 'DeletePushTemplateRequest')
+    DeletePushTemplateResponse = Shapes::StructureShape.new(name: 'DeletePushTemplateResponse')
     DeleteSegmentRequest = Shapes::StructureShape.new(name: 'DeleteSegmentRequest')
     DeleteSegmentResponse = Shapes::StructureShape.new(name: 'DeleteSegmentResponse')
     DeleteSmsChannelRequest = Shapes::StructureShape.new(name: 'DeleteSmsChannelRequest')
     DeleteSmsChannelResponse = Shapes::StructureShape.new(name: 'DeleteSmsChannelResponse')
+    DeleteSmsTemplateRequest = Shapes::StructureShape.new(name: 'DeleteSmsTemplateRequest')
+    DeleteSmsTemplateResponse = Shapes::StructureShape.new(name: 'DeleteSmsTemplateResponse')
     DeleteUserEndpointsRequest = Shapes::StructureShape.new(name: 'DeleteUserEndpointsRequest')
     DeleteUserEndpointsResponse = Shapes::StructureShape.new(name: 'DeleteUserEndpointsResponse')
     DeleteVoiceChannelRequest = Shapes::StructureShape.new(name: 'DeleteVoiceChannelRequest')
@@ -104,6 +120,8 @@ module Aws::Pinpoint
     EmailChannelRequest = Shapes::StructureShape.new(name: 'EmailChannelRequest')
     EmailChannelResponse = Shapes::StructureShape.new(name: 'EmailChannelResponse')
     EmailMessage = Shapes::StructureShape.new(name: 'EmailMessage')
+    EmailTemplateRequest = Shapes::StructureShape.new(name: 'EmailTemplateRequest')
+    EmailTemplateResponse = Shapes::StructureShape.new(name: 'EmailTemplateResponse')
     EndpointBatchItem = Shapes::StructureShape.new(name: 'EndpointBatchItem')
     EndpointBatchRequest = Shapes::StructureShape.new(name: 'EndpointBatchRequest')
     EndpointDemographic = Shapes::StructureShape.new(name: 'EndpointDemographic')
@@ -171,6 +189,8 @@ module Aws::Pinpoint
     GetChannelsResponse = Shapes::StructureShape.new(name: 'GetChannelsResponse')
     GetEmailChannelRequest = Shapes::StructureShape.new(name: 'GetEmailChannelRequest')
     GetEmailChannelResponse = Shapes::StructureShape.new(name: 'GetEmailChannelResponse')
+    GetEmailTemplateRequest = Shapes::StructureShape.new(name: 'GetEmailTemplateRequest')
+    GetEmailTemplateResponse = Shapes::StructureShape.new(name: 'GetEmailTemplateResponse')
     GetEndpointRequest = Shapes::StructureShape.new(name: 'GetEndpointRequest')
     GetEndpointResponse = Shapes::StructureShape.new(name: 'GetEndpointResponse')
     GetEventStreamRequest = Shapes::StructureShape.new(name: 'GetEventStreamRequest')
@@ -185,6 +205,8 @@ module Aws::Pinpoint
     GetImportJobResponse = Shapes::StructureShape.new(name: 'GetImportJobResponse')
     GetImportJobsRequest = Shapes::StructureShape.new(name: 'GetImportJobsRequest')
     GetImportJobsResponse = Shapes::StructureShape.new(name: 'GetImportJobsResponse')
+    GetPushTemplateRequest = Shapes::StructureShape.new(name: 'GetPushTemplateRequest')
+    GetPushTemplateResponse = Shapes::StructureShape.new(name: 'GetPushTemplateResponse')
     GetSegmentExportJobsRequest = Shapes::StructureShape.new(name: 'GetSegmentExportJobsRequest')
     GetSegmentExportJobsResponse = Shapes::StructureShape.new(name: 'GetSegmentExportJobsResponse')
     GetSegmentImportJobsRequest = Shapes::StructureShape.new(name: 'GetSegmentImportJobsRequest')
@@ -199,6 +221,8 @@ module Aws::Pinpoint
     GetSegmentsResponse = Shapes::StructureShape.new(name: 'GetSegmentsResponse')
     GetSmsChannelRequest = Shapes::StructureShape.new(name: 'GetSmsChannelRequest')
     GetSmsChannelResponse = Shapes::StructureShape.new(name: 'GetSmsChannelResponse')
+    GetSmsTemplateRequest = Shapes::StructureShape.new(name: 'GetSmsTemplateRequest')
+    GetSmsTemplateResponse = Shapes::StructureShape.new(name: 'GetSmsTemplateResponse')
     GetUserEndpointsRequest = Shapes::StructureShape.new(name: 'GetUserEndpointsRequest')
     GetUserEndpointsResponse = Shapes::StructureShape.new(name: 'GetUserEndpointsResponse')
     GetVoiceChannelRequest = Shapes::StructureShape.new(name: 'GetVoiceChannelRequest')
@@ -224,11 +248,14 @@ module Aws::Pinpoint
     ListOfSegmentGroup = Shapes::ListShape.new(name: 'ListOfSegmentGroup')
     ListOfSegmentReference = Shapes::ListShape.new(name: 'ListOfSegmentReference')
     ListOfSegmentResponse = Shapes::ListShape.new(name: 'ListOfSegmentResponse')
+    ListOfTemplateResponse = Shapes::ListShape.new(name: 'ListOfTemplateResponse')
     ListOfTreatmentResource = Shapes::ListShape.new(name: 'ListOfTreatmentResource')
     ListOfWriteTreatmentResource = Shapes::ListShape.new(name: 'ListOfWriteTreatmentResource')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTemplatesRequest = Shapes::StructureShape.new(name: 'ListTemplatesRequest')
+    ListTemplatesResponse = Shapes::StructureShape.new(name: 'ListTemplatesResponse')
     MapOfAddressConfiguration = Shapes::MapShape.new(name: 'MapOfAddressConfiguration')
     MapOfAttributeDimension = Shapes::MapShape.new(name: 'MapOfAttributeDimension')
     MapOfChannelResponse = Shapes::MapShape.new(name: 'MapOfChannelResponse')
@@ -261,6 +288,8 @@ module Aws::Pinpoint
     PhoneNumberValidateRequest = Shapes::StructureShape.new(name: 'PhoneNumberValidateRequest')
     PhoneNumberValidateResponse = Shapes::StructureShape.new(name: 'PhoneNumberValidateResponse')
     PublicEndpoint = Shapes::StructureShape.new(name: 'PublicEndpoint')
+    PushNotificationTemplateRequest = Shapes::StructureShape.new(name: 'PushNotificationTemplateRequest')
+    PushNotificationTemplateResponse = Shapes::StructureShape.new(name: 'PushNotificationTemplateResponse')
     PutEventStreamRequest = Shapes::StructureShape.new(name: 'PutEventStreamRequest')
     PutEventStreamResponse = Shapes::StructureShape.new(name: 'PutEventStreamResponse')
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
@@ -276,6 +305,8 @@ module Aws::Pinpoint
     SMSChannelRequest = Shapes::StructureShape.new(name: 'SMSChannelRequest')
     SMSChannelResponse = Shapes::StructureShape.new(name: 'SMSChannelResponse')
     SMSMessage = Shapes::StructureShape.new(name: 'SMSMessage')
+    SMSTemplateRequest = Shapes::StructureShape.new(name: 'SMSTemplateRequest')
+    SMSTemplateResponse = Shapes::StructureShape.new(name: 'SMSTemplateResponse')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     SegmentBehaviors = Shapes::StructureShape.new(name: 'SegmentBehaviors')
     SegmentDemographics = Shapes::StructureShape.new(name: 'SegmentDemographics')
@@ -301,6 +332,11 @@ module Aws::Pinpoint
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
+    Template = Shapes::StructureShape.new(name: 'Template')
+    TemplateConfiguration = Shapes::StructureShape.new(name: 'TemplateConfiguration')
+    TemplateResponse = Shapes::StructureShape.new(name: 'TemplateResponse')
+    TemplateType = Shapes::StringShape.new(name: 'TemplateType')
+    TemplatesResponse = Shapes::StructureShape.new(name: 'TemplatesResponse')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TreatmentResource = Shapes::StructureShape.new(name: 'TreatmentResource')
     Type = Shapes::StringShape.new(name: 'Type')
@@ -324,16 +360,22 @@ module Aws::Pinpoint
     UpdateCampaignResponse = Shapes::StructureShape.new(name: 'UpdateCampaignResponse')
     UpdateEmailChannelRequest = Shapes::StructureShape.new(name: 'UpdateEmailChannelRequest')
     UpdateEmailChannelResponse = Shapes::StructureShape.new(name: 'UpdateEmailChannelResponse')
+    UpdateEmailTemplateRequest = Shapes::StructureShape.new(name: 'UpdateEmailTemplateRequest')
+    UpdateEmailTemplateResponse = Shapes::StructureShape.new(name: 'UpdateEmailTemplateResponse')
     UpdateEndpointRequest = Shapes::StructureShape.new(name: 'UpdateEndpointRequest')
     UpdateEndpointResponse = Shapes::StructureShape.new(name: 'UpdateEndpointResponse')
     UpdateEndpointsBatchRequest = Shapes::StructureShape.new(name: 'UpdateEndpointsBatchRequest')
     UpdateEndpointsBatchResponse = Shapes::StructureShape.new(name: 'UpdateEndpointsBatchResponse')
     UpdateGcmChannelRequest = Shapes::StructureShape.new(name: 'UpdateGcmChannelRequest')
     UpdateGcmChannelResponse = Shapes::StructureShape.new(name: 'UpdateGcmChannelResponse')
+    UpdatePushTemplateRequest = Shapes::StructureShape.new(name: 'UpdatePushTemplateRequest')
+    UpdatePushTemplateResponse = Shapes::StructureShape.new(name: 'UpdatePushTemplateResponse')
     UpdateSegmentRequest = Shapes::StructureShape.new(name: 'UpdateSegmentRequest')
     UpdateSegmentResponse = Shapes::StructureShape.new(name: 'UpdateSegmentResponse')
     UpdateSmsChannelRequest = Shapes::StructureShape.new(name: 'UpdateSmsChannelRequest')
     UpdateSmsChannelResponse = Shapes::StructureShape.new(name: 'UpdateSmsChannelResponse')
+    UpdateSmsTemplateRequest = Shapes::StructureShape.new(name: 'UpdateSmsTemplateRequest')
+    UpdateSmsTemplateResponse = Shapes::StructureShape.new(name: 'UpdateSmsTemplateResponse')
     UpdateVoiceChannelRequest = Shapes::StructureShape.new(name: 'UpdateVoiceChannelRequest')
     UpdateVoiceChannelResponse = Shapes::StructureShape.new(name: 'UpdateVoiceChannelResponse')
     VoiceChannelRequest = Shapes::StructureShape.new(name: 'VoiceChannelRequest')
@@ -430,6 +472,14 @@ module Aws::Pinpoint
     APNSMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     APNSMessage.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "Url"))
     APNSMessage.struct_class = Types::APNSMessage
+
+    APNSPushNotificationTemplate.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    APNSPushNotificationTemplate.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    APNSPushNotificationTemplate.add_member(:media_url, Shapes::ShapeRef.new(shape: __string, location_name: "MediaUrl"))
+    APNSPushNotificationTemplate.add_member(:sound, Shapes::ShapeRef.new(shape: __string, location_name: "Sound"))
+    APNSPushNotificationTemplate.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
+    APNSPushNotificationTemplate.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "Url"))
+    APNSPushNotificationTemplate.struct_class = Types::APNSPushNotificationTemplate
 
     APNSSandboxChannelRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: __string, location_name: "BundleId"))
     APNSSandboxChannelRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: __string, location_name: "Certificate"))
@@ -529,6 +579,16 @@ module Aws::Pinpoint
     AddressConfiguration.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
     AddressConfiguration.add_member(:title_override, Shapes::ShapeRef.new(shape: __string, location_name: "TitleOverride"))
     AddressConfiguration.struct_class = Types::AddressConfiguration
+
+    AndroidPushNotificationTemplate.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    AndroidPushNotificationTemplate.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    AndroidPushNotificationTemplate.add_member(:image_icon_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageIconUrl"))
+    AndroidPushNotificationTemplate.add_member(:image_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageUrl"))
+    AndroidPushNotificationTemplate.add_member(:small_image_icon_url, Shapes::ShapeRef.new(shape: __string, location_name: "SmallImageIconUrl"))
+    AndroidPushNotificationTemplate.add_member(:sound, Shapes::ShapeRef.new(shape: __string, location_name: "Sound"))
+    AndroidPushNotificationTemplate.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
+    AndroidPushNotificationTemplate.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "Url"))
+    AndroidPushNotificationTemplate.struct_class = Types::AndroidPushNotificationTemplate
 
     ApplicationDateRangeKpiResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
     ApplicationDateRangeKpiResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "EndTime"))
@@ -654,6 +714,7 @@ module Aws::Pinpoint
     CampaignResponse.add_member(:segment_version, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "SegmentVersion"))
     CampaignResponse.add_member(:state, Shapes::ShapeRef.new(shape: CampaignState, location_name: "State"))
     CampaignResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    CampaignResponse.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     CampaignResponse.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     CampaignResponse.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     CampaignResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
@@ -710,6 +771,17 @@ module Aws::Pinpoint
     CreateCampaignResponse[:payload] = :campaign_response
     CreateCampaignResponse[:payload_member] = CreateCampaignResponse.member(:campaign_response)
 
+    CreateEmailTemplateRequest.add_member(:email_template_request, Shapes::ShapeRef.new(shape: EmailTemplateRequest, required: true, location_name: "EmailTemplateRequest"))
+    CreateEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    CreateEmailTemplateRequest.struct_class = Types::CreateEmailTemplateRequest
+    CreateEmailTemplateRequest[:payload] = :email_template_request
+    CreateEmailTemplateRequest[:payload_member] = CreateEmailTemplateRequest.member(:email_template_request)
+
+    CreateEmailTemplateResponse.add_member(:create_template_message_body, Shapes::ShapeRef.new(shape: CreateTemplateMessageBody, required: true, location_name: "CreateTemplateMessageBody"))
+    CreateEmailTemplateResponse.struct_class = Types::CreateEmailTemplateResponse
+    CreateEmailTemplateResponse[:payload] = :create_template_message_body
+    CreateEmailTemplateResponse[:payload_member] = CreateEmailTemplateResponse.member(:create_template_message_body)
+
     CreateExportJobRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     CreateExportJobRequest.add_member(:export_job_request, Shapes::ShapeRef.new(shape: ExportJobRequest, required: true, location_name: "ExportJobRequest"))
     CreateExportJobRequest.struct_class = Types::CreateExportJobRequest
@@ -732,6 +804,17 @@ module Aws::Pinpoint
     CreateImportJobResponse[:payload] = :import_job_response
     CreateImportJobResponse[:payload_member] = CreateImportJobResponse.member(:import_job_response)
 
+    CreatePushTemplateRequest.add_member(:push_notification_template_request, Shapes::ShapeRef.new(shape: PushNotificationTemplateRequest, required: true, location_name: "PushNotificationTemplateRequest"))
+    CreatePushTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    CreatePushTemplateRequest.struct_class = Types::CreatePushTemplateRequest
+    CreatePushTemplateRequest[:payload] = :push_notification_template_request
+    CreatePushTemplateRequest[:payload_member] = CreatePushTemplateRequest.member(:push_notification_template_request)
+
+    CreatePushTemplateResponse.add_member(:create_template_message_body, Shapes::ShapeRef.new(shape: CreateTemplateMessageBody, required: true, location_name: "CreateTemplateMessageBody"))
+    CreatePushTemplateResponse.struct_class = Types::CreatePushTemplateResponse
+    CreatePushTemplateResponse[:payload] = :create_template_message_body
+    CreatePushTemplateResponse[:payload_member] = CreatePushTemplateResponse.member(:create_template_message_body)
+
     CreateSegmentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     CreateSegmentRequest.add_member(:write_segment_request, Shapes::ShapeRef.new(shape: WriteSegmentRequest, required: true, location_name: "WriteSegmentRequest"))
     CreateSegmentRequest.struct_class = Types::CreateSegmentRequest
@@ -742,6 +825,22 @@ module Aws::Pinpoint
     CreateSegmentResponse.struct_class = Types::CreateSegmentResponse
     CreateSegmentResponse[:payload] = :segment_response
     CreateSegmentResponse[:payload_member] = CreateSegmentResponse.member(:segment_response)
+
+    CreateSmsTemplateRequest.add_member(:sms_template_request, Shapes::ShapeRef.new(shape: SMSTemplateRequest, required: true, location_name: "SMSTemplateRequest"))
+    CreateSmsTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    CreateSmsTemplateRequest.struct_class = Types::CreateSmsTemplateRequest
+    CreateSmsTemplateRequest[:payload] = :sms_template_request
+    CreateSmsTemplateRequest[:payload_member] = CreateSmsTemplateRequest.member(:sms_template_request)
+
+    CreateSmsTemplateResponse.add_member(:create_template_message_body, Shapes::ShapeRef.new(shape: CreateTemplateMessageBody, required: true, location_name: "CreateTemplateMessageBody"))
+    CreateSmsTemplateResponse.struct_class = Types::CreateSmsTemplateResponse
+    CreateSmsTemplateResponse[:payload] = :create_template_message_body
+    CreateSmsTemplateResponse[:payload_member] = CreateSmsTemplateResponse.member(:create_template_message_body)
+
+    CreateTemplateMessageBody.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    CreateTemplateMessageBody.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    CreateTemplateMessageBody.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
+    CreateTemplateMessageBody.struct_class = Types::CreateTemplateMessageBody
 
     DefaultMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     DefaultMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
@@ -755,6 +854,13 @@ module Aws::Pinpoint
     DefaultPushNotificationMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     DefaultPushNotificationMessage.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "Url"))
     DefaultPushNotificationMessage.struct_class = Types::DefaultPushNotificationMessage
+
+    DefaultPushNotificationTemplate.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    DefaultPushNotificationTemplate.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    DefaultPushNotificationTemplate.add_member(:sound, Shapes::ShapeRef.new(shape: __string, location_name: "Sound"))
+    DefaultPushNotificationTemplate.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
+    DefaultPushNotificationTemplate.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "Url"))
+    DefaultPushNotificationTemplate.struct_class = Types::DefaultPushNotificationTemplate
 
     DeleteAdmChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteAdmChannelRequest.struct_class = Types::DeleteAdmChannelRequest
@@ -829,6 +935,14 @@ module Aws::Pinpoint
     DeleteEmailChannelResponse[:payload] = :email_channel_response
     DeleteEmailChannelResponse[:payload_member] = DeleteEmailChannelResponse.member(:email_channel_response)
 
+    DeleteEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    DeleteEmailTemplateRequest.struct_class = Types::DeleteEmailTemplateRequest
+
+    DeleteEmailTemplateResponse.add_member(:message_body, Shapes::ShapeRef.new(shape: MessageBody, required: true, location_name: "MessageBody"))
+    DeleteEmailTemplateResponse.struct_class = Types::DeleteEmailTemplateResponse
+    DeleteEmailTemplateResponse[:payload] = :message_body
+    DeleteEmailTemplateResponse[:payload_member] = DeleteEmailTemplateResponse.member(:message_body)
+
     DeleteEndpointRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "endpoint-id"))
     DeleteEndpointRequest.struct_class = Types::DeleteEndpointRequest
@@ -854,6 +968,14 @@ module Aws::Pinpoint
     DeleteGcmChannelResponse[:payload] = :gcm_channel_response
     DeleteGcmChannelResponse[:payload_member] = DeleteGcmChannelResponse.member(:gcm_channel_response)
 
+    DeletePushTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    DeletePushTemplateRequest.struct_class = Types::DeletePushTemplateRequest
+
+    DeletePushTemplateResponse.add_member(:message_body, Shapes::ShapeRef.new(shape: MessageBody, required: true, location_name: "MessageBody"))
+    DeletePushTemplateResponse.struct_class = Types::DeletePushTemplateResponse
+    DeletePushTemplateResponse[:payload] = :message_body
+    DeletePushTemplateResponse[:payload_member] = DeletePushTemplateResponse.member(:message_body)
+
     DeleteSegmentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteSegmentRequest.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "segment-id"))
     DeleteSegmentRequest.struct_class = Types::DeleteSegmentRequest
@@ -870,6 +992,14 @@ module Aws::Pinpoint
     DeleteSmsChannelResponse.struct_class = Types::DeleteSmsChannelResponse
     DeleteSmsChannelResponse[:payload] = :sms_channel_response
     DeleteSmsChannelResponse[:payload_member] = DeleteSmsChannelResponse.member(:sms_channel_response)
+
+    DeleteSmsTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    DeleteSmsTemplateRequest.struct_class = Types::DeleteSmsTemplateRequest
+
+    DeleteSmsTemplateResponse.add_member(:message_body, Shapes::ShapeRef.new(shape: MessageBody, required: true, location_name: "MessageBody"))
+    DeleteSmsTemplateResponse.struct_class = Types::DeleteSmsTemplateResponse
+    DeleteSmsTemplateResponse[:payload] = :message_body
+    DeleteSmsTemplateResponse[:payload_member] = DeleteSmsTemplateResponse.member(:message_body)
 
     DeleteUserEndpointsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteUserEndpointsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "user-id"))
@@ -931,6 +1061,23 @@ module Aws::Pinpoint
     EmailMessage.add_member(:simple_email, Shapes::ShapeRef.new(shape: SimpleEmail, location_name: "SimpleEmail"))
     EmailMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
     EmailMessage.struct_class = Types::EmailMessage
+
+    EmailTemplateRequest.add_member(:html_part, Shapes::ShapeRef.new(shape: __string, location_name: "HtmlPart"))
+    EmailTemplateRequest.add_member(:subject, Shapes::ShapeRef.new(shape: __string, location_name: "Subject"))
+    EmailTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    EmailTemplateRequest.add_member(:text_part, Shapes::ShapeRef.new(shape: __string, location_name: "TextPart"))
+    EmailTemplateRequest.struct_class = Types::EmailTemplateRequest
+
+    EmailTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    EmailTemplateResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CreationDate"))
+    EmailTemplateResponse.add_member(:html_part, Shapes::ShapeRef.new(shape: __string, location_name: "HtmlPart"))
+    EmailTemplateResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LastModifiedDate"))
+    EmailTemplateResponse.add_member(:subject, Shapes::ShapeRef.new(shape: __string, location_name: "Subject"))
+    EmailTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    EmailTemplateResponse.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "TemplateName"))
+    EmailTemplateResponse.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "TemplateType"))
+    EmailTemplateResponse.add_member(:text_part, Shapes::ShapeRef.new(shape: __string, location_name: "TextPart"))
+    EmailTemplateResponse.struct_class = Types::EmailTemplateResponse
 
     EndpointBatchItem.add_member(:address, Shapes::ShapeRef.new(shape: __string, location_name: "Address"))
     EndpointBatchItem.add_member(:attributes, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Attributes"))
@@ -1308,6 +1455,14 @@ module Aws::Pinpoint
     GetEmailChannelResponse[:payload] = :email_channel_response
     GetEmailChannelResponse[:payload_member] = GetEmailChannelResponse.member(:email_channel_response)
 
+    GetEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    GetEmailTemplateRequest.struct_class = Types::GetEmailTemplateRequest
+
+    GetEmailTemplateResponse.add_member(:email_template_response, Shapes::ShapeRef.new(shape: EmailTemplateResponse, required: true, location_name: "EmailTemplateResponse"))
+    GetEmailTemplateResponse.struct_class = Types::GetEmailTemplateResponse
+    GetEmailTemplateResponse[:payload] = :email_template_response
+    GetEmailTemplateResponse[:payload_member] = GetEmailTemplateResponse.member(:email_template_response)
+
     GetEndpointRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "endpoint-id"))
     GetEndpointRequest.struct_class = Types::GetEndpointRequest
@@ -1370,6 +1525,14 @@ module Aws::Pinpoint
     GetImportJobsResponse.struct_class = Types::GetImportJobsResponse
     GetImportJobsResponse[:payload] = :import_jobs_response
     GetImportJobsResponse[:payload_member] = GetImportJobsResponse.member(:import_jobs_response)
+
+    GetPushTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    GetPushTemplateRequest.struct_class = Types::GetPushTemplateRequest
+
+    GetPushTemplateResponse.add_member(:push_notification_template_response, Shapes::ShapeRef.new(shape: PushNotificationTemplateResponse, required: true, location_name: "PushNotificationTemplateResponse"))
+    GetPushTemplateResponse.struct_class = Types::GetPushTemplateResponse
+    GetPushTemplateResponse[:payload] = :push_notification_template_response
+    GetPushTemplateResponse[:payload_member] = GetPushTemplateResponse.member(:push_notification_template_response)
 
     GetSegmentExportJobsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetSegmentExportJobsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
@@ -1440,6 +1603,14 @@ module Aws::Pinpoint
     GetSmsChannelResponse.struct_class = Types::GetSmsChannelResponse
     GetSmsChannelResponse[:payload] = :sms_channel_response
     GetSmsChannelResponse[:payload_member] = GetSmsChannelResponse.member(:sms_channel_response)
+
+    GetSmsTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    GetSmsTemplateRequest.struct_class = Types::GetSmsTemplateRequest
+
+    GetSmsTemplateResponse.add_member(:sms_template_response, Shapes::ShapeRef.new(shape: SMSTemplateResponse, required: true, location_name: "SMSTemplateResponse"))
+    GetSmsTemplateResponse.struct_class = Types::GetSmsTemplateResponse
+    GetSmsTemplateResponse[:payload] = :sms_template_response
+    GetSmsTemplateResponse[:payload_member] = GetSmsTemplateResponse.member(:sms_template_response)
 
     GetUserEndpointsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetUserEndpointsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "user-id"))
@@ -1531,6 +1702,8 @@ module Aws::Pinpoint
 
     ListOfSegmentResponse.member = Shapes::ShapeRef.new(shape: SegmentResponse)
 
+    ListOfTemplateResponse.member = Shapes::ShapeRef.new(shape: TemplateResponse)
+
     ListOfTreatmentResource.member = Shapes::ShapeRef.new(shape: TreatmentResource)
 
     ListOfWriteTreatmentResource.member = Shapes::ShapeRef.new(shape: WriteTreatmentResource)
@@ -1544,6 +1717,17 @@ module Aws::Pinpoint
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
     ListTagsForResourceResponse[:payload] = :tags_model
     ListTagsForResourceResponse[:payload_member] = ListTagsForResourceResponse.member(:tags_model)
+
+    ListTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "next-token"))
+    ListTemplatesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
+    ListTemplatesRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "prefix"))
+    ListTemplatesRequest.add_member(:template_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "template-type"))
+    ListTemplatesRequest.struct_class = Types::ListTemplatesRequest
+
+    ListTemplatesResponse.add_member(:templates_response, Shapes::ShapeRef.new(shape: TemplatesResponse, required: true, location_name: "TemplatesResponse"))
+    ListTemplatesResponse.struct_class = Types::ListTemplatesResponse
+    ListTemplatesResponse[:payload] = :templates_response
+    ListTemplatesResponse[:payload_member] = ListTemplatesResponse.member(:templates_response)
 
     MapOfAddressConfiguration.key = Shapes::ShapeRef.new(shape: __string)
     MapOfAddressConfiguration.value = Shapes::ShapeRef.new(shape: AddressConfiguration)
@@ -1624,6 +1808,7 @@ module Aws::Pinpoint
     MessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Context"))
     MessageRequest.add_member(:endpoints, Shapes::ShapeRef.new(shape: MapOfEndpointSendConfiguration, location_name: "Endpoints"))
     MessageRequest.add_member(:message_configuration, Shapes::ShapeRef.new(shape: DirectMessageConfiguration, required: true, location_name: "MessageConfiguration"))
+    MessageRequest.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     MessageRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: __string, location_name: "TraceId"))
     MessageRequest.struct_class = Types::MessageRequest
 
@@ -1694,6 +1879,27 @@ module Aws::Pinpoint
     PublicEndpoint.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestId"))
     PublicEndpoint.add_member(:user, Shapes::ShapeRef.new(shape: EndpointUser, location_name: "User"))
     PublicEndpoint.struct_class = Types::PublicEndpoint
+
+    PushNotificationTemplateRequest.add_member(:adm, Shapes::ShapeRef.new(shape: AndroidPushNotificationTemplate, location_name: "ADM"))
+    PushNotificationTemplateRequest.add_member(:apns, Shapes::ShapeRef.new(shape: APNSPushNotificationTemplate, location_name: "APNS"))
+    PushNotificationTemplateRequest.add_member(:baidu, Shapes::ShapeRef.new(shape: AndroidPushNotificationTemplate, location_name: "Baidu"))
+    PushNotificationTemplateRequest.add_member(:default, Shapes::ShapeRef.new(shape: DefaultPushNotificationTemplate, location_name: "Default"))
+    PushNotificationTemplateRequest.add_member(:gcm, Shapes::ShapeRef.new(shape: AndroidPushNotificationTemplate, location_name: "GCM"))
+    PushNotificationTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    PushNotificationTemplateRequest.struct_class = Types::PushNotificationTemplateRequest
+
+    PushNotificationTemplateResponse.add_member(:adm, Shapes::ShapeRef.new(shape: AndroidPushNotificationTemplate, location_name: "ADM"))
+    PushNotificationTemplateResponse.add_member(:apns, Shapes::ShapeRef.new(shape: APNSPushNotificationTemplate, location_name: "APNS"))
+    PushNotificationTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    PushNotificationTemplateResponse.add_member(:baidu, Shapes::ShapeRef.new(shape: AndroidPushNotificationTemplate, location_name: "Baidu"))
+    PushNotificationTemplateResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CreationDate"))
+    PushNotificationTemplateResponse.add_member(:default, Shapes::ShapeRef.new(shape: DefaultPushNotificationTemplate, location_name: "Default"))
+    PushNotificationTemplateResponse.add_member(:gcm, Shapes::ShapeRef.new(shape: AndroidPushNotificationTemplate, location_name: "GCM"))
+    PushNotificationTemplateResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LastModifiedDate"))
+    PushNotificationTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    PushNotificationTemplateResponse.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "TemplateName"))
+    PushNotificationTemplateResponse.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "TemplateType"))
+    PushNotificationTemplateResponse.struct_class = Types::PushNotificationTemplateResponse
 
     PutEventStreamRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     PutEventStreamRequest.add_member(:write_event_stream, Shapes::ShapeRef.new(shape: WriteEventStream, required: true, location_name: "WriteEventStream"))
@@ -1777,6 +1983,19 @@ module Aws::Pinpoint
     SMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
     SMSMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
     SMSMessage.struct_class = Types::SMSMessage
+
+    SMSTemplateRequest.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    SMSTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    SMSTemplateRequest.struct_class = Types::SMSTemplateRequest
+
+    SMSTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    SMSTemplateResponse.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    SMSTemplateResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CreationDate"))
+    SMSTemplateResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LastModifiedDate"))
+    SMSTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    SMSTemplateResponse.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "TemplateName"))
+    SMSTemplateResponse.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "TemplateType"))
+    SMSTemplateResponse.struct_class = Types::SMSTemplateResponse
 
     Schedule.add_member(:end_time, Shapes::ShapeRef.new(shape: __string, location_name: "EndTime"))
     Schedule.add_member(:event_filter, Shapes::ShapeRef.new(shape: CampaignEventFilter, location_name: "EventFilter"))
@@ -1863,6 +2082,7 @@ module Aws::Pinpoint
 
     SendUsersMessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Context"))
     SendUsersMessageRequest.add_member(:message_configuration, Shapes::ShapeRef.new(shape: DirectMessageConfiguration, required: true, location_name: "MessageConfiguration"))
+    SendUsersMessageRequest.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     SendUsersMessageRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: __string, location_name: "TraceId"))
     SendUsersMessageRequest.add_member(:users, Shapes::ShapeRef.new(shape: MapOfEndpointSendConfiguration, required: true, location_name: "Users"))
     SendUsersMessageRequest.struct_class = Types::SendUsersMessageRequest
@@ -1911,6 +2131,26 @@ module Aws::Pinpoint
     TagsModel.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, required: true, location_name: "tags"))
     TagsModel.struct_class = Types::TagsModel
 
+    Template.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    Template.struct_class = Types::Template
+
+    TemplateConfiguration.add_member(:email_template, Shapes::ShapeRef.new(shape: Template, location_name: "EmailTemplate"))
+    TemplateConfiguration.add_member(:push_template, Shapes::ShapeRef.new(shape: Template, location_name: "PushTemplate"))
+    TemplateConfiguration.add_member(:sms_template, Shapes::ShapeRef.new(shape: Template, location_name: "SMSTemplate"))
+    TemplateConfiguration.struct_class = Types::TemplateConfiguration
+
+    TemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    TemplateResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CreationDate"))
+    TemplateResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LastModifiedDate"))
+    TemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    TemplateResponse.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "TemplateName"))
+    TemplateResponse.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "TemplateType"))
+    TemplateResponse.struct_class = Types::TemplateResponse
+
+    TemplatesResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfTemplateResponse, required: true, location_name: "Item"))
+    TemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    TemplatesResponse.struct_class = Types::TemplatesResponse
+
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
     TooManyRequestsException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
@@ -1920,6 +2160,7 @@ module Aws::Pinpoint
     TreatmentResource.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "Schedule"))
     TreatmentResource.add_member(:size_percent, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "SizePercent"))
     TreatmentResource.add_member(:state, Shapes::ShapeRef.new(shape: CampaignState, location_name: "State"))
+    TreatmentResource.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     TreatmentResource.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     TreatmentResource.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     TreatmentResource.struct_class = Types::TreatmentResource
@@ -2031,6 +2272,17 @@ module Aws::Pinpoint
     UpdateEmailChannelResponse[:payload] = :email_channel_response
     UpdateEmailChannelResponse[:payload_member] = UpdateEmailChannelResponse.member(:email_channel_response)
 
+    UpdateEmailTemplateRequest.add_member(:email_template_request, Shapes::ShapeRef.new(shape: EmailTemplateRequest, required: true, location_name: "EmailTemplateRequest"))
+    UpdateEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    UpdateEmailTemplateRequest.struct_class = Types::UpdateEmailTemplateRequest
+    UpdateEmailTemplateRequest[:payload] = :email_template_request
+    UpdateEmailTemplateRequest[:payload_member] = UpdateEmailTemplateRequest.member(:email_template_request)
+
+    UpdateEmailTemplateResponse.add_member(:message_body, Shapes::ShapeRef.new(shape: MessageBody, required: true, location_name: "MessageBody"))
+    UpdateEmailTemplateResponse.struct_class = Types::UpdateEmailTemplateResponse
+    UpdateEmailTemplateResponse[:payload] = :message_body
+    UpdateEmailTemplateResponse[:payload_member] = UpdateEmailTemplateResponse.member(:message_body)
+
     UpdateEndpointRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     UpdateEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "endpoint-id"))
     UpdateEndpointRequest.add_member(:endpoint_request, Shapes::ShapeRef.new(shape: EndpointRequest, required: true, location_name: "EndpointRequest"))
@@ -2065,6 +2317,17 @@ module Aws::Pinpoint
     UpdateGcmChannelResponse[:payload] = :gcm_channel_response
     UpdateGcmChannelResponse[:payload_member] = UpdateGcmChannelResponse.member(:gcm_channel_response)
 
+    UpdatePushTemplateRequest.add_member(:push_notification_template_request, Shapes::ShapeRef.new(shape: PushNotificationTemplateRequest, required: true, location_name: "PushNotificationTemplateRequest"))
+    UpdatePushTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    UpdatePushTemplateRequest.struct_class = Types::UpdatePushTemplateRequest
+    UpdatePushTemplateRequest[:payload] = :push_notification_template_request
+    UpdatePushTemplateRequest[:payload_member] = UpdatePushTemplateRequest.member(:push_notification_template_request)
+
+    UpdatePushTemplateResponse.add_member(:message_body, Shapes::ShapeRef.new(shape: MessageBody, required: true, location_name: "MessageBody"))
+    UpdatePushTemplateResponse.struct_class = Types::UpdatePushTemplateResponse
+    UpdatePushTemplateResponse[:payload] = :message_body
+    UpdatePushTemplateResponse[:payload_member] = UpdatePushTemplateResponse.member(:message_body)
+
     UpdateSegmentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     UpdateSegmentRequest.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "segment-id"))
     UpdateSegmentRequest.add_member(:write_segment_request, Shapes::ShapeRef.new(shape: WriteSegmentRequest, required: true, location_name: "WriteSegmentRequest"))
@@ -2087,6 +2350,17 @@ module Aws::Pinpoint
     UpdateSmsChannelResponse.struct_class = Types::UpdateSmsChannelResponse
     UpdateSmsChannelResponse[:payload] = :sms_channel_response
     UpdateSmsChannelResponse[:payload_member] = UpdateSmsChannelResponse.member(:sms_channel_response)
+
+    UpdateSmsTemplateRequest.add_member(:sms_template_request, Shapes::ShapeRef.new(shape: SMSTemplateRequest, required: true, location_name: "SMSTemplateRequest"))
+    UpdateSmsTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    UpdateSmsTemplateRequest.struct_class = Types::UpdateSmsTemplateRequest
+    UpdateSmsTemplateRequest[:payload] = :sms_template_request
+    UpdateSmsTemplateRequest[:payload_member] = UpdateSmsTemplateRequest.member(:sms_template_request)
+
+    UpdateSmsTemplateResponse.add_member(:message_body, Shapes::ShapeRef.new(shape: MessageBody, required: true, location_name: "MessageBody"))
+    UpdateSmsTemplateResponse.struct_class = Types::UpdateSmsTemplateResponse
+    UpdateSmsTemplateResponse[:payload] = :message_body
+    UpdateSmsTemplateResponse[:payload_member] = UpdateSmsTemplateResponse.member(:message_body)
 
     UpdateVoiceChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     UpdateVoiceChannelRequest.add_member(:voice_channel_request, Shapes::ShapeRef.new(shape: VoiceChannelRequest, required: true, location_name: "VoiceChannelRequest"))
@@ -2140,6 +2414,7 @@ module Aws::Pinpoint
     WriteCampaignRequest.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, location_name: "SegmentId"))
     WriteCampaignRequest.add_member(:segment_version, Shapes::ShapeRef.new(shape: __integer, location_name: "SegmentVersion"))
     WriteCampaignRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    WriteCampaignRequest.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     WriteCampaignRequest.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     WriteCampaignRequest.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     WriteCampaignRequest.struct_class = Types::WriteCampaignRequest
@@ -2157,6 +2432,7 @@ module Aws::Pinpoint
     WriteTreatmentResource.add_member(:message_configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "MessageConfiguration"))
     WriteTreatmentResource.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "Schedule"))
     WriteTreatmentResource.add_member(:size_percent, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "SizePercent"))
+    WriteTreatmentResource.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     WriteTreatmentResource.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     WriteTreatmentResource.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     WriteTreatmentResource.struct_class = Types::WriteTreatmentResource
@@ -2207,6 +2483,19 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:create_email_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEmailTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/templates/{template-name}/email"
+        o.input = Shapes::ShapeRef.new(shape: CreateEmailTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEmailTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
       api.add_operation(:create_export_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateExportJob"
         o.http_method = "POST"
@@ -2235,6 +2524,19 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:create_push_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePushTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/templates/{template-name}/push"
+        o.input = Shapes::ShapeRef.new(shape: CreatePushTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePushTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
       api.add_operation(:create_segment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSegment"
         o.http_method = "POST"
@@ -2247,6 +2549,19 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:create_sms_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSmsTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/templates/{template-name}/sms"
+        o.input = Shapes::ShapeRef.new(shape: CreateSmsTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSmsTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
       api.add_operation(:delete_adm_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -2375,6 +2690,20 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:delete_email_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEmailTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/templates/{template-name}/email"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEmailTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEmailTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEndpoint"
         o.http_method = "DELETE"
@@ -2417,6 +2746,20 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:delete_push_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePushTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/templates/{template-name}/push"
+        o.input = Shapes::ShapeRef.new(shape: DeletePushTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePushTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:delete_segment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSegment"
         o.http_method = "DELETE"
@@ -2437,6 +2780,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/sms"
         o.input = Shapes::ShapeRef.new(shape: DeleteSmsChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSmsChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_sms_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSmsTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/templates/{template-name}/sms"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSmsTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSmsTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -2725,6 +3082,20 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_email_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEmailTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/templates/{template-name}/email"
+        o.input = Shapes::ShapeRef.new(shape: GetEmailTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEmailTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEndpoint"
         o.http_method = "GET"
@@ -2815,6 +3186,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/jobs/import"
         o.input = Shapes::ShapeRef.new(shape: GetImportJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetImportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_push_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPushTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/templates/{template-name}/push"
+        o.input = Shapes::ShapeRef.new(shape: GetPushTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPushTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -2921,6 +3306,20 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_sms_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSmsTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/templates/{template-name}/sms"
+        o.input = Shapes::ShapeRef.new(shape: GetSmsTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSmsTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_user_endpoints, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetUserEndpoints"
         o.http_method = "GET"
@@ -2955,6 +3354,19 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/tags/{resource-arn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+      end)
+
+      api.add_operation(:list_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTemplates"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/templates"
+        o.input = Shapes::ShapeRef.new(shape: ListTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTemplatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
       api.add_operation(:phone_number_validate, Seahorse::Model::Operation.new.tap do |o|
@@ -3183,6 +3595,20 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:update_email_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEmailTemplate"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/templates/{template-name}/email"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEmailTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEmailTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:update_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateEndpoint"
         o.http_method = "PUT"
@@ -3225,6 +3651,20 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:update_push_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePushTemplate"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/templates/{template-name}/push"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePushTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePushTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:update_segment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateSegment"
         o.http_method = "PUT"
@@ -3245,6 +3685,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/sms"
         o.input = Shapes::ShapeRef.new(shape: UpdateSmsChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSmsChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_sms_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSmsTemplate"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/templates/{template-name}/sms"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSmsTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSmsTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

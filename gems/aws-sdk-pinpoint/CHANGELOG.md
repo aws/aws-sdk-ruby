@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-10-07)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API introduces support for using and managing message templates.
+
 1.27.0 (2019-07-25)
 ------------------
 

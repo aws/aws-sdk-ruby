@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-10-07)
+------------------
+
+* Feature - Amazon Kinesis Data Firehose now allows delivering data to Elasticsearch clusters set up in a different AWS account than the Firehose AWS account. For technical documentation, look for ElasticsearchDestinationConfiguration in the Amazon Kinesis Firehose API reference.
+
 1.20.0 (2019-07-25)
 ------------------
 
