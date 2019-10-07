@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.369 (2019-10-07)
+------------------
+
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
 
 * Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
