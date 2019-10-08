@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.370 (2019-10-08)
+------------------
+
 * Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
 
 * Feature - Aws::EventBridge - Updated the documentation for Amazon EventBridge.
