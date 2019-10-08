@@ -479,7 +479,8 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for a Network File System (NFS) file system.
+    # Defines a file system on a Network File System (NFS) server that can
+    # be read from or written to
     #
     # @option params [required, String] :subdirectory
     #   The subdirectory in the NFS file system that is used to read data from
@@ -643,7 +644,8 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for a Server Message Block (SMB) file system.
+    # Defines a file system on an Server Message Block (SMB) server that can
+    # be read from or written to
     #
     # @option params [required, String] :subdirectory
     #   The subdirectory in the SMB file system that is used to read data from
@@ -814,6 +816,7 @@ module Aws::DataSync
     #       preserve_devices: "NONE", # accepts NONE, PRESERVE
     #       posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #       bytes_per_second: 1,
+    #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     excludes: [
     #       {
@@ -1147,7 +1150,7 @@ module Aws::DataSync
     # @example Response structure
     #
     #   resp.task_arn #=> String
-    #   resp.status #=> String, one of "AVAILABLE", "CREATING", "RUNNING", "UNAVAILABLE"
+    #   resp.status #=> String, one of "AVAILABLE", "CREATING", "QUEUED", "RUNNING", "UNAVAILABLE"
     #   resp.name #=> String
     #   resp.current_task_execution_arn #=> String
     #   resp.source_location_arn #=> String
@@ -1167,6 +1170,7 @@ module Aws::DataSync
     #   resp.options.preserve_devices #=> String, one of "NONE", "PRESERVE"
     #   resp.options.posix_permissions #=> String, one of "NONE", "BEST_EFFORT", "PRESERVE"
     #   resp.options.bytes_per_second #=> Integer
+    #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1212,7 +1216,7 @@ module Aws::DataSync
     # @example Response structure
     #
     #   resp.task_execution_arn #=> String
-    #   resp.status #=> String, one of "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
+    #   resp.status #=> String, one of "QUEUED", "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
     #   resp.options.verify_mode #=> String, one of "POINT_IN_TIME_CONSISTENT", "ONLY_FILES_TRANSFERRED", "NONE"
     #   resp.options.overwrite_mode #=> String, one of "ALWAYS", "NEVER"
     #   resp.options.atime #=> String, one of "NONE", "BEST_EFFORT"
@@ -1223,6 +1227,7 @@ module Aws::DataSync
     #   resp.options.preserve_devices #=> String, one of "NONE", "PRESERVE"
     #   resp.options.posix_permissions #=> String, one of "NONE", "BEST_EFFORT", "PRESERVE"
     #   resp.options.bytes_per_second #=> Integer
+    #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1415,7 +1420,7 @@ module Aws::DataSync
     #
     #   resp.task_executions #=> Array
     #   resp.task_executions[0].task_execution_arn #=> String
-    #   resp.task_executions[0].status #=> String, one of "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
+    #   resp.task_executions[0].status #=> String, one of "QUEUED", "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTaskExecutions AWS API Documentation
@@ -1452,7 +1457,7 @@ module Aws::DataSync
     #
     #   resp.tasks #=> Array
     #   resp.tasks[0].task_arn #=> String
-    #   resp.tasks[0].status #=> String, one of "AVAILABLE", "CREATING", "RUNNING", "UNAVAILABLE"
+    #   resp.tasks[0].status #=> String, one of "AVAILABLE", "CREATING", "QUEUED", "RUNNING", "UNAVAILABLE"
     #   resp.tasks[0].name #=> String
     #   resp.next_token #=> String
     #
@@ -1515,6 +1520,7 @@ module Aws::DataSync
     #       preserve_devices: "NONE", # accepts NONE, PRESERVE
     #       posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #       bytes_per_second: 1,
+    #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     includes: [
     #       {
@@ -1668,6 +1674,7 @@ module Aws::DataSync
     #       preserve_devices: "NONE", # accepts NONE, PRESERVE
     #       posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #       bytes_per_second: 1,
+    #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     excludes: [
     #       {
@@ -1701,7 +1708,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

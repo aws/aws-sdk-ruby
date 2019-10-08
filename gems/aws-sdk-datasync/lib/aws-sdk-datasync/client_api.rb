@@ -131,6 +131,7 @@ module Aws::DataSync
     TaskExecutionStatus = Shapes::StringShape.new(name: 'TaskExecutionStatus')
     TaskList = Shapes::ListShape.new(name: 'TaskList')
     TaskListEntry = Shapes::StructureShape.new(name: 'TaskListEntry')
+    TaskQueueing = Shapes::StringShape.new(name: 'TaskQueueing')
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     Time = Shapes::TimestampShape.new(name: 'Time')
     Uid = Shapes::StringShape.new(name: 'Uid')
@@ -414,6 +415,7 @@ module Aws::DataSync
     Options.add_member(:preserve_devices, Shapes::ShapeRef.new(shape: PreserveDevices, location_name: "PreserveDevices"))
     Options.add_member(:posix_permissions, Shapes::ShapeRef.new(shape: PosixPermissions, location_name: "PosixPermissions"))
     Options.add_member(:bytes_per_second, Shapes::ShapeRef.new(shape: BytesPerSecond, location_name: "BytesPerSecond"))
+    Options.add_member(:task_queueing, Shapes::ShapeRef.new(shape: TaskQueueing, location_name: "TaskQueueing"))
     Options.struct_class = Types::Options
 
     PLSecurityGroupArnList.member = Shapes::ShapeRef.new(shape: Ec2SecurityGroupArn)

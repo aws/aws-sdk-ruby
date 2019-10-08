@@ -4083,6 +4083,9 @@ module Aws::Organizations
     #
     # Currently, you can list tags on an account in AWS Organizations.
     #
+    # This operation can be called only from the organization's master
+    # account.
+    #
     # @option params [required, String] :resource_id
     #   The ID of the resource that you want to retrieve tags for.
     #
@@ -4385,6 +4388,9 @@ module Aws::Organizations
     #
     # Currently, you can tag and untag accounts in AWS Organizations.
     #
+    # This operation can be called only from the organization's master
+    # account.
+    #
     # @option params [required, String] :resource_id
     #   The ID of the resource to add a tag to.
     #
@@ -4419,6 +4425,9 @@ module Aws::Organizations
     # Removes a tag from the specified resource.
     #
     # Currently, you can tag and untag accounts in AWS Organizations.
+    #
+    # This operation can be called only from the organization's master
+    # account.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource to remove the tag from.
@@ -4656,7 +4665,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

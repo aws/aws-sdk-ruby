@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2019-10-08)
+------------------
+
+* Feature - Add Sync options to enable/disable TaskQueueing
+
 1.13.0 (2019-09-24)
 ------------------
 

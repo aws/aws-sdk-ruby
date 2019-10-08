@@ -655,6 +655,10 @@ module Aws::Organizations
     #   * EMAIL\_ALREADY\_EXISTS: The account could not be created because
     #     another AWS account with that email address already exists.
     #
+    #   * GOVCLOUD\_ACCOUNT\_ALREADY\_EXISTS: The account in the AWS
+    #     GovCloud (US) Region could not be created because this Region
+    #     already includes an account with that email address.
+    #
     #   * INVALID\_ADDRESS: The account could not be created because the
     #     address you provided is not valid.
     #

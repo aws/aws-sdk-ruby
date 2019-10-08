@@ -381,7 +381,7 @@ module Aws::Firehose
     #           domain_arn: "ElasticsearchDomainARN",
     #           cluster_endpoint: "ElasticsearchClusterEndpoint",
     #           index_name: "ElasticsearchIndexName", # required
-    #           type_name: "ElasticsearchTypeName", # required
+    #           type_name: "ElasticsearchTypeName",
     #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
     #           buffering_hints: {
     #             interval_in_seconds: 1,
@@ -973,7 +973,7 @@ module Aws::Firehose
     #         domain_arn: "ElasticsearchDomainARN",
     #         cluster_endpoint: "ElasticsearchClusterEndpoint",
     #         index_name: "ElasticsearchIndexName", # required
-    #         type_name: "ElasticsearchTypeName", # required
+    #         type_name: "ElasticsearchTypeName",
     #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
     #         buffering_hints: {
     #           interval_in_seconds: 1,
@@ -1067,6 +1067,8 @@ module Aws::Firehose
     #   only one type per index. If you try to specify a new type for an
     #   existing index that already has another type, Kinesis Data Firehose
     #   returns an error during run time.
+    #
+    #   For Elasticsearch 7.x, don't specify a `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
@@ -1172,7 +1174,9 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] type_name
-    #   The Elasticsearch type name.
+    #   The Elasticsearch type name. This applies to Elasticsearch 6.x and
+    #   lower versions. For Elasticsearch 7.x, there's no value for
+    #   `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
@@ -1324,6 +1328,12 @@ module Aws::Firehose
     #   only one type per index. If you try to specify a new type for an
     #   existing index that already has another type, Kinesis Data Firehose
     #   returns an error during runtime.
+    #
+    #   If you upgrade Elasticsearch from 6.x to 7.x and don’t update your
+    #   delivery stream, Kinesis Data Firehose still delivers data to
+    #   Elasticsearch with the old index name and type name. If you want to
+    #   update your delivery stream with a new index name, provide an empty
+    #   string for `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
