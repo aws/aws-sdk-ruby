@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
+
+* Feature - Aws::EventBridge - Updated the documentation for Amazon EventBridge.
+
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
 2.11.369 (2019-10-07)
 ------------------
 
