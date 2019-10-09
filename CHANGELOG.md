@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.371 (2019-10-09)
+------------------
+
 * Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
 
 * Feature - Aws::Kafka - Updated the documentation for Managed Streaming for Kafka.
